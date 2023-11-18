@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0y6fmwlxf6xb"]
+
+[ext_resource type="Script" path="res://preparePhase/settings.gd" id="1_8hv3f"]
+[ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_ai3lr"]
+
+[node name="Settings" type="CanvasLayer"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ai3lr")
+script = ExtResource("1_8hv3f")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 355
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_ai3lr")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 240
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
+theme_override_font_sizes/font_size = 60
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FontChange" type="CheckButton" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+button_pressed = true
+text = "Dyslexic Font"
+
+[connection signal="pressed" from="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="CenterContainer" method="_on_font_change_pressed"]
