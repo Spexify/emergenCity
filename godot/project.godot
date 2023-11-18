@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="emergenCITY_game"
-run/main_scene="res://levels/crisis_phase.tscn"
+run/main_scene="res://preparePhase/home_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
