@@ -12,10 +12,10 @@ script = ExtResource("1_6xgqy")
 move_speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(0, -85)
 texture = ExtResource("1_874d8")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 93)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_o8mc2")

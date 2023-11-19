@@ -21,6 +21,7 @@ window/size/viewport_width=576
 window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/stretch/scale=0.5
+window/handheld/orientation=1
 
 [input]
 
@@ -49,3 +50,4 @@ up={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
