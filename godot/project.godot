@@ -13,7 +13,7 @@ config_version=5
 config/name="emergenCITY_game"
 run/main_scene="res://preparePhase/home_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://app_icon.png"
 
 [display]
 
@@ -21,6 +21,7 @@ window/size/viewport_width=576
 window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/stretch/scale=0.5
+window/handheld/orientation=1
 
 [input]
 
@@ -49,3 +50,4 @@ up={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
