@@ -549,7 +549,6 @@ size = Vector2(20, 2048)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_mrtgi")]
 position = Vector2(576, 1048)
-move_speed = 300.0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_crsjo")
