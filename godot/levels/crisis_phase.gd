@@ -5,17 +5,13 @@ var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_on_inventory_closed()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-
-func _on_btn_backpack_pressed():
-	var inventoryGUINode = get_node("GUI/Inventory")
-	inventoryGUINode.open()
 
 
 func _on_inventory_closed():

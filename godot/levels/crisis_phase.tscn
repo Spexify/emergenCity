@@ -725,15 +725,13 @@ shape = SubResource("RectangleShape2D_yx03m")
 position = Vector2(1162, 1024)
 shape = SubResource("RectangleShape2D_yx03m")
 
-[node name="BtnBackpack" type="TextureButton" parent="."]
+[node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-offset_left = 1016.0
-offset_top = 8.0
-offset_right = 1144.0
-offset_bottom = 136.0
+position = Vector2(992, 35)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(284, 512)
 anchors_preset = 15
 anchor_right = 1.0
@@ -748,6 +746,6 @@ scale = Vector2(4, 4)
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="BtnBackpack" to="." method="_on_btn_backpack_pressed"]
+[connection signal="released" from="BtnBackpack" to="GUI/Inventory" method="_on_btn_backpack_released"]
 [connection signal="closed" from="GUI/Inventory" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/Inventory" to="." method="_on_inventory_opened"]

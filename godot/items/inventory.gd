@@ -27,14 +27,16 @@ func _ready():
 func _process(_delta):
 	pass
 
+
 func _unhandled_input(event):
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
-		print("unhandled input")
-		toggle()
-		#get_viewport().set_input_as_handled()
+		if visible == true:
+			close()
+			get_viewport().set_input_as_handled()
 
-func toggle() -> void:	
+
+func toggle() -> void:
 	if visible == false:
 		open()
 	else:
@@ -48,3 +50,8 @@ func open():
 func close():
 	visible = false
 	closed.emit()
+
+
+func _on_btn_backpack_released():
+	get_viewport().set_input_as_handled() #needed, otherwhise it directly closes the window again
+	open()
