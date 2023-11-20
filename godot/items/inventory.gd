@@ -1,5 +1,8 @@
 extends Control
 
+signal opened
+signal closed
+
 #const SLOT_CNT : int = 30
 var m_slotScene : PackedScene = preload("res://items/inventory_slot.tscn")
 var m_slotCnt : int
@@ -23,3 +26,25 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+func _unhandled_input(event):
+	if ((event is InputEventMouseButton && event.pressed == true)
+	or (event is InputEventScreenTouch)):
+		print("unhandled input")
+		toggle()
+		#get_viewport().set_input_as_handled()
+
+func toggle() -> void:	
+	if visible == false:
+		open()
+	else:
+		close()
+
+
+func open():
+	visible = true
+	opened.emit()
+
+func close():
+	visible = false
+	closed.emit()

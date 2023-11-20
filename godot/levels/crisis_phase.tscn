@@ -734,7 +734,6 @@ offset_bottom = 136.0
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2(284, 512)
 anchors_preset = 15
 anchor_right = 1.0
@@ -750,3 +749,5 @@ visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="BtnBackpack" to="." method="_on_btn_backpack_pressed"]
+[connection signal="closed" from="GUI/Inventory" to="." method="_on_inventory_closed"]
+[connection signal="opened" from="GUI/Inventory" to="." method="_on_inventory_opened"]

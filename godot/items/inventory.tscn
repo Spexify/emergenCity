@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_vq42c"]
 
 [node name="Inventory" type="Control"]
+process_mode = 3
 z_index = 5
 layout_mode = 3
 anchors_preset = 8
