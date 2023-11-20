@@ -1,8 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=27 format=3 uid="uid://cdqgsn775dgsp"]
 
+[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/button_backpack.png" id="1_07xlw"]
+[ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Texture2D" uid="uid://cs1cwun2pfgmn" path="res://res/emergenCITY_sprites_colorful.png" id="2_nui4g"]
 [ext_resource type="Script" path="res://levels/TileMap.gd" id="3_26jf5"]
+[ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hg8xi"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
@@ -689,6 +692,7 @@ size = Vector2(1192, 20)
 size = Vector2(20, 2048)
 
 [node name="CrisisPhase" type="Node2D"]
+script = ExtResource("1_23hjb")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_mrtgi")]
 position = Vector2(571, 1075)
@@ -720,3 +724,29 @@ shape = SubResource("RectangleShape2D_yx03m")
 [node name="RightBorder" type="CollisionShape2D" parent="LevelBorders"]
 position = Vector2(1162, 1024)
 shape = SubResource("RectangleShape2D_yx03m")
+
+[node name="BtnBackpack" type="TextureButton" parent="."]
+z_index = 2
+offset_left = 1016.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 136.0
+texture_normal = ExtResource("1_07xlw")
+
+[node name="GUI" type="CenterContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(284, 512)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 284.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+
+[node name="Inventory" parent="GUI" instance=ExtResource("6_mo744")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="BtnBackpack" to="." method="_on_btn_backpack_pressed"]

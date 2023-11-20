@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-@export var move_speed : float = 100
+@export var move_speed: float = 100
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 
-const SPEED : float = 300.0
+const SPEED: float = 300.0
 
 #func _ready():
 #	navAgent.set_target_desired_distance(5.0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var input_direction : Vector2
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
@@ -32,11 +32,16 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _input(event):
+func _unhandled_input(event):
+	#var crisisPhaseNode = get_node("Chr") #get_tree().root
+	
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
-		var tileMap = get_node("/root/CrisisPhase/TileMap")
-		#if navAgent.is_target_reachable(): #funzt net ganz?
-		if !tileMap.clickedTileHasCollision(event.position):
-			navAgent.target_position = event.position
-		#print("Mouse Click at: ", event.position)
+		#if crisisPhaseNode.inputMode == crisisPhaseNode.INPUT_MODE.default:
+			var tileMap = get_node("/root/CrisisPhase/TileMap")
+			#if navAgent.is_target_reachable(): #funzt net ganz?
+			if !tileMap.clickedTileHasCollision(event.position):
+				navAgent.target_position = event.position
+			#print("Mouse Click at: ", event.position)
+				
+		
