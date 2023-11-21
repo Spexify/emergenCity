@@ -13,7 +13,7 @@ config_version=5
 config/name="emergenCITY_game"
 run/main_scene="res://preparePhase/home_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://app_icon.png"
+config/icon="res://app_icon.svg"
 
 [display]
 

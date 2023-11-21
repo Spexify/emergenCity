@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://cdqgsn775dgsp"]
 
-[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/button_backpack.png" id="1_07xlw"]
+[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Texture2D" uid="uid://cs1cwun2pfgmn" path="res://res/emergenCITY_sprites_colorful.png" id="2_nui4g"]
