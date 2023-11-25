@@ -58,13 +58,14 @@ text = "[center]Inventory[/center]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 139.0
 grow_horizontal = 2
-grow_vertical = 0
 
 [node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
@@ -76,7 +77,7 @@ layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 10
 
-[node name="TextBox" type="NinePatchRect" parent="Background/VBoxContainer/MarginContainer"]
+[node name="TextBoxBG" type="NinePatchRect" parent="Background/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 texture = ExtResource("4_vq42c")
@@ -84,3 +85,14 @@ patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
+
+[node name="Label" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 765.0
+offset_bottom = 285.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("2_pt2y3")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
