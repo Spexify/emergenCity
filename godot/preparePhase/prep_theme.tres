@@ -1,9 +1,12 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c7p7h5j8cckif"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c7p7h5j8cckif"]
+
+[ext_resource type="FontVariation" uid="uid://b31pmawugw4m" path="res://fonts/Gugi-Regular-Variation.tres" id="1_aects"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0uw7"]
 bg_color = Color(0.0117647, 0.247059, 0.388235, 1)
 
 [resource]
+default_font = ExtResource("1_aects")
 Button/font_sizes/font_size = 60
 Label/font_sizes/font_size = 45
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_i0uw7")

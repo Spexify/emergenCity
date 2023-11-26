@@ -1,16 +1,16 @@
 extends CenterContainer
 
-var is_dyslexic = true
-var dyslexic_font = preload("res://fonts/OpenDyslexic-Regular.otf")
-var normal_font = preload("res://fonts/Gugi-Regular.ttf")
+@onready var margin_container = $MarginContainer
+@onready var font_change = $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange
 
-@onready var ui = get_child(0)
-@onready var button = get_child(0).get_child(0).get_child(0).get_child(0).get_child(2)
+var is_dyslexic = true
+var dyslexic_font = preload("res://fonts/Dyslexic-Regular-Variation.tres")
+var normal_font = preload("res://fonts/Gugi-Regular-Variation.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	is_dyslexic = theme.get_default_font() == dyslexic_font
-	button.set_pressed_no_signal(is_dyslexic)
+	font_change.set_pressed_no_signal(is_dyslexic)
 
 func _on_font_change_pressed():
 	if (is_dyslexic):
@@ -22,6 +22,6 @@ func _on_font_change_pressed():
 	
 func _input(event):
 	if event is InputEventMouseButton:
-		if !Rect2(ui.position, ui.get_child(0).size).has_point(event.position):
-			get_parent().remove_child(self)
+		if !Rect2(margin_container.position, margin_container.get_child(0).size).has_point(event.position):
+			self.hide()
 	

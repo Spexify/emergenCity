@@ -1,9 +1,7 @@
 extends Control
 
-var dyslexic_font = preload("res://fonts/OpenDyslexic-Regular.otf")
-
 func _ready():
-	theme.set_default_font(dyslexic_font)
+	pass
 
 func _on_start_round_pressed():
 	get_tree().change_scene_to_file("res://levels/crisis_phase.tscn")
@@ -20,8 +18,14 @@ func _on_upgrade_center_pressed():
 	# Todo: link Upgrade Center Scene
 	# get_tree().change_scene_to_file()
 
-var settings_scene = preload("res://preparePhase/settings.tscn")
+# var settings_scene = preload("res://preparePhase/settings.tscn")
+
+@onready var settings = $"../Settings"
+@onready var main_menu = $"."
 
 func _on_settings_pressed():
-	var new_setting = settings_scene.instantiate()
-	add_child(new_setting)
+	#var new_setting = settings_scene.instantiate()
+	#add_child(new_setting)
+	settings.show()
+	for child in settings.get_children():
+		child.show()
