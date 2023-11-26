@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://items/item.gd" id="1_yg30b"]
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://res/items.png" id="2_trxve"]
 
-[node name="item" type="Control"]
+[node name="item" type="Control" groups=["items"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
@@ -17,4 +17,5 @@ centered = false
 hframes = 10
 vframes = 10
 
+[connection signal="clicked" from="." to="." method="_on_clicked"]
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

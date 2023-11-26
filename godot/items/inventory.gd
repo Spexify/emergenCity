@@ -6,7 +6,7 @@ extends Control
 ##Über toggleVisibility, open() und close() kann die Sichtbarkeit eingestellt werden.  
 ##Die beinhalteten Items kann man über die jeweiligen Methoden verwalten.
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
-class_name EC_Inventory
+class_name EMC_Inventory
 
 signal opened
 signal closed
@@ -38,35 +38,36 @@ func close():
 
 ## Diesem Inventar ein neues [EC_Item] hinzufügen.
 ## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
-func add_new_item(ID: EC_Item.IDs) -> bool:
-	var new_item = _item_scn.instantiate()
+func add_new_item(ID: EMC_Item.IDs) -> bool:
+	var new_item = _item_scn.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(ID, self)
 	return add_item(new_item)
 
 
 ## Diesem Inventar ein bestehendes [EC_Item] hinzufügen.
 ## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
-func add_item(item: EC_Item) -> bool:
+func add_item(item: EMC_Item) -> bool:
 	var gridcont : GridContainer = get_node("Background/VBoxContainer/GridContainer")
 	
 	for i in _slot_cnt:
 		var slot = gridcont.get_child(i)
 		if slot.is_free():
+			item.clicked.connect(_on_item_clicked)
 			slot.set_item(item)
 			return true
 	return false
 
 
 ##Item ID an Position ermitteln
-func get_item_ID_of_slot(slot_cnt: int) -> EC_Item.IDs:
+func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
 #	return $Background/VBoxContainer/GridContainer
 #TODO
-	return EC_Item.IDs.DUMMY
+	return EMC_Item.IDs.DUMMY
 
 
 ## Diesem Inventar ein Item [param cnt] Mal entfernen entfernen
 ## Gibt die Anzahl an erfolgreich entfernten Items zurück
-func remove_item(ID: EC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
+func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 	var removedCnt: int = 0
 	for slotIdx in _slot_cnt:
 		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
@@ -78,25 +79,25 @@ func remove_item(ID: EC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 
 
 ## Das Inventar ist im Besitz von Item
-func has_item(ID: EC_Item.IDs) -> bool:
+func has_item(ID: EMC_Item.IDs) -> bool:
 	#TODO
 	return false
 
 
 ## Das Inventar ist im Besitz von Item
-func has_item_n_times(ID: EC_Item.IDs) -> int:
+func has_item_n_times(ID: EMC_Item.IDs) -> int:
 	#TODO
 	return -1
 
 
 ## Informationen zu einem Item in der TextBox anzeigen
-func display_info(item: EC_Item) -> void:
+func _on_item_clicked(sender: EMC_Item) -> void:
 	#print("Info zu " + item._name)
 	var label = $Background/VBoxContainer/MarginContainer/TextBoxBG/Label
 	label.clear()
-	label.append_text("[color=black]" + item._name + "[/color]
+	label.append_text("[color=black]" + sender._name + "[/color]
 	")
-	label.append_text("[i][color=black]" + item._descr + "[/color][/i]")
+	label.append_text("[i][color=black]" + sender._descr + "[/color][/i]")
 	pass
 
 

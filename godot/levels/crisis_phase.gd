@@ -4,10 +4,10 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$GUI/Inventory.close()
-	$GUI/Inventory.add_new_item(EC_Item.IDs.WATER);
-	$GUI/Inventory.add_new_item(EC_Item.IDs.WATER);
-	$GUI/Inventory.add_new_item(EC_Item.IDs.RAVIOLI);
-	$GUI/Inventory.add_new_item(EC_Item.IDs.WATER_DIRTY);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.RAVIOLI);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	pass # Replace with function body.
 
 
