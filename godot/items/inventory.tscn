@@ -86,13 +86,33 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="Label" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+[node name="Name" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 765.0
-offset_bottom = 285.0
+offset_bottom = 75.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = ExtResource("2_pt2y3")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
+
+[node name="Components" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 765.0
+offset_bottom = 85.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("2_pt2y3")
+theme_override_font_sizes/normal_font_size = 40
+
+[node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 765.0
+offset_bottom = 180.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("2_pt2y3")
+theme_override_font_sizes/normal_font_size = 40

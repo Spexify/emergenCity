@@ -5,6 +5,7 @@ extends Control
 ##können oder nicht.
 ##Über toggleVisibility, open() und close() kann die Sichtbarkeit eingestellt werden.  
 ##Die beinhalteten Items kann man über die jeweiligen Methoden verwalten.
+##
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
 class_name EMC_Inventory
 
@@ -25,10 +26,12 @@ func toggleVisibility() -> void:
 	else:
 		close()
 
+
 ## Das Inventar sichtbar machen.
 func open():
 	visible = true
 	opened.emit()
+
 
 ## Das Inventar verstecken.
 func close():
@@ -36,7 +39,12 @@ func close():
 	closed.emit()
 
 
-## Diesem Inventar ein neues [EC_Item] hinzufügen.
+## Gibt zurück, ob noch Platz im Inventar vorhanden ist
+func has_space() -> bool:
+	return get_item_count() < _slot_cnt
+
+
+## Diesem Inventar ein neues [EMC_Item] hinzufügen.
 ## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
 func add_new_item(ID: EMC_Item.IDs) -> bool:
 	var new_item = _item_scn.instantiate() #EMC_Item.new(ID, self) 
@@ -44,7 +52,7 @@ func add_new_item(ID: EMC_Item.IDs) -> bool:
 	return add_item(new_item)
 
 
-## Diesem Inventar ein bestehendes [EC_Item] hinzufügen.
+## Diesem Inventar ein bestehendes [EMC_Item] hinzufügen.
 ## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
 func add_item(item: EMC_Item) -> bool:
 	var gridcont : GridContainer = get_node("Background/VBoxContainer/GridContainer")
@@ -61,43 +69,58 @@ func add_item(item: EMC_Item) -> bool:
 ##Item ID an Position ermitteln
 func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
 #	return $Background/VBoxContainer/GridContainer
-#TODO
+	#TODO
 	return EMC_Item.IDs.DUMMY
 
 
-## Diesem Inventar ein Item [param cnt] Mal entfernen entfernen
+## Diesem Inventar ein [EMC_Item] [param cnt] Mal entfernen entfernen
 ## Gibt die Anzahl an erfolgreich entfernten Items zurück
 func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 	var removedCnt: int = 0
 	for slotIdx in _slot_cnt:
 		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
 		var item = slot.get_item()
-		if item._ID == ID: #TODO: Lieber Getter statt direkter Zugriff auf private Attr.
+		if item != null && item.get_ID() == ID:
 			slot.remove_child(item)
 			removedCnt += 1
 	return removedCnt
 
 
-## Das Inventar ist im Besitz von Item
+## Das Inventar ist im Besitz von mindestens einem [EMC_Item] mit dieser ID
 func has_item(ID: EMC_Item.IDs) -> bool:
-	#TODO
+	for slotIdx in _slot_cnt:
+		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item = slot.get_item()
+		if item != null && item.get_ID() == ID:
+			return true
 	return false
 
 
-## Das Inventar ist im Besitz von Item
-func has_item_n_times(ID: EMC_Item.IDs) -> int:
-	#TODO
-	return -1
+## Gibt die Anzahl an [EMC_Item]s dieses Typ zurück
+func get_item_count_of_ID(ID: EMC_Item.IDs) -> int:
+	var cnt: int = 0
+	for slotIdx in _slot_cnt:
+		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item = slot.get_item()
+		if item != null && item.get_ID() == ID:
+			cnt += 1
+	return cnt
 
 
-## Informationen zu einem Item in der TextBox anzeigen
-func _on_item_clicked(sender: EMC_Item) -> void:
-	#print("Info zu " + item._name)
-	var label = $Background/VBoxContainer/MarginContainer/TextBoxBG/Label
-	label.clear()
-	label.append_text("[color=black]" + sender._name + "[/color]
-	")
-	label.append_text("[i][color=black]" + sender._descr + "[/color][/i]")
+## Gibt die Gesamtanzahl an [EMC_Item]s zurück
+func get_item_count() -> int:
+	var cnt: int = 0
+	for slotIdx in _slot_cnt:
+		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item = slot.get_item()
+		if item != null:
+			cnt += 1
+	return cnt
+
+
+## Items nach ID sortieren (QoL feature in der Zukunft)
+func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
+	#TODO (keine Prio)
 	pass
 
 
@@ -122,11 +145,34 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-#func _on_btn_backpack_released():
-#	get_viewport().set_input_as_handled() #needed, otherwhise it directly closes the window again
-
+	
 
 func _on_btn_backpack_pressed():
 	get_viewport().set_input_as_handled()
 	open()
+
+
+## Informationen zu einem Item in der TextBox anzeigen
+func _on_item_clicked(sender: EMC_Item) -> void:
+	#Name des Items
+	var label_name = $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
+	label_name.clear()
+	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
+	
+	#Komponenten des Items
+	var comps := sender.get_comps()
+	var comp_string: String
+	for comp in comps:
+		comp_string += comp.get_colored_name_with_vals() + ", "
+	##Überflüssiges Komma entfernen:
+	comp_string = comp_string.left(comp_string.length() - 2)
+	var label_comps = $Background/VBoxContainer/MarginContainer/TextBoxBG/Components
+	label_comps.clear()
+	label_comps.append_text("[color=black]" + comp_string + "[/color]")
+	
+	#Beschreibung des Items
+	var label_descr = $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
+	label_descr.clear()
+	label_descr.append_text("[color=black][font_size=36][i]" + sender.get_descr() +
+		"[/i][/font_size][/color]")
+	pass

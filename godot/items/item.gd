@@ -11,10 +11,10 @@ enum IDs{
 	GAS_CARTRIDGE = 4
 }
 
+#FYI: erbt "name" Attribut von Node
 var _ID: int = IDs.DUMMY
-var _name: String = "<No Name>"
 var _descr: String = "<No Descr>"
-#var _comps: <todo> 
+var _comps: Array[EMC_ItemComponent]
 var _parent_inventory: EMC_Inventory
 
 
@@ -28,18 +28,40 @@ func setup(ID: int, parent_inventory: EMC_Inventory) -> void:
 	#TODO: Statt case Statement, Infos aus JSON lesen
 	match _ID:
 		IDs.WATER:
-			_name = "Wasser"
+			name = "Wasser"
 			_descr = "Sauberes Trinkwasser."
+			_comps.push_back(EMC_IC_Drink.new(500))
+			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.WATER_DIRTY:
-			_name = "Dreckiges Wasser"
+			name = "Dreckiges Wasser"
 			_descr = "Nicht die Erstwahl, aber dennoch trinkbar."
+			_comps.push_back(EMC_IC_Drink.new(400))
+			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.RAVIOLI:
-			_name = "Ravioli"
+			name = "Ravioli"
 			_descr = "Lecker schmecker!"
+			_comps.push_back(EMC_IC_Food.new(250))
+			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.GAS_CARTRIDGE:
-			_name = "Gas Kartusche"
+			name = "Gas Kartusche"
 			_descr = "Für den Gaskocher."
+		_: #default/else
+			name = "<No Name>"
 
+
+#FYI: erbt "get_name()" Attribut von Node
+
+##Getter für _ID
+func get_ID() -> IDs:
+	return _ID
+
+##Getter für _descr
+func get_descr() -> String:
+	return _descr
+
+##Getter für _descr
+func get_comps() -> Array[EMC_ItemComponent]:
+	return _comps
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 # Called when the node enters the scene tree for the first time.

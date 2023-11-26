@@ -7,8 +7,9 @@ func _ready():
 	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
 	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
 	$GUI/Inventory.add_new_item(EMC_Item.IDs.RAVIOLI);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +21,7 @@ func _on_inventory_closed():
 	get_tree().paused = false
 	$GUI.hide()
 	$BtnBackpack.show()
-	pass # Replace with function body.
+	pass
 
 
 func _on_inventory_opened():
@@ -28,7 +29,7 @@ func _on_inventory_opened():
 	$GUI.show()
 	$BtnBackpack.hide()
 	get_viewport().set_input_as_handled()
-	pass # Replace with function body.
+	pass
 	
 	
 func _unhandled_input(event):
