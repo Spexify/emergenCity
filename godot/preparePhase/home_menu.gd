@@ -7,7 +7,7 @@ func _ready():
 
 func _on_start_round_pressed():
 	get_tree().change_scene_to_file("res://levels/crisis_phase.tscn")
-	
+
 
 func _on_shelf_pressed():
 	pass 
