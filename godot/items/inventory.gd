@@ -19,6 +19,11 @@ var _item_scn: PackedScene = preload("res://items/item.tscn")
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
+func _init(p_slotCnt : int = 30): 
+	_slot_cnt = p_slotCnt
+	if (_slot_cnt > MAX_SLOT_CNT): _slot_cnt = MAX_SLOT_CNT
+
+
 ## Die Sichtbarkeit umstellen.
 func toggleVisibility() -> void:
 	if visible == false:
@@ -77,6 +82,7 @@ func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
 ## Gibt die Anzahl an erfolgreich entfernten Items zurück
 func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 	var removedCnt: int = 0
+	
 	for slotIdx in _slot_cnt:
 		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
 		var item = slot.get_item()
@@ -99,6 +105,7 @@ func has_item(ID: EMC_Item.IDs) -> bool:
 ## Gibt die Anzahl an [EMC_Item]s dieses Typ zurück
 func get_item_count_of_ID(ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
+	
 	for slotIdx in _slot_cnt:
 		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
 		var item = slot.get_item()
@@ -110,12 +117,25 @@ func get_item_count_of_ID(ID: EMC_Item.IDs) -> int:
 ## Gibt die Gesamtanzahl an [EMC_Item]s zurück
 func get_item_count() -> int:
 	var cnt: int = 0
+	
 	for slotIdx in _slot_cnt:
 		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
 		var item = slot.get_item()
 		if item != null:
 			cnt += 1
 	return cnt
+
+
+## Alle Items des Inventars als Array an [EMC_Items] liefern
+func get_all_items() -> Array[EMC_Item]:
+	var items: Array[EMC_Item]
+	
+	for slotIdx in _slot_cnt:
+		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item = slot.get_item()
+		if item != null:
+			items.push_back(item)
+	return items
 
 
 ## Items nach ID sortieren (QoL feature in der Zukunft)
@@ -125,12 +145,6 @@ func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sor
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
-#MRM: Eig. in eigene init() Methode auszulagern, da man _init() nicht mit Parametern aufrufen kann:
-func _init(p_slotCnt : int = 30): 
-	_slot_cnt = p_slotCnt
-	if (_slot_cnt > MAX_SLOT_CNT): _slot_cnt = MAX_SLOT_CNT
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var gridcont : GridContainer = get_node("Background/VBoxContainer/GridContainer")
