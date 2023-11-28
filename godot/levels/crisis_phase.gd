@@ -17,13 +17,13 @@ func _ready():
 ##### The following Code is not a final design
 ##### It allows DayCircle to acces and check data
 
-	$DayCircle.parent = self
+	$DayCycle.parent = self
 	
 func day_time_equal(time):
-	return $DayCircle.current_time == time
+	return $DayCycle.current_time == time
 	
 func day_time_greater(time):
-	return $DayCircle.current_time > time
+	return $DayCycle.current_time > time
 
 func set_player_speed(speed: float):
 	$CharacterBody2D.move_speed = speed

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cs1cwun2pfgmn" path="res://res/emergenCITY_sprites_colorful.png" id="2_nui4g"]
 [ext_resource type="Script" path="res://levels/TileMap.gd" id="3_26jf5"]
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
-[ext_resource type="Script" path="res://levels/day_circle.gd" id="6_uiubs"]
+[ext_resource type="Script" path="res://levels/day_cycle.gd" id="6_nfi8x"]
 [ext_resource type="Script" path="res://levels/TestAction.gd" id="7_yuu25"]
 [ext_resource type="Script" path="res://levels/TestAction2.gd" id="8_n21jk"]
 
@@ -733,23 +733,23 @@ z_index = 2
 position = Vector2(992, 35)
 texture_normal = ExtResource("1_07xlw")
 
-[node name="DayCircle" type="Node" parent="."]
-script = ExtResource("6_uiubs")
+[node name="DayCycle" type="Node" parent="."]
+script = ExtResource("6_nfi8x")
 
-[node name="TestAction" type="Node2D" parent="DayCircle"]
+[node name="TestAction" type="Node2D" parent="DayCycle"]
 position = Vector2(339, 1118)
 script = ExtResource("7_yuu25")
 
-[node name="Button" type="Button" parent="DayCircle/TestAction"]
+[node name="Button" type="Button" parent="DayCycle/TestAction"]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 8.0
 offset_bottom = 8.0
 
-[node name="TestAction2" type="Node2D" parent="DayCircle"]
+[node name="TestAction2" type="Node2D" parent="DayCycle"]
 position = Vector2(439, 1620)
 script = ExtResource("8_n21jk")
 
-[node name="Button" type="Button" parent="DayCircle/TestAction2"]
+[node name="Button" type="Button" parent="DayCycle/TestAction2"]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 8.0
 offset_bottom = 8.0
@@ -771,7 +771,7 @@ visible = false
 layout_mode = 2
 
 [connection signal="released" from="BtnBackpack" to="GUI/Inventory" method="_on_btn_backpack_released"]
-[connection signal="pressed" from="DayCircle/TestAction/Button" to="DayCircle/TestAction" method="_on_button_pressed"]
-[connection signal="pressed" from="DayCircle/TestAction2/Button" to="DayCircle/TestAction2" method="_on_button_pressed"]
+[connection signal="pressed" from="DayCycle/TestAction/Button" to="DayCycle/TestAction" method="_on_button_pressed"]
+[connection signal="pressed" from="DayCycle/TestAction2/Button" to="DayCycle/TestAction2" method="_on_button_pressed"]
 [connection signal="closed" from="GUI/Inventory" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/Inventory" to="." method="_on_inventory_opened"]
