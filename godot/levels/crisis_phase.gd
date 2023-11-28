@@ -2,12 +2,33 @@ extends Node2D
 
 var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 
+## This is the main node holding all importent informations.
+## It will only work when the you run the main scene.
+@onready var main : Node = get_node("/root/main")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if main == null:
+		print("The main node could not be found. 
+		This may be because you ran the crisis scene directly!")
+	
 	_on_inventory_closed()
-	pass # Replace with function body.
+	
+##### The following Code is not a final design
+##### It allows DayCircle to acces and check data
 
+	$DayCircle.parent = self
+	
+func day_time_equal(time):
+	return $DayCircle.current_time == time
+	
+func day_time_greater(time):
+	return $DayCircle.current_time > time
+
+func set_player_speed(speed: float):
+	$CharacterBody2D.move_speed = speed
+	
+##### End of experimantal code
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

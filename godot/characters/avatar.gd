@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var move_speed: float = 100
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
-
+@onready var tileMap := $"../TileMap" as TileMap
 const SPEED: float = 300.0
 
 #func _ready():
@@ -38,7 +38,7 @@ func _unhandled_input(event):
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
 		#if crisisPhaseNode.inputMode == crisisPhaseNode.INPUT_MODE.default:
-			var tileMap = get_node("/root/CrisisPhase/TileMap")
+			#var tileMap = get_node("/root/CrisisPhase/TileMap")
 			#if navAgent.is_target_reachable(): #funzt net ganz?
 			if !tileMap.clickedTileHasCollision(event.position):
 				navAgent.target_position = event.position

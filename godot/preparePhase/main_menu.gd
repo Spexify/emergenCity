@@ -1,10 +1,22 @@
 extends Control
 
+var crisis_scene = preload("res://levels/crisis_phase.tscn")
+
+@onready var main_menu = $".."
+@onready var main = get_node("/root/main")
+
 func _ready():
-	pass
+	if main == null:
+		print("The main node could not be found. 
+		This may be because you ran the main menu scene directly!")
 
 func _on_start_round_pressed():
-	get_tree().change_scene_to_file("res://levels/crisis_phase.tscn")
+	if main != null:
+		main.remove_child(main_menu)
+		main_menu.call_deferred("free")
+		main.add_child(crisis_scene.instantiate())
+	else:
+		get_tree().change_scene_to_file("res://levels/crisis_phase.tscn")
 	
 
 func _on_shelf_pressed():
@@ -21,7 +33,6 @@ func _on_upgrade_center_pressed():
 # var settings_scene = preload("res://preparePhase/settings.tscn")
 
 @onready var settings = $"../Settings"
-@onready var main_menu = $"."
 
 func _on_settings_pressed():
 	#var new_setting = settings_scene.instantiate()
