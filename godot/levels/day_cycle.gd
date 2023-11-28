@@ -8,14 +8,16 @@ var current_time : DayTime = DayTime.MORNING
 var current_day : int = 0
 
 var parent : Node2D
+var get_avatar_rect : Callable
 
-func _ready():
+func _index_actions():
 	var actions = []
 	for uncast in uncast_actions:
 		actions.append(uncast as Action)
 	
 	for action in actions:
 		action.interacted.connect(_handel_actions)
+		action.get_avatar_rect = get_avatar_rect
 
 func _handel_actions(constrains, changes):
 	var allowed : bool = true
