@@ -1,6 +1,5 @@
 extends Node2D
 
-<<<<<<< HEAD
 var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 
 ## This is the main node holding all importent informations.
