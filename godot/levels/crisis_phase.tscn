@@ -936,7 +936,7 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
-[connection signal="released" from="BtnBackpack" to="GUI/Inventory" method="_on_btn_backpack_released"]
+[connection signal="pressed" from="BtnBackpack" to="GUI/Inventory" method="_on_btn_backpack_pressed"]
 [connection signal="pressed" from="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/normal" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/slower" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/faster" method="_on_button_pressed"]
