@@ -17,91 +17,76 @@
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_m52f6"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vgg6c"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sgi81"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_g4mkg"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_p5hq0"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jbxyt"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hgh0k"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3wodp"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_46jx6"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_28q8x"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ipv17"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lku4k"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wenej"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gu0oa"]
 vertices = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
-source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8wlff"]
 texture = ExtResource("2_nui4g")
@@ -701,8 +686,6 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-custom_data_layer_0/name = ""
-custom_data_layer_0/type = 0
 sources/3 = SubResource("TileSetAtlasSource_8wlff")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
@@ -718,15 +701,15 @@ size = Vector2(20, 2048)
 process_mode = 3
 script = ExtResource("1_23hjb")
 
-[node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1
 position = Vector2(571, 1075)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Avatar"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
 path_postprocessing = 1
 debug_enabled = true
 
-[node name="Stage" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
 process_mode = 1
 tile_set = SubResource("TileSet_crsjo")
 format = 2
@@ -949,13 +932,13 @@ grow_vertical = 2
 scale = Vector2(4, 4)
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI" instance=ExtResource("6_mo744")]
+[node name="Inventory" parent="GUI" instance=ExtResource("6_mo744")]
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="pressed" from="BtnBackpack" to="GUI/Inventory" method="_on_btn_backpack_pressed"]
 [connection signal="pressed" from="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/normal" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/slower" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/faster" method="_on_button_pressed"]
-[connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
-[connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="closed" from="GUI/Inventory" to="." method="_on_inventory_closed"]
+[connection signal="opened" from="GUI/Inventory" to="." method="_on_inventory_opened"]

@@ -8,13 +8,12 @@ var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$GUI/BackpackGUI.setup(30, "Rucksack")
-	$GUI/BackpackGUI.close()
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI);
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	$GUI/Inventory.close()
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.RAVIOLI);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 
 	if main == null:
 		print("The main node could not be found. 
@@ -24,6 +23,7 @@ func _ready():
 ##### It allows DayCircle to acces and check data
 
 	$DayCycle.parent = self
+	$DayCycle.get_avatar_rect = $CharacterBody2D/Sprite2D.get_rect
 	$DayCycle._index_actions()
 
 func day_time_equal(time):
@@ -62,6 +62,6 @@ func _on_inventory_opened():
 	
 func _unhandled_input(event):
 	if (event is InputEventScreenTouch && event.pressed == true):
-		if $GUI/BackpackGUI.visible && !$BtnBackpack.is_pressed():
-			$GUI/BackpackGUI.close()
+		if $GUI/Inventory.visible && !$BtnBackpack.is_pressed():
+			$GUI/Inventory.close()
 

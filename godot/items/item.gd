@@ -30,17 +30,17 @@ func setup(ID: int, parent_inventory: EMC_Inventory) -> void:
 		IDs.WATER:
 			name = "Wasser"
 			_descr = "Sauberes Trinkwasser."
-			_comps.push_back(EMC_IC_Drink.new(1))
+			_comps.push_back(EMC_IC_Drink.new(500))
 			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.WATER_DIRTY:
 			name = "Dreckiges Wasser"
 			_descr = "Nicht die Erstwahl, aber dennoch trinkbar."
-			_comps.push_back(EMC_IC_Drink.new(1))
+			_comps.push_back(EMC_IC_Drink.new(400))
 			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.RAVIOLI:
 			name = "Ravioli"
 			_descr = "Lecker schmecker!"
-			_comps.push_back(EMC_IC_Food.new(9))
+			_comps.push_back(EMC_IC_Food.new(250))
 			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.GAS_CARTRIDGE:
 			name = "Gas Kartusche"

@@ -14,23 +14,14 @@ signal closed
 
 const MAX_SLOT_CNT: int = 50
 var _slot_scn: PackedScene = preload("res://items/inventory_slot.tscn")
-var _slot_cnt: int = 30
+var _slot_cnt: int
 var _item_scn: PackedScene = preload("res://items/item.tscn")
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-## Konstruktro des Inventars
-## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
-## ([param p_title]) gesetzt werden
-func setup(p_slot_cnt: int = 30, p_title: String = "Inventar"):
-	_slot_cnt = p_slot_cnt
+func _init(p_slotCnt : int = 30): 
+	_slot_cnt = p_slotCnt
 	if (_slot_cnt > MAX_SLOT_CNT): _slot_cnt = MAX_SLOT_CNT
-	setTitle(p_title)
-
-
-## Die Überschrift der Inventar-UI setzen
-func setTitle(newText: String):
-	$Background/Label.text = "[center]" + newText + "[/center]"
 
 
 ## Die Sichtbarkeit umstellen.
