@@ -949,13 +949,13 @@ grow_vertical = 2
 scale = Vector2(4, 4)
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI" instance=ExtResource("6_mo744")]
+[node name="Backpack" parent="GUI" instance=ExtResource("6_mo744")]
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="pressed" from="BtnBackpack" to="GUI/Backpack" method="_on_btn_backpack_pressed"]
 [connection signal="pressed" from="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/normal" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/slower" method="_on_button_pressed"]
 [connection signal="pressed" from="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/faster" method="_on_button_pressed"]
-[connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
-[connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="closed" from="GUI/Backpack" to="." method="_on_inventory_closed"]
+[connection signal="opened" from="GUI/Backpack" to="." method="_on_inventory_opened"]
