@@ -7,8 +7,9 @@ enum IDs{
 	DUMMY = 0,
 	WATER = 1,
 	WATER_DIRTY = 2,
-	RAVIOLI = 3,
-	GAS_CARTRIDGE = 4
+	RAVIOLI_TIN = 3,
+	GAS_CARTRIDGE = 4,
+	RAVIOLI_MEAL = 5,
 }
 
 #FYI: erbt "name" Attribut von Node
@@ -37,16 +38,20 @@ func setup(ID: int, parent_inventory: EMC_Inventory) -> void:
 			_descr = "Nicht die Erstwahl, aber dennoch trinkbar."
 			_comps.push_back(EMC_IC_Drink.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
-		IDs.RAVIOLI:
-			name = "Ravioli"
-			_descr = "Lecker schmecker!"
+		IDs.RAVIOLI_TIN:
+			name = "Ravioli Konserve"
+			_descr = "Kalt genießbar, aber ein Festmahl sieht anders aus.."
 			_comps.push_back(EMC_IC_Food.new(9))
 			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.GAS_CARTRIDGE:
-			name = "Gas Kartusche"
+			name = "Gaskartusche"
 			_descr = "Für den Gaskocher."
 		_: #default/else
 			name = "<No Name>"
+		IDs.RAVIOLI_MEAL:
+			name = "Ravioli Gericht"
+			_descr = "Lecker schmecker!"
+			_comps.push_back(EMC_IC_Food.new(15))
 
 
 #FYI: erbt "get_name()" Attribut von Node

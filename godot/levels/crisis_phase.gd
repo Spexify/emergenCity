@@ -12,7 +12,8 @@ func _ready():
 	$GUI/BackpackGUI.close()
 	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
 	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
-	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
 	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 

@@ -151,4 +151,4 @@ text = "Dyslexic Font"
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="Settings/CenterContainer" method="_on_font_change_pressed" flags=18]
+[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="Settings/CenterContainer" method="_on_font_change_pressed"]
