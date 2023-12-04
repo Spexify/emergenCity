@@ -38,7 +38,10 @@ func _unhandled_input(event):
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
 		#if crisisPhaseNode.inputMode == crisisPhaseNode.INPUT_MODE.default:
-			var stage = get_node("/root/CrisisPhase/Stage")
+			#var tileMap = get_node("/root/CrisisPhase/TileMap")
 			#if navAgent.is_target_reachable(): #funzt net ganz?
-			if !stage.clickedTileHasCollision(event.position):
+			if !tileMap.clickedTileHasCollision(event.position):
 				navAgent.target_position = event.position
+			#print("Mouse Click at: ", event.position)
+				
+		

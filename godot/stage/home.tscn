@@ -1,23 +1,13 @@
-[gd_scene load_steps=48 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=35 format=3 uid="uid://riay0ilweh8c"]
 
-[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
-[ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
-[ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
-[ext_resource type="Texture2D" uid="uid://cs1cwun2pfgmn" path="res://res/emergenCITY_sprites_colorful.png" id="2_nui4g"]
-[ext_resource type="Texture2D" uid="uid://b8untfr2ru51b" path="res://res/tilesets/furniture.png" id="3_6txw0"]
-[ext_resource type="Script" path="res://levels/TileMap.gd" id="3_26jf5"]
-[ext_resource type="Texture2D" uid="uid://4tuyoalkrjit" path="res://res/tilesets/ground.png" id="4_ve505"]
-[ext_resource type="Texture2D" uid="uid://vl1xu06r7ypy" path="res://res/tilesets/walls.png" id="5_d8o71"]
-[ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
-[ext_resource type="Script" path="res://levels/day_cycle.gd" id="6_nfi8x"]
-[ext_resource type="Script" path="res://actions/normal.gd" id="7_ur4li"]
-[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="8_sapeu"]
-[ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="9_7uqfk"]
-[ext_resource type="Script" path="res://actions/slower.gd" id="10_k4lsv"]
-[ext_resource type="Script" path="res://actions/faster.gd" id="11_dv3u5"]
+[ext_resource type="Texture2D" uid="uid://b8untfr2ru51b" path="res://res/tilesets/furniture.png" id="1_x0c3w"]
+[ext_resource type="Texture2D" uid="uid://4tuyoalkrjit" path="res://res/tilesets/ground.png" id="2_0uso0"]
+[ext_resource type="Texture2D" uid="uid://vl1xu06r7ypy" path="res://res/tilesets/walls.png" id="3_dasgg"]
+[ext_resource type="Texture2D" uid="uid://cs1cwun2pfgmn" path="res://res/emergenCITY_sprites_colorful.png" id="4_r7vvx"]
+[ext_resource type="Script" path="res://levels/TileMap.gd" id="5_em2fd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_le81o"]
-texture = ExtResource("3_6txw0")
+texture = ExtResource("1_x0c3w")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -377,7 +367,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eofl4"]
-texture = ExtResource("4_ve505")
+texture = ExtResource("2_0uso0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -696,7 +686,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rd6sb"]
-texture = ExtResource("5_d8o71")
+texture = ExtResource("3_dasgg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -1180,7 +1170,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8wlff"]
-texture = ExtResource("2_nui4g")
+texture = ExtResource("4_r7vvx")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -1784,28 +1774,7 @@ sources/0 = SubResource("TileSetAtlasSource_le81o")
 sources/1 = SubResource("TileSetAtlasSource_eofl4")
 sources/2 = SubResource("TileSetAtlasSource_rd6sb")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
-size = Vector2(1192, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj5r1"]
-size = Vector2(1192, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yx03m"]
-size = Vector2(20, 2048)
-
-[node name="CrisisPhase" type="Node2D"]
-process_mode = 3
-script = ExtResource("1_23hjb")
-
-[node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
-process_mode = 1
-position = Vector2(571, 1075)
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Avatar"]
-path_postprocessing = 1
-debug_enabled = true
-
-[node name="Stage" type="TileMap" parent="."]
+[node name="Stage" type="TileMap"]
 process_mode = 1
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_crsjo")
@@ -1817,231 +1786,4 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Foreground"
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(655365, 262146, 1, 655366, 327682, 1, 655367, 327682, 1, 655368, 589826, 1)
-script = ExtResource("3_26jf5")
-
-[node name="LevelBorders" type="StaticBody2D" parent="."]
-
-[node name="TopBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, -10)
-shape = SubResource("RectangleShape2D_3j7vf")
-
-[node name="LowerBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, 2058)
-shape = SubResource("RectangleShape2D_qj5r1")
-
-[node name="LeftBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(-10, 1024)
-shape = SubResource("RectangleShape2D_yx03m")
-
-[node name="RightBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(1162, 1024)
-shape = SubResource("RectangleShape2D_yx03m")
-
-[node name="BtnBackpack" type="TouchScreenButton" parent="."]
-z_index = 2
-position = Vector2(992, 35)
-texture_normal = ExtResource("1_07xlw")
-
-[node name="DayCycle" type="Node" parent="."]
-script = ExtResource("6_nfi8x")
-
-[node name="normal" type="Node" parent="DayCycle"]
-script = ExtResource("7_ur4li")
-
-[node name="Sprite2D" type="Sprite2D" parent="DayCycle/normal"]
-position = Vector2(291, 1744)
-scale = Vector2(3, 3)
-texture = ExtResource("8_sapeu")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DayCycle/normal"]
-visible = false
-
-[node name="CenterContainer" type="CenterContainer" parent="DayCycle/normal/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/normal/CanvasLayer/CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 105
-
-[node name="PanelContainer" type="PanelContainer" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 455
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Move in Normal Speed"
-
-[node name="HSeparator" type="HSeparator" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="Button" type="Button" parent="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Take Action"
-
-[node name="slower" type="Node" parent="DayCycle"]
-script = ExtResource("10_k4lsv")
-
-[node name="Sprite2D" type="Sprite2D" parent="DayCycle/slower"]
-position = Vector2(413, 1743)
-scale = Vector2(3, 3)
-texture = ExtResource("8_sapeu")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DayCycle/slower"]
-visible = false
-
-[node name="CenterContainer" type="CenterContainer" parent="DayCycle/slower/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/slower/CanvasLayer/CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 105
-
-[node name="PanelContainer" type="PanelContainer" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 455
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Move slower"
-
-[node name="HSeparator" type="HSeparator" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="Button" type="Button" parent="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Take Action"
-
-[node name="faster" type="Node" parent="DayCycle"]
-script = ExtResource("11_dv3u5")
-
-[node name="Sprite2D" type="Sprite2D" parent="DayCycle/faster"]
-position = Vector2(553, 1696)
-scale = Vector2(3, 3)
-texture = ExtResource("8_sapeu")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DayCycle/faster"]
-visible = false
-
-[node name="CenterContainer" type="CenterContainer" parent="DayCycle/faster/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/faster/CanvasLayer/CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 105
-
-[node name="PanelContainer" type="PanelContainer" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("9_7uqfk")
-
-[node name="MarginContainer" type="MarginContainer" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 455
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Move faster"
-
-[node name="HSeparator" type="HSeparator" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="Button" type="Button" parent="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Take Action"
-
-[node name="GUI" type="CenterContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(284, 512)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 284.0
-offset_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(4, 4)
-mouse_filter = 2
-
-[node name="BackpackGUI" parent="GUI" instance=ExtResource("6_mo744")]
-visible = false
-layout_mode = 2
-
-[connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
-[connection signal="pressed" from="DayCycle/normal/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/normal" method="_on_button_pressed"]
-[connection signal="pressed" from="DayCycle/slower/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/slower" method="_on_button_pressed"]
-[connection signal="pressed" from="DayCycle/faster/CanvasLayer/CenterContainer/MarginContainer/PanelContainer/MarginContainer2/Button" to="DayCycle/faster" method="_on_button_pressed"]
-[connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
-[connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
+script = ExtResource("5_em2fd")
