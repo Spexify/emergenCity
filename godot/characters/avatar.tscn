@@ -8,6 +8,8 @@ size = Vector2(90, 50)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_6xgqy")
 move_speed = 300.0
 
@@ -19,3 +21,10 @@ hframes = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_o8mc2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 3
+path_postprocessing = 1
+debug_enabled = true
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]

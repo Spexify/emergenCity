@@ -89,7 +89,7 @@ func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
 
 ## Diesem Inventar ein [EMC_Item] [param cnt] Mal entfernen entfernen
 ## Gibt die Anzahl an erfolgreich entfernten Items zurück
-func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
+func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
 	for slotIdx in _slot_cnt:
@@ -98,6 +98,7 @@ func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 		if item != null && item.get_ID() == ID:
 			slot.remove_child(item)
 			removedCnt += 1
+			if removedCnt == to_be_removed_cnt: break
 	return removedCnt
 
 
@@ -184,7 +185,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	
 	#Komponenten des Items
 	var comps := sender.get_comps()
-	var comp_string: String
+	var comp_string: String = ""
 	for comp in comps:
 		comp_string += comp.get_colored_name_with_vals() + ", "
 	##Überflüssiges Komma entfernen:
