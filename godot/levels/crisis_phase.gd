@@ -21,7 +21,7 @@ func _ready():
 		print("The main node could not be found. 
 		This may be because you ran the crisis scene directly!")
 	
-	var guis = []
+	var guis : Array[EMC_GUI] = []
 	for uncast in uncast_guis:
 		guis.append(uncast as EMC_GUI)
 	

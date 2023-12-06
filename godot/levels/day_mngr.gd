@@ -42,11 +42,12 @@ func on_interacted_with_furniture(action_id : int):
 	var current_action : EMC_Action = self._actionArr[action_id]
 	
 	var rejected_constrains : Array[String] = []
-	for constrain_key in current_action.constrains_prior.keys():
-		if not Callable(self, constrain_key).call(current_action.constrains_prior[constrain_key]):
+	for constrain_key in current_action._constrains_prior.keys():
+		if not Callable(self, constrain_key).call(current_action._constrains_prior[constrain_key]):
 			rejected_constrains.append(constrain_key)
 	
 	if rejected_constrains.size() >= 1:
+		current_action._constrains_rejected = rejected_constrains
 		if self.gui_refs[0].get_type_gui() == "reject":
 			self.gui_refs[0].show_gui(current_action)
 		else:
