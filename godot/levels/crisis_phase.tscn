@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=49 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
 [ext_resource type="Script" path="res://levels/day_cycle.gd" id="6_nfi8x"]
 [ext_resource type="Script" path="res://actions/normal.gd" id="7_ur4li"]
+[ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="8_boxsy"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="8_sapeu"]
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="9_7uqfk"]
 [ext_resource type="Script" path="res://actions/slower.gd" id="10_k4lsv"]
@@ -30,6 +31,8 @@ process_mode = 1
 position = Vector2(571, 1075)
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
+
+[node name="Stage2" parent="." instance=ExtResource("8_boxsy")]
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 

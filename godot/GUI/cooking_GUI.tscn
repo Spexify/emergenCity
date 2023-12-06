@@ -8,8 +8,8 @@ anchors_preset = 0
 
 [node name="BG" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 504.0
-offset_bottom = 654.0
+offset_right = 393.0
+offset_bottom = 447.0
 texture = ExtResource("1_8ei5q")
 patch_margin_left = 10
 patch_margin_top = 10
