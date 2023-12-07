@@ -5,6 +5,8 @@ var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 ## This is the main node holding all importent informations.
 ## It will only work when the you run the main scene.
 @onready var main : Node = get_node("/root/main")
+@onready var uncast_guis = $GUI.get_children()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,25 +25,11 @@ func _ready():
 		print("The main node could not be found. 
 		This may be because you ran the crisis scene directly!")
 	
-##### The following Code is not a final design
-##### It allows DayCircle to acces and check data
-
-	$DayCycle.parent = self
-	$DayCycle._index_actions()
-
-func day_time_equal(time):
-	return $DayCycle.current_time == time
+	var guis : Array[EMC_GUI] = []
+	for uncast in uncast_guis:
+		guis.append(uncast as EMC_GUI)
 	
-func day_time_greater(time):
-	return $DayCycle.current_time > time
-
-func player_speed_set(speed: float):
-	$CharacterBody2D.move_speed = speed
-	
-func player_speed_add(speed: float):
-	$CharacterBody2D.move_speed += speed
-	
-##### End of experimantal code
+	$DayMngr.setup(guis)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
