@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="emergenCITY_game"
-run/main_scene="res://preparePhase/main_menu.tscn"
+run/main_scene="res://entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://app_icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [display]
 

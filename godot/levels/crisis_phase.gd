@@ -2,11 +2,7 @@ extends Node2D
 
 var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
 
-## This is the main node holding all importent informations.
-## It will only work when the you run the main scene.
-@onready var main : Node = get_node("/root/main")
 @onready var uncast_guis = $GUI.get_children()
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,10 +16,6 @@ func _ready():
 	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
 	$StageMngr.setup($Avatar)
-	
-	if main == null:
-		print("The main node could not be found. 
-		This may be because you ran the crisis scene directly!")
 	
 	var guis : Array[EMC_GUI] = []
 	for uncast in uncast_guis:
