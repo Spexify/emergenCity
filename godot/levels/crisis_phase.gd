@@ -57,3 +57,4 @@ func _on_summary_end_of_day_gui_closed():
 
 func _on_summary_end_of_day_gui_opened():
 	pass # Replace with function body.
+
