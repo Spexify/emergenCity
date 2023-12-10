@@ -14,14 +14,23 @@ signal closed
 
 const MAX_SLOT_CNT: int = 50
 var _slot_scn: PackedScene = preload("res://items/inventory_slot.tscn")
-var _slot_cnt: int
+var _slot_cnt: int = 30
 var _item_scn: PackedScene = preload("res://items/item.tscn")
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(p_slotCnt : int = 30): 
-	_slot_cnt = p_slotCnt
+## Konstruktro des Inventars
+## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
+## ([param p_title]) gesetzt werden
+func setup(p_slot_cnt: int = 30, p_title: String = "Inventar"):
+	_slot_cnt = p_slot_cnt
 	if (_slot_cnt > MAX_SLOT_CNT): _slot_cnt = MAX_SLOT_CNT
+	setTitle(p_title)
+
+
+## Die Überschrift der Inventar-UI setzen
+func setTitle(newText: String):
+	$Background/Label.text = "[center]" + newText + "[/center]"
 
 
 ## Die Sichtbarkeit umstellen.
@@ -80,7 +89,7 @@ func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
 
 ## Diesem Inventar ein [EMC_Item] [param cnt] Mal entfernen entfernen
 ## Gibt die Anzahl an erfolgreich entfernten Items zurück
-func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
+func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
 	for slotIdx in _slot_cnt:
@@ -89,6 +98,7 @@ func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
 		if item != null && item.get_ID() == ID:
 			slot.remove_child(item)
 			removedCnt += 1
+			if removedCnt == to_be_removed_cnt: break
 	return removedCnt
 
 
@@ -175,7 +185,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	
 	#Komponenten des Items
 	var comps := sender.get_comps()
-	var comp_string: String
+	var comp_string: String = ""
 	for comp in comps:
 		comp_string += comp.get_colored_name_with_vals() + ", "
 	##Überflüssiges Komma entfernen:

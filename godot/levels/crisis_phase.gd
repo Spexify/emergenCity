@@ -1,16 +1,47 @@
 extends Node2D
 
+var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
+
+## This is the main node holding all importent informations.
+## It will only work when the you run the main scene.
+@onready var main : Node = get_node("/root/main")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$GUI/Inventory.close()
-	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
-	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER);
-	$GUI/Inventory.add_new_item(EMC_Item.IDs.RAVIOLI);
-	$GUI/Inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	$GUI/Inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	pass
+	$GUI/BackpackGUI.setup(30, "Rucksack")
+	$GUI/BackpackGUI.close()
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	$GUI/BackpackGUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	
+	$StageMngr.setup($Avatar)
+	
+	if main == null:
+		print("The main node could not be found. 
+		This may be because you ran the crisis scene directly!")
+	
+##### The following Code is not a final design
+##### It allows DayCircle to acces and check data
 
+	$DayCycle.parent = self
+	$DayCycle._index_actions()
+
+func day_time_equal(time):
+	return $DayCycle.current_time == time
+	
+func day_time_greater(time):
+	return $DayCycle.current_time > time
+
+func player_speed_set(speed: float):
+	$CharacterBody2D.move_speed = speed
+	
+func player_speed_add(speed: float):
+	$CharacterBody2D.move_speed += speed
+	
+##### End of experimantal code
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -34,6 +65,6 @@ func _on_inventory_opened():
 	
 func _unhandled_input(event):
 	if (event is InputEventScreenTouch && event.pressed == true):
-		if $GUI/Inventory.visible && !$BtnBackpack.is_pressed():
-			$GUI/Inventory.close()
+		if $GUI/BackpackGUI.visible && !$BtnBackpack.is_pressed():
+			$GUI/BackpackGUI.close()
 
