@@ -162,7 +162,7 @@ func _on_avatar_arrived():
 	if _last_clicked_tile != null:
 		var stage_name = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.STAGE_NAME)
 		if _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID) != 0:
-			change_stage(stage_name)
-			#interacted_with_furniture.emit(stage_name) #TODO: interacted_with_furniture mit DayMngr verknüpfen
+			change_stage(stage_name) ##TODO: Stage_name löschen aus CustomID
+			#interacted_with_furniture.emit(CustomDataLayers.ACTION_ID) #TODO: interacted_with_furniture mit DayMngr verknüpfen
 		elif stage_name != "":
 			change_stage(stage_name)
