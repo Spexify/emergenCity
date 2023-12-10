@@ -78,21 +78,19 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
-[node name="SummaryEndOfDayGUI" type="Control" parent="GUI"]
-layout_mode = 2
+[node name="SummaryEndOfDayGUI" type="PopupPanel" parent="GUI"]
 script = ExtResource("8_loy51")
 
 [node name="Background" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -115.0
-offset_top = -186.0
-offset_right = 116.0
-offset_bottom = 131.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_de65e")
@@ -168,21 +166,19 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="WinnerScreenGUI" type="Control" parent="GUI"]
-layout_mode = 2
+[node name="WinnerScreenGUI" type="PopupPanel" parent="GUI"]
 script = ExtResource("12_7ntee")
 
 [node name="Background" type="NinePatchRect" parent="GUI/WinnerScreenGUI"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = 11.0
-offset_right = 352.0
-offset_bottom = 215.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_0lc3n")
@@ -230,21 +226,19 @@ layout_mode = 2
 text = "Home Menu
 "
 
-[node name="GameOverScreenGUI" type="Control" parent="GUI"]
-layout_mode = 2
+[node name="GameOverGUI" type="PopupPanel" parent="GUI"]
 script = ExtResource("13_nhlsp")
 
-[node name="Background" type="NinePatchRect" parent="GUI/GameOverScreenGUI"]
-layout_mode = 1
+[node name="Background" type="NinePatchRect" parent="GUI/GameOverGUI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = 11.0
-offset_right = 352.0
-offset_bottom = 215.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_0lc3n")
@@ -253,7 +247,7 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="Title" type="RichTextLabel" parent="GUI/GameOverScreenGUI/Background"]
+[node name="Title" type="RichTextLabel" parent="GUI/GameOverGUI/Background"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
 anchors_preset = 10
@@ -273,7 +267,7 @@ text = "[center]GAME OVER[/center]
 "
 visible_characters_behavior = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/GameOverScreenGUI/Background"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/GameOverGUI/Background"]
 clip_contents = true
 layout_mode = 2
 offset_left = 40.0
@@ -282,13 +276,13 @@ offset_right = 307.0
 offset_bottom = 189.0
 theme_override_constants/separation = 7
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GameOverScreenGUI/Background/VBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GameOverGUI/Background/VBoxContainer2"]
 custom_minimum_size = Vector2(140, 70)
 layout_mode = 2
 text = "Sadly you did not survive...
 10 ECoins"
 
-[node name="Go to Home Menu" type="Button" parent="GUI/GameOverScreenGUI/Background/VBoxContainer2"]
+[node name="Go to Home Menu" type="Button" parent="GUI/GameOverGUI/Background/VBoxContainer2"]
 layout_mode = 2
 text = "Home Menu
 "
@@ -296,5 +290,3 @@ text = "Home Menu
 [connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
-[connection signal="closed" from="GUI/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
-[connection signal="opened" from="GUI/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
