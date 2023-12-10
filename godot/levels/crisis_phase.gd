@@ -51,7 +51,6 @@ func _unhandled_input(event):
 
 
 func _on_summary_end_of_day_gui_closed():
-
 	pass # Replace with function body.
 
 

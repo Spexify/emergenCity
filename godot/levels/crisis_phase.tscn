@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=17 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="9_de65e"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="10_pnbkm"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="11_0lc3n"]
+[ext_resource type="Script" path="res://levels/winner_screen_GUI.gd" id="12_7ntee"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://stage/stage_mngr.tscn" id="13_8jkao"]
+[ext_resource type="Script" path="res://levels/game_over_screen_GUI.gd" id="13_nhlsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(1192, 20)
@@ -165,6 +167,131 @@ patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
+
+[node name="WinnerScreenGUI" type="Control" parent="GUI"]
+layout_mode = 2
+script = ExtResource("12_7ntee")
+
+[node name="Background" type="NinePatchRect" parent="GUI/WinnerScreenGUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 352.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_0lc3n")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="GUI/WinnerScreenGUI/Background"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 26.0
+offset_right = 1010.0
+offset_bottom = 170.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.113725, 0.0392157, 0.203922, 0.682353)
+theme_override_fonts/normal_font = ExtResource("10_pnbkm")
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]WINNER![/center]
+"
+visible_characters_behavior = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/WinnerScreenGUI/Background"]
+clip_contents = true
+layout_mode = 2
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 307.0
+offset_bottom = 189.0
+theme_override_constants/separation = 7
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/WinnerScreenGUI/Background/VBoxContainer2"]
+custom_minimum_size = Vector2(140, 70)
+layout_mode = 2
+text = "Congratulations, you've survived! You won 50 ECoins!"
+
+[node name="Go to Home Menu" type="Button" parent="GUI/WinnerScreenGUI/Background/VBoxContainer2"]
+layout_mode = 2
+text = "Home Menu
+"
+
+[node name="GameOverScreenGUI" type="Control" parent="GUI"]
+layout_mode = 2
+script = ExtResource("13_nhlsp")
+
+[node name="Background" type="NinePatchRect" parent="GUI/GameOverScreenGUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 352.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_0lc3n")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="GUI/GameOverScreenGUI/Background"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 26.0
+offset_right = 1010.0
+offset_bottom = 170.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.113725, 0.0392157, 0.203922, 0.682353)
+theme_override_fonts/normal_font = ExtResource("10_pnbkm")
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]GAME OVER[/center]
+"
+visible_characters_behavior = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/GameOverScreenGUI/Background"]
+clip_contents = true
+layout_mode = 2
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 307.0
+offset_bottom = 189.0
+theme_override_constants/separation = 7
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GameOverScreenGUI/Background/VBoxContainer2"]
+custom_minimum_size = Vector2(140, 70)
+layout_mode = 2
+text = "Sadly you did not survive...
+10 ECoins"
+
+[node name="Go to Home Menu" type="Button" parent="GUI/GameOverScreenGUI/Background/VBoxContainer2"]
+layout_mode = 2
+text = "Home Menu
+"
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
