@@ -82,7 +82,7 @@ func _on_executed(action : EMC_Action):
 func get_current_day_cycle():
 	return self.current_day_cycle
 	
-func get_current_day_preiod():
+func get_current_day_period():
 	return self.day_period
 
 func get_current_day():
