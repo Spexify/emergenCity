@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
 	if (navAgent.distance_to_target() < 5.0):
-		arrived.emit()
+		#arrived.emit()
 		cancel_navigation()
 	if (navAgent.is_navigation_finished()):
 		#Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up

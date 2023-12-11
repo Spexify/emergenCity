@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="emergenCITY_game"
-run/main_scene="res://preparePhase/main_menu.tscn"
+run/main_scene="res://entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://app_icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [display]
 
@@ -22,6 +26,11 @@ window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/stretch/scale=0.5
 window/handheld/orientation=1
+
+[gui]
+
+theme/custom="res://GUI/default_theme.tres"
+theme/custom_font="res://fonts/Gugi-Regular-Variation.tres"
 
 [input]
 
