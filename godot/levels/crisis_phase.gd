@@ -48,3 +48,13 @@ func _unhandled_input(event):
 		if $GUI/BackpackGUI.visible && !$BtnBackpack.is_pressed():
 			$GUI/BackpackGUI.close()
 
+
+
+func _on_summary_end_of_day_gui_closed():
+
+	pass # Replace with function body.
+
+
+func _on_summary_end_of_day_gui_opened():
+	pass # Replace with function body.
+

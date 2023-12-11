@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=15 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://levels/day_mngr.gd" id="6_e3w11"]
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="8_boxsy"]
+[ext_resource type="Script" path="res://levels/summary_end_of_day.gd" id="8_loy51"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="9_de65e"]
+[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="10_pnbkm"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="11_0lc3n"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://stage/stage_mngr.tscn" id="13_8jkao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
@@ -72,6 +76,98 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
+[node name="SummaryEndOfDayGUI" type="Control" parent="GUI"]
+layout_mode = 2
+script = ExtResource("8_loy51")
+
+[node name="Background" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -186.0
+offset_right = 116.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_de65e")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="GUI/SummaryEndOfDayGUI/Background"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 25.0
+offset_right = 681.0
+offset_bottom = 120.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("10_pnbkm")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[center]Day is over...[/center]
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.5
+offset_top = 76.0
+offset_right = 100.5
+offset_bottom = 281.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Eat" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Eat
+"
+
+[node name="Drink" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Drink
+"
+
+[node name="Continue" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+texture = ExtResource("11_0lc3n")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
 [connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="closed" from="GUI/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
+[connection signal="opened" from="GUI/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
