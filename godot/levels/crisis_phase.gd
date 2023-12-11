@@ -1,7 +1,7 @@
 extends Node2D
 
 var inventoryScene : PackedScene = preload("res://items/inventory.tscn")
-var mainsMenuScene : PackedScene = preload("res://preparePhase/main_menu.tscn")
+var mainMenuScene : PackedScene = preload("res://preparePhase/main_menu.tscn")
 
 @onready var uncast_guis = $GUI.get_children()
 
@@ -77,5 +77,5 @@ func _on_button_next_day_pressed():
 
 
 func _on_go_to_main_menu_pressed():
-	
+	get_tree().change_scene(mainMenuScene)
 	pass # Replace with function body.
