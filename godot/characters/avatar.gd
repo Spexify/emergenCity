@@ -1,30 +1,20 @@
 extends CharacterBody2D
-class_name EMC_Avatar
-
-signal arrived
 
 @export var move_speed: float = 100
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
+@onready var tileMap := $"../TileMap" as TileMap
 const SPEED: float = 300.0
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
-## Das Navigationsziel des Avatars setzen
-##TODO: In TechDoku aufnehmen: navAgent.is_target_reachable(): #funzt net
-func set_target(target_coord: Vector2) -> void:
-	navAgent.target_position = target_coord
+#func _ready():
+#	navAgent.set_target_desired_distance(5.0)
 
-func cancel_navigation() -> void:
-	navAgent.target_position = self.position
-
-
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
 func _physics_process(_delta):
-	var input_direction: Vector2
+	var input_direction : Vector2
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
-	if (navAgent.distance_to_target() < 5.0):
-		#arrived.emit()
-		cancel_navigation()
+	if (navAgent.distance_to_target() < 5.0): navAgent.target_position = self.position #move_speed = 0.1
+	#else: move_speed = SPEED
+	
 	if (navAgent.is_navigation_finished()):
 		#Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up
 		# Get the input direction
@@ -42,6 +32,16 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-## target_reached() doesn't work for whatever reason
-func _on_navigation_agent_2d_navigation_finished():
-	arrived.emit()
+func _unhandled_input(event):
+	#var crisisPhaseNode = get_node("Chr") #get_tree().root
+	
+	if ((event is InputEventMouseButton && event.pressed == true)
+	or (event is InputEventScreenTouch)):
+		#if crisisPhaseNode.inputMode == crisisPhaseNode.INPUT_MODE.default:
+			#var tileMap = get_node("/root/CrisisPhase/TileMap")
+			#if navAgent.is_target_reachable(): #funzt net ganz?
+			if !tileMap.clickedTileHasCollision(event.position):
+				navAgent.target_position = event.position
+			#print("Mouse Click at: ", event.position)
+				
+		
