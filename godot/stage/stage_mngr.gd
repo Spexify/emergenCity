@@ -13,7 +13,7 @@ class_name EMC_StageMngr
 	#var last_action_ID: int
 	#var last_stage_name: String
 
-signal interacted_with_furniture(p_stage_name: String)
+#signal interacted_with_furniture(p_stage_name: String)
 
 
 enum Layers{
@@ -28,15 +28,28 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
+const TILE_MIN_X_COORD: int = 0
+const TILE_MAX_X_COORD: int = 8
+const TILE_MIN_Y_COORD: int = 0
+const TILE_MAX_Y_COORD: int = 15
+
 var _avatar: EMC_Avatar
+var _day_mngr: EMC_DayMngr
 var _last_clicked_tile: TileData = null #LastClickedTile
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar) -> void:
+func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr) -> void:
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
+	_day_mngr = p_day_mngr
 
+
+func get_stage_name() -> String:
+	var parts = $Stage.get_scene_file_path().split("/")
+	var filename_with_ending: String = parts[parts.size() - 1]
+	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
+	
 
 func get_stage() -> TileMap:
 	return $Stage
@@ -46,6 +59,7 @@ func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://stage/" + p_stage_name + ".tscn").instantiate()
 	$Stage.replace_by(new_stage)
 	new_stage.name = "Stage"
+	$Stage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
@@ -103,9 +117,8 @@ func _tile_has_collision(p_tile_coord: Vector2i) -> bool:
 ## TODO
 func _tile_is_furniture(p_tiledata: TileData) -> bool:
 	var action_ID: int = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
-	var stage_name: String = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.STAGE_NAME)
 	
-	return (action_ID != 0) || (stage_name != "")
+	return (action_ID != 0)
 
 
 ## TODO
@@ -133,36 +146,36 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 
 ## TODO
 func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
-	var result: Vector2
 	var tile_coord := _get_tile_coord(p_click_pos)
 	
 	if !_tile_has_collision(tile_coord + Vector2i(0, 0)):
 		return to_global($Stage.map_to_local(tile_coord))
-	var south_tile = tile_coord + Vector2i(0, 1)
-	if !_tile_has_collision(south_tile):
-		return to_global($Stage.map_to_local(south_tile))
-	var southeast_tile = tile_coord + Vector2i(1, 1)
-	if !_tile_has_collision(southeast_tile):
-		return to_global($Stage.map_to_local(southeast_tile))
-	var southwest_tile = tile_coord + Vector2i(-1, 1)
-	if !_tile_has_collision(southwest_tile):
-		return to_global($Stage.map_to_local(southwest_tile))
-	var east_tile = tile_coord + Vector2i(1, 0)
-	if !_tile_has_collision(east_tile):
-		return to_global($Stage.map_to_local(east_tile))
-	var west_tile = tile_coord + Vector2i(-1, 0)
-	if !_tile_has_collision(west_tile):
-		return to_global($Stage.map_to_local(west_tile))
+	if tile_coord.y < TILE_MAX_Y_COORD:
+		var south_tile = tile_coord + Vector2i(0, 1)
+		if !_tile_has_collision(south_tile):
+			return to_global($Stage.map_to_local(south_tile))
+		var southeast_tile = tile_coord + Vector2i(1, 1)
+		if !_tile_has_collision(southeast_tile):
+			return to_global($Stage.map_to_local(southeast_tile))
+		var southwest_tile = tile_coord + Vector2i(-1, 1)
+		if !_tile_has_collision(southwest_tile):
+			return to_global($Stage.map_to_local(southwest_tile))
+	if tile_coord.x < TILE_MAX_X_COORD:
+		var east_tile = tile_coord + Vector2i(1, 0)
+		if !_tile_has_collision(east_tile):
+			return to_global($Stage.map_to_local(east_tile))
+	if tile_coord.y > TILE_MAX_X_COORD:
+		var west_tile = tile_coord + Vector2i(-1, 0)
+		if !_tile_has_collision(west_tile):
+			return to_global($Stage.map_to_local(west_tile))
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
-	return result
+	return Vector2.ZERO
 
 
+## TODO
 func _on_avatar_arrived():
 	if _last_clicked_tile != null:
-		var stage_name = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.STAGE_NAME)
-		if _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID) != 0:
-			change_stage(stage_name) ##TODO: Stage_name löschen aus CustomID
-			#interacted_with_furniture.emit(CustomDataLayers.ACTION_ID) #TODO: interacted_with_furniture mit DayMngr verknüpfen
-		elif stage_name != "":
-			change_stage(stage_name)
+		var action_ID = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+		if action_ID != 0:
+			_day_mngr.on_interacted_with_furniture(action_ID)

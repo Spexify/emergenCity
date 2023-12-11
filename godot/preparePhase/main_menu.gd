@@ -3,7 +3,7 @@ extends Control
 @onready var main_menu = $".."
 
 func _on_start_round_pressed():
-	Global.goto_scene("res://levels/crisis_phase.tscn")
+	Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 	
 
 func _on_shelf_pressed():
