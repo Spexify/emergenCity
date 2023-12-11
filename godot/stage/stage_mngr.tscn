@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://rs5ai1864vx5"]
+
+[ext_resource type="Script" path="res://stage/stage_mngr.gd" id="1_2ergk"]
+[ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="2_epoie"]
+
+[node name="StageMngr" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_2ergk")
+
+[node name="Stage" parent="." instance=ExtResource("2_epoie")]
