@@ -1,4 +1,4 @@
-extends Control
+extends PopupPanel
 
 signal opened
 signal closed

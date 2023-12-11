@@ -79,6 +79,10 @@ visible = false
 layout_mode = 2
 
 [node name="SummaryEndOfDayGUI" type="PopupPanel" parent="GUI"]
+title = "EndofDay"
+initial_position = 1
+size = Vector2i(1000, 1600)
+visible = true
 script = ExtResource("8_loy51")
 
 [node name="Background" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI"]
@@ -87,10 +91,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -252.0
-offset_top = -252.0
-offset_right = -160.0
-offset_bottom = -160.0
+offset_left = -496.0
+offset_top = -796.0
+offset_right = 496.0
+offset_bottom = 796.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_de65e")
@@ -100,71 +104,65 @@ patch_margin_right = 10
 patch_margin_bottom = 10
 
 [node name="Title" type="RichTextLabel" parent="GUI/SummaryEndOfDayGUI/Background"]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 1.0
-offset_top = 25.0
-offset_right = 681.0
-offset_bottom = 120.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 408.0
+offset_bottom = 295.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("10_pnbkm")
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 330
 bbcode_enabled = true
-text = "[center]Day is over...[/center]
-"
+text = "[center]Day is over...[/center]"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -102.5
-offset_top = 76.0
-offset_right = 100.5
-offset_bottom = 281.0
+anchor_bottom = 0.5
+offset_left = -421.0
+offset_top = -296.0
+offset_right = 429.0
+offset_bottom = 504.0
 grow_horizontal = 2
-theme_override_constants/separation = 20
+grow_vertical = 2
+theme_override_constants/separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Eat" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
+theme_override_font_sizes/font_size = 80
 text = "Eat
 "
 
 [node name="Drink" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
+theme_override_font_sizes/font_size = 80
 text = "Drink
 "
 
 [node name="Continue" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
+theme_override_font_sizes/font_size = 80
 text = "Continue
 "
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
-texture = ExtResource("11_0lc3n")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
 
 [node name="WinnerScreenGUI" type="PopupPanel" parent="GUI"]
 script = ExtResource("12_7ntee")
