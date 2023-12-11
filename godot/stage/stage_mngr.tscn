@@ -7,4 +7,5 @@
 scale = Vector2(4, 4)
 script = ExtResource("1_2ergk")
 
-[node name="Stage" parent="." instance=ExtResource("2_epoie")]
+[node name="CurrStage" parent="." instance=ExtResource("2_epoie")]
+layer_2/modulate = Color(1, 1, 1, 0.262745)

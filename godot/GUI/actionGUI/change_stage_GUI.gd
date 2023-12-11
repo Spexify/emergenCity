@@ -18,13 +18,13 @@ func show_gui(p_action: EMC_Action):
 	_action = p_action
 	
 	if _stage_mngr.get_stage_name() == "home":
-		_on_okay_pressed() #Ohne Meldung weitermachen
+		_on_confirm_btn_pressed() #Ohne Meldung weitermachen
 	else:
 		show()
 		opened.emit()
 
 
-func _on_okay_pressed():
+func _on_confirm_btn_pressed():
 	var stageChangeAction: EMC_StageChangeAction = _action
 	print("Stage wechseln zu " + stageChangeAction.get_stage_name())
 	print(_stage_mngr.get_stage_name())
@@ -39,3 +39,4 @@ func _on_okay_pressed():
 func _on_cancel_btn_pressed():
 	hide()
 	closed.emit()
+

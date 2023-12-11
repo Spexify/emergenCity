@@ -54,12 +54,12 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="OkayBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="ConfirmBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("3_scbir")
 theme_override_font_sizes/font_size = 60
-text = "Okay"
+text = "Bestätigen"
 
 [node name="VSeparator" type="VSeparator" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -70,7 +70,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("3_scbir")
 theme_override_font_sizes/font_size = 60
-text = "Zurück"
+text = "Abbrechen"
 
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/OkayBtn" to="." method="_on_okay_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]

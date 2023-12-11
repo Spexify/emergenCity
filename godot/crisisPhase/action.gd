@@ -6,6 +6,14 @@ class_name EMC_Action
 
 extends Node
 
+enum IDs{
+	NO_ACTION = 0,
+	TELEPORTER_HOME = 1,
+	TELEPORTER_MARKET = 2,
+	REST = 3,
+	COOKING = 4
+}
+
 ## This sigal will be emmited if the Action was performed 
 ## and is needed in [EMC_DayMngr] to recored a history of performed Actions.
 signal executed(action : EMC_Action)

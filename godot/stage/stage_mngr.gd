@@ -6,15 +6,6 @@ class_name EMC_StageMngr
 ## Cell = An instanciated Tile of a Tileset on a Tilemap
 ## Tilemap = Many cells
 
-### This inner class is used as a tiple aka "Plain old datastructure"
-### Therefore, no methods should be defined, and direct public access to its
-### members is granted.
-#class LastClickedTile:
-	#var last_action_ID: int
-	#var last_stage_name: String
-
-#signal interacted_with_furniture(p_stage_name: String)
-
 
 enum Layers{
 	BACKGROUND   = 0,
@@ -24,7 +15,7 @@ enum Layers{
 }
 
 enum CustomDataLayers{
-	ACTION_ID   = 0,
+	ACTION_ID  = 0,
 	STAGE_NAME = 1
 }
 
@@ -32,6 +23,7 @@ const TILE_MIN_X_COORD: int = 0
 const TILE_MAX_X_COORD: int = 8
 const TILE_MIN_Y_COORD: int = 0
 const TILE_MAX_Y_COORD: int = 15
+
 
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
@@ -46,28 +38,23 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr) -> void:
 
 
 func get_stage_name() -> String:
-	var parts = $Stage.get_scene_file_path().split("/")
+	var parts = $CurrStage.get_scene_file_path().split("/")
 	var filename_with_ending: String = parts[parts.size() - 1]
 	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
 	
 
-func get_stage() -> TileMap:
-	return $Stage
+func get_curr_stage() -> TileMap:
+	return $CurrStage
 
 
 func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://stage/" + p_stage_name + ".tscn").instantiate()
-	$Stage.replace_by(new_stage)
-	new_stage.name = "Stage"
-	$Stage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
+	$CurrStage.replace_by(new_stage)
+	new_stage.name = "CurrStage"
+	$CurrStage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
-func _ready():
-	#_remove_redundant_navigation()
-	pass
-
-
 ### Because the navigation works only on the BACKGROUND layer, there can be problems, as the 
 ### MIDDLEGROUND can still contain objects with collision. The navigation polygon on BG tiles
 ### is removed if it contains collision tiles in the middleground
@@ -80,34 +67,29 @@ func _ready():
 			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
 
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target
 func _unhandled_input(p_event: InputEvent) -> void:
 	if ((p_event is InputEventMouseButton && p_event.pressed == true)
 	or (p_event is InputEventScreenTouch)):
 		_last_clicked_tile = _get_tile_data_front_to_back(p_event.position)
-		if _tile_is_furniture(_last_clicked_tile):
+		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
 				_determine_adjacent_free_tile(p_event.position)
 			_avatar.set_target(adjacent_free_tile_pos)
-		elif !_tile_has_collision(_get_tile_coord(p_event.position)):
+		elif !_has_tile_collision(_get_tile_coord(p_event.position)):
 			_avatar.set_target(p_event.position)
 
 
 ## TODO
-func _tile_has_collision(p_tile_coord: Vector2i) -> bool:
+func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	const PHYSICS_LAYER: int = 0
-	var tiledata_bg = $Stage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
+	var tiledata_bg: TileData = $CurrStage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
 	
 	if tiledata_bg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
 		return true
 	else:
-		var tiledata_mg = $Stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tile_coord)
+		var tiledata_mg: TileData = $CurrStage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tile_coord)
 		if tiledata_mg != null && tiledata_mg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
 			return true
 		else:
@@ -115,31 +97,31 @@ func _tile_has_collision(p_tile_coord: Vector2i) -> bool:
 
 
 ## TODO
-func _tile_is_furniture(p_tiledata: TileData) -> bool:
+func _is_tile_furniture(p_tiledata: TileData) -> bool:
 	var action_ID: int = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 	
-	return (action_ID != 0)
+	return (action_ID != EMC_Action.IDs.NO_ACTION)
 
 
 ## TODO
 func _get_tile_coord(p_click_pos: Vector2) -> Vector2i:
-	#Da die TileMap skaliert ist, muss die Klickposition angepasst werden
+	#The click position has to be scaled according to the scale of the stage
 	var scaled_click_pos := to_local(p_click_pos)
-	return $Stage.local_to_map(scaled_click_pos)
+	return $CurrStage.local_to_map(scaled_click_pos)
 
 
 ## TODO
 func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
-	var tile_coord = _get_tile_coord(p_click_pos)
+	var tile_coord := _get_tile_coord(p_click_pos)
 	var tiledata: TileData
 	#Check first, if a teleporter tile is placed there
-	tiledata = $Stage.get_cell_tile_data(Layers.TELEPORTER, tile_coord)
+	tiledata = $CurrStage.get_cell_tile_data(Layers.TELEPORTER, tile_coord)
 	if tiledata != null: return tiledata
 	#Next: Is a furniture placed there?
-	tiledata = $Stage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
+	tiledata = $CurrStage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
 	if tiledata != null: return tiledata
-	#Otherwhise return the background tile data
-	tiledata = $Stage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
+	#Otherwise return the background tile data
+	tiledata = $CurrStage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
 	assert(tiledata != null, "Clicked Coordinate has no tile! Foreground Tiles don't suffice!")
 	return tiledata
 
@@ -148,26 +130,26 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	
-	if !_tile_has_collision(tile_coord + Vector2i(0, 0)):
-		return to_global($Stage.map_to_local(tile_coord))
+	if !_has_tile_collision(tile_coord + Vector2i(0, 0)):
+		return to_global($CurrStage.map_to_local(tile_coord))
 	if tile_coord.y < TILE_MAX_Y_COORD:
 		var south_tile = tile_coord + Vector2i(0, 1)
-		if !_tile_has_collision(south_tile):
-			return to_global($Stage.map_to_local(south_tile))
+		if !_has_tile_collision(south_tile):
+			return to_global($CurrStage.map_to_local(south_tile))
 		var southeast_tile = tile_coord + Vector2i(1, 1)
-		if !_tile_has_collision(southeast_tile):
-			return to_global($Stage.map_to_local(southeast_tile))
+		if !_has_tile_collision(southeast_tile):
+			return to_global($CurrStage.map_to_local(southeast_tile))
 		var southwest_tile = tile_coord + Vector2i(-1, 1)
-		if !_tile_has_collision(southwest_tile):
-			return to_global($Stage.map_to_local(southwest_tile))
+		if !_has_tile_collision(southwest_tile):
+			return to_global($CurrStage.map_to_local(southwest_tile))
 	if tile_coord.x < TILE_MAX_X_COORD:
 		var east_tile = tile_coord + Vector2i(1, 0)
-		if !_tile_has_collision(east_tile):
-			return to_global($Stage.map_to_local(east_tile))
+		if !_has_tile_collision(east_tile):
+			return to_global($CurrStage.map_to_local(east_tile))
 	if tile_coord.y > TILE_MAX_X_COORD:
 		var west_tile = tile_coord + Vector2i(-1, 0)
-		if !_tile_has_collision(west_tile):
-			return to_global($Stage.map_to_local(west_tile))
+		if !_has_tile_collision(west_tile):
+			return to_global($CurrStage.map_to_local(west_tile))
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
 	return Vector2.ZERO
@@ -176,6 +158,6 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 ## TODO
 func _on_avatar_arrived():
 	if _last_clicked_tile != null:
-		var action_ID = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
-		if action_ID != 0:
+		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+		if _is_tile_furniture(_last_clicked_tile):
 			_day_mngr.on_interacted_with_furniture(action_ID)

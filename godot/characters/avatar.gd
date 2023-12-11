@@ -7,10 +7,20 @@ signal arrived
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
+enum Frame{
+	FRONTSIDE = 0,
+	BACKSIDE = 1
+}
+
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Das Navigationsziel des Avatars setzen
 ##TODO: In TechDoku aufnehmen: navAgent.is_target_reachable(): #funzt net
 func set_target(target_coord: Vector2) -> void:
+	if (target_coord.y > position.y):
+		$Sprite2D.frame = Frame.FRONTSIDE
+	else:
+		$Sprite2D.frame = Frame.BACKSIDE
+	
 	navAgent.target_position = target_coord
 
 func cancel_navigation() -> void:
