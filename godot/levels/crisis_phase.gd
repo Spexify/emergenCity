@@ -57,3 +57,23 @@ func _on_summary_end_of_day_gui_closed():
 func _on_summary_end_of_day_gui_opened():
 	pass # Replace with function body.
 
+
+
+func _on_continue_to_summary_pressed():
+	pass # Replace with function body.
+
+
+func _on_eat_pressed():
+	pass # Replace with function body.
+
+
+func _on_drink_pressed():
+	pass # Replace with function body.
+
+
+func _on_button_next_day_pressed():
+	pass # Replace with function body.
+
+
+func _on_go_to_home_menu_pressed():
+	pass # Replace with function body.

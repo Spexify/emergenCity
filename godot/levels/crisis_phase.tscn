@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=18 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://levels/crisis_phase.gd" id="1_23hjb"]
@@ -6,13 +6,14 @@
 [ext_resource type="Script" path="res://levels/day_mngr.gd" id="6_e3w11"]
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://items/inventory.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="8_boxsy"]
-[ext_resource type="Script" path="res://levels/summary_end_of_day_GUI.gd" id="8_loy51"]
+[ext_resource type="Script" path="res://levels/decision_window_GUI.gd" id="8_loy51"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="9_de65e"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="10_pnbkm"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="11_0lc3n"]
 [ext_resource type="Script" path="res://levels/winner_screen_GUI.gd" id="12_7ntee"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://stage/stage_mngr.tscn" id="13_8jkao"]
 [ext_resource type="Script" path="res://levels/game_over_screen_GUI.gd" id="13_nhlsp"]
+[ext_resource type="Script" path="res://levels/summary_end_of_day_GUI.gd" id="14_2pukd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(1192, 20)
@@ -78,12 +79,95 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
-[node name="SummaryEndOfDayGUI" type="PopupPanel" parent="GUI"]
+[node name="DecisionWindowGUI" type="PopupPanel" parent="GUI"]
 title = "EndofDay"
 initial_position = 1
 size = Vector2i(1000, 1600)
-visible = true
 script = ExtResource("8_loy51")
+
+[node name="Background" type="NinePatchRect" parent="GUI/DecisionWindowGUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -496.0
+offset_top = -796.0
+offset_right = 496.0
+offset_bottom = 796.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_de65e")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="GUI/DecisionWindowGUI/Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 408.0
+offset_bottom = 295.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("10_pnbkm")
+theme_override_font_sizes/normal_font_size = 330
+bbcode_enabled = true
+text = "[center]Day is over...[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/DecisionWindowGUI/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -421.0
+offset_top = -296.0
+offset_right = 429.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/DecisionWindowGUI/Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Eat" type="Button" parent="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Eat
+"
+
+[node name="Drink" type="Button" parent="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Drink
+"
+
+[node name="Continue" type="Button" parent="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Continue
+"
+
+[node name="SummaryEndOfDayGUI" type="PopupPanel" parent="GUI"]
+initial_position = 1
+size = Vector2i(1000, 1600)
+script = ExtResource("14_2pukd")
 
 [node name="Background" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI"]
 anchors_preset = 8
@@ -117,66 +201,61 @@ size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("10_pnbkm")
 theme_override_font_sizes/normal_font_size = 330
 bbcode_enabled = true
-text = "[center]Day is over...[/center]"
+text = "You have:
+"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -421.0
-offset_top = -296.0
-offset_right = 429.0
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 200.0
+offset_top = 400.0
+offset_right = 800.0
+offset_bottom = 1200.0
 theme_override_constants/separation = 100
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 600)
 layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
+texture = ExtResource("11_0lc3n")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="Eat" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Eat
-"
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 90.0
+theme_override_fonts/normal_font = ExtResource("10_pnbkm")
+theme_override_font_sizes/normal_font_size = 40
+text = "stats
+s"
 
-[node name="Drink" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Drink
-"
-
-[node name="Continue" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="GUI/SummaryEndOfDayGUI/Background/VBoxContainer"]
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Continue
-"
+theme_override_font_sizes/font_size = 50
+text = "Start next day"
 
 [node name="WinnerScreenGUI" type="PopupPanel" parent="GUI"]
+initial_position = 1
+size = Vector2i(808, 608)
 script = ExtResource("12_7ntee")
 
 [node name="Background" type="NinePatchRect" parent="GUI/WinnerScreenGUI"]
+clip_contents = true
+custom_minimum_size = Vector2(800, 600)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -252.0
-offset_top = -252.0
-offset_right = -160.0
-offset_bottom = -160.0
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_0lc3n")
@@ -190,16 +269,16 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 2.0
-offset_top = 26.0
-offset_right = 1010.0
-offset_bottom = 170.0
+offset_left = 175.0
+offset_top = 100.0
+offset_right = 1183.0
+offset_bottom = 244.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.113725, 0.0392157, 0.203922, 0.682353)
 theme_override_fonts/normal_font = ExtResource("10_pnbkm")
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 300
 bbcode_enabled = true
 text = "[center]WINNER![/center]
 "
@@ -208,35 +287,43 @@ visible_characters_behavior = 1
 [node name="VBoxContainer2" type="VBoxContainer" parent="GUI/WinnerScreenGUI/Background"]
 clip_contents = true
 layout_mode = 2
-offset_left = 40.0
-offset_top = 64.0
-offset_right = 307.0
-offset_bottom = 189.0
-theme_override_constants/separation = 7
+offset_left = 100.0
+offset_top = 225.0
+offset_right = 700.0
+offset_bottom = 825.0
+theme_override_constants/separation = 30
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GUI/WinnerScreenGUI/Background/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 70)
+custom_minimum_size = Vector2(140, 150)
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
 text = "Congratulations, you've survived! You won 50 ECoins!"
 
 [node name="Go to Home Menu" type="Button" parent="GUI/WinnerScreenGUI/Background/VBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Home Menu
 "
 
 [node name="GameOverGUI" type="PopupPanel" parent="GUI"]
+initial_position = 1
+size = Vector2i(808, 608)
 script = ExtResource("13_nhlsp")
 
-[node name="Background" type="NinePatchRect" parent="GUI/GameOverGUI"]
+[node name="Background2" type="NinePatchRect" parent="GUI/GameOverGUI"]
+clip_contents = true
+custom_minimum_size = Vector2(800, 600)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -252.0
-offset_top = -252.0
-offset_right = -160.0
-offset_bottom = -160.0
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_0lc3n")
@@ -245,46 +332,56 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="Title" type="RichTextLabel" parent="GUI/GameOverGUI/Background"]
+[node name="Title" type="RichTextLabel" parent="GUI/GameOverGUI/Background2"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 2.0
-offset_top = 26.0
-offset_right = 1010.0
-offset_bottom = 170.0
+offset_left = 175.0
+offset_top = 100.0
+offset_right = 1183.0
+offset_bottom = 244.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.113725, 0.0392157, 0.203922, 0.682353)
 theme_override_fonts/normal_font = ExtResource("10_pnbkm")
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 300
 bbcode_enabled = true
 text = "[center]GAME OVER[/center]
 "
 visible_characters_behavior = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/GameOverGUI/Background"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/GameOverGUI/Background2"]
 clip_contents = true
 layout_mode = 2
-offset_left = 40.0
-offset_top = 64.0
-offset_right = 307.0
-offset_bottom = 189.0
-theme_override_constants/separation = 7
+offset_left = 100.0
+offset_top = 225.0
+offset_right = 700.0
+offset_bottom = 825.0
+theme_override_constants/separation = 30
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GameOverGUI/Background/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 70)
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/GameOverGUI/Background2/VBoxContainer2"]
+custom_minimum_size = Vector2(140, 150)
 layout_mode = 2
-text = "Sadly you did not survive...
+theme_override_font_sizes/normal_font_size = 40
+text = "Sadly you did not make it...
 10 ECoins"
 
-[node name="Go to Home Menu" type="Button" parent="GUI/GameOverGUI/Background/VBoxContainer2"]
+[node name="Go to Home Menu" type="Button" parent="GUI/GameOverGUI/Background2/VBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Home Menu
 "
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/BackpackGUI" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="pressed" from="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer/Eat" to="." method="_on_eat_pressed"]
+[connection signal="pressed" from="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer/HBoxContainer/Drink" to="." method="_on_drink_pressed"]
+[connection signal="pressed" from="GUI/DecisionWindowGUI/Background/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="GUI/SummaryEndOfDayGUI/Background/VBoxContainer/Button" to="." method="_on_button_next_day_pressed"]
+[connection signal="pressed" from="GUI/WinnerScreenGUI/Background/VBoxContainer2/Go to Home Menu" to="." method="_on_go_to_home_menu_pressed"]
+[connection signal="pressed" from="GUI/GameOverGUI/Background2/VBoxContainer2/Go to Home Menu" to="." method="_on_go_to_home_menu_pressed"]
