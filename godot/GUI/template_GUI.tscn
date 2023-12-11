@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
 [gd_scene load_steps=2 format=3 uid="uid://ddg7r3nd0o3u"]
 
-[ext_resource type="ButtonGroup" path="res://GUI/template_button_group.tres" id="1_bc0ej"]
-=======
-[gd_scene load_steps=2 format=3 uid="uid://kr2rnknfrgft"]
-
 [ext_resource type="ButtonGroup" uid="uid://dxqn3bmute38h" path="res://GUI/template_button_group.tres" id="1_bc0ej"]
->>>>>>> Stashed changes
 
 [node name="TemplateGui" type="Node2D"]
 
