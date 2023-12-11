@@ -304,7 +304,7 @@ clip_contents = true
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Home Menu
+text = "Main Menu
 "
 
 [node name="GameOverGUI" type="PopupPanel" parent="GUI"]
@@ -373,7 +373,7 @@ clip_contents = true
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Home Menu
+text = "Main Menu
 "
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/BackpackGUI" method="_on_btn_backpack_pressed"]
