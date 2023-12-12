@@ -31,7 +31,7 @@ script = ExtResource("1_23hjb")
 
 [node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1
-position = Vector2(571, 1075)
+position = Vector2(571, 1100)
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 

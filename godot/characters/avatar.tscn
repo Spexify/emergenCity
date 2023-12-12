@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://characters/avatar.gd" id="1_6xgqy"]
 [ext_resource type="Texture2D" uid="uid://c85qb3qkelvl7" path="res://res/characters/character_avatar.png" id="1_874d8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8mc2"]
-size = Vector2(90, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbegu"]
+radius = 50.0
 
 [node name="Avatar" type="CharacterBody2D"]
 collision_layer = 3
@@ -20,7 +20,7 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_o8mc2")
+shape = SubResource("CircleShape2D_nbegu")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3

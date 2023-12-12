@@ -19,6 +19,7 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
+const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
 const TILE_MAX_X_COORD: int = 8
 const TILE_MIN_Y_COORD: int = 0
@@ -76,7 +77,8 @@ func _unhandled_input(p_event: InputEvent) -> void:
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
 				_determine_adjacent_free_tile(p_event.position)
-			_avatar.set_target(adjacent_free_tile_pos)
+			if adjacent_free_tile_pos != INVALID_TILE:
+				_avatar.set_target(adjacent_free_tile_pos)
 		elif !_has_tile_collision(_get_tile_coord(p_event.position)):
 			_avatar.set_target(p_event.position)
 
@@ -84,6 +86,9 @@ func _unhandled_input(p_event: InputEvent) -> void:
 ## TODO
 func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	const PHYSICS_LAYER: int = 0
+	if (p_tile_coord.x < 0 || p_tile_coord.y < 0):
+		push_error("Angeklickte Tile-Koordinaten ungültig")
+		return true
 	var tiledata_bg: TileData = $CurrStage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
 	
 	if tiledata_bg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
@@ -98,7 +103,7 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 
 ## TODO
 func _is_tile_furniture(p_tiledata: TileData) -> bool:
-	var action_ID: int = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+	var action_ID: EMC_Action.IDs = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 	
 	return (action_ID != EMC_Action.IDs.NO_ACTION)
 
@@ -132,27 +137,34 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	
 	if !_has_tile_collision(tile_coord + Vector2i(0, 0)):
 		return to_global($CurrStage.map_to_local(tile_coord))
+		
 	if tile_coord.y < TILE_MAX_Y_COORD:
 		var south_tile = tile_coord + Vector2i(0, 1)
 		if !_has_tile_collision(south_tile):
 			return to_global($CurrStage.map_to_local(south_tile))
-		var southeast_tile = tile_coord + Vector2i(1, 1)
-		if !_has_tile_collision(southeast_tile):
-			return to_global($CurrStage.map_to_local(southeast_tile))
-		var southwest_tile = tile_coord + Vector2i(-1, 1)
-		if !_has_tile_collision(southwest_tile):
-			return to_global($CurrStage.map_to_local(southwest_tile))
+			
+		if tile_coord.x < TILE_MAX_X_COORD:
+			var southeast_tile = tile_coord + Vector2i(1, 1)
+			if !_has_tile_collision(southeast_tile):
+				return to_global($CurrStage.map_to_local(southeast_tile))
+				
+		if tile_coord.x > TILE_MIN_X_COORD:
+			var southwest_tile = tile_coord + Vector2i(-1, 1)
+			if !_has_tile_collision(southwest_tile):
+				return to_global($CurrStage.map_to_local(southwest_tile))
+				
 	if tile_coord.x < TILE_MAX_X_COORD:
 		var east_tile = tile_coord + Vector2i(1, 0)
 		if !_has_tile_collision(east_tile):
 			return to_global($CurrStage.map_to_local(east_tile))
-	if tile_coord.y > TILE_MAX_X_COORD:
+			
+	if tile_coord.x > TILE_MIN_X_COORD:
 		var west_tile = tile_coord + Vector2i(-1, 0)
 		if !_has_tile_collision(west_tile):
 			return to_global($CurrStage.map_to_local(west_tile))
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
-	return Vector2.ZERO
+	return INVALID_TILE
 
 
 ## TODO
@@ -160,4 +172,5 @@ func _on_avatar_arrived():
 	if _last_clicked_tile != null:
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		if _is_tile_furniture(_last_clicked_tile):
+			_last_clicked_tile = null
 			_day_mngr.on_interacted_with_furniture(action_ID)
