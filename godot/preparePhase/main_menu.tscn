@@ -56,6 +56,7 @@ theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
 [node name="Settings" type="Button" parent="Menu/MarginContainer2"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
 theme_override_font_sizes/font_size = 45

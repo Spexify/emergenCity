@@ -28,6 +28,7 @@ process_mode = 3
 script = ExtResource("1_23hjb")
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
+process_mode = 1
 
 [node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1

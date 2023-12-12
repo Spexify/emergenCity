@@ -15,13 +15,16 @@ enum Frame{
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Das Navigationsziel des Avatars setzen
 ##TODO: In TechDoku aufnehmen: navAgent.is_target_reachable(): #funzt net
-func set_target(target_coord: Vector2) -> void:
-	if (target_coord.y > position.y):
+func set_target(p_target_pos: Vector2) -> void:
+	if (p_target_pos == position):
+		return
+	if (p_target_pos.y > position.y):
 		$Sprite2D.frame = Frame.FRONTSIDE
 	else:
 		$Sprite2D.frame = Frame.BACKSIDE
 	
-	navAgent.target_position = target_coord
+	navAgent.target_position = p_target_pos
+
 
 func cancel_navigation() -> void:
 	navAgent.target_position = self.position
