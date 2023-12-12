@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqjid78osbso6"]
+
+[ext_resource type="Script" path="res://crisisPhase/day_mngr.gd" id="1_wh1q6"]
+[ext_resource type="Texture2D" uid="uid://dgwbhgjshvbnx" path="res://res/gui/icon_dayperiods.png" id="2_0gvtg"]
+
+[node name="DayMngr" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 0
+script = ExtResource("1_wh1q6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25, 0.25)
+
+[node name="Container" type="Container" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="DayPeriodIcon" type="Sprite2D" parent="HBoxContainer/Container"]
+position = Vector2(70, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_0gvtg")
+hframes = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 90)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80
+text = "Tag "

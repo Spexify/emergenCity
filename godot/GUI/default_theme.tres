@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://chlnla1l7sts5"]
+
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_kkl5m"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_y5ghx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bgso7"]
+texture = ExtResource("1_kkl5m")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_85k67"]
+texture = ExtResource("2_y5ghx")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[resource]
+Button/font_sizes/font_size = 24
+HeaderLarge/font_sizes/font_size = 32
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 24
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_bgso7")
+WhitePanelContainer/base_type = &"PanelContainer"
+WhitePanelContainer/styles/panel = SubResource("StyleBoxTexture_85k67")
