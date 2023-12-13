@@ -42,6 +42,8 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	$GUI/VBC/UpperSection/DayMngr.setup(guis, seodGUI, egGUI)
+	
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar)
 
 
 func _on_inventory_closed():

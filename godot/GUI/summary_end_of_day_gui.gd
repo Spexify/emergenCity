@@ -4,6 +4,8 @@ class_name EMC_SummaryEndOfDayGUI
 signal opened
 signal closed
 
+var _avatar: EMC_Avatar
+
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
 # it out.
@@ -12,6 +14,9 @@ signal closed
 		#open()
 	#else:
 		#close()
+
+func setup(p_avatar: EMC_Avatar):
+	_avatar = p_avatar
 
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
