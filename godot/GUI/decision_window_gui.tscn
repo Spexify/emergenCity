@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://de0d65k7d0xuq"]
+
+[ext_resource type="Script" path="res://levels/decision_window_GUI.gd" id="1_p60nc"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_38sdi"]
+[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_gk2tj"]
+
+[node name="DecisionWindowGUI" type="PopupPanel"]
+title = "EndofDay"
+initial_position = 1
+size = Vector2i(1000, 1600)
+script = ExtResource("1_p60nc")
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -496.0
+offset_top = -796.0
+offset_right = 496.0
+offset_bottom = 796.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_38sdi")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 408.0
+offset_bottom = 295.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_gk2tj")
+theme_override_font_sizes/normal_font_size = 330
+bbcode_enabled = true
+text = "[center]Day is over...[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -421.0
+offset_top = -296.0
+offset_right = 429.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Eat" type="Button" parent="Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Eat
+"
+
+[node name="Drink" type="Button" parent="Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Drink
+"
+
+[node name="Continue" type="Button" parent="Background/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Continue
+"

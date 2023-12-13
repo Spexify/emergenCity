@@ -1,0 +1,180 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg6lxi4odtfq5"]
+
+[ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_d3kw5"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_n7isj"]
+[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_4y73n"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_hvs1n"]
+
+[node name="SummaryEndOfDayGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 996.0
+offset_bottom = 1596.0
+script = ExtResource("1_d3kw5")
+
+[node name="eat" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="NinePatchRect" parent="eat"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -12.0
+offset_right = 974.0
+offset_bottom = 1580.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_n7isj")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="eat/Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 408.0
+offset_bottom = 295.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_4y73n")
+theme_override_font_sizes/normal_font_size = 330
+bbcode_enabled = true
+text = "[center]Day is over...[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="eat/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -421.0
+offset_top = -296.0
+offset_right = 429.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="eat/Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="eat/Background/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Eat" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Eat
+"
+
+[node name="Drink" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Drink
+"
+
+[node name="Continue" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Continue
+"
+
+[node name="summary" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="NinePatchRect" parent="summary"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 972.0
+offset_bottom = 1572.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_n7isj")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="summary/Background"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 1108.0
+offset_bottom = 600.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_4y73n")
+theme_override_font_sizes/normal_font_size = 330
+bbcode_enabled = true
+text = "You have:
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="summary/Background"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 400.0
+offset_right = 800.0
+offset_bottom = 1200.0
+theme_override_constants/separation = 100
+
+[node name="NinePatchRect" type="NinePatchRect" parent="summary/Background/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 2
+texture = ExtResource("4_hvs1n")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="summary/Background/VBoxContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 250.0
+offset_bottom = 250.0
+theme_override_fonts/normal_font = ExtResource("3_4y73n")
+theme_override_font_sizes/normal_font_size = 40
+text = "stats
+s"
+
+[node name="Button" type="Button" parent="summary/Background/VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Start next day"
+
+[connection signal="pressed" from="eat/Background/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

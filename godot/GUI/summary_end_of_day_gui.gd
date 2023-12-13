@@ -1,5 +1,5 @@
 extends EMC_GUI
-#class_name EMC_SummaryEndOfDayGUI
+class_name EMC_SummaryEndOfDayGUI
 
 signal opened
 signal closed

@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5t1twx87t2rw"]
+
+[ext_resource type="Script" path="res://levels/winner_screen_GUI.gd" id="1_3jgv3"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_1ff15"]
+[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_4f060"]
+
+[node name="WinnerScreenGUI" type="PopupPanel"]
+initial_position = 1
+size = Vector2i(808, 608)
+visible = true
+script = ExtResource("1_3jgv3")
+
+[node name="Background" type="NinePatchRect" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(800, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 804.0
+offset_bottom = 604.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1ff15")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Title" type="RichTextLabel" parent="Background"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 175.0
+offset_top = 100.0
+offset_right = 1183.0
+offset_bottom = 500.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.113725, 0.0392157, 0.203922, 0.682353)
+theme_override_fonts/normal_font = ExtResource("3_4f060")
+theme_override_font_sizes/normal_font_size = 300
+bbcode_enabled = true
+text = "[center]WINNER![/center]
+"
+visible_characters_behavior = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background"]
+clip_contents = true
+layout_mode = 2
+offset_left = 100.0
+offset_top = 225.0
+offset_right = 700.0
+offset_bottom = 825.0
+theme_override_constants/separation = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer2"]
+custom_minimum_size = Vector2(140, 150)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Congratulations, you've survived! You won 50 ECoins!"
+
+[node name="Go to Home Menu" type="Button" parent="Background/VBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Main Menu
+"
