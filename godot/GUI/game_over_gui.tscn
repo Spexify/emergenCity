@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7xg0vkimyoy8"]
 
-[ext_resource type="Script" path="res://levels/game_over_screen_GUI.gd" id="1_5v1rw"]
+[ext_resource type="Script" path="res://GUI/game_over_screen_GUI.gd" id="1_5v1rw"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_a03fu"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_dxc2q"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5t1twx87t2rw"]
 
-[ext_resource type="Script" path="res://levels/winner_screen_GUI.gd" id="1_3jgv3"]
+[ext_resource type="Script" path="res://GUI/winner_screen_GUI.gd" id="1_3jgv3"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_1ff15"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_4f060"]
 
