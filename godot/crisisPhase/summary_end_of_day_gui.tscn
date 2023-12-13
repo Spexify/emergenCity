@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dixcog4cqotof"]
+[gd_scene load_steps=4 format=3 uid="uid://b0lm56ey7v70q"]
 
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_yi8pu"]
-[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="2_n6ike"]
-[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="3_mqbkw"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_yf7ac"]
+[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="2_8yrxi"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="3_lpcgv"]
 
 [node name="Summary" type="Node2D"]
 
@@ -18,7 +18,7 @@ offset_right = 116.0
 offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_yi8pu")
+texture = ExtResource("1_yf7ac")
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
@@ -36,7 +36,7 @@ offset_bottom = 120.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("2_n6ike")
+theme_override_fonts/normal_font = ExtResource("2_8yrxi")
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "[center]Day is over...[/center]
@@ -85,7 +85,7 @@ layout_mode = 2
 [node name="NinePatchRect" type="NinePatchRect" parent="Background/VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-texture = ExtResource("3_mqbkw")
+texture = ExtResource("3_lpcgv")
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
