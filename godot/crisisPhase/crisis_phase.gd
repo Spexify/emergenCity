@@ -29,6 +29,7 @@ func _ready():
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)
 	
 	var seodGUI = $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
+	var egGUI = $GUI/VBC/MiddleSection/EndGameGUI
 	var guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.
@@ -40,7 +41,7 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
-	$GUI/VBC/UpperSection/DayMngr.setup(guis, seodGUI)
+	$GUI/VBC/UpperSection/DayMngr.setup(guis, seodGUI, egGUI)
 
 
 func _on_inventory_closed():

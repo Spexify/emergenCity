@@ -36,3 +36,7 @@ func _process(delta):
 func _on_continue_pressed():
 	close()
 	pass # Replace with function body.
+
+
+func _on_new_day_pressed():
+	pass # Replace with function body.

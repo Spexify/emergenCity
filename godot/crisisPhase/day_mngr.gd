@@ -28,7 +28,7 @@ var max_day : int
 
 var gui_refs : Array[EMC_ActionGUI]
 var _seodGUI : EMC_SummaryEndOfDayGUI
-var end_of_game_ref : Callable
+var _egGUI : EMC_EndGameGUI
 
 
 func _create_action(p_action_ID: int):
@@ -51,10 +51,13 @@ func _create_action(p_action_ID: int):
 	return result
 
 
-func setup(gui_refs : Array[EMC_ActionGUI], seodGUI: EMC_SummaryEndOfDayGUI, max_day : int = 3):
+func setup(gui_refs : Array[EMC_ActionGUI],
+seodGUI: EMC_SummaryEndOfDayGUI,
+egGUI : EMC_EndGameGUI, max_day : int = 3):
 	self.max_day = max_day
 	self.gui_refs = gui_refs
 	_seodGUI = seodGUI
+	_egGUI = egGUI
 	_update_HUD()
 
 
@@ -97,15 +100,16 @@ func _on_action_executed(action : EMC_Action):
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			#self.summary_end_of_day_ref.call(self.history)
-			_seodGUI.open(self.current_day_cycle)
+			if get_current_day() >= self.max_day-1:
+				_egGUI.open(self.history)
+			else:
+				_seodGUI.open(self.current_day_cycle)
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	
 	self._period_cnt += 1
 	_update_HUD()
 	
-	if get_current_day() >= self.max_day:
-		self.end_of_game_ref.call(self.current_day_cycle)
+
 
 
 func get_current_day_cycle() -> EMC_DayCycle:

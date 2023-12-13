@@ -7,116 +7,113 @@
 
 [node name="SummaryEndOfDayGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 996.0
-offset_bottom = 1596.0
-script = ExtResource("1_d3kw5")
-
-[node name="eat" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Background" type="NinePatchRect" parent="eat"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -12.0
-offset_right = 974.0
-offset_bottom = 1580.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_d3kw5")
+
+[node name="DecisionWindow" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchor_right = 0.213
+anchor_bottom = 0.196
+offset_right = -122.688
+offset_bottom = -200.704
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="NinePatchRect" parent="DecisionWindow"]
+layout_mode = 1
+offset_left = -110.0
+offset_top = -160.0
+offset_right = 110.0
+offset_bottom = 170.0
 texture = ExtResource("2_n7isj")
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="Title" type="RichTextLabel" parent="eat/Background"]
+[node name="Title" type="RichTextLabel" parent="DecisionWindow/Background"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 100.0
-offset_top = 200.0
-offset_right = 408.0
-offset_bottom = 295.0
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 525.0
+offset_bottom = 250.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("3_4y73n")
-theme_override_font_sizes/normal_font_size = 330
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center]Day is over...[/center]"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="eat/Background"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DecisionWindow/Background"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -421.0
-offset_top = -296.0
-offset_right = 429.0
-offset_bottom = 504.0
+offset_left = -85.0
+offset_top = -35.0
+offset_right = 85.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="eat/Background/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="HBoxContainer" type="HBoxContainer" parent="eat/Background/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/Background/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Eat" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 400)
+[node name="Eat" type="Button" parent="DecisionWindow/Background/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 15
 text = "Eat
 "
 
-[node name="Drink" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 400)
+[node name="Drink" type="Button" parent="DecisionWindow/Background/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 15
 text = "Drink
 "
 
-[node name="Continue" type="Button" parent="eat/Background/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 300)
+[node name="Continue" type="Button" parent="DecisionWindow/Background/VBoxContainer"]
+custom_minimum_size = Vector2(80, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 15
 text = "Continue
 "
 
-[node name="summary" type="Control" parent="."]
-visible = false
+[node name="SummaryWindow" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Background" type="NinePatchRect" parent="summary"]
+[node name="Background" type="NinePatchRect" parent="SummaryWindow"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 972.0
-offset_bottom = 1572.0
+offset_left = -460.0
+offset_top = -660.0
+offset_right = 420.0
+offset_bottom = 660.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_n7isj")
@@ -125,34 +122,35 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="Title" type="RichTextLabel" parent="summary/Background"]
+[node name="Title" type="RichTextLabel" parent="SummaryWindow/Background"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 100.0
-offset_top = 200.0
-offset_right = 1108.0
-offset_bottom = 600.0
+offset_left = 200.0
+offset_top = 120.0
+offset_right = 920.0
+offset_bottom = 920.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("3_4y73n")
-theme_override_font_sizes/normal_font_size = 330
+theme_override_font_sizes/normal_font_size = 300
 bbcode_enabled = true
 text = "You have:
 "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="summary/Background"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/Background"]
 layout_mode = 0
-offset_left = 200.0
-offset_top = 400.0
-offset_right = 800.0
-offset_bottom = 1200.0
-theme_override_constants/separation = 100
+offset_left = 100.0
+offset_top = 320.0
+offset_right = 2820.0
+offset_bottom = 3840.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/separation = 150
 
-[node name="NinePatchRect" type="NinePatchRect" parent="summary/Background/VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="SummaryWindow/Background/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(400, 600)
+custom_minimum_size = Vector2(2720, 2400)
 layout_mode = 2
 texture = ExtResource("4_hvs1n")
 patch_margin_left = 10
@@ -160,21 +158,23 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="RichTextLabel" type="RichTextLabel" parent="summary/Background/VBoxContainer/NinePatchRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SummaryWindow/Background/VBoxContainer/NinePatchRect"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 250.0
-offset_bottom = 250.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 620.0
+scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = ExtResource("3_4y73n")
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 200
 text = "stats
 s"
 
-[node name="Button" type="Button" parent="summary/Background/VBoxContainer"]
-custom_minimum_size = Vector2(500, 300)
+[node name="NewDay" type="Button" parent="SummaryWindow/Background/VBoxContainer"]
+custom_minimum_size = Vector2(80, 600)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 300
 text = "Start next day"
 
-[connection signal="pressed" from="eat/Background/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="DecisionWindow/Background/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="SummaryWindow/Background/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]

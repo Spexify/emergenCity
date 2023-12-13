@@ -1,15 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://de0d65k7d0xuq"]
+[gd_scene load_steps=4 format=3 uid="uid://b1rsx0m81doni"]
 
-[ext_resource type="Script" path="res://GUI/decision_window_GUI.gd" id="1_p60nc"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_38sdi"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_gk2tj"]
+
+[sub_resource type="GDScript" id="GDScript_tpo7x"]
+script/source = "extends PopupPanel
+
+signal opened
+signal closed
+
+## tackle visibility
+func toggleVisibility() -> void:
+	if visible == false:
+		open()
+	else:
+		close()
+
+## opens summary end of day GUI/makes visible
+func open():
+	visible = true
+	opened.emit()
+
+## closes summary end of day GUI/makes invisible
+func close():
+	visible = false
+	closed.emit()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="DecisionWindowGUI" type="PopupPanel"]
 title = "EndofDay"
 initial_position = 1
 size = Vector2i(1000, 1600)
 visible = true
-script = ExtResource("1_p60nc")
+script = SubResource("GDScript_tpo7x")
 
 [node name="Background" type="NinePatchRect" parent="."]
 anchors_preset = 8
