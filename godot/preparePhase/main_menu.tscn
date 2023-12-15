@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="3_j0hbn"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_1rel4"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_3syux"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_qpdy4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -147,6 +150,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 45
 button_pressed = true
 text = "Dyslexic Font"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_1rel4")
+bus = &"SFX"
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_3syux")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_qpdy4")
 
 [connection signal="pressed" from="Menu/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_round_pressed"]

@@ -8,7 +8,7 @@ var inventoryScene : PackedScene = preload("res://GUI/inventory.tscn")
 func _ready():
 	var backpack_GUI = $GUI/VBC/MiddleSection/BackpackGUI
 	backpack_GUI.setup(30, "Rucksack")
-	backpack_GUI.close()
+	#backpack_GUI.close()
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER);
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER);
 	backpack_GUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
@@ -16,7 +16,7 @@ func _ready():
 	backpack_GUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.close()
+	#$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.close()
 	$GUI/VBC/LowerSection/RestGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)

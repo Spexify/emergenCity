@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cku3etpcuk085"]
+[gd_scene load_steps=5 format=3 uid="uid://cku3etpcuk085"]
 
 [ext_resource type="Script" path="res://characters/avatar.gd" id="1_6xgqy"]
 [ext_resource type="Texture2D" uid="uid://c85qb3qkelvl7" path="res://res/characters/character_avatar.png" id="1_874d8"]
+[ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://SFX/walking.wav" id="3_nintj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbegu"]
 radius = 50.0
@@ -26,5 +27,11 @@ shape = SubResource("CircleShape2D_nbegu")
 navigation_layers = 3
 path_postprocessing = 1
 debug_enabled = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Walking" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_nintj")
+bus = &"SFX"
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]

@@ -7,6 +7,8 @@ signal arrived
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
+@onready var walking = $SFX/Walking
+
 enum Frame{
 	FRONTSIDE = 0,
 	BACKSIDE = 1
@@ -18,12 +20,14 @@ enum Frame{
 func set_target(p_target_pos: Vector2) -> void:
 	if (p_target_pos == position):
 		return
-	if (p_target_pos.y > position.y):
+	if (p_target_pos.y >= position.y):
 		$Sprite2D.frame = Frame.FRONTSIDE
 	else:
 		$Sprite2D.frame = Frame.BACKSIDE
 	
 	navAgent.target_position = p_target_pos
+	if not walking.playing:
+		walking.play()
 
 
 func cancel_navigation() -> void:
@@ -57,4 +61,5 @@ func _physics_process(_delta):
 
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished():
+	walking.stop()
 	arrived.emit()
