@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7xg0vkimyoy8"]
+[gd_scene load_steps=7 format=3 uid="uid://c7xg0vkimyoy8"]
 
 [ext_resource type="Script" path="res://GUI/game_over_screen_gui.gd" id="1_brneb"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_jg1sr"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_rwr70"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_2cnqb"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_55ssa"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_oj6ur"]
 
 [node name="EndGame" type="Control"]
 layout_mode = 3
@@ -158,6 +161,18 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Main Menu
 "
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_2cnqb")
+bus = &"SFX"
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_55ssa")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_oj6ur")
 
 [connection signal="pressed" from="WinnerScreen/Background/VBoxContainer2/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="LoserScreen/Background2/VBoxContainer2/Main Menu" to="." method="_on_main_menu_pressed"]

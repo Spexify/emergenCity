@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b24quxaht4cs2"]
+[gd_scene load_steps=7 format=3 uid="uid://b24quxaht4cs2"]
 
 [ext_resource type="Script" path="res://GUI/inventory.gd" id="1_0s3y1"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_0v5gv"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_668v8"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_8s01l"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="5_lsrp5"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="6_pnmbi"]
 
 [node name="Inventory" type="Control"]
 process_mode = 3
@@ -114,3 +116,12 @@ offset_bottom = 180.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = ExtResource("3_668v8")
 theme_override_font_sizes/normal_font_size = 40
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_lsrp5")
+bus = &"SFX"
+
+[node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_pnmbi")

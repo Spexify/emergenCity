@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://g8y1un3il5jm"]
+[gd_scene load_steps=7 format=3 uid="uid://g8y1un3il5jm"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/rest_GUI.gd" id="1_eoiso"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_y2hl0"]
-[ext_resource type="Theme" uid="uid://chlnla1l7sts5" path="res://GUI/default_theme.tres" id="3_k786i"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_k786i"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_tawdp"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_f4qw6"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_2ksyk"]
 
 [node name="RestGUI" type="Control"]
 layout_mode = 3
@@ -71,6 +74,18 @@ layout_mode = 2
 theme = ExtResource("3_k786i")
 theme_override_font_sizes/font_size = 60
 text = "Zurück"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_tawdp")
+bus = &"SFX"
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_f4qw6")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_2ksyk")
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

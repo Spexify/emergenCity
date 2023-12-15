@@ -12,6 +12,9 @@ class_name EMC_Inventory
 signal opened
 signal closed
 
+@onready var open_gui = $SFX/OpenGUI
+@onready var close_gui = $SFX/CloseGUI
+
 const MAX_SLOT_CNT: int = 50
 var _slot_scn: PackedScene = preload("res://GUI/inventory_slot.tscn")
 var _slot_cnt: int = 30
@@ -43,12 +46,14 @@ func toggleVisibility() -> void:
 
 ## Das Inventar sichtbar machen.
 func open():
+	open_gui.play()
 	visible = true
 	opened.emit()
 
 
 ## Das Inventar verstecken.
 func close():
+	close_gui.play()
 	visible = false
 	closed.emit()
 

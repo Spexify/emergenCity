@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg6lxi4odtfq5"]
+[gd_scene load_steps=8 format=3 uid="uid://bg6lxi4odtfq5"]
 
 [ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_d3kw5"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_n7isj"]
 [ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_4y73n"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_hvs1n"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="5_lj6ma"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="6_no73o"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="7_grdqo"]
 
 [node name="SummaryEndOfDayGUI" type="Control"]
 layout_mode = 3
@@ -175,6 +178,18 @@ custom_minimum_size = Vector2(80, 600)
 layout_mode = 2
 theme_override_font_sizes/font_size = 300
 text = "Start next day"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_lj6ma")
+bus = &"SFX"
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_no73o")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_grdqo")
 
 [connection signal="pressed" from="DecisionWindow/Background/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="SummaryWindow/Background/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]

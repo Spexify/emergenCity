@@ -4,6 +4,11 @@ class_name EMC_SummaryEndOfDayGUI
 signal opened
 signal closed
 
+@onready var open_gui_sfx = $SFX/OpenGUISFX
+@onready var close_gui_sfx = $SFX/CloseGUISFX
+@onready var button_sfx = $SFX/ButtonSFX
+
+
 var _avatar: EMC_Avatar
 
 ## tackle visibility
@@ -20,11 +25,13 @@ func setup(p_avatar: EMC_Avatar):
 
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
+	open_gui_sfx.play()
 	visible = true
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
 func close():
+	close_gui_sfx.play()
 	visible = false
 	closed.emit()
 
@@ -39,9 +46,12 @@ func _process(delta):
 
 
 func _on_continue_pressed():
+	button_sfx.play()
 	close()
 	pass # Replace with function body.
 
 
 func _on_new_day_pressed():
+	button_sfx.play()
+	await button_sfx.finished
 	pass # Replace with function body.

@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvuhkwet8fnsy"]
+[gd_scene load_steps=7 format=3 uid="uid://dvuhkwet8fnsy"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/change_stage_GUI.gd" id="1_48h4p"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_fxamn"]
-[ext_resource type="Theme" uid="uid://chlnla1l7sts5" path="res://GUI/default_theme.tres" id="3_scbir"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_scbir"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_5y2m7"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_hrm30"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_1150s"]
 
 [node name="ChangeStageGUI" type="Control"]
 layout_mode = 3
@@ -71,6 +74,18 @@ layout_mode = 2
 theme = ExtResource("3_scbir")
 theme_override_font_sizes/font_size = 60
 text = "Abbrechen"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_5y2m7")
+bus = &"SFX"
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_hrm30")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_1150s")
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]

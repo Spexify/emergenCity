@@ -1,6 +1,10 @@
 extends EMC_ActionGUI
 class_name EMC_ChangeStageGUI
 
+@onready var open_gui_sfx = $SFX/OpenGUISFX
+@onready var close_gui_sfx = $SFX/CloseGUISFX
+@onready var button_sfx = $SFX/ButtonSFX
+
 var _stage_mngr: EMC_StageMngr
 var _avatar: EMC_Avatar
 
@@ -20,6 +24,7 @@ func show_gui(p_action: EMC_Action):
 	if _stage_mngr.get_stage_name() == "home":
 		_on_confirm_btn_pressed() #Ohne Meldung weitermachen
 	else:
+		open_gui_sfx.play()
 		show()
 		opened.emit()
 
@@ -32,11 +37,21 @@ func _on_confirm_btn_pressed():
 		_action.executed.emit(_action)
 	_stage_mngr.change_stage(stageChangeAction.get_stage_name())
 	_avatar.position = stageChangeAction.get_spawn_pos()
+	
+	if _stage_mngr.get_stage_name() == "home":
+		button_sfx.play()
+		await button_sfx.finished
+		close_gui_sfx.play()
+	
 	hide()
 	closed.emit()
 
 
 func _on_cancel_btn_pressed():
+	button_sfx.play()
+	await button_sfx.finished
+	close_gui_sfx.play()
+	
 	hide()
 	closed.emit()
 

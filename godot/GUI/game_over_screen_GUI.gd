@@ -4,6 +4,10 @@ class_name EMC_EndGameGUI
 signal opened
 signal closed
 
+@onready var open_gui_sfx = $SFX/OpenGUISFX
+@onready var close_gui_sfx = $SFX/CloseGUISFX
+@onready var button_sfx = $SFX/ButtonSFX
+
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
 # it out.
@@ -15,11 +19,13 @@ signal closed
 
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle]):
+	open_gui_sfx.play()
 	visible = true
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
 func close():
+	close_gui_sfx.play()
 	visible = false
 	closed.emit()
 
@@ -34,4 +40,6 @@ func _process(delta):
 	
 
 func _on_main_menu_pressed():
+	button_sfx.play()
+	await button_sfx.finished
 	Global.goto_scene("res://preparePhase/main_menu.tscn")
