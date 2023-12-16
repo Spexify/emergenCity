@@ -53,6 +53,7 @@ shape = SubResource("RectangleShape2D_yx03m")
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
 position = Vector2(992, 35)
+scale = Vector2(4, 4)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
