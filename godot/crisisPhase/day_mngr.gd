@@ -29,6 +29,8 @@ var max_day : int
 var gui_refs : Array[EMC_ActionGUI]
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
+var _puGUI : EMC_PopUpGUI
+
 var _avatar_ref : EMC_Avatar
 var avatar_life_status : bool = true
 
@@ -47,6 +49,8 @@ func _create_action(p_action_ID: int):
 		4: result = EMC_Action.new(p_action_ID, "Cooking", {"constraint_cooking" : 0}, 
 								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
+		5: result = EMC_Action.new(p_action_ID, "Pop Up EVent", { }, { }, "PopUpGUI", 
+								 "Pop Up Aktion ausgeführt.")
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result
@@ -55,7 +59,8 @@ func _create_action(p_action_ID: int):
 func setup(avatar_ref : EMC_Avatar,
 gui_refs : Array[EMC_ActionGUI],
 seodGUI: EMC_SummaryEndOfDayGUI,
-egGUI : EMC_EndGameGUI, max_day : int = 3):
+egGUI : EMC_EndGameGUI, 
+puGUI : EMC_PopUpGUI, max_day : int = 3):
 	_avatar_ref = avatar_ref
 	self.max_day = max_day
 	self.gui_refs = gui_refs

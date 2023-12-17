@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=16 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://GUI/inventory.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://c7xg0vkimyoy8" path="res://GUI/game_over_screen_gui.tscn" id="8_saydl"]
+[ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://g8y1un3il5jm" path="res://GUI/actionGUI/rest_GUI.tscn" id="11_dfl7m"]
 [ext_resource type="PackedScene" uid="uid://bg6lxi4odtfq5" path="res://GUI/summary_end_of_day_gui.tscn" id="11_rvert"]
 [ext_resource type="PackedScene" uid="uid://cmd5cgjqucdg8" path="res://GUI/actionGUI/reject_GUI.tscn" id="12_qvhee"]
@@ -95,6 +96,10 @@ visible = false
 layout_mode = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
+visible = false
+layout_mode = 2
+
+[node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
 layout_mode = 2
 
