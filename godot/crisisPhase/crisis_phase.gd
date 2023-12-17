@@ -42,7 +42,7 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
-	$GUI/VBC/UpperSection/DayMngr.setup(guis, seodGUI, egGUI, puGUI)
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, guis, seodGUI, egGUI, puGUI)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar)
 
 
