@@ -8,6 +8,7 @@ signal closed
 @onready var close_gui_sfx = $SFX/CloseGUISFX
 @onready var button_sfx = $SFX/ButtonSFX
 
+## TODO: add inventory in popup SEOD and choice of food and drinks
 
 var _avatar: EMC_Avatar
 
@@ -30,6 +31,7 @@ func open(p_day_cycle: EMC_DayCycle):
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
 	opened.emit()
+	print("Hunger : " + str(_avatar.getHungerStatus()))
 
 ## closes summary end of day GUI/makes invisible
 func close():
@@ -47,7 +49,10 @@ func _process(delta):
 	pass
 
 
+## TODO: reduce health and thirst every step, also think about values and coefficent, add and subtract methods instead of set methods
 func _on_continue_pressed():
+	var _hunger : int =_avatar.getHungerStatus()
+	_avatar.setHungerStatus(_hunger-1)
 	button_sfx.play()
 	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true
@@ -58,10 +63,3 @@ func _on_new_day_pressed():
 	await button_sfx.finished
 	close()
 
-
-func _on_eat_pressed():
-	pass # Replace with function body.
-
-
-func _on_drink_pressed():
-	pass # Replace with function body.

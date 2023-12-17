@@ -25,7 +25,6 @@ var _period_cnt : EMC_DayPeriod = EMC_DayPeriod.MORNING
 var max_day : int
 
 #var _actionArr : Array[EMC_Action] #MRM: Curr not used anymore
-
 var gui_refs : Array[EMC_ActionGUI]
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
@@ -33,6 +32,11 @@ var _puGUI : EMC_PopUpGUI
 
 var _avatar_ref : EMC_Avatar
 var avatar_life_status : bool = true
+
+var _pu_GUI_counter : int
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+const LOWER_RANGE : int = 1
+const UPPER_RANGE : int = 3
 
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
@@ -49,7 +53,7 @@ func _create_action(p_action_ID: int):
 		4: result = EMC_Action.new(p_action_ID, "Cooking", {"constraint_cooking" : 0}, 
 								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
-		5: result = EMC_Action.new(p_action_ID, "Pop Up EVent", { }, { }, "PopUpGUI", 
+		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
@@ -66,6 +70,9 @@ puGUI : EMC_PopUpGUI, max_day : int = 3):
 	self.gui_refs = gui_refs
 	_seodGUI = seodGUI
 	_egGUI = egGUI
+	_puGUI = puGUI
+	_rng.randomize()
+	_pu_GUI_counter = _rng.randi_range(LOWER_RANGE,UPPER_RANGE)
 	_update_HUD()
 
 
@@ -118,10 +125,40 @@ func _on_action_executed(action : EMC_Action):
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
+	_check_pu_counter()
+	
+func _check_pu_counter() -> void:
+	_pu_GUI_counter -= 1
+	if _pu_GUI_counter == 0:
+		var _action := create_new_pop_up_action()
+		_puGUI.open(_action, _avatar_ref)
+		_pu_GUI_counter = _rng.randi_range(LOWER_RANGE,UPPER_RANGE)
 	
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_update_HUD()
+	_check_pu_counter()
+	
+func create_new_pop_up_action() -> EMC_PopUpAction:
+	match get_current_day_period():
+		EMC_DayPeriod.MORNING:
+			var _counter_morning : int = _rng.randi_range(1, 2)
+			match _counter_morning:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+		EMC_DayPeriod.NOON:
+			var _counter_noon : int = _rng.randi_range(1, 2)
+			match _counter_noon:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+		EMC_DayPeriod.EVENING: 
+			var _counter_evening : int = _rng.randi_range(1, 2)
+			match _counter_evening:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+		_: 
+			push_error("Unerwarteter Fehler PopUpAction")
+	return null
 
 
 func get_current_day_cycle() -> EMC_DayCycle:

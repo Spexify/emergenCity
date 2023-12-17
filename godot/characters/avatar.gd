@@ -8,9 +8,9 @@ signal arrived
 const SPEED: float = 300.0
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und health_bar gemessen in Prozent
-var hunger_bar : int = 2200
-var thirst_bar : int = 2000
-var health_bar : int = 100
+var hunger_bar : int = 5
+var thirst_bar : int = 5
+var health_bar : int = 5
 
 @onready var walking = $SFX/Walking
 
