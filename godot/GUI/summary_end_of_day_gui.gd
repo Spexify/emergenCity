@@ -26,7 +26,7 @@ func setup(p_avatar: EMC_Avatar):
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
 	open_gui_sfx.play()
-	visible = true
+	$DecisionWindow.visible = true
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
@@ -47,11 +47,11 @@ func _process(delta):
 
 func _on_continue_pressed():
 	button_sfx.play()
-	close()
-	pass # Replace with function body.
+	$DecisionWindow.visible = false
+	$SummaryWindow.visible = true
 
 
 func _on_new_day_pressed():
 	button_sfx.play()
 	await button_sfx.finished
-	pass # Replace with function body.
+	close()

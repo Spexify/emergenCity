@@ -23,7 +23,6 @@ size_flags_vertical = 4
 script = ExtResource("1_d3kw5")
 
 [node name="DecisionWindow" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchor_right = 0.213
 anchor_bottom = 0.196
@@ -183,7 +182,6 @@ text = "Start next day"
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_lj6ma")
-bus = &"SFX"
 
 [node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_no73o")

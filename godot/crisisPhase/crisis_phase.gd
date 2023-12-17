@@ -65,11 +65,11 @@ func _unhandled_input(event):
 
 
 func _on_summary_end_of_day_gui_closed():
-	pass # Replace with function body.
+	get_tree().paused = false
 
 
 func _on_summary_end_of_day_gui_opened():
-	pass # Replace with function body.
+	get_tree().paused = true
 
 
 func _on_action_GUI_opened():
