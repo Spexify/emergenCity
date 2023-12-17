@@ -26,6 +26,7 @@ func setup(p_avatar: EMC_Avatar):
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
 	open_gui_sfx.play()
+	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
 	opened.emit()
 
