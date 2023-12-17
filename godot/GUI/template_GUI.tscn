@@ -2,9 +2,14 @@
 
 [ext_resource type="ButtonGroup" uid="uid://dxqn3bmute38h" path="res://GUI/template_button_group.tres" id="1_bc0ej"]
 
-[node name="TemplateGui" type="Node2D"]
+[node name="TemplateGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
@@ -34,7 +39,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Desciption" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextBox"]
+[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."

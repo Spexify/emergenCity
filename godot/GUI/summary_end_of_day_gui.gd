@@ -57,3 +57,11 @@ func _on_new_day_pressed():
 	button_sfx.play()
 	await button_sfx.finished
 	close()
+
+
+func _on_eat_pressed():
+	pass # Replace with function body.
+
+
+func _on_drink_pressed():
+	pass # Replace with function body.
