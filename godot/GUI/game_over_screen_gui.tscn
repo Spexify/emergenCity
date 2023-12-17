@@ -166,7 +166,6 @@ text = "Main Menu
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_2cnqb")
-bus = &"SFX"
 
 [node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_55ssa")

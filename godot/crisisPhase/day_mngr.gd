@@ -29,7 +29,8 @@ var max_day : int
 var gui_refs : Array[EMC_ActionGUI]
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
-
+var _avatar_ref : EMC_Avatar
+var avatar_life_status : bool = true
 
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
@@ -51,9 +52,11 @@ func _create_action(p_action_ID: int):
 	return result
 
 
-func setup(gui_refs : Array[EMC_ActionGUI],
+func setup(avatar_ref : EMC_Avatar,
+gui_refs : Array[EMC_ActionGUI],
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, max_day : int = 3):
+	_avatar_ref = avatar_ref
 	self.max_day = max_day
 	self.gui_refs = gui_refs
 	_seodGUI = seodGUI
@@ -100,8 +103,10 @@ func _on_action_executed(action : EMC_Action):
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			if get_current_day() >= self.max_day-1:
-				_egGUI.open(self.history)
+			if _avatar_ref.getHungerStatus() <= 0.0 || _avatar_ref.getThirstStatus() <= 0.0 || _avatar_ref.getHealthStatus() <= 0.0 :
+				avatar_life_status == false
+			if get_current_day() >= self.max_day-1 :
+				_egGUI.open(self.history, avatar_life_status)
 			else:
 				_seodGUI.open(self.current_day_cycle)
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
