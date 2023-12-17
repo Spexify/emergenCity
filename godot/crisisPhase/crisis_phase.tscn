@@ -13,13 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://dvuhkwet8fnsy" path="res://GUI/actionGUI/change_stage_GUI.tscn" id="13_nblvh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
-size = Vector2(1192, 20)
+size = Vector2(596, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qj5r1"]
-size = Vector2(1192, 20)
+size = Vector2(596, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yx03m"]
-size = Vector2(20, 2048)
+size = Vector2(20, 1028)
 
 [node name="CrisisPhase" type="Node2D"]
 process_mode = 3
@@ -30,30 +30,30 @@ process_mode = 1
 
 [node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1
-position = Vector2(571, 1100)
+position = Vector2(277, 601)
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 
 [node name="TopBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, -10)
+position = Vector2(288, -10)
 shape = SubResource("RectangleShape2D_3j7vf")
 
 [node name="LowerBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, 2058)
+position = Vector2(288, 1034)
 shape = SubResource("RectangleShape2D_qj5r1")
 
 [node name="LeftBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(-10, 1024)
+position = Vector2(-10, 512)
 shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="RightBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(1162, 1024)
+position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-position = Vector2(992, 35)
-scale = Vector2(4, 4)
+position = Vector2(481, 20)
+scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
@@ -66,7 +66,7 @@ offset_right = 284.0
 offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 pivot_offset = Vector2(-5, -5)
 size_flags_vertical = 0
 mouse_filter = 2
@@ -95,6 +95,7 @@ visible = false
 layout_mode = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
+visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]

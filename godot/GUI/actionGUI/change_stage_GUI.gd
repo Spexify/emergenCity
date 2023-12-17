@@ -31,8 +31,8 @@ func show_gui(p_action: EMC_Action):
 
 func _on_confirm_btn_pressed():
 	var stageChangeAction: EMC_StageChangeAction = _action
-	print("Stage wechseln zu " + stageChangeAction.get_stage_name())
-	print(_stage_mngr.get_stage_name())
+	#print("Stage wechseln zu " + stageChangeAction.get_stage_name())
+	#print(_stage_mngr.get_stage_name())
 	if _stage_mngr.get_stage_name() != "home":
 		_action.executed.emit(_action)
 	_stage_mngr.change_stage(stageChangeAction.get_stage_name())

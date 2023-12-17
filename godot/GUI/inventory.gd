@@ -202,6 +202,6 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	#Beschreibung des Items
 	var label_descr = $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
-	label_descr.append_text("[color=black][font_size=36][i]" + sender.get_descr() +
-		"[/i][/font_size][/color]")
+	label_descr.append_text("[color=black][i]" + sender.get_descr() +
+		"[/i][/color]") #[font_size=36][/font_size]
 	pass

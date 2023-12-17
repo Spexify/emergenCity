@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=8 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="3_j0hbn"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_1rel4"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_3syux"]
@@ -59,7 +60,6 @@ theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
 [node name="Settings" type="Button" parent="Menu/MarginContainer2"]
-visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
 theme_override_font_sizes/font_size = 45
@@ -73,9 +73,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.5
+offset_left = -278.0
 offset_top = -119.5
-offset_right = 400.5
+offset_right = 278.0
 offset_bottom = 119.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -83,7 +83,9 @@ theme_override_constants/separation = 40
 
 [node name="Start" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gc4t1")
 theme_override_colors/font_color = Color(0.541176, 0.537255, 0.752941, 1)
+theme_override_font_sizes/font_size = 40
 text = "Start New Round"
 flat = true
 
@@ -93,13 +95,17 @@ theme_override_constants/separation = 50
 
 [node name="Shelf" type="Button" parent="Menu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gc4t1")
 theme_override_colors/font_color = Color(0.976471, 0.341176, 0.219608, 1)
+theme_override_font_sizes/font_size = 40
 text = "Open Shelf"
 flat = true
 
 [node name="UpgradeCenter" type="Button" parent="Menu/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_gc4t1")
 theme_override_colors/font_color = Color(0.239216, 0.839216, 0.815686, 1)
+theme_override_font_sizes/font_size = 40
 text = "Open Upgrade 
 Center"
 flat = true
@@ -155,7 +161,6 @@ text = "Dyslexic Font"
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_1rel4")
-bus = &"SFX"
 
 [node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_3syux")
