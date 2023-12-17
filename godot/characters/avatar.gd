@@ -8,9 +8,9 @@ signal arrived
 const SPEED: float = 300.0
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und health_bar gemessen in Prozent
-var hunger_bar : float = 2200.0
-var thirst_bar : float = 2000.0
-var health_bar : float = 100.00
+var hunger_bar : int = 2200
+var thirst_bar : int = 2000
+var health_bar : int = 100
 
 @onready var walking = $SFX/Walking
 
@@ -40,24 +40,24 @@ func cancel_navigation() -> void:
 	
 
 ## Getters für die Statutbalken vom Avatar
-func getHungerStatus() -> float:
+func getHungerStatus() -> int:
 	return hunger_bar
 
-func getThirstStatus() -> float:
+func getThirstStatus() -> int:
 	return thirst_bar
 	
-func getHealthStatus() -> float:
+func getHealthStatus() -> int:
 	return health_bar
 	
 	
 ## Setters für die Statutbalken vom Avatar
-func setHungerStatus(hunger_status : float) -> void:
+func setHungerStatus(hunger_status : int) -> void:
 	hunger_bar = hunger_status
 
-func setThirstStatus(thirst_status : float) -> void:
+func setThirstStatus(thirst_status : int) -> void:
 	thirst_bar = thirst_status
 	
-func setHealthStatus(health_status : float) -> void:
+func setHealthStatus(health_status : int) -> void:
 	health_bar = health_status
 
 

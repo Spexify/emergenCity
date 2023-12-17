@@ -16,7 +16,8 @@ func _ready():
 	backpack_GUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
-	#$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.close()
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
+	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
@@ -64,17 +65,14 @@ func _unhandled_input(event):
 			$GUI/VBC/MiddleSection/BackpackGUI.close()
 
 
-func _on_summary_end_of_day_gui_closed():
-	get_tree().paused = false
-
-
 func _on_summary_end_of_day_gui_opened():
 	get_tree().paused = true
 
+func _on_summary_end_of_day_gui_closed():
+	get_tree().paused = false
 
 func _on_action_GUI_opened():
 	get_tree().paused = true
-
 
 func _on_action_GUI_closed():
 	get_tree().paused = false

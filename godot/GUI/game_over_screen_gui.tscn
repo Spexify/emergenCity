@@ -13,89 +13,89 @@ offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_brneb")
 
-[node name="WinnerWindow" type="PanelContainer" parent="."]
+[node name="WinnerScreen" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
 offset_bottom = 288.0
 
-[node name="MarginContainer" type="MarginContainer" parent="WinnerWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="WinnerScreen"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WinnerWindow/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WinnerScreen/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleSpacing" type="MarginContainer" parent="WinnerWindow/MarginContainer/VBoxContainer"]
+[node name="TitleSpacing" type="MarginContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="WinnerWindow/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "WINNER!"
 horizontal_alignment = 1
 
-[node name="TextBox" type="PanelContainer" parent="WinnerWindow/MarginContainer/VBoxContainer"]
+[node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="WinnerWindow/MarginContainer/VBoxContainer/TextBox"]
+[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 text = "You have finished the game successfully and have won 50 ECoins!
 "
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="WinnerWindow/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Go back to main menu"
 
-[node name="LoserWindow" type="PanelContainer" parent="."]
+[node name="LoserScreen" type="PanelContainer" parent="."]
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
 offset_bottom = 288.0
 
-[node name="MarginContainer" type="MarginContainer" parent="LoserWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LoserWindow/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LoserScreen/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleSpacing" type="MarginContainer" parent="LoserWindow/MarginContainer/VBoxContainer"]
+[node name="TitleSpacing" type="MarginContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="LoserWindow/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "LOSER!"
 horizontal_alignment = 1
 
-[node name="TextBox" type="PanelContainer" parent="LoserWindow/MarginContainer/VBoxContainer"]
+[node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="LoserWindow/MarginContainer/VBoxContainer/TextBox"]
+[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 text = "You have not successfully finished the game and have won only 10 ECoins!
 "
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="LoserWindow/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Go back to main menu"
@@ -111,5 +111,5 @@ stream = ExtResource("5_55ssa")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_oj6ur")
 
-[connection signal="pressed" from="WinnerWindow/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="LoserWindow/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="WinnerScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="LoserScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

@@ -100,6 +100,7 @@ visible = false
 layout_mode = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
+visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]
@@ -119,3 +120,6 @@ layout_mode = 2
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="GUI/VBC/UpperSection/DayMngr" method="_on_seod_closed"]
+[connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

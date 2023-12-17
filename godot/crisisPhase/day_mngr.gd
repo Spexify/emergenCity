@@ -114,12 +114,14 @@ func _on_action_executed(action : EMC_Action):
 				_egGUI.open(self.history, avatar_life_status)
 			else:
 				_seodGUI.open(self.current_day_cycle)
+			return
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
-	
 	self._period_cnt += 1
 	_update_HUD()
 	
-
+func _on_seod_closed() -> void:
+	self._period_cnt += 1
+	_update_HUD()
 
 
 func get_current_day_cycle() -> EMC_DayCycle:
@@ -148,3 +150,4 @@ func constraint_cooking() -> bool:
 # "Changes" needed? See comment in Action.gd
 func test_change() -> void:
 	print("A change occurred!")
+
