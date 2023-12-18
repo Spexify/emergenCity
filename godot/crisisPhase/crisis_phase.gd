@@ -76,3 +76,13 @@ func _on_action_GUI_opened():
 
 func _on_action_GUI_closed():
 	get_tree().paused = false
+
+## TODO: finish
+func _SEOD_on_drink_pressed():
+	pass # Replace with function body.
+
+## TODO: finish
+func _SEOD_on_eat_pressed():
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
+	$GUI/VBC/MiddleSection/BackpackGUI.visible = true
+	pass # Replace with function body.

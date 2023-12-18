@@ -122,4 +122,6 @@ layout_mode = 2
 [connection signal="opened" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_opened"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="GUI/VBC/UpperSection/DayMngr" method="_on_seod_closed"]
+[connection signal="on_drink_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_drink_pressed"]
+[connection signal="on_eat_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_eat_pressed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

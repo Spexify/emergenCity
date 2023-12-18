@@ -3,6 +3,8 @@ class_name EMC_SummaryEndOfDayGUI
 
 signal opened
 signal closed
+signal on_eat_pressed
+signal on_drink_pressed
 
 @onready var open_gui_sfx = $SFX/OpenGUISFX
 @onready var close_gui_sfx = $SFX/CloseGUISFX
@@ -68,13 +70,5 @@ func _on_new_day_pressed():
 	close()
 
 
-## TODO: put actual values and coefficent for eating
-func _on_eat_pressed() -> void:
-	$DecisionWindow.visible = false
-	_inventory.open()
-	var item_ID : EMC_Item.IDs =_inventory.get_item_ID_of_slot(1)
-	var amount_items_removed : int =_inventory.remove_item(item_ID)
-	_avatar.raise_hunger(1)
-	_inventory.close()
-	$DecisionWindow.visible = true
-	
+func _on_eat_pressed():
+	_on_eat_pressed().emit()
