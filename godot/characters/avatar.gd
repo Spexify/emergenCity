@@ -40,17 +40,18 @@ func cancel_navigation() -> void:
 	
 
 ## Getters für die Statutbalken vom Avatar
-func getHungerStatus() -> int:
+func get_hunger_status() -> int:
 	return hunger_bar
 
-func getThirstStatus() -> int:
+func get_thirst_status() -> int:
 	return thirst_bar
 	
-func getHealthStatus() -> int:
+func get_health_status() -> int:
 	return health_bar
 	
 	
 ## Setters für die Statutbalken vom Avatar
+## TODO : add and subtract methods instead
 func setHungerStatus(hunger_status : int) -> void:
 	hunger_bar = hunger_status
 
