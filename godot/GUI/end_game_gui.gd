@@ -8,6 +8,8 @@ signal closed
 @onready var close_gui_sfx = $SFX/CloseGUISFX
 @onready var button_sfx = $SFX/ButtonSFX
 
+var history : Array [EMC_DayCycle]
+
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
 # it out.
@@ -18,7 +20,14 @@ signal closed
 		#close()
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array[EMC_DayCycle]):
+func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool):
+	if avatar_life_status == false :
+		$LoserScreen.visible = true
+		$WinnerScreen.visible = false
+	else: 
+		$LoserScreen.visible = false
+		$WinnerScreen.visible = true
+	history = p_history
 	open_gui_sfx.play()
 	visible = true
 	opened.emit()
@@ -29,15 +38,6 @@ func close():
 	visible = false
 	closed.emit()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 
 func _on_main_menu_pressed():
 	button_sfx.play()

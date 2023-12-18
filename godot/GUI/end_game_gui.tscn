@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnmcmtfl1jq8q"]
+
+[ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_2cnqb"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_55ssa"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_oj6ur"]
+
+[node name="GameOverGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_brneb")
+
+[node name="WinnerScreen" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 496.0
+offset_bottom = 288.0
+
+[node name="MarginContainer" type="MarginContainer" parent="WinnerScreen"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinnerScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleSpacing" type="MarginContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="Title" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "WINNER!"
+horizontal_alignment = 1
+
+[node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "You have finished the game successfully and have won 50 ECoins!
+"
+autowrap_mode = 2
+
+[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go back to Main menu"
+
+[node name="LoserScreen" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 496.0
+offset_bottom = 288.0
+
+[node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoserScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleSpacing" type="MarginContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="Title" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "LOSER!"
+horizontal_alignment = 1
+
+[node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "You have not successfully finished the game and have won only 10 ECoins!
+"
+autowrap_mode = 2
+
+[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go back to Main menu"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_2cnqb")
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_55ssa")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_oj6ur")
+
+[connection signal="pressed" from="WinnerScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="LoserScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

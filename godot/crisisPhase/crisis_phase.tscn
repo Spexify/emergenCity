@@ -1,25 +1,26 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=16 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://GUI/inventory.tscn" id="6_mo744"]
-[ext_resource type="PackedScene" uid="uid://c7xg0vkimyoy8" path="res://GUI/game_over_screen_gui.tscn" id="8_saydl"]
+[ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
+[ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
+[ext_resource type="PackedScene" uid="uid://c8qngbqj8n42a" path="res://GUI/summary_end_of_day_gui.tscn" id="9_owtos"]
 [ext_resource type="PackedScene" uid="uid://g8y1un3il5jm" path="res://GUI/actionGUI/rest_GUI.tscn" id="11_dfl7m"]
-[ext_resource type="PackedScene" uid="uid://bg6lxi4odtfq5" path="res://GUI/summary_end_of_day_gui.tscn" id="11_rvert"]
 [ext_resource type="PackedScene" uid="uid://cmd5cgjqucdg8" path="res://GUI/actionGUI/reject_GUI.tscn" id="12_qvhee"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://stage/stage_mngr.tscn" id="13_8jkao"]
 [ext_resource type="PackedScene" uid="uid://dvuhkwet8fnsy" path="res://GUI/actionGUI/change_stage_GUI.tscn" id="13_nblvh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
-size = Vector2(1192, 20)
+size = Vector2(596, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qj5r1"]
-size = Vector2(1192, 20)
+size = Vector2(596, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yx03m"]
-size = Vector2(20, 2048)
+size = Vector2(20, 1028)
 
 [node name="CrisisPhase" type="Node2D"]
 process_mode = 3
@@ -30,29 +31,30 @@ process_mode = 1
 
 [node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1
-position = Vector2(571, 1100)
+position = Vector2(277, 601)
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 
 [node name="TopBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, -10)
+position = Vector2(288, -10)
 shape = SubResource("RectangleShape2D_3j7vf")
 
 [node name="LowerBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(576, 2058)
+position = Vector2(288, 1034)
 shape = SubResource("RectangleShape2D_qj5r1")
 
 [node name="LeftBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(-10, 1024)
+position = Vector2(-10, 512)
 shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="RightBorder" type="CollisionShape2D" parent="LevelBorders"]
-position = Vector2(1162, 1024)
+position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-position = Vector2(992, 35)
+position = Vector2(481, 20)
+scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
@@ -65,7 +67,7 @@ offset_right = 284.0
 offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 pivot_offset = Vector2(-5, -5)
 size_flags_vertical = 0
 mouse_filter = 2
@@ -89,11 +91,16 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("11_rvert")]
+[node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
+visible = false
+layout_mode = 2
+
+[node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
+visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]
@@ -113,3 +120,8 @@ layout_mode = 2
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_opened"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="GUI/VBC/UpperSection/DayMngr" method="_on_seod_closed"]
+[connection signal="on_drink_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_drink_pressed"]
+[connection signal="on_eat_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_eat_pressed"]
+[connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

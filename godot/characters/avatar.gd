@@ -7,6 +7,11 @@ signal arrived
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
+## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und health_bar gemessen in Prozent
+var hunger_bar : int = 5
+var thirst_bar : int = 5
+var health_bar : int = 5
+
 @onready var walking = $SFX/Walking
 
 enum Frame{
@@ -28,10 +33,42 @@ func set_target(p_target_pos: Vector2) -> void:
 	navAgent.target_position = p_target_pos
 	if not walking.playing:
 		walking.play()
-
+		
 
 func cancel_navigation() -> void:
 	navAgent.target_position = self.position
+	
+
+## Getters für die Statutbalken vom Avatar
+func get_hunger_status() -> int:
+	return hunger_bar
+
+func get_thirst_status() -> int:
+	return thirst_bar
+	
+func get_health_status() -> int:
+	return health_bar
+	
+	
+## Setters für die Statutbalken vom Avatar
+## TODO : add and subtract methods instead
+func raise_hunger(hunger_status : int) -> void:
+	hunger_bar += hunger_status
+	
+func lower_hunger(hunger_status : int) -> void:
+	hunger_bar -= hunger_status
+	
+func raise_thirst(thirst_status : int) -> void:
+	thirst_bar += thirst_status
+	
+func lower_thirst(thirst_status : int) -> void:
+	thirst_bar -= thirst_status
+
+func raise_health(health_status : int) -> void:
+	health_bar += health_status
+	
+func lower_health(health_status : int) -> void:
+	health_bar -= health_status
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

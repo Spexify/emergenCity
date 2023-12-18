@@ -41,6 +41,8 @@ func setup(ID: int, parent_inventory: EMC_Inventory) -> void:
 		IDs.RAVIOLI_TIN:
 			name = "Ravioli Konserve"
 			_descr = "Kalt genießbar, aber ein Festmahl sieht anders aus.."
+			_comps.push_back(EMC_IC_Food.new(8))
+			_comps.push_back(EMC_IC_Ingredient.new())
 		IDs.GAS_CARTRIDGE:
 			name = "Gaskartusche"
 			_descr = "Für den Gaskocher."

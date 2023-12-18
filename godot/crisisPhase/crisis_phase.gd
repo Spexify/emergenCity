@@ -16,7 +16,8 @@ func _ready():
 	backpack_GUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
-	#$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.close()
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
+	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
@@ -30,6 +31,7 @@ func _ready():
 	
 	var seodGUI = $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI = $GUI/VBC/MiddleSection/EndGameGUI
+	var puGUI = $GUI/VBC/MiddleSection/PopUpGUI
 	var guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.
@@ -41,9 +43,8 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
-	$GUI/VBC/UpperSection/DayMngr.setup(guis, seodGUI, egGUI)
-	
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar)
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, guis, seodGUI, egGUI, puGUI)
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, backpack_GUI)
 
 
 func _on_inventory_closed():
@@ -64,18 +65,15 @@ func _unhandled_input(event):
 			$GUI/VBC/MiddleSection/BackpackGUI.close()
 
 
-func _on_summary_end_of_day_gui_closed():
-
-	pass # Replace with function body.
-
-
 func _on_summary_end_of_day_gui_opened():
-	pass # Replace with function body.
+	get_tree().paused = true
 
+func _on_summary_end_of_day_gui_closed():
+	get_tree().paused = false
 
 func _on_action_GUI_opened():
 	get_tree().paused = true
 
-
 func _on_action_GUI_closed():
 	get_tree().paused = false
+

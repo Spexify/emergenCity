@@ -24,7 +24,6 @@ Global="*res://global.gd"
 window/size/viewport_width=576
 window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
-window/stretch/scale=0.5
 window/handheld/orientation=1
 
 [gui]

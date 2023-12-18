@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="2_epoie"]
 
 [node name="StageMngr" type="Node2D"]
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 script = ExtResource("1_2ergk")
 
 [node name="CurrStage" parent="." instance=ExtResource("2_epoie")]

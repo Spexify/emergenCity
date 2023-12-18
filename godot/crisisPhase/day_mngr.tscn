@@ -6,6 +6,8 @@
 [node name="DayMngr" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 8.0
+offset_bottom = 8.0
 size_flags_vertical = 0
 script = ExtResource("1_wh1q6")
 

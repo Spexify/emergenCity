@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GUI/inventory.gd" id="1_0s3y1"]
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_0v5gv"]
-[ext_resource type="FontFile" uid="uid://c1rf6xy7ekahi" path="res://fonts/Gugi-Regular.ttf" id="3_668v8"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_88dkj"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_8s01l"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="5_lsrp5"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="6_pnmbi"]
@@ -44,14 +44,14 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 1.0
-offset_top = 11.75
-offset_right = 681.0
-offset_bottom = 159.75
+offset_top = 8.0
+offset_right = 226.0
+offset_bottom = 64.0
 grow_horizontal = 2
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("3_668v8")
-theme_override_font_sizes/normal_font_size = 80
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "[center]Inventory[/center]
 "
@@ -90,38 +90,36 @@ patch_margin_bottom = 10
 layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 765.0
+offset_right = 385.0
 offset_bottom = 75.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("3_668v8")
-theme_override_font_sizes/normal_font_size = 60
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 
 [node name="Components" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 25.0
-offset_right = 765.0
+offset_right = 385.0
 offset_bottom = 85.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("3_668v8")
-theme_override_font_sizes/normal_font_size = 40
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 25
 
 [node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 40.0
-offset_right = 765.0
-offset_bottom = 180.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("3_668v8")
-theme_override_font_sizes/normal_font_size = 40
+offset_right = 385.0
+offset_bottom = 110.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 18
 
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_lsrp5")
-bus = &"SFX"
 
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_pnmbi")
