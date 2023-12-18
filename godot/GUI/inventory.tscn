@@ -114,7 +114,7 @@ offset_right = 385.0
 offset_bottom = 110.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_88dkj")
-theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
 
 [node name="SFX" type="Node" parent="."]
 

@@ -16,14 +16,18 @@ func _ready():
 	backpack_GUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	backpack_GUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
+	#GUIs initial verstecken
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
 	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
+	$GUI/VBC/MiddleSection/PopUpGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.visible = false
-	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
-	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/RejectGUI.visible = false
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
+	
+	#Setup-Methoden
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
+	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
+	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
 	

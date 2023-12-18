@@ -203,6 +203,4 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() +
 		"[/i][/color]") #[font_size=36][/font_size]
-	pass
-	
 

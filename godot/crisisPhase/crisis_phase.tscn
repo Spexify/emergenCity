@@ -92,7 +92,6 @@ visible = false
 layout_mode = 2
 
 [node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
-visible = false
 layout_mode = 2
 
 [node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_owtos")]
@@ -112,9 +111,11 @@ visible = false
 layout_mode = 2
 
 [node name="RejectGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("12_qvhee")]
+visible = false
 layout_mode = 2
 
 [node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
+visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]

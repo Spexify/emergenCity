@@ -11,14 +11,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
 script = ExtResource("1_wmmkg")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 288.0
+layout_mode = 1
+offset_left = 52.0
+offset_top = 40.0
+offset_right = 528.0
+offset_bottom = 501.0
 
 [node name="MarginContainer" type="MarginContainer" parent="DecisionWindow"]
 layout_mode = 2
