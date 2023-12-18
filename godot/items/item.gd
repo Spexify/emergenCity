@@ -16,14 +16,12 @@ enum IDs{
 var _ID: IDs = IDs.DUMMY
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
-var _parent_inventory: EMC_Inventory
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ##Objekt-Attribute initialisieren
-func setup(ID: int, parent_inventory: EMC_Inventory) -> void:
+func setup(ID: int) -> void:
 	_ID = ID
-	_parent_inventory = parent_inventory
 	
 	
 	#TODO: Statt case Statement, Infos aus JSON lesen
@@ -73,11 +71,6 @@ func get_comps() -> Array[EMC_ItemComponent]:
 func _ready():
 	$Sprite2D.frame = _ID
 #	add_to_group("items") #Über den Editor realisiert...
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 
 func _on_gui_input(event):

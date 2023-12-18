@@ -1,20 +1,21 @@
 extends Node2D
 
-var inventoryScene : PackedScene = preload("res://GUI/inventory.tscn")
+var _backpack: EMC_Inventory = EMC_Inventory.new()
 
 @onready var uncast_guis = $GUI.get_children()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var backpack_GUI = $GUI/VBC/MiddleSection/BackpackGUI
-	backpack_GUI.setup(30, "Rucksack")
-	#backpack_GUI.close()
-	backpack_GUI.add_new_item(EMC_Item.IDs.WATER);
-	backpack_GUI.add_new_item(EMC_Item.IDs.WATER);
-	backpack_GUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	backpack_GUI.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	backpack_GUI.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	backpack_GUI.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	#Backpack-inventory and its GUI
+	_backpack.add_new_item(EMC_Item.IDs.WATER);
+	_backpack.add_new_item(EMC_Item.IDs.WATER);
+	_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_backpack.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	_backpack.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack")
+	
 	
 	#GUIs initial verstecken
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
@@ -48,7 +49,7 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, guis, seodGUI, egGUI, puGUI)
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, backpack_GUI)
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 
 func _on_inventory_closed():

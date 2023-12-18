@@ -26,7 +26,7 @@ var _has_drank : bool = false
 	#else:
 		#close()
 
-func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_GUI):
+func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory):
 	_avatar = _p_avatar
 	_inventory = _p_inventory
 	
