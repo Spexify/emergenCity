@@ -1,84 +1,93 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddg7r3nd0o3u"]
+[gd_scene format=3 uid="uid://ddg7r3nd0o3u"]
 
-[ext_resource type="ButtonGroup" uid="uid://dxqn3bmute38h" path="res://GUI/template_button_group.tres" id="1_bc0ej"]
-
-[node name="TemplateGUI" type="Control"]
+[node name="TemplateGui" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -512.0
+offset_right = 288.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 944.0
+[node name="GUISpacing" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -521.5
+offset_top = -1690.0
+offset_right = 521.5
+offset_bottom = 1690.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"GUISpacing"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GUISpacing"]
 layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUISpacing/PanelContainer"]
 layout_mode = 2
 
-[node name="TitleSpacing" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleSpacing" type="MarginContainer" parent="GUISpacing/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_bottom = 12
+theme_type_variation = &"TitleSpacing"
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="GUISpacing/PanelContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
-theme_type_variation = &"HeaderLarge"
 text = "Lorem ipsum dolor sit"
-horizontal_alignment = 1
+fit_content = true
 
-[node name="TextBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GUISpacing/PanelContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
+text = "Lorem ipsum
+"
 
-[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="PanelContainer" type="PanelContainer" parent="GUISpacing/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TextBox"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUISpacing/PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-autowrap_mode = 2
+fit_content = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUISpacing/PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 
-[node name="SingleChoiceList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUISpacing/PanelContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Option1" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SingleChoiceList"]
+[node name="CheckButton" type="CheckButton" parent="GUISpacing/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-button_group = ExtResource("1_bc0ej")
 text = "Lorem"
 
-[node name="Option2" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SingleChoiceList"]
+[node name="CheckButton2" type="CheckButton" parent="GUISpacing/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-button_group = ExtResource("1_bc0ej")
 text = "Ipsum"
 
-[node name="Option3" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/SingleChoiceList"]
+[node name="CheckButton3" type="CheckButton" parent="GUISpacing/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-button_group = ExtResource("1_bc0ej")
 text = "Dolor"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUISpacing/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ConfirmBtn" type="Button" parent="GUISpacing/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "Bestätigen"
 
-[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="GUISpacing/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/separation = 64
+
+[node name="CancelBtn" type="Button" parent="GUISpacing/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 text = "Abbrechen"
