@@ -15,6 +15,9 @@ signal on_drink_pressed
 var _avatar: EMC_Avatar
 var _inventory : EMC_Inventory
 
+var _has_eaten : bool = false
+var _has_drank : bool = false
+
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
 # it out.
@@ -32,6 +35,9 @@ func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_GUI):
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
 	open_gui_sfx.play()
+	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = p_day_cycle.morning_action.get_description()
+	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = p_day_cycle.noon_action.get_description()
+	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = p_day_cycle.evening_action.get_description()
 	visible = true
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
@@ -59,6 +65,7 @@ func _on_continue_pressed():
 	_avatar.lower_hunger(1)
 	_avatar.lower_thirst(1)
 	_avatar.lower_health(1)
+	_update_health()
 	button_sfx.play()
 	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true
@@ -71,4 +78,14 @@ func _on_new_day_pressed():
 
 
 func _on_eat_pressed():
-	_on_eat_pressed().emit()
+	_avatar.raise_hunger(1)
+	_has_eaten = true
+
+
+func _on_drink_pressed():
+	_avatar.raise_thirst(1)
+	_has_drank = true
+	
+func _update_health():
+	if _has_drank && _has_eaten:
+		_avatar.raise_health(1)

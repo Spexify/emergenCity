@@ -44,7 +44,7 @@ func _create_action(p_action_ID: int):
 		0: #(unused)
 			push_error("Action ID 0 sollte nicht erstellt werden!")
 		1: result = EMC_StageChangeAction.new(p_action_ID, "Teleporter_Home", { }, 
-								 "N/A", "home", Vector2i(450, 500)) #No descr, as it should never be executed
+								 "Hat Marktplatz besucht.", "home", Vector2i(450, 500)) #No descr, as it should never be executed
 		2: result = EMC_StageChangeAction.new(p_action_ID, "Teleporter_Marketplace", { }, 
 								 "Hat Marktplatz besucht.", "market", Vector2i(250, 1000))
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 

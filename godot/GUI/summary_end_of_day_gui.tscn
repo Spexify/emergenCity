@@ -102,14 +102,64 @@ text = "Today you have:
 "
 horizontal_alignment = 1
 
-[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="MorningLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+text = "MORNING"
+autowrap_mode = 2
+
+[node name="NoonLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+text = "NOON"
+autowrap_mode = 2
+
+[node name="EveningLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+text = "EVENING"
+autowrap_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="MorningContent" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
+autowrap_mode = 2
+
+[node name="TextBox2" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="NoonContent" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="TextBox3" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="EveningContent" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
 autowrap_mode = 2
 
 [node name="NewDay" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
@@ -129,5 +179,6 @@ stream = ExtResource("3_hs5pc")
 stream = ExtResource("4_2a3qa")
 
 [connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Eat" to="." method="_on_eat_pressed"]
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Drink" to="." method="_on_drink_pressed"]
 [connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]
