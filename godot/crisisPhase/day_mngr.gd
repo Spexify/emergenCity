@@ -115,12 +115,11 @@ func _on_action_executed(action : EMC_Action):
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			if _avatar_ref.get_hunger_status() <= 0.0 || _avatar_ref.get_thirst_status() <= 0.0 || _avatar_ref.get_health_status() <= 0.0 :
+			_seodGUI.open(self.current_day_cycle)
+			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				avatar_life_status = false
-			if get_current_day() >= self.max_day - 1:
+			if get_current_day() >= self.max_day - 1 || !avatar_life_status:
 				_egGUI.open(self.history, avatar_life_status)
-			else:
-				_seodGUI.open(self.current_day_cycle)
 			return
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1

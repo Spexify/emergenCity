@@ -7,6 +7,7 @@ signal closed
 @onready var open_gui_sfx = $SFX/OpenGUISFX
 @onready var close_gui_sfx = $SFX/CloseGUISFX
 @onready var button_sfx = $SFX/ButtonSFX
+
 var history : Array [EMC_DayCycle]
 
 ## tackle visibility
