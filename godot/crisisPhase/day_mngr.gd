@@ -31,12 +31,12 @@ var _egGUI : EMC_EndGameGUI
 var _puGUI : EMC_PopUpGUI
 
 var _avatar_ref : EMC_Avatar
-var avatar_life_status : bool = true
+var _avatar_life_status : bool = true
 
-var _pu_GUI_counter : int
+var _puGUI_probability_countdown : int
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-const LOWER_RANGE : int = 1
-const UPPER_RANGE : int = 3
+const PU_LOWER_BOUND : int = 1
+const PU_UPPER_BOUND : int = 3
 
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
@@ -72,7 +72,7 @@ puGUI : EMC_PopUpGUI, max_day : int = 3):
 	_egGUI = egGUI
 	_puGUI = puGUI
 	_rng.randomize()
-	_pu_GUI_counter = _rng.randi_range(LOWER_RANGE,UPPER_RANGE)
+	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 	_update_HUD()
 
 
@@ -105,7 +105,6 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 
 
 func _on_action_executed(action : EMC_Action):
-	
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
 			self.current_day_cycle = EMC_DayCycle.new()
@@ -117,47 +116,19 @@ func _on_action_executed(action : EMC_Action):
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
 			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
-				avatar_life_status = false
-			if get_current_day() >= self.max_day - 1 || !avatar_life_status:
-				_egGUI.open(self.history, avatar_life_status)
+				_avatar_life_status = false
+			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
+				_egGUI.open(self.history, _avatar_life_status)
 			return
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
 	
-func _check_pu_counter() -> void:
-	_pu_GUI_counter -= 1
-	if _pu_GUI_counter == 0:
-		var _action := create_new_pop_up_action()
-		_puGUI.open(_action, _avatar_ref)
-		_pu_GUI_counter = _rng.randi_range(LOWER_RANGE,UPPER_RANGE)
-	
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
-	
-func create_new_pop_up_action() -> EMC_PopUpAction:
-	match get_current_day_period():
-		EMC_DayPeriod.MORNING:
-			var _counter_morning : int = _rng.randi_range(1, 2)
-			match _counter_morning:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
-		EMC_DayPeriod.NOON:
-			var _counter_noon : int = _rng.randi_range(1, 2)
-			match _counter_noon:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
-		EMC_DayPeriod.EVENING: 
-			var _counter_evening : int = _rng.randi_range(1, 2)
-			match _counter_evening:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
-		_: 
-			push_error("Unerwarteter Fehler PopUpAction")
-	return null
 
 
 func get_current_day_cycle() -> EMC_DayCycle:
@@ -175,6 +146,43 @@ func get_current_day() -> int:
 func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
+	
+################################### Pop Up Events ##################################################
+	
+func _check_pu_counter() -> void:
+	_puGUI_probability_countdown -= 1
+	if _puGUI_probability_countdown == 0:
+		var _action := _create_new_pop_up_action()
+		_puGUI.open(_action, _avatar_ref)
+		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
+	
+## TODO: refactor range und actions content
+func _create_new_pop_up_action() -> EMC_PopUpAction:
+	match get_current_day_period():
+		EMC_DayPeriod.MORNING:
+			var _counter_morning : int = _rng.randi_range(1, 2)
+			match _counter_morning:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				_: 
+					push_error("Unerwarteter Fehler PopUpAction")
+		EMC_DayPeriod.NOON:
+			var _counter_noon : int = _rng.randi_range(1, 2)
+			match _counter_noon:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				_: 
+					push_error("Unerwarteter Fehler PopUpAction")
+		EMC_DayPeriod.EVENING: 
+			var _counter_evening : int = _rng.randi_range(1, 2)
+			match _counter_evening:
+				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
+				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				_: 
+					push_error("Unerwarteter Fehler PopUpAction")
+		_: 
+			push_error("Unerwarteter Fehler PopUpAction")
+	return null
 
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> bool:

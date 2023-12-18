@@ -5,18 +5,11 @@ signal opened
 signal closed
 
 var _action : EMC_PopUpAction
+var _avatar_ref : EMC_Avatar
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func open(_p_action : EMC_PopUpAction, _avatar_ref : EMC_Avatar) -> void:
+func open(_p_action : EMC_PopUpAction, _p_avatar_ref : EMC_Avatar) -> void:
 	_action = _p_action
+	_avatar_ref = _p_avatar_ref
 	visible = true
 	$PanelContainer/MarginContainer/VBoxContainer/TextBox/Desciption.text = _p_action.get_pop_up_text()
 
