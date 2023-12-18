@@ -11,7 +11,6 @@ signal on_drink_pressed
 @onready var button_sfx = $SFX/ButtonSFX
 
 ## TODO: add inventory in popup SEOD and choice of food and drinks
-
 var _avatar: EMC_Avatar
 var _inventory : EMC_Inventory
 
@@ -50,15 +49,6 @@ func close():
 	visible = false
 	closed.emit()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 ## TODO: reduce health and thirst every step, also think about values and coefficent
 func _on_continue_pressed():
@@ -69,7 +59,6 @@ func _on_continue_pressed():
 	button_sfx.play()
 	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true
-
 
 func _on_new_day_pressed():
 	button_sfx.play()

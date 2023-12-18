@@ -38,7 +38,7 @@ theme_override_constants/margin_bottom = 12
 [node name="Title" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "The day is over...
+text = "Der tag ist vorbei...
 "
 horizontal_alignment = 1
 
@@ -49,8 +49,7 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "You should take care of your health. It is time to eat and drink something.
-"
+text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
@@ -59,18 +58,17 @@ layout_mode = 2
 [node name="Eat" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Eat"
+text = "Essen"
 
 [node name="Drink" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Drink"
+text = "Trinken"
 
 [node name="Continue" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Continue
-"
+text = "Weiter"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
 visible = false
@@ -113,19 +111,19 @@ theme_override_constants/separation = 55
 [node name="MorningLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 24)
 layout_mode = 2
-text = "MORNING"
+text = "MORGEN"
 autowrap_mode = 2
 
 [node name="NoonLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 24)
 layout_mode = 2
-text = "NOON"
+text = "MITTAG"
 autowrap_mode = 2
 
 [node name="EveningLabel" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 24)
 layout_mode = 2
-text = "EVENING"
+text = "ABEND"
 autowrap_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -165,7 +163,7 @@ autowrap_mode = 2
 [node name="NewDay" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Start a new day"
+text = "Starte den nächsten Tag"
 
 [node name="SFX" type="Node" parent="."]
 

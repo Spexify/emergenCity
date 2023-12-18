@@ -38,7 +38,7 @@ theme_override_constants/margin_bottom = 12
 [node name="Title" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "WINNER!"
+text = "GEWONNEN"
 horizontal_alignment = 1
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
@@ -48,14 +48,14 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "You have finished the game successfully and have won 50 ECoins!
+text = "Du hast die Krise erfolgreich überstanden und 50 ECoins erworben!
 "
 autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Go back to Main menu"
+text = "Zurück zur Hauptmenu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -82,7 +82,7 @@ theme_override_constants/margin_bottom = 12
 [node name="Title" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "LOSER!"
+text = "VERLOREN"
 horizontal_alignment = 1
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
@@ -92,14 +92,13 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "You have not successfully finished the game and have won only 10 ECoins!
-"
+text = "Du hast die Krise nicht überstanden und leider nur 10 ECoins erhalten!"
 autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Go back to Main menu"
+text = "Zurück zur Hauptmenu"
 
 [node name="SFX" type="Node" parent="."]
 
