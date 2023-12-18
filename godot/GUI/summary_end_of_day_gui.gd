@@ -11,6 +11,7 @@ signal closed
 ## TODO: add inventory in popup SEOD and choice of food and drinks
 
 var _avatar: EMC_Avatar
+var _inventory : EMC_Inventory
 
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
@@ -21,8 +22,10 @@ var _avatar: EMC_Avatar
 	#else:
 		#close()
 
-func setup(p_avatar: EMC_Avatar):
-	_avatar = p_avatar
+func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_GUI):
+	_avatar = _p_avatar
+	_inventory = _p_inventory
+	
 
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle):
@@ -64,3 +67,14 @@ func _on_new_day_pressed():
 	await button_sfx.finished
 	close()
 
+
+## TODO: put actual values and coefficent for eating
+func _on_eat_pressed() -> void:
+	$DecisionWindow.visible = false
+	_inventory.open()
+	var item_ID : EMC_Item.IDs =_inventory.get_item_ID_of_slot(1)
+	var amount_items_removed : int =_inventory.remove_item(item_ID)
+	_avatar.raise_hunger(1)
+	_inventory.close()
+	$DecisionWindow.visible = true
+	

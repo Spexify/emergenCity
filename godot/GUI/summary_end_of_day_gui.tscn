@@ -14,6 +14,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("1_wmmkg")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -42,6 +43,19 @@ text = "The day is over...
 "
 horizontal_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Eat" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eat"
+
+[node name="Drink" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Drink"
+
 [node name="Continue" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -50,6 +64,7 @@ text = "Continue
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
@@ -103,5 +118,6 @@ stream = ExtResource("3_hs5pc")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_2a3qa")
 
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Eat" to="." method="_on_eat_pressed"]
 [connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]

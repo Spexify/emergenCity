@@ -158,7 +158,6 @@ func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sor
 	#TODO (keine Prio)
 	pass
 
-
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -205,3 +204,5 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.append_text("[color=black][i]" + sender.get_descr() +
 		"[/i][/color]") #[font_size=36][/font_size]
 	pass
+	
+
