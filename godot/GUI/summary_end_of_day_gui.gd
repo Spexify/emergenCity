@@ -31,7 +31,7 @@ func open(p_day_cycle: EMC_DayCycle):
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
 	opened.emit()
-	print("Hunger : " + str(_avatar.getHungerStatus()))
+	print("Hunger : " + str(_avatar.get_hunger_status()))
 
 ## closes summary end of day GUI/makes invisible
 func close():
@@ -49,10 +49,11 @@ func _process(delta):
 	pass
 
 
-## TODO: reduce health and thirst every step, also think about values and coefficent, add and subtract methods instead of set methods
+## TODO: reduce health and thirst every step, also think about values and coefficent
 func _on_continue_pressed():
-	var _hunger : int =_avatar.getHungerStatus()
-	_avatar.setHungerStatus(_hunger-1)
+	_avatar.lower_hunger(1)
+	_avatar.lower_thirst(1)
+	_avatar.lower_health(1)
 	button_sfx.play()
 	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true

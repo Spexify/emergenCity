@@ -55,7 +55,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Go back to main menu"
+text = "Go back to Main menu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
 offset_left = 80.0
@@ -98,7 +98,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Go back to main menu"
+text = "Go back to Main menu"
 
 [node name="SFX" type="Node" parent="."]
 

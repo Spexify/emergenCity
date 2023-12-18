@@ -52,14 +52,23 @@ func get_health_status() -> int:
 	
 ## Setters für die Statutbalken vom Avatar
 ## TODO : add and subtract methods instead
-func setHungerStatus(hunger_status : int) -> void:
-	hunger_bar = hunger_status
-
-func setThirstStatus(thirst_status : int) -> void:
-	thirst_bar = thirst_status
+func raise_hunger(hunger_status : int) -> void:
+	hunger_bar += hunger_status
 	
-func setHealthStatus(health_status : int) -> void:
-	health_bar = health_status
+func lower_hunger(hunger_status : int) -> void:
+	hunger_bar -= hunger_status
+	
+func raise_thirst(thirst_status : int) -> void:
+	thirst_bar += thirst_status
+	
+func lower_thirst(thirst_status : int) -> void:
+	thirst_bar -= thirst_status
+
+func raise_health(health_status : int) -> void:
+	health_bar += health_status
+	
+func lower_health(health_status : int) -> void:
+	health_bar -= health_status
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
