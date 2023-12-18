@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyfkm4ffbmnov"]
+
+[ext_resource type="Script" path="res://global.gd" id="1_f83gq"]
+[ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://SFX/Lofi.wav" id="2_j7ou4"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_f83gq")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Musik" type="AudioStreamPlayer" parent="SFX"]
+process_mode = 3
+stream = ExtResource("2_j7ou4")
+autoplay = true
+bus = &"Musik"
