@@ -50,7 +50,7 @@ func _create_action(p_action_ID: int):
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "rest_GUI", 
 								 "Hat sich ausgeruht.")
-		4: result = EMC_Action.new(p_action_ID, "Cooking", {"constraint_cooking" : 0}, 
+		4: result = EMC_Action.new(p_action_ID, "Cooking", { }, 
 								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
@@ -94,7 +94,8 @@ func on_interacted_with_furniture(action_id : int):
 		#else:
 		_get_gui_ref_by_name("reject_GUI").show_gui(current_action)
 	else:
-		_get_gui_ref_by_name(current_action.get_type_gui()).show_gui(current_action)
+		var gui_name = current_action.get_type_gui()
+		_get_gui_ref_by_name(gui_name).show_gui(current_action)
 
 
 func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:

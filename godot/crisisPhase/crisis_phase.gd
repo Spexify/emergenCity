@@ -26,6 +26,8 @@ func _ready():
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
+	$GUI/VBC/MiddleSection/CookingGUI.visible = false
+	$GUI/VBC/MiddleSection/CookingGUI.setup($GUI/VBC/MiddleSection/BackpackGUI)
 	
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)
 	
@@ -43,6 +45,7 @@ func _ready():
 	guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
+	guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, guis, seodGUI, egGUI, puGUI)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, backpack_GUI)
 
