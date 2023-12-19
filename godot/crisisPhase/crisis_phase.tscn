@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
-[ext_resource type="PackedScene" uid="uid://cjb4gbh5jbsw0" path="res://GUI/inventory.tscn" id="6_mo744"]
+[ext_resource type="PackedScene" uid="uid://b24quxaht4cs2" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://c8qngbqj8n42a" path="res://GUI/summary_end_of_day_gui.tscn" id="9_owtos"]
@@ -124,10 +124,3 @@ visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
-[connection signal="closed" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_closed"]
-[connection signal="opened" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_inventory_opened"]
-[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
-[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="GUI/VBC/UpperSection/DayMngr" method="_on_seod_closed"]
-[connection signal="on_drink_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_drink_pressed"]
-[connection signal="on_eat_pressed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_SEOD_on_eat_pressed"]
-[connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
