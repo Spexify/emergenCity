@@ -31,7 +31,7 @@ func _ready():
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/MiddleSection/CookingGUI.visible = false
+	$GUI/VBC/MiddleSection/CookingGUI.visible = true
 	$GUI/VBC/MiddleSection/CookingGUI.setup($GUI/VBC/MiddleSection/BackpackGUI)
 	
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)

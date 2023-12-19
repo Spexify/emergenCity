@@ -10,7 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_yctcf")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
@@ -38,8 +38,7 @@ theme_override_constants/margin_bottom = 12
 [node name="Title" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "The day is over...
-"
+text = "Was möchtest du kochen?"
 horizontal_alignment = 1
 
 [node name="TextBox" type="PanelContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
@@ -49,28 +48,21 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "You should take care of your health. It is time to eat and drink something.
-"
+text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
 autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Eat" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Kochen" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Eat"
+text = "Kochen"
 
-[node name="Drink" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Abbrechen" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Drink"
-
-[node name="Continue" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Continue
-"
+text = "Abbrechen"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
 visible = false
@@ -128,6 +120,6 @@ stream = ExtResource("3_v0fsp")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_tv2ru")
 
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Eat" to="." method="_on_eat_pressed"]
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Kochen" to="." method="_on_kochen_pressed"]
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Abbrechen" to="." method="_on_abbrechen_pressed"]
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]

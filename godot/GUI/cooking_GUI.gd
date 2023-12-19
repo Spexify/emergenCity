@@ -18,3 +18,12 @@ func show_gui(p_action : EMC_Action):
 	
 	# Enter code here if necessary 
 	opened.emit()
+
+
+func _on_kochen_pressed():
+	$SummaryWindow.visible = true 
+
+
+func _on_abbrechen_pressed():
+	visible = false
+	Global.goto_scene("res://crisisPhase/crisis_phase.tscn")

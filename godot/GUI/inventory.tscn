@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjb4gbh5jbsw0"]
+
+[ext_resource type="Script" path="res://GUI/inventory.gd" id="1_0s3y1"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_0v5gv"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_88dkj"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_8s01l"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="5_lsrp5"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="6_pnmbi"]
+
+[node name="Inventory" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0s3y1")
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -186.0
+offset_right = 116.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0v5gv")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Label" type="RichTextLabel" parent="Background"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 8.0
+offset_right = 226.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 3
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]Inventory[/center]
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 139.0
+grow_horizontal = 2
+
+[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="TextBoxBG" type="NinePatchRect" parent="Background/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+texture = ExtResource("4_8s01l")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Name" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 385.0
+offset_bottom = 75.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+
+[node name="Components" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 385.0
+offset_bottom = 85.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 25
+
+[node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 385.0
+offset_bottom = 110.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_88dkj")
+theme_override_font_sizes/normal_font_size = 18
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_lsrp5")
+
+[node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_pnmbi")
