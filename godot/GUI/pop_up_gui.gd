@@ -1,6 +1,7 @@
 extends Control
 class_name EMC_PopUpGUI
 
+
 signal opened
 signal closed
 
@@ -15,7 +16,9 @@ func open(_p_action : EMC_PopUpAction, _p_avatar_ref : EMC_Avatar) -> void:
 
 ## TODO: finish methods
 func _on_confirm_pressed():
-	_action.executed.emit()
+	#MRM: Wir hatten vergessen dem emit die Aktion auch als Parameter zu geben (ist nötig):
+	_action.executed.emit(_action) 
+	visible = false #MRM hat gefehlt :)
 
 
 func _on_cancel_pressed():

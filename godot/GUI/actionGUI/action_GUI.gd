@@ -9,7 +9,7 @@ signal closed
 var _type_gui: String = ""
 var _action: EMC_Action
 
-## Method that should be overwritten in each class that implements E[MC_ActionGUI]:
+## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action : EMC_Action):
 	_action = p_action
 	# Enter code here if necessary 

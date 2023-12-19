@@ -15,9 +15,13 @@ run/main_scene="res://entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://app_icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://SFX/default_bus_layout.tres"
+
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://global.tscn"
 
 [display]
 
