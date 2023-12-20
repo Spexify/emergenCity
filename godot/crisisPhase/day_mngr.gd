@@ -50,7 +50,7 @@ func _create_action(p_action_ID: int):
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "rest_GUI", 
 								 "Hat sich ausgeruht.")
-		4: result = EMC_Action.new(p_action_ID, "Cooking", { }, 
+		4: result = EMC_Action.new(p_action_ID, "Cooking", { "constraint_cooking" : 0 }, 
 								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
@@ -188,7 +188,8 @@ func _create_new_pop_up_action() -> EMC_PopUpAction:
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> bool:
 	print("Constraint Cooking was checked!")
-	#TODO
+	#TODO: Electricity?
+	##TODO: In the future: Else Gaskocher?
 	return false
 
 ########################################## CHANGE METHODS ##########################################
