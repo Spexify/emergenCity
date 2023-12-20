@@ -3,6 +3,11 @@ extends Control
 @onready var open_guisfx = $"../SFX/OpenGUISFX"
 @onready var close_guisfx = $"../SFX/CloseGUISFX"
 @onready var button_sfx = $"../SFX/ButtonSFX"
+@onready var e_coins = $MarginContainer/eCoins
+@onready var timer = $"../Timer"
+
+func _ready():
+	e_coins.text = str(Global.get_e_coins()) + " eCoins"
 
 func _on_start_round_pressed():
 	button_sfx.play()
