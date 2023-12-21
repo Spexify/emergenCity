@@ -116,18 +116,22 @@ func _on_action_executed(action : EMC_Action):
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			_seodGUI.open(self.current_day_cycle)
-			_seodGUI.closed.connect(_on_seod_closed())
+			_seodGUI.open(self.current_day_cycle, false)
+			_seodGUI.closed.connect(_on_seod_closed)
 			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
-			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
-				_egGUI.open(self.history, _avatar_life_status)
+			if get_current_day() >= self.max_day - 3 || !_avatar_life_status:
+				_seodGUI.open(self.current_day_cycle, true)
+				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
-	
+
+func _on_seod_closed_game_end():
+	_egGUI.open(self.history, _avatar_life_status)
+
 func _on_seod_closed():
 	self._period_cnt += 1
 	_update_HUD()
