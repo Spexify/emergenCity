@@ -47,6 +47,7 @@ func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool):
 	opened.emit()
 	print("Hunger : " + str(_avatar.get_hunger_status()))
 
+
 ## closes summary end of day GUI/makes invisible
 func close():
 	close_gui_sfx.play()
