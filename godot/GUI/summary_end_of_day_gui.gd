@@ -57,8 +57,8 @@ func _on_continue_pressed():
 	_avatar.lower_health(1)
 	_update_health()
 	button_sfx.play()
-	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true
+	$DecisionWindow.visible = false
 
 func _on_new_day_pressed():
 	button_sfx.play()

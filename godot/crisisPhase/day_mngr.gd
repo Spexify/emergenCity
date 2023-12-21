@@ -38,6 +38,7 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 const PU_LOWER_BOUND : int = 1
 const PU_UPPER_BOUND : int = 3
 
+
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
 	match p_action_ID:
@@ -116,6 +117,7 @@ func _on_action_executed(action : EMC_Action):
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
+			_seodGUI.closed.connect(_on_seod_closed())
 			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
 			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
@@ -126,7 +128,7 @@ func _on_action_executed(action : EMC_Action):
 	_update_HUD()
 	_check_pu_counter()
 	
-func _on_seod_closed() -> void:
+func _on_seod_closed():
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
