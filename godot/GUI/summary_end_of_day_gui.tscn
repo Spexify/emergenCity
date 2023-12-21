@@ -72,7 +72,6 @@ size_flags_horizontal = 3
 text = "Weiter"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -97,8 +96,7 @@ theme_override_constants/margin_bottom = 12
 [node name="Title" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "Today you have: 
-"
+text = "Heute hast du:"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
