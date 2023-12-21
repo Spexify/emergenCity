@@ -120,7 +120,7 @@ func _on_action_executed(action : EMC_Action):
 			_seodGUI.closed.connect(_on_seod_closed)
 			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
-			if get_current_day() >= self.max_day - 3 || !_avatar_life_status:
+			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
 				_seodGUI.open(self.current_day_cycle, true)
 				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
@@ -165,31 +165,33 @@ func _check_pu_counter() -> void:
 	
 ## TODO: refactor range und actions content
 func _create_new_pop_up_action() -> EMC_PopUpAction:
+	var result: EMC_PopUpAction
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
 			var _counter_morning : int = _rng.randi_range(1, 2)
 			match _counter_morning:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.NOON:
 			var _counter_noon : int = _rng.randi_range(1, 2)
 			match _counter_noon:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.EVENING: 
 			var _counter_evening : int = _rng.randi_range(1, 2)
 			match _counter_evening:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		_: 
 			push_error("Unerwarteter Fehler PopUpAction")
-	return null
+	result.executed.connect(_on_action_executed)
+	return result
 
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> bool:
