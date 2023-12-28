@@ -24,9 +24,11 @@ func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool):
 	if avatar_life_status == false :
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false
+		Global.set_e_coins(Global.get_e_coins() + 10)
 	else: 
 		$LoserScreen.visible = false
 		$WinnerScreen.visible = true
+		Global.set_e_coins(Global.get_e_coins() + 50)
 	history = p_history
 	open_gui_sfx.play()
 	visible = true

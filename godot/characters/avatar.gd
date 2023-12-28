@@ -33,7 +33,7 @@ func set_target(p_target_pos: Vector2) -> void:
 	navAgent.target_position = p_target_pos
 	if not walking.playing:
 		walking.play()
-		
+
 
 func cancel_navigation() -> void:
 	navAgent.target_position = self.position

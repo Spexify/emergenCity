@@ -32,16 +32,21 @@ func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory):
 	
 
 ## opens summary end of day GUI/makes visible
-func open(p_day_cycle: EMC_DayCycle):
+func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool):
 	open_gui_sfx.play()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = p_day_cycle.morning_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = p_day_cycle.noon_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = p_day_cycle.evening_action.get_description()
 	visible = true
-	$SummaryWindow.visible = false
-	$DecisionWindow.visible = true
+	if !_p_is_game_end : 
+		$SummaryWindow.visible = false
+		$DecisionWindow.visible = true
+	else: 
+		$SummaryWindow.visible = true
+		$DecisionWindow.visible = false
 	opened.emit()
 	print("Hunger : " + str(_avatar.get_hunger_status()))
+
 
 ## closes summary end of day GUI/makes invisible
 func close():
@@ -57,8 +62,8 @@ func _on_continue_pressed():
 	_avatar.lower_health(1)
 	_update_health()
 	button_sfx.play()
-	$DecisionWindow.visible = false
 	$SummaryWindow.visible = true
+	$DecisionWindow.visible = false
 
 func _on_new_day_pressed():
 	button_sfx.play()

@@ -124,3 +124,5 @@ visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
+[connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

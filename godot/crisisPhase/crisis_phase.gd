@@ -32,6 +32,8 @@ func _ready():
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
+	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
+	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)
@@ -55,16 +57,16 @@ func _ready():
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 
-func _on_inventory_closed():
-	get_tree().paused = false
-	$BtnBackpack.show()
-
 
 func _on_inventory_opened():
 	get_tree().paused = true
 	$BtnBackpack.hide()
 	get_viewport().set_input_as_handled()
 
+
+func _on_inventory_closed():
+	get_tree().paused = false
+	$BtnBackpack.show()
 
 
 func _unhandled_input(event):

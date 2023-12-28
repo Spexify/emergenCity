@@ -16,10 +16,12 @@ func show_gui(p_action: EMC_Action):
 func _on_okay_pressed():
 	button_sfx.play()
 	await button_sfx.finished
-	_action.executed.emit(_action)
 	close_gui_sfx.play()
 	hide()
 	closed.emit()
+	#MRM: Bugfix: Execute Action AFTER closed.emit, so potentially
+	# following GUIs (like PopupEvents or SEOD) are opened after this one is closed
+	_action.executed.emit(_action)
 
 
 func _on_cancel_pressed():

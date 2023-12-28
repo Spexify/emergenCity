@@ -38,6 +38,7 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 const PU_LOWER_BOUND : int = 1
 const PU_UPPER_BOUND : int = 3
 
+
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
 	match p_action_ID:
@@ -50,8 +51,8 @@ func _create_action(p_action_ID: int):
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "RestGUI", 
 								 "Hat sich ausgeruht.")
-		4: result = EMC_Action.new(p_action_ID, "Cooking", { }, 
-								 { }, "CookingGUI", 
+		4: result = EMC_Action.new(p_action_ID, "Cooking", { "constraint_cooking" : 0 }, 
+								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")
@@ -115,18 +116,23 @@ func _on_action_executed(action : EMC_Action):
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			_seodGUI.open(self.current_day_cycle)
+			_seodGUI.open(self.current_day_cycle, false)
+			_seodGUI.closed.connect(_on_seod_closed)
 			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
 			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
-				_egGUI.open(self.history, _avatar_life_status)
+				_seodGUI.open(self.current_day_cycle, true)
+				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
-	
-func _on_seod_closed() -> void:
+
+func _on_seod_closed_game_end():
+	_egGUI.open(self.history, _avatar_life_status)
+
+func _on_seod_closed():
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
@@ -159,36 +165,39 @@ func _check_pu_counter() -> void:
 	
 ## TODO: refactor range und actions content
 func _create_new_pop_up_action() -> EMC_PopUpAction:
+	var result: EMC_PopUpAction
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
 			var _counter_morning : int = _rng.randi_range(1, 2)
 			match _counter_morning:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.NOON:
 			var _counter_noon : int = _rng.randi_range(1, 2)
 			match _counter_noon:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.EVENING: 
 			var _counter_evening : int = _rng.randi_range(1, 2)
 			match _counter_evening:
-				1: return EMC_PopUpAction.new(1001, "PopUp_1", { }, "", "PopUp 1 happening")
-				2: return EMC_PopUpAction.new(1002, "PopUp_2", { }, "", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		_: 
 			push_error("Unerwarteter Fehler PopUpAction")
-	return null
+	result.executed.connect(_on_action_executed)
+	return result
 
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> bool:
 	print("Constraint Cooking was checked!")
-	#TODO
+	#TODO: Electricity?
+	##TODO: In the future: Else Gaskocher?
 	return false
 
 ########################################## CHANGE METHODS ##########################################
