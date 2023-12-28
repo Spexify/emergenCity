@@ -5,10 +5,6 @@ class_name EMC_RestActionGUI
 @onready var close_gui_sfx = $SFX/CloseGUISFX
 @onready var button_sfx = $SFX/ButtonSFX
 
-func _init():
-	_type_gui = "rest_GUI"
-
-
 ## Method that should be overwritten in each class that implements E[MC_ActionGUI]:
 func show_gui(p_action: EMC_Action):
 	_action = p_action

@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://j8qcqefgbhq4"]
+[gd_scene load_steps=3 format=3 uid="uid://j8qcqefgbhq4"]
+
+[ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -7,3 +10,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mfqhx")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme = ExtResource("2_duud7")
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_duud7")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]Inventory[/center]
+"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 325)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"TextBox"
+
+[node name="Shelf" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/Shelf"]
+layout_mode = 2
+columns = 15
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_duud7")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]Shop[/center]
+"
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 325)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"TextBox"
+
+[node name="Shelf" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/Shelf"]
+layout_mode = 2

@@ -5,12 +5,32 @@ var current_scene : Node = null
 @onready var root = get_tree().root
 
 var _e_coins : int = 10;
+var _inventory : EMC_Inventory = null
 
 const MAX_ECOINS = 99999
 
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
+	
+	_inventory = EMC_Inventory.new()
+	_inventory.add_new_item(EMC_Item.IDs.WATER);
+	_inventory.add_new_item(EMC_Item.IDs.WATER);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	_inventory.add_new_item(EMC_Item.IDs.WATER);
+	_inventory.add_new_item(EMC_Item.IDs.WATER);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	_inventory.add_new_item(EMC_Item.IDs.WATER);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 
 func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
@@ -24,6 +44,9 @@ func _deferred_goto_scene(path):
 
 func load_scene_name():
 	return "res://preparePhase/main_menu.tscn"
+	
+func load_save_file():
+	pass
 	
 func save():
 	pass
@@ -47,3 +70,9 @@ func sub_e_coins(e_coins : int):
 		return false
 	else:
 		_e_coins -= e_coins
+		
+func get_inventory() -> EMC_Inventory:
+	return _inventory
+	
+func set_inventory(inventory : EMC_Inventory):
+	_inventory = inventory

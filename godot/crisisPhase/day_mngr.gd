@@ -48,10 +48,10 @@ func _create_action(p_action_ID: int):
 		2: result = EMC_StageChangeAction.new(p_action_ID, "Teleporter_Marketplace", { }, 
 								 "Hat Marktplatz besucht.", "market", Vector2i(250, 1000))
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
-								 { }, "rest_GUI", 
+								 { }, "RestGUI", 
 								 "Hat sich ausgeruht.")
 		4: result = EMC_Action.new(p_action_ID, "Cooking", { }, 
-								 { }, "cooking_GUI", 
+								 { }, "CookingGUI", 
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")
@@ -92,7 +92,7 @@ func on_interacted_with_furniture(action_id : int):
 		#if self.gui_refs[0].get_type_gui() == "reject": 
 			#self.gui_refs[0].show_gui(current_action)
 		#else:
-		_get_gui_ref_by_name("reject_GUI").show_gui(current_action)
+		_get_gui_ref_by_name("RejectGUI").show_gui(current_action)
 	else:
 		var gui_name = current_action.get_type_gui()
 		_get_gui_ref_by_name(gui_name).show_gui(current_action)
@@ -100,7 +100,7 @@ func on_interacted_with_furniture(action_id : int):
 
 func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 	for ref: EMC_ActionGUI in self.gui_refs:
-		if ref.get_type_gui() == p_name:
+		if ref.name == p_name:
 			return ref
 	return null
 

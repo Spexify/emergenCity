@@ -1,9 +1,6 @@
 extends EMC_ActionGUI
 
 var _inventory: EMC_Inventory
-
-func _init():
-	_type_gui = "cooking_GUI"
 	
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory

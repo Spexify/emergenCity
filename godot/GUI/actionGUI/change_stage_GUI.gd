@@ -8,10 +8,6 @@ class_name EMC_ChangeStageGUI
 var _stage_mngr: EMC_StageMngr
 var _avatar: EMC_Avatar
 
-func _init():
-	_type_gui = "change_stage_GUI"
-
-
 func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar
