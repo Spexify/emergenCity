@@ -3,15 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_kkl5m"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_y5ghx"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4tvx8"]
-texture = ExtResource("1_kkl5m")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_278fl"]
+texture = ExtResource("2_y5ghx")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nerh7"]
-texture = ExtResource("2_y5ghx")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eh4ga"]
+texture = ExtResource("1_kkl5m")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
@@ -19,19 +19,13 @@ texture_margin_bottom = 8.0
 
 [resource]
 default_font_size = 25
-GUISpacing/base_type = &"MarginContainer"
-GUISpacing/constants/margin_bottom = 80
-GUISpacing/constants/margin_left = 80
-GUISpacing/constants/margin_right = 80
-GUISpacing/constants/margin_top = 80
 HeaderLarge/font_sizes/bold_font_size = 46
 HeaderLarge/font_sizes/bold_italics_font_size = 46
 HeaderLarge/font_sizes/font_size = 46
 HeaderLarge/font_sizes/italics_font_size = 46
 HeaderLarge/font_sizes/mono_font_size = 46
 HeaderLarge/font_sizes/normal_font_size = 46
-PanelContainer/styles/panel = SubResource("StyleBoxTexture_4tvx8")
-TextBox/base_type = &"PanelContainer"
-TextBox/styles/panel = SubResource("StyleBoxTexture_nerh7")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_278fl")
+PopupPanel/styles/panel = SubResource("StyleBoxTexture_eh4ga")
 TitleSpacing/base_type = &"MarginContainer"
 TitleSpacing/constants/margin_bottom = 12
