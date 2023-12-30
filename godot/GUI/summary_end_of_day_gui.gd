@@ -79,10 +79,6 @@ func _on_eat_pressed():
 	
 	
 	
-
-
-
-
 func _on_drink_pressed():
 	_avatar.raise_thirst(1)
 	_has_drank = true

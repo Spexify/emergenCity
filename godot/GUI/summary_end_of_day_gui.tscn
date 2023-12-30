@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8qngbqj8n42a"]
+[gd_scene load_steps=9 format=3 uid="uid://c8qngbqj8n42a"]
 
 [ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_13vms"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="2_q6owg"]
+[ext_resource type="Script" path="res://GUI/inventory_GUI.gd" id="2_ybret"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_fy6nl"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="3_hs5pc"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="4_2a3qa"]
+[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_3kg1e"]
 
 [node name="SummaryEndOfDayGUI" type="Control"]
 layout_mode = 3
@@ -15,6 +19,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_wmmkg")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 offset_left = 52.0
 offset_top = 40.0
@@ -72,6 +77,7 @@ size_flags_horizontal = 3
 text = "Weiter"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -163,6 +169,98 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Starte den nächsten Tag"
+
+[node name="Filtered Inventory" type="PanelContainer" parent="."]
+offset_left = -115.0
+offset_top = -186.0
+offset_right = 116.0
+offset_bottom = 131.0
+script = ExtResource("2_ybret")
+
+[node name="Background" type="NinePatchRect" parent="Filtered Inventory"]
+layout_mode = 2
+texture = ExtResource("2_13vms")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Label" type="RichTextLabel" parent="Filtered Inventory/Background"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 8.0
+offset_right = 226.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(0.5, 0.5)
+size_flags_vertical = 3
+theme = ExtResource("3_fy6nl")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[center]Inventory[/center]
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Filtered Inventory/Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 139.0
+grow_horizontal = 2
+
+[node name="GridContainer" type="GridContainer" parent="Filtered Inventory/Background/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="Filtered Inventory/Background/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="TextBoxBG" type="NinePatchRect" parent="Filtered Inventory/Background/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+texture = ExtResource("4_3kg1e")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Name" type="RichTextLabel" parent="Filtered Inventory/Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 385.0
+offset_bottom = 75.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+
+[node name="Components" type="RichTextLabel" parent="Filtered Inventory/Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 385.0
+offset_bottom = 85.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_fy6nl")
+
+[node name="Description" type="RichTextLabel" parent="Filtered Inventory/Background/VBoxContainer/MarginContainer/TextBoxBG"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 385.0
+offset_bottom = 110.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_fy6nl")
+theme_override_font_sizes/italics_font_size = 18
 
 [node name="SFX" type="Node" parent="."]
 
