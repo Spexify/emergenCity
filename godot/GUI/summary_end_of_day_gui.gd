@@ -75,14 +75,14 @@ func _on_new_day_pressed():
 func _on_eat_pressed():
 	_avatar.raise_hunger(1)
 	_has_eaten = true
-	var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
+	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
 	
 	
 	
 func _on_drink_pressed():
 	_avatar.raise_thirst(1)
 	_has_drank = true
-	var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
+	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
 	
 	
 func _update_health():
