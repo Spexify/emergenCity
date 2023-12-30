@@ -7,10 +7,12 @@ signal arrived
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
-## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und health_bar gemessen in Prozent
-var hunger_bar : int = 5
-var thirst_bar : int = 5
-var health_bar : int = 5
+## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_bar gemessen in Prozent
+## working in untis of 4
+var _hunger_bar : int = 2
+var _thirst_bar : int = 2
+var _health_bar : int = 2
+const MAX_VITALS = 4
 
 @onready var walking = $SFX/Walking
 
@@ -41,34 +43,51 @@ func cancel_navigation() -> void:
 
 ## Getters für die Statutbalken vom Avatar
 func get_hunger_status() -> int:
-	return hunger_bar
+	return _hunger_bar
 
 func get_thirst_status() -> int:
-	return thirst_bar
+	return _thirst_bar
 	
 func get_health_status() -> int:
-	return health_bar
+	return _health_bar
 	
 	
 ## Setters für die Statutbalken vom Avatar
-## TODO : add and subtract methods instead
-func raise_hunger(hunger_status : int) -> void:
-	hunger_bar += hunger_status
+func add_hunger(hunger_status : int):
+	if _hunger_bar + hunger_status > MAX_VITALS:
+		_hunger_bar = hunger_status
+	else:
+		_hunger_bar += hunger_status
 	
-func lower_hunger(hunger_status : int) -> void:
-	hunger_bar -= hunger_status
+func sub_hunger(hunger_status : int):
+	if _hunger_bar - hunger_status < 0 or _hunger_bar < 0:
+		return false
+	else:
+		_hunger_bar -= hunger_status
 	
-func raise_thirst(thirst_status : int) -> void:
-	thirst_bar += thirst_status
+func add_thirst(thirst_status : int):
+	if _thirst_bar + thirst_status > MAX_VITALS:
+		_thirst_bar = thirst_status
+	else:
+		_thirst_bar += thirst_status
 	
-func lower_thirst(thirst_status : int) -> void:
-	thirst_bar -= thirst_status
+func sub_thirst(thirst_status : int):
+	if _thirst_bar - thirst_status < 0 or _thirst_bar < 0:
+		return false
+	else:
+		_thirst_bar -= thirst_status
 
-func raise_health(health_status : int) -> void:
-	health_bar += health_status
+func add_health(health_status : int):
+	if _health_bar + health_status > MAX_VITALS:
+		_health_bar = health_status
+	else:
+		_health_bar += health_status
 	
-func lower_health(health_status : int) -> void:
-	health_bar -= health_status
+func sub_health(health_status : int):
+	if _health_bar - health_status < 0 or _health_bar < 0:
+		return false
+	else:
+		_health_bar -= health_status
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

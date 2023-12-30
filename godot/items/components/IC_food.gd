@@ -2,7 +2,7 @@ extends EMC_ItemComponent
 class_name EMC_IC_Food
 
 const UNIT: String = "kcal"
-const UNIT_FACTOR: int = 500 #1 Unit = 500kcal
+const UNIT_FACTOR: int = 550 #1 Unit = 550kcal
 var _nutritionness: int = 0
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------

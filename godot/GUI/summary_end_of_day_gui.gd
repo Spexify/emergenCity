@@ -56,15 +56,16 @@ func close():
 	closed.emit()
 
 
-## TODO: reduce health and thirst every step, also think about values and coefficent
+## TODO: think about eating and drinking untis and updating health accordingly
 func _on_continue_pressed():
-	_avatar.lower_hunger(1)
-	_avatar.lower_thirst(1)
-	_avatar.lower_health(1)
+	_avatar.sub_hunger(1)
+	_avatar.sub_thirst(1)
+	_avatar.sub_health(1)
 	_update_health()
 	button_sfx.play()
 	$SummaryWindow.visible = true
 	$DecisionWindow.visible = false
+
 
 func _on_new_day_pressed():
 	button_sfx.play()
@@ -73,19 +74,18 @@ func _on_new_day_pressed():
 
 
 func _on_eat_pressed():
-	_avatar.raise_hunger(1)
+	_avatar.add_hunger(1)
 	_has_eaten = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
 	
 	
-	
 func _on_drink_pressed():
-	_avatar.raise_thirst(1)
+	_avatar.add_thirst(1)
 	_has_drank = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
 	
 	
 func _update_health():
 	if _has_drank && _has_eaten:
-		_avatar.raise_health(1)
+		_avatar.add_health(1)
 
