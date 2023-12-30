@@ -13,6 +13,7 @@ signal on_drink_pressed
 ## TODO: add inventory in popup SEOD and choice of food and drinks
 var _avatar: EMC_Avatar
 var _inventory : EMC_Inventory
+const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 
 var _has_eaten : bool = false
 var _has_drank : bool = false
@@ -74,12 +75,21 @@ func _on_new_day_pressed():
 func _on_eat_pressed():
 	_avatar.raise_hunger(1)
 	_has_eaten = true
+	var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
+	
+	
+	
+
+
 
 
 func _on_drink_pressed():
 	_avatar.raise_thirst(1)
 	_has_drank = true
+	var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
+	
 	
 func _update_health():
 	if _has_drank && _has_eaten:
 		_avatar.raise_health(1)
+
