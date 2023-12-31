@@ -33,10 +33,18 @@ var _puGUI : EMC_PopUpGUI
 var _avatar_ref : EMC_Avatar
 var _avatar_life_status : bool = true
 
-var _puGUI_probability_countdown : int
+var _overworld_states_mngr_ref : EMC_OverworldStatesMngr
+
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+# hyperparameters for random pop-up- and optional events respectively
+var _puGUI_probability_countdown : int
 const PU_LOWER_BOUND : int = 2 #MRM hab ich erhöht, weil sie manchmal nerven x)
 const PU_UPPER_BOUND : int = 4 #MRM hab ich erhöht, weil sie manchmal nerven x)
+
+var _opGUI_probability_countdown : int
+const OP_LOWER_BOUND : int = 2
+const OP_UPPER_BOUND : int = 4 
 
 
 func _create_action(p_action_ID: int):
@@ -63,11 +71,13 @@ func _create_action(p_action_ID: int):
 
 
 func setup(avatar_ref : EMC_Avatar,
+overworld_states_mngr_ref : EMC_OverworldStatesMngr,
 gui_refs : Array[EMC_ActionGUI],
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI, max_day : int = 3):
 	_avatar_ref = avatar_ref
+	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	self.max_day = max_day
 	self.gui_refs = gui_refs
 	_seodGUI = seodGUI
@@ -193,6 +203,20 @@ func _create_new_pop_up_action() -> EMC_PopUpAction:
 			push_error("Unerwarteter Fehler PopUpAction")
 	result.executed.connect(_on_action_executed)
 	return result
+	
+################################### Optional Events ################################################
+
+func _check_op_counter() -> void:
+	_opGUI_probability_countdown -= 1
+	if _opGUI_probability_countdown == 0:
+		_create_new_optional_event()
+		_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
+		
+func _create_new_optional_event() -> void:
+	# currently only one event, the RAINWATER_BARREL is implemented
+	# With more content, this should be a match statement similar to create_pop_up_action
+	_overworld_states_mngr_ref.set_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, 
+		_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL))
 
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> bool:
