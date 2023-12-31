@@ -137,11 +137,11 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	return removedCnt
 	
 
-
+## TODO: rework, shading non consumables
 ## KL: Filter Funktion, die nur die Items übergibt, die den Filterkriterium entsprechen
 ## Variable food_or_drink hat 2 Werte : 0 falls es nach EMC_IC_Food Items gefiltert wird, 
 ## 										1, falls es nach EMC_IC_Drink gefiltert wird
-func filter_items(food_or_drink : int) -> EMC_Inventory:
+func filter_items(food_or_drink : int) -> Array[EMC_Item.IDs]:
 	var items = get_all_items()		
 	var filtered_inventory : EMC_Inventory = _init(30)
 	for slot_idx in items.size():
@@ -153,7 +153,7 @@ func filter_items(food_or_drink : int) -> EMC_Inventory:
 			else: 
 				if comp is EMC_IC_Drink:
 					filtered_inventory.add_item(item_at_slot)
-	return filtered_inventory
+	return Array[EMC_Item.IDs]
 
 ### Items nach ID sortieren (QoL feature in der Zukunft)
 #func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
