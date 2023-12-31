@@ -56,7 +56,7 @@ shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-position = Vector2(481, 50)
+position = Vector2(481, 20)
 scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
@@ -85,9 +85,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 1
-
-[node name="StatusBars" parent="GUI/VBC/UpperSection" instance=ExtResource("6_22w2e")]
-layout_mode = 2
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
 custom_minimum_size = Vector2(288, 350)
@@ -130,6 +127,9 @@ layout_mode = 2
 
 [node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]
 visible = false
+layout_mode = 2
+
+[node name="StatusBars" parent="GUI/VBC/LowerSection" instance=ExtResource("6_22w2e")]
 layout_mode = 2
 
 [node name="CityMap" parent="." instance=ExtResource("4_ospyx")]
