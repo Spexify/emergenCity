@@ -165,9 +165,6 @@ func get_current_day() -> int:
 func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
-	$HBoxContainer/RichTextLabelNutrition.text = str(_avatar_ref.get_unit_nutrition_status()) + "kcal"
-	$HBoxContainer/RichTextLabelHydration.text = str(_avatar_ref.get_unit_hydration_status()) + "ml"
-	$HBoxContainer/RichTextLabelHealth.text = str(_avatar_ref.get_unit_health_status()) + "%"
 	
 ################################### Pop Up Events ##################################################
 	

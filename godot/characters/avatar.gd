@@ -3,20 +3,22 @@ class_name EMC_Avatar
 
 signal arrived
 signal nutrition_updated(p_new_value: int)
+signal hydration_updated(p_new_value: int)
+signal health_updated(p_new_value: int)
 
 @export var move_speed: float = 100
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
-## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_bar gemessen in Prozent
+## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
 ## working in untis of 4
-var _nutrition_bar : int = 2
-var _hydration_bar : int = 2
-var _health_bar : int = 2
+var _nutrition_value : int = 2
+var _hydration_value : int = 2
+var _health_value : int = 2
 const MAX_VITALS = 4
 const UNIT_FACTOR_NUTRITION: int = 550 #food Unit = 550 kcal
 const UNIT_FACTOR_HYDRATION: int = 500 #water Unit = 500 ml
-const UNIT_FACTOR_HEALTH: int = 500 #health Unit = 25 percent
+const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
 
 @onready var walking := $SFX/Walking
 
@@ -45,71 +47,78 @@ func cancel_navigation() -> void:
 	navAgent.target_position = self.position
 	
 
-## Getters für die Statutbalken vom Avatar
+## Getters für die Statutwerten vom Avatar
 func get_nutrition_status() -> int:
-	return _nutrition_bar
+	return _nutrition_value
 
 func get_unit_nutrition_status() -> int:
-	return _nutrition_bar*UNIT_FACTOR_NUTRITION
+	return _nutrition_value*UNIT_FACTOR_NUTRITION
 	
 func get_hydration_status() -> int:
-	return _hydration_bar
+	return _hydration_value
 	
 func get_unit_hydration_status() -> int:
-	return _hydration_bar*UNIT_FACTOR_HYDRATION
+	return _hydration_value*UNIT_FACTOR_HYDRATION
 	
 func get_health_status() -> int:
-	return _health_bar
+	return _health_value
 	
 func get_unit_health_status() -> int:
-	return _health_bar*UNIT_FACTOR_HEALTH
+	return _health_value*UNIT_FACTOR_HEALTH
 	
 	
 ## Setters für die Statutbalken vom Avatar
 func add_nutrition(nutrition_status : int) -> void:
-	if _nutrition_bar + nutrition_status > MAX_VITALS:
-		_nutrition_bar = nutrition_status
+	if _nutrition_value + nutrition_status > MAX_VITALS:
+		_nutrition_value = nutrition_status
 	else:
-		_nutrition_bar += nutrition_status
+		_nutrition_value += nutrition_status
+	nutrition_updated.emit(_nutrition_value)
 	
 func sub_nutrition(nutrition_status : int) -> bool:
-	if _nutrition_bar - nutrition_status < 0 or _nutrition_bar < 0:
+	if _nutrition_value - nutrition_status < 0 or _nutrition_value < 0:
 		return false
 	else:
-		_nutrition_bar -= nutrition_status
+		_nutrition_value -= nutrition_status
 		return true
+	nutrition_updated.emit(_nutrition_value)
 	
 func add_hydration(hydration_status : int) -> void:
-	if _hydration_bar + hydration_status > MAX_VITALS:
-		_hydration_bar = hydration_status
+	if _hydration_value + hydration_status > MAX_VITALS:
+		_hydration_value = hydration_status
 	else:
-		_hydration_bar += hydration_status
-	nutrition_updated.emit(_hydration_bar)
+		_hydration_value += hydration_status
+	hydration_updated.emit(_hydration_value)
 	
 func sub_hydration(hydration_status : int) -> bool:
-	if _hydration_bar - hydration_status < 0 or _hydration_bar < 0:
+	if _hydration_value - hydration_status < 0 or _hydration_value < 0:
 		return false
 	else:
-		_hydration_bar -= hydration_status
+		_hydration_value -= hydration_status
 		return true
+	hydration_updated.emit(_hydration_value)
 
 func add_health(health_status : int) -> void:
-	if _health_bar + health_status > MAX_VITALS:
-		_health_bar = health_status
+	if _health_value + health_status > MAX_VITALS:
+		_health_value = health_status
 	else:
-		_health_bar += health_status
+		_health_value += health_status
+	health_updated.emit(_health_value)
 	
 func sub_health(health_status : int) -> bool:
-	if _health_bar - health_status < 0 or _health_bar < 0:
+	if _health_value - health_status < 0 or _health_value < 0:
 		return false
 	else:
-		_health_bar -= health_status
+		_health_value -= health_status
 		return true
+	health_updated.emit(_health_value)
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 func _ready() -> void:
-	nutrition_updated.emit(_nutrition_bar)
+	nutrition_updated.emit(_nutrition_value)
+	hydration_updated.emit(_hydration_value)
+	health_updated.emit(_health_value)
 
 
 func _physics_process(_delta: float) -> void:
