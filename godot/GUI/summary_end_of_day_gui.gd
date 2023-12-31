@@ -46,7 +46,7 @@ func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool) -> void:
 		$SummaryWindow.visible = true
 		$DecisionWindow.visible = false
 	opened.emit()
-	print("Hunger : " + str(_avatar.get_hunger_status()))
+	print("Hunger : " + str(_avatar.get_unit_nutrition_status()))
 
 
 ## closes summary end of day GUI/makes invisible
@@ -58,8 +58,8 @@ func close() -> void:
 
 ## TODO: think about eating and drinking untis and updating health accordingly
 func _on_continue_pressed() -> void:
-	_avatar.sub_hunger(1)
-	_avatar.sub_thirst(1)
+	_avatar.sub_nutrition(1)
+	_avatar.sub_hydration(1)
 	_avatar.sub_health(1)
 	_update_health()
 	button_sfx.play()
@@ -74,13 +74,13 @@ func _on_new_day_pressed() -> void:
 
 
 func _on_eat_pressed() -> void:
-	_avatar.add_hunger(1)
+	_avatar.add_nutrition(1)
 	_has_eaten = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
 	
 	
 func _on_drink_pressed() -> void:
-	_avatar.add_thirst(1)
+	_avatar.add_hydration(1)
 	_has_drank = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
 	

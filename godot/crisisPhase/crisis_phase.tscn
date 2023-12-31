@@ -56,7 +56,7 @@ shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-position = Vector2(461, 100)
+position = Vector2(481, 20)
 scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
@@ -139,6 +139,8 @@ offset_right = 288.0
 offset_bottom = 512.0
 scale = Vector2(2, 2)
 
+[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_health_updated"]
+[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]

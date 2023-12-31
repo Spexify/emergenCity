@@ -130,7 +130,7 @@ func _on_action_executed(action : EMC_Action) -> void:
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle, false)
 			_seodGUI.closed.connect(_on_seod_closed)
-			if _avatar_ref.get_hunger_status() <= 0 || _avatar_ref.get_thirst_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
+			if _avatar_ref.get_nutrition_status() <= 0 || _avatar_ref.get_hydration_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
 			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
 				_seodGUI.open(self.current_day_cycle, true)
