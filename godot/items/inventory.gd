@@ -35,7 +35,7 @@ func has_space() -> bool:
 ## Add a new [EMC_Item] to this inventory.
 ## Returns true, if the item was added, else false
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	var new_item := _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(p_ID)
 	return add_item(new_item)
 
@@ -64,7 +64,7 @@ func get_item_of_slot(p_slot_idx: int) -> EMC_Item:
 ## else returns null 
 func get_item_of_ID(p_ID: EMC_Item.IDs) -> EMC_Item:
 	for slot_idx in _slot_cnt:
-		var item = _slots[slot_idx]
+		var item := _slots[slot_idx]
 		if item != null && item.get_ID() == p_ID:
 			return item
 	return null
@@ -80,8 +80,8 @@ func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
 	
 	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
+		var slot := $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item: EMC_Item = slot.get_item()
 		if item != null && item.get_ID() == p_ID:
 			cnt += 1
 	return cnt
@@ -92,7 +92,7 @@ func get_item_count() -> int:
 	var cnt: int = 0
 	
 	for slot_idx in _slot_cnt:
-		var item = _slots[slot_idx]
+		var item := _slots[slot_idx]
 		if item != null:
 			cnt += 1
 		##Mini-Optimization that can be used in the future, when the array is guaranteed to always be sorted:
@@ -106,8 +106,8 @@ func get_all_items() -> Array[EMC_Item]:
 	var items: Array[EMC_Item] = []
 	
 	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
+		var slot: EMC_InventorySlot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item := slot.get_item()
 		if item != null:
 			items.push_back(item)
 	return items
@@ -115,7 +115,7 @@ func get_all_items() -> Array[EMC_Item]:
 
 ## Return all items as Array of [EMC_Item]s for an ID
 func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
-	var items = get_all_items()
+	var items := get_all_items()
 	for slot_idx in items.size():
 		if items[slot_idx].get_ID() != p_ID:
 			items.remove_at(slot_idx)
@@ -128,7 +128,7 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
 	for slot_idx in _slot_cnt:
-		var item = _slots[slot_idx]
+		var item := _slots[slot_idx]
 		if item != null && item.get_ID() == ID:
 			_slots[slot_idx] = null
 			item_removed.emit(item, slot_idx)
@@ -142,10 +142,10 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 ## Variable food_or_drink hat 2 Werte : 0 falls es nach EMC_IC_Food Items gefiltert wird, 
 ## 										1, falls es nach EMC_IC_Drink gefiltert wird
 func filter_items(food_or_drink : int) -> EMC_Inventory:
-	var items = get_all_items()		
+	var items := get_all_items()
 	var filtered_inventory : EMC_Inventory = _init(30)
 	for slot_idx in items.size():
-		var item_at_slot = items[slot_idx]
+		var item_at_slot := items[slot_idx]
 		for comp in items[slot_idx].get_comps():
 			if food_or_drink == 0:
 				if comp is EMC_IC_Food:

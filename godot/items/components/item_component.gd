@@ -20,7 +20,7 @@ class_name EMC_ItemComponent
 var _color: Color
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(p_name: String, p_color: Color = Color.BLACK):
+func _init(p_name: String, p_color: Color = Color.BLACK) -> void:
 	name = p_name
 	_color = p_color
 

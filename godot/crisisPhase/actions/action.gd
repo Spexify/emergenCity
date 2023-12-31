@@ -26,7 +26,7 @@ signal executed(action : EMC_Action)
 ## The ID-integer associated with this action
 var _action_ID : int
 ## Name associated with this Action, needed in [EMC_End_of_Day_Summary].
-var _ACTION_NAME : String 
+var _ACTION_NAME : String #MRM: Why capital case, if not a constant?
 
 ## A dictonary contaning all prior constraints before showing the associated [EMC_GUI].
 ## Where the key of the [Dictionary] is the String name of a Function and the value the Parameters for it.
@@ -37,12 +37,12 @@ var _constraints_rejected : Array[String]
 ## In the same Format as [member EMC_Action.constraints_prior]
 #MRM: Still needed? Now we designed the system in that way, that the GUI is responsible for any changes:
 var _changes : Dictionary 
-var _type_gui : String
+var _type_gui : String #deprecated??
 var _description : String
 
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		   changes : Dictionary, type_gui : String, description : String):
+		   changes : Dictionary, type_gui : String, description : String) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
@@ -51,28 +51,28 @@ func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 	self._description = description
 
 
-func get_ACTION_NAME():
+func get_ACTION_NAME() -> String:
 	return self._ACTION_NAME
 
 
-func get_constraints_prior():
+func get_constraints_prior() -> Dictionary:
 	return self._constraints_prior
 
 
-func get_constraints_rejected():
+func get_constraints_rejected() -> Array[String]:
 	return self._constraints_rejected
 
 
-func set_constraints_rejected(constraints_rejected):
+func set_constraints_rejected(constraints_rejected: Array[String]) -> void:
 	self._constraints_rejected = constraints_rejected
 
 
-func get_changes():
+func get_changes() -> Dictionary:
 	return self._changes
 
 
-func get_type_gui():
+func get_type_gui() -> String:
 	return self._type_gui
 
-func get_description():
+func get_description() -> String:
 	return self._description

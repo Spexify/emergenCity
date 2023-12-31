@@ -3,9 +3,9 @@ class_name EMC_ChangeStageGUI
 
 signal stayed_on_same_stage
 
-@onready var open_gui_sfx = $SFX/OpenGUISFX
-@onready var close_gui_sfx = $SFX/CloseGUISFX
-@onready var button_sfx = $SFX/ButtonSFX
+@onready var open_gui_sfx := $SFX/OpenGUISFX
+@onready var close_gui_sfx := $SFX/CloseGUISFX
+@onready var button_sfx := $SFX/ButtonSFX
 
 var _stage_mngr: EMC_StageMngr
 var _avatar: EMC_Avatar
@@ -18,23 +18,26 @@ func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
 
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
-func show_gui(p_action: EMC_Action):
+func show_gui(p_action: EMC_Action) -> void:
 	_action = p_action
 	var stage_change_action: EMC_StageChangeAction = _action
 	
-	if _stage_mngr.get_stage_name() == "home":
-		#Ohne Meldung/Action zu verbrauchen wechsel, aber [EMC_Action] vormerken
-		_on_confirm_btn_pressed()
-	elif _stage_mngr.get_stage_name() == stage_change_action.get_stage_name():
+	if _stage_mngr.get_curr_stage_name() == stage_change_action.get_stage_name():
 		stayed_on_same_stage.emit()
 		close()
 	else:
+		if _stage_mngr.get_curr_stage_name() == "home":
+			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+				stage_change_action.get_ACTION_NAME() + " gehen? Die Rückkehr kostet eine Aktion."
+		else:
+			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
 		open_gui_sfx.play()
 		show()
 		opened.emit()
 
 
-func _on_confirm_btn_pressed():
+func _on_confirm_btn_pressed() -> void:
 	var curr_SC_action: EMC_StageChangeAction = _action
 	
 	_stage_mngr.change_stage(curr_SC_action.get_stage_name())
@@ -50,20 +53,20 @@ func _on_confirm_btn_pressed():
 	else:
 		_last_SC_action = curr_SC_action
 	
-	if _stage_mngr.get_stage_name() == "home":
+	if _stage_mngr.get_curr_stage_name() == "home":
 		button_sfx.play()
 		await button_sfx.finished
 	
 	close()
 
 
-func close():
+func close() -> void:
 	close_gui_sfx.play()
 	hide()
 	closed.emit()
 
 
-func _on_cancel_btn_pressed():
+func _on_cancel_btn_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	close()
