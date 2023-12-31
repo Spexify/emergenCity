@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dafnpxmsjb4v7"
-path="res://.godot/imported/Lofi.wav-700e9e400a997713c5cca2c61a2714d1.sample"
+path="res://.godot/imported/Lofi.wav-877e026c51670adac2e5b8ad144233ff.sample"
 
 [deps]
 
-source_file="res://SFX/Lofi.wav"
-dest_files=["res://.godot/imported/Lofi.wav-700e9e400a997713c5cca2c61a2714d1.sample"]
+source_file="res://res/SFX/Lofi.wav"
+dest_files=["res://.godot/imported/Lofi.wav-877e026c51670adac2e5b8ad144233ff.sample"]
 
 [params]
 

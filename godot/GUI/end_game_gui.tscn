@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnmcmtfl1jq8q"]
 
 [ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_2cnqb"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_55ssa"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_oj6ur"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_2cnqb"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_55ssa"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_oj6ur"]
 
 [node name="GameOverGUI" type="Control"]
 layout_mode = 3

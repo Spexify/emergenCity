@@ -11,33 +11,33 @@ class_name EMC_InventoryGUI
 signal opened
 signal closed
 
-@onready var open_gui = $SFX/OpenGUI
-@onready var close_gui = $SFX/CloseGUI
+@onready var open_gui := $SFX/OpenGUI
+@onready var close_gui := $SFX/CloseGUI
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 var _inventory: EMC_Inventory
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-## Konstruktro des Inventars
+## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar"):
+func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
 	_inventory = p_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	setTitle(p_title)
 	
 	for slot_idx in _inventory.get_slot_cnt():
-		var new_slot = _SLOT_SCN.instantiate()
+		var new_slot := _SLOT_SCN.instantiate()
 		$Background/VBoxContainer/GridContainer.add_child(new_slot)
 		#Add items that already are in the inventory
-		var item = _inventory.get_item_of_slot(slot_idx)
+		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null:
 			_on_item_added(item, slot_idx)
 
 
 ## Die Überschrift der Inventar-UI setzen
-func setTitle(newText: String):
+func setTitle(newText: String) -> void:
 	$Background/Label.text = "[center]" + newText + "[/center]"
 
 
@@ -50,14 +50,14 @@ func toggleVisibility() -> void:
 
 
 ## Das Inventar sichtbar machen.
-func open():
+func open() -> void:
 	open_gui.play()
 	visible = true
 	opened.emit()
 
 
 ## Das Inventar verstecken.
-func close():
+func close() -> void:
 	close_gui.play()
 	visible = false
 	closed.emit()
@@ -65,34 +65,34 @@ func close():
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	hide()
 
 
 ## Handle the click on the backpack-button
-func _on_btn_backpack_pressed():
+func _on_btn_backpack_pressed() -> void:
 	get_viewport().set_input_as_handled()
 	open()
 
 
 ## Update this view when its underlying [EMC_Inventory] structure added an item
-func _on_item_added(p_item: EMC_Item, p_idx: int):
+func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.connect(_on_item_clicked)
-	var slot = $Background/VBoxContainer/GridContainer.get_child(p_idx)
+	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
 	slot.set_item(p_item)
 
 
 ## Update this view when its underlying [EMC_Inventory] structure removed an item
-func _on_item_removed(p_item: EMC_Item, p_idx: int):
+func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.disconnect(_on_item_clicked)
-	var slot = $Background/VBoxContainer/GridContainer.get_child(p_idx)
+	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
 	slot.remove_child(p_item)
 
 
 ## Display information of clicked [EMC_Item]
 func _on_item_clicked(sender: EMC_Item) -> void:
 	#Name of the item
-	var label_name = $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
+	var label_name := $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
 	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	
@@ -103,11 +103,11 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 		comp_string += comp.get_colored_name_with_vals() + ", "
 	#Remove superfluous comma:
 	comp_string = comp_string.left(comp_string.length() - 2)
-	var label_comps = $Background/VBoxContainer/MarginContainer/TextBoxBG/Components
+	var label_comps := $Background/VBoxContainer/MarginContainer/TextBoxBG/Components
 	label_comps.clear()
 	label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
-	var label_descr = $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
+	var label_descr := $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")

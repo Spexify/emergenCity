@@ -47,7 +47,7 @@ const OP_LOWER_BOUND : int = 2
 const OP_UPPER_BOUND : int = 4 
 
 
-func _create_action(p_action_ID: int):
+func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
 	match p_action_ID:
 		0: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
@@ -61,10 +61,10 @@ func _create_action(p_action_ID: int):
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")
 		#Stage Change Actions
-		2000: result = EMC_StageChangeAction.new(p_action_ID, "SC_Home", { }, 
-								 "Nach Hause gekehrt.", "home", Vector2i(450, 500))
-		2001: result = EMC_StageChangeAction.new(p_action_ID, "SC_Market", { "constraint_not_evening" : 0 }, 
-								 "Hat Marktplatz besucht.", "market", Vector2i(250, 1000)) 
+		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
+								 "Nach Hause gekehrt.", EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
+		2001: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
+								 "Hat Marktplatz besucht.", EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000)) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result
@@ -75,7 +75,7 @@ overworld_states_mngr_ref : EMC_OverworldStatesMngr,
 gui_refs : Array[EMC_ActionGUI],
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
-puGUI : EMC_PopUpGUI, max_day : int = 3):
+puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
 	_avatar_ref = avatar_ref
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	self.max_day = max_day
@@ -88,15 +88,16 @@ puGUI : EMC_PopUpGUI, max_day : int = 3):
 	_update_HUD()
 
 
-func on_interacted_with_furniture(action_id : int):
+## MRM TODO: This function should be renamed, as it is used for other interactions as well!
+func on_interacted_with_furniture(action_id : int) -> void:
 	#MRM: Duplicate of Objects cumbersome, and using the references of the array directly would
 	#lead to errors. That's why I changed it, so it just creates a new instance each time:
 	var current_action : EMC_Action = _create_action(action_id)
 	
 	var rejected_constraints : Array[String] = []
-	for constrain_key in current_action.get_constraints_prior().keys():
-		if not Callable(self, constrain_key).call():
-			rejected_constraints.append(constrain_key)
+	for constraint_key: String in current_action.get_constraints_prior().keys():
+		if not Callable(self, constraint_key).call():
+			rejected_constraints.append(constraint_key)
 	
 	if rejected_constraints.size() >= 1:
 		current_action.set_constraints_rejected(rejected_constraints)
@@ -106,7 +107,7 @@ func on_interacted_with_furniture(action_id : int):
 		#else:
 		_get_gui_ref_by_name("RejectGUI").show_gui(current_action)
 	else:
-		var gui_name = current_action.get_type_gui()
+		var gui_name := current_action.get_type_gui()
 		_get_gui_ref_by_name(gui_name).show_gui(current_action)
 
 
@@ -117,7 +118,7 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 	return null
 
 
-func _on_action_executed(action : EMC_Action):
+func _on_action_executed(action : EMC_Action) -> void:
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
 			self.current_day_cycle = EMC_DayCycle.new()
@@ -140,10 +141,10 @@ func _on_action_executed(action : EMC_Action):
 	_update_HUD()
 	_check_pu_counter()
 
-func _on_seod_closed_game_end():
+func _on_seod_closed_game_end() -> void:
 	_egGUI.open(self.history, _avatar_life_status)
 
-func _on_seod_closed():
+func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()

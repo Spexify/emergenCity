@@ -19,6 +19,9 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
+const STAGENAME_HOME: String = "home"
+const STAGENAME_MARKET: String = "market"
+
 const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
 const TILE_MAX_X_COORD: int = 8
@@ -33,10 +36,6 @@ var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null #LastClickedTile
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _ready():
-	#$CityMap.hide()
-	pass
-
 ## Konstruktor: Interne Avatar-Referenz setzen
 func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMap) -> void:
 	_avatar = p_avatar
@@ -45,8 +44,8 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMa
 	_city_map = p_city_map
 
 
-func get_stage_name() -> String:
-	var parts = $CurrStage.get_scene_file_path().split("/")
+func get_curr_stage_name() -> String:
+	var parts := get_curr_stage().get_scene_file_path().split("/")
 	var filename_with_ending: String = parts[parts.size() - 1]
 	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
 
@@ -147,27 +146,27 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 		return to_global($CurrStage.map_to_local(tile_coord))
 		
 	if tile_coord.y < TILE_MAX_Y_COORD:
-		var south_tile = tile_coord + Vector2i(0, 1)
+		var south_tile := tile_coord + Vector2i(0, 1)
 		if !_has_tile_collision(south_tile):
 			return to_global($CurrStage.map_to_local(south_tile))
 			
 		if tile_coord.x < TILE_MAX_X_COORD:
-			var southeast_tile = tile_coord + Vector2i(1, 1)
+			var southeast_tile := tile_coord + Vector2i(1, 1)
 			if !_has_tile_collision(southeast_tile):
 				return to_global($CurrStage.map_to_local(southeast_tile))
 				
 		if tile_coord.x > TILE_MIN_X_COORD:
-			var southwest_tile = tile_coord + Vector2i(-1, 1)
+			var southwest_tile := tile_coord + Vector2i(-1, 1)
 			if !_has_tile_collision(southwest_tile):
 				return to_global($CurrStage.map_to_local(southwest_tile))
 				
 	if tile_coord.x < TILE_MAX_X_COORD:
-		var east_tile = tile_coord + Vector2i(1, 0)
+		var east_tile := tile_coord + Vector2i(1, 0)
 		if !_has_tile_collision(east_tile):
 			return to_global($CurrStage.map_to_local(east_tile))
 			
 	if tile_coord.x > TILE_MIN_X_COORD:
-		var west_tile = tile_coord + Vector2i(-1, 0)
+		var west_tile := tile_coord + Vector2i(-1, 0)
 		if !_has_tile_collision(west_tile):
 			return to_global($CurrStage.map_to_local(west_tile))
 	
@@ -176,7 +175,7 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 
 
 ## TODO
-func _on_avatar_arrived():
+func _on_avatar_arrived() -> void:
 	if _last_clicked_tile != null:
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		if _is_tile_furniture(_last_clicked_tile):
@@ -186,24 +185,3 @@ func _on_avatar_arrived():
 			else:
 				_day_mngr.on_interacted_with_furniture(action_ID)
 
-
-###################################CITY MAP#####################################
-#func show_city_map():
-	#$CityMap.show()
-	#get_tree().paused = true
-	#$CityMap/Pin/AnimationPlayer.play("pin_animation")
-	#MRM: Warum auch immer schaff ich es nicht die GUI sichtbar zu haben,
-	#ohne dass sie den Klick-Input schluckt.. :(
-	#_GUI.hide()
-
-
-#func _on_back_btn_pressed():
-	#$CityMap.hide()
-	#get_tree().paused = false
-	##_GUI.show() #MRM: s. oben
-#
-#
-#
-#func _on_elias_flat_btn_pressed():
-	##_GUI.show()
-	#_tooltip_GUI.open("Elias Wohnung ist noch nicht implementiert!")

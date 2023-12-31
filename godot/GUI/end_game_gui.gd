@@ -4,9 +4,9 @@ class_name EMC_EndGameGUI
 signal opened
 signal closed
 
-@onready var open_gui_sfx = $SFX/OpenGUISFX
-@onready var close_gui_sfx = $SFX/CloseGUISFX
-@onready var button_sfx = $SFX/ButtonSFX
+@onready var open_gui_sfx := $SFX/OpenGUISFX
+@onready var close_gui_sfx := $SFX/CloseGUISFX
+@onready var button_sfx := $SFX/ButtonSFX
 
 var history : Array [EMC_DayCycle]
 
@@ -20,7 +20,7 @@ var history : Array [EMC_DayCycle]
 		#close()
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool):
+func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool) -> void:
 	if avatar_life_status == false :
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false
@@ -35,13 +35,13 @@ func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool):
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
-func close():
+func close() -> void:
 	close_gui_sfx.play()
 	visible = false
 	closed.emit()
 
 
-func _on_main_menu_pressed():
+func _on_main_menu_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	Global.goto_scene("res://preparePhase/main_menu.tscn")

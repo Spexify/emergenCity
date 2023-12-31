@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="3_j0hbn"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="4_1rel4"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="5_3syux"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="6_qpdy4"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

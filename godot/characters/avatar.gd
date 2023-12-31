@@ -14,7 +14,7 @@ var _thirst_bar : int = 2
 var _health_bar : int = 2
 const MAX_VITALS = 4
 
-@onready var walking = $SFX/Walking
+@onready var walking := $SFX/Walking
 
 enum Frame{
 	FRONTSIDE = 0,
@@ -53,45 +53,48 @@ func get_health_status() -> int:
 	
 	
 ## Setters für die Statutbalken vom Avatar
-func add_hunger(hunger_status : int):
+func add_hunger(hunger_status : int) -> void:
 	if _hunger_bar + hunger_status > MAX_VITALS:
 		_hunger_bar = hunger_status
 	else:
 		_hunger_bar += hunger_status
 	
-func sub_hunger(hunger_status : int):
+func sub_hunger(hunger_status : int) -> bool:
 	if _hunger_bar - hunger_status < 0 or _hunger_bar < 0:
 		return false
 	else:
 		_hunger_bar -= hunger_status
+		return true
 	
-func add_thirst(thirst_status : int):
+func add_thirst(thirst_status : int) -> void:
 	if _thirst_bar + thirst_status > MAX_VITALS:
 		_thirst_bar = thirst_status
 	else:
 		_thirst_bar += thirst_status
 	
-func sub_thirst(thirst_status : int):
+func sub_thirst(thirst_status : int) -> bool:
 	if _thirst_bar - thirst_status < 0 or _thirst_bar < 0:
 		return false
 	else:
 		_thirst_bar -= thirst_status
+		return true
 
-func add_health(health_status : int):
+func add_health(health_status : int) -> void:
 	if _health_bar + health_status > MAX_VITALS:
 		_health_bar = health_status
 	else:
 		_health_bar += health_status
 	
-func sub_health(health_status : int):
+func sub_health(health_status : int) -> bool:
 	if _health_bar - health_status < 0 or _health_bar < 0:
 		return false
 	else:
 		_health_bar -= health_status
+		return true
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
@@ -116,6 +119,6 @@ func _physics_process(_delta):
 
 
 ## target_reached() doesn't work for whatever reason
-func _on_navigation_agent_2d_navigation_finished():
-	walking.stop()
+func _on_navigation_agent_2d_navigation_finished() -> void:
+	walking.stop() #Name should be more precise. Walking could be an animation or a state-object
 	arrived.emit()
