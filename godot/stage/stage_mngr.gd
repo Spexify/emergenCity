@@ -19,6 +19,9 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
+const STAGENAME_HOME: String = "home"
+const STAGENAME_MARKET: String = "market"
+
 const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
 const TILE_MAX_X_COORD: int = 8
@@ -28,21 +31,24 @@ const TILE_MAX_Y_COORD: int = 15
 
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
+var _GUI: CenterContainer
+var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null #LastClickedTile
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr) -> void:
+func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMap) -> void:
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
+	_city_map = p_city_map
 
 
-func get_stage_name() -> String:
-	var parts = $CurrStage.get_scene_file_path().split("/")
+func get_curr_stage_name() -> String:
+	var parts := get_curr_stage().get_scene_file_path().split("/")
 	var filename_with_ending: String = parts[parts.size() - 1]
 	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
-	
+
 
 func get_curr_stage() -> TileMap:
 	return $CurrStage
@@ -53,6 +59,7 @@ func change_stage(p_stage_name: String) -> void:
 	$CurrStage.replace_by(new_stage)
 	new_stage.name = "CurrStage"
 	$CurrStage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
+	_city_map.close()
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
@@ -139,27 +146,27 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 		return to_global($CurrStage.map_to_local(tile_coord))
 		
 	if tile_coord.y < TILE_MAX_Y_COORD:
-		var south_tile = tile_coord + Vector2i(0, 1)
+		var south_tile := tile_coord + Vector2i(0, 1)
 		if !_has_tile_collision(south_tile):
 			return to_global($CurrStage.map_to_local(south_tile))
 			
 		if tile_coord.x < TILE_MAX_X_COORD:
-			var southeast_tile = tile_coord + Vector2i(1, 1)
+			var southeast_tile := tile_coord + Vector2i(1, 1)
 			if !_has_tile_collision(southeast_tile):
 				return to_global($CurrStage.map_to_local(southeast_tile))
 				
 		if tile_coord.x > TILE_MIN_X_COORD:
-			var southwest_tile = tile_coord + Vector2i(-1, 1)
+			var southwest_tile := tile_coord + Vector2i(-1, 1)
 			if !_has_tile_collision(southwest_tile):
 				return to_global($CurrStage.map_to_local(southwest_tile))
 				
 	if tile_coord.x < TILE_MAX_X_COORD:
-		var east_tile = tile_coord + Vector2i(1, 0)
+		var east_tile := tile_coord + Vector2i(1, 0)
 		if !_has_tile_collision(east_tile):
 			return to_global($CurrStage.map_to_local(east_tile))
 			
 	if tile_coord.x > TILE_MIN_X_COORD:
-		var west_tile = tile_coord + Vector2i(-1, 0)
+		var west_tile := tile_coord + Vector2i(-1, 0)
 		if !_has_tile_collision(west_tile):
 			return to_global($CurrStage.map_to_local(west_tile))
 	
@@ -168,9 +175,13 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 
 
 ## TODO
-func _on_avatar_arrived():
+func _on_avatar_arrived() -> void:
 	if _last_clicked_tile != null:
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
-			_day_mngr.on_interacted_with_furniture(action_ID)
+			if action_ID == EMC_Action.IDs.CITY_MAP:
+				_city_map.open()
+			else:
+				_day_mngr.on_interacted_with_furniture(action_ID)
+

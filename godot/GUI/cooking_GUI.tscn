@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://e2vuw03w1lx6"]
 
 [ext_resource type="Script" path="res://GUI/cooking_GUI.gd" id="1_yctcf"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://SFX/open_GUI.wav" id="2_vnbwr"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://SFX/close_GUI.wav" id="3_v0fsp"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://SFX/button_pressed.wav" id="4_tv2ru"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_vnbwr"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_v0fsp"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_tv2ru"]
 
 [node name="CookingGUI" type="Control"]
 layout_mode = 3

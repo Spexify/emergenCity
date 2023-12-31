@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmp3dkvy1barj"]
+
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_hirtw"]
+[ext_resource type="Script" path="res://GUI/tooltip_GUI.gd" id="2_tllve"]
+
+[node name="TooltipGUI" type="NinePatchRect"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.5
+offset_right = 133.5
+offset_bottom = 90.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+mouse_filter = 0
+texture = ExtResource("1_hirtw")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+script = ExtResource("2_tllve")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 508.0
+offset_bottom = 2150.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TextBox"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=black]Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.[/color]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Zurück
+"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

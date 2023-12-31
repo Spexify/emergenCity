@@ -68,12 +68,12 @@ func get_comps() -> Array[EMC_ItemComponent]:
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$Sprite2D.frame = _ID
 #	add_to_group("items") #Über den Editor realisiert...
 
 
-func _on_gui_input(event):
+func _on_gui_input(event: InputEvent) -> void:
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
 		clicked.emit(self)
@@ -81,7 +81,7 @@ func _on_gui_input(event):
 		get_tree().call_group("items", "_on_clicked", self) 
 
 
-func _on_clicked(sender: EMC_Item):
+func _on_clicked(sender: EMC_Item) -> void:
 	if sender == self:
 		self.modulate = Color(0.4, 0.4, 0.4)
 	else:

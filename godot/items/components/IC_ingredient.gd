@@ -7,7 +7,7 @@ extends EMC_ItemComponent
 class_name EMC_IC_Ingredient
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init():
+func _init() -> void:
 	super("Zutat", Color.CORAL)
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

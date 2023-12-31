@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=3 uid="uid://hcfsn06a2085"]
+
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/citymap.png" id="1_g3kl2"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/gui/invisible_button.png" id="2_1ab2i"]
+[ext_resource type="Script" path="res://GUI/city_map.gd" id="2_hb4w4"]
+[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="3_p1i3u"]
+[ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/gui/icon_pin.png" id="4_86e27"]
+
+[sub_resource type="Animation" id="Animation_xndm7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_inmhp"]
+resource_name = "pin_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uc87h"]
+_data = {
+"RESET": SubResource("Animation_xndm7"),
+"pin_animation": SubResource("Animation_inmhp")
+}
+
+[node name="CityMap" type="TextureRect"]
+z_index = 2
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("1_g3kl2")
+script = ExtResource("2_hb4w4")
+
+[node name="HomeBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 121.0
+offset_top = 219.5
+offset_right = 185.0
+offset_bottom = 283.5
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_direction = 2
+layout_mode = 0
+offset_left = 242.0
+offset_top = 465.5
+offset_right = 274.0
+offset_bottom = 497.5
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("3_p1i3u")
+
+[node name="MarketplaceBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 440.0
+offset_right = 134.0
+offset_bottom = 504.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="EliasFlatBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 166.5
+offset_top = 367.5
+offset_right = 230.5
+offset_bottom = 431.5
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="PublicBuildingBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 368.0
+offset_right = 82.0
+offset_bottom = 432.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="JuliasHouseBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 255.0
+offset_right = 112.0
+offset_bottom = 319.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="ComplexBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 175.0
+offset_right = 104.0
+offset_bottom = 239.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="GardenhouseBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 168.0
+offset_top = 158.0
+offset_right = 232.0
+offset_bottom = 222.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="VillaBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 219.0
+offset_top = 82.0
+offset_right = 283.0
+offset_bottom = 146.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="NatureBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 69.0
+offset_top = 60.0
+offset_right = 133.0
+offset_bottom = 124.0
+texture_normal = ExtResource("2_1ab2i")
+
+[node name="Pin" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(150, 230)
+texture = ExtResource("4_86e27")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pin"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="MarketplaceBtn" to="." method="_on_marketplace_btn_pressed"]
+[connection signal="pressed" from="EliasFlatBtn" to="." method="_on_elias_flat_btn_pressed"]
+[connection signal="pressed" from="PublicBuildingBtn" to="." method="_on_public_building_btn_pressed"]
+[connection signal="pressed" from="JuliasHouseBtn" to="." method="_on_julias_house_btn_pressed"]
+[connection signal="pressed" from="ComplexBtn" to="." method="_on_complex_btn_pressed"]
+[connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
+[connection signal="pressed" from="VillaBtn" to="." method="_on_villa_btn_pressed"]
+[connection signal="pressed" from="NatureBtn" to="." method="_on_nature_btn_pressed"]

@@ -6,7 +6,7 @@ const UNIT_FACTOR: int = 500 #1 Unit = 500ml
 var _hydration: int = 0 #Wie sehr man hydriert wird
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(hydration: int):
+func _init(hydration: int) -> void:
 	super("Getränk", Color.CADET_BLUE)
 	_hydration = hydration 
 

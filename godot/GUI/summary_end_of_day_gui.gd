@@ -6,9 +6,9 @@ signal closed
 signal on_eat_pressed
 signal on_drink_pressed
 
-@onready var open_gui_sfx = $SFX/OpenGUISFX
-@onready var close_gui_sfx = $SFX/CloseGUISFX
-@onready var button_sfx = $SFX/ButtonSFX
+@onready var open_gui_sfx := $SFX/OpenGUISFX
+@onready var close_gui_sfx := $SFX/CloseGUISFX
+@onready var button_sfx := $SFX/ButtonSFX
 
 ## TODO: add inventory in popup SEOD and choice of food and drinks
 var _avatar: EMC_Avatar
@@ -27,13 +27,13 @@ var _has_drank : bool = false
 	#else:
 		#close()
 
-func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory):
+func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
 	_inventory = _p_inventory
 	
 
 ## opens summary end of day GUI/makes visible
-func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool):
+func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool) -> void:
 	open_gui_sfx.play()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = p_day_cycle.morning_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = p_day_cycle.noon_action.get_description()
@@ -50,14 +50,14 @@ func open(p_day_cycle: EMC_DayCycle, _p_is_game_end : bool):
 
 
 ## closes summary end of day GUI/makes invisible
-func close():
+func close() -> void:
 	close_gui_sfx.play()
 	visible = false
 	closed.emit()
 
 
 ## TODO: think about eating and drinking untis and updating health accordingly
-func _on_continue_pressed():
+func _on_continue_pressed() -> void:
 	_avatar.sub_hunger(1)
 	_avatar.sub_thirst(1)
 	_avatar.sub_health(1)
@@ -67,25 +67,25 @@ func _on_continue_pressed():
 	$DecisionWindow.visible = false
 
 
-func _on_new_day_pressed():
+func _on_new_day_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	close()
 
 
-func _on_eat_pressed():
+func _on_eat_pressed() -> void:
 	_avatar.add_hunger(1)
 	_has_eaten = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
 	
 	
-func _on_drink_pressed():
+func _on_drink_pressed() -> void:
 	_avatar.add_thirst(1)
 	_has_drank = true
 	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
 	
 	
-func _update_health():
+func _update_health() -> void:
 	if _has_drank && _has_eaten:
 		_avatar.add_health(1)
 

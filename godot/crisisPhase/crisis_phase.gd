@@ -2,10 +2,10 @@ extends Node2D
 
 var _backpack: EMC_Inventory = EMC_Inventory.new()
 
-@onready var uncast_guis = $GUI.get_children()
+@onready var uncast_guis := $GUI.get_children()
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	#Backpack-inventory and its GUI
 	_backpack.add_new_item(EMC_Item.IDs.WATER);
 	_backpack.add_new_item(EMC_Item.IDs.WATER);
@@ -25,6 +25,7 @@ func _ready():
 	$GUI/VBC/LowerSection/RejectGUI.visible = false
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
+	$GUI/VBC/LowerSection/TooltipGUI.hide()
 	
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
@@ -36,11 +37,12 @@ func _ready():
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)
+	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr, $CityMap)
+	$CityMap.setup($GUI/VBC/UpperSection/DayMngr, $StageMngr, $GUI/VBC/LowerSection/TooltipGUI)
 	
-	var seodGUI = $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
-	var egGUI = $GUI/VBC/MiddleSection/EndGameGUI
-	var puGUI = $GUI/VBC/MiddleSection/PopUpGUI
+	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
+	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
+	var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
 	var guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.
@@ -58,32 +60,32 @@ func _ready():
 
 
 
-func _on_inventory_opened():
+func _on_inventory_opened() -> void:
 	get_tree().paused = true
 	$BtnBackpack.hide()
 	get_viewport().set_input_as_handled()
 
 
-func _on_inventory_closed():
+func _on_inventory_closed() -> void:
 	get_tree().paused = false
 	$BtnBackpack.show()
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch && event.pressed == true):
 		if $GUI/VBC/MiddleSection/BackpackGUI.visible && !$BtnBackpack.is_pressed():
 			$GUI/VBC/MiddleSection/BackpackGUI.close()
 
 
-func _on_summary_end_of_day_gui_opened():
+func _on_summary_end_of_day_gui_opened() -> void:
 	get_tree().paused = true
 
-func _on_summary_end_of_day_gui_closed():
+func _on_summary_end_of_day_gui_closed() -> void:
 	get_tree().paused = false
 
-func _on_action_GUI_opened():
+func _on_action_GUI_opened() -> void:
 	get_tree().paused = true
 
-func _on_action_GUI_closed():
+func _on_action_GUI_closed() -> void:
 	get_tree().paused = false
 

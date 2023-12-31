@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cn3ryoq1oruxb"]
 
 [ext_resource type="Script" path="res://global.gd" id="1_f83gq"]
-[ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://SFX/Lofi.wav" id="2_j7ou4"]
+[ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://res/SFX/Lofi.wav" id="2_j7ou4"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_f83gq")

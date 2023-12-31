@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://characters/avatar.gd" id="1_6xgqy"]
 [ext_resource type="Texture2D" uid="uid://c85qb3qkelvl7" path="res://res/characters/character_avatar.png" id="1_874d8"]
-[ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://SFX/walking.wav" id="3_nintj"]
+[ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://res/SFX/walking.wav" id="3_nintj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nbegu"]
 radius = 25.0799
