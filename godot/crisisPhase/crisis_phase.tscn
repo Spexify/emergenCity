@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=20 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="4_ospyx"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
+[ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
@@ -55,7 +56,7 @@ shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 2
-position = Vector2(481, 20)
+position = Vector2(481, 50)
 scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
@@ -84,6 +85,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 1
+
+[node name="StatusBars" parent="GUI/VBC/UpperSection" instance=ExtResource("6_22w2e")]
+layout_mode = 2
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
 custom_minimum_size = Vector2(288, 350)
@@ -129,6 +133,7 @@ visible = false
 layout_mode = 2
 
 [node name="CityMap" parent="." instance=ExtResource("4_ospyx")]
+visible = false
 offset_right = 288.0
 offset_bottom = 512.0
 scale = Vector2(2, 2)

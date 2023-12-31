@@ -171,6 +171,7 @@ size_flags_horizontal = 3
 text = "Starte den nächsten Tag"
 
 [node name="Filtered Inventory" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_left = -115.0
 offset_top = -186.0
 offset_right = 116.0

@@ -9,10 +9,13 @@ const SPEED: float = 300.0
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_bar gemessen in Prozent
 ## working in untis of 4
-var _hunger_bar : int = 2
-var _thirst_bar : int = 2
+var _nutrition_bar : int = 2
+var _hydration_bar : int = 2
 var _health_bar : int = 2
 const MAX_VITALS = 4
+const UNIT_FACTOR_NUTRITION: int = 550 #food Unit = 550 kcal
+const UNIT_FACTOR_HYDRATION: int = 500 #water Unit = 500 ml
+const UNIT_FACTOR_HEALTH: int = 500 #health Unit = 25 percent
 
 @onready var walking := $SFX/Walking
 
@@ -42,41 +45,50 @@ func cancel_navigation() -> void:
 	
 
 ## Getters für die Statutbalken vom Avatar
-func get_hunger_status() -> int:
-	return _hunger_bar
+func get_nutrition_status() -> int:
+	return _nutrition_bar
 
-func get_thirst_status() -> int:
-	return _thirst_bar
+func get_unit_nutrition_status() -> int:
+	return _nutrition_bar*UNIT_FACTOR_NUTRITION
+	
+func get_hydration_status() -> int:
+	return _hydration_bar
+	
+func get_unit_hydration_status() -> int:
+	return _hydration_bar*UNIT_FACTOR_HYDRATION
 	
 func get_health_status() -> int:
 	return _health_bar
 	
+func get_unit_health_status() -> int:
+	return _health_bar*UNIT_FACTOR_HEALTH
+	
 	
 ## Setters für die Statutbalken vom Avatar
-func add_hunger(hunger_status : int) -> void:
-	if _hunger_bar + hunger_status > MAX_VITALS:
-		_hunger_bar = hunger_status
+func add_nutrition(nutrition_status : int) -> void:
+	if _nutrition_bar + nutrition_status > MAX_VITALS:
+		_nutrition_bar = nutrition_status
 	else:
-		_hunger_bar += hunger_status
+		_nutrition_bar += nutrition_status
 	
-func sub_hunger(hunger_status : int) -> bool:
-	if _hunger_bar - hunger_status < 0 or _hunger_bar < 0:
+func sub_nutrition(nutrition_status : int) -> bool:
+	if _nutrition_bar - nutrition_status < 0 or _nutrition_bar < 0:
 		return false
 	else:
-		_hunger_bar -= hunger_status
+		_nutrition_bar -= nutrition_status
 		return true
 	
-func add_thirst(thirst_status : int) -> void:
-	if _thirst_bar + thirst_status > MAX_VITALS:
-		_thirst_bar = thirst_status
+func add_hydration(hydration_status : int) -> void:
+	if _hydration_bar + hydration_status > MAX_VITALS:
+		_hydration_bar = hydration_status
 	else:
-		_thirst_bar += thirst_status
+		_hydration_bar += hydration_status
 	
-func sub_thirst(thirst_status : int) -> bool:
-	if _thirst_bar - thirst_status < 0 or _thirst_bar < 0:
+func sub_hydration(hydration_status : int) -> bool:
+	if _hydration_bar - hydration_status < 0 or _hydration_bar < 0:
 		return false
 	else:
-		_thirst_bar -= thirst_status
+		_hydration_bar -= hydration_status
 		return true
 
 func add_health(health_status : int) -> void:

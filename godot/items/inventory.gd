@@ -142,6 +142,8 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 ## Variable food_or_drink hat 2 Werte : 0 falls es nach EMC_IC_Food Items gefiltert wird, 
 ## 										1, falls es nach EMC_IC_Drink gefiltert wird
 
+func filter_items() -> void:
+	pass
 
 ### Items nach ID sortieren (QoL feature in der Zukunft)
 #func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
