@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://tpxumytrh032"]
+
+[ext_resource type="Script" path="res://crisisPhase/day_mngr.gd" id="1_xg6r3"]
+[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/gui/icon_statusbar_nutrition.png" id="2_m3q3p"]
+[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/gui/icon_statusbar_hydration.png" id="3_k4dk6"]
+[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/gui/icon_statusbar_health.png" id="4_rju8q"]
+
+[node name="StatusBars" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xg6r3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 50.0
+offset_top = 60.0
+offset_right = 1750.0
+offset_bottom = 150.0
+scale = Vector2(0.2, 0.2)
+
+[node name="ContainerNutrition" type="Container" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="NutritionIcon" type="Sprite2D" parent="HBoxContainer/ContainerNutrition"]
+position = Vector2(70, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_m3q3p")
+
+[node name="RichTextLabelNutrition" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(110, 90)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80
+
+[node name="ContainerHydration" type="Container" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="HydrationIcon" type="Sprite2D" parent="HBoxContainer/ContainerHydration"]
+position = Vector2(80, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("3_k4dk6")
+
+[node name="RichTextLabelHydration" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(110, 90)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80
+
+[node name="ContainerHealth" type="Container" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="HealthIcon" type="Sprite2D" parent="HBoxContainer/ContainerHealth"]
+position = Vector2(90, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("4_rju8q")
+
+[node name="RichTextLabelHealth" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(110, 90)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80

@@ -18,7 +18,7 @@ const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 var _inventory: EMC_Inventory
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-## Konstruktro des Inventars
+## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:

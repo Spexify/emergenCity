@@ -13,8 +13,8 @@ script = ExtResource("1_wh1q6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 564.0
+offset_bottom = 90.0
 scale = Vector2(0.25, 0.25)
 
 [node name="Container" type="Container" parent="HBoxContainer"]
