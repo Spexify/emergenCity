@@ -1,6 +1,8 @@
 extends EMC_ActionGUI
 class_name EMC_ChangeStageGUI
 
+signal stayed_on_same_stage
+
 @onready var open_gui_sfx = $SFX/OpenGUISFX
 @onready var close_gui_sfx = $SFX/CloseGUISFX
 @onready var button_sfx = $SFX/ButtonSFX
@@ -16,9 +18,13 @@ func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action: EMC_Action):
 	_action = p_action
+	var stage_change_action: EMC_StageChangeAction = _action
 	
 	if _stage_mngr.get_stage_name() == "home":
 		_on_confirm_btn_pressed() #Ohne Meldung weitermachen
+	elif _stage_mngr.get_stage_name() == stage_change_action.get_stage_name():
+		stayed_on_same_stage.emit()
+		close()
 	else:
 		open_gui_sfx.play()
 		show()
@@ -26,19 +32,22 @@ func show_gui(p_action: EMC_Action):
 
 
 func _on_confirm_btn_pressed():
-	var stageChangeAction: EMC_StageChangeAction = _action
-	#print("Stage wechseln zu " + stageChangeAction.get_stage_name())
+	var stage_change_action: EMC_StageChangeAction = _action
+	#print("Stage wechseln zu " + stage_change_action.get_stage_name())
 	#print(_stage_mngr.get_stage_name())
 	if _stage_mngr.get_stage_name() != "home":
 		_action.executed.emit(_action)
-	_stage_mngr.change_stage(stageChangeAction.get_stage_name())
-	_avatar.position = stageChangeAction.get_spawn_pos()
+	_stage_mngr.change_stage(stage_change_action.get_stage_name())
+	_avatar.position = stage_change_action.get_spawn_pos()
 	
 	if _stage_mngr.get_stage_name() == "home":
 		button_sfx.play()
 		await button_sfx.finished
-		close_gui_sfx.play()
-	
+	close()
+
+
+func close():
+	close_gui_sfx.play()
 	hide()
 	closed.emit()
 
@@ -46,8 +55,5 @@ func _on_confirm_btn_pressed():
 func _on_cancel_btn_pressed():
 	button_sfx.play()
 	await button_sfx.finished
-	close_gui_sfx.play()
-	
-	hide()
-	closed.emit()
+	close()
 

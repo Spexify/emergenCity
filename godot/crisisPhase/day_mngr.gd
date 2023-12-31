@@ -35,19 +35,15 @@ var _avatar_life_status : bool = true
 
 var _puGUI_probability_countdown : int
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-const PU_LOWER_BOUND : int = 1
-const PU_UPPER_BOUND : int = 3
+const PU_LOWER_BOUND : int = 2 #MRM hab ich erhöht, weil sie manchmal nerven x)
+const PU_UPPER_BOUND : int = 4 #MRM hab ich erhöht, weil sie manchmal nerven x)
 
 
 func _create_action(p_action_ID: int):
 	var result: EMC_Action
 	match p_action_ID:
-		0: #(unused)
-			push_error("Action ID 0 sollte nicht erstellt werden!")
-		1: result = EMC_StageChangeAction.new(p_action_ID, "Teleporter_Home", { }, 
-								 "Hat Marktplatz besucht.", "home", Vector2i(450, 500)) #No descr, as it should never be executed
-		2: result = EMC_StageChangeAction.new(p_action_ID, "Teleporter_Marketplace", { }, 
-								 "Hat Marktplatz besucht.", "market", Vector2i(250, 1000))
+		0: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
+		1: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "RestGUI", 
 								 "Hat sich ausgeruht.")
@@ -56,6 +52,11 @@ func _create_action(p_action_ID: int):
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")
+		#Stage Change Actions
+		2000: result = EMC_StageChangeAction.new(p_action_ID, "SC_Home", { }, 
+								 "Nach Hause gekehrt.", "home", Vector2i(450, 500))
+		2001: result = EMC_StageChangeAction.new(p_action_ID, "SC_Market", { "constraint_not_evening" : 0 }, 
+								 "Hat Marktplatz besucht.", "market", Vector2i(250, 1000)) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result
@@ -199,6 +200,11 @@ func constraint_cooking() -> bool:
 	#TODO: Electricity?
 	##TODO: In the future: Else Gaskocher?
 	return false
+
+
+func constraint_not_evening() -> bool:
+	return get_current_day_period() != EMC_DayPeriod.EVENING
+
 
 ########################################## CHANGE METHODS ##########################################
 # "Changes" needed? See comment in Action.gd

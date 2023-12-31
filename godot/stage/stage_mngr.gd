@@ -28,21 +28,28 @@ const TILE_MAX_Y_COORD: int = 15
 
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
+var _GUI: CenterContainer
+var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null #LastClickedTile
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
+func _ready():
+	#$CityMap.hide()
+	pass
+
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr) -> void:
+func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMap) -> void:
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
+	_city_map = p_city_map
 
 
 func get_stage_name() -> String:
 	var parts = $CurrStage.get_scene_file_path().split("/")
 	var filename_with_ending: String = parts[parts.size() - 1]
 	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
-	
+
 
 func get_curr_stage() -> TileMap:
 	return $CurrStage
@@ -53,6 +60,7 @@ func change_stage(p_stage_name: String) -> void:
 	$CurrStage.replace_by(new_stage)
 	new_stage.name = "CurrStage"
 	$CurrStage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
+	_city_map.close()
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
@@ -173,4 +181,29 @@ func _on_avatar_arrived():
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
-			_day_mngr.on_interacted_with_furniture(action_ID)
+			if action_ID == EMC_Action.IDs.CITY_MAP:
+				_city_map.open()
+			else:
+				_day_mngr.on_interacted_with_furniture(action_ID)
+
+
+###################################CITY MAP#####################################
+#func show_city_map():
+	#$CityMap.show()
+	#get_tree().paused = true
+	#$CityMap/Pin/AnimationPlayer.play("pin_animation")
+	#MRM: Warum auch immer schaff ich es nicht die GUI sichtbar zu haben,
+	#ohne dass sie den Klick-Input schluckt.. :(
+	#_GUI.hide()
+
+
+#func _on_back_btn_pressed():
+	#$CityMap.hide()
+	#get_tree().paused = false
+	##_GUI.show() #MRM: s. oben
+#
+#
+#
+#func _on_elias_flat_btn_pressed():
+	##_GUI.show()
+	#_tooltip_GUI.open("Elias Wohnung ist noch nicht implementiert!")

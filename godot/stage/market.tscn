@@ -12,6 +12,6 @@ layer_1/tile_data = PackedInt32Array(131072, 589824, 4, 196608, 589824, 5, 26214
 layer_2/name = "Teleporters"
 layer_2/modulate = Color(1, 1, 1, 0.372549)
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(983043, 65540, 0, 983044, 65540, 0, 983045, 65540, 0)
+layer_2/tile_data = PackedInt32Array(983043, 4, 0, 983044, 4, 0, 983045, 4, 0)
 layer_3/name = "Foreground"
 layer_3/tile_data = PackedInt32Array()

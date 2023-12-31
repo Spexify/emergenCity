@@ -8,10 +8,16 @@ extends Node
 
 enum IDs{
 	NO_ACTION = 0,
-	TELEPORTER_HOME = 1,
-	TELEPORTER_MARKET = 2,
+	CITY_MAP = 1,
+	TELEPORTER_MARKET = 2, #obsolete
 	REST = 3,
-	COOKING = 4
+	COOKING = 4,
+	##1000s = PopupActions
+	POPUP_0 = 1000,
+	POPUP_1 = 1001,
+	##2000s = StageChangeActions
+	SC_HOME = 2000,
+	SC_MARKET = 2001,
 }
 
 ## This sigal will be emmited if the Action was performed 

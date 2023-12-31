@@ -25,6 +25,7 @@ func _ready():
 	$GUI/VBC/LowerSection/RejectGUI.visible = false
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
+	$GUI/VBC/LowerSection/TooltipGUI.hide()
 	
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
@@ -36,7 +37,8 @@ func _ready():
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr)
+	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr, $CityMap)
+	$CityMap.setup($GUI/VBC/UpperSection/DayMngr, $GUI/VBC/LowerSection/TooltipGUI)
 	
 	var seodGUI = $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI = $GUI/VBC/MiddleSection/EndGameGUI

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=19 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
+[ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="4_ospyx"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cmd5cgjqucdg8" path="res://GUI/actionGUI/reject_GUI.tscn" id="12_qvhee"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://stage/stage_mngr.tscn" id="13_8jkao"]
 [ext_resource type="PackedScene" uid="uid://dvuhkwet8fnsy" path="res://GUI/actionGUI/change_stage_GUI.tscn" id="13_nblvh"]
+[ext_resource type="PackedScene" uid="uid://dmp3dkvy1barj" path="res://GUI/tooltip_GUI.tscn" id="14_0s3fx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -28,7 +30,6 @@ process_mode = 3
 script = ExtResource("1_23hjb")
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
-process_mode = 1
 
 [node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
 process_mode = 1
@@ -64,14 +65,13 @@ custom_minimum_size = Vector2(284, 512)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 284.0
+offset_right = 288.0
 offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(-5, -5)
 size_flags_vertical = 0
-mouse_filter = 2
 
 [node name="VBC" type="VBoxContainer" parent="GUI"]
 layout_mode = 2
@@ -83,12 +83,14 @@ layout_mode = 2
 [node name="DayMngr" parent="GUI/VBC/UpperSection" instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
 custom_minimum_size = Vector2(288, 350)
 layout_mode = 2
 
 [node name="BackpackGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("6_mo744")]
+visible = false
 layout_mode = 2
 
 [node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
@@ -120,9 +122,20 @@ visible = false
 layout_mode = 2
 
 [node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
+layout_mode = 2
+
+[node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]
 visible = false
 layout_mode = 2
+
+[node name="CityMap" parent="." instance=ExtResource("4_ospyx")]
+offset_right = 288.0
+offset_bottom = 512.0
+scale = Vector2(2, 2)
 
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
+[connection signal="closed" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_closed"]
+[connection signal="opened" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_opened"]
+[connection signal="stayed_on_same_stage" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_stayed_on_same_stage"]
