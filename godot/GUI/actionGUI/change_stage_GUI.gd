@@ -9,6 +9,8 @@ signal stayed_on_same_stage
 
 var _stage_mngr: EMC_StageMngr
 var _avatar: EMC_Avatar
+## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
+var _last_SC_action: EMC_StageChangeAction
 
 func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
 	_stage_mngr = p_stage_mngr
@@ -21,7 +23,8 @@ func show_gui(p_action: EMC_Action):
 	var stage_change_action: EMC_StageChangeAction = _action
 	
 	if _stage_mngr.get_stage_name() == "home":
-		_on_confirm_btn_pressed() #Ohne Meldung weitermachen
+		#Ohne Meldung/Action zu verbrauchen wechsel, aber [EMC_Action] vormerken
+		_on_confirm_btn_pressed()
 	elif _stage_mngr.get_stage_name() == stage_change_action.get_stage_name():
 		stayed_on_same_stage.emit()
 		close()
@@ -32,17 +35,25 @@ func show_gui(p_action: EMC_Action):
 
 
 func _on_confirm_btn_pressed():
-	var stage_change_action: EMC_StageChangeAction = _action
-	#print("Stage wechseln zu " + stage_change_action.get_stage_name())
-	#print(_stage_mngr.get_stage_name())
-	if _stage_mngr.get_stage_name() != "home":
-		_action.executed.emit(_action)
-	_stage_mngr.change_stage(stage_change_action.get_stage_name())
-	_avatar.position = stage_change_action.get_spawn_pos()
+	var curr_SC_action: EMC_StageChangeAction = _action
+	
+	_stage_mngr.change_stage(curr_SC_action.get_stage_name())
+	_avatar.position = curr_SC_action.get_spawn_pos()
+	
+	if _last_SC_action != null:
+		_last_SC_action.executed.emit(_last_SC_action)
+	
+	##The change to home should not be executed (at is was skipped initially and should not
+	##be protocolled in the SEOD)
+	if curr_SC_action.get_stage_name() == "home": 
+		_last_SC_action = null
+	else:
+		_last_SC_action = curr_SC_action
 	
 	if _stage_mngr.get_stage_name() == "home":
 		button_sfx.play()
 		await button_sfx.finished
+	
 	close()
 
 
