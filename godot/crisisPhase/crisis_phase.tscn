@@ -87,6 +87,7 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="StatusBars" parent="GUI/VBC/UpperSection" instance=ExtResource("6_22w2e")]
+process_mode = 3
 layout_mode = 2
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
@@ -138,6 +139,7 @@ offset_right = 288.0
 offset_bottom = 512.0
 scale = Vector2(2, 2)
 
+[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

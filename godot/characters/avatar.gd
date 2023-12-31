@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name EMC_Avatar
 
 signal arrived
+signal nutrition_updated(p_new_value: int)
 
 @export var move_speed: float = 100
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
@@ -83,6 +84,7 @@ func add_hydration(hydration_status : int) -> void:
 		_hydration_bar = hydration_status
 	else:
 		_hydration_bar += hydration_status
+	nutrition_updated.emit(_hydration_bar)
 	
 func sub_hydration(hydration_status : int) -> bool:
 	if _hydration_bar - hydration_status < 0 or _hydration_bar < 0:
@@ -106,6 +108,10 @@ func sub_health(health_status : int) -> bool:
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
+func _ready() -> void:
+	nutrition_updated.emit(_nutrition_bar)
+
+
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
 	

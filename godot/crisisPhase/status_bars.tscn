@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://tpxumytrh032"]
 
-[ext_resource type="Script" path="res://crisisPhase/day_mngr.gd" id="1_xg6r3"]
+[ext_resource type="Script" path="res://crisisPhase/status_bars.gd" id="1_m4dni"]
 [ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/gui/icon_statusbar_nutrition.png" id="2_m3q3p"]
 [ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/gui/icon_statusbar_hydration.png" id="3_k4dk6"]
 [ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/gui/icon_statusbar_health.png" id="4_rju8q"]
@@ -8,7 +8,7 @@
 [node name="StatusBars" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_xg6r3")
+script = ExtResource("1_m4dni")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -28,6 +28,9 @@ size_flags_vertical = 4
 position = Vector2(70, 0)
 scale = Vector2(4, 4)
 texture = ExtResource("2_m3q3p")
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/ContainerNutrition"]
+layout_mode = 2
 
 [node name="RichTextLabelNutrition" type="RichTextLabel" parent="HBoxContainer"]
 custom_minimum_size = Vector2(110, 90)
