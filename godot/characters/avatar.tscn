@@ -27,7 +27,6 @@ shape = SubResource("CircleShape2D_nbegu")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="SFX" type="Node" parent="."]
 

@@ -57,8 +57,10 @@ func close() -> void:
 
 
 ## TODO: think about eating and drinking untis and updating health accordingly
+#MRM: Technically the values should be subtracted when opening the screen but the 
+#gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
-	_avatar.sub_nutrition(1)
+	_avatar.sub_nutrition(1) 
 	_avatar.sub_hydration(1)
 	_avatar.sub_health(1)
 	_update_health()
