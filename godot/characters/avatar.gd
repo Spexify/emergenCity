@@ -12,11 +12,12 @@ const SPEED: float = 300.0
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
 ## working in untis of 4
-var _nutrition_value : int = 2
+var _nutrition_value : int = MAX_VITALS
 var _hydration_value : int = 2
 var _health_value : int = 2
 const MAX_VITALS = 4
-const UNIT_FACTOR_NUTRITION: int = 550 #food Unit = 550 kcal
+#MRM: Unit sollte direct von den Components verwendet werden:
+const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #550 #food Unit = 550 kcal 
 const UNIT_FACTOR_HYDRATION: int = 500 #water Unit = 500 ml
 const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
 
@@ -68,20 +69,23 @@ func get_unit_health_status() -> int:
 	
 	
 ## Setters für die Statutbalken vom Avatar
-func add_nutrition(nutrition_status : int) -> void:
-	if _nutrition_value + nutrition_status > MAX_VITALS:
-		_nutrition_value = nutrition_status
-	else:
+#MRM: "nutrition status": name should make clear, that it's the difference/change/addition in value:
+func add_nutrition(nutrition_status : int) -> void: 
+	if _nutrition_value + nutrition_status <= MAX_VITALS: #MRM: Fixed bug
 		_nutrition_value += nutrition_status
-	nutrition_updated.emit(_nutrition_value)
-	
+		nutrition_updated.emit(_nutrition_value)
+
+
 func sub_nutrition(nutrition_status : int) -> bool:
 	if _nutrition_value - nutrition_status < 0 or _nutrition_value < 0:
+		#MRM: Ups, das emit muss vor dem return passieren, da es sonst nie aufgerufen wird:
+		nutrition_updated.emit(_nutrition_value) 
 		return false
 	else:
 		_nutrition_value -= nutrition_status
+		#MRM: Ups, das emit muss vor dem return passieren, da es sonst nie aufgerufen wird:
+		nutrition_updated.emit(_nutrition_value)
 		return true
-	nutrition_updated.emit(_nutrition_value)
 	
 func add_hydration(hydration_status : int) -> void:
 	if _hydration_value + hydration_status > MAX_VITALS:

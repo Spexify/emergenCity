@@ -55,7 +55,8 @@ func _ready() -> void:
 	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
-	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, guis, seodGUI, egGUI, puGUI)
+	#TODO: Substitute null with OptionalEventMngr:
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, guis, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 

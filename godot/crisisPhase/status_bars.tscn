@@ -34,7 +34,7 @@ texture = ExtResource("2_m3q3p")
 
 [node name="NutritionBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-step = 25.0
+step = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
