@@ -15,7 +15,6 @@ size_flags_horizontal = 4
 script = ExtResource("1_wmmkg")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 offset_left = 52.0
 offset_top = 40.0
@@ -73,7 +72,6 @@ size_flags_horizontal = 3
 text = "Weiter"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0

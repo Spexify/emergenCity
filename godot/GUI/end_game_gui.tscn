@@ -41,6 +41,30 @@ theme_type_variation = &"HeaderLarge"
 text = "GEWONNEN"
 horizontal_alignment = 1
 
+[node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "Du hast die Krise überstanden. 
+Übersicht von Aktionen:
+"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Days" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="DailyContent" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
@@ -48,7 +72,7 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "Du hast die Krise erfolgreich überstanden und 50 ECoins erworben!
+text = "Du hast 50 ECoins erworben!
 "
 autowrap_mode = 2
 
@@ -58,6 +82,7 @@ size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
