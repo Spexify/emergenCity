@@ -53,16 +53,16 @@ text = "Du hast die Krise überstanden.
 "
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="Days" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="Days" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="DailyContent" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="DailyContent" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
