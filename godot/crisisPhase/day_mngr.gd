@@ -16,6 +16,8 @@ enum EMC_DayPeriod {
 	EVENING = 2
 }
 
+const NO_REJECTION: String = ""
+
 var history : Array[EMC_DayCycle]
 #MRM: Technically redundant: current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var current_day_cycle : EMC_DayCycle 
@@ -26,6 +28,7 @@ var max_day : int
 
 #var _actionArr : Array[EMC_Action] #MRM: Curr not used anymore
 var gui_refs : Array[EMC_ActionGUI]
+var _tooltip_GUI : EMC_TooltipGUI
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
 var _puGUI : EMC_PopUpGUI
@@ -73,6 +76,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 func setup(avatar_ref : EMC_Avatar,
 overworld_states_mngr_ref : EMC_OverworldStatesMngr,
 gui_refs : Array[EMC_ActionGUI],
+p_tooltip_GUI : EMC_TooltipGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
@@ -80,6 +84,7 @@ puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	self.max_day = max_day
 	self.gui_refs = gui_refs
+	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
 	_egGUI = egGUI
 	_puGUI = puGUI
@@ -94,21 +99,17 @@ func on_interacted_with_furniture(action_id : int) -> void:
 	#lead to errors. That's why I changed it, so it just creates a new instance each time:
 	var current_action : EMC_Action = _create_action(action_id)
 	
-	var rejected_constraints : Array[String] = []
+	var reject_reasons: String
 	for constraint_key: String in current_action.get_constraints_prior().keys():
-		if not Callable(self, constraint_key).call():
-			rejected_constraints.append(constraint_key)
+		var reject_reason: String = Callable(self, constraint_key).call()
+		if reject_reason != NO_REJECTION:
+			reject_reasons = reject_reasons + reject_reason + " "
 	
-	if rejected_constraints.size() >= 1:
-		current_action.set_constraints_rejected(rejected_constraints)
-		#MRM: Access via Index redundant
-		#if self.gui_refs[0].get_type_gui() == "reject": 
-			#self.gui_refs[0].show_gui(current_action)
-		#else:
-		_get_gui_ref_by_name("RejectGUI").show_gui(current_action)
-	else:
+	if reject_reasons == NO_REJECTION:
 		var gui_name := current_action.get_type_gui()
 		_get_gui_ref_by_name(gui_name).show_gui(current_action)
+	else:
+		_tooltip_GUI.open(reject_reasons)
 
 
 func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
@@ -220,15 +221,33 @@ func _create_new_optional_event() -> void:
 		_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL))
 
 ######################################## CONSTRAINT METHODS ########################################
-func constraint_cooking() -> bool:
-	print("Constraint Cooking was checked!")
+func constraint_cooking() -> String:
 	#TODO: Electricity?
 	##TODO: In the future: Else Gaskocher?
-	return false
+	return "Grund warum kochen nicht möglich ist."
+	#else:
+	return NO_REJECTION
 
 
-func constraint_not_evening() -> bool:
-	return get_current_day_period() != EMC_DayPeriod.EVENING
+func constraint_not_morning() -> String:
+	if get_current_day_period() == EMC_DayPeriod.MORNING:
+		return "Man kann diese Aktion nicht morgens ausführen!"
+	else:
+		return NO_REJECTION
+
+
+func constraint_not_noon() -> String:
+	if get_current_day_period() == EMC_DayPeriod.NOON:
+		return "Man kann diese Aktion nicht mittag ausführen!"
+	else:
+		return NO_REJECTION
+		
+
+func constraint_not_evening() -> String:
+	if get_current_day_period() == EMC_DayPeriod.EVENING:
+		return "Man kann diese Aktion nicht abends ausführen!"
+	else:
+		return NO_REJECTION
 
 
 ########################################## CHANGE METHODS ##########################################

@@ -22,7 +22,6 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
 	$GUI/VBC/MiddleSection/PopUpGUI.visible = false
 	$GUI/VBC/LowerSection/RestGUI.visible = false
-	$GUI/VBC/LowerSection/RejectGUI.visible = false
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
@@ -43,7 +42,7 @@ func _ready() -> void:
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
 	var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
-	var guis : Array[EMC_ActionGUI] = []
+	var action_guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.
 	#for uncast in uncast_guis:
@@ -51,12 +50,12 @@ func _ready() -> void:
 			#uncast.opened.connect(_on_action_GUI_opened)
 			#uncast.closed.connect(_on_action_GUI_closed)
 			#guis.append(uncast as EMC_ActionGUI)
-	guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
-	guis.append($"GUI/VBC/LowerSection/RejectGUI" as EMC_ActionGUI)
-	guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
-	guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
+	action_guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
+	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
+	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	#TODO: Substitute null with OptionalEventMngr:
-	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, guis, seodGUI, egGUI, puGUI) 
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, action_guis, \
+		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 
