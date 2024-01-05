@@ -12,6 +12,7 @@ enum IDs{
 	TELEPORTER_MARKET = 2, #obsolete
 	REST = 3,
 	COOKING = 4,
+	RAINWATER_BARREL = 5,
 	##1000s = PopupActions
 	POPUP_0 = 1000,
 	POPUP_1 = 1001,

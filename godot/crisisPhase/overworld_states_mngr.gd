@@ -12,12 +12,15 @@ enum WaterState{
 var _water_state: WaterState
 
 enum Furniture{
-	RAINWATER_BARREL = 0
+	RAINWATER_BARREL = 0,
+	ELECTRIC_RADIO = 1,
 }
 
 var _upgrades: Array[Furniture]
 
-var _furniture_state : Dictionary # {Furniture : int}
+var _furniture_state : Dictionary = {
+	Furniture.RAINWATER_BARREL : 0,
+}
 # All furniture_states range between 0 and the furniture_state_maximum defined here
 const _furniture_state_maximum : Dictionary = {
 	Furniture.RAINWATER_BARREL : 5,

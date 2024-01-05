@@ -83,7 +83,7 @@ func _on_villa_btn_pressed() -> void:
 
 
 func _on_nature_btn_pressed() -> void:
-	_tooltip_GUI.open("Hain ist noch nicht implementiert!")
+	_tooltip_GUI.open("Lichtung ist noch nicht implementiert!")
 
 
 func _on_change_stage_gui_closed() -> void:

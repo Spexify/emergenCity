@@ -21,6 +21,30 @@ var history : Array [EMC_DayCycle]
 
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool) -> void:
+	$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer.vertical_scroll_mode = true
+	history = p_history
+	for day in history:
+		## creating labels for each day of the history
+		var day_label := Label.new()
+		day_label.text = "Day" + str(day)
+		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Days.add_child(day_label)
+		## filling content of each day of the history
+		var morning := PanelContainer.new()
+		var morningContent := Label.new()
+		morningContent.text = day.morning_action.get_ACTION_NAME()
+		morning.add_child(morningContent)
+		var noon := PanelContainer.new()
+		var noonContent := Label.new()
+		noonContent.text = day.noon_action.get_ACTION_NAME()
+		noon.add_child(noonContent)
+		var evening := PanelContainer.new()
+		var eveningContent := Label.new()
+		eveningContent.text = day.evening_action.get_ACTION_NAME()
+		evening.add_child(eveningContent)
+		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DailyContent.add_child(morning)
+		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DailyContent.add_child(noon)
+		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/DailyContent.add_child(evening)
+		
 	if avatar_life_status == false :
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false
@@ -29,8 +53,7 @@ func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool) -> void:
 		$LoserScreen.visible = false
 		$WinnerScreen.visible = true
 		Global.set_e_coins(Global.get_e_coins() + 50)
-	history = p_history
-	open_gui_sfx.play()
+		open_gui_sfx.play()
 	visible = true
 	opened.emit()
 
