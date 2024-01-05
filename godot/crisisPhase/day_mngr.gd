@@ -61,8 +61,11 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		4: result = EMC_Action.new(p_action_ID, "Cooking", { "constraint_cooking" : 0 }, 
 								 { }, "cooking_GUI", 
 								 "Hat gekocht.")
-		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
-								 "Pop Up Aktion ausgeführt.")
+		#5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
+		#						 "Pop Up Aktion ausgeführt.")
+		5: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
+								{ }, "rainwater_barrel_GUI",
+								"Hat Wasser aus der Regentonne geschöpft.")
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
@@ -227,6 +230,12 @@ func constraint_cooking() -> String:
 	return "Grund warum kochen nicht möglich ist."
 	#else:
 	return NO_REJECTION
+	
+func constraint_rainwater_barrel() -> String:
+	if _overworld_states_mngr_ref.get_furniture_state(_overworld_states_mngr_ref.Furniture.RAINWATER_BARREL) == 0:
+		return "Die Regentonne ist leer"
+	else:
+		return NO_REJECTION
 
 
 func constraint_not_morning() -> String:
