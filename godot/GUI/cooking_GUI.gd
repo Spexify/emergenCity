@@ -38,7 +38,7 @@ func _on_kochen_pressed() -> void:
 
 func _on_abbrechen_pressed() -> void:
 	visible = false
-	Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
+	# Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 
 #func _meal_selection(inventory: EMC_Inventory) -> Array:
 #	if get_electricity_state() = true:
