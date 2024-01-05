@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c38cnaco26erq"]
 
 [ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_kkl5m"]
 [ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="2_y5ghx"]
@@ -17,6 +17,13 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r16st"]
+texture = ExtResource("1_kkl5m")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
 [resource]
 default_font_size = 25
 HeaderLarge/font_sizes/bold_font_size = 46
@@ -27,5 +34,6 @@ HeaderLarge/font_sizes/mono_font_size = 46
 HeaderLarge/font_sizes/normal_font_size = 46
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_278fl")
 PopupPanel/styles/panel = SubResource("StyleBoxTexture_eh4ga")
+TextureButton/styles/Panel = SubResource("StyleBoxTexture_r16st")
 TitleSpacing/base_type = &"MarginContainer"
 TitleSpacing/constants/margin_bottom = 12

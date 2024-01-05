@@ -55,8 +55,8 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "RestGUI", 
 								 "Hat sich ausgeruht.")
-		4: result = EMC_Action.new(p_action_ID, "Cooking", { "constraint_cooking" : 0 }, 
-								 { }, "cooking_GUI", 
+		4: result = EMC_Action.new(p_action_ID, "Cooking", {}, 
+								 { }, "CookingGUI", 
 								 "Hat gekocht.")
 		5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.")

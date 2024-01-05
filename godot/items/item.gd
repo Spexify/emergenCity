@@ -13,7 +13,7 @@ enum IDs{
 }
 
 #FYI: erbt "name" Attribut von Node
-var _ID: IDs = IDs.DUMMY
+@export var _ID: IDs = IDs.DUMMY
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
 
