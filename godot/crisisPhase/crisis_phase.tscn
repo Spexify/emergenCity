@@ -142,4 +142,3 @@ scale = Vector2(2, 2)
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
 [connection signal="closed" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_closed"]
 [connection signal="opened" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_opened"]
-[connection signal="stayed_on_same_stage" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_stayed_on_same_stage"]

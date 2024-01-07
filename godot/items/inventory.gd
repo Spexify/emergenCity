@@ -32,15 +32,19 @@ func has_space() -> bool:
 	return get_item_count() < _slot_cnt
 
 
-## Add a new [EMC_Item] to this inventory.
+## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
 ## Returns true, if the item was added, else false
+##
+## TODO: Please rename
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
 	var new_item := _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(p_ID)
 	return add_item(new_item)
 
 
-## Add an existing [EMC_Item] to this inventory.
+## Add an already instantiated [EMC_Item] Scene to this inventory.
+## This is used if a [EMC_Item] has additional components like durability,
+## which should be remembered.
 ## Returns true, if the item was added, else false
 func add_item(p_item: EMC_Item) -> bool:
 	if p_item == null: return false
@@ -79,10 +83,9 @@ func has_item(p_ID: EMC_Item.IDs) -> bool:
 func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
 	
-	for slotIdx in _slot_cnt:
-		var slot := $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item: EMC_Item = slot.get_item()
-		if item != null && item.get_ID() == p_ID:
+	for slot_idx in _slot_cnt:
+		var item: EMC_Item = _slots[slot_idx]
+		if item != null and item.get_ID() == p_ID:
 			cnt += 1
 	return cnt
 
@@ -99,7 +102,6 @@ func get_item_count() -> int:
 		#else:
 			#break
 	return cnt
-
 
 ## Return all items as Array of [EMC_Item]s
 func get_all_items() -> Array[EMC_Item]:
