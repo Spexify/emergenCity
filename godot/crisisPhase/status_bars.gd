@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:
-	#MRM: Hab den Step mal rausgenommen und für Nutrition die Prozent-Berechnung eingefügt :)
 	var perc: int = float(p_new_value) / EMC_Avatar.MAX_VITALS * 100 #float() Casting wichtig!
 	$VBoxContainer/HBoxContainer2/NutritionBar.set_value_no_signal(perc)
 

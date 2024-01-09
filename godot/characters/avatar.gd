@@ -18,7 +18,7 @@ var _health_value : int = 2
 const MAX_VITALS = 4
 #MRM: Unit sollte direct von den Components verwendet werden:
 const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #550 #food Unit = 550 kcal 
-const UNIT_FACTOR_HYDRATION: int = 500 #water Unit = 500 ml
+const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR #water Unit = 500 ml
 const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
 
 @onready var walking := $SFX/Walking
@@ -69,53 +69,48 @@ func get_unit_health_status() -> int:
 	
 	
 ## Setters für die Statutbalken vom Avatar
-#MRM: "nutrition status": name should make clear, that it's the difference/change/addition in value:
-func add_nutrition(nutrition_status : int) -> void: 
-	if _nutrition_value + nutrition_status <= MAX_VITALS: #MRM: Fixed bug
-		_nutrition_value += nutrition_status
+func add_nutrition(nutrition_change : int) -> void: 
+	if _nutrition_value + nutrition_change <= MAX_VITALS: #MRM: Fixed bug
+		_nutrition_value += nutrition_change
 		nutrition_updated.emit(_nutrition_value)
 
 
-func sub_nutrition(nutrition_status : int) -> bool:
-	if _nutrition_value - nutrition_status < 0 or _nutrition_value < 0:
-		#MRM: Ups, das emit muss vor dem return passieren, da es sonst nie aufgerufen wird:
+func sub_nutrition(nutrition_change : int) -> bool:
+	if _nutrition_value - nutrition_change < 0 or _nutrition_value < 0:
 		nutrition_updated.emit(_nutrition_value) 
 		return false
 	else:
-		_nutrition_value -= nutrition_status
-		#MRM: Ups, das emit muss vor dem return passieren, da es sonst nie aufgerufen wird:
+		_nutrition_value -= nutrition_change
 		nutrition_updated.emit(_nutrition_value)
 		return true
 	
-func add_hydration(hydration_status : int) -> void:
-	if _hydration_value + hydration_status > MAX_VITALS:
-		_hydration_value = hydration_status
-	else:
-		_hydration_value += hydration_status
-	hydration_updated.emit(_hydration_value)
+func add_hydration(hydration_change : int) -> void:
+	if _hydration_value + hydration_change <= MAX_VITALS:
+		_hydration_value += hydration_change
+		hydration_updated.emit(_hydration_value)
 	
-func sub_hydration(hydration_status : int) -> bool:
-	if _hydration_value - hydration_status < 0 or _hydration_value < 0:
+func sub_hydration(hydration_change : int) -> bool:
+	if _hydration_value - hydration_change < 0 or _hydration_value < 0:
+		hydration_updated.emit(_hydration_value)
 		return false
 	else:
-		_hydration_value -= hydration_status
+		_hydration_value -= hydration_change
+		hydration_updated.emit(_hydration_value)
 		return true
-	hydration_updated.emit(_hydration_value)
 
-func add_health(health_status : int) -> void:
-	if _health_value + health_status > MAX_VITALS:
-		_health_value = health_status
-	else:
-		_health_value += health_status
-	health_updated.emit(_health_value)
+func add_health(health_change : int) -> void:
+	if _health_value + health_change <= MAX_VITALS: 
+		_health_value += health_change
+		health_updated.emit(_health_value)
 	
-func sub_health(health_status : int) -> bool:
-	if _health_value - health_status < 0 or _health_value < 0:
+func sub_health(health_change : int) -> bool:
+	if _health_value - health_change < 0 or _health_value < 0:
+		health_updated.emit(_health_value)
 		return false
 	else:
-		_health_value -= health_status
+		_health_value -= health_change
+		health_updated.emit(_health_value)
 		return true
-	health_updated.emit(_health_value)
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
