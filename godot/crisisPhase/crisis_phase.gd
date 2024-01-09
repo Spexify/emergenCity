@@ -14,7 +14,7 @@ func _ready() -> void:
 	_backpack.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	_backpack.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack")
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack", true)
 	
 	
 	#GUIs initial verstecken
