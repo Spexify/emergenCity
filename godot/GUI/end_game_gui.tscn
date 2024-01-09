@@ -18,7 +18,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
-offset_bottom = 288.0
+offset_bottom = 667.0
 
 [node name="MarginContainer" type="MarginContainer" parent="WinnerScreen"]
 layout_mode = 2
@@ -54,16 +54,20 @@ text = "Du hast die Krise überstanden.
 autowrap_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(376, 150)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
 
-[node name="Days" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="Actions" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-
-[node name="DailyContent" type="VBoxContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
-layout_mode = 2
+text = "
+"
+autowrap_mode = 2
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -82,12 +86,11 @@ size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
-offset_bottom = 288.0
+offset_bottom = 667.0
 
 [node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
 layout_mode = 2
@@ -117,7 +120,34 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "Du hast die Krise nicht überstanden und leider nur 10 ECoins erhalten!"
+text = "Du hast die Krise nicht überstanden."
+autowrap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(376, 150)
+layout_mode = 2
+
+[node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(376, 0)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Actions" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "
+"
+autowrap_mode = 2
+
+[node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "Du hast 10 ECoins erworben!
+"
 autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
