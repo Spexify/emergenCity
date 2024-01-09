@@ -1,18 +1,18 @@
 extends Node2D
 
-var _backpack: EMC_Inventory = EMC_Inventory.new()
+var _backpack: EMC_Inventory = Global.get_inventory()
 
 @onready var uncast_guis := $GUI.get_children()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Backpack-inventory and its GUI
-	_backpack.add_new_item(EMC_Item.IDs.WATER);
-	_backpack.add_new_item(EMC_Item.IDs.WATER);
-	_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_backpack.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	_backpack.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	#_backpack.add_new_item(EMC_Item.IDs.WATER);
+	#_backpack.add_new_item(EMC_Item.IDs.WATER);
+	#_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_backpack.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	#_backpack.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack")
 	

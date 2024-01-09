@@ -20,17 +20,17 @@ func _ready() -> void:
 	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
 	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	_inventory.add_new_item(EMC_Item.IDs.WATER);
-	_inventory.add_new_item(EMC_Item.IDs.WATER);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	_inventory.add_new_item(EMC_Item.IDs.WATER);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	#_inventory.add_new_item(EMC_Item.IDs.WATER);
+	#_inventory.add_new_item(EMC_Item.IDs.WATER);
+	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	#_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	#_inventory.add_new_item(EMC_Item.IDs.WATER);
+	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
+	#_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
+	#_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
