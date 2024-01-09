@@ -21,8 +21,8 @@ var history : Array [EMC_DayCycle]
 
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool) -> void:
-	$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer.vertical_scroll_mode = true
 	
+	$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer.vertical_scroll_mode = true
 	history = p_history
 	var actions_summary := {}
 	for action : String in EMC_Action.IDs:
