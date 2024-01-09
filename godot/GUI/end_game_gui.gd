@@ -25,21 +25,21 @@ func open(p_history: Array[EMC_DayCycle], avatar_life_status : bool) -> void:
 	
 	history = p_history
 	var actions_summary := {}
-	for id : String in EMC_Action.IDs:
-		print(id)
+	for action : String in EMC_Action.IDs:
 		var action_frequency_counter := 0
 		for day in history:
-			if day.morning_action._ACTION_NAME == id :
+			if day.morning_action.get_ACTION_NAME().to_upper() == action :
 				action_frequency_counter += 1
-			if day.noon_action._ACTION_NAME == id :
+			if day.noon_action.get_ACTION_NAME().to_upper() == action :
 				action_frequency_counter += 1
-			if day.evening_action._ACTION_NAME == id :
+			if day.evening_action.get_ACTION_NAME().to_upper() == action :
 				action_frequency_counter += 1
-		actions_summary[id] = action_frequency_counter
+		actions_summary[action] = action_frequency_counter
 	
 	var summary_text : String
 	for key : String in actions_summary:
-		summary_text += str(key) + " wurde " + str(actions_summary.get(key)) +\
+		if actions_summary.get(key) != 0:
+			summary_text += str(key) + " wurde " + str(actions_summary.get(key)) +\
 						 " Mal ausgeführt.\n"
 						
 	if avatar_life_status == false :
