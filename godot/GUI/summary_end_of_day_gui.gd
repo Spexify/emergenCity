@@ -15,8 +15,8 @@ var _avatar: EMC_Avatar
 var _inventory : EMC_Inventory
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 
-var _has_eaten : bool = false
-var _has_drank : bool = false
+var _has_eaten : bool 
+var _has_drank : bool 
 
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
@@ -60,9 +60,6 @@ func close() -> void:
 #MRM: Technically the values should be subtracted when opening the screen but the 
 #gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
-	_avatar.sub_nutrition(1) 
-	_avatar.sub_hydration(1)
-	_avatar.sub_health(1)
 	_update_health()
 	button_sfx.play()
 	$SummaryWindow.visible = true
@@ -74,7 +71,7 @@ func _on_new_day_pressed() -> void:
 	await button_sfx.finished
 	close()
 
-
+## KL: TODO: eating and drinking in correspondace with the inventory
 func _on_eat_pressed() -> void:
 	_avatar.add_nutrition(1)
 	_has_eaten = true
