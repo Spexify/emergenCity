@@ -72,6 +72,7 @@ size_flags_horizontal = 3
 text = "Weiter"
 
 [node name="SummaryWindow" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0

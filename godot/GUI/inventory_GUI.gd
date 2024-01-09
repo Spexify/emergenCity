@@ -21,11 +21,15 @@ var _inventory: EMC_Inventory
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
+func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
+			_only_inventory : bool = true) -> void:
 	_inventory = p_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	setTitle(p_title)
+	
+	if _only_inventory:
+		$Background/VBoxContainer/Consume.visible = false
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		var new_slot := _SLOT_SCN.instantiate()
@@ -111,3 +115,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	var label_descr := $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
+
+
+func _on_consume_pressed() -> void:
+	pass # Replace with function body.

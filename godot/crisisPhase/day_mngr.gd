@@ -125,21 +125,23 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 func _on_action_executed(action : EMC_Action) -> void:
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
-			self.current_day_cycle = EMC_DayCycle.new()
-			self.current_day_cycle.morning_action = action
+			if _avatar_life_status:
+				self.current_day_cycle = EMC_DayCycle.new()
+				self.current_day_cycle.morning_action = action
 		EMC_DayPeriod.NOON:
 			self.current_day_cycle.noon_action = action
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
 			self.history.append(self.current_day_cycle)
-			_seodGUI.open(self.current_day_cycle, false)
+			_seodGUI.open(self.current_day_cycle)
 			_seodGUI.closed.connect(_on_seod_closed)
 			if _avatar_ref.get_nutrition_status() <= 0 || _avatar_ref.get_hydration_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
 				_avatar_life_status = false
 			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
-				_seodGUI.open(self.current_day_cycle, true)
+				_seodGUI.open(self.current_day_cycle)
 				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
+		_: push_error("Current day period unassigned!")
 		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
@@ -151,6 +153,7 @@ func _on_seod_closed_game_end() -> void:
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_update_HUD()
+	_update_vitals()
 	_check_pu_counter()
 
 
@@ -165,10 +168,15 @@ func get_current_day_period() -> EMC_DayPeriod:
 func get_current_day() -> int:
 	return floor(self._period_cnt / 3.0)
 
+func _update_vitals() -> void:
+	_avatar_ref.sub_nutrition(1) 
+	_avatar_ref.sub_hydration(1)
+	_avatar_ref.sub_health(1)
 
 func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
+	
 	
 ################################### Pop Up Events ##################################################
 	
