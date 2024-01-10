@@ -114,7 +114,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
 func set_inventory_height(max_height : int = 250)-> void:
-	$Background.s
+	pass
 
 func _on_consume_pressed() -> void:
 	pass # Replace with function body.

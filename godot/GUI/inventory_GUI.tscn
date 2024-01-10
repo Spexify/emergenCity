@@ -67,7 +67,10 @@ offset_right = 100.0
 offset_bottom = 139.0
 grow_horizontal = 2
 
-[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 columns = 6
 
