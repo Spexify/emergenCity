@@ -1,9 +1,6 @@
 extends Panel
 class_name EMC_InventorySlot
 
-var _count : int = 1
-var _additonal_count : int = 0
-
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Checks if slot is free
 ## Returns true if slot is free, otherwise false
@@ -26,39 +23,6 @@ func set_item(p_item: EMC_Item) -> bool:
 	if !is_free(): return false
 	$Slot_BG.add_child(p_item)
 	return true
-
-func set_label_count(count : int) -> void: 
-	$Count.set_text("[color=blue]"+str(count)+"x[/color]")
-	
-func get_label_count() -> int: 
-	return _count
-	
-func add_additional_count(count : int) -> void:
-	_additonal_count += count
-	$AddCount.set_text("[right][color=green]"+str(_additonal_count)+"x[/color][/right]")
-
-func sub_additional_count(count : int) -> void:
-	_additonal_count -= count
-	$AddCount.set_text("[right][color=green]"+str(_additonal_count)+"x[/color][/right]")
-	
-func set_additional_count(count : int) -> void:
-	_additonal_count = count
-	$AddCount.set_text("[right][color=green]"+str(_additonal_count)+"x[/color][/right]")
-
-func get_additional_count() -> int:
-	return _additonal_count
-	
-func show_count() -> void:
-	$Count.visible = true
-	
-func hide_count() -> void:
-	$Count.visible = true
-	
-func show_add_count() -> void:
-	$AddCount.visible = true
-	
-func hide_add_count() -> void:
-	$AddCount.visible = true
 	
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 

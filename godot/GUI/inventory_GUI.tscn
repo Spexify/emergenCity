@@ -30,7 +30,7 @@ anchor_bottom = 0.5
 offset_left = -115.0
 offset_top = -186.0
 offset_right = 116.0
-offset_bottom = 131.0
+offset_bottom = 194.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qja6e")
@@ -52,8 +52,6 @@ grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 3
 theme = ExtResource("3_270nm")
-theme_override_font_sizes/normal_font_size = 46
-bbcode_enabled = true
 text = "[center]Inventory[/center]
 "
 
@@ -116,8 +114,9 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_270nm")
 theme_override_font_sizes/italics_font_size = 18
 
-[node name="Button" type="Button" parent="Background/VBoxContainer"]
+[node name="Consume" type="Button" parent="Background/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Consume"
 
 [node name="SFX" type="Node" parent="."]
@@ -127,3 +126,5 @@ stream = ExtResource("5_w1mvg")
 
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_i2pde")
+
+[connection signal="pressed" from="Background/VBoxContainer/Consume" to="." method="_on_consume_pressed"]

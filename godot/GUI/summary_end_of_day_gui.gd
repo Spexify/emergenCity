@@ -12,7 +12,7 @@ signal on_drink_pressed
 
 ## TODO: add inventory in popup SEOD and choice of food and drinks
 var _avatar: EMC_Avatar
-var _inventory : EMC_Inventory
+var _inventory : EMC_InventoryGUI
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 
 var _has_eaten : bool 
@@ -29,7 +29,9 @@ var _has_drank : bool
 
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
-	_inventory = _p_inventory
+	_inventory = EMC_InventoryGUI.new()
+	_inventory.setup(_p_inventory, "Essen/Trinken" , false)
+	$DecisionWindow/MarginContainer/VBoxContainer.add_child(_inventory)
 	
 
 ## opens summary end of day GUI/makes visible
