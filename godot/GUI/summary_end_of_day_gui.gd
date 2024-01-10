@@ -32,7 +32,7 @@ func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
 	_inventory = _INV_SCN.instantiate()
 	_inventory.setup(_p_inventory, "Essen/Trinken" , false)
-	$DecisionWindow/MarginContainer/VBoxContainer.add_child(_inventory)
+	$DecisionWindow/MarginContainer/VBoxContainer/MarginContainer.add_child(_inventory)
 	_inventory.show()
 	
 

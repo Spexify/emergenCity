@@ -27,6 +27,7 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
+	$Background/VBoxContainer/ScrollContainer.vertical_scroll_mode = false
 	
 	if _only_inventory:
 		$Background/VBoxContainer/Consume.visible = false
@@ -34,7 +35,7 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
 		var new_slot := _SLOT_SCN.instantiate()
-		$Background/VBoxContainer/GridContainer.add_child(new_slot)
+		$Background/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null:
@@ -75,7 +76,7 @@ func _on_btn_backpack_pressed() -> void:
 ## Update this view when its underlying [EMC_Inventory] structure added an item
 func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.connect(_on_item_clicked)
-	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
+	var slot := $Background/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
 	if slot == null:
 		printerr("InventoryGUI: Slots not initialized properly")
 		return
@@ -112,6 +113,8 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
+func set_inventory_height(max_height : int = 250)-> void:
+	$Background.s
 
 func _on_consume_pressed() -> void:
 	pass # Replace with function body.
