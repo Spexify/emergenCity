@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" path="res://GUI/inventory_GUI.gd" id="1_ve5h2"]
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_lm6xo"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_qja6e"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_270nm"]
-[ext_resource type="Texture2D" uid="uid://bhbkdpt6i46vw" path="res://res/gui/menu_box_white.png" id="4_47hfl"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="4_47hfl"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="5_w1mvg"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="6_i2pde"]
 
@@ -20,6 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_ve5h2")
 
 [node name="Background" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(450, 630)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,11 +33,11 @@ offset_right = 116.0
 offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_lm6xo")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
+texture = ExtResource("2_qja6e")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="Label" type="RichTextLabel" parent="Background"]
 custom_minimum_size = Vector2(0, 40)
@@ -45,7 +46,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_left = 1.0
 offset_top = 8.0
-offset_right = 226.0
+offset_right = 430.0
 offset_bottom = 64.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
@@ -78,13 +79,13 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 10
 
 [node name="TextBoxBG" type="NinePatchRect" parent="Background/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(200, 80)
+custom_minimum_size = Vector2(400, 160)
 layout_mode = 2
 texture = ExtResource("4_47hfl")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="Name" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
 layout_mode = 0

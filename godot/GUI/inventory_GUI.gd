@@ -25,9 +25,10 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
 	_inventory = p_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
-	setTitle(p_title)
+	set_title(p_title)
 	
 	for slot_idx in _inventory.get_slot_cnt():
+		#Setup slot grid
 		var new_slot := _SLOT_SCN.instantiate()
 		$Background/VBoxContainer/GridContainer.add_child(new_slot)
 		#Add items that already are in the inventory
@@ -36,30 +37,22 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
 			_on_item_added(item, slot_idx)
 
 
-## Die Überschrift der Inventar-UI setzen
-func setTitle(newText: String) -> void:
-	$Background/Label.text = "[center]" + newText + "[/center]"
+## Set the title of inventory GUI
+func set_title(p_new_text: String) -> void:
+	$Background/Label.text = "[center]" + p_new_text + "[/center]"
 
 
-## Die Sichtbarkeit umstellen.
-func toggleVisibility() -> void:
-	if visible == false:
-		open()
-	else:
-		close()
-
-
-## Das Inventar sichtbar machen.
+## Open the GUI
 func open() -> void:
 	open_gui.play()
-	visible = true
+	show()
 	opened.emit()
 
 
-## Das Inventar verstecken.
+## Close the GUI
 func close() -> void:
 	close_gui.play()
-	visible = false
+	hide()
 	closed.emit()
 
 
@@ -79,6 +72,9 @@ func _on_btn_backpack_pressed() -> void:
 func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.connect(_on_item_clicked)
 	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
+	if slot == null:
+		printerr("InventoryGUI: Slots not initialized properly")
+		return
 	slot.set_item(p_item)
 
 

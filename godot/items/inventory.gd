@@ -29,7 +29,7 @@ func get_slot_cnt() -> int:
 
 ## Returns if the inventory has any free slots left
 func has_space() -> bool:
-	return get_item_count() < _slot_cnt
+	return get_item_count_total() < _slot_cnt
 
 
 ## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
@@ -60,7 +60,11 @@ func add_item(p_item: EMC_Item) -> bool:
 ## else returns null
 ## THIS METHOD SHOULD PRIMARILY BE USED BY [EMC_InventoryGUI]!
 ## Use get_item_of_ID() instead
+## Code Review: Method necessary for EMC_InventoryGUI.setup()
 func get_item_of_slot(p_slot_idx: int) -> EMC_Item:
+	if (p_slot_idx < 0 || p_slot_idx > MAX_SLOT_CNT):
+		printerr("Array out of bounds Zugriff.")
+		return null
 	return _slots[p_slot_idx]
 
 
@@ -74,12 +78,12 @@ func get_item_of_ID(p_ID: EMC_Item.IDs) -> EMC_Item:
 	return null
 
 
-## Das Inventar ist im Besitz von mindestens einem [EMC_Item] mit dieser ID
+## The inventory has at least one item of [p_ID]
 func has_item(p_ID: EMC_Item.IDs) -> bool:
 	return get_item_of_ID(p_ID) != null
 
 
-## Gibt die Anzahl an [EMC_Item]s dieses Typ zurück
+## Returns count of [EMC_Item]s of [p_ID]
 func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
 	
@@ -90,8 +94,8 @@ func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	return cnt
 
 
-## Gibt die Gesamtanzahl an [EMC_Item]s zurück
-func get_item_count() -> int:
+## Returns total count of [EMC_Item]s in inventory
+func get_item_count_total() -> int:
 	var cnt: int = 0
 	
 	for slot_idx in _slot_cnt:
@@ -116,6 +120,7 @@ func get_all_items() -> Array[EMC_Item]:
 
 
 ## Return all items as Array of [EMC_Item]s for an ID
+## CodeReview TODO: Add to_get_cnt parameter, with to_get_cnt = -1 => all items
 func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 	var items := get_all_items()
 	for slot_idx in items.size():
@@ -124,8 +129,8 @@ func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 	return items
 
 
-## Diesem Inventar ein [EMC_Item] [to_be_removed_cnt] Mal entfernen entfernen
-## Gibt die Anzahl an erfolgreich entfernten Items zurück
+## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
+## Returns the count of successfully removed items
 func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
@@ -147,7 +152,7 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 func filter_items() -> void:
 	pass
 
-### Items nach ID sortieren (QoL feature in der Zukunft)
+### Sort Items (by ID?) -> TODO
 #func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
 	##TODO (keine Prio)
 	#pass

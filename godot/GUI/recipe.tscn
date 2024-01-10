@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://nh3br4hbeg8l"]
 
 [ext_resource type="Script" path="res://GUI/recipe.gd" id="1_e58a3"]
+[ext_resource type="Texture2D" uid="uid://c7aj7kyjwwtl5" path="res://res/gui/menu_BG_gray.png" id="2_b5e1n"]
 [ext_resource type="PackedScene" uid="uid://bi2q0hbmab582" path="res://items/item.tscn" id="2_ivjpr"]
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_pvvmq"]
 
 [node name="Recipe" type="TextureButton"]
 offset_right = 44.0
@@ -12,13 +12,13 @@ script = ExtResource("1_e58a3")
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 0
-offset_right = 40.0
+offset_right = 450.0
 offset_bottom = 40.0
-texture = ExtResource("2_pvvmq")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+texture = ExtResource("2_b5e1n")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 40)

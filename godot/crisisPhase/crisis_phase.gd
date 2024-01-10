@@ -36,8 +36,8 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr, $CityMap)
-	$CityMap.setup($GUI/VBC/UpperSection/DayMngr, $StageMngr, $GUI/VBC/LowerSection/TooltipGUI)
+	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $CityMap)
+	$CityMap.setup($GUI/VBC/UpperSection/HBC/DayMngr, $StageMngr, $GUI/VBC/LowerSection/TooltipGUI)
 	
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -54,7 +54,7 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	#TODO: Substitute null with OptionalEventMngr:
-	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, action_guis, \
+	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, null, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 

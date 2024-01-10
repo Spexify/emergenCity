@@ -1,41 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmp3dkvy1barj"]
+[gd_scene load_steps=4 format=3 uid="uid://dmp3dkvy1barj"]
 
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_hirtw"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="1_22m5l"]
 [ext_resource type="Script" path="res://GUI/tooltip_GUI.gd" id="2_tllve"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_h2c2a"]
 
 [node name="TooltipGUI" type="NinePatchRect"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -133.5
-offset_right = 133.5
-offset_bottom = 90.0
+offset_left = -249.0
+offset_right = 251.0
+offset_bottom = 180.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 mouse_filter = 0
-texture = ExtResource("1_hirtw")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
+texture = ExtResource("1_22m5l")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 script = ExtResource("2_tllve")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 508.0
-offset_bottom = 2150.0
-scale = Vector2(0.5, 0.5)
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 10.0
+offset_right = 230.0
+offset_bottom = 150.0
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_h2c2a")
 theme_type_variation = &"TextBox"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
+theme = ExtResource("3_h2c2a")
 bbcode_enabled = true
 text = "[color=black]Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.[/color]"
 fit_content = true

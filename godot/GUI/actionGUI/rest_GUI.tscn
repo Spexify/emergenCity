@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://g8y1un3il5jm"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/rest_GUI.gd" id="1_eoiso"]
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="2_y2hl0"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_5tqau"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_k786i"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_tawdp"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_f4qw6"]
@@ -20,6 +20,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_eoiso")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,36 +33,42 @@ offset_right = 126.5
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_y2hl0")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
+texture = ExtResource("2_5tqau")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.25, 0.25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -92.0
+offset_right = 229.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(10, 8)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(950, 130)
+custom_minimum_size = Vector2(100, 130)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-theme_override_font_sizes/normal_font_size = 50
 text = "Willst du dich ausruhen?"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 alignment = 1
 
 [node name="Okay" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-theme_override_font_sizes/font_size = 60
 text = "Okay"
 
 [node name="VSeparator" type="VSeparator" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
@@ -69,10 +76,9 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="Cancel" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-theme_override_font_sizes/font_size = 60
 text = "Zurück"
 
 [node name="SFX" type="Node" parent="."]

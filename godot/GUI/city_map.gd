@@ -24,9 +24,9 @@ func open() -> void:
 	var curr_stage_name := _stage_mngr.get_curr_stage_name()
 	match curr_stage_name:
 		EMC_StageMngr.STAGENAME_HOME:
-			$Pin.position = Vector2i(150, 230)
+			$Pin.position = Vector2i(150, 230) * 2 #MRM: Mal 2 ist magic number, wegen Scale wechsel, srry
 		EMC_StageMngr.STAGENAME_MARKET:
-			$Pin.position = Vector2i(103, 460)
+			$Pin.position = Vector2i(103, 460) * 2 #MRM: Mal 2 ist magic number, wegen Scale wechsel, srry
 		_: push_error("CityMap-Pin kennt momentane Stage nicht!")
 	#_pin_pos_tween = get_tree().create_tween()
 	#_pin_pos_tween.tween_property($Pin, "position", $Pin.position - Vector2(0, 15), 0.5).set_trans(Tween.TRANS_CUBIC)

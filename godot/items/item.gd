@@ -12,18 +12,19 @@ enum IDs{
 	RAVIOLI_MEAL = 5,
 }
 
-#FYI: erbt "name" Attribut von Node
+#FYI: Inherits "name" property from Node
 @export var _ID: IDs = IDs.DUMMY
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-##Objekt-Attribute initialisieren
+##Initialize properties
 func setup(ID: int) -> void:
 	_ID = ID
-	
-	
+	$Sprite2D.frame = _ID
+
+
 	#TODO: Statt case Statement, Infos aus JSON lesen
 	match _ID:
 		IDs.WATER:
@@ -50,39 +51,44 @@ func setup(ID: int) -> void:
 			_comps.push_back(EMC_IC_Food.new(15))
 		_: #default/else
 			name = "<No Name>"
+			printerr("Item Setup: ID unknown!")
 
 
-#FYI: erbt "get_name()" Attribut von Node
-
-##Getter für _ID
+##Getter for _ID
 func get_ID() -> IDs:
 	return _ID
 
-##Getter für _descr
+##Getter for _descr
 func get_descr() -> String:
 	return _descr
 
-##Getter für _descr
+##Getter for _comps
 func get_comps() -> Array[EMC_ItemComponent]:
 	return _comps
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Sprite2D.frame = _ID
-#	add_to_group("items") #Über den Editor realisiert...
 
 
+## TODO
 func _on_gui_input(event: InputEvent) -> void:
 	if ((event is InputEventMouseButton && event.pressed == true)
 	or (event is InputEventScreenTouch)):
 		clicked.emit(self)
-		#Ruft _on_clicked(self) für alle Instanzen an Items (s. Gruppe "items") auf:
+		#Calls _on_clicked(self) for all instances of signal group "items":
 		get_tree().call_group("items", "_on_clicked", self) 
 
 
+## TODO
 func _on_clicked(sender: EMC_Item) -> void:
-	if sender == self:
-		self.modulate = Color(0.4, 0.4, 0.4)
+	const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
+	const DEFAULT_COLOR := Color(1, 1, 1)
+	
+	if sender == null:
+		printerr("Item._on_clicked(): Sender ist null!")
+	elif sender == self:
+		self.modulate = HIGHLIGHTED_COLOR
 	else:
-		self.modulate = Color(1, 1, 1)
+		self.modulate = DEFAULT_COLOR

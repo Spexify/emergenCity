@@ -56,41 +56,39 @@ shape = SubResource("RectangleShape2D_yx03m")
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 3
 position = Vector2(481, 20)
-scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
 z_index = 3
-custom_minimum_size = Vector2(284, 512)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 288.0
-offset_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
+custom_minimum_size = Vector2(568, 1024)
+offset_right = 568.0
+offset_bottom = 1024.0
 pivot_offset = Vector2(-5, -5)
+size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="VBC" type="VBoxContainer" parent="GUI"]
 layout_mode = 2
 
 [node name="UpperSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(576, 100)
 layout_mode = 2
 
-[node name="DayMngr" parent="GUI/VBC/UpperSection" instance=ExtResource("5_gk1jp")]
+[node name="HBC" type="HBoxContainer" parent="GUI/VBC/UpperSection"]
+layout_mode = 2
+
+[node name="StatusBars" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("6_22w2e")]
+process_mode = 3
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="StatusBars" parent="GUI/VBC/UpperSection" instance=ExtResource("6_22w2e")]
-process_mode = 3
-layout_mode = 2
-
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(288, 350)
+custom_minimum_size = Vector2(576, 700)
 layout_mode = 2
 
 [node name="BackpackGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("6_mo744")]
@@ -114,7 +112,7 @@ visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(576, 200)
 layout_mode = 2
 
 [node name="RestGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("11_dfl7m")]
@@ -132,11 +130,10 @@ layout_mode = 2
 visible = false
 offset_right = 288.0
 offset_bottom = 512.0
-scale = Vector2(2, 2)
 
-[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_health_updated"]
-[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_hydration_updated"]
-[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_nutrition_updated"]
+[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
+[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
+[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

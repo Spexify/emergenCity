@@ -16,7 +16,7 @@ extends Node
 ##Dies ist eine Komponente.
 class_name EMC_ItemComponent
 
-#FYI: erbt "name" Attribut von Node
+#FYI: Inherits "name" property of Node
 var _color: Color
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
@@ -24,16 +24,14 @@ func _init(p_name: String, p_color: Color = Color.BLACK) -> void:
 	name = p_name
 	_color = p_color
 
-#FYI: erbt "get_name()" Attribut von Node
 
-
-#Kann bei Bedarf von Unterklassen überschrieben werden
+## Can be overwritten by subclasses
 func get_name_with_values() -> String:
 	return get_name()
 
 
-##Alle relevanten Informationen werden mit einem entsprechenden BBCode Tag als
-##String geliefert, sodass man sie direkt in einem RichTextLabel verwenden kann.
+##All relevant information are returned with an appropriate BBCode Tag,
+## this way the formatting is directly applied to a  RichTextLabel
 func get_colored_name_with_vals() -> String:
 	return "[color=" + _color.to_html(false) + "]" + get_name_with_values() + "[/color]"
 

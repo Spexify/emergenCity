@@ -36,6 +36,7 @@ gdscript/warnings/unsafe_call_argument=1
 window/size/viewport_width=576
 window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 window/handheld/orientation=1
 
 [gui]
