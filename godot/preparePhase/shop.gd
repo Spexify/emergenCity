@@ -1,6 +1,9 @@
 extends Control
 
 var _inventory : EMC_Inventory
+var _inventory_occupied : int = 0
+var _items_to_buy : Array[EMC_Item.IDs] = []
+var _balance : int = Global.get_e_coins()
 
 @onready var inventory_grid := $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/Shelf/GridContainer
 @onready var shop_grid := $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/Shelf/GridContainer
@@ -17,46 +20,54 @@ func _ready() -> void:
 		_inventory = EMC_Inventory.new()
 	#_inventory.item_added.connect(_on_item_added)
 	#_inventory.item_removed.connect(_on_item_removed)	
-	var acc_count : int = 0
 	
-	
-	for item_id : EMC_Item.IDs in EMC_Item.IDs.values():
-		var count : int = _inventory.get_item_count_of_ID(item_id)
-		
-		if count > 0:
-			_add_item_of_id(false, item_id, count)
-			acc_count += count
-			
-	_add_item_of_id(false, EMC_Item.IDs.DUMMY, acc_count)
+	for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
+		_add_item_by_id(item, inventory_grid, _on_inventory_item_clicked)
+		if item != EMC_Item.IDs.DUMMY:
+			_inventory_occupied += 1
 	
 	for item_id : EMC_Item.IDs in EMC_Item.IDs.values():
 		if item_id == EMC_Item.IDs.DUMMY:
 			continue
-		_add_item_of_id(true, item_id, 0)
-			
-	
-func _add_item_of_id(is_shop : bool, item_id : EMC_Item.IDs, count: int) -> void:
+		_add_item_by_id(item_id)
+
+func _add_item_by_id(item_id : EMC_Item.IDs, grid : GridContainer = shop_grid, connect : Callable = _on_shop_item_clicked) -> void:
 	var new_slot := _SLOT_SCN.instantiate()
 	if item_id != EMC_Item.IDs.DUMMY:
 		var new_item := _ITEM_SCN.instantiate()
 		new_item.setup(item_id)
 		
 		# Connect to correct handler
-		if is_shop:
-			new_item.clicked.connect(_on_shop_item_clicked)
-		else:
-			new_item.clicked.connect(_on_inventory_item_clicked)
+		new_item.clicked.connect(connect)
 			
 		new_slot.set_item(new_item)
-	if count != 0:
-		new_slot.set_label_count(count)
-		new_slot.show_count()
 	
 	# Add to correct Grid
-	if is_shop:
-		shop_grid.add_child(new_slot)
-	else:
-		inventory_grid.add_child(new_slot)
+	grid.add_child(new_slot)
+	
+func _remove_item_by_id(item : EMC_Item) -> void :
+	var i : int = 0
+	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
+		if i >= _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
+			inventory_grid.remove_child(slot)
+			_balance += slot.get_item().get_comps() \
+				.filter(func(comp : EMC_ItemComponent)->bool: return comp.name == "Cost")[0].get_cost()
+			var new_slot := _SLOT_SCN.instantiate()
+			inventory_grid.add_child(new_slot)
+			break
+		i += 1
+	
+func _add_item_to_slot_by_id(item_id : EMC_Item.IDs) -> bool :
+	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
+		if slot.get_item() == null:
+			var new_item := _ITEM_SCN.instantiate()
+			new_item.setup(item_id)
+			
+			new_item.clicked.connect(_on_inventory_item_clicked)
+			
+			slot.set_item(new_item)
+			return true
+	return false
 
 #func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 	##p_item.clicked.connect(_on_item_clicked)
@@ -71,14 +82,26 @@ func _add_item_of_id(is_shop : bool, item_id : EMC_Item.IDs, count: int) -> void
 	##p_item.clicked.disconnect(_on_item_clicked)
 
 func _on_shop_item_clicked(sender: EMC_Item) -> void:
-	for item_slot in inventory_grid.get_children():
-		var item : EMC_Item = item_slot.get_item()
-		if item != null and item.get_ID() == sender.get_ID():
-			item_slot.add_additional_count(1)
-			item_slot.show_add_count()
+	_display_info(sender)
+	
+	var cost : int = 0
+	for comp in sender.get_comps():
+		if comp.name == "Cost":
+			cost = comp.get_cost()
+
+	if _balance - cost >= 0 and _add_item_to_slot_by_id(sender.get_ID()):
+		#_inventory.add_new_item(sender.get_ID())
+		_balance -= cost
+		_items_to_buy.push_back(sender.get_ID())
+
+func _on_inventory_item_clicked(sender : EMC_Item) -> void:
+	_display_info(sender)
+	_remove_item_by_id.call_deferred(sender)
  
 ## Display information of clicked [EMC_Item]
-func _on_inventory_item_clicked(sender: EMC_Item) -> void:
+func _display_info(sender: EMC_Item) -> void:
+	print(_balance)
+	
 	#Name of the item
 	var label_name := $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/MarginContainer/PanelContainer2/VBoxContainer/Name
 	label_name.clear()

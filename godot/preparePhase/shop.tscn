@@ -70,7 +70,7 @@ layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/Shelf"]
 layout_mode = 2
-columns = 7
+columns = 9
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -136,75 +136,4 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Home"
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
-position = Vector2i(63, 237)
-size = Vector2i(450, 683)
-
-[node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 442.0
-offset_bottom = 675.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Title" type="RichTextLabel" parent="PopupPanel/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 34)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center] Wie oft wollen sie [/center]"
-
-[node name="ItemName" type="RichTextLabel" parent="PopupPanel/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 34)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-
-[node name="End" type="RichTextLabel" parent="PopupPanel/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 34)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center] kaufen [/center]"
-
-[node name="MarginContainer" type="MarginContainer" parent="PopupPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="PopupPanel/MarginContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="SpinBox" type="SpinBox" parent="PopupPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 50
-
-[node name="Buy" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(125, 50)
-layout_mode = 2
-text = "Buy"
-
-[node name="Cancel" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(125, 50)
-layout_mode = 2
-text = "Cancel
-"
-
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Home" to="." method="_on_home_pressed"]
-[connection signal="pressed" from="PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/Buy" to="." method="_on_buy_pressed"]
-[connection signal="pressed" from="PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

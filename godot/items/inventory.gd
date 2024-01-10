@@ -113,7 +113,13 @@ func get_all_items() -> Array[EMC_Item]:
 		if item != null:
 			items.push_back(item)
 	return items
-
+	
+## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
+func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
+	var items : Array[EMC_Item.IDs] = []
+	for item in _slots:
+		items.push_back(item.get_ID() if item != null else EMC_Item.IDs.DUMMY)
+	return items
 
 ## Return all items as Array of [EMC_Item]s for an ID
 func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:

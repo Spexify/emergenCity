@@ -31,23 +31,28 @@ func setup(ID: int) -> void:
 			_descr = "Sauberes Trinkwasser."
 			_comps.push_back(EMC_IC_Drink.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(10))
 		IDs.WATER_DIRTY:
 			name = "Dreckiges Wasser"
 			_descr = "Nicht die Erstwahl, aber dennoch trinkbar."
 			_comps.push_back(EMC_IC_Drink.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(5))
 		IDs.RAVIOLI_TIN:
 			name = "Ravioli Konserve"
 			_descr = "Kalt genießbar, aber ein Festmahl sieht anders aus.."
 			_comps.push_back(EMC_IC_Food.new(8))
 			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.GAS_CARTRIDGE:
 			name = "Gaskartusche"
 			_descr = "Für den Gaskocher."
+			_comps.push_back(EMC_IC_Cost.new(30))
 		IDs.RAVIOLI_MEAL:
 			name = "Ravioli Gericht"
 			_descr = "Lecker schmecker!"
 			_comps.push_back(EMC_IC_Food.new(15))
+			_comps.push_back(EMC_IC_Cost.new(50))
 		_: #default/else
 			name = "<No Name>"
 
@@ -74,8 +79,9 @@ func _ready() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if ((event is InputEventMouseButton && event.pressed == true)
-	or (event is InputEventScreenTouch)):
+	if ((event is InputEventMouseButton && event.pressed == true)):
+	## Note: I removed the InputEventScreenTouch as it emited the clicked signal multiple times (Jakob)
+	#or (event is InputEventScreenTouch)):
 		clicked.emit(self)
 		#Ruft _on_clicked(self) für alle Instanzen an Items (s. Gruppe "items") auf:
 		get_tree().call_group("items", "_on_clicked", self) 
