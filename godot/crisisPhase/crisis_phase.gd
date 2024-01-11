@@ -11,8 +11,6 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack", true)
-	
-	dialogue_resource = load("res://res/dialogue/dialogue.dialogue")
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
 	#GUIs initial verstecken
@@ -58,19 +56,12 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("DialogueTest"):
-		#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
-		#even when it's hidden! :(
-		#Workaround: Just instantiate it when needed. It's done the same way in the example code
-		var dialogue_GUI : EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-		$GUI/VBC/LowerSection.add_child(dialogue_GUI)
-		dialogue_GUI.start(dialogue_resource, "start")
+func _process(delta: float) -> void:	
+	if Input.is_action_just_pressed("ToggleGUI"): #G key
+		var guielem := $GUI/VBC/LowerSection
+		guielem.visible = !guielem.visible
+		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
 
-
-func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	print("Dialogue ended...")
-	pass
 
 
 func _on_inventory_opened() -> void:
@@ -102,3 +93,25 @@ func _on_action_GUI_opened() -> void:
 func _on_action_GUI_closed() -> void:
 	get_tree().paused = false
 
+
+###################################### DIALOGUE HANDLING ###########################################
+func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
+	#var existing_GUI = $GUI/VBC/LowerSection.get_node("DialogueGUI")
+	for node:Node in $GUI/VBC/LowerSection.get_children():
+		if node.get_name() == "DialogueGUI":
+			return #We don't want to start a new Dialogue if an old one is still going
+	
+	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
+	#even when it's hidden! :(
+	#Workaround: Just instantiate it when needed. It's done the same way in the example code
+	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+	dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
+	dialogue_GUI.start(dialogue_resource, "start")
+	get_tree().paused = true
+
+
+func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	print("Dialogue ended...")
+	get_tree().paused = false
+	pass

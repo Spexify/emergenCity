@@ -66,13 +66,16 @@ offset_bottom = 1024.0
 pivot_offset = Vector2(-5, -5)
 size_flags_horizontal = 4
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="VBC" type="VBoxContainer" parent="GUI"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="UpperSection" type="Container" parent="GUI/VBC"]
 custom_minimum_size = Vector2(576, 100)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBC" type="HBoxContainer" parent="GUI/VBC/UpperSection"]
 layout_mode = 2
@@ -81,57 +84,70 @@ layout_mode = 2
 process_mode = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
 custom_minimum_size = Vector2(576, 700)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="BackpackGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("6_mo744")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CookingGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("10_64vl8")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]
+process_mode = 3
 custom_minimum_size = Vector2(576, 200)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RestGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("11_dfl7m")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CityMap" parent="." instance=ExtResource("4_ospyx")]
 visible = false
 offset_right = 288.0
 offset_bottom = 512.0
 
+[connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]

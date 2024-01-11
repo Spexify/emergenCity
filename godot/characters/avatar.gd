@@ -142,6 +142,8 @@ func _physics_process(_delta: float) -> void:
 	
 	# move_and_slide() uses the characters velocity to move them on the map
 	move_and_slide()
+	
+	#print("Avatar y: " + str(position[1]))
 
 
 ## target_reached() doesn't work for whatever reason

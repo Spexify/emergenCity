@@ -10,3 +10,9 @@ script = ExtResource("1_2ergk")
 [node name="CurrStage" parent="." instance=ExtResource("2_epoie")]
 layer_2/modulate = Color(1, 1, 1, 0.262745)
 layer_2/tile_data = PackedInt32Array(393223, 4, 0)
+
+[node name="NPCs" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 1
