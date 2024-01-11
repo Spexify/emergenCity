@@ -71,6 +71,20 @@ func get_descr() -> String:
 func get_comps() -> Array[EMC_ItemComponent]:
 	return _comps
 
+
+## Getter for concrete [EMC_ItemComponent]
+## If no component of that type could be found, null is returned instead.
+## Example of call:
+##[codeblock]var item:= _backpack.get_item_of_slot(2)
+##var ic_food := item.get_comp(EMC_IC_Food)
+##print(ic_food.get_formatted_values())[/codeblock]
+func get_comp(p_classname: Variant) -> EMC_ItemComponent:
+	for comp:EMC_ItemComponent in _comps:
+		if is_instance_of(comp, p_classname):
+			return comp
+	return null
+
+
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
