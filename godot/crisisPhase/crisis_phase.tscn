@@ -120,6 +120,7 @@ visible = false
 layout_mode = 2
 
 [node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
+visible = false
 layout_mode = 2
 
 [node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]

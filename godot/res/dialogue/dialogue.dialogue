@@ -1,0 +1,37 @@
+~ start
+
+Avatar: [[Hi|Guten Tag.|Hallöchenpopöchen|Moin!|Servus]]
+Avatar: Das is nen emergenCITY Dialogue Test hier.
+Gerhard: Jawollja!
+Avatar: Pizza mit Ananas oder ohne?
+- Mit natürlich!
+	Avatar: [[Richtige Wahl ;)|Stimm ich zu!]]
+	Gerhard: [[Ick [speed=0.2]weeeess[/speed] ja net...]]
+- Bähh, ohne!
+	Avatar: Raus hier!
+	=> END
+- Ende Gelände => END!
+Avatar: Naja.
+- Was geht?
+- Nochmal!! => start
+%2 => dialog1
+%2 => dialog2
+%4 => dialog3
+=> END
+
+~ dialog1
+Avatar: Alles was gehen kann. 
+Avatar: [b]Micky[/b] kann wohl bessere Texte schreiben...
+Gerhard: Bestimmt.
+=> END
+
+~ dialog2
+Momo: Will mich ja nicht einmischen, aber ihr labbert Stuss!
+Mert: !!! [wait=0.5] Seit wann kannst du [i][speed=0.3]reden[/speed][/i], MOMO??
+=> END
+
+~ dialog3
+Veronika: Wollt ihr euch mal vorstellen, alle?
+Agathe: Nö.
+Veronika: Ok.
+=> END
