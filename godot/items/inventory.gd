@@ -37,7 +37,7 @@ func has_space() -> bool:
 ##
 ## TODO: Please rename
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item := _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	var new_item: EMC_Item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(p_ID)
 	return add_item(new_item)
 

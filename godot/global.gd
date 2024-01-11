@@ -10,7 +10,7 @@ var _inventory : EMC_Inventory = null
 const MAX_ECOINS = 99999
 
 func _ready() -> void:
-	var root := get_tree().root
+	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
 	_inventory = EMC_Inventory.new()
