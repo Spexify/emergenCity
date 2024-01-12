@@ -10,6 +10,7 @@ Gerhard: Pizza mit Ananas oder ohne?
 	Gerhard: Mach dich vom Acker!
 	=> END
 - Ende Gelände => END!
+
 Avatar: Naja.
 - Nochmal!! => start
 - Tschö mit ö! => END
