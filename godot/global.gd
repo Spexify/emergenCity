@@ -4,7 +4,7 @@ var current_scene : Node = null
 
 @onready var root := get_tree().root
 
-var _e_coins : int = 10;
+var _e_coins : int = 100;
 var _inventory : EMC_Inventory = null
 
 const MAX_ECOINS = 99999
@@ -20,17 +20,7 @@ func _ready() -> void:
 	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
 	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	#_inventory.add_new_item(EMC_Item.IDs.WATER);
-	#_inventory.add_new_item(EMC_Item.IDs.WATER);
-	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	#_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	#_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	#_inventory.add_new_item(EMC_Item.IDs.WATER);
-	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	#_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	#_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	#_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	_inventory.sort_custom(EMC_Inventory.sort_helper)
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
