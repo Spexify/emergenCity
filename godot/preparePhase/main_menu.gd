@@ -40,3 +40,7 @@ func _on_settings_pressed() -> void:
 	settings.show()
 	for child in settings.get_children():
 		child.show()
+
+
+func _on_reset_pressed() -> void:
+	Global.reset_save()

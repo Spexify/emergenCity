@@ -7,20 +7,14 @@ var current_scene : Node = null
 var _e_coins : int = 100;
 var _inventory : EMC_Inventory = null
 
+var _start_scene : String = "res://preparePhase/main_menu.tscn"
+
 const MAX_ECOINS = 99999
+const SAVE_FILE = "user://savegame.save"
 
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
-	
-	_inventory = EMC_Inventory.new()
-	_inventory.add_new_item(EMC_Item.IDs.WATER);
-	_inventory.add_new_item(EMC_Item.IDs.WATER);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
-	_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
-	_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY);
-	_inventory.sort_custom(EMC_Inventory.sort_helper)
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
@@ -33,13 +27,69 @@ func _deferred_goto_scene(path: String) -> void:
 	root.add_child(current_scene)
 
 func load_scene_name() -> String:
-	return "res://preparePhase/main_menu.tscn"
+	return _start_scene
+
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_game()
+		get_tree().quit() 
 	
-func load_save_file() -> void:
-	pass
+func reset_save() -> void:
+	var save_game : FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	save_game.store_string("")
 	
-func save() -> void:
-	pass
+	load_game()
+	
+func save_game() -> void:
+	var save_game : FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	
+	var data : Dictionary = {
+		"e_coins": _e_coins,
+		"start_scene": "res://preparePhase/main_menu.tscn",
+		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
+	}
+	# JSON provides a static method to serialized JSON string.
+	var json_string : String = JSON.stringify(data)
+
+	# Store the save dictionary as a new line in the save file.
+	save_game.store_line(json_string)
+	
+func load_game() -> void:
+	if not FileAccess.file_exists(SAVE_FILE):
+		return # Error! We don't have a save to load.
+
+	var save_game : FileAccess = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var json_string : String = save_game.get_line()
+	var json : JSON = JSON.new()
+
+	var data : Dictionary
+
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		data = {}
+	else:
+		data = json.get_data()
+	
+	_e_coins = data.get("e_coins", 100)
+	_start_scene = data.get("start_scene", "res://preparePhase/main_menu.tscn")
+	
+	if data.get("inventory_data") == null:
+		_inventory = EMC_Inventory.new()
+		_inventory.add_new_item(EMC_Item.IDs.WATER)
+		_inventory.add_new_item(EMC_Item.IDs.WATER)
+		_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
+		_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
+		_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE)
+		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+		_inventory.sort_custom(EMC_Inventory.sort_helper)
+	else:
+		_inventory = EMC_Inventory.new()
+		for item_id : int in data["inventory_data"]:
+			_inventory.add_new_item(item_id)
+			print(str(item_id))
+			
+		_inventory.sort_custom(EMC_Inventory.sort_helper)
 
 func get_e_coins() -> int:
 	return _e_coins
