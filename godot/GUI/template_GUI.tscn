@@ -11,7 +11,7 @@ max_size = Vector2i(416, 866)
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 408.0
-offset_bottom = 858.0
+offset_bottom = 16036.0
 
 [node name="TitleSpacing" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

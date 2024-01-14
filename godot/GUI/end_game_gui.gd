@@ -69,4 +69,6 @@ func close() -> void:
 func _on_main_menu_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
+	get_tree().paused = false
+	Global.reset_state()
 	Global.goto_scene("res://preparePhase/main_menu.tscn")

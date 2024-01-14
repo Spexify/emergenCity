@@ -37,7 +37,7 @@ func has_space() -> bool:
 ##
 ## TODO: Please rename
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item := _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	var new_item: EMC_Item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(p_ID)
 	return add_item(new_item)
 
@@ -157,6 +157,16 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 
 func filter_items() -> void:
 	pass
+
+static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:
+	if a == null:
+		return false
+	if b == null:
+		return true
+	return a.get_ID() < b.get_ID()
+
+func sort_custom(f : Callable) -> void:
+	_slots.sort_custom(f)
 
 ### Sort Items (by ID?) -> TODO
 #func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll

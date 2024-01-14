@@ -55,11 +55,23 @@ layout_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="DecisionWindow/MarginContainer/VBC"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DecisionWindow/MarginContainer/VBC/PanelContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HBC" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBC/PanelContainer"]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-bbcode_enabled = true
-text = "Lorem ipsum"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DecisionWindow/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+
+[node name="InputItemList" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="DecisionWindow/MarginContainer/VBC/PanelContainer/HBC"]
+layout_mode = 2
+
+[node name="RestrictionList" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBC"]
 layout_mode = 2
@@ -74,51 +86,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"
 
-[node name="SummaryWindow" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 288.0
-
-[node name="MarginContainer" type="MarginContainer" parent="SummaryWindow"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TitleSpacing" type="MarginContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 12
-
-[node name="Title" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TitleSpacing"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Today you have: 
-"
-horizontal_alignment = 1
-
-[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Description" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
-autowrap_mode = 2
-
-[node name="NewDay" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Start a new day"
-
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
@@ -130,6 +97,5 @@ stream = ExtResource("3_v0fsp")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_tv2ru")
 
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBC/HBoxContainer/Kochen" to="." method="_on_kochen_pressed"]
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBC/HBoxContainer/Abbrechen" to="." method="_on_abbrechen_pressed"]
-[connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBC/HBoxContainer/Kochen" to="." method="_on_cooking_pressed"]
+[connection signal="pressed" from="DecisionWindow/MarginContainer/VBC/HBoxContainer/Abbrechen" to="." method="_on_cancel_pressed"]

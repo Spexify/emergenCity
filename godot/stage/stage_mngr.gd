@@ -19,6 +19,8 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
+const _NPC_SCN: PackedScene = preload("res://characters/NPC.tscn")
+
 const STAGENAME_HOME: String = "home"
 const STAGENAME_MARKET: String = "market"
 
@@ -28,12 +30,14 @@ const TILE_MAX_X_COORD: int = 8
 const TILE_MIN_Y_COORD: int = 0
 const TILE_MAX_Y_COORD: int = 15
 
+signal dialogue_initiated(p_NPC_name: String)
 
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
 var _GUI: CenterContainer
 var _city_map: EMC_CityMap
-var _last_clicked_tile: TileData = null #LastClickedTile
+var _last_clicked_tile: TileData = null
+var _last_clicked_NPC: EMC_NPC = null
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
@@ -42,6 +46,25 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMa
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
 	_city_map = p_city_map
+	
+	#Add NPCs -> should be done by a JSON in the future!
+	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
+	gerhard.setup("Gerhard")
+	gerhard.hide()
+	gerhard.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(gerhard)
+	
+	var friedel: EMC_NPC = _NPC_SCN.instantiate()
+	friedel.setup("Friedel")
+	friedel.hide()
+	friedel.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(friedel)
+	
+	var julia: EMC_NPC = _NPC_SCN.instantiate()
+	julia.setup("Julia")
+	julia.hide()
+	julia.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(julia)
 
 
 func get_curr_stage_name() -> String:
@@ -60,6 +83,7 @@ func change_stage(p_stage_name: String) -> void:
 	new_stage.name = "CurrStage"
 	$CurrStage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
 	_city_map.close()
+	_update_NPCs()
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
@@ -75,11 +99,36 @@ func change_stage(p_stage_name: String) -> void:
 			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
 
 
+func _update_NPCs() -> void:
+	#Hide all NPCs first
+	for NPC: EMC_NPC in $NPCs.get_children():
+		NPC.hide()
+	
+	#Dependend on the stage show and reposition NPCs
+	match get_curr_stage_name():
+		"home":
+			pass
+		"market":
+			var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
+			gerhard.show()
+			gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
+			var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
+			friedel.show()
+			friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
+			var julia := $NPCs.get_node("Julia") #Magic String, WIP
+			julia.show()
+			julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
+		_:
+			printerr("StageMngr._update_NPCs(): Unknown Stage Name!")
+	pass
+
+
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target
 func _unhandled_input(p_event: InputEvent) -> void:
 	if ((p_event is InputEventMouseButton && p_event.pressed == true)
 	or (p_event is InputEventScreenTouch)):
+		_last_clicked_NPC = null
 		_last_clicked_tile = _get_tile_data_front_to_back(p_event.position)
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
@@ -176,7 +225,11 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 
 ## TODO
 func _on_avatar_arrived() -> void:
-	if _last_clicked_tile != null:
+	if _last_clicked_tile == null:
+		#NPC angeklickt?
+		if _last_clicked_NPC != null:
+			dialogue_initiated.emit(_last_clicked_NPC.get_name())
+	else: #FURNITURE angeklickt?
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
@@ -185,3 +238,19 @@ func _on_avatar_arrived() -> void:
 			else:
 				_day_mngr.on_interacted_with_furniture(action_ID)
 
+
+func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
+	#print("NPC " + p_NPC.get_name() + " was clicked")
+	_last_clicked_tile = null
+	_last_clicked_NPC = p_NPC
+	var offset: Vector2 = Vector2.ZERO
+	if _avatar.position[0] < p_NPC.position[0]: #X Pos Offset
+		offset += Vector2(-50, 0)
+	else:
+		offset += Vector2(50, 0)
+	if _avatar.position[1] < p_NPC.position[1]: #> Pos Offset
+		offset += Vector2(0, -50)
+	else:
+		offset += Vector2(0, 50)
+		
+	_avatar.set_target(p_NPC.position + offset)
