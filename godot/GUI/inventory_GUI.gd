@@ -15,6 +15,7 @@ signal closed
 @onready var close_gui := $SFX/CloseGUI
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
+const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
@@ -31,6 +32,19 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 	
 	if _only_inventory:
 		$Background/VBoxContainer/Consume.visible = false
+	
+	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
+		#var new_slot := _SLOT_SCN.instantiate()
+		#if item != EMC_Item.IDs.DUMMY:
+			#var new_item := _ITEM_SCN.instantiate()
+			#new_item.setup(item)
+			#new_item.clicked.connect(_on_item_clicked)
+		#
+			#
+			#new_slot.set_item(new_item)
+	#
+		#
+		#$Background/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid

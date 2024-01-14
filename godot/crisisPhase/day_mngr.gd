@@ -156,14 +156,11 @@ func _on_seod_closed() -> void:
 	_update_vitals()
 	_check_pu_counter()
 
-
 func get_current_day_cycle() -> EMC_DayCycle:
 	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
 
-
 func get_current_day_period() -> EMC_DayPeriod:
 	return self._period_cnt % 3 as EMC_DayPeriod
-
 
 func get_current_day() -> int:
 	return floor(self._period_cnt / 3.0)
@@ -177,6 +174,25 @@ func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
 	
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"node_path": get_path(),
+		"period_cnt": _period_cnt,
+		"current_day_cycle": current_day_cycle.save() if current_day_cycle != null else EMC_DayCycle.new().save(),
+		"history" : history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	_period_cnt = data.get("period_cnt", 0)
+	current_day_cycle = EMC_DayCycle.new()
+	current_day_cycle.load_state(data.get("current_day_cycle"))
+	history.assign(data.get("history").map(
+		func(data : Dictionary) -> EMC_DayCycle: 
+			var cycle : EMC_DayCycle = EMC_DayCycle.new()
+			cycle.load_state(data)
+			return cycle) as Array[EMC_DayCycle])
+	_update_HUD()
 	
 ################################### Pop Up Events ##################################################
 	
