@@ -18,6 +18,14 @@ func _ready() -> void:
 	current_scene = root.get_child(root.get_child_count() - 1)
 	_inventory = EMC_Inventory.new() #MRM: Sonst gibt es einen Null error wenn man die CRISIS PHASE..
 									#.. ohne den Shop einmal geöffnet zu haben
+	#Starterkit (for testing)
+	_inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	_inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	_inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
+	_inventory.add_new_item(EMC_Item.IDs.COOKED_PASTA)
+	_inventory.add_new_item(EMC_Item.IDs.BREAD)
+	_inventory.add_new_item(EMC_Item.IDs.JAM)
+	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
@@ -59,6 +67,8 @@ func save_game() -> void:
 	save_game.store_line(json_string)
 	
 func load_game() -> void:
+	return #MRM: Zum testen, sorry
+	
 	if not FileAccess.file_exists(SAVE_FILE):
 		return # Error! We don't have a save to load.
 

@@ -86,8 +86,8 @@ func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 ## Update this view when its underlying [EMC_Inventory] structure removed an item
 func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.disconnect(_on_item_clicked)
-	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
-	slot.remove_child(p_item)
+	var slot := $Background/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
+	slot.remove_item()
 
 
 ## Display information of clicked [EMC_Item]

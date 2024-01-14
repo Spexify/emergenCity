@@ -10,6 +10,13 @@ enum IDs{
 	RAVIOLI_TIN = 3,
 	GAS_CARTRIDGE = 4,
 	RAVIOLI_MEAL = 5,
+	UNCOOKED_PASTA = 6,
+	COOKED_PASTA = 7,
+	SAUCE_JAR = 8,
+	PASTA_WITH_SAUCE = 9,
+	BREAD = 10,
+	JAM = 11,
+	BREAD_WITH_JAM = 12,
 }
 
 #FYI: Inherits "name" property from Node
@@ -21,6 +28,7 @@ var _comps: Array[EMC_ItemComponent]
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ##Initialize properties
 func setup(ID: int) -> void:
+	#await ready
 	_ID = ID
 	$Sprite2D.frame = _ID
 
@@ -54,6 +62,41 @@ func setup(ID: int) -> void:
 			_descr = "Lecker schmecker!"
 			_comps.push_back(EMC_IC_Food.new(15))
 			_comps.push_back(EMC_IC_Cost.new(50))
+		IDs.UNCOOKED_PASTA:
+			name = "Ungekochte Nudeln"
+			_descr = "Zu hart um sie roh zu essen, müssen erst gekocht werden."
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.COOKED_PASTA:
+			name = "Nudeln"
+			_descr = "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt."
+			_comps.push_back(EMC_IC_Food.new(10))
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.SAUCE_JAR:
+			name = "Soße im Glas"
+			_descr = "X"
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.PASTA_WITH_SAUCE:
+			name = "Nudeln mit Soße"
+			_descr = "X"
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.BREAD:
+			name = "Brot"
+			_descr = "X"
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.JAM:
+			name = "Marmelade"
+			_descr = "X"
+			_comps.push_back(EMC_IC_Ingredient.new())
+			_comps.push_back(EMC_IC_Cost.new(20))
+		IDs.BREAD_WITH_JAM:
+			name = "Brot mit Marmelade"
+			_descr = "X"
+			_comps.push_back(EMC_IC_Cost.new(20))
 		_: #default/else
 			name = "<No Name>"
 			printerr("Item Setup: ID unknown!")
