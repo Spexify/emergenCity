@@ -22,6 +22,7 @@ func _ready() -> void:
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
 
+
 func _deferred_goto_scene(path: String) -> void:
 	current_scene.free()
 
