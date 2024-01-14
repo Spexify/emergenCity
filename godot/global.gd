@@ -16,6 +16,8 @@ const SAVE_FILE = "user://savegame.save"
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
+	_inventory = EMC_Inventory.new() #MRM: Sonst gibt es einen Null error wenn man die CRISIS PHASE..
+									#.. ohne den Shop einmal geöffnet zu haben
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
