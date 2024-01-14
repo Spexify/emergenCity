@@ -16,12 +16,14 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 
+
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
+
 
 func _deferred_goto_scene(path: String) -> void:
 	current_scene.free()
