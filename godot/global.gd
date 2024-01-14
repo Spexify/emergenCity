@@ -12,6 +12,7 @@ var _start_scene : String = "res://preparePhase/main_menu.tscn"
 const MAX_ECOINS = 99999
 const SAVE_FILE = "user://savegame.save"
 
+
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
