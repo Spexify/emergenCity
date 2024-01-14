@@ -68,6 +68,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
+custom_minimum_size = Vector2(400, 350)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]
