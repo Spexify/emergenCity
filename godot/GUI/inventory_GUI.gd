@@ -27,6 +27,7 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
+	set_inventory_height(200)
 	$Background/VBoxContainer/ScrollContainer.vertical_scroll_mode = false
 	
 	if _only_inventory:
@@ -113,8 +114,8 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
-func set_inventory_height(max_height : int = 250)-> void:
-	pass
+func set_inventory_height(max_height : int = 630)-> void:
+	$Background.size.y = max_height
 
 func _on_consume_pressed() -> void:
 	pass # Replace with function body.
