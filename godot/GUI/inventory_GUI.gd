@@ -35,8 +35,8 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
 	
-	$Background/VBoxContainer/Consume.visible = false
-	$Background/VBoxContainer/Close.visible = false
+	$Background/VBoxContainer/HBoxContainer/Consume.visible = false
+	$Background/VBoxContainer/HBoxContainer/Close.visible = false
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -62,8 +62,8 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 
 func set_consume_active() -> void:
 	_only_inventory = false
-	$Background/VBoxContainer/Consume.visible = true
-	$Background/VBoxContainer/Close.visible = true
+	$Background/VBoxContainer/HBoxContainer/Consume.visible = true
+	$Background/VBoxContainer/HBoxContainer/Close.visible = true
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
