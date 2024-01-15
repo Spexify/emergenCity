@@ -50,7 +50,7 @@ func show_gui(p_action : EMC_Action) -> void:
 		#if comp is EMC_IC_Food:
 			#component_food = comp
 	
-	#$DecisionWindow/MarginContainer/VBC/RecipeBox/Description.text = \
+	#$PanelContainer/MarginContainer/VBC/RecipeBox/Description.text = \
 		#str(component_food.get_formatted_values())
 		
 	
@@ -70,7 +70,7 @@ func _on_cancel_pressed() -> void:
 
 func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 	_last_clicked_recipe = p_recipe
-	var input_items_list := $DecisionWindow/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer/InputItemList
+	var input_items_list := $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer/InputItemList
 	for unwanted_child : EMC_Item in input_items_list.get_children():
 		input_items_list.remove_child(unwanted_child)
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():

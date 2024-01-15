@@ -12,6 +12,7 @@ var _avatar: EMC_Avatar
 ## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
 var _last_SC_action: EMC_StageChangeAction
 
+
 func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar

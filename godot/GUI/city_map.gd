@@ -11,10 +11,12 @@ func _ready() -> void:
 	hide()
 
 
-func setup(p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI) -> void:
+func setup(p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
+	p_cs_GUI: EMC_ChangeStageGUI) -> void:
 	_day_mngr = p_day_mngr
 	_stage_mngr = p_stage_mngr
 	_tooltip_GUI = p_tooltip_GUI
+	p_cs_GUI.stayed_on_same_stage.connect(_on_change_stage_gui_stayed_on_same_stage)
 
 
 func open() -> void:

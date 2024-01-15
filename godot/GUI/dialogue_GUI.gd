@@ -45,7 +45,11 @@ var dialogue_line: DialogueLine:
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
-		character_portrait.texture = load("res://res/characters/portrait_%s%s.png" % [dialogue_line.character.to_lower(), file_suffix])
+		#MRM: Has to be CompressedTexture2D, otherwhise it doesn't work on mobile!!
+		var sprite_texture: CompressedTexture2D = \
+			load("res://res/characters/portrait_" + dialogue_line.character.to_lower() + ".png")
+		character_portrait.texture = sprite_texture
+		#character_portrait.texture = load("res://res/characters/portrait_%s%s.png" % [dialogue_line.character.to_lower(), file_suffix])
 
 		dialogue_label.modulate.a = 0
 		dialogue_label.custom_minimum_size.x = dialogue_label.get_parent().size.x - 1

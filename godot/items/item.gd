@@ -76,16 +76,19 @@ func setup(ID: int) -> void:
 		IDs.SAUCE_JAR:
 			name = "Soße im Glas"
 			_descr = "X"
+			_comps.push_back(EMC_IC_Food.new(4))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.PASTA_WITH_SAUCE:
 			name = "Nudeln mit Soße"
 			_descr = "X"
+			_comps.push_back(EMC_IC_Food.new(14))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.BREAD:
 			name = "Brot"
 			_descr = "X"
+			_comps.push_back(EMC_IC_Food.new(5))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.JAM:
@@ -96,7 +99,7 @@ func setup(ID: int) -> void:
 		IDs.BREAD_WITH_JAM:
 			name = "Brot mit Marmelade"
 			_descr = "X"
-			_comps.push_back(EMC_IC_Cost.new(20))
+			_comps.push_back(EMC_IC_Food.new(9))
 		_: #default/else
 			name = "<No Name>"
 			printerr("Item Setup: ID unknown!")

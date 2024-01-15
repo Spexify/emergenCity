@@ -13,8 +13,11 @@ func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 		#printerr("SpawnPosition of NPC " + p_name + " is out of bounds!")
 	
 	await ready #important, otherwhise the sprite might not be instantiated yet, and thus null
-	var sprite_image: Image = Image.load_from_file("res://res/characters/sprite_" + name.to_lower() + ".png")
-	_sprite.texture = ImageTexture.create_from_image(sprite_image)
+	
+	#MRM: You have to use CompressedTextures with load, otherwhise it doesn't work on the exported APK 
+	#var sprite_image: Image = Image.load_from_file("res://res/characters/sprite_" + name.to_lower() + ".png")
+	var sprite_texture: CompressedTexture2D = load("res://res/characters/sprite_" + name.to_lower() + ".png")
+	_sprite.texture = sprite_texture #ImageTexture.create_from_image(sprite_image)
 	
 	position = p_spawn_pos
 

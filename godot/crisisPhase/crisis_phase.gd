@@ -1,8 +1,12 @@
 extends Node2D
 
-var _backpack: EMC_Inventory = Global.get_inventory()
 
+const GERHARD_DIALOG : DialogueResource = preload("res://res/dialogue/gerhard.dialogue")
+const JULIA_DIALOG : DialogueResource = preload("res://res/dialogue/julia.dialogue")
+const FRIEDEL_DIALOG : DialogueResource = preload("res://res/dialogue/friedel.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
+
+var _backpack: EMC_Inventory = Global.get_inventory()
 
 @onready var uncast_guis := $GUI.get_children()
 @export var dialogue_resource: DialogueResource
@@ -35,7 +39,8 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI)
+	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
+		$GUI/VBC/LowerSection/ChangeStageGUI)
 	
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -106,7 +111,13 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
-	dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
+	#MRM: Problems with load on mobile export, so I preload it for now:
+	#dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
+	match p_NPC_name:
+		"Gerhard": dialogue_resource = GERHARD_DIALOG
+		"Julia": dialogue_resource = JULIA_DIALOG
+		"Friedel": dialogue_resource = FRIEDEL_DIALOG
+		_: printerr("unknown NPC")
 	dialogue_GUI.start(dialogue_resource, "start")
 	get_tree().paused = true
 
