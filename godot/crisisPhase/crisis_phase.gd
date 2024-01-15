@@ -58,8 +58,7 @@ func _ready() -> void:
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, null, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
-
-
+	
 func _process(delta: float) -> void:	
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection

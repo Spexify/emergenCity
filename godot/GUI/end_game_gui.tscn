@@ -10,7 +10,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_brneb")
 
 [node name="WinnerScreen" type="PanelContainer" parent="."]
@@ -91,6 +90,7 @@ offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
 offset_bottom = 667.0
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
 layout_mode = 2
@@ -152,7 +152,7 @@ autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 text = "Zurück zur Hauptmenu"
 
 [node name="SFX" type="Node" parent="."]

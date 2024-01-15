@@ -58,6 +58,8 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 		if item != null:
 			_on_item_added(item, slot_idx)
 
+func get_inventory() -> EMC_Inventory:
+	return _inventory
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
