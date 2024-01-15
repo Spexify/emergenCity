@@ -20,7 +20,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_eoiso")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(500, 200)
+custom_minimum_size = Vector2(500, 150)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,43 +39,39 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -229.0
-offset_top = -92.0
-offset_right = 229.0
-offset_bottom = 92.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(10, 8)
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 20.0
+offset_right = 479.0
+offset_bottom = 114.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 130)
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 theme = ExtResource("3_k786i")
 text = "Willst du dich ausruhen?"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Okay" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="Okay" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("3_k786i")
 text = "Okay"
 
-[node name="VSeparator" type="VSeparator" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="Cancel" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_k786i")
@@ -92,5 +88,5 @@ stream = ExtResource("5_f4qw6")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_2ksyk")
 
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

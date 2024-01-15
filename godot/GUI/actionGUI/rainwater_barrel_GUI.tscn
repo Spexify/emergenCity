@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://31cjdwx16jfm"]
 
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_bmbgf"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="1_bmbgf"]
 
 [node name="RainwaterBarrelGui" type="Control"]
 layout_mode = 3
