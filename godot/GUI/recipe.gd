@@ -20,6 +20,7 @@ p_needs_heat : bool) -> void:
 	_output_item_ID = p_outputItemID
 	_needs_water = p_needs_water
 	_needs_heat = p_needs_heat
+	#await ready
 	var item : EMC_Item = ITEM_SCN.instantiate()
 	item.setup(p_outputItemID)
 	$HBoxContainer/item.replace_by(item)

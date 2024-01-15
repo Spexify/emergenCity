@@ -12,6 +12,8 @@ func setup(p_inventory: EMC_Inventory) -> void:
 	var ravioli_recipe := RECIPE_SCN.instantiate()
 	var input_items : Array[EMC_Item.IDs]
 	var input_items2 : Array[EMC_Item.IDs]
+	var input_items3 : Array[EMC_Item.IDs]
+	var input_items4 : Array[EMC_Item.IDs]
 	input_items.append(EMC_Item.IDs.RAVIOLI_TIN)
 	ravioli_recipe.setup(input_items, EMC_Item.IDs.RAVIOLI_MEAL, false, true)
 	recipe_list.add_child(ravioli_recipe)
@@ -21,6 +23,16 @@ func setup(p_inventory: EMC_Inventory) -> void:
 	cooked_pasta_recipe.setup(input_items2, EMC_Item.IDs.COOKED_PASTA, false, true)
 	recipe_list.add_child(cooked_pasta_recipe)
 	cooked_pasta_recipe.was_pressed.connect(_on_recipe_pressed)
+	var pasta_with_sauce_recipe := RECIPE_SCN.instantiate()
+	input_items3 = [EMC_Item.IDs.UNCOOKED_PASTA, EMC_Item.IDs.SAUCE_JAR]
+	pasta_with_sauce_recipe.setup(input_items3, EMC_Item.IDs.PASTA_WITH_SAUCE, false, true)
+	recipe_list.add_child(pasta_with_sauce_recipe)
+	pasta_with_sauce_recipe.was_pressed.connect(_on_recipe_pressed)
+	var adding_sauce_to_pasta_recipe := RECIPE_SCN.instantiate()
+	input_items4 = [EMC_Item.IDs.COOKED_PASTA, EMC_Item.IDs.SAUCE_JAR]
+	adding_sauce_to_pasta_recipe.setup(input_items4, EMC_Item.IDs.PASTA_WITH_SAUCE, false, true)
+	recipe_list.add_child(adding_sauce_to_pasta_recipe)
+	adding_sauce_to_pasta_recipe.was_pressed.connect(_on_recipe_pressed)
 	
 
 
@@ -44,7 +56,7 @@ func show_gui(p_action : EMC_Action) -> void:
 
 func _on_cooking_pressed() -> void: 
 	if _recipe_cookable(_last_clicked_recipe):
-		_cook_recipe(_last_clicked_recipe)
+		_cook_recipe()
 
 
 func _on_cancel_pressed() -> void:
@@ -65,10 +77,21 @@ func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 
 ## TODO: Also check on electricity etc.
 func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
+	var counting_dict: Dictionary = {}
+	for input_item_ID: EMC_Item.IDs in p_recipe.get_input_item_IDs():
+		if counting_dict.has(input_item_ID):
+			counting_dict[input_item_ID] += 1 
+		else:
+			counting_dict[input_item_ID] = 1 
+	for counted_item_ID: EMC_Item.IDs in counting_dict.keys():
+		if _inventory.get_item_count_of_ID(counted_item_ID) < counting_dict[counted_item_ID]:
+			return false
 	return true
 
 
-func _cook_recipe(p_recipe: EMC_Recipe) -> void:
+func _cook_recipe() -> void:
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
 		_inventory.remove_item(input_item_ID)
-	_inventory.add_new_item(p_recipe.get_output_item_ID())
+	_inventory.add_new_item(_last_clicked_recipe.get_output_item_ID())
+	visible = false
+	_action.executed.emit(_action)
