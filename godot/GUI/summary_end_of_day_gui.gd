@@ -31,8 +31,11 @@ var _has_drank : bool
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
 	_inventory = _INV_SCN.instantiate()
-	_inventory.setup(_p_inventory, "Essen/Trinken" , false)
-	$DecisionWindow/MarginContainer/VBoxContainer/MarginContainer.add_child(_inventory)
+	_inventory.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)
+	$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.add_child(_inventory)
+	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.fit_child_in_rect(_inventory, Rect2(0,0,450,350) )
+	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI.SIZE_SHRINK_CENTER
+	#_inventory.set_height(400)
 	_inventory.show()
 	
 
@@ -70,18 +73,6 @@ func _on_new_day_pressed() -> void:
 	await button_sfx.finished
 	close()
 
-## KL: TODO: eating and drinking in correspondace with the inventory
-func _on_eat_pressed() -> void:
-	_avatar.add_nutrition(1)
-	_has_eaten = true
-	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(0), "Essensvorrat")
-	
-	
-func _on_drink_pressed() -> void:
-	_avatar.add_hydration(1)
-	_has_drank = true
-	#var _food_inventory = EMC_InventoryGUI.new().setup(_inventory.filter_items(1), "Getränkenvorrat")
-	
 	
 func _update_health() -> void:
 	if _has_drank && _has_eaten:

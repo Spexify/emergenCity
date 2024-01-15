@@ -10,16 +10,21 @@ signal health_updated(p_new_value: int)
 @onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 const SPEED: float = 300.0
 
-## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
-## working in untis of 4
-var _nutrition_value : int = MAX_VITALS
-var _hydration_value : int = 2
-var _health_value : int = 2
 const MAX_VITALS = 4
 #MRM: Unit sollte direct von den Components verwendet werden:
 const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #550 #food Unit = 550 kcal 
 const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR #water Unit = 500 ml
 const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
+
+const INIT_NUTRITION_VALUE : int = MAX_VITALS
+const INIT_HYDRATION_VALUE : int = 2
+const INIT_HEALTH_VALUE : int = 2
+
+## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
+## working in untis of 4
+var _nutrition_value : int = INIT_NUTRITION_VALUE
+var _hydration_value : int = INIT_HYDRATION_VALUE
+var _health_value : int = INIT_HEALTH_VALUE
 
 @onready var walking := $SFX/Walking
 
@@ -112,6 +117,32 @@ func sub_health(health_change : int) -> bool:
 		health_updated.emit(_health_value)
 		return true
 
+func save() -> Dictionary:
+
+	var some_position : Vector2 = get_global_position()
+
+	var data : Dictionary = {
+		"node_path": get_path(),
+		"nutrition_value": _nutrition_value,
+		"hydration_value": _hydration_value,
+		"health_value": _health_value,
+		"x-position": some_position.x,
+		"y-position": some_position.y
+	}
+
+	return data
+
+func load_state(data : Dictionary) -> void:
+	_nutrition_value = data.get("nutrition_value", INIT_NUTRITION_VALUE)
+	nutrition_updated.emit(_nutrition_value)
+	_hydration_value = data.get("hydration_value", INIT_HYDRATION_VALUE)
+	hydration_updated.emit(_hydration_value)
+	_health_value = data.get("health_value", INIT_HEALTH_VALUE)	
+	health_updated.emit(_health_value)
+	
+	var some_position : Vector2 = Vector2(data.get("x-position", 277), data.get("y-position", 601))
+	set_global_position(some_position)
+	
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 func _ready() -> void:

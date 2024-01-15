@@ -15,22 +15,39 @@ signal closed
 @onready var close_gui := $SFX/CloseGUI
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
+const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
+var _clicked_item : EMC_Item
+var _avatar_ref : EMC_Avatar
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
+func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
 			_only_inventory : bool = true) -> void:
+	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
-	$Background/VBoxContainer/ScrollContainer.vertical_scroll_mode = false
 	
 	if _only_inventory:
 		$Background/VBoxContainer/Consume.visible = false
+	else: 
+		set_inventory_height(200)
+	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
+		#var new_slot := _SLOT_SCN.instantiate()
+		#if item != EMC_Item.IDs.DUMMY:
+			#var new_item := _ITEM_SCN.instantiate()
+			#new_item.setup(item)
+			#new_item.clicked.connect(_on_item_clicked)
+		#
+			#
+			#new_slot.set_item(new_item)
+	#
+		#
+		#$Background/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
@@ -41,11 +58,18 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 		if item != null:
 			_on_item_added(item, slot_idx)
 
+func get_inventory() -> EMC_Inventory:
+	return _inventory
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	$Background/Label.text = "[center]" + p_new_text + "[/center]"
 
+func set_inventory_height(height : int = 400) -> void:
+	$Background/VBoxContainer/ScrollContainer.set_size(Vector2(450,height))
+
+func set_height(height : int = 630) -> void:
+	$Background.set_size(Vector2(450, height))
 
 ## Open the GUI
 func open() -> void:
@@ -86,12 +110,14 @@ func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 ## Update this view when its underlying [EMC_Inventory] structure removed an item
 func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.disconnect(_on_item_clicked)
-	var slot := $Background/VBoxContainer/GridContainer.get_child(p_idx)
-	slot.remove_child(p_item)
+	var slot := $Background/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
+	slot.remove_item()
 
 
 ## Display information of clicked [EMC_Item]
 func _on_item_clicked(sender: EMC_Item) -> void:
+	_clicked_item = sender
+	
 	#Name of the item
 	var label_name := $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
@@ -113,8 +139,12 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
-func set_inventory_height(max_height : int = 250)-> void:
-	pass
 
 func _on_consume_pressed() -> void:
-	pass # Replace with function body.
+	for component in _clicked_item.get_comps():
+		if component == EMC_IC_Drink:
+			_avatar_ref.add_hydration(_clicked_item.get_hydration())
+		if component == EMC_IC_Food:
+			_avatar_ref.add_nutrition(_clicked_item.get_nutritionness())
+	_inventory.remove_item(_clicked_item._ID)
+

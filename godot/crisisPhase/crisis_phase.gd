@@ -9,7 +9,11 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack", true)
+	if Global.was_crisis():
+		####################LOAD SAVE STATE#######################
+		Global.load_state()
+	
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
 	#GUIs initial verstecken
@@ -52,8 +56,7 @@ func _ready() -> void:
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
-
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible

@@ -23,6 +23,11 @@ func set_item(p_item: EMC_Item) -> bool:
 	if !is_free(): return false
 	$Slot_BG.add_child(p_item)
 	return true
-	
+
+
+func remove_item() -> void:
+	var potential_child := $Slot_BG.get_child(0)
+	if potential_child != null:
+		$Slot_BG.remove_child(potential_child)
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 
