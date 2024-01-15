@@ -12,6 +12,7 @@ var _action: EMC_Action
 func show_gui(p_action : EMC_Action) -> void:
 	_action = p_action
 	# Enter code here if necessary 
+	show()
 	opened.emit()
 
 #TODO:

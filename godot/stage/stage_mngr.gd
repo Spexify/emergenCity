@@ -47,6 +47,7 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_Too
 	_day_mngr = p_day_mngr
 	_city_map = $CityMap
 	$CityMap.setup(p_day_mngr, self, p_tooltip_GUI)
+	$CityMap.hide()
 	
 	#Add NPCs -> should be done by a JSON in the future!
 	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
