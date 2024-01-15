@@ -41,11 +41,12 @@ var _last_clicked_NPC: EMC_NPC = null
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_city_map: EMC_CityMap) -> void:
+func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI) -> void:
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
-	_city_map = p_city_map
+	_city_map = $CityMap
+	$CityMap.setup(p_day_mngr, self, p_tooltip_GUI)
 	
 	#Add NPCs -> should be done by a JSON in the future!
 	var gerhard: EMC_NPC = _NPC_SCN.instantiate()

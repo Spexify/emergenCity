@@ -4,6 +4,8 @@ const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const RECIPE_SCN: PackedScene = preload("res://GUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
+@onready var _recipe_list := $DecisionWindow/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
+
 	
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory
@@ -38,6 +40,9 @@ func setup(p_inventory: EMC_Inventory) -> void:
 
 func show_gui(p_action : EMC_Action) -> void:
 	_action = p_action
+	for recipe in _recipe_list.get_children():
+		if not _recipe_cookable(recipe):
+			recipe.hide()
 	visible = true
 	#var item_on_slot2 := _inventory.get_item_of_slot(2)
 	#item_on_slot2.get_ID()

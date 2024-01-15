@@ -7,6 +7,11 @@ signal clicked(p_NPC: EMC_NPC)
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 	name = p_name
+	#Check bounds, [0] = x-Pos
+	#if (p_spawn_pos[0] < 0 || p_spawn_pos[0] > get_viewport().size[0]) || \
+		#(p_spawn_pos[1] < 0 || p_spawn_pos[1] > get_viewport().size[1]):
+		#printerr("SpawnPosition of NPC " + p_name + " is out of bounds!")
+	
 	await ready #important, otherwhise the sprite might not be instantiated yet, and thus null
 	var sprite_image: Image = Image.load_from_file("res://res/characters/sprite_" + name.to_lower() + ".png")
 	_sprite.texture = ImageTexture.create_from_image(sprite_image)
@@ -19,16 +24,5 @@ func set_frame(p_frame_idx: int) -> void:
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
-func _physics_process(delta: float) -> void:
-	#print("NPC y: " + str(position[1]))
-	pass
-
-
-#func _unhandled_input(p_event: InputEvent) -> void:
-	#if ((p_event is InputEventMouseButton && p_event.pressed == true)
-	#or (p_event is InputEventScreenTouch)):
-		#print("NPC was clicked")
-
-
 func _on_dialogue_hit_box_pressed() -> void:
 	clicked.emit(self)
