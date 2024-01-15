@@ -4,12 +4,11 @@ const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const RECIPE_SCN: PackedScene = preload("res://GUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
-@onready var _recipe_list := $DecisionWindow/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
+@onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 
-	
+
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory
-	var recipe_list := $DecisionWindow/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 	# "Ravioli (warm)": [[3],[]]
 	var ravioli_recipe := RECIPE_SCN.instantiate()
 	var input_items : Array[EMC_Item.IDs]
@@ -18,22 +17,22 @@ func setup(p_inventory: EMC_Inventory) -> void:
 	var input_items4 : Array[EMC_Item.IDs]
 	input_items.append(EMC_Item.IDs.RAVIOLI_TIN)
 	ravioli_recipe.setup(input_items, EMC_Item.IDs.RAVIOLI_MEAL, false, true)
-	recipe_list.add_child(ravioli_recipe)
+	_recipe_list.add_child(ravioli_recipe)
 	ravioli_recipe.was_pressed.connect(_on_recipe_pressed)
 	var cooked_pasta_recipe := RECIPE_SCN.instantiate()
 	input_items2 = [EMC_Item.IDs.UNCOOKED_PASTA]
 	cooked_pasta_recipe.setup(input_items2, EMC_Item.IDs.COOKED_PASTA, false, true)
-	recipe_list.add_child(cooked_pasta_recipe)
+	_recipe_list.add_child(cooked_pasta_recipe)
 	cooked_pasta_recipe.was_pressed.connect(_on_recipe_pressed)
 	var pasta_with_sauce_recipe := RECIPE_SCN.instantiate()
 	input_items3 = [EMC_Item.IDs.UNCOOKED_PASTA, EMC_Item.IDs.SAUCE_JAR]
 	pasta_with_sauce_recipe.setup(input_items3, EMC_Item.IDs.PASTA_WITH_SAUCE, false, true)
-	recipe_list.add_child(pasta_with_sauce_recipe)
+	_recipe_list.add_child(pasta_with_sauce_recipe)
 	pasta_with_sauce_recipe.was_pressed.connect(_on_recipe_pressed)
 	var adding_sauce_to_pasta_recipe := RECIPE_SCN.instantiate()
 	input_items4 = [EMC_Item.IDs.COOKED_PASTA, EMC_Item.IDs.SAUCE_JAR]
 	adding_sauce_to_pasta_recipe.setup(input_items4, EMC_Item.IDs.PASTA_WITH_SAUCE, false, true)
-	recipe_list.add_child(adding_sauce_to_pasta_recipe)
+	_recipe_list.add_child(adding_sauce_to_pasta_recipe)
 	adding_sauce_to_pasta_recipe.was_pressed.connect(_on_recipe_pressed)
 	
 

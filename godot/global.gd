@@ -115,21 +115,33 @@ func load_game() -> void:
 		_start_scene = CONTINUE_SCENE
 	
 	if data.get("inventory_data") == null:
-		_inventory = EMC_Inventory.new()
-		_inventory.add_new_item(EMC_Item.IDs.WATER)
-		_inventory.add_new_item(EMC_Item.IDs.WATER)
-		_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
-		_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
-		_inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE)
-		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-		_inventory.sort_custom(EMC_Inventory.sort_helper)
+		_inventory = create_inventory_with_starting_items()
 	else:
 		_inventory = EMC_Inventory.new()
 		for item_id : int in data["inventory_data"]:
 			_inventory.add_new_item(item_id)
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
-	
+
+
+## A default inventory when the game save state is reset/a crisis ended
+func create_inventory_with_starting_items() -> EMC_Inventory:
+	var inventory := EMC_Inventory.new()
+	inventory.add_new_item(EMC_Item.IDs.WATER)
+	inventory.add_new_item(EMC_Item.IDs.WATER)
+	inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
+	inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
+	inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE)
+	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
+	inventory.add_new_item(EMC_Item.IDs.BREAD)
+	inventory.add_new_item(EMC_Item.IDs.JAM)
+	inventory.sort_custom(EMC_Inventory.sort_helper)
+	return inventory
+
+
 func load_state() -> void:
 	if not FileAccess.file_exists(SAVE_STATE_FILE):
 		return

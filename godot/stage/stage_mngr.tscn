@@ -16,3 +16,4 @@ anchors_preset = 0
 mouse_filter = 1
 
 [node name="CityMap" parent="." instance=ExtResource("3_3nwca")]
+visible = false
