@@ -10,6 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_yctcf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -75,12 +76,12 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2
 
-[node name="Kochen" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
+[node name="Cook" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Kochen"
 
-[node name="Abbrechen" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"
@@ -96,5 +97,5 @@ stream = ExtResource("3_v0fsp")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_tv2ru")
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Kochen" to="." method="_on_cooking_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Abbrechen" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cook" to="." method="_on_cooking_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
