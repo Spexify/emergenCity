@@ -14,7 +14,7 @@ func _ready() -> void:
 		####################LOAD SAVE STATE#######################
 		Global.load_state()
 	
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack", true)
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
 	#GUIs initial verstecken

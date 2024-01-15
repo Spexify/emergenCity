@@ -18,13 +18,15 @@ const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
+var _avatar_ref : EMC_Avatar
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
+func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
 			_only_inventory : bool = true) -> void:
+	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
@@ -137,4 +139,10 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 
 
 func _on_consume_pressed() -> void:
-	pass # Replace with function body.
+	for component in _clicked_item.get_comps():
+		if component == EMC_IC_Drink:
+			_avatar_ref.add_hydration(_clicked_item.get_hydration())
+		if component == EMC_IC_Food:
+			_avatar_ref.add_nutrition(_clicked_item.get_nutritionness())
+	_inventory.remove_item(_clicked_item._ID)
+
