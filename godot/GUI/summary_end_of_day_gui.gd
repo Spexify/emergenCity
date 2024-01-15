@@ -31,12 +31,16 @@ var _has_drank : bool
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
 	_inventory = _INV_SCN.instantiate()
-	_inventory.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)
-	$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.add_child(_inventory)
+	_inventory.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)	
+	#_inventory.setup(Global.get_inventory(), _p_avatar, "Essen/Trinken" , false)	
+	for item in Global.get_inventory().get_all_items_as_ID():
+		print(item)
+	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.add_child(_inventory)
 	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.fit_child_in_rect(_inventory, Rect2(0,0,450,350) )
 	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI.SIZE_SHRINK_CENTER
 	#_inventory.set_height(400)
 	_inventory.show()
+
 	
 
 ## opens summary end of day GUI/makes visible
@@ -64,6 +68,7 @@ func close() -> void:
 func _on_continue_pressed() -> void:
 	_update_health()
 	button_sfx.play()
+	_inventory.open()
 	$SummaryWindow.visible = true
 	$DecisionWindow.visible = false
 

@@ -33,7 +33,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	set_title(p_title)
 	
 	if _only_inventory:
-		$Background/VBoxContainer/Consume.visible = false
+		$Background/VBoxContainer/HBoxContainer/Consume.visible = false
 	else: 
 		set_inventory_height(200)
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
@@ -58,8 +58,6 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 		if item != null:
 			_on_item_added(item, slot_idx)
 
-func get_inventory() -> EMC_Inventory:
-	return _inventory
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
@@ -147,4 +145,6 @@ func _on_consume_pressed() -> void:
 		if component == EMC_IC_Food:
 			_avatar_ref.add_nutrition(_clicked_item.get_nutritionness())
 	_inventory.remove_item(_clicked_item._ID)
+	_inventory.item_removed.emit()
+	return
 
