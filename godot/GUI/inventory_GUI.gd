@@ -17,6 +17,7 @@ signal closed
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
+var _clicked_item : EMC_Item
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktror des Inventars
@@ -60,6 +61,11 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 func set_title(p_new_text: String) -> void:
 	$Background/Label.text = "[center]" + p_new_text + "[/center]"
 
+func set_inventory_height(height : int = 400) -> void:
+	$Background/VBoxContainer/ScrollContainer.set_size(Vector2(450,height))
+
+func set_height(height : int = 630) -> void:
+	$Background.set_size(Vector2(450, height))
 
 ## Open the GUI
 func open() -> void:
@@ -106,6 +112,8 @@ func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 
 ## Display information of clicked [EMC_Item]
 func _on_item_clicked(sender: EMC_Item) -> void:
+	_clicked_item = sender
+	
 	#Name of the item
 	var label_name := $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
@@ -127,8 +135,6 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
-func set_inventory_height(height : int = 400) -> void:
-	$Background/VBoxContainer/ScrollContainer.size.y = height
 
 func _on_consume_pressed() -> void:
 	pass # Replace with function body.
