@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8qngbqj8n42a"]
+[gd_scene load_steps=7 format=3 uid="uid://c8qngbqj8n42a"]
 
 [ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_p8j38"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_q6owg"]
+[ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="3_e2o6h"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_hs5pc"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_2a3qa"]
 
@@ -12,6 +13,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 4
+theme = ExtResource("2_p8j38")
 script = ExtResource("1_wmmkg")
 
 [node name="DecisionWindow" type="PanelContainer" parent="."]
@@ -54,6 +56,18 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 autowrap_mode = 2
+
+[node name="PanelContainer" type="ScrollContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryGUI" parent="DecisionWindow/MarginContainer/VBoxContainer/PanelContainer" instance=ExtResource("3_e2o6h")]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Continue" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2

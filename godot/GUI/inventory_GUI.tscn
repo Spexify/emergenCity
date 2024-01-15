@@ -119,21 +119,11 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_270nm")
 theme_override_font_sizes/italics_font_size = 18
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="Consume" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+[node name="Consume" type="Button" parent="Background/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Konsumieren
 "
-
-[node name="Return" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Zurück"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -143,5 +133,4 @@ stream = ExtResource("5_w1mvg")
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_i2pde")
 
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Return" to="." method="close"]
+[connection signal="pressed" from="Background/VBoxContainer/Consume" to="." method="_on_consume_pressed"]

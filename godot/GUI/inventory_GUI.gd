@@ -33,9 +33,10 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	set_title(p_title)
 	
 	if _only_inventory:
-		$Background/VBoxContainer/HBoxContainer/Consume.visible = false
+		$Background/VBoxContainer/Consume.visible = false
 	else: 
-		set_inventory_height(200)
+		set_grid_height(200)
+		$Background/Label.visible = false
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -57,18 +58,33 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null:
 			_on_item_added(item, slot_idx)
-
+			item.show()
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	$Background/Label.text = "[center]" + p_new_text + "[/center]"
 
-func set_inventory_height(height : int = 400) -> void:
-	$Background/VBoxContainer/ScrollContainer.set_size(Vector2(450,height))
+func set_grid_height(height : int = 400) -> void:
+	$Background/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
 
-func set_height(height : int = 630) -> void:
-	$Background.set_size(Vector2(450, height))
-
+func clear_items() -> void:
+	for slot in $Background/VBoxContainer/ScrollContainer/GridContainer.get_children():
+		slot.remove_item()
+		
+## TODO: Karina
+func update_items() -> void:
+	for slot_idx in _inventory.get_slot_cnt():
+		#Add items that already are in the inventory
+		var item := _inventory.get_item_of_slot(slot_idx)
+		if item != null:
+			print(item)
+			var duplicated := item.copy_item()
+			duplicated.setup(duplicated.get_ID())
+			print("duplicate")
+			print(duplicated)
+			_on_item_added(duplicated, slot_idx)
+			
+			
 ## Open the GUI
 func open() -> void:
 	open_gui.play()
@@ -139,6 +155,8 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 
 
 func _on_consume_pressed() -> void:
+	if _clicked_item == null:
+		return
 	for component in _clicked_item.get_comps():
 		if component == EMC_IC_Drink:
 			_avatar_ref.add_hydration(_clicked_item.get_hydration())

@@ -12,7 +12,8 @@ signal on_drink_pressed
 
 ## TODO: add inventory in popup SEOD and choice of food and drinks
 var _avatar: EMC_Avatar
-var _inventory : EMC_InventoryGUI
+var _inventory_GUI : EMC_InventoryGUI
+var _inventory : EMC_Inventory
 const _INV_SCN : PackedScene = preload("res://GUI/inventory_GUI.tscn")
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 
@@ -30,16 +31,14 @@ var _has_drank : bool
 
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
-	_inventory = _INV_SCN.instantiate()
-	_inventory.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)	
-	#_inventory.setup(Global.get_inventory(), _p_avatar, "Essen/Trinken" , false)	
-	for item in Global.get_inventory().get_all_items_as_ID():
-		print(item)
-	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.add_child(_inventory)
-	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.fit_child_in_rect(_inventory, Rect2(0,0,450,350) )
-	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI.SIZE_SHRINK_CENTER
-	#_inventory.set_height(400)
-	_inventory.show()
+	#_inventory_GUI = _INV_SCN.instantiate()
+	_inventory = _p_inventory
+	_inventory_GUI = $DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI
+	_inventory_GUI.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)	
+	#_inventory_GUI.setup(Global.get_inventory(), _p_avatar, "Essen/Trinken" , false)	
+	#for item in _p_inventory.get_all_items_as_ID():
+	#	print(item)
+	_inventory_GUI.show()
 
 	
 
@@ -49,6 +48,8 @@ func open(p_day_cycle: EMC_DayCycle) -> void:
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = p_day_cycle.morning_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = p_day_cycle.noon_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = p_day_cycle.evening_action.get_description()
+	_inventory_GUI.clear_items()
+	_inventory_GUI.update_items()	
 	visible = true
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
@@ -68,7 +69,6 @@ func close() -> void:
 func _on_continue_pressed() -> void:
 	_update_health()
 	button_sfx.play()
-	_inventory.open()
 	$SummaryWindow.visible = true
 	$DecisionWindow.visible = false
 
