@@ -30,10 +30,12 @@ var _has_drank : bool
 
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
 	_avatar = _p_avatar
-	_inventory = _INV_SCN.instantiate()
+	#_inventory = _INV_SCN.instantiate()
+	_inventory = $DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI
 	_inventory.setup(_p_inventory, "Essen/Trinken" , false)
-	_inventory.set_inventory_height(200)
-	$DecisionWindow/MarginContainer/VBoxContainer/MarginContainer.add_child(_inventory)
+	$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.add_child(_inventory)
+	#$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer.fit_child_in_rect(_inventory, Rect2(0,0,450,350) )
+	$DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI.SIZE_SHRINK_CENTER
 	_inventory.show()
 	
 

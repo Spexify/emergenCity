@@ -29,7 +29,6 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar",\
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
 	
-	
 	if _only_inventory:
 		$Background/VBoxContainer/Consume.visible = false
 	else: 
