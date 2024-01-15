@@ -1,31 +1,25 @@
 extends Node
 
-var current_scene : Node = null
-
 @onready var root := get_tree().root
+
+const MAX_ECOINS = 99999
+
+const SAVE_GAME_FILE = "user://savegame.save"
+const SAVE_STATE_FILE = "user://savestate.save"
+const HOME_SCENE = "res://preparePhase/main_menu.tscn"
+const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 
 var _e_coins : int = 100;
 var _inventory : EMC_Inventory = null
 
-var _start_scene : String = "res://preparePhase/main_menu.tscn"
-
-const MAX_ECOINS = 99999
-const SAVE_FILE = "user://savegame.save"
+var current_scene : Node = null
+var _start_scene : String
+var _was_crisis : bool
 
 
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
-	_inventory = EMC_Inventory.new() #MRM: Sonst gibt es einen Null error wenn man die CRISIS PHASE..
-									#.. ohne den Shop einmal geöffnet zu haben
-	#Starterkit (for testing)
-	_inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
-	_inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
-	_inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
-	_inventory.add_new_item(EMC_Item.IDs.COOKED_PASTA)
-	_inventory.add_new_item(EMC_Item.IDs.BREAD)
-	_inventory.add_new_item(EMC_Item.IDs.JAM)
-	_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
 
 func goto_scene(path: String) -> void:
 	call_deferred("_deferred_goto_scene", path)
@@ -40,24 +34,34 @@ func _deferred_goto_scene(path: String) -> void:
 
 func load_scene_name() -> String:
 	return _start_scene
+	
+func was_crisis() -> bool:
+	return _was_crisis
 
 func _notification(what : int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_game()
+	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
+		save_game(current_scene.name == "CrisisPhase")
 		get_tree().quit() 
 	
 func reset_save() -> void:
-	var save_game : FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	save_game.store_string("")
 	
 	load_game()
 	
-func save_game() -> void:
-	var save_game : FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+func reset_state() -> void:
+	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
+	save_game.store_string("")
+	
+func save_game(was_crisis : bool) -> void:
+	
+	###################SAVE GAME######################
+	
+	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
 	var data : Dictionary = {
 		"e_coins": _e_coins,
-		"start_scene": "res://preparePhase/main_menu.tscn",
+		"was_crisis": was_crisis,
 		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
 	}
 	# JSON provides a static method to serialized JSON string.
@@ -66,13 +70,30 @@ func save_game() -> void:
 	# Store the save dictionary as a new line in the save file.
 	save_game.store_line(json_string)
 	
-func load_game() -> void:
-	return #MRM: Zum testen, sorry
+	##################SAVE STATE#####################
 	
-	if not FileAccess.file_exists(SAVE_FILE):
-		return # Error! We don't have a save to load.
+	var save_state : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
+	var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Save")
+	for node in save_nodes:
+		# Check the node has a save function.
+		if !node.has_method("save"):
+			print("Save node '%s' is missing a save() function, skipped" % node.name)
+			continue
 
-	var save_game : FileAccess = FileAccess.open("user://savegame.save", FileAccess.READ)
+		# Call the node's save function.
+		var node_data : Dictionary = node.call("save")
+
+		# JSON provides a static method to serialized JSON string.
+		json_string = JSON.stringify(node_data)
+
+		# Store the save dictionary as a new line in the save file.
+		save_state.store_line(json_string)
+	
+func load_game() -> void:
+	if not FileAccess.file_exists(SAVE_GAME_FILE):
+		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
+
+	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.READ)
 	var json_string : String = save_game.get_line()
 	var json : JSON = JSON.new()
 
@@ -86,7 +107,12 @@ func load_game() -> void:
 		data = json.get_data()
 	
 	_e_coins = data.get("e_coins", 100)
-	_start_scene = data.get("start_scene", "res://preparePhase/main_menu.tscn")
+	
+	_was_crisis = data.get("was_crisis", false)
+	if not _was_crisis:
+		_start_scene = HOME_SCENE
+	else:
+		_start_scene = CONTINUE_SCENE
 	
 	if data.get("inventory_data") == null:
 		_inventory = EMC_Inventory.new()
@@ -101,9 +127,30 @@ func load_game() -> void:
 		_inventory = EMC_Inventory.new()
 		for item_id : int in data["inventory_data"]:
 			_inventory.add_new_item(item_id)
-			print(str(item_id))
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
+	
+func load_state() -> void:
+	if not FileAccess.file_exists(SAVE_STATE_FILE):
+		return
+
+	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.READ)
+	var json : JSON = JSON.new()
+
+	var data : Dictionary
+	
+	while save_game.get_position() < save_game.get_length():
+		var json_string : String = save_game.get_line()
+		
+		var parse_result : Error = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		var node_data : Dictionary = json.get_data()
+
+		var new_object : NodePath = node_data["node_path"]
+		get_node(new_object).load_state(node_data)
 
 func get_e_coins() -> int:
 	return _e_coins

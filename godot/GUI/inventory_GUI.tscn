@@ -27,10 +27,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -115.0
-offset_top = -186.0
-offset_right = 116.0
-offset_bottom = 194.0
+offset_left = -224.5
+offset_top = -311.0
+offset_right = 225.5
+offset_bottom = 319.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qja6e")
@@ -68,6 +68,7 @@ offset_bottom = 139.0
 grow_horizontal = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
+custom_minimum_size = Vector2(400, 350)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]

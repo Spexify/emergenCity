@@ -10,6 +10,10 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Global.was_crisis():
+		####################LOAD SAVE STATE#######################
+		Global.load_state()
+	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	

@@ -51,29 +51,39 @@ func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 	self._type_gui = type_gui
 	self._description = description
 
-
 func get_ACTION_NAME() -> String:
 	return self._ACTION_NAME
-
 
 func get_constraints_prior() -> Dictionary:
 	return self._constraints_prior
 
-
 func get_constraints_rejected() -> Array[String]:
 	return self._constraints_rejected
-
 
 func set_constraints_rejected(constraints_rejected: Array[String]) -> void:
 	self._constraints_rejected = constraints_rejected
 
-
 func get_changes() -> Dictionary:
 	return self._changes
-
 
 func get_type_gui() -> String:
 	return self._type_gui
 
 func get_description() -> String:
 	return self._description
+	
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"action_ID": _action_ID,
+		"ACTION_NAME": _ACTION_NAME,
+		"description": _description,
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	_action_ID = data.get("action_ID")
+	_ACTION_NAME = data.get("ACTION_NAME")
+	_description = data.get("description")
+	
+static func empty_action() -> EMC_Action:
+	return EMC_Action.new(NAN, "", {}, {}, "", "")

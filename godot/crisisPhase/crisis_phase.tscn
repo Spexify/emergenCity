@@ -31,7 +31,7 @@ script = ExtResource("1_23hjb")
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
 
-[node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
+[node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
 position = Vector2(277, 601)
 
@@ -86,7 +86,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("5_gk1jp")]
+[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" groups=["Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
