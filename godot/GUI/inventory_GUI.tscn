@@ -125,6 +125,11 @@ theme_override_font_sizes/font_size = 25
 text = "Konsumieren
 "
 
+[node name="Close" type="Button" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Close"
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
@@ -134,3 +139,4 @@ stream = ExtResource("5_w1mvg")
 stream = ExtResource("6_i2pde")
 
 [connection signal="pressed" from="Background/VBoxContainer/Consume" to="." method="_on_consume_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/Close" to="." method="close"]

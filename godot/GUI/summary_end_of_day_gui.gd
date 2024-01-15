@@ -29,18 +29,21 @@ var _has_drank : bool
 	#else:
 		#close()
 
-func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory) -> void:
+func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory, _p_inventory_GUI_ref: EMC_InventoryGUI) -> void:
 	_avatar = _p_avatar
 	#_inventory_GUI = _INV_SCN.instantiate()
 	_inventory = _p_inventory
-	_inventory_GUI = $DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI
-	_inventory_GUI.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)	
+	_inventory_GUI = _p_inventory_GUI_ref
+	#_inventory_GUI = $DecisionWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI
+	#_inventory_GUI.setup(_p_inventory, _p_avatar, "Essen/Trinken" , false)	
 	#_inventory_GUI.setup(Global.get_inventory(), _p_avatar, "Essen/Trinken" , false)	
 	#for item in _p_inventory.get_all_items_as_ID():
 	#	print(item)
-	_inventory_GUI.show()
-
+	#_inventory_GUI.show()
+	_inventory_GUI.close_button.connect(_open_summary_window)
 	
+func _open_summary_window() -> void:
+	$SummaryWindow.visible = true
 
 ## opens summary end of day GUI/makes visible
 func open(p_day_cycle: EMC_DayCycle) -> void:
@@ -48,8 +51,9 @@ func open(p_day_cycle: EMC_DayCycle) -> void:
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = p_day_cycle.morning_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = p_day_cycle.noon_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = p_day_cycle.evening_action.get_description()
-	_inventory_GUI.clear_items()
-	_inventory_GUI.update_items()	
+	#_inventory_GUI.clear_items()
+	#inventory_GUI.update_items()	
+
 	visible = true
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
@@ -69,9 +73,11 @@ func close() -> void:
 func _on_continue_pressed() -> void:
 	_update_health()
 	button_sfx.play()
-	$SummaryWindow.visible = true
+	_inventory_GUI.set_consume_active()
+	_inventory_GUI.open()
 	$DecisionWindow.visible = false
 
+	
 
 func _on_new_day_pressed() -> void:
 	button_sfx.play()

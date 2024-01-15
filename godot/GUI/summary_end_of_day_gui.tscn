@@ -58,12 +58,14 @@ text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 autowrap_mode = 2
 
 [node name="PanelContainer" type="ScrollContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+visible = false
 clip_contents = false
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="InventoryGUI" parent="DecisionWindow/MarginContainer/VBoxContainer/PanelContainer" instance=ExtResource("3_e2o6h")]
+visible = false
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3

@@ -54,7 +54,7 @@ func _ready() -> void:
 	#TODO: Substitute null with OptionalEventMngr:
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, null, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
 
 func _process(delta: float) -> void:	
 	if Input.is_action_just_pressed("ToggleGUI"): #G key

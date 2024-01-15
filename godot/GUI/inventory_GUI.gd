@@ -10,6 +10,7 @@ class_name EMC_InventoryGUI
 
 signal opened
 signal closed
+signal close_button
 
 @onready var open_gui := $SFX/OpenGUI
 @onready var close_gui := $SFX/CloseGUI
@@ -19,24 +20,23 @@ const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
+var _only_inventory : bool
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
-			_only_inventory : bool = true) -> void:
+			_p_only_inventory : bool = true) -> void:
 	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
+	_only_inventory = _p_only_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
 	
-	if _only_inventory:
-		$Background/VBoxContainer/Consume.visible = false
-	else: 
-		set_grid_height(200)
-		$Background/Label.visible = false
+	$Background/VBoxContainer/Consume.visible = false
+	$Background/VBoxContainer/Close.visible = false
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -59,6 +59,11 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 		if item != null:
 			_on_item_added(item, slot_idx)
 			item.show()
+
+func set_consume_active() -> void:
+	_only_inventory = false
+	$Background/VBoxContainer/Consume.visible = true
+	$Background/VBoxContainer/Close.visible = true
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
@@ -94,6 +99,8 @@ func open() -> void:
 
 ## Close the GUI
 func close() -> void:
+	if !_only_inventory: 
+		close_button.emit()
 	close_gui.play()
 	hide()
 	closed.emit()
@@ -157,11 +164,12 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
 		return
-	for component in _clicked_item.get_comps():
-		if component == EMC_IC_Drink:
-			_avatar_ref.add_hydration(_clicked_item.get_hydration())
-		if component == EMC_IC_Food:
-			_avatar_ref.add_nutrition(_clicked_item.get_nutritionness())
+	var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
+	if  drink_comp!= null:
+		_avatar_ref.add_hydration(drink_comp.get_hydration())
+	var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
+	if food_comp != null:
+		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
 	_inventory.remove_item(_clicked_item._ID)
 	_inventory.item_removed.emit()
 	return
