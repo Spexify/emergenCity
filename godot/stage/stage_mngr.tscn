@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf1x6jm5o81ck"]
+[gd_scene load_steps=4 format=3 uid="uid://bf1x6jm5o81ck"]
 
 [ext_resource type="Script" path="res://stage/stage_mngr.gd" id="1_2ergk"]
 [ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://stage/home.tscn" id="2_epoie"]
+[ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="3_3nwca"]
 
 [node name="StageMngr" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_2ergk")
 
 [node name="CurrStage" parent="." instance=ExtResource("2_epoie")]
 layer_2/modulate = Color(1, 1, 1, 0.262745)
-layer_2/tile_data = PackedInt32Array(393223, 4, 0)
 
 [node name="NPCs" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-scale = Vector2(0.5, 0.5)
 mouse_filter = 1
+
+[node name="CityMap" parent="." instance=ExtResource("3_3nwca")]

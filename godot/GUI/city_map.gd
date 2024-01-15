@@ -4,7 +4,7 @@ class_name EMC_CityMap
 var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
-#var _pin_pos_tween: Tween
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,9 +24,9 @@ func open() -> void:
 	var curr_stage_name := _stage_mngr.get_curr_stage_name()
 	match curr_stage_name:
 		EMC_StageMngr.STAGENAME_HOME:
-			$Pin.position = Vector2i(150, 230) * 2 #MRM: Mal 2 ist magic number, wegen Scale wechsel, srry
+			$Pin.position = Vector2i(300, 460)
 		EMC_StageMngr.STAGENAME_MARKET:
-			$Pin.position = Vector2i(103, 460) * 2 #MRM: Mal 2 ist magic number, wegen Scale wechsel, srry
+			$Pin.position = Vector2i(206, 920)
 		_: push_error("CityMap-Pin kennt momentane Stage nicht!")
 	#_pin_pos_tween = get_tree().create_tween()
 	#_pin_pos_tween.tween_property($Pin, "position", $Pin.position - Vector2(0, 15), 0.5).set_trans(Tween.TRANS_CUBIC)
@@ -84,14 +84,6 @@ func _on_villa_btn_pressed() -> void:
 
 func _on_nature_btn_pressed() -> void:
 	_tooltip_GUI.open("Lichtung ist noch nicht implementiert!")
-
-
-func _on_change_stage_gui_closed() -> void:
-	$MarketplaceBtn.show() #MRM: Bugfix: Sonst überlappt der Button den BestätigenButton der ChangeStage GUI
-
-
-func _on_change_stage_gui_opened() -> void:
-	$MarketplaceBtn.hide()
 
 
 func _on_change_stage_gui_stayed_on_same_stage() -> void:

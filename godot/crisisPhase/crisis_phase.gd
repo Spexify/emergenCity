@@ -5,7 +5,6 @@ var _backpack: EMC_Inventory = Global.get_inventory()
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 @onready var uncast_guis := $GUI.get_children()
-@onready var dialogue_GUI := $GUI/VBC/LowerSection/DialogueGUI
 @export var dialogue_resource: DialogueResource
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +20,6 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
-	#dialogue_GUI.hide()
 	
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
@@ -33,8 +31,7 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $CityMap)
-	$CityMap.setup($GUI/VBC/UpperSection/HBC/DayMngr, $StageMngr, $GUI/VBC/LowerSection/TooltipGUI)
+	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI)
 	
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -56,12 +53,11 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
 
-func _process(delta: float) -> void:	
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
-
 
 
 func _on_inventory_opened() -> void:
@@ -96,10 +92,11 @@ func _on_action_GUI_closed() -> void:
 
 ###################################### DIALOGUE HANDLING ###########################################
 func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
-	#var existing_GUI = $GUI/VBC/LowerSection.get_node("DialogueGUI")
+	#Theoretically the game is paused so no other DialogueGUI should be instantiated,
+	#but for robustness we still make sure there's at most one DialogueGUI
 	for node:Node in $GUI/VBC/LowerSection.get_children():
 		if node.get_name() == "DialogueGUI":
-			return #We don't want to start a new Dialogue if an old one is still going
+			return 
 	
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
@@ -112,6 +109,4 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	print("Dialogue ended...")
 	get_tree().paused = false
-	pass
