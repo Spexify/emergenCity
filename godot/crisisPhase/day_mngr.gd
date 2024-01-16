@@ -64,7 +64,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		#5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 		#						 "Pop Up Aktion ausgeführt.")
 		5: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
-								{ }, "rainwater_barrel_GUI",
+								{ }, "RainwaterBarrelGUI",
 								"Hat Wasser aus der Regentonne geschöpft.")
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
@@ -93,6 +93,7 @@ puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
 	_puGUI = puGUI
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
+	_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
 	_update_HUD()
 
 
@@ -144,6 +145,7 @@ func _on_action_executed(action : EMC_Action) -> void:
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
+	_check_op_counter()
 
 func _on_seod_closed_game_end() -> void:
 	_egGUI.open(self.history, _avatar_life_status)
@@ -152,6 +154,7 @@ func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
+	_check_op_counter()
 
 
 func get_current_day_cycle() -> EMC_DayCycle:
@@ -212,6 +215,8 @@ func _create_new_pop_up_action() -> EMC_PopUpAction:
 ################################### Optional Events ################################################
 
 func _check_op_counter() -> void:
+	print("check op")
+	print(str(_opGUI_probability_countdown))
 	_opGUI_probability_countdown -= 1
 	if _opGUI_probability_countdown == 0:
 		_create_new_optional_event()
@@ -220,8 +225,10 @@ func _check_op_counter() -> void:
 func _create_new_optional_event() -> void:
 	# currently only one event, the RAINWATER_BARREL is implemented
 	# With more content, this should be a match statement similar to create_pop_up_action
+	var _added_water_quantity : int = _rng.randi_range(1, 6) # in units of 250ml
 	_overworld_states_mngr_ref.set_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, 
-		_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL))
+		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL), 
+			(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) + _added_water_quantity)))
 
 ######################################## CONSTRAINT METHODS ########################################
 func constraint_cooking() -> String:

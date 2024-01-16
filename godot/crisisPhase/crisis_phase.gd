@@ -2,6 +2,8 @@ extends Node2D
 
 var _backpack: EMC_Inventory = EMC_Inventory.new()
 
+var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
+
 @onready var uncast_guis := $GUI.get_children()
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +15,10 @@ func _ready() -> void:
 	_backpack.add_new_item(EMC_Item.IDs.RAVIOLI_TIN);
 	_backpack.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE);
 	_backpack.add_new_item(EMC_Item.IDs.WATER_DIRTY);
+	
+	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
+	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
+	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, "Rucksack")
 	
@@ -35,6 +41,7 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
+	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 	
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/DayMngr, $CityMap)
 	$CityMap.setup($GUI/VBC/UpperSection/DayMngr, $StageMngr, $GUI/VBC/LowerSection/TooltipGUI)
@@ -53,8 +60,8 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
-	#TODO: Substitute null with OptionalEventMngr:
-	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, null, action_guis, \
+	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, _overworld_states_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack)
 
