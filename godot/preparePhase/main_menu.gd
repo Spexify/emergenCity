@@ -4,7 +4,7 @@ extends Control
 @onready var close_guisfx := $"../SFX/CloseGUISFX"
 @onready var button_sfx := $"../SFX/ButtonSFX"
 @onready var e_coins := $MarginContainer/eCoins
-@onready var timer := $"../Timer"
+#@onready var timer := $"../Timer"
 
 func _ready() -> void:
 	e_coins.text = str(Global.get_e_coins()) + " eCoins"
@@ -40,3 +40,7 @@ func _on_settings_pressed() -> void:
 	settings.show()
 	for child in settings.get_children():
 		child.show()
+
+
+func _on_reset_pressed() -> void:
+	Global.reset_save()

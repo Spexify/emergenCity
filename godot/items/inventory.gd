@@ -29,18 +29,22 @@ func get_slot_cnt() -> int:
 
 ## Returns if the inventory has any free slots left
 func has_space() -> bool:
-	return get_item_count() < _slot_cnt
+	return get_item_count_total() < _slot_cnt
 
 
-## Add a new [EMC_Item] to this inventory.
+## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
 ## Returns true, if the item was added, else false
+##
+## TODO: Please rename
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item := _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	var new_item: EMC_Item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
 	new_item.setup(p_ID)
 	return add_item(new_item)
 
 
-## Add an existing [EMC_Item] to this inventory.
+## Add an already instantiated [EMC_Item] Scene to this inventory.
+## This is used if a [EMC_Item] has additional components like durability,
+## which should be remembered.
 ## Returns true, if the item was added, else false
 func add_item(p_item: EMC_Item) -> bool:
 	if p_item == null: return false
@@ -56,7 +60,11 @@ func add_item(p_item: EMC_Item) -> bool:
 ## else returns null
 ## THIS METHOD SHOULD PRIMARILY BE USED BY [EMC_InventoryGUI]!
 ## Use get_item_of_ID() instead
+## Code Review: Method necessary for EMC_InventoryGUI.setup()
 func get_item_of_slot(p_slot_idx: int) -> EMC_Item:
+	if (p_slot_idx < 0 || p_slot_idx > MAX_SLOT_CNT):
+		printerr("Array out of bounds Zugriff.")
+		return null
 	return _slots[p_slot_idx]
 
 
@@ -70,25 +78,24 @@ func get_item_of_ID(p_ID: EMC_Item.IDs) -> EMC_Item:
 	return null
 
 
-## Das Inventar ist im Besitz von mindestens einem [EMC_Item] mit dieser ID
+## The inventory has at least one item of [p_ID]
 func has_item(p_ID: EMC_Item.IDs) -> bool:
 	return get_item_of_ID(p_ID) != null
 
 
-## Gibt die Anzahl an [EMC_Item]s dieses Typ zurück
+## Returns count of [EMC_Item]s of [p_ID]
 func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
 	
-	for slotIdx in _slot_cnt:
-		var slot := $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item: EMC_Item = slot.get_item()
-		if item != null && item.get_ID() == p_ID:
+	for slot_idx in _slot_cnt:
+		var item: EMC_Item = _slots[slot_idx]
+		if item != null and item.get_ID() == p_ID:
 			cnt += 1
 	return cnt
 
 
-## Gibt die Gesamtanzahl an [EMC_Item]s zurück
-func get_item_count() -> int:
+## Returns total count of [EMC_Item]s in inventory
+func get_item_count_total() -> int:
 	var cnt: int = 0
 	
 	for slot_idx in _slot_cnt:
@@ -100,7 +107,6 @@ func get_item_count() -> int:
 			#break
 	return cnt
 
-
 ## Return all items as Array of [EMC_Item]s
 func get_all_items() -> Array[EMC_Item]:
 	var items: Array[EMC_Item] = []
@@ -111,9 +117,16 @@ func get_all_items() -> Array[EMC_Item]:
 		if item != null:
 			items.push_back(item)
 	return items
-
+	
+## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
+func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
+	var items : Array[EMC_Item.IDs] = []
+	for item in _slots:
+		items.push_back(item.get_ID() if item != null else EMC_Item.IDs.DUMMY)
+	return items
 
 ## Return all items as Array of [EMC_Item]s for an ID
+## CodeReview TODO: Add to_get_cnt parameter, with to_get_cnt = -1 => all items
 func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 	var items := get_all_items()
 	for slot_idx in items.size():
@@ -122,8 +135,8 @@ func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 	return items
 
 
-## Diesem Inventar ein [EMC_Item] [to_be_removed_cnt] Mal entfernen entfernen
-## Gibt die Anzahl an erfolgreich entfernten Items zurück
+## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
+## Returns the count of successfully removed items
 func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
@@ -145,7 +158,17 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 func filter_items() -> void:
 	pass
 
-### Items nach ID sortieren (QoL feature in der Zukunft)
+static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:
+	if a == null:
+		return false
+	if b == null:
+		return true
+	return a.get_ID() < b.get_ID()
+
+func sort_custom(f : Callable) -> void:
+	_slots.sort_custom(f)
+
+### Sort Items (by ID?) -> TODO
 #func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
 	##TODO (keine Prio)
 	#pass

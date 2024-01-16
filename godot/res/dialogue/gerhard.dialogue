@@ -1,0 +1,18 @@
+~ start
+
+Avatar: [[Hi|Guten Tag.|Hallöchenpopöchen|Moin!|Servus]]
+Avatar: Das is nen emergenCITY Dialogue Test hier.
+Gerhard: Jawollja!
+Gerhard: Pizza mit Ananas oder ohne?
+- Avatar: Mit natürlich!
+	Gerhard: [[Ick [speed=0.2]weeeess[/speed] ja net...]]
+- Avatar: Bähh, ohne!
+	Gerhard: Mach dich vom Acker!
+	=> END
+- Ende Gelände => END!
+
+Avatar: Naja.
+- Nochmal!! => start
+- Tschö mit ö! => END
+
+=> END

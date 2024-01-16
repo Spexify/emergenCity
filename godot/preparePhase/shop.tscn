@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://j8qcqefgbhq4"]
+[gd_scene load_steps=8 format=3 uid="uid://j8qcqefgbhq4"]
 
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="3_ncapd"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/gui/icon_ecoins.png" id="3_spno5"]
+[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="5_npb2c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
+bg_color = Color(0.360784, 0.333333, 0.301961, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rftqe"]
+texture = ExtResource("3_ncapd")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -10,30 +23,63 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_duud7")
 script = ExtResource("1_mfqhx")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l86im")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[right][color=black]10[/color][/right]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("3_spno5")
+
+[node name="Margin" type="MarginContainer" parent="Background"]
 layout_mode = 2
 theme = ExtResource("2_duud7")
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="Main" type="VBoxContainer" parent="Background/Margin"]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/separation = 36
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="InventorySection" type="VBoxContainer" parent="Background/Margin/Main"]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Titel" type="RichTextLabel" parent="Background/Margin/Main/InventorySection"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_vertical = 4
@@ -43,23 +89,59 @@ bbcode_enabled = true
 text = "[center]Inventory[/center]
 "
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 325)
+[node name="InventoryPanel" type="PanelContainer" parent="Background/Margin/Main/InventorySection"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_vertical = 4
-theme_type_variation = &"TextBox"
+theme_override_styles/panel = SubResource("StyleBoxTexture_rftqe")
 
-[node name="Shelf" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer"]
+[node name="Margin" type="MarginContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PanelContainer/Shelf"]
-layout_mode = 2
-columns = 15
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="InventoryGrid" type="GridContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Shelf"]
+layout_mode = 2
+columns = 7
+
+[node name="Description" type="PanelContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description"]
+layout_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+
+[node name="Components" type="RichTextLabel" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme = ExtResource("2_duud7")
+
+[node name="Description" type="RichTextLabel" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("2_duud7")
+theme_override_font_sizes/italics_font_size = 18
+
+[node name="ShopSection" type="VBoxContainer" parent="Background/Margin/Main"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Background/Margin/Main/ShopSection"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_vertical = 4
@@ -69,14 +151,32 @@ bbcode_enabled = true
 text = "[center]Shop[/center]
 "
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 325)
+[node name="ShopPanel" type="PanelContainer" parent="Background/Margin/Main/ShopSection"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 4
-theme_type_variation = &"TextBox"
+theme_override_styles/panel = SubResource("StyleBoxTexture_rftqe")
 
-[node name="Shelf" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer"]
+[node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/ShopSection/ShopPanel"]
 layout_mode = 2
 
-[node name="ItemList" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/Shelf"]
+[node name="ShopGrid" type="GridContainer" parent="Background/Margin/Main/ShopSection/ShopPanel/Shelf"]
 layout_mode = 2
+columns = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Margin/Main"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Home" type="Button" parent="Background/Margin/Main/HBoxContainer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Home"
+
+[node name="TextureButton" type="TextureButton" parent="Background/Margin/Main/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_npb2c")
+
+[connection signal="pressed" from="Background/Margin/Main/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Background/Margin/Main/HBoxContainer/TextureButton" to="." method="_on_back_button_pressed"]

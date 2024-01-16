@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dpy2wxs2io5an"
+path="res://.godot/imported/gerhard.dialogue-6f68f4a6cea4f5a58ec3e9dc3e8e0567.tres"
+
+[deps]
+
+source_file="res://res/dialogue/gerhard.dialogue"
+dest_files=["res://.godot/imported/gerhard.dialogue-6f68f4a6cea4f5a58ec3e9dc3e8e0567.tres"]
+
+[params]
+
+defaults=true

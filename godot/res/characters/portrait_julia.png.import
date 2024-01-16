@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyk3bpoeo2jww"
-path="res://.godot/imported/menu_bg.png-7ec9a20d47f7a9a467a1e2ec16c715ed.ctex"
+uid="uid://bksj042ox1xlh"
+path="res://.godot/imported/portrait_julia.png-e52d4f3ceff67434cb31bddca66a4b98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/menu_bg.png"
-dest_files=["res://.godot/imported/menu_bg.png-7ec9a20d47f7a9a467a1e2ec16c715ed.ctex"]
+source_file="res://res/characters/portrait_julia.png"
+dest_files=["res://.godot/imported/portrait_julia.png-e52d4f3ceff67434cb31bddca66a4b98.ctex"]
 
 [params]
 

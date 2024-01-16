@@ -10,104 +10,81 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_yctcf")
 
-[node name="DecisionWindow" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 496.0
 offset_bottom = 288.0
 
-[node name="MarginContainer" type="MarginContainer" parent="DecisionWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DecisionWindow/MarginContainer"]
+[node name="VBC" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleSpacing" type="MarginContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+[node name="TitleSpacing" type="MarginContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBC/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Was möchtest du kochen?"
 horizontal_alignment = 1
 
-[node name="TextBox" type="PanelContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+[node name="RecipeBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="DecisionWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
-autowrap_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
-[node name="Kochen" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RecipeList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+
+[node name="HBC" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+
+[node name="InputItemList" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+layout_mode = 2
+
+[node name="RestrictionList" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+
+[node name="Cook" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Kochen"
 
-[node name="Abbrechen" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"
-
-[node name="SummaryWindow" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 288.0
-
-[node name="MarginContainer" type="MarginContainer" parent="SummaryWindow"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TitleSpacing" type="MarginContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 12
-
-[node name="Title" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TitleSpacing"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Today you have: 
-"
-horizontal_alignment = 1
-
-[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Description" type="Label" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."
-autowrap_mode = 2
-
-[node name="NewDay" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Start a new day"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -120,6 +97,5 @@ stream = ExtResource("3_v0fsp")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_tv2ru")
 
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Kochen" to="." method="_on_kochen_pressed"]
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/HBoxContainer/Abbrechen" to="." method="_on_abbrechen_pressed"]
-[connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cook" to="." method="_on_cooking_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

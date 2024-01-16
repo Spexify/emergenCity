@@ -157,6 +157,11 @@ theme_override_font_sizes/font_size = 45
 button_pressed = true
 text = "Dyslexic Font"
 
+[node name="Reset" type="Button" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Reset Save"
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
@@ -173,3 +178,4 @@ stream = ExtResource("6_qpdy4")
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
 [connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="Settings/CenterContainer" method="_on_font_change_pressed"]
+[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Reset" to="Menu" method="_on_reset_pressed"]

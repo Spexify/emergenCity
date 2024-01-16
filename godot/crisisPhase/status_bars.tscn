@@ -8,7 +8,6 @@
 [node name="StatusBars" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-scale = Vector2(0.25, 0.25)
 script = ExtResource("1_m4dni")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -19,57 +18,57 @@ theme_override_constants/separation = 20
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="ContainerNutrition" type="Container" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(150, 60)
+custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="NutritionIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer2/ContainerNutrition"]
-position = Vector2(70, 20)
-scale = Vector2(2, 2)
+position = Vector2(40, 15)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_m3q3p")
 
 [node name="NutritionBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 step = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="ContainerHydration" type="Container" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 60)
+custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="HydrationIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer/ContainerHydration"]
-position = Vector2(70, 20)
-scale = Vector2(2, 2)
+position = Vector2(40, 15)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("3_k4dk6")
 
 [node name="HydrationBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 step = 25.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="ContainerHealth" type="Container" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(150, 60)
+custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="HealthIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer3/ContainerHealth"]
-position = Vector2(70, 20)
-scale = Vector2(2, 2)
+position = Vector2(40, 15)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_rju8q")
 
 [node name="HealthBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 step = 25.0

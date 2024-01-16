@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=18 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://characters/avatar.tscn" id="1_mrtgi"]
-[ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="4_ospyx"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
@@ -32,7 +31,7 @@ script = ExtResource("1_23hjb")
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
 
-[node name="Avatar" parent="." instance=ExtResource("1_mrtgi")]
+[node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
 position = Vector2(277, 601)
 
@@ -57,94 +56,100 @@ shape = SubResource("RectangleShape2D_yx03m")
 [node name="BtnBackpack" type="TouchScreenButton" parent="."]
 z_index = 3
 position = Vector2(481, 20)
-scale = Vector2(2, 2)
 texture_normal = ExtResource("1_07xlw")
 
 [node name="GUI" type="CenterContainer" parent="."]
 z_index = 3
-custom_minimum_size = Vector2(284, 512)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 288.0
-offset_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2, 2)
+custom_minimum_size = Vector2(568, 1024)
+offset_right = 568.0
+offset_bottom = 1024.0
 pivot_offset = Vector2(-5, -5)
+size_flags_horizontal = 4
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="VBC" type="VBoxContainer" parent="GUI"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="UpperSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(576, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBC" type="HBoxContainer" parent="GUI/VBC/UpperSection"]
 layout_mode = 2
 
-[node name="DayMngr" parent="GUI/VBC/UpperSection" instance=ExtResource("5_gk1jp")]
+[node name="StatusBars" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("6_22w2e")]
+process_mode = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 
-[node name="StatusBars" parent="GUI/VBC/UpperSection" instance=ExtResource("6_22w2e")]
-process_mode = 3
+[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" groups=["Save"] instance=ExtResource("5_gk1jp")]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MiddleSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(288, 350)
+custom_minimum_size = Vector2(576, 700)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="BackpackGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("6_mo744")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CookingGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("10_64vl8")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RainwaterBarrelGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("12_ad4fq")]
 visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]
-custom_minimum_size = Vector2(0, 100)
+process_mode = 3
+custom_minimum_size = Vector2(576, 200)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RestGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("11_dfl7m")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
+visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
-[node name="CityMap" parent="." instance=ExtResource("4_ospyx")]
-visible = false
-offset_right = 288.0
-offset_bottom = 512.0
-scale = Vector2(2, 2)
-
-[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_health_updated"]
-[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_hydration_updated"]
-[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/StatusBars" method="_on_avatar_nutrition_updated"]
+[connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
+[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
+[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
+[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]
-[connection signal="closed" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_closed"]
-[connection signal="opened" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_opened"]
-[connection signal="stayed_on_same_stage" from="GUI/VBC/LowerSection/ChangeStageGUI" to="CityMap" method="_on_change_stage_gui_stayed_on_same_stage"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1w6y4ns7ia0s"
-path="res://.godot/imported/sprite_granny.png-4d87a466502a9a5320f6fcde8cb5a484.ctex"
+uid="uid://cibm6cmn81x02"
+path="res://.godot/imported/sprite_friedel.png-3a1397c3302bf22febcd824b5e1e4740.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/characters/sprite_granny.png"
-dest_files=["res://.godot/imported/sprite_granny.png-4d87a466502a9a5320f6fcde8cb5a484.ctex"]
+source_file="res://res/characters/sprite_friedel.png"
+dest_files=["res://.godot/imported/sprite_friedel.png-3a1397c3302bf22febcd824b5e1e4740.ctex"]
 
 [params]
 

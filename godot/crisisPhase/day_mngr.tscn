@@ -5,33 +5,34 @@
 
 [node name="DayMngr" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 8.0
-offset_bottom = 8.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 size_flags_vertical = 0
 script = ExtResource("1_wh1q6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(564, 90)
 layout_mode = 0
-offset_left = 100.0
-offset_right = 664.0
+offset_right = 564.0
 offset_bottom = 90.0
-scale = Vector2(0.2, 0.2)
 
-[node name="Container" type="Container" parent="HBoxContainer"]
-custom_minimum_size = Vector2(160, 0)
+[node name="Container" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="DayPeriodIcon" type="Sprite2D" parent="HBoxContainer/Container"]
-position = Vector2(70, 0)
-scale = Vector2(4, 4)
+position = Vector2(30, 0)
 texture = ExtResource("2_0gvtg")
 hframes = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(400, 90)
+custom_minimum_size = Vector2(400, 45)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 80
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 40
 text = "Tag "

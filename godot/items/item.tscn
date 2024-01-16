@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://res/items.png" id="2_trxve"]
 
 [node name="item" type="Control" groups=["items"]]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 32.0
