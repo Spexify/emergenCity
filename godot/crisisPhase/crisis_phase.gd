@@ -10,10 +10,6 @@ var _backpack: EMC_Inventory = Global.get_inventory()
 
 var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
 
-#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
-var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
-_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
-
 @onready var uncast_guis := $GUI.get_children()
 @export var dialogue_resource: DialogueResource
 
@@ -22,7 +18,11 @@ func _ready() -> void:
 	if Global.was_crisis():
 		####################LOAD SAVE STATE#######################
 		Global.load_state()
-
+		
+	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
+	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
+	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
+	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=19 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
