@@ -1,192 +1,174 @@
-extends Control
-##Ein Inventar des Spielers.
+extends Node
+## An Inventory (z.B. Backpack of the player, Shelf, etc..)
+## To display an inventory you can use [EMC_InventoryGUI].
 ##
-##Ein Inventar hat immer mehrere Slots, welche jeweils von bis zu einem [EC_Item]s belegt sein
-##können oder nicht.
-##Über toggleVisibility, open() und close() kann die Sichtbarkeit eingestellt werden.  
-##Die beinhalteten Items kann man über die jeweiligen Methoden verwalten.
-##
-##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
+## You can manage the contents of this inventory through its public methods
 class_name EMC_Inventory
 
-signal opened
-signal closed
+## For the communication with its according GUI
+signal item_added(p_item: EMC_Item, p_idx: int)
+## For the communication with its according GUI
+signal item_removed(p_item: EMC_Item, p_idx: int)
 
+const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 const MAX_SLOT_CNT: int = 50
-var _slot_scn: PackedScene = preload("res://items/inventory_slot.tscn")
-var _slot_cnt: int
-var _item_scn: PackedScene = preload("res://items/item.tscn")
 
+var _slot_cnt: int
+var _slots: Array[EMC_Item]
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(p_slotCnt : int = 30): 
-	_slot_cnt = p_slotCnt
+func _init(p_slot_cnt: int = 30) -> void:
+	_slot_cnt = p_slot_cnt
+	_slots.resize(_slot_cnt)
 	if (_slot_cnt > MAX_SLOT_CNT): _slot_cnt = MAX_SLOT_CNT
 
 
-## Die Sichtbarkeit umstellen.
-func toggleVisibility() -> void:
-	if visible == false:
-		open()
-	else:
-		close()
+func get_slot_cnt() -> int:
+	return _slot_cnt
 
 
-## Das Inventar sichtbar machen.
-func open():
-	visible = true
-	opened.emit()
-
-
-## Das Inventar verstecken.
-func close():
-	visible = false
-	closed.emit()
-
-
-## Gibt zurück, ob noch Platz im Inventar vorhanden ist
+## Returns if the inventory has any free slots left
 func has_space() -> bool:
-	return get_item_count() < _slot_cnt
+	return get_item_count_total() < _slot_cnt
 
 
-## Diesem Inventar ein neues [EMC_Item] hinzufügen.
-## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
-func add_new_item(ID: EMC_Item.IDs) -> bool:
-	var new_item = _item_scn.instantiate() #EMC_Item.new(ID, self) 
-	new_item.setup(ID, self)
+## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
+## Returns true, if the item was added, else false
+##
+## TODO: Please rename
+func add_new_item(p_ID: EMC_Item.IDs) -> bool:
+	var new_item: EMC_Item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	new_item.setup(p_ID)
 	return add_item(new_item)
 
 
-## Diesem Inventar ein bestehendes [EMC_Item] hinzufügen.
-## Gibt True zurück, falls das Item hinzugefügt wurde, sonst false.
-func add_item(item: EMC_Item) -> bool:
-	var gridcont : GridContainer = get_node("Background/VBoxContainer/GridContainer")
-	
-	for i in _slot_cnt:
-		var slot = gridcont.get_child(i)
-		if slot.is_free():
-			item.clicked.connect(_on_item_clicked)
-			slot.set_item(item)
+## Add an already instantiated [EMC_Item] Scene to this inventory.
+## This is used if a [EMC_Item] has additional components like durability,
+## which should be remembered.
+## Returns true, if the item was added, else false
+func add_item(p_item: EMC_Item) -> bool:
+	if p_item == null: return false
+	for slot_idx in _slot_cnt:
+		if _slots[slot_idx] == null:
+			_slots[slot_idx] = p_item
+			item_added.emit(p_item, slot_idx)
 			return true
 	return false
 
 
-##Item ID an Position ermitteln
-func get_item_ID_of_slot(slot_cnt: int) -> EMC_Item.IDs:
-#	return $Background/VBoxContainer/GridContainer
-	#TODO
-	return EMC_Item.IDs.DUMMY
+## Returns item at [p_slot_idx] if available,
+## else returns null
+## THIS METHOD SHOULD PRIMARILY BE USED BY [EMC_InventoryGUI]!
+## Use get_item_of_ID() instead
+## Code Review: Method necessary for EMC_InventoryGUI.setup()
+func get_item_of_slot(p_slot_idx: int) -> EMC_Item:
+	if (p_slot_idx < 0 || p_slot_idx > MAX_SLOT_CNT):
+		printerr("Array out of bounds Zugriff.")
+		return null
+	return _slots[p_slot_idx]
 
 
-## Diesem Inventar ein [EMC_Item] [param cnt] Mal entfernen entfernen
-## Gibt die Anzahl an erfolgreich entfernten Items zurück
-func remove_item(ID: EMC_Item.IDs, toBeRemovedCnt: int = 1) -> int:
-	var removedCnt: int = 0
-	
-	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
-		if item != null && item.get_ID() == ID:
-			slot.remove_child(item)
-			removedCnt += 1
-	return removedCnt
+## Returns ID of item at [p_slot_idx] if available,
+## else returns null 
+func get_item_of_ID(p_ID: EMC_Item.IDs) -> EMC_Item:
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
+		if item != null && item.get_ID() == p_ID:
+			return item
+	return null
 
 
-## Das Inventar ist im Besitz von mindestens einem [EMC_Item] mit dieser ID
-func has_item(ID: EMC_Item.IDs) -> bool:
-	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
-		if item != null && item.get_ID() == ID:
-			return true
-	return false
+## The inventory has at least one item of [p_ID]
+func has_item(p_ID: EMC_Item.IDs) -> bool:
+	return get_item_of_ID(p_ID) != null
 
 
-## Gibt die Anzahl an [EMC_Item]s dieses Typ zurück
-func get_item_count_of_ID(ID: EMC_Item.IDs) -> int:
+## Returns count of [EMC_Item]s of [p_ID]
+func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
 	var cnt: int = 0
 	
-	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
-		if item != null && item.get_ID() == ID:
+	for slot_idx in _slot_cnt:
+		var item: EMC_Item = _slots[slot_idx]
+		if item != null and item.get_ID() == p_ID:
 			cnt += 1
 	return cnt
 
 
-## Gibt die Gesamtanzahl an [EMC_Item]s zurück
-func get_item_count() -> int:
+## Returns total count of [EMC_Item]s in inventory
+func get_item_count_total() -> int:
 	var cnt: int = 0
 	
-	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
 		if item != null:
 			cnt += 1
+		##Mini-Optimization that can be used in the future, when the array is guaranteed to always be sorted:
+		#else:
+			#break
 	return cnt
 
-
-## Alle Items des Inventars als Array an [EMC_Items] liefern
+## Return all items as Array of [EMC_Item]s
 func get_all_items() -> Array[EMC_Item]:
-	var items: Array[EMC_Item]
+	var items: Array[EMC_Item] = []
 	
 	for slotIdx in _slot_cnt:
-		var slot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item = slot.get_item()
+		var slot: EMC_InventorySlot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
+		var item := slot.get_item()
 		if item != null:
 			items.push_back(item)
 	return items
+	
+## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
+func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
+	var items : Array[EMC_Item.IDs] = []
+	for item in _slots:
+		items.push_back(item.get_ID() if item != null else EMC_Item.IDs.DUMMY)
+	return items
+
+## Return all items as Array of [EMC_Item]s for an ID
+## CodeReview TODO: Add to_get_cnt parameter, with to_get_cnt = -1 => all items
+func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
+	var items := get_all_items()
+	for slot_idx in items.size():
+		if items[slot_idx].get_ID() != p_ID:
+			items.remove_at(slot_idx)
+	return items
 
 
-## Items nach ID sortieren (QoL feature in der Zukunft)
-func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
-	#TODO (keine Prio)
+## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
+## Returns the count of successfully removed items
+func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
+	var removedCnt: int = 0
+	
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
+		if item != null && item.get_ID() == ID:
+			_slots[slot_idx] = null
+			item_removed.emit(item, slot_idx)
+			removedCnt += 1
+			if removedCnt == to_be_removed_cnt: break
+	return removedCnt
+	
+
+## TODO: rework, shading non consumables
+## KL: Filter Funktion, die nur die Items übergibt, die den Filterkriterium entsprechen
+## Variable food_or_drink hat 2 Werte : 0 falls es nach EMC_IC_Food Items gefiltert wird, 
+## 										1, falls es nach EMC_IC_Drink gefiltert wird
+
+func filter_items() -> void:
 	pass
 
+static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:
+	if a == null:
+		return false
+	if b == null:
+		return true
+	return a.get_ID() < b.get_ID()
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var gridcont : GridContainer = get_node("Background/VBoxContainer/GridContainer")
-	
-	for i in _slot_cnt:
-		var new_slot = _slot_scn.instantiate()
-		gridcont.add_child(new_slot)
-	
-	hide()
+func sort_custom(f : Callable) -> void:
+	_slots.sort_custom(f)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-	
-
-func _on_btn_backpack_pressed():
-	get_viewport().set_input_as_handled()
-	open()
-
-
-## Informationen zu einem Item in der TextBox anzeigen
-func _on_item_clicked(sender: EMC_Item) -> void:
-	#Name des Items
-	var label_name = $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
-	label_name.clear()
-	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
-	
-	#Komponenten des Items
-	var comps := sender.get_comps()
-	var comp_string: String
-	for comp in comps:
-		comp_string += comp.get_colored_name_with_vals() + ", "
-	##Überflüssiges Komma entfernen:
-	comp_string = comp_string.left(comp_string.length() - 2)
-	var label_comps = $Background/VBoxContainer/MarginContainer/TextBoxBG/Components
-	label_comps.clear()
-	label_comps.append_text("[color=black]" + comp_string + "[/color]")
-	
-	#Beschreibung des Items
-	var label_descr = $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
-	label_descr.clear()
-	label_descr.append_text("[color=black][font_size=36][i]" + sender.get_descr() +
-		"[/i][/font_size][/color]")
-	pass
+### Sort Items (by ID?) -> TODO
+#func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
+	##TODO (keine Prio)
+	#pass

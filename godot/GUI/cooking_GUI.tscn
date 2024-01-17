@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://e2vuw03w1lx6"]
+
+[ext_resource type="Script" path="res://GUI/cooking_GUI.gd" id="1_yctcf"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_vnbwr"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_v0fsp"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_tv2ru"]
+
+[node name="CookingGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_yctcf")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 496.0
+offset_bottom = 288.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBC" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleSpacing" type="MarginContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBC/TitleSpacing"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Was möchtest du kochen?"
+horizontal_alignment = 1
+
+[node name="RecipeBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="RecipeList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+
+[node name="HBC" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+
+[node name="InputItemList" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+layout_mode = 2
+
+[node name="RestrictionList" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC/PanelContainer/HBC"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC"]
+layout_mode = 2
+
+[node name="Cook" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kochen"
+
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBC/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Abbrechen"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_vnbwr")
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_v0fsp")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_tv2ru")
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cook" to="." method="_on_cooking_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

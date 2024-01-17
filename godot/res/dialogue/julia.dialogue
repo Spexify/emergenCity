@@ -1,0 +1,23 @@
+~ start
+Avatar: Was geht?
+%2 => dialog1
+%2 => dialog2
+%3 => dialog3
+=> END
+
+~ dialog1
+Julia: Alles was gehen kann. 
+Avatar: [b]Micky[/b] kann wohl bessere Texte schreiben...
+Julia: Bestimmt.
+=> END
+
+~ dialog2
+Momo: Will mich ja nicht einmischen, aber ihr labbert Stuss!
+Mert: !!! [wait=0.5] Seit wann kannst du [i][speed=0.3]reden[/speed][/i], MOMO??
+=> END
+
+~ dialog3
+Veronika: Wollt ihr euch mal vorstellen, alle?
+Agathe: Nö.
+Veronika: Ok.
+=> END

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0y6fmwlxf6xb"]
+[gd_scene load_steps=3 format=3 uid="uid://bnus4vqks6mjt"]
 
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="1_8hv3f"]
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_ai3lr"]
