@@ -1,12 +1,16 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
-var _electricity_state: bool
+enum ElectricityState{
+	NONE = 0,
+	UNLIMITED = 1
+}
+var _electricity_state: ElectricityState
 
 enum WaterState{
-	CLEAN = 0,
+	NONE = 0,
 	DIRTY = 1,
-	NONE = 2
+	CLEAN = 2
 }
 
 var _water_state: WaterState
@@ -18,18 +22,25 @@ enum Furniture{
 
 var _upgrades: Array[Furniture]
 
-var _furniture_state : Dictionary = {
-	Furniture.RAINWATER_BARREL : 0,
-}
+var _furniture_state : Dictionary
+
 # All furniture_states range between 0 and the furniture_state_maximum defined here
 const _furniture_state_maximum : Dictionary = {
-	Furniture.RAINWATER_BARREL : 5,
+	Furniture.RAINWATER_BARREL : 24, # water quantity is in units of 250ml
 }
 
-func get_electricity_state() -> bool:
+func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[Furniture]) -> void:
+	_electricity_state = p_electricity_state
+	_water_state = p_water_state
+	_upgrades = p_upgrades
+	_furniture_state = {
+		Furniture.RAINWATER_BARREL : 0,
+	}
+
+func get_electricity_state() -> ElectricityState:
 	return _electricity_state
 
-func set_electricity_state(new_electricity_state: bool) -> void:
+func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
 	
 func get_water_state() -> WaterState:

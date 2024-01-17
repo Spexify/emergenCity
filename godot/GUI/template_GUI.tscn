@@ -1,67 +1,100 @@
-[gd_scene format=3 uid="uid://ddg7r3nd0o3u"]
+[gd_scene load_steps=2 format=3 uid="uid://ddg7r3nd0o3u"]
 
-[node name="TemplateGui" type="PopupPanel"]
-initial_position = 1
-size = Vector2i(416, 866)
-visible = true
-min_size = Vector2i(416, 0)
-max_size = Vector2i(416, 866)
+[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_ahehr"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 408.0
-offset_bottom = 16036.0
+[node name="TemplateGui" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TitleSpacing" type="MarginContainer" parent="VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(416, 876)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -438.0
+offset_right = 208.0
+offset_bottom = 438.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ahehr")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = -406.5
+offset_right = 173.0
+offset_bottom = 406.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleSpacing" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"TitleSpacing"
 
-[node name="Title" type="RichTextLabel" parent="VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/TitleSpacing"]
 layout_mode = 2
 bbcode_enabled = true
-text = "[center]Lorem ipsum dolor sit[/center] "
+text = "[center]Lorem ipsum[/center]"
 fit_content = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"TextBox"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 fit_content = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="NinePatchRect/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Lorem"
 
-[node name="CheckButton2" type="CheckButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="CheckButton2" type="CheckButton" parent="NinePatchRect/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ipsum"
 
-[node name="CheckButton3" type="CheckButton" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="CheckButton3" type="CheckButton" parent="NinePatchRect/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Dolor"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConfirmBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ConfirmBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Bestätigen"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="CancelBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="CancelBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Abbrechen"

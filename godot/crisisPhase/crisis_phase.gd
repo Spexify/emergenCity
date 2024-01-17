@@ -8,6 +8,8 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 var _backpack: EMC_Inventory = Global.get_inventory()
 
+var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
+
 @onready var uncast_guis := $GUI.get_children()
 @export var dialogue_resource: DialogueResource
 
@@ -16,10 +18,14 @@ func _ready() -> void:
 	if Global.was_crisis():
 		####################LOAD SAVE STATE#######################
 		Global.load_state()
+		
+	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
+	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
+	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	
+
 	#GUIs initial verstecken
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
 	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
@@ -28,7 +34,7 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
-	
+
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
@@ -38,10 +44,11 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
-	
+	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
+
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
 		$GUI/VBC/LowerSection/ChangeStageGUI)
-	
+
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
 	var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
@@ -56,12 +63,12 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
-	#TODO: Substitute null with OptionalEventMngr:
-	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, null, action_guis, \
-		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI) 
+	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
+	$GUI/VBC/UpperSection/DayMngr.setup($Avatar, _overworld_states_mngr, action_guis, \
+		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
 
-func _process(delta: float) -> void:	
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
@@ -104,8 +111,8 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	#but for robustness we still make sure there's at most one DialogueGUI
 	for node:Node in $GUI/VBC/LowerSection.get_children():
 		if node.get_name() == "DialogueGUI":
-			return 
-	
+			return
+
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code

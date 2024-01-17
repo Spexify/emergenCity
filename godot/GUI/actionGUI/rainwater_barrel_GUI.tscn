@@ -1,31 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://31cjdwx16jfm"]
+[gd_scene load_steps=3 format=3 uid="uid://c8c6lclmuiqum"]
 
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="1_bmbgf"]
+[ext_resource type="Script" path="res://GUI/actionGUI/rainwater_barrel_GUI.gd" id="1_u6c7a"]
 
-[node name="RainwaterBarrelGui" type="Control"]
+[node name="RainwaterBarrelGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_u6c7a")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(208, 438)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -113.0
+offset_top = -130.0
+offset_right = 289.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_bmbgf")
-region_rect = Rect2(0, 0, 416, 867)
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -155.0
+offset_right = 203.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleSpacing" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="Title" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/TitleSpacing"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Wie viel Wasser willst du abschöpfen?[/center]"
+fit_content = true
+
+[node name="PanelContainer" type="PanelContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TextBox"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser."
+fit_content = true
+
+[node name="GetWaterBtn" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Eine Flasche (250ml) abschöpfen"
+
+[node name="DoneBtn" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Fertig"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/GetWaterBtn" to="." method="_on_get_water_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/DoneBtn" to="." method="_on_done_btn_pressed"]
