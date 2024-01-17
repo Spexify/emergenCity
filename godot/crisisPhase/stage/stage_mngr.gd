@@ -19,7 +19,7 @@ enum CustomDataLayers{
 	STAGE_NAME = 1
 }
 
-const _NPC_SCN: PackedScene = preload("res://characters/NPC.tscn")
+const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
 
 const STAGENAME_HOME: String = "home"
 const STAGENAME_MARKET: String = "market"
@@ -81,10 +81,10 @@ func get_curr_stage() -> TileMap:
 
 
 func change_stage(p_stage_name: String) -> void:
-	var new_stage: TileMap = load("res://stage/" + p_stage_name + ".tscn").instantiate()
+	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
 	$CurrStage.replace_by(new_stage)
 	new_stage.name = "CurrStage"
-	$CurrStage.set_scene_file_path("res://stage/" + p_stage_name + ".tscn")
+	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
 	_city_map.close()
 	_update_NPCs()
 

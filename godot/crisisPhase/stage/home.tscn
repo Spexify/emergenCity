@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://riay0ilweh8c"]
 
-[ext_resource type="TileSet" uid="uid://di3unabjgalor" path="res://stage/tileset.tres" id="1_nnisn"]
+[ext_resource type="TileSet" uid="uid://di3unabjgalor" path="res://crisisPhase/stage/tileset.tres" id="1_nnisn"]
 
 [node name="Home" type="TileMap"]
 process_mode = 1

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="emergenCITY_game"
-run/main_scene="res://entry.tscn"
+run/main_scene="res://global/entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://app_icon.svg"
 
@@ -21,7 +21,7 @@ buses/default_bus_layout="res://res/SFX/default_bus_layout.tres"
 
 [autoload]
 
-Global="*res://global.tscn"
+Global="*res://global/global.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]
@@ -46,7 +46,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 [gui]
 
 theme/custom="res://GUI/default_theme.tres"
-theme/custom_font="res://fonts/Gugi-Regular-Variation.tres"
+theme/custom_font="res://res/fonts/Gugi-Regular-Variation.tres"
 
 [input]
 

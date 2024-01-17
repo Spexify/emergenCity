@@ -1,6 +1,6 @@
 [gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://w8evue3rwyg5"]
 
-[ext_resource type="FontFile" path="res://fonts/OpenDyslexic-Regular.otf" id="1_0jm13"]
+[ext_resource type="FontFile" uid="uid://dbsci5ohufhpo" path="res://res/fonts/OpenDyslexic-Regular.otf" id="1_0jm13"]
 
 [resource]
 base_font = ExtResource("1_0jm13")

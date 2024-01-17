@@ -4,8 +4,8 @@ extends CenterContainer
 @onready var font_change := $MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange
 
 var is_dyslexic := true
-var dyslexic_font := preload("res://fonts/Dyslexic-Regular-Variation.tres")
-var normal_font := preload("res://fonts/Gugi-Regular-Variation.tres")
+var dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
+var normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

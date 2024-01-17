@@ -1,7 +1,7 @@
 extends EMC_ActionGUI
 
 const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
-const RECIPE_SCN: PackedScene = preload("res://GUI/recipe.tscn")
+const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c1rf6xy7ekahi"
-path="res://.godot/imported/Gugi-Regular.ttf-0ba5d0cd481ace6f7e6e57cf89edfb6c.fontdata"
+path="res://.godot/imported/Gugi-Regular.ttf-5dddf217308ea48f7fe531607225492c.fontdata"
 
 [deps]
 
-source_file="res://fonts/Gugi-Regular.ttf"
-dest_files=["res://.godot/imported/Gugi-Regular.ttf-0ba5d0cd481ace6f7e6e57cf89edfb6c.fontdata"]
+source_file="res://res/fonts/Gugi-Regular.ttf"
+dest_files=["res://.godot/imported/Gugi-Regular.ttf-5dddf217308ea48f7fe531607225492c.fontdata"]
 
 [params]
 

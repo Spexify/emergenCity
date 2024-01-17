@@ -1,0 +1,1 @@
+You can't push/have empty folders in git, that's why this file exists. MRM
