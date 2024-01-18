@@ -115,8 +115,11 @@ func _ready() -> void:
 
 ## Handle the click on the backpack-button
 func _on_btn_backpack_pressed() -> void:
-	get_viewport().set_input_as_handled()
-	open()
+	if visible == false:
+		get_viewport().set_input_as_handled()
+		open()
+	else:
+		close()
 
 
 ## Update this view when its underlying [EMC_Inventory] structure added an item

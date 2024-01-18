@@ -79,20 +79,20 @@ func _process(delta: float) -> void:
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
 
 
-func _on_inventory_opened() -> void:
-	get_tree().paused = true
-	$BtnBackpack.hide()
-	get_viewport().set_input_as_handled()
-
-
-func _on_inventory_closed() -> void:
-	get_tree().paused = false
-	$BtnBackpack.show()
+#func _on_inventory_opened() -> void:
+	#get_tree().paused = true
+	#$BtnBackpack.hide()
+	#get_viewport().set_input_as_handled()
+#
+#
+#func _on_inventory_closed() -> void:
+	#get_tree().paused = false
+	#$BtnBackpack.show()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch && event.pressed == true):
-		if $GUI/VBC/MiddleSection/BackpackGUI.visible && !$BtnBackpack.is_pressed():
+		if $GUI/VBC/MiddleSection/BackpackGUI.visible: #&& !$BtnBackpack.is_pressed():
 			$GUI/VBC/MiddleSection/BackpackGUI.close()
 
 
@@ -140,3 +140,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	get_tree().paused = false
+
+
+func _on_backpack_gui_closed() -> void:
+	$BtnBackpack.set_pressed(false)
