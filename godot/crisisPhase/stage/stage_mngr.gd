@@ -39,6 +39,7 @@ var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 
+
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
 func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI, \
@@ -49,25 +50,7 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_Too
 	_city_map = $CityMap
 	$CityMap.setup(p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	$CityMap.hide()
-	
-	#Add NPCs -> should be done by a JSON in the future!
-	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
-	gerhard.setup("Gerhard")
-	gerhard.hide()
-	gerhard.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(gerhard)
-	
-	var friedel: EMC_NPC = _NPC_SCN.instantiate()
-	friedel.setup("Friedel")
-	friedel.hide()
-	friedel.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(friedel)
-	
-	var julia: EMC_NPC = _NPC_SCN.instantiate()
-	julia.setup("Julia")
-	julia.hide()
-	julia.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(julia)
+	_setup_NPCs()
 
 
 func get_curr_stage_name() -> String:
@@ -102,10 +85,33 @@ func change_stage(p_stage_name: String) -> void:
 			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
 
 
+### Add NPCs to the scene
+## TODO: should be done by a JSON in the future!
+func _setup_NPCs() -> void:
+	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
+	gerhard.setup("Gerhard")
+	gerhard.hide()
+	gerhard.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(gerhard)
+	
+	var friedel: EMC_NPC = _NPC_SCN.instantiate()
+	friedel.setup("Friedel")
+	friedel.hide()
+	friedel.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(friedel)
+	
+	var julia: EMC_NPC = _NPC_SCN.instantiate()
+	julia.setup("Julia")
+	julia.hide()
+	julia.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(julia)
+
+
+## Setup NPC position and (de)activate them
 func _update_NPCs() -> void:
 	#Hide all NPCs first
 	for NPC: EMC_NPC in $NPCs.get_children():
-		NPC.hide()
+		NPC.deactivate()
 	
 	#Dependend on the stage show and reposition NPCs
 	match get_curr_stage_name():
@@ -113,13 +119,13 @@ func _update_NPCs() -> void:
 			pass
 		"market":
 			var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
-			gerhard.show()
+			gerhard.activate()
 			gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
 			var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
-			friedel.show()
+			friedel.activate()
 			friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
 			var julia := $NPCs.get_node("Julia") #Magic String, WIP
-			julia.show()
+			julia.activate()
 			julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
 		_:
 			printerr("StageMngr._update_NPCs(): Unknown Stage Name!")
@@ -226,7 +232,8 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	return INVALID_TILE
 
 
-## TODO
+## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
+## (doesn't have to be the target position that was originally set)
 func _on_avatar_arrived() -> void:
 	if _last_clicked_tile == null:
 		#NPC angeklickt?

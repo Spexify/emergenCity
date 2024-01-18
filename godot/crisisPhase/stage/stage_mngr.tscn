@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="3_3nwca"]
 
 [node name="StageMngr" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_2ergk")
 
 [node name="CurrStage" parent="." instance=ExtResource("2_epoie")]
+y_sort_enabled = true
 layer_2/modulate = Color(1, 1, 1, 0.262745)
 
 [node name="NPCs" type="Control" parent="."]
