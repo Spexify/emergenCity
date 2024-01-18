@@ -17,6 +17,7 @@ enum IDs{
 	BREAD = 10,
 	JAM = 11,
 	BREAD_WITH_JAM = 12,
+	CHLOR_TABLET = 13
 }
 
 #FYI: Inherits "name" property from Node
@@ -100,6 +101,10 @@ func setup(ID: int) -> void:
 			name = "Brot mit Marmelade"
 			_descr = "X"
 			_comps.push_back(EMC_IC_Food.new(9))
+		IDs.CHLOR_TABLET:
+			name = "Chlortablette"
+			_descr = "Zum Wasser Filtern."
+			_comps.push_back(EMC_IC_Cost.new(5))
 		_: #default/else
 			name = "<No Name>"
 			printerr("Item Setup: ID unknown!")
