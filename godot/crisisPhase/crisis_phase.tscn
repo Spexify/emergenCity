@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=20 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://g8y1un3il5jm" path="res://GUI/actionGUI/rest_GUI.tscn" id="11_dfl7m"]
 [ext_resource type="PackedScene" uid="uid://c8c6lclmuiqum" path="res://GUI/actionGUI/rainwater_barrel_GUI.tscn" id="12_ad4fq"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://crisisPhase/stage/stage_mngr.tscn" id="13_8jkao"]
+[ext_resource type="PackedScene" uid="uid://wvwo5ylldjwd" path="res://GUI/actionGUI/filter_water_GUI.tscn" id="13_jpb2c"]
 [ext_resource type="PackedScene" uid="uid://dvuhkwet8fnsy" path="res://GUI/actionGUI/change_stage_GUI.tscn" id="13_nblvh"]
 [ext_resource type="PackedScene" uid="uid://dmp3dkvy1barj" path="res://GUI/tooltip_GUI.tscn" id="14_0s3fx"]
 
@@ -124,6 +125,9 @@ mouse_filter = 2
 
 [node name="RainwaterBarrelGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("12_ad4fq")]
 visible = false
+layout_mode = 2
+
+[node name="FilterWaterGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("13_jpb2c")]
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]

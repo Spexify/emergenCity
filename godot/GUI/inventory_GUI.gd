@@ -11,6 +11,7 @@ class_name EMC_InventoryGUI
 signal opened
 signal closed
 signal close_button
+signal chlor_tablets_clicked
 
 @onready var open_gui := $SFX/OpenGUI
 @onready var close_gui := $SFX/CloseGUI
@@ -159,7 +160,12 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	var label_descr := $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
-
+	
+	## if the Chlor tablets are clicked, open water filtering gui
+	if sender.get_ID() == 13:
+		##open gui and ask if water should be filtered, if there is available water
+		pass
+			
 
 func _on_consume_pressed() -> void:
 	var has_drank : bool = false
