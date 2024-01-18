@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://hcfsn06a2085"]
+[gd_scene load_steps=10 format=3 uid="uid://hcfsn06a2085"]
 
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/citymap.png" id="1_g3kl2"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/gui/invisible_button.png" id="2_1ab2i"]
 [ext_resource type="Script" path="res://GUI/city_map.gd" id="2_hb4w4"]
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="3_p1i3u"]
-[ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/gui/icon_pin.png" id="4_86e27"]
+[ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/gui/icons/icon_pin_home.png" id="5_t0jkf"]
+[ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/gui/icons/icon_pin.png" id="6_brjtq"]
 
 [sub_resource type="Animation" id="Animation_xndm7"]
 length = 0.001
@@ -143,12 +144,22 @@ offset_right = 266.0
 offset_bottom = 235.0
 texture_normal = ExtResource("2_1ab2i")
 
-[node name="Pin" type="Sprite2D" parent="."]
+[node name="HomePin" type="Sprite2D" parent="."]
 process_mode = 3
 position = Vector2(300, 460)
-texture = ExtResource("4_86e27")
+texture = ExtResource("5_t0jkf")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pin"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HomePin"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[node name="CurrPosPin" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(300, 460)
+texture = ExtResource("6_brjtq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CurrPosPin"]
 libraries = {
 "": SubResource("AnimationLibrary_uc87h")
 }

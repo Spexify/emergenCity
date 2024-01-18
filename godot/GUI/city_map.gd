@@ -1,6 +1,9 @@
 extends TextureRect
 class_name EMC_CityMap
 
+@onready var _curr_pos_pin := $CurrPosPin
+@onready var _home_pin := $HomePin
+
 var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
@@ -21,19 +24,22 @@ func setup(p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: 
 
 func open() -> void:
 	get_tree().paused = true
+	_home_pin.show()
 	
 	#Setup Current-Location-Pin
 	var curr_stage_name := _stage_mngr.get_curr_stage_name()
 	match curr_stage_name:
 		EMC_StageMngr.STAGENAME_HOME:
-			$Pin.position = Vector2i(300, 460)
+			_curr_pos_pin.position = Vector2i(300, 460)
+			_home_pin.hide()
 		EMC_StageMngr.STAGENAME_MARKET:
-			$Pin.position = Vector2i(206, 920)
+			_curr_pos_pin.position = Vector2i(206, 920)
 		_: push_error("CityMap-Pin kennt momentane Stage nicht!")
 	#_pin_pos_tween = get_tree().create_tween()
 	#_pin_pos_tween.tween_property($Pin, "position", $Pin.position - Vector2(0, 15), 0.5).set_trans(Tween.TRANS_CUBIC)
 	#_pin_pos_tween.set_loops() #no arguments = infinite
-	$Pin/AnimationPlayer.play("pin_animation")
+	_curr_pos_pin.get_node("AnimationPlayer").play("pin_animation")
+	_home_pin.get_node("AnimationPlayer").play("pin_animation")
 	show()
 
 
@@ -44,7 +50,8 @@ func open() -> void:
 
 func close() -> void:
 	get_tree().paused = false
-	$Pin/AnimationPlayer.stop()
+	_curr_pos_pin.get_node("AnimationPlayer").stop()
+	_home_pin.get_node("AnimationPlayer").stop()
 	hide()
 
 

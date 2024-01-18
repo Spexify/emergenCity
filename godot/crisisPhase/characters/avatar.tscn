@@ -4,24 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://ppdc880khrdn" path="res://res/characters/sprite_avatar.png" id="2_fbrni"]
 [ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://res/SFX/walking.wav" id="3_nintj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nbegu"]
-radius = 18.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pu6g1"]
+height = 50.0
 
 [node name="Avatar" type="CharacterBody2D"]
-y_sort_enabled = true
+position = Vector2(0, -15)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_6xgqy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
 texture = ExtResource("2_fbrni")
 offset = Vector2(0, -30)
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("CircleShape2D_nbegu")
+position = Vector2(0, 16)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pu6g1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3

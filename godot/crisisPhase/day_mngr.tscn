@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqjid78osbso6"]
 
 [ext_resource type="Script" path="res://crisisPhase/day_mngr.gd" id="1_wh1q6"]
-[ext_resource type="Texture2D" uid="uid://dgwbhgjshvbnx" path="res://res/gui/icon_dayperiods.png" id="2_0gvtg"]
+[ext_resource type="Texture2D" uid="uid://mlwfi58qelas" path="res://res/gui/icons/icon_dayperiods.png" id="2_w2qxb"]
 
 [node name="DayMngr" type="Control"]
 layout_mode = 3
@@ -13,9 +13,9 @@ size_flags_vertical = 0
 script = ExtResource("1_wh1q6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(564, 90)
+custom_minimum_size = Vector2(282, 90)
 layout_mode = 0
-offset_right = 564.0
+offset_right = 282.0
 offset_bottom = 90.0
 
 [node name="Container" type="CenterContainer" parent="HBoxContainer"]
@@ -26,11 +26,11 @@ size_flags_vertical = 4
 
 [node name="DayPeriodIcon" type="Sprite2D" parent="HBoxContainer/Container"]
 position = Vector2(30, 0)
-texture = ExtResource("2_0gvtg")
+texture = ExtResource("2_w2qxb")
 hframes = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(400, 45)
+custom_minimum_size = Vector2(200, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

@@ -10,9 +10,11 @@ script = ExtResource("1_2ergk")
 
 [node name="CurrStage" parent="." instance=ExtResource("2_epoie")]
 y_sort_enabled = true
+layer_1/y_sort_enabled = true
 layer_2/modulate = Color(1, 1, 1, 0.262745)
 
 [node name="NPCs" type="Control" parent="."]
+y_sort_enabled = true
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1

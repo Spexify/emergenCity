@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhj4hfky75aeg"
-path="res://.godot/imported/icon_statusbar_health.png-e2fbf8ac4da50cddfdbfd27f08bd2989.ctex"
+uid="uid://6bj8wmm5lv04"
+path="res://.godot/imported/icon_pin.png-7c29987b35a1dedb3f0550031396451a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icon_statusbar_health.png"
-dest_files=["res://.godot/imported/icon_statusbar_health.png-e2fbf8ac4da50cddfdbfd27f08bd2989.ctex"]
+source_file="res://res/gui/icons/icon_pin.png"
+dest_files=["res://.godot/imported/icon_pin.png-7c29987b35a1dedb3f0550031396451a.ctex"]
 
 [params]
 

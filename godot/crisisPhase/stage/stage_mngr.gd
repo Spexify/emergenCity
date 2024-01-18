@@ -67,6 +67,7 @@ func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
 	$CurrStage.replace_by(new_stage)
 	new_stage.name = "CurrStage"
+	new_stage.y_sort_enabled = true
 	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
 	_city_map.close()
 	_update_NPCs()
