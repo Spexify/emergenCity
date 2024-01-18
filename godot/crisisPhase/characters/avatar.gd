@@ -6,10 +6,7 @@ signal nutrition_updated(p_new_value: int)
 signal hydration_updated(p_new_value: int)
 signal health_updated(p_new_value: int)
 
-@onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
-@onready var walking := $SFX/Walking
-const MOVE_SPEED: float = 300.0
-
+const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoidance (Max Speed)!
 const MAX_VITALS = 4
 #MRM: Unit sollte direct von den Components verwendet werden:
 const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #550 #food Unit = 550 kcal 
@@ -19,6 +16,9 @@ const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
 const INIT_NUTRITION_VALUE : int = MAX_VITALS
 const INIT_HYDRATION_VALUE : int = 2
 const INIT_HEALTH_VALUE : int = 2
+
+@onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var walking := $SFX/Walking
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
 ## working in untis of 4
@@ -177,14 +177,18 @@ func _physics_process(_delta: float) -> void:
 	
 	# Update velocity
 	velocity = MOVE_SPEED * input_direction
-	
-	# move_and_slide() uses the characters velocity to move them on the map
-	move_and_slide()
-	
-	#print("Avatar y: " + str(position[1]))
+	#print(velocity)
+	_nav_agent.set_velocity(velocity)
 
 
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	walking.stop() #Name should be more precise. Walking could be an animation or a state-object
 	arrived.emit()
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+	# move_and_slide() uses the characters velocity to move them on the map
+	#print(velocity)
+	move_and_slide()

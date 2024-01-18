@@ -24,8 +24,12 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pu6g1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-navigation_layers = 3
 path_postprocessing = 1
+avoidance_enabled = true
+radius = 32.0
+time_horizon_agents = 0.5
+time_horizon_obstacles = 0.5
+max_speed = 300.0
 
 [node name="SFX" type="Node" parent="."]
 
@@ -33,3 +37,4 @@ path_postprocessing = 1
 stream = ExtResource("3_nintj")
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

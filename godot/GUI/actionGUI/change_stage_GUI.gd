@@ -6,6 +6,7 @@ signal stayed_on_same_stage
 @onready var open_gui_sfx := $SFX/OpenGUISFX
 @onready var close_gui_sfx := $SFX/CloseGUISFX
 @onready var button_sfx := $SFX/ButtonSFX
+@onready var _richtext_label := $NinePatchRect/MarginContainer/VBoxContainer/RichTextLabel
 
 var _stage_mngr: EMC_StageMngr
 var _avatar: EMC_Avatar
@@ -28,10 +29,10 @@ func show_gui(p_action: EMC_Action) -> void:
 		close()
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
-			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Die Rückkehr kostet eine Aktion."
 		else:
-			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
 		open_gui_sfx.play()
 		show()

@@ -7,11 +7,20 @@ class_name EMC_StageMngr
 ## Tilemap = Many cells
 
 
+enum Atlases{ #Tileset Atlasses
+	FURNITURE_PNG = 0,
+	GROUND_PNG = 1,
+	WALLS_PNG = 2,
+	NAVIGATION_PNG = 3,
+	TELEPORTERS_PNG = 4
+}
+
 enum Layers{
-	BACKGROUND   = 0,
-	MIDDLEGROUND = 1,
-	TELEPORTER   = 2,
-	FOREGROUND   = 3
+	NAVIGATION   = 0,
+	BACKGROUND   = 1,
+	MIDDLEGROUND = 2,
+	TELEPORTER   = 3,
+	FOREGROUND   = 4,
 }
 
 enum CustomDataLayers{
@@ -69,21 +78,40 @@ func change_stage(p_stage_name: String) -> void:
 	new_stage.name = "CurrStage"
 	new_stage.y_sort_enabled = true
 	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
-	_city_map.close()
 	_update_NPCs()
+	_create_navigation_layer_tiles()
+	_city_map.close()
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
+func _ready() -> void:
+	_create_navigation_layer_tiles()
+
+
 ### Because the navigation works only on the BACKGROUND layer, there can be problems, as the 
 ### MIDDLEGROUND can still contain objects with collision. The navigation polygon on BG tiles
 ### is removed if it contains collision tiles in the middleground
 #func _remove_redundant_navigation():
-	#for bg_cell_coord in $Stage.get_used_cells(Layers.MIDDLEGROUND):
+	#for bg_cell_coord in $CurrStage.get_used_cells(Layers.MIDDLEGROUND):
 		#if _tile_has_collision(bg_cell_coord):
 			#tile_data.set_navigation_polygon(0, NavigationPolygon.new())
 			#var nav_poly_res = NavigationPolygon.new()
 			#bg_cell_coord
 			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
+## Dynamiccaly create Navigation Layer tiles where there is no collision
+func _create_navigation_layer_tiles() -> void:
+	const NAVI_TILE_COORD = Vector2i(0, 0)
+	var tile_coords: Array[Vector2i] = $CurrStage.get_used_cells(Layers.BACKGROUND)
+	
+	## Pro tip to debug this: You can "Force Show" the Navigation visibility:
+	#$CurrStage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	
+	for tile_coord: Vector2i in tile_coords:
+		if !_has_tile_collision(tile_coord):
+			$CurrStage.set_cell(EMC_StageMngr.Layers.NAVIGATION, tile_coord, \
+				EMC_StageMngr.Atlases.NAVIGATION_PNG, NAVI_TILE_COORD)
+		else:
+			$CurrStage.erase_cell(Layers.NAVIGATION, tile_coord)
 
 
 ### Add NPCs to the scene

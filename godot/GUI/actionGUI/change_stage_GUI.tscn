@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvuhkwet8fnsy"]
+[gd_scene load_steps=8 format=3 uid="uid://dvuhkwet8fnsy"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/change_stage_GUI.gd" id="1_48h4p"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_b70k5"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_scbir"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_5y2m7"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/gui/icons/icon_needs_time.png" id="4_ee0w8"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_hrm30"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_1150s"]
 
@@ -20,7 +21,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_48h4p")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(506, 140)
+custom_minimum_size = Vector2(506, 180)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,43 +40,41 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 10.0
-offset_right = 1907.0
-offset_bottom = 456.0
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(10, 8)
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 485.0
+offset_bottom = 159.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(950, 260)
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(130, 70)
 layout_mode = 2
 theme = ExtResource("3_scbir")
-theme_override_font_sizes/normal_font_size = 80
 text = "Soll der Ort gewechselt werden? Es wird eine Aktion verbraucht."
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ConfirmBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(800, 0)
+[node name="ConfirmBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("3_scbir")
-theme_override_font_sizes/font_size = 80
 text = "Bestätigen"
+icon = ExtResource("4_ee0w8")
 
-[node name="VSeparator" type="VSeparator" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="CancelBtn" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(800, 0)
+[node name="CancelBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_scbir")
-theme_override_font_sizes/font_size = 80
 text = "Abbrechen"
 
 [node name="SFX" type="Node" parent="."]
@@ -90,5 +89,5 @@ stream = ExtResource("5_hrm30")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_1150s")
 
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]

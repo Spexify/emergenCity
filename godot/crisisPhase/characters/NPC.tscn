@@ -17,7 +17,6 @@ offset = Vector2(0, -30)
 hframes = 3
 
 [node name="CollisionCircle" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_1u2dm")
 
@@ -36,5 +35,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("3_d42ls")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, 9)
+avoidance_enabled = false
+radius = 32.0
 
 [connection signal="pressed" from="DialogueHitbox" to="." method="_on_dialogue_hit_box_pressed"]
