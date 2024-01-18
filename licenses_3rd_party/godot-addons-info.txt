@@ -1,0 +1,1 @@
+Licenses of godot addons/plugins such as the "Dialogue Manager" can be found in their subfolder unter godot/assets/
