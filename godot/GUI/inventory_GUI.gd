@@ -162,14 +162,20 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 
 
 func _on_consume_pressed() -> void:
+	var has_drank : bool = false
+	var has_eaten : bool = false
 	if _clicked_item == null:
 		return
 	var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 	if  drink_comp!= null:
 		_avatar_ref.add_hydration(drink_comp.get_hydration())
+		has_drank = true
 	var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
 	if food_comp != null:
 		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
+		has_eaten = true
+	if has_drank && has_eaten: 
+		_avatar_ref.add_health(1)
 	_inventory.remove_item(_clicked_item._ID)
 	_inventory.item_removed.emit()
 	return
