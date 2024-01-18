@@ -11,7 +11,7 @@ var _backpack: EMC_Inventory = Global.get_inventory()
 var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
-@export var dialogue_resource: DialogueResource
+@onready var _stage_mngr := $StageMngr
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -114,6 +114,7 @@ func _on_action_GUI_closed() -> void:
 
 ###################################### DIALOGUE HANDLING ###########################################
 func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
+	var dialogue_resource: DialogueResource
 	#Theoretically the game is paused so no other DialogueGUI should be instantiated,
 	#but for robustness we still make sure there's at most one DialogueGUI
 	for node:Node in $GUI/VBC/LowerSection.get_children():
@@ -124,6 +125,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	#even when it's hidden! :(
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
 	#MRM: Problems with load on mobile export, so I preload it for now:
 	#dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")

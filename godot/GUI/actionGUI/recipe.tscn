@@ -32,8 +32,10 @@ patch_margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
-offset_right = 436.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 478.0
+offset_bottom = 80.0
 mouse_filter = 2
 
 [node name="item" parent="HBoxContainer" instance=ExtResource("6_mfbhs")]
@@ -41,9 +43,10 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
 mouse_filter = 2
+bbcode_enabled = true
 text = "Lorem ipsum"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

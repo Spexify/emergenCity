@@ -41,12 +41,14 @@ const TILE_MAX_Y_COORD: int = 15
 
 signal dialogue_initiated(p_NPC_name: String)
 
+@onready var _city_map: EMC_CityMap = $CityMap
+
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
 var _GUI: CenterContainer
-var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
+var _dialogue_pitches: Dictionary
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
@@ -56,10 +58,11 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_Too
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
-	_city_map = $CityMap
-	$CityMap.setup(p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
-	$CityMap.hide()
+	
+	_city_map.setup(p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
+	_dialogue_pitches["Avatar"] = 1.0
 	_setup_NPCs()
+	_city_map.hide()
 
 
 func get_curr_stage_name() -> String:
@@ -81,6 +84,10 @@ func change_stage(p_stage_name: String) -> void:
 	_update_NPCs()
 	_create_navigation_layer_tiles()
 	_city_map.close()
+
+
+func get_dialogue_pitches() -> Dictionary:
+	return _dialogue_pitches
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
@@ -116,24 +123,27 @@ func _create_navigation_layer_tiles() -> void:
 
 ### Add NPCs to the scene
 ## TODO: should be done by a JSON in the future!
-func _setup_NPCs() -> void:
+func _setup_NPCs() -> void:	
 	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
 	gerhard.setup("Gerhard")
 	gerhard.hide()
 	gerhard.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(gerhard)
+	_dialogue_pitches[gerhard.get_name()] = 0.5
 	
 	var friedel: EMC_NPC = _NPC_SCN.instantiate()
 	friedel.setup("Friedel")
 	friedel.hide()
 	friedel.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(friedel)
+	_dialogue_pitches[friedel.get_name()] = 0.6
 	
 	var julia: EMC_NPC = _NPC_SCN.instantiate()
 	julia.setup("Julia")
 	julia.hide()
 	julia.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(julia)
+	_dialogue_pitches[julia.get_name()] = 1.3
 
 
 ## Setup NPC position and (de)activate them

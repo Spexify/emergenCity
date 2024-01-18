@@ -2,7 +2,7 @@
 Friedel: [[Wuff!|Wuffwuff!!|wuff...|Wuff??|[b]WUFF!!![/b]|[speed=0.4]Wuuuuuuuff[/speed]]]
 Streicheln?
 - Ja
-	Friedel: Wuff <3
+	Friedel: [#mood=happy]Wuff <3
 - Nein
-	Friedel: [i]*winsel*[/i] :(
+	Friedel: [#mood=sad][i]*winsel*[/i] :(
 => END

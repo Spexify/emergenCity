@@ -55,6 +55,9 @@ func reset_state() -> void:
 	
 func save_game(was_crisis : bool) -> void:
 	
+	if _inventory == null:
+		#MRM: I want to test partial Scenes with F6 but it still tries to save
+		return
 	###################SAVE GAME######################
 	
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)

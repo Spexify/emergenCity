@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=21 format=3 uid="uid://di3unabjgalor"]
 
-[ext_resource type="Texture2D" uid="uid://b8untfr2ru51b" path="res://res/tilesets/furniture.png" id="1_o07vy"]
-[ext_resource type="Texture2D" uid="uid://4tuyoalkrjit" path="res://res/tilesets/ground.png" id="2_dooyd"]
-[ext_resource type="Texture2D" uid="uid://vl1xu06r7ypy" path="res://res/tilesets/walls.png" id="3_tirjl"]
-[ext_resource type="Texture2D" uid="uid://cm7s6vyaqkkea" path="res://res/tilesets/teleporters.png" id="4_dxqby"]
-[ext_resource type="Texture2D" uid="uid://cbru0a0xc2tvx" path="res://res/tilesets/navigation.png" id="4_hoxfr"]
+[ext_resource type="Texture2D" uid="uid://b8untfr2ru51b" path="res://res/sprites/tilesets/furniture.png" id="1_o07vy"]
+[ext_resource type="Texture2D" uid="uid://4tuyoalkrjit" path="res://res/sprites/tilesets/ground.png" id="2_dooyd"]
+[ext_resource type="Texture2D" uid="uid://vl1xu06r7ypy" path="res://res/sprites/tilesets/walls.png" id="3_tirjl"]
+[ext_resource type="Texture2D" uid="uid://cm7s6vyaqkkea" path="res://res/sprites/tilesets/teleporters.png" id="4_dxqby"]
+[ext_resource type="Texture2D" uid="uid://cbru0a0xc2tvx" path="res://res/sprites/tilesets/navigation.png" id="4_hoxfr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_le81o"]
 texture = ExtResource("1_o07vy")
@@ -280,7 +280,7 @@ texture_region_size = Vector2i(64, 64)
 7:8/0 = 0
 7:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:8/0/physics_layer_0/angular_velocity = 0.0
-7:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+7:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 2, 32, 1.5, 32, 32, -32, 32)
 7:9/0 = 0
 7:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:9/0/physics_layer_0/angular_velocity = 0.0
@@ -318,7 +318,7 @@ texture_region_size = Vector2i(64, 64)
 8:8/0 = 0
 8:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:8/0/physics_layer_0/angular_velocity = 0.0
-8:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+8:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 2, 32, 1.5, 32, 32, -32, 32)
 8:9/0 = 0
 8:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:9/0/physics_layer_0/angular_velocity = 0.0
@@ -356,7 +356,7 @@ texture_region_size = Vector2i(64, 64)
 9:8/0 = 0
 9:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:8/0/physics_layer_0/angular_velocity = 0.0
-9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 2, 32, 1.5, 32, 32, -32, 32)
 9:9/0 = 0
 9:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:9/0/physics_layer_0/angular_velocity = 0.0

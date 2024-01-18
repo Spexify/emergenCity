@@ -21,8 +21,8 @@ func get_unit_hydration() -> int:
 	return _hydration * UNIT_FACTOR
 
 
-## Get text with formatting (colors)
-func get_formatted_values() -> String:
+## RENAME WITH CAUTION: It overrides superclass method!
+func get_name_with_values() -> String:
 	return get_name() + " (" + str(get_unit_hydration()) + UNIT + ")"
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

@@ -21,19 +21,17 @@ enum IDs{
 }
 
 #FYI: Inherits "name" property from Node
-@export var _ID: IDs = IDs.DUMMY
+var _ID: IDs
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
 var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ##Initialize properties
-func setup(ID: int) -> void:
+func setup(p_ID: int = IDs.DUMMY) -> void:
 	#await ready
-	_ID = ID
-	$Sprite2D.frame = _ID
-
-
+	_ID = p_ID
+	
 	#TODO: Statt case Statement, Infos aus JSON lesen
 	match _ID:
 		IDs.WATER:
@@ -136,12 +134,15 @@ func get_comp(p_classname: Variant) -> EMC_ItemComponent:
 			return comp
 	return null
 
+
+##@depracated
 func copy_item() -> EMC_Item:
 	var copied_item := _ITEM_SCN.instantiate()
 	copied_item._ID = _ID
 	copied_item._descr = _descr
 	copied_item._comps = _comps
 	return copied_item
+
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 ## Called when the node enters the scene tree for the first time.

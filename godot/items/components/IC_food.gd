@@ -21,7 +21,8 @@ func get_unit_nutritionness() -> int:
 	return _nutritionness * UNIT_FACTOR
 
 
-func get_formatted_values() -> String:
+## RENAME WITH CAUTION: It overrides superclass method!w
+func get_name_with_values() -> String:
 	return get_name() + " (" + str(get_unit_nutritionness()) + UNIT + ")"
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
