@@ -79,7 +79,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 			= summary_text_loser
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false
-		Global.set_e_coins(Global.get_e_coins() + 10)
+		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
 		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2/Actions.text \
 			= summary_text_winner
