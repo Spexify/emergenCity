@@ -27,6 +27,7 @@ size = Vector2(20, 1028)
 
 [node name="CrisisPhase" type="Node2D"]
 process_mode = 3
+y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
 [node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]

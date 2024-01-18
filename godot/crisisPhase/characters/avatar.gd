@@ -6,9 +6,9 @@ signal nutrition_updated(p_new_value: int)
 signal hydration_updated(p_new_value: int)
 signal health_updated(p_new_value: int)
 
-@export var move_speed: float = 100
-@onready var navAgent := $NavigationAgent2D as NavigationAgent2D
-const SPEED: float = 300.0
+@onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var walking := $SFX/Walking
+const MOVE_SPEED: float = 300.0
 
 const MAX_VITALS = 4
 #MRM: Unit sollte direct von den Components verwendet werden:
@@ -26,7 +26,6 @@ var _nutrition_value : int = INIT_NUTRITION_VALUE
 var _hydration_value : int = INIT_HYDRATION_VALUE
 var _health_value : int = INIT_HEALTH_VALUE
 
-@onready var walking := $SFX/Walking
 
 enum Frame{
 	FRONTSIDE = 0,
@@ -35,22 +34,18 @@ enum Frame{
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Das Navigationsziel des Avatars setzen
-##TODO: In TechDoku aufnehmen: navAgent.is_target_reachable(): #funzt net
+##TODO: In TechDoku aufnehmen: _nav_agent.is_target_reachable(): #funzt net
 func set_target(p_target_pos: Vector2) -> void:
 	if (p_target_pos == position):
 		return
-	if (p_target_pos.y >= position.y):
-		$Sprite2D.frame = Frame.FRONTSIDE
-	else:
-		$Sprite2D.frame = Frame.BACKSIDE
 	
-	navAgent.target_position = p_target_pos
+	_nav_agent.target_position = p_target_pos
 	if not walking.playing:
 		walking.play()
 
 
 func cancel_navigation() -> void:
-	navAgent.target_position = self.position
+	_nav_agent.target_position = self.position
 	
 
 ## Getters für die Statutwerten vom Avatar
@@ -117,6 +112,9 @@ func sub_health(health_change : int) -> bool:
 		health_updated.emit(_health_value)
 		return true
 
+
+## MRM: Naming idea: Could be renamed into "serialize()" as it's not really the saving itself,
+## but "serializing" the object data into a format that can be saved in a file
 func save() -> Dictionary:
 
 	var some_position : Vector2 = get_global_position()
@@ -129,8 +127,8 @@ func save() -> Dictionary:
 		"x-position": some_position.x,
 		"y-position": some_position.y
 	}
-
 	return data
+
 
 func load_state(data : Dictionary) -> void:
 	_nutrition_value = data.get("nutrition_value", INIT_NUTRITION_VALUE)
@@ -151,14 +149,23 @@ func _ready() -> void:
 	health_updated.emit(_health_value)
 
 
+func _process(p_delta: float) -> void:
+	#Set frame to direction that character is currently walking in
+	if !_nav_agent.is_navigation_finished():
+		if to_local(_nav_agent.get_next_path_position()).y > 0:
+			$Sprite2D.frame = Frame.FRONTSIDE
+		else:
+			$Sprite2D.frame = Frame.BACKSIDE
+
+
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
-	if (navAgent.distance_to_target() < 5.0):
+	if (_nav_agent.distance_to_target() < 5.0):
 		#arrived.emit()
 		cancel_navigation()
-	if (navAgent.is_navigation_finished()):
+	if (_nav_agent.is_navigation_finished()):
 		#Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up
 		# Get the input direction
 		input_direction = Vector2(
@@ -166,10 +173,10 @@ func _physics_process(_delta: float) -> void:
 			Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
 	else: #Navigation via Pathfinding
-		input_direction = to_local(navAgent.get_next_path_position()).normalized()
+		input_direction = to_local(_nav_agent.get_next_path_position()).normalized()
 	
 	# Update velocity
-	velocity = move_speed * input_direction
+	velocity = MOVE_SPEED * input_direction
 	
 	# move_and_slide() uses the characters velocity to move them on the map
 	move_and_slide()

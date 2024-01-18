@@ -39,6 +39,7 @@ var _city_map: EMC_CityMap
 var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 
+
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 ## Konstruktor: Interne Avatar-Referenz setzen
 func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI, \
@@ -49,8 +50,45 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_Too
 	_city_map = $CityMap
 	$CityMap.setup(p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	$CityMap.hide()
-	
-	#Add NPCs -> should be done by a JSON in the future!
+	_setup_NPCs()
+
+
+func get_curr_stage_name() -> String:
+	var parts := get_curr_stage().get_scene_file_path().split("/")
+	var filename_with_ending: String = parts[parts.size() - 1]
+	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
+
+
+func get_curr_stage() -> TileMap:
+	return $CurrStage
+
+
+func change_stage(p_stage_name: String) -> void:
+	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
+	$CurrStage.replace_by(new_stage)
+	new_stage.name = "CurrStage"
+	new_stage.y_sort_enabled = true
+	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
+	_city_map.close()
+	_update_NPCs()
+
+
+#----------------------------------------- PRIVATE METHODS -----------------------------------------
+### Because the navigation works only on the BACKGROUND layer, there can be problems, as the 
+### MIDDLEGROUND can still contain objects with collision. The navigation polygon on BG tiles
+### is removed if it contains collision tiles in the middleground
+#func _remove_redundant_navigation():
+	#for bg_cell_coord in $Stage.get_used_cells(Layers.MIDDLEGROUND):
+		#if _tile_has_collision(bg_cell_coord):
+			#tile_data.set_navigation_polygon(0, NavigationPolygon.new())
+			#var nav_poly_res = NavigationPolygon.new()
+			#bg_cell_coord
+			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
+
+
+### Add NPCs to the scene
+## TODO: should be done by a JSON in the future!
+func _setup_NPCs() -> void:
 	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
 	gerhard.setup("Gerhard")
 	gerhard.hide()
@@ -70,42 +108,11 @@ func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_Too
 	$NPCs.add_child(julia)
 
 
-func get_curr_stage_name() -> String:
-	var parts := get_curr_stage().get_scene_file_path().split("/")
-	var filename_with_ending: String = parts[parts.size() - 1]
-	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
-
-
-func get_curr_stage() -> TileMap:
-	return $CurrStage
-
-
-func change_stage(p_stage_name: String) -> void:
-	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
-	$CurrStage.replace_by(new_stage)
-	new_stage.name = "CurrStage"
-	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
-	_city_map.close()
-	_update_NPCs()
-
-
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
-### Because the navigation works only on the BACKGROUND layer, there can be problems, as the 
-### MIDDLEGROUND can still contain objects with collision. The navigation polygon on BG tiles
-### is removed if it contains collision tiles in the middleground
-#func _remove_redundant_navigation():
-	#for bg_cell_coord in $Stage.get_used_cells(Layers.MIDDLEGROUND):
-		#if _tile_has_collision(bg_cell_coord):
-			#tile_data.set_navigation_polygon(0, NavigationPolygon.new())
-			#var nav_poly_res = NavigationPolygon.new()
-			#bg_cell_coord
-			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
-
-
+## Setup NPC position and (de)activate them
 func _update_NPCs() -> void:
 	#Hide all NPCs first
 	for NPC: EMC_NPC in $NPCs.get_children():
-		NPC.hide()
+		NPC.deactivate()
 	
 	#Dependend on the stage show and reposition NPCs
 	match get_curr_stage_name():
@@ -113,13 +120,13 @@ func _update_NPCs() -> void:
 			pass
 		"market":
 			var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
-			gerhard.show()
+			gerhard.activate()
 			gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
 			var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
-			friedel.show()
+			friedel.activate()
 			friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
 			var julia := $NPCs.get_node("Julia") #Magic String, WIP
-			julia.show()
+			julia.activate()
 			julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
 		_:
 			printerr("StageMngr._update_NPCs(): Unknown Stage Name!")
@@ -226,7 +233,8 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	return INVALID_TILE
 
 
-## TODO
+## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
+## (doesn't have to be the target position that was originally set)
 func _on_avatar_arrived() -> void:
 	if _last_clicked_tile == null:
 		#NPC angeklickt?

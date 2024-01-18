@@ -3,6 +3,8 @@ class_name EMC_NPC
 
 signal clicked(p_NPC: EMC_NPC)
 @onready var _sprite := $Sprite2D
+@onready var _collision_circle := $CollisionCircle
+@onready var _dialogue_hitbox := $DialogueHitbox
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
@@ -24,6 +26,18 @@ func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 
 func set_frame(p_frame_idx: int) -> void:
 	_sprite.frame = p_frame_idx
+
+
+func deactivate() -> void:
+	hide()
+	_collision_circle.disabled = true
+	_dialogue_hitbox.disabled = true
+
+
+func activate() -> void:
+	show()
+	_collision_circle.disabled = false
+	_dialogue_hitbox.disabled = false
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

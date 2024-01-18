@@ -68,6 +68,7 @@ func _ready() -> void:
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
 
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
@@ -95,11 +96,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_summary_end_of_day_gui_opened() -> void:
 	get_tree().paused = true
 
+
 func _on_summary_end_of_day_gui_closed() -> void:
 	get_tree().paused = false
 
+
 func _on_action_GUI_opened() -> void:
 	get_tree().paused = true
+
 
 func _on_action_GUI_closed() -> void:
 	get_tree().paused = false

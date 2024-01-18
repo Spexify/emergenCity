@@ -6,6 +6,8 @@ class_name EMC_DayMngr
 ## EMC_DayMngr checks [EMC_Action]'s [member EMC_Action.constraints_prior] before calling the apropriated
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
+signal period_ended
+
 ## Enum describing the periods of a Day.
 enum EMC_DayPeriod {
 	## Morning periode
@@ -148,6 +150,8 @@ func _on_action_executed(action : EMC_Action) -> void:
 	_update_HUD()
 	_check_pu_counter()
 	_check_op_counter()
+	period_ended.emit()
+
 
 func _on_seod_closed_game_end() -> void:
 	_egGUI.open(self.history, _avatar_life_status)
