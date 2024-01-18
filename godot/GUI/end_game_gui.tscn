@@ -75,7 +75,7 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-text = "Du hast 50 ECoins erworben!
+text = "
 "
 autowrap_mode = 2
 

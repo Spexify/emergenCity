@@ -9,7 +9,7 @@ const SAVE_STATE_FILE = "user://savestate.save"
 const HOME_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 
-var _e_coins : int = 100;
+var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 
 var current_scene : Node = null

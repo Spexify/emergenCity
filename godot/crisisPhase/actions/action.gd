@@ -40,16 +40,19 @@ var _constraints_rejected : Array[String]
 var _changes : Dictionary 
 var _type_gui : String #deprecated??
 var _description : String
+var _performance_coin_value : int
 
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		   changes : Dictionary, type_gui : String, description : String) -> void:
+		   changes : Dictionary, type_gui : String, description : String, performance_coin_value : int) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
 	self._changes = changes
 	self._type_gui = type_gui
 	self._description = description
+	self._performance_coin_value = performance_coin_value
+	
 
 func get_ACTION_NAME() -> String:
 	return self._ACTION_NAME
@@ -72,6 +75,9 @@ func get_type_gui() -> String:
 func get_description() -> String:
 	return self._description
 	
+func get_performance_coin_value() -> int: 
+	return self._performance_coin_value
+	
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"action_ID": _action_ID,
@@ -86,4 +92,4 @@ func load_state(data : Dictionary) -> void:
 	_description = data.get("description")
 	
 static func empty_action() -> EMC_Action:
-	return EMC_Action.new(NAN, "", {}, {}, "", "")
+	return EMC_Action.new(NAN, "", {}, {}, "", "", 0)

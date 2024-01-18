@@ -57,20 +57,20 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		1: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
 		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
 								 { }, "RestGUI", 
-								 "Hat sich ausgeruht.")
+								 "Hat sich ausgeruht.", 10)
 		4: result = EMC_Action.new(p_action_ID, "Cooking", {}, 
 								 { }, "CookingGUI", 
-								 "Hat gekocht.")
-		#5: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
-		#						 "Pop Up Aktion ausgeführt.")
+								 "Hat gekocht.", 30)
 		5: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
 								{ }, "RainwaterBarrelGUI",
-								"Hat Wasser aus der Regentonne geschöpft.")
+								"Hat Wasser aus der Regentonne geschöpft.",0)
+		6: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
+								 "Pop Up Aktion ausgeführt.", 0)
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
-								 "Nach Hause gekehrt.", EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
+								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
 		2001: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
-								 "Hat Marktplatz besucht.", EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000)) 
+								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000)) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result
@@ -213,22 +213,22 @@ func _create_new_pop_up_action() -> EMC_PopUpAction:
 		EMC_DayPeriod.MORNING:
 			var _counter_morning : int = _rng.randi_range(1, 2)
 			match _counter_morning:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.NOON:
 			var _counter_noon : int = _rng.randi_range(1, 2)
 			match _counter_noon:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		EMC_DayPeriod.EVENING: 
 			var _counter_evening : int = _rng.randi_range(1, 2)
 			match _counter_evening:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", "PopUp 2 happening")
+				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
 		_: 
