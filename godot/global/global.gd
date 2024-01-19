@@ -128,7 +128,7 @@ func load_game() -> void:
 	else:
 		data = json.get_data()
 	
-	_e_coins = data.get("e_coins", 100)
+	_e_coins = data.get("e_coins", 500)
 	
 	_was_crisis = data.get("was_crisis", false)
 	if not _was_crisis:

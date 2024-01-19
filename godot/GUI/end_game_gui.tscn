@@ -53,19 +53,19 @@ text = "Du hast die Krise überstanden.
 autowrap_mode = 2
 
 [node name="TextBox3" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3"]
-custom_minimum_size = Vector2(376, 300)
+clip_contents = false
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
-custom_minimum_size = Vector2(24, 300)
 layout_mode = 2
 text = "
 "
+fit_content = true
 autowrap_mode = 2
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
@@ -85,6 +85,7 @@ size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -130,11 +131,12 @@ layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
-custom_minimum_size = Vector2(376, 300)
+clip_contents = false
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
-custom_minimum_size = Vector2(24, 300)
+clip_contents = false
 layout_mode = 2
 text = "
 "
