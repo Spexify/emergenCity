@@ -6,8 +6,9 @@ const MAX_ECOINS = 99999
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
-const HOME_SCENE = "res://preparePhase/main_menu.tscn"
+const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
+const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
 
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
@@ -15,14 +16,26 @@ var _inventory : EMC_Inventory = null
 var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
+var _in_crisis_phase: bool
 
 
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
 
+
 func goto_scene(path: String) -> void:
+	match path:
+		PREPARE_PHASE_SCENE: _in_crisis_phase = false
+		CONTINUE_SCENE: _in_crisis_phase = false #MRM: Eig. uneindeutig, vllt ein enum statt bool draus machen?
+		CRISIS_PHASE_SCENE: _in_crisis_phase = true
+		_: _in_crisis_phase = false
+	
 	call_deferred("_deferred_goto_scene", path)
+
+
+func is_in_crisis_phase() -> bool:
+	return _in_crisis_phase
 
 
 func _deferred_goto_scene(path: String) -> void:
@@ -32,11 +45,14 @@ func _deferred_goto_scene(path: String) -> void:
 	current_scene = s.instantiate()
 	root.add_child(current_scene)
 
+
 func load_scene_name() -> String:
 	return _start_scene
-	
+
+
 func was_crisis() -> bool:
 	return _was_crisis
+
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
@@ -48,11 +64,13 @@ func reset_save() -> void:
 	save_game.store_string("")
 	
 	load_game()
-	
+
+
 func reset_state() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
 	save_game.store_string("")
-	
+
+
 func save_game(was_crisis : bool) -> void:
 	
 	if _inventory == null:
@@ -91,7 +109,8 @@ func save_game(was_crisis : bool) -> void:
 
 		# Store the save dictionary as a new line in the save file.
 		save_state.store_line(json_string)
-	
+
+
 func load_game() -> void:
 	if not FileAccess.file_exists(SAVE_GAME_FILE):
 		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
@@ -113,7 +132,7 @@ func load_game() -> void:
 	
 	_was_crisis = data.get("was_crisis", false)
 	if not _was_crisis:
-		_start_scene = HOME_SCENE
+		_start_scene = PREPARE_PHASE_SCENE
 	else:
 		_start_scene = CONTINUE_SCENE
 	

@@ -152,7 +152,9 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	var comps := sender.get_comps()
 	var comp_string: String = ""
 	for comp in comps:
-		comp_string += comp.get_colored_name_with_vals() + ", "
+		var comp_text := comp.get_colored_name_with_vals()
+		if comp_text != "":
+			comp_string += comp_text + ", "
 	#Remove superfluous comma:
 	comp_string = comp_string.left(comp_string.length() - 2)
 	var label_comps := $Background/VBoxContainer/MarginContainer/TextBoxBG/Components

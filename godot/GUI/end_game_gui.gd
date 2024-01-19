@@ -105,4 +105,4 @@ func _on_main_menu_pressed() -> void:
 	await button_sfx.finished
 	get_tree().paused = false
 	Global.reset_state()
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	Global.goto_scene(Global.PREPARE_PHASE_SCENE)

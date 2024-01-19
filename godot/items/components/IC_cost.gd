@@ -11,8 +11,13 @@ func _init(cost : int) -> void:
 
 func get_cost() -> int:
 	return _cost
-	
+
+
+## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return str(_cost) + "eC"
+	if Global.is_in_crisis_phase():
+		return ""
+	else:
+		return str(_cost) + "eC"
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
