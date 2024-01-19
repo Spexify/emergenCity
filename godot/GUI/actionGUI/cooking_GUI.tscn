@@ -36,11 +36,10 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBC/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBC/TitleSpacing"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Was möchtest du kochen?"
-horizontal_alignment = 1
 
 [node name="RecipeBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2

@@ -31,7 +31,7 @@ fit_content = true
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"TextBox"
+theme_type_variation = &"WhitePanelContainer"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
