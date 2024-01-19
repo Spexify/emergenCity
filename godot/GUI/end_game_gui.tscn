@@ -34,35 +34,35 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "GEWONNEN"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]GEWONNEN[/center]"
 
 [node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
-text = "Du hast die Krise überstanden. 
-Übersicht von Aktionen:
+text = "Du hast die Krise überstanden.
 "
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(376, 150)
-layout_mode = 2
-
-[node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="TextBox3" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Actions" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3"]
+custom_minimum_size = Vector2(376, 300)
+layout_mode = 2
+
+[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
+custom_minimum_size = Vector2(24, 300)
 layout_mode = 2
 text = "
 "
@@ -72,8 +72,8 @@ autowrap_mode = 2
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
 text = "
 "
@@ -107,44 +107,46 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "VERLOREN"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]VERLOREN[/center]"
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
 text = "Du hast die Krise nicht überstanden."
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(376, 150)
-layout_mode = 2
-
-[node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="TextBox3" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Actions" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
+custom_minimum_size = Vector2(376, 300)
+layout_mode = 2
+
+[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
+custom_minimum_size = Vector2(24, 300)
 layout_mode = 2
 text = "
 "
+fit_content = true
 autowrap_mode = 2
 
 [node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
 text = "Du hast 10 ECoins erworben!
 "
@@ -153,7 +155,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Zurück zur Hauptmenu"
+text = "Zurück zum Hauptmenü"
 
 [node name="SFX" type="Node" parent="."]
 

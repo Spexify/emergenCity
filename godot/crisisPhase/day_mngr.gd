@@ -44,8 +44,8 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # hyperparameters for random pop-up- and optional events respectively
 var _puGUI_probability_countdown : int
-const PU_LOWER_BOUND : int = 3 #MRM hab ich erhöht, weil sie manchmal nerven x)
-const PU_UPPER_BOUND : int = 6 #MRM hab ich erhöht, weil sie manchmal nerven x)
+const PU_LOWER_BOUND : int = 999 #MRM hab ich erhöht, weil sie manchmal nerven x)
+const PU_UPPER_BOUND : int = 999 #MRM hab ich erhöht, weil sie manchmal nerven x)
 
 var _opGUI_probability_countdown : int
 const OP_LOWER_BOUND : int = 2

@@ -127,19 +127,21 @@ theme_override_font_sizes/italics_font_size = 36
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Consume" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Konsumieren
 "
 
 [node name="Close" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Close"
+text = "Weiter"
 
 [node name="SFX" type="Node" parent="."]
 

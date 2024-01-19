@@ -22,7 +22,7 @@ var history : Array [EMC_DayCycle]
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 	
-	$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer.vertical_scroll_mode = true
+	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer.vertical_scroll_mode = true
 	history = p_history
 	
 	
@@ -75,7 +75,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 						 " Mal ausgeführt .\n"
 						
 	if p_avatar_life_status == false :
-		$LoserScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2/Actions.text \
+		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_loser
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false

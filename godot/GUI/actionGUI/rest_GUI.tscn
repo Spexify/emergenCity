@@ -55,29 +55,30 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-text = "Willst du dich ausruhen?"
+bbcode_enabled = true
+text = "[center]Willst du dich ausruhen?[/center]
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Okay" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(230, 50)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-text = "Okay"
+text = "Bestätigen
+"
 icon = ExtResource("4_uimum")
-
-[node name="VSeparator" type="VSeparator" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
 
 [node name="Cancel" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_k786i")
-text = "Zurück"
+text = "Abbrechen
+"
 
 [node name="SFX" type="Node" parent="."]
 

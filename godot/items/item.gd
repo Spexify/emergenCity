@@ -49,7 +49,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 		IDs.RAVIOLI_TIN:
 			name = "Ravioli Konserve"
 			_descr = "Kalt genießbar, aber ein Festmahl sieht anders aus.."
-			_comps.push_back(EMC_IC_Food.new(8))
+			_comps.push_back(EMC_IC_Food.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.GAS_CARTRIDGE:
@@ -59,7 +59,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 		IDs.RAVIOLI_MEAL:
 			name = "Ravioli Gericht"
 			_descr = "Lecker schmecker!"
-			_comps.push_back(EMC_IC_Food.new(15))
+			_comps.push_back(EMC_IC_Food.new(2))
 			_comps.push_back(EMC_IC_Cost.new(50))
 		IDs.UNCOOKED_PASTA:
 			name = "Ungekochte Nudeln"
@@ -69,25 +69,25 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 		IDs.COOKED_PASTA:
 			name = "Nudeln"
 			_descr = "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt."
-			_comps.push_back(EMC_IC_Food.new(10))
+			_comps.push_back(EMC_IC_Food.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.SAUCE_JAR:
 			name = "Soße im Glas"
 			_descr = "X"
-			_comps.push_back(EMC_IC_Food.new(4))
+			_comps.push_back(EMC_IC_Food.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.PASTA_WITH_SAUCE:
 			name = "Nudeln mit Soße"
 			_descr = "X"
-			_comps.push_back(EMC_IC_Food.new(14))
+			_comps.push_back(EMC_IC_Food.new(2))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.BREAD:
 			name = "Brot"
 			_descr = "X"
-			_comps.push_back(EMC_IC_Food.new(5))
+			_comps.push_back(EMC_IC_Food.new(1))
 			_comps.push_back(EMC_IC_Ingredient.new())
 			_comps.push_back(EMC_IC_Cost.new(20))
 		IDs.JAM:
@@ -98,7 +98,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 		IDs.BREAD_WITH_JAM:
 			name = "Brot mit Marmelade"
 			_descr = "X"
-			_comps.push_back(EMC_IC_Food.new(9))
+			_comps.push_back(EMC_IC_Food.new(1))
 		IDs.CHLOR_TABLETS:
 			name = "Chlortablette"
 			_descr = "Zum Wasser Filtern."
