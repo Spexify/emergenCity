@@ -33,6 +33,9 @@ func get_name_with_values() -> String:
 ##All relevant information are returned with an appropriate BBCode Tag,
 ## this way the formatting is directly applied to a  RichTextLabel
 func get_colored_name_with_vals() -> String:
-	return "[color=" + _color.to_html(false) + "]" + get_name_with_values() + "[/color]"
+	if get_name_with_values() == "":
+		return ""
+	else:
+		return "[color=" + _color.to_html(false) + "]" + get_name_with_values() + "[/color]"
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
