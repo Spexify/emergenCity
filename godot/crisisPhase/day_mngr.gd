@@ -243,8 +243,6 @@ func _create_new_pop_up_action() -> EMC_PopUpAction:
 ################################### Optional Events ################################################
 
 func _check_op_counter() -> void:
-	print("check op")
-	print(str(_opGUI_probability_countdown))
 	_opGUI_probability_countdown -= 1
 	if _opGUI_probability_countdown == 0:
 		_create_new_optional_event()
