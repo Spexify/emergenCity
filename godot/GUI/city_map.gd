@@ -1,19 +1,19 @@
 extends TextureRect
 class_name EMC_CityMap
 
+signal opened
+signal closed
+
 @onready var _curr_pos_pin := $CurrPosPin
 @onready var _home_pin := $HomePin
 
+var _crisis_phase: EMC_CrisisPhase
 var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	hide()
-
-
+########################################## PUBLIC METHODS ##########################################
 func setup(p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
 	p_cs_GUI: EMC_ChangeStageGUI) -> void:
 	_day_mngr = p_day_mngr
@@ -23,7 +23,7 @@ func setup(p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: 
 
 
 func open() -> void:
-	get_tree().paused = true
+	get_tree().paused = true #StageMngr necessary?? Tried to fix bug, but didn't work
 	_home_pin.show()
 	
 	#Setup Current-Location-Pin
@@ -41,18 +41,26 @@ func open() -> void:
 	_curr_pos_pin.get_node("AnimationPlayer").play("pin_animation")
 	_home_pin.get_node("AnimationPlayer").play("pin_animation")
 	show()
+	opened.emit()
+
+
+func close() -> void:
+	_stage_mngr.get_tree().paused = false
+	_curr_pos_pin.get_node("AnimationPlayer").stop()
+	_home_pin.get_node("AnimationPlayer").stop()
+	hide()
+	closed.emit()
+
+
+########################################## PRIVATE METHODS #########################################
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	hide()
 
 
 #func _process(delta: float) -> void:
 	#if _pin_pos_tween != null:
 		#print(_pin_pos_tween.is_running())
-
-
-func close() -> void:
-	get_tree().paused = false
-	_curr_pos_pin.get_node("AnimationPlayer").stop()
-	_home_pin.get_node("AnimationPlayer").stop()
-	hide()
 
 
 func _on_back_btn_pressed() -> void:

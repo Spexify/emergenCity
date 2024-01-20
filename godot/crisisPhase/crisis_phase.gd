@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name EMC_CrisisPhase
 
 const GERHARD_DIALOG : DialogueResource = preload("res://res/dialogue/gerhard.dialogue")
 const JULIA_DIALOG : DialogueResource = preload("res://res/dialogue/julia.dialogue")
@@ -13,6 +13,8 @@ var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.ne
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 
+
+########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Global.was_crisis():

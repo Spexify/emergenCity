@@ -144,7 +144,7 @@ func copy_item() -> EMC_Item:
 	return copied_item
 
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+########################################## PRIVATE METHODS #########################################
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Sprite2D.frame = _ID

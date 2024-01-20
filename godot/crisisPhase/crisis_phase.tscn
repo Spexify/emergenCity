@@ -134,6 +134,7 @@ visible = false
 layout_mode = 2
 
 [node name="FilterWaterGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("13_jpb2c")]
+visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]

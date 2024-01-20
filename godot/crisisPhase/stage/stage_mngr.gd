@@ -123,7 +123,7 @@ func _create_navigation_layer_tiles() -> void:
 
 ### Add NPCs to the scene
 ## TODO: should be done by a JSON in the future!
-func _setup_NPCs() -> void:	
+func _setup_NPCs() -> void:
 	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
 	gerhard.setup("Gerhard")
 	gerhard.hide()
@@ -303,3 +303,11 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 		offset += Vector2(0, 50)
 		
 	_avatar.set_target(p_NPC.position + offset)
+
+
+func _on_city_map_opened() -> void:
+	$CurrStage.hide() #Hide Stage so clicks don't register on tiles anymore
+
+
+func _on_city_map_closed() -> void:
+	$CurrStage.show()

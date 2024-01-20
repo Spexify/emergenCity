@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://GUI/city_map.tscn" id="3_3nwca"]
 
 [node name="StageMngr" type="Node2D"]
+process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_2ergk")
 
@@ -21,4 +22,8 @@ anchors_preset = 0
 mouse_filter = 1
 
 [node name="CityMap" parent="." instance=ExtResource("3_3nwca")]
+process_mode = 3
 visible = false
+
+[connection signal="closed" from="CityMap" to="." method="_on_city_map_closed"]
+[connection signal="opened" from="CityMap" to="." method="_on_city_map_opened"]
