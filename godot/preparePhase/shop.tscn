@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="3_ncapd"]
-[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/gui/icon_ecoins.png" id="3_spno5"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/gui/icons/icon_ecoins.png" id="3_spno5"]
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="5_npb2c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
@@ -86,7 +86,7 @@ size_flags_vertical = 4
 theme = ExtResource("2_duud7")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
-text = "[center]Inventory[/center]
+text = "[center]Rucksack[/center]
 "
 
 [node name="InventoryPanel" type="PanelContainer" parent="Background/Margin/Main/InventorySection"]
@@ -117,6 +117,7 @@ columns = 7
 [node name="Description" type="PanelContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
 
 [node name="VBox" type="VBoxContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description"]
 layout_mode = 2
@@ -172,7 +173,7 @@ theme_override_constants/separation = 40
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
-text = "Home"
+text = "Hauptmenü"
 
 [node name="TextureButton" type="TextureButton" parent="Background/Margin/Main/HBoxContainer"]
 layout_mode = 2

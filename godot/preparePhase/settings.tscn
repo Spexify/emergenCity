@@ -32,21 +32,23 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 240
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Settings"
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+text = "Einstellungen"
+fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="FontChange" type="CheckButton" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 25
 button_pressed = true
-text = "Dyslexic Font"
+text = "Dyslexie Schrift"
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="CenterContainer" method="_on_font_change_pressed"]
