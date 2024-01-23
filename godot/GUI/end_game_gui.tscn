@@ -50,6 +50,7 @@ custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
 text = "Du hast die Krise überstanden.
 "
+fit_content = true
 autowrap_mode = 2
 
 [node name="TextBox3" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
@@ -77,6 +78,7 @@ custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
 text = "
 "
+fit_content = true
 autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
@@ -123,6 +125,7 @@ theme_type_variation = &"WhitePanelContainer"
 custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
 text = "Du hast die Krise nicht überstanden."
+fit_content = true
 autowrap_mode = 2
 
 [node name="TextBox3" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
@@ -152,6 +155,7 @@ custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
 text = "Du hast 10 ECoins erworben!
 "
+fit_content = true
 autowrap_mode = 2
 
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]

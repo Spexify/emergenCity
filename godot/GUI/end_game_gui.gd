@@ -35,8 +35,8 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 	var noon : bool = false
 	var evening : bool = false
 	
-	for action : String in EMC_Action.IDs:
-		#	for action : EMC_Action.IDs in EMC_Action.IDs:
+	#for action : String in EMC_Action.IDs:
+	for action : String in EMC_Action.IDs.keys():
 		var action_frequency_counter := 0
 		for day in history:
 			if day.morning_action.get_ACTION_NAME().to_upper() == action :
@@ -62,7 +62,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 				evening = false
 			
 		actions_summary[action] = action_frequency_counter
-		actions_summary[action + "CoinValue"] = action_coin_value
+		actions_summary[str(action) + "CoinValue"] = action_coin_value
 	
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):
@@ -82,7 +82,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 		$WinnerScreen.visible = false
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
-		$WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2/Actions.text \
+		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_winner
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
