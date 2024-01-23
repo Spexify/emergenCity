@@ -70,9 +70,6 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								"Hat Wasser aus der Regentonne geschöpft.",0)
 		6: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.", 0)
-		7: result = EMC_Action.new(p_action_ID, "Filter Water", {"constraint_filter_water" : 0}, { }, "FilterWaterGUI", 
-								 "Wasser ist gefiltert.", 0)
-								
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
@@ -181,9 +178,9 @@ func get_current_day() -> int:
 	return floor(self._period_cnt / 3.0)
 
 func _update_vitals() -> void:
-	_avatar_ref.sub_nutrition(1) 
-	_avatar_ref.sub_hydration(1)
-	_avatar_ref.sub_health(1)
+	_avatar_ref.sub_nutrition() 
+	_avatar_ref.sub_hydration()
+	_avatar_ref.sub_health()
 
 func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)

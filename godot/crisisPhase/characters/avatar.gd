@@ -69,13 +69,13 @@ func get_unit_health_status() -> int:
 	
 	
 ## Setters für die Statutbalken vom Avatar
-func add_nutrition(nutrition_change : int) -> void: 
+func add_nutrition(nutrition_change : int = 1) -> void: 
 	if _nutrition_value + nutrition_change <= MAX_VITALS: #MRM: Fixed bug
 		_nutrition_value += nutrition_change
 		nutrition_updated.emit(_nutrition_value)
 
 
-func sub_nutrition(nutrition_change : int) -> bool:
+func sub_nutrition(nutrition_change : int = 1) -> bool:
 	if _nutrition_value - nutrition_change < 0 or _nutrition_value < 0:
 		nutrition_updated.emit(_nutrition_value) 
 		return false
@@ -84,12 +84,12 @@ func sub_nutrition(nutrition_change : int) -> bool:
 		nutrition_updated.emit(_nutrition_value)
 		return true
 	
-func add_hydration(hydration_change : int) -> void:
+func add_hydration(hydration_change : int = 1) -> void:
 	if _hydration_value + hydration_change <= MAX_VITALS:
 		_hydration_value += hydration_change
 		hydration_updated.emit(_hydration_value)
 	
-func sub_hydration(hydration_change : int) -> bool:
+func sub_hydration(hydration_change : int = 1) -> bool:
 	if _hydration_value - hydration_change < 0 or _hydration_value < 0:
 		hydration_updated.emit(_hydration_value)
 		return false
@@ -98,12 +98,12 @@ func sub_hydration(hydration_change : int) -> bool:
 		hydration_updated.emit(_hydration_value)
 		return true
 
-func add_health(health_change : int) -> void:
+func add_health(health_change : int = 1) -> void:
 	if _health_value + health_change <= MAX_VITALS: 
 		_health_value += health_change
 		health_updated.emit(_health_value)
 	
-func sub_health(health_change : int) -> bool:
+func sub_health(health_change : int = 1) -> bool:
 	if _health_value - health_change < 0 or _health_value < 0:
 		health_updated.emit(_health_value)
 		return false

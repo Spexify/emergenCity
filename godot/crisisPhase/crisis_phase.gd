@@ -35,7 +35,6 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/RestGUI.visible = false
 	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
 	$GUI/VBC/MiddleSection/CookingGUI.visible = false
-	$GUI/VBC/MiddleSection/FilterWaterGUI.visible = false
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
 
 	#Setup-Methoden
@@ -48,7 +47,6 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
-	$GUI/VBC/MiddleSection/FilterWaterGUI.setup(_backpack)
 
 	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
 		$GUI/VBC/LowerSection/ChangeStageGUI)
@@ -56,7 +54,6 @@ func _ready() -> void:
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
 	var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
-	var fwGUI := $GUI/VBC/MiddleSection/FilterWaterGUI
 	var action_guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.
@@ -69,7 +66,6 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
-	action_guis.append($GUI/VBC/MiddleSection/FilterWaterGUI as EMC_ActionGUI)
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)

@@ -10,7 +10,6 @@ signal on_drink_pressed
 @onready var close_gui_sfx := $SFX/CloseGUISFX
 @onready var button_sfx := $SFX/ButtonSFX
 
-## TODO: add inventory in popup SEOD and choice of food and drinks
 var _avatar: EMC_Avatar
 var _inventory_GUI : EMC_InventoryGUI
 var _inventory : EMC_Inventory
@@ -18,7 +17,6 @@ const _INV_SCN : PackedScene = preload("res://GUI/inventory_GUI.tscn")
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 
 var _has_slept : int = 0 
-
 
 ## tackle visibility
 # MRM: This function would be a bonus, but since the open function expects a parameter I commented
@@ -63,7 +61,6 @@ func close() -> void:
 	closed.emit()
 
 
-## TODO: think about eating and drinking untis and updating health accordingly
 #MRM: Technically the values should be subtracted when opening the screen but the 
 #gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
