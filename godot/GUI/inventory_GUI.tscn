@@ -157,4 +157,5 @@ stream = ExtResource("5_w1mvg")
 stream = ExtResource("6_i2pde")
 
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Continue" to="." method="close"]

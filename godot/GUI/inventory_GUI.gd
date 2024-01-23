@@ -192,3 +192,7 @@ func _on_consume_pressed() -> void:
 	_inventory.item_removed.emit()
 	return
 
+
+
+func _on_discard_pressed() -> void:
+	_inventory.remove_item(_clicked_item.get_ID(),1)
