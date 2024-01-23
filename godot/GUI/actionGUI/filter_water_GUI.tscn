@@ -59,6 +59,7 @@ size_flags_horizontal = 3
 text = "Abbrechen"
 
 [node name="DirtyWaterFiltered" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -98,44 +99,6 @@ size_flags_horizontal = 3
 text = "Zurück
 "
 
-[node name="DirtyWaterUnavailable" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 75.0
-offset_top = 110.0
-offset_right = 628.0
-offset_bottom = 337.0
-
-[node name="MarginContainer" type="MarginContainer" parent="DirtyWaterUnavailable"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DirtyWaterUnavailable/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TitleSpacing" type="MarginContainer" parent="DirtyWaterUnavailable/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 12
-
-[node name="Title" type="Label" parent="DirtyWaterUnavailable/MarginContainer/VBoxContainer/TitleSpacing"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Es gibt kein dreckiges 
-Wasser zum Filtern."
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="DirtyWaterUnavailable/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Cancel" type="Button" parent="DirtyWaterUnavailable/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Zurück
-"
-
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
@@ -150,4 +113,3 @@ stream = ExtResource("4_pvqn0")
 [connection signal="pressed" from="DirtyWaterAvailable/MarginContainer/VBoxContainer/HBoxContainer/Filter" to="." method="_on_filter_pressed"]
 [connection signal="pressed" from="DirtyWaterAvailable/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="DirtyWaterFiltered/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="DirtyWaterUnavailable/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

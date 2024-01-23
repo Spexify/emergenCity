@@ -31,9 +31,12 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_8ckcn")
 
 [node name="NutritionBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
+max_value = 1000.0
 step = 1.0
+value = 500.0
+show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

@@ -37,7 +37,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	set_title(p_title)
 	
 	$Background/VBoxContainer/HBoxContainer/Consume.visible = false
-	$Background/VBoxContainer/HBoxContainer/Close.visible = false
+	$Background/VBoxContainer/HBoxContainer/Continue.visible = false
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -64,7 +64,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 func set_consume_active() -> void:
 	_only_inventory = false
 	$Background/VBoxContainer/HBoxContainer/Consume.visible = true
-	$Background/VBoxContainer/HBoxContainer/Close.visible = true
+	$Background/VBoxContainer/HBoxContainer/Continue.visible = true
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
@@ -168,6 +168,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	
 	## if the Chlor tablets are clicked, open water filtering gui
 	if sender.get_ID() == 13:
+		
 		##open gui and ask if water should be filtered, if there is available water
 		pass
 			

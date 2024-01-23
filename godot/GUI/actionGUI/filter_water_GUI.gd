@@ -1,28 +1,18 @@
-extends Control
+extends EMC_ActionGUI
 class_name EMC_FilterWaterGUI
-
-signal opened
-signal closed
-
 
 var _inventory : EMC_Inventory
 var _chlor_tabs : EMC_Item
 
 func setup(_p_inventory : EMC_Inventory) -> void:
 	_inventory = _p_inventory
+	_chlor_tabs = _inventory.get_item_of_ID(13)
 
-func open(sender : EMC_Item) -> void:
-	_chlor_tabs = sender
+func open() -> void:
 	visible = true
 	$SFX/OpenGUISFX.play()
-	if _inventory.has_item(2):
-		$DirtyWaterAvailable.visible = true
-		$DirtyWaterUnavailable.visible = false
-		$DirtyWaterFiltered.visible = false
-	else:
-		$DirtyWaterAvailable.visible = false
-		$DirtyWaterUnavailable.visible = true
-		$DirtyWaterFiltered.visible = false
+	$DirtyWaterAvailable.visible = true
+	$DirtyWaterFiltered.visible = false
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
@@ -44,6 +34,7 @@ func _on_filter_pressed() -> void:
 		_inventory.remove_item(13,1)
 	_inventory.remove_item(2,1)
 	_inventory.add_new_item(1)
+	$DirtyWaterAvailable.visible = false
 	$DirtyWaterFiltered.visible = true
 
 

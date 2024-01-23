@@ -51,6 +51,8 @@ var _opGUI_probability_countdown : int
 const OP_LOWER_BOUND : int = 2
 const OP_UPPER_BOUND : int = 4 
 
+var _inventory : EMC_Inventory
+
 
 func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
@@ -68,6 +70,9 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								"Hat Wasser aus der Regentonne geschöpft.",0)
 		6: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.", 0)
+		7: result = EMC_Action.new(p_action_ID, "Filter Water", {"constraint_filter_water" : 0}, { }, "FilterWaterGUI", 
+								 "Wasser ist gefiltert.", 0)
+								
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
@@ -84,7 +89,9 @@ gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
-puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
+puGUI : EMC_PopUpGUI,
+_p_inventory: EMC_Inventory,
+max_day : int = 3) -> void:
 	_avatar_ref = avatar_ref
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	self.max_day = max_day
@@ -92,6 +99,7 @@ puGUI : EMC_PopUpGUI, max_day : int = 3) -> void:
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
 	_egGUI = egGUI
+	_inventory = _p_inventory
 	_puGUI = puGUI
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
@@ -270,6 +278,13 @@ func constraint_rainwater_barrel() -> String:
 	else:
 		return NO_REJECTION
 
+func constraint_filter_water() -> String:
+	if !_inventory.has_item(2):
+		return "Kein dreckiges Wasser ist zum Filtern verfügbar.]"
+	if !_inventory.has_item(13):
+		return "Keine Chlortabletten sind zum Filtern verfügbar.]"
+	else:
+		return NO_REJECTION
 
 func constraint_not_morning() -> String:
 	if get_current_day_period() == EMC_DayPeriod.MORNING:

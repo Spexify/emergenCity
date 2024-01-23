@@ -36,6 +36,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 	var evening : bool = false
 	
 	for action : String in EMC_Action.IDs:
+		#	for action : EMC_Action.IDs in EMC_Action.IDs:
 		var action_frequency_counter := 0
 		for day in history:
 			if day.morning_action.get_ACTION_NAME().to_upper() == action :
