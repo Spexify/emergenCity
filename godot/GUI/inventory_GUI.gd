@@ -36,8 +36,10 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
 	
-	$Background/VBoxContainer/HBoxContainer/Consume.visible = false
-	$Background/VBoxContainer/HBoxContainer/Continue.visible = false
+	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false
+	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = false
+	$FilterWater.visible = false
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -49,12 +51,12 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 			#new_slot.set_item(new_item)
 	#
 		#
-		#$Background/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
+		#$Inventory/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
 		var new_slot := _SLOT_SCN.instantiate()
-		$Background/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
+		$Inventory/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null:
@@ -63,18 +65,18 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 
 func set_consume_active() -> void:
 	_only_inventory = false
-	$Background/VBoxContainer/HBoxContainer/Consume.visible = true
-	$Background/VBoxContainer/HBoxContainer/Continue.visible = true
+	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
-	$Background/Label.text = "[center]" + p_new_text + "[/center]"
+	$Inventory/Label.text = "[center]" + p_new_text + "[/center]"
 
 func set_grid_height(height : int = 400) -> void:
-	$Background/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
+	$Inventory/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
 
 func clear_items() -> void:
-	for slot in $Background/VBoxContainer/ScrollContainer/GridContainer.get_children():
+	for slot in $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
 		
 ## TODO: Karina
@@ -125,7 +127,7 @@ func _on_btn_backpack_pressed() -> void:
 ## Update this view when its underlying [EMC_Inventory] structure added an item
 func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.connect(_on_item_clicked)
-	var slot := $Background/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
+	var slot := $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
 	if slot == null:
 		printerr("InventoryGUI: Slots not initialized properly")
 		return
@@ -135,16 +137,17 @@ func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 ## Update this view when its underlying [EMC_Inventory] structure removed an item
 func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.disconnect(_on_item_clicked)
-	var slot := $Background/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
+	var slot := $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
 	slot.remove_item()
 
 
 ## Display information of clicked [EMC_Item]
 func _on_item_clicked(sender: EMC_Item) -> void:
 	_clicked_item = sender
+	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
 	
 	#Name of the item
-	var label_name := $Background/VBoxContainer/MarginContainer/TextBoxBG/Name
+	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
 	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	
@@ -157,33 +160,47 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 			comp_string += comp_text + ", "
 	#Remove superfluous comma:
 	comp_string = comp_string.left(comp_string.length() - 2)
-	var label_comps := $Background/VBoxContainer/MarginContainer/TextBoxBG/Components
+	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
 	label_comps.clear()
 	label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
-	var label_descr := $Background/VBoxContainer/MarginContainer/TextBoxBG/Description
+	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
 	## if the Chlor tablets are clicked, open water filtering gui
 	if sender.get_ID() == 13:
-		
+		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 		##open gui and ask if water should be filtered, if there is available water
 		pass
 			
 
 func _on_consume_pressed() -> void:
+	
 	var has_drank : bool = false
 	var has_eaten : bool = false
 	if _clicked_item == null:
 		return
+	if _clicked_item.get_ID() == 13:
+		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+		if !_inventory.has_item(2):
+			$FilterWater.visible = true
+		else:
+			_clicked_item.get_comp(EMC_IC_Uses).item_used(1)
+			if  _clicked_item.get_comp(EMC_IC_Uses).get_uses_left() == 0:
+				_inventory.remove_item(13,1)
+			_inventory.remove_item(2,1)
+			_inventory.add_new_item(1)
 	var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 	if  drink_comp!= null:
+		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Trink"
 		_avatar_ref.add_hydration(drink_comp.get_hydration())
 		has_drank = true
 	var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
 	if food_comp != null:
+		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Iss"
 		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
 		has_eaten = true
 	if has_drank && has_eaten: 
@@ -193,6 +210,9 @@ func _on_consume_pressed() -> void:
 	return
 
 
-
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
+
+
+func _on_cancel_pressed() -> void:
+	$FilterWater.visible = false

@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ve5h2")
 
-[node name="Background" type="NinePatchRect" parent="."]
+[node name="Inventory" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(450, 650)
 layout_mode = 1
 anchors_preset = 8
@@ -29,9 +29,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -224.5
-offset_top = -311.0
+offset_top = -321.0
 offset_right = 225.5
-offset_bottom = 319.0
+offset_bottom = 329.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qja6e")
@@ -40,7 +40,7 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="Label" type="RichTextLabel" parent="Background"]
+[node name="Label" type="RichTextLabel" parent="Inventory"]
 custom_minimum_size = Vector2(0, 65)
 layout_mode = 1
 anchors_preset = 10
@@ -58,7 +58,7 @@ bbcode_enabled = true
 text = "[center]Inventory[/center]
 "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -69,21 +69,21 @@ offset_right = 100.0
 offset_bottom = 139.0
 grow_horizontal = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Inventory/VBoxContainer"]
 custom_minimum_size = Vector2(420, 350)
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="Inventory/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 columns = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 10
 
-[node name="TextBoxBG" type="NinePatchRect" parent="Background/VBoxContainer/MarginContainer"]
+[node name="TextBoxBG" type="NinePatchRect" parent="Inventory/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(400, 160)
 layout_mode = 2
 texture = ExtResource("4_47hfl")
@@ -92,7 +92,7 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="Name" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+[node name="Name" type="RichTextLabel" parent="Inventory/VBoxContainer/MarginContainer/TextBoxBG"]
 custom_minimum_size = Vector2(800, 80)
 layout_mode = 0
 offset_left = 5.0
@@ -104,7 +104,7 @@ theme = ExtResource("3_270nm")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 
-[node name="Components" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+[node name="Components" type="RichTextLabel" parent="Inventory/VBoxContainer/MarginContainer/TextBoxBG"]
 custom_minimum_size = Vector2(800, 80)
 layout_mode = 0
 offset_left = 5.0
@@ -115,7 +115,7 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_270nm")
 theme_override_font_sizes/normal_font_size = 40
 
-[node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/TextBoxBG"]
+[node name="Description" type="RichTextLabel" parent="Inventory/VBoxContainer/MarginContainer/TextBoxBG"]
 custom_minimum_size = Vector2(800, 170)
 layout_mode = 0
 offset_left = 5.0
@@ -126,27 +126,71 @@ scale = Vector2(0.5, 0.5)
 theme = ExtResource("3_270nm")
 theme_override_font_sizes/italics_font_size = 36
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Consume" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+[node name="Consume" type="Button" parent="Inventory/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Konsumieren
 "
 
-[node name="Discard" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+[node name="Discard" type="Button" parent="Inventory/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Entsorgen"
 
-[node name="Continue" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer"]
+[node name="Continue" type="TextureButton" parent="Inventory/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_v1kmp")
+
+[node name="FilterWater" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -123.5
+offset_right = 213.0
+offset_bottom = 123.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="FilterWater"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FilterWater/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleSpacing" type="MarginContainer" parent="FilterWater/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 12
+
+[node name="Title" type="RichTextLabel" parent="FilterWater/MarginContainer/VBoxContainer/TitleSpacing"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Dreckiges Wasser zum Filtern ist nicht
+verfügbar."
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FilterWater/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="FilterWater/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zurück"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -156,6 +200,7 @@ stream = ExtResource("5_w1mvg")
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_i2pde")
 
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/Continue" to="." method="close"]
+[connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
+[connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
+[connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Continue" to="." method="close"]
+[connection signal="pressed" from="FilterWater/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
