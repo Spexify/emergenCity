@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0oebjhntv2g8"]
+
+[ext_resource type="Texture2D" uid="uid://dhftxjokqdgiu" path="res://res/sprites/GUI/button_doorbell_normal.png" id="1_j1yxm"]
+[ext_resource type="Texture2D" uid="uid://gfl5egwn4qbu" path="res://res/sprites/GUI/button_doorbell_pressed.png" id="2_ogr1v"]
+[ext_resource type="Script" path="res://GUI/doorbell.gd" id="3_j7i7k"]
+[ext_resource type="AudioStream" uid="uid://d265spjcv3uc2" path="res://res/SFX/doorbell-shortened-100308.mp3" id="4_h6cpd"]
+
+[node name="Doorbell" type="TextureButton"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 82.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_j1yxm")
+texture_pressed = ExtResource("2_ogr1v")
+script = ExtResource("3_j7i7k")
+
+[node name="RTL" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 40
+bbcode_enabled = true
+text = "[center][i]Dummy[/i][/center]"
+
+[node name="DingDongSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_h6cpd")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

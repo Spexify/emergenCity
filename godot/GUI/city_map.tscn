@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hcfsn06a2085"]
+[gd_scene load_steps=11 format=3 uid="uid://hcfsn06a2085"]
 
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="1_8f10l"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/gui/invisible_button.png" id="2_1ab2i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="3_p1i3u"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/gui/icons/icon_pin_home.png" id="5_t0jkf"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/gui/icons/icon_pin.png" id="6_brjtq"]
+[ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_qb8si"]
 
 [sub_resource type="Animation" id="Animation_xndm7"]
 length = 0.001
@@ -45,7 +46,7 @@ _data = {
 }
 
 [node name="CityMap" type="TextureRect"]
-z_index = 2
+z_index = 1
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
@@ -62,6 +63,7 @@ offset_bottom = 503.0
 texture_normal = ExtResource("2_1ab2i")
 
 [node name="BackBtn" type="TextureButton" parent="."]
+visible = false
 layout_direction = 2
 layout_mode = 0
 offset_left = 484.0
@@ -90,7 +92,7 @@ offset_right = 461.0
 offset_bottom = 863.0
 texture_normal = ExtResource("2_1ab2i")
 
-[node name="PublicBuildingBtn" type="TextureButton" parent="."]
+[node name="TownhallBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 34.0
@@ -164,11 +166,15 @@ libraries = {
 "": SubResource("AnimationLibrary_uc87h")
 }
 
+[node name="DoorbellsGUI" parent="." instance=ExtResource("7_qb8si")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="MarketplaceBtn" to="." method="_on_marketplace_btn_pressed"]
 [connection signal="pressed" from="EliasFlatBtn" to="." method="_on_elias_flat_btn_pressed"]
-[connection signal="pressed" from="PublicBuildingBtn" to="." method="_on_public_building_btn_pressed"]
+[connection signal="pressed" from="TownhallBtn" to="." method="_on_townhall_btn_pressed"]
 [connection signal="pressed" from="JuliasHouseBtn" to="." method="_on_julias_house_btn_pressed"]
 [connection signal="pressed" from="ComplexBtn" to="." method="_on_complex_btn_pressed"]
 [connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
