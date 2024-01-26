@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://c8qngbqj8n42a" path="res://GUI/summary_end_of_day_gui.tscn" id="9_owtos"]
-[ext_resource type="PackedScene" path="res://GUI/actionGUI/cooking_GUI.tscn" id="10_64vl8"]
+[ext_resource type="PackedScene" uid="uid://e2vuw03w1lx6" path="res://GUI/actionGUI/cooking_GUI.tscn" id="10_64vl8"]
 [ext_resource type="PackedScene" uid="uid://g8y1un3il5jm" path="res://GUI/actionGUI/rest_GUI.tscn" id="11_dfl7m"]
 [ext_resource type="PackedScene" uid="uid://c8c6lclmuiqum" path="res://GUI/actionGUI/rainwater_barrel_GUI.tscn" id="12_ad4fq"]
 [ext_resource type="PackedScene" uid="uid://bf1x6jm5o81ck" path="res://crisisPhase/stage/stage_mngr.tscn" id="13_8jkao"]
@@ -55,12 +55,32 @@ shape = SubResource("RectangleShape2D_yx03m")
 position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
-[node name="BtnBackpack" type="TextureButton" parent="."]
-z_index = 3
+[node name="ButtonList" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
 offset_left = 490.0
-offset_top = 940.0
+offset_top = 750.0
 offset_right = 554.0
-offset_bottom = 1004.0
+offset_bottom = 1006.0
+
+[node name="VBC" type="VBoxContainer" parent="ButtonList"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackpackBtn" type="TextureButton" parent="ButtonList/VBC"]
+layout_mode = 2
+size_flags_horizontal = 4
 toggle_mode = true
 texture_normal = ExtResource("1_07xlw")
 texture_pressed = ExtResource("5_arf8o")
@@ -159,7 +179,7 @@ mouse_filter = 2
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
-[connection signal="pressed" from="BtnBackpack" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_backpack_gui_closed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_closed"]
 [connection signal="opened" from="GUI/VBC/MiddleSection/SummaryEndOfDayGUI" to="." method="_on_summary_end_of_day_gui_opened"]

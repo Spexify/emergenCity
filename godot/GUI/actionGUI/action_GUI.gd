@@ -1,9 +1,5 @@
 extends EMC_GUI
-## TODO
 class_name EMC_ActionGUI
-
-signal opened
-signal closed
 
 ## Value should be set vor each class that implements [EMC_ActionGUI]:
 var _action: EMC_Action

@@ -1,8 +1,6 @@
 extends EMC_GUI
 class_name EMC_SummaryEndOfDayGUI
 
-signal opened
-signal closed
 signal on_eat_pressed
 signal on_drink_pressed
 

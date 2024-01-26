@@ -43,6 +43,7 @@ signal dialogue_initiated(p_NPC_name: String)
 
 @onready var _city_map: EMC_CityMap = $CityMap
 
+var _crisis_phase: EMC_CrisisPhase
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
 var _GUI: CenterContainer
@@ -51,15 +52,16 @@ var _last_clicked_NPC: EMC_NPC = null
 var _dialogue_pitches: Dictionary
 
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI, \
+func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI, \
 	p_cs_GUI: EMC_ChangeStageGUI) -> void:
+	_crisis_phase = p_crisis_phase
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
 	
-	_city_map.setup(p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
+	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	_dialogue_pitches["Avatar"] = 1.0
 	_setup_NPCs()
 	_city_map.hide()
@@ -90,7 +92,7 @@ func get_dialogue_pitches() -> Dictionary:
 	return _dialogue_pitches
 
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	_create_navigation_layer_tiles()
 
@@ -311,3 +313,7 @@ func _on_city_map_opened() -> void:
 
 func _on_city_map_closed() -> void:
 	$CurrStage.show()
+
+
+func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:
+	_day_mngr.on_interacted_with_furniture(p_stage_change_ID)

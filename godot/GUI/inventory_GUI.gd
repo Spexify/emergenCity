@@ -8,8 +8,6 @@ extends EMC_GUI
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
 class_name EMC_InventoryGUI
 
-signal opened
-signal closed
 signal close_button
 signal chlor_tablets_clicked
 
@@ -23,7 +21,7 @@ var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
@@ -109,7 +107,7 @@ func close() -> void:
 	closed.emit()
 
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()

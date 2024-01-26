@@ -1,9 +1,6 @@
 extends EMC_GUI
 class_name EMC_EndGameGUI
 
-signal opened
-signal closed
-
 @onready var open_gui_sfx := $SFX/OpenGUISFX
 @onready var close_gui_sfx := $SFX/CloseGUISFX
 @onready var button_sfx := $SFX/ButtonSFX

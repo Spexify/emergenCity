@@ -5,13 +5,31 @@ const GERHARD_DIALOG : DialogueResource = preload("res://res/dialogue/gerhard.di
 const JULIA_DIALOG : DialogueResource = preload("res://res/dialogue/julia.dialogue")
 const FRIEDEL_DIALOG : DialogueResource = preload("res://res/dialogue/friedel.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
+const _BACK_BTN_NAME := "BackButton"
 
 var _backpack: EMC_Inventory = Global.get_inventory()
-
 var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
+@onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
+
+
+########################################## PUBLIC METHODS ##########################################
+func add_back_button(p_on_pressed_callback: Callable) -> void:
+	var new_back_button := TextureButton.new()
+	new_back_button.texture_normal = load("res://res/gui/button_back.png")
+	new_back_button.name = _BACK_BTN_NAME
+	new_back_button.pressed.connect(p_on_pressed_callback)
+	#new_back_button.pressed.connect(remove_back_button)
+	$ButtonList/VBC.add_child(new_back_button)
+
+
+## Remove back button once it was pressed
+func remove_back_button() -> void:
+	for node: TextureButton in $ButtonList/VBC.get_children():
+		if node.name == _BACK_BTN_NAME:
+			$ButtonList/VBC.remove_child(node)
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -48,7 +66,7 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 
-	$StageMngr.setup($Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
+	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
 		$GUI/VBC/LowerSection/ChangeStageGUI)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
@@ -76,17 +94,6 @@ func _process(delta: float) -> void:
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
-
-
-#func _on_inventory_opened() -> void:
-	#get_tree().paused = true
-	#$BtnBackpack.hide()
-	#get_viewport().set_input_as_handled()
-#
-#
-#func _on_inventory_closed() -> void:
-	#get_tree().paused = false
-	#$BtnBackpack.show()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -142,4 +149,4 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 
 
 func _on_backpack_gui_closed() -> void:
-	$BtnBackpack.set_pressed(false)
+	_backpack_btn.set_pressed(false)
