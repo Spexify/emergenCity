@@ -275,13 +275,6 @@ func constraint_rainwater_barrel() -> String:
 	else:
 		return NO_REJECTION
 
-func constraint_filter_water() -> String:
-	if !_inventory.has_item(2):
-		return "Kein dreckiges Wasser ist zum Filtern verfügbar.]"
-	if !_inventory.has_item(13):
-		return "Keine Chlortabletten sind zum Filtern verfügbar.]"
-	else:
-		return NO_REJECTION
 
 func constraint_not_morning() -> String:
 	if get_current_day_period() == EMC_DayPeriod.MORNING:

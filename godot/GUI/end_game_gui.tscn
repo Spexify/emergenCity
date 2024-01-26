@@ -63,6 +63,7 @@ custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
+clip_contents = false
 layout_mode = 2
 text = "
 "

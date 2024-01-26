@@ -35,7 +35,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_8ckcn")
 
 [node name="NutritionBar" type="ProgressBar" parent="HBoxContainer5/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 20)
+custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
 max_value = 2200.0
 step = 1.0
@@ -56,10 +56,10 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("3_wao4g")
 
 [node name="HydrationBar" type="ProgressBar" parent="HBoxContainer5/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 20)
+custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
 max_value = 2000.0
-step = 25.0
+step = 1.0
 show_percentage = false
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer5"]
@@ -81,9 +81,9 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_ebr56")
 
 [node name="HealthBar" type="ProgressBar" parent="HBoxContainer5/VBoxContainer2/HBoxContainer3"]
-custom_minimum_size = Vector2(80, 20)
+custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
-step = 25.0
+step = 1.0
 show_percentage = false
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer5/VBoxContainer2"]
@@ -101,7 +101,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_ebr56")
 
 [node name="WellbeingBar" type="ProgressBar" parent="HBoxContainer5/VBoxContainer2/HBoxContainer4"]
-custom_minimum_size = Vector2(80, 20)
+custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
 step = 25.0
 show_percentage = false

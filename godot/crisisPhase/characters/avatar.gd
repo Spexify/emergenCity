@@ -7,13 +7,17 @@ signal hydration_updated(p_new_value: int)
 signal health_updated(p_new_value: int)
 
 const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoidance (Max Speed)!
-const MAX_VITALS = 4
+
 #MRM: Unit sollte direct von den Components verwendet werden:
-const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #550 #food Unit = 550 kcal 
+const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #food Unit = 250 kcal 
 const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR #water Unit = 500 ml
 const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
 
-const INIT_NUTRITION_VALUE : int = MAX_VITALS
+const MAX_VITALS_NUTRITION = 2200/UNIT_FACTOR_NUTRITION
+const MAX_VITALS_HYDRATION = 2000/UNIT_FACTOR_HYDRATION
+const MAX_VITALS_HEALTH = 100/UNIT_FACTOR_NUTRITION
+
+const INIT_NUTRITION_VALUE : int = 2
 const INIT_HYDRATION_VALUE : int = 2
 const INIT_HEALTH_VALUE : int = 2
 
@@ -68,48 +72,58 @@ func get_unit_health_status() -> int:
 	return _health_value*UNIT_FACTOR_HEALTH
 	
 	
-## Setters für die Statutbalken vom Avatar
+####################### Setters für die Statutbalken vom Avatar ############################
+
 func add_nutrition(nutrition_change : int = 1) -> void: 
-	if _nutrition_value + nutrition_change <= MAX_VITALS: #MRM: Fixed bug
+	if _nutrition_value + nutrition_change <= MAX_VITALS_NUTRITION:
 		_nutrition_value += nutrition_change
-		nutrition_updated.emit(_nutrition_value)
+		nutrition_updated.emit(get_unit_nutrition_status())
+	else: 
+		_nutrition_value = MAX_VITALS_NUTRITION
+		nutrition_updated.emit(get_unit_nutrition_status())
 
 
 func sub_nutrition(nutrition_change : int = 1) -> bool:
 	if _nutrition_value - nutrition_change < 0 or _nutrition_value < 0:
-		nutrition_updated.emit(_nutrition_value) 
+		nutrition_updated.emit(get_unit_nutrition_status()) 
 		return false
 	else:
 		_nutrition_value -= nutrition_change
-		nutrition_updated.emit(_nutrition_value)
+		nutrition_updated.emit(get_unit_nutrition_status())
 		return true
 	
 func add_hydration(hydration_change : int = 1) -> void:
-	if _hydration_value + hydration_change <= MAX_VITALS:
+	if _hydration_value + hydration_change <= MAX_VITALS_HYDRATION:
 		_hydration_value += hydration_change
-		hydration_updated.emit(_hydration_value)
+		hydration_updated.emit(get_unit_hydration_status())
+	else:
+		_hydration_value = MAX_VITALS_HYDRATION
+		hydration_updated.emit(get_unit_hydration_status())
 	
 func sub_hydration(hydration_change : int = 1) -> bool:
 	if _hydration_value - hydration_change < 0 or _hydration_value < 0:
-		hydration_updated.emit(_hydration_value)
+		hydration_updated.emit(get_unit_hydration_status())
 		return false
 	else:
 		_hydration_value -= hydration_change
-		hydration_updated.emit(_hydration_value)
+		hydration_updated.emit(get_unit_hydration_status())
 		return true
 
 func add_health(health_change : int = 1) -> void:
-	if _health_value + health_change <= MAX_VITALS: 
+	if _health_value + health_change <= MAX_VITALS_HEALTH: 
 		_health_value += health_change
-		health_updated.emit(_health_value)
+		health_updated.emit(get_health_status())
+	else: 
+		_health_value = MAX_VITALS_HEALTH
+		health_updated.emit(get_health_status())
 	
 func sub_health(health_change : int = 1) -> bool:
 	if _health_value - health_change < 0 or _health_value < 0:
-		health_updated.emit(_health_value)
+		health_updated.emit(get_unit_health_status())
 		return false
 	else:
 		_health_value -= health_change
-		health_updated.emit(_health_value)
+		health_updated.emit(get_unit_health_status())
 		return true
 
 
@@ -144,9 +158,9 @@ func load_state(data : Dictionary) -> void:
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
 func _ready() -> void:
-	nutrition_updated.emit(_nutrition_value)
-	hydration_updated.emit(_hydration_value)
-	health_updated.emit(_health_value)
+	nutrition_updated.emit(get_unit_nutrition_status())
+	hydration_updated.emit(get_unit_hydration_status())
+	health_updated.emit(get_unit_health_status())
 
 
 func _process(p_delta: float) -> void:

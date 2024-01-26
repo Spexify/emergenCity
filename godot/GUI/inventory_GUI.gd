@@ -201,6 +201,7 @@ func _on_consume_pressed() -> void:
 	var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
 	if food_comp != null:
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Iss"
+		print(food_comp.get_nutritionness())
 		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
 		has_eaten = true
 	if has_drank && has_eaten: 

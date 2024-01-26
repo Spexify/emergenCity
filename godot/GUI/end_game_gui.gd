@@ -35,20 +35,20 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 	var noon : bool = false
 	var evening : bool = false
 	
-	#for action : String in EMC_Action.IDs:
-	for action : String in EMC_Action.IDs.keys():
+	
+	for action : int in EMC_Action.IDs.values():
 		var action_frequency_counter := 0
 		for day in history:
-			if day.morning_action.get_ACTION_NAME().to_upper() == action :
-				action_coin_value += day.morning_action.get_performance_coin_value()
+			if day.morning_action._action_ID == action :
+				all_action_coins += day.morning_action.get_performance_coin_value()
 				morning = true
 				action_frequency_counter += 1
-			if day.noon_action.get_ACTION_NAME().to_upper() == action :
-				action_coin_value += day.noon_action.get_performance_coin_value()
+			if day.noon_action._action_ID == action :
+				all_action_coins += day.noon_action.get_performance_coin_value()
 				noon = true
 				action_frequency_counter += 1
-			if day.evening_action.get_ACTION_NAME().to_upper() == action :
-				action_coin_value += day.evening_action.get_performance_coin_value()
+			if day.evening_action._action_ID == action :
+				all_action_coins += day.evening_action.get_performance_coin_value()
 				evening = true
 				action_frequency_counter += 1
 			if morning : 
@@ -61,18 +61,17 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 				action_coin_value = day.evening_action.get_performance_coin_value()
 				evening = false
 			
-		actions_summary[action] = action_frequency_counter
+		actions_summary[str(action)] = action_frequency_counter
 		actions_summary[str(action) + "CoinValue"] = action_coin_value
 	
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):
 			continue
 		if actions_summary.get(key) != 0:
-			summary_text_winner += str(key) + " wurde " + str(actions_summary.get(key)) +\
+			summary_text_winner += EMC_Action.IDs.find_key(int(key)) + " wurde " + str(actions_summary.get(key)) +\
 						 " Mal ausgeführt und gibt dir jeweils" +\
 						str(actions_summary.get(key+"CoinValue")) + " ECoins.\n"
-			all_action_coins += actions_summary.get(key)*actions_summary.get(key+"CoinValue")
-			summary_text_loser += str(key) + " wurde " + str(actions_summary.get(key)) +\
+			summary_text_loser += EMC_Action.IDs.find_key(int(key)) + " wurde " + str(actions_summary.get(key)) +\
 						 " Mal ausgeführt .\n"
 						
 	if p_avatar_life_status == false :
