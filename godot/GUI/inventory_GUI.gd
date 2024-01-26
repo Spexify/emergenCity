@@ -171,12 +171,9 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	if sender.get_ID() == 13:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
-		##open gui and ask if water should be filtered, if there is available water
-		pass
 			
 
 func _on_consume_pressed() -> void:
-	
 	var has_drank : bool = false
 	var has_eaten : bool = false
 	if _clicked_item == null:
@@ -189,8 +186,10 @@ func _on_consume_pressed() -> void:
 			_clicked_item.get_comp(EMC_IC_Uses).item_used(1)
 			if  _clicked_item.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)
+				print("deleted")
 			_inventory.remove_item(2,1)
 			_inventory.add_new_item(1)
+			
 	var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 	if  drink_comp!= null:
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Trink"
