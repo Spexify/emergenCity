@@ -24,6 +24,7 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	new_back_button.pressed.connect(p_on_pressed_callback)
 	#new_back_button.pressed.connect(remove_back_button)
 	$ButtonList/VBC.add_child(new_back_button)
+	$ButtonList/VBC.move_child(new_back_button, 0) #so it appears above all the buttons in the list
 
 
 ## Remove back button once it was pressed
