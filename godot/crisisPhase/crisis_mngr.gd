@@ -1,4 +1,4 @@
-extends Node
+extends Control
 class_name EMC_CrisisMngr
 
 var _overworld_states_mngr : EMC_OverworldStatesMngr
@@ -7,6 +7,8 @@ var _day_mngr :  EMC_DayMngr
 var _max_day : int
 var DAY_PERIODS : int = 3
 var _crisis_period_counter : int
+
+var _message_text : String = "Eine Krise beginnt."
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -67,12 +69,15 @@ func check_crisis_status() -> void:
 	if _crisis_period_counter != 0:
 		## TODO add isolation restriction
 		if _overworld_states_mngr.get_electricity_state() == 1 || _overworld_states_mngr.get_water_state() != 0:
+			$".".visible = true
+			#$NinePatchRect/VBoxContainer/PanelContainer/RichTextLabel.text = _message_text
 			## TODO: check countdowns and limit catastrophe number at the same time
 			_water_crisis_mngr()
 			print("water crisis: " + str(_water_crisis_length_countdown))
 			_electricity_crisis_mngr()
 			print("electricity crisis: " + str(_electricity_crisis_length_countdown))
 			_isolation_crisis_mngr()
+		$".".visible = false
 		_crisis_period_counter -= 1
 
 ########################## PRIVATE METHODS #########################################################
@@ -109,10 +114,10 @@ func _isolation_crisis_mngr() -> void:
 	if _isolation_crisis_probability_countdown == 0:
 		_isolation_crisis = true
 		if _isolation_crisis_length_countdown != 0:
-			_overworld_states_mngr.set_isolation_state(0)
+			#_overworld_states_mngr.set_isolation_state(0)
 			_isolation_crisis_length_countdown -= 1
 		else:
-			_overworld_states_mngr.set_isolation_state(1) 
+			#_overworld_states_mngr.set_isolation_state(1) 
 			_isolation_crisis_length_countdown = 3
 			_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 			_isolation_crisis = false
