@@ -39,6 +39,7 @@ var _avatar_ref : EMC_Avatar
 var _avatar_life_status : bool = true
 
 var _overworld_states_mngr_ref : EMC_OverworldStatesMngr
+var _crisis_mngr : EMC_CrisisMngr
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -82,16 +83,17 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 
 func setup(avatar_ref : EMC_Avatar,
 overworld_states_mngr_ref : EMC_OverworldStatesMngr,
+_p_crisis_mngr : EMC_CrisisMngr,
 gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI,
-_p_inventory: EMC_Inventory,
-max_day : int = 3) -> void:
+_p_inventory: EMC_Inventory) -> void:
 	_avatar_ref = avatar_ref
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
-	self.max_day = max_day
+	_crisis_mngr = _p_crisis_mngr
+	self.max_day = _p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
@@ -136,10 +138,13 @@ func _on_action_executed(action : EMC_Action) -> void:
 			if _avatar_life_status:
 				self.current_day_cycle = EMC_DayCycle.new()
 				self.current_day_cycle.morning_action = action
+				_crisis_mngr.check_crisis_status()
 		EMC_DayPeriod.NOON:
 			self.current_day_cycle.noon_action = action
+			_crisis_mngr.check_crisis_status()
 		EMC_DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = action
+			_crisis_mngr.check_crisis_status()
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
 			_seodGUI.closed.connect(_on_seod_closed)
@@ -172,10 +177,10 @@ func get_current_day_cycle() -> EMC_DayCycle:
 	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
 
 func get_current_day_period() -> EMC_DayPeriod:
-	return self._period_cnt % 3 as EMC_DayPeriod
+	return self._period_cnt % _crisis_mngr.get_day_periods() as EMC_DayPeriod
 
 func get_current_day() -> int:
-	return floor(self._period_cnt / 3.0)
+	return floor(self._period_cnt / float(_crisis_mngr.get_day_periods()))
 
 func _update_vitals() -> void:
 	_avatar_ref.sub_nutrition() 

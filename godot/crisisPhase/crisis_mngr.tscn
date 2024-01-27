@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kv6nt2a23obd"]
+
+[ext_resource type="Script" path="res://crisisPhase/crisis_mngr.gd" id="1_7os6q"]
+
+[node name="CrisisGeneration" type="Node2D"]
+script = ExtResource("1_7os6q")
