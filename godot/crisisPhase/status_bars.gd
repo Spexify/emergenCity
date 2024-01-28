@@ -14,6 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+## TODO: MAx values of status bars to be set by the maxiumum in the avatar class
 
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 	var perc: int = float(p_new_value)  #float() Casting wichtig!

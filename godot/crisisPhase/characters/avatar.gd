@@ -123,11 +123,11 @@ func add_health(health_change : int = 1) -> void:
 
 func sub_health(health_change : int = 1) -> bool:
 	if _health_value - health_change < 0 or _health_value < 0:
-		health_updated.emit(get_unit_health_status())
+		health_updated.emit(get_health_status())
 		return false
 	else:
 		_health_value -= health_change
-		health_updated.emit(get_unit_health_status())
+		health_updated.emit(get_health_status())
 		return true
 
 
