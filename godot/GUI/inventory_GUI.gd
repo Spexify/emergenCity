@@ -133,6 +133,7 @@ func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
 		printerr("InventoryGUI: Slots not initialized properly")
 		return
 	slot.set_item(p_item)
+	_refresh()
 
 
 ## Update this view when its underlying [EMC_Inventory] structure removed an item
@@ -140,6 +141,9 @@ func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 	p_item.clicked.disconnect(_on_item_clicked)
 	var slot := $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
 	slot.remove_item()
+	if p_item == _clicked_item:
+		_clicked_item = null
+	_refresh()
 
 
 ## Display information of clicked [EMC_Item]
@@ -181,41 +185,45 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 func _on_consume_pressed() -> void:
 	var has_drank : bool = false
 	var has_eaten : bool = false
-	if _clicked_item == null:
+	var _clicked_item_copy := _clicked_item
+	if _clicked_item_copy == null:
 		return
-	if _clicked_item.get_ID() == 13: 
+	if _clicked_item_copy.get_ID() == 13: 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		if !_inventory.has_item(2):
 			$FilterWater.visible = true
 		else:
-			_clicked_item.get_comp(EMC_IC_Uses).item_used(1)
-			if  _clicked_item.get_comp(EMC_IC_Uses).get_uses_left() == 0:
+			_clicked_item_copy.get_comp(EMC_IC_Uses).item_used(1)
+			if  _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)
-				print("deleted")
 			_inventory.remove_item(2,1)
 			_inventory.add_new_item(1)
 			
-	var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
+	var drink_comp : EMC_IC_Drink = _clicked_item_copy.get_comp(EMC_IC_Drink)
 	if  drink_comp!= null:
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Trink"
 		_avatar_ref.add_hydration(drink_comp.get_hydration())
 		has_drank = true
-	var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
+	var food_comp : EMC_IC_Food = _clicked_item_copy.get_comp(EMC_IC_Food)
 	if food_comp != null:
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Iss"
 		print(food_comp.get_nutritionness())
 		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
 		has_eaten = true
-	var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
+	var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item_copy.get_comp(EMC_IC_Unpalatable)
 	if unpalatable_comp != null:
 		_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
 	
 	if has_drank && has_eaten: 
 		_avatar_ref.add_health(1)
-	_inventory.remove_item(_clicked_item._ID)
-	_inventory.item_removed.emit()
+	if _clicked_item_copy.get_ID() != 13:
+		_inventory.remove_item(_clicked_item_copy._ID)
 	return
 
+## TODO: description of item to be emptied
+## TODO: autosort method
+func _refresh() -> void:
+	pass
 
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)

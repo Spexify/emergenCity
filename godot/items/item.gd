@@ -109,7 +109,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 			name = "Chlortablette"
 			_descr = "Zum Wasser Filtern."
 			_comps.push_back(EMC_IC_Cost.new(5))
-			_comps.push_back(EMC_IC_Uses.new(0))
+			_comps.push_back(EMC_IC_Uses.new(3))
 		_: #default/else
 			name = "<No Name>"
 			printerr("Item Setup: ID unknown!")

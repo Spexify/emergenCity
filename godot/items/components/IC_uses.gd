@@ -11,7 +11,6 @@ func _init(_p_max_uses : int) -> void:
 	super("Uses", Color.AQUAMARINE)
 	_MAX_USES = _p_max_uses
 	_uses_left = _p_max_uses
-	set_name_with_values(_p_max_uses)
 	
 
 func get_uses_left() -> int:
@@ -21,16 +20,13 @@ func get_max_uses() -> int:
 	return _MAX_USES
 	
 func item_used(_p_uses : int = 1) -> void:
-	if _uses_left - _p_uses > 0 :
-		set_name_with_values(_uses_left - _p_uses) 
-	else: 
-		set_name_with_values(0)
-	
+	_uses_left -=_p_uses
+	if _uses_left < 0 :
+		_uses_left -= 0
+ 	
 	
 func get_name_with_values() -> String:
-	return _uses
+	return get_name() + " "  + str(_uses_left) +  " uses left"
 
-func set_name_with_values(_p_uses: int) -> String:
-	return str(_p_uses) + " uses left"
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
