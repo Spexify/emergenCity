@@ -23,6 +23,7 @@ buses/default_bus_layout="res://res/SFX/default_bus_layout.tres"
 
 Global="*res://global/global.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+OverworldStatesMngr="*res://crisisPhase/overworld_states_mngr.gd"
 
 [debug]
 

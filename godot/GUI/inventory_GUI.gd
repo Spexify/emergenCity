@@ -94,6 +94,9 @@ func update_items() -> void:
 ## Open the GUI
 func open() -> void:
 	open_gui.play()
+	
+	#TODO: Update or clear textboxes of last_clicked_item
+	
 	show()
 	opened.emit()
 
@@ -173,12 +176,14 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 			
 
+
+#MRM: TODO: Remove Magic Numbers
 func _on_consume_pressed() -> void:
 	var has_drank : bool = false
 	var has_eaten : bool = false
 	if _clicked_item == null:
 		return
-	if _clicked_item.get_ID() == 13:
+	if _clicked_item.get_ID() == 13: 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		if !_inventory.has_item(2):
 			$FilterWater.visible = true
@@ -201,6 +206,10 @@ func _on_consume_pressed() -> void:
 		print(food_comp.get_nutritionness())
 		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
 		has_eaten = true
+	var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
+	if unpalatable_comp != null:
+		_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
+	
 	if has_drank && has_eaten: 
 		_avatar_ref.add_health(1)
 	_inventory.remove_item(_clicked_item._ID)

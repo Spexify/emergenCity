@@ -5,7 +5,7 @@ const UNIT: String = "ml"
 const UNIT_FACTOR: int = 500 #1 Unit = 500ml
 var _hydration: int = 0 
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 func _init(p_hydration: int) -> void:
 	super("Getränk", Color.CADET_BLUE)
 	_hydration = p_hydration 
@@ -25,4 +25,4 @@ func get_unit_hydration() -> int:
 func get_name_with_values() -> String:
 	return get_name() + " (" + str(get_unit_hydration()) + UNIT + ")"
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+########################################## PRIVATE METHODS #########################################

@@ -38,18 +38,18 @@ var _constraints_rejected : Array[String]
 ## A dictonary contaning all changes to be applied schould the Action be performed.
 ## In the same Format as [member EMC_Action.constraints_prior]
 #MRM: Still needed? Now we designed the system in that way, that the GUI is responsible for any changes:
-var _changes : Dictionary 
+var _consequences : Dictionary #MRM: Renamed changes to consequences, because "changes" can mean anything
 var _type_gui : String #deprecated??
 var _description : String
 var _performance_coin_value : int
 
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		   changes : Dictionary, type_gui : String, description : String, performance_coin_value : int) -> void:
+		   p_consequences : Dictionary, type_gui : String, description : String, performance_coin_value : int) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
-	self._changes = changes
+	self._consequences = p_consequences
 	self._type_gui = type_gui
 	self._description = description
 	self._performance_coin_value = performance_coin_value
@@ -67,8 +67,8 @@ func get_constraints_rejected() -> Array[String]:
 func set_constraints_rejected(constraints_rejected: Array[String]) -> void:
 	self._constraints_rejected = constraints_rejected
 
-func get_changes() -> Dictionary:
-	return self._changes
+func get_consequences() -> Dictionary:
+	return self._consequences
 
 func get_type_gui() -> String:
 	return self._type_gui
@@ -86,11 +86,13 @@ func save() -> Dictionary:
 		"description": _description,
 	}
 	return data
-	
+
+
 func load_state(data : Dictionary) -> void:
 	_action_ID = data.get("action_ID")
 	_ACTION_NAME = data.get("ACTION_NAME")
 	_description = data.get("description")
-	
+
+
 static func empty_action() -> EMC_Action:
 	return EMC_Action.new(NAN, "", {}, {}, "", "", 0)

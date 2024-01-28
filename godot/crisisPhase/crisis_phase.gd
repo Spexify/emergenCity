@@ -8,7 +8,8 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 const _BACK_BTN_NAME := "BackButton"
 
 var _backpack: EMC_Inventory = Global.get_inventory()
-var _overworld_states_mngr: EMC_OverworldStatesMngr = EMC_OverworldStatesMngr.new()
+#MRM: I made the OverworldStatesMngr global, see TechDoku for details:
+var _overworld_states_mngr: EMC_OverworldStatesMngr = OverworldStatesMngr #EMC_OverworldStatesMngr.new()
 var _crisis_mngr : EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
@@ -43,7 +44,8 @@ func _ready() -> void:
 		
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
 	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
-	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
+	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.NONE, #(MRM: Changed to NONE to test the shelflife)
+		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)

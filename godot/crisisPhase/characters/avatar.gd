@@ -1,5 +1,8 @@
 extends CharacterBody2D
 class_name EMC_Avatar
+##MRM: TODO: Either the sub_ / add_ methods should check that the values are always positive, or
+## they should be merged into one "change_xxx_by" method
+
 
 signal arrived
 signal nutrition_updated(p_new_value: int)
@@ -9,17 +12,17 @@ signal health_updated(p_new_value: int)
 const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoidance (Max Speed)!
 
 #MRM: Unit sollte direct von den Components verwendet werden:
-const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR #food Unit = 250 kcal 
-const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR #water Unit = 500 ml
-const UNIT_FACTOR_HEALTH: int = 25 #health Unit = 25 percent
+const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR
+const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR
+const UNIT_FACTOR_HEALTH: int = 20 #health Unit in percent #MRM: Changed temp. so you don't die to early in tests
 
 const MAX_VITALS_NUTRITION = 2200/UNIT_FACTOR_NUTRITION
 const MAX_VITALS_HYDRATION = 2000/UNIT_FACTOR_HYDRATION
-const MAX_VITALS_HEALTH = 100/UNIT_FACTOR_NUTRITION
+const MAX_VITALS_HEALTH = 100/UNIT_FACTOR_HEALTH #Fixed bug, was UNIT_FACTOR_NUTRITION, previously
 
 const INIT_NUTRITION_VALUE : int = 2
 const INIT_HYDRATION_VALUE : int = 2
-const INIT_HEALTH_VALUE : int = 2
+const INIT_HEALTH_VALUE : int = MAX_VITALS_HEALTH
 
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var walking := $SFX/Walking
@@ -116,7 +119,8 @@ func add_health(health_change : int = 1) -> void:
 	else: 
 		_health_value = MAX_VITALS_HEALTH
 		health_updated.emit(get_health_status())
-	
+
+
 func sub_health(health_change : int = 1) -> bool:
 	if _health_value - health_change < 0 or _health_value < 0:
 		health_updated.emit(get_unit_health_status())

@@ -35,7 +35,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func setup(_p_overworld_states_mngr : EMC_OverworldStatesMngr,
-			_p_max_day : int = 3, _p_day_periods : int= 3) -> void:
+			_p_max_day : int = 4, _p_day_periods : int= 3) -> void: #(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)
 				
 	_overworld_states_mngr = _p_overworld_states_mngr
 	

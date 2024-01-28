@@ -7,6 +7,7 @@ class_name EMC_DayMngr
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
 signal period_ended
+signal day_ended
 
 ## Enum describing the periods of a Day.
 enum EMC_DayPeriod {
@@ -60,10 +61,10 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 	match p_action_ID:
 		0: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
 		1: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
-		3: result = EMC_Action.new(p_action_ID, "Rest", { }, 
-								 { }, "RestGUI", 
+		3: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
+								 {"add_health" : 1 }, "RestGUI", 
 								 "Hat sich ausgeruht.", 10)
-		4: result = EMC_Action.new(p_action_ID, "Cooking", {}, 
+		4: result = EMC_Action.new(p_action_ID, "Kochen", {}, 
 								 { }, "CookingGUI", 
 								 "Hat gekocht.", 30)
 		5: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
@@ -132,18 +133,20 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 	return null
 
 
-func _on_action_executed(action : EMC_Action) -> void:
+func _on_action_executed(p_action : EMC_Action) -> void:
+	_execute_consequences(p_action)
+	
 	match get_current_day_period():
 		EMC_DayPeriod.MORNING:
 			if _avatar_life_status:
 				self.current_day_cycle = EMC_DayCycle.new()
-				self.current_day_cycle.morning_action = action
+				self.current_day_cycle.morning_action = p_action
 				_crisis_mngr.check_crisis_status()
 		EMC_DayPeriod.NOON:
-			self.current_day_cycle.noon_action = action
+			self.current_day_cycle.noon_action = p_action
 			_crisis_mngr.check_crisis_status()
 		EMC_DayPeriod.EVENING:
-			self.current_day_cycle.evening_action = action
+			self.current_day_cycle.evening_action = p_action
 			_crisis_mngr.check_crisis_status()
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
@@ -163,8 +166,15 @@ func _on_action_executed(action : EMC_Action) -> void:
 	period_ended.emit()
 
 
+func _execute_consequences(p_action: EMC_Action) -> void:
+	var consequences: Dictionary = p_action.get_consequences()
+	for consequence_key: String in consequences.keys():
+		Callable(self, consequence_key).call(consequences[consequence_key])
+
+
 func _on_seod_closed_game_end() -> void:
 	_egGUI.open(self.history, _avatar_life_status)
+
 
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
@@ -172,6 +182,9 @@ func _on_seod_closed() -> void:
 	_update_vitals()
 	_check_pu_counter()
 	_check_op_counter()
+	_update_shelflives()
+	day_ended.emit()
+
 
 func get_current_day_cycle() -> EMC_DayCycle:
 	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
@@ -210,7 +223,18 @@ func load_state(data : Dictionary) -> void:
 			cycle.load_state(data)
 			return cycle) as Array[EMC_DayCycle])
 	_update_HUD()
-	
+
+
+func _update_shelflives() -> void:
+	for item: EMC_Item in _inventory.get_all_items():
+		var IC_shelflife : EMC_IC_Shelflife = item.get_comp(EMC_IC_Shelflife)
+		if (IC_shelflife != null):
+			IC_shelflife.reduce_shelflife()
+			# When an items spoils, replace the shelflive component with an unpalatable component
+			if IC_shelflife.is_spoiled():
+				item.remove_comp(EMC_IC_Shelflife)
+				item.add_comp(EMC_IC_Unpalatable.new(1))
+
 ################################### Pop Up Events ##################################################
 	
 func _check_pu_counter() -> void:
@@ -302,8 +326,6 @@ func constraint_not_evening() -> String:
 		return NO_REJECTION
 
 
-########################################## CHANGE METHODS ##########################################
-# "Changes" needed? See comment in Action.gd
-func test_change() -> void:
-	print("A change occurred!")
-
+###################################### CONSEQUENCES METHODS ########################################
+func add_health(p_value: int) -> void:
+	_avatar_ref.add_health(p_value)

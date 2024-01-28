@@ -111,13 +111,13 @@ func get_item_count_total() -> int:
 func get_all_items() -> Array[EMC_Item]:
 	var items: Array[EMC_Item] = []
 	
-	for slotIdx in _slot_cnt:
-		var slot: EMC_InventorySlot = $Background/VBoxContainer/GridContainer.get_child(slotIdx)
-		var item := slot.get_item()
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
 		if item != null:
 			items.push_back(item)
 	return items
-	
+
+
 ## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
 func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
 	var items : Array[EMC_Item.IDs] = []
