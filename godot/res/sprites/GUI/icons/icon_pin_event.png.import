@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clxphar2j8ggq"
-path="res://.godot/imported/icon_needs_time.png-16b989563a2b89e2ed20368906fe5836.ctex"
+uid="uid://11wqmydgbpf2"
+path="res://.godot/imported/icon_pin_event.png-472751274021d315afa39809b15f6eba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_needs_time.png"
-dest_files=["res://.godot/imported/icon_needs_time.png-16b989563a2b89e2ed20368906fe5836.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_pin_event.png"
+dest_files=["res://.godot/imported/icon_pin_event.png-472751274021d315afa39809b15f6eba.ctex"]
 
 [params]
 

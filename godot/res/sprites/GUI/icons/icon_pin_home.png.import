@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c515i1d3brhia"
-path="res://.godot/imported/mockup_socialsystem.png-4eaca1299bfc12a5d78cdc54864bb7aa.ctex"
+uid="uid://botpe5ux15226"
+path="res://.godot/imported/icon_pin_home.png-10d1565cc38398608a26a49bbad68e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/mockup_socialsystem.png"
-dest_files=["res://.godot/imported/mockup_socialsystem.png-4eaca1299bfc12a5d78cdc54864bb7aa.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_pin_home.png"
+dest_files=["res://.godot/imported/icon_pin_home.png-10d1565cc38398608a26a49bbad68e3f.ctex"]
 
 [params]
 

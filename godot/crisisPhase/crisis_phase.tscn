@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://cdqgsn775dgsp"]
 
-[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/gui/button_backpack.png" id="1_07xlw"]
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
-[ext_resource type="Texture2D" uid="uid://b0bhn1sy8mmli" path="res://res/gui/button_backpack_opened.png" id="5_arf8o"]
+[ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/sprites/GUI/buttons/button_backpack.png" id="4_ef5pu"]
+[ext_resource type="Texture2D" uid="uid://b0bhn1sy8mmli" path="res://res/sprites/GUI/buttons/button_backpack_opened.png" id="5_bkokv"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
@@ -82,8 +82,8 @@ grow_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
-texture_normal = ExtResource("1_07xlw")
-texture_pressed = ExtResource("5_arf8o")
+texture_normal = ExtResource("4_ef5pu")
+texture_pressed = ExtResource("5_bkokv")
 
 [node name="GUI" type="CenterContainer" parent="."]
 z_index = 3
@@ -180,3 +180,4 @@ mouse_filter = 2
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="closed" from="GUI/VBC/MiddleSection/BackpackGUI" to="." method="_on_backpack_gui_closed"]

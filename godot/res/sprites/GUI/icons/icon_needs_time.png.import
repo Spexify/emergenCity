@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p5rri284jbrj"
-path="res://.godot/imported/icon_needs_tool.png-4c301036e0da2a691d5366fd418cf208.ctex"
+uid="uid://clxphar2j8ggq"
+path="res://.godot/imported/icon_needs_time.png-536095c24587ab596c40c4613d78772d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_needs_tool.png"
-dest_files=["res://.godot/imported/icon_needs_tool.png-4c301036e0da2a691d5366fd418cf208.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_needs_time.png"
+dest_files=["res://.godot/imported/icon_needs_time.png-536095c24587ab596c40c4613d78772d.ctex"]
 
 [params]
 

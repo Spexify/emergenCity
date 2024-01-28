@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4cvdmct7qdxn"
-path="res://.godot/imported/icon_ecoins.png-b349e715ee2f3f2ff9b4793f5c346cc2.ctex"
+uid="uid://c343c8eflu7yf"
+path="res://.godot/imported/button_backpack.png-6e0fa542e68426b4f1a419818f760553.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_ecoins.png"
-dest_files=["res://.godot/imported/icon_ecoins.png-b349e715ee2f3f2ff9b4793f5c346cc2.ctex"]
+source_file="res://res/sprites/GUI/buttons/button_backpack.png"
+dest_files=["res://.godot/imported/button_backpack.png-6e0fa542e68426b4f1a419818f760553.ctex"]
 
 [params]
 

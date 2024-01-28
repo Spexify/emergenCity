@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://11wqmydgbpf2"
-path="res://.godot/imported/icon_pin_event.png-fb0de6c883b1f0e7aea663204d9f0fb0.ctex"
+uid="uid://bqq5vbmiv8nrr"
+path="res://.godot/imported/icon_statusbar_hydration.png-2efe80a1a4f9fbb5dec319d1e7455f4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_pin_event.png"
-dest_files=["res://.godot/imported/icon_pin_event.png-fb0de6c883b1f0e7aea663204d9f0fb0.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_statusbar_hydration.png"
+dest_files=["res://.godot/imported/icon_statusbar_hydration.png-2efe80a1a4f9fbb5dec319d1e7455f4e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh1xeb3ienh2a"
-path="res://.godot/imported/icon_needs_electricity.png-2f8708102a5d4a523d9e43ded0c05f09.ctex"
+uid="uid://b0bhn1sy8mmli"
+path="res://.godot/imported/button_backpack_opened.png-4805717dc360809f41902a5fbdf4f9ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_needs_electricity.png"
-dest_files=["res://.godot/imported/icon_needs_electricity.png-2f8708102a5d4a523d9e43ded0c05f09.ctex"]
+source_file="res://res/sprites/GUI/buttons/button_backpack_opened.png"
+dest_files=["res://.godot/imported/button_backpack_opened.png-4805717dc360809f41902a5fbdf4f9ed.ctex"]
 
 [params]
 

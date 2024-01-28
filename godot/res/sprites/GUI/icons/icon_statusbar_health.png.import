@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gfl5egwn4qbu"
-path="res://.godot/imported/button_doorbell_pressed.png-2254107d3bdd26d98356a117191e8170.ctex"
+uid="uid://dhj4hfky75aeg"
+path="res://.godot/imported/icon_statusbar_health.png-78c3f1a7d92c61ba5bb0bbad3eff92fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/GUI/button_doorbell_pressed.png"
-dest_files=["res://.godot/imported/button_doorbell_pressed.png-2254107d3bdd26d98356a117191e8170.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_statusbar_health.png"
+dest_files=["res://.godot/imported/icon_statusbar_health.png-78c3f1a7d92c61ba5bb0bbad3eff92fb.ctex"]
 
 [params]
 

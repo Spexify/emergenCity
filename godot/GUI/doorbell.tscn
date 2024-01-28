@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0oebjhntv2g8"]
 
-[ext_resource type="Texture2D" uid="uid://dhftxjokqdgiu" path="res://res/sprites/GUI/button_doorbell_normal.png" id="1_j1yxm"]
-[ext_resource type="Texture2D" uid="uid://gfl5egwn4qbu" path="res://res/sprites/GUI/button_doorbell_pressed.png" id="2_ogr1v"]
+[ext_resource type="Texture2D" uid="uid://dhftxjokqdgiu" path="res://res/sprites/GUI/buttons/button_doorbell_normal.png" id="1_f4bne"]
+[ext_resource type="Texture2D" uid="uid://gfl5egwn4qbu" path="res://res/sprites/GUI/buttons/button_doorbell_pressed.png" id="2_ydd7b"]
 [ext_resource type="Script" path="res://GUI/doorbell.gd" id="3_j7i7k"]
 [ext_resource type="AudioStream" uid="uid://d265spjcv3uc2" path="res://res/SFX/doorbell-shortened-100308.mp3" id="4_h6cpd"]
 
@@ -14,8 +14,8 @@ offset_right = 200.0
 offset_bottom = 82.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource("1_j1yxm")
-texture_pressed = ExtResource("2_ogr1v")
+texture_normal = ExtResource("1_f4bne")
+texture_pressed = ExtResource("2_ydd7b")
 script = ExtResource("3_j7i7k")
 
 [node name="RTL" type="RichTextLabel" parent="."]

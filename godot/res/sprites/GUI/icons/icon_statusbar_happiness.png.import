@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gcdjdctkg3xv"
-path="res://.godot/imported/icon_statusbar_happiness.png-06f819dc9bc4b927c848d29427d34b0f.ctex"
+path="res://.godot/imported/icon_statusbar_happiness.png-47d821d58dbfce31650f6eb42f9d30ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_statusbar_happiness.png"
-dest_files=["res://.godot/imported/icon_statusbar_happiness.png-06f819dc9bc4b927c848d29427d34b0f.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_statusbar_happiness.png"
+dest_files=["res://.godot/imported/icon_statusbar_happiness.png-47d821d58dbfce31650f6eb42f9d30ab.ctex"]
 
 [params]
 

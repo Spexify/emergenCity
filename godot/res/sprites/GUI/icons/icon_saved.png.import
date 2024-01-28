@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3oov025lvb8v"
-path="res://.godot/imported/icon_needs_water.png-bc8c9d06ce934d3498db328dae5f29f3.ctex"
+uid="uid://bjcnhtiirksap"
+path="res://.godot/imported/icon_saved.png-66f13d0c3b27911f357643de97197709.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_needs_water.png"
-dest_files=["res://.godot/imported/icon_needs_water.png-bc8c9d06ce934d3498db328dae5f29f3.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_saved.png"
+dest_files=["res://.godot/imported/icon_saved.png-66f13d0c3b27911f357643de97197709.ctex"]
 
 [params]
 

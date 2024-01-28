@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mlwfi58qelas"
-path="res://.godot/imported/icon_dayperiods.png-c70ca7536142672067a02c64255d18bd.ctex"
+uid="uid://6bj8wmm5lv04"
+path="res://.godot/imported/icon_pin.png-1bd6578657eda0e3a172155bbf7167f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_dayperiods.png"
-dest_files=["res://.godot/imported/icon_dayperiods.png-c70ca7536142672067a02c64255d18bd.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_pin.png"
+dest_files=["res://.godot/imported/icon_pin.png-1bd6578657eda0e3a172155bbf7167f1.ctex"]
 
 [params]
 

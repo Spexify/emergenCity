@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://botpe5ux15226"
-path="res://.godot/imported/icon_pin_home.png-060fbdba8415d7e40d6a9e14979b2de0.ctex"
+uid="uid://roxqf34j7vb0"
+path="res://.godot/imported/icon_NPC_relation.png-c661be20b3ce42ef9a34e56ffa68bb62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/icons/icon_pin_home.png"
-dest_files=["res://.godot/imported/icon_pin_home.png-060fbdba8415d7e40d6a9e14979b2de0.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_NPC_relation.png"
+dest_files=["res://.godot/imported/icon_NPC_relation.png-c661be20b3ce42ef9a34e56ffa68bb62.ctex"]
 
 [params]
 

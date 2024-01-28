@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://80yai28l2kh6"
-path="res://.godot/imported/button_left.png-bcb70af82675ddaf1caa09c2b6241fcb.ctex"
+uid="uid://dodrjlcgbbf5j"
+path="res://.godot/imported/icon_statusbar_nutrition.png-28eff23b1c50159e2ee2715374795fc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/button_left.png"
-dest_files=["res://.godot/imported/button_left.png-bcb70af82675ddaf1caa09c2b6241fcb.ctex"]
+source_file="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png"
+dest_files=["res://.godot/imported/icon_statusbar_nutrition.png-28eff23b1c50159e2ee2715374795fc3.ctex"]
 
 [params]
 
