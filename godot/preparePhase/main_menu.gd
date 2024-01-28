@@ -1,5 +1,6 @@
 extends Control
 
+@onready var settings := $"../Settings"
 @onready var open_guisfx := $"../SFX/OpenGUISFX"
 @onready var close_guisfx := $"../SFX/CloseGUISFX"
 @onready var button_sfx := $"../SFX/ButtonSFX"
@@ -30,7 +31,6 @@ func _on_upgrade_center_pressed() -> void:
 
 # var settings_scene = preload("res://preparePhase/settings.tscn")
 
-@onready var settings := $"../Settings"
 
 func _on_settings_pressed() -> void:
 	#var new_setting = settings_scene.instantiate()
@@ -38,7 +38,8 @@ func _on_settings_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	settings.show()
-	for child in settings.get_children():
+	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
+	for child: Node in settings.get_children():
 		child.show()
 
 

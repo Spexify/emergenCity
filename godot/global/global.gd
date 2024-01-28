@@ -58,7 +58,8 @@ func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
 		save_game(current_scene.name == "CrisisPhase")
 		get_tree().quit() 
-	
+
+
 func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	save_game.store_string("")

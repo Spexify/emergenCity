@@ -1,6 +1,7 @@
 extends Node2D
 class_name EMC_CrisisPhase
 
+
 const GERHARD_DIALOG : DialogueResource = preload("res://res/dialogue/gerhard.dialogue")
 const JULIA_DIALOG : DialogueResource = preload("res://res/dialogue/julia.dialogue")
 const FRIEDEL_DIALOG : DialogueResource = preload("res://res/dialogue/friedel.dialogue")
@@ -51,12 +52,13 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.visible = false
-	$GUI/VBC/MiddleSection/EndGameGUI.visible = false
-	$GUI/VBC/MiddleSection/PopUpGUI.visible = false
-	$GUI/VBC/LowerSection/RestGUI.visible = false
-	$GUI/VBC/LowerSection/ChangeStageGUI.visible = false
-	$GUI/VBC/MiddleSection/CookingGUI.visible = false
+	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.hide()
+	$GUI/VBC/MiddleSection/EndGameGUI.hide()
+	$GUI/VBC/MiddleSection/PopUpGUI.hide()
+	$GUI/VBC/MiddleSection/CookingGUI.hide()
+	
+	$GUI/VBC/LowerSection/RestGUI.hide()
+	$GUI/VBC/LowerSection/ChangeStageGUI.hide()
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
 
 	#Setup-Methoden
@@ -93,8 +95,6 @@ func _ready() -> void:
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
-	
-	
 
 
 func _process(delta: float) -> void:
@@ -134,7 +134,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	for node:Node in $GUI/VBC/LowerSection.get_children():
 		if node.get_name() == "DialogueGUI":
 			return
-
+	
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
@@ -158,3 +158,7 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 
 func _on_backpack_gui_closed() -> void:
 	_backpack_btn.set_pressed(false)
+
+
+func _on_pause_menu_btn_pressed() -> void:
+	$GUI/VBC/MiddleSection/PauseMenu.open()

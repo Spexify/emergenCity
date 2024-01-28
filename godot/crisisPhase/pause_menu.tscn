@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8su8e0hk46wu"]
+
+[ext_resource type="Script" path="res://crisisPhase/pause_menu.gd" id="1_wnduq"]
+[ext_resource type="PackedScene" uid="uid://5dpuu2l72yhg" path="res://GUI/settings_GUI.tscn" id="2_fqcqg"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wnduq")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM"]
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 954.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer_unaffectedByCM/VBoxContainer"]
+custom_minimum_size = Vector2(575, 100)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(330, 100)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[color=white] Pausiert[/color]"
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer_unaffectedByCM/VBoxContainer"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ResumeBtn" type="Button" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
+text = "Fortsetzen"
+
+[node name="Settings" type="Button" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
+text = "Einstellungen"
+
+[node name="CancelCurrCrisis" type="Button" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
+text = "Momentane Krise abbrechen"
+
+[node name="SaveAndQuit" type="Button" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
+text = "Speichern & Schließen"
+
+[node name="Settings" parent="CanvasLayer_unaffectedByCM" instance=ExtResource("2_fqcqg")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/CancelCurrCrisis" to="." method="_on_cancel_curr_crisis_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/SaveAndQuit" to="." method="_on_save_and_quit_pressed"]

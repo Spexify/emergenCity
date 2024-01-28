@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
-[ext_resource type="Script" path="res://preparePhase/settings.gd" id="3_j0hbn"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
+[ext_resource type="PackedScene" uid="uid://5dpuu2l72yhg" path="res://GUI/settings_GUI.tscn" id="4_qustw"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
 
@@ -113,57 +113,8 @@ text = "Open Upgrade
 Center"
 flat = true
 
-[node name="Settings" type="CanvasLayer" parent="."]
+[node name="Settings" parent="." instance=ExtResource("4_qustw")]
 visible = false
-
-[node name="CenterContainer" type="CenterContainer" parent="Settings"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_prdod")
-script = ExtResource("3_j0hbn")
-
-[node name="MarginContainer" type="MarginContainer" parent="Settings/CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 355
-
-[node name="PanelContainer" type="PanelContainer" parent="Settings/CenterContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("1_prdod")
-
-[node name="MarginContainer" type="MarginContainer" parent="Settings/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 240
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Einstellungen"
-
-[node name="HSeparator" type="HSeparator" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="FontChange" type="CheckButton" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-button_pressed = true
-text = "Dyslexic Font"
-
-[node name="Reset" type="Button" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Reset Save"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -180,5 +131,3 @@ stream = ExtResource("6_qpdy4")
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="Settings/CenterContainer" method="_on_font_change_pressed"]
-[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Reset" to="Menu" method="_on_reset_pressed"]
