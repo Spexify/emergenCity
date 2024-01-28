@@ -15,6 +15,14 @@ enum WaterState{
 
 var _water_state: WaterState
 
+enum IsolationState{
+	NONE = 0,
+	LIMITED_ACCESS_MARKET = 1,
+	ISOLATION = 2
+}
+
+var _isolation_state: IsolationState
+
 enum Furniture{
 	RAINWATER_BARREL = 0,
 	ELECTRIC_RADIO = 1,
@@ -48,6 +56,12 @@ func get_water_state() -> WaterState:
 
 func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
+	
+func get_isolation_state() -> IsolationState:
+	return _isolation_state
+
+func set_isolation_state(new_isolation_state: IsolationState) -> void:
+	_isolation_state = new_isolation_state
 	
 func get_upgrades() -> Array[Furniture]:
 	return _upgrades

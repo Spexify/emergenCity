@@ -46,9 +46,9 @@ func setup(_p_overworld_states_mngr : EMC_OverworldStatesMngr,
 	_water_crisis_probability_countdown = _rng.randi_range(WATER_LOWER_BOUND, WATER_UPPER_BOUND)
 	_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
 	_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
-	print(_water_crisis_probability_countdown)
-	print(_electricity_crisis_probability_countdown)
-	
+	print("water comes in: " + str(_water_crisis_probability_countdown))
+	print("electricity comes in: " + str(_electricity_crisis_probability_countdown))
+	print("isolation comes in: " + str(_isolation_crisis_probability_countdown))
 	
 ############################# GETTERS AND SETTERS ##################################################	
 	
@@ -69,15 +69,16 @@ func check_crisis_status() -> void:
 	if _crisis_period_counter != 0:
 		## TODO add isolation restriction
 		if _overworld_states_mngr.get_electricity_state() == 1 || _overworld_states_mngr.get_water_state() != 0:
-			$".".visible = true
+			$".".show()
 			#$NinePatchRect/VBoxContainer/PanelContainer/RichTextLabel.text = _message_text
 			## TODO: check countdowns and limit catastrophe number at the same time
 			_water_crisis_mngr()
-			print("water crisis: " + str(_water_crisis_length_countdown))
+			#print("water crisis length: " + str(_water_crisis_length_countdown))
 			_electricity_crisis_mngr()
-			print("electricity crisis: " + str(_electricity_crisis_length_countdown))
-			_isolation_crisis_mngr()
-		$".".visible = false
+			#print("electricity crisis length: " + str(_electricity_crisis_length_countdown))
+		_isolation_crisis_mngr()
+			#print("isolation crisis length: " + str(_isolation_crisis_length_countdown))
+		$".".hide()
 		_crisis_period_counter -= 1
 
 ########################## PRIVATE METHODS #########################################################
@@ -88,6 +89,7 @@ func _water_crisis_mngr() -> void:
 		if _water_crisis_length_countdown != 0:
 			_overworld_states_mngr.set_water_state(0)  ## or 1 depending on crisis
 			_water_crisis_length_countdown -= 1
+			print("water crisis: " + str(_water_crisis_length_countdown))
 		else:
 			_overworld_states_mngr.set_water_state(2)  ## or 1 depending on crisis
 			_water_crisis_length_countdown = 3
@@ -102,6 +104,7 @@ func _electricity_crisis_mngr() -> void:
 		if _electricity_crisis_length_countdown != 0:
 			_overworld_states_mngr.set_electricity_state(0)
 			_electricity_crisis_length_countdown -= 1
+			print("electricity crisis: " + str(_electricity_crisis_length_countdown))
 		else:
 			_overworld_states_mngr.set_electricity_state(1) 
 			_electricity_crisis_length_countdown = 3
@@ -114,10 +117,12 @@ func _isolation_crisis_mngr() -> void:
 	if _isolation_crisis_probability_countdown == 0:
 		_isolation_crisis = true
 		if _isolation_crisis_length_countdown != 0:
-			#_overworld_states_mngr.set_isolation_state(0)
+			_overworld_states_mngr.set_isolation_state(OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET)
 			_isolation_crisis_length_countdown -= 1
+			print("isolation crisis: " + str(_isolation_crisis_length_countdown))
 		else:
-			#_overworld_states_mngr.set_isolation_state(1) 
+			## 1 or 2
+			_overworld_states_mngr.set_isolation_state(0) 
 			_isolation_crisis_length_countdown = 3
 			_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 			_isolation_crisis = false

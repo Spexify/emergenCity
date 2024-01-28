@@ -50,6 +50,7 @@ var _GUI: CenterContainer
 var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 var _dialogue_pitches: Dictionary
+var _tooltip_GUI : EMC_TooltipGUI
 
 
 ########################################## PUBLIC METHODS ##########################################
@@ -60,6 +61,7 @@ func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EM
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
+	_tooltip_GUI = p_tooltip_GUI
 	
 	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	_dialogue_pitches["Avatar"] = 1.0
@@ -285,7 +287,10 @@ func _on_avatar_arrived() -> void:
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
 			if action_ID == EMC_Action.IDs.CITY_MAP:
-				_city_map.open()
+				if OverworldStatesMngr.get_isolation_state() != OverworldStatesMngr.IsolationState.ISOLATION:	
+					_city_map.open()
+				else: 
+					_tooltip_GUI.open("Die City Map ist nicht betretbar!")
 			else:
 				_day_mngr.on_interacted_with_furniture(action_ID)
 

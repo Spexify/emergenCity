@@ -139,7 +139,6 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 			_crisis_mngr.check_crisis_status()
 		DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = p_action
-			_crisis_mngr.check_crisis_status()
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
 			_seodGUI.closed.connect(_on_seod_closed)
@@ -175,13 +174,14 @@ func _on_seod_closed() -> void:
 	_check_pu_counter()
 	_check_op_counter()
 	_update_shelflives()
+	_crisis_mngr.check_crisis_status()
 	day_ended.emit()
 
 
 func _update_vitals() -> void:
 	_avatar_ref.sub_nutrition() 
 	_avatar_ref.sub_hydration()
-	_avatar_ref.sub_health()
+	#_avatar_ref.sub_health()
 
 
 func _update_HUD() -> void:

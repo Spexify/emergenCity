@@ -77,7 +77,10 @@ func _on_home_btn_pressed() -> void:
 
 
 func _on_marketplace_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
+	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET:
+		_tooltip_GUI.open("Der Marktplatz ist nicht betretbar!")
+	else: 
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
 
 
 func _on_elias_flat_btn_pressed() -> void:
