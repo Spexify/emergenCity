@@ -10,7 +10,7 @@ signal period_ended
 signal day_ended
 
 ## Enum describing the periods of a Day.
-enum EMC_DayPeriod {
+enum DayPeriod {
 	## Morning periode
 	MORNING = 0,
 	## Noon periode
@@ -19,13 +19,12 @@ enum EMC_DayPeriod {
 	EVENING = 2
 }
 
-const NO_REJECTION: String = ""
 
 var history : Array[EMC_DayCycle]
 #MRM: Technically redundant: current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var current_day_cycle : EMC_DayCycle 
 
-var _period_cnt : EMC_DayPeriod = EMC_DayPeriod.MORNING
+var _period_cnt : DayPeriod = DayPeriod.MORNING
 #var current_day : int = 0 #MRM: Redundant: Can be deduced through period_cnt (use getters)
 var max_day : int
 
@@ -54,6 +53,173 @@ const OP_LOWER_BOUND : int = 2
 const OP_UPPER_BOUND : int = 4 
 
 var _inventory : EMC_Inventory
+var _action_constraints: EMC_ActionConstraints
+var _action_consequences: EMC_ActionConsequences
+
+
+########################################## PUBLIC METHODS ##########################################
+func setup(avatar_ref : EMC_Avatar,
+overworld_states_mngr_ref : EMC_OverworldStatesMngr,
+_p_crisis_mngr : EMC_CrisisMngr,
+gui_refs : Array[EMC_ActionGUI],
+p_tooltip_GUI : EMC_TooltipGUI,
+seodGUI: EMC_SummaryEndOfDayGUI,
+egGUI : EMC_EndGameGUI, 
+puGUI : EMC_PopUpGUI,
+_p_inventory: EMC_Inventory) -> void:
+	_avatar_ref = avatar_ref
+	_overworld_states_mngr_ref = overworld_states_mngr_ref
+	_crisis_mngr = _p_crisis_mngr
+	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
+	_action_consequences = EMC_ActionConsequences.new(_avatar_ref)
+	
+	self.max_day = _p_crisis_mngr.get_max_day()
+	self.gui_refs = gui_refs
+	_tooltip_GUI = p_tooltip_GUI
+	_seodGUI = seodGUI
+	_egGUI = egGUI
+	_inventory = _p_inventory
+	_puGUI = puGUI
+	_rng.randomize()
+	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
+	_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
+	_update_HUD()
+
+
+## MRM TODO: This function should be renamed, as it is used for other interactions as well!
+func on_interacted_with_furniture(action_id : int) -> void:
+	#MRM: Duplicate of Objects cumbersome, and using the references of the array directly would
+	#lead to errors. That's why I changed it, so it just creates a new instance each time:
+	var current_action : EMC_Action = _create_action(action_id)
+	
+	var reject_reasons: String
+	for constraint_key: String in current_action.get_constraints_prior().keys():
+		var reject_reason: String = Callable(_action_constraints, constraint_key).call()
+		if reject_reason != EMC_ActionConstraints.NO_REJECTION:
+			reject_reasons = reject_reasons + reject_reason + " "
+	
+	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
+		var gui_name := current_action.get_type_gui()
+		_get_gui_ref_by_name(gui_name).show_gui(current_action)
+	else:
+		_tooltip_GUI.open(reject_reasons)
+
+
+func get_current_day_cycle() -> EMC_DayCycle:
+	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
+
+
+func get_current_day_period() -> DayPeriod:
+	return self._period_cnt % _crisis_mngr.get_day_periods() as DayPeriod
+
+
+func get_current_day() -> int:
+	return floor(self._period_cnt / float(_crisis_mngr.get_day_periods()))
+
+
+########################################## PRIVATE METHODS #########################################
+func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
+	for ref: EMC_ActionGUI in self.gui_refs:
+		if ref.name == p_name:
+			return ref
+	return null
+
+
+func _on_action_executed(p_action : EMC_Action) -> void:
+	_execute_consequences(p_action)
+	
+	match get_current_day_period():
+		DayPeriod.MORNING:
+			if _avatar_life_status:
+				self.current_day_cycle = EMC_DayCycle.new()
+				self.current_day_cycle.morning_action = p_action
+				_crisis_mngr.check_crisis_status()
+		DayPeriod.NOON:
+			self.current_day_cycle.noon_action = p_action
+			_crisis_mngr.check_crisis_status()
+		DayPeriod.EVENING:
+			self.current_day_cycle.evening_action = p_action
+			_crisis_mngr.check_crisis_status()
+			self.history.append(self.current_day_cycle)
+			_seodGUI.open(self.current_day_cycle)
+			_seodGUI.closed.connect(_on_seod_closed)
+			if _avatar_ref.get_nutrition_status() <= 0 || _avatar_ref.get_hydration_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
+				_avatar_life_status = false
+			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
+				_seodGUI.open(self.current_day_cycle)
+				_seodGUI.closed.connect(_on_seod_closed_game_end)
+			return
+		_: push_error("Current day period unassigned!")
+		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
+	self._period_cnt += 1
+	_update_HUD()
+	_check_pu_counter()
+	_check_op_counter()
+	period_ended.emit()
+
+
+func _execute_consequences(p_action: EMC_Action) -> void:
+	var consequences: Dictionary = p_action.get_consequences()
+	for consequence_key: String in consequences.keys():
+		Callable(_action_consequences, consequence_key).call(consequences[consequence_key])
+
+
+func _on_seod_closed_game_end() -> void:
+	_egGUI.open(self.history, _avatar_life_status)
+
+
+func _on_seod_closed() -> void:
+	self._period_cnt += 1
+	_update_HUD()
+	_update_vitals()
+	_check_pu_counter()
+	_check_op_counter()
+	_update_shelflives()
+	day_ended.emit()
+
+
+func _update_vitals() -> void:
+	_avatar_ref.sub_nutrition() 
+	_avatar_ref.sub_hydration()
+	_avatar_ref.sub_health()
+
+
+func _update_HUD() -> void:
+	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
+	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
+
+
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"node_path": get_path(),
+		"period_cnt": _period_cnt,
+		"current_day_cycle": current_day_cycle.save() if current_day_cycle != null else EMC_DayCycle.new().save(),
+		"history" : history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
+	}
+	return data
+
+
+func load_state(data : Dictionary) -> void:
+	_period_cnt = data.get("period_cnt", 0)
+	current_day_cycle = EMC_DayCycle.new()
+	current_day_cycle.load_state(data.get("current_day_cycle"))
+	history.assign(data.get("history").map(
+		func(data : Dictionary) -> EMC_DayCycle: 
+			var cycle : EMC_DayCycle = EMC_DayCycle.new()
+			cycle.load_state(data)
+			return cycle) as Array[EMC_DayCycle])
+	_update_HUD()
+
+
+func _update_shelflives() -> void:
+	for item: EMC_Item in _inventory.get_all_items():
+		var IC_shelflife : EMC_IC_Shelflife = item.get_comp(EMC_IC_Shelflife)
+		if (IC_shelflife != null):
+			IC_shelflife.reduce_shelflife()
+			# When an items spoils, replace the shelflive component with an unpalatable component
+			if IC_shelflife.is_spoiled():
+				item.remove_comp(EMC_IC_Shelflife)
+				item.add_comp(EMC_IC_Unpalatable.new(1))
 
 
 func _create_action(p_action_ID: int) -> EMC_Action:
@@ -82,161 +248,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 	return result
 
 
-func setup(avatar_ref : EMC_Avatar,
-overworld_states_mngr_ref : EMC_OverworldStatesMngr,
-_p_crisis_mngr : EMC_CrisisMngr,
-gui_refs : Array[EMC_ActionGUI],
-p_tooltip_GUI : EMC_TooltipGUI,
-seodGUI: EMC_SummaryEndOfDayGUI,
-egGUI : EMC_EndGameGUI, 
-puGUI : EMC_PopUpGUI,
-_p_inventory: EMC_Inventory) -> void:
-	_avatar_ref = avatar_ref
-	_overworld_states_mngr_ref = overworld_states_mngr_ref
-	_crisis_mngr = _p_crisis_mngr
-	self.max_day = _p_crisis_mngr.get_max_day()
-	self.gui_refs = gui_refs
-	_tooltip_GUI = p_tooltip_GUI
-	_seodGUI = seodGUI
-	_egGUI = egGUI
-	_inventory = _p_inventory
-	_puGUI = puGUI
-	_rng.randomize()
-	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
-	_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
-	_update_HUD()
-
-
-## MRM TODO: This function should be renamed, as it is used for other interactions as well!
-func on_interacted_with_furniture(action_id : int) -> void:
-	#MRM: Duplicate of Objects cumbersome, and using the references of the array directly would
-	#lead to errors. That's why I changed it, so it just creates a new instance each time:
-	var current_action : EMC_Action = _create_action(action_id)
-	
-	var reject_reasons: String
-	for constraint_key: String in current_action.get_constraints_prior().keys():
-		var reject_reason: String = Callable(self, constraint_key).call()
-		if reject_reason != NO_REJECTION:
-			reject_reasons = reject_reasons + reject_reason + " "
-	
-	if reject_reasons == NO_REJECTION:
-		var gui_name := current_action.get_type_gui()
-		_get_gui_ref_by_name(gui_name).show_gui(current_action)
-	else:
-		_tooltip_GUI.open(reject_reasons)
-
-
-func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
-	for ref: EMC_ActionGUI in self.gui_refs:
-		if ref.name == p_name:
-			return ref
-	return null
-
-
-func _on_action_executed(p_action : EMC_Action) -> void:
-	_execute_consequences(p_action)
-	
-	match get_current_day_period():
-		EMC_DayPeriod.MORNING:
-			if _avatar_life_status:
-				self.current_day_cycle = EMC_DayCycle.new()
-				self.current_day_cycle.morning_action = p_action
-				_crisis_mngr.check_crisis_status()
-		EMC_DayPeriod.NOON:
-			self.current_day_cycle.noon_action = p_action
-			_crisis_mngr.check_crisis_status()
-		EMC_DayPeriod.EVENING:
-			self.current_day_cycle.evening_action = p_action
-			_crisis_mngr.check_crisis_status()
-			self.history.append(self.current_day_cycle)
-			_seodGUI.open(self.current_day_cycle)
-			_seodGUI.closed.connect(_on_seod_closed)
-			if _avatar_ref.get_nutrition_status() <= 0 || _avatar_ref.get_hydration_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
-				_avatar_life_status = false
-			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
-				_seodGUI.open(self.current_day_cycle)
-				_seodGUI.closed.connect(_on_seod_closed_game_end)
-			return
-		_: push_error("Current day period unassigned!")
-		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
-	self._period_cnt += 1
-	_update_HUD()
-	_check_pu_counter()
-	_check_op_counter()
-	period_ended.emit()
-
-
-func _execute_consequences(p_action: EMC_Action) -> void:
-	var consequences: Dictionary = p_action.get_consequences()
-	for consequence_key: String in consequences.keys():
-		Callable(self, consequence_key).call(consequences[consequence_key])
-
-
-func _on_seod_closed_game_end() -> void:
-	_egGUI.open(self.history, _avatar_life_status)
-
-
-func _on_seod_closed() -> void:
-	self._period_cnt += 1
-	_update_HUD()
-	_update_vitals()
-	_check_pu_counter()
-	_check_op_counter()
-	_update_shelflives()
-	day_ended.emit()
-
-
-func get_current_day_cycle() -> EMC_DayCycle:
-	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
-
-func get_current_day_period() -> EMC_DayPeriod:
-	return self._period_cnt % _crisis_mngr.get_day_periods() as EMC_DayPeriod
-
-func get_current_day() -> int:
-	return floor(self._period_cnt / float(_crisis_mngr.get_day_periods()))
-
-func _update_vitals() -> void:
-	_avatar_ref.sub_nutrition() 
-	_avatar_ref.sub_hydration()
-	_avatar_ref.sub_health()
-
-func _update_HUD() -> void:
-	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
-	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
-	
-func save() -> Dictionary:
-	var data : Dictionary = {
-		"node_path": get_path(),
-		"period_cnt": _period_cnt,
-		"current_day_cycle": current_day_cycle.save() if current_day_cycle != null else EMC_DayCycle.new().save(),
-		"history" : history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
-	}
-	return data
-	
-func load_state(data : Dictionary) -> void:
-	_period_cnt = data.get("period_cnt", 0)
-	current_day_cycle = EMC_DayCycle.new()
-	current_day_cycle.load_state(data.get("current_day_cycle"))
-	history.assign(data.get("history").map(
-		func(data : Dictionary) -> EMC_DayCycle: 
-			var cycle : EMC_DayCycle = EMC_DayCycle.new()
-			cycle.load_state(data)
-			return cycle) as Array[EMC_DayCycle])
-	_update_HUD()
-
-
-func _update_shelflives() -> void:
-	for item: EMC_Item in _inventory.get_all_items():
-		var IC_shelflife : EMC_IC_Shelflife = item.get_comp(EMC_IC_Shelflife)
-		if (IC_shelflife != null):
-			IC_shelflife.reduce_shelflife()
-			# When an items spoils, replace the shelflive component with an unpalatable component
-			if IC_shelflife.is_spoiled():
-				item.remove_comp(EMC_IC_Shelflife)
-				item.add_comp(EMC_IC_Unpalatable.new(1))
-
 ################################### Pop Up Events ##################################################
-	
 func _check_pu_counter() -> void:
 	_puGUI_probability_countdown -= 1
 	if _puGUI_probability_countdown == 0:
@@ -248,21 +260,21 @@ func _check_pu_counter() -> void:
 func _create_new_pop_up_action() -> EMC_PopUpAction:
 	var result: EMC_PopUpAction
 	match get_current_day_period():
-		EMC_DayPeriod.MORNING:
+		DayPeriod.MORNING:
 			var _counter_morning : int = _rng.randi_range(1, 2)
 			match _counter_morning:
 				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
 				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
-		EMC_DayPeriod.NOON:
+		DayPeriod.NOON:
 			var _counter_noon : int = _rng.randi_range(1, 2)
 			match _counter_noon:
 				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
 				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
 				_: 
 					push_error("Unerwarteter Fehler PopUpAction")
-		EMC_DayPeriod.EVENING: 
+		DayPeriod.EVENING: 
 			var _counter_evening : int = _rng.randi_range(1, 2)
 			match _counter_evening:
 				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
@@ -281,7 +293,8 @@ func _check_op_counter() -> void:
 	if _opGUI_probability_countdown == 0:
 		_create_new_optional_event()
 		_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
-		
+
+
 func _create_new_optional_event() -> void:
 	# currently only one event, the RAINWATER_BARREL is implemented
 	# With more content, this should be a match statement similar to create_pop_up_action
@@ -290,42 +303,3 @@ func _create_new_optional_event() -> void:
 		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL), 
 			(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) + _added_water_quantity)))
 
-######################################## CONSTRAINT METHODS ########################################
-func constraint_cooking() -> String:
-	#TODO: Electricity?
-	##TODO: In the future: Else Gaskocher?
-	return "Grund warum kochen nicht möglich ist."
-	#else:
-	return NO_REJECTION
-	
-func constraint_rainwater_barrel() -> String:
-	if _overworld_states_mngr_ref.get_furniture_state(_overworld_states_mngr_ref.Furniture.RAINWATER_BARREL) == 0:
-		return "Die Regentonne ist leer"
-	else:
-		return NO_REJECTION
-
-
-func constraint_not_morning() -> String:
-	if get_current_day_period() == EMC_DayPeriod.MORNING:
-		return "Man kann diese Aktion nicht morgens ausführen!"
-	else:
-		return NO_REJECTION
-
-
-func constraint_not_noon() -> String:
-	if get_current_day_period() == EMC_DayPeriod.NOON:
-		return "Man kann diese Aktion nicht mittag ausführen!"
-	else:
-		return NO_REJECTION
-		
-
-func constraint_not_evening() -> String:
-	if get_current_day_period() == EMC_DayPeriod.EVENING:
-		return "Man kann diese Aktion nicht abends ausführen!"
-	else:
-		return NO_REJECTION
-
-
-###################################### CONSEQUENCES METHODS ########################################
-func add_health(p_value: int) -> void:
-	_avatar_ref.add_health(p_value)

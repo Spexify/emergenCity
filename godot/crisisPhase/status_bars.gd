@@ -25,6 +25,5 @@ func _on_avatar_hydration_updated(p_new_value: int) -> void:
 
 func _on_avatar_health_updated(p_new_value: int) -> void:
 	var perc: int = float(p_new_value)  #float() Casting wichtig!
-	print("New Health Value: " + str(p_new_value))
 	$HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar.set_value_no_signal(perc)
 

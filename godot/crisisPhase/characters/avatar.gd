@@ -22,7 +22,7 @@ const MAX_VITALS_HEALTH = 100/UNIT_FACTOR_HEALTH #Fixed bug, was UNIT_FACTOR_NUT
 
 const INIT_NUTRITION_VALUE : int = 2
 const INIT_HYDRATION_VALUE : int = 2
-const INIT_HEALTH_VALUE : int = MAX_VITALS_HEALTH
+const INIT_HEALTH_VALUE : int = 4
 
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var walking := $SFX/Walking
