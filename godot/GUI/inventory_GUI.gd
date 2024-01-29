@@ -89,8 +89,8 @@ func update_items() -> void:
 			print("duplicate")
 			print(duplicated)
 			_on_item_added(duplicated, slot_idx)
-			
-			
+
+
 ## Open the GUI
 func open() -> void:
 	open_gui.play()

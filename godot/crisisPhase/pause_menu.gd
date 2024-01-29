@@ -34,11 +34,14 @@ func _on_settings_pressed() -> void:
 		child.show()
 
 
+## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
-	Global.save_game(false)
+	Global.reset_state()
+	get_tree().paused = false
 	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
 
 
+## TODO
 func _on_save_and_quit_pressed() -> void:
 	await Global.save_game(true)
 	get_tree().quit()

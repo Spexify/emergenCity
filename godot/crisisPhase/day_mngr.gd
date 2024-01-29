@@ -302,4 +302,5 @@ func _create_new_optional_event() -> void:
 	_overworld_states_mngr_ref.set_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, 
 		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL), 
 			(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) + _added_water_quantity)))
+	_tooltip_GUI.open("Es hat geregnet")
 
