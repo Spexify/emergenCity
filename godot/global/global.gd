@@ -159,11 +159,14 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
 	inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE)
 	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
 	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
 	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
 	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
+	inventory.add_new_item(EMC_Item.IDs.CHLOR_TABLETS)
 	inventory.sort_custom(EMC_Inventory.sort_helper)
 	return inventory
 
