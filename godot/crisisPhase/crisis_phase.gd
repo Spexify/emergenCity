@@ -45,7 +45,7 @@ func _ready() -> void:
 		
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
 	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
-	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.NONE, #(MRM: Changed to NONE to test the shelflife)
+	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
@@ -91,8 +91,7 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
 	
-	_crisis_mngr.setup(_overworld_states_mngr,Global.get_crisis_length(),
-						Global.get_number_crisis_overlap())
+	_crisis_mngr.setup()
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)

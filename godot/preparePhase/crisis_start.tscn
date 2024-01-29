@@ -82,6 +82,8 @@ fit_content = true
 [node name="HSlider" type="HSlider" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 max_value = 2.0
+tick_count = 3
+ticks_on_borders = true
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
 layout_mode = 2

@@ -37,6 +37,7 @@ const _furniture_state_maximum : Dictionary = {
 	Furniture.RAINWATER_BARREL : 24, # water quantity is in units of 250ml
 }
 
+
 func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[Furniture]) -> void:
 	_electricity_state = p_electricity_state
 	_water_state = p_water_state
