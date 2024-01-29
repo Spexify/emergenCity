@@ -1,16 +1,16 @@
 extends EMC_ItemComponent
 class_name EMC_IC_Shelflife
 
+const DECAY_RATE_NO_ELECTRICITY: int = 2
+const DECAY_RATE_WITH_ELECTRICITY: int = 1
 const UNIT: String = " Tage"
 var _shelflife: int 
-var _max_shelflife: int
 
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_max_shelflife : int) -> void:
 	super("Haltbarkeit", Color.CHOCOLATE)
-	_max_shelflife = _p_max_shelflife
-	_shelflife = _max_shelflife
+	_shelflife = _p_max_shelflife
 
 
 ## Get the internal nutritionness value
@@ -29,10 +29,10 @@ func is_spoiled() -> bool:
 
 func reduce_shelflife() -> void:
 	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
-		_shelflife -= 2 #When there is no electricity, food decays twice as fast
+		_shelflife -= DECAY_RATE_NO_ELECTRICITY
 		if _shelflife < 0: _shelflife = 0
 	else:
-		_shelflife -= 1
+		_shelflife -= DECAY_RATE_WITH_ELECTRICITY
 
 
 ## RENAME WITH CAUTION: It overrides superclass method!

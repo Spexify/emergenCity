@@ -24,6 +24,7 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	new_back_button.texture_normal = load("res://res/gui/button_back.png")
 	new_back_button.name = _BACK_BTN_NAME
 	new_back_button.pressed.connect(p_on_pressed_callback)
+	#new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	#new_back_button.pressed.connect(remove_back_button)
 	$ButtonList/VBC.add_child(new_back_button)
 	$ButtonList/VBC.move_child(new_back_button, 0) #so it appears above all the buttons in the list
@@ -161,4 +162,9 @@ func _on_backpack_gui_closed() -> void:
 
 
 func _on_pause_menu_btn_pressed() -> void:
+	$ButtonList/VBC/BackpackBtn.disabled = true
 	$GUI/VBC/MiddleSection/PauseMenu.open()
+
+
+func _on_pause_menu_closed() -> void:
+	$ButtonList/VBC/BackpackBtn.disabled = false
