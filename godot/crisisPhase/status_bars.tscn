@@ -85,7 +85,6 @@ texture = ExtResource("4_m4gsd")
 custom_minimum_size = Vector2(90, 30)
 layout_mode = 2
 step = 1.0
-show_percentage = false
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer5/VBoxContainer2"]
 layout_mode = 2

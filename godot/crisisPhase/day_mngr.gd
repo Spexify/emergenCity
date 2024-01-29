@@ -181,7 +181,7 @@ func _on_seod_closed() -> void:
 func _update_vitals() -> void:
 	_avatar_ref.sub_nutrition() 
 	_avatar_ref.sub_hydration()
-	#_avatar_ref.sub_health()
+	_avatar_ref.add_health()
 
 
 func _update_HUD() -> void:
