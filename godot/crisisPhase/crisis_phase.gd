@@ -91,7 +91,8 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
 	
-	_crisis_mngr.setup(_overworld_states_mngr,3,3)
+	_crisis_mngr.setup(_overworld_states_mngr,Global.get_crisis_length(),
+						Global.get_number_crisis_overlap())
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)

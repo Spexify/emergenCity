@@ -5,7 +5,6 @@ var _overworld_states_mngr : EMC_OverworldStatesMngr
 var _day_mngr :  EMC_DayMngr
 
 var _max_day : int
-var DAY_PERIODS : int = 3
 var _crisis_period_counter : int
 
 var _message_text : String = "Eine Krise beginnt."
@@ -35,13 +34,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func setup(_p_overworld_states_mngr : EMC_OverworldStatesMngr,
-			_p_max_day : int = 4, _p_day_periods : int= 3) -> void: #(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)
+			_p_max_day : int = 4, _p_max_crisis_overlap : int = 2) -> void: #(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)
 				
 	_overworld_states_mngr = _p_overworld_states_mngr
 	
 	_max_day = _p_max_day
-	DAY_PERIODS = _p_day_periods
-	_crisis_period_counter = _p_max_day * _p_day_periods
+	_crisis_period_counter = _p_max_day * 3
 	
 	_water_crisis_probability_countdown = _rng.randi_range(WATER_LOWER_BOUND, WATER_UPPER_BOUND)
 	_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
@@ -51,9 +49,6 @@ func setup(_p_overworld_states_mngr : EMC_OverworldStatesMngr,
 	print("isolation comes in: " + str(_isolation_crisis_probability_countdown))
 	
 ############################# GETTERS AND SETTERS ##################################################	
-	
-func get_day_periods() -> int :
-	return DAY_PERIODS
 
 func get_max_day() -> int:
 	return _max_day

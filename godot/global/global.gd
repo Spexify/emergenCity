@@ -17,6 +17,8 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
+var _crisis_length : int = 3
+var _number_crisis_overlap : int = 3
 
 
 func _ready() -> void:
@@ -214,3 +216,14 @@ func get_inventory() -> EMC_Inventory:
 	
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
+
+func set_crisis_difficulty(_p_crisis_length : int = 3, 
+							_p_number_crisis_overlap : int = 2) -> void:
+	_crisis_length = _p_crisis_length
+	_number_crisis_overlap = _p_number_crisis_overlap
+
+func get_number_crisis_overlap() -> int:
+	return _number_crisis_overlap
+
+func get_crisis_length() -> int:
+	return _crisis_length

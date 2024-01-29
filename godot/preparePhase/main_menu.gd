@@ -13,7 +13,7 @@ func _ready() -> void:
 func _on_start_round_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
-	Global.goto_scene(Global.CRISIS_PHASE_SCENE)
+	Global.goto_scene("res://preparePhase/crisis_start.tscn")
 	
 
 func _on_shelf_pressed() -> void:
