@@ -110,11 +110,11 @@ func get_current_day_cycle() -> EMC_DayCycle:
 
 
 func get_current_day_period() -> DayPeriod:
-	return self._period_cnt % _crisis_mngr.get_day_periods() as DayPeriod
+	return self._period_cnt % 3 as DayPeriod
 
 
 func get_current_day() -> int:
-	return floor(self._period_cnt / float(_crisis_mngr.get_day_periods()))
+	return floor(self._period_cnt / float(3.0))
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -195,6 +195,7 @@ func save() -> Dictionary:
 		"period_cnt": _period_cnt,
 		"current_day_cycle": current_day_cycle.save() if current_day_cycle != null else EMC_DayCycle.new().save(),
 		"history" : history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
+		"avatar_ref" : _avatar_ref.get_path(),
 	}
 	return data
 
@@ -209,6 +210,8 @@ func load_state(data : Dictionary) -> void:
 			cycle.load_state(data)
 			return cycle) as Array[EMC_DayCycle])
 	_update_HUD()
+	_avatar_ref = get_node(data.get("avatar_ref"))
+	_avatar_ref.refresh_vitals()
 
 
 func _update_shelflives() -> void:
