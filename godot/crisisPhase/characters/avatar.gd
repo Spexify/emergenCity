@@ -130,6 +130,10 @@ func sub_health(health_change : int = 1) -> bool:
 		health_updated.emit(get_health_status())
 		return true
 
+func refresh_vitals() -> void:
+	nutrition_updated.emit(get_unit_nutrition_status())
+	hydration_updated.emit(get_unit_hydration_status())
+	health_updated.emit(get_health_status())
 
 ## MRM: Naming idea: Could be renamed into "serialize()" as it's not really the saving itself,
 ## but "serializing" the object data into a format that can be saved in a file
@@ -150,10 +154,10 @@ func save() -> Dictionary:
 
 func load_state(data : Dictionary) -> void:
 	_nutrition_value = data.get("nutrition_value", INIT_NUTRITION_VALUE)
-	nutrition_updated.emit(_nutrition_value)
+	nutrition_updated.emit(get_unit_nutrition_status())
 	_hydration_value = data.get("hydration_value", INIT_HYDRATION_VALUE)
-	hydration_updated.emit(_hydration_value)
-	_health_value = data.get("health_value", INIT_HEALTH_VALUE)	
+	hydration_updated.emit(get_unit_hydration_status())
+	_health_value = data.get("health_value", INIT_HEALTH_VALUE)
 	health_updated.emit(_health_value)
 	
 	var some_position : Vector2 = Vector2(data.get("x-position", 277), data.get("y-position", 601))

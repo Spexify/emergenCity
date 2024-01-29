@@ -41,7 +41,8 @@ func is_in_crisis_phase() -> bool:
 
 
 func _deferred_goto_scene(path: String) -> void:
-	current_scene.free()
+	#current_scene.free() # Wenn die current scene gefreed würde, wird das inventar gelöscht
+	get_tree().root.remove_child(current_scene) 
 
 	var s := ResourceLoader.load(path) #MRM: One letter variables are a bad habit :( "scn" would be better
 	current_scene = s.instantiate()

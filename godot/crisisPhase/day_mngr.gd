@@ -110,11 +110,11 @@ func get_current_day_cycle() -> EMC_DayCycle:
 
 
 func get_current_day_period() -> DayPeriod:
-	return self._period_cnt % _crisis_mngr.get_day_periods() as DayPeriod
+	return self._period_cnt % 3 as DayPeriod
 
 
 func get_current_day() -> int:
-	return floor(self._period_cnt / float(_crisis_mngr.get_day_periods()))
+	return floor(self._period_cnt / float(3.0))
 
 
 ########################################## PRIVATE METHODS #########################################
