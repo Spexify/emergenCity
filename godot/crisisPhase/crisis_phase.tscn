@@ -33,7 +33,7 @@ process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
-[node name="StageMngr" parent="." instance=ExtResource("13_8jkao")]
+[node name="StageMngr" parent="." groups=["Save"] instance=ExtResource("13_8jkao")]
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1

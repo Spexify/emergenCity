@@ -51,6 +51,7 @@ var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 var _dialogue_pitches: Dictionary
 var _tooltip_GUI : EMC_TooltipGUI
+var _initial_stage_name : String = "home"
 
 
 ########################################## PUBLIC METHODS ##########################################
@@ -67,6 +68,8 @@ func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EM
 	_dialogue_pitches["Avatar"] = 1.0
 	_setup_NPCs()
 	_city_map.hide()
+	
+	change_stage(_initial_stage_name)
 
 
 func get_curr_stage_name() -> String:
@@ -93,6 +96,15 @@ func change_stage(p_stage_name: String) -> void:
 func get_dialogue_pitches() -> Dictionary:
 	return _dialogue_pitches
 
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"node_path" : get_path(),
+		"stage_name" : get_curr_stage_name(),
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	_initial_stage_name = data.get("stage_name", "home")
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
