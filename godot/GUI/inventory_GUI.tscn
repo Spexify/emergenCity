@@ -196,9 +196,11 @@ text = "Zurück"
 
 [node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("5_w1mvg")
+bus = &"SFX"
 
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_i2pde")
+bus = &"SFX"
 
 [connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
 [connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]

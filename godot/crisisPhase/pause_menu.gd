@@ -1,18 +1,21 @@
 extends EMC_GUI
 
-@onready var _settings := $CanvasLayer_unaffectedByCM/Settings
+@onready var _settings : EMC_GUI = $CanvasLayer_unaffectedByCM/Settings
+@onready var canvas_modulate := $CanvasModulate
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
 	$CanvasLayer_unaffectedByCM.hide()
-	_settings.hide()
+	_settings.close()
+	_settings.closed.connect(open)
 
 
 func open() -> void:
 	get_tree().paused = true
 	show()
 	$CanvasLayer_unaffectedByCM.show()
+	canvas_modulate.show()
 	opened.emit()
 
 
@@ -20,6 +23,7 @@ func close() -> void:
 	get_tree().paused = false
 	hide()
 	$CanvasLayer_unaffectedByCM.hide()
+	canvas_modulate.hide()
 	closed.emit()
 
 
@@ -28,10 +32,8 @@ func _on_resume_btn_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	_settings.show()
-	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
-	for child: Node in _settings.get_children():
-		child.show()
+	_settings.open()
+	$CanvasLayer_unaffectedByCM.hide()
 
 
 ## TODO

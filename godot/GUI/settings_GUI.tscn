@@ -1,59 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://5dpuu2l72yhg"]
+[gd_scene load_steps=4 format=3 uid="uid://5dpuu2l72yhg"]
 
-[ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_l8kd6"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_hyvos"]
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="2_anji3"]
+[ext_resource type="Script" path="res://volume_slider.gd" id="3_pgw5n"]
 
-[node name="Settings" type="CanvasLayer"]
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -236.0
-offset_top = 100.0
-offset_right = 237.0
-offset_bottom = 1155.0
+[node name="Setting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme = ExtResource("1_l8kd6")
+grow_vertical = 2
+theme = ExtResource("1_hyvos")
 script = ExtResource("2_anji3")
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 355
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.470588, 0.470588, 0.470588, 1)
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 700)
-layout_mode = 2
-theme = ExtResource("1_l8kd6")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 240
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 954.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(480, 100)
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center][color=white] Einstellungen[/color][/center]"
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Einstellungen"
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
 
-[node name="FontChange" type="CheckButton" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(294, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
-button_pressed = true
+theme_override_constants/separation = 50
+
+[node name="Sound" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+custom_minimum_size = Vector2(356, 0)
+layout_mode = 2
+text = "Sound"
+
+[node name="FontChange" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
 text = "Dyslexic Font"
 
-[node name="Reset" type="Button" parent="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Reset" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Reset Save"
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.776471, 0, 0, 1)
+text = "Spiel zurücksetzen"
 
-[connection signal="pressed" from="CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="CenterContainer" method="_on_font_change_pressed"]
+[node name="Fortsetzen" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+custom_minimum_size = Vector2(356, 0)
+layout_mode = 2
+text = "Speichern & Zurück
+"
+
+[node name="Sounds" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+text = "Master"
+
+[node name="Master" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+script = ExtResource("3_pgw5n")
+bus_name = "Master"
+
+[node name="BGMusicLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+text = "Hintergrund Musik"
+
+[node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+script = ExtResource("3_pgw5n")
+bus_name = "Musik"
+
+[node name="SFXLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+text = "Sound Effekte"
+
+[node name="SFX" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+script = ExtResource("3_pgw5n")
+bus_name = "SFX"
+
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+custom_minimum_size = Vector2(356, 0)
+layout_mode = 2
+text = "Speichern & Zurück
+"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Sound" to="." method="_on_sound_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/FontChange" to="." method="_on_font_change_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Fortsetzen" to="." method="_on_fortsetzen_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Back" to="." method="_on_back_pressed"]

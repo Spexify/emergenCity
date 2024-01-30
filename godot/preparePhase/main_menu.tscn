@@ -34,7 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.152941, 0.14902, 0.207843, 1)
+color = Color(0.356863, 0.34902, 0.458824, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -115,6 +115,7 @@ flat = true
 
 [node name="Settings" parent="." instance=ExtResource("4_qustw")]
 visible = false
+layout_mode = 1
 
 [node name="SFX" type="Node" parent="."]
 
