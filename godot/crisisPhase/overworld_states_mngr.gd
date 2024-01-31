@@ -24,8 +24,10 @@ enum IsolationState{
 var _isolation_state: IsolationState
 
 enum Furniture{
-	RAINWATER_BARREL = 0,
-	ELECTRIC_RADIO = 1,
+	WATER_RESERVOIR = 0, #UNUSED
+	RAINWATER_BARREL = 1,
+	ELECTRIC_RADIO = 2,
+	CRANK_RADIO = 3,
 }
 
 var _upgrades: Array[Furniture]

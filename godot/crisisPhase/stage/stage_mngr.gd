@@ -12,7 +12,8 @@ enum Atlases{ #Tileset Atlasses
 	GROUND_PNG = 1,
 	WALLS_PNG = 2,
 	NAVIGATION_PNG = 3,
-	TELEPORTERS_PNG = 4
+	TELEPORTERS_PNG = 4,
+	UPGRADE_FURNITURE_PNG = 5,
 }
 
 enum Layers{
@@ -90,11 +91,15 @@ func change_stage(p_stage_name: String) -> void:
 	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
 	_update_NPCs()
 	_create_navigation_layer_tiles()
+	if get_curr_stage_name() == STAGENAME_HOME:
+		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(6, 3))
+		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(2, 2))
 	_city_map.close()
 
 
 func get_dialogue_pitches() -> Dictionary:
 	return _dialogue_pitches
+
 
 func save() -> Dictionary:
 	var data : Dictionary = {
@@ -102,25 +107,18 @@ func save() -> Dictionary:
 		"stage_name" : get_curr_stage_name(),
 	}
 	return data
-	
+
+
+
 func load_state(data : Dictionary) -> void:
 	_initial_stage_name = data.get("stage_name", "home")
+
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	_create_navigation_layer_tiles()
 
 
-### Because the navigation works only on the BACKGROUND layer, there can be problems, as the 
-### MIDDLEGROUND can still contain objects with collision. The navigation polygon on BG tiles
-### is removed if it contains collision tiles in the middleground
-#func _remove_redundant_navigation():
-	#for bg_cell_coord in $CurrStage.get_used_cells(Layers.MIDDLEGROUND):
-		#if _tile_has_collision(bg_cell_coord):
-			#tile_data.set_navigation_polygon(0, NavigationPolygon.new())
-			#var nav_poly_res = NavigationPolygon.new()
-			#bg_cell_coord
-			#get_cell_tile_data(0, cell).set_navigation_polygon(0, nav_poly_res)
 ## Dynamiccaly create Navigation Layer tiles where there is no collision
 func _create_navigation_layer_tiles() -> void:
 	const NAVI_TILE_COORD = Vector2i(0, 0)
@@ -135,6 +133,39 @@ func _create_navigation_layer_tiles() -> void:
 				EMC_StageMngr.Atlases.NAVIGATION_PNG, NAVI_TILE_COORD)
 		else:
 			$CurrStage.erase_cell(Layers.NAVIGATION, tile_coord)
+
+
+## TODO
+## The position is the "base position" = the bottom middle tile of the 3x3 grid that Upgrades can use. 
+## Look at the upgrade_furniture.png to get a better picture, here is a visual representation of it:
+## ("X" marks the base position):
+## O O O
+## O O O
+## O X O
+func _create_upgrade_furniture(p_upgrade_ID: EMC_OverworldStatesMngr.Furniture, p_position: Vector2i) -> void:
+	#Determine base position of upgrade_furniture.png:
+	const ATLAS_UPGRADE_WIDTH = 3 #How many tiles one upgrade takes up in the x-dimension
+	const ATLAS_UPGRADE_HEIGHT = 3 #How many tiles one upgrade takes up in the y-dimension
+	const ATLAS_UPGRADE_COLUMNS = 4 #How many 3x3-tiles of upgrades fit horizontally in the .png
+	const BASE_X_COORD_OFFSET = 1
+	const BASE_Y_COORD_OFFSET = 2
+	
+	var atlas_base_x_coord: int = (p_upgrade_ID * ATLAS_UPGRADE_WIDTH + BASE_X_COORD_OFFSET) % \
+		(ATLAS_UPGRADE_COLUMNS * ATLAS_UPGRADE_WIDTH)
+	var atlas_base_y_coord: int = floor(p_upgrade_ID/float(ATLAS_UPGRADE_COLUMNS)) * ATLAS_UPGRADE_HEIGHT + \
+		BASE_Y_COORD_OFFSET
+	var atlas_base_coord: Vector2i = Vector2i(atlas_base_x_coord, atlas_base_y_coord);
+	print("Upgrade Base coord:" + str(atlas_base_coord))
+	
+	#Offsets for 3x3 grid
+	var offsets := [Vector2(-1, -2), Vector2( 0, -2), Vector2( 1, -2),
+					Vector2(-1, -1), Vector2( 0, -1), Vector2( 1, -1),
+					Vector2(-1,  0), Vector2( 0,  0), Vector2( 1,  0)]
+	
+	#Set the tiles on the positions
+	for offset: Vector2i in offsets:
+		$CurrStage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, p_position + offset, \
+			EMC_StageMngr.Atlases.UPGRADE_FURNITURE_PNG, atlas_base_coord + offset)
 
 
 ### Add NPCs to the scene
