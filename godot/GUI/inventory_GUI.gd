@@ -13,6 +13,7 @@ signal chlor_tablets_clicked
 
 @onready var open_gui := $SFX/OpenGUI
 @onready var close_gui := $SFX/CloseGUI
+@onready var _slot_grid := $Inventory/VBoxContainer/ScrollContainer/GridContainer
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
@@ -36,10 +37,10 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
 
-	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false
-	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = false
-	$FilterWater.visible = false
+	$Inventory/VBoxContainer/HBoxContainer/Consume.hide()
+	$Inventory/VBoxContainer/HBoxContainer/Continue.hide()
+	$Inventory/VBoxContainer/HBoxContainer/Discard.hide()
+	$FilterWater.hide()
 	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
 		#var new_slot := _SLOT_SCN.instantiate()
 		#if item != EMC_Item.IDs.DUMMY:
@@ -56,46 +57,52 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
 		var new_slot := _SLOT_SCN.instantiate()
-		$Inventory/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
+		_slot_grid.add_child(new_slot)
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null:
 			_on_item_added(item, slot_idx)
 			item.show()
 
+
 func set_consume_active() -> void:
 	_only_inventory = false
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
 	is_consume_active = true
-	
+
+
 func set_consume_idle() -> void:
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 	is_consume_active = false
+
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	$Inventory/Label.text = "[center]" + p_new_text + "[/center]"
 
+
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
+
 
 func clear_items() -> void:
 	for slot in $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
-		
-## TODO: Karina
-func update_items() -> void:
-	for slot_idx in _inventory.get_slot_cnt():
-		#Add items that already are in the inventory
-		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null:
-			print(item)
-			var duplicated := item.copy_item()
-			duplicated.setup(duplicated.get_ID())
-			print("duplicate")
-			print(duplicated)
-			_on_item_added(duplicated, slot_idx)
+
+
+### TODO: Karina
+#func update_items() -> void:
+	#for slot_idx in _inventory.get_slot_cnt():
+		##Add items that already are in the inventory
+		#var item := _inventory.get_item_of_slot(slot_idx)
+		#if item != null:
+			#print(item)
+			#var duplicated := item.copy_item()
+			#duplicated.setup(duplicated.get_ID())
+			#print("duplicate")
+			#print(duplicated)
+			#_on_item_added(duplicated, slot_idx)
 
 
 ## Open the GUI
@@ -207,7 +214,7 @@ func _on_consume_pressed() -> void:
 			$FilterWater.visible = true
 		else:
 			_clicked_item_copy.get_comp(EMC_IC_Uses).item_used(1)
-			if  _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
+			if _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)
 			_inventory.remove_item(2,1)
 			_inventory.add_new_item(1)
@@ -233,10 +240,12 @@ func _on_consume_pressed() -> void:
 		_inventory.remove_item(_clicked_item_copy._ID)
 	return
 
+
 ## TODO: description of item to be emptied
-## TODO: autosort method
 func _refresh() -> void:
+	_sort()
 	pass
+
 
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
@@ -244,3 +253,37 @@ func _on_discard_pressed() -> void:
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false
+
+
+## Use a naive (non-optimized) bubble sort algorithm to sort in-place
+## Can't use the Godot-native custom_sort func so easily here as it's not a simple array,
+## unfortunately
+func _sort() -> void:
+	
+	#Outer loop from last elem to first elem
+	for slot_idx: int in range(_slot_grid.get_child_count() - 1, -1, -1):
+		for i: int in _slot_grid.get_child_count():
+			if i == _slot_grid.get_child_count() - 1: return
+			var slot_left: EMC_InventorySlot = _slot_grid.get_child(i)
+			var item_left := slot_left.get_item()
+			var slot_right: EMC_InventorySlot = _slot_grid.get_child(i + 1)
+			var item_right := slot_right.get_item()
+			
+			if item_right != null:
+				if item_left == null:
+					_swap_slot_items(i, i + 1)
+				elif item_left.get_ID() > item_right.get_ID():
+					_swap_slot_items(i, i + 1)
+
+
+func _swap_slot_items(p_slot_idx_left: int, p_slot_idx_right: int) -> void:
+	var slot_left: EMC_InventorySlot = _slot_grid.get_child(p_slot_idx_left)
+	var item_left := slot_left.pop()
+	var slot_right: EMC_InventorySlot = _slot_grid.get_child(p_slot_idx_right)
+	var item_right := slot_right.pop()
+	
+	if item_right != null:
+		slot_left.set_item(item_right)
+	
+	if item_left != null:
+		slot_right.set_item(item_left)

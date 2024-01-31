@@ -52,8 +52,25 @@ func add_item(p_item: EMC_Item) -> bool:
 		if _slots[slot_idx] == null:
 			_slots[slot_idx] = p_item
 			item_added.emit(p_item, slot_idx)
+			sort()
 			return true
 	return false
+
+
+## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
+## Returns the count of successfully removed items
+func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
+	var removedCnt: int = 0
+	
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
+		if item != null && item.get_ID() == ID:
+			_slots[slot_idx] = null
+			item_removed.emit(item, slot_idx)
+			removedCnt += 1
+			if removedCnt == to_be_removed_cnt: break
+	sort()
+	return removedCnt
 
 
 ## Returns item at [p_slot_idx] if available,
@@ -107,6 +124,7 @@ func get_item_count_total() -> int:
 			#break
 	return cnt
 
+
 ## Return all items as Array of [EMC_Item]s
 func get_all_items() -> Array[EMC_Item]:
 	var items: Array[EMC_Item] = []
@@ -125,6 +143,7 @@ func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
 		items.push_back(item.get_ID() if item != null else EMC_Item.IDs.DUMMY)
 	return items
 
+
 ## Return all items as Array of [EMC_Item]s for an ID
 ## CodeReview TODO: Add to_get_cnt parameter, with to_get_cnt = -1 => all items
 func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
@@ -134,21 +153,6 @@ func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 			items.remove_at(slot_idx)
 	return items
 
-
-## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
-## Returns the count of successfully removed items
-func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
-	var removedCnt: int = 0
-	
-	for slot_idx in _slot_cnt:
-		var item := _slots[slot_idx]
-		if item != null && item.get_ID() == ID:
-			_slots[slot_idx] = null
-			item_removed.emit(item, slot_idx)
-			removedCnt += 1
-			if removedCnt == to_be_removed_cnt: break
-	return removedCnt
-	
 
 ## TODO: rework, shading non consumables
 ## KL: Filter Funktion, die nur die Items übergibt, die den Filterkriterium entsprechen
@@ -165,10 +169,11 @@ static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:
 		return true
 	return a.get_ID() < b.get_ID()
 
+
 func sort_custom(f : Callable) -> void:
 	_slots.sort_custom(f)
 
-### Sort Items (by ID?) -> TODO
-#func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
-	##TODO (keine Prio)
-	#pass
+
+##TODO
+func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
+	sort_custom(sort_helper)
