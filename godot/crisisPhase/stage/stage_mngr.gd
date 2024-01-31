@@ -43,6 +43,7 @@ const TILE_MAX_Y_COORD: int = 15
 signal dialogue_initiated(p_NPC_name: String)
 
 @onready var _city_map: EMC_CityMap = $CityMap
+@onready var _curr_stage: TileMap = $StageOffset/CurrStage
 
 var _crisis_phase: EMC_CrisisPhase
 var _avatar: EMC_Avatar
@@ -80,24 +81,25 @@ func get_curr_stage_name() -> String:
 
 
 func get_curr_stage() -> TileMap:
-	return $CurrStage
+	return _curr_stage
 
 
 func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
-	$CurrStage.replace_by(new_stage)
+	$StageOffset/CurrStage.replace_by(new_stage)
 	new_stage.name = "CurrStage"
+	_curr_stage = $StageOffset/CurrStage
 	new_stage.y_sort_enabled = true
-	$CurrStage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
+	_curr_stage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
 	_update_NPCs()
 	_create_navigation_layer_tiles()
 	if get_curr_stage_name() == STAGENAME_HOME:
-		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(6, 3))
-		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(2, 2))
+		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(1, 15))
+		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(1, 9))
 	_city_map.close()
 	#Hide Tooltip-Layer while game is playing
 	const INVISIBLE := Color(0, 0, 0, 0)
-	$CurrStage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
+	_curr_stage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
 
 
 func get_dialogue_pitches() -> Dictionary:
@@ -125,17 +127,17 @@ func _ready() -> void:
 ## Dynamiccaly create Navigation Layer tiles where there is no collision
 func _create_navigation_layer_tiles() -> void:
 	const NAVI_TILE_COORD = Vector2i(0, 0)
-	var tile_coords: Array[Vector2i] = $CurrStage.get_used_cells(Layers.BACKGROUND)
+	var tile_coords: Array[Vector2i] = _curr_stage.get_used_cells(Layers.BACKGROUND)
 	
 	## Pro tip to debug this: You can "Force Show" the Navigation visibility:
-	#$CurrStage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	#_curr_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
 	
 	for tile_coord: Vector2i in tile_coords:
 		if !_has_tile_collision(tile_coord):
-			$CurrStage.set_cell(EMC_StageMngr.Layers.NAVIGATION, tile_coord, \
+			_curr_stage.set_cell(EMC_StageMngr.Layers.NAVIGATION, tile_coord, \
 				EMC_StageMngr.Atlases.NAVIGATION_PNG, NAVI_TILE_COORD)
 		else:
-			$CurrStage.erase_cell(Layers.NAVIGATION, tile_coord)
+			_curr_stage.erase_cell(Layers.NAVIGATION, tile_coord)
 
 
 ## TODO
@@ -167,8 +169,10 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_OverworldStatesMngr.Furniture, 
 	
 	#Set the tiles on the positions
 	for offset: Vector2i in offsets:
-		$CurrStage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, p_position + offset, \
-			EMC_StageMngr.Atlases.UPGRADE_FURNITURE_PNG, atlas_base_coord + offset)
+		var middleground_tile: TileData = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_position + offset)
+		if middleground_tile == null:
+			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, p_position + offset, \
+				EMC_StageMngr.Atlases.UPGRADE_FURNITURE_PNG, atlas_base_coord + offset)
 
 
 ### Add NPCs to the scene
@@ -227,14 +231,15 @@ func _unhandled_input(p_event: InputEvent) -> void:
 	if ((p_event is InputEventMouseButton && p_event.pressed == true)
 	or (p_event is InputEventScreenTouch)):
 		_last_clicked_NPC = null
-		_last_clicked_tile = _get_tile_data_front_to_back(p_event.position)
+		var click_position: Vector2i = p_event.position - $StageOffset.position
+		_last_clicked_tile = _get_tile_data_front_to_back(click_position)
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
-				_determine_adjacent_free_tile(p_event.position)
+				_determine_adjacent_free_tile(click_position) #+ $StageOffset.position
 			if adjacent_free_tile_pos != INVALID_TILE:
 				_avatar.set_target(adjacent_free_tile_pos)
-		elif !_has_tile_collision(_get_tile_coord(p_event.position)):
-			_avatar.set_target(p_event.position)
+		elif !_has_tile_collision(_get_tile_coord(click_position)):
+			_avatar.set_target(click_position)
 
 
 ## TODO
@@ -243,12 +248,12 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	if (p_tile_coord.x < 0 || p_tile_coord.y < 0):
 		push_error("Angeklickte Tile-Koordinaten ungültig")
 		return true
-	var tiledata_bg: TileData = $CurrStage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
+	var tiledata_bg: TileData = _curr_stage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
 	
 	if tiledata_bg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
 		return true
 	else:
-		var tiledata_mg: TileData = $CurrStage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tile_coord)
+		var tiledata_mg: TileData = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tile_coord)
 		if tiledata_mg != null && tiledata_mg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
 			return true
 		else:
@@ -257,6 +262,8 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 
 ## Check if the clicked tile is a FURNITURE, which means a decorative tile with functionality
 func _is_tile_furniture(p_tiledata: TileData) -> bool:
+	if p_tiledata == null:
+		return false
 	var tooltip: String = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
 	if tooltip != "":
 		return true
@@ -269,7 +276,7 @@ func _is_tile_furniture(p_tiledata: TileData) -> bool:
 func _get_tile_coord(p_click_pos: Vector2) -> Vector2i:
 	#The click position has to be scaled according to the scale of the stage
 	var scaled_click_pos := to_local(p_click_pos)
-	return $CurrStage.local_to_map(scaled_click_pos)
+	return _curr_stage.local_to_map(scaled_click_pos)
 
 
 ## TODO
@@ -277,16 +284,16 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	var tiledata: TileData
 	#Check first, if a tooltip tile is placed there
-	tiledata = $CurrStage.get_cell_tile_data(Layers.TOOLTIPS, tile_coord)
+	tiledata = _curr_stage.get_cell_tile_data(Layers.TOOLTIPS, tile_coord)
 	if tiledata != null: return tiledata
 	#Next: Check the Foreground
-	tiledata = $CurrStage.get_cell_tile_data(Layers.FOREGROUND, tile_coord)
+	tiledata = _curr_stage.get_cell_tile_data(Layers.FOREGROUND, tile_coord)
 	if tiledata != null: return tiledata
 	#Next: Check the Middleground, which contains FURNITURE
-	tiledata = $CurrStage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
+	tiledata = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
 	if tiledata != null: return tiledata
 	#Otherwise return the background tile data
-	tiledata = $CurrStage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
+	tiledata = _curr_stage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
 	assert(tiledata != null, "Clicked Coordinate has no tile! Foreground Tiles don't suffice!")
 	return tiledata
 
@@ -296,32 +303,32 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	
 	if !_has_tile_collision(tile_coord + Vector2i(0, 0)):
-		return to_global($CurrStage.map_to_local(tile_coord))
+		return to_global(_curr_stage.map_to_local(tile_coord))
 		
 	if tile_coord.y < TILE_MAX_Y_COORD:
 		var south_tile := tile_coord + Vector2i(0, 1)
 		if !_has_tile_collision(south_tile):
-			return to_global($CurrStage.map_to_local(south_tile))
+			return to_global(_curr_stage.map_to_local(south_tile))
 			
 		if tile_coord.x < TILE_MAX_X_COORD:
 			var southeast_tile := tile_coord + Vector2i(1, 1)
 			if !_has_tile_collision(southeast_tile):
-				return to_global($CurrStage.map_to_local(southeast_tile))
+				return to_global(_curr_stage.map_to_local(southeast_tile))
 				
 		if tile_coord.x > TILE_MIN_X_COORD:
 			var southwest_tile := tile_coord + Vector2i(-1, 1)
 			if !_has_tile_collision(southwest_tile):
-				return to_global($CurrStage.map_to_local(southwest_tile))
+				return to_global(_curr_stage.map_to_local(southwest_tile))
 				
 	if tile_coord.x < TILE_MAX_X_COORD:
 		var east_tile := tile_coord + Vector2i(1, 0)
 		if !_has_tile_collision(east_tile):
-			return to_global($CurrStage.map_to_local(east_tile))
+			return to_global(_curr_stage.map_to_local(east_tile))
 			
 	if tile_coord.x > TILE_MIN_X_COORD:
 		var west_tile := tile_coord + Vector2i(-1, 0)
 		if !_has_tile_collision(west_tile):
-			return to_global($CurrStage.map_to_local(west_tile))
+			return to_global(_curr_stage.map_to_local(west_tile))
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
 	return INVALID_TILE
@@ -371,11 +378,11 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 
 
 func _on_city_map_opened() -> void:
-	$CurrStage.hide() #Hide Stage so clicks don't register on tiles anymore
+	_curr_stage.hide() #Hide Stage so clicks don't register on tiles anymore
 
 
 func _on_city_map_closed() -> void:
-	$CurrStage.show()
+	_curr_stage.show()
 
 
 func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:

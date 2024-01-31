@@ -182,9 +182,10 @@ func _process(p_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
+	const MIN_DISTANCE_TO_TARGET: float = 5.0
 	
 	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
-	if (_nav_agent.distance_to_target() < 5.0):
+	if (_nav_agent.distance_to_target() < MIN_DISTANCE_TO_TARGET):
 		#arrived.emit()
 		cancel_navigation()
 	if (_nav_agent.is_navigation_finished()):
