@@ -178,6 +178,8 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	if sender.get_ID() == 13:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	else:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Consume"
 			
 
 
