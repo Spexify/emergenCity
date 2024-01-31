@@ -69,6 +69,7 @@ func _on_continue_pressed() -> void:
 
 
 func _on_new_day_pressed() -> void:
+	_inventory_GUI.set_consume_idle()
 	if _has_slept != 0:
 		_avatar.add_health(_has_slept)
 		_has_slept = 0

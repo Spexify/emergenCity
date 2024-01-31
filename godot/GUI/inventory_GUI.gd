@@ -21,6 +21,8 @@ var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
 
+var is_consume_active : bool
+
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
@@ -33,7 +35,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
 	set_title(p_title)
-	
+
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false
 	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = false
@@ -65,6 +67,11 @@ func set_consume_active() -> void:
 	_only_inventory = false
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
+	is_consume_active = true
+	
+func set_consume_idle() -> void:
+	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	is_consume_active = false
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
@@ -174,13 +181,17 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
+	if is_consume_active:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	else:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	
 	## if the Chlor tablets are clicked, open water filtering gui
 	if sender.get_ID() == 13:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	else:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Consume"
-			
 
 
 #MRM: TODO: Remove Magic Numbers
