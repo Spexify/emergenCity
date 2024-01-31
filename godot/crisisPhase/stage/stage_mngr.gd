@@ -20,13 +20,13 @@ enum Layers{
 	NAVIGATION   = 0,
 	BACKGROUND   = 1,
 	MIDDLEGROUND = 2,
-	TELEPORTER   = 3,
-	FOREGROUND   = 4,
+	FOREGROUND   = 3,
+	TOOLTIPS     = 4,
 }
 
 enum CustomDataLayers{
 	ACTION_ID  = 0,
-	STAGE_NAME = 1
+	TOOLTIP = 1
 }
 
 const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
@@ -95,6 +95,9 @@ func change_stage(p_stage_name: String) -> void:
 		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(6, 3))
 		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(2, 2))
 	_city_map.close()
+	#Hide Tooltip-Layer while game is playing
+	const INVISIBLE := Color(0, 0, 0, 0)
+	$CurrStage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
 
 
 func get_dialogue_pitches() -> Dictionary:
@@ -252,10 +255,13 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 			return false
 
 
-## TODO
+## Check if the clicked tile is a FURNITURE, which means a decorative tile with functionality
 func _is_tile_furniture(p_tiledata: TileData) -> bool:
-	var action_ID: EMC_Action.IDs = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+	var tooltip: String = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
+	if tooltip != "":
+		return true
 	
+	var action_ID: EMC_Action.IDs = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 	return (action_ID != EMC_Action.IDs.NO_ACTION)
 
 
@@ -270,10 +276,13 @@ func _get_tile_coord(p_click_pos: Vector2) -> Vector2i:
 func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	var tiledata: TileData
-	#Check first, if a teleporter tile is placed there
-	tiledata = $CurrStage.get_cell_tile_data(Layers.TELEPORTER, tile_coord)
+	#Check first, if a tooltip tile is placed there
+	tiledata = $CurrStage.get_cell_tile_data(Layers.TOOLTIPS, tile_coord)
 	if tiledata != null: return tiledata
-	#Next: Is a furniture placed there?
+	#Next: Check the Foreground
+	tiledata = $CurrStage.get_cell_tile_data(Layers.FOREGROUND, tile_coord)
+	if tiledata != null: return tiledata
+	#Next: Check the Middleground, which contains FURNITURE
 	tiledata = $CurrStage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
 	if tiledata != null: return tiledata
 	#Otherwise return the background tile data
@@ -327,8 +336,14 @@ func _on_avatar_arrived() -> void:
 			dialogue_initiated.emit(_last_clicked_NPC.get_name())
 	else: #FURNITURE angeklickt?
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+		var tooltip: String = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
+		
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
+			if tooltip != "":
+				_tooltip_GUI.open(tooltip)
+				return
+			
 			if action_ID == EMC_Action.IDs.CITY_MAP:
 				if OverworldStatesMngr.get_isolation_state() != OverworldStatesMngr.IsolationState.ISOLATION:	
 					_city_map.open()
