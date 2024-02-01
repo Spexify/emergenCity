@@ -240,7 +240,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								 "Pop Up Aktion ausgeführt.", 0)
 		#Stage Change Actions
 		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
-								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(450, 500))
+								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 600))
 		2001: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
 								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000)) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")

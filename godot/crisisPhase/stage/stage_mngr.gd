@@ -231,15 +231,15 @@ func _unhandled_input(p_event: InputEvent) -> void:
 	if ((p_event is InputEventMouseButton && p_event.pressed == true)
 	or (p_event is InputEventScreenTouch)):
 		_last_clicked_NPC = null
-		var click_position: Vector2i = p_event.position - $StageOffset.position
+		var click_position: Vector2 = p_event.position - $StageOffset.position
 		_last_clicked_tile = _get_tile_data_front_to_back(click_position)
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
-				_determine_adjacent_free_tile(click_position) #+ $StageOffset.position
+				_determine_adjacent_free_tile(click_position)
 			if adjacent_free_tile_pos != INVALID_TILE:
-				_avatar.set_target(adjacent_free_tile_pos)
+				_avatar.set_target(adjacent_free_tile_pos + $StageOffset.position)
 		elif !_has_tile_collision(_get_tile_coord(click_position)):
-			_avatar.set_target(click_position)
+			_avatar.set_target(click_position + $StageOffset.position)
 
 
 ## TODO

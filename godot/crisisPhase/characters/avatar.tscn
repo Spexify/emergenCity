@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://res/SFX/walking.wav" id="3_nintj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pu6g1"]
-height = 50.0
+height = 52.0
 
 [node name="Avatar" type="CharacterBody2D"]
 position = Vector2(0, -15)
