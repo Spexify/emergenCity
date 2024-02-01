@@ -198,6 +198,13 @@ func _setup_NPCs() -> void:
 	julia.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(julia)
 	_dialogue_pitches[julia.get_name()] = 1.3
+	
+	var mert: EMC_NPC = _NPC_SCN.instantiate()
+	mert.setup("Mert")
+	mert.hide()
+	mert.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(mert)
+	_dialogue_pitches[mert.get_name()] = 1.0
 
 
 ## Setup NPC position and (de)activate them
@@ -211,15 +218,18 @@ func _update_NPCs() -> void:
 		"home":
 			pass
 		"market":
-			var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
-			gerhard.activate()
-			gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
-			var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
-			friedel.activate()
-			friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
-			var julia := $NPCs.get_node("Julia") #Magic String, WIP
-			julia.activate()
-			julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
+			#var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
+			#gerhard.activate()
+			#gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
+			#var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
+			#friedel.activate()
+			#friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
+			#var julia := $NPCs.get_node("Julia") #Magic String, WIP
+			#julia.activate()
+			#julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
+			var mert := $NPCs.get_node("Mert")
+			mert.activate()
+			mert.position = Vector2(450, 350)
 		_:
 			printerr("StageMngr._update_NPCs(): Unknown Stage Name!")
 	pass
@@ -248,16 +258,15 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	if (p_tile_coord.x < 0 || p_tile_coord.y < 0):
 		push_error("Angeklickte Tile-Koordinaten ungültig")
 		return true
-	var tiledata_bg: TileData = _curr_stage.get_cell_tile_data(Layers.BACKGROUND, p_tile_coord)
 	
-	if tiledata_bg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
-		return true
-	else:
-		var tiledata_mg: TileData = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tile_coord)
-		if tiledata_mg != null && tiledata_mg.get_collision_polygons_count(PHYSICS_LAYER) > 0:
+	#Back to forth, as this should be the shortest check in most cases:
+	var collision_layers := [Layers.BACKGROUND, Layers.MIDDLEGROUND, Layers.TOOLTIPS]
+	for collision_layer: Layers in collision_layers:
+		var tiledata: TileData = _curr_stage.get_cell_tile_data(collision_layer, p_tile_coord)
+		if tiledata != null && tiledata.get_collision_polygons_count(PHYSICS_LAYER) > 0:
 			return true
-		else:
-			return false
+	
+	return false
 
 
 ## Check if the clicked tile is a FURNITURE, which means a decorative tile with functionality

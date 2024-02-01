@@ -136,19 +136,22 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 		if node.get_name() == "DialogueGUI":
 			return
 	
-	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
-	#even when it's hidden! :(
-	#Workaround: Just instantiate it when needed. It's done the same way in the example code
-	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
 	#MRM: Problems with load on mobile export, so I preload it for now:
 	#dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
 	match p_NPC_name:
 		"Gerhard": dialogue_resource = GERHARD_DIALOG
 		"Julia": dialogue_resource = JULIA_DIALOG
 		"Friedel": dialogue_resource = FRIEDEL_DIALOG
-		_: printerr("unknown NPC")
+		_:
+			printerr("unknown NPC")
+			return
+	
+	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
+	#even when it's hidden! :(
+	#Workaround: Just instantiate it when needed. It's done the same way in the example code
+	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
+	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
 	dialogue_GUI.start(dialogue_resource, "start")
 	get_tree().paused = true
 
