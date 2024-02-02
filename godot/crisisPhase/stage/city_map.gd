@@ -36,7 +36,20 @@ func open() -> void:
 			_home_pin.hide()
 		EMC_StageMngr.STAGENAME_MARKET:
 			_curr_pos_pin.position = Vector2i(206, 920)
-		_: push_error("CityMap-Pin kennt momentane Stage nicht!")
+		EMC_StageMngr.STAGENAME_TOWNHALL:
+			_curr_pos_pin.position = _determine_pin_position($TownhallBtn)
+		EMC_StageMngr.STAGENAME_GARDENHOUSE:
+			_curr_pos_pin.position = _determine_pin_position($GardenhouseBtn)
+		EMC_StageMngr.STAGENAME_ROWHOUSE:
+			_curr_pos_pin.position = _determine_pin_position($RowhouseBtn)
+		EMC_StageMngr.STAGENAME_MANSION:
+			_curr_pos_pin.position = _determine_pin_position($MansionBtn)
+		EMC_StageMngr.STAGENAME_PENTHOUSE:
+			_curr_pos_pin.position = _determine_pin_position($PenthouseBtn)
+		_: #You have to be on an extended STAGE of the apartment complex
+			_curr_pos_pin.position = _determine_pin_position($ComplexBtn)
+		
+		
 	#_pin_pos_tween = get_tree().create_tween()
 	#_pin_pos_tween.tween_property($Pin, "position", $Pin.position - Vector2(0, 15), 0.5).set_trans(Tween.TRANS_CUBIC)
 	#_pin_pos_tween.set_loops() #no arguments = infinite
@@ -63,11 +76,6 @@ func _ready() -> void:
 	hide()
 
 
-#func _process(delta: float) -> void:
-	#if _pin_pos_tween != null:
-		#print(_pin_pos_tween.is_running())
-
-
 func _on_back_btn_pressed() -> void:
 	close()
 
@@ -77,6 +85,7 @@ func _on_home_btn_pressed() -> void:
 
 
 func _on_marketplace_btn_pressed() -> void:
+	#MRM Idea: Check can be modelled as a action-constraint method 
 	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET:
 		_tooltip_GUI.open("Der Marktplatz ist nicht betretbar!")
 	else: 
@@ -84,15 +93,15 @@ func _on_marketplace_btn_pressed() -> void:
 
 
 func _on_elias_flat_btn_pressed() -> void:
-	_tooltip_GUI.open("Eljas Wohnung ist noch nicht implementiert!")
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
 
 
 func _on_townhall_btn_pressed() -> void:
-	_tooltip_GUI.open("Rathaus ist noch nicht implementiert!")
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
 
 
 func _on_julias_house_btn_pressed() -> void:
-	_tooltip_GUI.open("Julias Zuhause ist noch nicht implementiert!")
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
 
 
 func _on_complex_btn_pressed() -> void:
@@ -100,11 +109,11 @@ func _on_complex_btn_pressed() -> void:
 
 
 func _on_gardenhouse_btn_pressed() -> void:
-	_tooltip_GUI.open("Gerhards Gartenhaus ist noch nicht implementiert!")
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
 
 
 func _on_villa_btn_pressed() -> void:
-	_tooltip_GUI.open("Petro & Irenas Villa ist noch nicht implementiert!")
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
 
 
 func _on_nature_btn_pressed() -> void:
@@ -113,3 +122,10 @@ func _on_nature_btn_pressed() -> void:
 
 func _on_change_stage_gui_stayed_on_same_stage() -> void:
 	close()
+
+
+## Helper method to deduce the position of the pin on the basis of the Button
+func _determine_pin_position(p_texture_button: TextureButton) -> Vector2:
+	return p_texture_button.position + \
+		Vector2(p_texture_button.texture_normal.get_width()/2,
+				p_texture_button.texture_normal.get_height()/2 - 50)

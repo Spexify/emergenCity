@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://vgj2yo7vvatm"
+path="res://.godot/imported/momo.dialogue-53f7e0833e5bb5a2fb538d40778c574b.tres"
+
+[deps]
+
+source_file="res://res/dialogue/momo.dialogue"
+dest_files=["res://.godot/imported/momo.dialogue-53f7e0833e5bb5a2fb538d40778c574b.tres"]
+
+[params]
+
+defaults=true

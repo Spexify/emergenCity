@@ -9,9 +9,9 @@ extends Node
 enum IDs{
 	NO_ACTION = 0,
 	CITY_MAP = 1,
-	TELEPORTER_MARKET = 2, #obsolete
+	COOKING = 2, 
 	REST = 3,
-	COOKING = 4,
+	#OBSOLETE = 4,#obsolete
 	RAINWATER_BARREL = 5,
 	FILTER_WATTER = 7,
 	##1000s = PopupActions
@@ -20,6 +20,11 @@ enum IDs{
 	##2000s = StageChangeActions
 	SC_HOME = 2000,
 	SC_MARKET = 2001,
+	SC_TOWNHALL = 2002,
+	SC_GARDENHOUSE = 2003,
+	SC_ROWHOUSE = 2004,
+	SC_MANSION = 2005,
+	SC_PENTHOUSE = 2006,
 }
 
 ## This sigal will be emmited if the Action was performed 

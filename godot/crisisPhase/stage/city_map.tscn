@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="4_gh8se"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
-[ext_resource type="PackedScene" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
+[ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
 
 [sub_resource type="Animation" id="Animation_xndm7"]
 length = 0.001
@@ -49,7 +49,7 @@ _data = {
 z_index = 1
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("1_qljbr")
 script = ExtResource("2_a4fhc")
 
@@ -83,7 +83,7 @@ offset_right = 268.0
 offset_bottom = 1008.0
 texture_normal = ExtResource("3_mb2ha")
 
-[node name="EliasFlatBtn" type="TextureButton" parent="."]
+[node name="PenthouseBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 333.0
@@ -101,7 +101,7 @@ offset_right = 162.0
 offset_bottom = 864.0
 texture_normal = ExtResource("3_mb2ha")
 
-[node name="JuliasHouseBtn" type="TextureButton" parent="."]
+[node name="RowhouseBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 96.0
@@ -128,7 +128,7 @@ offset_right = 493.0
 offset_bottom = 442.0
 texture_normal = ExtResource("3_mb2ha")
 
-[node name="VillaBtn" type="TextureButton" parent="."]
+[node name="MansionBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 434.0
@@ -173,10 +173,10 @@ layout_mode = 1
 [connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="MarketplaceBtn" to="." method="_on_marketplace_btn_pressed"]
-[connection signal="pressed" from="EliasFlatBtn" to="." method="_on_elias_flat_btn_pressed"]
+[connection signal="pressed" from="PenthouseBtn" to="." method="_on_elias_flat_btn_pressed"]
 [connection signal="pressed" from="TownhallBtn" to="." method="_on_townhall_btn_pressed"]
-[connection signal="pressed" from="JuliasHouseBtn" to="." method="_on_julias_house_btn_pressed"]
+[connection signal="pressed" from="RowhouseBtn" to="." method="_on_julias_house_btn_pressed"]
 [connection signal="pressed" from="ComplexBtn" to="." method="_on_complex_btn_pressed"]
 [connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
-[connection signal="pressed" from="VillaBtn" to="." method="_on_villa_btn_pressed"]
+[connection signal="pressed" from="MansionBtn" to="." method="_on_villa_btn_pressed"]
 [connection signal="pressed" from="NatureBtn" to="." method="_on_nature_btn_pressed"]

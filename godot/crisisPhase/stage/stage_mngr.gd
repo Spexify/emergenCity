@@ -14,6 +14,8 @@ enum Atlases{ #Tileset Atlasses
 	NAVIGATION_PNG = 3,
 	TELEPORTERS_PNG = 4,
 	UPGRADE_FURNITURE_PNG = 5,
+	TOOLTIPS_PNG = 6,
+	INTERACTABLE_FURNITURE = 7,
 }
 
 enum Layers{
@@ -31,8 +33,14 @@ enum CustomDataLayers{
 
 const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
 
+
 const STAGENAME_HOME: String = "home"
 const STAGENAME_MARKET: String = "market"
+const STAGENAME_TOWNHALL: String = "townhall"
+const STAGENAME_GARDENHOUSE: String = "gardenhouse"
+const STAGENAME_ROWHOUSE: String = "rowhouse"
+const STAGENAME_MANSION: String = "mansion"
+const STAGENAME_PENTHOUSE: String = "penthouse"
 
 const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
@@ -91,7 +99,6 @@ func change_stage(p_stage_name: String) -> void:
 	_curr_stage = $StageOffset/CurrStage
 	new_stage.y_sort_enabled = true
 	_curr_stage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
-	_update_NPCs()
 	_create_navigation_layer_tiles()
 	if get_curr_stage_name() == STAGENAME_HOME:
 		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(1, 15))
@@ -100,6 +107,23 @@ func change_stage(p_stage_name: String) -> void:
 	#Hide Tooltip-Layer while game is playing
 	const INVISIBLE := Color(0, 0, 0, 0)
 	_curr_stage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
+
+
+## Setup NPC position and (de)activate them
+func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
+	#Hide all NPCs first
+	for NPC: EMC_NPC in $NPCs.get_children():
+		NPC.deactivate()
+	
+	#Dependend on the stage show and spawn NPCs
+	for NPC_name: String in p_NPC_spawn_pos:
+		var NPC := $NPCs.get_node(NPC_name)
+		if NPC == null:
+			printerr("StageMngr.update_NPCs(): Unknown NPC Name!")
+			continue
+		
+		NPC.activate()
+		NPC.position = p_NPC_spawn_pos[NPC_name]
 
 
 func get_dialogue_pitches() -> Dictionary:
@@ -204,35 +228,56 @@ func _setup_NPCs() -> void:
 	mert.hide()
 	mert.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(mert)
-	_dialogue_pitches[mert.get_name()] = 1.0
-
-
-## Setup NPC position and (de)activate them
-func _update_NPCs() -> void:
-	#Hide all NPCs first
-	for NPC: EMC_NPC in $NPCs.get_children():
-		NPC.deactivate()
+	_dialogue_pitches[mert.get_name()] = 0.9
 	
-	#Dependend on the stage show and reposition NPCs
-	match get_curr_stage_name():
-		"home":
-			pass
-		"market":
-			#var gerhard := $NPCs.get_node("Gerhard") #Magic String, WIP
-			#gerhard.activate()
-			#gerhard.position = Vector2(200, 700) #Spawn position of stages in JSON in the future!
-			#var friedel := $NPCs.get_node("Friedel") #Magic String, WIP
-			#friedel.activate()
-			#friedel.position = Vector2(260, 700) #Spawn position of stages in JSON in the future!
-			#var julia := $NPCs.get_node("Julia") #Magic String, WIP
-			#julia.activate()
-			#julia.position = Vector2(280, 350) #Spawn position of stages in JSON in the future!
-			var mert := $NPCs.get_node("Mert")
-			mert.activate()
-			mert.position = Vector2(450, 350)
-		_:
-			printerr("StageMngr._update_NPCs(): Unknown Stage Name!")
-	pass
+	var momo: EMC_NPC = _NPC_SCN.instantiate()
+	momo.setup("Momo")
+	momo.hide()
+	momo.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(momo)
+	_dialogue_pitches[momo.get_name()] = 0.8
+	
+	var petro: EMC_NPC = _NPC_SCN.instantiate()
+	petro.setup("Petro")
+	petro.hide()
+	petro.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(petro)
+	_dialogue_pitches[petro.get_name()] = 0.65
+	
+	var irena: EMC_NPC = _NPC_SCN.instantiate()
+	irena.setup("Irena")
+	irena.hide()
+	irena.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(irena)
+	_dialogue_pitches[irena.get_name()] = 1.3
+	
+	var elias: EMC_NPC = _NPC_SCN.instantiate()
+	elias.setup("Elias")
+	elias.hide()
+	elias.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(elias)
+	_dialogue_pitches[elias.get_name()] = 0.75
+	
+	var kris: EMC_NPC = _NPC_SCN.instantiate()
+	kris.setup("Kris")
+	kris.hide()
+	kris.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(kris)
+	_dialogue_pitches[kris.get_name()] = 1.0
+	
+	var veronika: EMC_NPC = _NPC_SCN.instantiate()
+	veronika.setup("Veronika")
+	veronika.hide()
+	veronika.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(veronika)
+	_dialogue_pitches[veronika.get_name()] = 1.1
+	
+	var townhall_worker: EMC_NPC = _NPC_SCN.instantiate()
+	townhall_worker.setup("TownhallWorker")
+	townhall_worker.hide()
+	townhall_worker.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(townhall_worker)
+	_dialogue_pitches[townhall_worker.get_name()] = 0.95
 
 
 ## Handle Tap/Mouse-Input

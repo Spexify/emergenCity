@@ -1,8 +1,10 @@
 ~ start
-Avatar: Was geht?
-%2 => dialog1
-%2 => dialog2
-%3 => dialog3
+Julia: Hi Nachbar!
+- Avatar: Was geht?
+	%2 => dialog1
+	%2 => dialog2
+	%3 => dialog3
+- Avatar: Bis dann!
 => END
 
 ~ dialog1

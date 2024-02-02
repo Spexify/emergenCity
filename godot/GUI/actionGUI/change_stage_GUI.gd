@@ -43,7 +43,8 @@ func _on_confirm_btn_pressed() -> void:
 	var curr_SC_action: EMC_StageChangeAction = _action
 	
 	_stage_mngr.change_stage(curr_SC_action.get_stage_name())
-	_avatar.position = curr_SC_action.get_spawn_pos()
+	_avatar.position = curr_SC_action.get_avatar_spawn_pos()
+	_stage_mngr.respawn_NPCs(curr_SC_action.get_NPCs_spawn_pos())
 	
 	if _last_SC_action != null:
 		_last_SC_action.executed.emit(_last_SC_action)

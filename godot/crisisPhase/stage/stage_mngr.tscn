@@ -15,7 +15,6 @@ position = Vector2(-32, -32)
 
 [node name="CurrStage" parent="StageOffset" instance=ExtResource("2_epoie")]
 layer_0/modulate = Color(1, 1, 1, 0.384314)
-layer_2/y_sort_enabled = true
 layer_3/modulate = Color(1, 1, 1, 0.262745)
 
 [node name="NPCs" type="Control" parent="."]

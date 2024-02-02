@@ -1,0 +1,8 @@
+~ start
+Momo: ...
+Mert: Momo ist etwas scheu.
+- Avatar: Warum denn?
+	- Mert: Lange Story, aber ich habe sie bei einem Feuerwehr-Einsatz gerettet.
+	- Avatar: Micky kann das ja hier gerne ausschmücken.
+- Muss los.
+=> END

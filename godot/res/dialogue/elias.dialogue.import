@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://jkx6thyc2y41"
+path="res://.godot/imported/elias.dialogue-a21419406f78426cbe1b04fb4e43816a.tres"
+
+[deps]
+
+source_file="res://res/dialogue/elias.dialogue"
+dest_files=["res://.godot/imported/elias.dialogue-a21419406f78426cbe1b04fb4e43816a.tres"]
+
+[params]
+
+defaults=true

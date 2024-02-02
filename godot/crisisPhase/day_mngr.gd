@@ -225,24 +225,41 @@ func _update_shelflives() -> void:
 func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
 	match p_action_ID:
-		0: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
-		1: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
-		3: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
+		EMC_Action.IDs.NO_ACTION: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
+		EMC_Action.IDs.CITY_MAP: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
+		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
 								 {"add_health" : 1 }, "RestGUI", 
 								 "Hat sich ausgeruht.", 10)
-		4: result = EMC_Action.new(p_action_ID, "Kochen", {}, 
+		EMC_Action.IDs.COOKING: result = EMC_Action.new(p_action_ID, "Kochen", {}, 
 								 { }, "CookingGUI", 
 								 "Hat gekocht.", 30)
-		5: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
+		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
 								{ }, "RainwaterBarrelGUI",
 								"Hat Wasser aus der Regentonne geschöpft.",0)
 		6: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
 								 "Pop Up Aktion ausgeführt.", 0)
 		#Stage Change Actions
-		2000: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
-								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 600))
-		2001: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
-								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000)) 
+		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
+								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
+								{ })
+		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
+								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
+								{"Mert" : Vector2(450, 350)}) 
+		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", { "constraint_not_evening" : 0 }, 
+								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
+								{"TownhallWorker" : Vector2(430, 250)}) 
+		EMC_Action.IDs.SC_GARDENHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Gerhard", { }, 
+								 "Hat Gerhard besucht.", 0, EMC_StageMngr.STAGENAME_GARDENHOUSE, Vector2i(150, 900),
+								{"Gerhard" : Vector2(460, 380), "Friedel" : Vector2(80, 700)}) 
+		EMC_Action.IDs.SC_ROWHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Julia", { }, 
+								 "Hat Julia besucht.", 0, EMC_StageMngr.STAGENAME_ROWHOUSE, Vector2i(250, 400),
+								{"Julia" : Vector2(450, 550)}) 
+		EMC_Action.IDs.SC_MANSION: result = EMC_StageChangeAction.new(p_action_ID, "zu Petro & Irena", { }, 
+								 "Hat Petro & Irena besucht.", 0, EMC_StageMngr.STAGENAME_MANSION, Vector2i(120, 900),
+								{"Petro" : Vector2(410, 800), "Irena" : Vector2(460, 300)}) 
+		EMC_Action.IDs.SC_PENTHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Elias", { }, 
+								 "Hat Elias besucht.", 0, EMC_StageMngr.STAGENAME_PENTHOUSE, Vector2i(250, 1000),
+								{"Elias" : Vector2(480, 760)}) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result
