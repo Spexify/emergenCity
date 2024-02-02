@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://doc1tdsx8itqw"]
+
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="1_xic5p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0cck"]
+bg_color = Color(0.360784, 0.333333, 0.301961, 1)
+
+[node name="UpgradeCenter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b0cck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[right][color=black]10[/color][/right]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("1_xic5p")
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="Title" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+bbcode_enabled = true
+text = "[center]Statten Sie sich für die nächste Krise aus[/center]"
+fit_content = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradesGrid" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Description" type="PanelContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gegenstand kaufen für 10"
+fit_content = true
+
+[node name="BuyBtn" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="EquipBtn" type="Button" parent="Background/VBoxContainer"]
+layout_mode = 2
+text = "Gegenstand ausrüsten"

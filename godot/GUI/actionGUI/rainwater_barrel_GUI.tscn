@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8c6lclmuiqum"]
+[gd_scene load_steps=5 format=3 uid="uid://c8c6lclmuiqum"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/rainwater_barrel_GUI.gd" id="1_u6c7a"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_ced33"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_xqjkh"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_g7yin"]
 
 [node name="RainwaterBarrelGUI" type="Control"]
 layout_mode = 3
@@ -57,6 +60,17 @@ text = "Eine Flasche (250ml) abschöpfen"
 [node name="DoneBtn" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Fertig"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_ced33")
+
+[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_xqjkh")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_g7yin")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/GetWaterBtn" to="." method="_on_get_water_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/DoneBtn" to="." method="_on_done_btn_pressed"]

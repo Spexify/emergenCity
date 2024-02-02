@@ -9,6 +9,7 @@ func setup(p_overworld_states_mngr_ref: EMC_OverworldStatesMngr, p_inventory_ref
 	$PanelContainer/VBoxContainer/PanelContainer/RichTextLabel.text = "In der Regentonne sind " + str(float(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL)) / 4) + "l Wasser."
 
 func _on_get_water_pressed() -> void:
+	$SFX/ButtonSFX.play()
 	if _overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) > 0:
 		if _inventory_ref.add_new_item(EMC_Item.IDs.WATER_DIRTY):
 			_overworld_states_mngr_ref.set_furniture_state(
@@ -20,8 +21,10 @@ func _on_get_water_pressed() -> void:
 
 func _on_done_btn_pressed() -> void:
 	hide() # Replace with function body.
+	$SFX/CloseGUISFX.play()
 	closed.emit()
 	
 func show_gui(p_action: EMC_Action) -> void:
 	$PanelContainer/VBoxContainer/PanelContainer/RichTextLabel.text = "In der Regentonne sind " + str(float(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL)) / 4) + "l Wasser."
+	$SFX/OpenGUISFX.play()
 	show()
