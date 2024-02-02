@@ -81,7 +81,9 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	_display_info(sender)
 	
 	var comp := sender.get_comp(EMC_IC_Cost)
-	assert(comp != null)
+	if comp == null:
+		return
+		
 	var cost : int = comp.get_cost()
 
 	if _balance - cost >= 0 and _add_item_to_slot_by_id(sender.get_ID()):
