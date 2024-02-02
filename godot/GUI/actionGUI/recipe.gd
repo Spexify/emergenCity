@@ -21,11 +21,11 @@ p_needs_heat : bool) -> void:
 	_needs_water = p_needs_water
 	_needs_heat = p_needs_heat
 	#await ready
-	#var item : EMC_Item = ITEM_SCN.instantiate()
-	#item.setup(p_outputItemID)
-	#$HBoxContainer/item.replace_by(item)
-	var item := $HBoxContainer/item
+	var item : EMC_Item = ITEM_SCN.instantiate()
 	item.setup(p_outputItemID)
+	$HBoxContainer.add_child(item)
+	#var item := $HBoxContainer/item
+	#item.setup(p_outputItemID)
 	$HBoxContainer/RichTextLabel.text = item.get_name()
 	#item.set_frame()
 

@@ -1,0 +1,71 @@
+[
+	{
+		"ID": 0,
+		"name": "DUMMY",
+		"descr": "Error: You should not see this Item."
+	},
+	{
+		"ID": 1,
+		"name": "Wasser",
+		"descr": "Sauberes Trinkwasser.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 10,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			}
+		]
+	},
+	{
+		"ID": 2,
+		"name": "Dreckiges Wasser",
+		"descr": "Nicht die Erstwahl, aber dennoch trinkbar.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "unpalatable",
+				"params": 1,
+			}
+		]
+	},
+	{
+		"ID": 3,
+		"name": "Ravioli Konserve",
+		"descr": "Kalt genießbar, aber ein Festmahl sieht anders aus..",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 5,
+		"name": "Ravioli Gericht",
+		"descr": "Lecker schmecker!",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 50,
+			},
+			{
+				"name": "food",
+				"params": 2,
+			},
+		]
+	}
+]
