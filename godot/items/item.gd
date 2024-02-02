@@ -18,6 +18,32 @@ enum IDs{
 	JAM = 11,
 	BREAD_WITH_JAM = 12,
 	CHLOR_TABLETS = 13,
+ 	FLOUR = 14,
+	SALT = 15,
+	SUGAR = 16, 
+	RICE = 17,
+	PULSES = 18,
+	FISH = 19,
+	POTATOES = 20,
+	VEGETABLES = 21,
+	FRUITS = 22,
+	CHOCOLATE = 23,
+	MEAT = 24,
+	TOFU = 25,
+	NUTS = 26,
+	CHEESE = 27,
+	MILK = 28,
+	BOLOGNESE = 29,
+	JUICE = 30,
+	SALTED_FISH = 31,
+	PICKLED_VEGETABLES = 32,
+	RICE_WITH_VEGETABLES = 33,
+	CURRY_WITH_RICE = 34,
+	HUMMUS_WITH_BREAD = 35,
+	CHEESE_SANDWICH = 36,
+	HOT_CHOCOLATE = 37,
+	GOULASH = 38,
+	MILK_RICE = 39,
 }
 
 #FYI: Inherits "name" property from Node
@@ -110,6 +136,133 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 			_descr = "Zum Wasser Filtern."
 			_comps.push_back(EMC_IC_Cost.new(5))
 			_comps.push_back(EMC_IC_Uses.new(3))
+		IDs.FLOUR : 
+			name = "Mehl"
+			_descr = "Zum Backen."
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.SALT : 
+			name = "Salz"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.SUGAR : 
+			name = "Zucker"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.RICE : 
+			name = "Reis"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.PULSES : 
+			name = "Schallenfrüchte"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.FISH : 
+			name = "Fisch"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.POTATOES : 
+			name = "Kartoffeln"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.VEGETABLES : 
+			name = "Gemüse"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.FRUITS : 
+			name = "Früchte"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.CHOCOLATE : 
+			name = "Schokolade"
+			_descr = "Zum Genießen."
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.NUTS : 
+			name = "Nüsse"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Cost.new(5))
+		IDs.MEAT : 
+			name = "Fleisch"
+			_descr = "Zum Kochen."
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.TOFU : 
+			name = "Tofu"
+			_descr = "Zum Kochen."
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.CHEESE : 
+			name = "Käse"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Shelflife.new(6))
+		IDs.MILK : 
+			name = "Milch"
+			_descr = ""
+			_comps.push_back(EMC_IC_Cost.new(5))
+			_comps.push_back(EMC_IC_Drink.new(1))
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(6))	
+		IDs.BOLOGNESE : 
+			name = "Bolognese"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.JUICE : 
+			name = "Saft"
+			_descr = ""
+			_comps.push_back(EMC_IC_Drink.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.SALTED_FISH : 
+			name = "Gesalzenes Fisch"
+			_descr = "Länger haltbar."
+			_comps.push_back(EMC_IC_Food.new(1))
+		IDs.PICKLED_VEGETABLES : 
+			name = "Eingelegte Gemüse"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+		IDs.RICE_WITH_VEGETABLES : 
+			name = "Gemüsereis"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.CURRY_WITH_RICE : 
+			name = "Curry mit Reis"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.HUMMUS_WITH_BREAD : 
+			name = "Hummus mit Brot"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.HOT_CHOCOLATE : 
+			name = "Heiße Schokolade"
+			_descr = ""
+			_comps.push_back(EMC_IC_Drink.new(1))
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.CHEESE_SANDWICH : 
+			name = "Käsesandwich"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.GOULASH : 
+			name = "Gulasch"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
+		IDs.MILK_RICE : 
+			name = "Milchreis"
+			_descr = ""
+			_comps.push_back(EMC_IC_Food.new(1))
+			_comps.push_back(EMC_IC_Shelflife.new(3))	
 		_: #default/else
 			name = "<No Name>"
 			printerr("Item Setup: ID unknown!")
