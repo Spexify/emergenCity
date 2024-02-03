@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://5dpuu2l72yhg"]
+[gd_scene load_steps=5 format=3 uid="uid://5dpuu2l72yhg"]
 
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_hyvos"]
 [ext_resource type="Script" path="res://preparePhase/settings.gd" id="2_anji3"]
 [ext_resource type="Script" path="res://volume_slider.gd" id="3_pgw5n"]
+[ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="4_k1gal"]
 
 [node name="Setting" type="Control"]
 layout_mode = 3
@@ -39,6 +40,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(294, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
+
+[node name="SelectAvatar" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+layout_mode = 2
+text = "Charakter auswählen"
 
 [node name="Sound" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
 custom_minimum_size = Vector2(356, 0)
@@ -98,6 +103,11 @@ layout_mode = 2
 text = "Speichern & Zurück
 "
 
+[node name="AvatarSelectionGUI" parent="." instance=ExtResource("4_k1gal")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/SelectAvatar" to="." method="_on_select_avatar_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Sound" to="." method="_on_sound_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/FontChange" to="." method="_on_font_change_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset" to="." method="_on_reset_pressed"]

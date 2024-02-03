@@ -1,0 +1,150 @@
+[gd_scene load_steps=16 format=3 uid="uid://ctqd8vvfeado1"]
+
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_71v8c"]
+[ext_resource type="Script" path="res://GUI/avatar_selection_GUI.gd" id="2_6drtd"]
+[ext_resource type="Texture2D" uid="uid://dqlhol50ouj46" path="res://res/sprites/characters/portrait_avatar_W01.png" id="3_7yewj"]
+[ext_resource type="Texture2D" uid="uid://d2l1udjem4jbc" path="res://res/sprites/characters/portrait_avatar.png" id="3_v7ya5"]
+[ext_resource type="Texture2D" uid="uid://b5dm4no6xhhsa" path="res://res/sprites/characters/portrait_avatar_M01.png" id="5_tvfkq"]
+[ext_resource type="Texture2D" uid="uid://l1ofxmm21383" path="res://res/sprites/characters/portrait_avatar_W02.png" id="6_5hypo"]
+[ext_resource type="Texture2D" uid="uid://b1goma4su78n3" path="res://res/sprites/characters/portrait_avatar_M02.png" id="7_17xgo"]
+[ext_resource type="Texture2D" uid="uid://h5yrf2q4d3l5" path="res://res/sprites/characters/portrait_avatar_W03.png" id="8_tnd65"]
+[ext_resource type="Texture2D" uid="uid://dpdgl87dk8xn1" path="res://res/sprites/characters/portrait_avatar_M03.png" id="9_35uxv"]
+[ext_resource type="Texture2D" uid="uid://qfudwx6pxuhy" path="res://res/sprites/characters/portrait_avatar_W04.png" id="10_0dwwe"]
+[ext_resource type="Texture2D" uid="uid://dpncvj14ry0c8" path="res://res/sprites/characters/portrait_avatar_M04.png" id="11_klvuv"]
+[ext_resource type="Texture2D" uid="uid://cg3xxv7cfsxoj" path="res://res/sprites/characters/portrait_avatar_W05.png" id="12_aw024"]
+[ext_resource type="Texture2D" uid="uid://bb1e5w02qmwr8" path="res://res/sprites/characters/portrait_avatar_M05.png" id="13_bf2s8"]
+[ext_resource type="Texture2D" uid="uid://ccg8luu201c21" path="res://res/sprites/characters/portrait_avatar_W06.png" id="14_rq43u"]
+[ext_resource type="Texture2D" uid="uid://dtap73p1jsa4v" path="res://res/sprites/characters/portrait_avatar_M06.png" id="15_16neq"]
+
+[node name="AvatarSelectionGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_71v8c")
+script = ExtResource("2_6drtd")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 620.0
+offset_bottom = 1488.0
+scale = Vector2(0.8, 0.8)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(720, 180)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center][color=white] Wähle deinen Charakter[/color][/center]"
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(620, 900)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="W01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_7yewj")
+
+[node name="NB01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_tvfkq")
+
+[node name="W02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_5hypo")
+
+[node name="NB02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_17xgo")
+
+[node name="W03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_tnd65")
+
+[node name="NB03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_35uxv")
+
+[node name="W04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_0dwwe")
+
+[node name="NB04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_klvuv")
+
+[node name="W05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("12_aw024")
+
+[node name="NB05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_bf2s8")
+
+[node name="W06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("14_rq43u")
+
+[node name="NB06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_v7ya5")
+
+[node name="M06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("15_16neq")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W01" to="." method="_on_w_01_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB01" to="." method="_on_nb_01_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M01" to="." method="_on_m_01_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W02" to="." method="_on_w_02_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB02" to="." method="_on_nb_02_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M02" to="." method="_on_m_02_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W03" to="." method="_on_w_03_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB03" to="." method="_on_nb_03_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M03" to="." method="_on_m_03_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W04" to="." method="_on_w_04_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB04" to="." method="_on_nb_04_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M04" to="." method="_on_m_04_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W05" to="." method="_on_w_05_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB05" to="." method="_on_nb_05_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M05" to="." method="_on_m_05_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W06" to="." method="_on_w_06_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB06" to="." method="_on_nb_06_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M06" to="." method="_on_m_06_pressed"]
