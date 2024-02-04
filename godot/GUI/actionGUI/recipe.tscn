@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://nh3br4hbeg8l"]
+[gd_scene load_steps=6 format=3 uid="uid://bafhl5bve300s"]
 
 [ext_resource type="ButtonGroup" uid="uid://dx6c60xbcphku" path="res://GUI/actionGUI/recipe_group.tres" id="1_kdf54"]
 [ext_resource type="Texture2D" uid="uid://7umchdbvgas" path="res://res/gui/menu_box_recipe.png" id="2_ol7r2"]
 [ext_resource type="Texture2D" uid="uid://ca4ifk578tgel" path="res://res/gui/menu_box_recipe_pressed.png" id="3_8g68u"]
 [ext_resource type="Script" path="res://GUI/actionGUI/recipe.gd" id="4_q0vg1"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="5_rsdh0"]
-[ext_resource type="PackedScene" uid="uid://bi2q0hbmab582" path="res://items/item.tscn" id="6_mfbhs"]
 
 [node name="Recipe" type="TextureButton"]
 custom_minimum_size = Vector2(0, 50)
@@ -36,10 +35,6 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 478.0
 offset_bottom = 80.0
-mouse_filter = 2
-
-[node name="item" parent="HBoxContainer" instance=ExtResource("6_mfbhs")]
-layout_mode = 2
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]

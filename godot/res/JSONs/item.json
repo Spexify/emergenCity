@@ -54,6 +54,17 @@
 		]
 	},
 	{
+		"ID": 4,
+		"name": "Gaskartusche",
+		"descr": "Für den Gaskocher.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 30,
+			},
+		]
+	},
+	{
 		"ID": 5,
 		"name": "Ravioli Gericht",
 		"descr": "Lecker schmecker!",
@@ -67,5 +78,507 @@
 				"params": 2,
 			},
 		]
-	}
+	},
+	{
+		"ID": 6,
+		"name": "Ungekochte Nudeln",
+		"descr": "Zu hart um sie roh zu essen, müssen erst gekocht werden.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+		]
+	},
+	{
+		"ID": 7,
+		"name": "Nudeln",
+		"descr": "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 25,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 2,
+			},
+		]
+	},
+	{
+		"ID": 8,
+		"name": "Soße im Glas",
+		"descr": "X",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 9,
+		"name": "Nudeln mit Soße",
+		"descr": "X",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+			{
+				"name": "food",
+				"params": 2,
+			},
+			{
+				"name": "shelflife",
+				"params": 2,
+			},
+		]
+	},
+	{
+		"ID": 10,
+		"name": "Brot",
+		"descr": "X",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 11,
+		"name": "Marmelade",
+		"descr": "X",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 20,
+			},
+		]
+	},
+	{
+		"ID": 12,
+		"name": "Brot mit Marmelade",
+		"descr": "X",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 13,
+		"name": "Chlortablette",
+		"descr": "Zum Wasser Filtern.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "uses",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 14,
+		"name": "Mehl",
+		"descr": "Zum Backen.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 15,
+		"name": "Salz",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 16,
+		"name": "Zucker",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 17,
+		"name": "Reis",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 18,
+		"name": "Schallenfrüchte",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 19,
+		"name": "Fisch",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 20,
+		"name": "Kartoffeln",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+		]
+	},
+	{
+		"ID": 21,
+		"name": "Gemüse",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 22,
+		"name": "Früchte",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 23,
+		"name": "Schokolade",
+		"descr": "Zum Genießen.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 24,
+		"name": "Fleisch",
+		"descr": "Zum Kochen.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 25,
+		"name": "Tofu",
+		"descr": "Zum Kochen.",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 26,
+		"name": "Nüsse",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 27,
+		"name": "Käse",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+		]
+	},
+	{
+		"ID": 28,
+		"name": "Milch",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 5,
+			},
+			{
+				"name": "shelflife",
+				"params": 6,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 29,
+		"name": "Bolognese",
+		"descr": "",
+		"comps": [
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 30,
+		"name": "Saft",
+		"descr": "",
+		"comps": [
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 31,
+		"name": "Gesalzenes Fisch",
+		"descr": "Länger haltbar.",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 32,
+		"name": "Eingelegte Gemüse",
+		"descr": "Länger haltbar.",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 33,
+		"name": "Gemüsereis",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 34,
+		"name": "Curry mit Reis",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 35,
+		"name": "Hummus mit Brot",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 36,
+		"name": "Käsesandwich",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 37,
+		"name": "Heiße Schokolade",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 38,
+		"name": "Gulasch",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 39,
+		"name": "Milchreis",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 3,
+			},
+		]
+	},
 ]

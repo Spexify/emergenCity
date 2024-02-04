@@ -23,7 +23,7 @@ func _ready() -> void:
 		if item != EMC_Item.IDs.DUMMY:
 			_inventory_occupied += 1
 	
-	for item_id : EMC_Item.IDs in EMC_Item.IDs.values():
+	for item_id : EMC_Item.IDs in JsonMngr.get_all_ids():
 		if item_id == EMC_Item.IDs.DUMMY:
 			continue
 		_add_item_by_id(item_id, true)

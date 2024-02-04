@@ -139,6 +139,16 @@ func id_to_name(ID : int) -> String:
 		return "DUMMY"
 		
 	return _name_to_id.find_key(ID)
+	
+func get_all_ids() -> Array[int]:
+	var result : Array[int]
+	result.assign(_name_to_id.values())
+	return result
+	
+func get_all_names() -> Array[String]:
+	var result : Array[String]
+	result.assign(_name_to_id.keys())
+	return result
 
 func load_item_translator() -> void:
 	if not FileAccess.file_exists(ITEM_TRANSLATE_SOURCE):
