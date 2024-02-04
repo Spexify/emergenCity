@@ -94,7 +94,8 @@ func on_interacted_with_furniture(action_id : int) -> void:
 	
 	var reject_reasons: String
 	for constraint_key: String in current_action.get_constraints_prior().keys():
-		var reject_reason: String = Callable(_action_constraints, constraint_key).call()
+		var param: Variant = current_action.get_constraints_prior()[constraint_key]
+		var reject_reason: String = Callable(_action_constraints, constraint_key).call(param)
 		if reject_reason != EMC_ActionConstraints.NO_REJECTION:
 			reject_reasons = reject_reasons + reject_reason + " "
 	
@@ -242,24 +243,34 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
 								{ })
-		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : 0 }, 
+		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : "" }, 
 								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
-								{"Mert" : Vector2(450, 350)}) 
-		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", { "constraint_not_evening" : 0 }, 
+								{"Mert" : Vector2(470, 380)}) 
+		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", { "constraint_not_evening" : "" }, 
 								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
-								{"TownhallWorker" : Vector2(430, 250)}) 
+								{"TownhallWorker" : Vector2(430, 300)}) 
 		EMC_Action.IDs.SC_GARDENHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Gerhard", { }, 
 								 "Hat Gerhard besucht.", 0, EMC_StageMngr.STAGENAME_GARDENHOUSE, Vector2i(150, 900),
-								{"Gerhard" : Vector2(460, 380), "Friedel" : Vector2(80, 700)}) 
+								{"Gerhard" : Vector2(420, 380), "Friedel" : Vector2(80, 700)}) 
 		EMC_Action.IDs.SC_ROWHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Julia", { }, 
 								 "Hat Julia besucht.", 0, EMC_StageMngr.STAGENAME_ROWHOUSE, Vector2i(250, 400),
 								{"Julia" : Vector2(450, 550)}) 
 		EMC_Action.IDs.SC_MANSION: result = EMC_StageChangeAction.new(p_action_ID, "zu Petro & Irena", { }, 
 								 "Hat Petro & Irena besucht.", 0, EMC_StageMngr.STAGENAME_MANSION, Vector2i(120, 900),
-								{"Petro" : Vector2(410, 800), "Irena" : Vector2(460, 300)}) 
+								{"Petro" : Vector2(370, 870), "Irena" : Vector2(460, 260)}) 
 		EMC_Action.IDs.SC_PENTHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Elias", { }, 
 								 "Hat Elias besucht.", 0, EMC_StageMngr.STAGENAME_PENTHOUSE, Vector2i(250, 1000),
-								{"Elias" : Vector2(480, 760)}) 
+								{"Elias" : Vector2(440, 800)}) 
+		EMC_Action.IDs.SC_APARTMENT_MERT: result = EMC_StageChangeAction.new(p_action_ID, "zu Mert", \
+								{ "constraint_not_noon" : "Mert ist Mittags nicht zuhause" }, 
+								 "Hat Mert besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_MERT, Vector2i(150, 400),
+								{"Mert" : Vector2(400, 310), "Momo" : Vector2(480, 760)}) 
+		EMC_Action.IDs.SC_APARTMENT_CAMPER: result = EMC_StageChangeAction.new(p_action_ID, "zu Kris & Veronika", { }, 
+								 "Hat Kris & Veronika besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_CAMPER, Vector2i(150, 400),
+								{"Kris" : Vector2(460, 300), "Veronika" : Vector2(480, 780)}) 
+		EMC_Action.IDs.SC_APARTMENT_AGATHE: result = EMC_StageChangeAction.new(p_action_ID, "zu Agathe", { }, 
+								 "Hat Agathe besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT, Vector2i(250, 900),
+								{"Agathe" : Vector2(490, 400)}) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
 	return result

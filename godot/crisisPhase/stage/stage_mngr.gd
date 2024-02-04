@@ -41,6 +41,10 @@ const STAGENAME_GARDENHOUSE: String = "gardenhouse"
 const STAGENAME_ROWHOUSE: String = "rowhouse"
 const STAGENAME_MANSION: String = "mansion"
 const STAGENAME_PENTHOUSE: String = "penthouse"
+#kann mehrfach verwendet werden in der Zukunft:
+const STAGENAME_APARTMENT_DEFAULT: String = "apartment_default" 
+const STAGENAME_APARTMENT_MERT: String = "apartment_mert"
+const STAGENAME_APARTMENT_CAMPER: String = "apartment_camper"
 
 const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
@@ -99,11 +103,22 @@ func change_stage(p_stage_name: String) -> void:
 	_curr_stage = $StageOffset/CurrStage
 	new_stage.y_sort_enabled = true
 	_curr_stage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
-	_create_navigation_layer_tiles()
-	if get_curr_stage_name() == STAGENAME_HOME:
-		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(1, 15))
-		_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(1, 9))
 	_city_map.close()
+	
+	#Manipulate the original Tilemap according to needs:
+	_create_navigation_layer_tiles()
+	
+	#Upgrades & Optional Events: Dynamically placed furniture
+	match get_curr_stage_name():
+		STAGENAME_HOME:
+			_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, Vector2i(1, 15))
+			_create_upgrade_furniture(EMC_OverworldStatesMngr.Furniture.ELECTRIC_RADIO, Vector2i(1, 9))
+		STAGENAME_MARKET:
+			#TODO: Insert if-statement, so only when THW-event is active, the THW truck is addaed:
+			_place_furniture_on_position(Vector2i(6, 0), Vector2i(10, 5), 3, 1, true)
+			_place_furniture_on_position(Vector2i(6, 1), Vector2i(10, 5), 3, 1, true)
+			_place_furniture_on_position(Vector2i(6, 2), Vector2i(10, 5), 3, 4, true)
+	
 	#Hide Tooltip-Layer while game is playing
 	const INVISIBLE := Color(0, 0, 0, 0)
 	_curr_stage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
@@ -199,6 +214,28 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_OverworldStatesMngr.Furniture, 
 				EMC_StageMngr.Atlases.UPGRADE_FURNITURE_PNG, atlas_base_coord + offset)
 
 
+## Places a tile from the furniture-Atlas on the Middleground Layer
+func _place_furniture_on_position(p_tilemap_pos: Vector2i, \
+p_atlas_coord: Vector2i, p_tiles_width: int = 1, p_tiles_height: int = 1, \
+p_overwrite_existing_tiles: bool = false) -> void:
+	
+	if p_tiles_width < 1: p_tiles_width = 1
+	if p_tiles_height < 1: p_tiles_height = 1
+	
+	#Place new tiles
+	for x_offset in range(0, p_tiles_width):
+		for y_offset in range(0, p_tiles_height):
+			#If necessary, check if previous tile exists and exit
+			if p_overwrite_existing_tiles == false:
+				var previous_tile := _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tilemap_pos)
+				if previous_tile != null: continue
+			
+			var tilemap_pos := Vector2i(p_tilemap_pos.x + x_offset, p_tilemap_pos.y + y_offset)
+			var atlas_coord := Vector2i(p_atlas_coord.x + x_offset, p_atlas_coord.y + y_offset)
+			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, tilemap_pos, \
+				EMC_StageMngr.Atlases.FURNITURE_PNG, atlas_coord)
+
+
 ### Add NPCs to the scene
 ## TODO: should be done by a JSON in the future!
 func _setup_NPCs() -> void:
@@ -236,6 +273,13 @@ func _setup_NPCs() -> void:
 	momo.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(momo)
 	_dialogue_pitches[momo.get_name()] = 0.8
+	
+	var agathe: EMC_NPC = _NPC_SCN.instantiate()
+	agathe.setup("Agathe")
+	agathe.hide()
+	agathe.clicked.connect(_on_NPC_clicked)
+	$NPCs.add_child(agathe)
+	_dialogue_pitches[agathe.get_name()] = 1.2
 	
 	var petro: EMC_NPC = _NPC_SCN.instantiate()
 	petro.setup("Petro")

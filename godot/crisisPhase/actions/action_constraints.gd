@@ -13,7 +13,7 @@ func _init(p_day_mngr: EMC_DayMngr, p_overworld_states_mngr: EMC_OverworldStates
 	_overworld_states_mngr = p_overworld_states_mngr
 
 
-func constraint_cooking() -> String:
+func constraint_cooking(_dummy_param: Variant) -> String:
 	#TODO: Electricity?
 	##TODO: In the future: Else Gaskocher?
 	return "Grund warum kochen nicht möglich ist."
@@ -21,29 +21,32 @@ func constraint_cooking() -> String:
 	return NO_REJECTION
 
 
-func constraint_rainwater_barrel() -> String:
+func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
 	if _overworld_states_mngr.get_furniture_state(_overworld_states_mngr.Furniture.RAINWATER_BARREL) == 0:
 		return "Die Regentonne ist leer"
 	else:
 		return NO_REJECTION
 
 
-func constraint_not_morning() -> String:
+func constraint_not_morning(p_reason: String = "") -> String:
 	if _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.MORNING:
-		return "Man kann diese Aktion nicht morgens ausführen!"
+		var reason := "Man kann diese Aktion nicht morgens ausführen!" if p_reason == "" else p_reason 
+		return reason 
 	else:
 		return NO_REJECTION
 
 
-func constraint_not_noon() -> String:
+func constraint_not_noon(p_reason: String = "") -> String:
 	if _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.NOON:
-		return "Man kann diese Aktion nicht mittag ausführen!"
+		var reason := "Man kann diese Aktion nicht mittags ausführen!" if p_reason == "" else p_reason 
+		return reason 
 	else:
 		return NO_REJECTION
 
 
-func constraint_not_evening() -> String:
+func constraint_not_evening(p_reason: String = "") -> String:
 	if _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING:
-		return "Man kann diese Aktion nicht abends ausführen!"
+		var reason := "Man kann diese Aktion nicht abends ausführen!" if p_reason == "" else p_reason 
+		return reason 
 	else:
 		return NO_REJECTION
