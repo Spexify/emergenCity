@@ -3,6 +3,7 @@ extends Node
 @onready var root := get_tree().root
 
 const MAX_ECOINS = 99999
+const INITIAL_E_COINS = 500
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
@@ -65,8 +66,20 @@ func _notification(what : int) -> void:
 
 func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
-	save_game.store_string("")
 	
+	var data : Dictionary = {
+		"was_crisis": _was_crisis,
+		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
+		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
+		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
+	}
+	# JSON provides a static method to serialized JSON string.
+	var json_string : String = JSON.stringify(data)
+
+	# Store the save dictionary as a new line in the save file.
+	save_game.store_line(json_string)
+	save_game.flush()
+		
 	load_game()
 
 
@@ -88,6 +101,9 @@ func save_game(was_crisis : bool) -> void:
 		"e_coins": _e_coins,
 		"was_crisis": was_crisis,
 		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
+		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
+		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
+		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -132,7 +148,7 @@ func load_game() -> void:
 	else:
 		data = json.get_data()
 	
-	_e_coins = data.get("e_coins", 500)
+	_e_coins = data.get("e_coins", INITIAL_E_COINS)
 	
 	_was_crisis = data.get("was_crisis", false)
 	if not _was_crisis:
@@ -148,6 +164,13 @@ func load_game() -> void:
 			_inventory.add_new_item(item_id)
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
+		
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get("musik_volume", 1)))
+	$SFX/Musik.set_autoplay(true)
+	$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
+	$SFX/Musik.play() 
 
 
 ## A default inventory when the game save state is reset/a crisis ended
