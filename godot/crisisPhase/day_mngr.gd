@@ -246,9 +246,14 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : "" }, 
 								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
 								{"Mert" : Vector2(470, 380)}) 
-		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", { "constraint_not_evening" : "" }, 
+		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", \
+								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen." }, 
 								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
 								{"TownhallWorker" : Vector2(430, 300)}) 
+		EMC_Action.IDs.SC_PARK: result = EMC_StageChangeAction.new(p_action_ID, "zum Park", \
+								{ "constraint_not_evening" : "Abends kann der Park gefährlich werden!" }, 
+								 "Hat den Park besucht.", 0, EMC_StageMngr.STAGENAME_PARK, Vector2i(350, 700),
+								{"Gerhard" : Vector2(140, 730), "Friedel" : Vector2(80, 730)}) 
 		EMC_Action.IDs.SC_GARDENHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Gerhard", { }, 
 								 "Hat Gerhard besucht.", 0, EMC_StageMngr.STAGENAME_GARDENHOUSE, Vector2i(150, 900),
 								{"Gerhard" : Vector2(420, 380), "Friedel" : Vector2(80, 700)}) 

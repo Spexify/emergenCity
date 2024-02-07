@@ -35,8 +35,11 @@ const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
 
 
 const STAGENAME_HOME: String = "home"
+#Public Locations:
 const STAGENAME_MARKET: String = "market"
 const STAGENAME_TOWNHALL: String = "townhall"
+const STAGENAME_PARK: String = "park"
+#Private Locations:
 const STAGENAME_GARDENHOUSE: String = "gardenhouse"
 const STAGENAME_ROWHOUSE: String = "rowhouse"
 const STAGENAME_MANSION: String = "mansion"
@@ -48,9 +51,9 @@ const STAGENAME_APARTMENT_CAMPER: String = "apartment_camper"
 
 const INVALID_TILE: Vector2 = Vector2(-1, -1)
 const TILE_MIN_X_COORD: int = 0
-const TILE_MAX_X_COORD: int = 8
+const TILE_MAX_X_COORD: int = 9
 const TILE_MIN_Y_COORD: int = 0
-const TILE_MAX_Y_COORD: int = 15
+const TILE_MAX_Y_COORD: int = 16
 
 signal dialogue_initiated(p_NPC_name: String)
 
@@ -332,6 +335,7 @@ func _unhandled_input(p_event: InputEvent) -> void:
 		_last_clicked_NPC = null
 		var click_position: Vector2 = p_event.position - $StageOffset.position
 		_last_clicked_tile = _get_tile_data_front_to_back(click_position)
+		if _is_tile_out_of_bounds(_get_tile_coord(click_position)): return
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
 				_determine_adjacent_free_tile(click_position)
@@ -339,6 +343,17 @@ func _unhandled_input(p_event: InputEvent) -> void:
 				_avatar.set_target(adjacent_free_tile_pos + $StageOffset.position)
 		elif !_has_tile_collision(_get_tile_coord(click_position)):
 			_avatar.set_target(click_position + $StageOffset.position)
+
+
+## Returns only true, if click was on a tile, that belongs to the "inner" tiles 
+## The outer half-tile broad "frame" doesn't count
+func _is_tile_out_of_bounds(p_tile_coord: Vector2i) -> bool:
+	if p_tile_coord.x <= TILE_MIN_X_COORD || p_tile_coord.x >= TILE_MAX_X_COORD:
+		return true
+	if p_tile_coord.y <= TILE_MIN_Y_COORD || p_tile_coord.x >= TILE_MAX_Y_COORD:
+		return true
+	
+	return false
 
 
 ## TODO

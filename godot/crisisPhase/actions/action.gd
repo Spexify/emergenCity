@@ -21,13 +21,14 @@ enum IDs{
 	SC_HOME = 2000,
 	SC_MARKET = 2001,
 	SC_TOWNHALL = 2002,
-	SC_GARDENHOUSE = 2003,
-	SC_ROWHOUSE = 2004,
-	SC_MANSION = 2005,
-	SC_PENTHOUSE = 2006,
-	SC_APARTMENT_MERT = 2007, #Muss in JSON ausgelagert werden
-	SC_APARTMENT_CAMPER = 2008, #Muss in JSON ausgelagert werden
-	SC_APARTMENT_AGATHE = 2009, #Muss in JSON ausgelagert werden
+	SC_PARK = 2003,
+	SC_GARDENHOUSE = 2004,
+	SC_ROWHOUSE = 2005,
+	SC_MANSION = 2006,
+	SC_PENTHOUSE = 2007,
+	SC_APARTMENT_MERT = 2008, #Muss in JSON ausgelagert werden
+	SC_APARTMENT_CAMPER = 2009, #Muss in JSON ausgelagert werden
+	SC_APARTMENT_AGATHE = 2010 #Muss in JSON ausgelagert werden
 }
 
 ## This sigal will be emmited if the Action was performed 

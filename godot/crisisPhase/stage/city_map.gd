@@ -38,6 +38,8 @@ func open() -> void:
 			_curr_pos_pin.position = Vector2i(206, 920)
 		EMC_StageMngr.STAGENAME_TOWNHALL:
 			_curr_pos_pin.position = _determine_pin_position($TownhallBtn)
+		EMC_StageMngr.STAGENAME_PARK:
+			_curr_pos_pin.position = _determine_pin_position($ParkBtn)
 		EMC_StageMngr.STAGENAME_GARDENHOUSE:
 			_curr_pos_pin.position = _determine_pin_position($GardenhouseBtn)
 		EMC_StageMngr.STAGENAME_ROWHOUSE:
@@ -116,8 +118,8 @@ func _on_villa_btn_pressed() -> void:
 	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
 
 
-func _on_nature_btn_pressed() -> void:
-	_tooltip_GUI.open("Lichtung ist noch nicht implementiert!")
+func _on_park_btn_pressed() -> void:
+	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
 
 
 func _on_change_stage_gui_stayed_on_same_stage() -> void:
@@ -129,3 +131,5 @@ func _determine_pin_position(p_texture_button: TextureButton) -> Vector2:
 	return p_texture_button.position + \
 		Vector2(p_texture_button.texture_normal.get_width()/2,
 				p_texture_button.texture_normal.get_height()/2 - 50)
+
+

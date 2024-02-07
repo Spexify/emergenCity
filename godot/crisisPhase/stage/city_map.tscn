@@ -137,13 +137,13 @@ offset_right = 562.0
 offset_bottom = 286.0
 texture_normal = ExtResource("3_mb2ha")
 
-[node name="NatureBtn" type="TextureButton" parent="."]
+[node name="ParkBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 138.0
-offset_top = 107.0
-offset_right = 266.0
-offset_bottom = 235.0
+offset_left = 369.0
+offset_top = 539.0
+offset_right = 497.0
+offset_bottom = 667.0
 texture_normal = ExtResource("3_mb2ha")
 
 [node name="HomePin" type="Sprite2D" parent="."]
@@ -179,4 +179,4 @@ layout_mode = 1
 [connection signal="pressed" from="ComplexBtn" to="." method="_on_complex_btn_pressed"]
 [connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
 [connection signal="pressed" from="MansionBtn" to="." method="_on_villa_btn_pressed"]
-[connection signal="pressed" from="NatureBtn" to="." method="_on_nature_btn_pressed"]
+[connection signal="pressed" from="ParkBtn" to="." method="_on_park_btn_pressed"]
