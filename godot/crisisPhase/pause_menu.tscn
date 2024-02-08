@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8su8e0hk46wu"]
+[gd_scene load_steps=2 format=3 uid="uid://b8su8e0hk46wu"]
 
 [ext_resource type="Script" path="res://crisisPhase/pause_menu.gd" id="1_wnduq"]
-[ext_resource type="PackedScene" uid="uid://5dpuu2l72yhg" path="res://GUI/settings_GUI.tscn" id="2_fqcqg"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -56,9 +55,6 @@ text = "Momentane Krise abbrechen"
 [node name="SaveAndQuit" type="Button" parent="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons"]
 layout_mode = 2
 text = "Speichern & Schließen"
-
-[node name="Settings" parent="CanvasLayer_unaffectedByCM" instance=ExtResource("2_fqcqg")]
-visible = false
 
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons/Settings" to="." method="_on_settings_pressed"]

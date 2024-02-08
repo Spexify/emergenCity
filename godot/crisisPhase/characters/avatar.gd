@@ -169,6 +169,8 @@ func _ready() -> void:
 	nutrition_updated.emit(get_unit_nutrition_status())
 	hydration_updated.emit(get_unit_hydration_status())
 	health_updated.emit(get_unit_health_status())
+	SettingsGUI.avatar_sprite_changed.connect(_on_new_avatar_sprite_changed)
+	_on_new_avatar_sprite_changed(SettingsGUI.get_avatar_sprite_suffix()) #init
 
 
 func _process(p_delta: float) -> void:
@@ -215,3 +217,8 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	# move_and_slide() uses the characters velocity to move them on the map
 	#print(velocity)
 	move_and_slide()
+
+
+func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:
+	$Sprite2D.texture = \
+		load("res://res/sprites/characters/sprite_avatar_" + p_avatar_sprite_suffix + ".png")

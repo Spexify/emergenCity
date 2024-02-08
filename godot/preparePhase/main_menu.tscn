@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
-[ext_resource type="PackedScene" uid="uid://5dpuu2l72yhg" path="res://GUI/settings_GUI.tscn" id="4_qustw"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
 
@@ -112,10 +111,6 @@ theme_override_font_sizes/font_size = 40
 text = "Open Upgrade 
 Center"
 flat = true
-
-[node name="Settings" parent="." instance=ExtResource("4_qustw")]
-visible = false
-layout_mode = 1
 
 [node name="SFX" type="Node" parent="."]
 

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var settings := $"../Settings"
+@onready var _settings := SettingsGUI #$"../Settings"
 @onready var open_guisfx := $"../SFX/OpenGUISFX"
 @onready var close_guisfx := $"../SFX/CloseGUISFX"
 @onready var button_sfx := $"../SFX/ButtonSFX"
@@ -37,9 +37,9 @@ func _on_settings_pressed() -> void:
 	#add_child(new_setting)
 	button_sfx.play()
 	await button_sfx.finished
-	settings.show()
+	_settings.show()
 	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
-	for child: Node in settings.get_children():
+	for child: Node in _settings.get_children():
 		child.show()
 
 

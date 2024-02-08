@@ -1,5 +1,7 @@
 extends EMC_GUI
-class_name EMC_Settings
+class_name EMC_SettingsGUI
+
+signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 
 @onready var font_change := $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/FontChange
 @onready var canvas_layer := $CanvasLayer
@@ -36,6 +38,7 @@ func close() -> void:
 
 func set_avatar_sprite_suffix(p_avatar_sprite_suffix: String) -> void:
 	_avatar_sprite_suffix = p_avatar_sprite_suffix
+	avatar_sprite_changed.emit(_avatar_sprite_suffix)
 
 
 func get_avatar_sprite_suffix() -> String:
@@ -85,5 +88,10 @@ func _on_select_avatar_pressed() -> void:
 	#normal pause menue. Not a beautiful solution, but works for now, sorry:
 	hide()
 	canvas_layer.hide()
-	canvas_modulate.hide()
-	$AvatarSelectionGUI.open(self)
+	$AvatarSelectionGUI.open()
+
+
+func _on_avatar_selection_gui_closed() -> void:
+	if canvas_layer == null: return
+	show()
+	canvas_layer.show()
