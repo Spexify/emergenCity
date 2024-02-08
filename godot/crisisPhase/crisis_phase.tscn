@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="6_mo744"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://res/sprites/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
-[ext_resource type="PackedScene" uid="uid://dgs3rq8l35ik8" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
+[ext_resource type="PackedScene" uid="uid://7oi6kcm73lxd" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://c8qngbqj8n42a" path="res://GUI/summary_end_of_day_gui.tscn" id="9_owtos"]
 [ext_resource type="PackedScene" uid="uid://e2vuw03w1lx6" path="res://GUI/actionGUI/cooking_GUI.tscn" id="10_64vl8"]
 [ext_resource type="PackedScene" uid="uid://g8y1un3il5jm" path="res://GUI/actionGUI/rest_GUI.tscn" id="11_dfl7m"]

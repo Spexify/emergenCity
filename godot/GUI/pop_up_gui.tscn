@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgs3rq8l35ik8"]
+[gd_scene load_steps=2 format=3 uid="uid://7oi6kcm73lxd"]
 
 [ext_resource type="Script" path="res://GUI/pop_up_gui.gd" id="1_ii2pp"]
 
@@ -45,6 +45,7 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Desciption" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TextBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
 autowrap_mode = 2
 

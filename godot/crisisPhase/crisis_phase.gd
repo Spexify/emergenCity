@@ -71,13 +71,17 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/RestGUI.hide()
 	$GUI/VBC/LowerSection/ChangeStageGUI.hide()
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
+	
+	#Setup Consequences
+	var consequences := EMC_ActionConsequences.new($Avatar)
 
 	#Setup-Methoden
-	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
+	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
+	$GUI/VBC/MiddleSection/PopUpGUI.setup(consequences)
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)

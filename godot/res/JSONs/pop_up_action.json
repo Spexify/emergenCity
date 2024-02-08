@@ -1,0 +1,15 @@
+[
+	{
+		"name": "POP_UP_TEST",
+		"pop_up_text": "Hello this is a JSON loaded test popup",
+		"constraints": {
+			"constraint_not_evening": ""
+		},
+		"consequences": {
+			"add_health": 10,
+		},
+		"type_gui": "",
+		"description": "A Test pop up event",
+		"e_coin": 10,
+	},
+]

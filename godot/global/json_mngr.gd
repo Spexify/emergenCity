@@ -6,54 +6,9 @@ const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 const ITEM_SOURCE := "res://res/JSONs/item.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 
-var is_items_loaded : bool = false
+const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
 
-var test : Dictionary = {}
-
-var _name_to_id : Dictionary = {
-	"DUMMY" : 0,
-	"WATER" : 1,
-	"WATER_DIRTY" : 2,
-	"RAVIOLI_TIN" : 3,
-	"GAS_CARTRIDGE" : 4,
-	"RAVIOLI_MEAL" : 5,
-	"UNCOOKED_PASTA" : 6,
-	"COOKED_PASTA" : 7,
-	"SAUCE_JAR" : 8,
-	"PASTA_WITH_SAUCE" : 9,
-	"BREAD" : 10,
-	"JAM" : 11,
-	"BREAD_WITH_JAM" : 12,
-	"CHLOR_TABLETS" : 13,
- 	"FLOUR" : 14,
-	"SALT" : 15,
-	"SUGAR" : 16, 
-	"RICE" : 17,
-	"PULSES" : 18,
-	"FISH" : 19,
-	"POTATOES" : 20,
-	"VEGETABLES" : 21,
-	"FRUITS" : 22,
-	"CHOCOLATE" : 23,
-	"MEAT" : 24,
-	"TOFU" : 25,
-	"NUTS" : 26,
-	"CHEESE" : 27,
-	"MILK" : 28,
-	"BOLOGNESE" : 29,
-	"JUICE" : 30,
-	"SALTED_FISH" : 31,
-	"PICKLED_VEGETABLES" : 32,
-	"RICE_WITH_VEGETABLES" : 33,
-	"CURRY_WITH_RICE" : 34,
-	"HUMMUS_WITH_BREAD" : 35,
-	"CHEESE_SANDWICH" : 36,
-	"HOT_CHOCOLATE" : 37,
-	"GOULASH" : 38,
-	"MILK_RICE" : 39,
-}
-
-var _id_to_item_vars : Dictionary = {}
+########################################JSON RECIPES################################################
 
 func load_recipes() -> Array[EMC_Recipe]:
 	if not FileAccess.file_exists(RECIPT_SOURCE):
@@ -110,9 +65,17 @@ func load_recipes() -> Array[EMC_Recipe]:
 		i += 1
 	
 	return results
-	
+
+#########################################JSON ITEMS#################################################
+
+var _is_items_loaded : bool = false
+var _name_to_id : Dictionary = {}
+var _id_to_item_vars : Dictionary = {}
+
+#...................................Conversion Functions............................................
+
 func get_item_vars_from_id(ID : int) -> Dictionary:
-	if not is_items_loaded:
+	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return {}
 		
@@ -123,7 +86,7 @@ func get_item_vars_from_id(ID : int) -> Dictionary:
 	return _id_to_item_vars[str(ID)]
 	
 func name_to_id(p_name : String) -> int:
-	if not is_items_loaded:
+	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return 0
 	
@@ -134,7 +97,7 @@ func name_to_id(p_name : String) -> int:
 	return _name_to_id[p_name]
 	
 func id_to_name(ID : int) -> String:
-	if not is_items_loaded:
+	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return "DUMMY"
 		
@@ -150,9 +113,11 @@ func get_all_names() -> Array[String]:
 	result.assign(_name_to_id.keys())
 	return result
 
+#...................................JSON load Functions.............................................
+
 func load_item_translator() -> void:
 	if not FileAccess.file_exists(ITEM_TRANSLATE_SOURCE):
-		printerr("Could not load recipes from source: " + ITEM_TRANSLATE_SOURCE)
+		printerr("Could not load item translatore from source: " + ITEM_TRANSLATE_SOURCE)
 		return
 
 	var recipe_source : FileAccess = FileAccess.open(ITEM_TRANSLATE_SOURCE, FileAccess.READ)
@@ -169,7 +134,6 @@ func load_item_translator() -> void:
 		printerr("Invalid format of Item-Translator-JSON (" + ITEM_TRANSLATE_SOURCE + "). Make sure it is in form of a Dictonarie.")
 		
 	_name_to_id = data
-	
 
 func load_items() -> void:
 	load_item_translator()
@@ -245,4 +209,60 @@ func load_items() -> void:
 		
 	item_index += 1
 	
-	is_items_loaded = true
+	_is_items_loaded = true
+
+######################################JSON POPUP-EVENTS#############################################
+
+var _pop_up_actions : Array[EMC_PopUpAction]
+var _pop_up_name_to_id : Dictionary
+var _is_pop_ups_loaded : bool = false
+
+func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAction:
+	var filtered : Array[EMC_PopUpAction] = _pop_up_actions.filter(func (action : EMC_PopUpAction) -> bool: 
+		for key : String in action.get_constraints_prior():
+			var params : Variant = action.get_constraints_prior()[key]
+			if not Callable(action_constraint, key).call(params) == EMC_ActionConstraints.NO_REJECTION:
+				return false
+		return true
+		)
+	return filtered.pick_random()
+
+func load_pop_up_actions() -> void:
+	if not FileAccess.file_exists(POP_UP_ACTION_SOURCE):
+		printerr("Could not load PopUps from source: " + POP_UP_ACTION_SOURCE)
+		return
+
+	var recipe_source : FileAccess = FileAccess.open(POP_UP_ACTION_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = recipe_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return
+
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_ARRAY:
+		printerr("Invalid format of Item-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
+
+	
+	var pop_up_id : int = 1000 
+	
+	for pop_up : Dictionary in data:
+		var _name :String = pop_up.get("name")
+		
+		var pop_up_data : Dictionary = {
+			"ID": pop_up_id,
+			"name": _name,
+		}
+		
+		for key : String in pop_up:
+			if key != "name":
+				pop_up_data[key] = pop_up[key]
+		
+		_pop_up_name_to_id[str(pop_up_id)] = _name
+		_pop_up_actions.append(EMC_PopUpAction.from_dict(pop_up_data))
+		
+	pop_up_id += 1
+	
+	_is_pop_ups_loaded = true

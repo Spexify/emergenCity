@@ -1,26 +1,26 @@
-extends Control
+extends EMC_GUI
 class_name EMC_PopUpGUI
 
+var _current_action : EMC_PopUpAction
+var _action_consequences : EMC_ActionConsequences
 
-signal opened
-signal closed
+func setup(p_action_consequences : EMC_ActionConsequences) -> void:
+	_action_consequences = p_action_consequences
 
-var _action : EMC_PopUpAction
-var _avatar_ref : EMC_Avatar
-
-func open(_p_action : EMC_PopUpAction, _p_avatar_ref : EMC_Avatar) -> void:
-	_action = _p_action
-	_avatar_ref = _p_avatar_ref
+func open(_p_action : EMC_PopUpAction) -> void:
+	_current_action = _p_action
 	show()
 	opened.emit()
-	$PanelContainer/MarginContainer/VBoxContainer/TextBox/Desciption.text = _p_action.get_pop_up_text()
-
-
+	$PanelContainer/MarginContainer/VBoxContainer/TextBox/Desciption.set_text(_p_action.get_pop_up_text())
+	
 func _on_confirm_pressed() -> void:
+	for key : String in _current_action.get_consequences().keys():
+		var params : Variant = _current_action.get_consequences()[key]
+		Callable(_action_consequences, key).call(params)
+	
 	hide()
 	closed.emit()
-	_action.executed.emit(_action) 
-
+	_current_action.executed.emit(_current_action) 
 
 func _on_cancel_pressed() -> void:
 	$".".visible = false

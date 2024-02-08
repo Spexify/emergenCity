@@ -45,8 +45,8 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # hyperparameters for random pop-up- and optional events respectively
 var _puGUI_probability_countdown : int
-const PU_LOWER_BOUND : int = 999 #MRM hab ich erhöht, weil sie manchmal nerven x)
-const PU_UPPER_BOUND : int = 999 #MRM hab ich erhöht, weil sie manchmal nerven x)
+const PU_LOWER_BOUND : int = 6
+const PU_UPPER_BOUND : int = 10
 
 var _opGUI_probability_countdown : int
 const OP_LOWER_BOUND : int = 2
@@ -285,39 +285,41 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 func _check_pu_counter() -> void:
 	_puGUI_probability_countdown -= 1
 	if _puGUI_probability_countdown == 0:
-		var _action := _create_new_pop_up_action()
-		_puGUI.open(_action, _avatar_ref)
+		var _action : EMC_PopUpAction = JsonMngr.get_pop_up_action(_action_constraints)
+		if _action != null:
+			_action.executed.connect(_on_action_executed)
+			_puGUI.open(_action)
 		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 	
 ## TODO: refactor range und actions content
-func _create_new_pop_up_action() -> EMC_PopUpAction:
-	var result: EMC_PopUpAction
-	match get_current_day_period():
-		DayPeriod.MORNING:
-			var _counter_morning : int = _rng.randi_range(1, 2)
-			match _counter_morning:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				_: 
-					push_error("Unerwarteter Fehler PopUpAction")
-		DayPeriod.NOON:
-			var _counter_noon : int = _rng.randi_range(1, 2)
-			match _counter_noon:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				_: 
-					push_error("Unerwarteter Fehler PopUpAction")
-		DayPeriod.EVENING: 
-			var _counter_evening : int = _rng.randi_range(1, 2)
-			match _counter_evening:
-				1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				_: 
-					push_error("Unerwarteter Fehler PopUpAction")
-		_: 
-			push_error("Unerwarteter Fehler PopUpAction")
-	result.executed.connect(_on_action_executed)
-	return result
+#func _create_new_pop_up_action() -> EMC_PopUpAction:
+	#var result: EMC_PopUpAction
+	#match get_current_day_period():
+		#DayPeriod.MORNING:
+			#var _counter_morning : int = _rng.randi_range(1, 2)
+			#match _counter_morning:
+				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
+				#_: 
+					#push_error("Unerwarteter Fehler PopUpAction")
+		#DayPeriod.NOON:
+			#var _counter_noon : int = _rng.randi_range(1, 2)
+			#match _counter_noon:
+				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
+				#_: 
+					#push_error("Unerwarteter Fehler PopUpAction")
+		#DayPeriod.EVENING: 
+			#var _counter_evening : int = _rng.randi_range(1, 2)
+			#match _counter_evening:
+				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
+				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
+				#_: 
+					#push_error("Unerwarteter Fehler PopUpAction")
+		#_: 
+			#push_error("Unerwarteter Fehler PopUpAction")
+	#result.executed.connect(_on_action_executed)
+	#return result
 	
 ################################### Optional Events ################################################
 
