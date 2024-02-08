@@ -1,6 +1,7 @@
 extends Control
 
 var _inventory : EMC_Inventory
+var _tmp_inventory := EMC_Inventory.new()
 var _inventory_occupied : int = 0
 var _balance : int = Global.get_e_coins()
 
@@ -12,7 +13,7 @@ const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 
 func _ready() -> void:
-	_change_balance(0)
+	_add_balance(0)
 	
 	_inventory = Global.get_inventory()
 	if _inventory == null:
@@ -22,6 +23,7 @@ func _ready() -> void:
 		_add_item_by_id(item, false)
 		if item != EMC_Item.IDs.DUMMY:
 			_inventory_occupied += 1
+			_tmp_inventory.add_new_item(item)
 	
 	for item_id : EMC_Item.IDs in JsonMngr.get_all_ids():
 		if item_id == EMC_Item.IDs.DUMMY:
@@ -54,11 +56,11 @@ func _remove_item_by_id(item : EMC_Item) -> void :
 	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
 		if i >= _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
 			inventory_grid.remove_child(slot)
-			_inventory.remove_item(item.get_ID(), 1)
+			_tmp_inventory.remove_item(item.get_ID(), 1)
 			
 			var comp := item.get_comp(EMC_IC_Cost)
 			assert(comp != null) 
-			_change_balance(comp.get_cost())
+			_add_balance(comp.get_cost())
 			
 			var new_slot := _SLOT_SCN.instantiate()
 			inventory_grid.add_child(new_slot)
@@ -87,14 +89,14 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	var cost : int = comp.get_cost()
 
 	if _balance - cost >= 0 and _add_item_to_slot_by_id(sender.get_ID()):
-		_inventory.add_new_item(sender.get_ID())
-		_change_balance(-cost)
+		_tmp_inventory.add_new_item(sender.get_ID())
+		_add_balance(-cost)
 
 func _on_inventory_item_clicked(sender : EMC_Item) -> void:
 	_display_info(sender)
 	_remove_item_by_id.call_deferred(sender)
  
-func _change_balance(value : int) -> void:
+func _add_balance(value : int) -> void:
 	_balance += value
 	label_ecoins.clear()
 	label_ecoins.append_text("[right][color=black]" + str(_balance) + "[/color][/right]")
@@ -125,19 +127,12 @@ func _display_info(sender: EMC_Item) -> void:
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 
 func _on_home_pressed() -> void:
-	_inventory.sort_custom(EMC_Inventory.sort_helper)
-	Global.set_inventory(_inventory)
+	_tmp_inventory.sort_custom(EMC_Inventory.sort_helper)
+	Global.set_inventory(_tmp_inventory)
 	Global.set_e_coins(_balance)
 	Global.goto_scene("res://preparePhase/main_menu.tscn")
 
 
 func _on_back_button_pressed() -> void:
-	var tmp_inventory := EMC_Inventory.new()
-	var i : int = 0
-	for item in _inventory.get_all_items_as_ID():
-		if i >= _inventory_occupied:
-			break
-		tmp_inventory.add_new_item(item)
-		i += 1
-	Global.set_inventory(tmp_inventory)
+	Global.set_inventory(_inventory)
 	Global.goto_scene("res://preparePhase/main_menu.tscn")
