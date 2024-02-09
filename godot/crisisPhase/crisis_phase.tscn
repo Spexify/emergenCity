@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=24 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dmp3dkvy1barj" path="res://GUI/tooltip_GUI.tscn" id="14_0s3fx"]
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
+[ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -189,6 +190,11 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="DefaultActionGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("19_sb74j")]
+visible = false
+layout_mode = 2
+
+[node name="ShowerGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("20_ielcm")]
+visible = false
 layout_mode = 2
 
 [connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]

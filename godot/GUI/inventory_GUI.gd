@@ -108,8 +108,7 @@ func clear_items() -> void:
 ## Open the GUI
 func open() -> void:
 	open_gui.play()
-	
-	#TODO: Update or clear textboxes of last_clicked_item
+	_on_item_clicked(_clicked_item)
 	
 	show()
 	opened.emit()
@@ -173,12 +172,12 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 		label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	
 	#Components of item
-	var comps := sender.get_comps()
 	var comp_string: String = ""
 	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
 	label_comps.clear()
 	
 	if _clicked_item != null:
+		var comps := sender.get_comps()
 		for comp in comps:
 			var comp_text := comp.get_colored_name_with_vals()
 			if comp_text != "":
@@ -219,7 +218,7 @@ func _on_consume_pressed() -> void:
 		if !_inventory.has_item(2):
 			$FilterWater.visible = true
 		else:
-			_clicked_item_copy.get_comp(EMC_IC_Uses).item_used(1)
+			_clicked_item_copy.get_comp(EMC_IC_Uses).use_item(1)
 			if _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)
 			_inventory.remove_item(2,1)
@@ -244,7 +243,8 @@ func _on_consume_pressed() -> void:
 		_avatar_ref.add_health(1)
 	if _clicked_item_copy.get_ID() != 13:
 		_inventory.remove_item(_clicked_item_copy._ID)
-	return
+	
+	_on_item_clicked(_clicked_item) #Update GUI
 
 
 ## TODO: description of item to be emptied
@@ -265,7 +265,6 @@ func _on_cancel_pressed() -> void:
 ## Can't use the Godot-native custom_sort func so easily here as it's not a simple array,
 ## unfortunately
 func _sort() -> void:
-	
 	#Outer loop from last elem to first elem
 	for slot_idx: int in range(_slot_grid.get_child_count() - 1, -1, -1):
 		for i: int in _slot_grid.get_child_count():

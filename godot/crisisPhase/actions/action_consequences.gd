@@ -30,3 +30,18 @@ func add_tap_water(_dummy: int) -> void:
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
+
+
+
+## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
+## If it is completely used up, the item is removed from the [EMC_Inventory]
+func use_item(p_ID: EMC_Item.IDs) -> void:
+	var item := _inventory.get_item_of_ID(p_ID)
+	if item == null:
+		return
+	
+	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
+	if usesIC != null:
+		usesIC.use_item()
+	if usesIC.no_uses_left():
+		_inventory.remove_specific_item(item)

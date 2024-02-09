@@ -198,6 +198,7 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
 	inventory.add_new_item(EMC_Item.IDs.CHLOR_TABLETS)
+	inventory.add_new_item(EMC_Item.IDs.SOAP)
 	inventory.sort_custom(EMC_Inventory.sort_helper)
 	return inventory
 

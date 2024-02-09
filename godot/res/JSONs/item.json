@@ -581,4 +581,53 @@
 			},
 		]
 	},
+	{
+		"ID": 40,
+		"name": "Suppe",
+		"descr": "",
+		"comps": [
+			{
+				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "shelflife",
+				"params": 1,
+			},
+		]
+	},
+	{
+		"ID": 41,
+		"name": "Batterien",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 30,
+			},
+			{
+				"name": "uses",
+				"params": 3,
+			},
+		]
+	},
+	{
+		"ID": 42,
+		"name": "Seife",
+		"descr": "",
+		"comps": [
+			{
+				"name": "cost",
+				"params": 30,
+			},
+			{
+				"name": "uses",
+				"params": 5,
+			},
+		]
+	},
 ]

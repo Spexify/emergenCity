@@ -71,6 +71,18 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	return removedCnt
 
 
+## Remove a concrete [EMC_Item] from this inventory
+## Returns if the removal was successful
+func remove_specific_item(p_item: EMC_Item) -> bool:	
+	for slot_idx in _slot_cnt:
+		var item := _slots[slot_idx]
+		if item != null && item == p_item:
+			_slots[slot_idx] = null
+			item_removed.emit(item, slot_idx)
+			sort()
+	return false
+
+
 ## Returns item at [p_slot_idx] if available,
 ## else returns null
 ## THIS METHOD SHOULD PRIMARILY BE USED BY [EMC_InventoryGUI]!

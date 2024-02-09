@@ -14,7 +14,7 @@ const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoid
 #MRM: Unit sollte direct von den Components verwendet werden:
 const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR
 const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR
-const UNIT_FACTOR_HEALTH: int = 20 #health Unit in percent #MRM: Changed temp. so you don't die to early in tests
+const UNIT_FACTOR_HEALTH: int = 10 #health Unit in percent #MRM: Changed temp. so you don't die to early in tests
 
 const MAX_VITALS_NUTRITION = 2200/UNIT_FACTOR_NUTRITION
 const MAX_VITALS_HYDRATION = 2000/UNIT_FACTOR_HYDRATION

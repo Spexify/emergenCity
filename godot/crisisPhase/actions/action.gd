@@ -95,6 +95,11 @@ func get_performance_coin_value() -> int:
 func progresses_day_period() -> bool:
 	return _progresses_day_period
 
+## Disclaimer: godoIf a consequence with the same key already exists, it is overwritten!
+func add_consequence(p_key: String, p_param: Variant) -> void:
+	_consequences[p_key] = p_param
+
+
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"action_ID": _action_ID,

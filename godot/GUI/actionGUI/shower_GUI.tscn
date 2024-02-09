@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://oj0fy8uvcwa5"]
+
+[ext_resource type="Script" path="res://GUI/actionGUI/shower_GUI.gd" id="1_c56dp"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="2_s8dyi"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_csdlp"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="4_wxuw7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jy4p8"]
+texture = ExtResource("2_s8dyi")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="ShowerGUI" type="PanelContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 188.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+script = ExtResource("1_c56dp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_jy4p8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("3_csdlp")
+bbcode_enabled = true
+text = "[color=black]Willst du duschen?[/color]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ConfirmBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Ja
+"
+icon = ExtResource("4_wxuw7")
+
+[node name="ConfirmBtn_WithSoap" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Ja, mit Seife"
+icon = ExtResource("4_wxuw7")
+
+[node name="BackBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Zurück
+"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap" to="." method="_on_confirm_btn_with_soap_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

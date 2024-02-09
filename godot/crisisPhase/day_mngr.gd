@@ -246,9 +246,9 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{"constraint_rainwater_barrel" : 0},
 								{ }, "RainwaterBarrelGUI",
 								"Hat Wasser aus der Regentonne geschöpft.",0)
-		#EMC_Action.IDs.SHOWER: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
-								#{ }, "RainwaterBarrelGUI",
-								#"Hat Wasser aus der Regentonne geschöpft.",0)
+		EMC_Action.IDs.SHOWER: result = EMC_Action.new(p_action_ID, "Duschen", { },
+								{ }, "ShowerGUI", #the consequences are added later in the GUI
+								"Hat geduscht.", 10)
 		#Stage Change Actions
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),

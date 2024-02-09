@@ -33,8 +33,10 @@ func _ready() -> void:
 func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
 	var new_slot := _SLOT_SCN.instantiate()
 	if item_id != EMC_Item.IDs.DUMMY:
-		var new_item := _ITEM_SCN.instantiate()
+		var new_item: EMC_Item = _ITEM_SCN.instantiate()
 		new_item.setup(item_id)
+		var cost_IC := new_item.get_comp(EMC_IC_Cost)
+		if cost_IC == null: return
 		
 		# Connect to correct handler
 		if shop:

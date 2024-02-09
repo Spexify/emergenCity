@@ -86,6 +86,7 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
+	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 
 	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
 		$GUI/VBC/LowerSection/ChangeStageGUI)
@@ -107,6 +108,7 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
 	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
+	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)
 	
 	_crisis_mngr.setup()
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \
