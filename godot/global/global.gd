@@ -11,6 +11,8 @@ const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
 
+const SAVEFILE_AVATAR_SKIN := "avatar_skin"
+
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 
@@ -72,6 +74,7 @@ func reset_save() -> void:
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
+		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -104,6 +107,7 @@ func save_game(was_crisis : bool) -> void:
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
+		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -171,6 +175,10 @@ func load_game() -> void:
 	$SFX/Musik.set_autoplay(true)
 	$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
 	$SFX/Musik.play() 
+	
+	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
+	if avatar_skin != null:
+		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 
 
 ## A default inventory when the game save state is reset/a crisis ended
@@ -184,12 +192,12 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
 	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
 	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	#inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
-	#inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
-	#inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
-	#inventory.add_new_item(EMC_Item.IDs.BREAD)
-	#inventory.add_new_item(EMC_Item.IDs.JAM)
-	#inventory.add_new_item(EMC_Item.IDs.CHLOR_TABLETS)
+	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
+	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
+	inventory.add_new_item(EMC_Item.IDs.BREAD)
+	inventory.add_new_item(EMC_Item.IDs.JAM)
+	inventory.add_new_item(EMC_Item.IDs.CHLOR_TABLETS)
 	inventory.sort_custom(EMC_Inventory.sort_helper)
 	return inventory
 
