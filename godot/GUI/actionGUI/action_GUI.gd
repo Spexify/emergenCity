@@ -10,5 +10,3 @@ func show_gui(p_action : EMC_Action) -> void:
 	# Enter code here if necessary 
 	show()
 	opened.emit()
-
-#TODO:

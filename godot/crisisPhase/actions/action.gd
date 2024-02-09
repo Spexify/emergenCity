@@ -1,19 +1,19 @@
+extends Node
 class_name EMC_Action
 ## [EMC_Action] contains all infromation needed to describe a Action.
 ## It constains prior constraints ([member EMC_Action.constraints_prior]),
 ## associated GUI ([member EMC_Action.type_ui]) 
 ## and [member EMC_Action.changes] should the Action be performed.
 
-extends Node
 
 enum IDs{
-	NO_ACTION = 0,
-	CITY_MAP = 1,
-	COOKING = 2, 
-	REST = 3,
-	#OBSOLETE = 4,#obsolete
+	NO_ACTION 		= 0,
+	CITY_MAP 		= 1, #Interaction (never executes)
+	COOKING 		= 2, 
+	TAP_WATER 		= 3, #Interaction (never executes)
+	REST 			= 4,
 	RAINWATER_BARREL = 5,
-	FILTER_WATTER = 7,
+	SHOWER 			= 6,
 	##1000s = PopupActions
 	POPUP_0 = 1000,
 	POPUP_1 = 1001,
@@ -34,6 +34,7 @@ enum IDs{
 ## This sigal will be emmited if the Action was performed 
 ## and is needed in [EMC_DayMngr] to recored a history of performed Actions.
 signal executed(action : EMC_Action)
+
 ## The ID-integer associated with this action
 var _action_ID : int
 ## Name associated with this Action, needed in [EMC_End_of_Day_Summary].
@@ -51,10 +52,12 @@ var _consequences : Dictionary #MRM: Renamed changes to consequences, because "c
 var _type_gui : String #deprecated??
 var _description : String
 var _performance_coin_value : int
+var _progresses_day_period: bool
 
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		   p_consequences : Dictionary, type_gui : String, description : String, performance_coin_value : int) -> void:
+		   p_consequences : Dictionary, type_gui : String, description : String, performance_coin_value : int,
+		   p_progresses_day_period: bool = true) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
@@ -62,6 +65,7 @@ func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 	self._type_gui = type_gui
 	self._description = description
 	self._performance_coin_value = performance_coin_value
+	self._progresses_day_period = p_progresses_day_period
 	
 
 func get_ACTION_NAME() -> String:
@@ -87,7 +91,10 @@ func get_description() -> String:
 	
 func get_performance_coin_value() -> int: 
 	return self._performance_coin_value
-	
+
+func progresses_day_period() -> bool:
+	return _progresses_day_period
+
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"action_ID": _action_ID,

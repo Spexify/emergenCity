@@ -50,3 +50,20 @@ func constraint_not_evening(p_reason: String = "") -> String:
 		return reason 
 	else:
 		return NO_REJECTION
+
+
+func constraint_no_isolation(p_reason: String = "") -> String:
+	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.ISOLATION:
+		var reason := "Es herrscht momentan eine Isolations-Verordnung!" if p_reason == "" else p_reason 
+		return reason 
+	else:
+		return NO_REJECTION
+
+
+func constraint_some_water_available(p_reason: String = "") -> String:
+	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.CLEAN || \
+		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
+		return NO_REJECTION
+	else:
+		var reason := "Kein Wasser verfügbar!" if p_reason == "" else p_reason 
+		return reason 

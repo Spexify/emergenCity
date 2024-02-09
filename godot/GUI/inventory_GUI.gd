@@ -161,6 +161,7 @@ func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
 
 
 ## Display information of clicked [EMC_Item]
+## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(sender: EMC_Item) -> void:
 	_clicked_item = sender
 	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
@@ -168,25 +169,29 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	#Name of the item
 	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
-	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
+	if _clicked_item != null:
+		label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	
 	#Components of item
 	var comps := sender.get_comps()
 	var comp_string: String = ""
-	for comp in comps:
-		var comp_text := comp.get_colored_name_with_vals()
-		if comp_text != "":
-			comp_string += comp_text + ", "
-	#Remove superfluous comma:
-	comp_string = comp_string.left(comp_string.length() - 2)
 	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
 	label_comps.clear()
-	label_comps.append_text("[color=black]" + comp_string + "[/color]")
+	
+	if _clicked_item != null:
+		for comp in comps:
+			var comp_text := comp.get_colored_name_with_vals()
+			if comp_text != "":
+				comp_string += comp_text + ", "
+		#Remove superfluous comma:
+		comp_string = comp_string.left(comp_string.length() - 2)
+		label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
 	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
-	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
+	if _clicked_item != null:
+		label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
 	if is_consume_active:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
@@ -194,11 +199,12 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 	
 	## if the Chlor tablets are clicked, open water filtering gui
-	if sender.get_ID() == 13:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
-	else:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Consume"
+	if _clicked_item != null:
+		if sender.get_ID() == 13:
+			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+		else:
+			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Consume"
 
 
 #MRM: TODO: Remove Magic Numbers
@@ -244,7 +250,7 @@ func _on_consume_pressed() -> void:
 ## TODO: description of item to be emptied
 func _refresh() -> void:
 	_sort()
-	pass
+	_on_item_clicked(null)
 
 
 func _on_discard_pressed() -> void:

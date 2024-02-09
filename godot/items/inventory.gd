@@ -34,19 +34,17 @@ func has_space() -> bool:
 
 ## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
 ## Returns true, if the item was added, else false
-##
-## TODO: Please rename
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item: EMC_Item = _ITEM_SCN.instantiate() #EMC_Item.new(ID, self) 
+	var new_item: EMC_Item = _ITEM_SCN.instantiate()
 	new_item.setup(p_ID)
-	return add_item(new_item)
+	return add_existing_item(new_item)
 
 
 ## Add an already instantiated [EMC_Item] Scene to this inventory.
 ## This is used if a [EMC_Item] has additional components like durability,
 ## which should be remembered.
 ## Returns true, if the item was added, else false
-func add_item(p_item: EMC_Item) -> bool:
+func add_existing_item(p_item: EMC_Item) -> bool:
 	if p_item == null: return false
 	for slot_idx in _slot_cnt:
 		if _slots[slot_idx] == null:

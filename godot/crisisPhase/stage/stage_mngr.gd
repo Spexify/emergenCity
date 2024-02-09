@@ -161,6 +161,9 @@ func load_state(data : Dictionary) -> void:
 	_initial_stage_name = data.get("stage_name", "home")
 
 
+func get_city_map() -> EMC_CityMap:
+	return _city_map
+
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	_create_navigation_layer_tiles()
@@ -464,13 +467,7 @@ func _on_avatar_arrived() -> void:
 				_tooltip_GUI.open(tooltip)
 				return
 			
-			if action_ID == EMC_Action.IDs.CITY_MAP:
-				if OverworldStatesMngr.get_isolation_state() != OverworldStatesMngr.IsolationState.ISOLATION:	
-					_city_map.open()
-				else: 
-					_tooltip_GUI.open("Die City Map ist nicht betretbar!")
-			else:
-				_day_mngr.on_interacted_with_furniture(action_ID)
+			_day_mngr.on_interacted_with_furniture(action_ID)
 
 
 func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:

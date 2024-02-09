@@ -1,8 +1,8 @@
-extends TextureRect
+extends EMC_ActionGUI
 class_name EMC_CityMap
 
-signal opened
-signal closed
+#signal opened
+#signal closed
 
 @onready var _curr_pos_pin := $CurrPosPin
 @onready var _home_pin := $HomePin
@@ -22,6 +22,12 @@ func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mng
 	_tooltip_GUI = p_tooltip_GUI
 	p_cs_GUI.stayed_on_same_stage.connect(_on_change_stage_gui_stayed_on_same_stage)
 	$DoorbellsGUI.setup(p_stage_mngr)
+
+
+## The inherited ActionGUI-Method.
+## We don't use the action in this case
+func show_gui(p_action : EMC_Action) -> void:
+	open()
 
 
 func open() -> void:

@@ -59,7 +59,7 @@ func _ready() -> void:
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack,$Avatar, "Rucksack", true)
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
@@ -73,15 +73,15 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/TooltipGUI.hide()
 	
 	#Setup Consequences
-	var consequences := EMC_ActionConsequences.new($Avatar)
-
+	#var consequences := EMC_ActionConsequences.new($Avatar, _backpack)
+	
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/MiddleSection/PopUpGUI.setup(consequences)
+	#$GUI/VBC/MiddleSection/PopUpGUI.setup(consequences)
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
@@ -105,6 +105,8 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
+	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
+	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
 	
 	_crisis_mngr.setup()
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \

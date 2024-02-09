@@ -60,25 +60,25 @@ var _action_consequences: EMC_ActionConsequences
 ########################################## PUBLIC METHODS ##########################################
 func setup(avatar_ref : EMC_Avatar,
 overworld_states_mngr_ref : EMC_OverworldStatesMngr,
-_p_crisis_mngr : EMC_CrisisMngr,
+p_crisis_mngr : EMC_CrisisMngr,
 gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI,
-_p_inventory: EMC_Inventory) -> void:
+p_inventory: EMC_Inventory) -> void:
 	_avatar_ref = avatar_ref
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
-	_crisis_mngr = _p_crisis_mngr
+	_crisis_mngr = p_crisis_mngr
 	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
-	_action_consequences = EMC_ActionConsequences.new(_avatar_ref)
+	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory)
 	
-	self.max_day = _p_crisis_mngr.get_max_day()
+	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
 	_egGUI = egGUI
-	_inventory = _p_inventory
+	_inventory = p_inventory
 	_puGUI = puGUI
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
@@ -128,6 +128,7 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
+	if !p_action.progresses_day_period(): return
 	
 	match get_current_day_period():
 		DayPeriod.MORNING:
@@ -159,9 +160,9 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 
 
 func _execute_consequences(p_action: EMC_Action) -> void:
-	var consequences: Dictionary = p_action.get_consequences()
-	for consequence_key: String in consequences.keys():
-		Callable(_action_consequences, consequence_key).call(consequences[consequence_key])
+	for key : String in p_action.get_consequences().keys():
+		var params : Variant = p_action.get_consequences()[key]
+		Callable(_action_consequences, key).call(params)
 
 
 func _on_seod_closed_game_end() -> void:
@@ -226,19 +227,28 @@ func _update_shelflives() -> void:
 func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
 	match p_action_ID:
-		EMC_Action.IDs.NO_ACTION: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused) 
-		EMC_Action.IDs.CITY_MAP: push_error("Diese ID ist ausschließlich für das Triggern der CITY Map reserviert!")
-		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-								 {"add_health" : 1 }, "RestGUI", 
-								 "Hat sich ausgeruht.", 10)
+		EMC_Action.IDs.NO_ACTION: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused)
+		EMC_Action.IDs.CITY_MAP: result = EMC_Action.new(p_action_ID, "-",
+								{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
+								 { }, "CityMap", 
+								 "-", 0, false)
 		EMC_Action.IDs.COOKING: result = EMC_Action.new(p_action_ID, "Kochen", {}, 
 								 { }, "CookingGUI", 
 								 "Hat gekocht.", 30)
-		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
+		EMC_Action.IDs.TAP_WATER: result = EMC_Action.new(p_action_ID, "Willst du Wasser aus dem Hahn zapfen?",
+								{ "constraint_some_water_available" : ""},
+								{ "add_tap_water" : 0}, "DefaultActionGUI",
+								"-", 0, false)
+		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
+								 {"add_health" : 1 }, "RestGUI", 
+								 "Hat sich ausgeruht.", 10)
+		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
+								{"constraint_rainwater_barrel" : 0},
 								{ }, "RainwaterBarrelGUI",
 								"Hat Wasser aus der Regentonne geschöpft.",0)
-		6: result = EMC_Action.new(p_action_ID, "Pop Up Event", { }, { }, "PopUpGUI", 
-								 "Pop Up Aktion ausgeführt.", 0)
+		#EMC_Action.IDs.SHOWER: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen", {"constraint_rainwater_barrel" : 0},
+								#{ }, "RainwaterBarrelGUI",
+								#"Hat Wasser aus der Regentonne geschöpft.",0)
 		#Stage Change Actions
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
@@ -290,37 +300,8 @@ func _check_pu_counter() -> void:
 			_action.executed.connect(_on_action_executed)
 			_puGUI.open(_action)
 		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
-	
-## TODO: refactor range und actions content
-#func _create_new_pop_up_action() -> EMC_PopUpAction:
-	#var result: EMC_PopUpAction
-	#match get_current_day_period():
-		#DayPeriod.MORNING:
-			#var _counter_morning : int = _rng.randi_range(1, 2)
-			#match _counter_morning:
-				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				#_: 
-					#push_error("Unerwarteter Fehler PopUpAction")
-		#DayPeriod.NOON:
-			#var _counter_noon : int = _rng.randi_range(1, 2)
-			#match _counter_noon:
-				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				#_: 
-					#push_error("Unerwarteter Fehler PopUpAction")
-		#DayPeriod.EVENING: 
-			#var _counter_evening : int = _rng.randi_range(1, 2)
-			#match _counter_evening:
-				#1: result = EMC_PopUpAction.new(1001, "PopUp_1", { }, "Popup 1 happened", 0, "PopUp 1 happening")
-				#2: result = EMC_PopUpAction.new(1002, "PopUp_2", { }, "Popup 2 happened", 0, "PopUp 2 happening")
-				#_: 
-					#push_error("Unerwarteter Fehler PopUpAction")
-		#_: 
-			#push_error("Unerwarteter Fehler PopUpAction")
-	#result.executed.connect(_on_action_executed)
-	#return result
-	
+
+
 ################################### Optional Events ################################################
 
 func _check_op_counter() -> void:
