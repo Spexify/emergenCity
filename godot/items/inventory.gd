@@ -16,7 +16,7 @@ const MAX_SLOT_CNT: int = 50
 var _slot_cnt: int
 var _slots: Array[EMC_Item]
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 func _init(p_slot_cnt: int = 30) -> void:
 	_slot_cnt = p_slot_cnt
 	_slots.resize(_slot_cnt)
@@ -25,6 +25,15 @@ func _init(p_slot_cnt: int = 30) -> void:
 
 func get_slot_cnt() -> int:
 	return _slot_cnt
+
+
+func get_free_slot_cnt() -> int:
+	var free_slot_cnt: int
+	
+	for slot_idx in _slot_cnt:
+		if _slots[slot_idx] == null:
+			free_slot_cnt += 1
+	return free_slot_cnt
 
 
 ## Returns if the inventory has any free slots left

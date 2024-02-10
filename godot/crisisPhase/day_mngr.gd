@@ -263,7 +263,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SC_PARK: result = EMC_StageChangeAction.new(p_action_ID, "zum Park", \
 								{ "constraint_not_evening" : "Abends kann der Park gefährlich werden!" }, 
 								 "Hat den Park besucht.", 0, EMC_StageMngr.STAGENAME_PARK, Vector2i(350, 700),
-								{"Gerhard" : Vector2(140, 730), "Friedel" : Vector2(80, 730)}) 
+								{"Gerhard" : Vector2(160, 730), "Friedel" : Vector2(80, 730)}) 
 		EMC_Action.IDs.SC_GARDENHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Gerhard", { }, 
 								 "Hat Gerhard besucht.", 0, EMC_StageMngr.STAGENAME_GARDENHOUSE, Vector2i(150, 900),
 								{"Gerhard" : Vector2(420, 380), "Friedel" : Vector2(80, 700)}) 

@@ -1,3 +1,32 @@
-~ start
+~ START
 Agathe: Holla, die Waldfee, endlich wieder Besuch!
+~ BRANCH
+Agathe: Bist du zum Tauschen hier?
+- Avatar: Nein, lass uns quatschen!
+	=> TALK
+- Avatar: Ja, ich will handeln.
+	=>< TRADE
+	=> BRANCH
+- Avatar: Nichts dergleichen
+	=> END
+
+~ TALK
+Agathe: Wie reizend! Seitdem diese Krise angefangen hat, traue ich mich kaum raus.
+Agathe: Einkaufen kann man auch nichts mehr! Gut, dass mich meine Nichte ab und zu besucht.
+Avatar: Muss schon wieder los!
+=> END
+
+
+~ TRADE
+do TradeMngr.setup_next_trade("Agathe")
+Agathe: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.
+if TradeMngr.is_trade_feasible()
+	Agathe: Einverstanden?
+	- Avatar: Okay!
+		do TradeMngr.execute_trade()
+		Agathe: [#mood=happy]Entzückend!
+	- Avatar: Nein Danke.
+		Agathe: [#mood=sad][i]Schade[/i]..
+else
+	Agathe: [#mood=sad]Oh jemine, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END

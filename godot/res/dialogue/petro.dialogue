@@ -1,3 +1,37 @@
-~ start
+~ START
 Petro: Moin!
+~ BRANCH
+Petro: Alles klar bei dir, kommst du gut durch die Krise?
+- Avatar: Ja, wie läuft's bei dir?
+	=> TALK
+- Avatar: Hast du was zu tauschen?
+	=>< TRADE
+	=> BRANCH
+- Avatar: Bis denne!
+	=> END
+
+
+~ TALK
+Petro: In letzter Zeit überlege ich mir, ob wir nicht irgendwie Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.
+Petro: Irre Idee nicht?
+Avatar: Schon spannend.
+Petro: Mein Faible für Aviatik färbt schon auf Irena ab.
+Petro: Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben..
+Avatar: Haha. Naja, bis dann.
+Petro: Tschö [wait=0.5], mit Ö.
+=> END
+
+
+~ TRADE
+do TradeMngr.setup_next_trade("Petro")
+Petro: Immer doch. Suche grad nach {{TradeMngr.get_sought_items_text()}}, dafür biete ich {{TradeMngr.get_offered_items_text()}}.
+if TradeMngr.is_trade_feasible()
+	Petro: Wie sieht's aus?
+	- Avatar: Passt.
+		do TradeMngr.execute_trade()
+		Petro: [#mood=happy]Exzellent, hier.
+	- Avatar: Nein, danke.
+		Petro: Kein Problem.
+else
+	Petro: Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}!
 => END

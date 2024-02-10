@@ -26,6 +26,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 OverworldStatesMngr="*res://crisisPhase/overworld_states_mngr.gd"
 JsonMngr="*res://global/json_mngr.gd"
 SettingsGUI="*res://global/settings_GUI.tscn"
+TradeMngr="*res://crisisPhase/characters/trade_mngr.gd"
 
 [debug]
 

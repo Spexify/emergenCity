@@ -87,6 +87,7 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
+	TradeMngr.setup(_stage_mngr, _backpack)
 
 	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
 		$GUI/VBC/LowerSection/ChangeStageGUI)
@@ -179,7 +180,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
-	dialogue_GUI.start(dialogue_resource, "start")
+	dialogue_GUI.start(dialogue_resource, "START")
 	get_tree().paused = true
 
 

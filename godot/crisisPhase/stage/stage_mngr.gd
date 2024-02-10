@@ -164,6 +164,15 @@ func load_state(data : Dictionary) -> void:
 func get_city_map() -> EMC_CityMap:
 	return _city_map
 
+
+func get_NPC(p_NPC_name: String) -> EMC_NPC:
+	for NPC: EMC_NPC in $NPCs.get_children():
+		if NPC.get_name() == p_NPC_name:
+			return NPC
+	
+	return null
+
+
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	_create_navigation_layer_tiles()
@@ -251,6 +260,10 @@ func _setup_NPCs() -> void:
 	gerhard.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(gerhard)
 	_dialogue_pitches[gerhard.get_name()] = 0.5
+	var trade_bid_gerhard := EMC_TradeMngr.TradeBid.new()
+	trade_bid_gerhard.sought_items = [EMC_Item.IDs.WATER_DIRTY, EMC_Item.IDs.WATER_DIRTY]
+	trade_bid_gerhard.offered_items = [EMC_Item.IDs.VEGETABLES]
+	gerhard.set_trade_bid(trade_bid_gerhard)
 	
 	var friedel: EMC_NPC = _NPC_SCN.instantiate()
 	friedel.setup("Friedel")
@@ -286,6 +299,10 @@ func _setup_NPCs() -> void:
 	agathe.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(agathe)
 	_dialogue_pitches[agathe.get_name()] = 1.2
+	var trade_bid_agathe := EMC_TradeMngr.TradeBid.new()
+	trade_bid_agathe.sought_items = [EMC_Item.IDs.CHLOR_TABLETS]
+	trade_bid_agathe.offered_items = [EMC_Item.IDs.PICKLED_VEGETABLES, EMC_Item.IDs. JAM]
+	agathe.set_trade_bid(trade_bid_agathe)
 	
 	var petro: EMC_NPC = _NPC_SCN.instantiate()
 	petro.setup("Petro")
@@ -293,6 +310,10 @@ func _setup_NPCs() -> void:
 	petro.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(petro)
 	_dialogue_pitches[petro.get_name()] = 0.65
+	var trade_bid_petro := EMC_TradeMngr.TradeBid.new()
+	trade_bid_petro.sought_items = [EMC_Item.IDs.SOAP]
+	trade_bid_petro.offered_items = [EMC_Item.IDs.BATTERIES]
+	petro.set_trade_bid(trade_bid_petro)
 	
 	var irena: EMC_NPC = _NPC_SCN.instantiate()
 	irena.setup("Irena")
@@ -321,6 +342,10 @@ func _setup_NPCs() -> void:
 	veronika.clicked.connect(_on_NPC_clicked)
 	$NPCs.add_child(veronika)
 	_dialogue_pitches[veronika.get_name()] = 1.1
+	var trade_bid_veronika := EMC_TradeMngr.TradeBid.new()
+	trade_bid_veronika.sought_items = [EMC_Item.IDs.SUGAR]
+	trade_bid_veronika.offered_items = [EMC_Item.IDs.GAS_CARTRIDGE]
+	veronika.set_trade_bid(trade_bid_veronika)
 	
 	var townhall_worker: EMC_NPC = _NPC_SCN.instantiate()
 	townhall_worker.setup("TownhallWorker")

@@ -7,8 +7,9 @@ signal clicked(p_NPC: EMC_NPC)
 @onready var _dialogue_hitbox := $DialogueHitbox
 
 var _dialogue_pitch: float = 1.0 #TODO: link this to the dialogue_GUI.gd
+var _trade_bid: EMC_TradeMngr.TradeBid
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 	name = p_name
 	#Check bounds, [0] = x-Pos
@@ -41,6 +42,13 @@ func activate() -> void:
 	_dialogue_hitbox.disabled = false
 
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+func set_trade_bid(p_trade_bid: EMC_TradeMngr.TradeBid) -> void:
+	_trade_bid = p_trade_bid
+
+
+func get_trade_bid() -> EMC_TradeMngr.TradeBid:
+	return _trade_bid
+
+########################################## PRIVATE METHODS #########################################
 func _on_dialogue_hit_box_pressed() -> void:
 	clicked.emit(self)

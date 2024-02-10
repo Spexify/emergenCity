@@ -1,7 +1,14 @@
-~ start
-
+~ START
 Avatar: [[Hi|Guten Tag.|Hallöchenpopöchen|Moin!|Servus]]
 Avatar: Das is nen emergenCITY Dialogue Test hier.
+~ BRANCH
+Gerhard: Willste babble oder handeln?
+- Avatar: Babble
+- Avatar: Handeln
+	=>< TRADE
+	=> BRANCH
+- Avatar: Nichts dergleichen
+	=> END
 Gerhard: Jawollja!
 Gerhard: Pizza mit Ananas oder ohne?
 - Avatar: Mit natürlich!
@@ -9,10 +16,25 @@ Gerhard: Pizza mit Ananas oder ohne?
 - Avatar: Bähh, ohne!
 	Gerhard: Mach dich vom Acker!
 	=> END
-- Ende Gelände => END!
+- Ende Gelände => END
 
 Avatar: Naja.
-- Nochmal!! => start
+- Nochmal!! => START
 - Tschö mit ö! => END
 
+=> END
+
+
+~ TRADE
+do TradeMngr.setup_next_trade("Gerhard")
+Gerhard: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.
+if TradeMngr.is_trade_feasible()
+	Gerhard: Einverstanden?
+	- Avatar: Okay!
+		do TradeMngr.execute_trade()
+		Gerhard: [#mood=happy]Wunderbar, hier.
+	- Avatar: Nein Danke.
+		Gerhard: Ok.
+else
+	Gerhard: [#mood=sad]Sorry, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END

@@ -1,4 +1,4 @@
-~ start
+~ START
 Julia: Hi Nachbar!
 - Avatar: Was geht?
 	%2 => dialog1
