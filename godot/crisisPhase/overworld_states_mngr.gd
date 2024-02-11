@@ -23,6 +23,13 @@ enum IsolationState{
 
 var _isolation_state: IsolationState
 
+enum FoodContaminationState{
+	NONE = 0,
+	FOOD_SPOILED = 1	
+}
+
+var _food_contamination_state: FoodContaminationState
+
 enum Furniture{
 	WATER_RESERVOIR = 0, #UNUSED
 	RAINWATER_BARREL = 1,
@@ -65,6 +72,12 @@ func get_isolation_state() -> IsolationState:
 
 func set_isolation_state(new_isolation_state: IsolationState) -> void:
 	_isolation_state = new_isolation_state
+	
+func get_food_contamination_state() -> FoodContaminationState:
+	return _food_contamination_state
+
+func set_food_contamination_state(new_food_contamination_state: FoodContaminationState) -> void:
+	_food_contamination_state = new_food_contamination_state
 	
 func get_upgrades() -> Array[Furniture]:
 	return _upgrades
