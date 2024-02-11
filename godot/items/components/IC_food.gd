@@ -4,16 +4,23 @@ class_name EMC_IC_Food
 const UNIT: String = "kcal"
 const UNIT_FACTOR: int = 250 #1 Unit = 250kcal
 var _nutritionness: int = 0
+var _pleasurable: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(nutritionness: int) -> void:
+func _init(nutritionness: int, pleasurable: int = 0) -> void:
 	super("Essen", Color.INDIAN_RED)
 	_nutritionness = nutritionness 
+	_pleasurable = pleasurable
 
 
 ## Get the internal nutritionness value
 func get_nutritionness() -> int:
 	return _nutritionness
+	
+## if possitive int, adds to happinnesss, negative subtracts, zero makes no change
+## to be used to set the happinness bar
+func get_pleasurablenness() -> int:
+	return _pleasurable
 
 
 ## Get the nutritionness value scaled to fit real-life units

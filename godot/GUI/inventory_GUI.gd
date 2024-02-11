@@ -203,7 +203,7 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 		else:
-			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Consume"
+			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Konsumieren"
 
 
 #MRM: TODO: Remove Magic Numbers
