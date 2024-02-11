@@ -8,6 +8,7 @@ signal arrived
 signal nutrition_updated(p_new_value: int)
 signal hydration_updated(p_new_value: int)
 signal health_updated(p_new_value: int)
+signal happinness_updated(p_new_value: int)
 
 const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoidance (Max Speed)!
 
@@ -15,23 +16,27 @@ const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoid
 const UNIT_FACTOR_NUTRITION: int = EMC_IC_Food.UNIT_FACTOR
 const UNIT_FACTOR_HYDRATION: int = EMC_IC_Drink.UNIT_FACTOR
 const UNIT_FACTOR_HEALTH: int = 10 #health Unit in percent #MRM: Changed temp. so you don't die to early in tests
+const UNIT_FACTOR_HAPPINNESS: int = 10
 
 const MAX_VITALS_NUTRITION = 2200/UNIT_FACTOR_NUTRITION
 const MAX_VITALS_HYDRATION = 2000/UNIT_FACTOR_HYDRATION
 const MAX_VITALS_HEALTH = 100/UNIT_FACTOR_HEALTH #Fixed bug, was UNIT_FACTOR_NUTRITION, previously
+const MAX_VITALS_HAPPINNESS = 100/UNIT_FACTOR_HAPPINNESS
 
 const INIT_NUTRITION_VALUE : int = 2
 const INIT_HYDRATION_VALUE : int = 2
 const INIT_HEALTH_VALUE : int = 4
+const INIT_HAPPINNESS_VALUE : int = 4
 
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var walking := $SFX/Walking
 
-## 2200 kCal Nahrung, 2000 ml Wasser pro Tag und _health_value gemessen in Prozent
+## 2200 kCal Nahrung, 2000 ml Wasser pro Tag, _health_value und _happinness_value gemessen in Prozent
 ## working in untis of 4
 var _nutrition_value : int = INIT_NUTRITION_VALUE
 var _hydration_value : int = INIT_HYDRATION_VALUE
 var _health_value : int = INIT_HEALTH_VALUE
+var _happinness_value : int = INIT_HAPPINNESS_VALUE
 
 
 enum Frame{
@@ -74,7 +79,12 @@ func get_health_status() -> int:
 func get_unit_health_status() -> int:
 	return _health_value*UNIT_FACTOR_HEALTH
 	
+func get_happinness_status() -> int:
+	return _happinness_value
 	
+func get_unit_happinness_status() -> int:
+	return _happinness_value*UNIT_FACTOR_HAPPINNESS
+		
 ####################### Setters für die Statutbalken vom Avatar ############################
 
 func add_nutrition(nutrition_change : int = 1) -> void: 
@@ -129,11 +139,30 @@ func sub_health(health_change : int = 1) -> bool:
 		_health_value -= health_change
 		health_updated.emit(get_health_status())
 		return true
+		
+func add_happinness(happinness_change : int = 1) -> void:
+	if _happinness_value + happinness_change <= MAX_VITALS_HAPPINNESS: 
+		_happinness_value += happinness_change
+		happinness_updated.emit(get_happinness_status())
+	else: 
+		_happinness_value = MAX_VITALS_HAPPINNESS
+		happinness_updated.emit(get_happinness_status())
+
+
+func sub_happinness(happinness_change : int = 1) -> bool:
+	if _happinness_value - happinness_change < 0 or _happinness_value < 0:
+		happinness_updated.emit(get_happinness_status())
+		return false
+	else:
+		_happinness_value -= happinness_change
+		happinness_updated.emit(get_happinness_status())
+		return true
 
 func refresh_vitals() -> void:
 	nutrition_updated.emit(get_unit_nutrition_status())
 	hydration_updated.emit(get_unit_hydration_status())
-	health_updated.emit(get_health_status())
+	health_updated.emit(get_unit_health_status())
+	happinness_updated.emit(get_unit_happinness_status())
 
 ## MRM: Naming idea: Could be renamed into "serialize()" as it's not really the saving itself,
 ## but "serializing" the object data into a format that can be saved in a file
@@ -146,6 +175,7 @@ func save() -> Dictionary:
 		"nutrition_value": _nutrition_value,
 		"hydration_value": _hydration_value,
 		"health_value": _health_value,
+		"happinness_value": _happinness_value,
 		"x-position": some_position.x,
 		"y-position": some_position.y
 	}
@@ -159,6 +189,8 @@ func load_state(data : Dictionary) -> void:
 	hydration_updated.emit(get_unit_hydration_status())
 	_health_value = data.get("health_value", INIT_HEALTH_VALUE)
 	health_updated.emit(_health_value)
+	_happinness_value = data.get("happinness_value", INIT_HAPPINNESS_VALUE)
+	happinness_updated.emit(_happinness_value)
 	
 	var some_position : Vector2 = Vector2(data.get("x-position", 277), data.get("y-position", 601))
 	set_global_position(some_position)
@@ -169,6 +201,7 @@ func _ready() -> void:
 	nutrition_updated.emit(get_unit_nutrition_status())
 	hydration_updated.emit(get_unit_hydration_status())
 	health_updated.emit(get_unit_health_status())
+	happinness_updated.emit(get_unit_happinness_status())
 	SettingsGUI.avatar_sprite_changed.connect(_on_new_avatar_sprite_changed)
 	_on_new_avatar_sprite_changed(SettingsGUI.get_avatar_sprite_suffix()) #init
 

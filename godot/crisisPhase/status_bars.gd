@@ -28,3 +28,6 @@ func _on_avatar_health_updated(p_new_value: int) -> void:
 	var perc: int = float(p_new_value) * EMC_Avatar.UNIT_FACTOR_HEALTH  #float() Casting wichtig!
 	$HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar.set_value_no_signal(perc)
 
+func _on_avatar_happinness_updated(p_new_value: int) -> void:
+	var perc: int = float(p_new_value) * EMC_Avatar.UNIT_FACTOR_HAPPINNESS  #float() Casting wichtig!
+	$HBoxContainer5/VBoxContainer2/HBoxContainer4/HappinnessBar.set_value_no_signal(perc)
