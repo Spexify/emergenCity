@@ -15,6 +15,8 @@ const CRISIS_OVERLAP_UPPER_BOUND : int = 3
 
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+var _scenario : EMC_CrisisScenario = EMC_CrisisScenario.new()
+
 
 func _on_continue_pressed() -> void:
 	if $VBoxContainer/VBoxContainer/HSlider.value == 0:
@@ -29,7 +31,10 @@ func _on_continue_pressed() -> void:
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)
 	print("difficulty: " + str($VBoxContainer/VBoxContainer/HSlider.value))
 	
+	var _current_scenario := _scenario.get_scenario()
 	
-	
-	Global.set_crisis_difficulty(_crisis_length, _number_crisis_overlap, true, true, true, false)
+	Global.set_crisis_difficulty(_current_scenario["water_crisis"],_current_scenario["electricity_crisis"],
+								_current_scenario["isolation_crisis"],_current_scenario["food_contamination_crisis"],
+								_crisis_length, _number_crisis_overlap)
+								
 	Global.goto_scene(Global.CRISIS_PHASE_SCENE)

@@ -54,10 +54,16 @@ func setup() -> void:
 	_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
 	_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 	_food_contamination_crisis_probability_countdown = _rng.randi_range(FOOD_CONTAMINATION_LOWER_BOUND, FOOD_CONTAMINATION_UPPER_BOUND)
-	print("water crisis comes in: " + str(_water_crisis_probability_countdown))
-	print("electricity crisis comes in: " + str(_electricity_crisis_probability_countdown))
-	print("isolation comes in: " + str(_isolation_crisis_probability_countdown))
-	print("food contamination comes in: " + str(_food_contamination_crisis_probability_countdown))
+	
+	
+	#if _water_crisis:
+	#	print("water crisis comes in: " + str(_water_crisis_probability_countdown))
+	#if _electricity_crisis:
+	#	print("electricity crisis comes in: " + str(_electricity_crisis_probability_countdown))
+	#if _isolation_crisis:
+	#	print("isolation comes in: " + str(_isolation_crisis_probability_countdown))
+	#if _food_contamination_crisis:
+	#	print("food contamination comes in: " + str(_food_contamination_crisis_probability_countdown))
 	
 ############################# GETTERS AND SETTERS ##################################################	
 
@@ -110,18 +116,18 @@ func _refresh() -> int:
 	if _food_contamination_crisis:
 		_food_contamination_crisis_probability_countdown -= 1
 	
-	print("water crisis: " + str(_water_crisis_length_countdown) + "   electricity crisis: " + str(_electricity_crisis_length_countdown)\
-	+ "   isolation crisis: " + str(_isolation_crisis_length_countdown)
-	+ "   food_contamination crisis: " + str(_food_contamination_crisis_length_countdown))
+	#print("water crisis: " + str(_water_crisis_length_countdown) + "   electricity crisis: " + str(_electricity_crisis_length_countdown)\
+	#+ "   isolation crisis: " + str(_isolation_crisis_length_countdown)
+	#+ "   food_contamination crisis: " + str(_food_contamination_crisis_length_countdown))
 	
 	return cnt
 
 ## start counting time with day_mngr
 func check_crisis_status() -> void:
-	print("water status: " + str(OverworldStatesMngr.get_water_state()))
-	print("electricity status: " + str(OverworldStatesMngr.get_electricity_state()))
-	print("isolation status: " + str(OverworldStatesMngr.get_isolation_state()))
-	print("food_contamination status: " + str(OverworldStatesMngr.get_food_contamination_state()))
+	#print("water status: " + str(OverworldStatesMngr.get_water_state()))
+	#print("electricity status: " + str(OverworldStatesMngr.get_electricity_state()))
+	#print("isolation status: " + str(OverworldStatesMngr.get_isolation_state()))
+	#print("food_contamination status: " + str(OverworldStatesMngr.get_food_contamination_state()))
 	
 	if _crisis_period_counter != 0:
 		var cnt := _refresh()
@@ -162,5 +168,6 @@ func _isolation_crisis_mngr() -> void:
 			
 func _food_contamination_crisis_mngr() -> void:
 	if _food_contamination_crisis_probability_countdown <= 0:
+		
 		if _food_contamination_crisis_length_countdown > 0:
 			OverworldStatesMngr.set_food_contamination_state(1)
