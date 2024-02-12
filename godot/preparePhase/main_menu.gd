@@ -49,8 +49,8 @@ func _on_reset_pressed() -> void:
 
 
 func _on_information_pressed() -> void:
-	pass # Replace with function body.
+	Global.goto_scene("res://preparePhase/information.tscn")
 
 
 func _on_credit_screen_pressed() -> void:
-	pass # Replace with function body.
+	Global.goto_scene("res://preparePhase/credit_information.tscn")
