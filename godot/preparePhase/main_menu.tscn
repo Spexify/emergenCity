@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=9 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="3_ddmuk"]
+[ext_resource type="Texture2D" uid="uid://18r2pljgx646" path="res://res/sprites/GUI/icons/icon_menu_settings.png" id="4_0v5y1"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
 
@@ -44,18 +46,29 @@ color = Color(0.470588, 0.470588, 0.470588, 1)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -257.0
-offset_bottom = 89.0
+offset_left = -136.0
+offset_right = 13.0
+offset_bottom = 90.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 
-[node name="eCoins" type="Label" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="eCoins" type="Label" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
-text = "10 eCoins"
+text = "10"
 horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+texture = ExtResource("4_2txvv")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_right = 277.0
@@ -63,9 +76,9 @@ offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
+[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
 layout_mode = 2
-text = "Settings"
+texture_normal = ExtResource("4_0v5y1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_top = 300.0
@@ -89,38 +102,37 @@ fit_content = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="Buttons2" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2"]
+[node name="GameButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="StartRound" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
+[node name="StartRound" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
 text = "Neues Spiel starten
 "
 
-[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
+[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
 text = "Shelf"
 
-[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
+[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
 text = "Upgrade Center"
 
-[node name="Buttons2" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+[node name="InformationButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_left = 320.0
 offset_top = 900.0
 offset_right = 567.0
 offset_bottom = 1008.0
 theme_override_constants/separation = 40
 
-[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
 layout_mode = 2
 text = "credit screen"
 
-[node name="Information" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
+[node name="Information" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
 layout_mode = 2
-text = "information
-"
+text = "Information"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -134,6 +146,8 @@ stream = ExtResource("5_3syux")
 stream = ExtResource("6_qpdy4")
 
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/StartRound" to="Menu" method="_on_start_round_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/Shelf" to="Menu" method="_on_shelf_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/Shelf" to="Menu" method="_on_shelf_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]

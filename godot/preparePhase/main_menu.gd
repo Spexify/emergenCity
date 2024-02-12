@@ -45,3 +45,11 @@ func _on_settings_pressed() -> void:
 
 func _on_reset_pressed() -> void:
 	Global.reset_save()
+
+
+func _on_information_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_credit_screen_pressed() -> void:
+	pass # Replace with function body.
