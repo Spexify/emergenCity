@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://5dpuu2l72yhg"]
+[gd_scene load_steps=6 format=3 uid="uid://5dpuu2l72yhg"]
 
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_g18nf"]
 [ext_resource type="Script" path="res://global/settings_GUI.gd" id="2_f1d4f"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="3_2gmg0"]
 [ext_resource type="Script" path="res://volume_slider.gd" id="3_n24n2"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="4_s3tp7"]
 
@@ -15,8 +16,17 @@ grow_vertical = 2
 theme = ExtResource("1_g18nf")
 script = ExtResource("2_f1d4f")
 
+[node name="ColorRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_2gmg0")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.470588, 0.470588, 0.470588, 1)
+color = Color(0.306923, 0.306923, 0.306923, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

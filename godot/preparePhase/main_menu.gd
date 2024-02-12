@@ -4,11 +4,11 @@ extends Control
 @onready var open_guisfx := $"../SFX/OpenGUISFX"
 @onready var close_guisfx := $"../SFX/CloseGUISFX"
 @onready var button_sfx := $"../SFX/ButtonSFX"
-@onready var e_coins := $MarginContainer/eCoins
+@onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
 #@onready var timer := $"../Timer"
 
 func _ready() -> void:
-	e_coins.text = str(Global.get_e_coins()) + " eCoins"
+	e_coins.text = str(Global.get_e_coins())
 
 func _on_start_round_pressed() -> void:
 	button_sfx.play()
@@ -37,7 +37,8 @@ func _on_settings_pressed() -> void:
 	#add_child(new_setting)
 	button_sfx.play()
 	await button_sfx.finished
-	_settings.show()
+	#_settings.show()
+	Global.goto_scene("res://global/settings_GUI.tscn")
 	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
 	for child: Node in _settings.get_children():
 		child.show()

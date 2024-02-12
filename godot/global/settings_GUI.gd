@@ -71,6 +71,7 @@ func _on_reset_pressed() -> void:
 
 func _on_fortsetzen_pressed() -> void:
 	close()
+	Global.goto_scene("res://preparePhase/main_menu.tscn")
 
 
 func _on_sound_pressed() -> void:

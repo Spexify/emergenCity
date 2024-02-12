@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=10 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
+[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
 
 [node name="MainMenu" type="Control"]
@@ -108,31 +109,37 @@ theme_override_constants/separation = 40
 
 [node name="StartRound" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten
 "
 
 [node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
-text = "Shelf"
+theme_override_font_sizes/font_size = 40
+text = "Shop
+"
 
 [node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Upgrade Center"
 
 [node name="InformationButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
-offset_left = 320.0
-offset_top = 900.0
-offset_right = 567.0
-offset_bottom = 1008.0
-theme_override_constants/separation = 40
+offset_left = 450.0
+offset_top = 850.0
+offset_right = 544.0
+offset_bottom = 988.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
+layout_mode = 2
+texture_normal = ExtResource("6_7kgqm")
 
 [node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
 layout_mode = 2
-text = "credit screen"
-
-[node name="Information" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
-layout_mode = 2
-text = "Information"
+text = "Credits
+"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -149,5 +156,5 @@ stream = ExtResource("6_qpdy4")
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]

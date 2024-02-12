@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnjubq58koags"]
+
+[ext_resource type="Script" path="res://preparePhase/information.gd" id="1_3i2wm"]
+
+[node name="Information" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3i2wm")
