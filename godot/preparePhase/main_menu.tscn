@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="3_ddmuk"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
@@ -32,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_ddmuk")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Menu"]
 color = Color(0.470588, 0.470588, 0.470588, 1)
@@ -63,10 +65,7 @@ theme_override_constants/margin_top = 40
 
 [node name="Settings" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 35
-text = "Einstellungen"
-flat = true
+text = "Settings"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_top = 300.0
@@ -108,17 +107,17 @@ layout_mode = 2
 text = "Upgrade Center"
 
 [node name="Buttons2" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
-offset_left = 300.0
-offset_top = 808.0
-offset_right = 547.0
-offset_bottom = 990.0
+offset_left = 320.0
+offset_top = 900.0
+offset_right = 567.0
+offset_bottom = 1008.0
 theme_override_constants/separation = 40
 
-[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
 layout_mode = 2
 text = "credit screen"
 
-[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
+[node name="Information" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
 layout_mode = 2
 text = "information
 "
@@ -138,5 +137,3 @@ stream = ExtResource("6_qpdy4")
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/StartRound" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/Buttons2/Shelf" to="Menu" method="_on_shelf_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/Buttons2/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
