@@ -79,16 +79,16 @@ func _refresh() -> int:
 	var cnt : int = 0
 	if OverworldStatesMngr.get_water_state() != 2 && _water_crisis:
 		cnt+= 1
-		_water_crisis_length_countdown -= 1 
+		_water_crisis_length_countdown -= 3
 	if OverworldStatesMngr.get_electricity_state() != 1 && _electricity_crisis:
 		cnt+= 1
-		_electricity_crisis_length_countdown -= 1
+		_electricity_crisis_length_countdown -= 3
 	if OverworldStatesMngr.get_isolation_state() != 0 && _isolation_crisis:
 		cnt+= 1
-		_isolation_crisis_length_countdown -= 1
+		_isolation_crisis_length_countdown -= 3
 	if OverworldStatesMngr.get_food_contamination_state() != 0 && _food_contamination_crisis:
 		cnt+= 1
-		_food_contamination_crisis_length_countdown -= 1
+		_food_contamination_crisis_length_countdown -= 3
 		
 	if _water_crisis_length_countdown <= 0:
 		OverworldStatesMngr.set_water_state(2)  ## or 1 depending on crisis
@@ -108,13 +108,13 @@ func _refresh() -> int:
 		_food_contamination_crisis_probability_countdown = _rng.randi_range(FOOD_CONTAMINATION_LOWER_BOUND, FOOD_CONTAMINATION_UPPER_BOUND)
 		
 	if _water_crisis: 
-		_water_crisis_probability_countdown -= 1
+		_water_crisis_probability_countdown -= 3
 	if _electricity_crisis:
-		_electricity_crisis_probability_countdown -= 1
+		_electricity_crisis_probability_countdown -= 3
 	if _isolation_crisis:
-		_isolation_crisis_probability_countdown -= 1	
+		_isolation_crisis_probability_countdown -= 3	
 	if _food_contamination_crisis:
-		_food_contamination_crisis_probability_countdown -= 1
+		_food_contamination_crisis_probability_countdown -= 3
 	
 	#print("water crisis: " + str(_water_crisis_length_countdown) + "   electricity crisis: " + str(_electricity_crisis_length_countdown)\
 	#+ "   isolation crisis: " + str(_isolation_crisis_length_countdown)
@@ -144,7 +144,7 @@ func check_crisis_status() -> void:
 				if _food_contamination_crisis:
 					_food_contamination_crisis_mngr()
 
-		_crisis_period_counter -= 1
+		_crisis_period_counter -= 3
 
 ########################## PRIVATE METHODS #########################################################
 

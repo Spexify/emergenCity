@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=6 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
-[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
@@ -26,17 +25,20 @@ grow_vertical = 2
 theme = ExtResource("1_prdod")
 script = ExtResource("2_bbqsv")
 
-[node name="ColorRect" type="ColorRect" parent="Menu"]
+[node name="ColorRect" type="TextureRect" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.356863, 0.34902, 0.458824, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
-layout_mode = 1
+[node name="CanvasModulate" type="CanvasModulate" parent="Menu"]
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="Menu"]
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -46,71 +48,80 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 
-[node name="eCoins" type="Label" parent="Menu/MarginContainer"]
+[node name="eCoins" type="Label" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "10 eCoins"
 horizontal_alignment = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Menu"]
-layout_mode = 1
-offset_right = 230.0
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+offset_right = 277.0
 offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="Button" parent="Menu/MarginContainer2"]
+[node name="Settings" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "Einstellungen"
 flat = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -278.0
-offset_top = -119.5
-offset_right = 278.0
-offset_bottom = 119.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+offset_top = 300.0
+offset_right = 575.0
+offset_bottom = 1004.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer"]
+custom_minimum_size = Vector2(575, 100)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(450, 100)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[color=white] GAME TITLE[/color]"
+fit_content = true
+
+[node name="CenterContainer2" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Buttons2" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2"]
+layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Start" type="Button" parent="Menu/VBoxContainer"]
+[node name="StartRound" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
 layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.541176, 0.537255, 0.752941, 1)
-theme_override_font_sizes/font_size = 40
-text = "Neues Spiel starten"
-flat = true
+text = "Neues Spiel starten
+"
 
-[node name="Shelf" type="Button" parent="Menu/VBoxContainer"]
+[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
 layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.976471, 0.341176, 0.219608, 1)
-theme_override_font_sizes/font_size = 40
-text = "Vorräte einkaufen"
-flat = true
+text = "Shelf"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer"]
+[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2"]
 layout_mode = 2
-theme_override_constants/separation = 50
+text = "Upgrade Center"
 
-[node name="UpgradeCenter" type="Button" parent="Menu/VBoxContainer/HBoxContainer"]
-visible = false
+[node name="Buttons2" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+offset_left = 300.0
+offset_top = 808.0
+offset_right = 547.0
+offset_bottom = 990.0
+theme_override_constants/separation = 40
+
+[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
 layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.239216, 0.839216, 0.815686, 1)
-theme_override_font_sizes/font_size = 40
-text = "Open Upgrade 
-Center"
-flat = true
+text = "credit screen"
+
+[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/Buttons2"]
+layout_mode = 2
+text = "information
+"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -123,7 +134,9 @@ stream = ExtResource("5_3syux")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_qpdy4")
 
-[connection signal="pressed" from="Menu/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_round_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Shelf" to="Menu" method="_on_shelf_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/StartRound" to="Menu" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/Shelf" to="Menu" method="_on_shelf_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainer/CenterContainer2/Buttons2/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/Buttons2/Shelf" to="Menu" method="_on_shelf_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/Buttons2/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]

@@ -138,7 +138,6 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 				_crisis_mngr.check_crisis_status()
 		DayPeriod.NOON:
 			self.current_day_cycle.noon_action = p_action
-			_crisis_mngr.check_crisis_status()
 		DayPeriod.EVENING:
 			self.current_day_cycle.evening_action = p_action
 			self.history.append(self.current_day_cycle)
@@ -176,7 +175,6 @@ func _on_seod_closed() -> void:
 	_check_pu_counter()
 	_check_op_counter()
 	_update_shelflives()
-	_crisis_mngr.check_crisis_status()
 	day_ended.emit()
 
 
