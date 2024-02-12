@@ -71,7 +71,9 @@ func _on_reset_pressed() -> void:
 
 func _on_fortsetzen_pressed() -> void:
 	close()
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	#MRM: Bug: The settings menu is also availbe inside the crisis phase: This doesn't allow
+	#the player to close the settings, so I commented it out:
+	#Global.goto_scene("res://preparePhase/main_menu.tscn") 
 
 
 func _on_sound_pressed() -> void:

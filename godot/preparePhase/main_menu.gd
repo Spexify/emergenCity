@@ -7,8 +7,29 @@ extends Control
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
 #@onready var timer := $"../Timer"
 
+
+#MRM: Added this, because there was a bug (see commit)
+func open() -> void:
+	show()
+	#get_tree().paused = true
+	$CanvasLayer_unaffectedByCM.show()
+	$CanvasModulate.show()
+	#opened.emit()
+
+
+#MRM: Added this, because there was a bug (see commit)
+func close() -> void:
+	#get_tree().paused = false
+	hide()
+	$CanvasLayer_unaffectedByCM.hide()
+	$CanvasModulate.show()
+	#closed.emit()
+
+
 func _ready() -> void:
 	e_coins.text = str(Global.get_e_coins())
+	_settings.closed.connect(open)
+
 
 func _on_start_round_pressed() -> void:
 	button_sfx.play()
@@ -38,10 +59,13 @@ func _on_settings_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	#_settings.show()
-	Global.goto_scene("res://global/settings_GUI.tscn")
+	#MRM: Had a bug (see commit)
+	close()
+	SettingsGUI.open()
+	#Global.goto_scene("res://global/settings_GUI.tscn")
 	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
-	for child: Node in _settings.get_children():
-		child.show()
+	#for child: Node in _settings.get_children():
+		#child.show()
 
 
 func _on_reset_pressed() -> void:
