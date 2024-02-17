@@ -67,6 +67,7 @@ layout_mode = 2
 
 [node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
 clip_contents = false
+custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 text = "
 "
@@ -91,7 +92,6 @@ size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
@@ -144,8 +144,10 @@ layout_mode = 2
 
 [node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
 clip_contents = false
+custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
-text = "
+bbcode_enabled = true
+text = "blaaaaah
 "
 fit_content = true
 autowrap_mode = 2
