@@ -2,7 +2,6 @@ extends Control
 
 
 # Called when the node enters the scene tree for the first time.
-# TODO : Karina
 func _ready() -> void:
 	var sb := StyleBoxFlat.new()
 	add_theme_stylebox_override("fill", sb)

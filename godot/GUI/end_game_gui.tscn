@@ -147,8 +147,6 @@ clip_contents = false
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 bbcode_enabled = true
-text = "blaaaaah
-"
 fit_content = true
 autowrap_mode = 2
 

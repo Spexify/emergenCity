@@ -62,14 +62,14 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 				evening = false
 		
 		actions_summary[action_name] = action_frequency_counter
-		actions_summary[str(action) + "CoinValue"] = action_coin_value
+		actions_summary[action_name + "CoinValue"] = action_coin_value
 	
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):
 			continue
 		if actions_summary.get(key) != 0:
 			summary_text_winner += key + " wurde " + str(actions_summary.get(key)) +\
-						 " Mal ausgeführt und gibt dir jeweils" +\
+						 " Mal ausgeführt und gibt dir jeweils " +\
 						str(actions_summary.get(key+"CoinValue")) + " ECoins.\n"
 			summary_text_loser += key + " wurde " + str(actions_summary.get(key)) +\
 						 " Mal ausgeführt .\n"
@@ -91,11 +91,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 		$WinnerScreen.visible = false
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
-		
+		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar_ref.get_unit_happinness_status()) + " Prozent."
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
 			= summary_text_winner
-			
-		all_action_coins += _avatar_ref.get_happinness_status()
+
+		all_action_coins += _avatar_ref.get_unit_happinness_status()
 		Global.set_e_coins(Global.get_e_coins() + all_action_coins)
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
