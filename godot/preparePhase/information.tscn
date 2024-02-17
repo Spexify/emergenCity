@@ -1,73 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnjubq58koags"]
+[gd_scene load_steps=6 format=3 uid="uid://hvrc68vqew2a"]
 
 [ext_resource type="Script" path="res://preparePhase/information.gd" id="1_3i2wm"]
-[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="2_m430r"]
-[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="3_bpaks"]
+[ext_resource type="PackedScene" uid="uid://dbyt7my8jy188" path="res://crisisPhase/stage/gardenhouse.tscn" id="2_132ip"]
+[ext_resource type="Texture2D" uid="uid://bfxwegfvf1ime" path="res://res/kochenohnestrom.png" id="3_v146t"]
+[ext_resource type="Texture2D" uid="uid://b77uhdblr7pj8" path="res://res/bbkbroschüre.png" id="4_nlyup"]
+[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="5_43ujg"]
 
-[node name="Information" type="Control"]
+[node name="CreditInformation" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3i2wm")
 
-[node name="ColorRect" type="TextureRect" parent="."]
-layout_mode = 1
-texture = ExtResource("2_m430r")
+[node name="Gardenhouse" parent="." instance=ExtResource("2_132ip")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer_unaffectedByCM"]
-offset_top = 200.0
-offset_right = 576.0
-offset_bottom = 824.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer_unaffectedByCM"]
+offset_left = 70.0
+offset_top = 310.0
+offset_right = 502.0
+offset_bottom = 567.0
+theme_override_constants/separation = 60
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM/ColorRect"]
-custom_minimum_size = Vector2(476, 524)
-layout_mode = 0
-offset_left = 40.0
-offset_top = 50.0
-offset_right = 536.0
-offset_bottom = 574.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer"]
+[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
+texture_normal = ExtResource("3_v146t")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer/VBoxContainer"]
+[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-bbcode_enabled = true
-text = "[center]emergenCITY[/center]
-
-• nadja.thiessen@tu-darmstadt.de
-• willich@tk.tu-darmstadt.de
-• schulze@stadt.tu-darmstadt.de
-
-[center]Entwickler*innen[/center]
-
-• marcos.rizig@stud.tu-darmstadt.de
-• karina.lazarova@stud.tu-darmstadt.de
-• michelle.geisler@stud.tu-darmstadt.de
-• ole.fabritz@stud.tu-darmstadt.de
-• jakob.huth@stud.tu-darmstadt.de
-• Farbpalette"
-fit_content = true
-
-[node name="LinkButton" type="LinkButton" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "emergenCity"
-uri = "https://www.emergencity.de/de/"
+texture_normal = ExtResource("4_nlyup")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM"]
-offset_left = 496.0
-offset_top = 844.0
-offset_right = 560.0
-offset_bottom = 908.0
+offset_left = 486.0
+offset_top = 794.0
+offset_right = 550.0
+offset_bottom = 858.0
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture_normal = ExtResource("3_bpaks")
+texture_normal = ExtResource("5_43ujg")
 
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/BBKButton" to="." method="_on_bbk_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
