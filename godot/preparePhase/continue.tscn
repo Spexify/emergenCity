@@ -1,14 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccgia2x32o7ds"]
+[gd_scene load_steps=2 format=3 uid="uid://ccgia2x32o7ds"]
 
 [ext_resource type="Script" path="res://preparePhase/continue.gd" id="1_3lud4"]
-[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="1_5g0lp"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mc450"]
-texture = ExtResource("1_5g0lp")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
 
 [node name="Continue" type="Control"]
 layout_mode = 3
@@ -19,49 +11,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3lud4")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_mc450")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 568.0
+offset_bottom = 1016.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 20
+theme_override_constants/separation = 60
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "[center]You are currently in a Crisis[/center]"
+text = "[center]Du bist in der Mitte einer Krise.[/center]"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Continue Crisis"
+text = "Krise fortsetzen"
 
-[node name="Reset" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Reset" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Reset Game"
+text = "Krise zurücksetzen"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
