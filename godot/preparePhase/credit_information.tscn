@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://hvrc68vqew2a"]
+[gd_scene load_steps=6 format=3 uid="uid://hvrc68vqew2a"]
 
 [ext_resource type="Script" path="res://preparePhase/credit_information.gd" id="1_4y0di"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="2_rbtca"]
-[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="3_0kg73"]
+[ext_resource type="Texture2D" uid="uid://bfxwegfvf1ime" path="res://res/kochenohnestrom.png" id="3_x8s85"]
+[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="4_6h3h8"]
+[ext_resource type="Texture2D" uid="uid://b77uhdblr7pj8" path="res://res/bbkbroschüre.png" id="4_wut86"]
 
 [node name="CreditInformation" type="Control"]
 layout_mode = 3
@@ -10,38 +12,50 @@ anchors_preset = 0
 script = ExtResource("1_4y0di")
 
 [node name="ColorRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 1024.0
 texture = ExtResource("2_rbtca")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.85098, 0.85098, 0.85098, 1)
+color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer_unaffectedByCM"]
-offset_top = 200.0
-offset_right = 576.0
-offset_bottom = 824.0
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer_unaffectedByCM"]
+offset_left = 20.0
+offset_top = 150.0
+offset_right = 556.0
+offset_bottom = 774.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/ColorRect"]
-custom_minimum_size = Vector2(506, 524)
-layout_mode = 0
-offset_left = 35.0
-offset_top = 50.0
-offset_right = 541.0
-offset_bottom = 574.0
-bbcode_enabled = true
-text = "• BBK-Broschüre
-• Kochen ohne Strom"
-fit_content = true
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer_unaffectedByCM/ColorRect2"]
+offset_left = 50.0
+offset_top = 160.0
+offset_right = 482.0
+offset_bottom = 417.0
+theme_override_constants/separation = 60
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM"]
-offset_left = 496.0
-offset_top = 844.0
-offset_right = 560.0
-offset_bottom = 908.0
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer"]
+[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/ColorRect2/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-texture_normal = ExtResource("3_0kg73")
+texture_normal = ExtResource("3_x8s85")
 
-[connection signal="pressed" from="CanvasLayer_unaffectedByCM/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/ColorRect2/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_wut86")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM/ColorRect2"]
+offset_left = 476.0
+offset_top = 694.0
+offset_right = 540.0
+offset_bottom = 758.0
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/ColorRect2/MarginContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture_normal = ExtResource("4_6h3h8")
+
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/ColorRect2/HBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/ColorRect2/HBoxContainer/BBKButton" to="." method="_on_bbk_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/ColorRect2/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]

@@ -14,7 +14,7 @@ layout_mode = 1
 texture = ExtResource("2_m430r")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.85098, 0.85098, 0.85098, 1)
+color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
 
@@ -23,18 +23,42 @@ offset_top = 200.0
 offset_right = 576.0
 offset_bottom = 824.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/ColorRect"]
-custom_minimum_size = Vector2(506, 524)
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM/ColorRect"]
+custom_minimum_size = Vector2(476, 524)
 layout_mode = 0
-offset_left = 35.0
+offset_left = 40.0
 offset_top = 50.0
-offset_right = 541.0
+offset_right = 536.0
 offset_bottom = 574.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
 bbcode_enabled = true
-text = "• emergenCITY
-• unsere Namen
+text = "[center]emergenCITY[/center]
+
+• nadja.thiessen@tu-darmstadt.de
+• willich@tk.tu-darmstadt.de
+• schulze@stadt.tu-darmstadt.de
+
+[center]Entwickler*innen[/center]
+
+• marcos.rizig@stud.tu-darmstadt.de
+• karina.lazarova@stud.tu-darmstadt.de
+• michelle.geisler@stud.tu-darmstadt.de
+• ole.fabritz@stud.tu-darmstadt.de
+• jakob.huth@stud.tu-darmstadt.de
 • Farbpalette"
 fit_content = true
+
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer_unaffectedByCM/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "emergenCity"
+uri = "https://www.emergencity.de/de/"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM"]
 offset_left = 496.0
