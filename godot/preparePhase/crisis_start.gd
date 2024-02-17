@@ -20,7 +20,9 @@ var _scenario : EMC_CrisisScenario = EMC_CrisisScenario.new()
 
 func _on_continue_pressed() -> void:
 	if $VBoxContainer/VBoxContainer/HSlider.value == 0:
-		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_EASY, LENGTH_UPPER_BOUND_EASY)
+		## KL: setting on 1 to fix end screen issues
+		#_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_EASY, LENGTH_UPPER_BOUND_EASY)
+		_crisis_length = 1
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)
 	elif $VBoxContainer/VBoxContainer/HSlider.value == 1:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_NORMAL, LENGTH_UPPER_BOUND_NORMAL)

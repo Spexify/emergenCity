@@ -17,9 +17,9 @@ var history : Array [EMC_DayCycle]
 		#close()
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
+func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, p_happinness_status  : int) -> void:
 	
-	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer.vertical_scroll_mode = true
+	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer.vertical_scroll_mode = true
 	history = p_history
 	
 	
@@ -72,14 +72,15 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool) -> void:
 						 " Mal ausgeführt .\n"
 						
 	if p_avatar_life_status == false :
-		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
+		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
 			= summary_text_loser
 		$LoserScreen.visible = true
 		$WinnerScreen.visible = false
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
-		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
+		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
 			= summary_text_winner
+		all_action_coins += p_happinness_status
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
 		all_action_coins = 0

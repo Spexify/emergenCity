@@ -165,7 +165,8 @@ func _execute_consequences(p_action: EMC_Action) -> void:
 
 
 func _on_seod_closed_game_end() -> void:
-	_egGUI.open(self.history, _avatar_life_status)
+	_egGUI.open(self.history, _avatar_life_status, _avatar_ref.get_unit_happinness_status())
+	print(_avatar_ref.get_unit_happinness_status())
 
 
 func _on_seod_closed() -> void:

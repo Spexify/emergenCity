@@ -57,12 +57,15 @@ autowrap_mode = 2
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3"]
+[node name="MarginContainer" type="MarginContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
-[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
+[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
 clip_contents = false
 layout_mode = 2
 text = "

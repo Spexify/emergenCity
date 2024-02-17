@@ -44,6 +44,7 @@ show_percentage = false
 
 [node name="CaloriesLabel" type="RichTextLabel" parent="HBoxContainer5/VBoxContainer/HBoxContainer2/NutritionBar"]
 custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
 offset_top = 5.0
 offset_right = 90.0
 offset_bottom = 35.0
