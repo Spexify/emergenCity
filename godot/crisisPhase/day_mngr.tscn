@@ -15,10 +15,10 @@ size_flags_vertical = 0
 script = ExtResource("1_wh1q6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(282, 90)
+custom_minimum_size = Vector2(140, 70)
 layout_mode = 0
-offset_right = 282.0
-offset_bottom = 90.0
+offset_right = 264.0
+offset_bottom = 70.0
 
 [node name="Container" type="CenterContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(60, 0)

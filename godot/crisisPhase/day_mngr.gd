@@ -6,7 +6,7 @@ class_name EMC_DayMngr
 ## EMC_DayMngr checks [EMC_Action]'s [member EMC_Action.constraints_prior] before calling the apropriated
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
-signal period_ended
+signal period_ended(p_new_period: DayPeriod)
 signal day_ended
 
 ## Enum describing the periods of a Day.
@@ -150,12 +150,11 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
 		_: push_error("Current day period unassigned!")
-		#MRM: Defensive Programmierung: Ein "_" Fall sollte immer implementiert sein und Fehler werfen.
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
 	_check_op_counter()
-	period_ended.emit()
+	period_ended.emit(get_current_day_period())
 
 
 func _execute_consequences(p_action: EMC_Action) -> void:
@@ -176,6 +175,7 @@ func _on_seod_closed() -> void:
 	_check_op_counter()
 	_update_shelflives()
 	day_ended.emit()
+	period_ended.emit(get_current_day_period())
 
 
 func _update_vitals() -> void:

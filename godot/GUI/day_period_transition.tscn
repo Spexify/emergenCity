@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=3 uid="uid://0ice0vxqhi78"]
+
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_c43s7"]
+[ext_resource type="Script" path="res://GUI/day_period_transition.gd" id="1_fuwqt"]
+[ext_resource type="Texture2D" uid="uid://mlwfi58qelas" path="res://res/sprites/GUI/icons/icon_dayperiods.png" id="1_vmejx"]
+[ext_resource type="Texture2D" uid="uid://b66j3vf3g1dwc" path="res://res/sprites/GUI/icons/icon_marker.png" id="4_76uvx"]
+
+[sub_resource type="Gradient" id="Gradient_hfb0w"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3ydjh"]
+gradient = SubResource("Gradient_hfb0w")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_hp7v0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8lv4x"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rq76k"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t043m"]
+_data = {
+"RESET": SubResource("Animation_hp7v0"),
+"fade_in": SubResource("Animation_8lv4x"),
+"fade_out": SubResource("Animation_rq76k")
+}
+
+[node name="DayPeriodTransition" type="Node2D"]
+process_mode = 2
+z_index = 5
+script = ExtResource("1_fuwqt")
+
+[node name="BG" type="TextureRect" parent="."]
+offset_right = 600.0
+offset_bottom = 1100.0
+texture = SubResource("GradientTexture2D_3ydjh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 136.0
+offset_top = 84.0
+offset_right = 436.0
+offset_bottom = 184.0
+theme = ExtResource("1_c43s7")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[color=white]Day N[/color]"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t043m")
+}
+
+[node name="Marker_Morning" type="Sprite2D" parent="."]
+position = Vector2(451, 543)
+texture = ExtResource("4_76uvx")
+
+[node name="Marker_Noon" type="Sprite2D" parent="."]
+position = Vector2(295, 406)
+texture = ExtResource("4_76uvx")
+
+[node name="Marker_Evening" type="Sprite2D" parent="."]
+position = Vector2(137, 551)
+texture = ExtResource("4_76uvx")
+
+[node name="DayPeriodIcon" type="Sprite2D" parent="."]
+position = Vector2(483, 570)
+scale = Vector2(2, 2)
+texture = ExtResource("1_vmejx")
+hframes = 3
+frame = 1
+
+[node name="FG" type="TextureRect" parent="."]
+offset_top = 687.0
+offset_right = 600.0
+offset_bottom = 1100.0
+texture = SubResource("GradientTexture2D_3ydjh")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
