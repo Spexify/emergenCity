@@ -249,7 +249,7 @@
 	},
 	{
 		"ID": 18,
-		"name": "Schallenfrüchte",
+		"name": "Hülsenfrüchte",
 		"descr": "",
 		"comps": [
 			{
@@ -269,7 +269,7 @@
 			},
 			{
 				"name": "shelflife",
-				"params": 6,
+				"params": 2,
 			},
 		]
 	},
@@ -452,7 +452,7 @@
 	},
 	{
 		"ID": 31,
-		"name": "Gesalzenes Fisch",
+		"name": "Gesalzener Fisch",
 		"descr": "Länger haltbar.",
 		"comps": [
 			{
