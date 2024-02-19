@@ -125,4 +125,16 @@
 		"input_item_names": ["RICE", "SUGAR", "MILK"],
 		"output_item_name": "MILK_RICE",
 	},
+	{
+		"needs_water": true,
+		"needs_heat": true,
+		"input_item_names": ["VEGETABLES", "SALT"],
+		"output_item_name": "SOUP",
+	},
+	{
+		"needs_water": true,
+		"needs_heat": true,
+		"input_item_names": ["FISH", "SALT"],
+		"output_item_name": "SOUP",
+	},
 ]
