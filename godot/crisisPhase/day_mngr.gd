@@ -7,7 +7,7 @@ class_name EMC_DayMngr
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
 signal period_ended(p_new_period: DayPeriod)
-signal day_ended
+signal day_ended(p_curr_day: int)
 
 ## Enum describing the periods of a Day.
 enum DayPeriod {
@@ -174,7 +174,7 @@ func _on_seod_closed() -> void:
 	_check_pu_counter()
 	_check_op_counter()
 	_update_shelflives()
-	day_ended.emit()
+	day_ended.emit(get_current_day())
 	period_ended.emit(get_current_day_period())
 
 

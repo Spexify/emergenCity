@@ -2,6 +2,15 @@ extends EMC_GUI
 
 @onready var _settings : = SettingsGUI #$CanvasLayer_unaffectedByCM/Settings
 @onready var canvas_modulate := $CanvasModulate
+@onready var _electricity_state_icon := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/ElectricityState/TextureRect/Sprite2D
+@onready var _electricity_state_value := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/ElectricityState/Value
+@onready var _water_state_icon := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/WaterState/TextureRect/Sprite2D
+@onready var _water_state_value := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/WaterState/Value
+@onready var _isolation_state_icon := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/IsolationState/TextureRect/Sprite2D
+@onready var _isolation_state_value := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/IsolationState/Value
+@onready var _foodcontam_state_icon := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/FoodContamState/TextureRect/Sprite2D
+@onready var _foodcontam_state_value := $CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/FoodContamState/Value
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +21,7 @@ func _ready() -> void:
 
 
 func open() -> void:
+	_update_overworld_states()
 	show()
 	get_tree().paused = true
 	$CanvasLayer_unaffectedByCM.show()
@@ -48,3 +58,14 @@ func _on_cancel_curr_crisis_pressed() -> void:
 func _on_save_and_quit_pressed() -> void:
 	await Global.save_game(true)
 	get_tree().quit()
+
+
+func _update_overworld_states() -> void:
+	_electricity_state_icon.frame =  OverworldStatesMngr.get_electricity_state()
+	_electricity_state_value.text = "[color=white]" + OverworldStatesMngr.get_electricity_state_descr() + "[/color]"
+	_water_state_icon.frame =  OverworldStatesMngr.get_water_state()
+	_water_state_value.text = "[color=white]" + OverworldStatesMngr.get_water_state_descr() + "[/color]"
+	_isolation_state_icon.frame =  OverworldStatesMngr.get_isolation_state()
+	_isolation_state_value.text = "[color=white]" + OverworldStatesMngr.get_isolation_state_descr() + "[/color]"
+	_foodcontam_state_icon.frame =  OverworldStatesMngr.get_food_contamination_state()
+	_foodcontam_state_value.text = "[color=white]" + OverworldStatesMngr.get_food_contamination_state_descr() + "[/color]"

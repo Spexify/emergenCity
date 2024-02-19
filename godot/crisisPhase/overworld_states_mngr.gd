@@ -1,31 +1,37 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
+enum SemaphoreColors{
+	RED = 0,
+	YELLOW = 1,
+	GREEN = 2,
+}
+
 enum ElectricityState{
-	NONE = 0,
-	UNLIMITED = 1
+	NONE = SemaphoreColors.RED,
+	UNLIMITED = SemaphoreColors.GREEN
 }
 var _electricity_state: ElectricityState
 
 enum WaterState{
-	NONE = 0,
-	DIRTY = 1,
-	CLEAN = 2
+	NONE = SemaphoreColors.RED,
+	DIRTY = SemaphoreColors.YELLOW,
+	CLEAN = SemaphoreColors.GREEN
 }
 
 var _water_state: WaterState
 
 enum IsolationState{
-	NONE = 0,
-	LIMITED_ACCESS_MARKET = 1,
-	ISOLATION = 2
+	NONE = SemaphoreColors.GREEN,
+	LIMITED_ACCESS_MARKET = SemaphoreColors.YELLOW,
+	ISOLATION = SemaphoreColors.RED,
 }
 
 var _isolation_state: IsolationState
 
 enum FoodContaminationState{
-	NONE = 0,
-	FOOD_SPOILED = 1	
+	NONE = SemaphoreColors.GREEN,
+	FOOD_SPOILED = SemaphoreColors.RED
 }
 
 var _food_contamination_state: FoodContaminationState
@@ -60,24 +66,50 @@ func get_electricity_state() -> ElectricityState:
 
 func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
+
+func get_electricity_state_descr() -> String:
+	match _electricity_state:
+		ElectricityState.NONE: return "Ausgefallen!"
+		ElectricityState.UNLIMITED: return "Vorhanden."
+	return ""
 	
 func get_water_state() -> WaterState:
 	return _water_state
 
 func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
+
+func get_water_state_descr() -> String:
+	match _water_state:
+		WaterState.NONE: return "Ausgefallen!"
+		WaterState.DIRTY: return "Verdreckt."
+		WaterState.CLEAN: return "Vorhanden."
+	return ""
 	
 func get_isolation_state() -> IsolationState:
 	return _isolation_state
 
 func set_isolation_state(new_isolation_state: IsolationState) -> void:
 	_isolation_state = new_isolation_state
+
+func get_isolation_state_descr() -> String:
+	match _isolation_state:
+		IsolationState.NONE: return "Keine."
+		IsolationState.LIMITED_ACCESS_MARKET: return "Einige Betretsverbote."
+		IsolationState.ISOLATION: return "Quarantäne!"
+	return ""
 	
 func get_food_contamination_state() -> FoodContaminationState:
 	return _food_contamination_state
 
 func set_food_contamination_state(new_food_contamination_state: FoodContaminationState) -> void:
 	_food_contamination_state = new_food_contamination_state
+
+func get_food_contamination_state_descr() -> String:
+	match _food_contamination_state:
+		FoodContaminationState.NONE: return "Kein Problem."
+		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
+	return ""
 	
 func get_upgrades() -> Array[Furniture]:
 	return _upgrades
