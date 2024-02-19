@@ -84,7 +84,7 @@ offset_bottom = 35.0
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[center]2200 ml[/center]
+text = "[color=white][center]2200 ml[/center] [/color]
 "
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer5"]

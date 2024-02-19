@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
-[ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://GUI/day_period_transition.tscn" id="21_6msld"]
+[ext_resource type="PackedScene" path="res://GUI/day_period_transition.tscn" id="21_6msld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -201,6 +201,7 @@ layout_mode = 2
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
 
 [connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
+[connection signal="happinness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happinness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]

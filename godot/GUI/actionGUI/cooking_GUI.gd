@@ -60,6 +60,8 @@ func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 
 ## TODO: Also check on electricity etc.
 func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
+	if p_recipe == null:
+		return false
 	var counting_dict: Dictionary = {}
 	for input_item_ID: EMC_Item.IDs in p_recipe.get_input_item_IDs():
 		if counting_dict.has(input_item_ID):

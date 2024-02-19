@@ -26,8 +26,6 @@ func get_shelflife() -> int:
 func is_spoiled() -> bool:
 	return _shelflife <= 0
 
-func make_spoiled() -> void:
-	_shelflife = 0
 
 func reduce_shelflife() -> void:
 	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:

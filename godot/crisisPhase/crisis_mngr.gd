@@ -35,12 +35,16 @@ const FOOD_CONTAMINATION_UPPER_BOUND : int = 4
 var _food_contamination_crisis_probability_countdown : int
 var _food_contamination_crisis_length_countdown : int = 2
 
+var _inventory : EMC_Inventory
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-func setup() -> void: 
+func setup(p_backpack : EMC_Inventory) -> void: 
 				#(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)	
+	_inventory = p_backpack
+				
 	_water_crisis = Global.get_water_crisis_status()
 	_electricity_crisis = Global.get_electricity_crisis_status()
 	_isolation_crisis = Global.get_isolation_crisis_status()
@@ -171,3 +175,4 @@ func _food_contamination_crisis_mngr() -> void:
 		
 		if _food_contamination_crisis_length_countdown > 0:
 			OverworldStatesMngr.set_food_contamination_state(1)
+			_inventory.spoil_all_items()

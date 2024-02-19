@@ -111,7 +111,7 @@ func _ready() -> void:
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)
 	
-	_crisis_mngr.setup()
+	_crisis_mngr.setup(_backpack)
 	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _overworld_states_mngr, _crisis_mngr, action_guis, \
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
@@ -199,3 +199,4 @@ func _on_pause_menu_btn_pressed() -> void:
 
 func _on_pause_menu_closed() -> void:
 	$ButtonList/VBC/BackpackBtn.disabled = false
+
