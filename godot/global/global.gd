@@ -15,7 +15,7 @@ const FIRST_GAME_SCENE = "res://global/first_game.tscn"
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
 ## TODO : find a way to save this in the files
-var _tutorial_done : bool = false
+var _tutorial_done : bool = true
 
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
