@@ -76,5 +76,6 @@ func _on_new_day_pressed() -> void:
 	button_sfx.play()
 	await button_sfx.finished
 	close()
+	_avatar.get_home()
 
 

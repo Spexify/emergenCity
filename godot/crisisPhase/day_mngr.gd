@@ -38,6 +38,7 @@ var _puGUI : EMC_PopUpGUI
 var _avatar_ref : EMC_Avatar
 var _avatar_life_status : bool = true
 
+var _stage_mngr : EMC_StageMngr
 var _overworld_states_mngr_ref : EMC_OverworldStatesMngr
 var _crisis_mngr : EMC_CrisisMngr
 
@@ -58,7 +59,7 @@ var _action_consequences: EMC_ActionConsequences
 
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(avatar_ref : EMC_Avatar,
+func setup(avatar_ref : EMC_Avatar, stage_mngr : EMC_StageMngr, 
 overworld_states_mngr_ref : EMC_OverworldStatesMngr,
 p_crisis_mngr : EMC_CrisisMngr,
 gui_refs : Array[EMC_ActionGUI],
@@ -68,6 +69,7 @@ egGUI : EMC_EndGameGUI,
 puGUI : EMC_PopUpGUI,
 p_inventory: EMC_Inventory) -> void:
 	_avatar_ref = avatar_ref
+	_stage_mngr = stage_mngr
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	_crisis_mngr = p_crisis_mngr
 	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
@@ -169,6 +171,8 @@ func _on_seod_closed_game_end() -> void:
 
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
+	_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
+	_avatar_ref.set_global_position(Vector2i(250, 750))
 	_update_HUD()
 	_update_vitals()
 	_check_pu_counter()
