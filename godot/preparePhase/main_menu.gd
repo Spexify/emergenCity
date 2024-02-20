@@ -7,14 +7,27 @@ extends Control
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
 #@onready var timer := $"../Timer"
 
+var _tutorial_done : bool = false
+
 
 #MRM: Added this, because there was a bug (see commit)
 func open() -> void:
-	show()
-	#get_tree().paused = true
-	$CanvasLayer_unaffectedByCM.show()
-	$CanvasModulate.show()
-	#opened.emit()
+	if _tutorial_done : 
+		#get_tree().paused = true
+		$".".show()
+		$CanvasLayer_unaffectedByCM.show()
+		$CanvasModulate.show()
+		$"../MenuFirstGame".hide()
+		$"../MenuFirstGame/CanvasLayer_unaffectedByCM".hide()
+		$"../MenuFirstGame/CanvasModulate".hide()
+		#opened.emit()
+	else: 
+		$".".hide()
+		$CanvasLayer_unaffectedByCM.hide()
+		$CanvasModulate.hide()
+		$"../MenuFirstGame".show()
+		$"../MenuFirstGame/CanvasLayer_unaffectedByCM".show()
+		$"../MenuFirstGame/CanvasModulate".show()
 
 
 #MRM: Added this, because there was a bug (see commit)
@@ -22,7 +35,9 @@ func close() -> void:
 	#get_tree().paused = false
 	hide()
 	$CanvasLayer_unaffectedByCM.hide()
+	$"../MenuFirstGame/CanvasLayer_unaffectedByCM".hidE()
 	$CanvasModulate.show()
+	$"../MenuFirstGame/CanvasModulate".show()
 	#closed.emit()
 
 
