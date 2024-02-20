@@ -10,6 +10,7 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var buttons := $CanvasLayer/VBoxContainer/CenterContainer2/Buttons
 @onready var music := $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Music
 @onready var sfx := $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/SFX
+@onready var reset := $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
 
 const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
 const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
@@ -28,12 +29,12 @@ func open() -> void:
 	show()
 	opened.emit()
 
-
-func close() -> void:
+func close(without_signal : bool = false) -> void:
 	hide()
 	canvas_layer.hide()
 	canvas_modulate.hide()
-	closed.emit()
+	if not without_signal:
+		closed.emit()
 
 
 func set_avatar_sprite_suffix(p_avatar_sprite_suffix: String) -> void:
@@ -65,8 +66,11 @@ func _on_font_change_pressed() -> void:
 
 
 func _on_reset_pressed() -> void:
+	self.close(true)
 	Global.reset_state()
 	Global.reset_save()
+	get_tree().paused = false
+	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
 
 
 func _on_fortsetzen_pressed() -> void:

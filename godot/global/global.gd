@@ -72,12 +72,15 @@ func _notification(what : int) -> void:
 func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
+	reset_inventory()
+	
 	var data : Dictionary = {
 		"was_crisis": _was_crisis,
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
-		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03
+		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
+		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -91,8 +94,16 @@ func reset_save() -> void:
 
 func reset_state() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
-	save_game.store_string("")
+	
+	var data : Dictionary = {}
+	
+	var json_string : String = JSON.stringify(data)
+	
+	save_game.store_string(json_string)
+	save_game.flush()
 
+func reset_inventory() -> void:
+	_inventory = create_inventory_with_starting_items()
 
 func save_game(was_crisis : bool) -> void:
 	
@@ -225,8 +236,9 @@ func load_state() -> void:
 
 		var node_data : Dictionary = json.get_data()
 
-		var new_object : NodePath = node_data["node_path"]
-		get_node(new_object).load_state(node_data)
+		var new_object : Variant = node_data.get("node_path")
+		if new_object:
+			get_node(new_object).load_state(node_data)
 
 func get_e_coins() -> int:
 	return _e_coins

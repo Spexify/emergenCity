@@ -192,9 +192,9 @@ func load_state(data : Dictionary) -> void:
 	_hydration_value = data.get("hydration_value", INIT_HYDRATION_VALUE)
 	hydration_updated.emit(get_unit_hydration_status())
 	_health_value = data.get("health_value", INIT_HEALTH_VALUE)
-	health_updated.emit(_health_value)
+	health_updated.emit(get_unit_health_status())
 	_happinness_value = data.get("happinness_value", INIT_HAPPINNESS_VALUE)
-	happinness_updated.emit(_happinness_value)
+	happinness_updated.emit(get_unit_happinness_status())
 	
 	var some_position : Vector2 = Vector2(data.get("x-position", 277), data.get("y-position", 601))
 	set_global_position(some_position)

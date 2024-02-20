@@ -16,7 +16,7 @@ extends EMC_GUI
 func _ready() -> void:
 	hide()
 	$CanvasLayer_unaffectedByCM.hide()
-	_settings.close()
+	_settings.close(true)
 	_settings.closed.connect(open)
 
 
@@ -50,6 +50,7 @@ func _on_settings_pressed() -> void:
 ## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
 	Global.reset_state()
+	Global.reset_inventory()
 	get_tree().paused = false
 	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
 

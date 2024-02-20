@@ -119,4 +119,5 @@ func _on_main_menu_pressed() -> void:
 	await button_sfx.finished
 	get_tree().paused = false
 	Global.reset_state()
+	Global.reset_inventory()
 	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
