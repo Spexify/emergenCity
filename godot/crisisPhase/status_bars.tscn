@@ -16,10 +16,12 @@ script = ExtResource("1_m4dni")
 [node name="HBoxContainer5" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_bottom = 30.0
+scale = Vector2(0.95, 0.95)
+theme_override_constants/separation = -10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer5"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 13
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer5/VBoxContainer"]
 layout_mode = 2
@@ -89,7 +91,7 @@ text = "[color=white][center]2200 ml[/center] [/color]
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer5"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 13
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer5/VBoxContainer2"]
 layout_mode = 2
