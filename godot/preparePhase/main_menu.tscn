@@ -19,8 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_prdod")
 
-[node name="MenuNormal" type="Control" parent="."]
-visible = false
+[node name="Menu" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +29,7 @@ grow_vertical = 2
 theme = ExtResource("1_prdod")
 script = ExtResource("2_bbqsv")
 
-[node name="ColorRect" type="TextureRect" parent="MenuNormal"]
+[node name="ColorRect" type="TextureRect" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,13 +38,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_ddmuk")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="MenuNormal"]
+[node name="CanvasModulate" type="CanvasModulate" parent="Menu"]
 color = Color(0.470588, 0.470588, 0.470588, 1)
 
-[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="MenuNormal"]
-visible = false
+[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="Menu"]
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -56,34 +54,34 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="eCoins" type="Label" parent="MenuNormal/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
+[node name="eCoins" type="Label" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
 text = "10"
 horizontal_alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MenuNormal/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(49, 0)
 layout_mode = 2
 texture = ExtResource("4_2txvv")
 
-[node name="MarginContainer2" type="MarginContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM"]
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_right = 277.0
 offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="TextureButton" parent="MenuNormal/CanvasLayer_unaffectedByCM/MarginContainer2"]
+[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
 layout_mode = 2
 texture_normal = ExtResource("4_0v5y1")
 
-[node name="InformationButtons" type="VBoxContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM"]
+[node name="InformationButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_left = 450.0
 offset_top = 850.0
 offset_right = 544.0
@@ -91,25 +89,25 @@ offset_bottom = 988.0
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Information" type="TextureButton" parent="MenuNormal/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
 layout_mode = 2
 texture_normal = ExtResource("6_7kgqm")
 
-[node name="CreditScreen" type="Button" parent="MenuNormal/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
 layout_mode = 2
 text = "Credits
 "
 
-[node name="VBoxContainerNormal" type="VBoxContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM"]
+[node name="VBoxContainerNormal" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 offset_top = 300.0
 offset_right = 575.0
 offset_bottom = 804.0
 
-[node name="CenterContainer" type="CenterContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
 custom_minimum_size = Vector2(575, 100)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(450, 100)
 layout_mode = 2
@@ -118,141 +116,30 @@ bbcode_enabled = true
 text = "[color=white] GAME TITLE[/color]"
 fit_content = true
 
-[node name="CenterContainerNormal" type="CenterContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
+[node name="CenterContainerNormal" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="GameButtons" type="VBoxContainer" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal"]
+[node name="GameButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="StartRound" type="Button" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
+[node name="StartRound" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten
 "
 
-[node name="Shelf" type="Button" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
+[node name="Shelf" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Shop
 "
 
-[node name="UpgradeCenter" type="Button" parent="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
+[node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Upgrade Center"
-
-[node name="MenuFirstGame" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_prdod")
-script = ExtResource("2_bbqsv")
-
-[node name="ColorRect" type="TextureRect" parent="MenuFirstGame"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_ddmuk")
-
-[node name="CanvasModulate" type="CanvasModulate" parent="MenuFirstGame"]
-color = Color(0.470588, 0.470588, 0.470588, 1)
-
-[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="MenuFirstGame"]
-
-[node name="MarginContainer" type="MarginContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -136.0
-offset_right = 13.0
-offset_bottom = 90.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/MarginContainer"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="eCoins" type="Label" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 35
-text = "10"
-horizontal_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(49, 0)
-layout_mode = 2
-texture = ExtResource("4_2txvv")
-
-[node name="MarginContainer2" type="MarginContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM"]
-offset_right = 277.0
-offset_bottom = 94.0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-
-[node name="Settings" type="TextureButton" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/MarginContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("4_0v5y1")
-
-[node name="InformationButtons" type="VBoxContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM"]
-offset_left = 450.0
-offset_top = 850.0
-offset_right = 544.0
-offset_bottom = 988.0
-theme_override_constants/separation = 20
-alignment = 2
-
-[node name="Information" type="TextureButton" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/InformationButtons"]
-layout_mode = 2
-texture_normal = ExtResource("6_7kgqm")
-
-[node name="CreditScreen" type="Button" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/InformationButtons"]
-layout_mode = 2
-text = "Credits
-"
-
-[node name="VBoxContainerFirstGame" type="VBoxContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM"]
-offset_top = 300.0
-offset_right = 575.0
-offset_bottom = 804.0
-
-[node name="CenterContainer" type="CenterContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame"]
-custom_minimum_size = Vector2(575, 100)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame/CenterContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(450, 100)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 70
-bbcode_enabled = true
-text = "[color=white] GAME TITLE[/color]"
-fit_content = true
-
-[node name="CenterContainerFirstGame" type="CenterContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-
-[node name="GameButtons" type="VBoxContainer" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame/CenterContainerFirstGame"]
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="StartRound" type="Button" parent="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame/CenterContainerFirstGame/GameButtons"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Neues Spiel starten
-"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -265,13 +152,9 @@ stream = ExtResource("5_3syux")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_qpdy4")
 
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="MenuNormal" method="_on_settings_pressed"]
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="MenuNormal" method="_on_information_pressed"]
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="MenuNormal" method="_on_credit_screen_pressed"]
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/StartRound" to="MenuNormal" method="_on_start_round_pressed"]
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shelf" to="MenuNormal" method="_on_shelf_pressed"]
-[connection signal="pressed" from="MenuNormal/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter" to="MenuNormal" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="MenuFirstGame/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="MenuFirstGame" method="_on_settings_pressed"]
-[connection signal="pressed" from="MenuFirstGame/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="MenuFirstGame" method="_on_information_pressed"]
-[connection signal="pressed" from="MenuFirstGame/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="MenuFirstGame" method="_on_credit_screen_pressed"]
-[connection signal="pressed" from="MenuFirstGame/CanvasLayer_unaffectedByCM/VBoxContainerFirstGame/CenterContainerFirstGame/GameButtons/StartRound" to="MenuFirstGame" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shelf" to="Menu" method="_on_shelf_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]

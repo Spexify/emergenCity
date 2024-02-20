@@ -10,8 +10,12 @@ const SAVE_STATE_FILE = "user://savestate.save"
 const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
+const FIRST_GAME_SCENE = "res://global/first_game.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
+
+## TODO : find a way to save this in the files
+var _tutorial_done : bool = false
 
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
@@ -270,9 +274,9 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
-func set_crisis_difficulty(_p_water_crisis: bool, _p_electricity_crisis : bool,
-							_p_isolation_crisis : bool, _p_food_contamination_crisis : bool,
-						_p_crisis_length : int = 3, _p_number_crisis_overlap : int = 2) -> void:
+func set_crisis_difficulty(_p_water_crisis: bool = true, _p_electricity_crisis : bool = true,
+							_p_isolation_crisis : bool = false, _p_food_contamination_crisis : bool = false,
+						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2) -> void:
 	_water_crisis = _p_water_crisis
 	_electricity_crisis =_p_electricity_crisis
 	_isolation_crisis = _p_isolation_crisis
