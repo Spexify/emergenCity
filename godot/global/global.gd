@@ -27,6 +27,8 @@ var _electricity_crisis : bool = false
 var _isolation_crisis : bool = false
 var _food_contamination_crisis : bool = false
 
+var _gui_active : bool = false
+
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -279,6 +281,11 @@ func set_crisis_difficulty(_p_water_crisis: bool, _p_electricity_crisis : bool,
 	_crisis_length = _p_crisis_length
 	_number_crisis_overlap = _p_number_crisis_overlap
 	
+func get_gui_active() -> bool:
+	return _gui_active
+
+func set_gui_active(is_active : bool) -> void:
+	_gui_active = is_active
 
 func get_number_crisis_overlap() -> int:
 	return _number_crisis_overlap

@@ -32,10 +32,12 @@ func _ready() -> void:
 
 
 func open() -> void:
+	Global.set_gui_active(true)
 	show()
 	#opened.emit()
 
 
 func close() -> void:
+	Global.set_gui_active(false)
 	hide()
 	#closed.emit()

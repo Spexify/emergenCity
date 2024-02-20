@@ -105,12 +105,14 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 		$WinnerScreen.visible = true
 		open_gui_sfx.play()
 	visible = true
+	Global.set_gui_active(true)
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	close_gui_sfx.play()
 	visible = false
+	Global.set_gui_active(false)
 	closed.emit()
 
 

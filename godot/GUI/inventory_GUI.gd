@@ -109,7 +109,7 @@ func clear_items() -> void:
 func open() -> void:
 	open_gui.play()
 	_on_item_clicked(_clicked_item)
-	
+	Global.set_gui_active(true)
 	show()
 	opened.emit()
 
@@ -120,6 +120,7 @@ func close() -> void:
 		close_button.emit()
 	close_gui.play()
 	hide()
+	Global.set_gui_active(false)
 	closed.emit()
 
 

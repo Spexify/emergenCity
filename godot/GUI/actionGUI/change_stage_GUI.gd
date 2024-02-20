@@ -36,6 +36,7 @@ func show_gui(p_action: EMC_Action) -> void:
 				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
 		open_gui_sfx.play()
 		show()
+		Global.set_gui_active(true)
 		opened.emit()
 
 
@@ -65,6 +66,7 @@ func _on_confirm_btn_pressed() -> void:
 
 func close() -> void:
 	close_gui_sfx.play()
+	Global.set_gui_active(false)
 	hide()
 	closed.emit()
 

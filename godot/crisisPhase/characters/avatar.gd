@@ -90,36 +90,36 @@ func get_unit_happinness_status() -> int:
 func add_nutrition(nutrition_change : int = 1) -> void: 
 	if _nutrition_value + nutrition_change <= MAX_VITALS_NUTRITION:
 		_nutrition_value += nutrition_change
-		nutrition_updated.emit(get_unit_nutrition_status(), MAX_VITALS_NUTRITION*UNIT_FACTOR_NUTRITION)
+		nutrition_updated.emit(get_unit_nutrition_status())
 	else: 
 		_nutrition_value = MAX_VITALS_NUTRITION
-		nutrition_updated.emit(get_unit_nutrition_status(), MAX_VITALS_NUTRITION*UNIT_FACTOR_NUTRITION)
+		nutrition_updated.emit(get_unit_nutrition_status())
 
 
 func sub_nutrition(nutrition_change : int = 1) -> bool:
 	if _nutrition_value - nutrition_change < 0 or _nutrition_value < 0:
-		nutrition_updated.emit(get_unit_nutrition_status(), MAX_VITALS_NUTRITION*UNIT_FACTOR_NUTRITION) 
+		nutrition_updated.emit(get_unit_nutrition_status()) 
 		return false
 	else:
 		_nutrition_value -= nutrition_change
-		nutrition_updated.emit(get_unit_nutrition_status(), MAX_VITALS_NUTRITION*UNIT_FACTOR_NUTRITION)
+		nutrition_updated.emit(get_unit_nutrition_status())
 		return true
 	
 func add_hydration(hydration_change : int = 1) -> void:
 	if _hydration_value + hydration_change <= MAX_VITALS_HYDRATION:
 		_hydration_value += hydration_change
-		hydration_updated.emit(get_unit_hydration_status(), MAX_VITALS_HYDRATION*UNIT_FACTOR_HYDRATION)
+		hydration_updated.emit(get_unit_hydration_status())
 	else:
 		_hydration_value = MAX_VITALS_HYDRATION
-		hydration_updated.emit(get_unit_hydration_status(), MAX_VITALS_HYDRATION*UNIT_FACTOR_HYDRATION)
+		hydration_updated.emit(get_unit_hydration_status())
 	
 func sub_hydration(hydration_change : int = 1) -> bool:
 	if _hydration_value - hydration_change < 0 or _hydration_value < 0:
-		hydration_updated.emit(get_unit_hydration_status(), MAX_VITALS_HYDRATION*UNIT_FACTOR_HYDRATION)
+		hydration_updated.emit(get_unit_hydration_status())
 		return false
 	else:
 		_hydration_value -= hydration_change
-		hydration_updated.emit(get_unit_hydration_status(), MAX_VITALS_HYDRATION*UNIT_FACTOR_HYDRATION)
+		hydration_updated.emit(get_unit_hydration_status())
 		return true
 
 func add_health(health_change : int = 1) -> void:

@@ -33,6 +33,7 @@ func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory, _p_inventory_GUI
 	
 func _open_summary_window() -> void:
 	$SummaryWindow.visible = true
+	Global.set_gui_active(true)
 
 ## opens summary end of day GUI/makes visible
 func open(_p_day_cycle: EMC_DayCycle) -> void:
@@ -49,6 +50,7 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 	visible = true
 	$SummaryWindow.visible = false
 	$DecisionWindow.visible = true
+	Global.set_gui_active(true)
 	opened.emit()
 
 
@@ -56,6 +58,7 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 func close() -> void:
 	close_gui_sfx.play()
 	visible = false
+	Global.set_gui_active(false)
 	closed.emit()
 
 

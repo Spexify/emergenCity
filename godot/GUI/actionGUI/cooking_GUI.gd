@@ -17,6 +17,7 @@ func setup(p_inventory: EMC_Inventory) -> void:
 
 
 func show_gui(p_action : EMC_Action) -> void:
+	Global.set_gui_active(true)
 	_action = p_action
 	for recipe in _recipe_list.get_children():
 		if not _recipe_cookable(recipe):
@@ -43,6 +44,7 @@ func _on_cooking_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
+	Global.set_gui_active(false)
 	visible = false
 	# Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 

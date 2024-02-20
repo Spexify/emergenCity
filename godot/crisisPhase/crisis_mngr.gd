@@ -13,7 +13,7 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _water_crisis : bool = false
 const WATER_LOWER_BOUND : int = 1
-const WATER_UPPER_BOUND : int = 4 
+const WATER_UPPER_BOUND : int = 6 
 var _water_crisis_probability_countdown : int 
 var _water_crisis_length_countdown : int = 2
 
@@ -24,14 +24,14 @@ var _electricity_crisis_probability_countdown : int
 var _electricity_crisis_length_countdown : int = 2
 
 var _isolation_crisis : bool = false
-const ISOLATION_LOWER_BOUND : int = 2
-const ISOLATION_UPPER_BOUND : int = 4 
+const ISOLATION_LOWER_BOUND : int = 6
+const ISOLATION_UPPER_BOUND : int = 12
 var _isolation_crisis_probability_countdown : int
 var _isolation_crisis_length_countdown : int = 2
 
 var _food_contamination_crisis : bool = false
-const FOOD_CONTAMINATION_LOWER_BOUND : int = 2
-const FOOD_CONTAMINATION_UPPER_BOUND : int = 4 
+const FOOD_CONTAMINATION_LOWER_BOUND : int = 6
+const FOOD_CONTAMINATION_UPPER_BOUND : int = 12
 var _food_contamination_crisis_probability_countdown : int
 var _food_contamination_crisis_length_countdown : int = 2
 

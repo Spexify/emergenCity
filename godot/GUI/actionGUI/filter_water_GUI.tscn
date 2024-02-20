@@ -17,6 +17,7 @@ func setup(_p_inventory : EMC_Inventory) -> void:
 
 func open() -> void:
 	visible = true
+	Global.set_gui_active(true)
 	$SFX/OpenGUISFX.play()
 	$DirtyWaterAvailable.visible = true
 	$DirtyWaterFiltered.visible = false
@@ -26,6 +27,7 @@ func open() -> void:
 func close() -> void:
 	$SFX/OpenGUISFX.play()
 	visible = false
+	Global.set_gui_active(false)
 	closed.emit()
 
 # Called when the node enters the scene tree for the first time.

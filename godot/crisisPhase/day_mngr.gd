@@ -25,7 +25,6 @@ var history : Array[EMC_DayCycle]
 var current_day_cycle : EMC_DayCycle 
 
 var _period_cnt : DayPeriod = DayPeriod.MORNING
-#var current_day : int = 0 #MRM: Redundant: Can be deduced through period_cnt (use getters)
 var max_day : int
 
 #var _actionArr : Array[EMC_Action] #MRM: Curr not used anymore
@@ -46,8 +45,8 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # hyperparameters for random pop-up- and optional events respectively
 var _puGUI_probability_countdown : int
-const PU_LOWER_BOUND : int = 6
-const PU_UPPER_BOUND : int = 10
+const PU_LOWER_BOUND : int = 3
+const PU_UPPER_BOUND : int = 6
 
 var _opGUI_probability_countdown : int
 const OP_LOWER_BOUND : int = 2
@@ -101,7 +100,7 @@ func on_interacted_with_furniture(action_id : int) -> void:
 		if reject_reason != EMC_ActionConstraints.NO_REJECTION:
 			reject_reasons = reject_reasons + reject_reason + " "
 	
-	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
+	if reject_reasons == EMC_ActionConstraints.NO_REJECTION && !Global.get_gui_active():
 		var gui_name := current_action.get_type_gui()
 		_get_gui_ref_by_name(gui_name).show_gui(current_action)
 	else:

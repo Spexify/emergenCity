@@ -15,11 +15,13 @@ func show_gui(p_action: EMC_Action) -> void:
 		$VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon.show()
 		$VBoxContainer/HBoxContainer/ConfirmBtn.hide()
 	show()
+	Global.set_gui_active(true)
 	opened.emit()
 
 
 func close() -> void:
 	hide()
+	Global.set_gui_active(false)
 	closed.emit()
 
 
