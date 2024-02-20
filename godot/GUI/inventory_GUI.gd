@@ -209,8 +209,6 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 
 #MRM: TODO: Remove Magic Numbers
 func _on_consume_pressed() -> void:
-	var has_drank : bool = false
-	var has_eaten : bool = false
 	var _clicked_item_copy := _clicked_item
 	if _clicked_item_copy == null:
 		return
@@ -226,32 +224,28 @@ func _on_consume_pressed() -> void:
 			_inventory.add_new_item(1)
 			
 	var drink_comp : EMC_IC_Drink = _clicked_item_copy.get_comp(EMC_IC_Drink)
-	if  drink_comp!= null:
-		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Trink"
-		_avatar_ref.add_hydration(drink_comp.get_hydration())
-		has_drank = true
 	var food_comp : EMC_IC_Food = _clicked_item_copy.get_comp(EMC_IC_Food)
-	if food_comp != null:
-		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Iss"
-		print(food_comp.get_nutritionness())
-		_avatar_ref.add_nutrition(food_comp.get_nutritionness())
-		has_eaten = true
-	var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item_copy.get_comp(EMC_IC_Unpalatable)
-	if unpalatable_comp != null:
-		_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
-	
-	var pleasurablenness_comp : EMC_IC_Pleasurablenness = _clicked_item_copy.get_comp(EMC_IC_Pleasurablenness)
-	if pleasurablenness_comp != null:
-		if pleasurablenness_comp.get_happinness_change() < 0:
-			_avatar_ref.sub_happinness(pleasurablenness_comp.get_happinness_change())
-		elif pleasurablenness_comp.get_happinness_change() >= 0 :
-			_avatar_ref.add_happinness(pleasurablenness_comp.get_happinness_change())
-			
-	if has_drank && has_eaten: 
-		_avatar_ref.add_health(1)
-	if _clicked_item_copy.get_ID() != 13:
+	if drink_comp != null || food_comp != null:
+		if  drink_comp!= null:
+			_avatar_ref.add_hydration(drink_comp.get_hydration())
+		if food_comp != null:
+			print(food_comp.get_nutritionness())
+			_avatar_ref.add_nutrition(food_comp.get_nutritionness())
+		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item_copy.get_comp(EMC_IC_Unpalatable)
+		if unpalatable_comp != null:
+			_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
+		
+		var pleasurablenness_comp : EMC_IC_Pleasurablenness = _clicked_item_copy.get_comp(EMC_IC_Pleasurablenness)
+		if pleasurablenness_comp != null:
+			if pleasurablenness_comp.get_happinness_change() < 0:
+				_avatar_ref.sub_happinness(pleasurablenness_comp.get_happinness_change())
+			elif pleasurablenness_comp.get_happinness_change() >= 0 :
+				_avatar_ref.add_happinness(pleasurablenness_comp.get_happinness_change())
+
+		#if _clicked_item_copy.get_ID() != 13:
 		_inventory.remove_item(_clicked_item_copy._ID)
-	
+	else: 
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 	_on_item_clicked(_clicked_item) #Update GUI
 
 
