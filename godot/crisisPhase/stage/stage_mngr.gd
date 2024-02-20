@@ -254,105 +254,111 @@ p_overwrite_existing_tiles: bool = false) -> void:
 ### Add NPCs to the scene
 ## TODO: should be done by a JSON in the future!
 func _setup_NPCs() -> void:
-	var gerhard: EMC_NPC = _NPC_SCN.instantiate()
-	gerhard.setup("Gerhard")
-	gerhard.hide()
-	gerhard.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(gerhard)
-	_dialogue_pitches[gerhard.get_name()] = 0.5
-	var trade_bid_gerhard := EMC_TradeMngr.TradeBid.new()
-	trade_bid_gerhard.sought_items = [EMC_Item.IDs.WATER_DIRTY, EMC_Item.IDs.WATER_DIRTY]
-	trade_bid_gerhard.offered_items = [EMC_Item.IDs.VEGETABLES]
-	gerhard.set_trade_bid(trade_bid_gerhard)
+	for npc : EMC_NPC in JsonMngr.load_NPC():
+		npc.hide()
+		npc.clicked.connect(_on_NPC_clicked)
+		$NPCs.add_child(npc)
+		_dialogue_pitches[npc.get_name()] = npc._dialogue_pitch
 	
-	var friedel: EMC_NPC = _NPC_SCN.instantiate()
-	friedel.setup("Friedel")
-	friedel.hide()
-	friedel.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(friedel)
-	_dialogue_pitches[friedel.get_name()] = 0.6
-	
-	var julia: EMC_NPC = _NPC_SCN.instantiate()
-	julia.setup("Julia")
-	julia.hide()
-	julia.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(julia)
-	_dialogue_pitches[julia.get_name()] = 1.3
-	
-	var mert: EMC_NPC = _NPC_SCN.instantiate()
-	mert.setup("Mert")
-	mert.hide()
-	mert.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(mert)
-	_dialogue_pitches[mert.get_name()] = 0.9
-	
-	var momo: EMC_NPC = _NPC_SCN.instantiate()
-	momo.setup("Momo")
-	momo.hide()
-	momo.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(momo)
-	_dialogue_pitches[momo.get_name()] = 0.8
-	
-	var agathe: EMC_NPC = _NPC_SCN.instantiate()
-	agathe.setup("Agathe")
-	agathe.hide()
-	agathe.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(agathe)
-	_dialogue_pitches[agathe.get_name()] = 1.2
-	var trade_bid_agathe := EMC_TradeMngr.TradeBid.new()
-	trade_bid_agathe.sought_items = [EMC_Item.IDs.CHLOR_TABLETS]
-	trade_bid_agathe.offered_items = [EMC_Item.IDs.PICKLED_VEGETABLES, EMC_Item.IDs. JAM]
-	agathe.set_trade_bid(trade_bid_agathe)
-	
-	var petro: EMC_NPC = _NPC_SCN.instantiate()
-	petro.setup("Petro")
-	petro.hide()
-	petro.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(petro)
-	_dialogue_pitches[petro.get_name()] = 0.65
-	var trade_bid_petro := EMC_TradeMngr.TradeBid.new()
-	trade_bid_petro.sought_items = [EMC_Item.IDs.SOAP]
-	trade_bid_petro.offered_items = [EMC_Item.IDs.BATTERIES]
-	petro.set_trade_bid(trade_bid_petro)
-	
-	var irena: EMC_NPC = _NPC_SCN.instantiate()
-	irena.setup("Irena")
-	irena.hide()
-	irena.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(irena)
-	_dialogue_pitches[irena.get_name()] = 1.3
-	
-	var elias: EMC_NPC = _NPC_SCN.instantiate()
-	elias.setup("Elias")
-	elias.hide()
-	elias.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(elias)
-	_dialogue_pitches[elias.get_name()] = 0.75
-	
-	var kris: EMC_NPC = _NPC_SCN.instantiate()
-	kris.setup("Kris")
-	kris.hide()
-	kris.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(kris)
-	_dialogue_pitches[kris.get_name()] = 1.0
-	
-	var veronika: EMC_NPC = _NPC_SCN.instantiate()
-	veronika.setup("Veronika")
-	veronika.hide()
-	veronika.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(veronika)
-	_dialogue_pitches[veronika.get_name()] = 1.1
-	var trade_bid_veronika := EMC_TradeMngr.TradeBid.new()
-	trade_bid_veronika.sought_items = [EMC_Item.IDs.SUGAR]
-	trade_bid_veronika.offered_items = [EMC_Item.IDs.GAS_CARTRIDGE]
-	veronika.set_trade_bid(trade_bid_veronika)
-	
-	var townhall_worker: EMC_NPC = _NPC_SCN.instantiate()
-	townhall_worker.setup("TownhallWorker")
-	townhall_worker.hide()
-	townhall_worker.clicked.connect(_on_NPC_clicked)
-	$NPCs.add_child(townhall_worker)
-	_dialogue_pitches[townhall_worker.get_name()] = 0.95
+	#var gerhard: EMC_NPC = _NPC_SCN.instantiate()
+	#gerhard.setup("Gerhard")
+	#gerhard.hide()
+	#gerhard.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(gerhard)
+	#_dialogue_pitches[gerhard.get_name()] = 0.5
+	#var trade_bid_gerhard := EMC_TradeMngr.TradeBid.new()
+	#trade_bid_gerhard.sought_items = [EMC_Item.IDs.WATER_DIRTY, EMC_Item.IDs.WATER_DIRTY]
+	#trade_bid_gerhard.offered_items = [EMC_Item.IDs.VEGETABLES]
+	#gerhard.set_trade_bid(trade_bid_gerhard)
+	#
+	#var friedel: EMC_NPC = _NPC_SCN.instantiate()
+	#friedel.setup("Friedel")
+	#friedel.hide()
+	#friedel.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(friedel)
+	#_dialogue_pitches[friedel.get_name()] = 0.6
+	#
+	#var julia: EMC_NPC = _NPC_SCN.instantiate()
+	#julia.setup("Julia")
+	#julia.hide()
+	#julia.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(julia)
+	#_dialogue_pitches[julia.get_name()] = 1.3
+	#
+	#var mert: EMC_NPC = _NPC_SCN.instantiate()
+	#mert.setup("Mert")
+	#mert.hide()
+	#mert.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(mert)
+	#_dialogue_pitches[mert.get_name()] = 0.9
+	#
+	#var momo: EMC_NPC = _NPC_SCN.instantiate()
+	#momo.setup("Momo")
+	#momo.hide()
+	#momo.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(momo)
+	#_dialogue_pitches[momo.get_name()] = 0.8
+	#
+	#var agathe: EMC_NPC = _NPC_SCN.instantiate()
+	#agathe.setup("Agathe")
+	#agathe.hide()
+	#agathe.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(agathe)
+	#_dialogue_pitches[agathe.get_name()] = 1.2
+	#var trade_bid_agathe := EMC_TradeMngr.TradeBid.new()
+	#trade_bid_agathe.sought_items = [EMC_Item.IDs.CHLOR_TABLETS]
+	#trade_bid_agathe.offered_items = [EMC_Item.IDs.PICKLED_VEGETABLES, EMC_Item.IDs. JAM]
+	#agathe.set_trade_bid(trade_bid_agathe)
+	#
+	#var petro: EMC_NPC = _NPC_SCN.instantiate()
+	#petro.setup("Petro")
+	#petro.hide()
+	#petro.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(petro)
+	#_dialogue_pitches[petro.get_name()] = 0.65
+	#var trade_bid_petro := EMC_TradeMngr.TradeBid.new()
+	#trade_bid_petro.sought_items = [EMC_Item.IDs.SOAP]
+	#trade_bid_petro.offered_items = [EMC_Item.IDs.BATTERIES]
+	#petro.set_trade_bid(trade_bid_petro)
+	#
+	#var irena: EMC_NPC = _NPC_SCN.instantiate()
+	#irena.setup("Irena")
+	#irena.hide()
+	#irena.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(irena)
+	#_dialogue_pitches[irena.get_name()] = 1.3
+	#
+	#var elias: EMC_NPC = _NPC_SCN.instantiate()
+	#elias.setup("Elias")
+	#elias.hide()
+	#elias.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(elias)
+	#_dialogue_pitches[elias.get_name()] = 0.75
+	#
+	#var kris: EMC_NPC = _NPC_SCN.instantiate()
+	#kris.setup("Kris")
+	#kris.hide()
+	#kris.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(kris)
+	#_dialogue_pitches[kris.get_name()] = 1.0
+	#
+	#var veronika: EMC_NPC = _NPC_SCN.instantiate()
+	#veronika.setup("Veronika")
+	#veronika.hide()
+	#veronika.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(veronika)
+	#_dialogue_pitches[veronika.get_name()] = 1.1
+	#var trade_bid_veronika := EMC_TradeMngr.TradeBid.new()
+	#trade_bid_veronika.sought_items = [EMC_Item.IDs.SUGAR]
+	#trade_bid_veronika.offered_items = [EMC_Item.IDs.GAS_CARTRIDGE]
+	#veronika.set_trade_bid(trade_bid_veronika)
+	#
+	#var townhall_worker: EMC_NPC = _NPC_SCN.instantiate()
+	#townhall_worker.setup("TownhallWorker")
+	#townhall_worker.hide()
+	#townhall_worker.clicked.connect(_on_NPC_clicked)
+	#$NPCs.add_child(townhall_worker)
+	#_dialogue_pitches[townhall_worker.get_name()] = 0.95
 
 
 ## Handle Tap/Mouse-Input

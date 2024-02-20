@@ -3,8 +3,8 @@ class_name EMC_TradeMngr
 ## TradeMngr has to be global, because the dialogue-system can only access global class's members
 
 class TradeBid:
-	var sought_items: Array[EMC_Item.IDs]  #from perspective of NPC
-	var offered_items: Array[EMC_Item.IDs] #from perspective of NPC
+	var sought_items: Array[int]  #from perspective of NPC
+	var offered_items: Array[int] #from perspective of NPC
 
 
 enum TradeFeasibility{
@@ -124,10 +124,24 @@ func get_unfeasibility_reason() -> String:
 			printerr("Unknown feasibility reason")
 			return ""
 
-
+static func deserialize_tradebid(data : Dictionary) -> EMC_TradeMngr.TradeBid:
+	var sought_items : Array[String]
+	var t_items : Variant = data.get("in")
+	assert(typeof(t_items) == TYPE_ARRAY and typeof(t_items[0]) == TYPE_STRING, "Error: deserialize trades failed, no items or wrong format for 'in' Items.")
+	sought_items.assign(t_items)
+	
+	var offered_items : Array[String]
+	t_items = data.get("out")
+	assert(typeof(t_items) == TYPE_ARRAY and typeof(t_items[0]) == TYPE_STRING, "Error: deserialize trades failed, no items or wrong format for 'out' Items.")
+	offered_items.assign(t_items)
+	
+	var bid := EMC_TradeMngr.TradeBid.new()
+	bid.sought_items.assign(sought_items.map(func (name : String) -> int: return JsonMngr.name_to_id(name)))
+	bid.offered_items.assign(offered_items.map(func (name : String) -> int: return JsonMngr.name_to_id(name)))
+	return bid
 
 ########################################## PRIVATE METHODS #########################################
-func _get_sought_item_IDs() -> Array[EMC_Item.IDs]:
+func _get_sought_item_IDs() -> Array[int]:
 	if _curr_NPC != null:
 		var _trade_bid: EMC_TradeMngr.TradeBid = _curr_NPC.get_trade_bid()
 		if _trade_bid != null:
@@ -136,7 +150,7 @@ func _get_sought_item_IDs() -> Array[EMC_Item.IDs]:
 	return []
 
 
-func _get_offered_item_IDs() -> Array[EMC_Item.IDs]:
+func _get_offered_item_IDs() -> Array[int]:
 	if _curr_NPC != null:
 		var _trade_bid: EMC_TradeMngr.TradeBid = _curr_NPC.get_trade_bid()
 		if _trade_bid != null:
@@ -170,7 +184,7 @@ func _has_enough_inventory_space() -> bool:
 		return _inventory.get_free_slot_cnt() >= diff
 
 
-func _count_items(p_item_IDs: Array[EMC_Item.IDs]) -> Dictionary:
+func _count_items(p_item_IDs: Array[int]) -> Dictionary:
 	var counting_dict: Dictionary = {}
 	#Count the sought items in a dictionary
 	for item_ID: EMC_Item.IDs in p_item_IDs:

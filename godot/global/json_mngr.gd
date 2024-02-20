@@ -1,12 +1,15 @@
 extends Node
 
+## RECIPTS
 const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
-
+## ITEMS
 const ITEM_SOURCE := "res://res/JSONs/item.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
-
+## POPUPS
 const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
+## NPCS
+const NPS_Source := "res://res/JSONs/npcs.json"
 
 ########################################JSON RECIPES################################################
 
@@ -266,3 +269,51 @@ func load_pop_up_actions() -> void:
 	pop_up_id += 1
 	
 	_is_pop_ups_loaded = true
+
+##########################################JSON NPCS#################################################
+
+const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
+
+func load_NPC() -> Array[EMC_NPC]:
+	assert(_is_items_loaded, "NPS-JSON: Items must be loaded before NPCs")
+	
+	if not FileAccess.file_exists(NPS_Source):
+		printerr("Could not load PopUps from source: " + NPS_Source)
+		return []
+
+	var recipe_source : FileAccess = FileAccess.open(NPS_Source, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = recipe_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return []
+
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_ARRAY:
+		printerr("Invalid format of NPC-JSON (" + NPS_Source + "). Make sure it is in form of an Array of Dictonaries.")
+		
+	var result : Array[EMC_NPC]
+	
+	var i : int = 0 
+	for dict_data : Dictionary in data:
+		var p_name : String = dict_data.get("name", "ERROR") 
+		assert(p_name != "ERROR", "NPC-JSON: NPC in position: " + str(i) + " has no name or an invalide name(such as 'ERROR').")
+		var t_pitch : float = dict_data.get("pitch", 0.0)
+		assert(t_pitch != 0.0, "NPC-JSON: NPC in position: " + str(i) + " has no pitch or an invalide pitch(such as 0.0).")
+		
+		var npc := _NPC_SCN.instantiate()
+		npc.setup(p_name)
+		npc._dialogue_pitch = t_pitch
+		
+		var p_trades : Variant = dict_data.get("trade", false)
+		if typeof(p_trades) != TYPE_BOOL:
+			assert(typeof(p_trades) == TYPE_DICTIONARY, "NPC-JSON: NPC in position: " + str(i) + " has invalide trades format.")
+			var trade : EMC_TradeMngr.TradeBid = EMC_TradeMngr.deserialize_tradebid(p_trades)
+			npc.set_trade_bid(trade)
+		
+		result.append(npc)
+		i += 1
+	return result
+
