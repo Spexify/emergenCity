@@ -1,5 +1,8 @@
 extends Node
 
+const INVALID_INT_VALUE: int = 0
+const INVALID_STRING_VALUE: String = "ERROR"
+
 ## RECIPTS
 const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
@@ -10,6 +13,8 @@ const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
 ## NPCS
 const NPS_Source := "res://res/JSONs/npcs.json"
+## BOOKS
+const BOOKS_SOURCE := "res://res/JSONs/books.json"
 
 ########################################JSON RECIPES################################################
 
@@ -289,7 +294,7 @@ func load_NPC() -> Array[EMC_NPC]:
 	if not parse_result == OK:
 		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 		return []
-
+	
 	var data : Variant = json.get_data()
 	if not typeof(data) == TYPE_ARRAY:
 		printerr("Invalid format of NPC-JSON (" + NPS_Source + "). Make sure it is in form of an Array of Dictonaries.")
@@ -317,3 +322,40 @@ func load_NPC() -> Array[EMC_NPC]:
 		i += 1
 	return result
 
+
+########################################JSON RECIPES################################################
+func load_books() -> Array[EMC_BookGUI.Book]:
+	if not FileAccess.file_exists(BOOKS_SOURCE):
+		printerr("Could not load books from source: " + BOOKS_SOURCE)
+		return []
+	
+	var books_src : FileAccess = FileAccess.open(BOOKS_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	var json_string : String = books_src.get_as_text()
+	var parse_result : Error = json.parse(books_src.get_as_text())
+	if not parse_result == OK:
+		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return []
+	
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_ARRAY:
+		printerr("Invalid format of NPC-JSON (" + NPS_Source + "). Make sure it is in form of an Array of Dictonaries.")
+		
+	var result : Array[EMC_BookGUI.Book]
+	
+	var i : int = 0 
+	for dict_data : Dictionary in data:
+		var ID : int = dict_data.get("ID", INVALID_INT_VALUE) 
+		assert(ID != INVALID_INT_VALUE, "BOOK-JSON: BOOK in position: " + str(i) + \
+			" has no ID or an invalid value(such as " + str(INVALID_INT_VALUE) + ").")
+		var title: String = dict_data.get("title", INVALID_STRING_VALUE)
+		assert(title != INVALID_STRING_VALUE, "BOOK-JSON: BOOK in position: " + str(i) + \
+			 " has no title or an invalide value('" + INVALID_STRING_VALUE + "').")
+		
+		var content: Array[String]
+		var content_dicts : Array[Dictionary]
+		content.assign(dict_data.get("content", []))
+		
+		result.append(EMC_BookGUI.Book.new(ID, title, content))
+		i += 1
+	return result

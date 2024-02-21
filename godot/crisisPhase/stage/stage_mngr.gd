@@ -28,7 +28,8 @@ enum Layers{
 
 enum CustomDataLayers{
 	ACTION_ID  = 0,
-	TOOLTIP = 1
+	TOOLTIP = 1,
+	BOOK = 2,
 }
 
 const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
@@ -68,18 +69,20 @@ var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 var _dialogue_pitches: Dictionary
 var _tooltip_GUI : EMC_TooltipGUI
+var _book_GUI: EMC_BookGUI
 var _initial_stage_name : String = "home"
 
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI, \
-	p_cs_GUI: EMC_ChangeStageGUI) -> void:
+func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, \
+p_tooltip_GUI: EMC_TooltipGUI, p_book_GUI: EMC_BookGUI, p_cs_GUI: EMC_ChangeStageGUI) -> void:
 	_crisis_phase = p_crisis_phase
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
 	_tooltip_GUI = p_tooltip_GUI
+	_book_GUI = p_book_GUI
 	
 	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	_dialogue_pitches["Avatar"] = 1.0
@@ -259,110 +262,11 @@ func _setup_NPCs() -> void:
 		npc.clicked.connect(_on_NPC_clicked)
 		$NPCs.add_child(npc)
 		_dialogue_pitches[npc.get_name()] = npc._dialogue_pitch
-	
-	#var gerhard: EMC_NPC = _NPC_SCN.instantiate()
-	#gerhard.setup("Gerhard")
-	#gerhard.hide()
-	#gerhard.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(gerhard)
-	#_dialogue_pitches[gerhard.get_name()] = 0.5
-	#var trade_bid_gerhard := EMC_TradeMngr.TradeBid.new()
-	#trade_bid_gerhard.sought_items = [EMC_Item.IDs.WATER_DIRTY, EMC_Item.IDs.WATER_DIRTY]
-	#trade_bid_gerhard.offered_items = [EMC_Item.IDs.VEGETABLES]
-	#gerhard.set_trade_bid(trade_bid_gerhard)
-	#
-	#var friedel: EMC_NPC = _NPC_SCN.instantiate()
-	#friedel.setup("Friedel")
-	#friedel.hide()
-	#friedel.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(friedel)
-	#_dialogue_pitches[friedel.get_name()] = 0.6
-	#
-	#var julia: EMC_NPC = _NPC_SCN.instantiate()
-	#julia.setup("Julia")
-	#julia.hide()
-	#julia.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(julia)
-	#_dialogue_pitches[julia.get_name()] = 1.3
-	#
-	#var mert: EMC_NPC = _NPC_SCN.instantiate()
-	#mert.setup("Mert")
-	#mert.hide()
-	#mert.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(mert)
-	#_dialogue_pitches[mert.get_name()] = 0.9
-	#
-	#var momo: EMC_NPC = _NPC_SCN.instantiate()
-	#momo.setup("Momo")
-	#momo.hide()
-	#momo.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(momo)
-	#_dialogue_pitches[momo.get_name()] = 0.8
-	#
-	#var agathe: EMC_NPC = _NPC_SCN.instantiate()
-	#agathe.setup("Agathe")
-	#agathe.hide()
-	#agathe.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(agathe)
-	#_dialogue_pitches[agathe.get_name()] = 1.2
-	#var trade_bid_agathe := EMC_TradeMngr.TradeBid.new()
-	#trade_bid_agathe.sought_items = [EMC_Item.IDs.CHLOR_TABLETS]
-	#trade_bid_agathe.offered_items = [EMC_Item.IDs.PICKLED_VEGETABLES, EMC_Item.IDs. JAM]
-	#agathe.set_trade_bid(trade_bid_agathe)
-	#
-	#var petro: EMC_NPC = _NPC_SCN.instantiate()
-	#petro.setup("Petro")
-	#petro.hide()
-	#petro.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(petro)
-	#_dialogue_pitches[petro.get_name()] = 0.65
-	#var trade_bid_petro := EMC_TradeMngr.TradeBid.new()
-	#trade_bid_petro.sought_items = [EMC_Item.IDs.SOAP]
-	#trade_bid_petro.offered_items = [EMC_Item.IDs.BATTERIES]
-	#petro.set_trade_bid(trade_bid_petro)
-	#
-	#var irena: EMC_NPC = _NPC_SCN.instantiate()
-	#irena.setup("Irena")
-	#irena.hide()
-	#irena.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(irena)
-	#_dialogue_pitches[irena.get_name()] = 1.3
-	#
-	#var elias: EMC_NPC = _NPC_SCN.instantiate()
-	#elias.setup("Elias")
-	#elias.hide()
-	#elias.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(elias)
-	#_dialogue_pitches[elias.get_name()] = 0.75
-	#
-	#var kris: EMC_NPC = _NPC_SCN.instantiate()
-	#kris.setup("Kris")
-	#kris.hide()
-	#kris.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(kris)
-	#_dialogue_pitches[kris.get_name()] = 1.0
-	#
-	#var veronika: EMC_NPC = _NPC_SCN.instantiate()
-	#veronika.setup("Veronika")
-	#veronika.hide()
-	#veronika.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(veronika)
-	#_dialogue_pitches[veronika.get_name()] = 1.1
-	#var trade_bid_veronika := EMC_TradeMngr.TradeBid.new()
-	#trade_bid_veronika.sought_items = [EMC_Item.IDs.SUGAR]
-	#trade_bid_veronika.offered_items = [EMC_Item.IDs.GAS_CARTRIDGE]
-	#veronika.set_trade_bid(trade_bid_veronika)
-	#
-	#var townhall_worker: EMC_NPC = _NPC_SCN.instantiate()
-	#townhall_worker.setup("TownhallWorker")
-	#townhall_worker.hide()
-	#townhall_worker.clicked.connect(_on_NPC_clicked)
-	#$NPCs.add_child(townhall_worker)
-	#_dialogue_pitches[townhall_worker.get_name()] = 0.95
 
 
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target
+## To see the consequences, once arrived, see func _on_avatar_arrived
 func _unhandled_input(p_event: InputEvent) -> void:
 	if ((p_event is InputEventMouseButton && p_event.pressed == true)
 	or (p_event is InputEventScreenTouch)):
@@ -377,6 +281,31 @@ func _unhandled_input(p_event: InputEvent) -> void:
 				_avatar.set_target(adjacent_free_tile_pos + $StageOffset.position)
 		elif !_has_tile_collision(_get_tile_coord(click_position)):
 			_avatar.set_target(click_position + $StageOffset.position)
+
+
+## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
+## See func _unhandled_input for where the navigation began
+## (doesn't have to be the target position that was originally set)
+func _on_avatar_arrived() -> void:
+	if _last_clicked_tile == null:
+		#NPC angeklickt?
+		if _last_clicked_NPC != null:
+			dialogue_initiated.emit(_last_clicked_NPC.get_name())
+	else: #FURNITURE angeklickt?
+		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+		var tooltip: String = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
+		var bookID: int = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.BOOK)
+		
+		if _is_tile_furniture(_last_clicked_tile):
+			_last_clicked_tile = null
+			if tooltip != "":
+				_tooltip_GUI.open(tooltip)
+				return
+			if bookID != 0:
+				_book_GUI.open(bookID)
+				return
+			
+			_day_mngr.on_interacted_with_furniture(action_ID)
 
 
 ## Returns only true, if click was on a tile, that belongs to the "inner" tiles 
@@ -413,6 +342,9 @@ func _is_tile_furniture(p_tiledata: TileData) -> bool:
 		return false
 	var tooltip: String = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
 	if tooltip != "":
+		return true
+	var book_ID: int = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.BOOK)
+	if book_ID != 0:
 		return true
 	
 	var action_ID: EMC_Action.IDs = p_tiledata.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
@@ -479,26 +411,6 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
 	return INVALID_TILE
-
-
-## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
-## (doesn't have to be the target position that was originally set)
-func _on_avatar_arrived() -> void:
-	if _last_clicked_tile == null:
-		#NPC angeklickt?
-		if _last_clicked_NPC != null:
-			dialogue_initiated.emit(_last_clicked_NPC.get_name())
-	else: #FURNITURE angeklickt?
-		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
-		var tooltip: String = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
-		
-		if _is_tile_furniture(_last_clicked_tile):
-			_last_clicked_tile = null
-			if tooltip != "":
-				_tooltip_GUI.open(tooltip)
-				return
-			
-			_day_mngr.on_interacted_with_furniture(action_ID)
 
 
 func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:

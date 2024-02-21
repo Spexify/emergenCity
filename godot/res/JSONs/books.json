@@ -1,0 +1,28 @@
+[
+	{
+		"ID": 1,
+		"title": "Krisenbewältigung für Anfänger",
+		"content": [
+			"Um eine Krise erfolgreich zu bewältigen, muss man insbesondere vier Aspekte im Auge behalten:\n
+			Ernährung, Hydrierung???, Gesundheit/Hygiene und Glücklickkeit",
+			"bla bla - \n
+			Autor X. Perte",
+		],
+	},
+	{
+		"ID": 2,
+		"title": "Die Krisen-Chroniken",
+		"content": [
+			"In diesem Buch werden Beispiele von Krisen in der Geschichte behandelt.",
+			"page 2",
+		],
+	},
+	{
+		"ID": 3,
+		"title": "Moderne Krisenmaßnahmen (?)",
+		"content": [
+			"page 1 :)",
+			"page 2 :)",
+		],
+	},
+]

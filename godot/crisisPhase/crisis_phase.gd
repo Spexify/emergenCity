@@ -26,7 +26,8 @@ var _crisis_mngr : EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 @onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
-
+@onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
+@onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
 
 ########################################## PUBLIC METHODS ##########################################
 func add_back_button(p_on_pressed_callback: Callable) -> void:
@@ -89,8 +90,8 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 
-	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, $GUI/VBC/LowerSection/TooltipGUI, \
-		$GUI/VBC/LowerSection/ChangeStageGUI)
+	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, _tooltip_GUI, \
+		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI

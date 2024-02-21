@@ -103,11 +103,11 @@ func _refresh() -> int:
 		_electricity_crisis_length_countdown = 2
 		_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
 	if _isolation_crisis_length_countdown <= 0:
-		OverworldStatesMngr.set_isolation_state(0) 
+		OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.IsolationState.NONE) #MRM: Bugfix: Enum instead of Magic number
 		_isolation_crisis_length_countdown = 2
 		_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 	if _food_contamination_crisis_length_countdown <= 0:
-		OverworldStatesMngr.set_food_contamination_state(0) 
+		OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.FoodContaminationState.NONE)  #MRM: Bugfix: Enum instead of Magic number
 		_food_contamination_crisis_length_countdown = 2
 		_food_contamination_crisis_probability_countdown = _rng.randi_range(FOOD_CONTAMINATION_LOWER_BOUND, FOOD_CONTAMINATION_UPPER_BOUND)
 		

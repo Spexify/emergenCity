@@ -11,7 +11,7 @@ enum ElectricityState{
 	NONE = SemaphoreColors.RED,
 	UNLIMITED = SemaphoreColors.GREEN
 }
-var _electricity_state: ElectricityState
+var _electricity_state: ElectricityState = ElectricityState.NONE
 
 enum WaterState{
 	NONE = SemaphoreColors.RED,
@@ -19,7 +19,7 @@ enum WaterState{
 	CLEAN = SemaphoreColors.GREEN
 }
 
-var _water_state: WaterState
+var _water_state: WaterState = WaterState.NONE
 
 enum IsolationState{
 	NONE = SemaphoreColors.GREEN,
@@ -27,14 +27,14 @@ enum IsolationState{
 	ISOLATION = SemaphoreColors.RED,
 }
 
-var _isolation_state: IsolationState
+var _isolation_state: IsolationState = IsolationState.NONE #MRM Bugfix: Initialized with NONE
 
 enum FoodContaminationState{
 	NONE = SemaphoreColors.GREEN,
 	FOOD_SPOILED = SemaphoreColors.RED
 }
 
-var _food_contamination_state: FoodContaminationState
+var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE #MRM Bugfix: Initialized with NONE
 
 enum Furniture{
 	WATER_RESERVOIR = 0, #UNUSED
