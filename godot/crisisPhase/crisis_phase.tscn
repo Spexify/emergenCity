@@ -205,6 +205,7 @@ layout_mode = 2
 
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
 
+[connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
 [connection signal="happinness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happinness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
