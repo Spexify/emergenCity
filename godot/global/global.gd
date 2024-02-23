@@ -14,6 +14,9 @@ const FIRST_GAME_SCENE = "res://global/first_game.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
+signal game_loaded
+signal scene_changed
+
 ## TODO : find a way to save this in the files
 var _tutorial_done : bool = true
 
@@ -59,6 +62,7 @@ func _deferred_goto_scene(path: String) -> void:
 	var s := ResourceLoader.load(path) #MRM: One letter variables are a bad habit :( "scn" would be better
 	current_scene = s.instantiate()
 	root.add_child(current_scene)
+	scene_changed.emit()
 
 
 func load_scene_name() -> String:
@@ -192,13 +196,16 @@ func load_game() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get("musik_volume", 1)))
-	$SFX/Musik.set_autoplay(true)
-	$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
-	$SFX/Musik.play() 
+	#$SFX/Musik.set_autoplay(true)
+	#$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
+	if not $SFX/Musik.playing:
+		$SFX/Musik.play() 
 	
 	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
 	if avatar_skin != null:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
+		
+	game_loaded.emit()
 
 
 ## A default inventory when the game save state is reset/a crisis ended

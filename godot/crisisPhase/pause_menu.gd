@@ -19,6 +19,8 @@ func _ready() -> void:
 	_settings.close(true)
 	_settings.closed.connect(open)
 
+func _exit_tree() -> void:
+	_settings.closed.disconnect(open)
 
 func open() -> void:
 	_update_overworld_states()

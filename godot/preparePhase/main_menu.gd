@@ -1,9 +1,6 @@
 extends Control
 
 @onready var _settings := SettingsGUI #$"../Settings"
-@onready var open_guisfx := $"../SFX/OpenGUISFX"
-@onready var close_guisfx := $"../SFX/CloseGUISFX"
-@onready var button_sfx := $"../SFX/ButtonSFX"
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
 #@onready var timer := $"../Timer"
 
@@ -32,20 +29,14 @@ func _ready() -> void:
 
 
 func _on_start_round_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	Global.goto_scene("res://preparePhase/crisis_start.tscn")
 	
 
 func _on_shelf_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	Global.goto_scene("res://preparePhase/shop.tscn")
 
 
 func _on_upgrade_center_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	pass 
 	# Todo: link Upgrade Center Scene
 	# get_tree().change_scene_to_file()
@@ -56,8 +47,6 @@ func _on_upgrade_center_pressed() -> void:
 func _on_settings_pressed() -> void:
 	#var new_setting = settings_scene.instantiate()
 	#add_child(new_setting)
-	button_sfx.play()
-	await button_sfx.finished
 	#_settings.show()
 	#MRM: Had a bug (see commit)
 	close()

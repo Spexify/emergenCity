@@ -42,13 +42,13 @@ text = "[center]Du bist in der Mitte einer Krise.[/center]"
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Krise fortsetzen"
 
-[node name="Reset" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Reset" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 45

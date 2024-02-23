@@ -52,12 +52,12 @@ autowrap_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bestätigen"
 
-[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"

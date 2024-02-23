@@ -153,22 +153,22 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="ResumeBtn" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons"]
+[node name="ResumeBtn" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Fortsetzen"
 
-[node name="Settings" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons"]
+[node name="Settings" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Einstellungen"
 
-[node name="CancelCurrCrisis" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons"]
+[node name="CancelCurrCrisis" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Krise abbrechen"
 
-[node name="SaveAndQuit" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons"]
+[node name="SaveAndQuit" type="Button" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Speichern & Schließen"

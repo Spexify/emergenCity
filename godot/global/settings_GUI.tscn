@@ -51,17 +51,17 @@ custom_minimum_size = Vector2(294, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Fortsetzen" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+[node name="Fortsetzen" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 text = "Speichern & Zurück
 "
 
-[node name="SelectAvatar" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+[node name="SelectAvatar" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 text = "Charakter auswählen"
 
-[node name="Sound" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+[node name="Sound" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 text = "Sound"
@@ -70,7 +70,7 @@ text = "Sound"
 layout_mode = 2
 text = "Dyslexic Font"
 
-[node name="Reset" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+[node name="Reset" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.776471, 0, 0, 1)
@@ -107,7 +107,7 @@ layout_mode = 2
 script = ExtResource("3_n24n2")
 bus_name = "SFX"
 
-[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 text = "Speichern & Zurück

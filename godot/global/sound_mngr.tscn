@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4o7v5wq5yd3"]
+
+[ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://res/SFX/Lofi.wav" id="1_cpl1b"]
+[ext_resource type="Script" path="res://global/sound_mngr.gd" id="1_ps8k0"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="3_l0jhf"]
+
+[node name="SFX" type="Node"]
+script = ExtResource("1_ps8k0")
+
+[node name="Musik" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("1_cpl1b")
+bus = &"Musik"
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_l0jhf")
+bus = &"SFX"

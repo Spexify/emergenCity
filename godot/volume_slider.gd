@@ -11,6 +11,7 @@ func _init() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await Global.game_loaded
 	bus_index = AudioServer.get_bus_index(bus_name)
 	set_value_no_signal(db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
 	value_changed.connect(_on_value_changed)
