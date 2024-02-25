@@ -242,12 +242,12 @@ func _on_consume_pressed() -> void:
 		if unpalatable_comp != null:
 			_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
 		
-		var pleasurablenness_comp : EMC_IC_Pleasurablenness = _clicked_item_copy.get_comp(EMC_IC_Pleasurablenness)
-		if pleasurablenness_comp != null:
-			if pleasurablenness_comp.get_happinness_change() < 0:
-				_avatar_ref.sub_happinness(pleasurablenness_comp.get_happinness_change())
-			elif pleasurablenness_comp.get_happinness_change() >= 0 :
-				_avatar_ref.add_happinness(pleasurablenness_comp.get_happinness_change())
+		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item_copy.get_comp(EMC_IC_Pleasurable)
+		if pleasurable_comp != null:
+			if pleasurable_comp.get_happinness_change() < 0:
+				_avatar_ref.sub_happinness(pleasurable_comp.get_happinness_change())
+			elif pleasurable_comp.get_happinness_change() >= 0 :
+				_avatar_ref.add_happinness(pleasurable_comp.get_happinness_change())
 
 		#if _clicked_item_copy.get_ID() != 13:
 		_inventory.remove_item(_clicked_item_copy._ID)

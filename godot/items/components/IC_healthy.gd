@@ -7,7 +7,7 @@ var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_health_change : int) -> void:
-	super("Genießbar", Color.HOT_PINK)
+	super("Gesund", Color.HOT_PINK)
 	_health_change = _p_health_change
 
 
