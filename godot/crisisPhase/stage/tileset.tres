@@ -509,12 +509,6 @@ texture_region_size = Vector2i(64, 64)
 3:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:10/0/physics_layer_0/angular_velocity = 0.0
 3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-4:12/0 = 0
-4:12/0/y_sort_origin = -100
-4:12/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:12/0/physics_layer_0/angular_velocity = 0.0
-4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-4:12/0/custom_data_1 = "Hier muss mal die BBK Broschüre als bookGUI oder link erscheinen..."
 3:12/0 = 0
 3:12/0/y_sort_origin = -100
 3:12/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -829,6 +823,12 @@ texture_region_size = Vector2i(64, 64)
 3:15/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:15/0/physics_layer_0/angular_velocity = 0.0
 3:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+4:12/0 = 0
+4:12/0/y_sort_origin = -100
+4:12/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:12/0/physics_layer_0/angular_velocity = 0.0
+4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+4:12/0/custom_data_0 = 7
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_w20dv"]
 source_geometry_group_name = &"navigation_polygon_source_group"

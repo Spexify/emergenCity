@@ -191,7 +191,7 @@ func load_game() -> void:
 		SoundMngr.play_musik() 
 	
 	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
-	if avatar_skin != null:
+	if avatar_skin != null && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 		
 	game_loaded.emit()

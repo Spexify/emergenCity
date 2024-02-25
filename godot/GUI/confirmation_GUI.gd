@@ -1,4 +1,4 @@
-extends EMC_GUI
+extends EMC_ActionGUI
 class_name EMC_ConfirmationGUI
 
 signal decided

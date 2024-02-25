@@ -4,7 +4,7 @@ class_name EMC_DayPeriodTransition
 const FADE_IN_ANIM := "fade_in"
 const FADE_OUT_ANIM := "fade_out"
 const AMPLITUDE = 200
-const SPEED : float = 4.0
+const SPEED : float = 3.0
 var ONE_PERIOD_RADIAN := PI / (EMC_DayMngr.DayPeriod.size() - 1)
 var distance_factor := 1.0
 var _MAX_TIME: float = 1.0/SPEED #+ _START_TIME

@@ -27,6 +27,7 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 @onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
+@onready var _day_mngr := $GUI/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
 @onready var _backpack_GUI := $GUI/VBC/MiddleSection/BackpackGUI
 @onready var _SEOD := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
@@ -100,7 +101,7 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
-	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, _tooltip_GUI, \
+	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, \
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
@@ -121,11 +122,12 @@ func _ready() -> void:
 	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)
+	action_guis.append(_confirmation_GUI as EMC_ActionGUI)
 	
 	_crisis_mngr.setup(_backpack)
-	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
-		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
+	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
+		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack)
+	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
 
 	if !Global._tutorial_done:
 		var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()

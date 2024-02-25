@@ -1,4 +1,7 @@
 extends Control
+class_name EMC_Information
+
+const BBK_BROCHURE_LINK := "https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/ratgeber-notfallvorsorge.pdf?__blob=publicationFile&v=15"
 
 func open() -> void:
 	show()
@@ -6,6 +9,9 @@ func open() -> void:
 
 func close() -> void:
 	hide()
+
+static func open_bbk_brochure() -> void:
+	OS.shell_open(BBK_BROCHURE_LINK)
 
 
 func _on_texture_button_pressed() -> void:
@@ -18,4 +24,6 @@ func _on_cooking_button_pressed() -> void:
 
 
 func _on_bbk_button_pressed() -> void:
-	OS.shell_open("https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/ratgeber-notfallvorsorge.pdf?__blob=publicationFile&v=15")
+	open_bbk_brochure()
+
+

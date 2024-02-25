@@ -79,7 +79,7 @@ _data = {
 }
 
 [node name="DayPeriodTransition" type="Node2D"]
-process_mode = 2
+process_mode = 3
 z_index = 5
 script = ExtResource("1_fuwqt")
 
