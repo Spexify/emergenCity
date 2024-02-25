@@ -196,10 +196,8 @@ func load_game() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get("musik_volume", 1)))
-	#$SFX/Musik.set_autoplay(true)
-	#$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
-	if not $SFX/Musik.playing:
-		$SFX/Musik.play() 
+	if not SoundMngr.is_musik_playing():
+		SoundMngr.play_musik() 
 	
 	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
 	if avatar_skin != null:
