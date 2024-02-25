@@ -27,12 +27,7 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
-var _crisis_length : int = 3
-var _number_crisis_overlap : int = 3
-var _water_crisis : bool = false
-var _electricity_crisis : bool = false
-var _isolation_crisis : bool = false
-var _food_contamination_crisis : bool = false
+
 
 var _gui_active : bool = false
 
@@ -280,17 +275,6 @@ func get_inventory() -> EMC_Inventory:
 	
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
-
-func set_crisis_difficulty(_p_water_crisis: bool = true, _p_electricity_crisis : bool = true,
-							_p_isolation_crisis : bool = false, _p_food_contamination_crisis : bool = false,
-						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2) -> void:
-	_water_crisis = _p_water_crisis
-	_electricity_crisis =_p_electricity_crisis
-	_isolation_crisis = _p_isolation_crisis
-	_food_contamination_crisis = _p_food_contamination_crisis
-	
-	_crisis_length = _p_crisis_length
-	_number_crisis_overlap = _p_number_crisis_overlap
 	
 func get_gui_active() -> bool:
 	return _gui_active
@@ -298,20 +282,3 @@ func get_gui_active() -> bool:
 func set_gui_active(is_active : bool) -> void:
 	_gui_active = is_active
 
-func get_number_crisis_overlap() -> int:
-	return _number_crisis_overlap
-
-func get_crisis_length() -> int:
-	return _crisis_length
-	
-func get_water_crisis_status() -> bool:
-	return _water_crisis
-	
-func get_electricity_crisis_status() -> bool:
-	return _electricity_crisis
-	
-func get_isolation_crisis_status() -> bool:
-	return _isolation_crisis
-	
-func get_food_contamination_crisis_status() -> bool:
-	return _food_contamination_crisis

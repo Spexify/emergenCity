@@ -1,6 +1,13 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
+var _crisis_length : int = 3
+var _number_crisis_overlap : int = 3
+var _water_crisis_status : bool = false
+var _electricity_crisis_status : bool = false
+var _isolation_crisis_status : bool = false
+var _food_contamination_crisis_status : bool = false
+
 enum SemaphoreColors{
 	RED = 0,
 	YELLOW = 1,
@@ -60,6 +67,35 @@ func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_u
 	_furniture_state = {
 		Furniture.RAINWATER_BARREL : 0,
 	}
+
+func set_crisis_difficulty(_p_water_crisis: bool = true, _p_electricity_crisis : bool = true,
+							_p_isolation_crisis : bool = false, _p_food_contamination_crisis : bool = false,
+						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2) -> void:
+	_water_crisis_status = _p_water_crisis
+	_electricity_crisis_status =_p_electricity_crisis
+	_isolation_crisis_status = _p_isolation_crisis
+	_food_contamination_crisis_status = _p_food_contamination_crisis
+	
+	_crisis_length = _p_crisis_length
+	_number_crisis_overlap = _p_number_crisis_overlap
+	
+func get_number_crisis_overlap() -> int:
+	return _number_crisis_overlap
+
+func get_crisis_length() -> int:
+	return _crisis_length
+	
+func get_water_crisis_status() -> bool:
+	return _water_crisis_status
+	
+func get_electricity_crisis_status() -> bool:
+	return _electricity_crisis_status
+	
+func get_isolation_crisis_status() -> bool:
+	return _isolation_crisis_status
+	
+func get_food_contamination_crisis_status() -> bool:
+	return _food_contamination_crisis_status
 
 func get_electricity_state() -> ElectricityState:
 	return _electricity_state

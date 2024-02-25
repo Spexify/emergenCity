@@ -45,14 +45,14 @@ func setup(p_backpack : EMC_Inventory) -> void:
 				#(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)	
 	_inventory = p_backpack
 				
-	_water_crisis = Global.get_water_crisis_status()
-	_electricity_crisis = Global.get_electricity_crisis_status()
-	_isolation_crisis = Global.get_isolation_crisis_status()
-	_food_contamination_crisis = Global.get_food_contamination_crisis_status()
+	_water_crisis = OverworldStatesMngr.get_water_crisis_status()
+	_electricity_crisis = OverworldStatesMngr.get_electricity_crisis_status()
+	_isolation_crisis = OverworldStatesMngr.get_isolation_crisis_status()
+	_food_contamination_crisis = OverworldStatesMngr.get_food_contamination_crisis_status()
 
-	_max_day = Global.get_crisis_length()
+	_max_day = OverworldStatesMngr.get_crisis_length()
 	_crisis_period_counter = _max_day * 3
-	_max_crisis_overlap = Global.get_number_crisis_overlap()
+	_max_crisis_overlap = OverworldStatesMngr.get_number_crisis_overlap()
 	
 	_water_crisis_probability_countdown = _rng.randi_range(WATER_LOWER_BOUND, WATER_UPPER_BOUND)
 	_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)

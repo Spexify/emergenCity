@@ -35,10 +35,10 @@ func _on_continue_pressed() -> void:
 	var _current_scenario := _scenario.get_scenario()
 	
 	if Global._tutorial_done: 
-		Global.set_crisis_difficulty(_current_scenario["water_crisis"],_current_scenario["electricity_crisis"],
+		OverworldStatesMngr.set_crisis_difficulty(_current_scenario["water_crisis"],_current_scenario["electricity_crisis"],
 								_current_scenario["isolation_crisis"],_current_scenario["food_contamination_crisis"],
 								_crisis_length, _number_crisis_overlap)
 	else:
-		Global.set_crisis_difficulty()
+		OverworldStatesMngr.set_crisis_difficulty()
 		
 	Global.goto_scene(Global.CRISIS_PHASE_SCENE)
