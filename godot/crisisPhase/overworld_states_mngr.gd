@@ -69,8 +69,8 @@ func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_u
 		Furniture.RAINWATER_BARREL : 0,
 	}
 
-func set_crisis_difficulty(_p_water_crisis: WaterState, _p_electricity_crisis : ElectricityState,
-							_p_isolation_crisis : IsolationState, _p_food_contamination_crisis : FoodContaminationState,
+func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_electricity_crisis : ElectricityState = ElectricityState.UNLIMITED,
+							_p_isolation_crisis : IsolationState = IsolationState.NONE, _p_food_contamination_crisis : FoodContaminationState = FoodContaminationState.NONE,
 						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2, _p_notification : String = "") -> void:
 	_water_crisis_status = _p_water_crisis
 	_electricity_crisis_status =_p_electricity_crisis
