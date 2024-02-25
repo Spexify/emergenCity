@@ -14,6 +14,7 @@ const AGATHE_DIALOG : DialogueResource = preload("res://res/dialogue/agathe.dial
 const KRIS_DIALOG : DialogueResource = preload("res://res/dialogue/kris.dialogue")
 const VERONIKA_DIALOG : DialogueResource = preload("res://res/dialogue/veronika.dialogue")
 const WORKER_DIALOG : DialogueResource = preload("res://res/dialogue/townhall_worker.dialogue")
+const TUTORIAL_DIALOG : DialogueResource = preload("res://res/dialogue/tutorial.dialogue")
 
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 const _BACK_BTN_NAME := "BackButton"
@@ -60,7 +61,7 @@ func _ready() -> void:
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar, "Rucksack", true)
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar,$GUI/VBC/MiddleSection/SummaryEndOfDayGUI , "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
@@ -117,6 +118,13 @@ func _ready() -> void:
 		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
 	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
 
+	if !Global._tutorial_done:
+		var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+		dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
+		$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+		dialogue_GUI.start(TUTORIAL_DIALOG, "START")
+		get_tree().paused = true
+		Global._tutorial_done = true
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key

@@ -40,7 +40,10 @@ func close() -> void:
 
 
 func _ready() -> void:
-	close()
+	$CanvasLayer.hide()
+	$CanvasModulate.hide()
+	hide()
+	#close()
 
 
 #func _process(p_delta: float) -> void:

@@ -1,16 +1,15 @@
 extends Control
 class_name EMC_FirstGame
 
+func _ready() -> void:
+	$AnimationPlayer.play("Fade")
+	await( get_tree().create_timer(2))
+
 
 func _on_start_tutorial_pressed() -> void:
-	#Global.goto_scene("res://GUI/avatar_selection_GUI.tscn")
-	## TODO: add avatar selection and starting in the middle of the crisis
-	Global.load_game()
-	Global.set_crisis_difficulty()
-	Global._tutorial_done = true
-	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
-	Global.goto_scene(start_scene_name)
 	close()
+	$AvatarSelectionGUI.open()
+
 
 func close() -> void:
 	#get_tree().paused = false
@@ -18,3 +17,13 @@ func close() -> void:
 	$CanvasLayer_unaffectedByCM.hide()
 	$CanvasModulate.hide()
 	#closed.emit()
+
+
+func _on_avatar_selection_gui_closed() -> void:
+	Global.load_game()
+	OverworldStatesMngr.set_crisis_difficulty(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.ElectricityState.NONE,
+							EMC_OverworldStatesMngr.IsolationState.NONE, EMC_OverworldStatesMngr.FoodContaminationState.NONE,
+							3, 1, "Der Strom ist ausgefallen!")
+	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
+	Global.goto_scene(start_scene_name)
+	close()

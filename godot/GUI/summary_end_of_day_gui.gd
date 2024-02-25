@@ -48,7 +48,6 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = _p_day_cycle.noon_action.get_description()
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = _p_day_cycle.evening_action.get_description()
 	visible = true
-	$SummaryWindow.visible = false
 	Global.set_gui_active(true)
 	opened.emit()
 
@@ -68,6 +67,9 @@ func _on_continue_pressed() -> void:
 	_inventory_GUI.set_consume_active(_has_slept)
 	_inventory_GUI.open()
 	_has_slept = 0
+	close_gui_sfx.play()
+	visible = false
+
+
+func _on_inventory_gui_seod_inventory_closed()-> void:
 	close()
-
-

@@ -19,7 +19,6 @@ signal scene_changed
 
 ## TODO : find a way to save this in the files
 var _tutorial_done : bool = true
-
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 
@@ -27,8 +26,6 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
-
-
 var _gui_active : bool = false
 
 func _ready() -> void:

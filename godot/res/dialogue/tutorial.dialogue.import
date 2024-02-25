@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://0b3cdamfvgg7"
+path="res://.godot/imported/tutorial.dialogue-404e388611dabf861d3ebe9657e209a5.tres"
+
+[deps]
+
+source_file="res://res/dialogue/tutorial.dialogue"
+dest_files=["res://.godot/imported/tutorial.dialogue-404e388611dabf861d3ebe9657e209a5.tres"]
+
+[params]
+
+defaults=true

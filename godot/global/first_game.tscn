@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://i4v276dowcqx"]
+[gd_scene load_steps=7 format=3 uid="uid://i4v276dowcqx"]
 
 [ext_resource type="Script" path="res://global/first_game.gd" id="1_126p6"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="2_vvf4y"]
+[ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="3_508yw"]
+
+[sub_resource type="Animation" id="Animation_6l2s4"]
+resource_name = "Fade"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ddmar"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hr5gj"]
+_data = {
+"Fade": SubResource("Animation_6l2s4"),
+"RESET": SubResource("Animation_ddmar")
+}
 
 [node name="FirstGame" type="Control"]
 layout_mode = 3
@@ -51,4 +89,19 @@ theme_override_font_sizes/font_size = 40
 text = "Spiel starten
 "
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 1024.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hr5gj")
+}
+
+[node name="AvatarSelectionGUI" parent="." instance=ExtResource("3_508yw")]
+layout_mode = 1
+
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/StartTutorial" to="." method="_on_start_tutorial_pressed"]
+[connection signal="closed" from="AvatarSelectionGUI" to="." method="_on_avatar_selection_gui_closed"]

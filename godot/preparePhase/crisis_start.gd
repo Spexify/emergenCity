@@ -27,7 +27,7 @@ func _on_continue_pressed() -> void:
 	elif $CanvasLayer/VBoxContainer/VBoxContainer/HSlider.value == 1:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_NORMAL, LENGTH_UPPER_BOUND_NORMAL)
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)
-		print(_number_crisis_overlap)
+		#print(_number_crisis_overlap)
 	elif $CanvasLayer/VBoxContainer/VBoxContainer/HSlider.value == 2:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_HARD, LENGTH_UPPER_BOUND_HARD)
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)

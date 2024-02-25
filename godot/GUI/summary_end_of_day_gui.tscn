@@ -151,4 +151,5 @@ stream = ExtResource("3_hs5pc")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_2a3qa")
 
+[connection signal="seod_inventory_closed" from="SummaryWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI" to="." method="_on_inventory_gui_seod_inventory_closed"]
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

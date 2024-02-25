@@ -10,6 +10,7 @@ class_name EMC_InventoryGUI
 
 signal close_button
 signal chlor_tablets_clicked
+signal seod_inventory_closed
 
 @onready var open_gui := $SFX/OpenGUI
 @onready var close_gui := $SFX/CloseGUI
@@ -21,6 +22,7 @@ var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
+var _seod : EMC_SummaryEndOfDayGUI
 
 var is_consume_active : bool
 var _has_slept : int = 0
@@ -29,13 +31,14 @@ var _has_slept : int = 0
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
+func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
 			_p_only_inventory : bool = true) -> void:
 	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
 	_only_inventory = _p_only_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
+	_seod = _p_seod
 	set_title(p_title)
 
 	$Inventory/VBoxContainer/HBoxContainer/Consume.hide()
@@ -124,11 +127,14 @@ func close() -> void:
 			_avatar_ref.add_health(_has_slept)
 		_has_slept = 0
 		_avatar_ref.get_home()
-		close_button.emit()
+	close_button.emit()
 	close_gui.play()
 	hide()
 	Global.set_gui_active(false)
 	closed.emit()
+	if !_only_inventory:
+		_seod.close()
+	seod_inventory_closed.emit()
 
 
 ########################################## PRIVATE METHODS #########################################

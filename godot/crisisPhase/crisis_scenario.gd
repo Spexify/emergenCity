@@ -49,28 +49,14 @@ var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.Water
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var LOWER_BOUND : int = 1
-var UPPER_BOUND : int = 7
+var UPPER_BOUND : int = _all_scenarios.size()
 
 var _scenario := {}
 
 func _init() -> void:
-	#print(_all_scenarios.keys())
-	match _rng.randi_range(LOWER_BOUND, UPPER_BOUND):
-		1:
-			_scenario = _all_scenarios["Flood"]
-		2:
-			_scenario = _all_scenarios["Hurricane"]
-		3:
-			_scenario = _all_scenarios["Drought"]
-		4:
-			_scenario = _all_scenarios["Pandemic"]
-		5:
-			_scenario = _all_scenarios["Earthquake"]
-		6:
-			_scenario = _all_scenarios["Forest Fire"]
-		7:
-			_scenario = _all_scenarios["Chemical Accident"]
-		_: push_error("Scenario index out of bounds!")
+	var index := _rng.randi_range(LOWER_BOUND, UPPER_BOUND)
+	_scenario = _all_scenarios.values()[index-1]
+	
 	
 func get_scenario() -> Dictionary:
 	return _scenario
