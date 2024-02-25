@@ -17,7 +17,6 @@ signal seod_inventory_closed
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
-var _crisis_phase: EMC_CrisisPhase
 var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
@@ -31,13 +30,16 @@ var _has_slept : int = 0
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 <<<<<<< HEAD
+<<<<<<< HEAD
 func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
 =======
 func setup(p_inventory: EMC_Inventory, p_crisis_phase: EMC_CrisisPhase, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
 >>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
+=======
+func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
+>>>>>>> 43be90ed9e5b6c88a3362fefce35745595506e46
 			_p_only_inventory : bool = true) -> void:
 	_inventory = p_inventory
-	_crisis_phase = p_crisis_phase
 	_avatar_ref = _p_avatar_ref
 	_only_inventory = _p_only_inventory
 	_inventory.item_added.connect(_on_item_added)
@@ -49,18 +51,6 @@ func setup(p_inventory: EMC_Inventory, p_crisis_phase: EMC_CrisisPhase, _p_avata
 	$Inventory/VBoxContainer/HBoxContainer/Continue.hide()
 	$Inventory/VBoxContainer/HBoxContainer/Discard.hide()
 	$FilterWater.hide()
-	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
-		#var new_slot := _SLOT_SCN.instantiate()
-		#if item != EMC_Item.IDs.DUMMY:
-			#var new_item := _ITEM_SCN.instantiate()
-			#new_item.setup(item)
-			#new_item.clicked.connect(_on_item_clicked)
-		#
-			#
-			#new_slot.set_item(new_item)
-	#
-		#
-		#$Inventory/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
@@ -119,7 +109,6 @@ func open() -> void:
 	_on_item_clicked(_clicked_item)
 	Global.set_gui_active(true)
 	show()
-	_crisis_phase.add_back_button(close)
 	get_tree().paused = true
 	opened.emit()
 
@@ -140,7 +129,6 @@ func close() -> void:
 >>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
 	hide()
 	Global.set_gui_active(false)
-	_crisis_phase.remove_back_button()
 	get_tree().paused = false
 	closed.emit()
 	if !_only_inventory:

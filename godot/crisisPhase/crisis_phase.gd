@@ -41,10 +41,10 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	#new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	#new_back_button.pressed.connect(remove_back_button)
 	
-	#Hide all other back button
-	for node: TextureButton in $ButtonList/VBC.get_children():
-		if node.name == _BACK_BTN_NAME:
-			node.hide()
+	#Hide all other back buttons
+	#for node: TextureButton in $ButtonList/VBC.get_children():
+		#if node.name == _BACK_BTN_NAME:
+			#node.hide()
 	
 	$ButtonList/VBC.add_child(new_back_button)
 	$ButtonList/VBC.move_child(new_back_button, 0) #so it appears above all the buttons in the list
@@ -57,9 +57,9 @@ func remove_back_button() -> void:
 		if node.name == _BACK_BTN_NAME:
 			$ButtonList/VBC.remove_child(node)
 	#Show latest back button if there is one
-	var last_backBtn := $ButtonList/VBC.get_child(0)
-	if last_backBtn.name == _BACK_BTN_NAME:
-		last_backBtn.show()
+	#var last_backBtn := $ButtonList/VBC.get_child(0)
+	#if last_backBtn.name == _BACK_BTN_NAME:
+		#last_backBtn.show()
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
@@ -74,10 +74,14 @@ func _ready() -> void:
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar,$GUI/VBC/MiddleSection/SummaryEndOfDayGUI , "Rucksack", true)
 =======
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, self, $Avatar, "Rucksack", true)
 >>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
+=======
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar, "Rucksack", true)
+>>>>>>> 43be90ed9e5b6c88a3362fefce35745595506e46
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
