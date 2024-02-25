@@ -157,23 +157,23 @@ func check_crisis_status() -> void:
 func _water_crisis_mngr() -> void:
 	if _water_crisis_probability_countdown <= 0:
 		if _water_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_water_state(EMC_OverworldStatesMngr.WaterState.NONE)
+			OverworldStatesMngr.set_water_state(_water_crisis)
 			
 
 		
 func _electricity_crisis_mngr() -> void:
 	if _electricity_crisis_probability_countdown <= 0:
 		if _electricity_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_electricity_state(EMC_OverworldStatesMngr.ElectricityState.NONE)
+			OverworldStatesMngr.set_electricity_state(_electricity_crisis)
 			
 		
 func _isolation_crisis_mngr() -> void:
 	if _isolation_crisis_probability_countdown <= 0:
 		if _isolation_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET)
+			OverworldStatesMngr.set_isolation_state(_isolation_crisis)
 			
 func _food_contamination_crisis_mngr() -> void:
 	if _food_contamination_crisis_probability_countdown <= 0:
 		if _food_contamination_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_food_contamination_state(EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED)
+			OverworldStatesMngr.set_food_contamination_state(_food_contamination_crisis)
 			_inventory.spoil_all_items()
