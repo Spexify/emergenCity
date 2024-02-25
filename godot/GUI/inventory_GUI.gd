@@ -238,6 +238,20 @@ func _on_consume_pressed() -> void:
 				_avatar_ref.sub_happinness(pleasurable_comp.get_happinness_change())
 			elif pleasurable_comp.get_happinness_change() >= 0 :
 				_avatar_ref.add_happinness(pleasurable_comp.get_happinness_change())
+				
+		var healthy_comp : EMC_IC_Healthy = _clicked_item_copy.get_comp(EMC_IC_Healthy)
+		if healthy_comp != null:
+			if healthy_comp.get_health_change() < 0:
+				_avatar_ref.sub_health(healthy_comp.get_health_change())
+			elif healthy_comp.get_health_change() >= 0 :
+				_avatar_ref.add_health(healthy_comp.get_health_change())
+				
+		var hydrating_comp : EMC_IC_Hydrating = _clicked_item_copy.get_comp(EMC_IC_Hydrating)
+		if hydrating_comp != null:
+			if hydrating_comp.get_hydration_change() < 0:
+				_avatar_ref.sub_hydration(hydrating_comp.get_hydration_change())
+			elif hydrating_comp.get_hydration_change() >= 0 :
+				_avatar_ref.add_hydration(hydrating_comp.get_hydration_change())
 
 		#if _clicked_item_copy.get_ID() != 13:
 		_inventory.remove_item(_clicked_item_copy._ID)
