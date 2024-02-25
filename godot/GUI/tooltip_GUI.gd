@@ -17,13 +17,11 @@ func _process(delta: float) -> void:
 func open(p_text: String) -> void:
 	$VBoxContainer/PanelContainer/RichTextLabel.text = "[color=black]" + p_text + "[/color]"
 	get_tree().paused = true
-	Global.set_gui_active(true)
 	show()
 	opened.emit()
 
 
 func _on_back_btn_pressed() -> void:
 	get_tree().paused = false
-	Global.set_gui_active(false)
 	hide()
 	closed.emit()

@@ -99,7 +99,6 @@ func clear_items() -> void:
 ## Open the GUI
 func open() -> void:
 	_on_item_clicked(_clicked_item)
-	Global.set_gui_active(true)
 	show()
 	get_tree().paused = true
 	opened.emit()
@@ -110,7 +109,6 @@ func close() -> void:
 	close_button.emit()
 	#close_gui.play()
 	hide()
-	Global.set_gui_active(false)
 	get_tree().paused = false
 	closed.emit()
 	if !_only_inventory:
