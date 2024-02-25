@@ -25,10 +25,6 @@
 		"descr": "Nicht die Erstwahl, aber dennoch trinkbar.",
 		"comps": [
 			{
-				"name": "cost",
-				"params": 5,
-			},
-			{
 				"name": "drink",
 				"params": 1,
 			},
@@ -206,7 +202,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 70,
 			},
 			{
 				"name": "uses",
@@ -221,7 +217,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 		]
 	},
@@ -232,7 +228,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 20,
 			},
 		]
 	},
@@ -243,7 +239,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 20,
 			},
 		]
 	},
@@ -254,7 +250,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 		]
 	},
@@ -265,7 +261,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
 			},
 		]
 	},
@@ -276,7 +272,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 40,
 			},
 			{
 				"name": "shelflife",
@@ -291,7 +287,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
 			},
 			{
 				"name": "healthy",
@@ -306,7 +302,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
 			},
 			{
 				"name": "food",
@@ -329,7 +325,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 			{
 				"name": "food",
@@ -352,7 +348,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 80,
 			},
 			{
 				"name": "food",
@@ -370,7 +366,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 100,
 			},
 			{
 				"name": "shelflife",
@@ -385,7 +381,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 60,
 			},
 			{
 				"name": "shelflife",
@@ -400,7 +396,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 60,
 			},
 			{
 				"name": "food",
@@ -419,7 +415,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 45,
 			},
 			{
 				"name": "shelflife",
@@ -434,7 +430,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 			{
 				"name": "shelflife",
@@ -474,6 +470,10 @@
 		"name": "Saft",
 		"descr": "",
 		"comps": [
+			{
+				"name": "cost",
+				"params": 25,
+			},
 			{
 				"name": "shelflife",
 				"params": 3,
@@ -689,7 +689,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 30,
+				"params": 90,
 			},
 			{
 				"name": "uses",
