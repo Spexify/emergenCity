@@ -1,6 +1,9 @@
 extends NinePatchRect
 class_name EMC_TooltipGUI
 
+signal opened
+signal closed
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -16,9 +19,11 @@ func open(p_text: String) -> void:
 	get_tree().paused = true
 	Global.set_gui_active(true)
 	show()
+	opened.emit()
 
 
 func _on_back_btn_pressed() -> void:
 	get_tree().paused = false
 	Global.set_gui_active(false)
 	hide()
+	closed.emit()

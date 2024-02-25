@@ -31,6 +31,8 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
 
 ########################################## PUBLIC METHODS ##########################################
+
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func add_back_button(p_on_pressed_callback: Callable) -> void:
 	var new_back_button := TextureButton.new()
 	new_back_button.texture_normal = load("res://res/gui/button_back.png")
@@ -38,16 +40,26 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	new_back_button.pressed.connect(p_on_pressed_callback)
 	#new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	#new_back_button.pressed.connect(remove_back_button)
+	
+	#Hide all other back button
+	for node: TextureButton in $ButtonList/VBC.get_children():
+		if node.name == _BACK_BTN_NAME:
+			node.hide()
+	
 	$ButtonList/VBC.add_child(new_back_button)
 	$ButtonList/VBC.move_child(new_back_button, 0) #so it appears above all the buttons in the list
 
 
 ## Remove back button once it was pressed
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func remove_back_button() -> void:
 	for node: TextureButton in $ButtonList/VBC.get_children():
 		if node.name == _BACK_BTN_NAME:
 			$ButtonList/VBC.remove_child(node)
-
+	#Show latest back button if there is one
+	var last_backBtn := $ButtonList/VBC.get_child(0)
+	if last_backBtn.name == _BACK_BTN_NAME:
+		last_backBtn.show()
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
@@ -61,7 +73,11 @@ func _ready() -> void:
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
+<<<<<<< HEAD
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar,$GUI/VBC/MiddleSection/SummaryEndOfDayGUI , "Rucksack", true)
+=======
+	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, self, $Avatar, "Rucksack", true)
+>>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
@@ -131,12 +147,6 @@ func _process(delta: float) -> void:
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if (event is InputEventScreenTouch && event.pressed == true):
-		if $GUI/VBC/MiddleSection/BackpackGUI.visible: #&& !$BtnBackpack.is_pressed():
-			$GUI/VBC/MiddleSection/BackpackGUI.close()
 
 
 func _on_summary_end_of_day_gui_opened() -> void:

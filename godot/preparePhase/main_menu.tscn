@@ -74,7 +74,7 @@ offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
+[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("4_0v5y1")
 
@@ -86,11 +86,11 @@ offset_bottom = 988.0
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("6_7kgqm")
 
-[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
 layout_mode = 2
 text = "Credits
 "

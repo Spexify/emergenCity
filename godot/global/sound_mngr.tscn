@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4o7v5wq5yd3"]
+[gd_scene load_steps=8 format=3 uid="uid://c4o7v5wq5yd3"]
 
 [ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://res/SFX/Lofi.wav" id="1_cpl1b"]
 [ext_resource type="Script" path="res://global/sound_mngr.gd" id="1_ps8k0"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="3_l0jhf"]
+[ext_resource type="AudioStream" uid="uid://4yemglbwkgmh" path="res://res/SFX/water.wav" id="4_10vph"]
+[ext_resource type="AudioStream" uid="uid://d265spjcv3uc2" path="res://res/SFX/doorbell-shortened-100308.mp3" id="5_kndxj"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="6_qnn1w"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="7_w1u83"]
 
 [node name="SFX" type="Node"]
 script = ExtResource("1_ps8k0")
@@ -12,6 +16,22 @@ process_mode = 3
 stream = ExtResource("1_cpl1b")
 bus = &"Musik"
 
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="."]
+[node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_l0jhf")
+bus = &"SFX"
+
+[node name="Water" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_10vph")
+bus = &"SFX"
+
+[node name="DingDong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kndxj")
+bus = &"SFX"
+
+[node name="OpenGUI" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qnn1w")
+bus = &"SFX"
+
+[node name="CloseGUI" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w1u83")
 bus = &"SFX"

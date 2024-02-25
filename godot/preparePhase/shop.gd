@@ -43,7 +43,7 @@ func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
 			new_item.clicked.connect(_on_shop_item_clicked)
 		else:
 			new_item.clicked.connect(_on_inventory_item_clicked)
-			new_slot.modulate = Color(1, 0.8, 0.6)
+			new_slot.modulate = Color(0.3, 0.3, 0.3)
 			
 		new_slot.set_item(new_item)
 	

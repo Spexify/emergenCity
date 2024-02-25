@@ -172,6 +172,7 @@ func load_items() -> void:
 		var _id : int = item.get("ID", 0)
 		var _name : String = item.get("name", "DUMMY")
 		var _descr : String = item.get("descr", "Error. This item is not supposed to appeare")
+		var _sound : String = item.get("sound", "BasicItem")
 		var _comp_dicts : Array[Dictionary]
 		_comp_dicts.assign(item.get("comps", []))
 		
@@ -209,7 +210,8 @@ func load_items() -> void:
 		var item_data : Dictionary = {
 			"name": _name,
 			"descr": _descr,
-			"comps": _comps
+			"comps": _comps,
+			"sound": _sound,
 		}
 		
 		#_name_to_id[_name] = _id

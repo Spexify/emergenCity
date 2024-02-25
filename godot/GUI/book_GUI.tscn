@@ -73,7 +73,7 @@ size_flags_horizontal = 0
 texture_normal = ExtResource("3_awayq")
 texture_disabled = ExtResource("5_1e35g")
 
-[node name="BackBtn" type="TextureButton" parent="PanelContainer/VBC/ButtonBar"]
+[node name="BackBtn" type="TextureButton" parent="PanelContainer/VBC/ButtonBar" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 0
 texture_normal = ExtResource("4_me52j")

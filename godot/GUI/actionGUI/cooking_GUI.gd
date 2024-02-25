@@ -46,6 +46,7 @@ func _on_cooking_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	Global.set_gui_active(false)
 	visible = false
+	closed.emit()
 	# Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 
 

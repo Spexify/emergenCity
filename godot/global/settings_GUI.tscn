@@ -26,7 +26,7 @@ grow_vertical = 2
 texture = ExtResource("3_2gmg0")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.306923, 0.306923, 0.306923, 1)
+color = Color(0.305882, 0.305882, 0.305882, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
