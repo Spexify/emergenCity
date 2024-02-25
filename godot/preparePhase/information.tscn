@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://hvrc68vqew2a"]
+[gd_scene load_steps=6 format=3 uid="uid://hvrc68vqew2a"]
 
 [ext_resource type="Script" path="res://preparePhase/information.gd" id="1_3i2wm"]
+[ext_resource type="PackedScene" uid="uid://bi80mrculo0v3" path="res://crisisPhase/stage/apartment_camper.tscn" id="2_te0id"]
 [ext_resource type="Texture2D" uid="uid://bfxwegfvf1ime" path="res://res/kochenohnestrom.png" id="3_v146t"]
 [ext_resource type="Texture2D" uid="uid://b77uhdblr7pj8" path="res://res/bbkbroschüre.png" id="4_nlyup"]
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="5_43ujg"]
@@ -10,8 +11,10 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3i2wm")
 
+[node name="ApartmentCamper" parent="." instance=ExtResource("2_te0id")]
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.470588, 0.470588, 0.470588, 1)
+color = Color(0.282353, 0.282353, 0.282353, 1)
 
 [node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
 
