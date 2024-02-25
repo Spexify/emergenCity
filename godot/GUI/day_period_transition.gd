@@ -30,7 +30,6 @@ func _open(p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
 	show()
 	get_tree().paused = true
 	$AnimationPlayer.play(FADE_IN_ANIM)
-	
 
 
 func _process(delta: float) -> void:
