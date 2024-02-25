@@ -16,73 +16,12 @@ size_flags_horizontal = 4
 theme = ExtResource("2_p8j38")
 script = ExtResource("1_wmmkg")
 
-[node name="DecisionWindow" type="PanelContainer" parent="."]
-layout_mode = 1
-offset_left = 52.0
-offset_top = 240.0
-offset_right = 528.0
-offset_bottom = 498.0
-theme = ExtResource("2_p8j38")
-
-[node name="MarginContainer" type="MarginContainer" parent="DecisionWindow"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DecisionWindow/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TitleSpacing" type="MarginContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 12
-
-[node name="Title" type="RichTextLabel" parent="DecisionWindow/MarginContainer/VBoxContainer/TitleSpacing"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-bbcode_enabled = true
-text = "[center]Der Tag ist vorbei...[/center]
-"
-
-[node name="TextBox" type="PanelContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Description" type="RichTextLabel" parent="DecisionWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 55)
-layout_mode = 2
-text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
-fit_content = true
-autowrap_mode = 2
-
-[node name="PanelContainer" type="ScrollContainer" parent="DecisionWindow/MarginContainer/VBoxContainer"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="InventoryGUI" parent="DecisionWindow/MarginContainer/VBoxContainer/PanelContainer" instance=ExtResource("3_e2o6h")]
-visible = false
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Continue" type="Button" parent="DecisionWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Weiter"
-
 [node name="SummaryWindow" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 80.0
-offset_top = 80.0
+offset_top = 200.0
 offset_right = 496.0
-offset_bottom = 288.0
+offset_bottom = 813.0
 
 [node name="MarginContainer" type="MarginContainer" parent="SummaryWindow"]
 layout_mode = 2
@@ -104,8 +43,19 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "[center]Heute hast du:[/center]"
+text = "[center]Tagesübersicht[/center]"
 fit_content = true
+
+[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 55)
+layout_mode = 2
+text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
+fit_content = true
+autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -171,10 +121,24 @@ layout_mode = 2
 fit_content = true
 autowrap_mode = 2
 
-[node name="NewDay" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="ScrollContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryGUI" parent="SummaryWindow/MarginContainer/VBoxContainer/PanelContainer" instance=ExtResource("3_e2o6h")]
+visible = false
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Starte den nächsten Tag"
+size_flags_vertical = 3
+
+[node name="Continue" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Weiter"
 
 [node name="SFX" type="Node" parent="."]
 
@@ -187,5 +151,4 @@ stream = ExtResource("3_hs5pc")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_2a3qa")
 
-[connection signal="pressed" from="DecisionWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/NewDay" to="." method="_on_new_day_pressed"]
+[connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

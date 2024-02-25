@@ -1,29 +1,29 @@
 extends EMC_ItemComponent
-class_name EMC_IC_Pleasurablenness
+class_name EMC_IC_Healthy
 ## For unenjoyable or enjoyable food or drink items
 
 const UNIT: String = "% ♡"
-var _happinness_change: int
+var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_happinness_change : int) -> void:
-	super("Genießbar", Color.HOT_PINK)
-	_happinness_change = _p_happinness_change
+func _init(_p_health_change : int) -> void:
+	super("Gesund", Color.HOT_PINK)
+	_health_change = _p_health_change
 
 
 ## Get the internal nutritionness value
-func get_happinness_change() -> int:
-	return _happinness_change
+func get_health_change() -> int:
+	return _health_change
 
 
 ## Get the hydration value scaled to fit real-life units
-func get_unit_happinness_change() -> int:
-	return get_happinness_change() * EMC_Avatar.UNIT_FACTOR_HAPPINNESS
+func get_unit_health_change() -> int:
+	return get_health_change() * EMC_Avatar.UNIT_FACTOR_HEALTH
 
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return get_name() + "(-" + str(get_unit_happinness_change()) + UNIT + ")"
+	return get_name() + "(-" + str(get_unit_health_change()) + UNIT + ")"
 
 
 ########################################## PRIVATE METHODS #########################################

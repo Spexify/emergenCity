@@ -16,7 +16,7 @@
 			{
 				"name": "drink",
 				"params": 1,
-			}
+			},
 		]
 	},
 	{
@@ -76,6 +76,10 @@
 			{
 				"name": "food",
 				"params": 2,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -140,6 +144,9 @@
 			{
 				"name": "shelflife",
 				"params": 2,
+			},{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -282,6 +289,10 @@
 				"name": "cost",
 				"params": 5,
 			},
+			{
+				"name": "healthy",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -300,6 +311,10 @@
 			{
 				"name": "shelflife",
 				"params": 6,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
 			},
 		]
 	},
@@ -320,6 +335,10 @@
 				"name": "shelflife",
 				"params": 6,
 			},
+			{
+				"name": "healthy",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -333,6 +352,9 @@
 			},
 			{
 				"name": "food",
+				"params": 1,
+			},{
+				"name": "pleasurable",
 				"params": 1,
 			},
 		]
@@ -378,6 +400,10 @@
 			},
 			{
 				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
 				"params": 1,
 			},
 		]
@@ -433,6 +459,10 @@
 				"name": "food",
 				"params": 1,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -446,6 +476,14 @@
 			},
 			{
 				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
 				"params": 1,
 			},
 		]
@@ -470,6 +508,10 @@
 				"name": "food",
 				"params": 1,
 			},
+			{
+				"name": "healthy",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -484,6 +526,14 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
 			},
 		]
 	},
@@ -500,6 +550,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -515,6 +569,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -529,6 +587,10 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -549,6 +611,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 2,
+			},
 		]
 	},
 	{
@@ -564,6 +630,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -578,6 +648,10 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -596,6 +670,10 @@
 			},
 			{
 				"name": "shelflife",
+				"params": 1,
+			},
+			{
+				"name": "pleasurable",
 				"params": 1,
 			},
 		]

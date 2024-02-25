@@ -7,29 +7,27 @@ var _max_day : int
 var _crisis_period_counter : int
 var _max_crisis_overlap : int = 2
 
-var _message_text : String = "Ooops, manche Systeme für : "
-
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-var _water_crisis : bool = false
+var _water_crisis : EMC_OverworldStatesMngr.WaterState = EMC_OverworldStatesMngr.WaterState.CLEAN
 const WATER_LOWER_BOUND : int = 1
 const WATER_UPPER_BOUND : int = 6 
 var _water_crisis_probability_countdown : int 
 var _water_crisis_length_countdown : int = 2
 
-var _electricity_crisis : bool = false
+var _electricity_crisis : EMC_OverworldStatesMngr.ElectricityState = EMC_OverworldStatesMngr.ElectricityState.UNLIMITED
 const ELECTRICITY_LOWER_BOUND : int = 1
 const ELECTRICITY_UPPER_BOUND : int = 6
 var _electricity_crisis_probability_countdown : int 
 var _electricity_crisis_length_countdown : int = 2
 
-var _isolation_crisis : bool = false
+var _isolation_crisis : EMC_OverworldStatesMngr.IsolationState = EMC_OverworldStatesMngr.IsolationState.NONE
 const ISOLATION_LOWER_BOUND : int = 6
 const ISOLATION_UPPER_BOUND : int = 12
 var _isolation_crisis_probability_countdown : int
 var _isolation_crisis_length_countdown : int = 2
 
-var _food_contamination_crisis : bool = false
+var _food_contamination_crisis : EMC_OverworldStatesMngr.FoodContaminationState = EMC_OverworldStatesMngr.FoodContaminationState.NONE
 const FOOD_CONTAMINATION_LOWER_BOUND : int = 6
 const FOOD_CONTAMINATION_UPPER_BOUND : int = 12
 var _food_contamination_crisis_probability_countdown : int
@@ -45,14 +43,14 @@ func setup(p_backpack : EMC_Inventory) -> void:
 				#(MRM: Temp. changed P_MAX_DAY to 4 to test shelflife of items)	
 	_inventory = p_backpack
 				
-	_water_crisis = Global.get_water_crisis_status()
-	_electricity_crisis = Global.get_electricity_crisis_status()
-	_isolation_crisis = Global.get_isolation_crisis_status()
-	_food_contamination_crisis = Global.get_food_contamination_crisis_status()
+	_water_crisis = OverworldStatesMngr.get_water_crisis_status()
+	_electricity_crisis = OverworldStatesMngr.get_electricity_crisis_status()
+	_isolation_crisis = OverworldStatesMngr.get_isolation_crisis_status()
+	_food_contamination_crisis = OverworldStatesMngr.get_food_contamination_crisis_status()
 
-	_max_day = Global.get_crisis_length()
+	_max_day = OverworldStatesMngr.get_crisis_length()
 	_crisis_period_counter = _max_day * 3
-	_max_crisis_overlap = Global.get_number_crisis_overlap()
+	_max_crisis_overlap = OverworldStatesMngr.get_number_crisis_overlap()
 	
 	_water_crisis_probability_countdown = _rng.randi_range(WATER_LOWER_BOUND, WATER_UPPER_BOUND)
 	_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
@@ -81,16 +79,20 @@ func set_max_day(_p_max_day : int = 3) -> void:
 ########################## PUBLIC METHODS #########################################################
 func _refresh() -> int:
 	var cnt : int = 0
-	if OverworldStatesMngr.get_water_state() != 2 && _water_crisis:
+	if OverworldStatesMngr.get_water_state() != EMC_OverworldStatesMngr.WaterState.CLEAN \
+		&& _water_crisis != EMC_OverworldStatesMngr.WaterState.NONE:
 		cnt+= 1
 		_water_crisis_length_countdown -= 3
-	if OverworldStatesMngr.get_electricity_state() != 1 && _electricity_crisis:
+	if OverworldStatesMngr.get_electricity_state() != EMC_OverworldStatesMngr.ElectricityState.UNLIMITED \
+		&& _electricity_crisis != EMC_OverworldStatesMngr.ElectricityState.UNLIMITED:
 		cnt+= 1
 		_electricity_crisis_length_countdown -= 3
-	if OverworldStatesMngr.get_isolation_state() != 0 && _isolation_crisis:
+	if OverworldStatesMngr.get_isolation_state() != EMC_OverworldStatesMngr.IsolationState.NONE \
+		&& _isolation_crisis != EMC_OverworldStatesMngr.IsolationState.NONE:
 		cnt+= 1
 		_isolation_crisis_length_countdown -= 3
-	if OverworldStatesMngr.get_food_contamination_state() != 0 && _food_contamination_crisis:
+	if OverworldStatesMngr.get_food_contamination_state() != EMC_OverworldStatesMngr.FoodContaminationState.NONE \
+		&& _food_contamination_crisis != EMC_OverworldStatesMngr.FoodContaminationState.NONE:
 		cnt+= 1
 		_food_contamination_crisis_length_countdown -= 3
 		
@@ -139,13 +141,13 @@ func check_crisis_status() -> void:
 		if _max_crisis_overlap == 1 && cnt == 0 \
 			|| _max_crisis_overlap == 2 && cnt != 2 \
 			|| _max_crisis_overlap == 3 && cnt != 3 :
-				if _water_crisis == true:
+				if _water_crisis != EMC_OverworldStatesMngr.WaterState.NONE:
 					_water_crisis_mngr()
-				if _electricity_crisis:
+				if _electricity_crisis != EMC_OverworldStatesMngr.ElectricityState.UNLIMITED:
 					_electricity_crisis_mngr()
-				if _isolation_crisis:
+				if _isolation_crisis != EMC_OverworldStatesMngr.IsolationState.NONE:
 					_isolation_crisis_mngr()
-				if _food_contamination_crisis:
+				if _food_contamination_crisis != EMC_OverworldStatesMngr.FoodContaminationState.NONE:
 					_food_contamination_crisis_mngr()
 
 		_crisis_period_counter -= 3
@@ -155,24 +157,23 @@ func check_crisis_status() -> void:
 func _water_crisis_mngr() -> void:
 	if _water_crisis_probability_countdown <= 0:
 		if _water_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_water_state(0)  ## or 1 depending on crisis
+			OverworldStatesMngr.set_water_state(_water_crisis)
 			
 
 		
 func _electricity_crisis_mngr() -> void:
 	if _electricity_crisis_probability_countdown <= 0:
 		if _electricity_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_electricity_state(0)
+			OverworldStatesMngr.set_electricity_state(_electricity_crisis)
 			
 		
 func _isolation_crisis_mngr() -> void:
 	if _isolation_crisis_probability_countdown <= 0:
 		if _isolation_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET)
+			OverworldStatesMngr.set_isolation_state(_isolation_crisis)
 			
 func _food_contamination_crisis_mngr() -> void:
 	if _food_contamination_crisis_probability_countdown <= 0:
-		
 		if _food_contamination_crisis_length_countdown > 0:
-			OverworldStatesMngr.set_food_contamination_state(1)
+			OverworldStatesMngr.set_food_contamination_state(_food_contamination_crisis)
 			_inventory.spoil_all_items()
