@@ -49,7 +49,6 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = _p_day_cycle.evening_action.get_description()
 	visible = true
 	$SummaryWindow.visible = false
-	$DecisionWindow.visible = true
 	Global.set_gui_active(true)
 	opened.emit()
 
@@ -66,19 +65,8 @@ func close() -> void:
 #gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
 	button_sfx.play()
-	_inventory_GUI.set_consume_active()
+	_inventory_GUI.set_consume_active(_has_slept)
 	_inventory_GUI.open()
-	$DecisionWindow.visible = false
-
-
-func _on_new_day_pressed() -> void:
-	_inventory_GUI.set_consume_idle()
-	if _has_slept != 0:
-		_avatar.add_health(_has_slept)
-		_has_slept = 0
-	button_sfx.play()
-	await button_sfx.finished
-	close()
-	_avatar.get_home()
+	_has_slept = 0
 
 

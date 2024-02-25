@@ -23,6 +23,7 @@ var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
 
 var is_consume_active : bool
+var _has_slept : int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
@@ -65,7 +66,8 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 			item.show()
 
 
-func set_consume_active() -> void:
+func set_consume_active( _p_has_slept : int = 0) -> void:
+	_has_slept =  _p_has_slept
 	_only_inventory = false
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
@@ -117,6 +119,11 @@ func open() -> void:
 ## Close the GUI
 func close() -> void:
 	if !_only_inventory: 
+		set_consume_idle()
+		if _has_slept != 0:
+			_avatar_ref.add_health(_has_slept)
+		_has_slept = 0
+		_avatar_ref.get_home()
 		close_button.emit()
 	close_gui.play()
 	hide()
