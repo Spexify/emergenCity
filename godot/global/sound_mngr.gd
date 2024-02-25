@@ -25,6 +25,7 @@ func on_open() -> void:
 	open_gui.play()
 
 func on_close() -> void:
+	await button.finished
 	close_gui.play()
 	
 func is_musik_playing() -> bool:

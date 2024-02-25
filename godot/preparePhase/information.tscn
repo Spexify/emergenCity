@@ -25,12 +25,12 @@ offset_right = 502.0
 offset_bottom = 567.0
 theme_override_constants/separation = 60
 
-[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture_normal = ExtResource("3_v146t")
 
-[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture_normal = ExtResource("4_nlyup")
@@ -41,7 +41,7 @@ offset_top = 794.0
 offset_right = 550.0
 offset_bottom = 858.0
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer"]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer" groups=["Button"]]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture_normal = ExtResource("5_43ujg")

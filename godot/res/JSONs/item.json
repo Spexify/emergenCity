@@ -8,6 +8,7 @@
 		"ID": 1,
 		"name": "Wasser",
 		"descr": "Sauberes Trinkwasser.",
+		"sound": "water",
 		"comps": [
 			{
 				"name": "cost",
@@ -23,6 +24,7 @@
 		"ID": 2,
 		"name": "Dreckiges Wasser",
 		"descr": "Nicht die Erstwahl, aber dennoch trinkbar.",
+		"sound": "water",
 		"comps": [
 			{
 				"name": "cost",

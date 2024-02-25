@@ -169,13 +169,13 @@ columns = 7
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Home" type="Button" parent="Background/Margin/Main/HBoxContainer"]
+[node name="Home" type="Button" parent="Background/Margin/Main/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Hauptmenü"
 
-[node name="TextureButton" type="TextureButton" parent="Background/Margin/Main/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="Background/Margin/Main/HBoxContainer" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("5_npb2c")
 

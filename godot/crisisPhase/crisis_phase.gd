@@ -30,6 +30,8 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
 
 ########################################## PUBLIC METHODS ##########################################
+
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func add_back_button(p_on_pressed_callback: Callable) -> void:
 	var new_back_button := TextureButton.new()
 	new_back_button.texture_normal = load("res://res/gui/button_back.png")
@@ -42,11 +44,11 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 
 
 ## Remove back button once it was pressed
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func remove_back_button() -> void:
 	for node: TextureButton in $ButtonList/VBC.get_children():
 		if node.name == _BACK_BTN_NAME:
 			$ButtonList/VBC.remove_child(node)
-
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.

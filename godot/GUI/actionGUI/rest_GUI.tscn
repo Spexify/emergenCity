@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://g8y1un3il5jm"]
+[gd_scene load_steps=5 format=3 uid="uid://g8y1un3il5jm"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/rest_GUI.gd" id="1_eoiso"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_5tqau"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_k786i"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_tawdp"]
-[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/gui/icons/icon_needs_time.png" id="4_uimum"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_f4qw6"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_2ksyk"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="4_uimum"]
 
 [node name="RestGUI" type="Control"]
 layout_mode = 3
@@ -65,7 +62,7 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Okay" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Okay" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(230, 50)
 layout_mode = 2
 theme = ExtResource("3_k786i")
@@ -73,23 +70,12 @@ text = "Bestätigen
 "
 icon = ExtResource("4_uimum")
 
-[node name="Cancel" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_k786i")
 text = "Abbrechen
 "
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_tawdp")
-
-[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_f4qw6")
-
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_2ksyk")
 
 [connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

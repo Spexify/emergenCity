@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GUI/pop_up_gui.gd" id="1_ii2pp"]
 
-[node name="PopUpGUI" type="Control"]
+[node name="PopUpGUI" type="Control" groups=["Gui"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -4,10 +4,6 @@ class_name EMC_SummaryEndOfDayGUI
 signal on_eat_pressed
 signal on_drink_pressed
 
-@onready var open_gui_sfx := $SFX/OpenGUISFX
-@onready var close_gui_sfx := $SFX/CloseGUISFX
-@onready var button_sfx := $SFX/ButtonSFX
-
 var _avatar: EMC_Avatar
 var _inventory_GUI : EMC_InventoryGUI
 var _inventory : EMC_Inventory
@@ -37,7 +33,6 @@ func _open_summary_window() -> void:
 
 ## opens summary end of day GUI/makes visible
 func open(_p_day_cycle: EMC_DayCycle) -> void:
-	open_gui_sfx.play()
 	if _p_day_cycle.morning_action._action_ID == 3: 
 		_has_slept +=1
 	if _p_day_cycle.noon_action._action_ID == 3: 
@@ -55,7 +50,6 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	close_gui_sfx.play()
 	visible = false
 	Global.set_gui_active(false)
 	closed.emit()
@@ -64,7 +58,6 @@ func close() -> void:
 #MRM: Technically the values should be subtracted when opening the screen but the 
 #gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
-	button_sfx.play()
 	_inventory_GUI.set_consume_active(_has_slept)
 	_inventory_GUI.open()
 	_has_slept = 0

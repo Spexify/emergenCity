@@ -212,6 +212,8 @@ func load_state(data : Dictionary) -> void:
 			cycle.load_state(data)
 			return cycle) as Array[EMC_DayCycle])
 	_update_HUD()
+	if current_day_cycle.evening_action.get_ACTION_NAME() != "":
+		print("Ha du versuchst zu cheaten")
 
 
 func _update_shelflives() -> void:

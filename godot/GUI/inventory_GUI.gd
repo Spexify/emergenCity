@@ -11,8 +11,6 @@ class_name EMC_InventoryGUI
 signal close_button
 signal chlor_tablets_clicked
 
-@onready var open_gui := $SFX/OpenGUI
-@onready var close_gui := $SFX/CloseGUI
 @onready var _slot_grid := $Inventory/VBoxContainer/ScrollContainer/GridContainer
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
@@ -109,7 +107,6 @@ func clear_items() -> void:
 
 ## Open the GUI
 func open() -> void:
-	open_gui.play()
 	_on_item_clicked(_clicked_item)
 	Global.set_gui_active(true)
 	show()
@@ -125,7 +122,6 @@ func close() -> void:
 		_has_slept = 0
 		_avatar_ref.get_home()
 		close_button.emit()
-	close_gui.play()
 	hide()
 	Global.set_gui_active(false)
 	closed.emit()

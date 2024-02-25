@@ -54,6 +54,7 @@ var _ID: IDs
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
 var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
+var _sound_effect : String = "BasicItem"
 
 ########################################## PUBLIC METHODS ##########################################
 ##Initialize properties
@@ -67,6 +68,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 	
 	name = data.get("name", "Dummy")
 	_descr = data.get("descr", "Error")
+	_sound_effect = data.get("sound", "BasicItem")
 	_comps.assign(data.get("comps", []))
 
 
@@ -142,5 +144,7 @@ func _on_clicked(sender: EMC_Item) -> void:
 		printerr("Item._on_clicked(): Sender ist null!")
 	elif sender == self:
 		self.modulate = HIGHLIGHTED_COLOR
+		SoundMngr.play_sound(sender._sound_effect)
 	else:
 		self.modulate = DEFAULT_COLOR
+		SoundMngr.play_sound(sender._sound_effect)

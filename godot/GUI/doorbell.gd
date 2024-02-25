@@ -23,7 +23,6 @@ func _on_button_up() -> void:
 
 
 func _on_pressed() -> void:
-	$DingDongSFX.seek(1.5) #Play to second x
-	$DingDongSFX.play()
+	SoundMngr.play_sound("dingdong", 1.5)
 	#await $DingDongSFX.finished
 	rang.emit(_stage_change_ID)
