@@ -37,7 +37,7 @@ func _on_continue_pressed() -> void:
 	if Global._tutorial_done: 
 		OverworldStatesMngr.set_crisis_difficulty(_current_scenario["water_crisis"],_current_scenario["electricity_crisis"],
 								_current_scenario["isolation_crisis"],_current_scenario["food_contamination_crisis"],
-								_crisis_length, _number_crisis_overlap)
+								_crisis_length, _number_crisis_overlap, _notification)
 	else:
 		OverworldStatesMngr.set_crisis_difficulty()
 		

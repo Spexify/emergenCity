@@ -21,7 +21,7 @@ const _BACK_BTN_NAME := "BackButton"
 var _backpack: EMC_Inventory = Global.get_inventory()
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
 var _overworld_states_mngr: EMC_OverworldStatesMngr = OverworldStatesMngr #EMC_OverworldStatesMngr.new()
-var _crisis_mngr : EMC_CrisisMngr = EMC_CrisisMngr.new()
+var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr

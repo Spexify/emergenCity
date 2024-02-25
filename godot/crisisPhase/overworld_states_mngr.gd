@@ -3,10 +3,11 @@ class_name EMC_OverworldStatesMngr
 
 var _crisis_length : int = 3
 var _number_crisis_overlap : int = 3
-var _water_crisis_status : bool = false
-var _electricity_crisis_status : bool = false
-var _isolation_crisis_status : bool = false
-var _food_contamination_crisis_status : bool = false
+var _water_crisis_status : WaterState
+var _electricity_crisis_status : ElectricityState
+var _isolation_crisis_status : IsolationState
+var _food_contamination_crisis_status : FoodContaminationState
+var _notification : String = ""
 
 enum SemaphoreColors{
 	RED = 0,
@@ -68,13 +69,14 @@ func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_u
 		Furniture.RAINWATER_BARREL : 0,
 	}
 
-func set_crisis_difficulty(_p_water_crisis: bool = true, _p_electricity_crisis : bool = true,
-							_p_isolation_crisis : bool = false, _p_food_contamination_crisis : bool = false,
-						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2) -> void:
+func set_crisis_difficulty(_p_water_crisis: WaterState, _p_electricity_crisis : ElectricityState,
+							_p_isolation_crisis : IsolationState, _p_food_contamination_crisis : FoodContaminationState,
+						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2, _p_notification : String = "") -> void:
 	_water_crisis_status = _p_water_crisis
 	_electricity_crisis_status =_p_electricity_crisis
 	_isolation_crisis_status = _p_isolation_crisis
 	_food_contamination_crisis_status = _p_food_contamination_crisis
+	_notification = _p_notification
 	
 	_crisis_length = _p_crisis_length
 	_number_crisis_overlap = _p_number_crisis_overlap
@@ -85,16 +87,19 @@ func get_number_crisis_overlap() -> int:
 func get_crisis_length() -> int:
 	return _crisis_length
 	
-func get_water_crisis_status() -> bool:
+func get_crisis_notification() -> String:
+	return _notification
+	
+func get_water_crisis_status() -> WaterState:
 	return _water_crisis_status
 	
-func get_electricity_crisis_status() -> bool:
+func get_electricity_crisis_status() -> ElectricityState:
 	return _electricity_crisis_status
 	
-func get_isolation_crisis_status() -> bool:
+func get_isolation_crisis_status() -> IsolationState:
 	return _isolation_crisis_status
 	
-func get_food_contamination_crisis_status() -> bool:
+func get_food_contamination_crisis_status() -> FoodContaminationState:
 	return _food_contamination_crisis_status
 
 func get_electricity_state() -> ElectricityState:
