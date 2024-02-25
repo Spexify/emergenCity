@@ -22,3 +22,7 @@ func _on_cancel_pressed() -> void:
 	hide()
 	Global.set_gui_active(false)
 	closed.emit()
+
+
+func _ready() -> void:
+	hide()

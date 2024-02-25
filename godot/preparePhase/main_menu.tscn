@@ -104,13 +104,13 @@ offset_bottom = 804.0
 custom_minimum_size = Vector2(575, 100)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
+[node name="Title" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(450, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[color=white] GAME TITLE[/color]"
+text = "[center][color=white]Krisopolis[/color]"
 fit_content = true
 
 [node name="CenterContainerNormal" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]

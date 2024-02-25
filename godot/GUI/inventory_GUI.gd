@@ -216,6 +216,7 @@ func _on_consume_pressed() -> void:
 		if !_inventory.has_item(2):
 			$FilterWater.visible = true
 		else:
+			##Improvement idea: use new _inventory.use_item() method
 			_clicked_item_copy.get_comp(EMC_IC_Uses).use_item(1)
 			if _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)

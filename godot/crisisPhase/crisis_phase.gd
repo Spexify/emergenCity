@@ -27,8 +27,15 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 @onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
-@onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
+#GUIs Middle Section:
+@onready var _backpack_GUI := $GUI/VBC/MiddleSection/BackpackGUI
+@onready var _SEOD := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
+@onready var _pause_menue := $GUI/VBC/MiddleSection/PauseMenu
+@onready var _cooking_GUI := $GUI/VBC/MiddleSection/CookingGUI
+#GUIs Lower Section:
+@onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
+@onready var _confirmation_GUI := $GUI/VBC/LowerSection/ConfirmationGUI
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -69,26 +76,16 @@ func _ready() -> void:
 		Global.load_state()
 		
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
-	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL]
+	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, EMC_OverworldStatesMngr.Furniture.GAS_COOKER]
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
-
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar,$GUI/VBC/MiddleSection/SummaryEndOfDayGUI , "Rucksack", true)
+	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.hide()
 	$GUI/VBC/MiddleSection/EndGameGUI.hide()
 	$GUI/VBC/MiddleSection/PopUpGUI.hide()
-	$GUI/VBC/MiddleSection/CookingGUI.hide()
-	
-	$GUI/VBC/LowerSection/RestGUI.hide()
-	$GUI/VBC/LowerSection/ChangeStageGUI.hide()
-	$GUI/VBC/LowerSection/TooltipGUI.hide()
-	
-	#Setup Consequences
-	#var consequences := EMC_ActionConsequences.new($Avatar, _backpack)
 	
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
@@ -96,14 +93,13 @@ func _ready() -> void:
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
-	#$GUI/VBC/MiddleSection/PopUpGUI.setup(consequences)
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
+	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
-
+	
 	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, _tooltip_GUI, \
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
 
@@ -139,11 +135,40 @@ func _ready() -> void:
 		get_tree().paused = true
 		Global._tutorial_done = true
 
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
+	
+	if Input.is_action_just_pressed("Toggle_Electricity"):
+		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_electricity_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.get_electricity_state() + 1)
+		_pause_menue.update_overworld_states()
+	
+	if Input.is_action_just_pressed("Toggle_Water"):
+		if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_water_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
+		_pause_menue.update_overworld_states()
+	
+	if Input.is_action_just_pressed("Toggle_Isolation"):
+		if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_isolation_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
+		_pause_menue.update_overworld_states()
+	
+	if Input.is_action_just_pressed("Toggle_Food_Contam"):
+		if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_food_contamination_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
+		_pause_menue.update_overworld_states()
 
 
 func _on_summary_end_of_day_gui_opened() -> void:

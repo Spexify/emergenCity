@@ -69,3 +69,6 @@ func close() -> void:
 func _on_cancel_btn_pressed() -> void:
 	close()
 
+
+func _ready() -> void:
+	hide()

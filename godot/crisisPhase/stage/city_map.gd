@@ -94,7 +94,7 @@ func _on_home_btn_pressed() -> void:
 
 func _on_marketplace_btn_pressed() -> void:
 	#MRM Idea: Check can be modelled as a action-constraint method 
-	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET:
+	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
 		_tooltip_GUI.open("Der Marktplatz ist nicht betretbar!")
 	else: 
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)

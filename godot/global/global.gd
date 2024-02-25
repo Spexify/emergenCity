@@ -264,15 +264,19 @@ func sub_e_coins(e_coins : int) -> bool:
 	else:
 		_e_coins -= e_coins
 		return true
-		
+
+
 func get_inventory() -> EMC_Inventory:
 	return _inventory
-	
+
+
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
-	
+
+
 func get_gui_active() -> bool:
 	return _gui_active
+
 
 func set_gui_active(is_active : bool) -> void:
 	_gui_active = is_active

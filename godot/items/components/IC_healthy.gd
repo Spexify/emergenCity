@@ -23,7 +23,7 @@ func get_unit_health_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return get_name() + "(-" + str(get_unit_health_change()) + UNIT + ")"
+	return get_name() + "(" + str(get_unit_health_change()) + UNIT + ")"
 
 
 ########################################## PRIVATE METHODS #########################################

@@ -60,3 +60,6 @@ func _on_continue_pressed() -> void:
 
 #func _on_inventory_gui_seod_inventory_closed()-> void:
 	#close()
+
+func _ready() -> void:
+	hide()

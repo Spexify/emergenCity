@@ -31,29 +31,31 @@ var _water_state: WaterState = WaterState.NONE
 
 enum IsolationState{
 	NONE = SemaphoreColors.GREEN,
-	LIMITED_ACCESS_MARKET = SemaphoreColors.YELLOW,
+	LIMITED_PUBLIC_ACCESS = SemaphoreColors.YELLOW,
 	ISOLATION = SemaphoreColors.RED,
 }
 
-var _isolation_state: IsolationState = IsolationState.NONE #MRM Bugfix: Initialized with NONE
+var _isolation_state: IsolationState = IsolationState.NONE
 
 enum FoodContaminationState{
 	NONE = SemaphoreColors.GREEN,
 	FOOD_SPOILED = SemaphoreColors.RED
 }
 
-var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE #MRM Bugfix: Initialized with NONE
+var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE
 
 enum Furniture{
 	WATER_RESERVOIR = 0, #UNUSED
 	RAINWATER_BARREL = 1,
 	ELECTRIC_RADIO = 2,
 	CRANK_RADIO = 3,
+	GAS_COOKER = 4,
 }
 
-var _upgrades: Array[Furniture]
 
+var _upgrades: Array[Furniture]
 var _furniture_state : Dictionary
+
 
 # All furniture_states range between 0 and the furniture_state_maximum defined here
 const _furniture_state_maximum : Dictionary = {
@@ -136,7 +138,7 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
 		IsolationState.NONE: return "Keine."
-		IsolationState.LIMITED_ACCESS_MARKET: return "Einige Betretsverbote."
+		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
 	
@@ -155,12 +157,19 @@ func get_food_contamination_state_descr() -> String:
 func get_upgrades() -> Array[Furniture]:
 	return _upgrades
 
+
+func has_upgrade(p_upgrade: Furniture) -> bool:
+	return _upgrades.has(p_upgrade)
+
+
 func set_upgrades(new_upgrades: Array[Furniture]) -> void:
 	_upgrades = new_upgrades
-	
+
+
 func get_furniture_state(furniture: Furniture) -> int:
 	return _furniture_state[furniture]
-	
+
+
 func set_furniture_state(furniture: Furniture, state: int) -> void:
 	if state > _furniture_state_maximum[furniture] || state < 0:
 		push_error("Unerwarteter Fehler: furniture state out of bounds")
