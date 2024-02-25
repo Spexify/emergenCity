@@ -32,7 +32,6 @@ func show_gui(p_action: EMC_Action) -> void:
 			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
 		show()
-		Global.set_gui_active(true)
 		opened.emit()
 
 
@@ -61,7 +60,6 @@ func _on_confirm_btn_pressed() -> void:
 
 
 func close() -> void:
-	Global.set_gui_active(false)
 	hide()
 	closed.emit()
 

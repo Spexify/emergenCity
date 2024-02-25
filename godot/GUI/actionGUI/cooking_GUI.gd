@@ -23,7 +23,6 @@ func setup(p_inventory: EMC_Inventory, p_confirmationGUI: EMC_ConfirmationGUI, p
 
 
 func show_gui(p_action : EMC_Action) -> void:
-	Global.set_gui_active(true)
 	_action = p_action
 	for recipe in _recipe_list.get_children():
 		recipe.disabled = !_recipe_cookable(recipe)
@@ -51,7 +50,6 @@ func _on_cooking_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
-	Global.set_gui_active(false)
 	hide()
 	_last_clicked_recipe = null
 	closed.emit()

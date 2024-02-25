@@ -17,13 +17,11 @@ func show_gui(p_action: EMC_Action) -> void:
 	else:
 		$VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap.hide()
 	show()
-	Global.set_gui_active(true)
 	opened.emit()
 
 
 func close() -> void:
 	hide()
-	Global.set_gui_active(false)
 	closed.emit()
 
 

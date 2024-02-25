@@ -26,7 +26,6 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
-var _gui_active : bool = false
 
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
@@ -272,12 +271,4 @@ func get_inventory() -> EMC_Inventory:
 
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
-
-
-func get_gui_active() -> bool:
-	return _gui_active
-
-
-func set_gui_active(is_active : bool) -> void:
-	_gui_active = is_active
 

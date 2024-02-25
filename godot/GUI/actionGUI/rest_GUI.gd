@@ -11,7 +11,6 @@ func show_gui(p_action: EMC_Action) -> void:
 
 func _on_okay_pressed() -> void:
 	hide()
-	Global.set_gui_active(false)
 	closed.emit()
 	#MRM: Bugfix: Execute Action AFTER closed.emit, so potentially
 	# following GUIs (like PopupEvents or SEOD) are opened after this one is closed
@@ -20,7 +19,6 @@ func _on_okay_pressed() -> void:
 
 func _on_cancel_pressed() -> void:
 	hide()
-	Global.set_gui_active(false)
 	closed.emit()
 
 
