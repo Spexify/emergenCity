@@ -18,6 +18,7 @@ signal chlor_tablets_clicked
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
+var _crisis_phase: EMC_CrisisPhase
 var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
@@ -29,10 +30,11 @@ var _has_slept : int = 0
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
+func setup(p_inventory: EMC_Inventory, p_crisis_phase: EMC_CrisisPhase, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
 			_p_only_inventory : bool = true) -> void:
-	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
+	_crisis_phase = p_crisis_phase
+	_avatar_ref = _p_avatar_ref
 	_only_inventory = _p_only_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
@@ -113,6 +115,8 @@ func open() -> void:
 	_on_item_clicked(_clicked_item)
 	Global.set_gui_active(true)
 	show()
+	_crisis_phase.add_back_button(close)
+	get_tree().paused = true
 	opened.emit()
 
 
@@ -128,6 +132,8 @@ func close() -> void:
 	close_gui.play()
 	hide()
 	Global.set_gui_active(false)
+	_crisis_phase.remove_back_button()
+	get_tree().paused = false
 	closed.emit()
 
 
@@ -263,7 +269,8 @@ func _refresh() -> void:
 
 
 func _on_discard_pressed() -> void:
-	_inventory.remove_item(_clicked_item.get_ID(),1)
+	if _clicked_item != null:
+		_inventory.remove_item(_clicked_item.get_ID(),1)
 
 
 func _on_cancel_pressed() -> void:

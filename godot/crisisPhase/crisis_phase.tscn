@@ -62,41 +62,6 @@ shape = SubResource("RectangleShape2D_yx03m")
 position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
-[node name="ButtonList" type="Control" parent="."]
-z_index = 2
-layout_mode = 3
-anchors_preset = 0
-offset_left = 490.0
-offset_top = 750.0
-offset_right = 554.0
-offset_bottom = 1006.0
-
-[node name="VBC" type="VBoxContainer" parent="ButtonList"]
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -64.0
-offset_right = 32.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="PauseMenuBtn" type="TextureButton" parent="ButtonList/VBC"]
-layout_mode = 2
-texture_normal = ExtResource("6_tr7dm")
-
-[node name="BackpackBtn" type="TextureButton" parent="ButtonList/VBC"]
-layout_mode = 2
-size_flags_horizontal = 4
-toggle_mode = true
-texture_normal = ExtResource("4_ef5pu")
-texture_pressed = ExtResource("5_bkokv")
-
 [node name="GUI" type="CenterContainer" parent="."]
 z_index = 3
 custom_minimum_size = Vector2(568, 1024)
@@ -203,6 +168,41 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="ButtonList" type="Control" parent="."]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = 490.0
+offset_top = 750.0
+offset_right = 554.0
+offset_bottom = 1006.0
+
+[node name="VBC" type="VBoxContainer" parent="ButtonList"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="PauseMenuBtn" type="TextureButton" parent="ButtonList/VBC"]
+layout_mode = 2
+texture_normal = ExtResource("6_tr7dm")
+
+[node name="BackpackBtn" type="TextureButton" parent="ButtonList/VBC"]
+layout_mode = 2
+size_flags_horizontal = 4
+toggle_mode = true
+texture_normal = ExtResource("4_ef5pu")
+texture_pressed = ExtResource("5_bkokv")
+
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
 
 [connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
@@ -210,8 +210,8 @@ layout_mode = 2
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
-[connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
-[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
 [connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_day_ended"]
 [connection signal="period_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_period_ended"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
+[connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
+[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
