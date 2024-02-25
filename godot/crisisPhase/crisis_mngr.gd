@@ -11,13 +11,13 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _water_crisis : EMC_OverworldStatesMngr.WaterState = EMC_OverworldStatesMngr.WaterState.CLEAN
 const WATER_LOWER_BOUND : int = 1
-const WATER_UPPER_BOUND : int = 6 
+const WATER_UPPER_BOUND : int = 4 
 var _water_crisis_probability_countdown : int 
 var _water_crisis_length_countdown : int = 2
 
 var _electricity_crisis : EMC_OverworldStatesMngr.ElectricityState = EMC_OverworldStatesMngr.ElectricityState.UNLIMITED
 const ELECTRICITY_LOWER_BOUND : int = 1
-const ELECTRICITY_UPPER_BOUND : int = 6
+const ELECTRICITY_UPPER_BOUND : int = 4
 var _electricity_crisis_probability_countdown : int 
 var _electricity_crisis_length_countdown : int = 2
 

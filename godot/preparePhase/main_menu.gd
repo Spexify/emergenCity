@@ -11,6 +11,7 @@ func open() -> void:
 	$".".show()
 	$CanvasLayer_unaffectedByCM.show()
 	$CanvasModulate.show()
+	
 	#opened.emit()
 
 
@@ -26,10 +27,20 @@ func close() -> void:
 func _ready() -> void:
 	e_coins.text = str(Global.get_e_coins())
 	_settings.closed.connect(open)
+	if !Global._tutorial_done:
+		$CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer.hide()
+		$CanvasLayer_unaffectedByCM/MarginContainer2.hide()
+		$CanvasLayer_unaffectedByCM/InformationButtons.hide()
+		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shelf.hide()
+		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter.hide()
 
 
 func _on_start_round_pressed() -> void:
-	Global.goto_scene("res://preparePhase/crisis_start.tscn")
+	if !Global._tutorial_done:
+		close()
+		$"../AvatarSelectionGUI".open()
+	else: 
+		Global.goto_scene("res://preparePhase/crisis_start.tscn")
 	
 
 func _on_shelf_pressed() -> void:
@@ -67,3 +78,13 @@ func _on_information_pressed() -> void:
 
 func _on_credit_screen_pressed() -> void:
 	Global.goto_scene("res://preparePhase/credit_information.tscn")
+
+
+func _on_avatar_selection_gui_closed() -> void:
+	Global.load_game()
+	OverworldStatesMngr.set_crisis_difficulty(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.ElectricityState.NONE,
+							EMC_OverworldStatesMngr.IsolationState.NONE, EMC_OverworldStatesMngr.FoodContaminationState.NONE,
+							3, 1, "Der Strom ist ausgefallen!")
+	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
+	Global.goto_scene(start_scene_name)
+	close()

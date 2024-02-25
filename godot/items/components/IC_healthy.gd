@@ -2,7 +2,7 @@ extends EMC_ItemComponent
 class_name EMC_IC_Healthy
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = "% ♡"
+const UNIT: String = " Gesundheit"
 var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################
@@ -23,7 +23,11 @@ func get_unit_health_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return get_name() + "(" + str(get_unit_health_change()) + UNIT + ")"
+	if _health_change < 0:
+		return "Un" + get_name().to_lower() + "(" + str(get_unit_health_change()) + UNIT + ")"
+	else:
+		return get_name() + "(" + str(get_unit_health_change()) + UNIT + ")"
+
 
 
 ########################################## PRIVATE METHODS #########################################

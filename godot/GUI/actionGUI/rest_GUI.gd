@@ -5,7 +5,6 @@ class_name EMC_RestActionGUI
 func show_gui(p_action: EMC_Action) -> void:
 	_action = p_action
 	show()
-	Global.set_gui_active(true)
 	opened.emit()
 
 

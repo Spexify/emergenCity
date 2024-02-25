@@ -2,7 +2,7 @@ extends EMC_ItemComponent
 class_name EMC_IC_Pleasurable
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = "% ♡"
+const UNIT: String = " Glück"
 var _happinness_change: int
 
 ########################################## PUBLIC METHODS ##########################################

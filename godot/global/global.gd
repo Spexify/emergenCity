@@ -18,7 +18,7 @@ signal game_loaded
 signal scene_changed
 
 ## TODO : find a way to save this in the files
-var _tutorial_done : bool = true
+var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 

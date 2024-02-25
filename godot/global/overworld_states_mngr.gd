@@ -83,6 +83,9 @@ func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_el
 	_crisis_length = _p_crisis_length
 	_number_crisis_overlap = _p_number_crisis_overlap
 	
+	#if !Global._tutorial_done:
+		#_electricity_state = ElectricityState.NONE
+	
 func get_number_crisis_overlap() -> int:
 	return _number_crisis_overlap
 

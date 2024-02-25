@@ -19,9 +19,9 @@ script = ExtResource("1_wmmkg")
 [node name="SummaryWindow" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 80.0
-offset_top = 200.0
+offset_top = 150.0
 offset_right = 496.0
-offset_bottom = 813.0
+offset_bottom = 763.0
 
 [node name="MarginContainer" type="MarginContainer" parent="SummaryWindow"]
 layout_mode = 2
@@ -45,17 +45,6 @@ theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
 text = "[center]Tagesübersicht[/center]"
 fit_content = true
-
-[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Description" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 55)
-layout_mode = 2
-text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
-fit_content = true
-autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -118,6 +107,17 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="EveningContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+fit_content = true
+autowrap_mode = 2
+
+[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Description" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 55)
+layout_mode = 2
+text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 fit_content = true
 autowrap_mode = 2
 

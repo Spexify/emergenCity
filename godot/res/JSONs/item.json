@@ -178,6 +178,10 @@
 				"name": "cost",
 				"params": 20,
 			},
+			{
+				"name": "healthy",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -193,6 +197,7 @@
 				"name": "shelflife",
 				"params": 6,
 			},
+	
 		]
 	},
 	{
@@ -353,9 +358,14 @@
 			{
 				"name": "food",
 				"params": 1,
-			},{
+			},
+			{
 				"name": "pleasurable",
 				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": -1,
 			},
 		]
 	},
@@ -501,6 +511,14 @@
 				"name": "food",
 				"params": 1,
 			},
+			{
+				"name": "pleasurable",
+				"params": -1,
+			},
+			{
+				"name": "hydrating",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -619,6 +637,10 @@
 				"name": "pleasurable",
 				"params": 2,
 			},
+			{
+				"name": "healthy",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -656,6 +678,10 @@
 			{
 				"name": "pleasurable",
 				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": -1,
 			},
 		]
 	},
