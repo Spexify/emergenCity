@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmp3dkvy1barj"]
+[gd_scene load_steps=5 format=3 uid="uid://dmp3dkvy1barj"]
 
-[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="1_22m5l"]
 [ext_resource type="Script" path="res://GUI/tooltip_GUI.gd" id="2_tllve"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_h2c2a"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="3_peaef"]
@@ -12,7 +11,7 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
-[node name="TooltipGUI" type="NinePatchRect"]
+[node name="TooltipGUI" type="PanelContainer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -21,25 +20,11 @@ offset_right = 251.0
 offset_bottom = 180.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-mouse_filter = 0
-texture = ExtResource("1_22m5l")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
 script = ExtResource("2_tllve")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -230.0
-offset_top = 10.0
-offset_right = 230.0
-offset_bottom = 150.0
-grow_horizontal = 2
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -56,6 +41,7 @@ fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="BackBtn" type="Button" parent="VBoxContainer/HBoxContainer" groups=["Button"]]

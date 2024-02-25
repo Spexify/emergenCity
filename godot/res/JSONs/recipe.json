@@ -2,13 +2,13 @@
 	{
 		"needs_water": true,
 		"needs_heat": true,
-		"input_item_names": ["FLOUR", "WATER"],
+		"input_item_names": ["FLOUR"],
 		"output_item_name": "BREAD",
 	},
 	{
 		"needs_water": true,
 		"needs_heat": true,
-		"input_item_names": ["UNCOOKED_PASTA", "WATER"],
+		"input_item_names": ["UNCOOKED_PASTA"],
 		"output_item_name": "COOKED_PASTA",
 	},
 	{
@@ -20,7 +20,7 @@
 	{
 		"needs_water": true,
 		"needs_heat": true,
-		"input_item_names": ["UNCOOKED_PASTA", "WATER", "SAUCE_JAR"],
+		"input_item_names": ["UNCOOKED_PASTA", "SAUCE_JAR"],
 		"output_item_name": "PASTA_WITH_SAUCE",
 	},
 	{
@@ -38,13 +38,13 @@
 	{
 		"needs_water": true,
 		"needs_heat": true,
-		"input_item_names": ["UNCOOKED_PASTA", "WATER", "MEAT"],
+		"input_item_names": ["UNCOOKED_PASTA", "MEAT"],
 		"output_item_name": "BOLOGNESE",
 	},
 	{
 		"needs_water": true,
 		"needs_heat": true,
-		"input_item_names": ["UNCOOKED_PASTA", "WATER", "PULSES"],
+		"input_item_names": ["UNCOOKED_PASTA", "PULSES"],
 		"output_item_name": "BOLOGNESE",
 	},
 	{
@@ -74,7 +74,7 @@
 	{
 		"needs_water": true,
 		"needs_heat": false,
-		"input_item_names": ["VEGETABLES", "WATER", "SALT"],
+		"input_item_names": ["VEGETABLES", "SALT"],
 		"output_item_name": "PICKLED_VEGETABLES",
 	},
 	{

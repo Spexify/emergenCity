@@ -19,3 +19,7 @@ func _on_okay_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	hide()
 	closed.emit()
+
+
+func _ready() -> void:
+	hide()

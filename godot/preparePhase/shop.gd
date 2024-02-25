@@ -30,6 +30,7 @@ func _ready() -> void:
 			continue
 		_add_item_by_id(item_id, true)
 
+
 func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
 	var new_slot := _SLOT_SCN.instantiate()
 	if item_id != EMC_Item.IDs.DUMMY:
@@ -52,7 +53,8 @@ func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
 		shop_grid.add_child(new_slot)
 	else:
 		inventory_grid.add_child(new_slot)
-	
+
+
 func _remove_item_by_id(item : EMC_Item) -> void :
 	var i : int = 0
 	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
@@ -68,7 +70,8 @@ func _remove_item_by_id(item : EMC_Item) -> void :
 			inventory_grid.add_child(new_slot)
 			break
 		i += 1
-	
+
+
 func _add_item_to_slot_by_id(item_id : EMC_Item.IDs) -> bool :
 	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
 		if slot.get_item() == null:
@@ -80,6 +83,7 @@ func _add_item_to_slot_by_id(item_id : EMC_Item.IDs) -> bool :
 			slot.set_item(new_item)
 			return true
 	return false
+
 
 func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	_display_info(sender)
@@ -94,14 +98,17 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 		_tmp_inventory.add_new_item(sender.get_ID())
 		_add_balance(-cost)
 
+
 func _on_inventory_item_clicked(sender : EMC_Item) -> void:
 	_display_info(sender)
 	_remove_item_by_id.call_deferred(sender)
- 
+
+
 func _add_balance(value : int) -> void:
 	_balance += value
 	label_ecoins.clear()
 	label_ecoins.append_text("[right][color=black]" + str(_balance) + "[/color][/right]")
+
 
 ## Display information of clicked [EMC_Item]
 func _display_info(sender: EMC_Item) -> void:
@@ -127,6 +134,7 @@ func _display_info(sender: EMC_Item) -> void:
 	var label_descr := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox/Description
 	label_descr.clear()
 	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
+
 
 func _on_home_pressed() -> void:
 	_tmp_inventory.sort_custom(EMC_Inventory.sort_helper)

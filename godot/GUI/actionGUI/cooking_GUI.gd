@@ -4,11 +4,18 @@ const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
+var _confirmation_GUI: EMC_ConfirmationGUI
+var _tooltipGUI: EMC_TooltipGUI
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
+@onready var _needs_water_icon := $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsWater
+@onready var _needs_heat_icon := $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsHeat
 
 
-func setup(p_inventory: EMC_Inventory) -> void:
+########################################## PUBLIC METHODS ##########################################
+func setup(p_inventory: EMC_Inventory, p_confirmationGUI: EMC_ConfirmationGUI, p_tooltipGUI: EMC_TooltipGUI) -> void:
 	_inventory = p_inventory
+	_confirmation_GUI = p_confirmationGUI
+	_tooltipGUI = p_tooltipGUI
 	
 	for recipe in JsonMngr.load_recipes():
 		_recipe_list.add_child(recipe)
@@ -18,24 +25,34 @@ func setup(p_inventory: EMC_Inventory) -> void:
 func show_gui(p_action : EMC_Action) -> void:
 	_action = p_action
 	for recipe in _recipe_list.get_children():
-		if not _recipe_cookable(recipe):
-			recipe.hide() #TODO: Disable
-	visible = true
+		recipe.disabled = !_recipe_cookable(recipe)
+	_needs_water_icon.hide()
+	_needs_heat_icon.hide()
+	show()
 	
 	# Enter code here if necessary 
 	opened.emit()
 
 
+########################################## PRIVATE METHODS #########################################
+func _ready() -> void:
+	hide()
+
+
+
 func _on_cooking_pressed() -> void: 
 	if _recipe_cookable(_last_clicked_recipe):
-		_cook_recipe()
+		if _last_clicked_recipe.needs_heat() && \
+		OverworldStatesMngr.get_electricity_state() != OverworldStatesMngr.ElectricityState.UNLIMITED:
+			_try_cooking_with_heat_source()
+		else:
+			_cook_recipe()
 
 
 func _on_cancel_pressed() -> void:
-	visible = false
+	hide()
 	_last_clicked_recipe = null
 	closed.emit()
-	# Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 
 
 func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
@@ -47,6 +64,14 @@ func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 		var item : EMC_Item = ITEM_SCN.instantiate()
 		item.setup(input_item_ID)
 		input_items_list.add_child(item)
+		
+	_needs_water_icon.visible = p_recipe.needs_water()
+	_needs_heat_icon.visible = p_recipe.needs_heat()
+	if p_recipe.needs_water() && \
+	OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:
+		var water : EMC_Item = ITEM_SCN.instantiate()
+		water.setup(EMC_Item.IDs.WATER)
+		input_items_list.add_child(water)
 
 
 ## TODO: Also check on electricity etc.
@@ -71,3 +96,13 @@ func _cook_recipe() -> void:
 	_inventory.add_new_item(_last_clicked_recipe.get_output_item_ID())
 	visible = false
 	_action.executed.emit(_action)
+
+
+func _try_cooking_with_heat_source() -> void:
+	if OverworldStatesMngr.has_upgrade(OverworldStatesMngr.Furniture.GAS_COOKER) && \
+		_inventory.has_item(EMC_Item.IDs.GAS_CARTRIDGE):
+		if await _confirmation_GUI.confirm("Willst eine Gaskartusche zum Kochen verwenden?"):
+			_inventory.use_item(EMC_Item.IDs.GAS_CARTRIDGE)
+			_cook_recipe()
+	else:
+		_tooltipGUI.open("Du hast weder Strom, noch Gaskocher und -kartusche zum Kochen!")

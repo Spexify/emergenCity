@@ -7,7 +7,7 @@ var _happinness_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_happinness_change : int) -> void:
-	super("Lecker", Color.HOT_PINK)
+	super("Köstlich", Color.HOT_PINK)
 	_happinness_change = _p_happinness_change
 
 

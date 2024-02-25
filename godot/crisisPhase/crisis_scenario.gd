@@ -5,7 +5,7 @@ class_name EMC_CrisisScenario
 ## can use numbers or key words instead of booleans
 var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
-									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET,
+									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
 									"notification": ""
 									},
@@ -17,7 +17,7 @@ var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.Water
 									},
 						"Drought" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
-									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET,
+									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
 									"notification": ""
 									},
@@ -29,13 +29,13 @@ var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.Water
 									},
 						"Earthquake" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
-									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET,
+									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
 									"notification": ""
 									},
 						"Forest Fire" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
-									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_ACCESS_MARKET,
+									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
 									"notification": ""
 									},

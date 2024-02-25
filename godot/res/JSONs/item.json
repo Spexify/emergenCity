@@ -62,6 +62,10 @@
 				"name": "cost",
 				"params": 30,
 			},
+			{
+				"name": "uses",
+				"params": 2,
+			},
 		]
 	},
 	{

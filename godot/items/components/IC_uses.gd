@@ -12,11 +12,14 @@ func _init(_p_max_uses : int) -> void:
 	_MAX_USES = _p_max_uses
 	_uses_left = _p_max_uses
 
+
 func no_uses_left() -> bool:
-	return get_uses_left() == 0
+	return get_uses_left() <= 0
+
 
 func get_uses_left() -> int:
 	return _uses_left
+
 
 func get_max_uses() -> int: 
 	return _MAX_USES
@@ -31,7 +34,7 @@ func use_item(_p_uses : int = 1) -> void:
  	
 	
 func get_name_with_values() -> String:
-	return get_name() + " "  + str(_uses_left) +  " uses left"
+	return str(_uses_left) + " Nutzungen übrig."
 
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

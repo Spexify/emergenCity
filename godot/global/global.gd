@@ -263,11 +263,12 @@ func sub_e_coins(e_coins : int) -> bool:
 	else:
 		_e_coins -= e_coins
 		return true
-		
+
+
 func get_inventory() -> EMC_Inventory:
 	return _inventory
-	
+
+
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
-	
 
