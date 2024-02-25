@@ -30,7 +30,7 @@ alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]emergenCITY[/center]
 
