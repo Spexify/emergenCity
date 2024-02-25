@@ -29,15 +29,8 @@ var _has_slept : int = 0
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
-=======
-func setup(p_inventory: EMC_Inventory, p_crisis_phase: EMC_CrisisPhase, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
->>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
-=======
-func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
->>>>>>> 43be90ed9e5b6c88a3362fefce35745595506e46
 			_p_only_inventory : bool = true) -> void:
 	_inventory = p_inventory
 	_avatar_ref = _p_avatar_ref
@@ -121,12 +114,8 @@ func close() -> void:
 			_avatar_ref.add_health(_has_slept)
 		_has_slept = 0
 		_avatar_ref.get_home()
-<<<<<<< HEAD
 	close_button.emit()
-	close_gui.play()
-=======
-		close_button.emit()
->>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
+	#close_gui.play()
 	hide()
 	Global.set_gui_active(false)
 	get_tree().paused = false

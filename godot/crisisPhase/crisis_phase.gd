@@ -73,15 +73,8 @@ func _ready() -> void:
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar,$GUI/VBC/MiddleSection/SummaryEndOfDayGUI , "Rucksack", true)
-=======
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, self, $Avatar, "Rucksack", true)
->>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
-=======
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar, "Rucksack", true)
->>>>>>> 43be90ed9e5b6c88a3362fefce35745595506e46
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken

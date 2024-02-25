@@ -93,7 +93,7 @@ max_value = 2.0
 tick_count = 3
 ticks_on_borders = true
 
-[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer" groups=["Button"]]
+[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Weiter

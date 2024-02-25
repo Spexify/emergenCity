@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://diu2wl65n301n"]
+[gd_scene load_steps=8 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" path="res://GUI/inventory_GUI.gd" id="1_ve5h2"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_qja6e"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_270nm"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="4_47hfl"]
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="5_kbada"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="5_w1mvg"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="6_i2pde"]
 
-[node name="InventoryGUI" type="Control" groups=["Gui"]]
+[node name="InventoryGUI" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 8
@@ -142,7 +144,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Entsorgen"
 
-[node name="Continue" type="TextureButton" parent="Inventory/VBoxContainer/HBoxContainer" groups=["Button"]]
+[node name="Continue" type="TextureButton" parent="Inventory/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_kbada")
 
@@ -186,10 +188,20 @@ fit_content = true
 [node name="HBoxContainer" type="HBoxContainer" parent="FilterWater/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Cancel" type="Button" parent="FilterWater/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
+[node name="Cancel" type="Button" parent="FilterWater/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zurück"
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="OpenGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_w1mvg")
+bus = &"SFX"
+
+[node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_i2pde")
+bus = &"SFX"
 
 [connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Consume" to="." method="_on_consume_pressed"]
 [connection signal="pressed" from="Inventory/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]

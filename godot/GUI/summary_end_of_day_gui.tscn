@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8qngbqj8n42a"]
+[gd_scene load_steps=7 format=3 uid="uid://c8qngbqj8n42a"]
 
 [ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_p8j38"]
+[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_q6owg"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="3_e2o6h"]
+[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_hs5pc"]
+[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_2a3qa"]
 
 [node name="SummaryEndOfDayGUI" type="Control"]
 layout_mode = 3
@@ -132,12 +135,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Continue" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer" groups=["Button"]]
+[node name="Continue" type="Button" parent="SummaryWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Weiter"
 
-<<<<<<< HEAD
 [node name="SFX" type="Node" parent="."]
 
 [node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
@@ -150,6 +152,4 @@ stream = ExtResource("3_hs5pc")
 stream = ExtResource("4_2a3qa")
 
 [connection signal="seod_inventory_closed" from="SummaryWindow/MarginContainer/VBoxContainer/PanelContainer/InventoryGUI" to="." method="_on_inventory_gui_seod_inventory_closed"]
-=======
->>>>>>> b8878b06cd5d9c34eb6be9694c8b15ec7bbb7364
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

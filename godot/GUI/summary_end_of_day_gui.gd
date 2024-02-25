@@ -60,7 +60,7 @@ func _on_continue_pressed() -> void:
 	_inventory_GUI.set_consume_active(_has_slept)
 	_inventory_GUI.open()
 	_has_slept = 0
-	close_gui_sfx.play()
+	#close_gui_sfx.play()
 	visible = false
 
 
