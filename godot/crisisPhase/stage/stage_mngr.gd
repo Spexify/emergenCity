@@ -217,7 +217,7 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_OverworldStatesMngr.Furniture, 
 	var atlas_base_y_coord: int = floor(p_upgrade_ID/float(ATLAS_UPGRADE_COLUMNS)) * ATLAS_UPGRADE_HEIGHT + \
 		BASE_Y_COORD_OFFSET
 	var atlas_base_coord: Vector2i = Vector2i(atlas_base_x_coord, atlas_base_y_coord);
-	print("Upgrade Base coord:" + str(atlas_base_coord))
+	#print("Upgrade Base coord:" + str(atlas_base_coord))
 	
 	#Offsets for 3x3 grid
 	var offsets := [Vector2(-1, -2), Vector2( 0, -2), Vector2( 1, -2),

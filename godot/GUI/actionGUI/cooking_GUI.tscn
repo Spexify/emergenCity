@@ -44,7 +44,7 @@ layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox"]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 450)
 layout_mode = 2
 
 [node name="RecipeList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer"]

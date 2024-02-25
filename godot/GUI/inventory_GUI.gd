@@ -22,7 +22,6 @@ var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
 var _seod : EMC_SummaryEndOfDayGUI
 
-var is_consume_active : bool
 var _has_slept : int = 0
 
 ########################################## PUBLIC METHODS ##########################################
@@ -61,12 +60,12 @@ func set_consume_active( _p_has_slept : int = 0) -> void:
 	_only_inventory = false
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
-	is_consume_active = true
 
 
 func set_consume_idle() -> void:
+	_only_inventory = true  #MRM Bugfix
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	is_consume_active = false
+	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false #MRM Bugfix
 
 
 ## Set the title of inventory GUI
@@ -108,12 +107,6 @@ func open() -> void:
 
 ## Close the GUI
 func close() -> void:
-	if !_only_inventory: 
-		set_consume_idle()
-		if _has_slept != 0:
-			_avatar_ref.add_health(_has_slept)
-		_has_slept = 0
-		_avatar_ref.get_home()
 	close_button.emit()
 	#close_gui.play()
 	hide()
@@ -121,6 +114,11 @@ func close() -> void:
 	get_tree().paused = false
 	closed.emit()
 	if !_only_inventory:
+		set_consume_idle()
+		if _has_slept != 0:
+			_avatar_ref.add_health(_has_slept)
+		_has_slept = 0
+		_avatar_ref.get_home()
 		_seod.close()
 	seod_inventory_closed.emit()
 
@@ -194,10 +192,10 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	if _clicked_item != null:
 		label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
-	if is_consume_active:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
-	else:
+	if _only_inventory:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	else:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	
 	## if the Chlor tablets are clicked, open water filtering gui
 	if _clicked_item != null:

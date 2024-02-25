@@ -9,11 +9,10 @@ var _last_clicked_recipe: EMC_Recipe
 
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory
-
+	
 	for recipe in JsonMngr.load_recipes():
 		_recipe_list.add_child(recipe)
 		recipe.was_pressed.connect(_on_recipe_pressed)
-	
 
 
 func show_gui(p_action : EMC_Action) -> void:
@@ -21,18 +20,8 @@ func show_gui(p_action : EMC_Action) -> void:
 	_action = p_action
 	for recipe in _recipe_list.get_children():
 		if not _recipe_cookable(recipe):
-			recipe.hide()
+			recipe.hide() #TODO: Disable
 	visible = true
-	#var item_on_slot2 := _inventory.get_item_of_slot(2)
-	#item_on_slot2.get_ID()
-	#var component_food : EMC_IC_Food
-	#for comp in item_on_slot2.get_comps():
-		#if comp is EMC_IC_Food:
-			#component_food = comp
-	
-	#$PanelContainer/MarginContainer/VBC/RecipeBox/Description.text = \
-		#str(component_food.get_formatted_values())
-		
 	
 	# Enter code here if necessary 
 	opened.emit()
@@ -46,6 +35,7 @@ func _on_cooking_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	Global.set_gui_active(false)
 	visible = false
+	_last_clicked_recipe = null
 	closed.emit()
 	# Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
 

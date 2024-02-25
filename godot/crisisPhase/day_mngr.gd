@@ -100,7 +100,7 @@ func on_interacted_with_furniture(action_id : int) -> void:
 		if reject_reason != EMC_ActionConstraints.NO_REJECTION:
 			reject_reasons = reject_reasons + reject_reason + " "
 	
-	if reject_reasons == EMC_ActionConstraints.NO_REJECTION && !Global.get_gui_active():
+	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
 		var gui_name := current_action.get_type_gui()
 		_get_gui_ref_by_name(gui_name).show_gui(current_action)
 	else:
@@ -108,11 +108,11 @@ func on_interacted_with_furniture(action_id : int) -> void:
 
 
 func get_current_day_cycle() -> EMC_DayCycle:
-	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
+	return self.history[get_current_day()]
 
 
 func get_current_day_period() -> DayPeriod:
-	return self._period_cnt % 3 as DayPeriod
+	return self._period_cnt % DayPeriod.size() as DayPeriod
 
 
 func get_current_day() -> int:

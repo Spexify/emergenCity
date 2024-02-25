@@ -26,10 +26,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon_NextPeriod:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_8lv4x"]
 resource_name = "fade_in"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,7 +49,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -45,6 +57,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rq76k"]
 resource_name = "fade_out"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -52,7 +65,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -66,7 +79,7 @@ _data = {
 }
 
 [node name="DayPeriodTransition" type="Node2D"]
-process_mode = 3
+process_mode = 2
 z_index = 5
 script = ExtResource("1_fuwqt")
 
@@ -102,7 +115,15 @@ texture = ExtResource("4_76uvx")
 position = Vector2(137, 551)
 texture = ExtResource("4_76uvx")
 
-[node name="DayPeriodIcon" type="Sprite2D" parent="."]
+[node name="Icon_PrevPeriod" type="Sprite2D" parent="."]
+position = Vector2(483, 570)
+scale = Vector2(2, 2)
+texture = ExtResource("1_vmejx")
+hframes = 3
+frame = 1
+
+[node name="Icon_NextPeriod" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(483, 570)
 scale = Vector2(2, 2)
 texture = ExtResource("1_vmejx")
