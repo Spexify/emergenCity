@@ -9,6 +9,9 @@ var _day_mngr : EMC_DayMngr
 
 const AGATHE_EVENT : DialogueResource = preload("res://res/dialogue/agathe_event.dialogue")
 const JULIA_EVENT : DialogueResource = preload("res://res/dialogue/julia_event.dialogue")
+const GERHARD_EVENT : DialogueResource = preload("res://res/dialogue/gerhard_event.dialogue")
+const PETRO_EVENT : DialogueResource = preload("res://res/dialogue/petro_event.dialogue")
+const MERT_EVENT : DialogueResource = preload("res://res/dialogue/mert_event.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 ########################################## PUBLIC METHODS ##########################################
@@ -67,6 +70,12 @@ func trigger_dialogue(data : Dictionary) -> void:
 			dialog_res = AGATHE_EVENT
 		"julia_event":
 			dialog_res = JULIA_EVENT
+		"gerhard_event":
+			dialog_res = GERHARD_EVENT
+		"petro_event":
+			dialog_res = PETRO_EVENT
+		"mert-event":
+			dialog_res = MERT_EVENT
 	
 	
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()

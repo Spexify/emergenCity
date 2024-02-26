@@ -67,3 +67,11 @@ func constraint_some_water_available(p_reason: String = "") -> String:
 	else:
 		var reason := "Kein Wasser verfügbar!" if p_reason == "" else p_reason 
 		return reason 
+
+func constraint_no_clean_water_available(p_reason: String = "") -> String:
+	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.NONE || \
+		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
+		return NO_REJECTION
+	else:
+		var reason := "Sauberes Wasser verfügbar!" if p_reason == "" else p_reason 
+		return reason 

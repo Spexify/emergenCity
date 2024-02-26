@@ -36,4 +36,59 @@
 		"description": "Julia geholfen",
 		"e_coin": 0,
 	},
+	{
+		"name": "GERHARD_KNOCKS",
+		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+		"constraints": {
+			"constraint_no_isolation": "",
+		},
+		"consequences": {
+			"trigger_dialogue": {
+						"dialogue_name" : "gerhard_event",
+						"action_names": [
+							"HELP_GERHARD"
+							],
+						},
+		},
+		"type_gui": "silent",
+		"description": "Gerhard geholfen",
+		"e_coin": 0,
+	},
+	{
+		"name": "PETRO_KNOCKS",
+		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+		"constraints": {
+			"constraint_no_isolation": "",
+		},
+		"consequences": {
+			"trigger_dialogue": {
+						"dialogue_name" : "petro_event",
+						"action_names": [
+							"HELP_PETRO"
+							],
+						},
+		},
+		"type_gui": "silent",
+		"description": "Mit Irena gespielt",
+		"e_coin": 0,
+	},
+	{
+		"name": "MERT_KNOCKS",
+		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+		"constraints": {
+			"constraint_no_isolation": "",
+			"constraint_no_clean_water_available": "" 
+		},
+		"consequences": {
+			"trigger_dialogue": {
+						"dialogue_name" : "mert_event",
+						"action_names": [
+							"HELP_MERT"
+							],
+						},
+		},
+		"type_gui": "silent",
+		"description": "Mert geholfen",
+		"e_coin": 0,
+	}
 ]
