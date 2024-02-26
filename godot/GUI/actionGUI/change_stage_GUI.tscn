@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvuhkwet8fnsy"]
+[gd_scene load_steps=5 format=3 uid="uid://dvuhkwet8fnsy"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/change_stage_GUI.gd" id="1_48h4p"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_b70k5"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_scbir"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_5y2m7"]
-[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/gui/icons/icon_needs_time.png" id="4_ee0w8"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_hrm30"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_1150s"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="4_ee0w8"]
 
 [node name="ChangeStageGUI" type="Control"]
 layout_mode = 3
@@ -60,7 +57,7 @@ text = "Soll der Ort gewechselt werden? Es wird eine Aktion verbraucht."
 layout_mode = 2
 alignment = 1
 
-[node name="ConfirmBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ConfirmBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme = ExtResource("3_scbir")
@@ -71,23 +68,11 @@ icon = ExtResource("4_ee0w8")
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="CancelBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CancelBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("3_scbir")
 text = "Abbrechen"
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_5y2m7")
-bus = &"SFX"
-
-[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_hrm30")
-
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_1150s")
 
 [connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
 [connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/CancelBtn" to="." method="_on_cancel_btn_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=8 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://18r2pljgx646" path="res://res/sprites/GUI/icons/icon_menu_settings.png" id="4_0v5y1"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
 [ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
+[ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="7_jnxxn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -74,7 +75,7 @@ offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2"]
+[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("4_0v5y1")
 
@@ -86,11 +87,11 @@ offset_bottom = 988.0
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("6_7kgqm")
 
-[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons"]
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
 layout_mode = 2
 text = "Credits
 "
@@ -104,13 +105,13 @@ offset_bottom = 804.0
 custom_minimum_size = Vector2(575, 100)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
+[node name="Title" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(450, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[color=white] GAME TITLE[/color]"
+text = "[center][color=white]Krisopolis[/color]"
 fit_content = true
 
 [node name="CenterContainerNormal" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
@@ -138,9 +139,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Upgrade Center"
 
+[node name="AvatarSelectionGUI" parent="." instance=ExtResource("7_jnxxn")]
+layout_mode = 1
+
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shelf" to="Menu" method="_on_shelf_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="closed" from="AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

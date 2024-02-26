@@ -15,6 +15,8 @@ const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
 const NPS_Source := "res://res/JSONs/npcs.json"
 ## BOOKS
 const BOOKS_SOURCE := "res://res/JSONs/books.json"
+## ACTIONS
+const ACTION_SOURCE := "res://res/JSONs/action.json"
 
 ########################################JSON RECIPES################################################
 
@@ -172,6 +174,7 @@ func load_items() -> void:
 		var _id : int = item.get("ID", 0)
 		var _name : String = item.get("name", "DUMMY")
 		var _descr : String = item.get("descr", "Error. This item is not supposed to appeare")
+		var _sound : String = item.get("sound", "BasicItem")
 		var _comp_dicts : Array[Dictionary]
 		_comp_dicts.assign(item.get("comps", []))
 		
@@ -209,7 +212,8 @@ func load_items() -> void:
 		var item_data : Dictionary = {
 			"name": _name,
 			"descr": _descr,
-			"comps": _comps
+			"comps": _comps,
+			"sound": _sound,
 		}
 		
 		#_name_to_id[_name] = _id
@@ -225,10 +229,23 @@ var _pop_up_actions : Array[EMC_PopUpAction]
 var _pop_up_name_to_id : Dictionary
 var _is_pop_ups_loaded : bool = false
 
+func name_to_pop_up_action(p_name : String) -> EMC_PopUpAction:
+	if not _is_pop_ups_loaded:
+		printerr("PopUp Actions not loaded")
+		return null
+	for pop in _pop_up_actions:
+		if p_name == pop.get_ACTION_NAME():
+			return pop
+			
+	assert(false)
+	return null
+
 func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAction:
 	var filtered : Array[EMC_PopUpAction] = _pop_up_actions.filter(func (action : EMC_PopUpAction) -> bool: 
 		for key : String in action.get_constraints_prior():
 			var params : Variant = action.get_constraints_prior()[key]
+			
+			## TODO: Handel non exisitend functions
 			if not Callable(action_constraint, key).call(params) == EMC_ActionConstraints.NO_REJECTION:
 				return false
 		return true
@@ -274,6 +291,64 @@ func load_pop_up_actions() -> void:
 	pop_up_id += 1
 	
 	_is_pop_ups_loaded = true
+
+########################################JSON ACTION#################################################
+
+var _actions : Dictionary
+var _is_action_loaded : bool = false
+
+func name_to_action_id(p_name : String) -> int:
+	if not _is_action_loaded:
+		printerr("Actions not loaded")
+		return NAN
+	for key : int in _actions.keys():
+		if _actions[key].get_ACTION_NAME() == p_name:
+			return key
+	return NAN
+
+func name_to_action(p_name : String) -> EMC_Action:
+	if not _is_action_loaded:
+		printerr("Actions not loaded")
+		return null
+	return _actions.get(name_to_action_id(p_name))
+
+func load_actions() -> void:
+	if not FileAccess.file_exists(ACTION_SOURCE):
+			printerr("Could not load PopUps from source: " + ACTION_SOURCE)
+			return
+
+	var recipe_source : FileAccess = FileAccess.open(ACTION_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = recipe_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return
+
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_ARRAY:
+		printerr("Invalid format of Item-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
+
+	var action_id : int = 3000 
+	
+	for act : Dictionary in data:
+		var _name :String = act.get("name")
+		
+		var action_data : Dictionary = {
+			"ID": action_id,
+			"name": _name,
+		}
+		
+		for key : String in act:
+			if key != "name":
+				action_data[key] = act[key]
+		
+		_actions[action_id] = EMC_Action.from_dict(action_data)
+		
+		action_id += 1
+	
+	_is_action_loaded = true
 
 ##########################################JSON NPCS#################################################
 

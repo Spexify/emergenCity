@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnmcmtfl1jq8q"]
+[gd_scene load_steps=2 format=3 uid="uid://bnmcmtfl1jq8q"]
 
 [ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_2cnqb"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_55ssa"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_oj6ur"]
 
 [node name="GameOverGUI" type="Control"]
 layout_mode = 3
@@ -86,7 +83,7 @@ text = "
 fit_content = true
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
@@ -162,21 +159,10 @@ text = "Du hast 10 ECoins erworben!
 fit_content = true
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Zurück zum Hauptmenü"
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_2cnqb")
-
-[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_55ssa")
-
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_oj6ur")
 
 [connection signal="pressed" from="WinnerScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="LoserScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

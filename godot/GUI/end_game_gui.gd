@@ -1,10 +1,6 @@
 extends EMC_GUI
 class_name EMC_EndGameGUI
 
-@onready var open_gui_sfx := $SFX/OpenGUISFX
-@onready var close_gui_sfx := $SFX/CloseGUISFX
-@onready var button_sfx := $SFX/ButtonSFX
-
 var history : Array [EMC_DayCycle]
 
 ## tackle visibility
@@ -103,22 +99,16 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 				
 		$LoserScreen.visible = false
 		$WinnerScreen.visible = true
-		open_gui_sfx.play()
 	visible = true
-	Global.set_gui_active(true)
 	opened.emit()
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	close_gui_sfx.play()
 	visible = false
-	Global.set_gui_active(false)
 	closed.emit()
 
 
 func _on_main_menu_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	get_tree().paused = false
 	Global.reset_state()
 	Global.reset_inventory()

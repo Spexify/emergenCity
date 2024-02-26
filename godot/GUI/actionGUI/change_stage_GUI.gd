@@ -3,9 +3,6 @@ class_name EMC_ChangeStageGUI
 
 signal stayed_on_same_stage
 
-@onready var open_gui_sfx := $SFX/OpenGUISFX
-@onready var close_gui_sfx := $SFX/CloseGUISFX
-@onready var button_sfx := $SFX/ButtonSFX
 @onready var _richtext_label := $NinePatchRect/MarginContainer/VBoxContainer/RichTextLabel
 
 var _stage_mngr: EMC_StageMngr
@@ -34,9 +31,7 @@ func show_gui(p_action: EMC_Action) -> void:
 		else:
 			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
-		open_gui_sfx.play()
 		show()
-		Global.set_gui_active(true)
 		opened.emit()
 
 
@@ -57,22 +52,21 @@ func _on_confirm_btn_pressed() -> void:
 	else:
 		_last_SC_action = curr_SC_action
 	
-	if _stage_mngr.get_curr_stage_name() == "home":
-		button_sfx.play()
-		await button_sfx.finished
+	#if _stage_mngr.get_curr_stage_name() == "home":
+		#button_sfx.play()
+		#await button_sfx.finished
 	
 	close()
 
 
 func close() -> void:
-	close_gui_sfx.play()
-	Global.set_gui_active(false)
 	hide()
 	closed.emit()
 
 
 func _on_cancel_btn_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	close()
 
+
+func _ready() -> void:
+	hide()

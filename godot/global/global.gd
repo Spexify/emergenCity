@@ -18,8 +18,7 @@ signal game_loaded
 signal scene_changed
 
 ## TODO : find a way to save this in the files
-var _tutorial_done : bool = true
-
+var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 var _upgrades : Array[EMC_Upgrade] = [null, null, null]
@@ -28,14 +27,6 @@ var current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
-var _crisis_length : int = 3
-var _number_crisis_overlap : int = 3
-var _water_crisis : bool = false
-var _electricity_crisis : bool = false
-var _isolation_crisis : bool = false
-var _food_contamination_crisis : bool = false
-
-var _gui_active : bool = false
 
 func _ready() -> void:
 	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
@@ -92,6 +83,7 @@ func reset_save() -> void:
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
 		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
+		"tutorial_done" : false,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -133,6 +125,7 @@ func save_game(was_crisis : bool) -> void:
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
+		"tutorial_done" : _tutorial_done,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -197,14 +190,14 @@ func load_game() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get("musik_volume", 1)))
-	#$SFX/Musik.set_autoplay(true)
-	#$SFX/Musik.set_volume_db(linear_to_db(data.get("musik_volume", 1)))
-	if not $SFX/Musik.playing:
-		$SFX/Musik.play() 
+	if not SoundMngr.is_musik_playing():
+		SoundMngr.play_musik() 
 	
 	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
-	if avatar_skin != null:
+	if avatar_skin != null && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
+		
+	_tutorial_done = data.get("tutorial_done", false)
 		
 	game_loaded.emit()
 
@@ -275,10 +268,12 @@ func sub_e_coins(e_coins : int) -> bool:
 	else:
 		_e_coins -= e_coins
 		return true
-		
+
+
 func get_inventory() -> EMC_Inventory:
 	return _inventory
-	
+
+
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 	
@@ -288,37 +283,3 @@ func get_upgrades() -> Array[EMC_Upgrade]:
 func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
 	_upgrades = upgrades
 
-func set_crisis_difficulty(_p_water_crisis: bool = true, _p_electricity_crisis : bool = true,
-							_p_isolation_crisis : bool = false, _p_food_contamination_crisis : bool = false,
-						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2) -> void:
-	_water_crisis = _p_water_crisis
-	_electricity_crisis =_p_electricity_crisis
-	_isolation_crisis = _p_isolation_crisis
-	_food_contamination_crisis = _p_food_contamination_crisis
-	
-	_crisis_length = _p_crisis_length
-	_number_crisis_overlap = _p_number_crisis_overlap
-	
-func get_gui_active() -> bool:
-	return _gui_active
-
-func set_gui_active(is_active : bool) -> void:
-	_gui_active = is_active
-
-func get_number_crisis_overlap() -> int:
-	return _number_crisis_overlap
-
-func get_crisis_length() -> int:
-	return _crisis_length
-	
-func get_water_crisis_status() -> bool:
-	return _water_crisis
-	
-func get_electricity_crisis_status() -> bool:
-	return _electricity_crisis
-	
-func get_isolation_crisis_status() -> bool:
-	return _isolation_crisis
-	
-func get_food_contamination_crisis_status() -> bool:
-	return _food_contamination_crisis

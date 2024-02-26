@@ -30,16 +30,20 @@ p_needs_heat : bool) -> void:
 	#item.set_frame()
 
 
+#func set_disabled(p_disabled: bool = false) -> void:
+	#disabled = p_disabled
+
 func get_input_item_IDs() -> Array[EMC_Item.IDs]:
 	return _input_item_IDs
 
 func get_output_item_ID() -> EMC_Item.IDs:
 	return _output_item_ID
 
-###Konstruktor
-##func init():
-	##pass
+func needs_water() -> bool:
+	return _needs_water
 
-
+func needs_heat() -> bool:
+	return _needs_heat
+	
 func _on_pressed() -> void:
 	was_pressed.emit(self)

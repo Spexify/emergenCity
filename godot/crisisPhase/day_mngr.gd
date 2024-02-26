@@ -30,6 +30,7 @@ var max_day : int
 #var _actionArr : Array[EMC_Action] #MRM: Curr not used anymore
 var gui_refs : Array[EMC_ActionGUI]
 var _tooltip_GUI : EMC_TooltipGUI
+var _confirmation_GUI: EMC_ConfirmationGUI
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
 var _puGUI : EMC_PopUpGUI
@@ -63,16 +64,19 @@ overworld_states_mngr_ref : EMC_OverworldStatesMngr,
 p_crisis_mngr : EMC_CrisisMngr,
 gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
+p_confirmation_GUI: EMC_ConfirmationGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI,
-p_inventory: EMC_Inventory) -> void:
+p_inventory: EMC_Inventory,
+p_lower_gui_node : Node) -> void:
 	_avatar_ref = avatar_ref
 	_stage_mngr = stage_mngr
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	_crisis_mngr = p_crisis_mngr
+	_confirmation_GUI = p_confirmation_GUI
 	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
-	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory)
+	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory, _stage_mngr, p_lower_gui_node, self)
 	
 	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
@@ -88,10 +92,10 @@ p_inventory: EMC_Inventory) -> void:
 
 
 ## MRM TODO: This function should be renamed, as it is used for other interactions as well!
-func on_interacted_with_furniture(action_id : int) -> void:
+func on_interacted_with_furniture(p_action_ID : int) -> void:
 	#MRM: Duplicate of Objects cumbersome, and using the references of the array directly would
 	#lead to errors. That's why I changed it, so it just creates a new instance each time:
-	var current_action : EMC_Action = _create_action(action_id)
+	var current_action : EMC_Action = _create_action(p_action_ID)
 	
 	var reject_reasons: String
 	for constraint_key: String in current_action.get_constraints_prior().keys():
@@ -100,19 +104,23 @@ func on_interacted_with_furniture(action_id : int) -> void:
 		if reject_reason != EMC_ActionConstraints.NO_REJECTION:
 			reject_reasons = reject_reasons + reject_reason + " "
 	
-	if reject_reasons == EMC_ActionConstraints.NO_REJECTION && !Global.get_gui_active():
-		var gui_name := current_action.get_type_gui()
-		_get_gui_ref_by_name(gui_name).show_gui(current_action)
+	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
+		if p_action_ID == EMC_Action.IDs.BBK_LINK:
+			if await _confirmation_GUI.confirm("Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?"):
+				EMC_Information.open_bbk_brochure()
+		else:
+			var gui_name := current_action.get_type_gui()
+			_get_gui_ref_by_name(gui_name).show_gui(current_action)
 	else:
 		_tooltip_GUI.open(reject_reasons)
 
 
 func get_current_day_cycle() -> EMC_DayCycle:
-	return current_day_cycle #MRM: could be changed later to: self.history[get_current_day()]
+	return self.history[get_current_day()]
 
 
 func get_current_day_period() -> DayPeriod:
-	return self._period_cnt % 3 as DayPeriod
+	return self._period_cnt % DayPeriod.size() as DayPeriod
 
 
 func get_current_day() -> int:
@@ -126,9 +134,14 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 			return ref
 	return null
 
+func _on_action_silent_executed(p_action : EMC_Action) -> void:
+	_execute_consequences(p_action)
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
+	_advance_day_time(p_action)
+	
+func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
 	match get_current_day_period():
@@ -156,7 +169,6 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 	_check_pu_counter()
 	_check_op_counter()
 	period_ended.emit(get_current_day_period())
-
 
 func _execute_consequences(p_action: EMC_Action) -> void:
 	for key : String in p_action.get_consequences().keys():
@@ -212,6 +224,8 @@ func load_state(data : Dictionary) -> void:
 			cycle.load_state(data)
 			return cycle) as Array[EMC_DayCycle])
 	_update_HUD()
+	if current_day_cycle.evening_action.get_ACTION_NAME() != "":
+		print("Ha du versuchst zu cheaten")
 
 
 func _update_shelflives() -> void:
@@ -250,6 +264,8 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SHOWER: result = EMC_Action.new(p_action_ID, "Duschen", { },
 								{ }, "ShowerGUI", #the consequences are added later in the GUI
 								"Hat geduscht.", 10)
+		EMC_Action.IDs.BBK_LINK: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
+								{ }, "ConfirmationGUI", "-", 0)
 		#Stage Change Actions
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
@@ -289,6 +305,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{"Agathe" : Vector2(490, 400)}) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
+	result.silent_executed.connect(_on_action_silent_executed)
 	return result
 
 
@@ -299,6 +316,7 @@ func _check_pu_counter() -> void:
 		var _action : EMC_PopUpAction = JsonMngr.get_pop_up_action(_action_constraints)
 		if _action != null:
 			_action.executed.connect(_on_action_executed)
+			_action.silent_executed.connect(_on_action_silent_executed)
 			_puGUI.open(_action)
 		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 

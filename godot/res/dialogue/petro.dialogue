@@ -3,24 +3,31 @@ Petro: Moin!
 ~ BRANCH
 Petro: Alles klar bei dir, kommst du gut durch die Krise?
 - Avatar: Ja, wie läuft's bei dir?
-	=> TALK
+	%2 => DIALOG1
+	%2 => DIALOG2
 - Avatar: Hast du was zu tauschen?
 	=>< TRADE
 	=> BRANCH
 - Avatar: Bis denne!
+	Petro: Tschö!
 	=> END
 
 
-~ TALK
-Petro: In letzter Zeit überlege ich mir, ob wir nicht irgendwie Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.
-Petro: Irre Idee nicht?
-Avatar: Schon spannend.
-Petro: Mein Faible für Aviatik färbt schon auf Irena ab.
+~ DIALOG1
+Petro: In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.
+Petro: Irre Idee, nicht?
+- Schon spannend.
+	Petro: Wusste ich doch, dass dich das auch begeistert! 
+- Klingt unrealistisch.
+	Petro: Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?
+=> END
+
+~ DIALOG2
+Petro: Meine Liebe für die Luftfahrt färbt schon auf Irena ab.
 Petro: Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben..
 Avatar: Haha. Naja, bis dann.
 Petro: Tschö [wait=0.5], mit Ö.
 => END
-
 
 ~ TRADE
 do TradeMngr.setup_next_trade("Petro")

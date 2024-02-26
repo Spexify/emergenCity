@@ -1,13 +1,13 @@
 extends EMC_ItemComponent
-class_name EMC_IC_Pleasurablenness
+class_name EMC_IC_Pleasurable
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = "% ♡"
+const UNIT: String = " Glück"
 var _happinness_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_happinness_change : int) -> void:
-	super("Genießbar", Color.HOT_PINK)
+	super("Köstlich", Color.HOT_PINK)
 	_happinness_change = _p_happinness_change
 
 
@@ -23,7 +23,7 @@ func get_unit_happinness_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return get_name() + "(-" + str(get_unit_happinness_change()) + UNIT + ")"
+	return get_name() + "(" + str(get_unit_happinness_change()) + UNIT + ")"
 
 
 ########################################## PRIVATE METHODS #########################################

@@ -14,6 +14,7 @@ const AGATHE_DIALOG : DialogueResource = preload("res://res/dialogue/agathe.dial
 const KRIS_DIALOG : DialogueResource = preload("res://res/dialogue/kris.dialogue")
 const VERONIKA_DIALOG : DialogueResource = preload("res://res/dialogue/veronika.dialogue")
 const WORKER_DIALOG : DialogueResource = preload("res://res/dialogue/townhall_worker.dialogue")
+const TUTORIAL_DIALOG : DialogueResource = preload("res://res/dialogue/tutorial.dialogue")
 
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 const _BACK_BTN_NAME := "BackButton"
@@ -22,15 +23,25 @@ var _backpack: EMC_Inventory = Global.get_inventory()
 var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
 var _overworld_states_mngr: EMC_OverworldStatesMngr = OverworldStatesMngr #EMC_OverworldStatesMngr.new()
-var _crisis_mngr : EMC_CrisisMngr = EMC_CrisisMngr.new()
+var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 @onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
-@onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
+@onready var _day_mngr := $GUI/VBC/UpperSection/HBC/DayMngr
+#GUIs Middle Section:
+@onready var _backpack_GUI := $GUI/VBC/MiddleSection/BackpackGUI
+@onready var _SEOD := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
+@onready var _pause_menue := $GUI/VBC/MiddleSection/PauseMenu
+@onready var _cooking_GUI := $GUI/VBC/MiddleSection/CookingGUI
+#GUIs Lower Section:
+@onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
+@onready var _confirmation_GUI := $GUI/VBC/LowerSection/ConfirmationGUI
 
 ########################################## PUBLIC METHODS ##########################################
+
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func add_back_button(p_on_pressed_callback: Callable) -> void:
 	var new_back_button := TextureButton.new()
 	new_back_button.texture_normal = load("res://res/gui/button_back.png")
@@ -38,16 +49,26 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	new_back_button.pressed.connect(p_on_pressed_callback)
 	#new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	#new_back_button.pressed.connect(remove_back_button)
+
+	#Hide all other back buttons
+	#for node: TextureButton in $ButtonList/VBC.get_children():
+		#if node.name == _BACK_BTN_NAME:
+			#node.hide()
+
 	$ButtonList/VBC.add_child(new_back_button)
 	$ButtonList/VBC.move_child(new_back_button, 0) #so it appears above all the buttons in the list
 
 
 ## Remove back button once it was pressed
+## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func remove_back_button() -> void:
 	for node: TextureButton in $ButtonList/VBC.get_children():
 		if node.name == _BACK_BTN_NAME:
 			$ButtonList/VBC.remove_child(node)
-
+	#Show latest back button if there is one
+	#var last_backBtn := $ButtonList/VBC.get_child(0)
+	#if last_backBtn.name == _BACK_BTN_NAME:
+		#last_backBtn.show()
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
@@ -55,42 +76,34 @@ func _ready() -> void:
 	if Global.was_crisis():
 		####################LOAD SAVE STATE#######################
 		Global.load_state()
-		
+
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
-	
-	$GUI/VBC/MiddleSection/BackpackGUI.setup(_backpack, $Avatar, "Rucksack", true)
+
+	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
+	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.hide()
 	$GUI/VBC/MiddleSection/EndGameGUI.hide()
 	$GUI/VBC/MiddleSection/PopUpGUI.hide()
-	$GUI/VBC/MiddleSection/CookingGUI.hide()
-	
-	$GUI/VBC/LowerSection/RestGUI.hide()
-	$GUI/VBC/LowerSection/ChangeStageGUI.hide()
-	$GUI/VBC/LowerSection/TooltipGUI.hide()
-	
-	#Setup Consequences
-	#var consequences := EMC_ActionConsequences.new($Avatar, _backpack)
-	
+
 	#Setup-Methoden
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
-	#$GUI/VBC/MiddleSection/PopUpGUI.setup(consequences)
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/MiddleSection/CookingGUI.setup(_backpack)
+	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
 	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 
-	$StageMngr.setup(self, $Avatar, $GUI/VBC/UpperSection/HBC/DayMngr, _tooltip_GUI, \
+	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, \
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
+	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -110,11 +123,20 @@ func _ready() -> void:
 	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)
-	
+	action_guis.append(_confirmation_GUI as EMC_ActionGUI)
+
 	_crisis_mngr.setup(_backpack)
-	$GUI/VBC/UpperSection/HBC/DayMngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
-		$GUI/VBC/LowerSection/TooltipGUI, seodGUI, egGUI, puGUI, _backpack)
-	$GUI/VBC/MiddleSection/SummaryEndOfDayGUI.setup($Avatar, _backpack, $GUI/VBC/MiddleSection/BackpackGUI)
+	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
+		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection)
+	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
+
+	if !Global._tutorial_done:
+		var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+		dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
+		$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+		dialogue_GUI.start(TUTORIAL_DIALOG, "START")
+		get_tree().paused = true
+		Global._tutorial_done = true
 
 
 func _process(delta: float) -> void:
@@ -123,11 +145,33 @@ func _process(delta: float) -> void:
 		guielem.visible = !guielem.visible
 		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
 
+	if Input.is_action_just_pressed("Toggle_Electricity"):
+		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_electricity_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.get_electricity_state() + 1)
+		_pause_menue.update_overworld_states()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if (event is InputEventScreenTouch && event.pressed == true):
-		if $GUI/VBC/MiddleSection/BackpackGUI.visible: #&& !$BtnBackpack.is_pressed():
-			$GUI/VBC/MiddleSection/BackpackGUI.close()
+	if Input.is_action_just_pressed("Toggle_Water"):
+		if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_water_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
+		_pause_menue.update_overworld_states()
+
+	if Input.is_action_just_pressed("Toggle_Isolation"):
+		if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_isolation_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
+		_pause_menue.update_overworld_states()
+
+	if Input.is_action_just_pressed("Toggle_Food_Contam"):
+		if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_food_contamination_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
+		_pause_menue.update_overworld_states()
 
 
 func _on_summary_end_of_day_gui_opened() -> void:
@@ -154,7 +198,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	for node:Node in $GUI/VBC/LowerSection.get_children():
 		if node.get_name() == "DialogueGUI":
 			return
-	
+
 	#MRM: Problems with load on mobile export, so I preload it for now:
 	#dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
 	match p_NPC_name:
@@ -173,7 +217,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 		_:
 			printerr("unknown NPC")
 			return
-	
+
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
@@ -199,4 +243,3 @@ func _on_pause_menu_btn_pressed() -> void:
 
 func _on_pause_menu_closed() -> void:
 	$ButtonList/VBC/BackpackBtn.disabled = false
-

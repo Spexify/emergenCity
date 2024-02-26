@@ -16,7 +16,7 @@
 			{
 				"name": "drink",
 				"params": 1,
-			}
+			},
 		]
 	},
 	{
@@ -24,10 +24,6 @@
 		"name": "Dreckiges Wasser",
 		"descr": "Nicht die Erstwahl, aber dennoch trinkbar.",
 		"comps": [
-			{
-				"name": "cost",
-				"params": 5,
-			},
 			{
 				"name": "drink",
 				"params": 1,
@@ -62,6 +58,10 @@
 				"name": "cost",
 				"params": 30,
 			},
+			{
+				"name": "uses",
+				"params": 2,
+			},
 		]
 	},
 	{
@@ -70,12 +70,12 @@
 		"descr": "Lecker schmecker!",
 		"comps": [
 			{
-				"name": "cost",
-				"params": 50,
-			},
-			{
 				"name": "food",
 				"params": 2,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -95,10 +95,6 @@
 		"name": "Nudeln",
 		"descr": "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt.",
 		"comps": [
-			{
-				"name": "cost",
-				"params": 25,
-			},
 			{
 				"name": "food",
 				"params": 1,
@@ -140,6 +136,9 @@
 			{
 				"name": "shelflife",
 				"params": 2,
+			},{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -171,6 +170,10 @@
 				"name": "cost",
 				"params": 20,
 			},
+			{
+				"name": "healthy",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -186,6 +189,7 @@
 				"name": "shelflife",
 				"params": 6,
 			},
+	
 		]
 	},
 	{
@@ -195,7 +199,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 70,
 			},
 			{
 				"name": "uses",
@@ -210,7 +214,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 		]
 	},
@@ -221,7 +225,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 20,
 			},
 		]
 	},
@@ -232,7 +236,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 20,
 			},
 		]
 	},
@@ -243,7 +247,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 		]
 	},
@@ -254,7 +258,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
 			},
 		]
 	},
@@ -265,7 +269,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 40,
 			},
 			{
 				"name": "shelflife",
@@ -280,7 +284,11 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
 			},
 		]
 	},
@@ -291,7 +299,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 25,
 			},
 			{
 				"name": "food",
@@ -300,6 +308,10 @@
 			{
 				"name": "shelflife",
 				"params": 6,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
 			},
 		]
 	},
@@ -310,7 +322,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 			{
 				"name": "food",
@@ -319,6 +331,10 @@
 			{
 				"name": "shelflife",
 				"params": 6,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
 			},
 		]
 	},
@@ -329,11 +345,19 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 80,
 			},
 			{
 				"name": "food",
 				"params": 1,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": -1,
 			},
 		]
 	},
@@ -344,7 +368,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 100,
 			},
 			{
 				"name": "shelflife",
@@ -359,7 +383,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 60,
 			},
 			{
 				"name": "shelflife",
@@ -374,10 +398,14 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 60,
 			},
 			{
 				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
 				"params": 1,
 			},
 		]
@@ -389,7 +417,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 45,
 			},
 			{
 				"name": "shelflife",
@@ -404,7 +432,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 5,
+				"params": 30,
 			},
 			{
 				"name": "shelflife",
@@ -433,6 +461,10 @@
 				"name": "food",
 				"params": 1,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -441,11 +473,23 @@
 		"descr": "",
 		"comps": [
 			{
+				"name": "cost",
+				"params": 25,
+			},
+			{
 				"name": "shelflife",
 				"params": 3,
 			},
 			{
 				"name": "drink",
+				"params": 1,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
 				"params": 1,
 			},
 		]
@@ -459,6 +503,14 @@
 				"name": "food",
 				"params": 1,
 			},
+			{
+				"name": "pleasurable",
+				"params": -1,
+			},
+			{
+				"name": "hydrating",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -468,6 +520,10 @@
 		"comps": [
 			{
 				"name": "food",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
 				"params": 1,
 			},
 		]
@@ -485,6 +541,14 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -499,6 +563,10 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -515,6 +583,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -529,6 +601,10 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
 			},
 		]
 	},
@@ -549,6 +625,14 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 2,
+			},
+			{
+				"name": "healthy",
+				"params": -1,
+			},
 		]
 	},
 	{
@@ -564,6 +648,10 @@
 				"name": "shelflife",
 				"params": 3,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -578,6 +666,14 @@
 			{
 				"name": "shelflife",
 				"params": 3,
+			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
+			{
+				"name": "healthy",
+				"params": -1,
 			},
 		]
 	},
@@ -598,6 +694,10 @@
 				"name": "shelflife",
 				"params": 1,
 			},
+			{
+				"name": "pleasurable",
+				"params": 1,
+			},
 		]
 	},
 	{
@@ -607,7 +707,7 @@
 		"comps": [
 			{
 				"name": "cost",
-				"params": 30,
+				"params": 90,
 			},
 			{
 				"name": "uses",

@@ -1,3 +1,33 @@
 ~ START
-Kris: Oh, hey!
+Kris: Oh, hey! 
+- Avatar: Was geht?
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Avatar: Man sieht sich!
+	Kris: Okay, bis dann!
+	=> END
+
+~ DIALOG1
+Kris: Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.
+Kris: Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.
+Kris: Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?
+- Kann ich gut nachvollziehen.
+	Avatar: Ohne Spontanität ist das Leben langweilig.
+	Kris: Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!
+	Kris: Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.
+	Kris: Mal sehen, was wir dieses Mal finden!
+- Sehe ich anders.
+	Avatar:  Nur in den Tag hinein leben funktioniert auch nicht.
+	Kris: Ja, das stimmt natürlich ...
+	Kris: Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant.
+=> END
+
+~ DIALOG2
+Kris: Hast du Lust auf eine heiße Schokolade?
+Veronika: Wir haben keine Milch mehr da.
+Kris: Oh, schade. Aber ich könnte uns einen Smoothie machen!
+Veronika: Obst haben wir auch keins mehr.
+Kris: Stimmt ja. Oh, und was ist mit Milchreis?
+Veronika: ... Kris. Keine Milch.
+Kris: Achja. Na gut. Dann nächstes Mal.
 => END

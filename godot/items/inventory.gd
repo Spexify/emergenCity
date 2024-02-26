@@ -66,6 +66,7 @@ func add_existing_item(p_item: EMC_Item) -> bool:
 
 ## Remove [EMC_Item] [to_be_removed_cnt] times from this inventory
 ## Returns the count of successfully removed items
+## TODO: Add an analogous method that takes in a specific item instead of an ID
 func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 	var removedCnt: int = 0
 	
@@ -115,8 +116,8 @@ func get_item_of_ID(p_ID: EMC_Item.IDs) -> EMC_Item:
 
 
 ## The inventory has at least one item of [p_ID]
-func has_item(p_ID: EMC_Item.IDs) -> bool:
-	return get_item_of_ID(p_ID) != null
+func has_item(p_ID: EMC_Item.IDs, p_times: int = 1) -> bool:
+	return get_item_count_of_ID(p_ID) >= p_times
 
 
 ## Returns count of [EMC_Item]s of [p_ID]
@@ -154,6 +155,7 @@ func get_all_items() -> Array[EMC_Item]:
 			items.push_back(item)
 	return items
 
+
 ## Spoil all items
 func spoil_all_items() -> void:
 	for slot_idx in _slot_cnt:
@@ -161,6 +163,7 @@ func spoil_all_items() -> void:
 		if item != null:
 			item.remove_comp(EMC_IC_Shelflife)
 			item.add_comp(EMC_IC_Unpalatable.new(1))
+
 
 ## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
 func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
@@ -178,6 +181,25 @@ func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 		if items[slot_idx].get_ID() != p_ID:
 			items.remove_at(slot_idx)
 	return items
+
+
+## Try to use a usable item = An item that has the [EMC_ItemComponent] [IC_uses]
+## If it is used up, remove it
+## If the usage was successful return true, otherwise false
+func use_item(p_ID: EMC_Item.IDs) -> bool:
+	var item := get_item_of_ID(p_ID)
+	if item == null:
+		return false
+	
+	var IC_uses := item.get_comp(EMC_IC_Uses)
+	if IC_uses == null:
+		return false
+	
+	IC_uses.use_item()
+	if IC_uses.no_uses_left():
+		remove_item(p_ID)
+		
+	return true
 
 
 ## TODO: rework, shading non consumables

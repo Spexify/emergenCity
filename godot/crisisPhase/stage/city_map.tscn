@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="4_gh8se"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
-[ext_resource type="PackedScene" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
+[ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
 
 [sub_resource type="Animation" id="Animation_xndm7"]
 length = 0.001
@@ -62,7 +62,7 @@ offset_right = 306.0
 offset_bottom = 503.0
 texture_normal = ExtResource("3_mb2ha")
 
-[node name="BackBtn" type="TextureButton" parent="."]
+[node name="BackBtn" type="TextureButton" parent="." groups=["Button"]]
 visible = false
 layout_direction = 2
 layout_mode = 0

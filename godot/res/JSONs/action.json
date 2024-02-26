@@ -1,0 +1,38 @@
+[
+	{
+		"name": "HELP_AGATHE_JAM",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "JAM",
+		},
+		"type_gui": "",
+		"description": "Hat mit Agathe geplaudert.",
+		"e_coin": 0,
+	},
+	{
+		"name": "HELP_AGATHE_HAPPY",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_happiness": 10,
+		},
+		"type_gui": "",
+		"description": "Hat mit Agathe geplaudert.",
+		"e_coin": 0,
+	},
+	{
+		"name": "HELP_JULIA",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "CHOCOLATE",
+		},
+		"type_gui": "",
+		"description": "Hat Julia geholfen.",
+		"e_coin": 0,
+	}
+]

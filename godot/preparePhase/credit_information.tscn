@@ -30,7 +30,7 @@ alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]emergenCITY[/center]
 
@@ -48,7 +48,7 @@ text = "[center]emergenCITY[/center]
 • Farbpalette"
 fit_content = true
 
-[node name="LinkButton" type="LinkButton" parent="CanvasLayer_unaffectedByCM/MarginContainer2/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer_unaffectedByCM/MarginContainer2/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 text = "emergenCity"
 uri = "https://www.emergencity.de/de/"
@@ -59,7 +59,7 @@ offset_top = 844.0
 offset_right = 560.0
 offset_bottom = 908.0
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer"]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer" groups=["Button"]]
 layout_mode = 2
 texture_normal = ExtResource("3_0kg73")
 

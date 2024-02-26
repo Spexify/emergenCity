@@ -10,9 +10,8 @@ class_name EMC_InventoryGUI
 
 signal close_button
 signal chlor_tablets_clicked
+signal seod_inventory_closed
 
-@onready var open_gui := $SFX/OpenGUI
-@onready var close_gui := $SFX/CloseGUI
 @onready var _slot_grid := $Inventory/VBoxContainer/ScrollContainer/GridContainer
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
@@ -21,38 +20,29 @@ var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar_ref : EMC_Avatar
 var _only_inventory : bool
+var _seod : EMC_SummaryEndOfDayGUI
 
-var is_consume_active : bool
+var _has_slept : int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
-func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: String = "Inventar",\
+
+func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
 			_p_only_inventory : bool = true) -> void:
-	_avatar_ref = _p_avatar_ref
 	_inventory = p_inventory
+	_avatar_ref = _p_avatar_ref
 	_only_inventory = _p_only_inventory
 	_inventory.item_added.connect(_on_item_added)
 	_inventory.item_removed.connect(_on_item_removed)
+	_seod = _p_seod
 	set_title(p_title)
 
 	$Inventory/VBoxContainer/HBoxContainer/Consume.hide()
 	$Inventory/VBoxContainer/HBoxContainer/Continue.hide()
 	$Inventory/VBoxContainer/HBoxContainer/Discard.hide()
 	$FilterWater.hide()
-	#for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
-		#var new_slot := _SLOT_SCN.instantiate()
-		#if item != EMC_Item.IDs.DUMMY:
-			#var new_item := _ITEM_SCN.instantiate()
-			#new_item.setup(item)
-			#new_item.clicked.connect(_on_item_clicked)
-		#
-			#
-			#new_slot.set_item(new_item)
-	#
-		#
-		#$Inventory/VBoxContainer/ScrollContainer/GridContainer.add_child(new_slot)
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
@@ -65,16 +55,17 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, p_title: Stri
 			item.show()
 
 
-func set_consume_active() -> void:
+func set_consume_active( _p_has_slept : int = 0) -> void:
+	_has_slept =  _p_has_slept
 	_only_inventory = false
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
-	is_consume_active = true
 
 
 func set_consume_idle() -> void:
+	_only_inventory = true  #MRM Bugfix
 	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	is_consume_active = false
+	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false #MRM Bugfix
 
 
 ## Set the title of inventory GUI
@@ -107,21 +98,27 @@ func clear_items() -> void:
 
 ## Open the GUI
 func open() -> void:
-	open_gui.play()
 	_on_item_clicked(_clicked_item)
-	Global.set_gui_active(true)
 	show()
+	get_tree().paused = true
 	opened.emit()
 
 
 ## Close the GUI
 func close() -> void:
-	if !_only_inventory: 
-		close_button.emit()
-	close_gui.play()
+	close_button.emit()
+	#close_gui.play()
 	hide()
-	Global.set_gui_active(false)
+	get_tree().paused = false
 	closed.emit()
+	if !_only_inventory:
+		set_consume_idle()
+		if _has_slept != 0:
+			_avatar_ref.add_health(_has_slept)
+		_has_slept = 0
+		_avatar_ref.get_home()
+		_seod.close()
+	seod_inventory_closed.emit()
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -193,10 +190,10 @@ func _on_item_clicked(sender: EMC_Item) -> void:
 	if _clicked_item != null:
 		label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
-	if is_consume_active:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
-	else:
+	if _only_inventory:
 		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	else:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	
 	## if the Chlor tablets are clicked, open water filtering gui
 	if _clicked_item != null:
@@ -217,6 +214,7 @@ func _on_consume_pressed() -> void:
 		if !_inventory.has_item(2):
 			$FilterWater.visible = true
 		else:
+			##Improvement idea: use new _inventory.use_item() method
 			_clicked_item_copy.get_comp(EMC_IC_Uses).use_item(1)
 			if _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
 				_inventory.remove_item(13,1)
@@ -235,12 +233,26 @@ func _on_consume_pressed() -> void:
 		if unpalatable_comp != null:
 			_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
 		
-		var pleasurablenness_comp : EMC_IC_Pleasurablenness = _clicked_item_copy.get_comp(EMC_IC_Pleasurablenness)
-		if pleasurablenness_comp != null:
-			if pleasurablenness_comp.get_happinness_change() < 0:
-				_avatar_ref.sub_happinness(pleasurablenness_comp.get_happinness_change())
-			elif pleasurablenness_comp.get_happinness_change() >= 0 :
-				_avatar_ref.add_happinness(pleasurablenness_comp.get_happinness_change())
+		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item_copy.get_comp(EMC_IC_Pleasurable)
+		if pleasurable_comp != null:
+			if pleasurable_comp.get_happinness_change() < 0:
+				_avatar_ref.sub_happinness(pleasurable_comp.get_happinness_change())
+			elif pleasurable_comp.get_happinness_change() >= 0 :
+				_avatar_ref.add_happinness(pleasurable_comp.get_happinness_change())
+				
+		var healthy_comp : EMC_IC_Healthy = _clicked_item_copy.get_comp(EMC_IC_Healthy)
+		if healthy_comp != null:
+			if healthy_comp.get_health_change() < 0:
+				_avatar_ref.sub_health(healthy_comp.get_health_change())
+			elif healthy_comp.get_health_change() >= 0 :
+				_avatar_ref.add_health(healthy_comp.get_health_change())
+				
+		var hydrating_comp : EMC_IC_Hydrating = _clicked_item_copy.get_comp(EMC_IC_Hydrating)
+		if hydrating_comp != null:
+			if hydrating_comp.get_hydration_change() < 0:
+				_avatar_ref.sub_hydration(hydrating_comp.get_hydration_change())
+			elif hydrating_comp.get_hydration_change() >= 0 :
+				_avatar_ref.add_hydration(hydrating_comp.get_hydration_change())
 
 		#if _clicked_item_copy.get_ID() != 13:
 		_inventory.remove_item(_clicked_item_copy._ID)
@@ -256,7 +268,8 @@ func _refresh() -> void:
 
 
 func _on_discard_pressed() -> void:
-	_inventory.remove_item(_clicked_item.get_ID(),1)
+	if _clicked_item != null:
+		_inventory.remove_item(_clicked_item.get_ID(),1)
 
 
 func _on_cancel_pressed() -> void:
