@@ -123,10 +123,10 @@ static func empty_action() -> EMC_Action:
 static func from_dict(data : Dictionary) -> EMC_Action:
 	var _action_id : int = data.get("ID")
 	var _action_name : String = data.get("name", "")
-	var _constraints : Dictionary = data.get("constraints")
-	var _consequences : Dictionary = data.get("consequences")
+	var _constraints : Dictionary = data.get("constraints", {})
+	var _consequences : Dictionary = data.get("consequences",{})
 	var _type_gui : String = data.get("type_gui", "")
-	var _description : String = data.get("description")
-	var _e_coin : int = data.get("e_coin")
+	var _description : String = data.get("description", "")
+	var _e_coin : int = data.get("e_coin", 0)
 	
 	return EMC_Action.new(_action_id, _action_name, _constraints, _consequences, _type_gui, _description, _e_coin)

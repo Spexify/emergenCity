@@ -70,10 +70,6 @@
 		"descr": "Lecker schmecker!",
 		"comps": [
 			{
-				"name": "cost",
-				"params": 50,
-			},
-			{
 				"name": "food",
 				"params": 2,
 			},
@@ -99,10 +95,6 @@
 		"name": "Nudeln",
 		"descr": "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt.",
 		"comps": [
-			{
-				"name": "cost",
-				"params": 25,
-			},
 			{
 				"name": "food",
 				"params": 1,
