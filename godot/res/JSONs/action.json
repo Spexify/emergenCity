@@ -1,0 +1,15 @@
+[
+	{
+		"name": "MIT_WALTER_REDEN",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "HOT_CHOCOLATE",
+			"add_health": 10,
+		},
+		"type_gui": "",
+		"description": "Du hast mit Walter geredet.",
+		"e_coin": 0,
+	},
+]

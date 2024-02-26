@@ -68,14 +68,15 @@ p_confirmation_GUI: EMC_ConfirmationGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI,
-p_inventory: EMC_Inventory) -> void:
+p_inventory: EMC_Inventory,
+p_lower_gui_node : Node) -> void:
 	_avatar_ref = avatar_ref
 	_stage_mngr = stage_mngr
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	_crisis_mngr = p_crisis_mngr
 	_confirmation_GUI = p_confirmation_GUI
 	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
-	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory)
+	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory, _stage_mngr, p_lower_gui_node, self)
 	
 	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
@@ -133,9 +134,14 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 			return ref
 	return null
 
+func _on_action_silent_executed(p_action : EMC_Action) -> void:
+	_execute_consequences(p_action)
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
+	_advance_day_time(p_action)
+	
+func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
 	match get_current_day_period():
@@ -163,7 +169,6 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 	_check_pu_counter()
 	_check_op_counter()
 	period_ended.emit(get_current_day_period())
-
 
 func _execute_consequences(p_action: EMC_Action) -> void:
 	for key : String in p_action.get_consequences().keys():
@@ -300,6 +305,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{"Agathe" : Vector2(490, 400)}) 
 		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
 	result.executed.connect(_on_action_executed)
+	result.silent_executed.connect(_on_action_silent_executed)
 	return result
 
 
@@ -310,6 +316,7 @@ func _check_pu_counter() -> void:
 		var _action : EMC_PopUpAction = JsonMngr.get_pop_up_action(_action_constraints)
 		if _action != null:
 			_action.executed.connect(_on_action_executed)
+			_action.silent_executed.connect(_on_action_silent_executed)
 			_puGUI.open(_action)
 		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 

@@ -3,13 +3,18 @@
 		"name": "POP_UP_TEST",
 		"pop_up_text": "Hello this is a JSON loaded test popup",
 		"constraints": {
-			"constraint_not_evening": ""
+			
 		},
 		"consequences": {
-			"add_health": 10,
+			"trigger_dialogue": {
+						"dialogue_name" : "Walter",
+						"action_names": [
+							"MIT_WALTER_REDEN"
+							],
+						},
 		},
-		"type_gui": "",
+		"type_gui": "silent",
 		"description": "A Test pop up event",
-		"e_coin": 10,
+		"e_coin": 0,
 	},
 ]

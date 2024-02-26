@@ -1,0 +1,4 @@
+~ START
+Avatar: Es Klappt oder ?
+do execute("MIT_WALTER_REDEN")
+=> END
