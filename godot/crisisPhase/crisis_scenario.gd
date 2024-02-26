@@ -7,43 +7,43 @@ var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.Water
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": ""
+									"notification": "Flood"
 									},
 						"Hurricane" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": ""
+									"notification": "Hurricane"
 									},
 						"Drought" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": ""
+									"notification": "Drought"
 									},
 						"Pandemic" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": ""
+									"notification": "Pandemic"
 									},
 						"Earthquake" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": ""
+									"notification": "Earthquake"
 									},
 						"Forest Fire" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": ""
+									"notification": "Forest Fire"
 									},
 						"Chemical Accident" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": ""
+									"notification": "Chemical Accident"
 									}}
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
