@@ -20,6 +20,10 @@ bus = &"Musik"
 stream = ExtResource("3_l0jhf")
 bus = &"SFX"
 
+[node name="BasicItem" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_l0jhf")
+bus = &"SFX"
+
 [node name="Water" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_10vph")
 bus = &"SFX"

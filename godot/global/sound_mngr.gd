@@ -43,14 +43,6 @@ func play_sound(sound : String, start : float = 0) -> void:
 	if sound_player == null:
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
 		return
-	
-	#match sound:
-		#"water":
-			#sound_player = water
-		#"ding_dong":
-			#sound_player = ding_dong
-		#_ :
-			#return
 
 	sound_player.seek(start)
 	sound_player.play()
