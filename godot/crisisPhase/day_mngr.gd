@@ -140,7 +140,8 @@ func _on_action_silent_executed(p_action : EMC_Action) -> void:
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
 	_advance_day_time(p_action)
-	
+
+
 func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
@@ -149,7 +150,6 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 			if _avatar_life_status:
 				self.current_day_cycle = EMC_DayCycle.new()
 				self.current_day_cycle.morning_action = p_action
-				_crisis_mngr.check_crisis_status()
 		DayPeriod.NOON:
 			self.current_day_cycle.noon_action = p_action
 		DayPeriod.EVENING:
@@ -170,6 +170,7 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 	_check_op_counter()
 	period_ended.emit(get_current_day_period())
 
+
 func _execute_consequences(p_action: EMC_Action) -> void:
 	for key : String in p_action.get_consequences().keys():
 		var params : Variant = p_action.get_consequences()[key]
@@ -183,12 +184,13 @@ func _on_seod_closed_game_end() -> void:
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
-	_avatar_ref.set_global_position(Vector2i(250, 750))
+	_avatar_ref.set_global_position(Vector2i(250, 650))
 	_update_HUD()
 	_update_vitals()
 	_check_pu_counter()
 	_check_op_counter()
 	_update_shelflives()
+	_crisis_mngr.check_crisis_status(get_current_day())
 	day_ended.emit(get_current_day())
 	period_ended.emit(get_current_day_period())
 
@@ -268,7 +270,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{ }, "ConfirmationGUI", "-", 0)
 		#Stage Change Actions
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
-								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
+								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 650),
 								{ })
 		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", \
 								{ "constraint_not_evening" : "", "constraint_no_limited_public_access" : "" }, 

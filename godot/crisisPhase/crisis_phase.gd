@@ -76,7 +76,7 @@ func _ready() -> void:
 	if Global.was_crisis():
 		####################LOAD SAVE STATE#######################
 		Global.load_state()
-		
+	
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
 	#var _upgrades: Array[EMC_Upgrade.IDs] = [EMC_Upgrade.IDsRAINWATER_BARREL, EMC_Upgrade.IDs.GAS_COOKER]
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
@@ -131,7 +131,9 @@ func _ready() -> void:
 	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
 		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection)
 	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
-
+	
+	#_day_mngr.day_ended.connect(_crisis_mngr._on_day_ended)
+	
 	if !Global._tutorial_done:
 		var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 		dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
@@ -246,3 +248,9 @@ func _on_pause_menu_btn_pressed() -> void:
 func _on_pause_menu_closed() -> void:
 	$ButtonList/VBC/BackpackBtn.disabled = false
 
+
+func _on_day_mngr_day_ended(p_curr_day: int) -> void:
+	var active_crises_descr := OverworldStatesMngr.get_active_crises_descr()
+	if active_crises_descr != "":
+		_tooltip_GUI.open(active_crises_descr)
+	OverworldStatesMngr.clear_active_crises_descr()

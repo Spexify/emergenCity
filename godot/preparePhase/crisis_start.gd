@@ -1,8 +1,8 @@
 extends Control
 class_name EMC_CrisisStart
 
-var _crisis_length : int = 4
-const LENGTH_LOWER_BOUND_EASY : int = 2
+var _crisis_length : int
+const LENGTH_LOWER_BOUND_EASY : int = 3
 const LENGTH_UPPER_BOUND_EASY : int = 4 
 const LENGTH_LOWER_BOUND_NORMAL : int = 4
 const LENGTH_UPPER_BOUND_NORMAL : int = 7 

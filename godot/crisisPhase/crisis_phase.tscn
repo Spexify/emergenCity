@@ -215,6 +215,7 @@ layout_mode = 2
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
+[connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="." method="_on_day_mngr_day_ended"]
 [connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_day_ended"]
 [connection signal="period_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_period_ended"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

@@ -92,4 +92,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_day_mngr_day_ended(p_curr_day: int) -> void:
-	$RichTextLabel.text = "[color=white]Tag " + str(p_curr_day) + "[/color]"
+	$RichTextLabel.text = "[center][color=white]Tag " + str(p_curr_day) + "[/color]"
