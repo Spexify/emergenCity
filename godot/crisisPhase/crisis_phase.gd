@@ -231,7 +231,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 
 
 func _on_backpack_gui_closed() -> void:
