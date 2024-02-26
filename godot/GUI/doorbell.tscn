@@ -13,6 +13,7 @@ offset_right = 200.0
 offset_bottom = 82.0
 grow_horizontal = 2
 size_flags_horizontal = 4
+mouse_filter = 1
 texture_normal = ExtResource("1_f4bne")
 texture_pressed = ExtResource("2_ydd7b")
 script = ExtResource("3_j7i7k")
