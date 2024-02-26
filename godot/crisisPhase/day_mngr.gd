@@ -191,7 +191,7 @@ func _on_seod_closed() -> void:
 func _update_vitals() -> void:
 	_avatar_ref.sub_nutrition() 
 	_avatar_ref.sub_hydration()
-	_avatar_ref.add_health()
+	_avatar_ref.sub_health()
 
 
 func _update_HUD() -> void:
@@ -250,7 +250,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{ "add_tap_water" : 0}, "DefaultActionGUI",
 								"-", 0, false)
 		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-								 {"add_health" : 1 }, "RestGUI", 
+								 {}, "RestGUI", 
 								 "Hat sich ausgeruht.", 10)
 		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
 								{"constraint_rainwater_barrel" : 0},
