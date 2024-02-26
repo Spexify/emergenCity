@@ -3,14 +3,9 @@ class_name EMC_EndGameGUI
 
 var history : Array [EMC_DayCycle]
 
-## tackle visibility
-# MRM: This function would be a bonus, but since the open function expects a parameter I commented
-# it out.
-#func toggleVisibility() -> void:
-	#if visible == false:
-		#open()
-	#else:
-		#close()
+func _ready() -> void:
+	hide()
+
 
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_ref : EMC_Avatar) -> void:

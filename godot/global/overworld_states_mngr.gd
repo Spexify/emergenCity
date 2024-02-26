@@ -133,7 +133,7 @@ func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
 	match _water_state:
 		WaterState.NONE: _active_crises_descr += "Das Wasser ist komplett ausgefallen!"
-		WaterState.DIRTY: _active_crises_descr += "Nur verunreinigtes Wasser fließt im Haus!"
+		WaterState.DIRTY: _active_crises_descr += "Nur verunreinigtes Wasser fließt aus der Leitung!"
 		WaterState.CLEAN: pass
 
 
@@ -178,7 +178,10 @@ func set_food_contamination_state(new_food_contamination_state: FoodContaminatio
 
 func get_food_contamination_state_descr() -> String:
 	match _food_contamination_state:
-		FoodContaminationState.NONE: return "Kein Problem."
+		FoodContaminationState.NONE:
+			if _electricity_state == ElectricityState.NONE:
+				return "Reduzierte Haltbarkeit (Kühlschrank ohne Strom)"
+			else: return "Kein Problem."
 		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
 	return ""
 

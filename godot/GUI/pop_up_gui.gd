@@ -7,6 +7,10 @@ var _current_action : EMC_PopUpAction
 #func setup(p_action_consequences : EMC_ActionConsequences) -> void:
 	#_action_consequences = p_action_consequences
 
+func _ready() -> void:
+	hide()
+
+
 func open(_p_action : EMC_PopUpAction) -> void:
 	#moved action consequences to DayMngr, as we can use them there for normal actions too
 	_current_action = _p_action

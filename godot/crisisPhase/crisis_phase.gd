@@ -28,6 +28,8 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var uncast_guis := $GUI.get_children()
 @onready var _stage_mngr := $StageMngr
 @onready var _backpack_btn := $ButtonList/VBC/BackpackBtn
+#GUIs Upper Section:
+@onready var _status_bars := $GUI/VBC/UpperSection/HBC/StatusBars
 @onready var _day_mngr := $GUI/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
 @onready var _backpack_GUI := $GUI/VBC/MiddleSection/BackpackGUI
@@ -85,12 +87,10 @@ func _ready() -> void:
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
 	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-
-	#GUIs initial verstecken
-	$GUI/VBC/MiddleSection/EndGameGUI.hide()
-	$GUI/VBC/MiddleSection/PopUpGUI.hide()
+	
 	
 	#Setup-Methoden
+	_status_bars.setup(_tooltip_GUI)
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
