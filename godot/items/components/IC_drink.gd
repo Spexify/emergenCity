@@ -2,7 +2,7 @@ extends EMC_ItemComponent
 class_name EMC_IC_Drink
 
 const UNIT: String = "ml"
-const UNIT_FACTOR: int = 500 #1 Unit = 500ml
+const UNIT_FACTOR: int = 250 #1 Unit = 500ml
 var _hydration: int = 0 
 
 ########################################## PUBLIC METHODS ##########################################
