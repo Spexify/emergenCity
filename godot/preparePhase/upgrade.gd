@@ -61,11 +61,8 @@ func set_state(new_state : int) -> void:
 func get_state_maximum() -> int:
 	return _state_maximum
 	
-func get_button() -> TextureButton:
-	return $TextureButton
-	
 func get_sprite() -> Sprite2D:
-	return $TextureButton/Sprite2D
-
-func _on_texture_button_pressed() -> void:
-	was_pressed.emit(self) # Replace with function body.
+	return $Sprite2D
+	
+func _on_pressed() -> void:
+	was_pressed.emit(self)
