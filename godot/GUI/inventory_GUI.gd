@@ -34,8 +34,6 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC
 	_inventory = p_inventory
 	_avatar_ref = _p_avatar_ref
 	_only_inventory = _p_only_inventory
-	_inventory.item_added.connect(_on_item_added)
-	_inventory.item_removed.connect(_on_item_removed)
 	_seod = _p_seod
 	set_title(p_title)
 
@@ -47,35 +45,31 @@ func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
 		var new_slot := _SLOT_SCN.instantiate()
-		_slot_grid.add_child(new_slot)
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null:
-			_on_item_added(item, slot_idx)
-			item.show()
+		if item != null and item.get_ID() != JsonMngr.name_to_id("DUMMY"):
+			item.clicked.connect(_on_item_clicked)
+			new_slot.set_item(item)
+		_slot_grid.add_child(new_slot)
 
 
 func set_consume_active( _p_has_slept : int = 0) -> void:
 	_has_slept =  _p_has_slept
 	_only_inventory = false
-	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	#$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
-
 
 func set_consume_idle() -> void:
 	_only_inventory = true  #MRM Bugfix
-	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	#$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false #MRM Bugfix
-
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	$Inventory/Label.text = "[center]" + p_new_text + "[/center]"
 
-
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
-
 
 func clear_items() -> void:
 	for slot in $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_children():
@@ -98,14 +92,16 @@ func clear_items() -> void:
 
 ## Open the GUI
 func open() -> void:
-	_on_item_clicked(_clicked_item)
+	_clicked_item = null
 	show()
 	get_tree().paused = true
 	opened.emit()
+	_reload_items()
 
 
 ## Close the GUI
 func close() -> void:
+	_clear_gui()
 	close_button.emit()
 	#close_gui.play()
 	hide()
@@ -126,7 +122,6 @@ func close() -> void:
 func _ready() -> void:
 	hide()
 
-
 ## Handle the click on the backpack-button
 func _on_btn_backpack_pressed() -> void:
 	if visible == false:
@@ -134,176 +129,163 @@ func _on_btn_backpack_pressed() -> void:
 		open()
 	else:
 		close()
-
-
-## Update this view when its underlying [EMC_Inventory] structure added an item
-func _on_item_added(p_item: EMC_Item, p_idx: int) -> void:
-	p_item.clicked.connect(_on_item_clicked)
-	var slot := $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
-	if slot == null:
-		printerr("InventoryGUI: Slots not initialized properly")
-		return
-	slot.set_item(p_item)
-	_refresh()
-
-
-## Update this view when its underlying [EMC_Inventory] structure removed an item
-func _on_item_removed(p_item: EMC_Item, p_idx: int) -> void:
-	p_item.clicked.disconnect(_on_item_clicked)
-	var slot := $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_child(p_idx)
-	slot.remove_item()
-	if p_item == _clicked_item:
-		_clicked_item = null
-	_refresh()
-
-
+		
+func _clear_gui() -> void:
+	#Name of the item
+	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
+	label_name.clear()
+	
+	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
+	label_comps.clear()
+	
+	#Description of item:
+	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
+	label_descr.clear()
+	
+	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = false
+	
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(sender: EMC_Item) -> void:
 	_clicked_item = sender
-	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
 	
 	#Name of the item
 	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
 	label_name.clear()
-	if _clicked_item != null:
-		label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
+	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	
 	#Components of item
 	var comp_string: String = ""
 	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
 	label_comps.clear()
 	
-	if _clicked_item != null:
-		var comps := sender.get_comps()
-		for comp in comps:
-			var comp_text := comp.get_colored_name_with_vals()
-			if comp_text != "":
-				comp_string += comp_text + ", "
-		#Remove superfluous comma:
-		comp_string = comp_string.left(comp_string.length() - 2)
-		label_comps.append_text("[color=black]" + comp_string + "[/color]")
+	var comps := sender.get_comps()
+	for comp in comps:
+		var comp_text := comp.get_colored_name_with_vals()
+		if comp_text != "":
+			comp_string += comp_text + ", "
+	#Remove superfluous comma:
+	comp_string = comp_string.left(comp_string.length() - 2)
+	label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
 	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
 	label_descr.clear()
-	if _clicked_item != null:
-		label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
-	
-	if _only_inventory:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	else:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
 	## if the Chlor tablets are clicked, open water filtering gui
-	if _clicked_item != null:
-		if sender.get_ID() == 13:
-			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+	if sender.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"):
+		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+		if _only_inventory:
+			$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
+	else:
+		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Konsumieren"
+		
+		if _only_inventory:
+			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+			$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
+		elif _item_consumable(_clicked_item):
 			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
 		else:
-			$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Konsumieren"
+			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
 
+func _item_consumable(item : EMC_Item) -> bool:
+	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
 
+func _remove_item(item : EMC_Item) -> void:
+	for slot in _slot_grid.get_children():
+		if slot.get_item() == item:
+			slot.remove_item()
+
+func _remove_item_by_id(item_id : int) -> void:
+	for slot in _slot_grid.get_children():
+		if slot.get_item().get_ID() == item_id:
+			slot.remove_item()
+			return
+			
+func _reload_items() -> void:
+	_inventory.sort_custom(EMC_Inventory.sort_helper)
+	
+	for child in _slot_grid.get_children():
+		child.remove_item()
+		_slot_grid.remove_child(child)
+	
+	for slot_idx in _inventory.get_slot_cnt():
+		#Setup slot grid
+		var new_slot := _SLOT_SCN.instantiate()
+		#Add items that already are in the inventory
+		var item := _inventory.get_item_of_slot(slot_idx)
+		if item != null and item.get_ID() != JsonMngr.name_to_id("DUMMY"):
+			item.clicked.connect(_on_item_clicked)
+			new_slot.set_item(item)
+		_slot_grid.add_child(new_slot)
+		
 #MRM: TODO: Remove Magic Numbers
 func _on_consume_pressed() -> void:
-	var _clicked_item_copy := _clicked_item
-	if _clicked_item_copy == null:
+	if _clicked_item == null:
 		return
-	if _clicked_item_copy.get_ID() == 13: 
+	if _clicked_item.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"): 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
-		if !_inventory.has_item(2):
+		if !_inventory.has_item(JsonMngr.name_to_id("WATER_DIRTY")):
 			$FilterWater.visible = true
 		else:
 			##Improvement idea: use new _inventory.use_item() method
-			_clicked_item_copy.get_comp(EMC_IC_Uses).use_item(1)
-			if _clicked_item_copy.get_comp(EMC_IC_Uses).get_uses_left() == 0:
-				_inventory.remove_item(13,1)
-			_inventory.remove_item(2,1)
-			_inventory.add_new_item(1)
+			var comp_uses : EMC_IC_Uses = _clicked_item.get_comp(EMC_IC_Uses)
+			comp_uses.use_item(1)
+			# Work around to stop gray modulate
+			_clicked_item._on_clicked(EMC_Item.new())
+				
+			if comp_uses.no_uses_left():
+				_inventory.remove_item(_clicked_item.get_ID())
 			
-	var drink_comp : EMC_IC_Drink = _clicked_item_copy.get_comp(EMC_IC_Drink)
-	var food_comp : EMC_IC_Food = _clicked_item_copy.get_comp(EMC_IC_Food)
-	if drink_comp != null || food_comp != null:
-		if  drink_comp!= null:
+			_inventory.remove_item(JsonMngr.name_to_id("WATER_DIRTY"))
+			_inventory.add_new_item(JsonMngr.name_to_id("WATER"))
+	else:
+		var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
+		var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
+		if  drink_comp != null:
 			_avatar_ref.add_hydration(drink_comp.get_hydration())
 		if food_comp != null:
 			print(food_comp.get_nutritionness())
 			_avatar_ref.add_nutrition(food_comp.get_nutritionness())
-		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item_copy.get_comp(EMC_IC_Unpalatable)
+		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
 		if unpalatable_comp != null:
 			_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
 		
-		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item_copy.get_comp(EMC_IC_Pleasurable)
+		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item.get_comp(EMC_IC_Pleasurable)
 		if pleasurable_comp != null:
 			if pleasurable_comp.get_happinness_change() < 0:
 				_avatar_ref.sub_happinness(pleasurable_comp.get_happinness_change())
 			elif pleasurable_comp.get_happinness_change() >= 0 :
 				_avatar_ref.add_happinness(pleasurable_comp.get_happinness_change())
 				
-		var healthy_comp : EMC_IC_Healthy = _clicked_item_copy.get_comp(EMC_IC_Healthy)
+		var healthy_comp : EMC_IC_Healthy = _clicked_item.get_comp(EMC_IC_Healthy)
 		if healthy_comp != null:
 			if healthy_comp.get_health_change() < 0:
 				_avatar_ref.sub_health(healthy_comp.get_health_change())
 			elif healthy_comp.get_health_change() >= 0 :
 				_avatar_ref.add_health(healthy_comp.get_health_change())
 				
-		var hydrating_comp : EMC_IC_Hydrating = _clicked_item_copy.get_comp(EMC_IC_Hydrating)
+		var hydrating_comp : EMC_IC_Hydrating = _clicked_item.get_comp(EMC_IC_Hydrating)
 		if hydrating_comp != null:
 			if hydrating_comp.get_hydration_change() < 0:
 				_avatar_ref.sub_hydration(hydrating_comp.get_hydration_change())
 			elif hydrating_comp.get_hydration_change() >= 0 :
 				_avatar_ref.add_hydration(hydrating_comp.get_hydration_change())
 
-		#if _clicked_item_copy.get_ID() != 13:
-		_inventory.remove_item(_clicked_item_copy._ID)
-	else: 
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	_on_item_clicked(_clicked_item) #Update GUI
-
-
-## TODO: description of item to be emptied
-func _refresh() -> void:
-	_sort()
-	_on_item_clicked(null)
-
+		# Work around to stop gray modulate
+		_clicked_item._on_clicked(EMC_Item.new())
+		_inventory.remove_item(_clicked_item._ID)
+		
+	_reload_items()
+	_clear_gui()
 
 func _on_discard_pressed() -> void:
-	if _clicked_item != null:
-		_inventory.remove_item(_clicked_item.get_ID(),1)
-
+	_inventory.remove_item(_clicked_item.get_ID(),1)
+	_reload_items()
+	_clear_gui()
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false
-
-
-## Use a naive (non-optimized) bubble sort algorithm to sort in-place
-## Can't use the Godot-native custom_sort func so easily here as it's not a simple array,
-## unfortunately
-func _sort() -> void:
-	#Outer loop from last elem to first elem
-	for slot_idx: int in range(_slot_grid.get_child_count() - 1, -1, -1):
-		for i: int in _slot_grid.get_child_count():
-			if i == _slot_grid.get_child_count() - 1: return
-			var slot_left: EMC_InventorySlot = _slot_grid.get_child(i)
-			var item_left := slot_left.get_item()
-			var slot_right: EMC_InventorySlot = _slot_grid.get_child(i + 1)
-			var item_right := slot_right.get_item()
-			
-			if item_right != null:
-				if item_left == null:
-					_swap_slot_items(i, i + 1)
-				elif item_left.get_ID() > item_right.get_ID():
-					_swap_slot_items(i, i + 1)
-
-
-func _swap_slot_items(p_slot_idx_left: int, p_slot_idx_right: int) -> void:
-	var slot_left: EMC_InventorySlot = _slot_grid.get_child(p_slot_idx_left)
-	var item_left := slot_left.pop()
-	var slot_right: EMC_InventorySlot = _slot_grid.get_child(p_slot_idx_right)
-	var item_right := slot_right.pop()
-	
-	if item_right != null:
-		slot_left.set_item(item_right)
-	
-	if item_left != null:
-		slot_right.set_item(item_left)

@@ -30,7 +30,7 @@ func get_max_uses() -> int:
 func use_item(_p_uses : int = 1) -> void:
 	_uses_left -=_p_uses
 	if _uses_left < 0 :
-		_uses_left -= 0
+		_uses_left = 0
  	
 	
 func get_name_with_values() -> String:
