@@ -7,43 +7,43 @@ var _all_scenarios := {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.Water
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": "Flood"
+									"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!"
 									},
 						"Hurricane" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": "Hurricane"
+									"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst nicht aus dem Haus raus!"
 									},
 						"Drought" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": "Drought"
+									"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, verdorbene Lmittel und darfst manche Orte nicht betreten!"
 									},
 						"Pandemic" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": "Pandemic"
+									"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst manche Orte nicht betreten!"
 									},
 						"Earthquake" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": "Earthquake"
+									"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!"
 									},
 						"Forest Fire" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.NONE, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-									"notification": "Forest Fire"
+									"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst manche Orte nicht betreten!"
 									},
 						"Chemical Accident" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, 
 									"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.ISOLATION,
 									"food_contamination_crisis" : EMC_OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED,
-									"notification": "Chemical Accident"
+									"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst nicht aus dem Haus raus!"
 									}}
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
