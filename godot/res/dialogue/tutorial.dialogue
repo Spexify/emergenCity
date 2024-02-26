@@ -2,13 +2,13 @@
 Avatar: Ah, so ein schöner Morgen! [wait=0.5] Huch, wieso geht mein Licht nicht an?
 Avatar: Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom ist wohl weg.
 Avatar: Oh, da ist jemand an der Tür. 
-Julia: Guten Morgen Nachbar*! Hast du auch keinen Strom?
+Julia: Guten Morgen Nachbar! Hast du auch keinen Strom?
 Avatar: Sieht ganz so aus.
 Julia: Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?
 - Ja, klar.
 	Avatar: Gar kein Problem. Ich habe ja auch noch mein Krisenbewätigungsbuch im Regal.
 	Julia: Klingt gut. Viel Erfolg!
-- Naja...
+- Naja.
 	Avatar: Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewätigungs-buch im Regal.
 	Julia: Klingt gut. Viel Erfolg!
 => END
