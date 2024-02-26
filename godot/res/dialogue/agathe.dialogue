@@ -1,5 +1,5 @@
 ~ START
-Agathe: Holla, die Waldfee, endlich wieder Besuch!
+Agathe: Oh toll, endlich wieder Besuch!
 ~ BRANCH
 Agathe: Bist du zum Tauschen hier?
 - Avatar: Nein, lass uns quatschen!
@@ -7,7 +7,7 @@ Agathe: Bist du zum Tauschen hier?
 - Avatar: Ja, ich will handeln.
 	=>< TRADE
 	=> BRANCH
-- Avatar: Nichts dergleichen
+- Avatar: Nichts dergleichen.
 	=> END
 
 ~ TALK
