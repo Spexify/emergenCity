@@ -1,20 +1,39 @@
 [
 	{
-		"name": "POP_UP_TEST",
-		"pop_up_text": "Hello this is a JSON loaded test popup",
+		"name": "AGATHE_KNOCKS",
+		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
-			
+			"constraint_no_isolation": "",
 		},
 		"consequences": {
 			"trigger_dialogue": {
-						"dialogue_name" : "Walter",
+						"dialogue_name" : "agathe_event",
 						"action_names": [
-							"MIT_WALTER_REDEN"
+							"HELP_AGATHE_HAPPY",
+							"HELP_AGATHE_JAM"
 							],
 						},
 		},
 		"type_gui": "silent",
-		"description": "A Test pop up event",
+		"description": "Mit Agathe geplaudert",
+		"e_coin": 0,
+	},
+		{
+		"name": "JULIA_KNOCKS",
+		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+		"constraints": {
+			"constraint_no_isolation": "",
+		},
+		"consequences": {
+			"trigger_dialogue": {
+						"dialogue_name" : "julia_event",
+						"action_names": [
+							"HELP_JULIA"
+							],
+						},
+		},
+		"type_gui": "silent",
+		"description": "Julia geholfen",
 		"e_coin": 0,
 	},
 ]

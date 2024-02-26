@@ -7,7 +7,8 @@ var _stage_mngr : EMC_StageMngr
 var _lower_gui_node : Node
 var _day_mngr : EMC_DayMngr
 
-const WALTER : DialogueResource = preload("res://res/dialogue/walter.dialogue")
+const AGATHE_EVENT : DialogueResource = preload("res://res/dialogue/agathe_event.dialogue")
+const JULIA_EVENT : DialogueResource = preload("res://res/dialogue/julia_event.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 ########################################## PUBLIC METHODS ##########################################
@@ -21,6 +22,9 @@ func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_
 
 func add_health(p_value: int) -> void:
 	_avatar.add_health(p_value)
+
+func add_happiness(p_value: int) -> void:
+	_avatar.add_happinness(p_value)
 
 ## Adds the [EMC_Item]
 func add_item(p_ID: EMC_Item.IDs) -> void:
@@ -59,8 +63,10 @@ func trigger_dialogue(data : Dictionary) -> void:
 	var executer := EMC_ActionExecuter.new(actions)
 	
 	match p_name:
-		"Walter":
-			dialog_res = WALTER
+		"agathe_event":
+			dialog_res = AGATHE_EVENT
+		"julia_event":
+			dialog_res = JULIA_EVENT
 	
 	
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
