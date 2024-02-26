@@ -48,9 +48,9 @@ func _on_shelf_pressed() -> void:
 
 
 func _on_upgrade_center_pressed() -> void:
-	pass 
+	Global.goto_scene("res://preparePhase/upgrade_center.tscn")
 	# Todo: link Upgrade Center Scene
-	# get_tree().change_scene_to_file()
+	#get_tree().change_scene_to_file("res://preparePhase/upgrade_center.tscn")
 
 # var settings_scene = preload("res://preparePhase/settings.tscn")
 
