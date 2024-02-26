@@ -82,6 +82,7 @@ func _ready() -> void:
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
+	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
@@ -103,6 +104,7 @@ func _ready() -> void:
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, \
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
+	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -126,7 +128,7 @@ func _ready() -> void:
 	
 	_crisis_mngr.setup(_backpack)
 	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
-		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack)
+		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection)
 	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
 
 	if !Global._tutorial_done:

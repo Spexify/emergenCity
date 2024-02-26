@@ -35,6 +35,7 @@ enum IDs{
 ## This sigal will be emmited if the Action was performed 
 ## and is needed in [EMC_DayMngr] to recored a history of performed Actions.
 signal executed(action : EMC_Action)
+signal silent_executed(action : EMC_Action)
 
 ## The ID-integer associated with this action
 var _action_ID : int
@@ -67,7 +68,9 @@ func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 	self._description = description
 	self._performance_coin_value = performance_coin_value
 	self._progresses_day_period = p_progresses_day_period
-	
+
+func get_ID() -> int:
+	return _action_ID
 
 func get_ACTION_NAME() -> String:
 	return self._ACTION_NAME
