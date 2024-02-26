@@ -17,19 +17,22 @@ func _ready() -> void:
 	_add_balance(0)
 	
 	_equipped_upgrades = Global.get_upgrades()
-	
-	for i in range(len(_equipped_upgrades)):
-		_equipped_upgrades[i] = _upgrade_scene.instantiate()
-		
+	var _equipped_ids : Array[EMC_Upgrade.IDs] = []
+	for i in  range(len(_equipped_upgrades)):
 		if _equipped_upgrades[i] != null:
-			_equipped_upgrades[i].get_sprite().set_frame_coords(_equipped_upgrades[i].get_tilemap_position())
+			_equipped_ids.append(_equipped_upgrades[i].get_id())
 	
 	for id : EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
-		var _added_upgrade : EMC_Upgrade = _upgrade_scene.instantiate()
-		_added_upgrade.setup(id)
-		_added_upgrade.get_sprite().set_frame_coords(_added_upgrade.get_tilemap_position())
+		if id in _equipped_ids:
+			for i in range(len(_equipped_upgrades)):
+				if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == id:
+					_upgrade_list.add_child(_equipped_upgrades[i])
+		else:
+			var _added_upgrade : EMC_Upgrade = _upgrade_scene.instantiate()
+			_added_upgrade.setup(id)
+			_added_upgrade.get_sprite().set_frame_coords(_added_upgrade.get_tilemap_position())
 		
-		_upgrade_list.add_child(_added_upgrade)
+			_upgrade_list.add_child(_added_upgrade)
 		
 		
 func _add_balance(value : int) -> void:
