@@ -27,9 +27,13 @@ func _on_avatar_hydration_updated(p_new_value: int) -> void:
 	$HBoxContainer5/VBoxContainer/HBoxContainer/HydrationBar.set_value_no_signal(perc)
 
 func _on_avatar_health_updated(p_new_value: int) -> void:
-	var perc: int = float(p_new_value) * EMC_Avatar.UNIT_FACTOR_HEALTH  #float() Casting wichtig!
+	var perc: int = float(p_new_value)  #float() Casting wichtig!
+	$HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar.max_value = EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH
+	$HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar/HealthLabel.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
 	$HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar.set_value_no_signal(perc)
 
 func _on_avatar_happinness_updated(p_new_value: int) -> void:
-	var perc: int = float(p_new_value) * EMC_Avatar.UNIT_FACTOR_HAPPINNESS  #float() Casting wichtig!
+	var perc: int = float(p_new_value) #float() Casting wichtig!
+	$HBoxContainer5/VBoxContainer2/HBoxContainer4/HappinnessBar.max_value = EMC_Avatar.MAX_VITALS_HAPPINNESS*EMC_Avatar.UNIT_FACTOR_HAPPINNESS
+	$HBoxContainer5/VBoxContainer2/HBoxContainer4/HappinnessBar/HappinnessLabel.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
 	$HBoxContainer5/VBoxContainer2/HBoxContainer4/HappinnessBar.set_value_no_signal(perc)

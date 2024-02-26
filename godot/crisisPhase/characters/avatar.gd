@@ -125,41 +125,41 @@ func sub_hydration(hydration_change : int = 1) -> bool:
 func add_health(health_change : int = 1) -> void:
 	if _health_value + health_change <= MAX_VITALS_HEALTH: 
 		_health_value += health_change
-		health_updated.emit(get_health_status())
+		health_updated.emit(get_unit_health_status())
 	else: 
 		_health_value = MAX_VITALS_HEALTH
-		health_updated.emit(get_health_status())
+		health_updated.emit(get_unit_health_status())
 
 
 func sub_health(health_change : int = 1) -> bool:
 	if health_change < 0:
 		health_change *= -1 
 	if _health_value - health_change < 0 or _health_value < 0:
-		health_updated.emit(get_health_status())
+		health_updated.emit(get_unit_health_status())
 		return false
 	else:
 		_health_value -= health_change
-		health_updated.emit(get_health_status())
+		health_updated.emit(get_unit_health_status())
 		return true
 		
 func add_happinness(happinness_change : int = 1) -> void:
 	if _happinness_value + happinness_change <= MAX_VITALS_HAPPINNESS: 
 		_happinness_value += happinness_change
-		happinness_updated.emit(get_happinness_status())
+		happinness_updated.emit(get_unit_happinness_status())
 	else: 
 		_happinness_value = MAX_VITALS_HAPPINNESS
-		happinness_updated.emit(get_happinness_status())
+		happinness_updated.emit(get_unit_happinness_status())
 
 
 func sub_happinness(happinness_change : int = 1) -> bool:
 	if happinness_change < 0:
 		happinness_change *= -1 
 	if _happinness_value - happinness_change < 0 or _happinness_value < 0:
-		happinness_updated.emit(get_happinness_status())
+		happinness_updated.emit(get_unit_happinness_status())
 		return false
 	else:
 		_happinness_value -= happinness_change
-		happinness_updated.emit(get_happinness_status())
+		happinness_updated.emit(get_unit_happinness_status())
 		return true
 
 func refresh_vitals() -> void:
