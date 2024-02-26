@@ -82,6 +82,7 @@ func reset_save() -> void:
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
 		"inventory_data": _inventory.get_all_items_as_ID().filter(func(item_id : EMC_Item.IDs) -> bool: return item_id != EMC_Item.IDs.DUMMY),
+		"tutorial_done" : false,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -123,6 +124,7 @@ func save_game(was_crisis : bool) -> void:
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
+		"tutorial_done" : _tutorial_done,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -193,6 +195,8 @@ func load_game() -> void:
 	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
 	if avatar_skin != null && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
+		
+	_tutorial_done = data.get("tutorial_done", false)
 		
 	game_loaded.emit()
 
