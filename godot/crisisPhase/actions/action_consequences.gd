@@ -74,7 +74,7 @@ func trigger_dialogue(data : Dictionary) -> void:
 			dialog_res = GERHARD_EVENT
 		"petro_event":
 			dialog_res = PETRO_EVENT
-		"mert-event":
+		"mert_event":
 			dialog_res = MERT_EVENT
 	
 	
