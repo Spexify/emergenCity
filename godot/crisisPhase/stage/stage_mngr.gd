@@ -313,7 +313,7 @@ func _on_avatar_arrived() -> void:
 func _is_tile_out_of_bounds(p_tile_coord: Vector2i) -> bool:
 	if p_tile_coord.x <= TILE_MIN_X_COORD || p_tile_coord.x >= TILE_MAX_X_COORD:
 		return true
-	if p_tile_coord.y <= TILE_MIN_Y_COORD || p_tile_coord.x >= TILE_MAX_Y_COORD:
+	if p_tile_coord.y <= TILE_MIN_Y_COORD || p_tile_coord.y >= TILE_MAX_Y_COORD:
 		return true
 	
 	return false
@@ -381,32 +381,32 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	
-	if !_has_tile_collision(tile_coord + Vector2i(0, 0)):
+	if !_has_tile_collision(tile_coord) && !_is_tile_out_of_bounds(tile_coord):
 		return to_global(_curr_stage.map_to_local(tile_coord))
 		
 	if tile_coord.y < TILE_MAX_Y_COORD:
 		var south_tile := tile_coord + Vector2i(0, 1)
-		if !_has_tile_collision(south_tile):
+		if !_has_tile_collision(south_tile) && !_is_tile_out_of_bounds(south_tile):
 			return to_global(_curr_stage.map_to_local(south_tile))
 			
 		if tile_coord.x < TILE_MAX_X_COORD:
 			var southeast_tile := tile_coord + Vector2i(1, 1)
-			if !_has_tile_collision(southeast_tile):
+			if !_has_tile_collision(southeast_tile) && !_is_tile_out_of_bounds(southeast_tile):
 				return to_global(_curr_stage.map_to_local(southeast_tile))
 				
 		if tile_coord.x > TILE_MIN_X_COORD:
 			var southwest_tile := tile_coord + Vector2i(-1, 1)
-			if !_has_tile_collision(southwest_tile):
+			if !_has_tile_collision(southwest_tile) && !_is_tile_out_of_bounds(southwest_tile):
 				return to_global(_curr_stage.map_to_local(southwest_tile))
 				
 	if tile_coord.x < TILE_MAX_X_COORD:
 		var east_tile := tile_coord + Vector2i(1, 0)
-		if !_has_tile_collision(east_tile):
+		if !_has_tile_collision(east_tile) && !_is_tile_out_of_bounds(east_tile):
 			return to_global(_curr_stage.map_to_local(east_tile))
 			
 	if tile_coord.x > TILE_MIN_X_COORD:
 		var west_tile := tile_coord + Vector2i(-1, 0)
-		if !_has_tile_collision(west_tile):
+		if !_has_tile_collision(west_tile) && !_is_tile_out_of_bounds(west_tile):
 			return to_global(_curr_stage.map_to_local(west_tile))
 	
 	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")

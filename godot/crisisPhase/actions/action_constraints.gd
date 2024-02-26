@@ -52,6 +52,14 @@ func constraint_not_evening(p_reason: String = "") -> String:
 		return NO_REJECTION
 
 
+func constraint_no_limited_public_access(p_reason: String = "") -> String:
+	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
+		var reason := "Es herrscht momentan ein Betretugsverbot öffentlicher Gelände!" if p_reason == "" else p_reason 
+		return reason 
+	else:
+		return NO_REJECTION
+
+
 func constraint_no_isolation(p_reason: String = "") -> String:
 	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.ISOLATION:
 		var reason := "Es herrscht momentan eine Isolations-Verordnung!" if p_reason == "" else p_reason 
