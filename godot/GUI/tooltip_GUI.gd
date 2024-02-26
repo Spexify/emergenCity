@@ -12,6 +12,7 @@ func open(p_text: String) -> void:
 	get_tree().paused = true
 	show()
 	opened.emit()
+	await closed
 
 
 func _on_back_btn_pressed() -> void:

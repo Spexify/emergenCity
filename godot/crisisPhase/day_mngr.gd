@@ -183,8 +183,11 @@ func _on_seod_closed_game_end() -> void:
 
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
+	#Send avatar back home on a new day
 	_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
+	_stage_mngr.deactivate_NPCs()
 	_avatar_ref.set_global_position(Vector2i(250, 650))
+	
 	_update_HUD()
 	_update_vitals()
 	_check_pu_counter()

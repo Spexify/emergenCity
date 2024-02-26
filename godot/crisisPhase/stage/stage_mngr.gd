@@ -133,8 +133,7 @@ func change_stage(p_stage_name: String) -> void:
 ## Setup NPC position and (de)activate them
 func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
 	#Hide all NPCs first
-	for NPC: EMC_NPC in $NPCs.get_children():
-		NPC.deactivate()
+	deactivate_NPCs()
 	
 	#Dependend on the stage show and spawn NPCs
 	for NPC_name: String in p_NPC_spawn_pos:
@@ -174,6 +173,11 @@ func get_NPC(p_NPC_name: String) -> EMC_NPC:
 			return NPC
 	
 	return null
+
+## Remove all NPCs that are currently spawned
+func deactivate_NPCs() -> void:
+	for NPC: EMC_NPC in $NPCs.get_children():
+		NPC.deactivate()
 
 
 ########################################## PRIVATE METHODS #########################################
