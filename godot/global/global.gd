@@ -109,7 +109,6 @@ func reset_inventory() -> void:
 	_inventory = create_inventory_with_starting_items()
 
 func save_game(was_crisis : bool) -> void:
-	
 	if _inventory == null:
 		#MRM: I want to test partial Scenes with F6 but it still tries to save
 		return
@@ -218,8 +217,6 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
-	inventory.add_new_item(EMC_Item.IDs.CHLOR_TABLETS)
-	inventory.add_new_item(EMC_Item.IDs.SOAP)
 	inventory.sort_custom(EMC_Inventory.sort_helper)
 	return inventory
 

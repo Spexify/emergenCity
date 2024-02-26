@@ -194,9 +194,9 @@ func _on_seod_closed() -> void:
 
 
 func _update_vitals() -> void:
-	_avatar_ref.sub_nutrition() 
-	_avatar_ref.sub_hydration()
-	_avatar_ref.sub_health()
+	_avatar_ref.sub_nutrition(3) 
+	_avatar_ref.sub_hydration(3)
+	_avatar_ref.sub_health(1)
 
 
 func _update_HUD() -> void:
@@ -270,11 +270,12 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
 								{ })
-		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : "" }, 
+		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", \
+								{ "constraint_not_evening" : "", "constraint_no_limited_public_access" : "" }, 
 								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
 								{"Mert" : Vector2(470, 380)}) 
 		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", \
-								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen." }, 
+								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen.", "constraint_no_limited_public_access" : "" }, 
 								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
 								{"TownhallWorker" : Vector2(430, 300)}) 
 		EMC_Action.IDs.SC_PARK: result = EMC_StageChangeAction.new(p_action_ID, "zum Park", \

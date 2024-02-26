@@ -146,13 +146,13 @@ func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 
 func set_furniture_state(p_upgrade_id: EMC_Upgrade.IDs, new_state: int) -> void:
 	for upgrade in _upgrades:
-		if upgrade.get_id() == p_upgrade_id:
+		if upgrade != null && upgrade.get_id() == p_upgrade_id: #MRM: Added null check
 			upgrade.set_state(new_state)
 	push_error("Upgrade nicht ausgerüstet!")
 
 func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	for upgrade in _upgrades:
-		if upgrade.get_id() == p_upgrade_id:
+		if upgrade != null && upgrade.get_id() == p_upgrade_id: #MRM: Added null check
 			return upgrade.get_state_maximum()
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
