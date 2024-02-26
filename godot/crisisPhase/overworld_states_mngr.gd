@@ -36,30 +36,12 @@ enum FoodContaminationState{
 
 var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE #MRM Bugfix: Initialized with NONE
 
-enum Furniture{
-	WATER_RESERVOIR = 0, #UNUSED
-	RAINWATER_BARREL = 1,
-	ELECTRIC_RADIO = 2,
-	CRANK_RADIO = 3,
-}
+var _upgrades: Array[EMC_Upgrade]
 
-var _upgrades: Array[Furniture]
-
-var _furniture_state : Dictionary
-
-# All furniture_states range between 0 and the furniture_state_maximum defined here
-const _furniture_state_maximum : Dictionary = {
-	Furniture.RAINWATER_BARREL : 24, # water quantity is in units of 250ml
-}
-
-
-func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[Furniture]) -> void:
+func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[EMC_Upgrade]) -> void:
 	_electricity_state = p_electricity_state
 	_water_state = p_water_state
 	_upgrades = p_upgrades
-	_furniture_state = {
-		Furniture.RAINWATER_BARREL : 0,
-	}
 
 func get_electricity_state() -> ElectricityState:
 	return _electricity_state
@@ -111,19 +93,22 @@ func get_food_contamination_state_descr() -> String:
 		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
 	return ""
 	
-func get_upgrades() -> Array[Furniture]:
-	return _upgrades
-
-func set_upgrades(new_upgrades: Array[Furniture]) -> void:
-	_upgrades = new_upgrades
+func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
+	for upgrade in _upgrades:
+		if upgrade.get_id() == p_upgrade_id:
+			return upgrade.get_state()
+	push_error("Upgrade nicht ausgerüstet!") 
+	return -1
 	
-func get_furniture_state(furniture: Furniture) -> int:
-	return _furniture_state[furniture]
+func set_furniture_state(p_upgrade_id: EMC_Upgrade.IDs, new_state: int) -> void:
+	for upgrade in _upgrades:
+		if upgrade.get_id() == p_upgrade_id:
+			upgrade.set_state(new_state)
+	push_error("Upgrade nicht ausgerüstet!")
 	
-func set_furniture_state(furniture: Furniture, state: int) -> void:
-	if state > _furniture_state_maximum[furniture] || state < 0:
-		push_error("Unerwarteter Fehler: furniture state out of bounds")
-	_furniture_state[furniture] = state
-	
-func get_furniture_state_maximum(furniture: Furniture) -> int:
-	return _furniture_state_maximum[furniture]
+func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
+	for upgrade in _upgrades:
+		if upgrade.get_id() == p_upgrade_id:
+			return upgrade.get_state_maximum()
+	push_error("Upgrade nicht ausgerüstet!") 
+	return -1

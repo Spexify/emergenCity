@@ -22,7 +22,7 @@ func constraint_cooking(_dummy_param: Variant) -> String:
 
 
 func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
-	if _overworld_states_mngr.get_furniture_state(_overworld_states_mngr.Furniture.RAINWATER_BARREL) == 0:
+	if _overworld_states_mngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:
 		return "Die Regentonne ist leer"
 	else:
 		return NO_REJECTION

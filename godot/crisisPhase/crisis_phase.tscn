@@ -205,13 +205,10 @@ layout_mode = 2
 
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
 
-[connection signal="dialogue_initiated" from="StageMngr" to="." method="_on_stage_mngr_dialogue_initiated"]
 [connection signal="happinness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happinness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_btn_backpack_pressed"]
-[connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_day_ended"]
-[connection signal="period_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_period_ended"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
