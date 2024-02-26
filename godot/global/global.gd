@@ -21,6 +21,7 @@ signal scene_changed
 var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
+var _upgrades : Array[EMC_Upgrade] = [null, null, null]
 
 var current_scene : Node = null
 var _start_scene : String
@@ -192,11 +193,11 @@ func load_game() -> void:
 	if not SoundMngr.is_musik_playing():
 		SoundMngr.play_musik() 
 	
-	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
-	if avatar_skin != null && Global._tutorial_done:
-		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
-		
 	_tutorial_done = data.get("tutorial_done", false)
+	
+	var avatar_skin: String = data.get(SAVEFILE_AVATAR_SKIN, "ERROR")
+	if avatar_skin != "ERROR" && Global._tutorial_done:
+		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 		
 	game_loaded.emit()
 
@@ -276,3 +277,8 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
+func get_upgrades() -> Array[EMC_Upgrade]:
+	return _upgrades
+	
+func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
+	_upgrades = upgrades

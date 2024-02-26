@@ -1,4 +1,24 @@
 ~ START
-Momo: Will mich ja nicht einmischen, aber ihr labbert Stuss!
-Mert: !!! [wait=0.5] Seit wann kannst du [i][speed=0.3]reden[/speed][/i], MOMO??
+Mert: Hey Kumpel! Alles klar bei dir?
+- Avatar: Ja, wie läuft's bei dir?
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Avatar: Ich muss los!
+	Mert: Man sieht sich!
+	=> END
+
+~ DIALOG1
+Mert: Mir gehts super! Kommst du gut durch die Krise?
+- Ja
+	Avatar: Ich komme klar.
+	Mert: Schön zu hören! Aber pass' trotzdem auf dich auf, ja? So eine Krise ist nicht ohne.
+- Nein
+	Avatar: Ist ehrlich gesagt ganz schön schwierig.
+	Mert: Tut mir leid, das zu hören. Wenn du jemandem zum Reden brauchst, sag Bescheid, ja?
+	Mert: Zusammen schaffen wir das schon!
+=> END
+
+~ DIALOG2
+Mert: Bin ein bisschen gestresst. In solchen Zeiten hat das THW mehr zu tun als sonst.
+Mert: Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - Das ist das Größte.
 => END

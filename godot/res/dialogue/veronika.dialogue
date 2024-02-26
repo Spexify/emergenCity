@@ -1,22 +1,25 @@
 ~ START
-Veronika: Hi!
+Veronika: Hi! Alles klar bei dir?
 ~ BRANCH
-- Avatar: Erzähl mal.
+- Avatar: Wie läuft's?
 	=> TALK
 - Avatar: Hast du was zu tauschen?
 	=>< TRADE
 	=> BRANCH
-- Avatar: Tüdeldü!
+- Avatar: Tschüss!
+	Veronika: Ciao!
 	=> END
 
 
 ~ TALK
-Veronika: Gut, dass ich meinen Zunder und Feuerstahl hab.
-Veronika: Man kann nie vorbereitet genug sein.
-Kris: Hey, das ist mein Spruch!
-- Avatar: Warum liegt hier eig. Camper Zeugs rum?
-	Veronika: Ist unser Hobby. Micky fällt vllt mehr dazu ein.
-- Zurück
+Veronika: Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...
+Kris: Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!
+Veronika: Du verstehst aber unter "Planen" auch nur "Snacks einkaufen".
+Kris: Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!
+Veronika: Aber auch nur, wenn du bis dahin welche übrig gelassen hast.
+Kris: ...
+Veronika: ...
+Kris: Ich kaufe noch ein paar mehr ein.
 => END
 
 

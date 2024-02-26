@@ -20,6 +20,7 @@ const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 const _BACK_BTN_NAME := "BackButton"
 
 var _backpack: EMC_Inventory = Global.get_inventory()
+var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
 var _overworld_states_mngr: EMC_OverworldStatesMngr = OverworldStatesMngr #EMC_OverworldStatesMngr.new()
 var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
@@ -77,11 +78,12 @@ func _ready() -> void:
 		Global.load_state()
 		
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
-	var _upgrades: Array[EMC_OverworldStatesMngr.Furniture] = [EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, EMC_OverworldStatesMngr.Furniture.GAS_COOKER]
+	#var _upgrades: Array[EMC_Upgrade.IDs] = [EMC_Upgrade.IDsRAINWATER_BARREL, EMC_Upgrade.IDs.GAS_COOKER]
 	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
+	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	#GUIs initial verstecken
@@ -103,6 +105,7 @@ func _ready() -> void:
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, \
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
+	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 
 	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
 	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
@@ -126,7 +129,7 @@ func _ready() -> void:
 	
 	_crisis_mngr.setup(_backpack)
 	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
-		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack)
+		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection)
 	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
 
 	if !Global._tutorial_done:
