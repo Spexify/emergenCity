@@ -87,4 +87,5 @@ func _on_avatar_selection_gui_closed() -> void:
 							3, 1, "Der Strom ist ausgefallen!")
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
+	
 	close()
