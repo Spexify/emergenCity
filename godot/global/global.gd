@@ -21,7 +21,6 @@ signal scene_changed
 var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
-var _upgrades : Array[EMC_Upgrade] = [null, null, null]
 
 var current_scene : Node = null
 var _start_scene : String
@@ -276,10 +275,4 @@ func get_inventory() -> EMC_Inventory:
 
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
-	
-func get_upgrades() -> Array[EMC_Upgrade]:
-	return _upgrades
-	
-func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
-	_upgrades = upgrades
 

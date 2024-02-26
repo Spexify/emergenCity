@@ -334,8 +334,8 @@ func _create_new_optional_event() -> void:
 	# currently only one event, the RAINWATER_BARREL is implemented
 	# With more content, this should be a match statement similar to create_pop_up_action
 	var _added_water_quantity : int = _rng.randi_range(1, 6) # in units of 250ml
-	_overworld_states_mngr_ref.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
-		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
-			(_overworld_states_mngr_ref.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
+	_overworld_states_mngr_ref.set_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, 
+		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL), 
+			(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) + _added_water_quantity)))
 	_tooltip_GUI.open("Es hat geregnet")
 

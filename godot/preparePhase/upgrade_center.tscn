@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://doc1tdsx8itqw"]
+[gd_scene load_steps=3 format=3 uid="uid://doc1tdsx8itqw"]
 
-[ext_resource type="Script" path="res://preparePhase/upgrade_center.gd" id="1_j1ie4"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="1_xic5p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0cck"]
@@ -13,7 +12,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j1ie4")
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -56,99 +54,40 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 texture = ExtResource("1_xic5p")
 
-[node name="MarginContainer2" type="MarginContainer" parent="Background/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_type_variation = &"TitleSpacing"
 
-[node name="Title" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer2"]
+[node name="Title" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
 text = "[center]Statten Sie sich für die nächste Krise aus[/center]"
 fit_content = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/PanelContainer"]
+[node name="UpgradesGrid" type="GridContainer" parent="Background/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"TitleSpacing"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]Ausgerüstete Gegenstände[/center]"
-fit_content = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Upgrade1" type="PanelContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 178)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Upgrade2" type="PanelContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 178)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="Upgrade3" type="PanelContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 178)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="PanelContainer2" type="PanelContainer" parent="Background/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/PanelContainer2"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"TitleSpacing"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer/MarginContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]Erwerbbare Gegenstände[/center]"
-fit_content = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-size_flags_horizontal = 3
-columns = 3
 
 [node name="Description" type="PanelContainer" parent="Background/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/Description"]
-layout_mode = 2
-theme_type_variation = &"TitleSpacing"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/Description/MarginContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/Description"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
 
-[node name="BuyBtn" type="Button" parent="Background/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Gegenstand kaufen"
+text = "Gegenstand kaufen für 10"
+fit_content = true
+
+[node name="BuyBtn" type="Button" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="EquipBtn" type="Button" parent="Background/VBoxContainer"]
 layout_mode = 2

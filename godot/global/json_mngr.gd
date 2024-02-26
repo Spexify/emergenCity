@@ -346,7 +346,7 @@ func load_actions() -> void:
 		
 		_actions[action_id] = EMC_Action.from_dict(action_data)
 		
-		action_id += 1
+	action_id += 1
 	
 	_is_action_loaded = true
 
