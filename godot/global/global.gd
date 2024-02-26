@@ -192,11 +192,11 @@ func load_game() -> void:
 	if not SoundMngr.is_musik_playing():
 		SoundMngr.play_musik() 
 	
-	var avatar_skin: Variant = data.get(SAVEFILE_AVATAR_SKIN)
-	if avatar_skin != null && Global._tutorial_done:
-		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
-		
 	_tutorial_done = data.get("tutorial_done", false)
+	
+	var avatar_skin: String = data.get(SAVEFILE_AVATAR_SKIN, "ERROR")
+	if avatar_skin != "ERROR" && Global._tutorial_done:
+		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 		
 	game_loaded.emit()
 
