@@ -3,22 +3,13 @@ Agathe: Hallo Schätzchen! Ich habe ein altes Fotobuch gefunden. Hast du Lust, d
 - Ja
 	Avatar: Klar, gerne!
 	Agathe: Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten. 
-	Agathe: Solche Frisuren waren damals total angesagt …
-	%2 => DIALOG1
-	%2 => DIALOG2
+	Agathe: Solche Frisuren waren damals total angesagt ...
+	Agathe: Ach ja, ich habe viel zu viel Obst gekauft, und mehr Marmelade gekocht als ich selbst essen kann. 
+	Agathe: Magst du ein Glas haben?
+	Avatar: Oh ja, danke!
+	do execute("HELP_AGATHE_JAM")
+	=> END
 - Nein
+	Avatar: Tut mir leid, das passt mir gerade nicht gut.
 	Agathe: Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal.
 	=> END
-
-~ DIALOG1
-Agathe: Das hat Spaß gemacht! Lass uns bald mal wieder reden!
-Avatar: Gerne!
-do execute("HELP_AGATHE_HAPPY")
-=> END
-
-~ DIALOG2
-Agathe: Ach ja, ich habe viel zu viel Obst gekauft, und mehr Marmelade gekocht als ich selbst essen kann. 
-Agathe: Magst du ein Glas haben?
-Avatar: Oh ja, danke!
-do execute("HELP_AGATHE_JAM")
-=> END

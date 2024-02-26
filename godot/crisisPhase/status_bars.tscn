@@ -111,6 +111,15 @@ texture = ExtResource("4_m4gsd")
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0
+show_percentage = false
+
+[node name="HealthLabel" type="RichTextLabel" parent="HBoxContainer5/VBoxContainer2/HBoxContainer3/HealthBar"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+bbcode_enabled = true
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer5/VBoxContainer2"]
 layout_mode = 2
@@ -130,3 +139,12 @@ texture = ExtResource("5_xfaii")
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0
+show_percentage = false
+
+[node name="HappinnessLabel" type="RichTextLabel" parent="HBoxContainer5/VBoxContainer2/HBoxContainer4/HappinnessBar"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+bbcode_enabled = true

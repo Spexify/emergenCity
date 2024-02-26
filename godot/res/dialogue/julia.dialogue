@@ -3,23 +3,28 @@ Julia: Hi Nachbar!
 - Avatar: Was geht?
 	%2 => dialog1
 	%2 => dialog2
-	%3 => dialog3
+	%2 => dialog3
 - Avatar: Bis dann!
 => END
 
 ~ dialog1
-Julia: Alles was gehen kann. 
-Avatar: [b]Micky[/b] kann wohl bessere Texte schreiben...
-Julia: Bestimmt.
+Julia: Hast du heute schon ein paar Nachbarn besucht? Soziale Kontakte sind das A und O in einer Krise.
+Julia: In unserer Nachbarschaft gibt es einige sehr liebe Menschen, die dir sicher gerne helfen, besser durch die Krise zu kommen.
+Julia: Andersherum ist es natürlich auch nett, wenn du ihnen hilfst, falls sie sich mit einem Problem an dich wenden.
+Avatar: Danke für den Tipp!
 => END
 
 ~ dialog2
-Momo: Will mich ja nicht einmischen, aber ihr labbert Stuss!
-Mert: !!! [wait=0.5] Seit wann kannst du [i][speed=0.3]reden[/speed][/i], MOMO??
+Julia: Hast du heute schon etwas gekocht? Wenn du tagsüber etwas kochst, kannst du abends eine warme Mahlzeit zu dir nehmen.
+Julia: Das schmeckt nicht nur besser; viele Lebensmittel sind ungekocht gar nicht genießbar. Keiner möchte gerne ungekochte Nudeln kauen. 
+Julia: Aber gekochtes Essen hält sich häufig nicht sehr lange und sollte daher bald gegessen werden.
+Avatar: Danke für den Tipp!
 => END
 
 ~ dialog3
-Veronika: Wollt ihr euch mal vorstellen, alle?
-Agathe: Nö.
-Veronika: Ok.
+Julia: Es gibt viele Möglichkeiten, an Wasser zu gelangen: Schön ist natürlich, wenn einfach sauberes Wasser aus deinem Wasserhahn kommt.
+Julia: Wenn das Wasser mal ausfällt, kann man welches aus der Regentonne schöpfen. Das ist dann allerdings nicht sehr sauber.
+Julia: Dafür gibt es Chlortabletten: Die reinigen verschmutztes Wasser aus der Regentonne oder bei Verschmutzungen in der Leitung.
+Julia: Manchmal teilt der THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt.
+Avatar: Danke für den Tipp!
 => END
