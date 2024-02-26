@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://j8qcqefgbhq4"]
+[gd_scene load_steps=8 format=3 uid="uid://j8qcqefgbhq4"]
 
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="3_ncapd"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="3_spno5"]
+[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="5_npb2c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)
@@ -168,17 +169,15 @@ columns = 7
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Home" type="Button" parent="Background/Margin/Main/HBoxContainer" groups=["Button"]]
-custom_minimum_size = Vector2(245, 50)
+[node name="Home" type="Button" parent="Background/Margin/Main/HBoxContainer"]
+custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Bestätigen"
+theme_override_font_sizes/font_size = 65
+text = "Hauptmenü"
 
-[node name="Cancel" type="Button" parent="Background/Margin/Main/HBoxContainer" groups=["Button"]]
-custom_minimum_size = Vector2(245, 50)
+[node name="TextureButton" type="TextureButton" parent="Background/Margin/Main/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Abbrechen"
+texture_normal = ExtResource("5_npb2c")
 
 [connection signal="pressed" from="Background/Margin/Main/HBoxContainer/Home" to="." method="_on_home_pressed"]
-[connection signal="pressed" from="Background/Margin/Main/HBoxContainer/Cancel" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Background/Margin/Main/HBoxContainer/TextureButton" to="." method="_on_back_button_pressed"]
