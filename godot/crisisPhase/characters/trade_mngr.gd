@@ -12,6 +12,7 @@ enum TradeFeasibility{
 	UNFEASABLE = 1,
 	NO_INVENTORY_SPACE = 2,
 	MISSING_SOUGHT_ITEMS = 3,
+	#Idea: Bad relationship with NPC
 }
 
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")

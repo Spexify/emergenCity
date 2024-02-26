@@ -4,9 +4,10 @@ Agathe: Hallo Schätzchen! Ich habe ein altes Fotobuch gefunden. Hast du Lust, d
 	Avatar: Klar, gerne!
 	Agathe: Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten. 
 	Agathe: Solche Frisuren waren damals total angesagt …
-	%2 => DIALOG1
+	%0 => DIALOG1
 	%2 => DIALOG2
 - Nein
+	Avatar: Tut mir leid, das passt mir gerade nicht gut.
 	Agathe: Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal.
 	=> END
 
