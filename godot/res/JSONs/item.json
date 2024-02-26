@@ -7,7 +7,7 @@
 	{
 		"ID": 1,
 		"name": "Wasser",
-		"descr": "Sauberes Trinkwasser.",
+		"descr": "Sauberes Trinkwasser. Eignet sich auch zum Kochen oder Waschen.",
 		"comps": [
 			{
 				"name": "cost",
@@ -22,7 +22,7 @@
 	{
 		"ID": 2,
 		"name": "Dreckiges Wasser",
-		"descr": "Nicht die Erstwahl, aber dennoch trinkbar.",
+		"descr": "Verschmutzt. Trinken auf eigene Gefahr.",
 		"comps": [
 			{
 				"name": "drink",
@@ -37,7 +37,7 @@
 	{
 		"ID": 3,
 		"name": "Ravioli Konserve",
-		"descr": "Kalt genießbar, aber ein Festmahl sieht anders aus..",
+		"descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus..",
 		"comps": [
 			{
 				"name": "cost",
@@ -67,12 +67,8 @@
 	{
 		"ID": 5,
 		"name": "Ravioli Gericht",
-		"descr": "Lecker schmecker!",
+		"descr": "Warm deutlich leckerer als kalt.",
 		"comps": [
-			{
-				"name": "cost",
-				"params": 50,
-			},
 			{
 				"name": "food",
 				"params": 2,
@@ -100,10 +96,6 @@
 		"descr": "Trockene, gekochte Nudeln. Die Definition von 'langweiligem Essen', aber machen satt.",
 		"comps": [
 			{
-				"name": "cost",
-				"params": 25,
-			},
-			{
 				"name": "food",
 				"params": 1,
 			},
@@ -116,7 +108,7 @@
 	{
 		"ID": 8,
 		"name": "Soße im Glas",
-		"descr": "X",
+		"descr": "Alleine nicht lecker, aber wertet deine trockenen Nudeln auf.",
 		"comps": [
 			{
 				"name": "cost",
@@ -131,7 +123,7 @@
 	{
 		"ID": 9,
 		"name": "Nudeln mit Soße",
-		"descr": "X",
+		"descr": "Leicht zu machen und lecker; nicht umsonst das Lieblingsessen vieler Kinder.",
 		"comps": [
 			{
 				"name": "cost",
@@ -153,7 +145,7 @@
 	{
 		"ID": 10,
 		"name": "Brot",
-		"descr": "X",
+		"descr": "Wie eine weiße Leinwand: Besser mit Belag darauf.",
 		"comps": [
 			{
 				"name": "cost",
@@ -172,7 +164,7 @@
 	{
 		"ID": 11,
 		"name": "Marmelade",
-		"descr": "X",
+		"descr": "Süßer Obstaufstrich. Einkochen hat das Obst sehr haltbar gemacht.",
 		"comps": [
 			{
 				"name": "cost",
@@ -187,7 +179,7 @@
 	{
 		"ID": 12,
 		"name": "Brot mit Marmelade",
-		"descr": "X",
+		"descr": "Der Frühstücksklassiker schlechthin.",
 		"comps": [
 			{
 				"name": "food",
@@ -203,7 +195,7 @@
 	{
 		"ID": 13,
 		"name": "Chlortablette",
-		"descr": "Zum Wasser Filtern.",
+		"descr": "Können genutzt werden, um schmutziges Wasser zu reinigen.",
 		"comps": [
 			{
 				"name": "cost",
@@ -218,7 +210,7 @@
 	{
 		"ID": 14,
 		"name": "Mehl",
-		"descr": "Zum Backen.",
+		"descr": "Zutat zum Backen, alleine nicht genießbar.",
 		"comps": [
 			{
 				"name": "cost",
@@ -229,7 +221,7 @@
 	{
 		"ID": 15,
 		"name": "Salz",
-		"descr": "",
+		"descr": "Das beliebteste Gewürz; nicht zu Verwechseln mit Zucker.",
 		"comps": [
 			{
 				"name": "cost",
@@ -240,7 +232,7 @@
 	{
 		"ID": 16,
 		"name": "Zucker",
-		"descr": "",
+		"descr": "Das beliebteste Süßungsmittel; nicht zu Verwechseln mit Salz.",
 		"comps": [
 			{
 				"name": "cost",
@@ -251,7 +243,7 @@
 	{
 		"ID": 17,
 		"name": "Reis",
-		"descr": "",
+		"descr": "Vielseitige Beilage, besonders gerne zu Curry serviert.",
 		"comps": [
 			{
 				"name": "cost",
@@ -262,7 +254,7 @@
 	{
 		"ID": 18,
 		"name": "Hülsenfrüchte",
-		"descr": "",
+		"descr": "Unterschätzte Alleskönner, reich an Eiweiß und oft besonders lange haltbar.",
 		"comps": [
 			{
 				"name": "cost",
@@ -273,7 +265,7 @@
 	{
 		"ID": 19,
 		"name": "Fisch",
-		"descr": "",
+		"descr": "Achtung vor den Gräten!",
 		"comps": [
 			{
 				"name": "cost",
@@ -288,7 +280,7 @@
 	{
 		"ID": 20,
 		"name": "Kartoffeln",
-		"descr": "",
+		"descr": "Für diese allseits beliebten Knollen gibt es zig verschiedenen Zubereitungsarten.",
 		"comps": [
 			{
 				"name": "cost",
@@ -303,7 +295,7 @@
 	{
 		"ID": 21,
 		"name": "Gemüse",
-		"descr": "",
+		"descr": "Vielseitig und gesund, und frisch geerntet besonders lecker.",
 		"comps": [
 			{
 				"name": "cost",
@@ -326,7 +318,7 @@
 	{
 		"ID": 22,
 		"name": "Früchte",
-		"descr": "",
+		"descr": "Süß und gesund, perfekt für den Snack zwischendurch.",
 		"comps": [
 			{
 				"name": "cost",
@@ -349,7 +341,7 @@
 	{
 		"ID": 23,
 		"name": "Schokolade",
-		"descr": "Zum Genießen.",
+		"descr": "Zum Genießen, in Maßen.",
 		"comps": [
 			{
 				"name": "cost",
@@ -372,7 +364,7 @@
 	{
 		"ID": 24,
 		"name": "Fleisch",
-		"descr": "Zum Kochen.",
+		"descr": "Nur wenige Sorten (und nur sehr frische Stücke) sind roh genießbar, der Rest sollte dringend durchgebraten werden.",
 		"comps": [
 			{
 				"name": "cost",
@@ -387,7 +379,7 @@
 	{
 		"ID": 25,
 		"name": "Tofu",
-		"descr": "Zum Kochen.",
+		"descr": "Eiweißlieferant, häufig als Fleischersatz verwendet.",
 		"comps": [
 			{
 				"name": "cost",
@@ -402,7 +394,7 @@
 	{
 		"ID": 26,
 		"name": "Nüsse",
-		"descr": "",
+		"descr": "Lang haltbare Lieferanten für Eiweiß, Eisen und Omega-3-Fettsäuren.",
 		"comps": [
 			{
 				"name": "cost",
@@ -421,7 +413,7 @@
 	{
 		"ID": 27,
 		"name": "Käse",
-		"descr": "",
+		"descr": "In Scheiben geschnitten ein beliebter Brotbelag.",
 		"comps": [
 			{
 				"name": "cost",
@@ -436,7 +428,7 @@
 	{
 		"ID": 28,
 		"name": "Milch",
-		"descr": "",
+		"descr": "Von einer Kuh oder aus Hafer/Soja/Mandeln.",
 		"comps": [
 			{
 				"name": "cost",
@@ -459,7 +451,7 @@
 	{
 		"ID": 29,
 		"name": "Bolognese",
-		"descr": "",
+		"descr": "Nudelgericht, dessen Soße mehr Eiweiß enthält als eine gewöhnliche Tomatensoße.",
 		"comps": [
 			{
 				"name": "shelflife",
@@ -478,7 +470,7 @@
 	{
 		"ID": 30,
 		"name": "Saft",
-		"descr": "",
+		"descr": "Schmeckt frisch gepresst am Besten.",
 		"comps": [
 			{
 				"name": "cost",
@@ -505,7 +497,7 @@
 	{
 		"ID": 31,
 		"name": "Gesalzener Fisch",
-		"descr": "Länger haltbar.",
+		"descr": "Länger haltbar als ungesalzener Fisch, aber eben auch ... salziger.",
 		"comps": [
 			{
 				"name": "food",
@@ -524,7 +516,7 @@
 	{
 		"ID": 32,
 		"name": "Eingelegte Gemüse",
-		"descr": "Länger haltbar.",
+		"descr": "Länger haltbar als unbehandeltes Gemüse.",
 		"comps": [
 			{
 				"name": "food",
@@ -539,7 +531,7 @@
 	{
 		"ID": 33,
 		"name": "Gemüsereis",
-		"descr": "",
+		"descr": "Beliebtes Gericht, das mit quasi jeder Gemüsesorte funktioniert.",
 		"comps": [
 			{
 				"name": "food",
@@ -562,7 +554,7 @@
 	{
 		"ID": 34,
 		"name": "Curry mit Reis",
-		"descr": "",
+		"descr": "Je nach Rezept irgendwo zwischen 'ein wenig scharf' und 'SEHR scharf'. Der Reis mildert den Geschmack ein wenig ab.",
 		"comps": [
 			{
 				"name": "food",
@@ -581,7 +573,7 @@
 	{
 		"ID": 35,
 		"name": "Hummus mit Brot",
-		"descr": "",
+		"descr": "Brot mit deftigem Kichererbsen-Aufstrich, den es in verschiedenen Würzungen gibt.",
 		"comps": [
 			{
 				"name": "food",
@@ -600,7 +592,7 @@
 	{
 		"ID": 36,
 		"name": "Käsesandwich",
-		"descr": "",
+		"descr": "Der Klassiker unter den Pausebroten.",
 		"comps": [
 			{
 				"name": "food",
@@ -619,7 +611,7 @@
 	{
 		"ID": 37,
 		"name": "Heiße Schokolade",
-		"descr": "",
+		"descr": "Ein warmer Genuss für Jung und Alt.",
 		"comps": [
 			{
 				"name": "food",
@@ -646,7 +638,7 @@
 	{
 		"ID": 38,
 		"name": "Gulasch",
-		"descr": "",
+		"descr": "Das Eintopf-artige Gericht wärmt von innen.",
 		"comps": [
 			{
 				"name": "food",
@@ -665,7 +657,7 @@
 	{
 		"ID": 39,
 		"name": "Milchreis",
-		"descr": "",
+		"descr": "Leckere Süßspeise, traditionell mit Obst oder Zimt und Zucker gegessen.",
 		"comps": [
 			{
 				"name": "food",
@@ -688,7 +680,7 @@
 	{
 		"ID": 40,
 		"name": "Suppe",
-		"descr": "",
+		"descr": "Nicht nur reich an Nährstoffen, sondern auch ein Helfer bei der Flüssigkeitszufuhr.",
 		"comps": [
 			{
 				"name": "food",
@@ -711,7 +703,7 @@
 	{
 		"ID": 41,
 		"name": "Batterien",
-		"descr": "",
+		"descr": "Wiederaufladbar. Können benutzt werden, um verschiedene Geräte zu betreiben.",
 		"comps": [
 			{
 				"name": "cost",
@@ -726,7 +718,7 @@
 	{
 		"ID": 42,
 		"name": "Seife",
-		"descr": "",
+		"descr": "Duschen geht auch ohne, ist mit aber viel effektiver.",
 		"comps": [
 			{
 				"name": "cost",

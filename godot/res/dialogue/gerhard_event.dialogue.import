@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://b3x2itdlxg1pm"
+path="res://.godot/imported/gerhard_event.dialogue-73e2b5df8e4dc640f72cc641317254b8.tres"
+
+[deps]
+
+source_file="res://res/dialogue/gerhard_event.dialogue"
+dest_files=["res://.godot/imported/gerhard_event.dialogue-73e2b5df8e4dc640f72cc641317254b8.tres"]
+
+[params]
+
+defaults=true

@@ -11,6 +11,7 @@
 custom_minimum_size = Vector2(0, 50)
 offset_right = 44.0
 offset_bottom = 24.0
+mouse_filter = 1
 toggle_mode = true
 button_group = ExtResource("1_kdf54")
 texture_normal = ExtResource("2_wy3h8")

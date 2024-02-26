@@ -48,9 +48,9 @@ func _on_shelf_pressed() -> void:
 
 
 func _on_upgrade_center_pressed() -> void:
-	pass 
+	Global.goto_scene("res://preparePhase/upgrade_center.tscn")
 	# Todo: link Upgrade Center Scene
-	# get_tree().change_scene_to_file()
+	#get_tree().change_scene_to_file("res://preparePhase/upgrade_center.tscn")
 
 # var settings_scene = preload("res://preparePhase/settings.tscn")
 
@@ -87,5 +87,4 @@ func _on_avatar_selection_gui_closed() -> void:
 							3, 1, "Der Strom ist ausgefallen!")
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
-	
 	close()

@@ -194,9 +194,9 @@ func _on_seod_closed() -> void:
 
 
 func _update_vitals() -> void:
-	_avatar_ref.sub_nutrition() 
-	_avatar_ref.sub_hydration()
-	_avatar_ref.add_health()
+	_avatar_ref.sub_nutrition(3) 
+	_avatar_ref.sub_hydration(3)
+	_avatar_ref.sub_health(1)
 
 
 func _update_HUD() -> void:
@@ -255,7 +255,7 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								{ "add_tap_water" : 0}, "DefaultActionGUI",
 								"-", 0, false)
 		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-								 {"add_health" : 1 }, "RestGUI", 
+								 {}, "RestGUI", 
 								 "Hat sich ausgeruht.", 10)
 		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
 								{"constraint_rainwater_barrel" : 0},
@@ -270,11 +270,12 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
 								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 750),
 								{ })
-		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", { "constraint_not_evening" : "" }, 
+		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", \
+								{ "constraint_not_evening" : "", "constraint_no_limited_public_access" : "" }, 
 								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
 								{"Mert" : Vector2(470, 380)}) 
 		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", \
-								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen." }, 
+								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen.", "constraint_no_limited_public_access" : "" }, 
 								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
 								{"TownhallWorker" : Vector2(430, 300)}) 
 		EMC_Action.IDs.SC_PARK: result = EMC_StageChangeAction.new(p_action_ID, "zum Park", \
@@ -334,8 +335,8 @@ func _create_new_optional_event() -> void:
 	# currently only one event, the RAINWATER_BARREL is implemented
 	# With more content, this should be a match statement similar to create_pop_up_action
 	var _added_water_quantity : int = _rng.randi_range(1, 6) # in units of 250ml
-	_overworld_states_mngr_ref.set_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL, 
-		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL), 
-			(_overworld_states_mngr_ref.get_furniture_state(EMC_OverworldStatesMngr.Furniture.RAINWATER_BARREL) + _added_water_quantity)))
+	_overworld_states_mngr_ref.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
+		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
+			(_overworld_states_mngr_ref.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
 	_tooltip_GUI.open("Es hat geregnet")
 

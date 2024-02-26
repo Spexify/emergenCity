@@ -22,7 +22,7 @@ func constraint_cooking(_dummy_param: Variant) -> String:
 
 
 func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
-	if _overworld_states_mngr.get_furniture_state(_overworld_states_mngr.Furniture.RAINWATER_BARREL) == 0:
+	if _overworld_states_mngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:
 		return "Die Regentonne ist leer"
 	else:
 		return NO_REJECTION
@@ -52,6 +52,14 @@ func constraint_not_evening(p_reason: String = "") -> String:
 		return NO_REJECTION
 
 
+func constraint_no_limited_public_access(p_reason: String = "") -> String:
+	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
+		var reason := "Es herrscht momentan ein Betretugsverbot öffentlicher Gelände!" if p_reason == "" else p_reason 
+		return reason 
+	else:
+		return NO_REJECTION
+
+
 func constraint_no_isolation(p_reason: String = "") -> String:
 	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.ISOLATION:
 		var reason := "Es herrscht momentan eine Isolations-Verordnung!" if p_reason == "" else p_reason 
@@ -66,4 +74,12 @@ func constraint_some_water_available(p_reason: String = "") -> String:
 		return NO_REJECTION
 	else:
 		var reason := "Kein Wasser verfügbar!" if p_reason == "" else p_reason 
+		return reason 
+
+func constraint_no_clean_water_available(p_reason: String = "") -> String:
+	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.NONE || \
+		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
+		return NO_REJECTION
+	else:
+		var reason := "Sauberes Wasser verfügbar!" if p_reason == "" else p_reason 
 		return reason 

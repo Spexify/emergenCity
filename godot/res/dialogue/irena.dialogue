@@ -1,9 +1,11 @@
 ~ START
 Irena: Hast du Spiele auf deinem Handy??
-Irena: Meine Lieblingsapp ist EmergenCITY: Play & Prepare!!!
-Avatar: Shameless-Plug™.
-- Avatar: Mit was spielst [i]du[/i] da?
-	Irena: Mit einem Flugzeug! [speed=0.3]Wuuuuschhhh!![/speed]
-	Irena: Ist aber meins[wait=0.5],\nÄäätschi bätsch!
+Irena: Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!
+Avatar: Oh, das klingt spaßig.
+Irena: Ist es auch!
+- Nach Irenas Spielzeug fragen
+	Avatar: Mit was spielst du da?
+	Irena: Mit einer Rakete! [speed=0.3]Wuuuuschhhh!![/speed]
+	Irena: Ist aber meine[wait=0.5],\nÄäätschi bätsch!
 - Zurück
 => END

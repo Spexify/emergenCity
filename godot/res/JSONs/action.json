@@ -1,15 +1,74 @@
 [
 	{
-		"name": "MIT_WALTER_REDEN",
+		"name": "HELP_AGATHE_JAM",
 		"constraints": {
 			
 		},
 		"consequences": {
-			"add_item_by_name": "HOT_CHOCOLATE",
-			"add_health": 10,
+			"add_item_by_name": "JAM",
 		},
 		"type_gui": "",
-		"description": "Du hast mit Walter geredet.",
-		"e_coin": 0,
+		"description": "Mit Agathe geplaudert.",
+		"e_coin": 50,
 	},
+	{
+		"name": "HELP_AGATHE_HAPPY",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_happiness": 30,
+		},
+		"type_gui": "",
+		"description": "Mit Agathe geplaudert.",
+		"e_coin": 50,
+	},
+	{
+		"name": "HELP_JULIA",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "CHOCOLATE",
+		},
+		"type_gui": "",
+		"description": "Julia geholfen.",
+		"e_coin": 50,
+	},
+	{
+		"name": "HELP_GERHARD",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_happiness": 30,
+		},
+		"type_gui": "",
+		"description": "Mit Gerhard nach Friedel gesucht.",
+		"e_coin": 50,
+	},
+	{
+		"name": "HELP_PETRO",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "BATTERIES",
+		},
+		"type_gui": "",
+		"description": "Mit Irena gespielt.",
+		"e_coin": 50,
+	},
+	{
+		"name": "HELP_MERT",
+		"constraints": {
+			
+		},
+		"consequences": {
+			"add_item_by_name": "WATER",
+		},
+		"type_gui": "",
+		"description": "Mit Mert Wasser verteilt.",
+		"e_coin": 50,
+	}
 ]
