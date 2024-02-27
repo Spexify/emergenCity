@@ -47,13 +47,12 @@ show_percentage = false
 [node name="CaloriesLabel" type="RichTextLabel" parent="HBC/VBoxContainer/NutritionCont/NutritionBar"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 0
-offset_top = 5.0
-offset_right = 90.0
-offset_bottom = 35.0
+offset_right = 100.0
+offset_bottom = 30.0
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[center]2000 kcal[/center]
+text = "
 "
 
 [node name="HydrationCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
@@ -80,13 +79,12 @@ show_percentage = false
 [node name="MillilitersLabel" type="RichTextLabel" parent="HBC/VBoxContainer/HydrationCont/HydrationBar"]
 custom_minimum_size = Vector2(90, 30)
 layout_mode = 1
-offset_top = 5.0
 offset_right = 100.0
-offset_bottom = 35.0
+offset_bottom = 30.0
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "[color=white][center]2200 ml[/center] [/color]
+text = "
 "
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBC"]
