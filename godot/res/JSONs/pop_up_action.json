@@ -77,7 +77,7 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
-			"constraint_no_clean_water_available": "" 
+			"constraint_no_clean_water_available": "",
 		},
 		"consequences": {
 			"trigger_dialogue": {

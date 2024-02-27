@@ -48,6 +48,7 @@ func add_tap_water(_dummy: int) -> void:
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
 
+
 func trigger_dialogue(data : Dictionary) -> void:
 	var dialog_res : DialogueResource
 
