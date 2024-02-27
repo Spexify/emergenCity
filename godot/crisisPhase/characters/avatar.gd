@@ -98,7 +98,7 @@ func add_nutrition(nutrition_change : int = 1) -> void:
 
 func sub_nutrition(nutrition_change : int = 1) -> bool:
 	if _nutrition_value - nutrition_change < 0 or _nutrition_value < 0:
-		nutrition_updated.emit(get_unit_nutrition_status()) 
+		nutrition_updated.emit(0) 
 		return false
 	else:
 		_nutrition_value -= nutrition_change
@@ -115,7 +115,7 @@ func add_hydration(hydration_change : int = 1) -> void:
 	
 func sub_hydration(hydration_change : int = 1) -> bool:
 	if _hydration_value - hydration_change < 0 or _hydration_value < 0:
-		hydration_updated.emit(get_unit_hydration_status())
+		hydration_updated.emit(0)
 		return false
 	else:
 		_hydration_value -= hydration_change
