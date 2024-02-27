@@ -4,7 +4,6 @@ Mert: Hast du Zeit und Lust, mir zu helfen?
 - Helfen
 	Avatar: Kein Problem!
 	Mert: Super, danke! Dann steig ein, und los geht's zum Marktplatz!
-	Mert: ...
 	do execute("HELP_MERT")
 	Mert: Super, wir konnten allen Leuten Wasser zukommen lassen. Und schau mal, es ist noch welches übrig!
 	Mert: Danke nochmal für deine Hilfe! Man sieht sich!
