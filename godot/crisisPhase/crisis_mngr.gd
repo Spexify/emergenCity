@@ -21,16 +21,16 @@ var _electricity_crisis_probability_countdown : int
 var _electricity_crisis_length_countdown : int = 2
 
 var _possible_isolation_crisis : EMC_OverworldStatesMngr.IsolationState = EMC_OverworldStatesMngr.IsolationState.NONE
-const ISOLATION_LOWER_BOUND : int = 3
-const ISOLATION_UPPER_BOUND : int = 6
+const ISOLATION_LOWER_BOUND : int = 1
+const ISOLATION_UPPER_BOUND : int = 5
 var _isolation_crisis_probability_countdown : int
-var _isolation_crisis_length_countdown : int = 2
+var _isolation_crisis_length_countdown : int = 1
 
 var _possible_food_contamination_crisis : EMC_OverworldStatesMngr.FoodContaminationState = EMC_OverworldStatesMngr.FoodContaminationState.NONE
-const FOOD_CONTAMINATION_LOWER_BOUND : int = 6
-const FOOD_CONTAMINATION_UPPER_BOUND : int = 12
+const FOOD_CONTAMINATION_LOWER_BOUND : int = 1
+const FOOD_CONTAMINATION_UPPER_BOUND : int = 5
 var _food_contamination_crisis_probability_countdown : int
-var _food_contamination_crisis_length_countdown : int = 2
+var _food_contamination_crisis_length_countdown : int = 1
 
 var _inventory : EMC_Inventory
 
@@ -116,15 +116,17 @@ func _refresh() -> int:
 
 ## start counting time with day_mngr
 func check_crisis_status(p_curr_day: int) -> void:
-	#print("water status: " + str(OverworldStatesMngr.get_water_state()))
-	#print("electricity status: " + str(OverworldStatesMngr.get_electricity_state()))
-	#print("isolation status: " + str(OverworldStatesMngr.get_isolation_state()))
-	#print("food_contamination status: " + str(OverworldStatesMngr.get_food_contamination_state()))
+
 	
 	if p_curr_day >= OverworldStatesMngr.get_crisis_length(): return
 	
 	var active_crises_cnt := _refresh()
-	print("Water Crisis in Days: " + str(_water_crisis_probability_countdown))
+	
+	#print("water status: " + str(OverworldStatesMngr.get_water_state()))
+	#print("electricity status: " + str(OverworldStatesMngr.get_electricity_state()))
+	#print("isolation status: " + str(OverworldStatesMngr.get_isolation_state()))
+	#print("food_contamination status: " + str(OverworldStatesMngr.get_food_contamination_state()))
+	#print("Water Crisis in Days: " + str(_water_crisis_probability_countdown))
 	
 	if active_crises_cnt < _max_crisis_overlap:
 		if _possible_water_crisis != EMC_OverworldStatesMngr.WaterState.NONE:
