@@ -286,3 +286,9 @@ func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
 	
 func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
 	_upgrade_ids_unlocked.append(upgrade_id)
+	
+func has_upgrade(upgrade_id : EMC_Upgrade.IDs) -> bool:
+	for upgrade in _upgrades_equipped:
+		if upgrade != null && upgrade.get_id() == upgrade_id:
+			return true
+	return false

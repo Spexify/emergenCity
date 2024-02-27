@@ -102,7 +102,8 @@ func _ready() -> void:
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
 	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
-	$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
+	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
+		$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
 	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
@@ -121,7 +122,8 @@ func _ready() -> void:
 	action_guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
 	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
-	action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
+	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
+		action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
 	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)

@@ -117,8 +117,10 @@ func change_stage(p_stage_name: String) -> void:
 	#Upgrades & Optional Events: Dynamically placed furniture
 	match get_curr_stage_name():
 		STAGENAME_HOME:
-			_create_upgrade_furniture(EMC_Upgrade.IDs.RAINWATER_BARREL, Vector2i(1, 15))
-			_create_upgrade_furniture(EMC_Upgrade.IDs.ELECTRIC_RADIO, Vector2i(1, 9))
+			if Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL):
+				_create_upgrade_furniture(EMC_Upgrade.IDs.RAINWATER_BARREL, Vector2i(1, 15))
+			if Global.has_upgrade(EMC_Upgrade.IDs.ELECTRIC_RADIO):
+				_create_upgrade_furniture(EMC_Upgrade.IDs.ELECTRIC_RADIO, Vector2i(1, 9))
 		STAGENAME_MARKET:
 			#TODO: Insert if-statement, so only when THW-event is active, the THW truck is addaed:
 			_place_furniture_on_position(Vector2i(6, 0), Vector2i(10, 5), 3, 1, true)
