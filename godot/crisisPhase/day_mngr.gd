@@ -35,8 +35,7 @@ var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
 var _puGUI : EMC_PopUpGUI
 
-var _avatar_ref : EMC_Avatar
-var _avatar_life_status : bool = true
+var _avatar : EMC_Avatar
 
 var _stage_mngr : EMC_StageMngr
 var _overworld_states_mngr_ref : EMC_OverworldStatesMngr
@@ -70,21 +69,20 @@ egGUI : EMC_EndGameGUI,
 puGUI : EMC_PopUpGUI,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node) -> void:
-	_avatar_ref = avatar_ref
+	_avatar = avatar_ref
 	_stage_mngr = stage_mngr
 	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	_crisis_mngr = p_crisis_mngr
 	_confirmation_GUI = p_confirmation_GUI
 	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
-	_action_consequences = EMC_ActionConsequences.new(_avatar_ref, p_inventory, _stage_mngr, p_lower_gui_node, self)
-	
-	self.max_day = p_crisis_mngr.get_max_day()
-	self.gui_refs = gui_refs
+	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, p_lower_gui_node, self)
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
 	_egGUI = egGUI
 	_inventory = p_inventory
 	_puGUI = puGUI
+	self.max_day = p_crisis_mngr.get_max_day()
+	self.gui_refs = gui_refs
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 	_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
@@ -148,9 +146,8 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 	
 	match get_current_day_period():
 		DayPeriod.MORNING:
-			if _avatar_life_status:
-				self.current_day_cycle = EMC_DayCycle.new()
-				self.current_day_cycle.morning_action = p_action
+			self.current_day_cycle = EMC_DayCycle.new()
+			self.current_day_cycle.morning_action = p_action
 		DayPeriod.NOON:
 			self.current_day_cycle.noon_action = p_action
 		DayPeriod.EVENING:
@@ -158,11 +155,6 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 			self.history.append(self.current_day_cycle)
 			_seodGUI.open(self.current_day_cycle)
 			_seodGUI.closed.connect(_on_seod_closed)
-			if _avatar_ref.get_nutrition_status() <= 0 || _avatar_ref.get_hydration_status() <= 0 || _avatar_ref.get_health_status() <= 0 :
-				_avatar_life_status = false
-			if get_current_day() >= self.max_day - 1 || !_avatar_life_status:
-				_seodGUI.open(self.current_day_cycle)
-				_seodGUI.closed.connect(_on_seod_closed_game_end)
 			return
 		_: push_error("Current day period unassigned!")
 	self._period_cnt += 1
@@ -178,16 +170,12 @@ func _execute_consequences(p_action: EMC_Action) -> void:
 		Callable(_action_consequences, key).call(params)
 
 
-func _on_seod_closed_game_end() -> void:
-	_egGUI.open(self.history, _avatar_life_status, _avatar_ref)
-
-
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	#Send avatar back home on a new day
 	_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
 	_stage_mngr.deactivate_NPCs()
-	_avatar_ref.set_global_position(Vector2i(250, 650))
+	_avatar.set_global_position(Vector2i(250, 650))
 	
 	_update_HUD()
 	_update_vitals()
@@ -200,9 +188,17 @@ func _on_seod_closed() -> void:
 
 
 func _update_vitals() -> void:
-	_avatar_ref.sub_nutrition(3) 
-	_avatar_ref.sub_hydration(3)
-	_avatar_ref.sub_health(1)
+	_avatar.sub_nutrition(3) 
+	_avatar.sub_hydration(3)
+	_avatar.sub_health(1)
+	
+	var avatar_life_status : bool = true
+	if _avatar.get_nutrition_status() <= 0 || _avatar.get_hydration_status() <= 0 || \
+	_avatar.get_health_status() <= 0 :
+		avatar_life_status = false
+	if get_current_day() >= self.max_day - 1 || !avatar_life_status:
+		#_seodGUI.open(self.current_day_cycle)
+		_egGUI.open(self.history, avatar_life_status, _avatar)
 
 
 func _update_HUD() -> void:

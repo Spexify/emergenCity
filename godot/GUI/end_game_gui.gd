@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_ref : EMC_Avatar) -> void:
+func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
 	
 	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer.vertical_scroll_mode = true
 	history = p_history
@@ -67,11 +67,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 						
 	if p_avatar_life_status == false :
 		var losing_reason : String = ""
-		if _avatar_ref.get_nutrition_status() == 0:
+		if _avatar.get_nutrition_status() == 0:
 			losing_reason = "Du bist verhungert. "
-		if _avatar_ref.get_hydration_status() == 0:
+		if _avatar.get_hydration_status() == 0:
 			losing_reason = "Du bist verdurstet. "
-		if _avatar_ref.get_health_status() == 0:
+		if _avatar.get_health_status() == 0:
 			losing_reason = "Du hattest Gesundheitsprobleme. "
 			
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
@@ -82,11 +82,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 		$WinnerScreen.visible = false
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
-		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar_ref.get_unit_happinness_status()) + " Prozent."
+		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happinness_status()) + " Prozent."
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
 			= summary_text_winner
 
-		all_action_coins += _avatar_ref.get_unit_happinness_status()
+		all_action_coins += _avatar.get_unit_happinness_status()
 		Global.set_e_coins(Global.get_e_coins() + all_action_coins)
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
@@ -96,6 +96,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar_r
 		$WinnerScreen.visible = true
 	visible = true
 	opened.emit()
+
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:

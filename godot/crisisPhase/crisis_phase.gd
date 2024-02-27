@@ -37,6 +37,9 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _book_GUI := $GUI/VBC/MiddleSection/BookGUI
 @onready var _pause_menue := $GUI/VBC/MiddleSection/PauseMenu
 @onready var _cooking_GUI := $GUI/VBC/MiddleSection/CookingGUI
+@onready var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
+@onready var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
+@onready var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $GUI/VBC/LowerSection/ConfirmationGUI
@@ -107,9 +110,6 @@ func _ready() -> void:
 		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
 	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 
-	var seodGUI := $GUI/VBC/MiddleSection/SummaryEndOfDayGUI
-	var egGUI := $GUI/VBC/MiddleSection/EndGameGUI
-	var puGUI := $GUI/VBC/MiddleSection/PopUpGUI
 	var action_guis : Array[EMC_ActionGUI] = []
 	#MRM: Because I reworked the node structure of the GUI node, following code
 	#needs to be reworked. For now I'll hardcode it.

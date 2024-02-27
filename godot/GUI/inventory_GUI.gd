@@ -18,7 +18,7 @@ const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
-var _avatar_ref : EMC_Avatar
+var _avatar : EMC_Avatar
 var _only_inventory : bool
 var _seod : EMC_SummaryEndOfDayGUI
 
@@ -29,10 +29,10 @@ var _has_slept : int = 0
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 
-func setup(p_inventory: EMC_Inventory, _p_avatar_ref : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
+func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
 			_p_only_inventory : bool = true) -> void:
 	_inventory = p_inventory
-	_avatar_ref = _p_avatar_ref
+	_avatar = _p_avatar
 	_only_inventory = _p_only_inventory
 	_seod = _p_seod
 	set_title(p_title)
@@ -110,9 +110,9 @@ func close() -> void:
 	if !_only_inventory:
 		set_consume_idle()
 		if _has_slept != 0:
-			_avatar_ref.add_health(_has_slept)
+			_avatar.add_health(_has_slept)
 		_has_slept = 0
-		_avatar_ref.get_home()
+		_avatar.get_home()
 		_seod.close()
 	seod_inventory_closed.emit()
 
@@ -246,34 +246,34 @@ func _on_consume_pressed() -> void:
 		var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 		var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
 		if  drink_comp != null:
-			_avatar_ref.add_hydration(drink_comp.get_hydration())
+			_avatar.add_hydration(drink_comp.get_hydration())
 		if food_comp != null:
 			print(food_comp.get_nutritionness())
-			_avatar_ref.add_nutrition(food_comp.get_nutritionness())
+			_avatar.add_nutrition(food_comp.get_nutritionness())
 		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
 		if unpalatable_comp != null:
-			_avatar_ref.sub_health(unpalatable_comp.get_health_reduction())
+			_avatar.sub_health(unpalatable_comp.get_health_reduction())
 		
 		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item.get_comp(EMC_IC_Pleasurable)
 		if pleasurable_comp != null:
 			if pleasurable_comp.get_happinness_change() < 0:
-				_avatar_ref.sub_happinness(pleasurable_comp.get_happinness_change())
+				_avatar.sub_happinness(pleasurable_comp.get_happinness_change())
 			elif pleasurable_comp.get_happinness_change() >= 0 :
-				_avatar_ref.add_happinness(pleasurable_comp.get_happinness_change())
+				_avatar.add_happinness(pleasurable_comp.get_happinness_change())
 				
 		var healthy_comp : EMC_IC_Healthy = _clicked_item.get_comp(EMC_IC_Healthy)
 		if healthy_comp != null:
 			if healthy_comp.get_health_change() < 0:
-				_avatar_ref.sub_health(healthy_comp.get_health_change())
+				_avatar.sub_health(healthy_comp.get_health_change())
 			elif healthy_comp.get_health_change() >= 0 :
-				_avatar_ref.add_health(healthy_comp.get_health_change())
+				_avatar.add_health(healthy_comp.get_health_change())
 				
 		var hydrating_comp : EMC_IC_Hydrating = _clicked_item.get_comp(EMC_IC_Hydrating)
 		if hydrating_comp != null:
 			if hydrating_comp.get_hydration_change() < 0:
-				_avatar_ref.sub_hydration(hydrating_comp.get_hydration_change())
+				_avatar.sub_hydration(hydrating_comp.get_hydration_change())
 			elif hydrating_comp.get_hydration_change() >= 0 :
-				_avatar_ref.add_hydration(hydrating_comp.get_hydration_change())
+				_avatar.add_hydration(hydrating_comp.get_hydration_change())
 
 		# Work around to stop gray modulate
 		_clicked_item._on_clicked(EMC_Item.new())
