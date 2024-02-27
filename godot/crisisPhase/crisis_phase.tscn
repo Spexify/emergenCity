@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 [ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://GUI/day_period_transition.tscn" id="21_6msld"]
-[ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
+[ext_resource type="PackedScene" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)

@@ -17,23 +17,19 @@ func _ready() -> void:
 	_add_balance(0)
 	
 	_equipped_upgrades = Global.get_upgrades()
-	var _equipped_ids : Array[EMC_Upgrade.IDs] = []
-	for i in  range(len(_equipped_upgrades)):
-		if _equipped_upgrades[i] != null:
-			_equipped_ids.append(_equipped_upgrades[i].get_id())
 	
 	for id : EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
-		if id in _equipped_ids:
-			for i in range(len(_equipped_upgrades)):
-				if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == id:
-					_upgrade_list.add_child(_equipped_upgrades[i])
-		else:
-			var _added_upgrade : EMC_Upgrade = _upgrade_scene.instantiate()
+		var _added_upgrade : EMC_Upgrade = null
+		for i in range(len(_equipped_upgrades)):
+			if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == id:
+				_added_upgrade = _equipped_upgrades[i]
+		if _added_upgrade == null:
+			_added_upgrade = _upgrade_scene.instantiate()
 			_added_upgrade.setup(id)
 			_added_upgrade.get_sprite().set_frame_coords(_added_upgrade.get_tilemap_position())
 		
-			_upgrade_list.add_child(_added_upgrade)
-		
+		_added_upgrade.was_pressed.connect(_on_upgrade_pressed)
+		_upgrade_list.add_child(_added_upgrade)
 		
 func _add_balance(value : int) -> void:
 	_balance += value
@@ -43,12 +39,27 @@ func _add_balance(value : int) -> void:
 func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	_last_clicked_upgrade = p_upgrade
 	
-	print("helldd")
 	_label_title.clear()
 	_label_title.append_text("[color=black]" + p_upgrade.get_display_name() + "[/color]")
+	_label_title.append_text("   [color=Color.GOLDENROD][i]" + str(p_upgrade.get_price()) + "eCoins [/i][/color]")
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + p_upgrade.get_description() + "[/i][/color]")
 	
+	# check if upgrade is already equipped
+	for i in range(len(_equipped_upgrades)):
+		if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == _last_clicked_upgrade.get_id():
+			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
+			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+			return
+	# check if upgrade is already unlocked
+	var _upgrade_ids_unlocked : Array[EMC_Upgrade.IDs] = Global.get_upgrade_ids_unlocked()
+	if _last_clicked_upgrade.get_id() in _upgrade_ids_unlocked:
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.show()
+	else:
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.show()
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+
 func _add_upgrade(p_upgrade_id : EMC_Upgrade.IDs) -> bool:
 	for i in range(len(_equipped_upgrades)):
 		if _equipped_upgrades[i] == null:
@@ -58,3 +69,19 @@ func _add_upgrade(p_upgrade_id : EMC_Upgrade.IDs) -> bool:
 			return true
 	return false
 	
+
+
+func _on_buy_btn_pressed() -> void:
+	if _balance >= _last_clicked_upgrade.get_price():
+		_add_balance(-_last_clicked_upgrade.get_price())
+		Global.unlock_upgrade_id(_last_clicked_upgrade.get_id())
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
+		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.show()
+
+
+func _on_equip_btn_pressed() -> void:
+	for i in range(len(_equipped_upgrades)):
+		if _equipped_upgrades[i] == null:
+			_equipped_upgrades[i] = _last_clicked_upgrade
+			_equipped_upgrades[i].show()
+			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()

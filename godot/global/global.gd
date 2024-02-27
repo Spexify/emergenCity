@@ -21,7 +21,8 @@ signal scene_changed
 var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
-var _upgrades : Array[EMC_Upgrade] = [null, null, null]
+var _upgrades_equipped : Array[EMC_Upgrade] = [null, null, null]
+var _upgrade_ids_unlocked : Array[EMC_Upgrade.IDs] = []
 
 var current_scene : Node = null
 var _start_scene : String
@@ -275,7 +276,13 @@ func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
 func get_upgrades() -> Array[EMC_Upgrade]:
-	return _upgrades
+	return _upgrades_equipped
 	
 func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
-	_upgrades = upgrades
+	_upgrades_equipped = upgrades
+	
+func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
+	return _upgrade_ids_unlocked
+	
+func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
+	_upgrade_ids_unlocked.append(upgrade_id)
