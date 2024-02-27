@@ -124,7 +124,8 @@ func get_current_day_period() -> DayPeriod:
 
 
 func get_current_day() -> int:
-	return floor(self._period_cnt / float(3.0))
+	#+1 because: Day 1 = period 0, 1, 2, Day 2 = period 3, 4, 5, ....
+	return floor(self._period_cnt / float(3.0)) + 1
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -205,7 +206,7 @@ func _update_vitals() -> void:
 
 
 func _update_HUD() -> void:
-	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day() + 1)
+	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day())
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
 
 
