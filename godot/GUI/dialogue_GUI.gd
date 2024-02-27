@@ -30,11 +30,13 @@ var dialogue_line: DialogueLine:
 			queue_free()
 			return
 		is_waiting_for_input = false
+		
+		if responses_menu != null:
 		# Remove any previous responses
-		for child in responses_menu.get_children():
-			responses_menu.remove_child(child)
-			child.queue_free()
-			
+			for child in responses_menu.get_children():
+				responses_menu.remove_child(child)
+				child.queue_free()
+		
 		dialogue_line = next_dialogue_line
 		
 		character_label.visible = not dialogue_line.character.is_empty()

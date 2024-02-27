@@ -250,6 +250,10 @@ func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAc
 				return false
 		return true
 		)
+	
+	#for popupevent in filtered: #TEST
+		#if popupevent.get_ACTION_NAME() == "MERT_KNOCKS": #TEST
+			#return popupevent #TEST
 	return filtered.pick_random()
 
 func load_pop_up_actions() -> void:
