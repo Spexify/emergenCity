@@ -17,9 +17,6 @@ toggle_mode = true
 button_group = ExtResource("2_2n5qh")
 texture_normal = ExtResource("3_d6kio")
 texture_pressed = ExtResource("4_56spv")
-texture_hover = ExtResource("3_d6kio")
-texture_disabled = ExtResource("3_d6kio")
-texture_focused = ExtResource("3_d6kio")
 script = ExtResource("1_7i8mp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,5 +24,6 @@ position = Vector2(89, 89)
 texture = ExtResource("1_fcdnh")
 hframes = 4
 vframes = 4
+frame = 5
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

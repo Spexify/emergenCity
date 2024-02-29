@@ -1,7 +1,10 @@
 extends Control
 
 @onready var _label_ecoins := $Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/RichTextLabel
+
+# This display only holds copies of the equipped upgrades, which are visually the same but not connected to _on_upgrade_pressed
 @onready var _equipped_upgrades_display := $Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer
+
 @onready var _upgrade_list := $Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/GridContainer
 @onready var _label_title := $Background/VBoxContainer/Description/MarginContainer/RichTextLabel
 @onready var _label_descr := $Background/VBoxContainer/Description/RichTextLabel
@@ -41,6 +44,7 @@ func _ready() -> void:
 			if(_equipped_upgrades[i] == null):
 				var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
 				empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
+				empty_slot.get_sprite().set_frame_coords(empty_slot.get_tilemap_position())
 				_equipped_upgrades[i] = empty_slot
 				_equipped_upgrades_display.add_child(empty_slot)
 
@@ -55,7 +59,8 @@ func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	
 	_label_title.clear()
 	_label_title.append_text("[color=black]" + p_upgrade.get_display_name() + "[/color]")
-	_label_title.append_text("   [color=Color.GOLDENROD][i]" + str(p_upgrade.get_price()) + "eCoins [/i][/color]")
+	const price_color = Color.GOLDENROD
+	_label_title.append_text("   [color=" + price_color.to_html(false) + "][i]" + str(p_upgrade.get_price()) + "eCoins [/i][/color]")
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + p_upgrade.get_description() + "[/i][/color]")
 	
@@ -88,6 +93,19 @@ func _on_equip_btn_pressed() -> void:
 		if _equipped_upgrades[i].get_id() == EMC_Upgrade.IDs.EMPTY_SLOT:
 			_equipped_upgrades_display.remove_child(_equipped_upgrades[i])
 			_equipped_upgrades[i] = _last_clicked_upgrade
-			_equipped_upgrades_display.add_child(_last_clicked_upgrade)
+			
+			# adding a copy in the equipment HBox that is not connected to _on_upgrade_pressed
+			var display_copy : EMC_Upgrade = _upgrade_scene.instantiate()
+			display_copy.setup(_last_clicked_upgrade.get_id())
+			display_copy.get_sprite().set_frame_coords(display_copy.get_tilemap_position())
+			_equipped_upgrades_display.add_child(display_copy)
+			_equipped_upgrades_display.move_child(display_copy, 0)
+			
 			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+			
 			return
+			
+
+func _on_main_menu_btn_pressed() -> void:
+	Global.set_upgrades(_equipped_upgrades)
+	Global.goto_scene(Global.PREPARE_PHASE_SCENE)

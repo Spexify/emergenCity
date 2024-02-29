@@ -162,5 +162,6 @@ custom_minimum_size = Vector2(245, 50)
 layout_mode = 2
 text = "Gegenstand ausrüsten"
 
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn" to="." method="_on_equip_btn_pressed"]

@@ -135,7 +135,6 @@ text = "Shop
 "
 
 [node name="UpgradeCenter" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons" groups=["Button"]]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Upgrade Center"
