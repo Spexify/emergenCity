@@ -95,6 +95,9 @@ func on_interacted_with_furniture(p_action_ID : int) -> void:
 	#lead to errors. That's why I changed it, so it just creates a new instance each time:
 	var current_action : EMC_Action = _create_action(p_action_ID)
 	
+	if current_action == null:
+		return
+	
 	var reject_reasons: String
 	for constraint_key: String in current_action.get_constraints_prior().keys():
 		var param: Variant = current_action.get_constraints_prior()[constraint_key]
@@ -139,7 +142,6 @@ func _on_action_silent_executed(p_action : EMC_Action) -> void:
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
 	_advance_day_time(p_action)
-
 
 func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
@@ -269,44 +271,24 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		EMC_Action.IDs.BBK_LINK: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
 								{ }, "ConfirmationGUI", "-", 0)
 		#Stage Change Actions
-		EMC_Action.IDs.SC_HOME: result = EMC_StageChangeAction.new(p_action_ID, "nachhause", { }, 
-								 "Nach Hause gekehrt.", 40, EMC_StageMngr.STAGENAME_HOME, Vector2i(250, 650),
-								{ })
-		EMC_Action.IDs.SC_MARKET: result = EMC_StageChangeAction.new(p_action_ID, "zum Marktplatz", \
-								{ "constraint_not_evening" : "", "constraint_no_limited_public_access" : "" }, 
-								 "Hat Marktplatz besucht.", 0, EMC_StageMngr.STAGENAME_MARKET, Vector2i(250, 1000),
-								{"Mert" : Vector2(470, 380)}) 
-		EMC_Action.IDs.SC_TOWNHALL: result = EMC_StageChangeAction.new(p_action_ID, "zum Rathaus", \
-								{ "constraint_not_evening" : "Das Rathaus ist Abends geschlossen.", "constraint_no_limited_public_access" : "" }, 
-								 "Hat Rathaus besucht.", 0, EMC_StageMngr.STAGENAME_TOWNHALL, Vector2i(450, 480),
-								{"TownhallWorker" : Vector2(430, 300)}) 
-		EMC_Action.IDs.SC_PARK: result = EMC_StageChangeAction.new(p_action_ID, "zum Park", \
-								{ "constraint_not_evening" : "Abends kann der Park gefährlich werden!" }, 
-								 "Hat den Park besucht.", 0, EMC_StageMngr.STAGENAME_PARK, Vector2i(350, 700),
-								{"Gerhard" : Vector2(160, 730), "Friedel" : Vector2(80, 730)}) 
-		EMC_Action.IDs.SC_GARDENHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Gerhard", { }, 
-								 "Hat Gerhard besucht.", 0, EMC_StageMngr.STAGENAME_GARDENHOUSE, Vector2i(150, 900),
-								{"Gerhard" : Vector2(420, 380), "Friedel" : Vector2(80, 700)}) 
-		EMC_Action.IDs.SC_ROWHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Julia", { }, 
-								 "Hat Julia besucht.", 0, EMC_StageMngr.STAGENAME_ROWHOUSE, Vector2i(250, 400),
-								{"Julia" : Vector2(450, 550)}) 
-		EMC_Action.IDs.SC_MANSION: result = EMC_StageChangeAction.new(p_action_ID, "zu Petro & Irena", { }, 
-								 "Hat Petro & Irena besucht.", 0, EMC_StageMngr.STAGENAME_MANSION, Vector2i(120, 900),
-								{"Petro" : Vector2(370, 870), "Irena" : Vector2(460, 260)}) 
-		EMC_Action.IDs.SC_PENTHOUSE: result = EMC_StageChangeAction.new(p_action_ID, "zu Elias", { }, 
-								 "Hat Elias besucht.", 0, EMC_StageMngr.STAGENAME_PENTHOUSE, Vector2i(250, 1000),
-								{"Elias" : Vector2(440, 800)}) 
-		EMC_Action.IDs.SC_APARTMENT_MERT: result = EMC_StageChangeAction.new(p_action_ID, "zu Mert", \
-								{ "constraint_not_noon" : "Mert ist Mittags nicht zuhause" }, 
-								 "Hat Mert besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_MERT, Vector2i(150, 400),
-								{"Mert" : Vector2(400, 310), "Momo" : Vector2(480, 760)}) 
-		EMC_Action.IDs.SC_APARTMENT_CAMPER: result = EMC_StageChangeAction.new(p_action_ID, "zu Kris & Veronika", { }, 
-								 "Hat Kris & Veronika besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_CAMPER, Vector2i(150, 400),
-								{"Kris" : Vector2(460, 300), "Veronika" : Vector2(480, 780)}) 
-		EMC_Action.IDs.SC_APARTMENT_AGATHE: result = EMC_StageChangeAction.new(p_action_ID, "zu Agathe", { }, 
-								 "Hat Agathe besucht.", 0, EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT, Vector2i(250, 900),
-								{"Agathe" : Vector2(490, 400)}) 
-		_: push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
+		#EMC_Action.IDs.SC_HOME: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_HOME) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_MARKET: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_MARKET) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_TOWNHALL: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_TOWNHALL) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_PARK: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_PARK) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_GARDENHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_GARDENHOUSE) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_ROWHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_ROWHOUSE) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_MANSION: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_MANSION) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_PENTHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_PENTHOUSE) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_APARTMENT_MERT: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_MERT) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_APARTMENT_CAMPER: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_CAMPER) as EMC_StageChangeAction
+		#EMC_Action.IDs.SC_APARTMENT_AGATHE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_AGATHE) as EMC_StageChangeAction
+		
+		var id: 
+			if 2000 <= id and id < 3000:
+				result = JsonMngr.id_to_action(id) as EMC_StageChangeAction
+			else:
+				push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
+				
 	result.executed.connect(_on_action_executed)
 	result.silent_executed.connect(_on_action_silent_executed)
 	return result

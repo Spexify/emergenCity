@@ -96,7 +96,7 @@ func _ready() -> void:
 	_status_bars.setup(_tooltip_GUI)
 	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr, $Avatar)
+	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr)
 	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
 	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
 	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)

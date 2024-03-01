@@ -56,7 +56,6 @@ var _description : String
 var _performance_coin_value : int
 var _progresses_day_period: bool
 
-
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 		   p_consequences : Dictionary, type_gui : String, description : String, performance_coin_value : int,
 		   p_progresses_day_period: bool = true) -> void:
@@ -121,7 +120,7 @@ static func empty_action() -> EMC_Action:
 	return EMC_Action.new(NAN, "", {}, {}, "", "", 0)
 	
 static func from_dict(data : Dictionary) -> EMC_Action:
-	var _action_id : int = data.get("ID")
+	var _action_id : int = data.get("id")
 	var _action_name : String = data.get("name", "")
 	var _constraints : Dictionary = data.get("constraints", {})
 	var _consequences : Dictionary = data.get("consequences",{})

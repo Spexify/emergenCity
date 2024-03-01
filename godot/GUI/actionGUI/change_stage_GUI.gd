@@ -6,14 +6,12 @@ signal stayed_on_same_stage
 @onready var _richtext_label := $NinePatchRect/MarginContainer/VBoxContainer/RichTextLabel
 
 var _stage_mngr: EMC_StageMngr
-var _avatar: EMC_Avatar
 ## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
 var _last_SC_action: EMC_StageChangeAction
 
 
-func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
+func setup(p_stage_mngr: EMC_StageMngr) -> void:
 	_stage_mngr = p_stage_mngr
-	_avatar = p_avatar
 
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
@@ -38,23 +36,20 @@ func show_gui(p_action: EMC_Action) -> void:
 func _on_confirm_btn_pressed() -> void:
 	var curr_SC_action: EMC_StageChangeAction = _action
 	
-	_stage_mngr.change_stage(curr_SC_action.get_stage_name())
-	_avatar.position = curr_SC_action.get_avatar_spawn_pos()
-	_stage_mngr.respawn_NPCs(curr_SC_action.get_NPCs_spawn_pos())
+	curr_SC_action.silent_executed.emit(curr_SC_action)
 	
 	if _last_SC_action != null:
+		var tmp : Dictionary = _last_SC_action._consequences.duplicate(true)
+		_last_SC_action._consequences = {}
 		_last_SC_action.executed.emit(_last_SC_action)
+		_last_SC_action._consequences = tmp
 	
-	##The change to home should not be executed (at is was skipped initially and should not
-	##be protocolled in the SEOD)
-	if curr_SC_action.get_stage_name() == "home": 
+	###The change to home should not be executed (at is was skipped initially and should not
+	###be protocolled in the SEOD)
+	if not curr_SC_action.progresses_day_period(): 
 		_last_SC_action = null
 	else:
 		_last_SC_action = curr_SC_action
-	
-	#if _stage_mngr.get_curr_stage_name() == "home":
-		#button_sfx.play()
-		#await button_sfx.finished
 	
 	close()
 

@@ -115,9 +115,8 @@ func trigger_dialogue(data : Dictionary) -> void:
 
 ############################################ Stage #################################################
 
-func change_stage(data : Dictionary) -> void:	
+func change_stage(data : Dictionary) -> void:
 	_stage_mngr.change_stage(data.get("stage_name"))
-	# TODO: Vectors
-	_avatar.position = data.get("avatar_position")
-	_stage_mngr.respawn_NPCs(data.get("npc_positions"))
+	_avatar.position = data.get("avatar_pos")
+	_stage_mngr.respawn_NPCs(data.get("npc_pos"))
 

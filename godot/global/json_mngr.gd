@@ -2,6 +2,7 @@ extends Node
 
 const INVALID_INT_VALUE: int = 0
 const INVALID_STRING_VALUE: String = "ERROR"
+const INVALID_DICTIONARY_VALUE: Dictionary = {}
 
 ## RECIPTS
 const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
@@ -281,7 +282,7 @@ func load_pop_up_actions() -> void:
 		var _name :String = pop_up.get("name")
 		
 		var pop_up_data : Dictionary = {
-			"ID": pop_up_id,
+			"id": pop_up_id,
 			"name": _name,
 		}
 		
@@ -319,6 +320,12 @@ func name_to_action(p_name : String) -> EMC_Action:
 		printerr("Actions not loaded")
 		return null
 	return _actions.get(name_to_action_id(p_name))
+	
+func id_to_action(id : int) -> EMC_Action:
+	if not _is_action_loaded:
+		printerr("Actions not loaded")
+		return null
+	return _actions.get(id)
 
 func load_actions() -> void:
 	if not FileAccess.file_exists(ACTION_SOURCE):
@@ -351,14 +358,40 @@ func load_actions() -> void:
 			printerr("Action-JSON: Action in position: " + str(act_index)+ " has not action_id declared. (Skipped)")
 			continue
 		
+		var _consequences : Dictionary = act.get("consequences", INVALID_DICTIONARY_VALUE)
+		if _consequences != INVALID_DICTIONARY_VALUE:
+			if _consequences.has("change_stage"):
+				var avatar_pos : Dictionary = _consequences["change_stage"].get("avatar_pos", INVALID_DICTIONARY_VALUE)
+				if avatar_pos == INVALID_DICTIONARY_VALUE:
+					printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
+					continue
+				var x : int = avatar_pos.get("x", NAN)
+				if x == NAN:
+					printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
+					continue
+				var y : int = avatar_pos.get("y", NAN)
+				if y == NAN:
+					printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
+					continue
+				
+				var npc_pos : Dictionary = _consequences["change_stage"].get("npc_pos", {})
+				
+				for npc : String in npc_pos:
+					npc_pos[npc] = Vector2(npc_pos[npc]["x"], npc_pos[npc]["y"])
+					
+				var tmp_data := {
+					"avatar_pos": Vector2i(x, y),
+					"npc_pos" : npc_pos,
+				}
+				tmp_data.merge(_consequences["change_stage"])
+				_consequences["change_stage"] = tmp_data
+		
 		var action_data : Dictionary = {
-			"ID": _action_id,
+			"id": _action_id,
 			"type": _type,
 		}
 		
-		for key : String in act:
-			if key != "type" and key != "ID":
-				action_data[key] = act[key]
+		action_data.merge(act)
 				
 		var act_scn : Resource = ACTION_SCNS.get(_type, null)
 			

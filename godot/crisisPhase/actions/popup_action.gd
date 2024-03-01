@@ -15,13 +15,13 @@ func get_pop_up_text() -> String :
 
 
 static func from_dict(data : Dictionary) -> EMC_PopUpAction:
-	var _action_id : int = data.get("ID")
+	var _action_id : int = data.get("id")
 	var _action_name : String = data.get("name", "")
 	var _constraints : Dictionary = data.get("constraints")
 	var _consequences : Dictionary = data.get("consequences")
 	var _description : String = data.get("description")
 	var _e_coin : int = data.get("e_coin")
 	var _pop_up_text : String = data.get("pop_up_text")
-	var _silent : bool = not data.get("silent", true)
+	var _silent : bool = not data.get("silent", false)
 	
 	return EMC_PopUpAction.new(_action_id, _action_name, _constraints, _consequences, _description, _e_coin, _pop_up_text, "PopUpGui", _silent)
