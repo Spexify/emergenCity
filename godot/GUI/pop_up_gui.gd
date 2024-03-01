@@ -22,7 +22,7 @@ func open(_p_action : EMC_PopUpAction) -> void:
 func _on_confirm_pressed() -> void:
 	hide()
 	closed.emit()
-	if _current_action.get_type_gui() == "silent":
+	if _current_action.progresses_day_period():
 		_current_action.silent_executed.emit(_current_action) 
 	else:
 		_current_action.executed.emit(_current_action) 

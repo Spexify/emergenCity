@@ -300,6 +300,10 @@ func load_pop_up_actions() -> void:
 
 var _actions : Dictionary
 var _is_action_loaded : bool = false
+var ACTION_SCNS : Dictionary = {} 
+
+const DEFAULT_ACTION_STR = "action" 
+const ACTION_SCN_PATH = "res://crisisPhase/actions/"
 
 func name_to_action_id(p_name : String) -> int:
 	if not _is_action_loaded:
@@ -333,25 +337,46 @@ func load_actions() -> void:
 	var data : Variant = json.get_data()
 	if not typeof(data) == TYPE_ARRAY:
 		printerr("Invalid format of Item-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
-
-	var action_id : int = 3000 
 	
+	var act_index : int = 0
 	for act : Dictionary in data:
-		var _name :String = act.get("name")
+		var _type : String = act.get("type", INVALID_STRING_VALUE)
+		if _type == INVALID_STRING_VALUE:
+			printerr("Action-JSON: Action in position: " + str(act_index)+ " has not type declared. (Skipped)")
+			continue
+		_type = _type.to_lower()
+		
+		var _action_id : int = act.get("id", NAN)
+		if _action_id == NAN:
+			printerr("Action-JSON: Action in position: " + str(act_index)+ " has not action_id declared. (Skipped)")
+			continue
 		
 		var action_data : Dictionary = {
-			"ID": action_id,
-			"name": _name,
+			"ID": _action_id,
+			"type": _type,
 		}
 		
 		for key : String in act:
-			if key != "name":
+			if key != "type" and key != "ID":
 				action_data[key] = act[key]
-		
-		_actions[action_id] = EMC_Action.from_dict(action_data)
-		
-		action_id += 1
+				
+		var act_scn : Resource = ACTION_SCNS.get(_type, null)
+			
+		if act_scn == null:
+			if _type == DEFAULT_ACTION_STR:
+				act_scn = load(ACTION_SCN_PATH + "action.gd")
+			else:
+				act_scn = load(ACTION_SCN_PATH + _type + "_action.gd")
+			
+			if act_scn == null:
+				printerr("Action-JSON: Action in position: " + str(act_index) + " has an invalid Action-Type: " + _type)
+				assert(act_scn != null)
+			
+			ACTION_SCNS[_type] = act_scn
+
+		_actions[_action_id] = act_scn.from_dict(action_data)
 	
+		act_index += 1
 	_is_action_loaded = true
 
 ##########################################JSON NPCS#################################################
@@ -401,8 +426,8 @@ func load_NPC() -> Array[EMC_NPC]:
 		i += 1
 	return result
 
-
 ########################################JSON RECIPES################################################
+
 func load_books() -> Array[EMC_BookGUI.Book]:
 	if not FileAccess.file_exists(BOOKS_SOURCE):
 		printerr("Could not load books from source: " + BOOKS_SOURCE)

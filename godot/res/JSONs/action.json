@@ -1,5 +1,7 @@
 [
 	{
+		"id": 3000,
+		"type": "action",
 		"name": "HELP_AGATHE_JAM",
 		"constraints": {
 			
@@ -12,6 +14,8 @@
 		"e_coin": 50,
 	},
 	{
+		"id": 3001,
+		"type": "action",
 		"name": "HELP_AGATHE_HAPPY",
 		"constraints": {
 			
@@ -24,6 +28,8 @@
 		"e_coin": 50,
 	},
 	{
+		"id": 3002,
+		"type": "action",
 		"name": "HELP_JULIA",
 		"constraints": {
 			
@@ -36,6 +42,8 @@
 		"e_coin": 50,
 	},
 	{
+		"id": 3003,
+		"type": "action",
 		"name": "HELP_GERHARD",
 		"constraints": {
 			
@@ -48,6 +56,8 @@
 		"e_coin": 50,
 	},
 	{
+		"id": 3004,
+		"type": "action",
 		"name": "HELP_PETRO",
 		"constraints": {
 			
@@ -60,6 +70,8 @@
 		"e_coin": 50,
 	},
 	{
+		"id": 3005,
+		"type": "action",
 		"name": "HELP_MERT",
 		"constraints": {
 			

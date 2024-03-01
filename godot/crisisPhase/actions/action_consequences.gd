@@ -22,12 +22,15 @@ func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_
 	_lower_gui_node = p_lower_gui_node
 	_day_mngr = p_day_mngr
 
+############################################ Avatar ################################################
 
 func add_health(p_value: int) -> void:
 	_avatar.add_health(p_value)
 
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happinness(p_value)
+
+############################################ Items #################################################
 
 ## Adds the [EMC_Item]
 func add_item(p_ID: EMC_Item.IDs) -> void:
@@ -47,7 +50,32 @@ func add_tap_water(_dummy: int) -> void:
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
+		
+## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
+## If it is completely used up, the item is removed from the [EMC_Inventory]
+func use_item(p_ID: EMC_Item.IDs) -> void:
+	var item := _inventory.get_item_of_ID(p_ID)
+	if item == null:
+		return
+	
+	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
+	if usesIC != null:
+		usesIC.use_item()
+	if usesIC.no_uses_left():
+		_inventory.remove_specific_item(item)
+		
+func use_item_by_name(p_name: String) -> void:
+	var item := _inventory.get_item_of_ID(JsonMngr.name_to_id(p_name))
+	if item == null:
+		return
+	
+	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
+	if usesIC != null:
+		usesIC.use_item()
+	if usesIC.no_uses_left():
+		_inventory.remove_specific_item(item)
 
+########################################## Dialogue ################################################
 
 func trigger_dialogue(data : Dictionary) -> void:
 	var dialog_res : DialogueResource
@@ -85,26 +113,11 @@ func trigger_dialogue(data : Dictionary) -> void:
 	dialogue_GUI.start(dialog_res, "START", [executer])
 	_lower_gui_node.get_tree().paused = true
 
-## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
-## If it is completely used up, the item is removed from the [EMC_Inventory]
-func use_item(p_ID: EMC_Item.IDs) -> void:
-	var item := _inventory.get_item_of_ID(p_ID)
-	if item == null:
-		return
-	
-	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
-	if usesIC != null:
-		usesIC.use_item()
-	if usesIC.no_uses_left():
-		_inventory.remove_specific_item(item)
-		
-func use_item_by_name(p_name: String) -> void:
-	var item := _inventory.get_item_of_ID(JsonMngr.name_to_id(p_name))
-	if item == null:
-		return
-	
-	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
-	if usesIC != null:
-		usesIC.use_item()
-	if usesIC.no_uses_left():
-		_inventory.remove_specific_item(item)
+############################################ Stage #################################################
+
+func change_stage(data : Dictionary) -> void:	
+	_stage_mngr.change_stage(data.get("stage_name"))
+	# TODO: Vectors
+	_avatar.position = data.get("avatar_position")
+	_stage_mngr.respawn_NPCs(data.get("npc_positions"))
+
