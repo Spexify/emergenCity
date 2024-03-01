@@ -18,6 +18,8 @@ const NPS_Source := "res://res/JSONs/npcs.json"
 const BOOKS_SOURCE := "res://res/JSONs/books.json"
 ## ACTIONS
 const ACTION_SOURCE := "res://res/JSONs/action.json"
+## DOORBELL
+const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 
 ########################################JSON RECIPES################################################
 
@@ -411,6 +413,28 @@ func load_actions() -> void:
 	
 		act_index += 1
 	_is_action_loaded = true
+
+##########################################DOOR BELL#################################################
+
+func load_door_bell() -> Dictionary:
+	if not FileAccess.file_exists(DOORBELL_SOURCE):
+		printerr("Could not load doorbell from source: " + DOORBELL_SOURCE)
+		return {}
+
+	var bell_source : FileAccess = FileAccess.open(DOORBELL_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = bell_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("DoorBell-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return {}
+		
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_DICTIONARY:
+		printerr("Invalid format of DoorBell-JSON (" + DOORBELL_SOURCE + "). Make sure it is in form of a Dictonary.")
+		
+	return data as Dictionary
 
 ##########################################JSON NPCS#################################################
 
