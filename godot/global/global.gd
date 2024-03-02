@@ -258,7 +258,8 @@ func add_e_coins(e_coins : int) -> void:
 		_e_coins = MAX_ECOINS
 	else:
 		_e_coins += e_coins
-	
+
+
 func sub_e_coins(e_coins : int) -> bool:
 	if _e_coins - e_coins < 0 or e_coins < 0:
 		return false
@@ -274,18 +275,30 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
+
+func get_upgrade_if_equipped(p_ID: EMC_Upgrade.IDs) -> EMC_Upgrade:
+	for upgrade in _upgrades_equipped:
+		if upgrade.get_id() == p_ID:
+			return upgrade
+	return null
+
+
 func get_upgrades() -> Array[EMC_Upgrade]:
 	return _upgrades_equipped
-	
+
+
 func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
 	_upgrades_equipped = upgrades
-	
+
+
 func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
 	return _upgrade_ids_unlocked
-	
+
+
 func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
 	_upgrade_ids_unlocked.append(upgrade_id)
-	
+
+
 func has_upgrade(upgrade_id : EMC_Upgrade.IDs) -> bool:
 	for upgrade in _upgrades_equipped:
 		if upgrade != null && upgrade.get_id() == upgrade_id:

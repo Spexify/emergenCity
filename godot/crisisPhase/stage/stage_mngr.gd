@@ -21,9 +21,10 @@ enum Atlases{ #Tileset Atlasses
 enum Layers{
 	NAVIGATION   = 0,
 	BACKGROUND   = 1,
-	MIDDLEGROUND = 2,
-	FOREGROUND   = 3,
-	TOOLTIPS     = 4,
+	MIDDLEGROUND_1 = 2,
+	MIDDLEGROUND_2 = 3,
+	FOREGROUND   = 4,
+	TOOLTIPS     = 5,
 }
 
 enum CustomDataLayers{
@@ -117,10 +118,13 @@ func change_stage(p_stage_name: String) -> void:
 	#Upgrades & Optional Events: Dynamically placed furniture
 	match get_curr_stage_name():
 		STAGENAME_HOME:
-			if Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL):
-				_create_upgrade_furniture(EMC_Upgrade.IDs.RAINWATER_BARREL, Vector2i(1, 15))
-			if Global.has_upgrade(EMC_Upgrade.IDs.ELECTRIC_RADIO):
-				_create_upgrade_furniture(EMC_Upgrade.IDs.ELECTRIC_RADIO, Vector2i(1, 9))
+			for upgrade_ID: EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
+				if upgrade_ID == EMC_Upgrade.IDs.EMPTY_SLOT: continue
+				
+				if Global.has_upgrade(upgrade_ID):
+					var spawn_pos : Vector2i = Global.get_upgrade_if_equipped(upgrade_ID).get_spawn_pos()
+					_create_upgrade_furniture(upgrade_ID, spawn_pos)
+		
 		STAGENAME_MARKET:
 			#TODO: Insert if-statement, so only when THW-event is active, the THW truck is addaed:
 			_place_furniture_on_position(Vector2i(6, 0), Vector2i(10, 5), 3, 1, true)
@@ -232,13 +236,13 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_Upgrade.IDs, p_position: Vector
 	
 	#Set the tiles on the positions
 	for offset: Vector2i in offsets:
-		var middleground_tile: TileData = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_position + offset)
+		var middleground_tile: TileData = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND_2, p_position + offset)
 		if middleground_tile == null:
-			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, p_position + offset, \
+			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND_2, p_position + offset, \
 				EMC_StageMngr.Atlases.UPGRADE_FURNITURE_PNG, atlas_base_coord + offset)
 
 
-## Places a tile from the furniture-Atlas on the Middleground Layer
+## Places a tile from the furniture-Atlas on the Middleground 1 Layer
 func _place_furniture_on_position(p_tilemap_pos: Vector2i, \
 p_atlas_coord: Vector2i, p_tiles_width: int = 1, p_tiles_height: int = 1, \
 p_overwrite_existing_tiles: bool = false) -> void:
@@ -251,12 +255,12 @@ p_overwrite_existing_tiles: bool = false) -> void:
 		for y_offset in range(0, p_tiles_height):
 			#If necessary, check if previous tile exists and exit
 			if p_overwrite_existing_tiles == false:
-				var previous_tile := _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, p_tilemap_pos)
+				var previous_tile := _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND_1, p_tilemap_pos)
 				if previous_tile != null: continue
 			
 			var tilemap_pos := Vector2i(p_tilemap_pos.x + x_offset, p_tilemap_pos.y + y_offset)
 			var atlas_coord := Vector2i(p_atlas_coord.x + x_offset, p_atlas_coord.y + y_offset)
-			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND, tilemap_pos, \
+			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND_1, tilemap_pos, \
 				EMC_StageMngr.Atlases.FURNITURE_PNG, atlas_coord)
 
 
@@ -333,7 +337,7 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 		return true
 	
 	#Back to forth, as this should be the shortest check in most cases:
-	var collision_layers := [Layers.BACKGROUND, Layers.MIDDLEGROUND, Layers.TOOLTIPS]
+	var collision_layers := [Layers.BACKGROUND, Layers.MIDDLEGROUND_1, Layers.MIDDLEGROUND_2, Layers.TOOLTIPS]
 	for collision_layer: Layers in collision_layers:
 		var tiledata: TileData = _curr_stage.get_cell_tile_data(collision_layer, p_tile_coord)
 		if tiledata != null && tiledata.get_collision_polygons_count(PHYSICS_LAYER) > 0:
@@ -375,12 +379,19 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 	tiledata = _curr_stage.get_cell_tile_data(Layers.FOREGROUND, tile_coord)
 	if tiledata != null: return tiledata
 	#Next: Check the Middleground, which contains FURNITURE
-	tiledata = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND, tile_coord)
+	tiledata = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND_1, tile_coord)
 	if tiledata != null: return tiledata
 	#Otherwise return the background tile data
 	tiledata = _curr_stage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
-	assert(tiledata != null, "Clicked Coordinate has no tile! Foreground Tiles don't suffice!")
-	return tiledata
+	
+	#Front to back:
+	var layers_to_check := [Layers.TOOLTIPS, Layers.FOREGROUND, Layers.MIDDLEGROUND_2, Layers.MIDDLEGROUND_1, Layers.BACKGROUND]
+	for layer: Layers in layers_to_check:
+		tiledata = _curr_stage.get_cell_tile_data(layer, tile_coord)
+		if tiledata != null:
+			return tiledata
+	
+	return null
 
 
 ## TODO

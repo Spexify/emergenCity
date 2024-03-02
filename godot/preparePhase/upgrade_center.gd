@@ -53,7 +53,8 @@ func _add_balance(value : int) -> void:
 	_balance += value
 	_label_ecoins.clear()
 	_label_ecoins.append_text("[right][color=black]" + str(_balance) + "[/color][/right]")
-	
+
+
 func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	_last_clicked_upgrade = p_upgrade
 	

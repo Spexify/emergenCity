@@ -47,10 +47,12 @@ var _food_contamination_state: FoodContaminationState = FoodContaminationState.N
 
 var _upgrades: Array[EMC_Upgrade]
 
+
 func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[EMC_Upgrade]) -> void:
 	_electricity_state = p_electricity_state
 	_water_state = p_water_state
 	_upgrades = p_upgrades
+
 
 func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_electricity_crisis : ElectricityState = ElectricityState.UNLIMITED,
 							_p_isolation_crisis : IsolationState = IsolationState.NONE, _p_food_contamination_crisis : FoodContaminationState = FoodContaminationState.NONE,
@@ -67,11 +69,14 @@ func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_el
 	#if !Global._tutorial_done:
 		#_electricity_state = ElectricityState.NONE
 
+
 func get_number_crisis_overlap() -> int:
 	return _number_crisis_overlap
 
+
 func get_crisis_length() -> int:
 	return _crisis_length
+
 
 ## Returns scenario name
 func get_scenario_name() -> String:

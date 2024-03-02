@@ -99,7 +99,7 @@ func _cook_recipe() -> void:
 
 
 func _try_cooking_with_heat_source() -> void:
-	if OverworldStatesMngr.has_upgrade(OverworldStatesMngr.Furniture.GAS_COOKER) && \
+	if Global.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER) && \
 		_inventory.has_item(EMC_Item.IDs.GAS_CARTRIDGE):
 		if await _confirmation_GUI.confirm("Willst eine Gaskartusche zum Kochen verwenden?"):
 			_inventory.use_item(EMC_Item.IDs.GAS_CARTRIDGE)

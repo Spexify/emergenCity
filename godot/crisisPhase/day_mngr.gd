@@ -270,18 +270,10 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 								"Hat geduscht.", 10)
 		EMC_Action.IDs.BBK_LINK: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
 								{ }, "ConfirmationGUI", "-", 0)
-		#Stage Change Actions
-		#EMC_Action.IDs.SC_HOME: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_HOME) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_MARKET: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_MARKET) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_TOWNHALL: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_TOWNHALL) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_PARK: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_PARK) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_GARDENHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_GARDENHOUSE) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_ROWHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_ROWHOUSE) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_MANSION: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_MANSION) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_PENTHOUSE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_PENTHOUSE) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_APARTMENT_MERT: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_MERT) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_APARTMENT_CAMPER: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_CAMPER) as EMC_StageChangeAction
-		#EMC_Action.IDs.SC_APARTMENT_AGATHE: result = JsonMngr.id_to_action(EMC_Action.IDs.SC_APARTMENT_AGATHE) as EMC_StageChangeAction
+		#EMC_Action.IDs.RADIO: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
+								#{ }, "ConfirmationGUI", "-", 0)
+		
+		#FYI: Stage Change actions and others are imported via JSON
 		
 		var id: 
 			if 2000 <= id and id < 3000:

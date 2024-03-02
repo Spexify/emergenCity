@@ -15,6 +15,7 @@ enum IDs{
 	RAINWATER_BARREL = 5,
 	SHOWER 			= 6,
 	BBK_LINK		= 7,
+	RADIO			= 8,
 	##1000s = PopupActions
 	POPUP_0 = 1000,
 	POPUP_1 = 1001,
