@@ -1,5 +1,6 @@
 extends Control
 
+
 func open() -> void:
 	show()
 

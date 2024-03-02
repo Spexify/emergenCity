@@ -9,9 +9,14 @@
 [node name="CreditInformation" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = -32.0
 script = ExtResource("1_3i2wm")
 
 [node name="ApartmentCamper" parent="." instance=ExtResource("2_te0id")]
+layer_4/modulate = Color(1, 1, 1, 0)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.282353, 0.282353, 0.282353, 1)

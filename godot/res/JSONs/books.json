@@ -17,6 +17,7 @@ Mit diesem Wissen sollten Sie für jede Gefahr gewappnet sein. Die nächste Kris
 Autor X. Perte",
 		],
 	},
+
 	{
 		"ID": 2,
 		"title": "Die Krisen-Chroniken",
@@ -37,13 +38,23 @@ Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuc
 * https://www.planet-wissen.de/geschichte/mittelalter/leben_im_mittelalter/pwiederschwarzetoddiepestwuetetineuropa100.html#:~:text=Die%20Pestpandemie%20beginnt%201347%20und,20%20und%2050%20Millionen%20Toten.
 * https://de.wikipedia.org/wiki/Große_Hungersnot_in_Irland
 * https://de.wikipedia.org/wiki/Flutkatastrophe_in_China_1931
-* https://de.wikipedia.org/wiki/COVID-19
-",
+* https://de.wikipedia.org/wiki/COVID-19",
 		],
 	},
+
 	{
 		"ID": 3,
 		"title": "Moderne Krisenmaßnahmen (?)",
+		"content": [
+"page 1 :)",
+
+"page 2 :)",
+		],
+	},
+
+	{
+		"ID": 4,
+		"title": "Krisen Kochbuch??",
 		"content": [
 "page 1 :)",
 

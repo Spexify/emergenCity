@@ -63,7 +63,8 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "EASY"
+text = "[center]Kurz
+"
 fit_content = true
 
 [node name="Normal" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer"]
@@ -72,8 +73,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "NORMAL
-"
+text = "[center]Mittel"
 fit_content = true
 
 [node name="Hard" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer"]
@@ -82,8 +82,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "HARD
-"
+text = "[center]Lang"
 fit_content = true
 
 [node name="HSlider" type="HSlider" parent="CanvasLayer/VBoxContainer/VBoxContainer"]

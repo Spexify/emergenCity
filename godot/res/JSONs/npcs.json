@@ -35,8 +35,8 @@
 		"name": "Petro",
 		"pitch": 0.65,
 		"trade" : {
-			"in" : ["SOAP"],
-			"out" : ["BATTERIES"],
+			"in" : ["BATTERIES"],
+			"out" : ["SOAP"],
 		},
 	},
 	{
@@ -46,6 +46,10 @@
 	{
 		"name": "Elias",
 		"pitch": 0.75,
+		"trade" : {
+			"in" : ["RAVIOLI_TIN"],
+			"out" : ["SALT"],
+		},
 	},
 	{
 		"name": "Kris",

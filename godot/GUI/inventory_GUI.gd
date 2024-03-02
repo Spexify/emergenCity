@@ -12,7 +12,14 @@ signal close_button
 signal chlor_tablets_clicked
 signal seod_inventory_closed
 
-@onready var _slot_grid := $Inventory/VBoxContainer/ScrollContainer/GridContainer
+@onready var _slot_grid := $Inventory/VBC/ScrollContainer/GridContainer
+@onready var _label_name := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Name
+@onready var _label_comps := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Components
+@onready var _label_descr := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Description
+@onready var _consume_btn := $Inventory/VBC/HBC/Consume
+@onready var _discard_btn := $Inventory/VBC/HBC/Discard
+@onready var _continue_btn := $Inventory/VBC/HBC/Continue
+
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
@@ -37,9 +44,9 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 	_seod = _p_seod
 	set_title(p_title)
 
-	$Inventory/VBoxContainer/HBoxContainer/Consume.hide()
-	$Inventory/VBoxContainer/HBoxContainer/Continue.hide()
-	$Inventory/VBoxContainer/HBoxContainer/Discard.hide()
+	_consume_btn.hide()
+	_continue_btn.hide()
+	_discard_btn.hide()
 	$FilterWater.hide()
 	
 	for slot_idx in _inventory.get_slot_cnt():
@@ -56,38 +63,23 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 func set_consume_active( _p_has_slept : int = 0) -> void:
 	_has_slept =  _p_has_slept
 	_only_inventory = false
-	#$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
-	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = true
+	_continue_btn.show()
 
 func set_consume_idle() -> void:
-	_only_inventory = true  #MRM Bugfix
-	#$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	$Inventory/VBoxContainer/HBoxContainer/Continue.visible = false #MRM Bugfix
+	_only_inventory = true
+	_continue_btn.hide()
+
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
-	$Inventory/Label.text = "[center]" + p_new_text + "[/center]"
+	$Inventory/VBC/Label.text = "[center]" + p_new_text + "[/center]"
 
 func set_grid_height(height : int = 400) -> void:
-	$Inventory/VBoxContainer/ScrollContainer.custom_minimum_size.y = height
+	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
 
 func clear_items() -> void:
-	for slot in $Inventory/VBoxContainer/ScrollContainer/GridContainer.get_children():
+	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
-
-
-### TODO: Karina
-#func update_items() -> void:
-	#for slot_idx in _inventory.get_slot_cnt():
-		##Add items that already are in the inventory
-		#var item := _inventory.get_item_of_slot(slot_idx)
-		#if item != null:
-			#print(item)
-			#var duplicated := item.copy_item()
-			#duplicated.setup(duplicated.get_ID())
-			#print("duplicate")
-			#print(duplicated)
-			#_on_item_added(duplicated, slot_idx)
 
 
 ## Open the GUI
@@ -122,6 +114,7 @@ func close() -> void:
 func _ready() -> void:
 	hide()
 
+
 ## Handle the click on the backpack-button
 func _on_btn_backpack_pressed() -> void:
 	if visible == false:
@@ -129,82 +122,76 @@ func _on_btn_backpack_pressed() -> void:
 		open()
 	else:
 		close()
-		
+
+
 func _clear_gui() -> void:
-	#Name of the item
-	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
-	label_name.clear()
+	_label_name.clear()
+	_label_comps.clear()
+	_label_descr.clear()
 	
-	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
-	label_comps.clear()
-	
-	#Description of item:
-	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
-	label_descr.clear()
-	
-	$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-	$Inventory/VBoxContainer/HBoxContainer/Discard.visible = false
-	
+	_consume_btn.hide()
+	_discard_btn.hide()
+
+
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
-func _on_item_clicked(sender: EMC_Item) -> void:
-	_clicked_item = sender
-	
+func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	#Name of the item
-	var label_name := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Name
-	label_name.clear()
-	label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
+	_label_name.clear()
+	_label_name.append_text("[color=black]" + p_clicked_item.get_name() + "[/color]")
 	
 	#Components of item
 	var comp_string: String = ""
-	var label_comps := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Components
-	label_comps.clear()
+	_label_comps.clear()
 	
-	var comps := sender.get_comps()
+	var comps := p_clicked_item.get_comps()
 	for comp in comps:
 		var comp_text := comp.get_colored_name_with_vals()
 		if comp_text != "":
 			comp_string += comp_text + ", "
 	#Remove superfluous comma:
 	comp_string = comp_string.left(comp_string.length() - 2)
-	label_comps.append_text("[color=black]" + comp_string + "[/color]")
+	_label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
-	var label_descr := $Inventory/VBoxContainer/MarginContainer/TextBoxBG/Description
-	label_descr.clear()
-	label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
+	_label_descr.clear()
+	_label_descr.append_text("[color=black][i]" + p_clicked_item.get_descr() + "[/i][/color]")
 	
 	## if the Chlor tablets are clicked, open water filtering gui
-	if sender.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"):
-		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
-		$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+	if p_clicked_item.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"):
+		_consume_btn.text = "Filtern"
+		_consume_btn.show()
 		if _only_inventory:
-			$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
+			_discard_btn.show()
 	else:
-		$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Konsumieren"
+		_consume_btn.text = "Konsumieren"
 		
 		if _only_inventory:
-			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
-			$Inventory/VBoxContainer/HBoxContainer/Discard.visible = true
-		elif _item_consumable(_clicked_item):
-			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = true
+			_consume_btn.hide()
+			_discard_btn.show()
+		elif _item_consumable(p_clicked_item):
+			_consume_btn.show()
 		else:
-			$Inventory/VBoxContainer/HBoxContainer/Consume.visible = false
+			_consume_btn.hide()
+
 
 func _item_consumable(item : EMC_Item) -> bool:
 	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
+
 
 func _remove_item(item : EMC_Item) -> void:
 	for slot in _slot_grid.get_children():
 		if slot.get_item() == item:
 			slot.remove_item()
 
+
 func _remove_item_by_id(item_id : int) -> void:
 	for slot in _slot_grid.get_children():
 		if slot.get_item().get_ID() == item_id:
 			slot.remove_item()
 			return
-			
+
+
 func _reload_items() -> void:
 	_inventory.sort_custom(EMC_Inventory.sort_helper)
 	
@@ -218,11 +205,12 @@ func _reload_items() -> void:
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null and item.get_ID() != JsonMngr.name_to_id("DUMMY"):
+			item.modulate = Color(1, 1, 1) #initialize so nothing is visually marked
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
-		
-#MRM: TODO: Remove Magic Numbers
+
+
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
 		return
@@ -282,10 +270,12 @@ func _on_consume_pressed() -> void:
 	_reload_items()
 	_clear_gui()
 
+
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
 	_reload_items()
 	_clear_gui()
+
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false

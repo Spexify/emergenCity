@@ -15,9 +15,9 @@ texture_margin_bottom = 16.0
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -249.0
-offset_right = 251.0
-offset_bottom = 180.0
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 188.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 script = ExtResource("2_tllve")
@@ -30,6 +30,7 @@ size_flags_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxTexture_h7xur")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]

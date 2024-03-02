@@ -1,4 +1,28 @@
 ~ START
-Elias: Hey, hab grad keine Zeit.
-Elias: [i]Sorry.[/i]
+Elias: Hi.
+~ BRANCH
+Elias: Brauchen Sie was?
+- Reden
+	Elias: Dafür hab ich grad keine Zeit.
+	Elias: [i]Sorry.[/i]
+- Handeln
+	Elias: Für ein gutes Tauschgeschäft bin ich immer zu haben!
+	=>< TRADE
+	=> BRANCH
+- Nö.
+=> END
+
+
+~ TRADE
+do TradeMngr.setup_next_trade("Elias")
+Elias: Ich biete dir {{TradeMngr.get_offered_items_text()}} falls du {{TradeMngr.get_sought_items_text()}} hast.
+if TradeMngr.is_trade_feasible()
+	Elias: Wie sieht's aus?
+	- Avatar: Angebot akzeptiert.
+		do TradeMngr.execute_trade()
+		Elias: [#mood=happy]Es war mir eine Freude mit Ihnen Geschäfte zu machen!
+	- Avatar: Nein danke.
+		Elias: Vielleicht ein ander' Mal dann.
+else
+	Elias: [#mood=sad]Tja, {{TradeMngr.get_unfeasibility_reason()}} leider!
 => END
