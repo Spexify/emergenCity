@@ -67,4 +67,12 @@
 		"name": "TownhallWorker",
 		"pitch": 0.95,
 	},
+	{
+		"name": "Walter",
+		"pitch": 0.7,
+		"trade" : {
+			"in" : ["SAUCE_JAR"],
+			"out" : ["POTATOES"],
+		},
+	},
 ]

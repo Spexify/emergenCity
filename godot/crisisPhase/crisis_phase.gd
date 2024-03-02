@@ -14,6 +14,7 @@ const AGATHE_DIALOG : DialogueResource = preload("res://res/dialogue/agathe.dial
 const KRIS_DIALOG : DialogueResource = preload("res://res/dialogue/kris.dialogue")
 const VERONIKA_DIALOG : DialogueResource = preload("res://res/dialogue/veronika.dialogue")
 const WORKER_DIALOG : DialogueResource = preload("res://res/dialogue/townhall_worker.dialogue")
+const WALTER_DIALOG : DialogueResource = preload("res://res/dialogue/walter.dialogue")
 const TUTORIAL_DIALOG : DialogueResource = preload("res://res/dialogue/tutorial.dialogue")
 
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
@@ -220,6 +221,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 		"Kris": dialogue_resource = KRIS_DIALOG
 		"Veronika": dialogue_resource = VERONIKA_DIALOG
 		"TownhallWorker": dialogue_resource = WORKER_DIALOG
+		"Walter": dialogue_resource = WALTER_DIALOG
 		_:
 			printerr("unknown NPC")
 			return
