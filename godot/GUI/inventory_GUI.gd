@@ -136,15 +136,16 @@ func _clear_gui() -> void:
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
+	_clicked_item = p_clicked_item
 	#Name of the item
 	_label_name.clear()
-	_label_name.append_text("[color=black]" + p_clicked_item.get_name() + "[/color]")
+	_label_name.append_text("[color=black]" + _clicked_item.get_name() + "[/color]")
 	
 	#Components of item
 	var comp_string: String = ""
 	_label_comps.clear()
 	
-	var comps := p_clicked_item.get_comps()
+	var comps := _clicked_item.get_comps()
 	for comp in comps:
 		var comp_text := comp.get_colored_name_with_vals()
 		if comp_text != "":
@@ -155,10 +156,10 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	
 	#Description of item:
 	_label_descr.clear()
-	_label_descr.append_text("[color=black][i]" + p_clicked_item.get_descr() + "[/i][/color]")
+	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
 	
 	## if the Chlor tablets are clicked, open water filtering gui
-	if p_clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
 		_consume_btn.text = "Filtern"
 		_consume_btn.show()
 		if _only_inventory:
@@ -169,7 +170,7 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 		if _only_inventory:
 			_consume_btn.hide()
 			_discard_btn.show()
-		elif _item_consumable(p_clicked_item):
+		elif _item_consumable(_clicked_item):
 			_consume_btn.show()
 		else:
 			_consume_btn.hide()

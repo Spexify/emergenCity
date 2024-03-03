@@ -50,6 +50,9 @@ alignment = 1
 layout_mode = 2
 text = "Bestätigen"
 
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Zurück

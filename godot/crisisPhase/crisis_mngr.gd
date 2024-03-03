@@ -54,7 +54,7 @@ func setup(p_backpack : EMC_Inventory) -> void:
 	_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 	_food_contamination_crisis_probability_countdown = _rng.randi_range(FOOD_CONTAMINATION_LOWER_BOUND, FOOD_CONTAMINATION_UPPER_BOUND)
 	
-############################# GETTERS AND SETTERS ##################################################	
+############################# GETTERS AND SETTERS ##################################################
 
 func get_max_day() -> int:
 	return _max_day
@@ -63,7 +63,7 @@ func set_max_day(_p_max_day : int = 3) -> void:
 	_max_day = _p_max_day
 
 
-########################## PUBLIC METHODS #########################################################
+########################################## PUBLIC METHODS ##########################################
 func _refresh() -> int:
 	var cnt : int = 0
 	#check if each crisis is active and reduce their length if so
@@ -116,8 +116,6 @@ func _refresh() -> int:
 
 ## start counting time with day_mngr
 func check_crisis_status(p_curr_day: int) -> void:
-
-	
 	if p_curr_day >= OverworldStatesMngr.get_crisis_length(): return
 	
 	var active_crises_cnt := _refresh()
@@ -138,7 +136,7 @@ func check_crisis_status(p_curr_day: int) -> void:
 		if _possible_food_contamination_crisis != EMC_OverworldStatesMngr.FoodContaminationState.NONE:
 			_food_contamination_crisis_mngr()
 
-########################## PRIVATE METHODS #########################################################
+########################################## PRIVATE METHODS #########################################
 
 #func _on_day_ended() -> void:
 	#check_crisis_status()

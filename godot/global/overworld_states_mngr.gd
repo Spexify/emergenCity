@@ -62,7 +62,6 @@ func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_el
 	_allowed_isolation_crisis = _p_isolation_crisis
 	_allowed_food_contamination_crisis = _p_food_contamination_crisis
 	_scenario_name = p_scenario_name
-
 	_crisis_length = _p_crisis_length
 	_number_crisis_overlap = _p_number_crisis_overlap
 
@@ -92,7 +91,7 @@ func clear_active_crises_descr() -> void:
 func get_active_crises_descr() -> String:
 	var res := _active_crises_descr
 	if res != "":
-		res = "Ohje... " + res
+		res = "Ohje..." + res
 	return res
 
 
@@ -119,7 +118,7 @@ func get_electricity_state() -> ElectricityState:
 func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
 	match _electricity_state:
-		ElectricityState.NONE: _active_crises_descr += "Der Strom ist ausgefallen!"
+		ElectricityState.NONE: _active_crises_descr += " Der Strom ist ausgefallen!"
 		ElectricityState.UNLIMITED: pass
 
 
@@ -137,8 +136,8 @@ func get_water_state() -> WaterState:
 func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
 	match _water_state:
-		WaterState.NONE: _active_crises_descr += "Das Wasser ist komplett ausgefallen!"
-		WaterState.DIRTY: _active_crises_descr += "Nur verunreinigtes Wasser fließt aus der Leitung!"
+		WaterState.NONE: _active_crises_descr += " Das Wasser ist komplett ausgefallen!"
+		WaterState.DIRTY: _active_crises_descr += " Nur verunreinigtes Wasser fließt aus der Leitung!"
 		WaterState.CLEAN: pass
 
 
@@ -158,8 +157,8 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 	_isolation_state = new_isolation_state
 	match _isolation_state:
 		IsolationState.NONE: pass
-		IsolationState.LIMITED_PUBLIC_ACCESS: _active_crises_descr += "Ein Betretungsverbot öffentlicher Gelände wurde verhangen!"
-		IsolationState.ISOLATION: _active_crises_descr += "Eine Quarantäne wurde angeordnet!"
+		IsolationState.LIMITED_PUBLIC_ACCESS: _active_crises_descr += " Ein Betretungsverbot öffentlicher Gelände wurde verhangen!"
+		IsolationState.ISOLATION: _active_crises_descr += " Eine Quarantäne wurde angeordnet!"
 
 
 func get_isolation_state_descr() -> String:
@@ -178,7 +177,7 @@ func set_food_contamination_state(new_food_contamination_state: FoodContaminatio
 	_food_contamination_state = new_food_contamination_state
 	match _food_contamination_state:
 		FoodContaminationState.NONE: pass
-		FoodContaminationState.FOOD_SPOILED: _active_crises_descr += "Die Essensvorräte sind allesamt verdorben!"
+		FoodContaminationState.FOOD_SPOILED: _active_crises_descr += " Die Essensvorräte sind allesamt verdorben!"
 
 
 func get_food_contamination_state_descr() -> String:

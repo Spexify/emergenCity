@@ -23,7 +23,6 @@ const _BACK_BTN_NAME := "BackButton"
 var _backpack: EMC_Inventory = Global.get_inventory()
 var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
-var _overworld_states_mngr: EMC_OverworldStatesMngr = OverworldStatesMngr #EMC_OverworldStatesMngr.new()
 var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var uncast_guis := $GUI.get_children()
@@ -44,6 +43,10 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $GUI/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $GUI/VBC/LowerSection/ConfirmationGUI
+@onready var _showerGUI := $GUI/VBC/LowerSection/ShowerGUI
+@onready var _cs_GUI := $GUI/VBC/LowerSection/ChangeStageGUI
+
+@onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -77,75 +80,69 @@ func remove_back_button() -> void:
 		#last_backBtn.show()
 
 ########################################## PRIVATE METHODS #########################################
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
+## Setup all the needed reference for GUIs etc.
 func _ready() -> void:
 	if Global.was_crisis():
-		####################LOAD SAVE STATE#######################
+		##LOAD SAVE STATE
 		Global.load_state()
 	
+	
+	#Setup-Methoden
 	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
 	#var _upgrades: Array[EMC_Upgrade.IDs] = [EMC_Upgrade.IDsRAINWATER_BARREL, EMC_Upgrade.IDs.GAS_COOKER]
-	_overworld_states_mngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
+	OverworldStatesMngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
 	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
-	
-	#Setup-Methoden
+	_crisis_mngr.setup(_backpack)
 	_status_bars.setup(_tooltip_GUI)
-	$GUI/VBC/LowerSection/RestGUI.opened.connect(_on_action_GUI_opened)
-	$GUI/VBC/LowerSection/RestGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/LowerSection/ChangeStageGUI.setup($StageMngr)
-	$GUI/VBC/LowerSection/ChangeStageGUI.opened.connect(_on_action_GUI_opened)
-	$GUI/VBC/LowerSection/ChangeStageGUI.closed.connect(_on_action_GUI_closed)
-	$GUI/VBC/MiddleSection/PopUpGUI.opened.connect(_on_action_GUI_opened)
-	$GUI/VBC/MiddleSection/PopUpGUI.closed.connect(_on_action_GUI_closed)
+	_cs_GUI.setup($StageMngr)
 	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
-		$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(_overworld_states_mngr, _backpack)
-	$GUI/VBC/LowerSection/ShowerGUI.setup(_backpack)
+		$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(OverworldStatesMngr, _backpack)
+	_showerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
-	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, \
-		_book_GUI, $GUI/VBC/LowerSection/ChangeStageGUI)
+	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, _book_GUI, _cs_GUI, _opt_event_mngr)
 	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
-
+	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
+	
+	## Collect all Action GUIs in one array for the DayMngr
 	var action_guis : Array[EMC_ActionGUI] = []
-	#MRM: Because I reworked the node structure of the GUI node, following code
-	#needs to be reworked. For now I'll hardcode it.
-	#for uncast in uncast_guis:
-		#if uncast is EMC_ActionGUI:
-			#uncast.opened.connect(_on_action_GUI_opened)
-			#uncast.closed.connect(_on_action_GUI_closed)
-			#guis.append(uncast as EMC_ActionGUI)
-	action_guis.append($"GUI/VBC/LowerSection/RestGUI" as EMC_ActionGUI)
-	action_guis.append($"GUI/VBC/LowerSection/ChangeStageGUI" as EMC_ActionGUI)
-	action_guis.append($"GUI/VBC/MiddleSection/CookingGUI" as EMC_ActionGUI)
+	action_guis.append(_cs_GUI as EMC_ActionGUI)
+	action_guis.append(_cooking_GUI as EMC_ActionGUI)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
 	action_guis.append(_stage_mngr.get_city_map() as EMC_ActionGUI)
 	action_guis.append($GUI/VBC/LowerSection/DefaultActionGUI as EMC_ActionGUI)
-	action_guis.append($GUI/VBC/LowerSection/ShowerGUI as EMC_ActionGUI)
+	action_guis.append(_showerGUI as EMC_ActionGUI)
 	action_guis.append(_confirmation_GUI as EMC_ActionGUI)
 	
-	_crisis_mngr.setup(_backpack)
-	_day_mngr.setup($Avatar, _stage_mngr, _overworld_states_mngr, _crisis_mngr, action_guis, \
-		_tooltip_GUI, _confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection)
-	_SEOD.setup($Avatar, _backpack, _backpack_GUI)
+	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, action_guis, _tooltip_GUI, \
+		_confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr)
 	
-	#_day_mngr.day_ended.connect(_crisis_mngr._on_day_ended)
+	## Connect signals to script-only classes (no Scene/Node so we can't connect it in the editor):
+	_day_mngr.period_ended.connect(_opt_event_mngr._on_day_mngr_period_ended)
+	_day_mngr.day_ended.connect(_crisis_mngr.check_crisis_status)
+	_day_mngr.day_ended.connect(_backpack._on_day_mngr_day_ended)
 	
-	if !Global._tutorial_done:
-		var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-		dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-		$GUI/VBC/LowerSection.add_child(dialogue_GUI)
-		dialogue_GUI.start(TUTORIAL_DIALOG, "START")
-		get_tree().paused = true
-		Global._tutorial_done = true
+	#Not the nices of solutions:
+	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
+	_opt_event_mngr.set_consequences(_day_mngr.get_action_consequences())
+	
+	$DayPeriodTransition._on_day_mngr_day_ended(_day_mngr.get_current_day())
+	
+	#Tutorial intro dialogue
+	if !Global._tutorial_done: _play_tutorial_dialogue()
 
 
+## Up until now, this is only used for keyboard-inputs for debbuging purposes
+## As there is no analogous input code on mobile phones, this can be called
+## indiscriminately
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
@@ -181,23 +178,16 @@ func _process(delta: float) -> void:
 		_pause_menue.update_overworld_states()
 
 
-func _on_summary_end_of_day_gui_opened() -> void:
-	get_tree().paused = true
-
-
-func _on_summary_end_of_day_gui_closed() -> void:
-	get_tree().paused = false
-
-
-func _on_action_GUI_opened() -> void:
-	get_tree().paused = true
-
-
-func _on_action_GUI_closed() -> void:
-	get_tree().paused = false
-
-
 ###################################### DIALOGUE HANDLING ###########################################
+func _play_tutorial_dialogue() -> void:
+	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
+	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+	dialogue_GUI.start(TUTORIAL_DIALOG, "START")
+	get_tree().paused = true
+	Global._tutorial_done = true
+
+
 func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	var dialogue_resource: DialogueResource
 	#Theoretically the game is paused so no other DialogueGUI should be instantiated,
@@ -239,6 +229,8 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	Global.get_tree().paused = false
 
+
+################################################################################
 
 func _on_backpack_gui_closed() -> void:
 	_backpack_btn.set_pressed(false)

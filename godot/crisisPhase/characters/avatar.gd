@@ -268,3 +268,10 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:
 	$Sprite2D.texture = \
 		load("res://res/sprites/characters/sprite_avatar_" + p_avatar_sprite_suffix + ".png")
+
+
+## After each day, the vitals of the avatar have to be adjusted
+func _on_day_mngr_day_ended(p_curr_day: int) -> void:
+	sub_nutrition(3) 
+	sub_hydration(3)
+	sub_health(1)

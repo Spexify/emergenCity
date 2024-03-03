@@ -72,18 +72,21 @@ var _dialogue_pitches: Dictionary
 var _tooltip_GUI : EMC_TooltipGUI
 var _book_GUI: EMC_BookGUI
 var _initial_stage_name : String = "home"
+var _opt_event_mngr: EMC_OptionalEventMngr
 
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
 func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, \
-p_tooltip_GUI: EMC_TooltipGUI, p_book_GUI: EMC_BookGUI, p_cs_GUI: EMC_ChangeStageGUI) -> void:
+p_tooltip_GUI: EMC_TooltipGUI, p_book_GUI: EMC_BookGUI, p_cs_GUI: EMC_ChangeStageGUI, \
+p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_phase = p_crisis_phase
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
 	_tooltip_GUI = p_tooltip_GUI
 	_book_GUI = p_book_GUI
+	_opt_event_mngr = p_opt_event_mngr
 	
 	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
 	_dialogue_pitches["Avatar"] = 1.0
@@ -103,6 +106,7 @@ func get_curr_stage() -> TileMap:
 	return _curr_stage
 
 
+## Change the stage to the one specified via [param p_stage_name]
 func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
 	$StageOffset/CurrStage.replace_by(new_stage)
@@ -115,21 +119,12 @@ func change_stage(p_stage_name: String) -> void:
 	#Manipulate the original Tilemap according to needs:
 	_create_navigation_layer_tiles()
 	
-	#Upgrades & Optional Events: Dynamically placed furniture
-	match get_curr_stage_name():
-		STAGENAME_HOME:
-			for upgrade_ID: EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
-				if upgrade_ID == EMC_Upgrade.IDs.EMPTY_SLOT: continue
-				
-				if Global.has_upgrade(upgrade_ID):
-					var spawn_pos : Vector2i = Global.get_upgrade_if_equipped(upgrade_ID).get_spawn_pos()
-					_create_upgrade_furniture(upgrade_ID, spawn_pos)
-		
-		STAGENAME_MARKET:
-			#TODO: Insert if-statement, so only when THW-event is active, the THW truck is addaed:
-			_place_furniture_on_position(Vector2i(6, 0), Vector2i(10, 5), 3, 1, true)
-			_place_furniture_on_position(Vector2i(6, 1), Vector2i(10, 5), 3, 1, true)
-			_place_furniture_on_position(Vector2i(6, 2), Vector2i(10, 5), 3, 4, true)
+	#Dynamically placed furniture for upgrades
+	if get_curr_stage_name() == STAGENAME_HOME:
+		_place_upgrade_furniture()
+	
+	#Optional Events:
+	_place_optional_event_entities()
 	
 	#Hide Tooltip-Layer while game is playing
 	const INVISIBLE := Color(0, 0, 0, 0)
@@ -143,13 +138,25 @@ func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
 	
 	#Dependend on the stage show and spawn NPCs
 	for NPC_name: String in p_NPC_spawn_pos:
-		var NPC := $NPCs.get_node(NPC_name)
+		_spawn_NPC(NPC_name, p_NPC_spawn_pos[NPC_name])
+	
+	#Optional Event NPCs
+	for opt_event in _opt_event_mngr.get_active_events():
+		var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
+		if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+			for spawn_NPCs in spawn_NPCs_arr:
+				if get_curr_stage_name() == spawn_NPCs.stage_name:
+					_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
+
+
+func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
+		var NPC := $NPCs.get_node(p_NPC_name)
 		if NPC == null:
 			printerr("StageMngr.update_NPCs(): Unknown NPC Name!")
-			continue
+			return
 		
 		NPC.activate()
-		NPC.position = p_NPC_spawn_pos[NPC_name]
+		NPC.position = p_spawn_pos
 
 
 func get_dialogue_pitches() -> Dictionary:
@@ -162,7 +169,6 @@ func save() -> Dictionary:
 		"stage_name" : get_curr_stage_name(),
 	}
 	return data
-
 
 
 func load_state(data : Dictionary) -> void:
@@ -244,15 +250,15 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_Upgrade.IDs, p_position: Vector
 
 ## Places a tile from the furniture-Atlas on the Middleground 1 Layer
 func _place_furniture_on_position(p_tilemap_pos: Vector2i, \
-p_atlas_coord: Vector2i, p_tiles_width: int = 1, p_tiles_height: int = 1, \
+p_atlas_coord: Vector2i, p_tiles_cols: int = 1, p_tiles_rows: int = 1, \
 p_overwrite_existing_tiles: bool = false) -> void:
 	
-	if p_tiles_width < 1: p_tiles_width = 1
-	if p_tiles_height < 1: p_tiles_height = 1
+	if p_tiles_cols < 1: p_tiles_cols = 1
+	if p_tiles_rows < 1: p_tiles_rows = 1
 	
 	#Place new tiles
-	for x_offset in range(0, p_tiles_width):
-		for y_offset in range(0, p_tiles_height):
+	for x_offset in range(0, p_tiles_cols):
+		for y_offset in range(0, p_tiles_rows):
 			#If necessary, check if previous tile exists and exit
 			if p_overwrite_existing_tiles == false:
 				var previous_tile := _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND_1, p_tilemap_pos)
@@ -446,3 +452,30 @@ func _on_city_map_closed() -> void:
 
 func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:
 	_day_mngr.on_interacted_with_furniture(p_stage_change_ID)
+
+
+func _place_upgrade_furniture() -> void:
+	for upgrade_ID: EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
+		if upgrade_ID == EMC_Upgrade.IDs.EMPTY_SLOT: continue
+		
+		if Global.has_upgrade(upgrade_ID):
+			var spawn_pos : Vector2i = Global.get_upgrade_if_equipped(upgrade_ID).get_spawn_pos()
+			_create_upgrade_furniture(upgrade_ID, spawn_pos)
+
+
+func _place_optional_event_entities() -> void:
+	for opt_event in _opt_event_mngr.get_active_events():
+		#Spawn Tiles
+		var spawn_tiles_arr := opt_event.spawn_tiles_arr
+		if spawn_tiles_arr != null && !spawn_tiles_arr.is_empty():
+			for spawn_tiles in spawn_tiles_arr:
+				if get_curr_stage_name() == spawn_tiles.stage_name:
+					_place_furniture_on_position(spawn_tiles.tilemap_pos, spawn_tiles.atlas_coord, \
+					spawn_tiles.tiles_cols, spawn_tiles.tiles_rows, spawn_tiles.overwrite_existing_tiles)
+		##ARE OVERWRITTEN BY LATER RESPAWN, so just included in respawn itself:
+		##Spawn NPCs
+		#var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
+		#if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+			#for spawn_NPCs in spawn_NPCs_arr:
+				#if get_curr_stage_name() == spawn_NPCs.stage_name:
+					#_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)

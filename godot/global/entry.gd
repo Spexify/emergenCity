@@ -3,6 +3,7 @@ extends Node
 func _ready() -> void:
 	JsonMngr.load_items()
 	JsonMngr.load_pop_up_actions()
+	JsonMngr.load_opt_events()
 	JsonMngr.load_actions()
 	#if !Global._tutorial_done:
 		### add animation, avtar setting and being thrown in the middle of an easy crisis

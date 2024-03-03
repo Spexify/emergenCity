@@ -57,48 +57,66 @@ var _type_gui : String #deprecated??
 var _description : String
 var _performance_coin_value : int
 var _progresses_day_period: bool
+var _prompt: String
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		p_consequences : Dictionary, type_gui : String, description : String,
-		performance_coin_value : int, p_progresses_day_period: bool = true) -> void:
+p_consequences : Dictionary, type_gui : String, description : String,
+p_prompt: String = "", performance_coin_value : int = 0,
+p_progresses_day_period: bool = true) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
 	self._consequences = p_consequences
 	self._type_gui = type_gui
 	self._description = description
+	self._prompt = p_prompt
 	self._performance_coin_value = performance_coin_value
 	self._progresses_day_period = p_progresses_day_period
+
 
 func get_ID() -> int:
 	return _action_ID
 
+
 func get_ACTION_NAME() -> String:
 	return self._ACTION_NAME
+
 
 func get_constraints_prior() -> Dictionary:
 	return self._constraints_prior
 
+
 func get_constraints_rejected() -> Array[String]:
 	return self._constraints_rejected
+
 
 func set_constraints_rejected(constraints_rejected: Array[String]) -> void:
 	self._constraints_rejected = constraints_rejected
 
+
 func get_consequences() -> Dictionary:
 	return self._consequences
+
 
 func get_type_gui() -> String:
 	return self._type_gui
 
+
 func get_description() -> String:
 	return self._description
-	
+
+
+func get_prompt() -> String:
+	return _prompt
+
+
 func get_performance_coin_value() -> int: 
 	return self._performance_coin_value
 
+
 func progresses_day_period() -> bool:
 	return _progresses_day_period
+
 
 ## Disclaimer: godoIf a consequence with the same key already exists, it is overwritten!
 func add_consequence(p_key: String, p_param: Variant) -> void:
@@ -113,21 +131,25 @@ func save() -> Dictionary:
 	}
 	return data
 
+
 func load_state(data : Dictionary) -> void:
 	_action_ID = data.get("action_ID")
 	_ACTION_NAME = data.get("ACTION_NAME")
 	_description = data.get("description")
 
+
 static func empty_action() -> EMC_Action:
-	return EMC_Action.new(NAN, "", {}, {}, "", "", 0)
-	
+	return EMC_Action.new(NAN, "", {}, {}, "", "")
+
+
 static func from_dict(data : Dictionary) -> EMC_Action:
-	var _action_id : int = data.get("id")
-	var _action_name : String = data.get("name", "")
-	var _constraints : Dictionary = data.get("constraints", {})
-	var _consequences : Dictionary = data.get("consequences",{})
-	var _type_gui : String = data.get("type_gui", "")
-	var _description : String = data.get("description", "")
-	var _e_coin : int = data.get("e_coin", 0)
+	var action_id : int = data.get("id")
+	var action_name : String = data.get("name", "")
+	var constraints : Dictionary = data.get("constraints", {})
+	var consequences : Dictionary = data.get("consequences",{})
+	var type_gui : String = data.get("type_gui", "")
+	var description : String = data.get("description", "")
+	var e_coin : int = data.get("e_coin", 0)
+	var prompt := ""
 	
-	return EMC_Action.new(_action_id, _action_name, _constraints, _consequences, _type_gui, _description, _e_coin)
+	return EMC_Action.new(action_id, action_name, constraints, consequences, type_gui, description, prompt, e_coin)

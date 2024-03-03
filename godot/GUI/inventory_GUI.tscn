@@ -93,9 +93,10 @@ layout_mode = 2
 theme_override_font_sizes/italics_font_size = 16
 
 [node name="HBC" type="HBoxContainer" parent="Inventory/VBC"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 15
-alignment = 1
+alignment = 2
 
 [node name="Consume" type="Button" parent="Inventory/VBC/HBC"]
 custom_minimum_size = Vector2(160, 0)
@@ -112,6 +113,7 @@ text = "Entsorgen"
 
 [node name="Continue" type="TextureButton" parent="Inventory/VBC/HBC"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture_normal = ExtResource("5_kbada")
 
 [node name="FilterWater" type="PanelContainer" parent="."]

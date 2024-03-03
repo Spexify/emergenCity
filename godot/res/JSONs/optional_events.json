@@ -1,0 +1,72 @@
+[
+	{
+		"name": "RAIN",
+		"propability": 3,
+		"descr": "Es hat geregnet.",
+		"announce_only_on_radio": false,
+		"active_periods": 0,
+		"constraints": { },
+		"consequences": {
+			"fill_rainbarrel": 0,
+		},
+		"spawn_tiles": [
+			{ },
+		],
+		"spawn_NPCs": [
+			{ },
+		],
+	},
+	{
+		"name": "THW_AIDKITS",
+		"propability": 10,
+		"descr": "Und nun eine Eilmeldung: Das 'Technische Hilfswerk' ist momentan auf dem Marktplatz und verteilt kostenlose Hilfspakete!",
+		"announce_only_on_radio": true,
+		"active_periods": 2,
+		"constraints": {
+			"constraint_not_evening": "",
+			"constraint_no_limited_public_access": "",
+			"constraint_no_isolation": "",
+		},
+		"consequences": { },
+		"spawn_tiles": [
+			{
+				"stage_name": "market",
+				"tilemap_x_pos": 6,
+				"tilemap_y_pos": 0,
+				"atlas_x_coord": 10,
+				"atlas_y_coord": 5,
+				"tiles_cols": 3,
+				"tiles_rows": 1,
+				"overwrite_existing_tiles": true,
+			},
+			{
+				"stage_name": "market",
+				"tilemap_x_pos": 6,
+				"tilemap_y_pos": 1,
+				"atlas_x_coord": 10,
+				"atlas_y_coord": 5,
+				"tiles_cols": 3,
+				"tiles_rows": 1,
+				"overwrite_existing_tiles": true,
+			},
+			{
+				"stage_name": "market",
+				"tilemap_x_pos": 6,
+				"tilemap_y_pos": 2,
+				"atlas_x_coord": 10,
+				"atlas_y_coord": 5,
+				"tiles_cols": 3,
+				"tiles_rows": 4,
+				"overwrite_existing_tiles": true,
+			},
+		],
+		"spawn_NPCs": [
+			{
+				"stage_name": "market",
+				"NPC_name": "Mert",
+				"x_pos" : 470,
+				"y_pos" : 380,
+			},
+		],
+	},
+]

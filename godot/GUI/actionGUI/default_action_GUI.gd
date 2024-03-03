@@ -6,7 +6,7 @@ class_name EMC_DefaultActionGUI
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action: EMC_Action) -> void:
 	_action = p_action
-	$VBoxContainer/PanelContainer/RichTextLabel.text = _action.get_description()
+	$VBoxContainer/PanelContainer/RichTextLabel.text = _action.get_prompt()
 	
 	if _action.progresses_day_period():
 		$VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon.hide()

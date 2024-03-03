@@ -68,8 +68,8 @@ func _process(delta: float) -> void:
 		$Icon_NextPeriod.position = $Icon_PrevPeriod.position
 		#Transparency
 		var progress_percentage: float = _time / _MAX_TIME
-		$Icon_PrevPeriod.modulate = Color($Icon_PrevPeriod.modulate, 255 - 255 * progress_percentage)
-		$Icon_NextPeriod.modulate = Color($Icon_NextPeriod.modulate, 255 * progress_percentage)
+		$Icon_PrevPeriod.modulate = Color($Icon_PrevPeriod.modulate, 1.0 - 1.0 * progress_percentage)
+		$Icon_NextPeriod.modulate = Color($Icon_NextPeriod.modulate, 1.0 * progress_percentage)
 		
 		
 		if _time > _MAX_TIME: #Stop playing animation

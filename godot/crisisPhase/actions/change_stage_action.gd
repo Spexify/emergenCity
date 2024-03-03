@@ -6,11 +6,13 @@ var _stage_name: String
 
 func _init(p_action_ID: int, p_action_name : String, p_constraints_prior : Dictionary, p_consequences : Dictionary, p_description : String,
 			p_performance_coin_value : int, p_stage_name: String, p_progresses_day_period : bool = true) -> void:
-	super(p_action_ID, p_action_name, p_constraints_prior, p_consequences, "ChangeStageGUI", p_description, p_performance_coin_value, p_progresses_day_period)
+	super(p_action_ID, p_action_name, p_constraints_prior, p_consequences, "ChangeStageGUI", p_description, "",  p_performance_coin_value, p_progresses_day_period)
 	_stage_name = p_stage_name
+
 
 func get_stage_name() -> String:
 	return _stage_name
+
 
 static func from_dict(data : Dictionary) -> EMC_Action:
 	var _action_id : int = data.get("id")

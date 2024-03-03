@@ -46,18 +46,13 @@ var _puGUI_probability_countdown : int
 const PU_LOWER_BOUND : int = 3
 const PU_UPPER_BOUND : int = 6
 
-var _opGUI_probability_countdown : int
-const OP_LOWER_BOUND : int = 2
-const OP_UPPER_BOUND : int = 4 
-
 var _inventory : EMC_Inventory
 var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
 
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(avatar_ref : EMC_Avatar, stage_mngr : EMC_StageMngr, 
-overworld_states_mngr_ref : EMC_OverworldStatesMngr,
+func setup(avatar_ref : EMC_Avatar, stage_mngr : EMC_StageMngr,
 p_crisis_mngr : EMC_CrisisMngr,
 gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
@@ -66,7 +61,8 @@ seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI, 
 puGUI : EMC_PopUpGUI,
 p_inventory: EMC_Inventory,
-p_lower_gui_node : Node) -> void:
+p_lower_gui_node : Node,
+p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_avatar = avatar_ref
 	_stage_mngr = stage_mngr
 	_crisis_mngr = p_crisis_mngr
@@ -78,12 +74,11 @@ p_lower_gui_node : Node) -> void:
 	_puGUI = puGUI
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
-		p_lower_gui_node, self, p_tooltip_GUI)
+		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
 	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
-	_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
 	_update_HUD()
 
 
@@ -106,7 +101,7 @@ func on_interacted_with_furniture(p_action_ID : int) -> void:
 	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
 		var gui_name := current_action.get_type_gui()
 		if gui_name == "ConfirmationGUI":
-			if await _confirmation_GUI.confirm(current_action.get_description()):
+			if await _confirmation_GUI.confirm(current_action.get_prompt()):
 				_execute_consequences(current_action)
 		else:
 			_get_gui_ref_by_name(gui_name).show_gui(current_action)
@@ -125,6 +120,14 @@ func get_current_day_period() -> DayPeriod:
 func get_current_day() -> int:
 	#+1 because: Day 1 = period 0, 1, 2, Day 2 = period 3, 4, 5, ....
 	return floor(self._period_cnt / float(3.0)) + 1
+
+
+func get_action_constraints() -> EMC_ActionConstraints:
+	return _action_constraints
+
+
+func get_action_consequences() -> EMC_ActionConsequences:
+	return _action_consequences
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -163,7 +166,6 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 	self._period_cnt += 1
 	_update_HUD()
 	_check_pu_counter()
-	_check_op_counter()
 	period_ended.emit(get_current_day_period())
 
 
@@ -184,28 +186,24 @@ func _on_seod_closed() -> void:
 	_avatar.set_global_position(Vector2i(250, 650))
 	
 	_update_HUD()
-	_update_vitals()
 	_check_pu_counter()
-	_check_op_counter()
-	_update_shelflives()
-	_crisis_mngr.check_crisis_status(get_current_day())
+	#Order has to be this way, because the transition animation needs to update
+	#its day first:
 	day_ended.emit(get_current_day())
 	period_ended.emit(get_current_day_period())
+	_check_game_over()
 
 
-## After each day, the vitals of the avatar have to be adjusted
-func _update_vitals() -> void:
-	_avatar.sub_nutrition(3) 
-	_avatar.sub_hydration(3)
-	_avatar.sub_health(1)
-	
+func _check_game_over() -> bool:
 	var avatar_life_status : bool = true
 	if _avatar.get_nutrition_status() <= 0 || _avatar.get_hydration_status() <= 0 || \
 	_avatar.get_health_status() <= 0 :
 		avatar_life_status = false
-	if get_current_day() >= self.max_day - 1 || !avatar_life_status:
-		#_seodGUI.open(self.current_day_cycle)
+	
+	if get_current_day() >= self.max_day || !avatar_life_status:
 		_egGUI.open(self.history, avatar_life_status, _avatar)
+		return true
+	return false
 
 
 ## Update the visual representation of the current daytime
@@ -238,17 +236,6 @@ func load_state(data : Dictionary) -> void:
 		print("Ha du versuchst zu cheaten")
 
 
-func _update_shelflives() -> void:
-	for item: EMC_Item in _inventory.get_all_items():
-		var IC_shelflife : EMC_IC_Shelflife = item.get_comp(EMC_IC_Shelflife)
-		if (IC_shelflife != null):
-			IC_shelflife.reduce_shelflife()
-			# When an items spoils, replace the shelflive component with an unpalatable component
-			if IC_shelflife.is_spoiled():
-				item.remove_comp(EMC_IC_Shelflife)
-				item.add_comp(EMC_IC_Unpalatable.new(1))
-
-
 func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
 	match p_action_ID:
@@ -258,41 +245,41 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 			result = EMC_Action.new(p_action_ID, "-",
 				{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
 				{ }, "CityMap", 
-				"-", 0, false)
+				"-", "", 0, false)
 		EMC_Action.IDs.COOKING:
 			result = EMC_Action.new(p_action_ID, "Kochen", {}, 
 				{ }, "CookingGUI", 
-				"Hat gekocht.", 30)
+				"Hat gekocht.", "", 30)
 		EMC_Action.IDs.TAP_WATER:
 			result = EMC_Action.new(p_action_ID, "(Wasserzapfen)",
 				{ "constraint_some_water_available" : ""},
 				{ "add_tap_water" : EMC_ActionConsequences.NO_PARAM}, "DefaultActionGUI",
-				"Willst du Wasser aus dem Hahn zapfen?", 0, false)
+				"-", "Willst du Wasser aus dem Hahn zapfen?", 0, false)
 		EMC_Action.IDs.REST:
 			result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-				{}, "RestGUI", 
-				"Hat sich ausgeruht.", 10)
+				{}, "DefaultActionGUI",
+				"Hat sich ausgeruht.", "Willst du dich ausruhen?", 10, true) 
 		EMC_Action.IDs.RAINWATER_BARREL:
 			result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
 				{"constraint_rainwater_barrel" : 0},
 				{ }, "RainwaterBarrelGUI",
-				"Hat Wasser aus der Regentonne geschöpft.",0)
+				"Hat Wasser aus der Regentonne geschöpft.", "", 0)
 		EMC_Action.IDs.SHOWER:
 			result = EMC_Action.new(p_action_ID, "Duschen", { },
 				{ }, "ShowerGUI", #the consequences are added later in the GUI as they are variable
-				"Hat geduscht.", 10)
+				"Hat geduscht.", "", 10)
 		EMC_Action.IDs.BBK_LINK:
 			result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
 				{ "open_bbk_brochure" : EMC_ActionConsequences.NO_PARAM }, "ConfirmationGUI",
-				"Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?", 0)
+				"-", "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?", 0)
 		EMC_Action.IDs.ELECTRIC_RADIO:
 			result = EMC_Action.new(p_action_ID, "(Radio)", { "constraint_has_item" : JsonMngr.item_name_to_id("BATTERIES") },
 				{ "use_item" : JsonMngr.item_name_to_id("BATTERIES"), "use_radio" : EMC_ActionConsequences.NO_PARAM },
-				"ConfirmationGUI", "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!", 0)
+				"ConfirmationGUI", "-", "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!", 0)
 		EMC_Action.IDs.CRANK_RADIO:
 			result = EMC_Action.new(p_action_ID, "(Radio)", { },
 				{ "use_radio" : EMC_ActionConsequences.NO_PARAM },
-				"ConfirmationGUI", "Willst du das Kurbelradio benutzen?", 0)
+				"ConfirmationGUI", "-", "Willst du das Kurbelradio benutzen?", 0)
 		
 		#FYI: Stage Change actions and others are imported via JSON
 		
@@ -317,23 +304,3 @@ func _check_pu_counter() -> void:
 			_action.silent_executed.connect(_on_action_silent_executed)
 			_puGUI.open(_action)
 		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
-
-
-################################### Optional Events ################################################
-
-func _check_op_counter() -> void:
-	_opGUI_probability_countdown -= 1
-	if _opGUI_probability_countdown == 0:
-		_create_new_optional_event()
-		_opGUI_probability_countdown = _rng.randi_range(OP_LOWER_BOUND, OP_UPPER_BOUND)
-
-
-func _create_new_optional_event() -> void:
-	# currently only one event, the RAINWATER_BARREL is implemented
-	# With more content, this should be a match statement similar to create_pop_up_action
-	var _added_water_quantity : int = _rng.randi_range(1, 6) # in units of 250ml
-	OverworldStatesMngr.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
-		min(OverworldStatesMngr.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
-			(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
-	_tooltip_GUI.open("Es hat geregnet")
-

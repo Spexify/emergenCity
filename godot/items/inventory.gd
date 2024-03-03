@@ -210,6 +210,8 @@ func use_item(p_ID: EMC_Item.IDs) -> bool:
 func filter_items() -> void:
 	pass
 
+
+########################################## PRIVATE METHODS #########################################
 static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:
 	if a == null:
 		return false
@@ -225,3 +227,15 @@ func sort_custom(f : Callable) -> void:
 ##TODO
 func sort() -> void: #Man könnte ein enum als Parameter ergänzen, nach was sortiert werden soll
 	sort_custom(sort_helper)
+
+
+func _on_day_mngr_day_ended(p_curr_day: int) -> void:
+	## Update shelflives:
+	for item: EMC_Item in get_all_items():
+		var IC_shelflife : EMC_IC_Shelflife = item.get_comp(EMC_IC_Shelflife)
+		if (IC_shelflife != null):
+			IC_shelflife.reduce_shelflife()
+			# When an items spoils, replace the shelflive component with an unpalatable component
+			if IC_shelflife.is_spoiled():
+				item.remove_comp(EMC_IC_Shelflife)
+				item.add_comp(EMC_IC_Unpalatable.new(1))

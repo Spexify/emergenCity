@@ -1,6 +1,6 @@
 extends Node
 
-@onready var root := get_tree().root
+@onready var _root := get_tree().root
 
 const MAX_ECOINS = 99999
 const INITIAL_E_COINS = 500
@@ -17,26 +17,26 @@ const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 signal game_loaded
 signal scene_changed
 
-## TODO : find a way to save this in the files
 var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
 var _upgrades_equipped : Array[EMC_Upgrade] = [null, null, null]
 var _upgrade_ids_unlocked : Array[EMC_Upgrade.IDs] = []
-
-var current_scene : Node = null
+var _current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
 
+
 func _ready() -> void:
-	var root := get_tree().root #MRM, editor-Warning: root is shadowed, variable should be renamed
-	current_scene = root.get_child(root.get_child_count() - 1)
+	var root := get_tree().root 
+	_current_scene = root.get_child(root.get_child_count() - 1)
+
 
 func goto_scene(path: String) -> void:
 	match path:
 		PREPARE_PHASE_SCENE: _in_crisis_phase = false
-		CONTINUE_SCENE: _in_crisis_phase = false #MRM: Eig. uneindeutig, vllt ein enum statt bool draus machen?
+		CONTINUE_SCENE: _in_crisis_phase = false
 		CRISIS_PHASE_SCENE: _in_crisis_phase = true
 		_: _in_crisis_phase = false
 	
@@ -48,12 +48,11 @@ func is_in_crisis_phase() -> bool:
 
 
 func _deferred_goto_scene(path: String) -> void:
-	#current_scene.free() # Wenn die current scene gefreed würde, wird das inventar gelöscht
-	get_tree().root.remove_child(current_scene) 
-
-	var s := ResourceLoader.load(path) #MRM: One letter variables are a bad habit :( "scn" would be better
-	current_scene = s.instantiate()
-	root.add_child(current_scene)
+	get_tree().root .remove_child(_current_scene) 
+	
+	var scn := ResourceLoader.load(path)
+	_current_scene = scn.instantiate()
+	_root.add_child(_current_scene)
 	scene_changed.emit()
 
 
@@ -67,7 +66,7 @@ func was_crisis() -> bool:
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
-		save_game(current_scene.name == "CrisisPhase")
+		save_game(_current_scene.name == "CrisisPhase")
 		get_tree().quit() 
 
 

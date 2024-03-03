@@ -12,6 +12,8 @@ const ITEM_SOURCE := "res://res/JSONs/item.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 ## POPUPS
 const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
+## OPT-EVENTS
+const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events.json"
 ## NPCS
 const NPS_Source := "res://res/JSONs/npcs.json"
 ## BOOKS
@@ -152,6 +154,7 @@ func load_item_translator() -> void:
 		
 	_name_to_id = data
 
+
 func load_items() -> void:
 	load_item_translator()
 	
@@ -247,12 +250,13 @@ func name_to_pop_up_action(p_name : String) -> EMC_PopUpAction:
 	assert(false)
 	return null
 
+
 func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAction:
 	var filtered : Array[EMC_PopUpAction] = _pop_up_actions.filter(func (action : EMC_PopUpAction) -> bool: 
 		for key : String in action.get_constraints_prior():
 			var params : Variant = action.get_constraints_prior()[key]
 			
-			## TODO: Handel non exisitend functions
+			## TODO: Handle non exisitend functions
 			if not Callable(action_constraint, key).call(params) == EMC_ActionConstraints.NO_REJECTION:
 				return false
 		return true
@@ -262,6 +266,7 @@ func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAc
 		#if popupevent.get_ACTION_NAME() == "MERT_KNOCKS": #TEST
 			#return popupevent #TEST
 	return filtered.pick_random()
+
 
 func load_pop_up_actions() -> void:
 	if not FileAccess.file_exists(POP_UP_ACTION_SOURCE):
@@ -279,8 +284,7 @@ func load_pop_up_actions() -> void:
 
 	var data : Variant = json.get_data()
 	if not typeof(data) == TYPE_ARRAY:
-		printerr("Invalid format of Item-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
-
+		printerr("Invalid format of Popup Events-JSON (" + POP_UP_ACTION_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
 	
 	var pop_up_id : int = 1000 
 	
@@ -299,9 +303,98 @@ func load_pop_up_actions() -> void:
 		_pop_up_name_to_id[str(pop_up_id)] = _name
 		_pop_up_actions.append(EMC_PopUpAction.from_dict(pop_up_data))
 		
-	pop_up_id += 1
+	pop_up_id += 1 ##is this correctly indented???
 	
 	_is_pop_ups_loaded = true
+
+
+######################################JSON OPT EVENTS#############################################
+var _opt_events : Array[EMC_OptionalEventMngr.Event]
+#var _pop_up_name_to_id : Dictionary
+var _is_opt_events_loaded : bool = false
+
+func load_opt_events() -> void:
+	if not FileAccess.file_exists(OPT_EVENTS_SOURCE):
+		printerr("Could not load PopUps from source: " + OPT_EVENTS_SOURCE)
+		return
+
+	var opt_events_source : FileAccess = FileAccess.open(OPT_EVENTS_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = opt_events_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("Opt-Events JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return
+
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_ARRAY:
+		printerr("Invalid format of Optional Events-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
+	
+	#General structure of JSON fine, let's loop over all the entries
+	for opt_event_data : Dictionary in data:
+		var name: String = opt_event_data.get("name")
+		var propability: int = opt_event_data.get("propability")
+		var descr: String = opt_event_data.get("descr")
+		var announce_only_on_radio: bool = opt_event_data.get("announce_only_on_radio")
+		var active_periods: int = opt_event_data.get("active_periods")
+		var constraints: Dictionary = opt_event_data.get("constraints")
+		var consequences: Dictionary = opt_event_data.get("consequences")
+		
+		#Dynamic tiles spawns
+		var dynamic_tiles_dict : Array[Dictionary]
+		dynamic_tiles_dict.assign(opt_event_data.get("spawn_tiles", []))
+		var spawn_tiles: Array[EMC_OptionalEventMngr.SpawnTiles] = []
+		
+		for entry in dynamic_tiles_dict:
+			var new_dynamic_tiles := EMC_OptionalEventMngr.SpawnTiles.new()
+			new_dynamic_tiles.stage_name = entry.get("stage_name", "error").to_lower()
+			new_dynamic_tiles.tilemap_pos = Vector2i(entry.get("tilemap_x_pos", -1),
+		 											 entry.get("tilemap_y_pos", -1))
+			new_dynamic_tiles.atlas_coord = Vector2i(entry.get("atlas_x_coord", -1),
+													 entry.get("atlas_y_coord", -1))
+			new_dynamic_tiles.tiles_cols = entry.get("tiles_cols", -1)
+			new_dynamic_tiles.tiles_rows = entry.get("tiles_rows", -1)
+			new_dynamic_tiles.overwrite_existing_tiles = entry.get("overwrite_existing_tiles", false)
+			
+			spawn_tiles.append(new_dynamic_tiles)
+		
+		##Dynamic NPCs spawns
+		var spawn_NPCs_dict : Array[Dictionary]
+		spawn_NPCs_dict.assign(opt_event_data.get("spawn_NPCs", []))
+		var spawn_NPCs: Array[EMC_OptionalEventMngr.SpawnNPCs] = []
+		
+		for spawn_NPC_dict_entry in spawn_NPCs_dict:
+			var new_NPC_spawn := EMC_OptionalEventMngr.SpawnNPCs.new()
+			new_NPC_spawn.stage_name = spawn_NPC_dict_entry.get("stage_name", "error").to_lower()
+			new_NPC_spawn.NPC_name = spawn_NPC_dict_entry.get("NPC_name", "error") #NOT TO LOWER!
+			new_NPC_spawn.pos = Vector2(spawn_NPC_dict_entry.get("x_pos", -1), \
+										spawn_NPC_dict_entry.get("y_pos", -1))
+			
+			spawn_NPCs.append(new_NPC_spawn)
+		
+		
+		## Create new optional event
+		var opt_event: EMC_OptionalEventMngr.Event = \
+			EMC_OptionalEventMngr.Event.new(name, propability, descr, announce_only_on_radio, \
+				active_periods, constraints, consequences, spawn_NPCs, spawn_tiles)
+		_opt_events.append(opt_event)
+	
+	_is_opt_events_loaded = true
+
+
+func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Array[EMC_OptionalEventMngr.Event]:
+	var filtered : Array[EMC_OptionalEventMngr.Event] = _opt_events.filter(func (opt_event: EMC_OptionalEventMngr.Event) -> bool: 
+		for key : String in opt_event.constraints:
+			var params : Variant = opt_event.constraints[key]
+			
+			## TODO: Handle non exisitend functions
+			if not Callable(p_action_constraint, key).call(params) == EMC_ActionConstraints.NO_REJECTION:
+				return false
+		return true
+		)
+	
+	return filtered
 
 ########################################JSON ACTION#################################################
 
@@ -332,6 +425,7 @@ func id_to_action(id : int) -> EMC_Action:
 		printerr("Actions not loaded")
 		return null
 	return _actions.get(id)
+
 
 func load_actions() -> void:
 	if not FileAccess.file_exists(ACTION_SOURCE):
