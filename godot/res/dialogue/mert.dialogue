@@ -22,3 +22,9 @@ Mert: Mir gehts super! Kommst du gut durch die Krise?
 Mert: Bin ein bisschen gestresst. In solchen Zeiten hat das THW mehr zu tun als sonst.
 Mert: Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - Das ist das Größte.
 => END
+
+
+~ THW_AIDKITS
+Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen!
+Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b]
+=> END

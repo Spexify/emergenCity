@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://hcfsn06a2085"]
+[gd_scene load_steps=12 format=3 uid="uid://hcfsn06a2085"]
 
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="1_qljbr"]
 [ext_resource type="Script" path="res://crisisPhase/stage/city_map.gd" id="2_a4fhc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="4_gh8se"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
+[ext_resource type="Texture2D" uid="uid://11wqmydgbpf2" path="res://res/sprites/GUI/icons/icon_pin_event.png" id="6_um0qv"]
 [ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
 
 [sub_resource type="Animation" id="Animation_xndm7"]
@@ -56,10 +57,10 @@ script = ExtResource("2_a4fhc")
 [node name="HomeBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 242.0
-offset_top = 439.0
-offset_right = 306.0
-offset_bottom = 503.0
+offset_left = 277.0
+offset_top = 478.0
+offset_right = 405.0
+offset_bottom = 606.0
 texture_normal = ExtResource("3_mb2ha")
 
 [node name="BackBtn" type="TextureButton" parent="." groups=["Button"]]
@@ -74,7 +75,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 texture_normal = ExtResource("4_gh8se")
 
-[node name="MarketplaceBtn" type="TextureButton" parent="."]
+[node name="MarketBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 140.0
@@ -156,6 +157,19 @@ libraries = {
 "": SubResource("AnimationLibrary_uc87h")
 }
 
+[node name="OptEventPin_Template" type="Sprite2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(352, 552)
+texture = ExtResource("6_um0qv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptEventPin_Template"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[node name="OptEventPins" type="Node2D" parent="."]
+
 [node name="CurrPosPin" type="Sprite2D" parent="."]
 process_mode = 3
 position = Vector2(300, 460)
@@ -172,7 +186,7 @@ layout_mode = 1
 
 [connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="pressed" from="MarketplaceBtn" to="." method="_on_marketplace_btn_pressed"]
+[connection signal="pressed" from="MarketBtn" to="." method="_on_marketplace_btn_pressed"]
 [connection signal="pressed" from="PenthouseBtn" to="." method="_on_elias_flat_btn_pressed"]
 [connection signal="pressed" from="TownhallBtn" to="." method="_on_townhall_btn_pressed"]
 [connection signal="pressed" from="RowhouseBtn" to="." method="_on_julias_house_btn_pressed"]

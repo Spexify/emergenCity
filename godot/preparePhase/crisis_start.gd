@@ -2,12 +2,13 @@ extends Control
 class_name EMC_CrisisStart
 
 var _crisis_length : int
-const LENGTH_LOWER_BOUND_EASY : int = 3
-const LENGTH_UPPER_BOUND_EASY : int = 4 
-const LENGTH_LOWER_BOUND_NORMAL : int = 4
-const LENGTH_UPPER_BOUND_NORMAL : int = 7 
-const LENGTH_LOWER_BOUND_HARD : int = 7
-const LENGTH_UPPER_BOUND_HARD : int = 10 
+#Until beginning of length-day (so minus 1 quasi)
+const LENGTH_LOWER_BOUND_EASY : int = 4
+const LENGTH_UPPER_BOUND_EASY : int = 5
+const LENGTH_LOWER_BOUND_NORMAL : int = 5
+const LENGTH_UPPER_BOUND_NORMAL : int = 8
+const LENGTH_LOWER_BOUND_HARD : int = 8
+const LENGTH_UPPER_BOUND_HARD : int = 11 
 
 var _number_crisis_overlap : int = 2
 const CRISIS_OVERLAP_LOWER_BOUND : int = 1
@@ -15,7 +16,7 @@ const CRISIS_OVERLAP_UPPER_BOUND : int = 3
 
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _scenario : EMC_CrisisScenario = EMC_CrisisScenario.new()
+var _scenario : EMC_CrisisScenario
 
 
 func _on_continue_pressed() -> void:
@@ -29,12 +30,12 @@ func _on_continue_pressed() -> void:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_HARD, LENGTH_UPPER_BOUND_HARD)
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)
 	
-	var _current_scenario := _scenario.get_scenario()
+	var _current_scenario := EMC_CrisisScenario.new() #TODO: Load scenario & its state from savefile..
 	
 	if Global._tutorial_done: 
-		OverworldStatesMngr.set_crisis_difficulty(_current_scenario["water_crisis"],_current_scenario["electricity_crisis"],
-								_current_scenario["isolation_crisis"],_current_scenario["food_contamination_crisis"],
-								_crisis_length, _number_crisis_overlap, _current_scenario["notification"])
+		OverworldStatesMngr.set_crisis_difficulty(_current_scenario.crisis_name, _current_scenario.allowed_water_crisis, _current_scenario.allowed_electricity_crisis,
+								_current_scenario.allowed_isolation_crisis, _current_scenario.allowed_food_contam_crisis,
+								_crisis_length, _number_crisis_overlap, _current_scenario.notification)
 	else:
 		OverworldStatesMngr.set_crisis_difficulty()
 		

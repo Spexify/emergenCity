@@ -88,7 +88,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_book_GUI = p_book_GUI
 	_opt_event_mngr = p_opt_event_mngr
 	
-	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI)
+	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI, p_opt_event_mngr)
 	_dialogue_pitches["Avatar"] = 1.0
 	_setup_NPCs()
 	_city_map.hide()

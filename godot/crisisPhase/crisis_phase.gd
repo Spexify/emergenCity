@@ -48,6 +48,8 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
 
+var _opt_event_consequences_after_dialogue: Dictionary = {}
+
 ########################################## PUBLIC METHODS ##########################################
 
 ## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
@@ -89,8 +91,6 @@ func _ready() -> void:
 	
 	
 	#Setup-Methoden
-	#TODO: Upgrades should later be initialized and passed by the UpgradeCenter
-	#var _upgrades: Array[EMC_Upgrade.IDs] = [EMC_Upgrade.IDsRAINWATER_BARREL, EMC_Upgrade.IDs.GAS_COOKER]
 	OverworldStatesMngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
 		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
 	
@@ -216,18 +216,44 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 			printerr("unknown NPC")
 			return
 	
+	
+	var starting_tag: String = "START" #English Tag, not "day" meant
+	## If you talk to a NPC that got spawned because of an optional event, trigger the dialogue
+	## on the tag name after the optional event and save the consequences to execute them once the 
+	## dialogue is finished
+	for opt_event in _opt_event_mngr.get_active_events():
+		var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
+		if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+			for spawn_NPCs in spawn_NPCs_arr:
+				if _stage_mngr.get_curr_stage_name() == spawn_NPCs.stage_name && \
+				p_NPC_name == spawn_NPCs.NPC_name:
+					starting_tag = opt_event.name
+					_opt_event_consequences_after_dialogue = opt_event.consequences
+					#deactivate already the event
+					_opt_event_mngr.deactivate_event(opt_event.name)
+	
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
-	dialogue_GUI.start(dialogue_resource, "START")
+	
+	dialogue_GUI.start(dialogue_resource, starting_tag)
 	get_tree().paused = true
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	Global.get_tree().paused = false
+	
+	#execute optional event consequences if there are any
+	if !_opt_event_consequences_after_dialogue.is_empty():
+		for key: String in _opt_event_consequences_after_dialogue.keys():
+			var params : Variant = _opt_event_consequences_after_dialogue[key]
+			Callable(_day_mngr.get_action_consequences(), key).call(params)
+		
+		#clear the temporary variable and deactivate the event
+		_opt_event_consequences_after_dialogue = {}
 
 
 ################################################################################

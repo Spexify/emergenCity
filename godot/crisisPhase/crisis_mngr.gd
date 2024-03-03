@@ -1,8 +1,9 @@
 extends Control
 class_name EMC_CrisisMngr
 
-var _day_mngr :  EMC_DayMngr
+## Improvement idea: Move curr EMC_CrisisScenario reference to here from OverworldStateMngr
 
+var _day_mngr :  EMC_DayMngr
 var _max_day : int
 var _max_crisis_overlap : int = 2
 
@@ -135,6 +136,10 @@ func check_crisis_status(p_curr_day: int) -> void:
 			_isolation_crisis_mngr()
 		if _possible_food_contamination_crisis != EMC_OverworldStatesMngr.FoodContaminationState.NONE:
 			_food_contamination_crisis_mngr()
+
+
+#func get_curr_scenario() -> void:
+	#return _scenario
 
 ########################################## PRIVATE METHODS #########################################
 

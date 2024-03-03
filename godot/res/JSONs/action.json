@@ -225,7 +225,7 @@
 			
 		},
 		"consequences": {
-			"add_item_by_name": "JAM",
+			"add_items_by_name": "JAM",
 		},
 		"type_gui": "",
 		"description": "Mit Agathe geplaudert.",
@@ -253,7 +253,7 @@
 			
 		},
 		"consequences": {
-			"add_item_by_name": "CHOCOLATE",
+			"add_items_by_name": "CHOCOLATE",
 		},
 		"type_gui": "",
 		"description": "Julia geholfen.",
@@ -281,7 +281,7 @@
 			
 		},
 		"consequences": {
-			"add_item_by_name": "BATTERIES",
+			"add_items_by_name": "BATTERIES",
 		},
 		"type_gui": "",
 		"description": "Mit Irena gespielt.",
@@ -295,7 +295,7 @@
 			
 		},
 		"consequences": {
-			"add_item_by_name": "WATER",
+			"add_items_by_name": "WATER",
 		},
 		"type_gui": "",
 		"description": "Mit Mert Wasser verteilt.",

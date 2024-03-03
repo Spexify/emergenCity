@@ -18,7 +18,7 @@
 	},
 	{
 		"name": "THW_AIDKITS",
-		"propability": 10,
+		"propability": 1,
 		"descr": "Und nun eine Eilmeldung: Das 'Technische Hilfswerk' ist momentan auf dem Marktplatz und verteilt kostenlose Hilfspakete!",
 		"announce_only_on_radio": true,
 		"active_periods": 2,
@@ -27,7 +27,9 @@
 			"constraint_no_limited_public_access": "",
 			"constraint_no_isolation": "",
 		},
-		"consequences": { },
+		"consequences": {
+			"add_items_by_name" : "WATER;WATER;RAVIOLI_TIN;RAVIOLI_TIN",
+		},
 		"spawn_tiles": [
 			{
 				"stage_name": "market",

@@ -54,6 +54,7 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var _opt_event_probability_countdown : int
 var _tooltip_GUI: EMC_TooltipGUI
 var _active_events: Array[Event]
+var _known_active_events: Array[Event]
 var _constraints: EMC_ActionConstraints
 var _consequences: EMC_ActionConsequences
 
@@ -66,6 +67,37 @@ func _init(p_tooltip_GUI: EMC_TooltipGUI) -> void:
 
 func get_active_events() -> Array[Event]:
 	return _active_events
+
+
+func get_active_event(p_name: String) -> Event:
+	for event in _active_events:
+		if event.name == p_name:
+			return event
+	return null
+
+
+func set_event_as_known(p_name: String) -> void:
+	var event := get_active_event(p_name)
+	if event != null:
+		_known_active_events.append(event)
+
+
+func get_known_active_events() -> Array[Event]:
+	return _known_active_events
+
+
+func deactivate_event(p_name: String) -> bool:
+	var removed_from_active_events := false
+	for event in _active_events:
+		if event.name == p_name:
+			_active_events.erase(event)
+			removed_from_active_events = true
+	
+	for event in _known_active_events:
+		if event.name == p_name:
+			_known_active_events.erase(event)
+	
+	return removed_from_active_events
 
 
 func set_constraints(p_constraints: EMC_ActionConstraints) -> void:
@@ -81,7 +113,7 @@ func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 	for event: Event in _active_events:
 		event.active_periods -= 1
 		if event.active_periods == 0:
-			_active_events.erase(event)
+			deactivate_event(event.name)
 	
 	#See if new event should be started
 	_opt_event_probability_countdown -= 1
@@ -101,11 +133,13 @@ func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 		for i in event.propability:
 			indices.append(event_idx)
 	
-	var chosen_event: Event = possible_opt_events[indices.pick_random()]
+	var rand_idx := indices[_rng.randi_range(0, indices.size() - 1)]
+	var chosen_event: Event = possible_opt_events[rand_idx] #pick_random doesn't work properly seemingly
 	
 	#Activate the chosen event
-	_active_events.append(chosen_event)
-	print("Event started:" + chosen_event.name) ##Test
+	if chosen_event.active_periods > 0:
+		_active_events.append(chosen_event)
+		print("Event started:" + chosen_event.name) ##Test
 	if !chosen_event.announce_only_on_radio && chosen_event.descr != "":
 		_tooltip_GUI.open(chosen_event.descr)
 

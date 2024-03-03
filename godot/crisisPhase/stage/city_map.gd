@@ -6,21 +6,25 @@ class_name EMC_CityMap
 
 @onready var _curr_pos_pin := $CurrPosPin
 @onready var _home_pin := $HomePin
+@onready var _opt_event_pin_template := $OptEventPin_Template
+@onready var _opt_event_pins := $OptEventPins
 
 var _crisis_phase: EMC_CrisisPhase
 var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
+var _opt_event_mngr: EMC_OptionalEventMngr
 
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
-	p_cs_GUI: EMC_ChangeStageGUI) -> void:
+	p_cs_GUI: EMC_ChangeStageGUI, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_phase = p_crisis_phase
 	_day_mngr = p_day_mngr
 	_stage_mngr = p_stage_mngr
 	_tooltip_GUI = p_tooltip_GUI
 	p_cs_GUI.stayed_on_same_stage.connect(_on_change_stage_gui_stayed_on_same_stage)
+	_opt_event_mngr = p_opt_event_mngr
 	$DoorbellsGUI.setup(p_stage_mngr)
 
 
@@ -41,7 +45,7 @@ func open() -> void:
 			_curr_pos_pin.position = Vector2i(300, 460)
 			_home_pin.hide()
 		EMC_StageMngr.STAGENAME_MARKET:
-			_curr_pos_pin.position = Vector2i(206, 920)
+			_curr_pos_pin.position = _determine_pin_position($MarketBtn)
 		EMC_StageMngr.STAGENAME_TOWNHALL:
 			_curr_pos_pin.position = _determine_pin_position($TownhallBtn)
 		EMC_StageMngr.STAGENAME_PARK:
@@ -56,8 +60,26 @@ func open() -> void:
 			_curr_pos_pin.position = _determine_pin_position($PenthouseBtn)
 		_: #You have to be on an extended STAGE of the apartment complex
 			_curr_pos_pin.position = _determine_pin_position($ComplexBtn)
-		
-		
+	
+	#Create an event pin for every stage that a NPC spawns in for every known event
+	for known_event: EMC_OptionalEventMngr.Event in _opt_event_mngr.get_known_active_events():
+		var spawn_NPCs_arr := known_event.spawn_NPCs_arr
+		if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+			for spawn_NPCs in spawn_NPCs_arr:
+				var new_event_pin := _opt_event_pin_template.duplicate()
+				_opt_event_pins.add_child(new_event_pin)
+				new_event_pin.get_node("AnimationPlayer").play("pin_animation")
+				#Try to determine the button belonging to the stage
+				var button_node: TextureButton
+				if spawn_NPCs.stage_name.contains("apartment_"):
+					button_node = $ComplexBtn
+				else:
+					button_node = get_node(spawn_NPCs.stage_name.capitalize() + "Btn")
+				
+				if button_node != null:
+					new_event_pin.position = _determine_pin_position(button_node)
+					new_event_pin.show()
+	
 	#_pin_pos_tween = get_tree().create_tween()
 	#_pin_pos_tween.tween_property($Pin, "position", $Pin.position - Vector2(0, 15), 0.5).set_trans(Tween.TRANS_CUBIC)
 	#_pin_pos_tween.set_loops() #no arguments = infinite
@@ -75,6 +97,9 @@ func close() -> void:
 	hide()
 	$DoorbellsGUI.hide()
 	_crisis_phase.remove_back_button()
+	#Remove all opt event pins
+	for prev_duplicated_pin in _opt_event_pins.get_children():
+		_opt_event_pins.remove_child(prev_duplicated_pin)
 	closed.emit()
 
 

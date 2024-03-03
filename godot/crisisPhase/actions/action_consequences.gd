@@ -18,7 +18,7 @@ var _lower_gui_node : Node
 var _day_mngr : EMC_DayMngr
 var _tooltip_GUI: EMC_TooltipGUI
 var _opt_event_mngr: EMC_OptionalEventMngr
-var _crisis_mngr: EMC_OptionalEventMngr
+var _crisis_mngr: EMC_CrisisMngr
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, \
@@ -47,8 +47,10 @@ func add_item(p_ID: EMC_Item.IDs) -> void:
 	_inventory.add_new_item(p_ID)
 
 
-func add_item_by_name(p_name : String) -> void:
-	_inventory.add_new_item(JsonMngr.item_name_to_id(p_name))
+## Allows multiple items, separated through a semicolon
+func add_items_by_name(p_names : String) -> void:
+	for item_name in p_names.split(";"):
+		_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
 
 
 ## Adds either Water depended on the Water-State
@@ -99,9 +101,19 @@ func open_bbk_brochure(_dummy: int = NO_PARAM) -> void:
 
 
 func use_radio(_dummy: int = NO_PARAM) -> void:
-	#TODO poll_information of optional_event_mngr or otherwise crisis_mngr 
-	#_opt_event_mngr
-	_tooltip_GUI.open("Das Radio hast du grade benutzt, yay!")
+	var radio_msg: String
+	var active_events := _opt_event_mngr.get_active_events()
+	if !active_events.is_empty():
+		var chosen_event: EMC_OptionalEventMngr.Event = active_events.pick_random()
+		radio_msg = chosen_event.descr
+		_opt_event_mngr.set_event_as_known(chosen_event.name)
+	else:
+		#50-50 zwischen unnützem Text und Szenario Name
+		if _rng.randi_range(0, 1) == 0:
+			radio_msg = OverworldStatesMngr.get_notification()
+		else:
+			radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
+	_tooltip_GUI.open(radio_msg)
 
 
 func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:

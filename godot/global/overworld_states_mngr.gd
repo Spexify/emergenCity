@@ -9,6 +9,7 @@ var _allowed_isolation_crisis : IsolationState
 var _allowed_food_contamination_crisis : FoodContaminationState
 var _scenario_name : String = ""
 var _active_crises_descr: String = ""
+var _notification: String
 
 enum SemaphoreColors{
 	RED = 0,
@@ -54,9 +55,11 @@ func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_u
 	_upgrades = p_upgrades
 
 
-func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_electricity_crisis : ElectricityState = ElectricityState.UNLIMITED,
+## Idea: instead of all the members of EMC_CrisisScenario, just pass one reference of it to there
+## This way, it is more ordered, and you can still access all the necessary data through the CrisisScenario object!
+func set_crisis_difficulty(p_scenario_name : String = "", _p_water_crisis: WaterState = WaterState.CLEAN, _p_electricity_crisis : ElectricityState = ElectricityState.UNLIMITED,
 							_p_isolation_crisis : IsolationState = IsolationState.NONE, _p_food_contamination_crisis : FoodContaminationState = FoodContaminationState.NONE,
-						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2, p_scenario_name : String = "") -> void:
+						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2, p_notification : String = "") -> void:
 	_allowed_water_crisis = _p_water_crisis
 	_allowed_electricity_crisis =_p_electricity_crisis
 	_allowed_isolation_crisis = _p_isolation_crisis
@@ -64,7 +67,10 @@ func set_crisis_difficulty(_p_water_crisis: WaterState = WaterState.CLEAN, _p_el
 	_scenario_name = p_scenario_name
 	_crisis_length = _p_crisis_length
 	_number_crisis_overlap = _p_number_crisis_overlap
-
+	_notification = p_notification
+	
+	print("Crisis length:" + str(_crisis_length))
+	
 	#if !Global._tutorial_done:
 		#_electricity_state = ElectricityState.NONE
 
@@ -80,6 +86,11 @@ func get_crisis_length() -> int:
 ## Returns scenario name
 func get_scenario_name() -> String:
 	return _scenario_name
+
+
+## Returns notification for radio
+func get_notification() -> String:
+	return _notification
 
 
 ## Not really nicely solved, but no time lol

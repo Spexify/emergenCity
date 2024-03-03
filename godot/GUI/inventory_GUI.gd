@@ -12,6 +12,7 @@ signal close_button
 signal chlor_tablets_clicked
 signal seod_inventory_closed
 
+@onready var _label := $Inventory/VBC/Label
 @onready var _slot_grid := $Inventory/VBC/ScrollContainer/GridContainer
 @onready var _label_name := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Name
 @onready var _label_comps := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Components
@@ -19,7 +20,6 @@ signal seod_inventory_closed
 @onready var _consume_btn := $Inventory/VBC/HBC/Consume
 @onready var _discard_btn := $Inventory/VBC/HBC/Discard
 @onready var _continue_btn := $Inventory/VBC/HBC/Continue
-
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
@@ -65,6 +65,7 @@ func set_consume_active( _p_has_slept : int = 0) -> void:
 	_only_inventory = false
 	_continue_btn.show()
 
+
 func set_consume_idle() -> void:
 	_only_inventory = true
 	_continue_btn.hide()
@@ -72,10 +73,12 @@ func set_consume_idle() -> void:
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
-	$Inventory/VBC/Label.text = "[center]" + p_new_text + "[/center]"
+	_label.text = "[center]" + p_new_text + "[/center]"
+
 
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
+
 
 func clear_items() -> void:
 	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
@@ -116,7 +119,7 @@ func _ready() -> void:
 
 
 ## Handle the click on the backpack-button
-func _on_btn_backpack_pressed() -> void:
+func _on_backpack_btn_pressed() -> void:
 	if visible == false:
 		get_viewport().set_input_as_handled()
 		open()
@@ -280,3 +283,4 @@ func _on_discard_pressed() -> void:
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false
+
