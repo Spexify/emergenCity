@@ -372,17 +372,6 @@ func _get_tile_coord(p_click_pos: Vector2) -> Vector2i:
 func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 	var tile_coord := _get_tile_coord(p_click_pos)
 	var tiledata: TileData
-	#Check first, if a tooltip tile is placed there
-	tiledata = _curr_stage.get_cell_tile_data(Layers.TOOLTIPS, tile_coord)
-	if tiledata != null: return tiledata
-	#Next: Check the Foreground
-	tiledata = _curr_stage.get_cell_tile_data(Layers.FOREGROUND, tile_coord)
-	if tiledata != null: return tiledata
-	#Next: Check the Middleground, which contains FURNITURE
-	tiledata = _curr_stage.get_cell_tile_data(Layers.MIDDLEGROUND_1, tile_coord)
-	if tiledata != null: return tiledata
-	#Otherwise return the background tile data
-	tiledata = _curr_stage.get_cell_tile_data(Layers.BACKGROUND, tile_coord)
 	
 	#Front to back:
 	var layers_to_check := [Layers.TOOLTIPS, Layers.FOREGROUND, Layers.MIDDLEGROUND_2, Layers.MIDDLEGROUND_1, Layers.BACKGROUND]

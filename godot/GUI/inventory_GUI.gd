@@ -54,7 +54,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 		var new_slot := _SLOT_SCN.instantiate()
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null and item.get_ID() != JsonMngr.name_to_id("DUMMY"):
+		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
@@ -158,7 +158,7 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_descr.append_text("[color=black][i]" + p_clicked_item.get_descr() + "[/i][/color]")
 	
 	## if the Chlor tablets are clicked, open water filtering gui
-	if p_clicked_item.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"):
+	if p_clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
 		_consume_btn.text = "Filtern"
 		_consume_btn.show()
 		if _only_inventory:
@@ -204,7 +204,7 @@ func _reload_items() -> void:
 		var new_slot := _SLOT_SCN.instantiate()
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null and item.get_ID() != JsonMngr.name_to_id("DUMMY"):
+		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
 			item.modulate = Color(1, 1, 1) #initialize so nothing is visually marked
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
@@ -214,9 +214,9 @@ func _reload_items() -> void:
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
 		return
-	if _clicked_item.get_ID() == JsonMngr.name_to_id("CHLOR_TABLETS"): 
+	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
-		if !_inventory.has_item(JsonMngr.name_to_id("WATER_DIRTY")):
+		if !_inventory.has_item(JsonMngr.item_name_to_id("WATER_DIRTY")):
 			$FilterWater.visible = true
 		else:
 			##Improvement idea: use new _inventory.use_item() method
@@ -228,8 +228,8 @@ func _on_consume_pressed() -> void:
 			if comp_uses.no_uses_left():
 				_inventory.remove_item(_clicked_item.get_ID())
 			
-			_inventory.remove_item(JsonMngr.name_to_id("WATER_DIRTY"))
-			_inventory.add_new_item(JsonMngr.name_to_id("WATER"))
+			_inventory.remove_item(JsonMngr.item_name_to_id("WATER_DIRTY"))
+			_inventory.add_new_item(JsonMngr.item_name_to_id("WATER"))
 	else:
 		var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 		var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)

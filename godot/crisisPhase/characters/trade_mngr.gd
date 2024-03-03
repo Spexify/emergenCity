@@ -137,8 +137,8 @@ static func deserialize_tradebid(data : Dictionary) -> EMC_TradeMngr.TradeBid:
 	offered_items.assign(t_items)
 	
 	var bid := EMC_TradeMngr.TradeBid.new()
-	bid.sought_items.assign(sought_items.map(func (name : String) -> int: return JsonMngr.name_to_id(name)))
-	bid.offered_items.assign(offered_items.map(func (name : String) -> int: return JsonMngr.name_to_id(name)))
+	bid.sought_items.assign(sought_items.map(func (name : String) -> int: return JsonMngr.item_name_to_id(name)))
+	bid.offered_items.assign(offered_items.map(func (name : String) -> int: return JsonMngr.item_name_to_id(name)))
 	return bid
 
 ########################################## PRIVATE METHODS #########################################

@@ -1,16 +1,19 @@
 extends Node
 class_name EMC_ActionConstraints
 
+const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
+
+const NO_PARAM: int = 0
 const NO_REJECTION: String = ""
 
 var _day_mngr: EMC_DayMngr
-var _overworld_states_mngr: EMC_OverworldStatesMngr
+var _inventory: EMC_Inventory
 
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_day_mngr: EMC_DayMngr, p_overworld_states_mngr: EMC_OverworldStatesMngr) -> void:
+func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory) -> void:
 	_day_mngr = p_day_mngr
-	_overworld_states_mngr = p_overworld_states_mngr
+	_inventory = p_inventory
 
 
 func constraint_cooking(_dummy_param: Variant) -> String:
@@ -22,7 +25,7 @@ func constraint_cooking(_dummy_param: Variant) -> String:
 
 
 func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
-	if _overworld_states_mngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:
+	if OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:
 		return "Die Regentonne ist leer"
 	else:
 		return NO_REJECTION
@@ -76,6 +79,7 @@ func constraint_some_water_available(p_reason: String = "") -> String:
 		var reason := "Kein Wasser verfügbar!" if p_reason == "" else p_reason 
 		return reason 
 
+
 func constraint_no_clean_water_available(p_reason: String = "") -> String:
 	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.NONE || \
 		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
@@ -83,3 +87,12 @@ func constraint_no_clean_water_available(p_reason: String = "") -> String:
 	else:
 		var reason := "Sauberes Wasser verfügbar!" if p_reason == "" else p_reason 
 		return reason 
+
+
+func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
+	if _inventory.has_item(p_ID):
+		return NO_REJECTION
+	else:
+		var item := _ITEM_SCN.instantiate()
+		item.setup(p_ID)
+		return "Du brauchst " + item.get_name() + " dafür!"

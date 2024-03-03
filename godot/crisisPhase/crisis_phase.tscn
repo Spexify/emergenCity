@@ -205,9 +205,11 @@ visible = false
 layout_mode = 2
 
 [node name="ConfirmationGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("22_ifwb8")]
+visible = false
 layout_mode = 2
 
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
+visible = false
 
 [connection signal="happinness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happinness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]

@@ -3,6 +3,7 @@ class_name EMC_Item
 
 signal clicked(sender: EMC_Item)
 
+##Better use: JsonMngr.item_name_to_id(<string from item_ids.json>)
 enum IDs{
 	DUMMY = 0,
 	WATER = 1,

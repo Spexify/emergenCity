@@ -15,7 +15,8 @@ enum IDs{
 	RAINWATER_BARREL = 5,
 	SHOWER 			= 6,
 	BBK_LINK		= 7,
-	RADIO			= 8,
+	ELECTRIC_RADIO	= 8,
+	CRANK_RADIO		= 9,
 	##1000s = PopupActions
 	POPUP_0 = 1000,
 	POPUP_1 = 1001,
@@ -58,8 +59,8 @@ var _performance_coin_value : int
 var _progresses_day_period: bool
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
-		   p_consequences : Dictionary, type_gui : String, description : String, performance_coin_value : int,
-		   p_progresses_day_period: bool = true) -> void:
+		p_consequences : Dictionary, type_gui : String, description : String,
+		performance_coin_value : int, p_progresses_day_period: bool = true) -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior

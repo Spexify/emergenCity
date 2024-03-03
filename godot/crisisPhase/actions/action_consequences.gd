@@ -1,11 +1,7 @@
 extends Node
 class_name EMC_ActionConsequences
 
-var _avatar: EMC_Avatar
-var _inventory: EMC_Inventory
-var _stage_mngr : EMC_StageMngr
-var _lower_gui_node : Node
-var _day_mngr : EMC_DayMngr
+const NO_PARAM: int = 0
 
 const AGATHE_EVENT : DialogueResource = preload("res://res/dialogue/agathe_event.dialogue")
 const JULIA_EVENT : DialogueResource = preload("res://res/dialogue/julia_event.dialogue")
@@ -14,13 +10,22 @@ const PETRO_EVENT : DialogueResource = preload("res://res/dialogue/petro_event.d
 const MERT_EVENT : DialogueResource = preload("res://res/dialogue/mert_event.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
+var _avatar: EMC_Avatar
+var _inventory: EMC_Inventory
+var _stage_mngr : EMC_StageMngr
+var _lower_gui_node : Node
+var _day_mngr : EMC_DayMngr
+var _tooltip_GUI: EMC_TooltipGUI
+
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr) -> void:
+func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, \
+p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI) -> void:
 	_avatar = p_avatar
 	_inventory = p_inventory
 	_stage_mngr = p_stage_mngr
 	_lower_gui_node = p_lower_gui_node
 	_day_mngr = p_day_mngr
+	_tooltip_GUI = p_tooltip_GUI
 
 ############################################ Avatar ################################################
 
@@ -36,8 +41,10 @@ func add_happiness(p_value: int) -> void:
 func add_item(p_ID: EMC_Item.IDs) -> void:
 	_inventory.add_new_item(p_ID)
 
+
 func add_item_by_name(p_name : String) -> void:
-	_inventory.add_new_item(JsonMngr.name_to_id(p_name))
+	_inventory.add_new_item(JsonMngr.item_name_to_id(p_name))
+
 
 ## Adds either Water depended on the Water-State
 func add_tap_water(_dummy: int) -> void:
@@ -50,9 +57,13 @@ func add_tap_water(_dummy: int) -> void:
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
-		
+
+
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
 ## If it is completely used up, the item is removed from the [EMC_Inventory]
+## TODO: inventory has a method for that now!!
+## TODO: Improvement idea: change parameter type to string, and use JsonMngr.item_name_to_id
+## This way, normal actions can be included in the JSON file
 func use_item(p_ID: EMC_Item.IDs) -> void:
 	var item := _inventory.get_item_of_ID(p_ID)
 	if item == null:
@@ -63,9 +74,10 @@ func use_item(p_ID: EMC_Item.IDs) -> void:
 		usesIC.use_item()
 	if usesIC.no_uses_left():
 		_inventory.remove_specific_item(item)
-		
+
+
 func use_item_by_name(p_name: String) -> void:
-	var item := _inventory.get_item_of_ID(JsonMngr.name_to_id(p_name))
+	var item := _inventory.get_item_of_ID(JsonMngr.item_name_to_id(p_name))
 	if item == null:
 		return
 	
@@ -74,6 +86,15 @@ func use_item_by_name(p_name: String) -> void:
 		usesIC.use_item()
 	if usesIC.no_uses_left():
 		_inventory.remove_specific_item(item)
+
+
+func open_bbk_brochure(_dummy: int = NO_PARAM) -> void:
+	EMC_Information.open_bbk_brochure()
+
+
+func use_radio(_dummy: int = NO_PARAM) -> void:
+	#TODO poll_information of optional_event_mngr or otherwise crisis_mngr 
+	_tooltip_GUI.open("Das Radio hast du grade benutzt, yay!")
 
 ########################################## Dialogue ################################################
 

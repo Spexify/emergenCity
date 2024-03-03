@@ -54,16 +54,16 @@ func load_recipes() -> Array[EMC_Recipe]:
 		var output_item_name : String = (recipe_json.get("output_item_name", "DUMMY") as String).to_upper()
 		
 		if input_item_IDs.is_empty():
-			input_item_IDs.assign(input_item_names.map(func(name : String) -> EMC_Item.IDs : return name_to_id(name.to_upper())))
+			input_item_IDs.assign(input_item_names.map(func(name : String) -> EMC_Item.IDs : return item_name_to_id(name.to_upper())))
 		
 		if input_item_IDs.is_empty():
 			printerr("Recipe-JSON input_item not found in JSON. (Recipe Nr.: " + str(i) + ")")
 			
 		if output_item_ID == EMC_Item.IDs.DUMMY:
-			if name_to_id(output_item_name) == null:
+			if item_name_to_id(output_item_name) == null:
 				printerr("Recip-JSON: no such item: " + output_item_name + " in Recipe Nr.: " + str(i))
 			else:
-				output_item_ID = name_to_id(output_item_name)
+				output_item_ID = item_name_to_id(output_item_name)
 				
 		if output_item_ID == EMC_Item.IDs.DUMMY:
 			printerr("Recipe-JSON output_item not found in JSON. (Recipe Nr.: " + str(i) + ")")
@@ -97,8 +97,11 @@ func get_item_vars_from_id(ID : int) -> Dictionary:
 		return {}
 		
 	return _id_to_item_vars[str(ID)]
-	
-func name_to_id(p_name : String) -> int:
+
+
+## Translates item name to its ID
+## Better than using the enum, as it uses the actual JSON-translation file
+func item_name_to_id(p_name : String) -> int:
 	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return 0
@@ -108,8 +111,9 @@ func name_to_id(p_name : String) -> int:
 		return 0
 	
 	return _name_to_id[p_name]
-	
-func id_to_name(ID : int) -> String:
+
+
+func item_id_to_name(ID : int) -> String:
 	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return "DUMMY"

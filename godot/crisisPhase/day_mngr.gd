@@ -19,7 +19,6 @@ enum DayPeriod {
 	EVENING = 2
 }
 
-
 var history : Array[EMC_DayCycle]
 #MRM: Technically redundant: current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var current_day_cycle : EMC_DayCycle 
@@ -38,7 +37,6 @@ var _puGUI : EMC_PopUpGUI
 var _avatar : EMC_Avatar
 
 var _stage_mngr : EMC_StageMngr
-var _overworld_states_mngr_ref : EMC_OverworldStatesMngr
 var _crisis_mngr : EMC_CrisisMngr
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -71,16 +69,16 @@ p_inventory: EMC_Inventory,
 p_lower_gui_node : Node) -> void:
 	_avatar = avatar_ref
 	_stage_mngr = stage_mngr
-	_overworld_states_mngr_ref = overworld_states_mngr_ref
 	_crisis_mngr = p_crisis_mngr
 	_confirmation_GUI = p_confirmation_GUI
-	_action_constraints = EMC_ActionConstraints.new(self, _overworld_states_mngr_ref)
-	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, p_lower_gui_node, self)
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
 	_egGUI = egGUI
 	_inventory = p_inventory
 	_puGUI = puGUI
+	_action_constraints = EMC_ActionConstraints.new(self, _inventory)
+	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
+		p_lower_gui_node, self, p_tooltip_GUI)
 	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
 	_rng.randomize()
@@ -106,11 +104,11 @@ func on_interacted_with_furniture(p_action_ID : int) -> void:
 			reject_reasons = reject_reasons + reject_reason + " "
 	
 	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
-		if p_action_ID == EMC_Action.IDs.BBK_LINK:
-			if await _confirmation_GUI.confirm("Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?"):
-				EMC_Information.open_bbk_brochure()
+		var gui_name := current_action.get_type_gui()
+		if gui_name == "ConfirmationGUI":
+			if await _confirmation_GUI.confirm(current_action.get_description()):
+				_execute_consequences(current_action)
 		else:
-			var gui_name := current_action.get_type_gui()
 			_get_gui_ref_by_name(gui_name).show_gui(current_action)
 	else:
 		_tooltip_GUI.open(reject_reasons)
@@ -136,12 +134,15 @@ func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
 			return ref
 	return null
 
+
 func _on_action_silent_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
+
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
 	_advance_day_time(p_action)
+
 
 func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
@@ -166,12 +167,15 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 	period_ended.emit(get_current_day_period())
 
 
+## Execute the consequences of an action
+## Doesn't have to move the time forward
 func _execute_consequences(p_action: EMC_Action) -> void:
 	for key : String in p_action.get_consequences().keys():
 		var params : Variant = p_action.get_consequences()[key]
 		Callable(_action_consequences, key).call(params)
 
 
+## Defines what happens after the "summery and of day" GUI is closed
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
 	#Send avatar back home on a new day
@@ -189,6 +193,7 @@ func _on_seod_closed() -> void:
 	period_ended.emit(get_current_day_period())
 
 
+## After each day, the vitals of the avatar have to be adjusted
 func _update_vitals() -> void:
 	_avatar.sub_nutrition(3) 
 	_avatar.sub_hydration(3)
@@ -203,6 +208,7 @@ func _update_vitals() -> void:
 		_egGUI.open(self.history, avatar_life_status, _avatar)
 
 
+## Update the visual representation of the current daytime
 func _update_HUD() -> void:
 	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day())
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
@@ -246,32 +252,47 @@ func _update_shelflives() -> void:
 func _create_action(p_action_ID: int) -> EMC_Action:
 	var result: EMC_Action
 	match p_action_ID:
-		EMC_Action.IDs.NO_ACTION: push_error("Action ID 0 sollte nicht erstellt werden!") #(unused)
-		EMC_Action.IDs.CITY_MAP: result = EMC_Action.new(p_action_ID, "-",
-								{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
-								 { }, "CityMap", 
-								 "-", 0, false)
-		EMC_Action.IDs.COOKING: result = EMC_Action.new(p_action_ID, "Kochen", {}, 
-								 { }, "CookingGUI", 
-								 "Hat gekocht.", 30)
-		EMC_Action.IDs.TAP_WATER: result = EMC_Action.new(p_action_ID, "Willst du Wasser aus dem Hahn zapfen?",
-								{ "constraint_some_water_available" : ""},
-								{ "add_tap_water" : 0}, "DefaultActionGUI",
-								"-", 0, false)
-		EMC_Action.IDs.REST: result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-								 {}, "RestGUI", 
-								 "Hat sich ausgeruht.", 10)
-		EMC_Action.IDs.RAINWATER_BARREL: result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
-								{"constraint_rainwater_barrel" : 0},
-								{ }, "RainwaterBarrelGUI",
-								"Hat Wasser aus der Regentonne geschöpft.",0)
-		EMC_Action.IDs.SHOWER: result = EMC_Action.new(p_action_ID, "Duschen", { },
-								{ }, "ShowerGUI", #the consequences are added later in the GUI
-								"Hat geduscht.", 10)
-		EMC_Action.IDs.BBK_LINK: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
-								{ }, "ConfirmationGUI", "-", 0)
-		#EMC_Action.IDs.RADIO: result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
-								#{ }, "ConfirmationGUI", "-", 0)
+		EMC_Action.IDs.NO_ACTION:
+			push_error("Action ID 0 sollte nicht erstellt werden!") #(unused)
+		EMC_Action.IDs.CITY_MAP:
+			result = EMC_Action.new(p_action_ID, "-",
+				{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
+				{ }, "CityMap", 
+				"-", 0, false)
+		EMC_Action.IDs.COOKING:
+			result = EMC_Action.new(p_action_ID, "Kochen", {}, 
+				{ }, "CookingGUI", 
+				"Hat gekocht.", 30)
+		EMC_Action.IDs.TAP_WATER:
+			result = EMC_Action.new(p_action_ID, "(Wasserzapfen)",
+				{ "constraint_some_water_available" : ""},
+				{ "add_tap_water" : EMC_ActionConsequences.NO_PARAM}, "DefaultActionGUI",
+				"Willst du Wasser aus dem Hahn zapfen?", 0, false)
+		EMC_Action.IDs.REST:
+			result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
+				{}, "RestGUI", 
+				"Hat sich ausgeruht.", 10)
+		EMC_Action.IDs.RAINWATER_BARREL:
+			result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
+				{"constraint_rainwater_barrel" : 0},
+				{ }, "RainwaterBarrelGUI",
+				"Hat Wasser aus der Regentonne geschöpft.",0)
+		EMC_Action.IDs.SHOWER:
+			result = EMC_Action.new(p_action_ID, "Duschen", { },
+				{ }, "ShowerGUI", #the consequences are added later in the GUI as they are variable
+				"Hat geduscht.", 10)
+		EMC_Action.IDs.BBK_LINK:
+			result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
+				{ "open_bbk_brochure" : EMC_ActionConsequences.NO_PARAM }, "ConfirmationGUI",
+				"Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?", 0)
+		EMC_Action.IDs.ELECTRIC_RADIO:
+			result = EMC_Action.new(p_action_ID, "(Radio)", { "constraint_has_item" : JsonMngr.item_name_to_id("BATTERIES") },
+				{ "use_item" : JsonMngr.item_name_to_id("BATTERIES"), "use_radio" : EMC_ActionConsequences.NO_PARAM },
+				"ConfirmationGUI", "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!", 0)
+		EMC_Action.IDs.CRANK_RADIO:
+			result = EMC_Action.new(p_action_ID, "(Radio)", { },
+				{ "use_radio" : EMC_ActionConsequences.NO_PARAM },
+				"ConfirmationGUI", "Willst du das Kurbelradio benutzen?", 0)
 		
 		#FYI: Stage Change actions and others are imported via JSON
 		
@@ -311,8 +332,8 @@ func _create_new_optional_event() -> void:
 	# currently only one event, the RAINWATER_BARREL is implemented
 	# With more content, this should be a match statement similar to create_pop_up_action
 	var _added_water_quantity : int = _rng.randi_range(1, 6) # in units of 250ml
-	_overworld_states_mngr_ref.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
-		min(_overworld_states_mngr_ref.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
-			(_overworld_states_mngr_ref.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
+	OverworldStatesMngr.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
+		min(OverworldStatesMngr.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
+			(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
 	_tooltip_GUI.open("Es hat geregnet")
 
