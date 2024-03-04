@@ -42,5 +42,11 @@ func get_name_with_values() -> String:
 	else:
 		return get_name() + ": " + str(get_shelflife()) + UNIT
 
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "shelflife",
+		"params": _shelflife,
+	}
+	return data
 
 ########################################## PRIVATE METHODS #########################################

@@ -24,5 +24,12 @@ func get_unit_hydration() -> int:
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
 	return get_name() + " (" + str(get_unit_hydration()) + UNIT + ")"
+	
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "drink",
+		"params": _hydration,
+	}
+	return data
 
 ########################################## PRIVATE METHODS #########################################

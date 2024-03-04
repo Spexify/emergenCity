@@ -204,18 +204,7 @@ func load_items() -> void:
 			
 			var comp_scn : Resource = COMP_SCNS.get(comp_name, null)
 			
-			if comp_scn != null:
-				_comps.append(comp_scn.new(comp_params))
-			else:
-				var tmp_scn : Resource = load("res://items/components/IC_" + comp_name + ".gd")
-				
-				if tmp_scn == null:
-					printerr("Item-JSON: Item in position: " + str(item_index) + 
-				 " has an invalid component. Name: " + comp_name +  " Nr.:" + str(comp_index))
-					assert(tmp_scn != null)
-				
-				COMP_SCNS[comp_name] = tmp_scn
-				_comps.append(COMP_SCNS[comp_name].new(comp_params))
+			_comps.append(EMC_ItemComponent.from_dict(comp_dict))
 				
 			comp_index += 1
 		
@@ -229,7 +218,7 @@ func load_items() -> void:
 		#_name_to_id[_name] = _id
 		_id_to_item_vars[str(_id)] = item_data
 		
-	item_index += 1
+		item_index += 1
 	
 	_is_items_loaded = true
 
@@ -303,7 +292,7 @@ func load_pop_up_actions() -> void:
 		_pop_up_name_to_id[str(pop_up_id)] = _name
 		_pop_up_actions.append(EMC_PopUpAction.from_dict(pop_up_data))
 		
-	pop_up_id += 1 ##is this correctly indented???
+		pop_up_id += 1
 	
 	_is_pop_ups_loaded = true
 
@@ -329,11 +318,11 @@ func load_opt_events() -> void:
 
 	var data : Variant = json.get_data()
 	if not typeof(data) == TYPE_ARRAY:
-		printerr("Invalid format of Optional Events-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
+		printerr("Invalid format of Optional Events-JSON (" + OPT_EVENTS_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
 	
 	#General structure of JSON fine, let's loop over all the entries
 	for opt_event_data : Dictionary in data:
-		var name: String = opt_event_data.get("name")
+		var _name: String = opt_event_data.get("name")
 		var propability: int = opt_event_data.get("propability")
 		var descr: String = opt_event_data.get("descr")
 		var announce_only_on_radio: bool = opt_event_data.get("announce_only_on_radio")
@@ -376,7 +365,7 @@ func load_opt_events() -> void:
 		
 		## Create new optional event
 		var opt_event: EMC_OptionalEventMngr.Event = \
-			EMC_OptionalEventMngr.Event.new(name, propability, descr, announce_only_on_radio, \
+			EMC_OptionalEventMngr.Event.new(_name, propability, descr, announce_only_on_radio, \
 				active_periods, constraints, consequences, spawn_NPCs, spawn_tiles)
 		_opt_events.append(opt_event)
 	

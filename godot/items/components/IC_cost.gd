@@ -20,4 +20,11 @@ func get_name_with_values() -> String:
 	else:
 		return str(_cost) + "eC"
 
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "cost",
+		"params": _cost,
+	}
+	return data
+
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

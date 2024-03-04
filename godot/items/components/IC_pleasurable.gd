@@ -25,5 +25,11 @@ func get_unit_happinness_change() -> int:
 func get_name_with_values() -> String:
 	return get_name() + "(" + str(get_unit_happinness_change()) + UNIT + ")"
 
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "pleasurable",
+		"params": _happinness_change,
+	}
+	return data
 
 ########################################## PRIVATE METHODS #########################################

@@ -54,8 +54,9 @@ enum IDs{
 var _ID: IDs
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
-var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 var _sound_effect : String = "BasicItem"
+
+static var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 
 ########################################## PUBLIC METHODS ##########################################
 ##Initialize properties
@@ -118,13 +119,38 @@ func copy_item() -> EMC_Item:
 	copied_item._descr = _descr
 	copied_item._comps = _comps
 	return copied_item
-
+	
+func to_dict() -> Dictionary:
+	var dict_comps := []
+	
+	for comp in _comps:
+		dict_comps.append(comp.to_dict())
+	
+	var data : Dictionary = {
+		"ID": _ID,
+		"name" : name,
+		"descr" : _descr,
+		"sound": _sound_effect,
+		"comps": dict_comps,
+	}
+	
+	return data
+	
+static func from_dict(data : Dictionary) -> EMC_Item:
+	var item : EMC_Item = _ITEM_SCN.instantiate()
+	item._ID = data.get("ID", 0)
+	item.name = data.get("name", "Dummy")
+	item._descr = data.get("descr", "Error")
+	item._sound_effect = data.get("sound", "BasicItem")
+	var tmp_comps : Array = data.get("comps", [])
+	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
+	
+	return item
 
 ########################################## PRIVATE METHODS #########################################
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sprite2D.frame = _ID
-
+	$Sprite2D.set_frame(_ID)
 
 ## TODO
 func _on_gui_input(event: InputEvent) -> void:

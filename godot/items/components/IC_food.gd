@@ -25,4 +25,11 @@ func get_unit_nutritionness() -> int:
 func get_name_with_values() -> String:
 	return get_name() + " (" + str(get_unit_nutritionness()) + UNIT + ")"
 
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "food",
+		"params": _nutritionness,
+	}
+	return data
+
 ########################################## PRIVATE METHODS #########################################

@@ -10,4 +10,10 @@ class_name EMC_IC_Ingredient
 func _init() -> void:
 	super("Zutat", Color.CORAL)
 
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "ingredient",
+	}
+	return data
+
 #----------------------------------------- PRIVATE METHODS -----------------------------------------
