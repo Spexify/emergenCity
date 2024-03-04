@@ -81,7 +81,7 @@ func reset_save() -> void:
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_dict()),
+		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		"tutorial_done" : false,
 	}
 	# JSON provides a static method to serialized JSON string.
@@ -118,7 +118,7 @@ func save_game(was_crisis : bool) -> void:
 	var data : Dictionary = {
 		"e_coins": _e_coins,
 		"was_crisis": was_crisis,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_dict()),
+		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
@@ -181,7 +181,7 @@ func load_game() -> void:
 	else:
 		_inventory = EMC_Inventory.new()
 		for item_dict : Dictionary in data["inventory_data"]:
-			_inventory.add_existing_item(EMC_Item.from_dict(item_dict))
+			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
 		

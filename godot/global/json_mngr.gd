@@ -100,7 +100,6 @@ func get_item_vars_from_id(ID : int) -> Dictionary:
 		
 	return _id_to_item_vars[str(ID)]
 
-
 ## Translates item name to its ID
 ## Better than using the enum, as it uses the actual JSON-translation file
 func item_name_to_id(p_name : String) -> int:
@@ -181,41 +180,41 @@ func load_items() -> void:
 	var item_index : int = 0
 	
 	for item : Dictionary in data:
-		var _id : int = item.get("ID", 0)
-		var _name : String = item.get("name", "DUMMY")
-		var _descr : String = item.get("descr", "Error. This item is not supposed to appeare")
+		var _id : Variant = item.get("ID", NAN)
+		if typeof(_id) != TYPE_FLOAT or _id == NAN or _name_to_id.find_key(_id) == null:
+			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'ID'.")
+			item_index += 1
+			continue
+		
+		var _name : Variant = item.get("name", INVALID_STRING_VALUE)
+		if typeof(_name) != TYPE_STRING or _name == INVALID_STRING_VALUE:
+			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'name'.")
+			item_index += 1
+			continue
+		
+		var _descr : String = item.get("descr", INVALID_STRING_VALUE)
+		if typeof(_descr) != TYPE_STRING or _descr == INVALID_STRING_VALUE:
+			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'descr'.")
+			item_index += 1
+			continue
+			
 		var _sound : String = item.get("sound", "BasicItem")
-		var _comp_dicts : Array[Dictionary]
-		_comp_dicts.assign(item.get("comps", []))
+		if typeof(_sound) != TYPE_STRING:
+			printerr("Item-JSON: item in position " + str(item_index) + " has no or an invalid item 'sound'.")
 		
-		var COMP_SCNS : Dictionary = {} 
-		var _comps : Array[EMC_ItemComponent] = []
-		
-		var comp_index : int = 0
-		
-		for comp_dict in _comp_dicts:
-			var comp_name : String = comp_dict.get("name", "error").to_lower()
-			var comp_params : Variant = comp_dict.get("params", null)
-			
-			if comp_params == null: 
-				printerr("Item-JSON: Item in position: " + str(item_index) + 
-				 " has invalid parameters for the component "+ str(comp_name) +" at position: " + str(comp_index))
-				assert(comp_params != null)
-			
-			var comp_scn : Resource = COMP_SCNS.get(comp_name, null)
-			
-			_comps.append(EMC_ItemComponent.from_dict(comp_dict))
-				
-			comp_index += 1
+		var _comp_dicts : Variant = item.get("comps", [])
+		if typeof(_comp_dicts) != TYPE_ARRAY:
+			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'comps'.")
+			item_index += 1
+			continue
 		
 		var item_data : Dictionary = {
 			"name": _name,
 			"descr": _descr,
-			"comps": _comps,
+			"comps": _comp_dicts,
 			"sound": _sound,
 		}
 		
-		#_name_to_id[_name] = _id
 		_id_to_item_vars[str(_id)] = item_data
 		
 		item_index += 1

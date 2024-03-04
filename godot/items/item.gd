@@ -64,15 +64,13 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 	#await ready
 	_ID = p_ID
 	
-	#TODO: Statt case Statement, Infos aus JSON lesen
-	
 	var data : Dictionary = JsonMngr.get_item_vars_from_id(_ID)
 	
 	name = data.get("name", "Dummy")
-	_descr = data.get("descr", "Error")
+	_descr = data.get("descr", "Error: Someone tempered with the JsonMngr.")
 	_sound_effect = data.get("sound", "BasicItem")
-	_comps.assign(data.get("comps", []))
-
+	var tmp_comps : Array = data.get("comps", [])
+	_comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 
 ##Getter for _ID
 func get_ID() -> IDs:
@@ -86,7 +84,6 @@ func get_descr() -> String:
 func get_comps() -> Array[EMC_ItemComponent]:
 	return _comps
 
-
 ## Getter for concrete [EMC_ItemComponent]
 ## If no component of that type could be found, null is returned instead.
 ## Example of call:
@@ -95,22 +92,19 @@ func get_comps() -> Array[EMC_ItemComponent]:
 ##if ic_food != null:
 ##	print(ic_food.get_formatted_values())[/codeblock]
 func get_comp(p_classname: Variant) -> EMC_ItemComponent:
-	for comp:EMC_ItemComponent in _comps:
+	for comp : EMC_ItemComponent in _comps:
 		if is_instance_of(comp, p_classname):
 			return comp
 	return null
-
 
 ## Ability to add components
 func add_comp(p_comp: EMC_ItemComponent) -> void:
 	_comps.push_back(p_comp)
 
-
 ## Ability to remove components
 func remove_comp(p_classname: Variant) -> void:
 	var comp_to_be_removed := get_comp(p_classname)
 	_comps.erase(comp_to_be_removed)
-
 
 ##@depracated
 func copy_item() -> EMC_Item:
@@ -119,7 +113,8 @@ func copy_item() -> EMC_Item:
 	copied_item._descr = _descr
 	copied_item._comps = _comps
 	return copied_item
-	
+
+## This Method returns all infomation the Item in form of a Dictionary
 func to_dict() -> Dictionary:
 	var dict_comps := []
 	
@@ -135,13 +130,51 @@ func to_dict() -> Dictionary:
 	}
 	
 	return data
+
+## This Method returns relevant infomation of the Item in form of a Dictionary.
+## Relevant information includes:
+## - ID
+## - comps
+func to_save() -> Dictionary:
+	var dict_comps := []
 	
+	for comp in _comps:
+		dict_comps.append(comp.to_dict())
+	
+	var data : Dictionary = {
+		"ID": _ID,
+		"comps": dict_comps,
+	}
+	
+	return data
+
+## Returns a new Item constructed out of a Dictionary containing all information of the Item
 static func from_dict(data : Dictionary) -> EMC_Item:
 	var item : EMC_Item = _ITEM_SCN.instantiate()
 	item._ID = data.get("ID", 0)
 	item.name = data.get("name", "Dummy")
 	item._descr = data.get("descr", "Error")
 	item._sound_effect = data.get("sound", "BasicItem")
+	var tmp_comps : Array = data.get("comps", [])
+	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
+	
+	return item
+
+## Returns a new Item constructed out of a Dictionary containing relevant information of the Item.
+## For this to work JsonMngr must already have loaded all Items.
+## Relevant Infromation is:
+## - ID
+## - comps
+static func from_save(data : Dictionary) -> EMC_Item:
+	var item : EMC_Item = _ITEM_SCN.instantiate()
+	
+	item._ID = data.get("ID", 0)
+	
+	var default_info : Dictionary = JsonMngr.get_item_vars_from_id(item._ID)
+	
+	item.name = default_info.get("name", "Dummy")
+	item._descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
+	item._sound_effect = default_info.get("sound", "BasicItem")
 	var tmp_comps : Array = data.get("comps", [])
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	

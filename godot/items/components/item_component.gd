@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 ##[b]IMPLIZIT ABSTRAKTE KLASSE: Es ergibt keinen Sinn eine Instanz von dieser
 ##Oberklasse zu erstellen![/b] Bitte nutze die Komponenten die von dieser Klasse
 ##erben.[br]
@@ -18,6 +18,7 @@ class_name EMC_ItemComponent
 
 #FYI: Inherits "name" property of Node
 var _color: Color
+var name : String
 
 static var COMP_SCNS : Dictionary = {}
 
@@ -53,7 +54,7 @@ static func from_dict(data : Dictionary) -> EMC_ItemComponent:
 		var tmp_scn : Resource = load("res://items/components/IC_" + comp_name + ".gd")
 		
 		if tmp_scn == null:
-			printerr("Comp with name: " +comp_name + ", does not exist.")
+			printerr("Comp with name: " + comp_name + ", does not exist.")
 			return null
 			assert(tmp_scn != null)
 		
