@@ -22,6 +22,8 @@ const BOOKS_SOURCE := "res://res/JSONs/books.json"
 const ACTION_SOURCE := "res://res/JSONs/action.json"
 ## DOORBELL
 const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
+## SCENARIOS
+const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
 
 ########################################JSON RECIPES################################################
 
@@ -414,7 +416,6 @@ func id_to_action(id : int) -> EMC_Action:
 		return null
 	return _actions.get(id)
 
-
 func load_actions() -> void:
 	if not FileAccess.file_exists(ACTION_SOURCE):
 			printerr("Could not load PopUps from source: " + ACTION_SOURCE)
@@ -606,3 +607,29 @@ func load_books() -> Array[EMC_BookGUI.Book]:
 		result.append(EMC_BookGUI.Book.new(ID, title, content))
 		i += 1
 	return result
+
+######################################JSON SCENARIOS################################################
+
+func load_scenarios() -> Dictionary:
+	if not FileAccess.file_exists(SCENARIOS_SOURCE):
+			printerr("Could not load PopUps from source: " + SCENARIOS_SOURCE)
+			return {}
+
+	var recipe_source : FileAccess = FileAccess.open(SCENARIOS_SOURCE, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = recipe_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		printerr("Action-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return {}
+
+	var data : Variant = json.get_data()
+	if not typeof(data) == TYPE_DICTIONARY:
+		printerr("Invalid format of Scenarios-JSON (" + SCENARIOS_SOURCE + "). Make sure it is in form of an Dictonarie.")
+	
+	return data
+
+
+
+
