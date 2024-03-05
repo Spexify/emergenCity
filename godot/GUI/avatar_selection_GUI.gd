@@ -43,11 +43,6 @@ func _ready() -> void:
 	$CanvasLayer.hide()
 	$CanvasModulate.hide()
 	hide()
-	#close()
-
-
-#func _process(p_delta: float) -> void:
-	#_position_chosen_avatar_frame()
 
 
 func _on_back_btn_pressed() -> void:

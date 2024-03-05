@@ -179,7 +179,7 @@ func load_game() -> void:
 		_inventory = create_inventory_with_starting_items()
 	else:
 		_inventory = EMC_Inventory.new()
-		for item_dict : Dictionary in data["inventory_data"]:
+		for item_dict: Dictionary in data["inventory_data"]:
 			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
@@ -239,21 +239,24 @@ func load_state() -> void:
 		if not parse_result == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
-
+		
 		var node_data : Dictionary = json.get_data()
-
+		
 		var new_object : Variant = node_data.get("node_path")
 		if new_object:
 			get_node(new_object).load_state(node_data)
 
+
 func get_e_coins() -> int:
 	return _e_coins
+	
 	
 func set_e_coins(e_coins : int) -> bool:
 	if e_coins < 0 or e_coins > MAX_ECOINS:
 		return false
 	_e_coins = e_coins
 	return true
+
 
 func add_e_coins(e_coins : int) -> void:
 	if _e_coins + e_coins > MAX_ECOINS:

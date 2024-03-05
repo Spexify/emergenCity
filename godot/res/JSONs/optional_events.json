@@ -28,7 +28,7 @@
 			"constraint_no_isolation": "",
 		},
 		"consequences": {
-			"add_items_by_name" : "WATER;WATER;RAVIOLI_TIN;RAVIOLI_TIN",
+			"add_items_by_name" : "WATER;WATER;WATER",
 		},
 		"spawn_tiles": [
 			{
