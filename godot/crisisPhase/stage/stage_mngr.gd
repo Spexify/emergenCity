@@ -72,6 +72,7 @@ var _dialogue_pitches: Dictionary
 var _tooltip_GUI : EMC_TooltipGUI
 var _book_GUI: EMC_BookGUI
 var _initial_stage_name : String = "home"
+var _initial_npc : Dictionary = {}
 var _opt_event_mngr: EMC_OptionalEventMngr
 
 
@@ -94,6 +95,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_city_map.hide()
 	
 	change_stage(_initial_stage_name)
+	respawn_NPCs(_initial_npc)
 
 
 func get_curr_stage_name() -> String:
@@ -158,6 +160,15 @@ func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 		NPC.activate()
 		NPC.position = p_spawn_pos
 
+## Returns a Dictonary cotaining every actives NPC position
+func get_all_active_npcs() -> Dictionary:
+	var data : Dictionary = {}
+	
+	for npc : EMC_NPC in $NPCs.get_children():
+		if npc.visible:
+			data[npc.name] = {"x" : npc.position.x, "y" : npc.position.y}
+			
+	return data
 
 func get_dialogue_pitches() -> Dictionary:
 	return _dialogue_pitches
@@ -167,12 +178,16 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path" : get_path(),
 		"stage_name" : get_curr_stage_name(),
+		"npc_pos" : get_all_active_npcs(), 
 	}
 	return data
 
 
 func load_state(data : Dictionary) -> void:
 	_initial_stage_name = data.get("stage_name", "home")
+	_initial_npc = data.get("npc_pos", {})
+	for npc : String in _initial_npc:
+		_initial_npc[npc] = Vector2(_initial_npc[npc].get("x", 0), _initial_npc[npc].get("y", 0))
 
 
 func get_city_map() -> EMC_CityMap:

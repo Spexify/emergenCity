@@ -128,18 +128,18 @@ func trigger_dialogue(data : Dictionary) -> void:
 	var dialog_res : DialogueResource
 
 	var p_name : String = data.get("dialogue_name", "")
-	var action_names : Array[String]
-	action_names.assign(data.get("action_names"))
-	var actions : Array[EMC_Action]
-	for act_name in action_names:
-		var action : EMC_Action = JsonMngr.name_to_action(act_name)
-		actions.append(action)
-		action.executed.connect(_day_mngr._on_action_executed)
+	#var action_names : Array[String]
+	#action_names.assign(data.get("action_names"))
+	#var actions : Array[EMC_Action]
+	#for act_name in action_names:
+		#var action : EMC_Action = JsonMngr.name_to_action(act_name)
+		#actions.append(action)
+		#action.executed.connect(_day_mngr._on_action_executed)
 	
 	#for callding : Dictionary in action.executed.get_connections():
 		#action.executed.disconnect(callding.get("callable"))
 	
-	var executer := EMC_ActionExecuter.new(actions)
+	var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
 	
 	match p_name:
 		"agathe_event":
@@ -167,3 +167,42 @@ func change_stage(p_data : Dictionary) -> void:
 	_avatar.position = p_data.get("avatar_pos")
 	_stage_mngr.respawn_NPCs(p_data.get("npc_pos"))
 
+############################################ JSON ##################################################
+
+## This function converts Dictionarys conatining consequnces with posible Vector or other json incompatible
+## Datatypes in to Dictionary with json compatible Datatype
+static func to_json(data : Dictionary) -> Dictionary:
+	var result : Dictionary = {}
+	if data.has("change_stage"):
+		result["change_stage"]["avatar_pos"]["x"] = data["change_stage"]["avatar_pos"].x
+		result["change_stage"]["avatar_pos"]["y"] = data["change_stage"]["avatar_pos"].y
+		
+		for npc : String in data["change_stage"]["npc_pos"]:
+			result["change_stage"]["npc_pos"][npc]["x"] = data["change_stage"]["npc_pos"][npc].x
+			result["change_stage"]["npc_pos"][npc]["y"] = data["change_stage"]["npc_pos"][npc].y
+	
+	result.merge(data)
+	
+	return result
+
+## This function converts consequnces in to using more compact json incompatible Datatypes (Vectors)
+static func from_json(data : Dictionary) -> Dictionary:
+	if data.has("change_stage"):
+		var avatar_pos : Dictionary = data["change_stage"].get("avatar_pos", {})
+		var x : int = avatar_pos.get("x", NAN)
+		var y : int = avatar_pos.get("y", NAN)
+		
+		var npc_pos : Dictionary = data["change_stage"].get("npc_pos", {})
+		
+		for npc : String in npc_pos:
+			npc_pos[npc] = Vector2(npc_pos[npc]["x"], npc_pos[npc]["y"])
+			
+		var tmp_data := {
+			"avatar_pos": Vector2i(x, y),
+			"npc_pos" : npc_pos,
+		}
+		tmp_data.merge(data["change_stage"])
+		data["change_stage"] = tmp_data
+	
+	return data
+	

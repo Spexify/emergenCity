@@ -8,10 +8,6 @@
 		"consequences": {
 			"trigger_dialogue": {
 						"dialogue_name" : "agathe_event",
-						"action_names": [
-							"HELP_AGATHE_HAPPY",
-							"HELP_AGATHE_JAM"
-							],
 						},
 		},
 		"silent": true,
@@ -27,9 +23,6 @@
 		"consequences": {
 			"trigger_dialogue": {
 						"dialogue_name" : "julia_event",
-						"action_names": [
-							"HELP_JULIA"
-							],
 						},
 		},
 		"silent": true,
@@ -45,9 +38,6 @@
 		"consequences": {
 			"trigger_dialogue": {
 						"dialogue_name" : "gerhard_event",
-						"action_names": [
-							"HELP_GERHARD"
-							],
 						},
 		},
 		"silent": true,
@@ -63,9 +53,6 @@
 		"consequences": {
 			"trigger_dialogue": {
 						"dialogue_name" : "petro_event",
-						"action_names": [
-							"HELP_PETRO"
-							],
 						},
 		},
 		"silent": true,
@@ -82,9 +69,6 @@
 		"consequences": {
 			"trigger_dialogue": {
 						"dialogue_name" : "mert_event",
-						"action_names": [
-							"HELP_MERT"
-							],
 						},
 		},
 		"silent": true,

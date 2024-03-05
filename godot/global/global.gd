@@ -32,7 +32,6 @@ func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
 
-
 func goto_scene(path: String) -> void:
 	match path:
 		PREPARE_PHASE_SCENE: _in_crisis_phase = false
@@ -42,10 +41,8 @@ func goto_scene(path: String) -> void:
 	
 	call_deferred("_deferred_goto_scene", path)
 
-
 func is_in_crisis_phase() -> bool:
 	return _in_crisis_phase
-
 
 func _deferred_goto_scene(path: String) -> void:
 	get_tree().root .remove_child(_current_scene) 
@@ -55,20 +52,16 @@ func _deferred_goto_scene(path: String) -> void:
 	_root.add_child(_current_scene)
 	scene_changed.emit()
 
-
 func load_scene_name() -> String:
 	return _start_scene
 
-
 func was_crisis() -> bool:
 	return _was_crisis
-
 
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
 		save_game(_current_scene.name == "CrisisPhase")
 		get_tree().quit() 
-
 
 func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
@@ -92,7 +85,6 @@ func reset_save() -> void:
 	save_game.flush()
 		
 	load_game()
-
 
 func reset_state() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)

@@ -125,22 +125,22 @@ func add_consequence(p_key: String, p_param: Variant) -> void:
 
 func save() -> Dictionary:
 	var data : Dictionary = {
+		"type": "action",
 		"action_ID": _action_ID,
 		"ACTION_NAME": _ACTION_NAME,
 		"description": _description,
+		"consequences": EMC_ActionConsequences.to_json(_consequences),
 	}
 	return data
-
 
 func load_state(data : Dictionary) -> void:
 	_action_ID = data.get("action_ID")
 	_ACTION_NAME = data.get("ACTION_NAME")
 	_description = data.get("description")
-
+	_consequences = EMC_ActionConsequences.from_json(data.get("consequences"))
 
 static func empty_action() -> EMC_Action:
 	return EMC_Action.new(NAN, "", {}, {}, "", "")
-
 
 static func from_dict(data : Dictionary) -> EMC_Action:
 	var action_id : int = data.get("id")

@@ -426,7 +426,7 @@ func load_actions() -> void:
 	var json_string : String = recipe_source.get_as_text()
 	var parse_result : Error = json.parse(json_string)
 	if not parse_result == OK:
-		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		printerr("Action-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 		return
 
 	var data : Variant = json.get_data()

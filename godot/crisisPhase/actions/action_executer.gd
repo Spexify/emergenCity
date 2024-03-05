@@ -1,13 +1,13 @@
 extends Node
 class_name EMC_ActionExecuter
 
-var _actions : Array[EMC_Action]
+var _function : Callable
 
-func _init(p_actions : Array[EMC_Action]) -> void:
-	_actions = p_actions
-	
+func _init(p_function : Callable) -> void:
+	_function = p_function
+
 func execute(p_name : String) -> void:
-	for act in _actions:
-		if act.get_ACTION_NAME() == p_name:
-			act.executed.emit(act)
-			return
+	var act : EMC_Action = JsonMngr.name_to_action(p_name)
+	if act != null:
+		act.executed.connect(_function)
+		act.executed.emit(act)
