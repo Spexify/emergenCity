@@ -98,15 +98,33 @@ func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 		var item := _ITEM_SCN.instantiate()
 		item.setup(p_ID)
 		return "Du brauchst " + item.get_name() + " dafür!"
-		
+
+
 func avatar_is_home(p_reason : String = "") -> String:
 	if _stage_mngr.get_curr_stage_name() == "home":
 		return NO_REJECTION
 	else:
 		return p_reason
 
+
 func avatar_is_on_stage(stage_name : String = "") -> String:
 	if _stage_mngr.get_curr_stage_name() == stage_name:
 		return NO_REJECTION
 	else:
 		return "Du bist nicht " + stage_name + "!"
+
+
+func is_scenario(p_scenario_names: String = "") -> String:
+	for scenario_name in p_scenario_names.split(";"):
+		if OverworldStatesMngr.get_scenario_name() == scenario_name:
+			return NO_REJECTION
+	
+	return "Nicht passendes Szenario!"
+
+
+func is_not_scenario(p_scenario_names: String = "") -> String:
+	for scenario_name in p_scenario_names.split(";"):
+		if OverworldStatesMngr.get_scenario_name() == scenario_name:
+			return "Aktuelles Szenario nicht erlaubt!"
+	
+	return NO_REJECTION
