@@ -124,24 +124,12 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 
 ########################################## Dialogue ################################################
 
-func trigger_dialogue(data : Dictionary) -> void:
+func trigger_dialogue(dialogue_name : String) -> void:
 	var dialog_res : DialogueResource
-
-	var p_name : String = data.get("dialogue_name", "")
-	#var action_names : Array[String]
-	#action_names.assign(data.get("action_names"))
-	#var actions : Array[EMC_Action]
-	#for act_name in action_names:
-		#var action : EMC_Action = JsonMngr.name_to_action(act_name)
-		#actions.append(action)
-		#action.executed.connect(_day_mngr._on_action_executed)
-	
-	#for callding : Dictionary in action.executed.get_connections():
-		#action.executed.disconnect(callding.get("callable"))
 	
 	var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
 	
-	match p_name:
+	match dialogue_name:
 		"agathe_event":
 			dialog_res = AGATHE_EVENT
 		"julia_event":

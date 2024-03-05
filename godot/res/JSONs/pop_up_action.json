@@ -4,11 +4,10 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
+			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": {
-						"dialogue_name" : "agathe_event",
-						},
+			"trigger_dialogue": "agathe_event",
 		},
 		"silent": true,
 		"description": "Mit Agathe geplaudert",
@@ -19,11 +18,10 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
+			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": {
-						"dialogue_name" : "julia_event",
-						},
+			"trigger_dialogue": "julia_event",
 		},
 		"silent": true,
 		"description": "Julia geholfen",
@@ -34,11 +32,10 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
+			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": {
-						"dialogue_name" : "gerhard_event",
-						},
+			"trigger_dialogue": "gerhard_event",
 		},
 		"silent": true,
 		"description": "Gerhard geholfen",
@@ -49,11 +46,10 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
+			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": {
-						"dialogue_name" : "petro_event",
-						},
+			"trigger_dialogue" : "petro_event",
 		},
 		"silent": true,
 		"description": "Mit Irena gespielt",
@@ -65,11 +61,10 @@
 		"constraints": {
 			"constraint_no_isolation": "",
 			"constraint_no_clean_water_available": "",
+			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": {
-						"dialogue_name" : "mert_event",
-						},
+			"trigger_dialogue": "mert_event",
 		},
 		"silent": true,
 		"description": "Mert geholfen",

@@ -8,12 +8,14 @@ const NO_REJECTION: String = ""
 
 var _day_mngr: EMC_DayMngr
 var _inventory: EMC_Inventory
+var _stage_mngr : EMC_StageMngr
 
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory) -> void:
+func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr) -> void:
 	_day_mngr = p_day_mngr
 	_inventory = p_inventory
+	_stage_mngr= p_stage_mngr
 
 
 func constraint_cooking(_dummy_param: Variant) -> String:
@@ -96,3 +98,15 @@ func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 		var item := _ITEM_SCN.instantiate()
 		item.setup(p_ID)
 		return "Du brauchst " + item.get_name() + " dafür!"
+		
+func avatar_is_home(p_reason : String = "") -> String:
+	if _stage_mngr.get_curr_stage_name() == "home":
+		return NO_REJECTION
+	else:
+		return p_reason
+
+func avatar_is_on_stage(stage_name : String = "") -> String:
+	if _stage_mngr.get_curr_stage_name() == stage_name:
+		return NO_REJECTION
+	else:
+		return "Du bist nicht " + stage_name + "!"

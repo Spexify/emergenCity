@@ -72,7 +72,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_egGUI = egGUI
 	_inventory = p_inventory
 	_puGUI = puGUI
-	_action_constraints = EMC_ActionConstraints.new(self, _inventory)
+	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
 		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
 	self.max_day = p_crisis_mngr.get_max_day()

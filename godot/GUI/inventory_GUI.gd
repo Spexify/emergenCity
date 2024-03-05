@@ -59,31 +59,25 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
 
-
 func set_consume_active( _p_has_slept : int = 0) -> void:
 	_has_slept =  _p_has_slept
 	_only_inventory = false
 	_continue_btn.show()
 
-
 func set_consume_idle() -> void:
 	_only_inventory = true
 	_continue_btn.hide()
-
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	_label.text = "[center]" + p_new_text + "[/center]"
 
-
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
-
 
 func clear_items() -> void:
 	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
-
 
 ## Open the GUI
 func open() -> void:
@@ -92,7 +86,6 @@ func open() -> void:
 	get_tree().paused = true
 	opened.emit()
 	_reload_items()
-
 
 ## Close the GUI
 func close() -> void:
@@ -111,12 +104,10 @@ func close() -> void:
 		_seod.close()
 	seod_inventory_closed.emit()
 
-
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
-
 
 ## Handle the click on the backpack-button
 func _on_backpack_btn_pressed() -> void:
@@ -126,7 +117,6 @@ func _on_backpack_btn_pressed() -> void:
 	else:
 		close()
 
-
 func _clear_gui() -> void:
 	_label_name.clear()
 	_label_comps.clear()
@@ -134,7 +124,6 @@ func _clear_gui() -> void:
 	
 	_consume_btn.hide()
 	_discard_btn.hide()
-
 
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
@@ -178,23 +167,8 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 		else:
 			_consume_btn.hide()
 
-
 func _item_consumable(item : EMC_Item) -> bool:
 	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
-
-
-func _remove_item(item : EMC_Item) -> void:
-	for slot in _slot_grid.get_children():
-		if slot.get_item() == item:
-			slot.remove_item()
-
-
-func _remove_item_by_id(item_id : int) -> void:
-	for slot in _slot_grid.get_children():
-		if slot.get_item().get_ID() == item_id:
-			slot.remove_item()
-			return
-
 
 func _reload_items() -> void:
 	_inventory.sort_custom(EMC_Inventory.sort_helper)
@@ -213,7 +187,6 @@ func _reload_items() -> void:
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
-
 
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
@@ -279,7 +252,6 @@ func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
 	_reload_items()
 	_clear_gui()
-
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false
