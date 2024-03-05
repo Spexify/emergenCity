@@ -48,6 +48,8 @@ var _food_contamination_state: FoodContaminationState = FoodContaminationState.N
 
 var _upgrades: Array[EMC_Upgrade]
 
+func _ready() -> void:
+	add_to_group("Save", true)
 
 func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[EMC_Upgrade]) -> void:
 	_electricity_state = p_electricity_state
@@ -73,7 +75,6 @@ func set_crisis_difficulty(p_scenario_name : String = "", _p_water_crisis: Water
 	
 	#if !Global._tutorial_done:
 		#_electricity_state = ElectricityState.NONE
-
 
 func get_number_crisis_overlap() -> int:
 	return _number_crisis_overlap
@@ -222,3 +223,51 @@ func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 			return upgrade.get_state_maximum()
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
+
+## Save function called to get all relevant information. This is used for Saving/loading
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"node_path" : get_path(),
+		"allowed_water_crisis" : _allowed_water_crisis,
+		"allowed_electricity_crisis" : _allowed_electricity_crisis, 
+		"allowed_isolation_crisis" : _allowed_isolation_crisis,
+		"allowed_food_contamination_crisis" : _allowed_food_contamination_crisis,
+		"scenario_name" : _scenario_name,
+		"crisis_length" : _crisis_length,
+		"number_crisis_overlap" : _number_crisis_overlap,
+		"notification" : _notification,
+		"water_state" : _water_state,
+		"isolation_state" : _isolation_state,
+		"food_contamination_state" : _food_contamination_state,
+		"electricity_state" : _electricity_state,
+	}
+	return data
+
+## Load all relevant information. This is used for Saving/loading
+func load_state(data : Dictionary) -> void:
+	var p_water_crisis : WaterState = data.get("allowed_water_crisis")
+	var p_electricity_crisis : ElectricityState = data.get("allowed_electricity_crisis")
+	var p_isolation_crisis : IsolationState = data.get("allowed_isolation_crisis")
+	var p_food_contamination_crisis : FoodContaminationState = data.get("allowed_food_contamination_crisis")
+	var p_scenario_name : String = data.get("scenario_name")
+	var p_crisis_length : int = data.get("crisis_length")
+	var p_number_crisis_overlap : int = data.get("number_crisis_overlap")
+	var p_notification : String = data.get("notification")
+	set_crisis_difficulty(p_scenario_name, p_water_crisis, p_electricity_crisis,
+							p_isolation_crisis, p_food_contamination_crisis,
+						p_crisis_length, p_number_crisis_overlap, p_notification)
+						
+	var p_water_state : WaterState = data.get("water_state")
+	var p_isolation_state : IsolationState = data.get("isolation_state")
+	var p_food_contamination_state : FoodContaminationState = data.get("food_contamination_state")
+	var p_electricity_state : ElectricityState = data.get("electricity_state")
+	
+	_set_all_states(p_water_state, p_isolation_state, p_food_contamination_state, p_electricity_state)
+	
+## This function sets all states without verification, it is needed to load save files
+func _set_all_states(p_water_state : WaterState, p_isolation_state : IsolationState,
+					p_food_contamination_state : FoodContaminationState, p_electricity_state : ElectricityState) -> void:
+	_water_state = p_water_state
+	_isolation_state = p_isolation_state
+	_food_contamination_state = p_food_contamination_state
+	_electricity_state = p_electricity_state
