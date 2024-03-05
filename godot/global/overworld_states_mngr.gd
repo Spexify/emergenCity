@@ -21,7 +21,7 @@ enum ElectricityState{
 	NONE = SemaphoreColors.RED,
 	UNLIMITED = SemaphoreColors.GREEN
 }
-var _electricity_state: ElectricityState = ElectricityState.NONE
+var _electricity_state: ElectricityState = ElectricityState.UNLIMITED
 
 enum WaterState{
 	NONE = SemaphoreColors.RED,
@@ -29,7 +29,7 @@ enum WaterState{
 	CLEAN = SemaphoreColors.GREEN
 }
 
-var _water_state: WaterState = WaterState.NONE
+var _water_state: WaterState = WaterState.CLEAN
 
 enum IsolationState{
 	NONE = SemaphoreColors.GREEN,

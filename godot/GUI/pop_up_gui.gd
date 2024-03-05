@@ -32,4 +32,8 @@ func _on_confirm_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
+	var tmp_dict : Dictionary = _current_action._consequences	# I know not pretty but fast inplemented
+	_current_action._consequences = _current_action._cancel_consequences
+	_current_action.silent_executed.emit(_current_action)
+	_current_action._consequences = tmp_dict
 	close()
