@@ -51,9 +51,7 @@ var _upgrades: Array[EMC_Upgrade]
 func _ready() -> void:
 	add_to_group("Save", true)
 
-func setup(p_electricity_state: ElectricityState, p_water_state: WaterState, p_upgrades: Array[EMC_Upgrade]) -> void:
-	_electricity_state = p_electricity_state
-	_water_state = p_water_state
+func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
 	_upgrades = p_upgrades
 
 
@@ -253,6 +251,7 @@ func load_state(data : Dictionary) -> void:
 	var p_crisis_length : int = data.get("crisis_length")
 	var p_number_crisis_overlap : int = data.get("number_crisis_overlap")
 	var p_notification : String = data.get("notification")
+	
 	set_crisis_difficulty(p_scenario_name, p_water_crisis, p_electricity_crisis,
 							p_isolation_crisis, p_food_contamination_crisis,
 						p_crisis_length, p_number_crisis_overlap, p_notification)

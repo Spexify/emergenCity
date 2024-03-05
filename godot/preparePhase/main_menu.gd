@@ -85,6 +85,8 @@ func _on_avatar_selection_gui_closed() -> void:
 	OverworldStatesMngr.set_crisis_difficulty("Tutorial Scenario", EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.ElectricityState.NONE,
 							EMC_OverworldStatesMngr.IsolationState.NONE, EMC_OverworldStatesMngr.FoodContaminationState.NONE,
 							3, 1, "Das ist die erste Krise seit langem! Es gab einen regionalen Stromausfall!")
+	OverworldStatesMngr._set_all_states(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.IsolationState.NONE,
+										EMC_OverworldStatesMngr.FoodContaminationState.NONE, EMC_OverworldStatesMngr.ElectricityState.NONE,)
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
 	close()

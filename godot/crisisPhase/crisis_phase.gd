@@ -91,8 +91,7 @@ func _ready() -> void:
 	
 	
 	#Setup-Methoden
-	OverworldStatesMngr.setup(EMC_OverworldStatesMngr.ElectricityState.UNLIMITED, #(MRM: Changed to NONE to test the shelflife)
-		EMC_OverworldStatesMngr.WaterState.CLEAN, _upgrades)
+	OverworldStatesMngr.setup(_upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
 	## NOTICE: connected dialog dont know if this is intendet
