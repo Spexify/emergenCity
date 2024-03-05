@@ -67,6 +67,7 @@ func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
 	reset_inventory()
+	reset_upgrades_equipped()
 	
 	var data : Dictionary = {
 		"was_crisis": _was_crisis,
@@ -75,6 +76,7 @@ func reset_save() -> void:
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
 		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
 	}
 	# JSON provides a static method to serialized JSON string.
@@ -98,6 +100,9 @@ func reset_state() -> void:
 
 func reset_inventory() -> void:
 	_inventory = create_inventory_with_starting_items()
+	
+func reset_upgrades_equipped() -> void:
+	_upgrades_equipped = [null, null, null]
 
 func save_game(was_crisis : bool) -> void:
 	if _inventory == null:
@@ -111,6 +116,8 @@ func save_game(was_crisis : bool) -> void:
 		"e_coins": _e_coins,
 		"was_crisis": was_crisis,
 		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		"upgrade_ids_unlocked": _upgrade_ids_unlocked,
+		"upgrades_equipped" : _upgrades_equipped.map(func (_upgrade : EMC_Upgrade) -> int : return _upgrade.get_id() if _upgrade != null else EMC_Upgrade.IDs.EMPTY_SLOT),
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
@@ -176,6 +183,10 @@ func load_game() -> void:
 			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)
+		
+	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
+	
+	_upgrades_equipped.assign(data.get("upgrades_equipped", [0, 0, 0]).map(func (id : int) -> EMC_Upgrade: var res := EMC_Upgrade.new(); res.setup(id); return res))
 		
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))

@@ -68,6 +68,7 @@ func _on_settings_pressed() -> void:
 func _on_cancel_curr_crisis_pressed() -> void:
 	Global.reset_state()
 	Global.reset_inventory()
+	Global.reset_upgrades_equipped()
 	get_tree().paused = false
 	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
 
