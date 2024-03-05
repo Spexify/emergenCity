@@ -179,7 +179,7 @@ func load_game() -> void:
 		_inventory = create_inventory_with_starting_items()
 	else:
 		_inventory = EMC_Inventory.new()
-		for item_dict: Dictionary in data["inventory_data"]:
+		for item_dict : Dictionary in data["inventory_data"]:
 			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
 			
 		_inventory.sort_custom(EMC_Inventory.sort_helper)

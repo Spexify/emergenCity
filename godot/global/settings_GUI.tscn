@@ -82,7 +82,7 @@ layout_mode = 2
 
 [node name="MasterLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
-text = "Master"
+text = "Allgemein"
 
 [node name="Master" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
