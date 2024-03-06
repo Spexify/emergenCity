@@ -43,6 +43,7 @@
         "comps": [
             {"name": "food", "params": 2},
             {"name": "pleasurable", "params": 1}
+            {"name": "shelflife", "params": 2}
         ]
     },
     {
@@ -204,7 +205,7 @@
         "descr": "Nur wenige Sorten (und nur sehr frische Stücke) sind roh genießbar, der Rest sollte dringend durchgebraten werden.",
         "comps": [
             {"name": "cost", "params": 100},
-            {"name": "shelflife", "params": 6}
+            {"name": "shelflife", "params": 3}
         ]
     },
     {
