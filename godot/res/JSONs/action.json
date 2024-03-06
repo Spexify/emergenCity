@@ -46,7 +46,7 @@
             "change_stage": {
                 "stage_name": "townhall",
                 "avatar_pos": {"x": 450, "y": 480},
-                "npc_pos": {"TownhallWorker": {"x": 430, "y": 300}}
+                "npc_pos": {"Leonie": {"x": 430, "y": 300}}
             }
         },
         "description": "Hat Rathaus besucht.",

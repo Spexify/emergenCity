@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd74ggdfvtuvl"
-path="res://.godot/imported/portrait_townhallworker.png-97c931fc86e95fafdf8268ee0d777631.ctex"
+uid="uid://b2teqwi7w0y5a"
+path="res://.godot/imported/sprite_leonie.png-8a81a9b3daabd340678e58eb057ed8b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/characters/portrait_townhallworker.png"
-dest_files=["res://.godot/imported/portrait_townhallworker.png-97c931fc86e95fafdf8268ee0d777631.ctex"]
+source_file="res://res/sprites/characters/sprite_leonie.png"
+dest_files=["res://.godot/imported/sprite_leonie.png-8a81a9b3daabd340678e58eb057ed8b1.ctex"]
 
 [params]
 

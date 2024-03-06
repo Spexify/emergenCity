@@ -9,7 +9,6 @@ func _ready() -> void:
 func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
 	
 	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer.vertical_scroll_mode = true
-	history = p_history
 	
 	var summary_text_winner : String = ""
 	var summary_text_loser : String = ""

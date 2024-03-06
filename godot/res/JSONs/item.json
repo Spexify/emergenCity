@@ -6,7 +6,7 @@
         "descr": "Sauberes Trinkwasser. Eignet sich auch zum Kochen oder Waschen.",
         "comps": [
             {"name": "cost", "params": 10},
-            {"name": "drink", "params": 1}
+            {"name": "drink", "params": 1},
         ]
     },
     {
@@ -15,7 +15,7 @@
         "descr": "Verschmutzt. Trinken auf eigene Gefahr.",
         "comps": [
             {"name": "drink", "params": 1},
-            {"name": "unpalatable", "params": 1}
+            {"name": "unpalatable", "params": 1},
         ]
     },
     {
@@ -24,7 +24,7 @@
         "descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus..",
         "comps": [
             {"name": "cost", "params": 20},
-            {"name": "food", "params": 1}
+            {"name": "food", "params": 1},
         ]
     },
     {
@@ -33,7 +33,7 @@
         "descr": "Für den Gaskocher.",
         "comps": [
             {"name": "cost", "params": 30},
-            {"name": "uses", "params": 2}
+            {"name": "uses", "params": 2},
         ]
     },
     {
@@ -42,8 +42,8 @@
         "descr": "Warm deutlich leckerer als kalt.",
         "comps": [
             {"name": "food", "params": 2},
-            {"name": "pleasurable", "params": 1}
-            {"name": "shelflife", "params": 2}
+            {"name": "pleasurable", "params": 1},
+            {"name": "shelflife", "params": 2},
         ]
     },
     {
@@ -67,7 +67,7 @@
         "descr": "Alleine nicht lecker, aber wertet deine trockenen Nudeln auf.",
         "comps": [
             {"name": "cost", "params": 20},
-            {"name": "food", "params": 1}
+            {"name": "food", "params": 1},
         ]
     },
     {
@@ -88,7 +88,7 @@
         "comps": [
             {"name": "cost", "params": 20},
             {"name": "food", "params": 1},
-            {"name": "shelflife", "params": 6}
+            {"name": "shelflife", "params": 6},
         ]
     },
     {
@@ -97,7 +97,7 @@
         "descr": "Süßer Obstaufstrich. Einkochen hat das Obst sehr haltbar gemacht.",
         "comps": [
             {"name": "cost", "params": 20},
-            {"name": "healthy", "params": -1}
+            {"name": "healthy", "params": -1},
         ]
     },
     {
@@ -106,7 +106,7 @@
         "descr": "Der Frühstücksklassiker schlechthin.",
         "comps": [
             {"name": "food", "params": 1},
-            {"name": "shelflife", "params": 6}
+            {"name": "shelflife", "params": 6},
         ]
     },
     {
@@ -115,7 +115,7 @@
         "descr": "Können genutzt werden, um schmutziges Wasser zu reinigen.",
         "comps": [
             {"name": "cost", "params": 70},
-            {"name": "uses", "params": 3}
+            {"name": "uses", "params": 3},
         ]
     },
     {
@@ -154,7 +154,7 @@
         "descr": "Achtung vor den Gräten!",
         "comps": [
             {"name": "cost", "params": 40},
-            {"name": "shelflife", "params": 2}
+            {"name": "shelflife", "params": 2},
         ]
     },
     {
@@ -163,7 +163,7 @@
         "descr": "Für diese allseits beliebten Knollen gibt es zig verschiedenen Zubereitungsarten.",
         "comps": [
             {"name": "cost", "params": 25},
-            {"name": "healthy", "params": 1}
+            {"name": "healthy", "params": 1},
         ]
     },
     {
@@ -185,7 +185,7 @@
             {"name": "cost", "params": 30},
             {"name": "food", "params": 1},
             {"name": "shelflife", "params": 6},
-            {"name": "healthy", "params": 1}
+            {"name": "healthy", "params": 1},
         ]
     },
     {
@@ -196,7 +196,7 @@
             {"name": "cost", "params": 80},
             {"name": "food", "params": 1},
             {"name": "pleasurable", "params": 1},
-            {"name": "healthy", "params": -1}
+            {"name": "healthy", "params": -1},
         ]
     },
     {
@@ -205,7 +205,7 @@
         "descr": "Nur wenige Sorten (und nur sehr frische Stücke) sind roh genießbar, der Rest sollte dringend durchgebraten werden.",
         "comps": [
             {"name": "cost", "params": 100},
-            {"name": "shelflife", "params": 3}
+            {"name": "shelflife", "params": 3},
         ]
     },
     {
@@ -214,7 +214,7 @@
         "descr": "Eiweißlieferant, häufig als Fleischersatz verwendet.",
         "comps": [
             {"name": "cost", "params": 60},
-            {"name": "shelflife", "params": 6}
+            {"name": "shelflife", "params": 6},
         ]
     },
     {
@@ -224,7 +224,7 @@
         "comps": [
             {"name": "cost", "params": 60},
             {"name": "food", "params": 1},
-            {"name": "healthy", "params": 1}
+            {"name": "healthy", "params": 1},
         ]
     },
     {
@@ -233,7 +233,7 @@
         "descr": "In Scheiben geschnitten ein beliebter Brotbelag.",
         "comps": [
             {"name": "cost", "params": 45},
-            {"name": "shelflife", "params": 6}
+            {"name": "shelflife", "params": 6},
         ]
     },
     {
@@ -244,7 +244,7 @@
             {"name": "cost", "params": 30},
             {"name": "shelflife", "params": 6},
             {"name": "drink", "params": 1},
-            {"name": "food", "params": 1}
+            {"name": "food", "params": 1},
         ]
     },
     {
@@ -254,7 +254,7 @@
         "comps": [
             {"name": "shelflife", "params": 3},
             {"name": "food", "params": 1},
-            {"name": "pleasurable", "params": 1}
+            {"name": "pleasurable", "params": 1},
         ]
     },
     {
@@ -266,7 +266,7 @@
             {"name": "shelflife", "params": 3},
             {"name": "drink", "params": 1},
             {"name": "pleasurable", "params": 1},
-            {"name": "healthy", "params": 1}
+            {"name": "healthy", "params": 1},
         ]
     },
     {

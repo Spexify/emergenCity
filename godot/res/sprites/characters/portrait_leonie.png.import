@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brmc54v11tqia"
-path="res://.godot/imported/portrait_NPC12.png-487fcf1ae90b528f73eb0865a07aa8f5.ctex"
+uid="uid://dd74ggdfvtuvl"
+path="res://.godot/imported/portrait_leonie.png-2cbe9f3ca2bd0dfa20a305662fc978ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/characters/portrait_NPC12.png"
-dest_files=["res://.godot/imported/portrait_NPC12.png-487fcf1ae90b528f73eb0865a07aa8f5.ctex"]
+source_file="res://res/sprites/characters/portrait_leonie.png"
+dest_files=["res://.godot/imported/portrait_leonie.png-2cbe9f3ca2bd0dfa20a305662fc978ef.ctex"]
 
 [params]
 

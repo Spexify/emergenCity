@@ -38,9 +38,9 @@ func reduce_shelflife() -> void:
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
 	if is_spoiled():
-		return get_name() + ": Verdorben"
+		return name + ": Verdorben"
 	else:
-		return get_name() + ": " + str(get_shelflife()) + UNIT
+		return name + ": " + str(get_shelflife()) + UNIT
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

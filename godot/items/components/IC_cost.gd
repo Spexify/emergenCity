@@ -9,6 +9,7 @@ func _init(cost : int) -> void:
 	super("Cost", Color.GOLDENROD)
 	_cost = cost
 
+
 func get_cost() -> int:
 	return _cost
 
@@ -19,6 +20,7 @@ func get_name_with_values() -> String:
 		return ""
 	else:
 		return str(_cost) + "eC"
+
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

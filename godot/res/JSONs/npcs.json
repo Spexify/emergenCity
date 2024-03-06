@@ -1,39 +1,57 @@
 [
-    {"name": "Friedel", "pitch": 0.6},
+    {
+	"name": "Friedel",
+	"pitch": 0.6
+    },
     {
         "name": "Gerhard",
         "pitch": 0.5,
         "trade": {"in": ["WATER_DIRTY", "WATER_DIRTY"], "out": ["VEGETABLES"]}
     },
-    {"name": "Julia", "pitch": 1.3},
-    {"name": "Mert", "pitch": 0.9},
-    {"name": "Momo", "pitch": 0.8},
+    {
+	"name": "Julia",
+	"pitch": 1.3
+    },
+    {
+	"name": "Mert",
+	"pitch": 0.9
+    },
+    {
+	"name": "Momo",
+	"pitch": 0.8
+    },
     {
         "name": "Agathe",
         "pitch": 1.2,
-        "trade": {
-            "in": ["CHLOR_TABLETS"],
-            "out": ["PICKLED_VEGETABLES", "JAM"]
-        }
+        "trade": {"in": ["CHLOR_TABLETS"], "out": ["PICKLED_VEGETABLES", "JAM"]}
     },
     {
         "name": "Petro",
         "pitch": 0.65,
         "trade": {"in": ["BATTERIES"], "out": ["SOAP"]}
     },
-    {"name": "Irena", "pitch": 1.3},
+    {
+	"name": "Irena",
+	"pitch": 1.3
+    },
     {
         "name": "Elias",
         "pitch": 0.75,
         "trade": {"in": ["RAVIOLI_TIN"], "out": ["SALT"]}
     },
-    {"name": "Kris", "pitch": 1.0},
+    {
+	"name": "Kris",
+	"pitch": 1.0,
+    },
     {
         "name": "Veronika",
         "pitch": 1.1,
         "trade": {"in": ["SUGAR"], "out": ["GAS_CARTRIDGE"]}
     },
-    {"name": "TownhallWorker", "pitch": 0.95},
+    {
+	"name": "Leonie",
+	"pitch": 0.95,
+    },
     {
         "name": "Walter",
         "pitch": 0.7,

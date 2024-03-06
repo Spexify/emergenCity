@@ -14,6 +14,7 @@ extends Resource
 ##"Komposition" nutzen, also die jeweiligen Unterobjekte als Attribute
 ##der Items realisieren.
 ##Dies ist eine Komponente.
+## CAUTION: use name instead of get_name()
 class_name EMC_ItemComponent
 
 #FYI: Inherits "name" property of Node
@@ -30,16 +31,17 @@ func _init(p_name: String, p_color: Color = Color.BLACK) -> void:
 
 ## Can be overwritten by subclasses
 func get_name_with_values() -> String:
-	return get_name()
+	return name
 
 
-##All relevant information are returned with an appropriate BBCode Tag,
+## All relevant information are returned with an appropriate BBCode Tag,
 ## this way the formatting is directly applied to a  RichTextLabel
 func get_colored_name_with_vals() -> String:
 	if get_name_with_values() == "":
 		return ""
 	else:
 		return "[color=" + _color.to_html(false) + "]" + get_name_with_values() + "[/color]"
+
 
 ## Returns a EMC_ItemComponent Child Object
 ## If the Component name is invalid return null
