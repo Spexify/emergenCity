@@ -38,7 +38,7 @@ func _ready() -> void:
 func _on_start_round_pressed() -> void:
 	if !Global._tutorial_done:
 		close()
-		$"../AvatarSelectionGUI".open()
+		$"../AvatarSelectionGUI".open(true)
 	else: 
 		Global.goto_scene("res://preparePhase/crisis_start.tscn")
 	
@@ -73,11 +73,11 @@ func _on_reset_pressed() -> void:
 
 
 func _on_information_pressed() -> void:
-	Global.goto_scene("res://preparePhase/information.tscn")
+	Global.goto_scene(Global.INFORMATION_SCENE)
 
 
 func _on_credit_screen_pressed() -> void:
-	Global.goto_scene("res://preparePhase/credit_information.tscn")
+	Global.goto_scene(Global.CREDIT_SCENE)
 
 
 func _on_avatar_selection_gui_closed() -> void:

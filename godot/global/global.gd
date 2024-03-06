@@ -11,6 +11,8 @@ const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
 const FIRST_GAME_SCENE = "res://global/first_game.tscn"
+const INFORMATION_SCENE = "res://preparePhase/information.tscn"
+const CREDIT_SCENE = "res://preparePhase/credit_information.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
@@ -31,6 +33,7 @@ var _in_crisis_phase: bool
 func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
+
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -63,6 +66,7 @@ func was_crisis() -> bool:
 	return _was_crisis
 
 
+## MRM: For what is this?? Sometimes I randomly get a crash in save_game
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
 		save_game(_current_scene.name == "CrisisPhase")
