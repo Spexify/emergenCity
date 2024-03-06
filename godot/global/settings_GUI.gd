@@ -16,6 +16,7 @@ const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres"
 const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
 
 
+var _previous_pause_mode: bool
 var is_dyslexic := false
 var _avatar_sprite_suffix: String = EMC_AvatarSelectionGUI.SPRITE_NB03
 signal debug_mode
@@ -23,13 +24,17 @@ signal debug_mode
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 
 func open() -> void:
+	_previous_pause_mode = get_tree().paused
+	get_tree().paused = true
 	($AvatarSelectionGUI as EMC_AvatarSelectionGUI).hide()
 	canvas_layer.show()
 	canvas_modulate.show()
 	show()
 	opened.emit()
 
+
 func close(without_signal : bool = false) -> void:
+	get_tree().paused = _previous_pause_mode
 	hide()
 	canvas_layer.hide()
 	canvas_modulate.hide()
@@ -70,7 +75,7 @@ func _on_reset_pressed() -> void:
 	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
 
 
-func _on_fortsetzen_pressed() -> void:
+func _on_continue_pressed() -> void:
 	close()
 
 

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="4_s3tp7"]
 
 [node name="SettingsGUI" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +52,7 @@ custom_minimum_size = Vector2(294, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Fortsetzen" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
+[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 text = "Speichern & Zurück
@@ -117,7 +118,7 @@ text = "Speichern & Zurück
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Fortsetzen" to="." method="_on_fortsetzen_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/SelectAvatar" to="." method="_on_select_avatar_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Sound" to="." method="_on_sound_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/FontChange" to="." method="_on_font_change_pressed"]
