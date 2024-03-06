@@ -26,35 +26,46 @@ func setup(p_upgrade_id: IDs) -> void:
 	# TODO: JSONification
 	# TODO: Write descriptions
 	_id = p_upgrade_id
-	match _id:
-		
-		IDs.EMPTY_SLOT:
-			_display_name = "" ; _description = "" ; _price = 0 ; _tilemap_position = Vector2i(3,3) ; _state = 0 ; _state_maximum = 0
-		
-		#Upgrade_ID.WATER_RESERVOIR: _display_name = "Wasserspeicher" ; _description = "" ; _tilemap_position = Vector2i(0,0) ; _state = -1 ; _state_maximum = -1 # UNUSED
-		
-		IDs.RAINWATER_BARREL:
-			_display_name = "Regentonne" ; _description = "" ; _price = 1000 ; _tilemap_position = Vector2i(1,0) ; _state = 0 ; _state_maximum = 24 # state: the water quantity in units of 250ml
-			_spawn_pos = Vector2i(1, 15)
-		
-		IDs.ELECTRIC_RADIO:
-			_display_name = "Elektrisches Radio" ; _description = "" ; _price = 200 ; _tilemap_position = Vector2i(2,0) ; _state = 0 ; _state_maximum = 0
-			_spawn_pos = Vector2i(1, 9)
-			
-		IDs.CRANK_RADIO:
-			_display_name = "Kurbelradio" ; _description = "" ; _price = 500 ; _tilemap_position = Vector2i(3,0) ; _state = 0 ; _state_maximum = 0
-			_spawn_pos = Vector2i(1, 9)
-		
-		IDs.GAS_COOKER:
-			_display_name = "Gaskocher"
-			_description = ""
-			_price = 1000
-			_tilemap_position = Vector2i(0,1)
-			_state = 0
-			_state_maximum = 0 
-			_spawn_pos = Vector2i(5, 10)
-		
-		_: push_error("Unerwarteter Fehler: Diese Upgrade ID ist nicht definiert!")
+	
+	var data : Dictionary = JsonMngr.id_to_upgrade_data(_id)
+	_display_name = data.get("display_name", "")
+	_description = data.get("description", "")
+	_price = data.get("price", 0)
+	_tilemap_position = data.get("tilemap_position", Vector2i(3,3))
+	_state = data.get("state", 0)
+	_state_maximum = data.get("state_maximum", 0) 
+	if data.has("spawn_pos"):
+		_spawn_pos = data["spawn_pos"]
+	
+	#match _id:
+		#
+		#IDs.EMPTY_SLOT:
+			#_display_name = "" ; _description = "" ; _price = 0 ; _tilemap_position = Vector2i(3,3) ; _state = 0 ; _state_maximum = 0
+		#
+		##Upgrade_ID.WATER_RESERVOIR: _display_name = "Wasserspeicher" ; _description = "" ; _tilemap_position = Vector2i(0,0) ; _state = -1 ; _state_maximum = -1 # UNUSED
+		#
+		#IDs.RAINWATER_BARREL:
+			#_display_name = "Regentonne" ; _description = "" ; _price = 1000 ; _tilemap_position = Vector2i(1,0) ; _state = 0 ; _state_maximum = 24 # state: the water quantity in units of 250ml
+			#_spawn_pos = Vector2i(1, 15)
+		#
+		#IDs.ELECTRIC_RADIO:
+			#_display_name = "Elektrisches Radio" ; _description = "" ; _price = 200 ; _tilemap_position = Vector2i(2,0) ; _state = 0 ; _state_maximum = 0
+			#_spawn_pos = Vector2i(1, 9)
+			#
+		#IDs.CRANK_RADIO:
+			#_display_name = "Kurbelradio" ; _description = "" ; _price = 500 ; _tilemap_position = Vector2i(3,0) ; _state = 0 ; _state_maximum = 0
+			#_spawn_pos = Vector2i(1, 9)
+		#
+		#IDs.GAS_COOKER:
+			#_display_name = "Gaskocher"
+			#_description = ""
+			#_price = 1000
+			#_tilemap_position = Vector2i(0,1)
+			#_state = 0
+			#_state_maximum = 0 
+			#_spawn_pos = Vector2i(5, 10)
+		#
+		#_: push_error("Unerwarteter Fehler: Diese Upgrade ID ist nicht definiert!")
 
 
 func get_id() -> IDs:

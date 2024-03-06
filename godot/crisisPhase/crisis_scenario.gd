@@ -4,10 +4,6 @@ class_name EMC_CrisisScenario
 
 ## can use numbers or key words instead of booleans
 static var _all_scenarios := JsonMngr.load_scenarios()
-
-
-
-
 #						:= {"Flood" : {"water_crisis" : EMC_OverworldStatesMngr.WaterState.DIRTY, 
 									#"electricity_crisis" : EMC_OverworldStatesMngr.ElectricityState.NONE, 
 									#"isolation_crisis" : EMC_OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS,

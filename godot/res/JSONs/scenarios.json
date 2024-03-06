@@ -1,51 +1,51 @@
 {
-	"Flood" : {
-		"water_crisis" : 1, 
-		"electricity_crisis" : 0, 
-		"isolation_crisis" : 1,
-		"food_contamination_crisis" : 2,
-		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!"
+	"Chemical Accident": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 0,
+		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst nicht aus dem Haus raus!",
+		"water_crisis": 1
 	},
-	"Hurricane" : {
-		"water_crisis" : 0, 
-		"electricity_crisis" : 0, 
-		"isolation_crisis" : 0,
-		"food_contamination_crisis" : 2,
-		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst nicht aus dem Haus raus!"
+	"Drought": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 1,
+		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, verdorbene Lmittel und darfst manche Orte nicht betreten!",
+		"water_crisis": 0
 	},
-	"Drought" : {
-		"water_crisis" : 0, 
-		"electricity_crisis" : 2, 
-		"isolation_crisis" : 1,
-		"food_contamination_crisis" : 0,
-		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, verdorbene Lmittel und darfst manche Orte nicht betreten!"
+	"Earthquake": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!",
+		"water_crisis": 1
 	},
-	"Pandemic" : {
-		"water_crisis" : 1, 
-		"electricity_crisis" : 2, 
-		"isolation_crisis" : 0,
-		"food_contamination_crisis" : 0,
-		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst manche Orte nicht betreten!"
+	"Flood": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!",
+		"water_crisis": 1
 	},
-	"Earthquake" : {
-		"water_crisis" : 1, 
-		"electricity_crisis" : 0, 
-		"isolation_crisis" : 1,
-		"food_contamination_crisis" : 2,
-		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, keinen Strom und darfst manche Orte nicht betreten!"
+	"Forest Fire": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst manche Orte nicht betreten!",
+		"water_crisis": 0
 	},
-	"Forest Fire" : {
-		"water_crisis" : 0, 
-		"electricity_crisis" : 0, 
-		"isolation_crisis" : 1,
-		"food_contamination_crisis" : 2,
-		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst manche Orte nicht betreten!"
+	"Hurricane": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 0,
+		"notification": "Es droht eine Naturkatastrophe. Du hast kein Wasser, keinen Strom und darfst nicht aus dem Haus raus!",
+		"water_crisis": 0
 	},
-	"Chemical Accident" : {
-		"water_crisis" : 1, 
-		"electricity_crisis" : 2, 
-		"isolation_crisis" : 0,
-		"food_contamination_crisis" : 0,
-		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst nicht aus dem Haus raus!"
+	"Pandemic": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 0,
+		"notification": "Es droht eine Naturkatastrophe. Du hast verschmutztes Wasser, verdorbene Lebensmittel und darfst manche Orte nicht betreten!",
+		"water_crisis": 1
 	}
 }

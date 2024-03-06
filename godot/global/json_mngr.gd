@@ -24,6 +24,8 @@ const ACTION_SOURCE := "res://res/JSONs/action.json"
 const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 ## SCENARIOS
 const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
+## UPGARDE
+const UPGRADES_SOURCE := "res://res/JSONs/upgrades.json"
 
 ########################################JSON RECIPES################################################
 
@@ -629,6 +631,131 @@ func load_scenarios() -> Dictionary:
 		printerr("Invalid format of Scenarios-JSON (" + SCENARIOS_SOURCE + "). Make sure it is in form of an Dictonarie.")
 	
 	return data
+
+######################################JSON UPGRADES#################################################
+
+var _is_upgrades_loaded : bool = false
+var _id_to_upgrade_data : Dictionary = {}
+
+func id_to_upgrade_data(id : int) -> Dictionary:
+	if _is_upgrades_loaded:
+		return _id_to_upgrade_data.get(id, {})
+	printerr("Upgrades not yet loaded!")
+	return {}
+
+func load_upgardes() -> void:
+	var data : Array = load_file_check_type(UPGRADES_SOURCE, "Upgrade", TYPE_ARRAY)
+	
+	if data == null:
+		return
+	
+	for dict : Dictionary in data:
+		if not (dict.has("id") and dict.has("display_name") and dict.has("description") and dict.has("price")
+						and dict.has("state") and dict.has("state_maximum") and dict.has("tilemap_position")):
+			printerr("Upgrade-JSON: there is at least one missing entry.")
+			continue
+		
+		var id : int = dict["id"]
+		dict.erase("id")
+		
+		_id_to_upgrade_data[id] = dict
+		
+		_id_to_upgrade_data[id]["tilemap_position"] = dict_to_vector(dict["tilemap_position"], TYPE_VECTOR2I)
+		if _id_to_upgrade_data[id]["tilemap_position"] == null:
+			continue
+		
+		if _id_to_upgrade_data[id].has("spawn_pos"):
+			_id_to_upgrade_data[id]["spawn_pos"] = dict_to_vector(dict["spawn_pos"], TYPE_VECTOR2I)
+			if _id_to_upgrade_data[id]["spawn_pos"] == null:
+				continue
+			
+	_is_upgrades_loaded = true
+
+func load_file_check_type(source : String, descr : String, type : Variant.Type) -> Variant:
+	if not FileAccess.file_exists(source):
+		push_error("Could not load " + descr + " from source: " + source)
+		return null
+
+	var recipe_source : FileAccess = FileAccess.open(source, FileAccess.READ)
+	var json : JSON = JSON.new()
+	
+	var json_string : String = recipe_source.get_as_text()
+	var parse_result : Error = json.parse(json_string)
+	if not parse_result == OK:
+		push_error(descr + "-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		return null
+
+	var data : Variant = json.get_data()
+	
+	if not typeof(data) == type:
+		push_error("Invalid format of " + descr + "-JSON (" + source + "). Make sure it is in the type of " + str(type))
+		return null
+	
+	return data 
+
+func dict_to_vector(data : Dictionary, type : Variant.Type) -> Variant:
+	var x : Variant = data.get("x", NAN)
+	var y : Variant = data.get("y", NAN)
+	var z : Variant = data.get("z", NAN)
+	var w : Variant = data.get("w", NAN)
+	
+	match type:
+		TYPE_VECTOR2:
+			if (x != NAN and y != NAN 
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)):
+				return Vector2(x as float, y as float)
+		TYPE_VECTOR2I:
+			if (x != NAN and y != NAN 
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)):
+				return Vector2i(x as int, y as int)
+		TYPE_VECTOR3:
+			if (x != NAN and y != NAN and z != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)):
+				return Vector3(x as float, y as float, z as float)
+		TYPE_VECTOR3I:
+			if (x != NAN and y != NAN and z != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)):
+				return Vector3i(x as int, y as int, z as int)
+		TYPE_VECTOR4:
+			if (x != NAN and y != NAN and z != NAN and w != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)
+			and (typeof(w) == TYPE_INT or typeof(w) == TYPE_FLOAT)):
+				return Vector4(x as float, y as float, z as float, w as float)
+		TYPE_VECTOR4I:
+			if (x != NAN and y != NAN and z != NAN and w != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)
+			and (typeof(w) == TYPE_INT or typeof(w) == TYPE_FLOAT)):
+				return Vector4i(x as int, y as int, z as int, w as int)
+		_: 
+			push_error(str(type) + " is not a Type.")
+	push_error("Wrong Type!")
+	return null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
