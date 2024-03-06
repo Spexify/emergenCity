@@ -1,34 +1,13 @@
 ~ START
-Walter: Guten Tag!
-Avatar: Guten Tag.
-~ BRANCH
-- Avatar: Was macht die Arbeit?
-	=> TALK
-- Avatar: Was hast du so im Angebot?
-	=>< TRADE
-	=> BRANCH
-- Avatar: Tschüss!
-	Walter: Bis dann!
-	=> END
-
-
-~ TALK
-Walter: Momentan handel ich ohne Geld. Wer weiß wie viel es morgen wert ist.
-Avatar: Nur [i]Ware[/i] ist Wahres?
-Walter: [#mood=happy]Hahaha. So könnte man es ausdrücken.
-=> END
-
-
-~ TRADE
-do TradeMngr.setup_next_trade("Walter")
-Walter: Für {{TradeMngr.get_sought_items_text()}} biete ich dir {{TradeMngr.get_offered_items_text()}}.
-if TradeMngr.is_trade_feasible()
-	Walter: Was meinst du?
-	- Avatar: Geht klar.
-		do TradeMngr.execute_trade()
-		Walter: [#mood=happy]Danke.
-	- Avatar: Grade nicht.
-		Walter: Okay, schönen Tag noch!
-else
-	Walter: Tut mir Leid, aber {{TradeMngr.get_unfeasibility_reason()}}!
+Momo: ...
+Mert: Momo ist etwas scheu.
+- Avatar: Warum denn?
+	Mert: Gute Frage. Vielleicht hat sie in der Vergangenheit keine guten Erfahrungen mit Menschen gemacht.
+	Mert: Manchmal klettert sie sogar auf hohe Bäume, um ihre Ruhe vor Menschen zu haben ... und kommt dann alleine nicht mehr herunter.
+	Mert: So habe ich sie kennen gelernt. Ich habe sie damals vom Baum geholt, als sie feststeckte.
+	Mert: Wir konnten danach keine Besitzer*innen finden, und gechipt war sie auch nicht, also habe ich sie bei mir aufgenommen.
+	Mert: Sie versteckt sich immer noch häufig, wenn fremde Menschen da sind. Wundert mich, dass sie überhaupt so ruhig hier sitzt.
+	Mert: Scheint so, als mag sie dich! Mit Streicheln wäre ich trotzdem vorsichtig.
+	Momo: Miau ...
+- Muss los.
 => END

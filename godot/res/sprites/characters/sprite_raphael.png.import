@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tacyxsxmsvqo"
-path="res://.godot/imported/portrait_walter.png-18134435f2e68f8a87846a89bd643caf.ctex"
+uid="uid://b8jpuprg7ijuv"
+path="res://.godot/imported/sprite_raphael.png-16197c8d002b42d1c6f2ca15e38b7ec2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/characters/portrait_walter.png"
-dest_files=["res://.godot/imported/portrait_walter.png-18134435f2e68f8a87846a89bd643caf.ctex"]
+source_file="res://res/sprites/characters/sprite_raphael.png"
+dest_files=["res://.godot/imported/sprite_raphael.png-16197c8d002b42d1c6f2ca15e38b7ec2.ctex"]
 
 [params]
 

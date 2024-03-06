@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://yg2kq7cdr44l"
+path="res://.godot/imported/raphael.dialogue-27ad9eb33d0ab719955d65a79ad7e512.tres"
+
+[deps]
+
+source_file="res://res/dialogue/raphael.dialogue"
+dest_files=["res://.godot/imported/raphael.dialogue-27ad9eb33d0ab719955d65a79ad7e512.tres"]
+
+[params]
+
+defaults=true
