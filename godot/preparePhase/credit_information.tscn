@@ -14,6 +14,7 @@ offset_bottom = -32.0
 script = ExtResource("1_4y0di")
 
 [node name="Park" parent="." instance=ExtResource("2_kmjb8")]
+layer_2/tile_data = PackedInt32Array(327688, 851968, 6, 393224, 851968, 7, 327689, 917504, 6, 393225, 917504, 7, 262152, 851968, 5, 262153, 917504, 5, 196616, 851968, 5, 196617, 917504, 5, 131080, 851968, 5, 131081, 917504, 5, 65544, 851968, 5, 65545, 917504, 5, 8, 851968, 5, 9, 917504, 5)
 layer_4/modulate = Color(1, 1, 1, 0)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
