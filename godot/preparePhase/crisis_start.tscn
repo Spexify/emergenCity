@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://iov3iav204i4"]
+[gd_scene load_steps=4 format=3 uid="uid://iov3iav204i4"]
 
 [ext_resource type="Script" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="2_oi1nj"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yuscm"]
 
 [node name="CrisisStart" type="Control"]
 layout_mode = 3
@@ -92,10 +93,9 @@ max_value = 2.0
 tick_count = 3
 ticks_on_borders = true
 
-[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="Continue" parent="CanvasLayer/VBoxContainer" instance=ExtResource("3_yuscm")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Weiter
-"
+text = "Weiter"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

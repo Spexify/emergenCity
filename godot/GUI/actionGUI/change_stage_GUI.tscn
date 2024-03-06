@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvuhkwet8fnsy"]
+[gd_scene load_steps=6 format=3 uid="uid://dvuhkwet8fnsy"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/change_stage_GUI.gd" id="1_48h4p"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/gui/menu_box_gray.png" id="2_b70k5"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_scbir"]
 [ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="4_ee0w8"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="5_ohm0g"]
 
 [node name="ChangeStageGUI" type="Control"]
 layout_mode = 3
@@ -57,10 +58,8 @@ text = "Soll der Ort gewechselt werden? Es wird eine Aktion verbraucht."
 layout_mode = 2
 alignment = 1
 
-[node name="ConfirmBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
-custom_minimum_size = Vector2(200, 50)
+[node name="ConfirmBtn" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_ohm0g")]
 layout_mode = 2
-theme = ExtResource("3_scbir")
 text = "Bestätigen"
 icon = ExtResource("4_ee0w8")
 
@@ -68,10 +67,8 @@ icon = ExtResource("4_ee0w8")
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="CancelBtn" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["Button"]]
-custom_minimum_size = Vector2(200, 0)
+[node name="CancelBtn" parent="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_ohm0g")]
 layout_mode = 2
-theme = ExtResource("3_scbir")
 text = "Abbrechen"
 
 [connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]

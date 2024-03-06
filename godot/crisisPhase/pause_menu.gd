@@ -60,7 +60,7 @@ func _on_resume_btn_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	close()
-	_settings.open()
+	_settings.open(true)
 	$CanvasLayer_unaffectedByCM.hide()
 
 
@@ -70,7 +70,7 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
 	get_tree().paused = false
-	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
+	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
 ## TODO

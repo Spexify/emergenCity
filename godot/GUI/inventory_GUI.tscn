@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://diu2wl65n301n"]
+[gd_scene load_steps=8 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" path="res://GUI/inventory_GUI.gd" id="1_ve5h2"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_270nm"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_2ujqp"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="4_47hfl"]
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="5_kbada"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="5_w1mvg"]
@@ -98,17 +99,14 @@ layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="Consume" type="Button" parent="Inventory/VBC/HBC"]
-custom_minimum_size = Vector2(160, 0)
+[node name="Consume" parent="Inventory/VBC/HBC" instance=ExtResource("4_2ujqp")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Konsumieren
-"
+theme_override_font_sizes/font_size = 30
+text = "Konsumieren"
 
-[node name="Discard" type="Button" parent="Inventory/VBC/HBC"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Discard" parent="Inventory/VBC/HBC" instance=ExtResource("4_2ujqp")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "Entsorgen"
 
 [node name="Continue" type="TextureButton" parent="Inventory/VBC/HBC"]

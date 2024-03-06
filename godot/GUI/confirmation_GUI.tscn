@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdvvsn8hcgjtw"]
+[gd_scene load_steps=6 format=3 uid="uid://cdvvsn8hcgjtw"]
 
 [ext_resource type="Script" path="res://GUI/confirmation_GUI.gd" id="2_y13du"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/gui/menu_box_white.png" id="3_2x76g"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="4_60yqs"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_frcv6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7xur"]
 texture = ExtResource("3_2x76g")
@@ -46,17 +47,16 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="ConfirmationBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ConfirmationBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 layout_mode = 2
 text = "Bestätigen"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Cancel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 layout_mode = 2
-text = "Zurück
-"
+text = "Abbrechen"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmationBtn" to="." method="_on_confirmation_btn_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

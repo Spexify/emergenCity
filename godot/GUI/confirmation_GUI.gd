@@ -29,7 +29,7 @@ func _on_confirmation_btn_pressed() -> void:
 	decided.emit()
 
 
-func _on_button_pressed() -> void:
+func _on_cancel_pressed() -> void:
 	_confirmed = false
 	close()
 	decided.emit()

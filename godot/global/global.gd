@@ -7,12 +7,15 @@ const INITIAL_E_COINS = 500
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
-const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
+const MAIN_MENU_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
 const FIRST_GAME_SCENE = "res://global/first_game.tscn"
 const INFORMATION_SCENE = "res://preparePhase/information.tscn"
 const CREDIT_SCENE = "res://preparePhase/credit_information.tscn"
+const CRISIS_START_SCENE = "res://preparePhase/crisis_start.tscn"
+const SHOP_SCENE = "res://preparePhase/shop.tscn"
+const UPGRADE_CENTER_SCENE = "res://preparePhase/upgrade_center.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
@@ -37,7 +40,7 @@ func _ready() -> void:
 
 func goto_scene(path: String) -> void:
 	match path:
-		PREPARE_PHASE_SCENE: _in_crisis_phase = false
+		MAIN_MENU_SCENE: _in_crisis_phase = false
 		CONTINUE_SCENE: _in_crisis_phase = false
 		CRISIS_PHASE_SCENE: _in_crisis_phase = true
 		_: _in_crisis_phase = false
@@ -182,7 +185,7 @@ func load_game() -> void:
 	
 	_was_crisis = data.get("was_crisis", false)
 	if not _was_crisis:
-		_start_scene = PREPARE_PHASE_SCENE
+		_start_scene = MAIN_MENU_SCENE
 	else:
 		_start_scene = CONTINUE_SCENE
 	

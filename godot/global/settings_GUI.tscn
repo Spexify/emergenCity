@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://5dpuu2l72yhg"]
+[gd_scene load_steps=8 format=3 uid="uid://5dpuu2l72yhg"]
 
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_g18nf"]
 [ext_resource type="Script" path="res://global/settings_GUI.gd" id="2_f1d4f"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="3_2gmg0"]
 [ext_resource type="Script" path="res://volume_slider.gd" id="3_n24n2"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_5kd0i"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="4_s3tp7"]
+[ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="6_cbnpx"]
 
 [node name="SettingsGUI" type="Control"]
 process_mode = 2
@@ -52,18 +54,15 @@ custom_minimum_size = Vector2(294, 0)
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Continue" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
-custom_minimum_size = Vector2(356, 0)
+[node name="Continue" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
-text = "Speichern & Zurück
-"
+text = "Speichern & Zurück"
 
-[node name="SelectAvatar" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
+[node name="SelectAvatar" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 text = "Charakter auswählen"
 
-[node name="Sound" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
-custom_minimum_size = Vector2(356, 0)
+[node name="Sound" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 text = "Sound"
 
@@ -71,10 +70,10 @@ text = "Sound"
 layout_mode = 2
 text = "Dyslexic Font"
 
-[node name="Reset" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" groups=["Button"]]
+[node name="Reset" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.776471, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
 text = "Spiel zurücksetzen"
 
 [node name="Sounds" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
@@ -113,6 +112,9 @@ custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 text = "Speichern & Zurück
 "
+
+[node name="ConfirmationGUI" parent="CanvasLayer" instance=ExtResource("6_cbnpx")]
+visible = false
 
 [node name="AvatarSelectionGUI" parent="." instance=ExtResource("4_s3tp7")]
 visible = false

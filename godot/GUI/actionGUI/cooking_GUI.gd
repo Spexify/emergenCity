@@ -38,7 +38,7 @@ func _ready() -> void:
 
 
 
-func _on_cooking_pressed() -> void: 
+func _on_cook_pressed() -> void:
 	if _recipe_cookable(_last_clicked_recipe):
 		if _last_clicked_recipe.needs_heat() && \
 		OverworldStatesMngr.get_electricity_state() != OverworldStatesMngr.ElectricityState.UNLIMITED:
@@ -105,3 +105,4 @@ func _try_cooking_with_heat_source() -> void:
 			_tooltipGUI.open("Du hast zwar einen Gaskocher, aber keine Gaskartusche um ihn zu betreiben!")
 	else:
 		_tooltipGUI.open("Du hast weder Strom, noch einen Gaskocher zum Kochen!")
+

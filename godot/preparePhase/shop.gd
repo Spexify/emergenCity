@@ -140,9 +140,9 @@ func _on_home_pressed() -> void:
 	_tmp_inventory.sort_custom(EMC_Inventory.sort_helper)
 	Global.set_inventory(_tmp_inventory)
 	Global.set_e_coins(_balance)
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
-func _on_back_button_pressed() -> void:
+func _on_cancel_pressed() -> void:
 	Global.set_inventory(_inventory)
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	Global.goto_scene(Global.MAIN_MENU_SCENE)
