@@ -21,7 +21,7 @@
         "name": "zum Marktplatz",
         "constraints": {
             "constraint_not_evening": "",
-            "constraint_no_limited_public_access": ""
+            "constraint_no_limited_public_access": "Der Marktplatz ist nicht betretbar!"
         },
         "consequences": {
             "change_stage": {
