@@ -19,6 +19,7 @@ func _on_texture_button_pressed() -> void:
 	Global.goto_scene("res://preparePhase/main_menu.tscn")
 
 
+## TODO: Name could be improved: "cooking" sounds like the in-game mechanic
 func _on_cooking_button_pressed() -> void:
 	OS.shell_open("https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Kochen-ohne-Strom/kochen-ohne-strom_node.html")
 

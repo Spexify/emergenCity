@@ -77,6 +77,7 @@ func _ready() -> void:
 	
 	
 	#Setup-Methoden
+	$InputBlock.hide()
 	OverworldStatesMngr.setup(_upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
@@ -209,10 +210,20 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	get_tree().paused = true
 
 
+## Is called when a dialogue ends
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	
+	#Block input for a while, so no accidental misclicks happen
+	const INPUT_BLOCK_DURATION: float = 0.4
+	$InputBlock.show()
+	await get_tree().create_timer(INPUT_BLOCK_DURATION).timeout
+	$InputBlock.hide()
+	
 	Global.get_tree().paused = false
 	
 	#execute optional event consequences if there are any
+	## TODO: Stupid solution,
+	## the consequences should be actively triggered inside the dialogue itself
 	if !_opt_event_consequences_after_dialogue.is_empty():
 		for key: String in _opt_event_consequences_after_dialogue.keys():
 			var params : Variant = _opt_event_consequences_after_dialogue[key]
@@ -223,7 +234,6 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 
 
 ################################################################################
-
 func _on_backpack_gui_closed() -> void:
 	_backpack_btn.set_pressed(false)
 
