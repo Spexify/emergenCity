@@ -167,8 +167,10 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 		else:
 			_consume_btn.hide()
 
+
 func _item_consumable(item : EMC_Item) -> bool:
 	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
+
 
 func _reload_items() -> void:
 	_inventory.sort_custom(EMC_Inventory.sort_helper)
@@ -187,6 +189,7 @@ func _reload_items() -> void:
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
+
 
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
@@ -252,6 +255,7 @@ func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
 	_reload_items()
 	_clear_gui()
+
 
 func _on_cancel_pressed() -> void:
 	$FilterWater.visible = false
