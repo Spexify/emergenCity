@@ -144,12 +144,20 @@ func change_stage(p_data : Dictionary) -> void:
 static func to_json(data : Dictionary) -> Dictionary:
 	var result : Dictionary = {}
 	if data.has("change_stage"):
-		result["change_stage"]["avatar_pos"]["x"] = data["change_stage"]["avatar_pos"].x
-		result["change_stage"]["avatar_pos"]["y"] = data["change_stage"]["avatar_pos"].y
+		result["change_stage"] = {
+			"avatar_pos" : {
+				"x" : data["change_stage"]["avatar_pos"].x,
+				"y" : data["change_stage"]["avatar_pos"].y
+			}
+		}
+		
+		result["change_stage"]["npc_pos"] = {}
 		
 		for npc : String in data["change_stage"]["npc_pos"]:
-			result["change_stage"]["npc_pos"][npc]["x"] = data["change_stage"]["npc_pos"][npc].x
-			result["change_stage"]["npc_pos"][npc]["y"] = data["change_stage"]["npc_pos"][npc].y
+			result["change_stage"]["npc_pos"][npc] = {
+				"x" : data["change_stage"]["npc_pos"][npc].x,
+				"y" : data["change_stage"]["npc_pos"][npc].y,
+			}
 	
 	result.merge(data)
 	
