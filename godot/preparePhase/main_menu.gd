@@ -1,11 +1,9 @@
 extends Control
 
-@onready var _settings := SettingsGUI #$"../Settings"
+@onready var _settings := SettingsGUI
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
-#@onready var timer := $"../Timer"
 
 
-#MRM: Added this, because there was a bug (see commit)
 func open() -> void: 
 	#get_tree().paused = true
 	$".".show()
@@ -31,28 +29,24 @@ func _ready() -> void:
 		$CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer.hide()
 		$CanvasLayer_unaffectedByCM/MarginContainer2.hide()
 		$CanvasLayer_unaffectedByCM/InformationButtons.hide()
-		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shelf.hide()
+		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shop.hide()
 		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter.hide()
 
 
 func _on_start_round_pressed() -> void:
 	if !Global._tutorial_done:
 		close()
-		$"../AvatarSelectionGUI".open()
+		$"../AvatarSelectionGUI".open(true)
 	else: 
-		Global.goto_scene("res://preparePhase/crisis_start.tscn")
-	
+		Global.goto_scene(Global.CRISIS_START_SCENE)
 
-func _on_shelf_pressed() -> void:
-	Global.goto_scene("res://preparePhase/shop.tscn")
+
+func _on_shop_pressed() -> void:
+	Global.goto_scene(Global.SHOP_SCENE)
 
 
 func _on_upgrade_center_pressed() -> void:
-	Global.goto_scene("res://preparePhase/upgrade_center.tscn")
-	# Todo: link Upgrade Center Scene
-	#get_tree().change_scene_to_file("res://preparePhase/upgrade_center.tscn")
-
-# var settings_scene = preload("res://preparePhase/settings.tscn")
+	Global.goto_scene(Global.UPGRADE_CENTER_SCENE)
 
 
 func _on_settings_pressed() -> void:
@@ -73,11 +67,11 @@ func _on_reset_pressed() -> void:
 
 
 func _on_information_pressed() -> void:
-	Global.goto_scene("res://preparePhase/information.tscn")
+	Global.goto_scene(Global.INFORMATION_SCENE)
 
 
 func _on_credit_screen_pressed() -> void:
-	Global.goto_scene("res://preparePhase/credit_information.tscn")
+	Global.goto_scene(Global.CREDIT_SCENE)
 
 
 func _on_avatar_selection_gui_closed() -> void:

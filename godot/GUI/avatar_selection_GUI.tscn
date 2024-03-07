@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ctqd8vvfeado1"]
+[gd_scene load_steps=26 format=3 uid="uid://ctqd8vvfeado1"]
 
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_71v8c"]
 [ext_resource type="Script" path="res://GUI/avatar_selection_GUI.gd" id="2_6drtd"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="16_vsmkq"]
 [ext_resource type="Texture2D" uid="uid://bv67h8il2cjis" path="res://res/sprites/characters/portrait_avatar_NB05.png" id="17_i51es"]
 [ext_resource type="Texture2D" uid="uid://bslnscry70rkm" path="res://res/sprites/characters/portrait_avatar_NB06.png" id="20_mfpjl"]
+[ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="23_4i4uv"]
 
 [sub_resource type="Gradient" id="Gradient_ltvlk"]
 offsets = PackedFloat32Array(0.843137, 0.954248)
@@ -182,6 +183,13 @@ offset_right = 564.0
 offset_bottom = 964.0
 texture_normal = ExtResource("16_vsmkq")
 
+[node name="Continue" type="TextureButton" parent="CanvasLayer"]
+offset_left = 500.0
+offset_top = 900.0
+offset_right = 564.0
+offset_bottom = 964.0
+texture_normal = ExtResource("23_4i4uv")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W01" to="." method="_on_w_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB01" to="." method="_on_nb_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M01" to="." method="_on_m_01_pressed"]
@@ -201,3 +209,4 @@ texture_normal = ExtResource("16_vsmkq")
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB06" to="." method="_on_nb_06_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M06" to="." method="_on_m_06_pressed"]
 [connection signal="pressed" from="CanvasLayer/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Continue" to="." method="_on_back_btn_pressed"]

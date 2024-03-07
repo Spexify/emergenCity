@@ -1,8 +1,6 @@
 extends EMC_GUI
 class_name EMC_EndGameGUI
 
-var history : Array [EMC_DayCycle]
-
 func _ready() -> void:
 	hide()
 
@@ -11,7 +9,6 @@ func _ready() -> void:
 func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
 	
 	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer.vertical_scroll_mode = true
-	history = p_history
 	
 	var summary_text_winner : String = ""
 	var summary_text_loser : String = ""
@@ -27,7 +24,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 	for action : int in EMC_Action.IDs.values():
 		var action_frequency_counter := 0
 		var action_name : String = ""
-		for day in history:
+		for day in p_history:
 			if day.morning_action._action_ID == action :
 				all_action_coins += day.morning_action.get_performance_coin_value()
 				morning = true
@@ -111,4 +108,4 @@ func _on_main_menu_pressed() -> void:
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
-	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
+	Global.goto_scene(Global.MAIN_MENU_SCENE)

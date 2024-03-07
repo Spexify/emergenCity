@@ -34,6 +34,7 @@ func use_item(_p_uses : int = 1) -> void:
 func get_name_with_values() -> String:
 	return str(_uses_left) + " Nutzungen übrig."
 
+
 func to_dict() -> Dictionary:
 	var data : Dictionary = {
 		"name": "uses",

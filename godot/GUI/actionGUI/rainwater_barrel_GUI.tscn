@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8c6lclmuiqum"]
+[gd_scene load_steps=3 format=3 uid="uid://c8c6lclmuiqum"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/rainwater_barrel_GUI.gd" id="1_u6c7a"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="2_27xxb"]
 
 [node name="RainwaterBarrelGUI" type="Control"]
 layout_mode = 3
@@ -50,13 +51,13 @@ layout_mode = 2
 text = "Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser."
 fit_content = true
 
-[node name="GetWaterBtn" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="GetWaterBtn" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_27xxb")]
 layout_mode = 2
 text = "Eine Flasche (250ml) abschöpfen"
 
-[node name="DoneBtn" type="Button" parent="PanelContainer/VBoxContainer" groups=["Button"]]
+[node name="DoneBtn" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_27xxb")]
 layout_mode = 2
 text = "Fertig"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GetWaterBtn" to="." method="_on_get_water_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GetWaterBtn" to="." method="_on_get_water_btn_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/DoneBtn" to="." method="_on_done_btn_pressed"]

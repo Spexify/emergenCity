@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccgia2x32o7ds"]
+[gd_scene load_steps=3 format=3 uid="uid://ccgia2x32o7ds"]
 
 [ext_resource type="Script" path="res://preparePhase/continue.gd" id="1_3lud4"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="2_uhejc"]
 
 [node name="Continue" type="Control"]
 layout_mode = 3
@@ -42,16 +43,16 @@ text = "[center]Du bist in der Mitte einer Krise.[/center]"
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Continue" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" groups=["Button"]]
+[node name="Continue" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uhejc")]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 40
 text = "Krise fortsetzen"
 
-[node name="Reset" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" groups=["Button"]]
+[node name="Reset" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_uhejc")]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 40
 text = "Krise zurücksetzen"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

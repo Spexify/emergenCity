@@ -21,13 +21,13 @@
         "name": "zum Marktplatz",
         "constraints": {
             "constraint_not_evening": "",
-            "constraint_no_limited_public_access": ""
+            "constraint_no_limited_public_access": "Der Marktplatz ist nicht betretbar!"
         },
         "consequences": {
             "change_stage": {
                 "stage_name": "market",
                 "avatar_pos": {"x": 250, "y": 1000},
-                "npc_pos": {"Walter": {"x": 200, "y": 230}}
+                "npc_pos": {"Raphael": {"x": 200, "y": 230}}
             }
         },
         "description": "Hat Marktplatz besucht.",
@@ -46,7 +46,7 @@
             "change_stage": {
                 "stage_name": "townhall",
                 "avatar_pos": {"x": 450, "y": 480},
-                "npc_pos": {"TownhallWorker": {"x": 430, "y": 300}}
+                "npc_pos": {"Leonie": {"x": 430, "y": 300}}
             }
         },
         "description": "Hat Rathaus besucht.",

@@ -41,7 +41,7 @@ script = ExtResource("1_23hjb")
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
-position = Vector2(277, 601)
+position = Vector2(212, 495)
 
 [node name="LevelBorders" type="StaticBody2D" parent="."]
 visible = false
@@ -203,6 +203,13 @@ layout_mode = 2
 
 [node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
 visible = false
+
+[node name="InputBlock" type="Panel" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 1100)
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="happinness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happinness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]

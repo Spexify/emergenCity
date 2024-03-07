@@ -91,6 +91,9 @@ func open() -> void:
 
 
 func close() -> void:
+	## Ugly workaround, to hopefully get rid of misterious nullptr bug:
+	if _stage_mngr.get_tree() == null:
+		return
 	_stage_mngr.get_tree().paused = false
 	_curr_pos_pin.get_node("AnimationPlayer").stop()
 	_home_pin.get_node("AnimationPlayer").stop()
@@ -118,39 +121,43 @@ func _on_home_btn_pressed() -> void:
 
 
 func _on_marketplace_btn_pressed() -> void:
-	#MRM Idea: Check can be modelled as a action-constraint method 
-	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
-		_tooltip_GUI.open("Der Marktplatz ist nicht betretbar!")
-	else: 
+	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
 
 
 func _on_elias_flat_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
 
 
 func _on_townhall_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
 
 
 func _on_julias_house_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
 
 
 func _on_complex_btn_pressed() -> void:
-	$DoorbellsGUI.open()
+	if _is_not_evening_suggest_home_return():
+		$DoorbellsGUI.open()
 
 
 func _on_gardenhouse_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
 
 
 func _on_villa_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
 
 
 func _on_park_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
+	if _is_not_evening_suggest_home_return():
+		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
 
 
 func _on_change_stage_gui_stayed_on_same_stage() -> void:
@@ -164,3 +171,9 @@ func _determine_pin_position(p_texture_button: TextureButton) -> Vector2:
 				p_texture_button.texture_normal.get_height()/2 - 50)
 
 
+func _is_not_evening_suggest_home_return() -> bool:
+	if _day_mngr.get_current_day_period() != EMC_DayMngr.DayPeriod.EVENING:
+		return true
+	else:
+		_tooltip_GUI.open("Es ist schon spät, ich sollte nach Hause gehen.")
+		return false

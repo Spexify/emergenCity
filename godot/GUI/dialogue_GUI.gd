@@ -40,14 +40,16 @@ var dialogue_line: DialogueLine:
 		dialogue_line = next_dialogue_line
 		
 		character_label.visible = not dialogue_line.character.is_empty()
-		character_label.text = tr(dialogue_line.character, "dialogue")
-		#MRM: Has to be CompressedTexture2D, otherwhise it doesn't work on mobile!!
 		var portrait_path: String
 		if dialogue_line.character.to_lower() == "avatar":
+			character_label.text = tr("Du", "dialogue")
 			portrait_path = "res://res/sprites/characters/portrait_" + dialogue_line.character.to_lower() + \
 				"_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"
 		else:
+			character_label.text = tr(dialogue_line.character, "dialogue")
 			portrait_path = "res://res/sprites/characters/portrait_" + dialogue_line.character.to_lower() + ".png"
+		
+		#MRM: Has to be CompressedTexture2D, otherwhise it doesn't work on mobile!!
 		var sprite_texture: CompressedTexture2D = load(portrait_path)
 		character_portrait.texture = sprite_texture
 		#character_portrait.texture = load("res://res/characters/portrait_%s%s.png" % [dialogue_line.character.to_lower(), file_suffix])

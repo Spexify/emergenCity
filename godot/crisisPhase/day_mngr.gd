@@ -19,23 +19,18 @@ enum DayPeriod {
 	EVENING = 2
 }
 
-var history : Array[EMC_DayCycle]
-#MRM: Technically redundant: current_day_cycle = history[get_current_day()], if array initialized accordingly:
-var current_day_cycle : EMC_DayCycle 
-
+var _history : Array[EMC_DayCycle]
+#MRM: Technically redundant: _current_day_cycle = history[get_current_day()], if array initialized accordingly:
+var _current_day_cycle : EMC_DayCycle 
 var _period_cnt : DayPeriod = DayPeriod.MORNING
-var max_day : int
 
-#var _actionArr : Array[EMC_Action] #MRM: Curr not used anymore
 var gui_refs : Array[EMC_ActionGUI]
 var _tooltip_GUI : EMC_TooltipGUI
 var _confirmation_GUI: EMC_ConfirmationGUI
 var _seodGUI : EMC_SummaryEndOfDayGUI
 var _egGUI : EMC_EndGameGUI
 var _puGUI : EMC_PopUpGUI
-
 var _avatar : EMC_Avatar
-
 var _stage_mngr : EMC_StageMngr
 var _crisis_mngr : EMC_CrisisMngr
 
@@ -75,7 +70,6 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
 		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
-	self.max_day = p_crisis_mngr.get_max_day()
 	self.gui_refs = gui_refs
 	_rng.randomize()
 	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
@@ -109,8 +103,8 @@ func on_interacted_with_furniture(p_action_ID : int) -> void:
 		_tooltip_GUI.open(reject_reasons)
 
 
-func get_current_day_cycle() -> EMC_DayCycle:
-	return self.history[get_current_day()]
+func get__current_day_cycle() -> EMC_DayCycle:
+	return _history[get_current_day()]
 
 
 func get_current_day_period() -> DayPeriod:
@@ -152,14 +146,14 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 	
 	match get_current_day_period():
 		DayPeriod.MORNING:
-			self.current_day_cycle = EMC_DayCycle.new()
-			self.current_day_cycle.morning_action = p_action
+			_current_day_cycle = EMC_DayCycle.new()
+			_current_day_cycle.morning_action = p_action
 		DayPeriod.NOON:
-			self.current_day_cycle.noon_action = p_action
+			_current_day_cycle.noon_action = p_action
 		DayPeriod.EVENING:
-			self.current_day_cycle.evening_action = p_action
-			self.history.append(self.current_day_cycle)
-			_seodGUI.open(self.current_day_cycle)
+			_current_day_cycle.evening_action = p_action
+			_history.append(_current_day_cycle)
+			_seodGUI.open(_current_day_cycle)
 			_seodGUI.closed.connect(_on_seod_closed)
 			return
 		_: push_error("Current day period unassigned!")
@@ -200,8 +194,8 @@ func _check_game_over() -> bool:
 	_avatar.get_health_status() <= 0 :
 		avatar_life_status = false
 	
-	if get_current_day() >= self.max_day || !avatar_life_status:
-		_egGUI.open(self.history, avatar_life_status, _avatar)
+	if get_current_day() >= _crisis_mngr.get_max_day() || !avatar_life_status:
+		_egGUI.open(_history, avatar_life_status, _avatar)
 		return true
 	return false
 
@@ -216,23 +210,23 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
 		"period_cnt": _period_cnt,
-		"current_day_cycle": current_day_cycle.save() if current_day_cycle != null else EMC_DayCycle.new().save(),
-		"history" : history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
+		"_current_day_cycle": _current_day_cycle.save() if _current_day_cycle != null else EMC_DayCycle.new().save(),
+		"history" : _history.map(func(cycle : EMC_DayCycle) -> Dictionary: return cycle.save()),
 	}
 	return data
 
 
 func load_state(data : Dictionary) -> void:
 	_period_cnt = data.get("period_cnt", 0)
-	current_day_cycle = EMC_DayCycle.new()
-	current_day_cycle.load_state(data.get("current_day_cycle"))
-	history.assign(data.get("history").map(
+	_current_day_cycle = EMC_DayCycle.new()
+	_current_day_cycle.load_state(data.get("_current_day_cycle"))
+	_history.assign(data.get("history").map(
 		func(data : Dictionary) -> EMC_DayCycle: 
 			var cycle : EMC_DayCycle = EMC_DayCycle.new()
 			cycle.load_state(data)
 			return cycle) as Array[EMC_DayCycle])
 	_update_HUD()
-	if current_day_cycle.evening_action.get_ACTION_NAME() != "":
+	if _current_day_cycle.evening_action.get_ACTION_NAME() != "":
 		print("Ha du versuchst zu cheaten")
 
 

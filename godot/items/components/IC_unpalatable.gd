@@ -25,7 +25,7 @@ func get_unit_health_reduction() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return get_name() + "(-" + str(get_unit_health_reduction()) + UNIT + ")"
+	return name + "(-" + str(get_unit_health_reduction()) + UNIT + ")"
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

@@ -2,12 +2,6 @@ extends Node
 class_name EMC_ActionConsequences
 
 const NO_PARAM: int = 0
-
-const AGATHE_EVENT : DialogueResource = preload("res://res/dialogue/agathe_event.dialogue")
-const JULIA_EVENT : DialogueResource = preload("res://res/dialogue/julia_event.dialogue")
-const GERHARD_EVENT : DialogueResource = preload("res://res/dialogue/gerhard_event.dialogue")
-const PETRO_EVENT : DialogueResource = preload("res://res/dialogue/petro_event.dialogue")
-const MERT_EVENT : DialogueResource = preload("res://res/dialogue/mert_event.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -124,23 +118,11 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 
 ########################################## Dialogue ################################################
 
-func trigger_dialogue(dialogue_name : String) -> void:
+func trigger_dialogue(p_dialogue_name : String) -> void:
 	var dialog_res : DialogueResource
-	
 	var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
 	
-	match dialogue_name:
-		"agathe_event":
-			dialog_res = AGATHE_EVENT
-		"julia_event":
-			dialog_res = JULIA_EVENT
-		"gerhard_event":
-			dialog_res = GERHARD_EVENT
-		"petro_event":
-			dialog_res = PETRO_EVENT
-		"mert_event":
-			dialog_res = MERT_EVENT
-	
+	dialog_res = load("res://res/dialogue/" + p_dialogue_name + ".dialogue")
 	
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())

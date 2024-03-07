@@ -2,21 +2,7 @@ extends Node2D
 class_name EMC_CrisisPhase
 
 
-const GERHARD_DIALOG : DialogueResource = preload("res://res/dialogue/gerhard.dialogue")
-const FRIEDEL_DIALOG : DialogueResource = preload("res://res/dialogue/friedel.dialogue")
-const JULIA_DIALOG : DialogueResource = preload("res://res/dialogue/julia.dialogue")
-const PETRO_DIALOG : DialogueResource = preload("res://res/dialogue/petro.dialogue")
-const IRENA_DIALOG : DialogueResource = preload("res://res/dialogue/irena.dialogue")
-const ELIAS_DIALOG : DialogueResource = preload("res://res/dialogue/elias.dialogue")
-const MERT_DIALOG : DialogueResource = preload("res://res/dialogue/mert.dialogue")
-const MOMO_DIALOG : DialogueResource = preload("res://res/dialogue/momo.dialogue")
-const AGATHE_DIALOG : DialogueResource = preload("res://res/dialogue/agathe.dialogue")
-const KRIS_DIALOG : DialogueResource = preload("res://res/dialogue/kris.dialogue")
-const VERONIKA_DIALOG : DialogueResource = preload("res://res/dialogue/veronika.dialogue")
-const WORKER_DIALOG : DialogueResource = preload("res://res/dialogue/townhall_worker.dialogue")
-const WALTER_DIALOG : DialogueResource = preload("res://res/dialogue/walter.dialogue")
 const TUTORIAL_DIALOG : DialogueResource = preload("res://res/dialogue/tutorial.dialogue")
-
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 const _BACK_BTN_NAME := "BackButton"
 
@@ -91,6 +77,7 @@ func _ready() -> void:
 	
 	
 	#Setup-Methoden
+	$InputBlock.hide()
 	OverworldStatesMngr.setup(_upgrades)
 	
 	_backpack_GUI.setup(_backpack, $Avatar, _SEOD, "Rucksack", true)
@@ -195,26 +182,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 		if node.get_name() == "DialogueGUI":
 			return
 	
-	#MRM: Problems with load on mobile export, so I preload it for now:
-	#dialogue_resource = load("res://res/dialogue/" + p_NPC_name + ".dialogue")
-	match p_NPC_name:
-		"Gerhard": dialogue_resource = GERHARD_DIALOG
-		"Friedel": dialogue_resource = FRIEDEL_DIALOG
-		"Julia": dialogue_resource = JULIA_DIALOG
-		"Petro": dialogue_resource = PETRO_DIALOG
-		"Irena": dialogue_resource = IRENA_DIALOG
-		"Elias": dialogue_resource = ELIAS_DIALOG
-		"Mert": dialogue_resource = MERT_DIALOG
-		"Momo": dialogue_resource = MOMO_DIALOG
-		"Agathe": dialogue_resource = AGATHE_DIALOG
-		"Kris": dialogue_resource = KRIS_DIALOG
-		"Veronika": dialogue_resource = VERONIKA_DIALOG
-		"TownhallWorker": dialogue_resource = WORKER_DIALOG
-		"Walter": dialogue_resource = WALTER_DIALOG
-		_:
-			printerr("unknown NPC")
-			return
-	
+	dialogue_resource = load("res://res/dialogue/" + p_NPC_name.to_lower() + ".dialogue")
 	
 	var starting_tag: String = "START" #English Tag, not "day" meant
 	## If you talk to a NPC that got spawned because of an optional event, trigger the dialogue
@@ -242,10 +210,20 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	get_tree().paused = true
 
 
+## Is called when a dialogue ends
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	
+	#Block input for a while, so no accidental misclicks happen
+	const INPUT_BLOCK_DURATION: float = 0.4
+	$InputBlock.show()
+	await get_tree().create_timer(INPUT_BLOCK_DURATION).timeout
+	$InputBlock.hide()
+	
 	Global.get_tree().paused = false
 	
 	#execute optional event consequences if there are any
+	## TODO: Stupid solution,
+	## the consequences should be actively triggered inside the dialogue itself
 	if !_opt_event_consequences_after_dialogue.is_empty():
 		for key: String in _opt_event_consequences_after_dialogue.keys():
 			var params : Variant = _opt_event_consequences_after_dialogue[key]
@@ -256,7 +234,6 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 
 
 ################################################################################
-
 func _on_backpack_gui_closed() -> void:
 	_backpack_btn.set_pressed(false)
 

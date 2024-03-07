@@ -7,10 +7,15 @@ const INITIAL_E_COINS = 500
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
-const PREPARE_PHASE_SCENE = "res://preparePhase/main_menu.tscn"
+const MAIN_MENU_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
 const FIRST_GAME_SCENE = "res://global/first_game.tscn"
+const INFORMATION_SCENE = "res://preparePhase/information.tscn"
+const CREDIT_SCENE = "res://preparePhase/credit_information.tscn"
+const CRISIS_START_SCENE = "res://preparePhase/crisis_start.tscn"
+const SHOP_SCENE = "res://preparePhase/shop.tscn"
+const UPGRADE_CENTER_SCENE = "res://preparePhase/upgrade_center.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
@@ -32,17 +37,20 @@ func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
 
+
 func goto_scene(path: String) -> void:
 	match path:
-		PREPARE_PHASE_SCENE: _in_crisis_phase = false
+		MAIN_MENU_SCENE: _in_crisis_phase = false
 		CONTINUE_SCENE: _in_crisis_phase = false
 		CRISIS_PHASE_SCENE: _in_crisis_phase = true
 		_: _in_crisis_phase = false
 	
 	call_deferred("_deferred_goto_scene", path)
 
+
 func is_in_crisis_phase() -> bool:
 	return _in_crisis_phase
+
 
 func _deferred_goto_scene(path: String) -> void:
 	get_tree().root .remove_child(_current_scene) 
@@ -52,16 +60,21 @@ func _deferred_goto_scene(path: String) -> void:
 	_root.add_child(_current_scene)
 	scene_changed.emit()
 
+
 func load_scene_name() -> String:
 	return _start_scene
+
 
 func was_crisis() -> bool:
 	return _was_crisis
 
+
+## MRM: For what is this?? Sometimes I randomly get a crash in save_game
 func _notification(what : int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
 		save_game(_current_scene.name == "CrisisPhase")
 		get_tree().quit() 
+
 
 func reset_save() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
@@ -87,6 +100,7 @@ func reset_save() -> void:
 	save_game.flush()
 		
 	load_game()
+
 
 func reset_state() -> void:
 	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
@@ -171,7 +185,7 @@ func load_game() -> void:
 	
 	_was_crisis = data.get("was_crisis", false)
 	if not _was_crisis:
-		_start_scene = PREPARE_PHASE_SCENE
+		_start_scene = MAIN_MENU_SCENE
 	else:
 		_start_scene = CONTINUE_SCENE
 	

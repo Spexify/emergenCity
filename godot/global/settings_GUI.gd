@@ -11,25 +11,32 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var music : EMC_VolumeSlider = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Music
 @onready var sfx : EMC_VolumeSlider = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/SFX
 @onready var reset : Button = $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
+@onready var _confirmGUI: EMC_ConfirmationGUI = $CanvasLayer/ConfirmationGUI
 
 const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
 const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
 
 
+var _previous_pause_mode: bool
 var is_dyslexic := false
 var _avatar_sprite_suffix: String = EMC_AvatarSelectionGUI.SPRITE_NB03
 signal debug_mode
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 
-func open() -> void:
+func open(p_during_crisis: bool = false) -> void:
+	_previous_pause_mode = get_tree().paused
+	get_tree().paused = true
 	($AvatarSelectionGUI as EMC_AvatarSelectionGUI).hide()
 	canvas_layer.show()
 	canvas_modulate.show()
+	$CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset.visible = !p_during_crisis
 	show()
 	opened.emit()
 
+
 func close(without_signal : bool = false) -> void:
+	get_tree().paused = _previous_pause_mode
 	hide()
 	canvas_layer.hide()
 	canvas_modulate.hide()
@@ -63,14 +70,17 @@ func _on_font_change_pressed() -> void:
 
 
 func _on_reset_pressed() -> void:
+	var confirmed := await _confirmGUI.confirm("Fortschritt & Einstellungen komplett zurücksetzen?")
+	if !confirmed: return
+	
 	self.close(true)
 	Global.reset_state()
 	Global.reset_save()
 	get_tree().paused = false
-	Global.goto_scene(Global.PREPARE_PHASE_SCENE)
+	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
-func _on_fortsetzen_pressed() -> void:
+func _on_continue_pressed() -> void:
 	close()
 
 

@@ -25,7 +25,8 @@ const SPRITE_M06 = "M06"
 
 var _chosen_avatar_button: TextureButton
 
-func open() -> void:
+func open(p_show_continue_button: bool = false) -> void:
+	$CanvasLayer/Continue.visible = p_show_continue_button
 	$CanvasLayer.show()
 	$CanvasModulate.show()
 	_position_chosen_avatar_frame()
