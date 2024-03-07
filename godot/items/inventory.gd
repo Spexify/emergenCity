@@ -161,8 +161,9 @@ func spoil_all_items() -> void:
 	for slot_idx in _slot_cnt:
 		var item := _slots[slot_idx]
 		if item != null:
-			item.remove_comp(EMC_IC_Shelflife)
-			item.add_comp(EMC_IC_Unpalatable.new(1))
+			if item.get_comp(EMC_IC_Shelflife) != null:
+				item.remove_comp(EMC_IC_Shelflife)
+				item.add_comp(EMC_IC_Unpalatable.new(1))
 
 
 ## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]

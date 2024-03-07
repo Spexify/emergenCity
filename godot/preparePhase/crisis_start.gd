@@ -4,11 +4,11 @@ class_name EMC_CrisisStart
 var _crisis_length : int
 #Until beginning of length-day (so minus 1 quasi)
 const LENGTH_LOWER_BOUND_EASY : int = 4
-const LENGTH_UPPER_BOUND_EASY : int = 5
-const LENGTH_LOWER_BOUND_NORMAL : int = 5
-const LENGTH_UPPER_BOUND_NORMAL : int = 8
-const LENGTH_LOWER_BOUND_HARD : int = 8
-const LENGTH_UPPER_BOUND_HARD : int = 11 
+const LENGTH_UPPER_BOUND_EASY : int = 6
+const LENGTH_LOWER_BOUND_NORMAL : int = 7
+const LENGTH_UPPER_BOUND_NORMAL : int = 9
+const LENGTH_LOWER_BOUND_HARD : int = 10
+const LENGTH_UPPER_BOUND_HARD : int = 13
 
 var _number_crisis_overlap : int = 2
 const CRISIS_OVERLAP_LOWER_BOUND : int = 1
