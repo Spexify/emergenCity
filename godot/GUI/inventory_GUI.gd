@@ -129,6 +129,7 @@ func _clear_gui() -> void:
 ## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_clicked_item = p_clicked_item
+	_clicked_item.clicked_sound()
 	#Name of the item
 	_label_name.clear()
 	_label_name.append_text("[color=black]" + _clicked_item.get_name() + "[/color]")
@@ -199,9 +200,10 @@ func _on_consume_pressed() -> void:
 			##Improvement idea: use new _inventory.use_item() method
 			var comp_uses : EMC_IC_Uses = _clicked_item.get_comp(EMC_IC_Uses)
 			comp_uses.use_item(1)
+			_clicked_item.consumed_sound()
 			# Work around to stop gray modulate
 			_clicked_item._on_clicked(EMC_Item.new())
-				
+			
 			if comp_uses.no_uses_left():
 				_inventory.remove_item(_clicked_item.get_ID())
 			
@@ -210,6 +212,7 @@ func _on_consume_pressed() -> void:
 	else:
 		var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
 		var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
+		_clicked_item.consumed_sound()
 		if  drink_comp != null:
 			_avatar.add_hydration(drink_comp.get_hydration())
 		if food_comp != null:

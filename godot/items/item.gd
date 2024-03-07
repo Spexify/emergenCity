@@ -54,7 +54,10 @@ enum IDs{
 var _ID: IDs
 var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
-var _sound_effect : String = "BasicItem"
+var _sound_effect : Dictionary = { 
+	"clicked" : "BasicItem",
+	"consumed" : "Water",
+	}
 
 static var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 
@@ -68,7 +71,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 	
 	name = data.get("name", "Dummy")
 	_descr = data.get("descr", "Error: Someone tempered with the JsonMngr.")
-	_sound_effect = data.get("sound", "BasicItem")
+	_sound_effect = data.get("sound", _sound_effect)
 	var tmp_comps : Array = data.get("comps", [])
 	_comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 
@@ -154,7 +157,7 @@ static func from_dict(data : Dictionary) -> EMC_Item:
 	item._ID = data.get("ID", 0)
 	item.name = data.get("name", "Dummy")
 	item._descr = data.get("descr", "Error")
-	item._sound_effect = data.get("sound", "BasicItem")
+	item._sound_effect = data.get("sound", item._sound_effect)
 	var tmp_comps : Array = data.get("comps", [])
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	
@@ -174,11 +177,17 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	
 	item.name = default_info.get("name", "Dummy")
 	item._descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
-	item._sound_effect = default_info.get("sound", "BasicItem")
+	item._sound_effect = default_info.get("sound", item._sound_effect)
 	var tmp_comps : Array = data.get("comps", [])
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	
 	return item
+
+func consumed_sound() -> void:
+	SoundMngr.play_sound(_sound_effect["consumed"])
+	
+func clicked_sound(pitch : float = 1) -> void:
+	SoundMngr.play_sound(_sound_effect["clicked"], 0, pitch)
 
 ########################################## PRIVATE METHODS #########################################
 ## Called when the node enters the scene tree for the first time.
@@ -194,7 +203,6 @@ func _on_gui_input(event: InputEvent) -> void:
 		#Calls _on_clicked(self) for all instances of signal group "items":
 		get_tree().call_group("items", "_on_clicked", self) 
 
-
 ## TODO
 func _on_clicked(sender: EMC_Item) -> void:
 	const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
@@ -204,7 +212,5 @@ func _on_clicked(sender: EMC_Item) -> void:
 		printerr("Item._on_clicked(): Sender ist null!")
 	elif sender == self:
 		self.modulate = HIGHLIGHTED_COLOR
-		SoundMngr.play_sound(sender._sound_effect)
 	else:
 		self.modulate = DEFAULT_COLOR
-		SoundMngr.play_sound(sender._sound_effect)

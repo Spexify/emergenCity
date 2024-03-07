@@ -34,7 +34,7 @@ func is_musik_playing() -> bool:
 func play_musik() -> void:
 	musik.play()
 
-func play_sound(sound : String, start : float = 0) -> void:
+func play_sound(sound : String, start : float = 0, pitch : float = 1) -> void:
 	var sound_player : AudioStreamPlayer
 	for player in get_children():
 		if sound.to_lower() == player.get_name().to_lower():
@@ -44,8 +44,10 @@ func play_sound(sound : String, start : float = 0) -> void:
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
 		return
 
-	sound_player.seek(start)
-	sound_player.play()
+	var tmp_pitch : float = sound_player.get_pitch_scale()
+	sound_player.set_pitch_scale(pitch)
+	sound_player.play(start)
+	#sound_player.set_pitch_scale(tmp_pitch)
 
 #######################################Private Methods##############################################
 

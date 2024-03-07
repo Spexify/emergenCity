@@ -59,6 +59,7 @@ func _remove_item_by_id(item : EMC_Item) -> void :
 	var i : int = 0
 	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
 		if i >= _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
+			SoundMngr.play_sound("Money", 0.1)
 			inventory_grid.remove_child(slot)
 			_tmp_inventory.remove_item(item.get_ID(), 1)
 			
@@ -68,6 +69,9 @@ func _remove_item_by_id(item : EMC_Item) -> void :
 			
 			var new_slot := _SLOT_SCN.instantiate()
 			inventory_grid.add_child(new_slot)
+			break
+		elif i < _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
+			item.clicked_sound(0.4)
 			break
 		i += 1
 
@@ -88,6 +92,8 @@ func _add_item_to_slot_by_id(item_id : EMC_Item.IDs) -> bool :
 func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	_display_info(sender)
 	
+	sender.clicked_sound()
+	
 	var comp := sender.get_comp(EMC_IC_Cost)
 	if comp == null:
 		return
@@ -100,6 +106,7 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 
 
 func _on_inventory_item_clicked(sender : EMC_Item) -> void:
+	
 	_display_info(sender)
 	_remove_item_by_id.call_deferred(sender)
 

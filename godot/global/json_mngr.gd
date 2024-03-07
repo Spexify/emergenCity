@@ -184,6 +184,8 @@ func load_items() -> void:
 	var item_index : int = 0
 	
 	for item : Dictionary in data:
+		var item_data : Dictionary = {}
+		
 		var _id : Variant = item.get("ID", NAN)
 		if typeof(_id) != TYPE_FLOAT or _id == NAN or _name_to_id.find_key(_id) == null:
 			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'ID'.")
@@ -202,21 +204,23 @@ func load_items() -> void:
 			item_index += 1
 			continue
 			
-		var _sound : String = item.get("sound", "BasicItem")
-		if typeof(_sound) != TYPE_STRING:
+		var _sound : Dictionary = item.get("sound", INVALID_DICTIONARY_VALUE)
+		if typeof(_sound) != TYPE_DICTIONARY:
 			printerr("Item-JSON: item in position " + str(item_index) + " has no or an invalid item 'sound'.")
-		
+		else:
+			item_data["sound"] = _sound
+			
 		var _comp_dicts : Variant = item.get("comps", [])
 		if typeof(_comp_dicts) != TYPE_ARRAY:
 			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'comps'.")
 			item_index += 1
 			continue
 		
-		var item_data : Dictionary = {
+		item_data = {
 			"name": _name,
 			"descr": _descr,
 			"comps": _comp_dicts,
-			"sound": _sound,
+			#"sound": _sound,
 		}
 		
 		_id_to_item_vars[str(_id)] = item_data

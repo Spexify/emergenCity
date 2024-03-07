@@ -120,13 +120,13 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_constants/separation = 180
 
-[node name="StatusBars" parent="GUI/VBC/UpperSection/HBC" instance=ExtResource("6_22w2e")]
+[node name="StatusBars" parent="GUI/VBC/UpperSection/HBC" groups=["Gui"] instance=ExtResource("6_22w2e")]
 process_mode = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" groups=["Save"] instance=ExtResource("5_gk1jp")]
+[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -137,7 +137,7 @@ custom_minimum_size = Vector2(576, 680)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_i2q6e")]
+[node name="BackpackGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
 
@@ -146,30 +146,30 @@ visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_owtos")]
+[node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="EndGameGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("8_saydl")]
+[node name="EndGameGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CookingGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("10_64vl8")]
+[node name="CookingGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("10_64vl8")]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="RainwaterBarrelGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("12_ad4fq")]
+[node name="RainwaterBarrelGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("12_ad4fq")]
 visible = false
 layout_mode = 2
 
-[node name="PauseMenu" parent="GUI/VBC/MiddleSection" instance=ExtResource("15_cjvwy")]
+[node name="PauseMenu" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("15_cjvwy")]
 visible = false
 layout_mode = 2
 
-[node name="BookGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("16_eg1dm")]
+[node name="BookGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("16_eg1dm")]
 visible = false
 layout_mode = 2
 
@@ -179,25 +179,25 @@ custom_minimum_size = Vector2(576, 220)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("13_nblvh")]
+[node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("13_nblvh")]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TooltipGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("14_0s3fx")]
+[node name="TooltipGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("14_0s3fx")]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DefaultActionGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("19_sb74j")]
+[node name="DefaultActionGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("19_sb74j")]
 visible = false
 layout_mode = 2
 
-[node name="ShowerGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("20_ielcm")]
+[node name="ShowerGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("20_ielcm")]
 visible = false
 layout_mode = 2
 
-[node name="ConfirmationGUI" parent="GUI/VBC/LowerSection" instance=ExtResource("22_ifwb8")]
+[node name="ConfirmationGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
 visible = false
 layout_mode = 2
 
