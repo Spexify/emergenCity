@@ -145,23 +145,23 @@ func save_game(p_was_crisis : bool) -> void:
 	save_game_file.store_line(json_string)
 	
 	##################SAVE STATE#####################
-	
-	var save_state : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
-	var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Save")
-	for node in save_nodes:
-		# Check the node has a save function.
-		if !node.has_method("save"):
-			print("Save node '%s' is missing a save() function, skipped" % node.name)
-			continue
+	if p_was_crisis:
+		var save_state : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
+		var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Save")
+		for node in save_nodes:
+			# Check the node has a save function.
+			if !node.has_method("save"):
+				print("Save node '%s' is missing a save() function, skipped" % node.name)
+				continue
 
-		# Call the node's save function.
-		var node_data : Dictionary = node.call("save")
+			# Call the node's save function.
+			var node_data : Dictionary = node.call("save")
 
-		# JSON provides a static method to serialized JSON string.
-		json_string = JSON.stringify(node_data)
+			# JSON provides a static method to serialized JSON string.
+			json_string = JSON.stringify(node_data)
 
-		# Store the save dictionary as a new line in the save file.
-		save_state.store_line(json_string)
+			# Store the save dictionary as a new line in the save file.
+			save_state.store_line(json_string)
 
 
 func load_game() -> void:
