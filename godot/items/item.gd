@@ -201,7 +201,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	#or (event is InputEventScreenTouch)):
 		clicked.emit(self)
 		#Calls _on_clicked(self) for all instances of signal group "items":
-		get_tree().call_group("items", "_on_clicked", self) 
+		Global.get_tree().call_group("items", "_on_clicked", self) 
 
 ## TODO
 func _on_clicked(sender: EMC_Item) -> void:

@@ -9,13 +9,13 @@ func _ready() -> void:
 
 func open(p_text: String) -> void:
 	$VBoxContainer/PanelContainer/RichTextLabel.text = "[color=black]" + p_text + "[/color]"
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	show()
 	opened.emit()
 	await closed
 
 
 func _on_back_btn_pressed() -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	hide()
 	closed.emit()

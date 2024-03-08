@@ -39,7 +39,7 @@ func _open(p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
 	$Icon_NextPeriod.frame = p_new_day_period
 	$Icon_NextPeriod.modulate = Color($Icon_NextPeriod.modulate, 0)
 	show()
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	$AnimationPlayer.play(FADE_IN_ANIM)
 
 
@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 		
 		if _time > _MAX_TIME: #Stop playing animation
 			_start_move_anim = false
-			await get_tree().create_timer(0.3).timeout #wait shortly
+			await Global.get_tree().create_timer(0.3).timeout #wait shortly
 			$AnimationPlayer.play(FADE_OUT_ANIM)
 
 
@@ -87,7 +87,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		_start_move_anim = true
 		_time = 0 #Time has to be 0 when its started, for the sin/cos values to be right!
 	elif anim_name == FADE_OUT_ANIM:
-		get_tree().paused = false
+		Global.get_tree().paused = false
 		hide()
 
 

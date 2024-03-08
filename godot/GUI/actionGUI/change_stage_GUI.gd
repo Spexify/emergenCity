@@ -16,7 +16,7 @@ func setup(p_stage_mngr: EMC_StageMngr) -> void:
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action: EMC_Action) -> void:
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	_action = p_action
 	var stage_change_action: EMC_StageChangeAction = _action
 	
@@ -56,7 +56,7 @@ func _on_confirm_btn_pressed() -> void:
 
 
 func close() -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	hide()
 	closed.emit()
 

@@ -83,7 +83,7 @@ func clear_items() -> void:
 func open() -> void:
 	_clicked_item = null
 	show()
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	opened.emit()
 	_reload_items()
 
@@ -93,7 +93,7 @@ func close() -> void:
 	close_button.emit()
 	#close_gui.play()
 	hide()
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	closed.emit()
 	if !_only_inventory:
 		set_consume_idle()

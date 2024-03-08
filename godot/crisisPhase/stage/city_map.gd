@@ -35,7 +35,7 @@ func show_gui(p_action : EMC_Action) -> void:
 
 
 func open() -> void:
-	get_tree().paused = true #StageMngr necessary?? Tried to fix bug, but didn't work
+	Global.get_tree().paused = true #StageMngr necessary?? Tried to fix bug, but didn't work
 	_home_pin.show()
 	
 	#Setup Current-Location-Pin

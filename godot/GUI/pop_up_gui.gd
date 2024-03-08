@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 func open(_p_action : EMC_PopUpAction) -> void:
-	_previous_pause_state = get_tree().paused
-	get_tree().paused = true
+	_previous_pause_state = Global.get_tree().paused
+	Global.get_tree().paused = true
 	show()
 	_current_action = _p_action
 	opened.emit()
@@ -18,7 +18,7 @@ func open(_p_action : EMC_PopUpAction) -> void:
 
 
 func close() -> void:
-	get_tree().paused = _previous_pause_state
+	Global.get_tree().paused = _previous_pause_state
 	hide()
 	closed.emit()
 

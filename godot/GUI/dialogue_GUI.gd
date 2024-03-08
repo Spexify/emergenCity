@@ -85,7 +85,7 @@ var dialogue_line: DialogueLine:
 			configure_menu()
 		elif dialogue_line.time != "":
 			var time := dialogue_line.text.length() * 0.02 if dialogue_line.time == "auto" else dialogue_line.time.to_float()
-			await get_tree().create_timer(time).timeout
+			await Global.get_tree().create_timer(time).timeout
 			next(dialogue_line.next_id)
 		else:
 			is_waiting_for_input = true
