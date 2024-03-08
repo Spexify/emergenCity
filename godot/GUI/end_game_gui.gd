@@ -19,7 +19,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 	var noon : bool = false
 	var evening : bool = false
 	
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	
 	for action : int in EMC_Action.IDs.values():
 		var action_frequency_counter := 0
@@ -98,14 +98,15 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	visible = false
 	closed.emit()
 
 
 func _on_main_menu_pressed() -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
+	Global.save_game(false)
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

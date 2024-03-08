@@ -16,14 +16,14 @@ extends EMC_GUI
 func open() -> void:
 	update_overworld_states()
 	show()
-	get_tree().paused = true
+	Global.get_tree().paused = true
 	$CanvasLayer_unaffectedByCM.show()
 	canvas_modulate.show()
 	opened.emit()
 
 
 func close() -> void:
-	get_tree().paused = false
+	Global.get_tree().paused = false
 	hide()
 	$CanvasLayer_unaffectedByCM.hide()
 	canvas_modulate.hide()
@@ -69,12 +69,13 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
-	get_tree().paused = false
+	Global.save_game(false)
+	Global.get_tree().paused = false
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
 ## TODO
 func _on_save_and_quit_pressed() -> void:
 	await Global.save_game(true)
-	get_tree().quit()
+	Global.get_tree().quit()
 
