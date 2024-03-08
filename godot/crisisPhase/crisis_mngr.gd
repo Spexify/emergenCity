@@ -35,7 +35,6 @@ var _food_contamination_crisis_length_countdown : int = 1
 
 var _inventory : EMC_Inventory
 
-
 func setup(p_backpack : EMC_Inventory) -> void: 
 	_inventory = p_backpack
 	
