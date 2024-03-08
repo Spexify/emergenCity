@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn3ryoq1oruxb"]
+[gd_scene load_steps=2 format=3 uid="uid://cn3ryoq1oruxb"]
 
 [ext_resource type="Script" path="res://global/global.gd" id="1_f83gq"]
-[ext_resource type="PackedScene" uid="uid://c4o7v5wq5yd3" path="res://global/sound_mngr.tscn" id="2_qxlm1"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_f83gq")
-
-[node name="SFX" parent="." instance=ExtResource("2_qxlm1")]

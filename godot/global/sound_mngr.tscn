@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4o7v5wq5yd3"]
+[gd_scene load_steps=7 format=3 uid="uid://c4o7v5wq5yd3"]
 
 [ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://res/SFX/Lofi.wav" id="1_cpl1b"]
 [ext_resource type="Script" path="res://global/sound_mngr.gd" id="1_ps8k0"]
 [ext_resource type="AudioStream" uid="uid://hoycd11nwt3j" path="res://res/SFX/button.wav" id="3_udcud"]
-[ext_resource type="AudioStream" uid="uid://4yemglbwkgmh" path="res://res/SFX/water.wav" id="4_10vph"]
-[ext_resource type="AudioStream" uid="uid://cdnwxtebgwpph" path="res://res/SFX/pick_up.wav" id="4_bynxh"]
-[ext_resource type="AudioStream" uid="uid://cohhyhx2w0tvd" path="res://res/SFX/money.wav" id="4_yqa44"]
 [ext_resource type="AudioStream" uid="uid://d265spjcv3uc2" path="res://res/SFX/doorbell-shortened-100308.mp3" id="5_kndxj"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="6_qnn1w"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="7_w1u83"]
@@ -21,19 +18,6 @@ bus = &"Musik"
 [node name="Button" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_udcud")
 volume_db = -5.0
-bus = &"SFX"
-
-[node name="Money" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_yqa44")
-volume_db = -5.0
-bus = &"SFX"
-
-[node name="BasicItem" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_bynxh")
-bus = &"SFX"
-
-[node name="Water" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_10vph")
 bus = &"SFX"
 
 [node name="DingDong" type="AudioStreamPlayer" parent="."]

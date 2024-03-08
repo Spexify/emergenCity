@@ -92,7 +92,7 @@ max_value = 2.0
 tick_count = 3
 ticks_on_borders = true
 
-[node name="Continue" parent="CanvasLayer/VBoxContainer" groups=["Button"] instance=ExtResource("3_yuscm")]
+[node name="Continue" parent="CanvasLayer/VBoxContainer" instance=ExtResource("3_yuscm")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Weiter"

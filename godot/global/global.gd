@@ -55,7 +55,7 @@ func is_in_crisis_phase() -> bool:
 func _deferred_goto_scene(path: String) -> void:
 	get_tree().root .remove_child(_current_scene) 
 	
-	var scn := ResourceLoader.load(path)
+	var scn : PackedScene = ResourceLoader.load(path)
 	_current_scene = scn.instantiate()
 	_root.add_child(_current_scene)
 	scene_changed.emit()
@@ -71,13 +71,13 @@ func was_crisis() -> bool:
 
 ## MRM: For what is this?? Sometimes I randomly get a crash in save_game
 func _notification(what : int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST: 
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED: 
 		save_game(_current_scene.name == "CrisisPhase")
 		get_tree().quit() 
 
 
 func reset_save() -> void:
-	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
+	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
 	reset_inventory()
 	reset_upgrades_equipped()
@@ -96,21 +96,21 @@ func reset_save() -> void:
 	var json_string : String = JSON.stringify(data)
 
 	# Store the save dictionary as a new line in the save file.
-	save_game.store_line(json_string)
-	save_game.flush()
+	save_game_file.store_line(json_string)
+	save_game_file.flush()
 		
 	load_game()
 
 
 func reset_state() -> void:
-	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
+	var save_game_file : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
 	
 	var data : Dictionary = {}
 	
 	var json_string : String = JSON.stringify(data)
 	
-	save_game.store_string(json_string)
-	save_game.flush()
+	save_game_file.store_string(json_string)
+	save_game_file.flush()
 
 func reset_inventory() -> void:
 	_inventory = create_inventory_with_starting_items()
@@ -118,17 +118,17 @@ func reset_inventory() -> void:
 func reset_upgrades_equipped() -> void:
 	_upgrades_equipped = [null, null, null]
 
-func save_game(was_crisis : bool) -> void:
+func save_game(p_was_crisis : bool) -> void:
 	if _inventory == null:
 		#MRM: I want to test partial Scenes with F6 but it still tries to save
 		return
 	###################SAVE GAME######################
 	
-	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
+	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
 	var data : Dictionary = {
 		"e_coins": _e_coins,
-		"was_crisis": was_crisis,
+		"was_crisis": p_was_crisis,
 		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		"upgrade_ids_unlocked": _upgrade_ids_unlocked,
 		"upgrades_equipped" : _upgrades_equipped.map(func (_upgrade : EMC_Upgrade) -> int : return _upgrade.get_id() if _upgrade != null else EMC_Upgrade.IDs.EMPTY_SLOT),
@@ -142,7 +142,7 @@ func save_game(was_crisis : bool) -> void:
 	var json_string : String = JSON.stringify(data)
 
 	# Store the save dictionary as a new line in the save file.
-	save_game.store_line(json_string)
+	save_game_file.store_line(json_string)
 	
 	##################SAVE STATE#####################
 	
@@ -168,8 +168,8 @@ func load_game() -> void:
 	if not FileAccess.file_exists(SAVE_GAME_FILE):
 		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
 
-	var save_game : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.READ)
-	var json_string : String = save_game.get_line()
+	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.READ)
+	var json_string : String = save_game_file.get_line()
 	var json : JSON = JSON.new()
 
 	var data : Dictionary
@@ -233,6 +233,7 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
+	
 	inventory.sort_custom(EMC_Inventory.sort_helper)
 	return inventory
 
@@ -241,13 +242,11 @@ func load_state() -> void:
 	if not FileAccess.file_exists(SAVE_STATE_FILE):
 		return
 
-	var save_game : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.READ)
+	var save_game_file : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.READ)
 	var json : JSON = JSON.new()
-
-	var data : Dictionary
 	
-	while save_game.get_position() < save_game.get_length():
-		var json_string : String = save_game.get_line()
+	while save_game_file.get_position() < save_game_file.get_length():
+		var json_string : String = save_game_file.get_line()
 		
 		var parse_result : Error = json.parse(json_string)
 		if not parse_result == OK:

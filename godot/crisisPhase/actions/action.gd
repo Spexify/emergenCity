@@ -58,11 +58,12 @@ var _description : String
 var _performance_coin_value : int
 var _progresses_day_period: bool
 var _prompt: String
+var _sound : String
 
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 p_consequences : Dictionary, type_gui : String, description : String,
 p_prompt: String = "", performance_coin_value : int = 0,
-p_progresses_day_period: bool = true) -> void:
+p_progresses_day_period: bool = true, p_sound : String = "") -> void:
 	self._action_ID = action_ID
 	self._ACTION_NAME = ACTION_NAME
 	self._constraints_prior = constraints_prior
@@ -72,6 +73,7 @@ p_progresses_day_period: bool = true) -> void:
 	self._prompt = p_prompt
 	self._performance_coin_value = performance_coin_value
 	self._progresses_day_period = p_progresses_day_period
+	self._sound = p_sound
 
 
 func get_ID() -> int:
@@ -122,6 +124,8 @@ func progresses_day_period() -> bool:
 func add_consequence(p_key: String, p_param: Variant) -> void:
 	_consequences[p_key] = p_param
 
+func play_sound(start : float = 0, pitch : float = 1) -> void:
+	SoundMngr.play_sound(_sound, start, pitch)
 
 func save() -> Dictionary:
 	var data : Dictionary = {
@@ -150,6 +154,9 @@ static func from_dict(data : Dictionary) -> EMC_Action:
 	var type_gui : String = data.get("type_gui", "")
 	var description : String = data.get("description", "")
 	var e_coin : int = data.get("e_coin", 0)
+	var p_progresses_day_period : bool = data.get("progresses_day_period", true)
+	var sound : String = data.get("sound", "BasicItem")
+	
 	var prompt := ""
 	
-	return EMC_Action.new(action_id, action_name, constraints, consequences, type_gui, description, prompt, e_coin)
+	return EMC_Action.new(action_id, action_name, constraints, consequences, type_gui, description, prompt, e_coin, p_progresses_day_period, sound)

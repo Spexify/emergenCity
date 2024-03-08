@@ -1,12 +1,33 @@
 extends Node
 
+const SFX_PATH : String = "res://res/SFX/"
+
 var _buttons : Array
 var _guis : Array
+var _last_sound : AudioStreamPlayer
 
-@onready var musik := $Musik
-@onready var button := $Button
-@onready var open_gui := $OpenGUI
-@onready var close_gui := $CloseGUI
+@onready var musik : AudioStreamPlayer = $Musik
+@onready var button : AudioStreamPlayer = $Button
+@onready var open_gui : AudioStreamPlayer = $OpenGUI
+@onready var close_gui : AudioStreamPlayer = $CloseGUI
+
+func _init() -> void:
+	var dir := DirAccess.open(SFX_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file_name : String = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".wav"):
+				var sound := ResourceLoader.load(SFX_PATH + file_name)
+				var player :=  AudioStreamPlayer.new()
+				player.stream = sound
+				player.name = file_name.get_basename().to_camel_case()
+				add_child(player)
+				print("Found Sound: " + file_name.get_basename().to_camel_case())
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+
 
 func _ready() -> void:
 	_connect_to_buttons()
@@ -35,19 +56,27 @@ func play_musik() -> void:
 	musik.play()
 
 func play_sound(sound : String, start : float = 0, pitch : float = 1) -> void:
+	if sound == "":
+		return
+	
 	var sound_player : AudioStreamPlayer
 	for player in get_children():
-		if sound.to_lower() == player.get_name().to_lower():
+		if sound.to_camel_case() == player.get_name().to_camel_case():
 			sound_player = player
 			break
 	if sound_player == null:
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
 		return
 
-	var tmp_pitch : float = sound_player.get_pitch_scale()
 	sound_player.set_pitch_scale(pitch)
 	sound_player.play(start)
-	#sound_player.set_pitch_scale(tmp_pitch)
+	_last_sound = sound_player
+	
+func is_sound_finished() -> Signal:
+	return _last_sound.finished 
+	
+func vibrate(time : int = 250) -> void:
+	Input.vibrate_handheld(time)
 
 #######################################Private Methods##############################################
 
