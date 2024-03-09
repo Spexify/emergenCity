@@ -42,3 +42,8 @@ if TradeMngr.is_trade_feasible()
 else
 	Petro: Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}!
 => END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Petro: Ich sollte wohl meinen Erste-Hilfe Kasten zuhause austauschen...
+=> END

@@ -34,7 +34,7 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
 
-var _opt_event_consequences_after_dialogue: Dictionary = {}
+#var _opt_event_consequences_after_dialogue: Dictionary = {}
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -189,15 +189,15 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	## on the tag name after the optional event and save the consequences to execute them once the 
 	## dialogue is finished
 	for opt_event in _opt_event_mngr.get_active_events():
-		var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
-		if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
-			for spawn_NPCs in spawn_NPCs_arr:
-				if _stage_mngr.get_curr_stage_name() == spawn_NPCs.stage_name && \
-				p_NPC_name == spawn_NPCs.NPC_name:
-					starting_tag = opt_event.name
-					_opt_event_consequences_after_dialogue = opt_event.consequences
-					#deactivate already the event
-					_opt_event_mngr.deactivate_event(opt_event.name)
+		if _stage_mngr.get_curr_stage_name() == opt_event.stage_name:
+			var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
+			if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+				for spawn_NPCs in spawn_NPCs_arr:
+					if p_NPC_name == spawn_NPCs.NPC_name:
+						starting_tag = opt_event.name
+						#_opt_event_consequences_after_dialogue = opt_event.consequences
+						#deactivate already the event
+						#_opt_event_mngr.deactivate_event(opt_event.name)
 	
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
@@ -206,7 +206,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
 	
-	dialogue_GUI.start(dialogue_resource, starting_tag)
+	dialogue_GUI.start(dialogue_resource, starting_tag, [_opt_event_mngr])
 	Global.get_tree().paused = true
 
 
@@ -224,13 +224,13 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	#execute optional event consequences if there are any
 	## TODO: Stupid solution,
 	## the consequences should be actively triggered inside the dialogue itself
-	if !_opt_event_consequences_after_dialogue.is_empty():
-		for key: String in _opt_event_consequences_after_dialogue.keys():
-			var params : Variant = _opt_event_consequences_after_dialogue[key]
-			Callable(_day_mngr.get_action_consequences(), key).call(params)
-		
-		#clear the temporary variable and deactivate the event
-		_opt_event_consequences_after_dialogue = {}
+	#if !_opt_event_consequences_after_dialogue.is_empty():
+		#for key: String in _opt_event_consequences_after_dialogue.keys():
+			#var params : Variant = _opt_event_consequences_after_dialogue[key]
+			#Callable(_day_mngr.get_action_consequences(), key).call(params)
+		#
+		##clear the temporary variable and deactivate the event
+		#_opt_event_consequences_after_dialogue = {}
 
 
 ################################################################################

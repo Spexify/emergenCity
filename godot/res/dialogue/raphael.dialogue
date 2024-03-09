@@ -32,3 +32,32 @@ if TradeMngr.is_trade_feasible()
 else
 	Raphael: Tut mir Leid, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END
+
+
+~ NEIGHBORHOOD_PARTY
+if not has_exectuted_consequences_of_event("NEIGHBORHOOD_PARTY")
+	=> FREE_FOOD
+else
+	Raphael: Hast du schon mit den anderen geschnackt?
+=> END
+
+
+~ FREE_FOOD
+Raphael: Willkommen auf der Nachbarschaftsfete!
+Raphael: Wir mussten ja jede Menge Krisen in letzter Zeit durchstehen.
+Raphael: Endlich hat sich der Bürgermeister durchgerungen, das Fest hier zu finanzieren.
+Raphael: Was willst du haben?
+- Bratfisch mit Pommes, bitte
+	Raphael: Einmal Bratfisch und Pommes, verstanden!
+	do execute_extra_consequence("add_items_by_name", "FISH_N_CHIPS")
+	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
+- Einen Teller Gulasch, bitte
+	Raphael: Ein Teller Gulasch kommt sofort!
+	do execute_extra_consequence("add_items_by_name", "GOULASH")
+	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
+- Reis mit Gemüse, bitte
+	Raphael: Hier!
+	do execute_extra_consequence("add_items_by_name", "RICE_WITH_VEGETABLES")
+	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
+Avatar: Danke!
+=> END

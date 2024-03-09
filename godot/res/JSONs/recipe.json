@@ -137,4 +137,10 @@
 		"input_item_names": ["FISH", "SALT"],
 		"output_item_name": "SOUP",
 	},
+	{
+		"needs_water": false,
+		"needs_heat": true,
+		"input_item_names": ["FISH", "POTATOES"],
+		"output_item_name": "FISH_N_CHIPS",
+	},
 ]

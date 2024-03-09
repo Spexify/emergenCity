@@ -28,3 +28,14 @@ Julia: Dafür gibt es Chlortabletten: Die reinigen verschmutztes Wasser aus der 
 Julia: Manchmal teilt der THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt.
 Avatar: Danke für den Tipp!
 => END
+
+
+~ NEIGHBORHOOD_PARTY
+Julia: Wir reden grade mit Leonie über Bücher.
+Julia: Liest du lieber was oder schaust du eher Filme?
+- Filme
+	Leonie: Ehrlich gesagt mag ich Filme genauso sehr! Kommt wirklich auf den Film an.
+	Julia: Wird Zeit für nen Filmabend, Leonie!
+- Bücher
+	Julia: Wir sollten unseren eigenen Bücherclub gründen! 
+=> END

@@ -57,6 +57,19 @@ func constraint_not_evening(p_reason: String = "") -> String:
 		return NO_REJECTION
 
 
+func no_active_crisis(p_reason: String = "") -> String:
+	if OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:
+		return "Momentan ist das Wasser nicht OK!"
+	if OverworldStatesMngr.get_electricity_state() != OverworldStatesMngr.ElectricityState.UNLIMITED:
+		return "Momentan ist der Strom nicht OK!"
+	if OverworldStatesMngr.get_isolation_state() != OverworldStatesMngr.IsolationState.NONE:
+		return "Momentan ist eine Isolations-Krise aktiv!"
+	if OverworldStatesMngr.get_food_contamination_state() != OverworldStatesMngr.FoodContaminationState.NONE:
+		return "Momentan ist eine Essensbefall-Krise aktiv!"
+	
+	return NO_REJECTION
+	
+
 func constraint_no_limited_public_access(p_reason: String = "") -> String:
 	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
 		var reason := "Es herrscht momentan ein Betretugsverbot öffentlicher Gelände!" if p_reason == "" else p_reason 

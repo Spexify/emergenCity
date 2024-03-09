@@ -153,6 +153,8 @@
 		"descr": "Achtung vor den Gräten!",
 		"comps": [
 			{"name": "cost", "params": 40},
+			{"name": "food", "params": 1},
+			{"name": "healthy", "params": -2},
 			{"name": "shelflife", "params": 2}
 		]
 	},
@@ -204,6 +206,8 @@
 		"descr": "Nur wenige Sorten (und nur sehr frische Stücke) sind roh genießbar, der Rest sollte dringend durchgebraten werden.",
 		"comps": [
 			{"name": "cost", "params": 100},
+			{"name": "food", "params": 1},
+			{"name": "healthy", "params": -2},
 			{"name": "shelflife", "params": 6}
 		]
 	},
@@ -390,5 +394,14 @@
 			{"name": "cost", "params": 30},
 			{"name": "uses", "params": 5}
 		]
-	}
+	},
+	{
+		"ID": 43,
+		"name": "Bratfisch mit Pommes",
+		"descr": "Fettig, aber lecker.",
+		"comps": [
+			{"name": "food", "params": 2},
+			{"name": "pleasurable", "params": 1},
+		]
+	},
 ]

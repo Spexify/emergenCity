@@ -31,3 +31,9 @@ Kris: Stimmt ja. Oh, und was ist mit Milchreis?
 Veronika: ... Kris. Keine Milch.
 Kris: Achja. Na gut. Dann nächstes Mal.
 => END
+
+
+~ NEIGHBORHOOD_PARTY
+Kris: Hey, endlich mal keine Krisen grade.
+Kris: Da kann man wieder seine sozialen Kontakte pflegen.
+=> END

@@ -144,21 +144,22 @@ func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
 	
 	#Optional Event NPCs
 	for opt_event in _opt_event_mngr.get_active_events():
-		var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
-		if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
-			for spawn_NPCs in spawn_NPCs_arr:
-				if get_curr_stage_name() == spawn_NPCs.stage_name:
+		if get_curr_stage_name() == opt_event.stage_name:
+			var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
+			if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
+				for spawn_NPCs in spawn_NPCs_arr:
 					_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
 
 
 func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 		var NPC := $NPCs.get_node(p_NPC_name)
 		if NPC == null:
-			printerr("StageMngr.update_NPCs(): Unknown NPC Name!")
+			printerr("StageMngr.update_NPCs(): Unknown NPC Name: " + p_NPC_name)
 			return
 		
 		NPC.activate()
 		NPC.position = p_spawn_pos
+
 
 ## Returns a Dictonary cotaining every actives NPC position
 func get_all_active_npcs() -> Dictionary:
@@ -480,11 +481,11 @@ func _place_upgrade_furniture() -> void:
 
 func _place_optional_event_entities() -> void:
 	for opt_event in _opt_event_mngr.get_active_events():
-		#Spawn Tiles
-		var spawn_tiles_arr := opt_event.spawn_tiles_arr
-		if spawn_tiles_arr != null && !spawn_tiles_arr.is_empty():
-			for spawn_tiles in spawn_tiles_arr:
-				if get_curr_stage_name() == spawn_tiles.stage_name:
+		if get_curr_stage_name() == opt_event.stage_name:
+			#Spawn Tiles
+			var spawn_tiles_arr := opt_event.spawn_tiles_arr
+			if spawn_tiles_arr != null && !spawn_tiles_arr.is_empty():
+				for spawn_tiles in spawn_tiles_arr:
 					_place_furniture_on_position(spawn_tiles.tilemap_pos, spawn_tiles.atlas_coord, \
 					spawn_tiles.tiles_cols, spawn_tiles.tiles_rows, spawn_tiles.overwrite_existing_tiles)
 		##ARE OVERWRITTEN BY LATER RESPAWN, so just included in respawn itself:

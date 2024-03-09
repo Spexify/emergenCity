@@ -105,18 +105,22 @@ func get_active_crises_descr() -> String:
 	return res
 
 
+## TODO Bad name, should be renamed!
 func get_water_crisis_status() -> WaterState:
 	return _allowed_water_crisis
 
 
+## TODO Bad name, should be renamed!
 func get_electricity_crisis_status() -> ElectricityState:
 	return _allowed_electricity_crisis
 
 
+## TODO Bad name, should be renamed!
 func get_isolation_crisis_status() -> IsolationState:
 	return _allowed_isolation_crisis
 
 
+## TODO Bad name, should be renamed!
 func get_food_contamination_crisis_status() -> FoodContaminationState:
 	return _allowed_food_contamination_crisis
 

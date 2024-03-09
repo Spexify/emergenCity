@@ -9,3 +9,14 @@ Irena: Ist es auch!
 	Irena: Ist aber meine[wait=0.5],\nÄäätschi bätsch!
 - Zurück
 => END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Irena: Das Feuerwehrauto is [speed=0.5]SOOOO[/speed] groß!
+Irena: Meins zuhause ist viel auch cool.
+Irena: Ich glaub, wenn ich groß bin will ich vielleicht Feuerwehrfrau werden.
+Irena: [speed=1.5]Oder Schauspielerin.[/speed] [wait=0.5]Im Fernsehn.
+Irena: [speed=1.5]Oder Pilotin.[/speed]
+Irena: [speed=0.4]Oooooder[/speed] vielleicht Superheldin!
+Irena: Aber ich glaube Astronautin zu werden reicht mir auch.
+=> END

@@ -36,3 +36,9 @@ if TradeMngr.is_trade_feasible()
 else
 	Veronika: Oh, {{TradeMngr.get_unfeasibility_reason()}}!
 => END
+
+
+~ NEIGHBORHOOD_PARTY
+Veronika: Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat.
+Veronika: Aber das Essen ist echt lecker[wait=0.5] ...und umsonst!
+=> END

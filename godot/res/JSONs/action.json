@@ -57,15 +57,13 @@
         "id": 2003,
         "type": "change_stage",
         "name": "zum Park",
-        "constraints": {
-            "constraint_not_evening": "Abends kann der Park gefährlich sein."
-        },
+        "constraints": { },
         "consequences": {
             "change_stage": {
                 "stage_name": "park",
                 "avatar_pos": {"x": 350, "y": 700},
                 "npc_pos": {
-                    "Gerhard": {"x": 160, "y": 730},
+                    "Gerhard": {"x": 460, "y": 960},
                     "Friedel": {"x": 80, "y": 730}
                 }
             }

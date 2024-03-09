@@ -4,14 +4,12 @@ class_name EMC_OptionalEventMngr
 
 ## Tuple class, you're welcome to access its public (!) members directly
 class SpawnNPCs:
-	var stage_name: String
 	var NPC_name: String
 	var pos: Vector2
 
 
 ## Tuple class, you're welcome to access its public (!) members directly
 class SpawnTiles:
-	var stage_name: String
 	var tilemap_pos: Vector2i
 	var atlas_coord: Vector2i
 	var tiles_cols: int
@@ -28,11 +26,14 @@ class Event:
 	var active_periods: int
 	var constraints: Dictionary
 	var consequences: Dictionary
+	var consequences_executed: bool = false
+	var stage_name: String
 	var spawn_NPCs_arr: Array[SpawnNPCs]
 	var spawn_tiles_arr: Array[SpawnTiles]
 	
+	
 	func _init(p_name: String, p_propability: int, p_descr: String, p_announce_only_on_radio: bool,
-	p_active_periods: int, p_constraints: Dictionary, p_consequences: Dictionary, 
+	p_active_periods: int, p_constraints: Dictionary, p_consequences: Dictionary, p_stage_name: String,
 	p_spawn_NPCs_arr: Array[SpawnNPCs], p_spawn_tiles_arr: Array[SpawnTiles]) -> void:
 		name = p_name
 		propability = p_propability
@@ -41,6 +42,7 @@ class Event:
 		active_periods = p_active_periods
 		constraints = p_constraints
 		consequences = p_consequences
+		stage_name = p_stage_name
 		spawn_NPCs_arr = p_spawn_NPCs_arr
 		spawn_tiles_arr = p_spawn_tiles_arr
 
@@ -55,8 +57,8 @@ var _opt_event_probability_countdown : int
 var _tooltip_GUI: EMC_TooltipGUI
 var _active_events: Array[Event]
 var _known_active_events: Array[Event]
-var _constraints: EMC_ActionConstraints
-var _consequences: EMC_ActionConsequences
+var _executable_constraints: EMC_ActionConstraints
+var _executable_consequences: EMC_ActionConsequences
 
 ########################################## PUBLIC METHODS ##########################################
 ## Constructor
@@ -74,6 +76,13 @@ func get_active_event(p_name: String) -> Event:
 		if event.name == p_name:
 			return event
 	return null
+
+
+func has_exectuted_consequences_of_event(p_name: String) -> bool:
+	var active_event := get_active_event(p_name)
+	if active_event == null: return true
+	
+	return active_event.consequences_executed
 
 
 func set_event_as_known(p_name: String) -> void:
@@ -101,11 +110,34 @@ func deactivate_event(p_name: String) -> bool:
 
 
 func set_constraints(p_constraints: EMC_ActionConstraints) -> void:
-	_constraints = p_constraints
+	_executable_constraints = p_constraints
 
 
 func set_consequences(p_consqeuences: EMC_ActionConsequences) -> void:
-	_consequences = p_consqeuences
+	_executable_consequences = p_consqeuences
+
+
+func execute_consequences(p_active_event_name: String) -> void:
+	var active_event := get_active_event(p_active_event_name)
+	if active_event == null: return
+	
+	for key : String in active_event.consequences.keys():
+		var params : Variant = active_event.consequences[key]
+		Callable(_executable_consequences, key).call(params)
+	
+	active_event.consequences_executed = true
+
+
+## As this doesn't flag know the active event it's operating on, you most likely want 
+## to call flag_consequences_as_executed afterwards
+func execute_extra_consequence(p_consequence: String, p_param: Variant) -> void:
+	Callable(_executable_consequences, p_consequence).call(p_param)
+
+
+func flag_consequences_as_executed(p_active_event_name: String) -> void:
+	var active_event := get_active_event(p_active_event_name)
+	if active_event == null: return
+	active_event.consequences_executed = true
 
 ########################################## PRIVATE METHODS #########################################
 func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
@@ -123,7 +155,7 @@ func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 
 
 func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
-	var possible_opt_events := JsonMngr.get_possible_opt_events(_constraints)
+	var possible_opt_events := JsonMngr.get_possible_opt_events(_executable_constraints)
 	
 	#Dependend on the propability choose one to activate
 	var indices: Array[int]
@@ -144,7 +176,3 @@ func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 		_tooltip_GUI.open(chosen_event.descr)
 
 
-func _execute_consequences(p_cons: Dictionary) -> void:
-	for key : String in p_cons.keys():
-		var params : Variant = p_cons[key]
-		Callable(_consequences, key).call(params)

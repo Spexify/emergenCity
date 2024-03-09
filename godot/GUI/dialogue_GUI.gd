@@ -42,7 +42,7 @@ var dialogue_line: DialogueLine:
 		character_label.visible = not dialogue_line.character.is_empty()
 		var portrait_path: String
 		if dialogue_line.character.to_lower() == "avatar":
-			character_label.text = tr("Du", "dialogue")
+			character_label.text = tr("Ich", "dialogue")
 			portrait_path = "res://res/sprites/characters/portrait_" + dialogue_line.character.to_lower() + \
 				"_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"
 		else:

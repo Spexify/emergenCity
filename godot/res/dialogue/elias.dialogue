@@ -26,3 +26,10 @@ if TradeMngr.is_trade_feasible()
 else
 	Elias: [#mood=sad]Tja, {{TradeMngr.get_unfeasibility_reason()}} leider!
 => END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Elias: Warum ich hier bin?
+Elias: Ich will eine Mitarbeiter-Schulung für mein Unternehmen zum Thema Brandmaßnahmen aufsetzen.
+Elias: "Safety first", wie man so schön sagt.
+=> END

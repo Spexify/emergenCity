@@ -22,7 +22,7 @@ enum DayPeriod {
 var _history : Array[EMC_DayCycle]
 #MRM: Technically redundant: _current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var _current_day_cycle : EMC_DayCycle 
-var _period_cnt : DayPeriod = DayPeriod.MORNING
+var _period_cnt : int = 0
 
 var gui_refs : Array[EMC_ActionGUI]
 var _tooltip_GUI : EMC_TooltipGUI

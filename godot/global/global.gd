@@ -112,18 +112,16 @@ func reset_state() -> void:
 	save_game_file.store_string(json_string)
 	save_game_file.flush()
 
+
 func reset_inventory() -> void:
 	_inventory = create_inventory_with_starting_items()
-	
+
+
 func reset_upgrades_equipped() -> void:
 	_upgrades_equipped = [null, null, null]
 
+
 func save_game(p_was_crisis : bool) -> void:
-	if _inventory == null:
-		#MRM: I want to test partial Scenes with F6 but it still tries to save
-		return
-	###################SAVE GAME######################
-	
 	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
 	var data : Dictionary = {
@@ -140,7 +138,7 @@ func save_game(p_was_crisis : bool) -> void:
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
-
+	
 	# Store the save dictionary as a new line in the save file.
 	save_game_file.store_line(json_string)
 	
@@ -153,13 +151,13 @@ func save_game(p_was_crisis : bool) -> void:
 			if !node.has_method("save"):
 				print("Save node '%s' is missing a save() function, skipped" % node.name)
 				continue
-
+				
 			# Call the node's save function.
 			var node_data : Dictionary = node.call("save")
-
+			
 			# JSON provides a static method to serialized JSON string.
 			json_string = JSON.stringify(node_data)
-
+			
 			# Store the save dictionary as a new line in the save file.
 			save_state.store_line(json_string)
 

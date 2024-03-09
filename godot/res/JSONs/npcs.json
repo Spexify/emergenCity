@@ -56,5 +56,9 @@
         "name": "Raphael",
         "pitch": 0.7,
         "trade": {"in": ["SAUCE_JAR"], "out": ["POTATOES"]}
-    }
+    },
+    {
+        "name": "Walter",
+        "pitch": 0.45,
+    },
 ]

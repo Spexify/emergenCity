@@ -48,3 +48,9 @@ if TradeMngr.is_trade_feasible()
 else
 	Agathe: [#mood=sad]Oh jemine, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END
+
+
+~ NEIGHBORHOOD_PARTY
+Agathe: Beinahe hätte ich diese Fete hier verpasst!
+Agathe: Gut, dass ich immer Radio höre.
+=> END

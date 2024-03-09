@@ -336,6 +336,7 @@ func load_opt_events() -> void:
 		var active_periods: int = opt_event_data.get("active_periods")
 		var constraints: Dictionary = opt_event_data.get("constraints")
 		var consequences: Dictionary = opt_event_data.get("consequences")
+		var stage_name: String = opt_event_data.get("stage_name", "error").to_lower()
 		
 		#Dynamic tiles spawns
 		var dynamic_tiles_dict : Array[Dictionary]
@@ -344,7 +345,6 @@ func load_opt_events() -> void:
 		
 		for entry in dynamic_tiles_dict:
 			var new_dynamic_tiles := EMC_OptionalEventMngr.SpawnTiles.new()
-			new_dynamic_tiles.stage_name = entry.get("stage_name", "error").to_lower()
 			new_dynamic_tiles.tilemap_pos = Vector2i(entry.get("tilemap_x_pos", -1),
 		 											 entry.get("tilemap_y_pos", -1))
 			new_dynamic_tiles.atlas_coord = Vector2i(entry.get("atlas_x_coord", -1),
@@ -362,7 +362,6 @@ func load_opt_events() -> void:
 		
 		for spawn_NPC_dict_entry in spawn_NPCs_dict:
 			var new_NPC_spawn := EMC_OptionalEventMngr.SpawnNPCs.new()
-			new_NPC_spawn.stage_name = spawn_NPC_dict_entry.get("stage_name", "error").to_lower()
 			new_NPC_spawn.NPC_name = spawn_NPC_dict_entry.get("NPC_name", "error") #NOT TO LOWER!
 			new_NPC_spawn.pos = Vector2(spawn_NPC_dict_entry.get("x_pos", -1), \
 										spawn_NPC_dict_entry.get("y_pos", -1))
@@ -373,7 +372,7 @@ func load_opt_events() -> void:
 		## Create new optional event
 		var opt_event: EMC_OptionalEventMngr.Event = \
 			EMC_OptionalEventMngr.Event.new(_name, propability, descr, announce_only_on_radio, \
-				active_periods, constraints, consequences, spawn_NPCs, spawn_tiles)
+				active_periods, constraints, consequences, stage_name, spawn_NPCs, spawn_tiles)
 		_opt_events.append(opt_event)
 	
 	_is_opt_events_loaded = true
@@ -389,6 +388,9 @@ func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Arr
 				return false
 		return true
 		)
+	
+	##TODO: Also check, that the location at which NPCs are spawned isn't already used in a currently
+	## active opt. event (otherhwise the events would collide!)
 	
 	return filtered
 
