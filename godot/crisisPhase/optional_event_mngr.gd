@@ -47,13 +47,13 @@ class Event:
 		spawn_tiles_arr = p_spawn_tiles_arr
 
 
-#OEP = Optional Event countdown
+#OEC = Optional Event Countdown
+var _opt_event_countdown : int
 const OEC_LOWER_BOUND : int = 2
 const OEC_UPPER_BOUND : int = 4 
 #const OE_ACTIVE_PERIODS: int = 2 #Amount of periods that an event stays active
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _opt_event_probability_countdown : int
 var _tooltip_GUI: EMC_TooltipGUI
 var _active_events: Array[Event]
 var _known_active_events: Array[Event]
@@ -64,7 +64,8 @@ var _executable_consequences: EMC_ActionConsequences
 ## Constructor
 func _init(p_tooltip_GUI: EMC_TooltipGUI) -> void:
 	_tooltip_GUI = p_tooltip_GUI
-	_opt_event_probability_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
+	_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
+	_rng.randomize()
 
 
 func get_active_events() -> Array[Event]:
@@ -148,10 +149,10 @@ func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 			deactivate_event(event.name)
 	
 	#See if new event should be started
-	_opt_event_probability_countdown -= 1
-	if _opt_event_probability_countdown == 0:
+	_opt_event_countdown -= 1
+	if _opt_event_countdown == 0:
 		_create_new_optional_event(p_new_period)
-		_opt_event_probability_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
+		_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
 
 
 func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:

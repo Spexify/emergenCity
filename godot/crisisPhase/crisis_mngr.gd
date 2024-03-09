@@ -36,6 +36,7 @@ var _food_contamination_crisis_length_countdown : int = 1
 var _inventory : EMC_Inventory
 
 func setup(p_backpack : EMC_Inventory) -> void: 
+	_rng.randomize()
 	_inventory = p_backpack
 	
 	_possible_water_crisis = OverworldStatesMngr.get_water_crisis_status()
@@ -113,6 +114,7 @@ func _refresh() -> int:
 	#+ "   food_contamination crisis: " + str(_food_contamination_crisis_length_countdown))
 	
 	return cnt
+
 
 ## start counting time with day_mngr
 func check_crisis_status(p_curr_day: int) -> void:

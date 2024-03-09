@@ -44,7 +44,7 @@ enum Frame{
 	BACKSIDE = 1
 }
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 ## Das Navigationsziel des Avatars setzen
 ##TODO: In TechDoku aufnehmen: _nav_agent.is_target_reachable(): #funzt net
 func set_target(p_target_pos: Vector2) -> void:
@@ -207,9 +207,16 @@ func load_state(data : Dictionary) -> void:
 func get_home() -> void:
 	EMC_StageMngr
 	set_global_position(Vector2i(250, 750))
-	
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+
+## After each day, the vitals of the avatar have to be adjusted
+func update_vitals() -> void:
+	sub_nutrition(3) 
+	sub_hydration(3)
+	sub_health(1)
+
+
+########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	nutrition_updated.emit(get_unit_nutrition_status())
 	hydration_updated.emit(get_unit_hydration_status())
@@ -270,8 +277,3 @@ func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:
 		load("res://res/sprites/characters/sprite_avatar_" + p_avatar_sprite_suffix + ".png")
 
 
-## After each day, the vitals of the avatar have to be adjusted
-func _on_day_mngr_day_ended(p_curr_day: int) -> void:
-	sub_nutrition(3) 
-	sub_hydration(3)
-	sub_health(1)

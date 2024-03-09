@@ -1,5 +1,5 @@
 extends EMC_GUI
-class_name EMC_PopUpGUI
+class_name EMC_PopUpGUI #should probably be called "PUEventGUI" as only Pop-up EVENTS use it
 
 var _current_action : EMC_PopUpAction
 var _previous_pause_state: bool

@@ -32,9 +32,9 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _showerGUI := $GUI/VBC/LowerSection/ShowerGUI
 @onready var _cs_GUI := $GUI/VBC/LowerSection/ChangeStageGUI
 
+#Optional event manager needs to be instantiated here because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
-
-#var _opt_event_consequences_after_dialogue: Dictionary = {}
+@onready var _pu_event_mngr: EMC_PopupEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -109,17 +109,20 @@ func _ready() -> void:
 	action_guis.append(_confirmation_GUI as EMC_ActionGUI)
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, action_guis, _tooltip_GUI, \
-		_confirmation_GUI, seodGUI, egGUI, puGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr)
+		_confirmation_GUI, seodGUI, egGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr)
+	
+	#Not the nicest of solutions:
+	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
+	_opt_event_mngr.set_consequences(_day_mngr.get_action_consequences())
+	_pu_event_mngr = EMC_PopupEventMngr.new(_day_mngr, puGUI, _day_mngr.get_action_constraints(), _day_mngr.get_action_consequences())
 	
 	## Connect signals to script-only classes (no Scene/Node so we can't connect it in the editor):
 	_day_mngr.period_ended.connect(_opt_event_mngr._on_day_mngr_period_ended)
+	_day_mngr.period_ended.connect(_pu_event_mngr._on_day_mngr_period_ended)
 	_day_mngr.day_ended.connect(_crisis_mngr.check_crisis_status)
 	_day_mngr.day_ended.connect(_backpack._on_day_mngr_day_ended)
 	
-	#Not the nices of solutions:
-	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
-	_opt_event_mngr.set_consequences(_day_mngr.get_action_consequences())
-	
+	#Setup DayPeriod Transition Screen
 	$DayPeriodTransition._on_day_mngr_day_ended(_day_mngr.get_current_day())
 	
 	#Tutorial intro dialogue
@@ -195,9 +198,6 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 				for spawn_NPCs in spawn_NPCs_arr:
 					if p_NPC_name == spawn_NPCs.NPC_name:
 						starting_tag = opt_event.name
-						#_opt_event_consequences_after_dialogue = opt_event.consequences
-						#deactivate already the event
-						#_opt_event_mngr.deactivate_event(opt_event.name)
 	
 	#Dialogue GUI can't be instantiated in editor, because it eats up all mouse input,
 	#even when it's hidden! :(
@@ -220,17 +220,6 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	$InputBlock.hide()
 	
 	Global.get_tree().paused = false
-	
-	#execute optional event consequences if there are any
-	## TODO: Stupid solution,
-	## the consequences should be actively triggered inside the dialogue itself
-	#if !_opt_event_consequences_after_dialogue.is_empty():
-		#for key: String in _opt_event_consequences_after_dialogue.keys():
-			#var params : Variant = _opt_event_consequences_after_dialogue[key]
-			#Callable(_day_mngr.get_action_consequences(), key).call(params)
-		#
-		##clear the temporary variable and deactivate the event
-		#_opt_event_consequences_after_dialogue = {}
 
 
 ################################################################################

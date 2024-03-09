@@ -20,6 +20,7 @@ var notification: String
 
 ## Constructor of one scenario instance
 func _init() -> void:
+	_rng.randomize()
 	var index := _rng.randi_range(LOWER_BOUND, UPPER_BOUND)
 	var scenario_data : Dictionary = _all_scenarios.values()[index-1]
 	crisis_name = _all_scenarios.keys()[index-1]

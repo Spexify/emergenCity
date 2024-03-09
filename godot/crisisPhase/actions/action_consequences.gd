@@ -25,6 +25,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr, p_crisis_mngr: EMC_CrisisMngr) -> void:
 	_day_mngr = p_day_mngr
 	_tooltip_GUI = p_tooltip_GUI
 	_opt_event_mngr = p_opt_event_mngr
+	_rng.randomize()
 
 ############################################ Avatar ################################################
 

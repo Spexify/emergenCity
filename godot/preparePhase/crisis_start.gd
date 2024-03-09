@@ -20,6 +20,7 @@ var _scenario : EMC_CrisisScenario
 
 
 func _on_continue_pressed() -> void:
+	_rng.randomize()
 	if $CanvasLayer/VBoxContainer/VBoxContainer/HSlider.value == 0:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_EASY, LENGTH_UPPER_BOUND_EASY)
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)

@@ -1,5 +1,4 @@
 extends Control
-
 class_name EMC_DayMngr
 ## [EMC_DayMngr] manages all [EMC_Action]'s. 
 ## The [EMC_Action]'s a triggered via [method EMC_DayMngr.on_interacted_with_furniture].
@@ -24,6 +23,9 @@ var _history : Array[EMC_DayCycle]
 var _current_day_cycle : EMC_DayCycle 
 var _period_cnt : int = 0
 
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+#References to other scenes:
 var gui_refs : Array[EMC_ActionGUI]
 var _tooltip_GUI : EMC_TooltipGUI
 var _confirmation_GUI: EMC_ConfirmationGUI
@@ -33,14 +35,6 @@ var _puGUI : EMC_PopUpGUI
 var _avatar : EMC_Avatar
 var _stage_mngr : EMC_StageMngr
 var _crisis_mngr : EMC_CrisisMngr
-
-var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-
-# hyperparameters for random pop-up- and optional events respectively
-var _puGUI_probability_countdown : int
-const PU_LOWER_BOUND : int = 3
-const PU_UPPER_BOUND : int = 6
-
 var _inventory : EMC_Inventory
 var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
@@ -53,8 +47,7 @@ gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
 p_confirmation_GUI: EMC_ConfirmationGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
-egGUI : EMC_EndGameGUI, 
-puGUI : EMC_PopUpGUI,
+egGUI : EMC_EndGameGUI,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
 p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
@@ -66,13 +59,11 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_seodGUI = seodGUI
 	_egGUI = egGUI
 	_inventory = p_inventory
-	_puGUI = puGUI
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
 		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
 	self.gui_refs = gui_refs
 	_rng.randomize()
-	_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)
 	_update_HUD()
 
 
@@ -159,7 +150,6 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 		_: push_error("Current day period unassigned!")
 	self._period_cnt += 1
 	_update_HUD()
-	_check_pu_counter()
 	period_ended.emit(get_current_day_period())
 
 
@@ -174,18 +164,19 @@ func _execute_consequences(p_action: EMC_Action) -> void:
 ## Defines what happens after the "summery and of day" GUI is closed
 func _on_seod_closed() -> void:
 	self._period_cnt += 1
-	#Send avatar back home on a new day
-	_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
-	_stage_mngr.deactivate_NPCs()
-	_avatar.set_global_position(Vector2i(250, 650))
+	_avatar.update_vitals()
 	
-	_update_HUD()
-	_check_pu_counter()
-	#Order has to be this way, because the transition animation needs to update
-	#its day first:
-	day_ended.emit(get_current_day())
-	period_ended.emit(get_current_day_period())
-	_check_game_over()
+	if !_check_game_over():
+		#Order has to be this way, because the transition animation needs to update
+		#its day first:
+		day_ended.emit(get_current_day())
+		period_ended.emit(get_current_day_period())
+		#Update HUD after period_ended (as this triggers the transition)
+		_update_HUD()
+		#Send avatar back home on a new day
+		_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
+		_stage_mngr.deactivate_NPCs()
+		_avatar.set_global_position(Vector2i(250, 650))
 
 
 func _check_game_over() -> bool:
@@ -276,25 +267,12 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 				"ConfirmationGUI", "-", "Willst du das Kurbelradio benutzen?", 0)
 		
 		#FYI: Stage Change actions and others are imported via JSON
-		
 		var id: 
 			if 2000 <= id and id < 3000:
 				result = JsonMngr.id_to_action(id) as EMC_StageChangeAction
 			else:
 				push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
-				
+	
 	result.executed.connect(_on_action_executed)
 	result.silent_executed.connect(_on_action_silent_executed)
 	return result
-
-
-################################### Pop Up Events ##################################################
-func _check_pu_counter() -> void:
-	_puGUI_probability_countdown -= 1
-	if _puGUI_probability_countdown == 0:
-		var _action : EMC_PopUpAction = JsonMngr.get_pop_up_action(_action_constraints)
-		if _action != null:
-			_action.executed.connect(_on_action_executed)
-			_action.silent_executed.connect(_on_action_silent_executed)
-			_puGUI.open(_action)
-		_puGUI_probability_countdown = _rng.randi_range(PU_LOWER_BOUND,PU_UPPER_BOUND)

@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://buhj6araogehg" path="res://GUI/book_GUI.tscn" id="16_eg1dm"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
-[ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://GUI/day_period_transition.tscn" id="21_6msld"]
+[ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://animations/day_period_transition.tscn" id="21_6msld"]
 [ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
@@ -218,7 +218,6 @@ offset_bottom = 40.0
 [connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_backpack_btn_pressed"]
 [connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="." method="_on_day_mngr_day_ended"]
-[connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="Avatar" method="_on_day_mngr_day_ended"]
 [connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_day_ended"]
 [connection signal="period_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_period_ended"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
