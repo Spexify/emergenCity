@@ -251,7 +251,7 @@
         "type": "action",
         "name": "HELP_MERT",
         "constraints": {},
-        "consequences": {"add_items_by_name": "WATER"},
+        "consequences": {"add_items_by_name": "WATER", "add_happiness": 1},
         "type_gui": "",
         "description": "Mit Mert Wasser verteilt.",
         "e_coin": 50

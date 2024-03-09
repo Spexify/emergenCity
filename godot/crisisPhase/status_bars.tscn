@@ -119,27 +119,27 @@ offset_right = 100.0
 offset_bottom = 30.0
 bbcode_enabled = true
 
-[node name="HappinnessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
+[node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
 layout_mode = 2
 
-[node name="ContainerHappinness" type="Container" parent="HBC/VBoxContainer2/HappinnessCont"]
+[node name="ContainerHappiness" type="Container" parent="HBC/VBoxContainer2/HappinessCont"]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="HappinnessIcon" type="Sprite2D" parent="HBC/VBoxContainer2/HappinnessCont/ContainerHappinness"]
+[node name="HappinessIcon" type="Sprite2D" parent="HBC/VBoxContainer2/HappinessCont/ContainerHappiness"]
 position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("5_xfaii")
 
-[node name="HappinnessBar" type="ProgressBar" parent="HBC/VBoxContainer2/HappinnessCont"]
+[node name="HappinessBar" type="ProgressBar" parent="HBC/VBoxContainer2/HappinessCont"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0
 show_percentage = false
 
-[node name="HappinnessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinnessCont/HappinnessBar"]
+[node name="HappinessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinessCont/HappinessBar"]
 clip_contents = false
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 0
@@ -150,4 +150,4 @@ bbcode_enabled = true
 [connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont" to="." method="_on_health_cont_gui_input"]
-[connection signal="gui_input" from="HBC/VBoxContainer2/HappinnessCont" to="." method="_on_happinness_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont" to="." method="_on_happiness_cont_gui_input"]

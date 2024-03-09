@@ -33,7 +33,7 @@ func add_health(p_value: int) -> void:
 	_avatar.add_health(p_value)
 
 func add_happiness(p_value: int) -> void:
-	_avatar.add_happinness(p_value)
+	_avatar.add_happiness(p_value)
 
 ############################################ Items #################################################
 

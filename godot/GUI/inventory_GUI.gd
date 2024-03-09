@@ -236,9 +236,9 @@ func _on_consume_pressed() -> void:
 		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item.get_comp(EMC_IC_Pleasurable)
 		if pleasurable_comp != null:
 			if pleasurable_comp.get_happinness_change() < 0:
-				_avatar.sub_happinness(pleasurable_comp.get_happinness_change())
+				_avatar.sub_happinness(pleasurable_comp.get_happiness_change())
 			elif pleasurable_comp.get_happinness_change() >= 0 :
-				_avatar.add_happinness(pleasurable_comp.get_happinness_change())
+				_avatar.add_happiness(pleasurable_comp.get_happiness_change())
 				
 		var healthy_comp : EMC_IC_Healthy = _clicked_item.get_comp(EMC_IC_Healthy)
 		if healthy_comp != null:

@@ -8,13 +8,14 @@ Irena: Ich habe eine neue Rakete, die muss ich dir unbedingt zeigen!
 	Irena: Guck mal, die hier hat noch mehr Antriebe als die andere Rakete!
 	Avatar: Das ist ja klasse! Und wohin fliegt die?
 	Irena: Mindestens bis zum Jupiter! [speed=0.3]Wuuuuschhhh!![/speed]
-	do execute("HELP_PETRO")
+	Du beschäftigst Irena mit Spielen und lernst dabei mehr über Flugzeuge als du willst.
 	Petro: Da bin ich wieder! Hattet ihr zwei Spaß?
 	Irena: Jaaa!
 	Petro: Das freut mich! Übrigens, im Baumarkt waren gerade Akkus im Angebot. Ich dachte, du brauchst vielleicht welche?
 	Avatar: Oh super, danke!
 	Petro: Kein Problem! Man sieht sich!
 	Irena: Tschüüüüss! [speed=0.3]Wuuuuschhhh!![/speed]
+	do execute("HELP_PETRO")
 	=> END
 - Ablehnen
 	Avatar: Tut mir leid, das passt mir gerade nicht gut.

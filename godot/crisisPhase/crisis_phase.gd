@@ -210,7 +210,6 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 
 ## Is called when a dialogue ends
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	
 	#Block input for a while, so no accidental misclicks happen
 	const INPUT_BLOCK_DURATION: float = 0.4
 	$InputBlock.show()

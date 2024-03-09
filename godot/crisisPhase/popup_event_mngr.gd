@@ -5,8 +5,8 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _popup_event_countdown : int
 #PUEC = Pop-Up Event Countdown:
-const PUEC_LOWER_BOUND : int = 1
-const PUEC_UPPER_BOUND : int = 1
+const PUEC_LOWER_BOUND : int = 3
+const PUEC_UPPER_BOUND : int = 6
 
 var _day_mngr: EMC_DayMngr
 var _puGUI: EMC_PopUpGUI
