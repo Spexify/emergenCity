@@ -257,7 +257,6 @@ func _physics_process(_delta: float) -> void:
 	
 	# Update velocity
 	velocity = MOVE_SPEED * input_direction
-	#print(velocity)
 	_nav_agent.set_velocity(velocity)
 
 
@@ -269,9 +268,7 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
-	# move_and_slide() uses the characters velocity to move them on the map
-	#print(velocity)
-	move_and_slide()
+	move_and_slide() #uses the characters velocity to move them on the map
 
 
 func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:

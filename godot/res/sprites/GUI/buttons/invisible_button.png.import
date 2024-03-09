@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp0iweoxe0jx2"
-path="res://.godot/imported/button_inventory_slot.png-85548bb2a4b7ca7dda5c02f44ec3a9db.ctex"
+uid="uid://f8j852tv3e22"
+path="res://.godot/imported/invisible_button.png-4c71de5f254b51c0bd0fe5a3a0ef3ee7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/gui/button_inventory_slot.png"
-dest_files=["res://.godot/imported/button_inventory_slot.png-85548bb2a4b7ca7dda5c02f44ec3a9db.ctex"]
+source_file="res://res/sprites/GUI/buttons/invisible_button.png"
+dest_files=["res://.godot/imported/invisible_button.png-4c71de5f254b51c0bd0fe5a3a0ef3ee7.ctex"]
 
 [params]
 

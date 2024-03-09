@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_mgugj"]
 [ext_resource type="Texture2D" uid="uid://ukcbiovx5a4l" path="res://res/sprites/characters/sprite_dummy.png" id="2_3c1j3"]
-[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/gui/invisible_button.png" id="3_d42ls"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/sprites/GUI/buttons/invisible_button.png" id="3_d42ls"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u2dm"]
 radius = 18.0

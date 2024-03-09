@@ -247,6 +247,8 @@ func name_to_pop_up_action(p_name : String) -> EMC_PopUpAction:
 	return null
 
 
+## CAUTION: Because the same array is used there is a risk, that a reference is manipulated during runtime
+## which could lead to unexpected behaviour! Ideally the filtered entry should be duplicated!!!
 func get_pop_up_action(action_constraint : EMC_ActionConstraints) -> EMC_PopUpAction:
 	var filtered : Array[EMC_PopUpAction] = _pop_up_actions.filter(func (action : EMC_PopUpAction) -> bool: 
 		for key : String in action.get_constraints_prior():
@@ -378,6 +380,8 @@ func load_opt_events() -> void:
 	_is_opt_events_loaded = true
 
 
+## CAUTION: Because the same array is used there is a risk, that a reference is manipulated during runtime
+## which could lead to unexpected behaviour! Ideally the filtered entry should be duplicated!!!
 func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Array[EMC_OptionalEventMngr.Event]:
 	var filtered : Array[EMC_OptionalEventMngr.Event] = _opt_events.filter(func (opt_event: EMC_OptionalEventMngr.Event) -> bool: 
 		for key : String in opt_event.constraints:

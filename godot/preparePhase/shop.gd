@@ -119,7 +119,6 @@ func _add_balance(value : int) -> void:
 
 ## Display information of clicked [EMC_Item]
 func _display_info(sender: EMC_Item) -> void:
-	#print(_balance)
 	
 	#Name of the item
 	var label_name := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox/Name
@@ -153,8 +152,3 @@ func _on_home_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	Global.set_inventory(_inventory)
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
-
-
-#func _on_inventory_grid_gui_input(event: InputEvent) -> void:
-	#if event is InputEventScreenDrag:
-		#print("dragged") #TODO: Maybe manually implement scrolling for Shop??

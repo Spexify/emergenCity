@@ -94,11 +94,11 @@ func _refresh() -> int:
 		_electricity_crisis_length_countdown = 2
 		_electricity_crisis_probability_countdown = _rng.randi_range(ELECTRICITY_LOWER_BOUND, ELECTRICITY_UPPER_BOUND)
 	if _isolation_crisis_length_countdown <= 0:
-		OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.IsolationState.NONE) #MRM: Bugfix: Enum instead of Magic number
+		OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.IsolationState.NONE)
 		_isolation_crisis_length_countdown = 2
 		_isolation_crisis_probability_countdown = _rng.randi_range(ISOLATION_LOWER_BOUND, ISOLATION_UPPER_BOUND)
 	if _food_contamination_crisis_length_countdown <= 0:
-		OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.FoodContaminationState.NONE)  #MRM: Bugfix: Enum instead of Magic number
+		OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.FoodContaminationState.NONE) 
 		_food_contamination_crisis_length_countdown = 2
 		_food_contamination_crisis_probability_countdown = _rng.randi_range(FOOD_CONTAMINATION_LOWER_BOUND, FOOD_CONTAMINATION_UPPER_BOUND)
 	
@@ -112,10 +112,6 @@ func _refresh() -> int:
 	if _possible_food_contamination_crisis != OverworldStatesMngr.FoodContaminationState.NONE:
 		_food_contamination_crisis_probability_countdown -= 1
 	
-	#print("water crisis: " + str(_water_crisis_length_countdown) + "   electricity crisis: " + str(_electricity_crisis_length_countdown)\
-	#+ "   isolation crisis: " + str(_isolation_crisis_length_countdown)
-	#+ "   food_contamination crisis: " + str(_food_contamination_crisis_length_countdown))
-	
 	return cnt
 
 
@@ -123,12 +119,6 @@ func _refresh() -> int:
 ## Returns the value that showed_new_crises() returns
 func check_crisis_status() -> bool:
 	var active_crises_cnt := _refresh()
-	
-	#print("water status: " + str(OverworldStatesMngr.get_water_state()))
-	#print("electricity status: " + str(OverworldStatesMngr.get_electricity_state()))
-	#print("isolation status: " + str(OverworldStatesMngr.get_isolation_state()))
-	#print("food_contamination status: " + str(OverworldStatesMngr.get_food_contamination_state()))
-	#print("Water Crisis in Days: " + str(_water_crisis_probability_countdown))
 	
 	if active_crises_cnt < _max_crisis_overlap:
 		if _possible_water_crisis != EMC_OverworldStatesMngr.WaterState.NONE:
@@ -142,9 +132,6 @@ func check_crisis_status() -> bool:
 	
 	return await _show_new_crises_info()
 
-
-#func get_curr_scenario() -> void:
-	#return _scenario
 
 ########################################## PRIVATE METHODS #########################################
 func _water_crisis_mngr() -> void:

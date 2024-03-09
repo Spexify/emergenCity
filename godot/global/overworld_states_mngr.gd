@@ -69,10 +69,9 @@ func set_crisis_difficulty(p_scenario_name : String = "", _p_water_crisis: Water
 	_number_crisis_overlap = _p_number_crisis_overlap
 	_notification = p_notification
 	
-	print("Crisis length:" + str(_crisis_length))
-	
 	#if !Global._tutorial_done:
 		#_electricity_state = ElectricityState.NONE
+
 
 func get_number_crisis_overlap() -> int:
 	return _number_crisis_overlap
@@ -198,7 +197,7 @@ func get_food_contamination_state_descr() -> String:
 	match _food_contamination_state:
 		FoodContaminationState.NONE:
 			if _electricity_state == ElectricityState.NONE:
-				return "Reduzierte Haltbarkeit (Kühlschrank ohne Strom)"
+				return "Reduz. Essens-Haltbarkeit"
 			else: return "Kein Problem."
 		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
 	return ""

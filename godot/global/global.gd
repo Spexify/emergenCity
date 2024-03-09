@@ -149,7 +149,7 @@ func save_game(p_was_crisis : bool) -> void:
 		for node in save_nodes:
 			# Check the node has a save function.
 			if !node.has_method("save"):
-				print("Save node '%s' is missing a save() function, skipped" % node.name)
+				printerr("Save node '%s' is missing a save() function, skipped" % node.name)
 				continue
 				
 			# Call the node's save function.
@@ -174,7 +174,7 @@ func load_game() -> void:
 
 	var parse_result : Error = json.parse(json_string)
 	if not parse_result == OK:
-		print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		printerr("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 		data = {}
 	else:
 		data = json.get_data()
@@ -248,7 +248,7 @@ func load_state() -> void:
 		
 		var parse_result : Error = json.parse(json_string)
 		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			printerr("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 		
 		var node_data : Dictionary = json.get_data()

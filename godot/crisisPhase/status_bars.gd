@@ -17,7 +17,6 @@ func setup(p_tooltip_GUI: EMC_TooltipGUI) -> void:
 
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 	var perc: int = float(p_new_value)  #float() Casting wichtig!
-	#print(perc)
 	$HBC/VBoxContainer/NutritionCont/NutritionBar.max_value = EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION
 	$HBC/VBoxContainer/NutritionCont/NutritionBar/CaloriesLabel.text = "[color=white][center]" + str(perc) +" kcal[/center][/color]"
 	$HBC/VBoxContainer/NutritionCont/NutritionBar.set_value_no_signal(perc)

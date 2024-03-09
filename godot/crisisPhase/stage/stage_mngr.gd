@@ -250,7 +250,6 @@ func _create_upgrade_furniture(p_upgrade_ID: EMC_Upgrade.IDs, p_position: Vector
 	var atlas_base_y_coord: int = floor(p_upgrade_ID/float(ATLAS_UPGRADE_COLUMNS)) * ATLAS_UPGRADE_HEIGHT + \
 		BASE_Y_COORD_OFFSET
 	var atlas_base_coord: Vector2i = Vector2i(atlas_base_x_coord, atlas_base_y_coord);
-	#print("Upgrade Base coord:" + str(atlas_base_coord))
 	
 	#Offsets for 3x3 grid
 	var offsets := [Vector2(-1, -2), Vector2( 0, -2), Vector2( 1, -2),
@@ -444,7 +443,6 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 
 
 func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
-	#print("NPC " + p_NPC.get_name() + " was clicked")
 	_last_clicked_tile = null
 	_last_clicked_NPC = p_NPC
 	var offset: Vector2 = Vector2.ZERO

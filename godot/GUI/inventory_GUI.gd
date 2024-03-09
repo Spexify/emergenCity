@@ -222,7 +222,6 @@ func _on_consume_pressed() -> void:
 		if  drink_comp != null:
 			_avatar.add_hydration(drink_comp.get_hydration())
 		if food_comp != null:
-			print(food_comp.get_nutritionness())
 			_avatar.add_nutrition(food_comp.get_nutritionness())
 		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
 		if unpalatable_comp != null:

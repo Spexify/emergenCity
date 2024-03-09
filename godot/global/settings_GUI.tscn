@@ -56,24 +56,29 @@ theme_override_constants/separation = 50
 
 [node name="Continue" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Speichern & Zurück"
 
 [node name="SelectAvatar" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Charakter auswählen"
 
 [node name="Sound" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Sound"
 
 [node name="FontChange" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "Dyslexic Font"
 
 [node name="Reset" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
 text = "Spiel zurücksetzen"
 
 [node name="Sounds" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]

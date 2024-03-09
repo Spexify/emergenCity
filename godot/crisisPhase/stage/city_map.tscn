@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="1_qljbr"]
 [ext_resource type="Script" path="res://crisisPhase/stage/city_map.gd" id="2_a4fhc"]
-[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/gui/invisible_button.png" id="3_mb2ha"]
-[ext_resource type="Texture2D" uid="uid://df0rwks1tmv7q" path="res://res/gui/button_back.png" id="4_gh8se"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/sprites/GUI/buttons/invisible_button.png" id="3_wxrxy"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_b0mqi"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
 [ext_resource type="Texture2D" uid="uid://11wqmydgbpf2" path="res://res/sprites/GUI/icons/icon_pin_event.png" id="6_um0qv"]
@@ -61,7 +61,7 @@ offset_left = 277.0
 offset_top = 478.0
 offset_right = 405.0
 offset_bottom = 606.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="BackBtn" type="TextureButton" parent="." groups=["Button"]]
 visible = false
@@ -73,7 +73,7 @@ offset_right = 548.0
 offset_bottom = 995.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture_normal = ExtResource("4_gh8se")
+texture_normal = ExtResource("4_b0mqi")
 
 [node name="MarketBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -82,7 +82,7 @@ offset_left = 140.0
 offset_top = 880.0
 offset_right = 268.0
 offset_bottom = 1008.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="PenthouseBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -91,7 +91,7 @@ offset_left = 333.0
 offset_top = 735.0
 offset_right = 461.0
 offset_bottom = 863.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="TownhallBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -100,7 +100,7 @@ offset_left = 34.0
 offset_top = 736.0
 offset_right = 162.0
 offset_bottom = 864.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="RowhouseBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -109,7 +109,7 @@ offset_left = 96.0
 offset_top = 510.0
 offset_right = 224.0
 offset_bottom = 638.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="ComplexBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -118,7 +118,7 @@ offset_left = 83.0
 offset_top = 347.0
 offset_right = 211.0
 offset_bottom = 475.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="GardenhouseBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -127,7 +127,7 @@ offset_left = 365.0
 offset_top = 314.0
 offset_right = 493.0
 offset_bottom = 442.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="MansionBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -136,7 +136,7 @@ offset_left = 434.0
 offset_top = 158.0
 offset_right = 562.0
 offset_bottom = 286.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="ParkBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -145,7 +145,7 @@ offset_left = 369.0
 offset_top = 539.0
 offset_right = 497.0
 offset_bottom = 667.0
-texture_normal = ExtResource("3_mb2ha")
+texture_normal = ExtResource("3_wxrxy")
 
 [node name="HomePin" type="Sprite2D" parent="."]
 process_mode = 3

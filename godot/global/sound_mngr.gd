@@ -23,10 +23,10 @@ func _init() -> void:
 				player.stream = sound
 				player.name = file_name.get_basename().to_camel_case()
 				add_child(player)
-				print("Found Sound: " + file_name.get_basename().to_camel_case())
+				#print("Found Sound: " + file_name.get_basename().to_camel_case())
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path.")
+		printerr("An error occurred when trying to access the path.")
 
 
 func _ready() -> void:
@@ -71,10 +71,12 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> void:
 	sound_player.set_pitch_scale(pitch)
 	sound_player.play(start)
 	_last_sound = sound_player
-	
+
+
 func is_sound_finished() -> Signal:
 	return _last_sound.finished 
-	
+
+
 func vibrate(time : int = 250) -> void:
 	Input.vibrate_handheld(time)
 
@@ -84,6 +86,7 @@ func _connect_to_buttons() -> void:
 	_buttons = get_tree().get_nodes_in_group("Button")
 	for inst : Node in _buttons:
 		inst.connect("pressed", on_button_pressed, CONNECT_REFERENCE_COUNTED)
+
 
 func _connect_to_guis() -> void:
 	_guis = get_tree().get_nodes_in_group("Gui")

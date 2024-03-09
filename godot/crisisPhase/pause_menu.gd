@@ -37,7 +37,12 @@ func update_overworld_states() -> void:
 	_water_state_value.text = "[color=white]" + OverworldStatesMngr.get_water_state_descr() + "[/color]"
 	_isolation_state_icon.frame =  OverworldStatesMngr.get_isolation_state()
 	_isolation_state_value.text = "[color=white]" + OverworldStatesMngr.get_isolation_state_descr() + "[/color]"
+	
+	#Reduced shelflive of food is a special case:
 	_foodcontam_state_icon.frame =  OverworldStatesMngr.get_food_contamination_state()
+	if _foodcontam_state_icon.frame == OverworldStatesMngr.SemaphoreColors.GREEN && \
+	_electricity_state_icon.frame != OverworldStatesMngr.SemaphoreColors.GREEN:
+		_foodcontam_state_icon.frame = OverworldStatesMngr.SemaphoreColors.YELLOW
 	_foodcontam_state_value.text = "[color=white]" + OverworldStatesMngr.get_food_contamination_state_descr() + "[/color]"
 
 

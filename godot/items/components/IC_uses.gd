@@ -8,7 +8,7 @@ var _uses: String = "3 uses left"
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func _init(_p_max_uses : int) -> void:
-	super("Uses", Color.AQUAMARINE)
+	super("Uses", Color.DARK_CYAN)
 	_uses_left = _p_max_uses
 	#_MAX_USES = _p_max_uses
 	#
@@ -29,8 +29,8 @@ func use_item(_p_uses : int = 1) -> void:
 	_uses_left -=_p_uses
 	if _uses_left < 0 :
 		_uses_left = 0
- 	
-	
+
+
 func get_name_with_values() -> String:
 	return str(_uses_left) + " Nutzungen übrig."
 
