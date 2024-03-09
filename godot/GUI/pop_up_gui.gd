@@ -4,6 +4,7 @@ class_name EMC_PopUpGUI #should probably be called "PUEventGUI" as only Pop-up E
 var _current_action : EMC_PopUpAction
 var _previous_pause_state: bool
 
+
 func _ready() -> void:
 	hide()
 

@@ -218,6 +218,4 @@ offset_bottom = 40.0
 [connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_backpack_btn_pressed"]
 [connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="." method="_on_day_mngr_day_ended"]
-[connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_day_ended"]
-[connection signal="period_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="DayPeriodTransition" method="_on_day_mngr_period_ended"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

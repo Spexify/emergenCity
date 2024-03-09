@@ -89,6 +89,7 @@ fit_content = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 max_value = 2.0
+value = 1.0
 tick_count = 3
 ticks_on_borders = true
 

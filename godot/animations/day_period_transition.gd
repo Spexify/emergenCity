@@ -1,10 +1,13 @@
 extends Node2D
 class_name EMC_DayPeriodTransition
 
+signal finished
+
 const FADE_IN_ANIM := "fade_in"
 const FADE_OUT_ANIM := "fade_out"
 const AMPLITUDE = 200
 const SPEED : float = 3.0
+
 var ONE_PERIOD_RADIAN := PI / (EMC_DayMngr.DayPeriod.size() - 1)
 var distance_factor := 1.0
 var _MAX_TIME: float = 1.0/SPEED #+ _START_TIME
@@ -15,15 +18,9 @@ var _time: float
 var _rad_offset: float
 
 
-########################################## PRIVATE METHODS #########################################
-func _ready() -> void:
-	$Marker_Morning.position = _get_position_for_period(EMC_DayMngr.DayPeriod.MORNING)
-	$Marker_Noon.position = _get_position_for_period(EMC_DayMngr.DayPeriod.NOON)
-	$Marker_Evening.position = _get_position_for_period(EMC_DayMngr.DayPeriod.EVENING)
-	hide()
-
-
-func _open(p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
+########################################## PUBLIC METHODS ##########################################
+func start(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
+	$RichTextLabel.text = "[center][color=white]Tag " + str(p_curr_day) + "[/color]"
 	#_rad_offset = (1.0 * PI) + ((EMC_DayMngr.DayPeriod.size() - p_new_day_period) * 0.5 * PI)
 	var period: EMC_DayMngr.DayPeriod
 	
@@ -41,6 +38,14 @@ func _open(p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
 	show()
 	Global.get_tree().paused = true
 	$AnimationPlayer.play(FADE_IN_ANIM)
+
+
+########################################## PRIVATE METHODS #########################################
+func _ready() -> void:
+	$Marker_Morning.position = _get_position_for_period(EMC_DayMngr.DayPeriod.MORNING)
+	$Marker_Noon.position = _get_position_for_period(EMC_DayMngr.DayPeriod.NOON)
+	$Marker_Evening.position = _get_position_for_period(EMC_DayMngr.DayPeriod.EVENING)
+	hide()
 
 
 ## 
@@ -78,10 +83,6 @@ func _process(delta: float) -> void:
 			$AnimationPlayer.play(FADE_OUT_ANIM)
 
 
-func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
-	_open(p_new_period)
-
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == FADE_IN_ANIM:
 		_start_move_anim = true
@@ -89,7 +90,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == FADE_OUT_ANIM:
 		Global.get_tree().paused = false
 		hide()
-
-
-func _on_day_mngr_day_ended(p_curr_day: int) -> void:
-	$RichTextLabel.text = "[center][color=white]Tag " + str(p_curr_day) + "[/color]"
+		finished.emit()

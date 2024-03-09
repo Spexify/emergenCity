@@ -109,7 +109,8 @@ func _ready() -> void:
 	action_guis.append(_confirmation_GUI as EMC_ActionGUI)
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, action_guis, _tooltip_GUI, \
-		_confirmation_GUI, seodGUI, egGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr)
+		_confirmation_GUI, seodGUI, egGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr, \
+		$DayPeriodTransition)
 	
 	#Not the nicest of solutions:
 	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
@@ -121,9 +122,6 @@ func _ready() -> void:
 	_day_mngr.period_ended.connect(_pu_event_mngr._on_day_mngr_period_ended)
 	_day_mngr.day_ended.connect(_crisis_mngr.check_crisis_status)
 	_day_mngr.day_ended.connect(_backpack._on_day_mngr_day_ended)
-	
-	#Setup DayPeriod Transition Screen
-	$DayPeriodTransition._on_day_mngr_day_ended(_day_mngr.get_current_day())
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: _play_tutorial_dialogue()

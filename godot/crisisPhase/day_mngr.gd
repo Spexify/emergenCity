@@ -26,7 +26,7 @@ var _period_cnt : int = 0
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 #References to other scenes:
-var gui_refs : Array[EMC_ActionGUI]
+var _gui_refs : Array[EMC_ActionGUI]
 var _tooltip_GUI : EMC_TooltipGUI
 var _confirmation_GUI: EMC_ConfirmationGUI
 var _seodGUI : EMC_SummaryEndOfDayGUI
@@ -38,22 +38,24 @@ var _crisis_mngr : EMC_CrisisMngr
 var _inventory : EMC_Inventory
 var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
-
+var _day_period_transition: EMC_DayPeriodTransition
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(avatar_ref : EMC_Avatar, stage_mngr : EMC_StageMngr,
+func setup(p_avatar : EMC_Avatar, p_stage_mngr : EMC_StageMngr,
 p_crisis_mngr : EMC_CrisisMngr,
-gui_refs : Array[EMC_ActionGUI],
+p_gui_refs : Array[EMC_ActionGUI],
 p_tooltip_GUI : EMC_TooltipGUI,
 p_confirmation_GUI: EMC_ConfirmationGUI,
 seodGUI: EMC_SummaryEndOfDayGUI,
 egGUI : EMC_EndGameGUI,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
-p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
-	_avatar = avatar_ref
-	_stage_mngr = stage_mngr
+p_opt_event_mngr: EMC_OptionalEventMngr,
+p_day_period_transition: EMC_DayPeriodTransition) -> void:
+	_avatar = p_avatar
+	_stage_mngr = p_stage_mngr
 	_crisis_mngr = p_crisis_mngr
+	_gui_refs = p_gui_refs
 	_confirmation_GUI = p_confirmation_GUI
 	_tooltip_GUI = p_tooltip_GUI
 	_seodGUI = seodGUI
@@ -62,7 +64,8 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
 		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
-	self.gui_refs = gui_refs
+	_day_period_transition = p_day_period_transition
+	
 	_rng.randomize()
 	_update_HUD()
 
@@ -117,7 +120,7 @@ func get_action_consequences() -> EMC_ActionConsequences:
 
 ########################################## PRIVATE METHODS #########################################
 func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
-	for ref: EMC_ActionGUI in self.gui_refs:
+	for ref: EMC_ActionGUI in _gui_refs:
 		if ref.name == p_name:
 			return ref
 	return null
@@ -135,6 +138,7 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 func _advance_day_time(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
+	var test := get_tree().paused
 	match get_current_day_period():
 		DayPeriod.MORNING:
 			_current_day_cycle = EMC_DayCycle.new()
@@ -150,6 +154,9 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 		_: push_error("Current day period unassigned!")
 	self._period_cnt += 1
 	_update_HUD()
+	
+	_day_period_transition.start(get_current_day(), get_current_day_period())
+	await _day_period_transition.finished
 	period_ended.emit(get_current_day_period())
 
 
@@ -167,6 +174,8 @@ func _on_seod_closed() -> void:
 	_avatar.update_vitals()
 	
 	if !_check_game_over():
+		_day_period_transition.start(get_current_day(), get_current_day_period())
+		await _day_period_transition.finished
 		#Order has to be this way, because the transition animation needs to update
 		#its day first:
 		day_ended.emit(get_current_day())
