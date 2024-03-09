@@ -14,7 +14,7 @@ var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
-
+var _previously_paused: bool
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
@@ -35,7 +35,8 @@ func show_gui(p_action : EMC_Action) -> void:
 
 
 func open() -> void:
-	Global.get_tree().paused = true #StageMngr necessary?? Tried to fix bug, but didn't work
+	_previously_paused = Global.get_tree().paused
+	Global.get_tree().paused = true
 	_home_pin.show()
 	
 	#Setup Current-Location-Pin
@@ -88,10 +89,7 @@ func open() -> void:
 
 
 func close() -> void:
-	## Ugly workaround, to hopefully get rid of misterious nullptr bug:
-	if _stage_mngr.get_tree() == null:
-		return
-	_stage_mngr.get_tree().paused = false
+	Global.get_tree().paused = _previously_paused
 	_curr_pos_pin.get_node("AnimationPlayer").stop()
 	_home_pin.get_node("AnimationPlayer").stop()
 	hide()

@@ -63,6 +63,7 @@ position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
 [node name="ButtonList" type="Control" parent="."]
+process_mode = 1
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -211,11 +212,12 @@ custom_minimum_size = Vector2(600, 1100)
 offset_right = 40.0
 offset_bottom = 40.0
 
+[connection signal="city_map_closed" from="StageMngr" to="." method="_on_stage_mngr_city_map_closed"]
+[connection signal="city_map_opened" from="StageMngr" to="." method="_on_stage_mngr_city_map_opened"]
 [connection signal="happiness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
-[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="GUI/VBC/MiddleSection/BackpackGUI" method="_on_backpack_btn_pressed"]
-[connection signal="day_ended" from="GUI/VBC/UpperSection/HBC/DayMngr" to="." method="_on_day_mngr_day_ended"]
+[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="." method="_on_backpack_btn_pressed"]
 [connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

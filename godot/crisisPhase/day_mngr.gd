@@ -5,8 +5,6 @@ class_name EMC_DayMngr
 ## EMC_DayMngr checks [EMC_Action]'s [member EMC_Action.constraints_prior] before calling the apropriated
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
-signal period_ended(p_new_period: DayPeriod)
-signal day_ended(p_curr_day: int)
 
 ## Enum describing the periods of a Day.
 enum DayPeriod {
@@ -21,7 +19,7 @@ enum DayPeriod {
 var _history : Array[EMC_DayCycle]
 #MRM: Technically redundant: _current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var _current_day_cycle : EMC_DayCycle 
-var _period_cnt : int = 0
+var _period_cnt : int = 0 #Keeps track of the current period (counted/summed up over all days)
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -38,6 +36,8 @@ var _crisis_mngr : EMC_CrisisMngr
 var _inventory : EMC_Inventory
 var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
+var _opt_event_mngr: EMC_OptionalEventMngr
+var _pu_event_mngr: EMC_PopupEventMngr
 var _day_period_transition: EMC_DayPeriodTransition
 
 ########################################## PUBLIC METHODS ##########################################
@@ -51,6 +51,7 @@ egGUI : EMC_EndGameGUI,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
 p_opt_event_mngr: EMC_OptionalEventMngr,
+p_pu_event_mngr: EMC_PopupEventMngr,
 p_day_period_transition: EMC_DayPeriodTransition) -> void:
 	_avatar = p_avatar
 	_stage_mngr = p_stage_mngr
@@ -64,6 +65,8 @@ p_day_period_transition: EMC_DayPeriodTransition) -> void:
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
 		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
+	_opt_event_mngr = p_opt_event_mngr
+	_pu_event_mngr = p_pu_event_mngr
 	_day_period_transition = p_day_period_transition
 	
 	_rng.randomize()
@@ -132,10 +135,11 @@ func _on_action_silent_executed(p_action : EMC_Action) -> void:
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
-	_advance_day_time(p_action)
+	_advance_day_period(p_action)
 
 
-func _advance_day_time(p_action : EMC_Action) -> void:
+## !!! Important function !!!
+func _advance_day_period(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
 	var test := get_tree().paused
@@ -149,15 +153,34 @@ func _advance_day_time(p_action : EMC_Action) -> void:
 			_current_day_cycle.evening_action = p_action
 			_history.append(_current_day_cycle)
 			_seodGUI.open(_current_day_cycle)
-			_seodGUI.closed.connect(_on_seod_closed)
-			return
+			await _seodGUI.closed
+			_avatar.update_vitals()
 		_: push_error("Current day period unassigned!")
-	self._period_cnt += 1
-	_update_HUD()
 	
+	#Actually advance the time
+	self._period_cnt += 1
+	
+	#Game over?
+	if _check_and_display_game_over(): return
+	
+	#play animation, do stuff and wait for it to finish
 	_day_period_transition.start(get_current_day(), get_current_day_period())
+	_update_HUD()
+	if get_current_day_period() == DayPeriod.MORNING:
+		_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
+		_stage_mngr.deactivate_NPCs()
+		_avatar.set_global_position(Vector2i(250, 650))
+		_inventory._on_day_mngr_day_ended(get_current_day())
 	await _day_period_transition.finished
-	period_ended.emit(get_current_day_period())
+	
+	#Events & Crises stuff
+	await _opt_event_mngr.check_for_new_event(get_current_day_period())
+	
+	if get_current_day_period() == DayPeriod.MORNING:
+		await _crisis_mngr.check_crisis_status()
+	
+	# Popup last, because it can lead to another _advance_day_period() call!!!
+	_pu_event_mngr.check_for_new_event()
 
 
 ## Execute the consequences of an action
@@ -168,27 +191,8 @@ func _execute_consequences(p_action: EMC_Action) -> void:
 		Callable(_action_consequences, key).call(params)
 
 
-## Defines what happens after the "summery and of day" GUI is closed
-func _on_seod_closed() -> void:
-	self._period_cnt += 1
-	_avatar.update_vitals()
-	
-	if !_check_game_over():
-		_day_period_transition.start(get_current_day(), get_current_day_period())
-		await _day_period_transition.finished
-		#Order has to be this way, because the transition animation needs to update
-		#its day first:
-		day_ended.emit(get_current_day())
-		period_ended.emit(get_current_day_period())
-		#Update HUD after period_ended (as this triggers the transition)
-		_update_HUD()
-		#Send avatar back home on a new day
-		_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
-		_stage_mngr.deactivate_NPCs()
-		_avatar.set_global_position(Vector2i(250, 650))
-
-
-func _check_game_over() -> bool:
+## Checks for game over conditions and displays the endscreen GUI if needed
+func _check_and_display_game_over() -> bool:
 	var avatar_life_status : bool = true
 	if _avatar.get_nutrition_status() <= 0 || _avatar.get_hydration_status() <= 0 || \
 	_avatar.get_health_status() <= 0 :

@@ -4,12 +4,13 @@ class_name EMC_SummaryEndOfDayGUI
 signal on_eat_pressed
 signal on_drink_pressed
 
+const _INV_SCN : PackedScene = preload("res://GUI/inventory_GUI.tscn")
+const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
+
 var _avatar: EMC_Avatar
 var _inventory_GUI : EMC_InventoryGUI
 var _inventory : EMC_Inventory
-const _INV_SCN : PackedScene = preload("res://GUI/inventory_GUI.tscn")
-const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
-var _has_slept : int = 0 
+var _has_slept : int = 0 #MRM: Should be called slept_cnt as "has_" is conventionally used for bools
 
 
 func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory, _p_inventory_GUI_ref: EMC_InventoryGUI) -> void:

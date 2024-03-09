@@ -4,6 +4,8 @@ class_name EMC_CrisisMngr
 ## Improvement idea: Move curr EMC_CrisisScenario reference to here from OverworldStateMngr
 
 var _day_mngr :  EMC_DayMngr
+var _inventory : EMC_Inventory
+var _tooltip_GUI : EMC_TooltipGUI
 var _max_day : int
 var _max_crisis_overlap : int = 2
 
@@ -33,11 +35,11 @@ const FOOD_CONTAMINATION_UPPER_BOUND : int = 5
 var _food_contamination_crisis_probability_countdown : int
 var _food_contamination_crisis_length_countdown : int = 1
 
-var _inventory : EMC_Inventory
 
-func setup(p_backpack : EMC_Inventory) -> void: 
+func setup(p_backpack : EMC_Inventory, p_tooltip_GUI: EMC_TooltipGUI) -> void: 
 	_rng.randomize()
 	_inventory = p_backpack
+	_tooltip_GUI = p_tooltip_GUI
 	
 	_possible_water_crisis = OverworldStatesMngr.get_water_crisis_status()
 	_possible_electricity_crisis = OverworldStatesMngr.get_electricity_crisis_status()
@@ -59,6 +61,7 @@ func setup(p_backpack : EMC_Inventory) -> void:
 
 func get_max_day() -> int:
 	return _max_day
+
 
 func set_max_day(_p_max_day : int = 3) -> void:
 	_max_day = _p_max_day
@@ -116,10 +119,9 @@ func _refresh() -> int:
 	return cnt
 
 
-## start counting time with day_mngr
-func check_crisis_status(p_curr_day: int) -> void:
-	if p_curr_day >= OverworldStatesMngr.get_crisis_length(): return
-	
+## Reduce countdowns and check the new states
+## Returns the value that showed_new_crises() returns
+func check_crisis_status() -> bool:
 	var active_crises_cnt := _refresh()
 	
 	#print("water status: " + str(OverworldStatesMngr.get_water_state()))
@@ -137,17 +139,14 @@ func check_crisis_status(p_curr_day: int) -> void:
 			_isolation_crisis_mngr()
 		if _possible_food_contamination_crisis != EMC_OverworldStatesMngr.FoodContaminationState.NONE:
 			_food_contamination_crisis_mngr()
+	
+	return await _show_new_crises_info()
 
 
 #func get_curr_scenario() -> void:
 	#return _scenario
 
 ########################################## PRIVATE METHODS #########################################
-
-#func _on_day_ended() -> void:
-	#check_crisis_status()
-
-
 func _water_crisis_mngr() -> void:
 	if _water_crisis_probability_countdown <= 0:
 		if _water_crisis_length_countdown > 0 && \
@@ -175,3 +174,16 @@ func _food_contamination_crisis_mngr() -> void:
 			_inventory.spoil_all_items()
 			if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.NONE:
 				OverworldStatesMngr.set_food_contamination_state(_possible_food_contamination_crisis)
+
+
+## If a new crises was started this period, then show an according information
+func _show_new_crises_info() -> bool:
+	var showed_new_crises: bool = false
+	var active_crises_descr := OverworldStatesMngr.get_active_crises_descr()
+	if active_crises_descr != "":
+		_tooltip_GUI.open(active_crises_descr)
+		await _tooltip_GUI.closed
+		showed_new_crises = true
+	OverworldStatesMngr.clear_active_crises_descr()
+	
+	return showed_new_crises

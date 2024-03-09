@@ -6,6 +6,8 @@ class_name EMC_StageMngr
 ## Cell = An instanciated Tile of a Tileset on a Tilemap
 ## Tilemap = Many cells
 
+signal city_map_opened
+signal city_map_closed
 
 enum Atlases{ #Tileset Atlasses
 	FURNITURE_PNG = 0,
@@ -34,7 +36,6 @@ enum CustomDataLayers{
 }
 
 const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
-
 
 const STAGENAME_HOME: String = "home"
 #Public Locations:
@@ -126,7 +127,7 @@ func change_stage(p_stage_name: String) -> void:
 		_place_upgrade_furniture()
 	
 	#Optional Events:
-	_place_optional_event_entities()
+	_place_optional_event_tiles()
 	
 	#Hide Tooltip-Layer while game is playing
 	const INVISIBLE := Color(0, 0, 0, 0)
@@ -351,7 +352,8 @@ func _is_tile_out_of_bounds(p_tile_coord: Vector2i) -> bool:
 	return false
 
 
-## TODO
+## Checks multiple distinct layers for collision polygons. If any of them contain one then true
+## is returned, otherwise false is returned
 func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	const PHYSICS_LAYER: int = 0
 	if (p_tile_coord.x < 0 || p_tile_coord.y < 0):
@@ -460,10 +462,12 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 
 func _on_city_map_opened() -> void:
 	_curr_stage.hide() #Hide Stage so clicks don't register on tiles anymore
+	city_map_opened.emit()
 
 
 func _on_city_map_closed() -> void:
 	_curr_stage.show()
+	city_map_closed.emit()
 
 
 func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:
@@ -479,7 +483,7 @@ func _place_upgrade_furniture() -> void:
 			_create_upgrade_furniture(upgrade_ID, spawn_pos)
 
 
-func _place_optional_event_entities() -> void:
+func _place_optional_event_tiles() -> void:
 	for opt_event in _opt_event_mngr.get_active_events():
 		if get_curr_stage_name() == opt_event.stage_name:
 			#Spawn Tiles
@@ -488,10 +492,3 @@ func _place_optional_event_entities() -> void:
 				for spawn_tiles in spawn_tiles_arr:
 					_place_furniture_on_position(spawn_tiles.tilemap_pos, spawn_tiles.atlas_coord, \
 					spawn_tiles.tiles_cols, spawn_tiles.tiles_rows, spawn_tiles.overwrite_existing_tiles)
-		##ARE OVERWRITTEN BY LATER RESPAWN, so just included in respawn itself:
-		##Spawn NPCs
-		#var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
-		#if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
-			#for spawn_NPCs in spawn_NPCs_arr:
-				#if get_curr_stage_name() == spawn_NPCs.stage_name:
-					#_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)

@@ -140,8 +140,8 @@ func flag_consequences_as_executed(p_active_event_name: String) -> void:
 	if active_event == null: return
 	active_event.consequences_executed = true
 
-########################################## PRIVATE METHODS #########################################
-func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
+
+func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 	#See if event should end
 	for event: Event in _active_events:
 		event.active_periods -= 1
@@ -151,11 +151,17 @@ func _on_day_mngr_period_ended(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 	#See if new event should be started
 	_opt_event_countdown -= 1
 	if _opt_event_countdown == 0:
-		_create_new_optional_event(p_new_period)
+		var new_event := _create_new_optional_event(p_new_period)
 		_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
+		print("Event started:" + new_event.name) ##Test
+		
+		if !new_event.announce_only_on_radio && new_event.descr != "":
+			_tooltip_GUI.open(new_event.descr)
+			await _tooltip_GUI.closed
 
 
-func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
+########################################## PRIVATE METHODS #########################################
+func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> Event:
 	var possible_opt_events := JsonMngr.get_possible_opt_events(_executable_constraints)
 	
 	#Dependend on the propability choose one to activate
@@ -172,8 +178,7 @@ func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 	#Activate the chosen event
 	if chosen_event.active_periods > 0:
 		_active_events.append(chosen_event)
-		print("Event started:" + chosen_event.name) ##Test
-	if !chosen_event.announce_only_on_radio && chosen_event.descr != "":
-		_tooltip_GUI.open(chosen_event.descr)
+	
+	return chosen_event
 
 

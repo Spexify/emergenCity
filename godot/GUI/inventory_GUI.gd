@@ -23,13 +23,14 @@ signal seod_inventory_closed
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
+
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar : EMC_Avatar
 var _only_inventory : bool
 var _seod : EMC_SummaryEndOfDayGUI
-
 var _has_slept : int = 0
+var _previously_paused: bool
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
@@ -87,9 +88,10 @@ func clear_items() -> void:
 
 ## Open the GUI
 func open() -> void:
+	_previously_paused = Global.get_tree().paused
+	Global.get_tree().paused = true
 	_clicked_item = null
 	show()
-	Global.get_tree().paused = true
 	opened.emit()
 	_reload_items()
 
@@ -100,7 +102,7 @@ func close() -> void:
 	close_button.emit()
 	#close_gui.play()
 	hide()
-	Global.get_tree().paused = false
+	Global.get_tree().paused = _previously_paused
 	closed.emit()
 	if !_only_inventory:
 		set_consume_idle()
@@ -116,13 +118,6 @@ func close() -> void:
 func _ready() -> void:
 	hide()
 
-## Handle the click on the backpack-button
-func _on_backpack_btn_pressed() -> void:
-	if visible == false:
-		get_viewport().set_input_as_handled()
-		open()
-	else:
-		close()
 
 func _clear_gui() -> void:
 	_label_name.clear()
@@ -235,9 +230,9 @@ func _on_consume_pressed() -> void:
 		
 		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item.get_comp(EMC_IC_Pleasurable)
 		if pleasurable_comp != null:
-			if pleasurable_comp.get_happinness_change() < 0:
-				_avatar.sub_happinness(pleasurable_comp.get_happiness_change())
-			elif pleasurable_comp.get_happinness_change() >= 0 :
+			if pleasurable_comp.get_happiness_change() < 0:
+				_avatar.sub_happiness(pleasurable_comp.get_happiness_change())
+			elif pleasurable_comp.get_happiness_change() >= 0 :
 				_avatar.add_happiness(pleasurable_comp.get_happiness_change())
 				
 		var healthy_comp : EMC_IC_Healthy = _clicked_item.get_comp(EMC_IC_Healthy)

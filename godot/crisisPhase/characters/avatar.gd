@@ -203,7 +203,8 @@ func load_state(data : Dictionary) -> void:
 	
 	var some_position : Vector2 = Vector2(data.get("x-position", 277), data.get("y-position", 601))
 	set_global_position(some_position)
-	
+
+
 func get_home() -> void:
 	EMC_StageMngr
 	set_global_position(Vector2i(250, 750))

@@ -32,9 +32,9 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _showerGUI := $GUI/VBC/LowerSection/ShowerGUI
 @onready var _cs_GUI := $GUI/VBC/LowerSection/ChangeStageGUI
 
-#Optional event manager needs to be instantiated here because the references are passed to the day_mngr
+#event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
-@onready var _pu_event_mngr: EMC_PopupEventMngr
+@onready var _pu_event_mngr: EMC_PopupEventMngr = EMC_PopupEventMngr.new(_day_mngr, puGUI)
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -44,7 +44,7 @@ func add_back_button(p_on_pressed_callback: Callable) -> void:
 	new_back_button.texture_normal = load("res://res/gui/button_back.png")
 	new_back_button.name = _BACK_BTN_NAME
 	new_back_button.pressed.connect(p_on_pressed_callback)
-	#new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
+	new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	#new_back_button.pressed.connect(remove_back_button)
 	
 	#Hide all other back buttons
@@ -75,7 +75,6 @@ func _ready() -> void:
 		##LOAD SAVE STATE
 		Global.load_state()
 	
-	
 	#Setup-Methoden
 	$InputBlock.hide()
 	OverworldStatesMngr.setup(_upgrades)
@@ -84,7 +83,7 @@ func _ready() -> void:
 	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
-	_crisis_mngr.setup(_backpack)
+	_crisis_mngr.setup(_backpack, _tooltip_GUI)
 	_status_bars.setup(_tooltip_GUI)
 	_cs_GUI.setup($StageMngr)
 	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
@@ -110,18 +109,13 @@ func _ready() -> void:
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, action_guis, _tooltip_GUI, \
 		_confirmation_GUI, seodGUI, egGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr, \
-		$DayPeriodTransition)
+		_pu_event_mngr, $DayPeriodTransition)
 	
 	#Not the nicest of solutions:
 	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
 	_opt_event_mngr.set_consequences(_day_mngr.get_action_consequences())
-	_pu_event_mngr = EMC_PopupEventMngr.new(_day_mngr, puGUI, _day_mngr.get_action_constraints(), _day_mngr.get_action_consequences())
-	
-	## Connect signals to script-only classes (no Scene/Node so we can't connect it in the editor):
-	_day_mngr.period_ended.connect(_opt_event_mngr._on_day_mngr_period_ended)
-	_day_mngr.period_ended.connect(_pu_event_mngr._on_day_mngr_period_ended)
-	_day_mngr.day_ended.connect(_crisis_mngr.check_crisis_status)
-	_day_mngr.day_ended.connect(_backpack._on_day_mngr_day_ended)
+	_pu_event_mngr.set_constraints(_day_mngr.get_action_constraints())
+	_pu_event_mngr.set_consequences(_day_mngr.get_action_consequences())
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: _play_tutorial_dialogue()
@@ -220,21 +214,31 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 
 
 ################################################################################
-func _on_backpack_gui_closed() -> void:
-	_backpack_btn.set_pressed(false)
+## Handle the click on the backpack-button
+func _on_backpack_btn_pressed() -> void:
+	if _backpack_GUI.visible == false:
+		_backpack_GUI.open()
+		$ButtonList/VBC/BackpackBtn.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	else:
+		_backpack_GUI.close()
+		$ButtonList/VBC/BackpackBtn.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 
 func _on_pause_menu_btn_pressed() -> void:
-	$ButtonList/VBC/BackpackBtn.disabled = true
+	$ButtonList/VBC/PauseMenuBtn.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	$GUI/VBC/MiddleSection/PauseMenu.open()
 
 
 func _on_pause_menu_closed() -> void:
-	$ButtonList/VBC/BackpackBtn.disabled = false
+	$ButtonList/VBC/PauseMenuBtn.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 
-func _on_day_mngr_day_ended(p_curr_day: int) -> void:
-	var active_crises_descr := OverworldStatesMngr.get_active_crises_descr()
-	if active_crises_descr != "":
-		_tooltip_GUI.open(active_crises_descr)
-	OverworldStatesMngr.clear_active_crises_descr()
+func _on_stage_mngr_city_map_opened() -> void:
+	$ButtonList/VBC/PauseMenuBtn.hide()
+	$ButtonList/VBC/BackpackBtn.hide()
+
+
+func _on_stage_mngr_city_map_closed() -> void:
+	$ButtonList/VBC/PauseMenuBtn.show()
+	$ButtonList/VBC/BackpackBtn.show()
+

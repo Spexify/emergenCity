@@ -8,6 +8,7 @@ signal stayed_on_same_stage
 var _stage_mngr: EMC_StageMngr
 ## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
 var _last_SC_action: EMC_StageChangeAction
+var _previously_paused: bool
 
 
 func setup(p_stage_mngr: EMC_StageMngr) -> void:
@@ -16,13 +17,14 @@ func setup(p_stage_mngr: EMC_StageMngr) -> void:
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action: EMC_Action) -> void:
+	_previously_paused = Global.get_tree().paused
 	Global.get_tree().paused = true
 	_action = p_action
 	var stage_change_action: EMC_StageChangeAction = _action
 	
 	if _stage_mngr.get_curr_stage_name() == stage_change_action.get_stage_name():
+		close() #Order important: First close yourself, then emit signal
 		stayed_on_same_stage.emit()
-		close()
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
 			_richtext_label.text = "Willst du " + \
@@ -35,8 +37,10 @@ func show_gui(p_action: EMC_Action) -> void:
 
 
 func _on_confirm_btn_pressed() -> void:
-	var curr_SC_action: EMC_StageChangeAction = _action
+	#First close the GUI (order important, as the pause-mode otherwise isn't set back correctly)
+	close()
 	
+	var curr_SC_action: EMC_StageChangeAction = _action #downcast
 	curr_SC_action.silent_executed.emit(curr_SC_action)
 	
 	if _last_SC_action != null:
@@ -52,11 +56,10 @@ func _on_confirm_btn_pressed() -> void:
 	else:
 		_last_SC_action = curr_SC_action
 	
-	close()
 
 
 func close() -> void:
-	Global.get_tree().paused = false
+	Global.get_tree().paused = _previously_paused
 	hide()
 	closed.emit()
 
