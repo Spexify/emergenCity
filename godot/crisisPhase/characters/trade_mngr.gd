@@ -1,6 +1,12 @@
 extends Node
 class_name EMC_TradeMngr
 ## TradeMngr has to be global, because the dialogue-system can only access global class's members
+## TODO: Refactor idea: Remove TradeBids from NPC-JSON (and in NPC class), and just setup the 
+## bid-items directly through the "setup_next_trade" function, one String parameter for input items,
+## one for output items (multiple item names separated by semicolon).
+## This allows for cleaner code, no dependency to the stage mngr/NPC classes and also more dynamic
+## trade options, as you can directly choose what to offer in the dialogue. (For example if you have
+## a "flea market" optional event where special trades, then special trades could be possible.)
 
 class TradeBid:
 	var sought_items: Array[int]  #from perspective of NPC

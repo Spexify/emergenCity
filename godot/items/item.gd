@@ -1,6 +1,8 @@
 extends Control
 class_name EMC_Item
 
+static var ITEMS_TEXTURE : Texture2D = preload("res://res/sprites/items.png")
+
 signal clicked(sender: EMC_Item)
 
 ##Better use: JsonMngr.item_name_to_id(<string from item_ids.json>)
@@ -75,17 +77,21 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 	var tmp_comps : Array = data.get("comps", [])
 	_comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 
+
 ##Getter for _ID
 func get_ID() -> IDs:
 	return _ID
+
 
 ##Getter for _descr
 func get_descr() -> String:
 	return _descr
 
+
 ##Getter for _comps
 func get_comps() -> Array[EMC_ItemComponent]:
 	return _comps
+
 
 ## Getter for concrete [EMC_ItemComponent]
 ## If no component of that type could be found, null is returned instead.
@@ -100,14 +106,17 @@ func get_comp(p_classname: Variant) -> EMC_ItemComponent:
 			return comp
 	return null
 
+
 ## Ability to add components
 func add_comp(p_comp: EMC_ItemComponent) -> void:
 	_comps.push_back(p_comp)
+
 
 ## Ability to remove components
 func remove_comp(p_classname: Variant) -> void:
 	var comp_to_be_removed := get_comp(p_classname)
 	_comps.erase(comp_to_be_removed)
+
 
 ##@depracated
 func copy_item() -> EMC_Item:
@@ -116,6 +125,7 @@ func copy_item() -> EMC_Item:
 	copied_item._descr = _descr
 	copied_item._comps = _comps
 	return copied_item
+
 
 ## This Method returns all infomation the Item in form of a Dictionary
 func to_dict() -> Dictionary:
@@ -134,6 +144,7 @@ func to_dict() -> Dictionary:
 	
 	return data
 
+
 ## This Method returns relevant infomation of the Item in form of a Dictionary.
 ## Relevant information includes:
 ## - ID
@@ -151,6 +162,7 @@ func to_save() -> Dictionary:
 	
 	return data
 
+
 ## Returns a new Item constructed out of a Dictionary containing all information of the Item
 static func from_dict(data : Dictionary) -> EMC_Item:
 	var item : EMC_Item = _ITEM_SCN.instantiate()
@@ -162,6 +174,7 @@ static func from_dict(data : Dictionary) -> EMC_Item:
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	
 	return item
+
 
 ## Returns a new Item constructed out of a Dictionary containing relevant information of the Item.
 ## For this to work JsonMngr must already have loaded all Items.
@@ -183,25 +196,37 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	
 	return item
 
+
 func consumed_sound() -> void:
 	SoundMngr.play_sound(_sound_effect["consumed"])
-	
+
+
 func clicked_sound(pitch : float = 1) -> void:
 	SoundMngr.play_sound(_sound_effect["clicked"], 0, pitch)
 
 ########################################## PRIVATE METHODS #########################################
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sprite2D.set_frame(_ID)
+	#$Sprite2D.set_frame(_ID)
+	const ITEM_ICON_WIDTH := 64
+	const ITEM_PNG_COLS = 10
+	var x_offset: int = (_ID % ITEM_PNG_COLS) * ITEM_ICON_WIDTH
+	var y_offset: int = (floor(_ID / ITEM_PNG_COLS)) * ITEM_ICON_WIDTH
+	var atlas_texture := AtlasTexture.new()
+	atlas_texture.set_atlas(ITEMS_TEXTURE)
+	atlas_texture.set_region(Rect2(x_offset, y_offset, ITEM_ICON_WIDTH, ITEM_ICON_WIDTH))
+	$TextureButton.texture_normal = atlas_texture
+
 
 ## TODO
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton && event.pressed == true and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
-	## Note: I removed the InputEventScreenTouch as it emited the clicked signal multiple times (Jakob)
-	#or (event is InputEventScreenTouch)):
-		clicked.emit(self)
-		#Calls _on_clicked(self) for all instances of signal group "items":
-		Global.get_tree().call_group("items", "_on_clicked", self) 
+#func _on_gui_input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton && event.pressed == true and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+	### Note: I removed the InputEventScreenTouch as it emited the clicked signal multiple times (Jakob)
+	##or (event is InputEventScreenTouch)):
+		#clicked.emit(self)
+		##Calls _on_clicked(self) for all instances of signal group "items":
+		#Global.get_tree().call_group("items", "_on_clicked", self) 
+
 
 ## TODO
 func _on_clicked(sender: EMC_Item) -> void:
@@ -214,3 +239,9 @@ func _on_clicked(sender: EMC_Item) -> void:
 		self.modulate = HIGHLIGHTED_COLOR
 	else:
 		self.modulate = DEFAULT_COLOR
+
+
+func _on_texture_button_pressed() -> void:
+	clicked.emit(self)
+	#Calls _on_clicked(self) for all instances of signal group "items":
+	Global.get_tree().call_group("items", "_on_clicked", self) 

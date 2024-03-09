@@ -74,7 +74,7 @@
 	},
 	{
 		"name": "FIRE_DEPARTMENT_DEMONSTRATION",
-		"propability": 100,
+		"propability": 1,
 		"descr": "Und nun die Nachrichten: Im [b]Park[/b] unternimmt die Feuerwehr zurzeit eine Übung zur Nutzung von Feuerlöschern sowie erste Hilfe Maßnahmen für Interessierte.",
 		"announce_only_on_radio": true,
 		"active_periods": 2,
@@ -166,7 +166,7 @@
 	},
 	{
 		"name": "NEIGHBORHOOD_PARTY",
-		"propability": 100,
+		"propability": 1,
 		"descr": "Da wir momentan die Krise im Griff haben, hat die Stadt ein Get-together Treffen im Park arrangiert.",
 		"announce_only_on_radio": true,
 		"active_periods": 1,

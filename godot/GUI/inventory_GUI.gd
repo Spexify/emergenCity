@@ -59,25 +59,31 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
 
+
 func set_consume_active( _p_has_slept : int = 0) -> void:
 	_has_slept =  _p_has_slept
 	_only_inventory = false
 	_continue_btn.show()
 
+
 func set_consume_idle() -> void:
 	_only_inventory = true
 	_continue_btn.hide()
+
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	_label.text = "[center]" + p_new_text + "[/center]"
 
+
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
+
 
 func clear_items() -> void:
 	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
+
 
 ## Open the GUI
 func open() -> void:
@@ -86,6 +92,7 @@ func open() -> void:
 	Global.get_tree().paused = true
 	opened.emit()
 	_reload_items()
+
 
 ## Close the GUI
 func close() -> void:
@@ -124,6 +131,7 @@ func _clear_gui() -> void:
 	
 	_consume_btn.hide()
 	_discard_btn.hide()
+
 
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
