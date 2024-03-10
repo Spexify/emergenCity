@@ -6,7 +6,7 @@ Walter: ...aber schau dir sonst gerne noch mal das Feuerwehrfahrzeug an.
 
 ~ FIRE_DEPARTMENT_DEMONSTRATION
 Walter: Guten Tag!
-if not has_exectuted_consequences_of_event("FIRE_DEPARTMENT_DEMONSTRATION")
+if not has_executed_consequences_of_event("FIRE_DEPARTMENT_DEMONSTRATION")
 	=> TRAINING
 else
 	Walter: Ich hoffe dir hat das Training gefallen.

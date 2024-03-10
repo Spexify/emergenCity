@@ -332,7 +332,7 @@ func load_opt_events() -> void:
 	#General structure of JSON fine, let's loop over all the entries
 	for opt_event_data : Dictionary in data:
 		var _name: String = opt_event_data.get("name")
-		var propability: int = opt_event_data.get("propability")
+		var probability: int = opt_event_data.get("probability")
 		var descr: String = opt_event_data.get("descr")
 		var announce_only_on_radio: bool = opt_event_data.get("announce_only_on_radio")
 		var active_periods: int = opt_event_data.get("active_periods")
@@ -373,7 +373,7 @@ func load_opt_events() -> void:
 		
 		## Create new optional event
 		var opt_event: EMC_OptionalEventMngr.Event = \
-			EMC_OptionalEventMngr.Event.new(_name, propability, descr, announce_only_on_radio, \
+			EMC_OptionalEventMngr.Event.new(_name, probability, descr, announce_only_on_radio, \
 				active_periods, constraints, consequences, stage_name, spawn_NPCs, spawn_tiles)
 		_opt_events.append(opt_event)
 	

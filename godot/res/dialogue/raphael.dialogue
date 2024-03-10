@@ -35,7 +35,7 @@ else
 
 
 ~ NEIGHBORHOOD_PARTY
-if not has_exectuted_consequences_of_event("NEIGHBORHOOD_PARTY")
+if not has_executed_consequences_of_event("NEIGHBORHOOD_PARTY")
 	=> FREE_FOOD
 else
 	Raphael: Hast du schon mit den anderen geschnackt?
