@@ -1,11 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://doc1tdsx8itqw"]
+[gd_scene load_steps=11 format=3 uid="uid://doc1tdsx8itqw"]
 
 [ext_resource type="Script" path="res://preparePhase/upgrade_center.gd" id="1_j1ie4"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="1_xic5p"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_wh8jv"]
+[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://res/VFX/particles/particle_star.png" id="4_c3pkx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0cck"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)
+
+[sub_resource type="Gradient" id="Gradient_ugh1t"]
+offsets = PackedFloat32Array(0, 0.918803)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.494118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rruuk"]
+gradient = SubResource("Gradient_ugh1t")
+
+[sub_resource type="Curve" id="Curve_7pxfh"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ubrj"]
+curve = SubResource("Curve_7pxfh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a62gn"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+direction = Vector3(0, -25, 0)
+spread = 28.0
+initial_velocity_min = 50.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 300, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_0ubrj")
+color_ramp = SubResource("GradientTexture1D_rruuk")
 
 [node name="UpgradeCenter" type="Control"]
 layout_mode = 3
@@ -161,6 +188,17 @@ visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Gegenstand ausrüsten"
+
+[node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
+position = Vector2(297, 221)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_a62gn")
+texture = ExtResource("4_c3pkx")
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.88
+randomness = 0.1
 
 [connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_pressed"]

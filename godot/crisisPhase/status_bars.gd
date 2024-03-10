@@ -20,6 +20,10 @@ func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 	$HBC/VBoxContainer/NutritionCont/NutritionBar.max_value = EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION
 	$HBC/VBoxContainer/NutritionCont/NutritionBar/CaloriesLabel.text = "[color=white][center]" + str(perc) +" kcal[/center][/color]"
 	$HBC/VBoxContainer/NutritionCont/NutritionBar.set_value_no_signal(perc)
+	#Play VFX
+	$SmokeVFX.process_material.color = EMC_Palette.LIGHT_GREEN
+	$SmokeVFX.position = $HBC/VBoxContainer/NutritionCont/ContainerNutrition/NutritionIcon.global_position
+	$SmokeVFX.emitting = true
 
 
 func _on_avatar_hydration_updated(p_new_value: int) -> void:
@@ -27,6 +31,10 @@ func _on_avatar_hydration_updated(p_new_value: int) -> void:
 	$HBC/VBoxContainer/HydrationCont/HydrationBar.max_value = EMC_Avatar.MAX_VITALS_HYDRATION*EMC_Avatar.UNIT_FACTOR_HYDRATION
 	$HBC/VBoxContainer/HydrationCont/HydrationBar/MillilitersLabel.text = "[color=white][center]" + str(perc) +" ml[/center][/color]"
 	$HBC/VBoxContainer/HydrationCont/HydrationBar.set_value_no_signal(perc)
+	#Play VFX
+	$SmokeVFX.process_material.color = EMC_Palette.LIGHT_BLUE
+	$SmokeVFX.position = $HBC/VBoxContainer/HydrationCont/ContainerHydration/HydrationIcon.global_position
+	$SmokeVFX.emitting = true
 
 
 func _on_avatar_health_updated(p_new_value: int) -> void:
@@ -34,6 +42,10 @@ func _on_avatar_health_updated(p_new_value: int) -> void:
 	$HBC/VBoxContainer2/HealthCont/HealthBar.max_value = EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH
 	$HBC/VBoxContainer2/HealthCont/HealthBar/HealthLabel.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
 	$HBC/VBoxContainer2/HealthCont/HealthBar.set_value_no_signal(perc)
+	#Play VFX
+	$SmokeVFX.process_material.color = EMC_Palette.LIGHT_RED
+	$SmokeVFX.position = $HBC/VBoxContainer2/HealthCont/ContainerHealth/HealthIcon.global_position
+	$SmokeVFX.emitting = true
 
 
 func _on_avatar_happiness_updated(p_new_value: int) -> void:
@@ -41,6 +53,10 @@ func _on_avatar_happiness_updated(p_new_value: int) -> void:
 	$HBC/VBoxContainer2/HappinessCont/HappinessBar.max_value = EMC_Avatar.MAX_VITALS_HAPPINESS * EMC_Avatar.UNIT_FACTOR_HAPPINESS
 	$HBC/VBoxContainer2/HappinessCont/HappinessBar/HappinessLabel.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
 	$HBC/VBoxContainer2/HappinessCont/HappinessBar.set_value_no_signal(perc)
+	#Play VFX
+	$SmokeVFX.process_material.color = EMC_Palette.LIGHT_YELLOW
+	$SmokeVFX.position = $HBC/VBoxContainer2/HappinessCont/ContainerHappiness/HappinessIcon.global_position
+	$SmokeVFX.emitting = true
 
 
 func _on_nutrition_cont_gui_input(event: InputEvent) -> void:

@@ -1,5 +1,10 @@
 extends EMC_GUI
 class_name EMC_EndGameGUI
+## Improvement idea: Instead of having two almost identical copies "WinnerScreen" and "LoserScreen"
+## just have one and change the contents... That's a lot better because with each copy there is, the
+## amount of work you have to do when making changes doubles (and you might overlook/forget to make
+## changes for both)
+
 
 func _ready() -> void:
 	hide()
@@ -67,17 +72,17 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 		var losing_reason : String = ""
 		if _avatar.get_nutrition_status() == 0:
 			losing_reason = "Du bist verhungert. "
-		if _avatar.get_hydration_status() == 0:
+		elif _avatar.get_hydration_status() == 0:
 			losing_reason = "Du bist verdurstet. "
-		if _avatar.get_health_status() == 0:
+		elif _avatar.get_health_status() == 0:
 			losing_reason = "Du hattest Gesundheitsprobleme. "
 			
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_loser
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description.text =\
 				losing_reason + "Du hast nur 100 ECoins erworben."
-		$LoserScreen.visible = true
-		$WinnerScreen.visible = false
+		$LoserScreen.show()
+		$WinnerScreen.hide()
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
 		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happinness_status()) + " Prozent."
@@ -90,16 +95,18 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
 		all_action_coins = 0
 				
-		$LoserScreen.visible = false
-		$WinnerScreen.visible = true
-	visible = true
+		$LoserScreen.hide()
+		$WinnerScreen.show()
+		$StarExplosionVFX.emitting = true
+	
+	show()
 	opened.emit()
 
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	Global.get_tree().paused = false
-	visible = false
+	hide()
 	closed.emit()
 
 

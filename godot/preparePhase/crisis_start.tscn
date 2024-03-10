@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://iov3iav204i4"]
 
 [ext_resource type="Script" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
-[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="2_oi1nj"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="2_oi1nj"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yuscm"]
 
 [node name="CrisisStart" type="Control"]

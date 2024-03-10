@@ -8,6 +8,10 @@ extends Control
 @onready var _upgrade_list := $Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/GridContainer
 @onready var _label_title := $Background/VBoxContainer/Description/MarginContainer/RichTextLabel
 @onready var _label_descr := $Background/VBoxContainer/Description/RichTextLabel
+@onready var _buy_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn
+@onready var _equip_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn
+@onready var _star_explosion_VFX := $StarExplosionVFX
+
 const _upgrade_scene := preload("res://preparePhase/upgrade.tscn")
 const _number_of_equipment_slots : int = 3 # the upgrade array in Global needs to be changed accordingly
 var _balance : int = Global.get_e_coins()
@@ -68,25 +72,28 @@ func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	# check if upgrade is already equipped
 	for i in range(len(_equipped_upgrades)):
 		if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == _last_clicked_upgrade.get_id():
-			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
-			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+			_buy_btn.hide()
+			_equip_btn.hide()
 			return
 	# check if upgrade is already unlocked
 	var _upgrade_ids_unlocked : Array[EMC_Upgrade.IDs] = Global.get_upgrade_ids_unlocked()
 	if _last_clicked_upgrade.get_id() in _upgrade_ids_unlocked:
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.show()
+		_buy_btn.hide()
+		_equip_btn.show()
 	else:
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.show()
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+		_buy_btn.show()
+		_equip_btn.hide()
 
 
 func _on_buy_btn_pressed() -> void:
 	if _balance >= _last_clicked_upgrade.get_price():
 		_add_balance(-_last_clicked_upgrade.get_price())
 		Global.unlock_upgrade_id(_last_clicked_upgrade.get_id())
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn.hide()
-		$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.show()
+		_buy_btn.hide()
+		_equip_btn.show()
+		#Play VFX at position of unlocked upgrade
+		_star_explosion_VFX.position = _last_clicked_upgrade.global_position + _last_clicked_upgrade.size/2
+		_star_explosion_VFX.emitting = true
 
 
 func _on_equip_btn_pressed() -> void:
@@ -102,10 +109,10 @@ func _on_equip_btn_pressed() -> void:
 			_equipped_upgrades_display.add_child(display_copy)
 			_equipped_upgrades_display.move_child(display_copy, 0)
 			
-			$Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn.hide()
+			_equip_btn.hide()
 			
 			return
-			
+
 
 func _on_main_menu_btn_pressed() -> void:
 	Global.set_upgrades(_equipped_upgrades)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://hcfsn06a2085"]
+[gd_scene load_steps=24 format=3 uid="uid://hcfsn06a2085"]
 
-[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap.png" id="1_qljbr"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="1_pkkoa"]
 [ext_resource type="Script" path="res://crisisPhase/stage/city_map.gd" id="2_a4fhc"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/sprites/GUI/buttons/invisible_button.png" id="3_wxrxy"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_b0mqi"]
@@ -8,6 +8,75 @@
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
 [ext_resource type="Texture2D" uid="uid://11wqmydgbpf2" path="res://res/sprites/GUI/icons/icon_pin_event.png" id="6_um0qv"]
 [ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
+[ext_resource type="Texture2D" uid="uid://cl3lhm7k1yq7i" path="res://res/VFX/particles/particle_bird.png" id="8_nsn6c"]
+[ext_resource type="Texture2D" uid="uid://ov3khq2j8kph" path="res://res/VFX/particles/particle_clouds.png" id="9_5vlc8"]
+[ext_resource type="Texture2D" uid="uid://mgvjk7a3irx0" path="res://res/VFX/particles/particle_water_drop.png" id="10_7a7e0"]
+[ext_resource type="Texture2D" uid="uid://cks714cqsksl" path="res://res/VFX/particles/particle_cloud_shadow.png" id="11_0jybd"]
+
+[sub_resource type="Curve" id="Curve_vqo80"]
+_data = [Vector2(0.532164, 1), 0.0, -1.18932, 0, 1, Vector2(0.994152, 0.450549), -1.18932, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h8ktu"]
+curve = SubResource("Curve_vqo80")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2q5kx"]
+particle_flag_disable_z = true
+direction = Vector3(0, -10, 0)
+spread = 10.0
+initial_velocity_min = 150.0
+initial_velocity_max = 170.0
+gravity = Vector3(0, 400, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_h8ktu")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jp4rf"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s1aqt"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 200, 1)
+direction = Vector3(1, 1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 30.0
+anim_speed_max = 30.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rabjr"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqlo5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 400, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color = Color(1, 1, 1, 0.803922)
+anim_offset_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bi3dh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 40, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 1.2
+anim_offset_max = 1.0
 
 [sub_resource type="Animation" id="Animation_xndm7"]
 length = 0.001
@@ -51,7 +120,7 @@ z_index = 1
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0
-texture = ExtResource("1_qljbr")
+texture = ExtResource("1_pkkoa")
 script = ExtResource("2_a4fhc")
 
 [node name="HomeBtn" type="TextureButton" parent="."]
@@ -146,6 +215,42 @@ offset_top = 539.0
 offset_right = 497.0
 offset_bottom = 667.0
 texture_normal = ExtResource("3_wxrxy")
+
+[node name="FountainVFX" type="GPUParticles2D" parent="."]
+position = Vector2(495, 569)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_2q5kx")
+texture = ExtResource("10_7a7e0")
+lifetime = 0.8
+
+[node name="BirdsVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_jp4rf")
+position = Vector2(-48, 399)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_s1aqt")
+texture = ExtResource("8_nsn6c")
+lifetime = 60.0
+visibility_rect = Rect2(-433.222, -566.763, 760.599, 1203.53)
+
+[node name="CloudShadowVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_rabjr")
+position = Vector2(760, 671)
+amount = 4
+amount_ratio = 0.4
+process_material = SubResource("ParticleProcessMaterial_mqlo5")
+texture = ExtResource("11_0jybd")
+lifetime = 50.0
+visibility_rect = Rect2(-1031.31, -285.027, 1287.81, 564.721)
+
+[node name="CloudVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_rabjr")
+position = Vector2(621, 47)
+amount = 10
+amount_ratio = 0.4
+process_material = SubResource("ParticleProcessMaterial_bi3dh")
+texture = ExtResource("9_5vlc8")
+lifetime = 50.0
+visibility_rect = Rect2(-1031.31, -285.027, 1287.81, 564.721)
 
 [node name="HomePin" type="Sprite2D" parent="."]
 process_mode = 3

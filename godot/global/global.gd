@@ -1,6 +1,5 @@
 extends Node
 
-@onready var _root := get_tree().root
 
 const MAX_ECOINS = 99999
 const INITIAL_E_COINS = 500
@@ -22,6 +21,7 @@ const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 signal game_loaded
 signal scene_changed
 
+@onready var _root := get_tree().root
 var _tutorial_done : bool = false
 var _e_coins : int = 500
 var _inventory : EMC_Inventory = null
@@ -31,6 +31,13 @@ var _current_scene : Node = null
 var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
+var _started_from_entry_scene: bool = false
+
+
+## This function and variable are there, so you can later distinguish if the project
+## was started normally (F5) or only for a certain scene (F6)
+func set_started_from_entry_scene(p_value: bool = true) -> void:
+	_started_from_entry_scene = p_value
 
 
 func _ready() -> void:
@@ -71,7 +78,10 @@ func was_crisis() -> bool:
 
 ## MRM: For what is this?? Sometimes I randomly get a crash in save_game
 func _notification(what : int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED: 
+	#should prevent saving problems when starting a stand-along scene (F6):
+	if !_started_from_entry_scene: return 
+	
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED:
 		save_game(_current_scene.name == "CrisisPhase")
 		get_tree().quit() 
 

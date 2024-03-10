@@ -1,6 +1,7 @@
 extends Node
 
 func _ready() -> void:
+	Global.set_started_from_entry_scene()
 	JsonMngr.load_items()
 	JsonMngr.load_upgardes()
 	JsonMngr.load_pop_up_actions()

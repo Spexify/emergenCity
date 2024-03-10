@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnbnxosef5r58"
-path="res://.godot/imported/citymap.png-4013d16efc4365102e80f94641b0aa2a.ctex"
+uid="uid://ov3khq2j8kph"
+path="res://.godot/imported/particle_clouds.png-a5a935174d434c8490e019cbc2fea8b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://res/sprites/citymap.png"
-dest_files=["res://.godot/imported/citymap.png-4013d16efc4365102e80f94641b0aa2a.ctex"]
+source_file="res://res/VFX/particles/particle_clouds.png"
+dest_files=["res://.godot/imported/particle_clouds.png-a5a935174d434c8490e019cbc2fea8b2.ctex"]
 
 [params]
 
