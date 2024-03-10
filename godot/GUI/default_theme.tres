@@ -1,24 +1,17 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c38cnaco26erq"]
 
-[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_kkl5m"]
-[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="2_xs18t"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_fn8en"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="2_vbssx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_278fl"]
-texture = ExtResource("1_kkl5m")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6pib0"]
-texture = ExtResource("2_xs18t")
+texture = ExtResource("1_fn8en")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ivrwx"]
-texture = ExtResource("2_xs18t")
+texture = ExtResource("2_vbssx")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
@@ -34,7 +27,6 @@ HeaderLarge/font_sizes/italics_font_size = 35
 HeaderLarge/font_sizes/mono_font_size = 35
 HeaderLarge/font_sizes/normal_font_size = 35
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_278fl")
-PanelContainer/styles/white = SubResource("StyleBoxTexture_6pib0")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
 TitleSpacing/base_type = &"MarginContainer"
 TitleSpacing/constants/margin_bottom = 12
