@@ -32,20 +32,25 @@ p_opt_event_mngr: EMC_OptionalEventMngr, p_crisis_mngr: EMC_CrisisMngr) -> void:
 func add_health(p_value: int) -> void:
 	_avatar.add_health(p_value)
 
+
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happiness(p_value)
+
 
 ############################################ Items #################################################
 
 ## Adds the [EMC_Item]
 func add_item(p_ID: EMC_Item.IDs) -> void:
-	_inventory.add_new_item(p_ID)
+	if _inventory.add_new_item(p_ID) == false:
+		_tooltip_GUI.open("Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!")
 
 
 ## Allows multiple items, separated through a semicolon
 func add_items_by_name(p_names : String) -> void:
 	for item_name in p_names.split(";"):
-		_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
+		if _inventory.add_new_item(JsonMngr.item_name_to_id(item_name)) == false:
+			_tooltip_GUI.open("Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!")
+			break
 
 
 ## Adds either Water depended on the Water-State

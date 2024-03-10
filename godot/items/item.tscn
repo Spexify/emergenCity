@@ -12,6 +12,7 @@ mouse_filter = 1
 script = ExtResource("1_yg30b")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 mouse_filter = 1
 

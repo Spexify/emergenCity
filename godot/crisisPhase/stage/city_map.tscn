@@ -225,7 +225,7 @@ lifetime = 0.8
 
 [node name="BirdsVFX" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_jp4rf")
-position = Vector2(-48, 399)
+position = Vector2(-23, 400)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_s1aqt")
 texture = ExtResource("8_nsn6c")

@@ -204,6 +204,7 @@ func consumed_sound() -> void:
 func clicked_sound(pitch : float = 1) -> void:
 	SoundMngr.play_sound(_sound_effect["clicked"], 0, pitch)
 
+
 ########################################## PRIVATE METHODS #########################################
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
