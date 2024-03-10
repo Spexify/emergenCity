@@ -2,7 +2,8 @@ extends Control
 
 @onready var _settings := SettingsGUI
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
-
+@onready var _shop_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop
+@onready var _upgrade_center_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter
 
 func open() -> void: 
 	#get_tree().paused = true
@@ -29,8 +30,8 @@ func _ready() -> void:
 		$CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer.hide()
 		$CanvasLayer_unaffectedByCM/MarginContainer2.hide()
 		$CanvasLayer_unaffectedByCM/InformationButtons.hide()
-		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shop.hide()
-		$CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter.hide()
+		_shop_btn.hide()
+		_upgrade_center_btn.hide()
 
 
 func _on_start_round_pressed() -> void:
