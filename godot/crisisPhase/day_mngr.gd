@@ -239,48 +239,50 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 	match p_action_ID:
 		EMC_Action.IDs.NO_ACTION:
 			push_error("Action ID 0 sollte nicht erstellt werden!") #(unused)
-		EMC_Action.IDs.CITY_MAP:
-			result = EMC_Action.new(p_action_ID, "-",
-				{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
-				{ }, "CityMap", 
-				"-", "", 0, false)
-		EMC_Action.IDs.COOKING:
-			result = EMC_Action.new(p_action_ID, "Kochen", {}, 
-				{ }, "CookingGUI", 
-				"Hat gekocht.", "", 30)
-		EMC_Action.IDs.TAP_WATER:
-			result = EMC_Action.new(p_action_ID, "(Wasserzapfen)",
-				{ "constraint_some_water_available" : ""},
-				{ "add_tap_water" : EMC_ActionConsequences.NO_PARAM}, "DefaultActionGUI",
-				"-", "Willst du Wasser aus dem Hahn zapfen?", 0, false)
-		EMC_Action.IDs.REST:
-			result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
-				{}, "DefaultActionGUI",
-				"Hat sich ausgeruht.", "Willst du dich ausruhen?", 10, true) 
-		EMC_Action.IDs.RAINWATER_BARREL:
-			result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
-				{"constraint_rainwater_barrel" : 0},
-				{ }, "RainwaterBarrelGUI",
-				"Hat Wasser aus der Regentonne geschöpft.", "", 0)
-		EMC_Action.IDs.SHOWER:
-			result = EMC_Action.new(p_action_ID, "Duschen", { },
-				{ }, "ShowerGUI", #the consequences are added later in the GUI as they are variable
-				"Hat geduscht.", "", 10)
-		EMC_Action.IDs.BBK_LINK:
-			result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
-				{ "open_bbk_brochure" : EMC_ActionConsequences.NO_PARAM }, "ConfirmationGUI",
-				"-", "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?", 0)
-		EMC_Action.IDs.ELECTRIC_RADIO:
-			result = EMC_Action.new(p_action_ID, "(Radio)", { "constraint_has_item" : JsonMngr.item_name_to_id("BATTERIES") },
-				{ "use_item" : JsonMngr.item_name_to_id("BATTERIES"), "use_radio" : EMC_ActionConsequences.NO_PARAM },
-				"ConfirmationGUI", "-", "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!", 0)
-		EMC_Action.IDs.CRANK_RADIO:
-			result = EMC_Action.new(p_action_ID, "(Radio)", { },
-				{ "use_radio" : EMC_ActionConsequences.NO_PARAM },
-				"ConfirmationGUI", "-", "Willst du das Kurbelradio benutzen?", 0)
+		#EMC_Action.IDs.CITY_MAP:
+			#result = EMC_Action.new(p_action_ID, "-",
+				#{ "constraint_no_isolation" : "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!" }, 
+				#{ }, "CityMap", 
+				#"-", "", 0, false)
+		#EMC_Action.IDs.COOKING:
+			#result = EMC_Action.new(p_action_ID, "Kochen", {}, 
+				#{ }, "CookingGUI", 
+				#"Hat gekocht.", "", 30, true, "Water")
+		#EMC_Action.IDs.TAP_WATER:
+			#result = EMC_Action.new(p_action_ID, "(Wasserzapfen)",
+				#{ "constraint_some_water_available" : ""},
+				#{ "add_tap_water" : EMC_ActionConsequences.NO_PARAM}, "DefaultActionGUI",
+				#"-", "Willst du Wasser aus dem Hahn zapfen?", 0, false, "Water")
+		#EMC_Action.IDs.REST:
+			#result = EMC_Action.new(p_action_ID, "Ausruhen", { }, 
+				#{}, "DefaultActionGUI",
+				#"Hat sich ausgeruht.", "Willst du dich ausruhen?", 10, true) 
+		#EMC_Action.IDs.RAINWATER_BARREL:
+			#result = EMC_Action.new(p_action_ID, "Wasser aus Regentonne schöpfen",
+				#{"constraint_rainwater_barrel" : 0},
+				#{ }, "RainwaterBarrelGUI",
+				#"Hat Wasser aus der Regentonne geschöpft.", "", 0)
+		#EMC_Action.IDs.SHOWER:
+			#result = EMC_Action.new(p_action_ID, "Duschen", { },
+				#{ }, "ShowerGUI", #the consequences are added later in the GUI as they are variable
+				#"Hat geduscht.", "", 10)
+		#EMC_Action.IDs.BBK_LINK:
+			#result = EMC_Action.new(p_action_ID, "(BBK-Broschürenlink)", { },
+				#{ "open_bbk_brochure" : EMC_ActionConsequences.NO_PARAM }, "ConfirmationGUI",
+				#"-", "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?", 0)
+		#EMC_Action.IDs.ELECTRIC_RADIO:
+			#result = EMC_Action.new(p_action_ID, "(Radio)", { "constraint_has_item" : JsonMngr.item_name_to_id("BATTERIES") },
+				#{ "use_item" : JsonMngr.item_name_to_id("BATTERIES"), "use_radio" : EMC_ActionConsequences.NO_PARAM },
+				#"ConfirmationGUI", "-", "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!", 0)
+		#EMC_Action.IDs.CRANK_RADIO:
+			#result = EMC_Action.new(p_action_ID, "(Radio)", { },
+				#{ "use_radio" : EMC_ActionConsequences.NO_PARAM },
+				#"ConfirmationGUI", "-", "Willst du das Kurbelradio benutzen?", 0)
 		
 		#FYI: Stage Change actions and others are imported via JSON
 		var id: 
+			if 1 <= id and id < 2000:
+				result = JsonMngr.id_to_action(id) as EMC_Action
 			if 2000 <= id and id < 3000:
 				result = JsonMngr.id_to_action(id) as EMC_StageChangeAction
 			else:

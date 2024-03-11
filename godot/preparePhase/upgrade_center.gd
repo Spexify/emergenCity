@@ -98,6 +98,7 @@ func _on_buy_btn_pressed() -> void:
 	if _balance >= _last_clicked_upgrade.get_price():
 		_add_balance(-_last_clicked_upgrade.get_price())
 		Global.unlock_upgrade_id(_last_clicked_upgrade.get_id())
+		Global.set_e_coins(_balance)
 		_buy_btn.hide()
 		_equip_btn.show()
 		

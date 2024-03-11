@@ -124,8 +124,8 @@ func progresses_day_period() -> bool:
 func add_consequence(p_key: String, p_param: Variant) -> void:
 	_consequences[p_key] = p_param
 
-func play_sound(start : float = 0, pitch : float = 1) -> void:
-	SoundMngr.play_sound(_sound, start, pitch)
+func play_sound(start : float = 0, pitch : float = 1) -> Signal:
+	return SoundMngr.play_sound(_sound, start, pitch)
 
 func save() -> Dictionary:
 	var data : Dictionary = {
@@ -155,8 +155,8 @@ static func from_dict(data : Dictionary) -> EMC_Action:
 	var description : String = data.get("description", "")
 	var e_coin : int = data.get("e_coin", 0)
 	var p_progresses_day_period : bool = data.get("progresses_day_period", true)
-	var sound : String = data.get("sound", "BasicItem")
+	var sound : String = data.get("sound", "")
 	
-	var prompt := ""
+	var prompt : String = data.get("prompt", "")
 	
 	return EMC_Action.new(action_id, action_name, constraints, consequences, type_gui, description, prompt, e_coin, p_progresses_day_period, sound)
