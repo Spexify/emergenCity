@@ -61,65 +61,69 @@ bbcode_enabled = true
 text = "[center]Tagesübersicht[/center]"
 fit_content = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 55
+alignment = 1
 
-[node name="MorningLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MorningLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "MORGEN"
 fit_content = true
 autowrap_mode = 2
 
-[node name="NoonLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="MorningContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/TextBox"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+fit_content = true
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NoonLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 text = "MITTAG"
 autowrap_mode = 2
 
-[node name="EveningLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextBox2" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="NoonContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/TextBox2"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+fit_content = true
+autowrap_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EveningLabel" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 text = "ABEND"
 autowrap_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="TextBox" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="TextBox3" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="MorningContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-fit_content = true
-autowrap_mode = 2
-
-[node name="TextBox2" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="NoonContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-fit_content = true
-autowrap_mode = 2
-
-[node name="TextBox3" type="PanelContainer" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="EveningContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3"]
+[node name="EveningContent" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/TextBox3"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 fit_content = true
