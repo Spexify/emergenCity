@@ -91,10 +91,10 @@ layout_mode = 2
 [node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
+mouse_filter = 1
 text = "
 "
-fit_content = true
-autowrap_mode = 2
+scroll_following = true
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -168,9 +168,9 @@ layout_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
+mouse_filter = 1
 bbcode_enabled = true
-fit_content = true
-autowrap_mode = 2
+scroll_following = true
 
 [node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
