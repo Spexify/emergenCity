@@ -16,6 +16,8 @@ const CRISIS_START_SCENE = "res://preparePhase/crisis_start.tscn"
 const SHOP_SCENE = "res://preparePhase/shop.tscn"
 const UPGRADE_CENTER_SCENE = "res://preparePhase/upgrade_center.tscn"
 
+const UPGRADE_SCENE_PRELOAD = preload("res://preparePhase/upgrade.tscn")
+
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
 signal game_loaded
@@ -208,7 +210,7 @@ func load_game() -> void:
 		
 	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
 	
-	_upgrades_equipped.assign(data.get("upgrades_equipped", [0, 0, 0]).map(func (id : int) -> EMC_Upgrade: var res := EMC_Upgrade.new(); res.setup(id); return res))
+	_upgrades_equipped.assign(data.get("upgrades_equipped", [0, 0, 0]).map(func (id : int) -> EMC_Upgrade: var res := UPGRADE_SCENE_PRELOAD.instantiate(); res.setup(id); return res))
 		
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))

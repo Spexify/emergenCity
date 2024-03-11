@@ -85,11 +85,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 		$WinnerScreen.hide()
 		Global.set_e_coins(Global.get_e_coins() + 100)
 	else: 
-		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happinness_status()) + " Prozent."
+		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
 			= summary_text_winner
 
-		all_action_coins += _avatar.get_unit_happinness_status()
+		all_action_coins += _avatar.get_unit_happiness_status()
 		Global.set_e_coins(Global.get_e_coins() + all_action_coins)
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
 				"Du hast " + str(all_action_coins) + " ECoins erworben!"
