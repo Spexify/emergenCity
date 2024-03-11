@@ -30,29 +30,37 @@ func _init() -> void:
 
 func _ready() -> void:
 	_connect_to_buttons()
-
+	
 	Global.scene_changed.connect(reload_groups)
+
 
 func reload_groups() -> void:
 	_connect_to_buttons()
 
+
 func on_button_pressed() -> void:
 	button.play()
-	
+
+
 func button_finished() -> Signal:
 	return button.finished
-	
+
+
 func play_open() -> void:
 	open_gui.play()
 
+
 func play_close() -> void:
 	close_gui.play()
-	
+
+
 func is_musik_playing() -> bool:
 	return musik.playing
 
+
 func play_musik() -> void:
 	musik.play()
+
 
 func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioStreamPlayer:
 	if sound == "":
@@ -66,10 +74,11 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioSt
 	if sound_player == null:
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
 		return null
-
+	
 	sound_player.set_pitch_scale(pitch)
 	sound_player.play(start)
 	return sound_player
+
 
 func vibrate(time : int = 250) -> void:
 	Input.vibrate_handheld(time)

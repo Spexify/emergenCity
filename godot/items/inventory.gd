@@ -121,12 +121,16 @@ func has_item(p_ID: EMC_Item.IDs, p_times: int = 1) -> bool:
 
 
 ## Returns count of [EMC_Item]s of [p_ID]
-func get_item_count_of_ID(p_ID: EMC_Item.IDs) -> int:
+func get_item_count_of_ID(p_ID: EMC_Item.IDs, p_exclude_unpalatable: bool = false) -> int:
 	var cnt: int = 0
 	
 	for slot_idx in _slot_cnt:
 		var item: EMC_Item = _slots[slot_idx]
 		if item != null and item.get_ID() == p_ID:
+			if p_exclude_unpalatable == true:
+				var unpalatable_comp := item.get_comp(EMC_IC_Unpalatable)
+				if unpalatable_comp != null:
+					continue
 			cnt += 1
 	return cnt
 

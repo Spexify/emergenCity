@@ -60,6 +60,7 @@ var _progresses_day_period: bool
 var _prompt: String
 var _sound : String
 
+
 func _init(action_ID: int, ACTION_NAME : String, constraints_prior : Dictionary,
 p_consequences : Dictionary, type_gui : String, description : String,
 p_prompt: String = "", performance_coin_value : int = 0,

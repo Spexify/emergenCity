@@ -102,6 +102,7 @@ func open_bbk_brochure(_dummy: int = NO_PARAM) -> void:
 
 func use_radio(_dummy: int = NO_PARAM) -> void:
 	var radio_msg: String
+	SoundMngr.play_sound("RadioTuning")
 	var active_events := _opt_event_mngr.get_active_events()
 	if !active_events.is_empty():
 		var chosen_event: EMC_OptionalEventMngr.Event = active_events.pick_random()

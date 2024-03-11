@@ -222,7 +222,10 @@ visible = false
 
 [node name="RainAnimation" parent="Animations" instance=ExtResource("24_5kmdu")]
 visible = false
+mouse_filter = 2
 
+[connection signal="city_map_closed" from="StageMngr" to="." method="_on_stage_mngr_city_map_closed"]
+[connection signal="city_map_opened" from="StageMngr" to="." method="_on_stage_mngr_city_map_opened"]
 [connection signal="happiness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]

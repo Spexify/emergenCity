@@ -155,26 +155,22 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
 	
-	## if the Chlor tablets are clicked, open water filtering gui
-	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
-		_consume_btn.text = "Filtern"
+	
+	if _only_inventory:
+		_consume_btn.hide()
+		_discard_btn.show()
+	elif _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+		## if the Chlor tablets are clicked, allow consumation
 		_consume_btn.show()
-		if _only_inventory:
-			_discard_btn.show()
-	else:
-		_consume_btn.text = "Konsumieren"
-		
-		if _only_inventory:
-			_consume_btn.hide()
-			_discard_btn.show()
-		elif _item_consumable(_clicked_item):
-			_consume_btn.show()
-		else:
-			_consume_btn.hide()
+	
+	_consume_btn.text = _determine_consume_btn_text(_clicked_item)
 
 
 func _item_consumable(item : EMC_Item) -> bool:
-	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
+	if item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+		return true
+	else:
+		return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
 
 
 func _reload_items() -> void:
@@ -293,6 +289,7 @@ func _on_consume_pressed() -> void:
 
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
+	SoundMngr.play_sound("TrashBin")
 	_reload_items()
 	_clear_gui()
 
@@ -300,3 +297,17 @@ func _on_discard_pressed() -> void:
 func _on_cancel_pressed() -> void:
 	$FilterWater.hide()
 
+
+func _determine_consume_btn_text(p_item: EMC_Item) -> String:
+	if p_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+		return "Filtern"
+	
+	var food_comp := p_item.get_comp(EMC_IC_Food)
+	if food_comp != null:
+		return "Essen"
+	
+	var food_drink := p_item.get_comp(EMC_IC_Drink)
+	if food_drink != null:
+		return "Trinken"
+	
+	return "Konsumieren"

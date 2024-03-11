@@ -41,7 +41,7 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 ## Notice: Why not Hide Back Button instead? You can use connect with Flag on_shot, so connection will only worj once
 func add_back_button(p_on_pressed_callback: Callable) -> void:
 	var new_back_button := TextureButton.new()
-	new_back_button.texture_normal = load("res://res/gui/button_back.png")
+	new_back_button.texture_normal = preload("res://res/sprites/GUI/buttons/button_back.png")
 	new_back_button.name = _BACK_BTN_NAME
 	new_back_button.pressed.connect(p_on_pressed_callback)
 	new_back_button.process_mode = Node.PROCESS_MODE_ALWAYS

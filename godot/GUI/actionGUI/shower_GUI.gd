@@ -46,8 +46,10 @@ func _on_confirm_btn_pressed() -> void:
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = _action.play_sound()
-	if wait != null:
-		await wait.finished
+	##Don't wait, because it causes problems because you can still click somewherelse
+	##while the SFX is playing (Made SoundMngr process always)
+	#if wait != null:
+		#await wait.finished 
 	
 	_action.executed.emit(_action)
 	close()

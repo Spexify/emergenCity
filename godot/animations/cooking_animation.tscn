@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7423f41j0fg3"]
+
+[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://res/sprites/items.png" id="1_7b4jc"]
+[ext_resource type="Texture2D" uid="uid://cno866v7sk8h4" path="res://res/VFX/particles/particle_bubble.png" id="2_6rmhf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lal3w"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 200.0
+emission_ring_radius = 200.0
+emission_ring_inner_radius = 180.0
+spread = 0.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+
+[node name="CookingAnimation" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InputItem_Template" type="Sprite2D" parent="PanelContainer"]
+position = Vector2(157, 89)
+texture = ExtResource("1_7b4jc")
+hframes = 10
+vframes = 10
+
+[node name="InputItems" type="Node2D" parent="PanelContainer"]
+
+[node name="OutputItem" type="Sprite2D" parent="PanelContainer"]
+position = Vector2(242, 247)
+texture = ExtResource("1_7b4jc")
+hframes = 10
+vframes = 10
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(286, 510)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_lal3w")
+texture = ExtResource("2_6rmhf")
+lifetime = 1.7

@@ -416,17 +416,20 @@ func name_to_action_id(p_name : String) -> int:
 			return key
 	return NAN
 
+
 func name_to_action(p_name : String) -> EMC_Action:
 	if not _is_action_loaded:
 		printerr("Actions not loaded")
 		return null
 	return _actions.get(name_to_action_id(p_name))
-	
+
+
 func id_to_action(id : int) -> EMC_Action:
 	if not _is_action_loaded:
 		printerr("Actions not loaded")
 		return null
 	return _actions.get(id)
+
 
 func load_actions() -> void:
 	if not FileAccess.file_exists(ACTION_SOURCE):
@@ -512,6 +515,7 @@ func load_actions() -> void:
 	
 		act_index += 1
 	_is_action_loaded = true
+
 
 ##########################################DOOR BELL#################################################
 

@@ -82,7 +82,7 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 		else:
 			counting_dict[input_item_ID] = 1 
 	for counted_item_ID: EMC_Item.IDs in counting_dict.keys():
-		if _inventory.get_item_count_of_ID(counted_item_ID) < counting_dict[counted_item_ID]:
+		if _inventory.get_item_count_of_ID(counted_item_ID, true) < counting_dict[counted_item_ID]:
 			return false
 	return true
 
@@ -94,8 +94,10 @@ func _cook_recipe() -> void:
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = _action.play_sound()
-	if wait != null:
-		await wait.finished
+	##Don't wait, because player has to wait too long otherwhise and there will be an 
+	##animation playing simultatenously (Made SoundMngr process always)
+	#if wait != null:
+		#await wait.finished
 	
 	hide()
 	_action.executed.emit(_action)
