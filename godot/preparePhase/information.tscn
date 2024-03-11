@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://hvrc68vqew2a"]
 
 [ext_resource type="Script" path="res://preparePhase/information.gd" id="1_3i2wm"]
-[ext_resource type="PackedScene" uid="uid://bi80mrculo0v3" path="res://crisisPhase/stage/apartment_camper.tscn" id="2_te0id"]
+[ext_resource type="PackedScene" uid="uid://cul33oq5ev2pa" path="res://crisisPhase/stage/park.tscn" id="2_skwwi"]
 [ext_resource type="Texture2D" uid="uid://bfxwegfvf1ime" path="res://res/kochenohnestrom.png" id="3_v146t"]
 [ext_resource type="Texture2D" uid="uid://b77uhdblr7pj8" path="res://res/bbkbroschüre.png" id="4_nlyup"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="5_4en81"]
@@ -15,9 +15,7 @@ offset_right = -32.0
 offset_bottom = -32.0
 script = ExtResource("1_3i2wm")
 
-[node name="ApartmentCamper" parent="." instance=ExtResource("2_te0id")]
-layer_2/tile_data = PackedInt32Array(655365, 196608, 0, 720901, 196608, 1, 655366, 262144, 0, 720902, 262144, 1, 655368, 131072, 7, 720904, 131072, 8, 786436, 131072, 7, 851972, 131072, 8, 262148, 196608, 8, 196612, 196608, 7, 196615, 0, 0, 262151, 0, 1, 196616, 65536, 0, 262152, 65536, 1, 262150, 393216, 2, 196614, 393216, 0, 983047, 1048576, 2, 983048, 1114112, 2, 917511, 1048576, 2, 917512, 1114112, 2, 983041, 1179648, 2, 983042, 1179648, 2, 131078, 131072, 5, 589832, 131072, 2, 655363, 917504, 10, 720899, 917504, 11, 786435, 917504, 12, 524291, 917504, 9, 589827, 917504, 10)
-layer_5/modulate = Color(1, 1, 1, 0)
+[node name="Park" parent="." instance=ExtResource("2_skwwi")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -32,15 +30,34 @@ offset_right = 502.0
 offset_bottom = 567.0
 theme_override_constants/separation = 60
 
-[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer" groups=["Button"]]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+layout_mode = 2
+
+[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer" groups=["Button"]]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture_normal = ExtResource("3_v146t")
 
-[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer" groups=["Button"]]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+layout_mode = 2
+
+[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2" groups=["Button"]]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture_normal = ExtResource("4_nlyup")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = " 7,61 MB"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM"]
 offset_left = 465.0
@@ -53,6 +70,6 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture_normal = ExtResource("5_4en81")
 
-[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
-[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/BBKButton" to="." method="_on_bbk_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2/BBKButton" to="." method="_on_bbk_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
