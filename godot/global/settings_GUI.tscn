@@ -44,6 +44,7 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center][color=white]Einstellungen[/color][/center]"
+fit_content = true
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 600)

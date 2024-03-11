@@ -169,9 +169,6 @@ fit_content = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer3"]
 layout_mode = 2
