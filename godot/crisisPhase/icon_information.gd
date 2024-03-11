@@ -11,5 +11,7 @@ func _on_continue_btn_pressed() -> void:
 	
 func close() -> void:
 	Global.get_tree().paused = false
-	visible = false
+	hide()
+	$CanvasModulate.hide()
+	$CanvasLayer.hide()
 	closed.emit()

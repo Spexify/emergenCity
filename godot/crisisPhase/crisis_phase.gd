@@ -118,6 +118,8 @@ func _ready() -> void:
 	_pu_event_mngr.set_constraints(_day_mngr.get_action_constraints())
 	_pu_event_mngr.set_consequences(_day_mngr.get_action_consequences())
 	
+	$GUI/VBC/MiddleSection/IconInformation.hide()
+	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
 		_play_tutorial_dialogue()
