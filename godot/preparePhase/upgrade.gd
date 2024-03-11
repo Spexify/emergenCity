@@ -22,16 +22,15 @@ var _spawn_pos: Vector2i
 
 
 func setup(p_upgrade_id: IDs) -> void:
-	# TODO: JSONification
 	# TODO: Write descriptions
 	_id = p_upgrade_id
-	
+
 	var data : Dictionary = JsonMngr.id_to_upgrade_data(_id)
 	_display_name = data.get("display_name", "")
 	_description = data.get("description", "")
 	_price = data.get("price", 0)
 	_state = data.get("state", 0)
-	_state_maximum = data.get("state_maximum", 0) 
+	_state_maximum = data.get("state_maximum", 0)
 	if data.has("spawn_pos"):
 		_spawn_pos = data["spawn_pos"]
 	if self.get_sprite() != null:
@@ -61,7 +60,7 @@ func setup(p_upgrade_id: IDs) -> void:
 			#_price = 1000
 			#_tilemap_position = Vector2i(0,1)
 			#_state = 0
-			#_state_maximum = 0 
+			#_state_maximum = 0
 			#_spawn_pos = Vector2i(5, 10)
 		#
 		#_: push_error("Unerwarteter Fehler: Diese Upgrade ID ist nicht definiert!")
@@ -103,6 +102,10 @@ func get_state_maximum() -> int:
 
 func get_sprite() -> Sprite2D:
 	return $Sprite2D
+
+
+func set_modulation(p_color: Color) -> void:
+	$Sprite2D.modulate = p_color
 
 
 func _on_pressed() -> void:

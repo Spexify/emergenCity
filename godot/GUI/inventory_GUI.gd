@@ -27,7 +27,7 @@ const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar : EMC_Avatar
-var _only_inventory : bool
+var _only_inventory : bool #Distinguish between the modes of the normal inventory and the SEOD-version
 var _seod : EMC_SummaryEndOfDayGUI
 var _has_slept : int = 0
 var _previously_paused: bool
@@ -61,7 +61,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 		_slot_grid.add_child(new_slot)
 
 
-func set_consume_active( _p_has_slept : int = 0) -> void:
+func set_consume_active(_p_has_slept : int = 0) -> void:
 	_has_slept =  _p_has_slept
 	_only_inventory = false
 	_continue_btn.show()
@@ -117,6 +117,7 @@ func close() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
+	$SpoiledVFX_Template.emitting = false
 
 
 func _clear_gui() -> void:
@@ -190,9 +191,43 @@ func _reload_items() -> void:
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
 			item.modulate = Color(1, 1, 1) #initialize so nothing is visually marked
+			##Code for Issue #25 Doesn't work, because if you click one item, it updates all the
+			##other ones and removes the modulation... To cumbersome to fix rn
+			#if !_only_inventory: 
+				##Mark all items pitch-black, if they can't be consumed (eaten/drunk)
+				#var IC_food := item.get_comp(EMC_IC_Food)
+				#var IC_drink := item.get_comp(EMC_IC_Drink)
+				#if IC_food == null && IC_drink == null:
+					#item.modulate = Color(0, 0, 0)
+			
 			item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
+		
 		_slot_grid.add_child(new_slot)
+	
+	call_deferred("_add_VFXs") #see. github.com/godotengine/godot/issues/30113
+
+
+## CAUTION: Don't rename without changing the deffered call in _reload_items()
+## If this is not called deferred, the positions of the slots are not correct (godot bug #30113)!
+func _add_VFXs() -> void:
+	#Reset VFX
+	for child in $VFX_Instances.get_children():
+		$VFX_Instances.remove_child(child)
+	
+	#Has to be done in extra loop, as only now the positions of the items are known
+	for slot in _slot_grid.get_children():
+		var item: EMC_Item = slot.get_item()
+		if item != null:
+			var IC_unpalatable := item.get_comp(EMC_IC_Unpalatable)
+			if IC_unpalatable != null:
+				#Spoiled VFX
+				var new_spoiled_VFX := $SpoiledVFX_Template.duplicate()
+				new_spoiled_VFX.emitting = true
+				 #Magic number, dirty fix, no idea why the offset is needed:
+				const WEIRD_OFFSET := Vector2(180, 270)
+				new_spoiled_VFX.global_position = slot.position - WEIRD_OFFSET
+				$VFX_Instances.add_child(new_spoiled_VFX)
 
 
 func _on_consume_pressed() -> void:

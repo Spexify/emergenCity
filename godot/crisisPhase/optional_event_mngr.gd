@@ -20,7 +20,7 @@ class SpawnTiles:
 ## Tuple class, you're welcome to access its public (!) members directly
 class Event:
 	var name: String
-	var propability: int #Weighted numbers, should be used between 1 and 10
+	var probability: int #Weighted numbers, should be used between 1 and 10
 	var descr: String
 	var announce_only_on_radio: bool
 	var active_periods: int
@@ -32,11 +32,11 @@ class Event:
 	var spawn_tiles_arr: Array[SpawnTiles]
 	
 	
-	func _init(p_name: String, p_propability: int, p_descr: String, p_announce_only_on_radio: bool,
+	func _init(p_name: String, p_probability: int, p_descr: String, p_announce_only_on_radio: bool,
 	p_active_periods: int, p_constraints: Dictionary, p_consequences: Dictionary, p_stage_name: String,
 	p_spawn_NPCs_arr: Array[SpawnNPCs], p_spawn_tiles_arr: Array[SpawnTiles]) -> void:
 		name = p_name
-		propability = p_propability
+		probability = p_probability
 		descr = p_descr
 		announce_only_on_radio = p_announce_only_on_radio
 		active_periods = p_active_periods
@@ -79,7 +79,7 @@ func get_active_event(p_name: String) -> Event:
 	return null
 
 
-func has_exectuted_consequences_of_event(p_name: String) -> bool:
+func has_executed_consequences_of_event(p_name: String) -> bool:
 	var active_event := get_active_event(p_name)
 	if active_event == null: return true
 	
@@ -164,12 +164,12 @@ func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> Event:
 	var possible_opt_events := JsonMngr.get_possible_opt_events(_executable_constraints)
 	
-	#Dependend on the propability choose one to activate
+	#Dependend on the probability choose one to activate
 	var indices: Array[int]
 	
 	for event_idx in possible_opt_events.size():
 		var event: Event = possible_opt_events[event_idx]
-		for i in event.propability:
+		for i in event.probability:
 			indices.append(event_idx)
 	
 	var rand_idx := indices[_rng.randi_range(0, indices.size() - 1)]

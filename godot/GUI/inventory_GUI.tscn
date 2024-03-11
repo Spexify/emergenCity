@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://diu2wl65n301n"]
+[gd_scene load_steps=10 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" path="res://GUI/inventory_GUI.gd" id="1_ve5h2"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_270nm"]
@@ -7,6 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="5_kbada"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="5_w1mvg"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="6_i2pde"]
+[ext_resource type="Texture2D" uid="uid://ctnvxrlyw2fp" path="res://res/VFX/particles/particle_fly.png" id="8_m04a3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3fov1"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 26.0
+emission_ring_radius = 26.0
+emission_ring_inner_radius = 8.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
 
 [node name="InventoryGUI" type="Control"]
 process_mode = 3
@@ -169,6 +181,18 @@ bus = &"SFX"
 [node name="CloseGUI" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_i2pde")
 bus = &"SFX"
+
+[node name="SpoiledVFX_Template" type="GPUParticles2D" parent="."]
+position = Vector2(-248, -478)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_3fov1")
+texture = ExtResource("8_m04a3")
+lifetime = 5.0
+speed_scale = 0.5
+explosiveness = 1.0
+
+[node name="VFX_Instances" type="Node2D" parent="."]
 
 [connection signal="pressed" from="Inventory/VBC/HBC/Consume" to="." method="_on_consume_pressed"]
 [connection signal="pressed" from="Inventory/VBC/HBC/Discard" to="." method="_on_discard_pressed"]

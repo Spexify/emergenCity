@@ -74,7 +74,6 @@
 		"name": "Nudeln mit Soße",
 		"descr": "Leicht zu machen und lecker; nicht umsonst das Lieblingsessen vieler Kinder.",
 		"comps": [
-			{"name": "cost", "params": 20},
 			{"name": "food", "params": 2},
 			{"name": "shelflife", "params": 2},
 			{"name": "pleasurable", "params": 1}

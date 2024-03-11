@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=10 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
 [ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="7_57rlv"]
+[ext_resource type="Texture2D" uid="uid://cy6hveptr5ap3" path="res://res/sprites/title_logo.png" id="7_77ygh"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="7_jnxxn"]
 
 [node name="MainMenu" type="Control"]
@@ -97,44 +98,45 @@ layout_mode = 2
 text = "Credits
 "
 
-[node name="VBoxContainerNormal" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
-offset_top = 300.0
-offset_right = 575.0
-offset_bottom = 804.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 custom_minimum_size = Vector2(575, 100)
-layout_mode = 2
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 707.0
 
-[node name="Title" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(450, 100)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 70
-bbcode_enabled = true
-text = "[center][color=white]Krisopolis[/color]"
-fit_content = true
-
-[node name="CenterContainerNormal" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-
-[node name="GameButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal"]
+[node name="GameButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="StartRound" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons" instance=ExtResource("7_57rlv")]
+[node name="Title" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("7_77ygh")
+
+[node name="Slogan" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+clip_contents = false
+custom_minimum_size = Vector2(450, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center][color=white]Play & Prepare[/color]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+layout_mode = 2
+
+[node name="StartRound" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten"
 
-[node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons" instance=ExtResource("7_57rlv")]
+[node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Shop
 "
 
-[node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons" instance=ExtResource("7_57rlv")]
+[node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Upgrade Center"
@@ -145,7 +147,7 @@ layout_mode = 1
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/VBoxContainerNormal/CenterContainerNormal/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
 [connection signal="closed" from="AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

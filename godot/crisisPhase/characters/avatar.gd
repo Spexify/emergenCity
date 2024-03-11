@@ -29,7 +29,7 @@ const INIT_HEALTH_VALUE : int = MAX_VITALS_NUTRITION/2
 const INIT_HAPPINESS_VALUE : int = MAX_VITALS_NUTRITION/2
 
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
-@onready var walking := $SFX/Walking
+@onready var _walking_SFX := $SFX/Walking
 
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag, _health_value und _happinness_value gemessen in Prozent
 ## working in untis of 4
@@ -52,8 +52,9 @@ func set_target(p_target_pos: Vector2) -> void:
 		return
 	
 	_nav_agent.target_position = p_target_pos
-	if not walking.playing:
-		walking.play()
+	if not _walking_SFX.playing:
+		_walking_SFX.play()
+	$AnimationPlayer.play("walking")
 
 
 func cancel_navigation() -> void:
@@ -167,16 +168,17 @@ func sub_happiness(happiness_change : int = 1) -> bool:
 		happiness_updated.emit(get_unit_happiness_status())
 		return true
 
+
 func refresh_vitals() -> void:
 	nutrition_updated.emit(get_unit_nutrition_status())
 	hydration_updated.emit(get_unit_hydration_status())
 	health_updated.emit(get_unit_health_status())
 	happiness_updated.emit(get_unit_happiness_status())
 
+
 ## MRM: Naming idea: Could be renamed into "serialize()" as it's not really the saving itself,
 ## but "serializing" the object data into a format that can be saved in a file
 func save() -> Dictionary:
-
 	var some_position : Vector2 = get_global_position()
 
 	var data : Dictionary = {
@@ -226,6 +228,7 @@ func _ready() -> void:
 	happiness_updated.emit(get_unit_happiness_status())
 	SettingsGUI.avatar_sprite_changed.connect(_on_new_avatar_sprite_changed)
 	_on_new_avatar_sprite_changed(SettingsGUI.get_avatar_sprite_suffix()) #init
+	$AnimationPlayer.play("idle")
 
 
 func _process(p_delta: float) -> void:
@@ -262,7 +265,10 @@ func _physics_process(_delta: float) -> void:
 
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished() -> void:
-	walking.stop() #Name should be more precise. Walking could be an animation or a state-object
+	_walking_SFX.stop() #Name should be more precise. Walking could be an animation or a state-object
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("idle")
+	scale = Vector2(1.0, 1.0)
 	arrived.emit()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cku3etpcuk085"]
+[gd_scene load_steps=9 format=3 uid="uid://cku3etpcuk085"]
 
 [ext_resource type="Script" path="res://crisisPhase/characters/avatar.gd" id="1_6xgqy"]
 [ext_resource type="Texture2D" uid="uid://ppdc880khrdn" path="res://res/sprites/characters/sprite_avatar.png" id="2_fbrni"]
@@ -6,6 +6,64 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pu6g1"]
 height = 52.0
+
+[sub_resource type="Animation" id="Animation_v3hvq"]
+resource_name = "walking"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1, 1), Vector2(1.05, 0.95)]
+}
+
+[sub_resource type="Animation" id="Animation_cxjb2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5s4w8"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.04), Vector2(1, 1), Vector2(1, 0.96)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rd3ph"]
+_data = {
+"RESET": SubResource("Animation_cxjb2"),
+"idle": SubResource("Animation_5s4w8"),
+"walking": SubResource("Animation_v3hvq")
+}
 
 [node name="Avatar" type="CharacterBody2D"]
 position = Vector2(0, -15)
@@ -35,6 +93,11 @@ max_speed = 300.0
 
 [node name="Walking" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("3_nintj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rd3ph")
+}
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
