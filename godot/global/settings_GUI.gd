@@ -12,6 +12,7 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var sfx : EMC_VolumeSlider = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/SFX
 @onready var reset : Button = $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
 @onready var _confirmGUI: EMC_ConfirmationGUI = $CanvasLayer/ConfirmationGUI
+@onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 
 const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
 const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
@@ -43,7 +44,6 @@ func close(without_signal : bool = false) -> void:
 	if not without_signal:
 		closed.emit()
 
-
 func set_avatar_sprite_suffix(p_avatar_sprite_suffix: String) -> void:
 	_avatar_sprite_suffix = p_avatar_sprite_suffix
 	avatar_sprite_changed.emit(_avatar_sprite_suffix)
@@ -57,6 +57,8 @@ func get_avatar_sprite_suffix() -> String:
 func _ready() -> void:
 	is_dyslexic = theme.get_default_font() == dyslexic_font
 	font_change.set_pressed_no_signal(is_dyslexic)
+	await Global.game_loaded
+	vibrate_button.set_pressed_no_signal(Global.is_vibration_enabled())
 	close()
 
 
@@ -106,3 +108,7 @@ func _on_avatar_selection_gui_closed() -> void:
 	if canvas_layer == null: return
 	show()
 	canvas_layer.show()
+
+
+func _on_vibrate_pressed() -> void:
+	Global.set_vibration_enabled(vibrate_button.button_pressed)

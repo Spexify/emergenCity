@@ -38,6 +38,7 @@
 		"prompt": "Willst du Wasser aus dem Hahn zapfen?",
         "e_coins": 0,
 		"progresses_day_period": false,
+		"sound": "water"
     },
 	{
         "id": 4,

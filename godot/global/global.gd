@@ -34,6 +34,7 @@ var _start_scene : String
 var _was_crisis : bool
 var _in_crisis_phase: bool
 var _started_from_entry_scene: bool = false
+var _vibration : bool = false
 
 
 ## This function and variable are there, so you can later distinguish if the project
@@ -103,6 +104,7 @@ func reset_save() -> void:
 		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
+		"vibration" : false,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -147,6 +149,7 @@ func save_game(p_was_crisis : bool) -> void:
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
 		"tutorial_done" : _tutorial_done,
+		"vibration" : _vibration,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -211,6 +214,8 @@ func load_game() -> void:
 	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
 	
 	_upgrades_equipped.assign(data.get("upgrades_equipped", [0, 0, 0]).map(func (id : int) -> EMC_Upgrade: var res := UPGRADE_SCENE_PRELOAD.instantiate(); res.setup(id); return res))
+	
+	_vibration = data.get("vibration", false)
 		
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
@@ -332,3 +337,9 @@ func has_upgrade(upgrade_id : EMC_Upgrade.IDs) -> bool:
 		if upgrade != null && upgrade.get_id() == upgrade_id:
 			return true
 	return false
+
+func set_vibration_enabled(x : bool) -> void:
+	_vibration = x
+
+func is_vibration_enabled() -> bool:
+	return _vibration
