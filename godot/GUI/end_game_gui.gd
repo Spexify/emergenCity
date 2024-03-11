@@ -71,11 +71,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 	if p_avatar_life_status == false :
 		var losing_reason : String = ""
 		if _avatar.get_nutrition_status() == 0:
-			losing_reason = "Du bist verhungert. "
+			losing_reason = "Du bist unterernährt und wurdest vom Notfalldienst gerettet. "
 		elif _avatar.get_hydration_status() == 0:
-			losing_reason = "Du bist verdurstet. "
+			losing_reason = "Du bist dehydriert und wurdest vom Notfalldienst gerettet. "
 		elif _avatar.get_health_status() == 0:
-			losing_reason = "Du hattest Gesundheitsprobleme. "
+			losing_reason = "Du hast eine Gesundheitskrise und wurdest vom Notfalldienst gerettet. "
 			
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_loser
