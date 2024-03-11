@@ -15,6 +15,7 @@ var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
 var _previously_paused: bool
+@onready var _tween := get_tree().create_tween().set_loops()
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
@@ -105,6 +106,8 @@ func close() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
+	
+	_setup_shader()
 
 
 func _on_back_btn_pressed() -> void:
@@ -175,3 +178,15 @@ func _is_not_evening_suggest_home_return() -> bool:
 	else:
 		_tooltip_GUI.open("Es ist schon spät, ich sollte nach Hause gehen.")
 		return false
+
+
+## Setup Shader stuff (see https://godotshaders.com/shader/2d-controlled-shine-highlight-with-angle-adjustment/)
+## Can be used freely under CC0 license (see https://creativecommons.org/publicdomain/zero/1.0/)
+func _setup_shader() -> void:
+	const SHINE_TIME: float = 2.0
+	
+	_tween.tween_property($ClickableBuildings.material, "shader_parameter/shine_progress", 1.0,
+		SHINE_TIME).from(0.0).set_delay(4.0)
+	_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) #Play even though the scene is paused
+	_tween.play()
+	

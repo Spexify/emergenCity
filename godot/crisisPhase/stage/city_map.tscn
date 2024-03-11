@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://hcfsn06a2085"]
+[gd_scene load_steps=27 format=3 uid="uid://hcfsn06a2085"]
 
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="1_pkkoa"]
 [ext_resource type="Script" path="res://crisisPhase/stage/city_map.gd" id="2_a4fhc"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/sprites/GUI/buttons/invisible_button.png" id="3_wxrxy"]
+[ext_resource type="Shader" path="res://res/VFX/shaders/city_map_clickable_buildings.gdshader" id="3_x6gau"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_b0mqi"]
 [ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
 [ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
@@ -12,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://ov3khq2j8kph" path="res://res/VFX/particles/particle_clouds.png" id="9_5vlc8"]
 [ext_resource type="Texture2D" uid="uid://mgvjk7a3irx0" path="res://res/VFX/particles/particle_water_drop.png" id="10_7a7e0"]
 [ext_resource type="Texture2D" uid="uid://cks714cqsksl" path="res://res/VFX/particles/particle_cloud_shadow.png" id="11_0jybd"]
+[ext_resource type="Texture2D" uid="uid://c2nkjrvwfo7h5" path="res://res/sprites/citymap/citymap_clickable_buildings.png" id="13_ge2rm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwa80"]
+shader = ExtResource("3_x6gau")
+shader_parameter/shine_color = Color(1, 1, 1, 0.462745)
+shader_parameter/shine_progress = 0.0
+shader_parameter/shine_size = 0.08
+shader_parameter/shine_angle = 51.4
 
 [sub_resource type="Curve" id="Curve_vqo80"]
 _data = [Vector2(0.532164, 1), 0.0, -1.18932, 0, 1, Vector2(0.994152, 0.450549), -1.18932, 0.0, 1, 0]
@@ -40,6 +49,7 @@ particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(1, 200, 1)
 direction = Vector3(1, 1, 0)
+spread = 25.0
 initial_velocity_min = 50.0
 initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
@@ -122,6 +132,14 @@ offset_bottom = 40.0
 mouse_filter = 0
 texture = ExtResource("1_pkkoa")
 script = ExtResource("2_a4fhc")
+
+[node name="ClickableBuildings" type="TextureRect" parent="."]
+process_mode = 3
+material = SubResource("ShaderMaterial_bwa80")
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 1024.0
+texture = ExtResource("13_ge2rm")
 
 [node name="HomeBtn" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0)
