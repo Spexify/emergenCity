@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dmp3dkvy1barj" path="res://GUI/tooltip_GUI.tscn" id="14_0s3fx"]
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://buhj6araogehg" path="res://GUI/book_GUI.tscn" id="16_eg1dm"]
-[ext_resource type="PackedScene" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
+[ext_resource type="PackedScene" uid="uid://dmchkorcdvl0d" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 [ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://animations/day_period_transition.tscn" id="21_6msld"]

@@ -44,3 +44,7 @@ func open() -> void:
 func close() -> void:
 	hide()
 	#closed.emit()
+
+
+func _on_back_btn_pressed() -> void:
+	close()
