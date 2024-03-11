@@ -23,6 +23,7 @@ func _ready() -> void:
 	_add_balance(0)
 	
 	_equipped_upgrades = Global.get_upgrades()
+	print(_equipped_upgrades)
 	
 	for id : EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
 		var _added_upgrade : EMC_Upgrade = null
@@ -154,5 +155,12 @@ func _unequip_upgrade_at_idx(idx: int) -> void:
 
 
 func _on_main_menu_btn_pressed() -> void:
-	Global.set_upgrades(_equipped_upgrades)
+	var tmp : Array[EMC_Upgrade] 
+	for i in range(len(_equipped_upgrades)):
+		var up := _upgrade_scene.instantiate()
+		up.setup(_equipped_upgrades[i].get_id())
+		tmp.append(up)
+	
+	print(tmp)
+	Global.set_upgrades(tmp)
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

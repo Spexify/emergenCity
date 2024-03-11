@@ -40,6 +40,7 @@ func reload_groups() -> void:
 
 func on_button_pressed() -> void:
 	button.play()
+	await button.finished
 	
 func on_open() -> void:
 	open_gui.play()
