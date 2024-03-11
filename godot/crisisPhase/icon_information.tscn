@@ -126,4 +126,4 @@ alignment = 1
 layout_mode = 2
 text = "Weiter"
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/ContinueBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/ContinueBtn" to="." method="_on_continue_btn_pressed"]

@@ -121,8 +121,7 @@ func _ready() -> void:
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
 		_play_tutorial_dialogue()
-		$GUI/VBC/MiddleSection/IconInformation.open()
-		Global._tutorial_done = true
+
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes
 ## As there is no analogous input code on mobile phones, this can be called
@@ -213,6 +212,9 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	$InputBlock.hide()
 	
 	Global.get_tree().paused = false
+	if !Global._tutorial_done:
+		$GUI/VBC/MiddleSection/IconInformation.open()
+		Global._tutorial_done = true
 
 
 ################################################################################
