@@ -92,6 +92,7 @@ func _cook_recipe() -> void:
 		_inventory.remove_item(input_item_ID)
 	_inventory.add_new_item(_last_clicked_recipe.get_output_item_ID())
 	
+	await SoundMngr.get_node("Button").finished
 	var wait : AudioStreamPlayer = _action.play_sound()
 	if wait != null:
 		await wait.finished

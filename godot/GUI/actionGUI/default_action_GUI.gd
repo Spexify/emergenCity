@@ -29,12 +29,12 @@ func _ready() -> void:
 
 
 func _on_confirm_btn_pressed() -> void:
-	_action.executed.emit(_action)
-	
 	await SoundMngr.get_node("Button").finished
 	var wait : AudioStreamPlayer = _action.play_sound()
 	if wait != null:
 		await wait.finished
+	
+	_action.executed.emit(_action)
 	close()
 
 
