@@ -16,7 +16,6 @@ var _id : IDs
 var _display_name : String
 var _description : String
 var _price : int
-var _tilemap_position : Vector2i #theoretically one could use the _ID for the frame, but it's not objectively better
 var _state : int
 var _state_maximum : int
 var _spawn_pos: Vector2i
@@ -31,12 +30,12 @@ func setup(p_upgrade_id: IDs) -> void:
 	_display_name = data.get("display_name", "")
 	_description = data.get("description", "")
 	_price = data.get("price", 0)
-	_tilemap_position = data.get("tilemap_position", Vector2i(3,3))
 	_state = data.get("state", 0)
 	_state_maximum = data.get("state_maximum", 0) 
 	if data.has("spawn_pos"):
 		_spawn_pos = data["spawn_pos"]
-	
+	if self.get_sprite() != null:
+		self.get_sprite().set_frame_coords(data.get("tilemap_position", Vector2i(3,3)))
 	#match _id:
 		#
 		#IDs.EMPTY_SLOT:
@@ -82,10 +81,6 @@ func get_description() -> String:
 
 func get_price() -> int:
 	return _price
-
-
-func get_tilemap_position() -> Vector2i:
-	return _tilemap_position
 
 
 func get_state() -> int:

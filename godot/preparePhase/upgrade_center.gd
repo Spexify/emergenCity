@@ -36,7 +36,6 @@ func _ready() -> void:
 		if _added_upgrade == null:
 			_added_upgrade = _upgrade_scene.instantiate()
 			_added_upgrade.setup(id)
-			_added_upgrade.get_sprite().set_frame_coords(_added_upgrade.get_tilemap_position())
 		
 		if !(_added_upgrade.get_id() == EMC_Upgrade.IDs.EMPTY_SLOT):
 			_added_upgrade.was_pressed.connect(_on_upgrade_pressed)
@@ -48,7 +47,6 @@ func _ready() -> void:
 			if(_equipped_upgrades[i] == null):
 				var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
 				empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
-				empty_slot.get_sprite().set_frame_coords(empty_slot.get_tilemap_position())
 				_equipped_upgrades[i] = empty_slot
 				_equipped_upgrades_display.add_child(empty_slot)
 
@@ -105,7 +103,6 @@ func _on_equip_btn_pressed() -> void:
 			# adding a copy in the equipment HBox that is not connected to _on_upgrade_pressed
 			var display_copy : EMC_Upgrade = _upgrade_scene.instantiate()
 			display_copy.setup(_last_clicked_upgrade.get_id())
-			display_copy.get_sprite().set_frame_coords(display_copy.get_tilemap_position())
 			_equipped_upgrades_display.add_child(display_copy)
 			_equipped_upgrades_display.move_child(display_copy, 0)
 			
