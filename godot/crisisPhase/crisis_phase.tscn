@@ -176,6 +176,7 @@ visible = false
 layout_mode = 2
 
 [node name="IconInformation" parent="GUI/VBC/MiddleSection" instance=ExtResource("17_yxtkp")]
+visible = false
 layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/VBC"]

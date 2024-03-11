@@ -1,11 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://tpxumytrh032"]
+[gd_scene load_steps=15 format=3 uid="uid://tpxumytrh032"]
 
 [ext_resource type="Script" path="res://crisisPhase/status_bars.gd" id="1_m4dni"]
 [ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_gr84e"]
+[ext_resource type="Texture2D" uid="uid://dp8ofl4ea1lse" path="res://res/VFX/particles/particle_smoke_green.png" id="3_66xh1"]
 [ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/sprites/GUI/icons/icon_statusbar_hydration.png" id="3_idu7t"]
 [ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/sprites/GUI/icons/icon_statusbar_health.png" id="4_m4gsd"]
+[ext_resource type="Texture2D" uid="uid://bk4pns81h8ars" path="res://res/VFX/particles/particle_smoke_blue.png" id="5_a7waw"]
 [ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://res/sprites/GUI/icons/icon_statusbar_happiness.png" id="5_xfaii"]
-[ext_resource type="Texture2D" uid="uid://dymxhcnf3bd1i" path="res://res/VFX/particles/particle_smoke.png" id="6_04kxj"]
+[ext_resource type="Texture2D" uid="uid://bhoni508p4cmx" path="res://res/VFX/particles/particle_smoke_red.png" id="7_5dx1v"]
+[ext_resource type="Texture2D" uid="uid://dny6kkus3j8l3" path="res://res/VFX/particles/particle_smoke_yellow.png" id="7_mjdb6"]
 
 [sub_resource type="Gradient" id="Gradient_hix8y"]
 offsets = PackedFloat32Array(0.405594, 1)
@@ -31,7 +34,6 @@ gravity = Vector3(0, 0, 0)
 tangential_accel_min = -100.0
 tangential_accel_max = -100.0
 scale_curve = SubResource("CurveTexture_yfwc6")
-color = Color(0.372549, 0.698039, 0.356863, 1)
 color_ramp = SubResource("GradientTexture1D_8qpq6")
 
 [node name="StatusBars" type="Control"]
@@ -66,6 +68,16 @@ position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_gr84e")
 
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/NutritionCont/ContainerNutrition"]
+position = Vector2(40, 14.7368)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("3_66xh1")
+one_shot = true
+speed_scale = 0.5
+
 [node name="NutritionBar" type="ProgressBar" parent="HBC/VBoxContainer/NutritionCont"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -97,6 +109,16 @@ size_flags_vertical = 4
 position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("3_idu7t")
+
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/HydrationCont/ContainerHydration"]
+position = Vector2(40, 14.8947)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("5_a7waw")
+one_shot = true
+speed_scale = 0.5
 
 [node name="HydrationBar" type="ProgressBar" parent="HBC/VBoxContainer/HydrationCont"]
 custom_minimum_size = Vector2(100, 30)
@@ -135,6 +157,16 @@ position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_m4gsd")
 
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HealthCont/ContainerHealth"]
+position = Vector2(38.6316, 16.8421)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("7_5dx1v")
+one_shot = true
+speed_scale = 0.5
+
 [node name="HealthBar" type="ProgressBar" parent="HBC/VBoxContainer2/HealthCont"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -163,6 +195,16 @@ position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("5_xfaii")
 
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HappinessCont/ContainerHappiness"]
+position = Vector2(40.7368, 17)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("7_mjdb6")
+one_shot = true
+speed_scale = 0.5
+
 [node name="HappinessBar" type="ProgressBar" parent="HBC/VBoxContainer2/HappinessCont"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -176,15 +218,6 @@ layout_mode = 0
 offset_right = 100.0
 offset_bottom = 30.0
 bbcode_enabled = true
-
-[node name="SmokeVFX" type="GPUParticles2D" parent="."]
-position = Vector2(38, 14)
-emitting = false
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_03rpy")
-texture = ExtResource("6_04kxj")
-one_shot = true
-speed_scale = 0.5
 
 [connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]
