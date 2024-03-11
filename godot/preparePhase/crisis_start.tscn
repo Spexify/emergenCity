@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://iov3iav204i4"]
+[gd_scene load_steps=8 format=3 uid="uid://iov3iav204i4"]
 
 [ext_resource type="Script" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="2_oi1nj"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yuscm"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_ak74w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svi03"]
 
@@ -45,9 +46,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
+offset_left = -262.0
 offset_top = -150.0
-offset_right = 226.0
+offset_right = 268.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -92,12 +93,22 @@ value = 1.0
 tick_count = 3
 ticks_on_borders = true
 
-[node name="Continue" parent="CanvasLayer/VBoxContainer" instance=ExtResource("3_yuscm")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 2
+
+[node name="Continue" parent="CanvasLayer/VBoxContainer/HBoxContainer" instance=ExtResource("3_yuscm")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Weiter"
 
+[node name="BackBtn" type="TextureButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_ak74w")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer/Easy" to="." method="_on_easy_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer/Normal" to="." method="_on_normal_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer/Hard" to="." method="_on_hard_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

@@ -53,3 +53,7 @@ func _on_normal_pressed() -> void:
 func _on_hard_pressed() -> void:
 		_crisis_length = _rng.randi_range(LENGTH_LOWER_BOUND_HARD, LENGTH_UPPER_BOUND_HARD)
 		_number_crisis_overlap = _rng.randi_range(CRISIS_OVERLAP_LOWER_BOUND, CRISIS_OVERLAP_UPPER_BOUND)
+
+
+func _on_back_btn_pressed() -> void:
+	Global.goto_scene("res://preparePhase/main_menu.tscn")
