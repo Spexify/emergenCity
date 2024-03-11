@@ -5,6 +5,7 @@ class_name EMC_EndGameGUI
 ## amount of work you have to do when making changes doubles (and you might overlook/forget to make
 ## changes for both)
 
+const LOSER_COIN_FACTOR : int = 40
 
 func _ready() -> void:
 	hide()
@@ -79,11 +80,13 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 			
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_loser
+		var end_coins : int = p_history.size()*LOSER_COIN_FACTOR
+		print(p_history.size())
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description.text =\
-				losing_reason + "Du hast nur 100 ECoins erworben."
+				losing_reason + "Du hast nur " + str(end_coins) +" ECoins erworben."
 		$LoserScreen.show()
 		$WinnerScreen.hide()
-		Global.set_e_coins(Global.get_e_coins() + 100)
+		Global.set_e_coins(Global.get_e_coins() + end_coins)
 	else: 
 		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \

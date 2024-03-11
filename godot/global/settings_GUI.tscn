@@ -44,6 +44,7 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center][color=white]Einstellungen[/color][/center]"
+fit_content = true
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 600)
@@ -112,6 +113,10 @@ layout_mode = 2
 script = ExtResource("3_n24n2")
 bus_name = "SFX"
 
+[node name="Vibrate" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
+layout_mode = 2
+text = "Vibration"
+
 [node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
@@ -130,5 +135,6 @@ layout_mode = 1
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Sound" to="." method="_on_sound_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/FontChange" to="." method="_on_font_change_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate" to="." method="_on_vibrate_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Back" to="." method="_on_back_pressed"]
 [connection signal="closed" from="AvatarSelectionGUI" to="." method="_on_avatar_selection_gui_closed"]

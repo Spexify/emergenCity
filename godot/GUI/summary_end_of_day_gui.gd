@@ -21,7 +21,7 @@ func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory, _p_inventory_GUI
 
 
 func _open_summary_window() -> void:
-	$SummaryWindow.visible = true
+	$SummaryWindow.show()
 
 
 ## opens summary end of day GUI/makes visible
@@ -36,14 +36,14 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 	$SummaryWindow/MarginContainer/VBC/VBC/HBC1/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
 	$SummaryWindow/MarginContainer/VBC/VBC/HBC2/TextBox/NoonContent.text = _p_day_cycle.noon_action.get_description()
 	$SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent.text = _p_day_cycle.evening_action.get_description()
-	visible = true
+	show()
 	opened.emit()
 
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	Global.get_tree().paused = false
-	visible = false
+	hide()
 	closed.emit()
 	_inventory_GUI.set_consume_idle() #MRM Bugfix
 
@@ -55,11 +55,7 @@ func _on_continue_pressed() -> void:
 	_inventory_GUI.open()
 	_has_slept = 0
 	#close_gui_sfx.play()
-	visible = false
-
-
-#func _on_inventory_gui_seod_inventory_closed()-> void:
-	#close()
+	hide()
 
 func _ready() -> void:
 	hide()

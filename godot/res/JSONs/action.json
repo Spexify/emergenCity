@@ -1,376 +1,377 @@
 [
 	{
-        "id": 1,
-        "type": "action",
-        "name": "-",
-        "constraints": {
-            "constraint_no_isolation": "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!",
-        },
-        "consequences": {
-        },
-        "type_gui": "CityMap",
+		"id": 1,
+		"type": "action",
+		"name": "-",
+		"constraints": {
+			"constraint_no_isolation": "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!",
+		},
+		"consequences": {
+		},
+		"type_gui": "CityMap",
 		"description": "-",
-        "e_coins": 0,
+		"e_coins": 0,
 		"progresses_day_period": false,
-    },
+	},
 	{
-        "id": 2,
-        "type": "action",
-        "name": "Kochen",
-        "constraints": {},
-        "consequences": {},
+		"id": 2,
+		"type": "action",
+		"name": "Kochen",
+		"constraints": {},
+		"consequences": {},
 		"type_gui": "CookingGUI",
-        "description": "Hat gekocht",
-        "e_coins": 30,
-    },
+		"description": "Hat gekocht",
+		"e_coins": 20,
+	},
 	{
-        "id": 3,
-        "type": "action",
-        "name": "(Wasserzapfen)",
-        "constraints": {
+		"id": 3,
+		"type": "action",
+		"name": "(Wasserzapfen)",
+		"constraints": {
 			"constraint_some_water_available": "",
 		},
-        "consequences": {
+		"consequences": {
 			"add_tap_water" : 0,
 		},
 		"type_gui": "DefaultActionGUI",
-        "description": "-",
+		"description": "-",
 		"prompt": "Willst du Wasser aus dem Hahn zapfen?",
-        "e_coins": 0,
+		"e_coins": 0,
 		"progresses_day_period": false,
-    },
+		"sound": "water"
+	},
 	{
-        "id": 4,
-        "type": "action",
-        "name": "Ausruhen",
-        "constraints": {},
-        "consequences": {},
+		"id": 4,
+		"type": "action",
+		"name": "Ausruhen",
+		"constraints": {},
+		"consequences": {},
 		"type_gui": "DefaultActionGUI",
-        "description": "Hat sich ausgeruht",
+		"description": "Hat sich ausgeruht",
 		"prompt": "Willst du dich ausruhen?",
-        "e_coins": 10,
-    },
+		"e_coins": 10,
+	},
 	{
-        "id": 5,
-        "type": "action",
-        "name": "Wasser aus Regentonne schöpfen",
-        "constraints": {
+		"id": 5,
+		"type": "action",
+		"name": "Wasser aus Regentonne schöpfen",
+		"constraints": {
 			"constraint_rainwater_barrel": 0,
 		},
-        "consequences": {},
+		"consequences": {},
 		"type_gui": "RainwaterBarrelGUI",
-        "description": "Hat Wasser aus der Regentonne geschöpft.",
+		"description": "Hat Wasser aus der Regentonne geschöpft.",
 		"prompt": "",
-        "e_coins": 0,
-    },
+		"e_coins": 0,
+	},
 	{
-        "id": 6,
-        "type": "action",
-        "name": "Duschen",
-        "constraints": {},
-        "consequences": {},
+		"id": 6,
+		"type": "action",
+		"name": "Duschen",
+		"constraints": {},
+		"consequences": {},
 		"type_gui": "ShowerGUI",
-        "description": "Hat geduscht.",
+		"description": "Hat geduscht.",
 		"prompt": "",
-        "e_coins": 10,
-    },
+		"e_coins": 15,
+	},
 	{
-        "id": 7,
-        "type": "action",
-        "name": "(BBK-Broschürenlink)",
-        "constraints": {},
-        "consequences": {
+		"id": 7,
+		"type": "action",
+		"name": "(BBK-Broschürenlink)",
+		"constraints": {},
+		"consequences": {
 			"open_bbk_brochure": 0,
 		},
 		"type_gui": "ConfirmationGUI",
-        "description": "-",
+		"description": "-",
 		"prompt": "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?",
-        "e_coins": 0,
-    },
+		"e_coins": 0,
+	},
 	{
-        "id": 8,
-        "type": "action",
-        "name": "(Radio)",
-        "constraints": {
+		"id": 8,
+		"type": "action",
+		"name": "(Radio)",
+		"constraints": {
 			"has_item_by_name": "BATTERIES",
 		},
-        "consequences": {
+		"consequences": {
 			"use_item_by_name": "BATTERIES",
 			"use_radio": 0,
 		},
 		"type_gui": "ConfirmationGUI",
-        "description": "-",
+		"description": "-",
 		"prompt": "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
-        "e_coins": 0,
-    },
+		"e_coins": 0,
+	},
 	{
-        "id": 9,
-        "type": "action",
-        "name": "(Radio)",
-        "constraints": {},
-        "consequences": {
+		"id": 9,
+		"type": "action",
+		"name": "(Radio)",
+		"constraints": {},
+		"consequences": {
 			"use_radio": 0,
 		},
 		"type_gui": "ConfirmationGUI",
-        "description": "-",
+		"description": "-",
 		"prompt": "Willst du das Kurbelradio benutzen?",
-        "e_coins": 0,
-    },
-    {
-        "id": 2000,
-        "type": "change_stage",
-        "name": "nachhause",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "home",
-                "avatar_pos": {"x": 250, "y": 650}
-            }
-        },
-        "description": "Nach Hause gekehrt.",
-        "stage_name": "home",
-        "e_coins": 40,
-        "silent": true
-    },
-    {
-        "id": 2001,
-        "type": "change_stage",
-        "name": "zum Marktplatz",
-        "constraints": {
-            "constraint_not_evening": "",
-            "constraint_no_limited_public_access": "Der Marktplatz ist nicht betretbar!"
-        },
-        "consequences": {
-            "change_stage": {
-                "stage_name": "market",
-                "avatar_pos": {"x": 250, "y": 1000},
-                "npc_pos": {"Raphael": {"x": 200, "y": 230}}
-            }
-        },
-        "description": "Hat Marktplatz besucht.",
-        "stage_name": "market",
-        "e_coins": 0
-    },
-    {
-        "id": 2002,
-        "type": "change_stage",
-        "name": "zum Rathaus",
-        "constraints": {
-            "constraint_not_evening": "Das Rathaus ist Abends geschlossen.",
-            "constraint_no_limited_public_access": ""
-        },
-        "consequences": {
-            "change_stage": {
-                "stage_name": "townhall",
-                "avatar_pos": {"x": 450, "y": 480},
-                "npc_pos": {"Leonie": {"x": 430, "y": 300}}
-            }
-        },
-        "description": "Hat Rathaus besucht.",
-        "stage_name": "townhall",
-        "e_coins": 0
-    },
-    {
-        "id": 2003,
-        "type": "change_stage",
-        "name": "zum Park",
-        "constraints": { },
-        "consequences": {
-            "change_stage": {
-                "stage_name": "park",
-                "avatar_pos": {"x": 350, "y": 700},
-                "npc_pos": {
-                    "Gerhard": {"x": 460, "y": 960},
-                    "Friedel": {"x": 80, "y": 730}
-                }
-            }
-        },
-        "description": "Hat den Park besucht.",
-        "stage_name": "park",
-        "e_coins": 0
-    },
-    {
-        "id": 2004,
-        "type": "change_stage",
-        "name": "zum Gerhard",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "gardenhouse",
-                "avatar_pos": {"x": 150, "y": 900},
-                "npc_pos": {
-                    "Gerhard": {"x": 420, "y": 380},
-                    "Friedel": {"x": 80, "y": 700}
-                }
-            }
-        },
-        "description": "Hat Gerhard besucht.",
-        "stage_name": "gardenhouse",
-        "e_coins": 0
-    },
-    {
-        "id": 2005,
-        "type": "change_stage",
-        "name": "zum Julia",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "rowhouse",
-                "avatar_pos": {"x": 250, "y": 400},
-                "npc_pos": {"Julia": {"x": 450, "y": 550}}
-            }
-        },
-        "description": "Hat Julia besucht.",
-        "stage_name": "rowhouse",
-        "e_coins": 0
-    },
-    {
-        "id": 2006,
-        "type": "change_stage",
-        "name": "zum Petro & Irena",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "mansion",
-                "avatar_pos": {"x": 120, "y": 900},
-                "npc_pos": {
-                    "Petro": {"x": 370, "y": 870},
-                    "Irena": {"x": 460, "y": 260}
-                }
-            }
-        },
-        "description": "Hat Petro & Irena besucht.",
-        "stage_name": "mansion",
-        "e_coins": 0
-    },
-    {
-        "id": 2007,
-        "type": "change_stage",
-        "name": "zum Elias",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "penthouse",
-                "avatar_pos": {"x": 250, "y": 1000},
-                "npc_pos": {"Elias": {"x": 440, "y": 800}}
-            }
-        },
-        "description": "Hat Elias besucht.",
-        "stage_name": "penthouse",
-        "e_coins": 0
-    },
-    {
-        "id": 2008,
-        "type": "change_stage",
-        "name": "zum Mert",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "apartment_mert",
-                "avatar_pos": {"x": 150, "y": 400},
-                "npc_pos": {
-                    "Mert": {"x": 400, "y": 310},
-                    "Momo": {"x": 480, "y": 760}
-                }
-            }
-        },
-        "description": "Hat Mert besucht.",
-        "stage_name": "apartment_mert",
-        "e_coins": 0
-    },
-    {
-        "id": 2009,
-        "type": "change_stage",
-        "name": "zum Kris & Veronika",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "apartment_camper",
-                "avatar_pos": {"x": 150, "y": 400},
-                "npc_pos": {
-                    "Kris": {"x": 460, "y": 300},
-                    "Veronika": {"x": 480, "y": 780}
-                }
-            }
-        },
-        "description": "Hat Kris & Veronika besucht.",
-        "stage_name": "apartment_camper",
-        "e_coins": 0
-    },
-    {
-        "id": 2010,
-        "type": "change_stage",
-        "name": "zum Agathe",
-        "constraints": {},
-        "consequences": {
-            "change_stage": {
-                "stage_name": "apartment_default",
-                "avatar_pos": {"x": 250, "y": 900},
-                "npc_pos": {"Agathe": {"x": 490, "y": 400}}
-            }
-        },
-        "description": "Hat Agathe besucht.",
-        "stage_name": "apartment_default",
-        "e_coins": 0
-    },
-    {
-        "id": 3000,
-        "type": "action",
-        "name": "HELP_AGATHE_JAM",
-        "constraints": {},
-        "consequences": {"add_items_by_name": "JAM"},
-        "type_gui": "",
-        "description": "Mit Agathe geplaudert.",
-        "e_coin": 50
-    },
-    {
-        "id": 3001,
-        "type": "action",
-        "name": "HELP_AGATHE_HAPPY",
-        "constraints": {},
-        "consequences": {"add_happiness": 30},
-        "type_gui": "",
-        "description": "Mit Agathe geplaudert.",
-        "e_coin": 50
-    },
-    {
-        "id": 3002,
-        "type": "action",
-        "name": "HELP_JULIA",
-        "constraints": {},
-        "consequences": {"add_items_by_name": "CHOCOLATE"},
-        "type_gui": "",
-        "description": "Julia geholfen.",
-        "e_coin": 50
-    },
-    {
-        "id": 3003,
-        "type": "action",
-        "name": "HELP_GERHARD",
-        "constraints": {},
-        "consequences": {"add_happiness": 30},
-        "type_gui": "",
-        "description": "Mit Gerhard nach Friedel gesucht.",
-        "e_coin": 50
-    },
-    {
-        "id": 3004,
-        "type": "action",
-        "name": "HELP_PETRO",
-        "constraints": {},
-        "consequences": {"add_items_by_name": "BATTERIES"},
-        "type_gui": "",
-        "description": "Mit Irena gespielt.",
-        "e_coin": 50
-    },
-    {
-        "id": 3005,
-        "type": "action",
-        "name": "HELP_MERT",
-        "constraints": {},
-        "consequences": {"add_items_by_name": "WATER", "add_happiness": 1},
-        "type_gui": "",
-        "description": "Mit Mert Wasser verteilt.",
-        "e_coin": 50
-    }
+		"e_coins": 0,
+	},
+	{
+		"id": 2000,
+		"type": "change_stage",
+		"name": "nachhause",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "home",
+				"avatar_pos": {"x": 250, "y": 650}
+			}
+		},
+		"description": "Nach Hause gekehrt.",
+		"stage_name": "home",
+		"e_coins": 25,
+		"silent": true
+	},
+	{
+		"id": 2001,
+		"type": "change_stage",
+		"name": "zum Marktplatz",
+		"constraints": {
+			"constraint_not_evening": "",
+			"constraint_no_limited_public_access": "Der Marktplatz ist nicht betretbar!"
+		},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "market",
+				"avatar_pos": {"x": 250, "y": 1000},
+				"npc_pos": {"Raphael": {"x": 200, "y": 230}}
+			}
+		},
+		"description": "Hat Marktplatz besucht.",
+		"stage_name": "market",
+		"e_coins": 25
+	},
+	{
+		"id": 2002,
+		"type": "change_stage",
+		"name": "zum Rathaus",
+		"constraints": {
+			"constraint_not_evening": "Das Rathaus ist Abends geschlossen.",
+			"constraint_no_limited_public_access": ""
+		},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "townhall",
+				"avatar_pos": {"x": 450, "y": 480},
+				"npc_pos": {"Leonie": {"x": 430, "y": 300}}
+			}
+		},
+		"description": "Hat Rathaus besucht.",
+		"stage_name": "townhall",
+		"e_coins": 25
+	},
+	{
+		"id": 2003,
+		"type": "change_stage",
+		"name": "zum Park",
+		"constraints": { },
+		"consequences": {
+			"change_stage": {
+				"stage_name": "park",
+				"avatar_pos": {"x": 350, "y": 700},
+				"npc_pos": {
+					"Gerhard": {"x": 460, "y": 960},
+					"Friedel": {"x": 80, "y": 730}
+				}
+			}
+		},
+		"description": "Hat den Park besucht.",
+		"stage_name": "park",
+		"e_coins": 25
+	},
+	{
+		"id": 2004,
+		"type": "change_stage",
+		"name": "zum Gerhard",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "gardenhouse",
+				"avatar_pos": {"x": 150, "y": 900},
+				"npc_pos": {
+					"Gerhard": {"x": 420, "y": 380},
+					"Friedel": {"x": 80, "y": 700}
+				}
+			}
+		},
+		"description": "Hat Gerhard besucht.",
+		"stage_name": "gardenhouse",
+		"e_coins": 25
+	},
+	{
+		"id": 2005,
+		"type": "change_stage",
+		"name": "zum Julia",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "rowhouse",
+				"avatar_pos": {"x": 250, "y": 400},
+				"npc_pos": {"Julia": {"x": 450, "y": 550}}
+			}
+		},
+		"description": "Hat Julia besucht.",
+		"stage_name": "rowhouse",
+		"e_coins": 25
+	},
+	{
+		"id": 2006,
+		"type": "change_stage",
+		"name": "zum Petro & Irena",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "mansion",
+				"avatar_pos": {"x": 120, "y": 900},
+				"npc_pos": {
+					"Petro": {"x": 370, "y": 870},
+					"Irena": {"x": 460, "y": 260}
+				}
+			}
+		},
+		"description": "Hat Petro & Irena besucht.",
+		"stage_name": "mansion",
+		"e_coins": 25
+	},
+	{
+		"id": 2007,
+		"type": "change_stage",
+		"name": "zum Elias",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "penthouse",
+				"avatar_pos": {"x": 250, "y": 1000},
+				"npc_pos": {"Elias": {"x": 440, "y": 800}}
+			}
+		},
+		"description": "Hat Elias besucht.",
+		"stage_name": "penthouse",
+		"e_coins": 25
+	},
+	{
+		"id": 2008,
+		"type": "change_stage",
+		"name": "zum Mert",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "apartment_mert",
+				"avatar_pos": {"x": 150, "y": 400},
+				"npc_pos": {
+					"Mert": {"x": 400, "y": 310},
+					"Momo": {"x": 480, "y": 760}
+				}
+			}
+		},
+		"description": "Hat Mert besucht.",
+		"stage_name": "apartment_mert",
+		"e_coins": 25
+	},
+	{
+		"id": 2009,
+		"type": "change_stage",
+		"name": "zum Kris & Veronika",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "apartment_camper",
+				"avatar_pos": {"x": 150, "y": 400},
+				"npc_pos": {
+					"Kris": {"x": 460, "y": 300},
+					"Veronika": {"x": 480, "y": 780}
+				}
+			}
+		},
+		"description": "Hat Kris & Veronika besucht.",
+		"stage_name": "apartment_camper",
+		"e_coins": 25
+	},
+	{
+		"id": 2010,
+		"type": "change_stage",
+		"name": "zum Agathe",
+		"constraints": {},
+		"consequences": {
+			"change_stage": {
+				"stage_name": "apartment_default",
+				"avatar_pos": {"x": 250, "y": 900},
+				"npc_pos": {"Agathe": {"x": 490, "y": 400}}
+			}
+		},
+		"description": "Hat Agathe besucht.",
+		"stage_name": "apartment_default",
+		"e_coins": 25
+	},
+	{
+		"id": 3000,
+		"type": "action",
+		"name": "HELP_AGATHE_JAM",
+		"constraints": {},
+		"consequences": {"add_items_by_name": "JAM"},
+		"type_gui": "",
+		"description": "Mit Agathe geplaudert.",
+		"e_coin": 30
+	},
+	{
+		"id": 3001,
+		"type": "action",
+		"name": "HELP_AGATHE_HAPPY",
+		"constraints": {},
+		"consequences": {"add_happiness": 2},
+		"type_gui": "",
+		"description": "Mit Agathe geplaudert.",
+		"e_coin": 30
+	},
+	{
+		"id": 3002,
+		"type": "action",
+		"name": "HELP_JULIA",
+		"constraints": {},
+		"consequences": {"add_items_by_name": "CHOCOLATE"},
+		"type_gui": "",
+		"description": "Julia geholfen.",
+		"e_coin": 30
+	},
+	{
+		"id": 3003,
+		"type": "action",
+		"name": "HELP_GERHARD",
+		"constraints": {},
+		"consequences": {"add_happiness": 2},
+		"type_gui": "",
+		"description": "Mit Gerhard nach Friedel gesucht.",
+		"e_coin": 30
+	},
+	{
+		"id": 3004,
+		"type": "action",
+		"name": "HELP_PETRO",
+		"constraints": {},
+		"consequences": {"add_items_by_name": "BATTERIES"},
+		"type_gui": "",
+		"description": "Mit Irena gespielt.",
+		"e_coin": 30
+	},
+	{
+		"id": 3005,
+		"type": "action",
+		"name": "HELP_MERT",
+		"constraints": {},
+		"consequences": {"add_items_by_name": "WATER", "add_happiness": 2},
+		"type_gui": "",
+		"description": "Mit Mert Wasser verteilt.",
+		"e_coin": 30
+	}
 ]
