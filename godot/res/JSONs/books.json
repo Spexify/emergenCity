@@ -19,28 +19,24 @@ Autor X. Perte",
 	},
 
 	{
-		"ID": 2,
-		"title": "Die Krisen-Chroniken",
-		"content": [
-"Ein Ausschnitt von Katastrophen historischen Ausmaßes.
-Insbesondere im 14. Jahrhundert verbreitete sich die [b]Pest[/b], auch als Schwarzer Tod bekannt, in Europa. Die über viele Jahrzehnte in Infektions-Wellen wütende Krankheit kostete geschätzt zwischen 20 und 50 Millionen Menschen das Leben. Durch das fehlende medizinische Wissen und mangelnde Hygiene konnte die Bevölkerung nicht effektiv die Bedrohung bekämpfen. Noch heute gibt es immer wieder kleinere Krankheits-Ausbrüche, welche jedoch gut behandelbar sind.",
+	"ID": 2,
+	"title": "Die Krisen-Chroniken",
+	"content": [
+		"Ein Ausschnitt von Katastrophen historischen Ausmaßes. Insbesondere im 14. Jahrhundert verbreitete sich die <a href='https://de.wikipedia.org/wiki/Geschichte_der_Pest#Bekannte_Opfer_der_Pest'>Pest</a>, auch als Schwarzer Tod bekannt, in Europa. 
+		Die über viele Jahrzehnte in Infektions-Wellen wütende Krankheit kostete geschätzt zwischen 20 und 50 Millionen Menschen das Leben. Durch das fehlende medizinische Wissen und mangelnde Hygiene konnte die Bevölkerung nicht effektiv die Bedrohung bekämpfen. 
+		Noch heute gibt es immer wieder kleinere Krankheits-Ausbrüche, welche jedoch gut behandelbar sind.",
 
-"Zwischen 1845 und 1849 ereignete sich in Irland die [i]An Gorta Mór[/i], zu deutsch [b]'Große Hungersnot'[/b]. Da Erdäpfel billig und schnell anbaubar sind, hat sich die irische Bevölkerung zunehmend auf den Anbau von Kartoffeln fokussiert, es entstand eine Monokultur von der die Gesellschaft abhängig war.
-Eine neuartige Krankheit, 'Kartoffelfäule' genannt, befiel die Knollenpflanzen und sorgte für mehrere Ernteausfälle, bei denen u.a. fast vollständig alle Kartoffel-Erzeugnisse und somit die Ernährungsgrundlage der Iren zerstört wurde.",
+		"Zwischen 1845 und 1849 ereignete sich in Irland die <a href='https://de.wikipedia.org/wiki/Große_Hungersnot_in_Irland'>An Gorta Mór</a>, zu deutsch <a href='https://www.planet-wissen.de/geschichte/mittelalter/leben_im_mittelalter/pwiederschwarzetoddiepestwuetetineuropa100.html#:~:text=Die%20Pestpandemie%20beginnt%201347%20und,20%20und%2050%20Millionen%20Toten'>'Große Hungersnot'</a>. 
+		Da Erdäpfel billig und schnell anbaubar sind, hat sich die irische Bevölkerung zunehmend auf den Anbau von Kartoffeln fokussiert, es entstand eine Monokultur von der die Gesellschaft abhängig war. 
+		Eine neuartige Krankheit, 'Kartoffelfäule' genannt, befiel die Knollenpflanzen und sorgte für mehrere Ernteausfälle, bei denen u.a. fast vollständig alle Kartoffel-Erzeugnisse und somit die Ernährungsgrundlage der Iren zerstört wurde.",
 
-"1931 in Jangtsekiang, Republik China: Nach einigen Jahren von anherrschender Dürre, kam es im Winter 1930 zu heftigen Schneestürmen und später schweren Regenfällen. Dies hatte einen stark steigenden Wasserspiegel zur Folge, welche zahlreiche Städte überschwemmte und dabei mindestens 145.000 Menschen in den Tod führte.
-Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuchen wie Cholera, andere verhungerten. Die Dunkelziffer der Todesopfer liegt insgesamt bei etwa 3,7 Millionen.",
+		"1931 in Jangtsekiang, Republik China: Nach einigen Jahren von anherrschender Dürre, kam es im Winter 1930 zu heftigen Schneestürmen und später schweren Regenfällen. Dies hatte einen stark steigenden Wasserspiegel zur Folge, welche zahlreiche Städte überschwemmte und dabei mindestens 145.000 Menschen in den Tod führte. 
+		Viele Menschen starben erst nach der verheerenden <a href='https://de.wikipedia.org/wiki/Flutkatastrophe_in_China_1931'>Flutkatastrophe</a> an Seuchen wie Cholera, andere verhungerten. Die Dunkelziffer der Todesopfer liegt insgesamt bei etwa 3,7 Millionen.",
 
-"Erst vor kurzem, ereignete sich mit [b]COVID-19[/b] eine weltweite Pandemie. Für viele hieß das Quarantäne und Isolation, für einige jedoch den Tod. Laut WHO kam es zwischen Anfang 2020 und Ende 2021 zur einer weltweiten Übersterblichkeit von mehr als 14 Millionen Toten - verursacht durch das Corona-Virus.",
-
-"Quellen:
-* https://de.wikipedia.org/wiki/Geschichte_der_Pest#Bekannte_Opfer_der_Pest,
-* https://www.planet-wissen.de/geschichte/mittelalter/leben_im_mittelalter/pwiederschwarzetoddiepestwuetetineuropa100.html#:~:text=Die%20Pestpandemie%20beginnt%201347%20und,20%20und%2050%20Millionen%20Toten.
-* https://de.wikipedia.org/wiki/Große_Hungersnot_in_Irland
-* https://de.wikipedia.org/wiki/Flutkatastrophe_in_China_1931
-* https://de.wikipedia.org/wiki/COVID-19",
+		"Erst vor kurzem, ereignete sich mit <a href='https://de.wikipedia.org/wiki/COVID-19'>COVID-19</a> eine weltweite Pandemie. Für viele hieß das Quarantäne und Isolation, für einige jedoch den Tod. Laut WHO kam es zwischen Anfang 2020 und Ende 2021 zur einer weltweiten Übersterblichkeit von mehr als 14 Millionen Toten - verursacht durch das Corona-Virus."
 		],
 	},
+
 
 	{
 		"ID": 3,

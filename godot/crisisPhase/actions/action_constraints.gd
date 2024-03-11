@@ -111,6 +111,15 @@ func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 		var item := _ITEM_SCN.instantiate()
 		item.setup(p_ID)
 		return "Du brauchst " + item.get_name() + " dafür!"
+		
+func has_item_by_name(p_name : String) -> String:
+	var id : int = JsonMngr.item_name_to_id(p_name)
+	if _inventory.has_item(id):
+		return NO_REJECTION
+	else:
+		var item := _ITEM_SCN.instantiate()
+		item.setup(id)
+		return "Du brauchst " + item.get_name() + " dafür!"
 
 
 func avatar_is_home(p_reason : String = "") -> String:

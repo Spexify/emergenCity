@@ -74,6 +74,7 @@ func _ready() -> void:
 	if Global.was_crisis():
 		##LOAD SAVE STATE
 		Global.load_state()
+
 	
 	#Setup-Methoden
 	$InputBlock.hide()
@@ -89,7 +90,7 @@ func _ready() -> void:
 	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(OverworldStatesMngr, _backpack)
-	_showerGUI.setup()
+	_showerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, _book_GUI, _cs_GUI, _opt_event_mngr)
@@ -118,8 +119,10 @@ func _ready() -> void:
 	_pu_event_mngr.set_consequences(_day_mngr.get_action_consequences())
 	
 	#Tutorial intro dialogue
-	if !Global._tutorial_done: _play_tutorial_dialogue()
-
+	if !Global._tutorial_done: 
+		_play_tutorial_dialogue()
+		$GUI/VBC/MiddleSection/IconInformation.open()
+		Global._tutorial_done = true
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes
 ## As there is no analogous input code on mobile phones, this can be called
@@ -166,7 +169,6 @@ func _play_tutorial_dialogue() -> void:
 	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
 	dialogue_GUI.start(TUTORIAL_DIALOG, "START")
 	Global.get_tree().paused = true
-	Global._tutorial_done = true
 
 
 func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:

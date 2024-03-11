@@ -91,6 +91,11 @@ func _cook_recipe() -> void:
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
 		_inventory.remove_item(input_item_ID)
 	_inventory.add_new_item(_last_clicked_recipe.get_output_item_ID())
+	
+	var wait : Signal = _action.play_sound()
+	if not wait.is_null():
+		await wait
+	
 	visible = false
 	_action.executed.emit(_action)
 
