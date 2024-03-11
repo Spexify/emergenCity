@@ -42,6 +42,9 @@ func _on_confirm_btn_pressed() -> void:
 	
 	var curr_SC_action: EMC_StageChangeAction = _action #downcast
 	curr_SC_action.silent_executed.emit(curr_SC_action)
+	var wait : Signal = curr_SC_action.play_sound()
+	if not wait.is_null():
+		await wait
 	
 	if _last_SC_action != null:
 		var tmp : Dictionary = _last_SC_action._consequences.duplicate(true)

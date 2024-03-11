@@ -30,6 +30,9 @@ func _ready() -> void:
 
 func _on_confirm_btn_pressed() -> void:
 	_action.executed.emit(_action)
+	var wait : Signal = _action.play_sound()
+	if not wait.is_null():
+		await wait
 	close()
 
 
