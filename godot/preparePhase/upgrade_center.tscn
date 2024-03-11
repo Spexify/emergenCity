@@ -140,36 +140,46 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 3
 
-[node name="Description" type="PanelContainer" parent="Background/VBoxContainer"]
+[node name="WhitePanel" type="PanelContainer" parent="Background/VBoxContainer"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/Description"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/WhitePanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"TitleSpacing"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/Description/MarginContainer"]
+[node name="UpgradeName" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
+fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/Description"]
+[node name="Price" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
 layout_mode = 2
+fit_content = true
+
+[node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
+layout_mode = 2
+fit_content = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 40
-alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
 [node name="MainMenuBtn" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2" instance=ExtResource("3_wh8jv")]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Auswahl bestätigen"
 

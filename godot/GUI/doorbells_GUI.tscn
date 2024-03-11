@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3u4ov75gx85f"]
+[gd_scene load_steps=3 format=3 uid="uid://c3u4ov75gx85f"]
 
 [ext_resource type="Script" path="res://GUI/doorbells_GUI.gd" id="1_nu6nh"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="2_wgkqs"]
 
 [node name="DoorbellsGUI" type="Control"]
 layout_mode = 3
@@ -37,11 +38,12 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="PanelCont/MarginCont/VBC"]
+[node name="Title" type="RichTextLabel" parent="PanelCont/MarginCont/VBC"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "Apartments"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]Apartments[/center]"
+fit_content = true
 
 [node name="ButtonBox" type="PanelContainer" parent="PanelCont/MarginCont/VBC"]
 layout_mode = 2
@@ -60,3 +62,13 @@ layout_mode = 2
 
 [node name="Doorbell2" parent="PanelCont/MarginCont/VBC/ButtonBox/ScrollContainer/DoorbellList" instance_placeholder="res://GUI/doorbell.tscn"]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelCont/MarginCont/VBC"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackBtn" type="TextureButton" parent="PanelCont/MarginCont/VBC/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_wgkqs")
+
+[connection signal="pressed" from="PanelCont/MarginCont/VBC/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

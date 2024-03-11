@@ -1,6 +1,7 @@
 extends Node
 class_name EMC_OptionalEventMngr
 
+signal rained
 
 ## Tuple class, you're welcome to access its public (!) members directly
 class SpawnNPCs:
@@ -55,6 +56,8 @@ const OEC_UPPER_BOUND : int = 4
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var _tooltip_GUI: EMC_TooltipGUI
+var _crisis_phase: EMC_CrisisPhase
+
 var _active_events: Array[Event]
 var _known_active_events: Array[Event]
 var _executable_constraints: EMC_ActionConstraints
@@ -62,7 +65,8 @@ var _executable_consequences: EMC_ActionConsequences
 
 ########################################## PUBLIC METHODS ##########################################
 ## Constructor
-func _init(p_tooltip_GUI: EMC_TooltipGUI) -> void:
+func _init(p_crisis_phase: EMC_CrisisPhase, p_tooltip_GUI: EMC_TooltipGUI) -> void:
+	_crisis_phase = p_crisis_phase
 	_tooltip_GUI = p_tooltip_GUI
 	_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
 	_rng.randomize()
@@ -153,9 +157,11 @@ func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 	if _opt_event_countdown == 0:
 		var new_event := _create_new_optional_event(p_new_period)
 		_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
-		print("Event started:" + new_event.name) ##Test
+		#print("Event started:" + new_event.name) ##Test
 		
-		if !new_event.announce_only_on_radio && new_event.descr != "":
+		if new_event.name == "RAIN":
+			await _crisis_phase.play_rain_anim()
+		elif !new_event.announce_only_on_radio && new_event.descr != "":
 			_tooltip_GUI.open(new_event.descr)
 			await _tooltip_GUI.closed
 

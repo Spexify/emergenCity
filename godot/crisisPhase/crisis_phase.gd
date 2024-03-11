@@ -33,7 +33,7 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _cs_GUI := $GUI/VBC/LowerSection/ChangeStageGUI
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
-@onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(_tooltip_GUI)
+@onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _tooltip_GUI)
 @onready var _pu_event_mngr: EMC_PopupEventMngr = EMC_PopupEventMngr.new(_day_mngr, puGUI)
 
 ########################################## PUBLIC METHODS ##########################################
@@ -110,7 +110,7 @@ func _ready() -> void:
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, action_guis, _tooltip_GUI, \
 		_confirmation_GUI, seodGUI, egGUI, _backpack, $GUI/VBC/LowerSection, _opt_event_mngr, \
-		_pu_event_mngr, $DayPeriodTransition)
+		_pu_event_mngr, $Animations/DayPeriodTransition)
 	
 	#Not the nicest of solutions:
 	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
@@ -161,6 +161,10 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
 		_pause_menue.update_overworld_states()
+
+
+func play_rain_anim() -> void:
+	await $Animations/RainAnimation.play()
 
 
 ###################################### DIALOGUE HANDLING ###########################################

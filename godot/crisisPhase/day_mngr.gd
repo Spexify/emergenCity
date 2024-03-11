@@ -142,7 +142,6 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 func _advance_day_period(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
 	
-	var test := get_tree().paused
 	match get_current_day_period():
 		DayPeriod.MORNING:
 			_current_day_cycle = EMC_DayCycle.new()
