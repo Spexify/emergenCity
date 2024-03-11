@@ -57,15 +57,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Easy" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer"]
-clip_contents = false
+[node name="Easy" type="Button" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Kurz"
-fit_content = true
+text = "Kurz"
 
 [node name="Normal" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
