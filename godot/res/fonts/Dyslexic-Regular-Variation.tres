@@ -4,3 +4,8 @@
 
 [resource]
 base_font = ExtResource("1_0jm13")
+variation_transform = Transform2D(0.75, 0, 0, 0.75, 0, 0)
+spacing_glyph = -10
+spacing_space = -10
+spacing_top = -20
+spacing_bottom = -20
