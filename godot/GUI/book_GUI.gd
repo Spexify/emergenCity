@@ -29,6 +29,7 @@ var _curr_max_page: int
 ########################################## PUBLIC METHODS ##########################################
 func _ready() -> void:
 	hide()
+	$PanelContainer/VBC/PageBG/PageContent.bbcode_enabled = true
 	_all_books = JsonMngr.load_books()
 
 
