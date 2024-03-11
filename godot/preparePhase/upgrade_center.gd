@@ -26,9 +26,11 @@ func _ready() -> void:
 	
 	for id : EMC_Upgrade.IDs in EMC_Upgrade.IDs.values():
 		var _added_upgrade : EMC_Upgrade = null
+		# already equipped upgrades are instantiated and setup in Global
 		for i in range(len(_equipped_upgrades)):
 			if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == id:
 				_added_upgrade = _equipped_upgrades[i]
+				
 				_equipped_upgrades_display.add_child(_added_upgrade)
 		
 		
@@ -57,8 +59,7 @@ func _ready() -> void:
 			if(_equipped_upgrades[i] == null):
 				var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
 				empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
-				_equipped_upgrades[i] = empty_slot
-				_equipped_upgrades_display.add_child(empty_slot)
+				_overwrite_upgrade_at_idx(i, empty_slot)
 
 
 func _add_balance(value : int) -> void:
@@ -79,7 +80,7 @@ func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	
 	# check if upgrade is already equipped
 	for i in range(len(_equipped_upgrades)):
-		if _equipped_upgrades[i] != null && _equipped_upgrades[i].get_id() == _last_clicked_upgrade.get_id():
+		if _equipped_upgrades[i].get_id() == _last_clicked_upgrade.get_id():
 			_buy_btn.hide()
 			_equip_btn.hide()
 			return
@@ -108,20 +109,48 @@ func _on_buy_btn_pressed() -> void:
 
 
 func _on_equip_btn_pressed() -> void:
+	# see if there is a mutually exclusive upgrade already equipped and remove it
+	for i in range(len(_equipped_upgrades)):
+		if _equipped_upgrades[i].get_spawn_pos() == _last_clicked_upgrade.get_spawn_pos():
+			# the corresponding display_slot should be at the same index:
+			if _equipped_upgrades_display.get_child(i).get_id() != _equipped_upgrades[i].get_id():
+				push_error("Unerwarteter Fehler: Upgrades equipped and their display are out of sync")
+				
+			var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
+			empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
+			_overwrite_upgrade_at_idx(i, empty_slot)
+	
+	# look for an empty slot
 	for i in range(len(_equipped_upgrades)):
 		if _equipped_upgrades[i].get_id() == EMC_Upgrade.IDs.EMPTY_SLOT:
-			_equipped_upgrades_display.remove_child(_equipped_upgrades[i])
-			_equipped_upgrades[i] = _last_clicked_upgrade
+			# the corresponding display_slot should be at the same index:
+			if _equipped_upgrades_display.get_child(i).get_id() != EMC_Upgrade.IDs.EMPTY_SLOT:
+				push_error("Unerwarteter Fehler: Upgrades equipped and their display are out of sync")
 			
-			# adding a copy in the equipment HBox that is not connected to _on_upgrade_pressed
-			var display_copy : EMC_Upgrade = _upgrade_scene.instantiate()
-			display_copy.setup(_last_clicked_upgrade.get_id())
-			_equipped_upgrades_display.add_child(display_copy)
-			_equipped_upgrades_display.move_child(display_copy, 0)
+			_overwrite_upgrade_at_idx(i, _last_clicked_upgrade)
 			
 			_equip_btn.hide()
-			
 			return
+
+func _overwrite_upgrade_at_idx(idx: int, new_upgrade : EMC_Upgrade) -> void:
+	
+	_equipped_upgrades[idx] = new_upgrade
+	_equipped_upgrades_display.remove_child(_equipped_upgrades_display.get_child(idx))
+	
+	var display_copy : EMC_Upgrade = _upgrade_scene.instantiate()
+	display_copy.setup(new_upgrade.get_id())
+	_equipped_upgrades_display.add_child(display_copy)
+	_equipped_upgrades_display.move_child(display_copy, idx)
+
+func _unequip_upgrade_at_idx(idx: int) -> void:
+	
+	_equipped_upgrades[idx] = null
+	_equipped_upgrades_display.remove_child(_equipped_upgrades_display.get_child(idx))
+	
+	var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
+	empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
+	_equipped_upgrades_display.add_child(empty_slot)
+	_equipped_upgrades_display.move_child(empty_slot, idx)
 
 
 func _on_main_menu_btn_pressed() -> void:

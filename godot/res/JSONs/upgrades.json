@@ -9,7 +9,7 @@
 		"tilemap_position": {"x": 3, "y": 3}
 	},
 	{
-		"description": "",
+		"description": "Sammelt Regenwasser. Das gesammelte Wasser ist schmutzig und sollte nicht getrunken werden.",
 		"display_name": "Regentonne",
 		"id": 1,
 		"price": 1000,
@@ -19,7 +19,7 @@
 		"tilemap_position": {"x": 1, "y": 0}
 	},
 	{
-		"description": "",
+		"description": "Radio, das durch Akkus betrieben wird. Der lokale Radiosender berichtet über alle wichtigen Neuigkeiten der Stadt.",
 		"display_name": "Elektrisches Radio",
 		"id": 2,
 		"price": 200,
@@ -29,7 +29,7 @@
 		"tilemap_position": {"x": 2, "y": 0}
 	},
 	{
-		"description": "",
+		"description": "Radio, das ohne Stromzufuhr auskommt. Der lokale Radiosender berichtet über alle wichtigen Neuigkeiten der Stadt.",
 		"display_name": "Kurbelradio",
 		"id": 3,
 		"price": 500,
@@ -39,7 +39,7 @@
 		"tilemap_position": {"x": 3, "y": 0}
 	},
 	{
-		"description": "",
+		"description": "Ermöglicht das Kochen ohne Strom, benötigt aber Gas aus einer Gaskartusche.",
 		"display_name": "Gaskocher",
 		"id": 4,
 		"price": 1000,
