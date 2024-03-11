@@ -69,6 +69,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_gr84e")
 
 [node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/NutritionCont/ContainerNutrition"]
+process_mode = 3
 position = Vector2(40, 14.7368)
 scale = Vector2(1.05263, 1.05263)
 emitting = false
@@ -111,6 +112,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("3_idu7t")
 
 [node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/HydrationCont/ContainerHydration"]
+process_mode = 3
 position = Vector2(40, 14.8947)
 scale = Vector2(1.05263, 1.05263)
 emitting = false
@@ -158,6 +160,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("4_m4gsd")
 
 [node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HealthCont/ContainerHealth"]
+process_mode = 3
 position = Vector2(38.6316, 16.8421)
 scale = Vector2(1.05263, 1.05263)
 emitting = false
@@ -196,6 +199,7 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("5_xfaii")
 
 [node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HappinessCont/ContainerHappiness"]
+process_mode = 3
 position = Vector2(40.7368, 17)
 scale = Vector2(1.05263, 1.05263)
 emitting = false
