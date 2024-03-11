@@ -96,7 +96,7 @@ func _cook_recipe() -> void:
 	if wait != null:
 		await wait.finished
 	
-	visible = false
+	hide()
 	_action.executed.emit(_action)
 
 
