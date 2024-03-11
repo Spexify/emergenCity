@@ -20,7 +20,7 @@
 	},
 	{
 		"ID": 3,
-		"name": "Ravioli Konserve",
+		"name": "Ravioli-Konserve",
 		"descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus..",
 		"comps": [
 			{"name": "cost", "params": 20},
@@ -38,11 +38,12 @@
 	},
 	{
 		"ID": 5,
-		"name": "Ravioli Gericht",
+		"name": "Gekochte Ravioli",
 		"descr": "Warm deutlich leckerer als kalt.",
 		"comps": [
 			{"name": "food", "params": 2},
-			{"name": "pleasurable", "params": 1}
+			{"name": "pleasurable", "params": 1},
+			{"name": "shelflife", "params": 2}
 		]
 	},
 	{
@@ -284,7 +285,7 @@
 	},
 	{
 		"ID": 32,
-		"name": "Eingelegte Gemüse",
+		"name": "Eingelegtes Gemüse",
 		"descr": "Länger haltbar als unbehandeltes Gemüse.",
 		"comps": [
 			{"name": "food", "params": 1},
@@ -400,6 +401,15 @@
 		"descr": "Fettig, aber lecker.",
 		"comps": [
 			{"name": "food", "params": 2},
+			{"name": "pleasurable", "params": 1},
+		]
+	},
+	{
+		"ID": 44,
+		"name": "Bratfisch",
+		"descr": "Genau das, wonach es klingt: Gebratener Fisch.",
+		"comps": [
+			{"name": "food", "params": 1},
 			{"name": "pleasurable", "params": 1},
 		]
 	},

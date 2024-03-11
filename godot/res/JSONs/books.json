@@ -44,7 +44,7 @@ Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuc
 
 	{
 		"ID": 3,
-		"title": "Moderne Krisenmaßnahmen (?)",
+		"title": "Moderne Krisenbewältigung",
 		"content": [
 "page 1 :)",
 
@@ -54,11 +54,41 @@ Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuc
 
 	{
 		"ID": 4,
-		"title": "Krisen Kochbuch??",
+		"title": "Kochen 101",
 		"content": [
-"page 1 :)",
+"Die Fähigkeit der Essenszubereitung ist unerlässlich für eine ausgewogene Ernährung. Gekocht schmecken Nahrungsmittel häufig besser als roh, manche Lebensmittel werden erst durch das Kochen überhaupt essbar.",
 
-"page 2 :)",
+"Dabei benötigt man für viele, aber nicht alle Rezepte eine Herdplatte (wie von einem Elektroherd oder einem Gaskocher), und auch Wasser wird für viele, aber nicht alle Rezepte gebraucht. Hierbei kann Wasser aus der Leitung oder abgefülltes Trinkwasser verwendet werden.",
+
+"Rezepte ohne Hitze und ohne Wasser:
+	Brot mit Marmelade: Brot, Marmelade
+	Käsesandwich: Brot, Käse
+	Hummus mit Brot: Brot, Hülsenfrüchte
+	Nudeln mit Soße: Nudeln, Soße im Glas
+	Gesalzener Fisch: Fisch, Salz
+	Saft: Früchte",
+
+"Rezepte mit Hitze, ohne Wasser:
+	Bolognese: Nudeln, Fleisch oder Hülsenfrüchte
+	Gemüsereis: Gemüse, Reis
+	Curry mit Reis: Hülsenfrüchte, Reis
+	Gekochte Ravioli: Ravioli-Konserve
+	Bratfisch: Fisch
+	Bratfisch mit Pommes: Fisch, Kartoffeln
+	Milchreis: Milch, Reis, Zucker
+	Heiße Schokolade: Milch, Schokolade
+	Marmelade: Früchte, Zucker",
+
+"Rezepte ohne Hitze, mit Wasser:
+	Eingelegtes Gemüse: Gemüse, Salz",
+
+"Rezepte mit Hitze, mit Wasser:
+	Brot: Mehl
+	Nudeln: Ungekochte Nudeln
+	Nudeln mit Soße: Ungekochte Nudeln, Soße im Glas
+	Bolognese: Ungekochte Nudeln, Fleisch oder Hülsenfrüchte
+	Gulasch: Gemüse, Kartoffeln, Fleisch
+	Suppe: Gemüse oder Fisch, Salz",
 		],
 	},
 ]
