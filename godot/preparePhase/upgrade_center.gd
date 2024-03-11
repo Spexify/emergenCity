@@ -6,8 +6,9 @@ extends Control
 @onready var _equipped_upgrades_display := $Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer
 
 @onready var _upgrade_list := $Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/GridContainer
-@onready var _label_title := $Background/VBoxContainer/Description/MarginContainer/RichTextLabel
-@onready var _label_descr := $Background/VBoxContainer/Description/RichTextLabel
+@onready var _label_title := $Background/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer/UpgradeName
+@onready var _label_price := $Background/VBoxContainer/WhitePanel/VBoxContainer/Price
+@onready var _label_descr := $Background/VBoxContainer/WhitePanel/VBoxContainer/Description
 @onready var _buy_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn
 @onready var _equip_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn
 @onready var _star_explosion_VFX := $StarExplosionVFX
@@ -74,8 +75,11 @@ func _on_upgrade_pressed(p_upgrade : EMC_Upgrade) -> void:
 	
 	_label_title.clear()
 	_label_title.append_text("[color=black]" + p_upgrade.get_display_name() + "[/color]")
+	
 	const price_color = Color.GOLDENROD
-	_label_title.append_text("   [color=" + price_color.to_html(false) + "][i]" + str(p_upgrade.get_price()) + "eCoins [/i][/color]")
+	_label_price.clear()
+	_label_price.append_text("[color=" + price_color.to_html(false) + "]" + str(p_upgrade.get_price()) + "eC[/color]")
+	
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + p_upgrade.get_description() + "[/i][/color]")
 	
@@ -142,16 +146,6 @@ func _overwrite_upgrade_at_idx(idx: int, new_upgrade : EMC_Upgrade) -> void:
 	display_copy.setup(new_upgrade.get_id())
 	_equipped_upgrades_display.add_child(display_copy)
 	_equipped_upgrades_display.move_child(display_copy, idx)
-
-func _unequip_upgrade_at_idx(idx: int) -> void:
-	
-	_equipped_upgrades[idx] = null
-	_equipped_upgrades_display.remove_child(_equipped_upgrades_display.get_child(idx))
-	
-	var empty_slot : EMC_Upgrade = _upgrade_scene.instantiate()
-	empty_slot.setup(EMC_Upgrade.IDs.EMPTY_SLOT)
-	_equipped_upgrades_display.add_child(empty_slot)
-	_equipped_upgrades_display.move_child(empty_slot, idx)
 
 
 func _on_main_menu_btn_pressed() -> void:
