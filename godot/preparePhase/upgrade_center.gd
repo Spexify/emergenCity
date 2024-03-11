@@ -40,6 +40,16 @@ func _ready() -> void:
 		
 		if !(_added_upgrade.get_id() == EMC_Upgrade.IDs.EMPTY_SLOT):
 			_added_upgrade.was_pressed.connect(_on_upgrade_pressed)
+			
+			#if locked, visually mark it 100% black
+			var locked: bool = true
+			var _upgrade_ids_unlocked: Array[EMC_Upgrade.IDs] = Global.get_upgrade_ids_unlocked()
+			for _upgrade_id_unlocked in _upgrade_ids_unlocked:
+				if _added_upgrade.get_id() == _upgrade_id_unlocked:
+					locked = false
+			if locked:
+				_added_upgrade.set_modulation(Color(0.0, 0.0, 0.0))
+			
 			_upgrade_list.add_child(_added_upgrade)
 	
 	# if there are free equipment-slots, fill them with EMPTY_SLOT
@@ -91,6 +101,8 @@ func _on_buy_btn_pressed() -> void:
 		Global.unlock_upgrade_id(_last_clicked_upgrade.get_id())
 		_buy_btn.hide()
 		_equip_btn.show()
+		
+		_last_clicked_upgrade.set_modulation(Color(1.0, 1.0, 1.0))
 		#Play VFX at position of unlocked upgrade
 		_star_explosion_VFX.position = _last_clicked_upgrade.global_position + _last_clicked_upgrade.size/2
 		_star_explosion_VFX.emitting = true
