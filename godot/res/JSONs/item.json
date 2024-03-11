@@ -23,7 +23,7 @@
 		"name": "Ravioli-Konserve",
 		"descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus..",
 		"comps": [
-			{"name": "cost", "params": 20},
+			{"name": "cost", "params": 10},
 			{"name": "food", "params": 1}
 		]
 	},
@@ -50,7 +50,7 @@
 		"ID": 6,
 		"name": "Ungekochte Nudeln",
 		"descr": "Zu hart um sie roh zu essen, müssen erst gekocht werden.",
-		"comps": [{"name": "cost", "params": 20}]
+		"comps": [{"name": "cost", "params": 10}]
 	},
 	{
 		"ID": 7,
@@ -95,7 +95,7 @@
 		"name": "Marmelade",
 		"descr": "Süßer Obstaufstrich. Einkochen hat das Obst sehr haltbar gemacht.",
 		"comps": [
-			{"name": "cost", "params": 20},
+			{"name": "cost", "params": 40},
 			{"name": "healthy", "params": -1}
 		]
 	},
@@ -104,7 +104,7 @@
 		"name": "Brot mit Marmelade",
 		"descr": "Der Frühstücksklassiker schlechthin.",
 		"comps": [
-			{"name": "food", "params": 1},
+			{"name": "food", "params": 2},
 			{"name": "shelflife", "params": 6}
 		]
 	},
@@ -121,25 +121,25 @@
 		"ID": 14,
 		"name": "Mehl",
 		"descr": "Zutat zum Backen, alleine nicht genießbar.",
-		"comps": [{"name": "cost", "params": 30}]
+		"comps": [{"name": "cost", "params": 10}]
 	},
 	{
 		"ID": 15,
 		"name": "Salz",
 		"descr": "Das beliebteste Gewürz; nicht zu Verwechseln mit Zucker.",
-		"comps": [{"name": "cost", "params": 20}]
+		"comps": [{"name": "cost", "params": 10}]
 	},
 	{
 		"ID": 16,
 		"name": "Zucker",
 		"descr": "Das beliebteste Süßungsmittel; nicht zu Verwechseln mit Salz.",
-		"comps": [{"name": "cost", "params": 20}]
+		"comps": [{"name": "cost", "params": 15}]
 	},
 	{
 		"ID": 17,
 		"name": "Reis",
 		"descr": "Vielseitige Beilage, besonders gerne zu Curry serviert.",
-		"comps": [{"name": "cost", "params": 30}]
+		"comps": [{"name": "cost", "params": 20}]
 	},
 	{
 		"ID": 18,
@@ -152,7 +152,7 @@
 		"name": "Fisch",
 		"descr": "Achtung vor den Gräten!",
 		"comps": [
-			{"name": "cost", "params": 40},
+			{"name": "cost", "params": 30},
 			{"name": "food", "params": 1},
 			{"name": "healthy", "params": -2},
 			{"name": "shelflife", "params": 2}
@@ -163,7 +163,7 @@
 		"name": "Kartoffeln",
 		"descr": "Für diese allseits beliebten Knollen gibt es zig verschiedenen Zubereitungsarten.",
 		"comps": [
-			{"name": "cost", "params": 25},
+			{"name": "cost", "params": 15},
 			{"name": "healthy", "params": 1}
 		]
 	},
@@ -172,7 +172,7 @@
 		"name": "Gemüse",
 		"descr": "Vielseitig und gesund, und frisch geerntet besonders lecker.",
 		"comps": [
-			{"name": "cost", "params": 25},
+			{"name": "cost", "params": 20},
 			{"name": "food", "params": 1},
 			{"name": "shelflife", "params": 6},
 			{"name": "healthy", "params": 1}
@@ -183,7 +183,7 @@
 		"name": "Früchte",
 		"descr": "Süß und gesund, perfekt für den Snack zwischendurch.",
 		"comps": [
-			{"name": "cost", "params": 30},
+			{"name": "cost", "params": 20},
 			{"name": "food", "params": 1},
 			{"name": "shelflife", "params": 6},
 			{"name": "healthy", "params": 1}
@@ -194,7 +194,7 @@
 		"name": "Schokolade",
 		"descr": "Zum Genießen, in Maßen.",
 		"comps": [
-			{"name": "cost", "params": 80},
+			{"name": "cost", "params": 50},
 			{"name": "food", "params": 1},
 			{"name": "pleasurable", "params": 1},
 			{"name": "healthy", "params": -1}
@@ -205,7 +205,7 @@
 		"name": "Fleisch",
 		"descr": "Nur wenige Sorten (und nur sehr frische Stücke) sind roh genießbar, der Rest sollte dringend durchgebraten werden.",
 		"comps": [
-			{"name": "cost", "params": 100},
+			{"name": "cost", "params": 40},
 			{"name": "food", "params": 1},
 			{"name": "healthy", "params": -2},
 			{"name": "shelflife", "params": 6}
@@ -216,7 +216,7 @@
 		"name": "Tofu",
 		"descr": "Eiweißlieferant, häufig als Fleischersatz verwendet.",
 		"comps": [
-			{"name": "cost", "params": 60},
+			{"name": "cost", "params": 30},
 			{"name": "shelflife", "params": 6}
 		]
 	},
@@ -225,7 +225,7 @@
 		"name": "Nüsse",
 		"descr": "Lang haltbare Lieferanten für Eiweiß, Eisen und Omega-3-Fettsäuren.",
 		"comps": [
-			{"name": "cost", "params": 60},
+			{"name": "cost", "params": 50},
 			{"name": "food", "params": 1},
 			{"name": "healthy", "params": 1}
 		]
@@ -236,7 +236,7 @@
 		"name": "Käse",
 		"descr": "In Scheiben geschnitten ein beliebter Brotbelag.",
 		"comps": [
-			{"name": "cost", "params": 45},
+			{"name": "cost", "params": 30},
 			{"name": "shelflife", "params": 6}
 		]
 	},
@@ -245,7 +245,7 @@
 		"name": "Milch",
 		"descr": "Von einer Kuh oder aus Hafer/Soja/Mandeln.",
 		"comps": [
-			{"name": "cost", "params": 30},
+			{"name": "cost", "params": 20},
 			{"name": "shelflife", "params": 6},
 			{"name": "drink", "params": 1},
 			{"name": "food", "params": 1}
@@ -266,7 +266,7 @@
 		"name": "Saft",
 		"descr": "Schmeckt frisch gepresst am Besten.",
 		"comps": [
-			{"name": "cost", "params": 25},
+			{"name": "cost", "params": 30},
 			{"name": "shelflife", "params": 3},
 			{"name": "drink", "params": 1},
 			{"name": "pleasurable", "params": 1},

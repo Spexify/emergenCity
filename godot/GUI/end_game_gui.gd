@@ -79,11 +79,12 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 			
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
 			= summary_text_loser
+		var end_coins := Global.get_e_coins() + p_history.size()*30
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description.text =\
-				losing_reason + "Du hast nur 100 ECoins erworben."
+				losing_reason + "Du hast nur " + str(end_coins) +" ECoins erworben."
 		$LoserScreen.show()
 		$WinnerScreen.hide()
-		Global.set_e_coins(Global.get_e_coins() + 100)
+		Global.set_e_coins(end_coins)
 	else: 
 		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
 		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
