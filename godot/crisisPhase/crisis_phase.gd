@@ -90,7 +90,7 @@ func _ready() -> void:
 	_cooking_GUI.setup(_backpack, _confirmation_GUI, _tooltip_GUI)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		$GUI/VBC/MiddleSection/RainwaterBarrelGUI.setup(OverworldStatesMngr, _backpack)
-	_showerGUI.setup()
+	_showerGUI.setup(_backpack)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _tooltip_GUI, _book_GUI, _cs_GUI, _opt_event_mngr)

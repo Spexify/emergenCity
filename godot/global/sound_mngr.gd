@@ -4,7 +4,6 @@ const SFX_PATH : String = "res://res/SFX/"
 
 var _buttons : Array
 var _guis : Array
-var _last_sound : AudioStreamPlayer
 
 @onready var musik : AudioStreamPlayer = $Musik
 @onready var button : AudioStreamPlayer = $Button
@@ -55,9 +54,9 @@ func is_musik_playing() -> bool:
 func play_musik() -> void:
 	musik.play()
 
-func play_sound(sound : String, start : float = 0, pitch : float = 1) -> void:
+func play_sound(sound : String, start : float = 0, pitch : float = 1) -> Signal:
 	if sound == "":
-		return
+		return Signal()
 	
 	var sound_player : AudioStreamPlayer
 	for player in get_children():
@@ -66,15 +65,13 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> void:
 			break
 	if sound_player == null:
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
-		return
+		return Signal()
 
 	sound_player.set_pitch_scale(pitch)
 	sound_player.play(start)
-	_last_sound = sound_player
+	return sound_player.finished
 
 
-func is_sound_finished() -> Signal:
-	return _last_sound.finished 
 
 
 func vibrate(time : int = 250) -> void:
