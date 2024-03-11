@@ -42,7 +42,7 @@ func _on_confirm_btn_pressed() -> void:
 	
 	var curr_SC_action: EMC_StageChangeAction = _action #downcast
 	
-	await SoundMngr.get_node("Button").finished
+	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = curr_SC_action.play_sound()
 	if wait != null:
 		await wait.finished

@@ -27,6 +27,11 @@ func close() -> void:
 func _on_confirm_pressed() -> void:
 	close()
 	
+	await SoundMngr.button_finished()
+	var wait : AudioStreamPlayer = _current_action.play_sound()
+	if wait != null:
+		await wait.finished
+	
 	if _current_action.progresses_day_period():
 		_current_action.silent_executed.emit(_current_action) 
 	else:

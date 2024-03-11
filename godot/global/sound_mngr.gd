@@ -21,12 +21,12 @@ func _init() -> void:
 				var player :=  AudioStreamPlayer.new()
 				player.stream = sound
 				player.name = file_name.get_basename().to_camel_case()
+				player.process_mode = PROCESS_MODE_ALWAYS
 				add_child(player)
 				#print("Found Sound: " + file_name.get_basename().to_camel_case())
 			file_name = dir.get_next()
 	else:
 		printerr("An error occurred when trying to access the path.")
-
 
 func _ready() -> void:
 	_connect_to_buttons()
@@ -38,6 +38,9 @@ func reload_groups() -> void:
 
 func on_button_pressed() -> void:
 	button.play()
+	
+func button_finished() -> Signal:
+	return button.finished
 	
 func play_open() -> void:
 	open_gui.play()
@@ -67,9 +70,6 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioSt
 	sound_player.set_pitch_scale(pitch)
 	sound_player.play(start)
 	return sound_player
-
-
-
 
 func vibrate(time : int = 250) -> void:
 	Input.vibrate_handheld(time)

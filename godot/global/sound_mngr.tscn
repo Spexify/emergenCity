@@ -18,18 +18,22 @@ stream = ExtResource("1_cpl1b")
 bus = &"Musik"
 
 [node name="Button" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("3_udcud")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="DingDong" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = SubResource("AudioStreamMP3_w0iis")
 bus = &"SFX"
 
 [node name="OpenGUI" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("6_qnn1w")
 bus = &"SFX"
 
 [node name="CloseGUI" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("7_w1u83")
 bus = &"SFX"
