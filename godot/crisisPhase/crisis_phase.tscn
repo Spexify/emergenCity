@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=28 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -18,11 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://dmp3dkvy1barj" path="res://GUI/tooltip_GUI.tscn" id="14_0s3fx"]
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://buhj6araogehg" path="res://GUI/book_GUI.tscn" id="16_eg1dm"]
-[ext_resource type="PackedScene" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
+[ext_resource type="PackedScene" uid="uid://dmchkorcdvl0d" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 [ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://animations/day_period_transition.tscn" id="21_6msld"]
 [ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
+[ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -207,15 +208,20 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="DayPeriodTransition" parent="." instance=ExtResource("21_6msld")]
-visible = false
-
 [node name="InputBlock" type="Panel" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(600, 1100)
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Animations" type="Node2D" parent="."]
+
+[node name="DayPeriodTransition" parent="Animations" instance=ExtResource("21_6msld")]
+visible = false
+
+[node name="RainAnimation" parent="Animations" instance=ExtResource("24_5kmdu")]
+visible = false
 
 [connection signal="happiness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]

@@ -33,9 +33,9 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 		_has_slept +=1
 	if _p_day_cycle.evening_action._action_ID == 3: 
 		_has_slept +=1
-	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
-	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox2/NoonContent.text = _p_day_cycle.noon_action.get_description()
-	$SummaryWindow/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/TextBox3/EveningContent.text = _p_day_cycle.evening_action.get_description()
+	$SummaryWindow/MarginContainer/VBC/VBC/HBC1/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
+	$SummaryWindow/MarginContainer/VBC/VBC/HBC2/TextBox/NoonContent.text = _p_day_cycle.noon_action.get_description()
+	$SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent.text = _p_day_cycle.evening_action.get_description()
 	visible = true
 	opened.emit()
 

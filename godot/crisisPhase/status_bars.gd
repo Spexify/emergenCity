@@ -12,8 +12,6 @@ func _ready() -> void:
 	var sb := StyleBoxFlat.new()
 	add_theme_stylebox_override("fill", sb)
 	sb.bg_color = Color("ff0000")
-	#$VBoxContainer/HBoxContainer2/NutritionBar.add_child(sb)
-	#$VBoxContainer/HBoxContainer2/NutritionBar.draw_style_box(sb, Rect2(30,30,100,20))
 
 
 func setup(p_tooltip_GUI: EMC_TooltipGUI) -> void:
