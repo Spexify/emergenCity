@@ -33,10 +33,10 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 		_has_slept +=1
 	if _p_day_cycle.evening_action._action_ID == 3: 
 		_has_slept +=1
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC1/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC2/TextBox/NoonContent.text = _p_day_cycle.noon_action.get_description()
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent.text = _p_day_cycle.evening_action.get_description()
-	visible = true
+	$SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
+	$SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/TextBox2/NoonContent.text = _p_day_cycle.noon_action.get_description()
+	$SummaryWindow/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/TextBox3/EveningContent.text = _p_day_cycle.evening_action.get_description()
+	show()
 	opened.emit()
 
 
@@ -55,11 +55,7 @@ func _on_continue_pressed() -> void:
 	_inventory_GUI.open()
 	_has_slept = 0
 	#close_gui_sfx.play()
-	visible = false
-
-
-#func _on_inventory_gui_seod_inventory_closed()-> void:
-	#close()
+	hide()
 
 func _ready() -> void:
 	hide()

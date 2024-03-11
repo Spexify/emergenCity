@@ -2,7 +2,7 @@ extends Node
 
 
 const MAX_ECOINS = 99999
-const INITIAL_E_COINS = 500
+const INITIAL_E_COINS = 300
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
@@ -237,13 +237,11 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	var inventory := EMC_Inventory.new()
 	inventory.add_new_item(EMC_Item.IDs.WATER)
 	inventory.add_new_item(EMC_Item.IDs.WATER)
+	inventory.add_new_item(EMC_Item.IDs.WATER)
+	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
 	inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
 	inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
-	#inventory.add_new_item(EMC_Item.IDs.GAS_CARTRIDGE)
-	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
 	inventory.add_new_item(EMC_Item.IDs.UNCOOKED_PASTA)
 	inventory.add_new_item(EMC_Item.IDs.SAUCE_JAR)
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
