@@ -124,7 +124,7 @@ func progresses_day_period() -> bool:
 func add_consequence(p_key: String, p_param: Variant) -> void:
 	_consequences[p_key] = p_param
 
-func play_sound(start : float = 0, pitch : float = 1) -> Signal:
+func play_sound(start : float = 0, pitch : float = 1) -> AudioStreamPlayer:
 	return SoundMngr.play_sound(_sound, start, pitch)
 
 func save() -> Dictionary:

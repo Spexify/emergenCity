@@ -25,12 +25,8 @@ func close() -> void:
 
 
 func _on_confirm_pressed() -> void:
-	var wait : Signal = _current_action.play_sound()
-	#Closed because of Issue#167, we don't have to wait at any cost for the SFX to play..
-	#if not wait.is_null():
-		#await wait
-	
 	close()
+	
 	if _current_action.progresses_day_period():
 		_current_action.silent_executed.emit(_current_action) 
 	else:
