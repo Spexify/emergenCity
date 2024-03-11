@@ -44,15 +44,12 @@ fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="ConfirmationBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 layout_mode = 2
 text = "Bestätigen"
-
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
 
 [node name="Cancel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 layout_mode = 2
