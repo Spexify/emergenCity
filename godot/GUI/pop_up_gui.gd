@@ -2,7 +2,7 @@ extends EMC_GUI
 class_name EMC_PopUpGUI #should probably be called "PUEventGUI" as only Pop-up EVENTS use it
 
 var _current_action : EMC_PopUpAction
-var _previous_pause_state: bool
+#var _previous_pause_state: bool
 
 
 func _ready() -> void:
@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func open(_p_action : EMC_PopUpAction) -> void:
-	_previous_pause_state = Global.get_tree().paused
+	#_previous_pause_state = Global.get_tree().paused
 	Global.get_tree().paused = true
 	show()
 	_current_action = _p_action
@@ -19,7 +19,7 @@ func open(_p_action : EMC_PopUpAction) -> void:
 
 
 func close() -> void:
-	Global.get_tree().paused = _previous_pause_state
+	Global.get_tree().paused = false #_previous_pause_state
 	hide()
 	closed.emit()
 
