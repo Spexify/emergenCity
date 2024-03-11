@@ -2,7 +2,7 @@ extends Node
 
 
 const MAX_ECOINS = 99999
-const INITIAL_E_COINS = 500
+const INITIAL_E_COINS = 300
 
 const SAVE_GAME_FILE = "user://savegame.save"
 const SAVE_STATE_FILE = "user://savestate.save"
