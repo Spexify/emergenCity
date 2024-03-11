@@ -236,7 +236,7 @@ func _on_consume_pressed() -> void:
 	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		if !_inventory.has_item(JsonMngr.item_name_to_id("WATER_DIRTY")):
-			$FilterWater.visible = true
+			$FilterWater.show()
 		else:
 			##Improvement idea: use new _inventory.use_item() method
 			var comp_uses : EMC_IC_Uses = _clicked_item.get_comp(EMC_IC_Uses)
@@ -298,5 +298,5 @@ func _on_discard_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
-	$FilterWater.visible = false
+	$FilterWater.hide()
 
