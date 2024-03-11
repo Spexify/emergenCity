@@ -45,7 +45,7 @@ fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="ConfirmBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
@@ -57,9 +57,6 @@ icon = ExtResource("4_4twlg")
 visible = false
 layout_mode = 2
 text = "Bestätigen"
-
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
 
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
 layout_mode = 2
