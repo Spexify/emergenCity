@@ -1,25 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://e2vuw03w1lx6"]
+[gd_scene load_steps=7 format=3 uid="uid://e2vuw03w1lx6"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/cooking_GUI.gd" id="1_yctcf"]
 [ext_resource type="Texture2D" uid="uid://c10dm4x6n65dm" path="res://res/sprites/GUI/icons/icon_needs_heat.png" id="2_rmnvb"]
 [ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="2_srli2"]
 [ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="3_f34gp"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="5_kacsq"]
+[ext_resource type="PackedScene" uid="uid://c7423f41j0fg3" path="res://animations/cooking_animation.tscn" id="6_ww8rm"]
 
 [node name="CookingGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_yctcf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 288.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -422.0
+offset_right = 330.0
+offset_bottom = 422.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -96,6 +112,10 @@ icon = ExtResource("2_srli2")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"
+
+[node name="CookingAnimation" parent="." instance=ExtResource("6_ww8rm")]
+visible = false
+position = Vector2(20, 0)
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cook" to="." method="_on_cook_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBC/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

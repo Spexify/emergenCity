@@ -14,6 +14,7 @@ var _output_item_ID: EMC_Item.IDs
 var _needs_water : bool
 var _needs_heat : bool
 
+
 func setup(p_inputItemIDs : Array[EMC_Item.IDs], p_outputItemID: EMC_Item.IDs, p_needs_water : bool, \
 p_needs_heat : bool) -> void:
 	_input_item_IDs = p_inputItemIDs
