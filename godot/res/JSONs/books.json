@@ -46,11 +46,17 @@ Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuc
 
 	{
 		"ID": 3,
-		"title": "Moderne Krisenbewältigung",
+		"title": "Moderne Sicherheitsarchitektur",
 		"content": [
-"page 1 :)",
+"Weiterhin werden Systeme aufgesetzt und erweitert, um die Bevölkerung im Notfall besser zu schützen zu können.
+Eine der neueren Ansätze dazu sind die 'Katastrophenschutz-Leuchttürme', kurz 'Kat-Leuchturm'. Dabei handelt es sicht um Gebäude die nicht nur eine Notstromversorgung besitzen, sondern auch weitere Ausrüstung um vor-Ort Hilfeleistungen vornehmen zu können.",
 
-"page 2 :)",
+"Ein weiteres Beispiel für Neuerungen in der Sicherheitsarchitektur Deutschlands sind die sogenannten 'Litfaßsäulen 4.0'.
+Wenn beispielweise andere Medienplattformen ausfallen, ist es von kritischer Wichtigkeit, dass man trotzdem über relevante Informationen verfügt. Hier kommen diese modernisierten Litfaßsäulen ins Spiel: Auf per Photovoltaik angetriebenen Bildschirmflächen an ihnen werden kurze Texte oder auch Piktogramme anzeigbar sein!",
+
+"Quellen:
+* [url=https://www.sifo.de/sifo/de/projekte/gesellschaft/sicherheitsoekonomie-und-sicherheitsarchitektur/kat-leuchttuerme/kat-leuchttuerme-katastrophens-oelkerung-in-krisensituationen.html]Kat-Leuchttürme[/url],
+* [url=https://www.emergencity.de/de/news/an-advertising-pillar-4-0/]Litfaßsäulen 4.0[/url]",
 		],
 	},
 
