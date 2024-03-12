@@ -155,22 +155,29 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
 	
+	#Reset first, to make things easier to understand
+	_discard_btn.hide()
+	_consume_btn.hide()
 	
+	#The activate the ones we need in the appropriate situation
 	if _only_inventory:
-		_consume_btn.hide()
 		_discard_btn.show()
-	elif _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
-		## if the Chlor tablets are clicked, allow consumation
-		_consume_btn.show()
+		if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+			## if the Chlor tablets are clicked, allow consumation
+			_consume_btn.show()
+	elif _item_consumable(_clicked_item):
+			_consume_btn.show()
 	
+	#And set the custom text
 	_consume_btn.text = _determine_consume_btn_text(_clicked_item)
 
 
 func _item_consumable(item : EMC_Item) -> bool:
-	if item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
-		return true
-	else:
-		return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
+	#Commented as it shouldn't be usable in SEOD:
+	#if item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
+		#return true
+	#else:
+	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
 
 
 func _reload_items() -> void:

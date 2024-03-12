@@ -57,5 +57,6 @@ func _on_continue_pressed() -> void:
 	#close_gui_sfx.play()
 	hide()
 
+
 func _ready() -> void:
 	hide()

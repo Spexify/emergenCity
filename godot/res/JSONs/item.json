@@ -208,7 +208,7 @@
 			{"name": "cost", "params": 40},
 			{"name": "food", "params": 1},
 			{"name": "healthy", "params": -2},
-			{"name": "shelflife", "params": 6}
+			{"name": "shelflife", "params": 2}
 		]
 	},
 	{
@@ -237,7 +237,7 @@
 		"descr": "In Scheiben geschnitten ein beliebter Brotbelag.",
 		"comps": [
 			{"name": "cost", "params": 30},
-			{"name": "shelflife", "params": 6}
+			{"name": "shelflife", "params": 5}
 		]
 	},
 	{
