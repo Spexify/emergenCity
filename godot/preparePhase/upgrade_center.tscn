@@ -92,7 +92,13 @@ theme_type_variation = &"TitleSpacing"
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "[center]Statten Sie sich für die nächste Krise aus[/center]"
+text = "[center]Statten Sie ihr Zuhause aus[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center]"
 fit_content = true
 
 [node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer"]

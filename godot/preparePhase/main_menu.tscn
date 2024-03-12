@@ -133,13 +133,12 @@ text = "Neues Spiel starten"
 [node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Shop
-"
+text = "Vorräte einkaufen"
 
 [node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Upgrade Center"
+text = "Haushalt ausstatten"
 
 [node name="AvatarSelectionGUI" parent="." instance=ExtResource("7_jnxxn")]
 layout_mode = 1
