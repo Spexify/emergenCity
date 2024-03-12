@@ -86,7 +86,9 @@ func _notification(what : int) -> void:
 	
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED:
 		save_game(_current_scene.name == "CrisisPhase")
-		get_tree().quit() 
+		##This leads to the game crashing if you open the mobile-task manager and try to continue
+		##the game:
+		#get_tree().quit() 
 
 
 func reset_save() -> void:

@@ -169,6 +169,7 @@ func _show_new_crises_info() -> bool:
 	var active_crises_descr := OverworldStatesMngr.get_active_crises_descr()
 	if active_crises_descr != "":
 		_tooltip_GUI.open(active_crises_descr)
+		SoundMngr.vibrate(250, 2)
 		await _tooltip_GUI.closed
 		showed_new_crises = true
 	OverworldStatesMngr.clear_active_crises_descr()

@@ -100,7 +100,7 @@ func _cook_recipe() -> void:
 		#await wait.finished
 	
 	await $CookingAnimation.play(_last_clicked_recipe)
-	wait.stop()
+	#wait.stop() #Bug on mobile: Doesn't work, and waits endlessly!
 	
 	hide()
 	_action.executed.emit(_action)

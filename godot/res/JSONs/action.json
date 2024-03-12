@@ -46,7 +46,9 @@
 		"type": "action",
 		"name": "Ausruhen",
 		"constraints": {},
-		"consequences": {},
+		"consequences": {
+			"add_health": 1,
+		},
 		"type_gui": "DefaultActionGUI",
 		"description": "Hat sich ausgeruht",
 		"prompt": "Willst du dich ausruhen?",
@@ -89,7 +91,7 @@
 		},
 		"type_gui": "ConfirmationGUI",
 		"description": "-",
-		"prompt": "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen?",
+		"prompt": "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
 		"e_coins": 0,
 	},
 	{

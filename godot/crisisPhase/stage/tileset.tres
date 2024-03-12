@@ -2540,6 +2540,7 @@ texture_region_size = Vector2i(64, 64)
 6:0/0 = 0
 6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0/custom_data_1 = "Mein Medizinschrank. Der Erstehilfe-Kasten steht einsatzbereit!"
 7:0/0 = 0
 7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:0/0/physics_layer_0/angular_velocity = 0.0

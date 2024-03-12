@@ -10,10 +10,11 @@ func _ready() -> void:
 
 
 func open(_p_action : EMC_PopUpAction) -> void:
+	_current_action = _p_action
 	#_previous_pause_state = Global.get_tree().paused
 	Global.get_tree().paused = true
 	show()
-	_current_action = _p_action
+	SoundMngr.vibrate(250, 2)
 	opened.emit()
 	$PanelContainer/MarginContainer/VBoxContainer/TextBox/Desciption.set_text(_p_action.get_pop_up_text())
 

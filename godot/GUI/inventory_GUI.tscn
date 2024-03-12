@@ -184,7 +184,6 @@ bus = &"SFX"
 
 [node name="SpoiledVFX_Template" type="GPUParticles2D" parent="."]
 position = Vector2(-248, -478)
-emitting = false
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_3fov1")
 texture = ExtResource("8_m04a3")

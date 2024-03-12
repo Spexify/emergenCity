@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://GUI/book_GUI.gd" id="1_ebrn4"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_pbbuy"]
-[ext_resource type="Texture2D" uid="uid://gkphtw28v8yx" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="1_rto4d"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="1_rto4d"]
 [ext_resource type="Texture2D" uid="uid://80yai28l2kh6" path="res://res/sprites/GUI/buttons/button_left.png" id="3_awayq"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_me52j"]
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="4_my5ou"]
@@ -84,6 +84,7 @@ size_flags_horizontal = 8
 texture_normal = ExtResource("4_my5ou")
 texture_disabled = ExtResource("8_q4mtc")
 
+[connection signal="meta_clicked" from="PanelContainer/VBC/PageBG/PageContent" to="." method="_on_page_content_meta_clicked"]
 [connection signal="pressed" from="PanelContainer/VBC/ButtonBar/BackwardBtn" to="." method="_on_backward_btn_pressed"]
 [connection signal="pressed" from="PanelContainer/VBC/ButtonBar/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="PanelContainer/VBC/ButtonBar/ForwardBtn" to="." method="_on_forward_btn_pressed"]

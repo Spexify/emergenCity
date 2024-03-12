@@ -1,4 +1,7 @@
 extends Node
+class_name EMC_SoundMngr
+## MP3-Files don't work on mobile if you just load them, so you have to add another
+## AudioStreamPlayer Node!! At least I (MRM) didn't get it to work
 
 const SFX_PATH : String = "res://res/SFX/"
 
@@ -27,6 +30,7 @@ func _init() -> void:
 			file_name = dir.get_next()
 	else:
 		printerr("An error occurred when trying to access the path.")
+
 
 func _ready() -> void:
 	_connect_to_buttons()
@@ -82,8 +86,10 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioSt
 	return player
 
 
-func vibrate(time : int = 250) -> void:
-	Input.vibrate_handheld(time)
+func vibrate(time : int = 250, p_times: int = 1, p_delay_between_times: int = 150) -> void:
+	for i in p_times:
+		Input.vibrate_handheld(time)
+		await get_tree().create_timer(p_delay_between_times).timeout
 
 #######################################Private Methods##############################################
 

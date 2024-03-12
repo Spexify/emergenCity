@@ -73,3 +73,7 @@ func set_curr_page_text() -> void:
 	$PanelContainer/VBC/PageBG/PageContent.text = _curr_book.content[_curr_page - 1]
 	$PanelContainer/VBC/ButtonBar/BackwardBtn.disabled = _curr_page == MIN_PAGE
 	$PanelContainer/VBC/ButtonBar/ForwardBtn.disabled = _curr_page == _curr_max_page
+
+
+func _on_page_content_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(meta)
