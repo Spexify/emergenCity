@@ -100,6 +100,7 @@ func _cook_recipe() -> void:
 		#await wait.finished
 	
 	await $CookingAnimation.play(_last_clicked_recipe)
+	wait.stop()
 	
 	hide()
 	_action.executed.emit(_action)

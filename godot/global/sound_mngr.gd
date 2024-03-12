@@ -16,11 +16,11 @@ func _init() -> void:
 		dir.list_dir_begin()
 		var file_name : String = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".wav"):
+			if not dir.current_is_dir() and (file_name.ends_with(".wav") or file_name.ends_with(".mp3")):
 				var sound := ResourceLoader.load(SFX_PATH + file_name)
 				var player :=  AudioStreamPlayer.new()
 				player.stream = sound
-				player.name = file_name.get_basename().to_camel_case()
+				player.name = file_name.get_basename().to_pascal_case()
 				player.process_mode = PROCESS_MODE_ALWAYS
 				add_child(player)
 				#print("Found Sound: " + file_name.get_basename().to_camel_case())
@@ -66,18 +66,20 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioSt
 	if sound == "":
 		return null
 	
-	var sound_player : AudioStreamPlayer
+	var sound_player : Array[AudioStreamPlayer]
 	for player in get_children():
-		if sound.to_camel_case() == player.get_name().to_camel_case():
-			sound_player = player
-			break
-	if sound_player == null:
+		if player.get_name().begins_with(sound.to_pascal_case()):
+			sound_player.append(player)
+			
+	if sound_player == null or sound_player.is_empty():
 		printerr("Error in SoundMngr: Sound with name: \"" + sound + "\" not found.")
 		return null
 	
-	sound_player.set_pitch_scale(pitch)
-	sound_player.play(start)
-	return sound_player
+	var player : AudioStreamPlayer = sound_player.pick_random()
+	
+	player.set_pitch_scale(pitch)
+	player.play(start)
+	return player
 
 
 func vibrate(time : int = 250) -> void:

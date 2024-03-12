@@ -58,7 +58,7 @@ var _descr: String = "<No Descr>"
 var _comps: Array[EMC_ItemComponent]
 var _sound_effect : Dictionary = { 
 	"clicked" : "BasicItem",
-	"consumed" : "Water",
+	"consumed" : "",
 	}
 
 static var _ITEM_SCN : PackedScene = preload("res://items/item.tscn")
