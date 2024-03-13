@@ -19,7 +19,8 @@ func save() -> Dictionary:
 		"evening_action": evening_action.save() if evening_action != null else EMC_Action.empty_action().save(),
 	}
 	return data
-	
+
+
 func load_state(data : Dictionary) -> void:
 	morning_action = EMC_Action.empty_action()
 	morning_action.load_state(data.get("morning_action"))

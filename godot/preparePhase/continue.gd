@@ -2,9 +2,11 @@ extends Control
 
 
 func _on_continue_pressed() -> void:
-	Global.goto_scene("res://crisisPhase/crisis_phase.tscn")
+	Global.goto_scene(Global.CRISIS_PHASE_SCENE)
 
 
 func _on_reset_pressed() -> void:
-	Global.reset_save()
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	Global.reset_state()
+	Global.reset_inventory()
+	Global.reset_upgrades_equipped()
+	Global.goto_scene(Global.MAIN_MENU_SCENE)

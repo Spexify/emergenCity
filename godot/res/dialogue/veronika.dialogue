@@ -1,0 +1,44 @@
+~ START
+Veronika: Hi! Alles klar bei dir?
+~ BRANCH
+- Avatar: Wie läuft's?
+	=> TALK
+- Avatar: Hast du was zu tauschen?
+	=>< TRADE
+	=> BRANCH
+- Avatar: Tschüss!
+	Veronika: Ciao!
+	=> END
+
+
+~ TALK
+Veronika: Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...
+Kris: Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!
+Veronika: Du verstehst aber unter "Planen" auch nur "Snacks einkaufen".
+Kris: Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!
+Veronika: Aber auch nur, wenn du bis dahin welche übrig gelassen hast.
+Kris: ...
+Veronika: ...
+Kris: Ich kaufe noch ein paar mehr ein.
+=> END
+
+
+~ TRADE
+do TradeMngr.setup_next_trade("Veronika")
+Veronika: Kommt drauf an. Hast du {{TradeMngr.get_sought_items_text()}}? Falls ja würde ich dir {{TradeMngr.get_offered_items_text()}} geben.
+if TradeMngr.is_trade_feasible()
+	Veronika: Und?
+	- Avatar: Gebongt.
+		do TradeMngr.execute_trade()
+		Veronika: [#mood=happy]Nice.
+	- Avatar: Nee, grad nicht.
+		Veronika: Okidoki.
+else
+	Veronika: Oh, {{TradeMngr.get_unfeasibility_reason()}}!
+=> END
+
+
+~ NEIGHBORHOOD_PARTY
+Veronika: Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat.
+Veronika: Aber das Essen ist echt lecker[wait=0.5] ...und umsonst!
+=> END

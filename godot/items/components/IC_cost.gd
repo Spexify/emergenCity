@@ -3,15 +3,30 @@ class_name EMC_IC_Cost
 
 var _cost : int = 0
 
+
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func _init(cost : int) -> void:
 	super("Cost", Color.GOLDENROD)
 	_cost = cost
 
+
 func get_cost() -> int:
 	return _cost
-	
+
+
+## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return str(_cost) + "eC"
+	if Global.is_in_crisis_phase():
+		return ""
+	else:
+		return str(_cost) + "eC"
+
+
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "cost",
+		"params": _cost,
+	}
+	return data
 
 #----------------------------------------- PRIVATE METHODS -----------------------------------------

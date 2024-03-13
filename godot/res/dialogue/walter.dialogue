@@ -1,0 +1,27 @@
+~ START
+Walter: Wir müssen langsam schon mit dem Abbau beginnen...
+Walter: ...aber schau dir sonst gerne noch mal das Feuerwehrfahrzeug an.
+=> END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Walter: Guten Tag!
+if not has_executed_consequences_of_event("FIRE_DEPARTMENT_DEMONSTRATION")
+	=> TRAINING
+else
+	Walter: Ich hoffe dir hat das Training gefallen.
+	Avatar: Ich habe auf jeden Fall einiges gelernt!
+=> END
+
+
+~ TRAINING
+Walter: Bist du auch gekommen um bei der Feuerlösch- & Erste Hilfe Übung mitzumachen?
+- Ja!
+	Walter: Alles klar, dann nimm dir einen der Feuerlöscher und los geht's!
+	do execute_consequences("FIRE_DEPARTMENT_DEMONSTRATION")
+	Walter gibt dir und den anderen einen Notfall-Crash-Kurs.
+	Avatar: ...das war lehrreich!
+	Avatar: Mit dem ganzen Programm hier hab ich mich echt körperlich betätigt.
+	Avatar: Das Workout für die Woche kann ich schon mal abhaken.
+- Erst mal nicht, danke.
+=> END

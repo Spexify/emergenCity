@@ -2,10 +2,10 @@ extends EMC_ItemComponent
 class_name EMC_IC_Drink
 
 const UNIT: String = "ml"
-const UNIT_FACTOR: int = 500 #1 Unit = 500ml
+const UNIT_FACTOR: int = 250 #1 Unit = 500ml
 var _hydration: int = 0 
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 func _init(p_hydration: int) -> void:
 	super("Getränk", Color.CADET_BLUE)
 	_hydration = p_hydration 
@@ -21,8 +21,15 @@ func get_unit_hydration() -> int:
 	return _hydration * UNIT_FACTOR
 
 
-## Get text with formatting (colors)
-func get_formatted_values() -> String:
-	return get_name() + " (" + str(get_unit_hydration()) + UNIT + ")"
+## RENAME WITH CAUTION: It overrides superclass method!
+func get_name_with_values() -> String:
+	return name + " (" + str(get_unit_hydration()) + UNIT + ")"
+	
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "drink",
+		"params": _hydration,
+	}
+	return data
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+########################################## PRIVATE METHODS #########################################

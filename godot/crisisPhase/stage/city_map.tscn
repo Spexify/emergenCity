@@ -1,0 +1,321 @@
+[gd_scene load_steps=27 format=3 uid="uid://hcfsn06a2085"]
+
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="1_pkkoa"]
+[ext_resource type="Script" path="res://crisisPhase/stage/city_map.gd" id="2_a4fhc"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://res/sprites/GUI/buttons/invisible_button.png" id="3_wxrxy"]
+[ext_resource type="Shader" path="res://res/VFX/shaders/city_map_clickable_buildings.gdshader" id="3_x6gau"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_b0mqi"]
+[ext_resource type="Texture2D" uid="uid://botpe5ux15226" path="res://res/sprites/GUI/icons/icon_pin_home.png" id="5_kxfhx"]
+[ext_resource type="Texture2D" uid="uid://6bj8wmm5lv04" path="res://res/sprites/GUI/icons/icon_pin.png" id="6_bj4s0"]
+[ext_resource type="Texture2D" uid="uid://11wqmydgbpf2" path="res://res/sprites/GUI/icons/icon_pin_event.png" id="6_um0qv"]
+[ext_resource type="PackedScene" uid="uid://c3u4ov75gx85f" path="res://GUI/doorbells_GUI.tscn" id="7_s5hyn"]
+[ext_resource type="Texture2D" uid="uid://cl3lhm7k1yq7i" path="res://res/VFX/particles/particle_bird.png" id="8_nsn6c"]
+[ext_resource type="Texture2D" uid="uid://ov3khq2j8kph" path="res://res/VFX/particles/particle_clouds.png" id="9_5vlc8"]
+[ext_resource type="Texture2D" uid="uid://mgvjk7a3irx0" path="res://res/VFX/particles/particle_water_drop.png" id="10_7a7e0"]
+[ext_resource type="Texture2D" uid="uid://cks714cqsksl" path="res://res/VFX/particles/particle_cloud_shadow.png" id="11_0jybd"]
+[ext_resource type="Texture2D" uid="uid://c2nkjrvwfo7h5" path="res://res/sprites/citymap/citymap_clickable_buildings.png" id="13_ge2rm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwa80"]
+shader = ExtResource("3_x6gau")
+shader_parameter/shine_color = Color(1, 1, 1, 0.462745)
+shader_parameter/shine_progress = 0.0
+shader_parameter/shine_size = 0.08
+shader_parameter/shine_angle = 51.4
+
+[sub_resource type="Curve" id="Curve_vqo80"]
+_data = [Vector2(0.532164, 1), 0.0, -1.18932, 0, 1, Vector2(0.994152, 0.450549), -1.18932, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h8ktu"]
+curve = SubResource("Curve_vqo80")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2q5kx"]
+particle_flag_disable_z = true
+direction = Vector3(0, -10, 0)
+spread = 10.0
+initial_velocity_min = 150.0
+initial_velocity_max = 170.0
+gravity = Vector3(0, 400, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_h8ktu")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jp4rf"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s1aqt"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 200, 1)
+direction = Vector3(1, 1, 0)
+spread = 25.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 30.0
+anim_speed_max = 30.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rabjr"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqlo5"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 400, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color = Color(1, 1, 1, 0.494118)
+anim_offset_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bi3dh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 40, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 1.2
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_xndm7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_inmhp"]
+resource_name = "pin_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uc87h"]
+_data = {
+"RESET": SubResource("Animation_xndm7"),
+"pin_animation": SubResource("Animation_inmhp")
+}
+
+[node name="CityMap" type="TextureRect"]
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("1_pkkoa")
+script = ExtResource("2_a4fhc")
+
+[node name="ClickableBuildings" type="TextureRect" parent="."]
+process_mode = 3
+material = SubResource("ShaderMaterial_bwa80")
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 1024.0
+mouse_filter = 2
+texture = ExtResource("13_ge2rm")
+
+[node name="HomeBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 277.0
+offset_top = 478.0
+offset_right = 405.0
+offset_bottom = 606.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="BackBtn" type="TextureButton" parent="." groups=["Button"]]
+visible = false
+layout_direction = 2
+layout_mode = 0
+offset_left = 484.0
+offset_top = 931.0
+offset_right = 548.0
+offset_bottom = 995.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("4_b0mqi")
+
+[node name="MarketBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 140.0
+offset_top = 880.0
+offset_right = 268.0
+offset_bottom = 1008.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="PenthouseBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 333.0
+offset_top = 735.0
+offset_right = 461.0
+offset_bottom = 863.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="TownhallBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 34.0
+offset_top = 736.0
+offset_right = 162.0
+offset_bottom = 864.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="RowhouseBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 96.0
+offset_top = 510.0
+offset_right = 224.0
+offset_bottom = 638.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="ComplexBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 83.0
+offset_top = 347.0
+offset_right = 211.0
+offset_bottom = 475.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="GardenhouseBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 365.0
+offset_top = 314.0
+offset_right = 493.0
+offset_bottom = 442.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="MansionBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 434.0
+offset_top = 158.0
+offset_right = 562.0
+offset_bottom = 286.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="ParkBtn" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 369.0
+offset_top = 539.0
+offset_right = 497.0
+offset_bottom = 667.0
+texture_normal = ExtResource("3_wxrxy")
+
+[node name="FountainVFX" type="GPUParticles2D" parent="."]
+position = Vector2(495, 569)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_2q5kx")
+texture = ExtResource("10_7a7e0")
+lifetime = 0.8
+
+[node name="BirdsVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_jp4rf")
+position = Vector2(-23, 400)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_s1aqt")
+texture = ExtResource("8_nsn6c")
+lifetime = 30.0
+explosiveness = 0.91
+visibility_rect = Rect2(-433.222, -566.763, 760.599, 1203.53)
+
+[node name="CloudShadowVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_rabjr")
+position = Vector2(760, 671)
+amount = 4
+amount_ratio = 0.4
+process_material = SubResource("ParticleProcessMaterial_mqlo5")
+texture = ExtResource("11_0jybd")
+lifetime = 70.0
+visibility_rect = Rect2(-1031.31, -285.027, 1287.81, 564.721)
+
+[node name="CloudVFX" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_rabjr")
+position = Vector2(621, 47)
+amount = 10
+amount_ratio = 0.4
+process_material = SubResource("ParticleProcessMaterial_bi3dh")
+texture = ExtResource("9_5vlc8")
+lifetime = 100.0
+visibility_rect = Rect2(-1031.31, -285.027, 1287.81, 564.721)
+
+[node name="HomePin" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(300, 460)
+texture = ExtResource("5_kxfhx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HomePin"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[node name="OptEventPin_Template" type="Sprite2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(352, 552)
+texture = ExtResource("6_um0qv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptEventPin_Template"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[node name="OptEventPins" type="Node2D" parent="."]
+
+[node name="CurrPosPin" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(300, 460)
+texture = ExtResource("6_bj4s0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CurrPosPin"]
+libraries = {
+"": SubResource("AnimationLibrary_uc87h")
+}
+
+[node name="DoorbellsGUI" parent="." instance=ExtResource("7_s5hyn")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="MarketBtn" to="." method="_on_marketplace_btn_pressed"]
+[connection signal="pressed" from="PenthouseBtn" to="." method="_on_elias_flat_btn_pressed"]
+[connection signal="pressed" from="TownhallBtn" to="." method="_on_townhall_btn_pressed"]
+[connection signal="pressed" from="RowhouseBtn" to="." method="_on_julias_house_btn_pressed"]
+[connection signal="pressed" from="ComplexBtn" to="." method="_on_complex_btn_pressed"]
+[connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
+[connection signal="pressed" from="MansionBtn" to="." method="_on_villa_btn_pressed"]
+[connection signal="pressed" from="ParkBtn" to="." method="_on_park_btn_pressed"]

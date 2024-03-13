@@ -1,0 +1,221 @@
+[gd_scene load_steps=11 format=3 uid="uid://doc1tdsx8itqw"]
+
+[ext_resource type="Script" path="res://preparePhase/upgrade_center.gd" id="1_j1ie4"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="1_xic5p"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_wh8jv"]
+[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://res/VFX/particles/particle_star.png" id="4_c3pkx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0cck"]
+bg_color = Color(0.360784, 0.333333, 0.301961, 1)
+
+[sub_resource type="Gradient" id="Gradient_ugh1t"]
+offsets = PackedFloat32Array(0, 0.918803)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.494118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rruuk"]
+gradient = SubResource("Gradient_ugh1t")
+
+[sub_resource type="Curve" id="Curve_7pxfh"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ubrj"]
+curve = SubResource("Curve_7pxfh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a62gn"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+direction = Vector3(0, -25, 0)
+spread = 28.0
+initial_velocity_min = 50.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 300, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_0ubrj")
+color_ramp = SubResource("GradientTexture1D_rruuk")
+
+[node name="UpgradeCenter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1ie4")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b0cck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[right][color=black]10[/color][/right]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("1_xic5p")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="Title" type="RichTextLabel" parent="Background/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+bbcode_enabled = true
+text = "[center]Statten Sie ihr Zuhause aus[/center]"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center]"
+fit_content = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Ausgerüstete Gegenstände[/center]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Erwerbbare Gegenstände[/center]"
+fit_content = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="WhitePanel" type="PanelContainer" parent="Background/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/WhitePanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleSpacing"
+
+[node name="UpgradeName" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+fit_content = true
+
+[node name="Price" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
+layout_mode = 2
+fit_content = true
+
+[node name="Description" type="RichTextLabel" parent="Background/VBoxContainer/WhitePanel/VBoxContainer"]
+layout_mode = 2
+fit_content = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenuBtn" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2" instance=ExtResource("3_wh8jv")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Auswahl bestätigen"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BuyBtn" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer" instance=ExtResource("3_wh8jv")]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Gegenstand kaufen"
+
+[node name="EquipBtn" parent="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer" instance=ExtResource("3_wh8jv")]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Gegenstand ausrüsten"
+
+[node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
+position = Vector2(297, 221)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_a62gn")
+texture = ExtResource("4_c3pkx")
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.88
+randomness = 0.1
+
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn" to="." method="_on_buy_btn_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn" to="." method="_on_equip_btn_pressed"]

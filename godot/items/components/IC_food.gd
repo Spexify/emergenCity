@@ -2,14 +2,14 @@ extends EMC_ItemComponent
 class_name EMC_IC_Food
 
 const UNIT: String = "kcal"
-const UNIT_FACTOR: int = 550 #1 Unit = 550kcal
+const UNIT_FACTOR: int = 250 #1 Unit = 250kcal
 var _nutritionness: int = 0
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(nutritionness: int) -> void:
+########################################## PUBLIC METHODS ##########################################
+func _init(nutritionness: int, pleasurable: int = 0) -> void:
 	super("Essen", Color.INDIAN_RED)
-	_nutritionness = nutritionness 
-
+	_nutritionness = nutritionness
+	
 
 ## Get the internal nutritionness value
 func get_nutritionness() -> int:
@@ -21,7 +21,15 @@ func get_unit_nutritionness() -> int:
 	return _nutritionness * UNIT_FACTOR
 
 
-func get_formatted_values() -> String:
-	return get_name() + " (" + str(get_unit_nutritionness()) + UNIT + ")"
+## RENAME WITH CAUTION: It overrides superclass method!
+func get_name_with_values() -> String:
+	return name + " (" + str(get_unit_nutritionness()) + UNIT + ")"
 
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
+func to_dict() -> Dictionary:
+	var data : Dictionary = {
+		"name": "food",
+		"params": _nutritionness,
+	}
+	return data
+
+########################################## PRIVATE METHODS #########################################

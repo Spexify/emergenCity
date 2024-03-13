@@ -1,21 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi2q0hbmab582"]
+[gd_scene load_steps=2 format=3 uid="uid://bi2q0hbmab582"]
 
 [ext_resource type="Script" path="res://items/item.gd" id="1_yg30b"]
-[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://res/items.png" id="2_trxve"]
 
-[node name="item" type="Control" groups=["items"]]
+[node name="Item" type="Control" groups=["items"]]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 32.0
 offset_bottom = 32.0
+mouse_filter = 1
 script = ExtResource("1_yg30b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_trxve")
-centered = false
-hframes = 10
-vframes = 10
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+mouse_filter = 1
 
-[connection signal="clicked" from="." to="." method="_on_clicked"]
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

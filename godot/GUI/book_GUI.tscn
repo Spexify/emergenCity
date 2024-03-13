@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://buhj6araogehg"]
+
+[ext_resource type="Script" path="res://GUI/book_GUI.gd" id="1_ebrn4"]
+[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_pbbuy"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="1_rto4d"]
+[ext_resource type="Texture2D" uid="uid://80yai28l2kh6" path="res://res/sprites/GUI/buttons/button_left.png" id="3_awayq"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_me52j"]
+[ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="4_my5ou"]
+[ext_resource type="Texture2D" uid="uid://b0whs1kiah54x" path="res://res/sprites/GUI/buttons/button_left_disabled.png" id="5_1e35g"]
+[ext_resource type="Texture2D" uid="uid://dcqomk2j6o16u" path="res://res/sprites/GUI/buttons/button_right_disabled.png" id="8_q4mtc"]
+
+[node name="BookGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_ebrn4")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_right = 252.0
+offset_bottom = 694.0
+grow_horizontal = 2
+
+[node name="VBC" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="PanelContainer/VBC"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_pbbuy")
+bbcode_enabled = true
+text = "[center]Titel[/center]"
+
+[node name="PageBG" type="NinePatchRect" parent="PanelContainer/VBC"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 2
+texture = ExtResource("1_rto4d")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="PageContent" type="RichTextLabel" parent="PanelContainer/VBC/PageBG"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -265.0
+offset_right = 220.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "dasd"
+
+[node name="ButtonBar" type="HBoxContainer" parent="PanelContainer/VBC"]
+layout_mode = 2
+theme_override_constants/separation = 140
+
+[node name="BackwardBtn" type="TextureButton" parent="PanelContainer/VBC/ButtonBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_awayq")
+texture_disabled = ExtResource("5_1e35g")
+
+[node name="BackBtn" type="TextureButton" parent="PanelContainer/VBC/ButtonBar" groups=["Button"]]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("4_me52j")
+
+[node name="ForwardBtn" type="TextureButton" parent="PanelContainer/VBC/ButtonBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("4_my5ou")
+texture_disabled = ExtResource("8_q4mtc")
+
+[connection signal="meta_clicked" from="PanelContainer/VBC/PageBG/PageContent" to="." method="_on_page_content_meta_clicked"]
+[connection signal="pressed" from="PanelContainer/VBC/ButtonBar/BackwardBtn" to="." method="_on_backward_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/VBC/ButtonBar/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="PanelContainer/VBC/ButtonBar/ForwardBtn" to="." method="_on_forward_btn_pressed"]

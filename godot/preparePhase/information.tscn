@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://hvrc68vqew2a"]
+
+[ext_resource type="Script" path="res://preparePhase/information.gd" id="1_3i2wm"]
+[ext_resource type="PackedScene" uid="uid://cul33oq5ev2pa" path="res://crisisPhase/stage/park.tscn" id="2_skwwi"]
+[ext_resource type="Texture2D" uid="uid://bfxwegfvf1ime" path="res://res/kochenohnestrom.png" id="3_v146t"]
+[ext_resource type="Texture2D" uid="uid://b77uhdblr7pj8" path="res://res/bbkbroschüre.png" id="4_nlyup"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="5_4en81"]
+
+[node name="CreditInformation" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = -32.0
+script = ExtResource("1_3i2wm")
+
+[node name="Park" parent="." instance=ExtResource("2_skwwi")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.282353, 0.282353, 0.282353, 1)
+
+[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer_unaffectedByCM"]
+offset_left = 70.0
+offset_top = 310.0
+offset_right = 502.0
+offset_bottom = 567.0
+theme_override_constants/separation = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+layout_mode = 2
+
+[node name="CookingButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer" groups=["Button"]]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("3_v146t")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer_unaffectedByCM/HBoxContainer"]
+layout_mode = 2
+
+[node name="BBKButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2" groups=["Button"]]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_nlyup")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = " 7,61 MB"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer_unaffectedByCM"]
+offset_left = 465.0
+offset_top = 872.0
+offset_right = 529.0
+offset_bottom = 936.0
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer_unaffectedByCM/MarginContainer" groups=["Button"]]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture_normal = ExtResource("5_4en81")
+
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2/BBKButton" to="." method="_on_bbk_button_pressed"]
+[connection signal="pressed" from="CanvasLayer_unaffectedByCM/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]

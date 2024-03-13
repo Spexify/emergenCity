@@ -67,6 +67,7 @@ theme_override_constants/separation = 10
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_type_variation = &"WhiteRichTextLabel"
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -74,6 +75,7 @@ scroll_active = false
 
 [node name="DialogueLabel" parent="Balloon/Margin/HBox/VBox" instance=ExtResource("3_nnlpb")]
 layout_mode = 2
+theme_type_variation = &"WhiteRichTextLabel"
 text = "Dialogue"
 skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
 
@@ -82,7 +84,9 @@ layout_mode = 2
 theme_override_constants/separation = 2
 
 [node name="ResponseTemplate" type="RichTextLabel" parent="Balloon/Margin/HBox/VBox"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_type_variation = &"WhiteRichTextLabel"
 theme_override_styles/focus = SubResource("StyleBoxFlat_5d24i")
 theme_override_styles/normal = SubResource("StyleBoxFlat_oj3c8")
 bbcode_enabled = true

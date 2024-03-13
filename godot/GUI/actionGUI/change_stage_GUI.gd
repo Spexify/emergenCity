@@ -3,72 +3,76 @@ class_name EMC_ChangeStageGUI
 
 signal stayed_on_same_stage
 
-@onready var open_gui_sfx := $SFX/OpenGUISFX
-@onready var close_gui_sfx := $SFX/CloseGUISFX
-@onready var button_sfx := $SFX/ButtonSFX
+@onready var _richtext_label := $NinePatchRect/MarginContainer/VBoxContainer/RichTextLabel
 
 var _stage_mngr: EMC_StageMngr
-var _avatar: EMC_Avatar
 ## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
 var _last_SC_action: EMC_StageChangeAction
+var _previously_paused: bool
 
 
-func setup(p_stage_mngr: EMC_StageMngr, p_avatar: EMC_Avatar) -> void:
+func setup(p_stage_mngr: EMC_StageMngr) -> void:
 	_stage_mngr = p_stage_mngr
-	_avatar = p_avatar
 
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func show_gui(p_action: EMC_Action) -> void:
+	_previously_paused = Global.get_tree().paused
+	Global.get_tree().paused = true
 	_action = p_action
 	var stage_change_action: EMC_StageChangeAction = _action
 	
 	if _stage_mngr.get_curr_stage_name() == stage_change_action.get_stage_name():
+		close() #Order important: First close yourself, then emit signal
 		stayed_on_same_stage.emit()
-		close()
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
-			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Die Rückkehr kostet eine Aktion."
 		else:
-			$NinePatchRect/VBoxContainer/RichTextLabel.text = "Willst du " + \
+			_richtext_label.text = "Willst du " + \
 				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
-		open_gui_sfx.play()
 		show()
 		opened.emit()
 
 
 func _on_confirm_btn_pressed() -> void:
-	var curr_SC_action: EMC_StageChangeAction = _action
+	#First close the GUI (order important, as the pause-mode otherwise isn't set back correctly)
+	close()
 	
-	_stage_mngr.change_stage(curr_SC_action.get_stage_name())
-	_avatar.position = curr_SC_action.get_spawn_pos()
+	var curr_SC_action: EMC_StageChangeAction = _action #downcast
+	
+	await SoundMngr.button_finished()
+	var wait : AudioStreamPlayer = curr_SC_action.play_sound()
+	if wait != null:
+		await wait.finished
+	
+	curr_SC_action.silent_executed.emit(curr_SC_action)
 	
 	if _last_SC_action != null:
+		var tmp : Dictionary = _last_SC_action._consequences.duplicate(true)
+		_last_SC_action._consequences = {}
 		_last_SC_action.executed.emit(_last_SC_action)
+		_last_SC_action._consequences = tmp
 	
-	##The change to home should not be executed (at is was skipped initially and should not
-	##be protocolled in the SEOD)
-	if curr_SC_action.get_stage_name() == "home": 
+	###The change to home should not be executed (at is was skipped initially and should not
+	###be protocolled in the SEOD)
+	if not curr_SC_action.progresses_day_period(): 
 		_last_SC_action = null
 	else:
 		_last_SC_action = curr_SC_action
 	
-	if _stage_mngr.get_curr_stage_name() == "home":
-		button_sfx.play()
-		await button_sfx.finished
-	
-	close()
 
 
 func close() -> void:
-	close_gui_sfx.play()
+	Global.get_tree().paused = _previously_paused
 	hide()
 	closed.emit()
 
 
 func _on_cancel_btn_pressed() -> void:
-	button_sfx.play()
-	await button_sfx.finished
 	close()
 
+
+func _ready() -> void:
+	hide()

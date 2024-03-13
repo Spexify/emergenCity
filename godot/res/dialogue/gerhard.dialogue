@@ -1,18 +1,45 @@
-~ start
-
-Avatar: [[Hi|Guten Tag.|Hallöchenpopöchen|Moin!|Servus]]
-Avatar: Das is nen emergenCITY Dialogue Test hier.
-Gerhard: Jawollja!
-Gerhard: Pizza mit Ananas oder ohne?
-- Avatar: Mit natürlich!
-	Gerhard: [[Ick [speed=0.2]weeeess[/speed] ja net...]]
-- Avatar: Bähh, ohne!
-	Gerhard: Mach dich vom Acker!
+~ START
+Avatar: Hallo!
+~ BRANCH
+Gerhard: Moin. Willst du handeln?
+- Reden
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Handeln
+	=>< TRADE
+	=> BRANCH
+- Nichts dergleichen
 	=> END
-- Ende Gelände => END!
 
-Avatar: Naja.
-- Nochmal!! => start
-- Tschö mit ö! => END
+~ DIALOG1
+Avatar: Lass uns reden! Wie geht's dir?
+Gerhard: Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht.
+Friedel: Wuff.
+Gerhard: Worüber willst du dich denn beklagen? Zu wenig Essen?
+Friedel: Wuff ...
+Gerhard: ... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
+Friedel: Wuff!
+=> END
 
+~ DIALOG2
+Avatar: Lass uns reden! Wie geht's Friedel?
+Gerhard: Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden. 
+Gerhard: Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.
+Gerhard: Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht.
+Avatar: Hund müsste man sein ...
+Friedel: Wuff!
+=> END
+
+~ TRADE
+do TradeMngr.setup_next_trade("Gerhard")
+Gerhard: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.
+if TradeMngr.is_trade_feasible()
+	Gerhard: Einverstanden?
+	- Avatar: Okay!
+		do TradeMngr.execute_trade()
+		Gerhard: [#mood=happy]Wunderbar, hier.
+	- Avatar: Nein Danke.
+		Gerhard: Ok.
+else
+	Gerhard: [#mood=sad]Sorry, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END

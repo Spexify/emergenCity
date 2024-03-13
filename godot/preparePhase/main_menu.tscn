@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bosmqyv0utabo"]
+[gd_scene load_steps=10 format=3 uid="uid://bosmqyv0utabo"]
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
-[ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_gc4t1"]
-[ext_resource type="Script" path="res://preparePhase/settings.gd" id="3_j0hbn"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_1rel4"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_3syux"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_qpdy4"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="3_ddmuk"]
+[ext_resource type="Texture2D" uid="uid://18r2pljgx646" path="res://res/sprites/GUI/icons/icon_menu_settings.png" id="4_0v5y1"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
+[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="7_57rlv"]
+[ext_resource type="Texture2D" uid="uid://cy6hveptr5ap3" path="res://res/sprites/title_logo.png" id="7_77ygh"]
+[ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="7_jnxxn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -27,155 +29,124 @@ grow_vertical = 2
 theme = ExtResource("1_prdod")
 script = ExtResource("2_bbqsv")
 
-[node name="ColorRect" type="ColorRect" parent="Menu"]
+[node name="ColorRect" type="TextureRect" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.152941, 0.14902, 0.207843, 1)
+texture = ExtResource("3_ddmuk")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
-layout_mode = 1
+[node name="CanvasModulate" type="CanvasModulate" parent="Menu"]
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="CanvasLayer_unaffectedByCM" type="CanvasLayer" parent="Menu"]
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -257.0
-offset_bottom = 89.0
+offset_left = -136.0
+offset_right = 13.0
+offset_bottom = 90.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 
-[node name="eCoins" type="Label" parent="Menu/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-text = "10 eCoins"
+theme_override_constants/separation = 20
 
-[node name="MarginContainer2" type="MarginContainer" parent="Menu"]
-layout_mode = 1
-offset_right = 230.0
+[node name="eCoins" type="Label" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "10"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+texture = ExtResource("4_2txvv")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+offset_right = 277.0
 offset_bottom = 94.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 
-[node name="Settings" type="Button" parent="Menu/MarginContainer2"]
+[node name="Settings" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer2" groups=["Button"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 45
-text = "Settings"
-flat = true
+texture_normal = ExtResource("4_0v5y1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -278.0
-offset_top = -119.5
-offset_right = 278.0
-offset_bottom = 119.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InformationButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+offset_left = 450.0
+offset_top = 850.0
+offset_right = 544.0
+offset_bottom = 988.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Information" type="TextureButton" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
+layout_mode = 2
+texture_normal = ExtResource("6_7kgqm")
+
+[node name="CreditScreen" type="Button" parent="Menu/CanvasLayer_unaffectedByCM/InformationButtons" groups=["Button"]]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CanvasLayer_unaffectedByCM"]
+custom_minimum_size = Vector2(575, 100)
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 707.0
+
+[node name="GameButtons" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer"]
+layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Start" type="Button" parent="Menu/VBoxContainer"]
+[node name="Title" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.541176, 0.537255, 0.752941, 1)
+texture = ExtResource("7_77ygh")
+
+[node name="Slogan" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+clip_contents = false
+custom_minimum_size = Vector2(450, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center][color=white]Play & Prepare[/color]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+layout_mode = 2
+
+[node name="StartRound" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
+layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Start New Round"
-flat = true
+text = "Neues Spiel starten"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer"]
+[node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="Shelf" type="Button" parent="Menu/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.976471, 0.341176, 0.219608, 1)
 theme_override_font_sizes/font_size = 40
-text = "Open Shelf"
-flat = true
+text = "Vorräte einkaufen"
 
-[node name="UpgradeCenter" type="Button" parent="Menu/VBoxContainer/HBoxContainer"]
+[node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
-theme = ExtResource("3_gc4t1")
-theme_override_colors/font_color = Color(0.239216, 0.839216, 0.815686, 1)
 theme_override_font_sizes/font_size = 40
-text = "Open Upgrade 
-Center"
-flat = true
+text = "Haushalt ausstatten"
 
-[node name="Settings" type="CanvasLayer" parent="."]
-visible = false
+[node name="AvatarSelectionGUI" parent="." instance=ExtResource("7_jnxxn")]
+layout_mode = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Settings"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_prdod")
-script = ExtResource("3_j0hbn")
-
-[node name="MarginContainer" type="MarginContainer" parent="Settings/CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 355
-
-[node name="PanelContainer" type="PanelContainer" parent="Settings/CenterContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("1_prdod")
-
-[node name="MarginContainer" type="MarginContainer" parent="Settings/CenterContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 240
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.909804, 0.819608, 1)
-theme_override_font_sizes/font_size = 60
-text = "Settings"
-
-[node name="HSeparator" type="HSeparator" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="FontChange" type="CheckButton" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-button_pressed = true
-text = "Dyslexic Font"
-
-[node name="Reset" type="Button" parent="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Reset Save"
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_1rel4")
-
-[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_3syux")
-
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_qpdy4")
-
-[connection signal="pressed" from="Menu/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_round_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/Shelf" to="Menu" method="_on_shelf_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FontChange" to="Settings/CenterContainer" method="_on_font_change_pressed"]
-[connection signal="pressed" from="Settings/CenterContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Reset" to="Menu" method="_on_reset_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
+[connection signal="closed" from="AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

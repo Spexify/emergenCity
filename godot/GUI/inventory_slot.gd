@@ -1,7 +1,7 @@
 extends Panel
 class_name EMC_InventorySlot
 
-#------------------------------------------ PUBLIC METHODS -----------------------------------------
+########################################## PUBLIC METHODS ##########################################
 ## Checks if slot is free
 ## Returns true if slot is free, otherwise false
 func is_free() -> bool:
@@ -29,5 +29,11 @@ func remove_item() -> void:
 	var potential_child := $Slot_BG.get_child(0)
 	if potential_child != null:
 		$Slot_BG.remove_child(potential_child)
-#----------------------------------------- PRIVATE METHODS -----------------------------------------
 
+
+## Returns item, if an item was set, otherwise null AND removes it
+func pop() -> EMC_Item:
+	if is_free(): return null
+	var item: EMC_Item = get_item()
+	remove_item()
+	return item

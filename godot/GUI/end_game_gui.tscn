@@ -1,15 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnmcmtfl1jq8q"]
+[gd_scene load_steps=8 format=3 uid="uid://bnmcmtfl1jq8q"]
 
 [ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
-[ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="4_2cnqb"]
-[ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="5_55ssa"]
-[ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="6_oj6ur"]
+[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://res/VFX/particles/particle_star.png" id="2_wm8fx"]
+
+[sub_resource type="Gradient" id="Gradient_vswwg"]
+offsets = PackedFloat32Array(0, 0.918803)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.494118)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fs814"]
+gradient = SubResource("Gradient_vswwg")
+
+[sub_resource type="Curve" id="Curve_3jcbx"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dhuun"]
+curve = SubResource("Curve_3jcbx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_txb1w"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+direction = Vector3(0, -25, 0)
+spread = 28.0
+initial_velocity_min = 50.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 300, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_dhuun")
+color_ramp = SubResource("GradientTexture1D_fs814")
 
 [node name="GameOverGUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_brneb")
 
 [node name="WinnerScreen" type="PanelContainer" parent="."]
@@ -34,52 +56,59 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "GEWONNEN"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]GEWONNEN[/center]"
 
 [node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
-text = "Du hast die Krise überstanden. 
-Übersicht von Aktionen:
+text = "Du hast die Krise überstanden.
 "
+fit_content = true
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(376, 150)
-layout_mode = 2
-
-[node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer"]
-custom_minimum_size = Vector2(376, 0)
+[node name="TextBox3" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Actions" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="MarginContainer" type="MarginContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3"]
+clip_contents = true
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(340, 250)
+layout_mode = 2
+mouse_filter = 1
 text = "
 "
-autowrap_mode = 2
+scroll_following = true
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
-text = "Du hast 50 ECoins erworben!
+text = "
 "
+fit_content = true
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Zurück zur Hauptmenu"
@@ -107,64 +136,70 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
-[node name="Title" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+[node name="Title" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "VERLOREN"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]VERLOREN[/center]"
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox"]
+custom_minimum_size = Vector2(24, 60)
 layout_mode = 2
 text = "Du hast die Krise nicht überstanden."
+fit_content = true
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(376, 150)
-layout_mode = 2
-
-[node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="TextBox3" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Actions" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/ScrollContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-text = "
-"
-autowrap_mode = 2
+
+[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(340, 250)
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+scroll_following = true
 
 [node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="Description" type="Label" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox2"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Description" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox2"]
+custom_minimum_size = Vector2(24, 30)
 layout_mode = 2
 text = "Du hast 10 ECoins erworben!
 "
+fit_content = true
 autowrap_mode = 2
 
-[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Zurück zur Hauptmenu"
+text = "Zurück zum Hauptmenü"
 
-[node name="SFX" type="Node" parent="."]
-
-[node name="OpenGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("4_2cnqb")
-
-[node name="CloseGUISFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("5_55ssa")
-
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_oj6ur")
+[node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(297, 221)
+emitting = false
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_txb1w")
+texture = ExtResource("2_wm8fx")
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.88
+randomness = 0.1
 
 [connection signal="pressed" from="WinnerScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="LoserScreen/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

@@ -1,74 +1,229 @@
-[gd_scene load_steps=5 format=3 uid="uid://tpxumytrh032"]
+[gd_scene load_steps=15 format=3 uid="uid://tpxumytrh032"]
 
 [ext_resource type="Script" path="res://crisisPhase/status_bars.gd" id="1_m4dni"]
-[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/gui/icon_statusbar_nutrition.png" id="2_m3q3p"]
-[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/gui/icon_statusbar_hydration.png" id="3_k4dk6"]
-[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/gui/icon_statusbar_health.png" id="4_rju8q"]
+[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_gr84e"]
+[ext_resource type="Texture2D" uid="uid://dp8ofl4ea1lse" path="res://res/VFX/particles/particle_smoke_green.png" id="3_66xh1"]
+[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/sprites/GUI/icons/icon_statusbar_hydration.png" id="3_idu7t"]
+[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/sprites/GUI/icons/icon_statusbar_health.png" id="4_m4gsd"]
+[ext_resource type="Texture2D" uid="uid://bk4pns81h8ars" path="res://res/VFX/particles/particle_smoke_blue.png" id="5_a7waw"]
+[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://res/sprites/GUI/icons/icon_statusbar_happiness.png" id="5_xfaii"]
+[ext_resource type="Texture2D" uid="uid://bhoni508p4cmx" path="res://res/VFX/particles/particle_smoke_red.png" id="7_5dx1v"]
+[ext_resource type="Texture2D" uid="uid://dny6kkus3j8l3" path="res://res/VFX/particles/particle_smoke_yellow.png" id="7_mjdb6"]
+
+[sub_resource type="Gradient" id="Gradient_hix8y"]
+offsets = PackedFloat32Array(0.405594, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.345098)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8qpq6"]
+gradient = SubResource("Gradient_hix8y")
+
+[sub_resource type="Curve" id="Curve_awn7y"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yfwc6"]
+curve = SubResource("Curve_awn7y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_03rpy"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 20.0
+initial_velocity_min = -100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = -100.0
+scale_curve = SubResource("CurveTexture_yfwc6")
+color_ramp = SubResource("GradientTexture1D_8qpq6")
 
 [node name="StatusBars" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = 15.0
+offset_bottom = 15.0
 script = ExtResource("1_m4dni")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 450.0
-offset_bottom = 300.0
-theme_override_constants/separation = 20
+[node name="HBC" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_bottom = 30.0
+scale = Vector2(0.95, 0.95)
+theme_override_constants/separation = -10
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBC"]
+process_mode = 1
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="NutritionCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
 layout_mode = 2
 
-[node name="ContainerNutrition" type="Container" parent="VBoxContainer/HBoxContainer2"]
+[node name="ContainerNutrition" type="Container" parent="HBC/VBoxContainer/NutritionCont"]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="NutritionIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer2/ContainerNutrition"]
+[node name="NutritionIcon" type="Sprite2D" parent="HBC/VBoxContainer/NutritionCont/ContainerNutrition"]
 position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("2_m3q3p")
+texture = ExtResource("2_gr84e")
 
-[node name="NutritionBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 0)
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/NutritionCont/ContainerNutrition"]
+process_mode = 3
+position = Vector2(40, 14.7368)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("3_66xh1")
+one_shot = true
+speed_scale = 0.5
+
+[node name="NutritionBar" type="ProgressBar" parent="HBC/VBoxContainer/NutritionCont"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+max_value = 2200.0
+step = 1.0
+show_percentage = false
+
+[node name="CaloriesLabel" type="RichTextLabel" parent="HBC/VBoxContainer/NutritionCont/NutritionBar"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "
+"
+
+[node name="HydrationCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContainerHydration" type="Container" parent="HBC/VBoxContainer/HydrationCont"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="HydrationIcon" type="Sprite2D" parent="HBC/VBoxContainer/HydrationCont/ContainerHydration"]
+position = Vector2(40, 15)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("3_idu7t")
+
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer/HydrationCont/ContainerHydration"]
+process_mode = 3
+position = Vector2(40, 14.8947)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("5_a7waw")
+one_shot = true
+speed_scale = 0.5
+
+[node name="HydrationBar" type="ProgressBar" parent="HBC/VBoxContainer/HydrationCont"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+max_value = 2000.0
+step = 1.0
+show_percentage = false
+
+[node name="MillilitersLabel" type="RichTextLabel" parent="HBC/VBoxContainer/HydrationCont/HydrationBar"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 30.0
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBC"]
+process_mode = 1
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="HealthCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
+layout_mode = 2
+
+[node name="ContainerHealth" type="Container" parent="HBC/VBoxContainer2/HealthCont"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="HealthIcon" type="Sprite2D" parent="HBC/VBoxContainer2/HealthCont/ContainerHealth"]
+position = Vector2(40, 15)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_m4gsd")
+
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HealthCont/ContainerHealth"]
+process_mode = 3
+position = Vector2(38.6316, 16.8421)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("7_5dx1v")
+one_shot = true
+speed_scale = 0.5
+
+[node name="HealthBar" type="ProgressBar" parent="HBC/VBoxContainer2/HealthCont"]
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0
+show_percentage = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HealthLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HealthCont/HealthBar"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+bbcode_enabled = true
+
+[node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
 layout_mode = 2
 
-[node name="ContainerHydration" type="Container" parent="VBoxContainer/HBoxContainer"]
+[node name="ContainerHappiness" type="Container" parent="HBC/VBoxContainer2/HappinessCont"]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="HydrationIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer/ContainerHydration"]
+[node name="HappinessIcon" type="Sprite2D" parent="HBC/VBoxContainer2/HappinessCont/ContainerHappiness"]
 position = Vector2(40, 15)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("3_k4dk6")
+texture = ExtResource("5_xfaii")
 
-[node name="HydrationBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="SmokeVFX" type="GPUParticles2D" parent="HBC/VBoxContainer2/HappinessCont/ContainerHappiness"]
+process_mode = 3
+position = Vector2(40.7368, 17)
+scale = Vector2(1.05263, 1.05263)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_03rpy")
+texture = ExtResource("7_mjdb6")
+one_shot = true
+speed_scale = 0.5
+
+[node name="HappinessBar" type="ProgressBar" parent="HBC/VBoxContainer2/HappinessCont"]
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
-step = 25.0
+step = 1.0
+show_percentage = false
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="HappinessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinessCont/HappinessBar"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 30.0
+bbcode_enabled = true
 
-[node name="ContainerHealth" type="Container" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(80, 30)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
-[node name="HealthIcon" type="Sprite2D" parent="VBoxContainer/HBoxContainer3/ContainerHealth"]
-position = Vector2(40, 15)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("4_rju8q")
-
-[node name="HealthBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-step = 25.0
+[connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont" to="." method="_on_health_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont" to="." method="_on_happiness_cont_gui_input"]

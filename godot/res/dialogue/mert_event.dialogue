@@ -1,0 +1,16 @@
+~ START
+Mert: Hey Kumpel! Ich bin auf dem Weg zum Marktplatz, aber der Kollege der mir beim Wasser verteilen helfen sollte ist krank geworden. 
+Mert: Hast du Zeit und Lust, mir zu helfen?
+- Helfen
+	Avatar: Kein Problem!
+	Mert: Super, danke! Dann steig ein, und los geht's zum Marktplatz!
+	Du hilfst Mert beim Austeilen der Wasser-Hilfspakete.
+	Es ist ein langwieriges, repetitives Unterfangen, was dich jedoch mit einem guten Gefühl hinterlässt.
+	Mert: Super, wir konnten allen Leuten Wasser zukommen lassen. Und schau mal, es ist noch welches übrig!
+	Mert: Danke nochmal für deine Hilfe! Man sieht sich!
+	do execute("HELP_MERT")
+	=> END
+- Nicht helfen
+	Avatar: Tut mir leid, das passt mir gerade nicht gut.
+	Mert: Kann man nichts machen. Beim nächsten Mal vielleicht!
+	=> END

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddg7r3nd0o3u"]
 
-[ext_resource type="Texture2D" uid="uid://dl86ut36dn30w" path="res://res/gui/menu_box_gray.png" id="1_ahehr"]
+[ext_resource type="Texture2D" uid="uid://ccynvp71l81l3" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_ahehr"]
 
 [node name="TemplateGui" type="Control"]
 layout_mode = 3
@@ -27,10 +27,10 @@ offset_bottom = 438.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ahehr")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
