@@ -25,6 +25,15 @@ Mert: Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen hab
 
 
 ~ THW_AIDKITS
-Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen!
-Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b]
+if not has_executed_consequences_of_event("THW_AIDKITS")
+	=> FREE_ITEMS
+else
+	Sorry, aber du hast bereits dein Paket erhalten.
+=> END
+
+
+~ THW_AIDKITS
+	Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen!
+	Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b]
+	do execute_consequences("THW_AIDKITS")
 => END

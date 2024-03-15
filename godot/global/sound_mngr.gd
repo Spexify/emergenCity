@@ -86,10 +86,10 @@ func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioSt
 	return player
 
 
-func vibrate(time : int = 250, p_times: int = 1, p_delay_between_times: int = 150) -> void:
+func vibrate(time : int = 250, p_times: int = 1, p_delay_between_times_in_ms: int = 150) -> void:
 	for i in p_times:
 		Input.vibrate_handheld(time)
-		await get_tree().create_timer(p_delay_between_times).timeout
+		await get_tree().create_timer(p_delay_between_times_in_ms / 1000.0).timeout
 
 #######################################Private Methods##############################################
 

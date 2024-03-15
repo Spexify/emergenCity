@@ -19,7 +19,7 @@
 	},
 	{
 		"name": "THW_AIDKITS",
-		"probability": 10,
+		"probability": 1,
 		"descr": "Und nun eine Eilmeldung: Das 'Technische Hilfswerk' ist momentan auf dem [b]Marktplatz[/b] und verteilt kostenlose Hilfspakete!",
 		"announce_only_on_radio": true,
 		"active_periods": 2,
