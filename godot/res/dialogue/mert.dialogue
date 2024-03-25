@@ -32,8 +32,8 @@ else
 => END
 
 
-~ THW_AIDKITS
-	Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen!
-	Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b]
-	do execute_consequences("THW_AIDKITS")
+~ FREE_ITEMS
+Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen!
+Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b]
+do execute_consequences("THW_AIDKITS")
 => END
