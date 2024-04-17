@@ -1,15 +1,15 @@
 ~ START
-Agathe: Hallo Schätzchen! Ich habe ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen?
-- Ja
-	Avatar: Klar, gerne!
-	Agathe: Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten. 
-	Agathe: Solche Frisuren waren damals total angesagt ...
-	Agathe: Ach ja, ich habe viel zu viel Obst gekauft, und mehr Marmelade gekocht als ich selbst essen kann. 
-	Agathe: Magst du ein Glas haben?
-	Avatar: Oh ja, danke!
+Agathe: Hallo Schätzchen! Ich habe ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen? [ID:t2a98d031d5]
+- Ja [ID:t49f569ceba]
+	Avatar: Klar, gerne! [ID:taac0ace861]
+	Agathe: Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten. [ID:tbf1f6bc85e] 
+	Agathe: Solche Frisuren waren damals total angesagt ... [ID:tbbf1994b4a]
+	Agathe: Ach ja, ich habe viel zu viel Obst gekauft, und mehr Marmelade gekocht als ich selbst essen kann. [ID:t395eb687eb] 
+	Agathe: Magst du ein Glas haben? [ID:tb14c956c19]
+	Avatar: Oh ja, danke! [ID:t7734426fe0]
 	do execute("HELP_AGATHE_JAM")
 	=> END
-- Nein
-	Avatar: Tut mir leid, das passt mir gerade nicht gut.
-	Agathe: Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal.
+- Nein [ID:tf55c5a83ff]
+	Avatar: Tut mir leid, das passt mir gerade nicht gut. [ID:td27e5d7dad]
+	Agathe: Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal. [ID:t1e789c1461]
 	=> END

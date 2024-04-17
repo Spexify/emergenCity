@@ -1,0 +1,45 @@
+keys,en
+tc477c2ac7c,Moin!
+t07c68f4ffa,"Alles klar bei dir, kommst du gut durch die Krise?"
+t29f8e6a41f,"Ja, wie läuft's bei dir?"
+t5ea37bc878,Hast du was zu tauschen?
+tc165d270d1,Bis denne!
+t41ef4ed94f,Tschö!
+td9c1bff2ec,"In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen."
+t0878cd5adc,"Irre Idee, nicht?"
+te654095a95,Schon spannend.
+tf2fb3425c9,"Wusste ich doch, dass dich das auch begeistert!"
+t662cee4f9d,Klingt unrealistisch.
+t9e266ee98f,"Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?"
+te7ce08013c,Meine Liebe für die Luftfahrt färbt schon auf Irena ab.
+t0f89ea419b,Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben..
+tcc1ab82237,"Haha. Naja, bis dann."
+t6a7a5de641,"Tschö [wait=0.5], mit Ö."
+t080b0f9e95,"Immer doch. Suche grad nach {{TradeMngr.get_sought_items_text()}}, dafür biete ich {{TradeMngr.get_offered_items_text()}}."
+taba3c13a6d,Wie sieht's aus?
+t873b53310f,Passt.
+t737873588a,"Exzellent, hier."
+tb998b4593a,"Nein, danke."
+t60f48ed5fd,Kein Problem.
+tb90ac4e685,Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}!
+t307a348ad1,Ich sollte wohl meinen Erste-Hilfe-Kasten zuhause austauschen...
+t59a41fe091,"Hallo Nachbar! Ich muss ein paar Besorgungen erledigen und zum Arzt, und kann Irena da schlecht mitnehmen."
+t74dc859b04,Würdest du für zwei Stunden auf sie aufpassen?
+t41ef9a2e25,"Ich habe eine neue Rakete, die muss ich dir unbedingt zeigen!"
+t21d0b44f17,Zustimmen
+te82125d983,Kein Problem!
+t4a94abc3b8,"Super, vielen Dank! Ich bin so schnell es geht wieder zurück!"
+t8124d708c9,"Guck mal, die hier hat noch mehr Antriebe als die andere Rakete!"
+tf4cea59812,Das ist ja klasse! Und wohin fliegt die?
+t4597b37967,Mindestens bis zum Jupiter! [speed=0.3]Wuuuuschhhh!![/speed]
+t0fc0c6a8d8,Du beschäftigst Irena mit Spielen und lernst dabei mehr über Flugzeuge als du willst.
+t36542b72b5,Da bin ich wieder! Hattet ihr zwei Spaß?
+tc1a1f4c4d9,Jaaa!
+t685dff74f9,"Das freut mich! Übrigens, im Baumarkt waren gerade Akkus im Angebot. Ich dachte, du brauchst vielleicht welche?"
+t334943a713,"Oh super, danke!"
+tf4f5a13839,Kein Problem! Man sieht sich!
+t76bfc1c656,Tschüüüüss! [speed=0.3]Wuuuuschhhh!![/speed]
+tdb87e173d7,Ablehnen
+t7b62bcc17d,"Tut mir leid, das passt mir gerade nicht gut."
+ta68937f6d6,"Oh okay, schade."
+te5bc72e6c5,Dann zeige ich sie dir nächstes Mal! [speed=0.3]Wuuuuschhhh!![/speed]

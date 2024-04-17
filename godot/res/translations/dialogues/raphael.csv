@@ -1,0 +1,29 @@
+keys,en
+t66cc7fc31e,Guten Tag!
+t06f134ea4d,Guten Tag.
+t89c11b1118,Was macht die Arbeit?
+tc2163dbe55,Was hast du so im Angebot?
+t35c53a4d05,Tschüss!
+t5608e0f93e,Bis dann!
+t8d244ed319,Momentan handel ich ohne Geld. Wer weiß wie viel es morgen wert ist.
+t9243c24e49,Nur [i]Ware[/i] ist Wahres?
+t4b582df164,Hahaha. So könnte man es ausdrücken.
+t6efa804990,Für {{TradeMngr.get_sought_items_text()}} biete ich dir {{TradeMngr.get_offered_items_text()}}.
+t0c98d4d4dd,Was meinst du?
+tbb47a3e3e1,Geht klar.
+t4809f85b7d,Danke.
+t4ec8793761,Grade nicht.
+t563278f53d,"Okay, schönen Tag noch!"
+tf5e7cc2bca,"Tut mir Leid, aber {{TradeMngr.get_unfeasibility_reason()}}!"
+tc234faf9b4,Hast du schon mit den anderen geschnackt?
+t56b7f9330e,Willkommen auf der Nachbarschaftsfete!
+tdd9a7fc9e7,Wir mussten ja jede Menge Krisen in letzter Zeit durchstehen.
+ta2aaee5d92,"Endlich hat sich der Bürgermeister durchgerungen, das Fest hier zu finanzieren."
+t590422d52e,Was willst du haben?
+tb8441a5660,"Bratfisch mit Pommes, bitte"
+t2ed4578417,"Einmal Bratfisch und Pommes, verstanden!"
+tfae3b93ad3,"Einen Teller Gulasch, bitte"
+t63bdf38193,Ein Teller Gulasch kommt sofort!
+t041dedfe39,"Reis mit Gemüse, bitte"
+t66fb1c54db,Hier!
+tf93603b6a6,Danke!

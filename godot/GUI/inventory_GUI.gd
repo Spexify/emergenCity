@@ -307,14 +307,14 @@ func _on_cancel_pressed() -> void:
 
 func _determine_consume_btn_text(p_item: EMC_Item) -> String:
 	if p_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
-		return "Filtern"
+		return tr("Filtern")
 	
 	var food_comp := p_item.get_comp(EMC_IC_Food)
 	if food_comp != null:
-		return "Essen"
+		return tr("Essen")
 	
 	var food_drink := p_item.get_comp(EMC_IC_Drink)
 	if food_drink != null:
-		return "Trinken"
+		return tr("Trinken")
 	
-	return "Konsumieren"
+	return tr("Konsumieren")

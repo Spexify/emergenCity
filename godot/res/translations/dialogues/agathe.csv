@@ -1,0 +1,40 @@
+keys,de,en
+t5bcf32409a,"Oh toll, endlich wieder Besuch!","Oh great, finally a visitor again!"
+td6f304035a,Bist du zum Tauschen hier?,"Are you here to trade?"
+tf62970d57d,"Nein, lass uns quatschen!","No, let's have a chat!"
+t8c4455452e,"Ja, ich will handeln.","Yes, I want to trade."
+tfe15c7af84,Nichts dergleichen.,Nothing like that.
+te2db7f4088,"Wie reizend! Seitdem diese Krise angefangen hat, traue ich mich kaum raus.","How lovely! Since this crisis started, I've hardly dared to go out."
+t36fbe92c59,"Einkaufen kann man auch nichts mehr! Gut, dass mich meine Nichte ab und zu besucht.","We can't do any more shopping either! It's a good thing my niece visits me from time to time."
+tcc86e61990,Und deine Besuche sind auch immer sehr schön.,And your visits are always very nice.
+tf1483d519e,Finde ich auch!,I think so too!
+t0e929c6747,Wie schön! Kennst du schon meinen Nachbarn Mert? Ein sehr netter Mensch.,How nice! Have you met my neighbour Mert? He's a very nice person.
+t926bae195d,"Seine Katze Momo ist sehr niedlich, aber leider auch sehr scheu.","His cat Momo is very cute, but unfortunately also very shy."
+t78329c3227,"Ob ich mir auch ein Haustier zulegen sollte? Es wäre schön, Gesellschaft zu haben.","Should I get a pet too? It would be nice to have some company."
+t3ecdc95fd1,"Aber es ist auch viel Verantwortung, besonders in Krisenzeiten.","But it is also a lot of responsibility, especially in times of crisis."
+td677caac3d,Wie schön! Kennst du schon meine Nachbarn Kris und Veronika? Ein sehr liebes Pärchen.,How lovely! Do you happen to know my neighbours Kris and Veronika? A very lovely couple.
+t4741af0c6a,"Veronika ist sehr organisiert und akribisch, aber wusstest du, dass von den beiden Kris sich um die Pflanzen kümmert?","Veronika is very organised and meticulous, but did you know that of the two, Kris takes care of the plants?"
+t667356d4ed,"Kris wirkt zwar oft etwas verträumt, aber die Pflanzen sind Kris wichtig, das merkt man.","Kris may often seem a little dreamy, but the plants are important to Kris, you can tell."
+t049e54629b,"Als die beiden das letzte Mal im Camping-Urlaub waren, hat Kris mir genau erklärt, welche Pflanze wie oft gegossen werden muss.","The last time they were on a camping holiday, Kris explained to me exactly which plant needed to be watered and how often."
+t29df548c73,"Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Urlaub bestimmt wieder gießen.","And since all the plants survived well, I'm sure I'll be able to water them again next time they're on holiday."
+taaa7d8d410,Was hast du zum Tauschen?,What have you got to trade?
+t5196013a7f,Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.,I want {{TradeMngr.get_sought_items_text()}} and offer you {{TradeMngr.get_offered_items_text()}} in return.
+t942e8256ee,Einverstanden?,Do you agree?
+tfc3599b731,Okay!,Very well!
+tb69898df19,Entzückend!,Delightful!
+t1f8a3a9f6b,Nein Danke., No Thanks.
+t4e1b26b9c3,[i]Schade[/i].,[i]What a pity.[/i]
+t04b43b6154,"Oh jemine, aber {{TradeMngr.get_unfeasibility_reason()}}!","Oh dear, but {{TradeMngr.get_unfeasibility_reason()}}!"
+t0f84136930,Beinahe hätte ich diese Fete hier verpasst!,I almost missed this party!
+t99c9361f1d,"Gut, dass ich immer Radio höre.","It's a good thing I always listen to the radio."
+t2a98d031d5,"Hallo Schätzchen! Ich habe ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen?","Hello darling! I've found an old photo book. Would you like to take a look at it with me?"
+t49f569ceba,Ja, Yes
+taac0ace861,"Klar, gerne!","Sure, with pleasure!"
+tbf1f6bc85e,"Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten.","How beautiful! Look, this is me and my friends at school."
+tbbf1994b4a,Solche Frisuren waren damals total angesagt ...,Hairstyles like that were all the rage back then ...
+t395eb687eb,"Ach ja, ich habe viel zu viel Obst gekauft, und mehr Marmelade gekocht als ich selbst essen kann.","Oh right, I've bought far too much fruit and made more jam than I can eat myself."
+tb14c956c19,Magst du ein Glas haben?,Would you like a some?
+t7734426fe0,"Oh ja, danke!","Oh yes, thank you!"
+tf55c5a83ff,Nein,No thanks
+td27e5d7dad,"Tut mir leid, das passt mir gerade nicht gut.","Sorry,I don't have any time right now."
+t1e789c1461,"Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal.","Oh, don't you have time right now? Too bad. Then maybe another time."

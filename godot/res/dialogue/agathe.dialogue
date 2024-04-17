@@ -1,56 +1,56 @@
 ~ START
-Agathe: Oh toll, endlich wieder Besuch!
+Agathe: Oh toll, endlich wieder Besuch! [ID:t5bcf32409a]
 ~ BRANCH
-Agathe: Bist du zum Tauschen hier?
-- Nein, lass uns quatschen!
+Agathe: Bist du zum Tauschen hier? [ID:td6f304035a]
+- Nein, lass uns quatschen! [ID:tf62970d57d]
 	%2 => DIALOG1
 	%2 => DIALOG2
 	%2 => DIALOG3
-- Ja, ich will handeln.
+- Ja, ich will handeln. [ID:t8c4455452e]
 	=>< TRADE
 	=> BRANCH
-- Nichts dergleichen.
+- Nichts dergleichen. [ID:tfe15c7af84]
 	=> END
 
 ~ DIALOG1
-Agathe: Wie reizend! Seitdem diese Krise angefangen hat, traue ich mich kaum raus.
-Agathe: Einkaufen kann man auch nichts mehr! Gut, dass mich meine Nichte ab und zu besucht.
-Agathe: Und deine Besuche sind auch immer sehr schön.
-Avatar: Finde ich auch!
+Agathe: Wie reizend! Seitdem diese Krise angefangen hat, traue ich mich kaum raus. [ID:te2db7f4088]
+Agathe: Einkaufen kann man auch nichts mehr! Gut, dass mich meine Nichte ab und zu besucht. [ID:t36fbe92c59]
+Agathe: Und deine Besuche sind auch immer sehr schön. [ID:tcc86e61990]
+Avatar: Finde ich auch! [ID:tf1483d519e]
 => END
 
 ~ DIALOG2
-Agathe: Wie schön! Kennst du schon meinen Nachbarn Mert? Ein sehr netter Mensch.
-Agathe: Seine Katze Momo ist sehr niedlich, aber leider auch sehr scheu.
-Agathe: Ob ich mir auch ein Haustier zulegen sollte? Es wäre schön, Gesellschaft zu haben. 
-Agathe: Aber es ist auch viel Verantwortung, besonders in Krisenzeiten.
+Agathe: Wie schön! Kennst du schon meinen Nachbarn Mert? Ein sehr netter Mensch. [ID:t0e929c6747]
+Agathe: Seine Katze Momo ist sehr niedlich, aber leider auch sehr scheu. [ID:t926bae195d]
+Agathe: Ob ich mir auch ein Haustier zulegen sollte? Es wäre schön, Gesellschaft zu haben. [ID:t78329c3227] 
+Agathe: Aber es ist auch viel Verantwortung, besonders in Krisenzeiten. [ID:t3ecdc95fd1]
 => END
 
 ~ DIALOG3
-Agathe: Wie schön! Kennst du schon meine Nachbarn Kris und Veronika? Ein sehr liebes Pärchen.
-Agathe: Veronika ist sehr organisiert und akribisch, aber wusstest du, dass von den beiden Kris sich um die Pflanzen kümmert?
-Agathe: Kris wirkt zwar oft etwas verträumt, aber die Pflanzen sind Kris wichtig, das merkt man.
-Agathe: Als die beiden das letzte Mal im Camping-Urlaub waren, hat Kris mir genau erklärt, welche Pflanze wie oft gegossen werden muss.
-Agathe: Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Urlaub bestimmt wieder gießen.
+Agathe: Wie schön! Kennst du schon meine Nachbarn Kris und Veronika? Ein sehr liebes Pärchen. [ID:td677caac3d]
+Agathe: Veronika ist sehr organisiert und akribisch, aber wusstest du, dass von den beiden Kris sich um die Pflanzen kümmert? [ID:t4741af0c6a]
+Agathe: Kris wirkt zwar oft etwas verträumt, aber die Pflanzen sind Kris wichtig, das merkt man. [ID:t667356d4ed]
+Agathe: Als die beiden das letzte Mal im Camping-Urlaub waren, hat Kris mir genau erklärt, welche Pflanze wie oft gegossen werden muss. [ID:t049e54629b]
+Agathe: Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Urlaub bestimmt wieder gießen. [ID:t29df548c73]
 => END
 
 ~ TRADE
 do TradeMngr.setup_next_trade("Agathe")
-Avatar: Was hast du zum Tauschen?
-Agathe: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.
+Avatar: Was hast du zum Tauschen? [ID:taaa7d8d410]
+Agathe: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}. [ID:t5196013a7f]
 if TradeMngr.is_trade_feasible()
-	Agathe: Einverstanden?
-	- Avatar: Okay!
+	Agathe: Einverstanden? [ID:t942e8256ee]
+	- Avatar: Okay! [ID:tfc3599b731]
 		do TradeMngr.execute_trade()
-		Agathe: [#mood=happy]Entzückend!
-	- Avatar: Nein Danke.
-		Agathe: [#mood=sad][i]Schade[/i]..
+		Agathe: [#mood=happy]Entzückend! [ID:tb69898df19]
+	- Avatar: Nein Danke. [ID:t1f8a3a9f6b]
+		Agathe: [#mood=sad][i]Schade[/i].. [ID:t4e1b26b9c3]
 else
-	Agathe: [#mood=sad]Oh jemine, aber {{TradeMngr.get_unfeasibility_reason()}}!
+	Agathe: [#mood=sad]Oh jemine, aber {{TradeMngr.get_unfeasibility_reason()}}! [ID:t04b43b6154]
 => END
 
 
 ~ NEIGHBORHOOD_PARTY
-Agathe: Beinahe hätte ich diese Fete hier verpasst!
-Agathe: Gut, dass ich immer Radio höre.
+Agathe: Beinahe hätte ich diese Fete hier verpasst! [ID:t0f84136930]
+Agathe: Gut, dass ich immer Radio höre. [ID:t99c9361f1d]
 => END

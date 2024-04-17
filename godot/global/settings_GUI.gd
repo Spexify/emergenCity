@@ -22,7 +22,7 @@ var _previous_pause_mode: bool
 var is_dyslexic := false
 var _avatar_sprite_suffix: String = EMC_AvatarSelectionGUI.SPRITE_NB03
 signal debug_mode
-
+	
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 
 func open(p_during_crisis: bool = false) -> void:

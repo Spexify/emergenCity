@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://k80yl5judagl"
+
+[deps]
+
+files=["res://res/translations/dialogues/raphael.en.translation"]
+
+source_file="res://res/translations/dialogues/raphael.csv"
+dest_files=["res://res/translations/dialogues/raphael.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,41 +1,41 @@
 ~ START
-Julia: Hi Nachbar!
-- Avatar: Was geht?
+Julia: Hi Nachbar! [ID:tf952cb12db]
+- Avatar: Was geht? [ID:t00bdde9f53]
 	%2 => dialog1
 	%2 => dialog2
 	%2 => dialog3
-- Avatar: Bis dann!
+- Avatar: Bis dann! [ID:ta0f45e9445]
 => END
 
 ~ dialog1
-Julia: Hast du heute schon ein paar Nachbarn besucht? Soziale Kontakte sind das A und O in einer Krise.
-Julia: In unserer Nachbarschaft gibt es einige sehr liebe Menschen, die dir sicher gerne helfen, besser durch die Krise zu kommen.
-Julia: Andersherum ist es natürlich auch nett, wenn du ihnen hilfst, falls sie sich mit einem Problem an dich wenden.
-Avatar: Danke für den Tipp!
+Julia: Hast du heute schon ein paar Nachbarn besucht? Soziale Kontakte sind das A und O in einer Krise. [ID:t988abcd9c1]
+Julia: In unserer Nachbarschaft gibt es einige sehr liebe Menschen, die dir sicher gerne helfen, besser durch die Krise zu kommen. [ID:t8df36690f1]
+Julia: Andersherum ist es natürlich auch nett, wenn du ihnen hilfst, falls sie sich mit einem Problem an dich wenden. [ID:t3cd38add93]
+Avatar: Danke für den Tipp! [ID:t6a40db0cc4]
 => END
 
 ~ dialog2
-Julia: Hast du heute schon etwas gekocht? Wenn du tagsüber etwas kochst, kannst du abends eine warme Mahlzeit zu dir nehmen.
-Julia: Das schmeckt nicht nur besser; viele Lebensmittel sind ungekocht gar nicht genießbar. Keiner möchte gerne ungekochte Nudeln kauen. 
-Julia: Aber gekochtes Essen hält sich häufig nicht sehr lange und sollte daher bald gegessen werden.
-Avatar: Danke für den Tipp!
+Julia: Hast du heute schon etwas gekocht? Wenn du tagsüber etwas kochst, kannst du abends eine warme Mahlzeit zu dir nehmen. [ID:t4ab2f2728c]
+Julia: Das schmeckt nicht nur besser; viele Lebensmittel sind ungekocht gar nicht genießbar. Keiner möchte gerne ungekochte Nudeln kauen. [ID:t1292bbb5e7] 
+Julia: Aber gekochtes Essen hält sich häufig nicht sehr lange und sollte daher bald gegessen werden. [ID:te1f727fc63]
+Avatar: Danke für den Tipp! [ID:t45414c5cbc]
 => END
 
 ~ dialog3
-Julia: Es gibt viele Möglichkeiten, an Wasser zu gelangen: Schön ist natürlich, wenn einfach sauberes Wasser aus deinem Wasserhahn kommt.
-Julia: Wenn das Wasser mal ausfällt, kann man welches aus der Regentonne schöpfen. Das ist dann allerdings nicht sehr sauber.
-Julia: Dafür gibt es Chlortabletten: Die reinigen verschmutztes Wasser aus der Regentonne oder bei Verschmutzungen in der Leitung.
-Julia: Manchmal teilt der THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt.
-Avatar: Danke für den Tipp!
+Julia: Es gibt viele Möglichkeiten, an Wasser zu gelangen: Schön ist natürlich, wenn einfach sauberes Wasser aus deinem Wasserhahn kommt. [ID:tab40dc6be0]
+Julia: Wenn das Wasser mal ausfällt, kann man welches aus der Regentonne schöpfen. Das ist dann allerdings nicht sehr sauber. [ID:t3d6e77922f]
+Julia: Dafür gibt es Chlortabletten: Die reinigen verschmutztes Wasser aus der Regentonne oder bei Verschmutzungen in der Leitung. [ID:t34fe5254ed]
+Julia: Manchmal teilt der THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt. [ID:t040049fa3e]
+Avatar: Danke für den Tipp! [ID:t543b47a23f]
 => END
 
 
 ~ NEIGHBORHOOD_PARTY
-Julia: Wir reden gerade mit Leonie über Bücher.
-Julia: Liest du lieber was oder schaust du eher Filme?
-- Filme
-	Leonie: Ehrlich gesagt mag ich Filme genauso sehr! Kommt wirklich auf den Film an.
-	Julia: Wird Zeit für nen Filmabend, Leonie!
-- Bücher
-	Julia: Wir sollten unseren eigenen Buchclub gründen! 
+Julia: Wir reden gerade mit Leonie über Bücher. [ID:ta7e58e737e]
+Julia: Liest du lieber was oder schaust du eher Filme? [ID:t9e16dc7d80]
+- Filme [ID:td916795c34]
+	Leonie: Ehrlich gesagt mag ich Filme genauso sehr! Kommt wirklich auf den Film an. [ID:t807b389211]
+	Julia: Wird Zeit für nen Filmabend, Leonie! [ID:t92b692f7f7]
+- Bücher [ID:tc1d57cf9c0]
+	Julia: Wir sollten unseren eigenen Buchclub gründen! [ID:tbd92fd18f0] 
 => END

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cv4vwbdauixvt"
+
+[deps]
+
+files=["res://res/translations/dialogues/momo.en.translation"]
+
+source_file="res://res/translations/dialogues/momo.csv"
+dest_files=["res://res/translations/dialogues/momo.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

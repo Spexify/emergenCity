@@ -1,0 +1,42 @@
+keys,en
+t17ba1bd507,Hallo!
+t9756149d8e,Moin. Willst du handeln?
+td6b4b9d5a3,Reden
+t2ad439437b,Handeln
+tc08e762d60,Nichts dergleichen
+tfb48017f28,Lass uns reden! Wie geht's dir?
+ta1206db9eb,"Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht."
+tf04fcbba4d,Wuff.
+tbdfa3c7b3b,Worüber willst du dich denn beklagen? Zu wenig Essen?
+tbfcdec9507,Wuff ...
+tae529c1a61,... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
+t62f1638df1,Wuff!
+t5bc0e42458,Lass uns reden! Wie geht's Friedel?
+tfbef13d3f4,"Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden."
+t4656d8b18a,Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.
+t48370a7417,"Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht."
+t24d2ed51bd,Hund müsste man sein ...
+tc8a7f2e7aa,Wuff!
+ta5f6658f86,Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.
+te8693c9975,Einverstanden?
+tc01425872c,Okay!
+t686816490d,"Wunderbar, hier."
+t59b80dbbc2,Nein Danke.
+ta72fa50b1c,Ok.
+t9a5f9ff93b,"Sorry, aber {{TradeMngr.get_unfeasibility_reason()}}!"
+t4535740b89,Friedel ist schon wieder alleine losgezogen. Hast du ihn gesehen?
+tf4af2a6432,Suchen helfen
+t58edbf07ad,"Komm, wir suchen ihn zusammen."
+t0191929b7c,"Danke! Wenn er nicht hier ist, ist er vermutlich wieder in den Park gelaufen."
+t224e8baaf3,"[speed=0.3]FRIEDEL, WO BIST DUUU?[/speed]"
+t6d073ec13d,[speed=0.3]FRIEEEDEL![/speed]
+t5164aa780a,Gerhard und du suchen in jedem Winkel der Nachbarschaft.
+tb29d137e6a,Nach einer langen Suche findet ihr den Vagabund-Hund.
+td007217546,Wuff. *wedel*
+t75ba6e4b8d,"Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten."
+t56f623165f,Wuff!
+tbafd4b88ce,Danke für deine Hilfe bei der Suche!
+ta8822207ae,(Friedel scheint sich auch zu freuen.)
+t672463efd1,Nicht suchen helfen
+tf6613c2c3a,"Nein, ich habe ihn leider nicht gesehen."
+tbae7cf35b1,"Okay, schade. Trotzdem danke! Ich suche dann mal weiter."

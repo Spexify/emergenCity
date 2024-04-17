@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bvpw5ljhnie36"
+
+[deps]
+
+files=["res://res/translations/dialogues/walter.en.translation"]
+
+source_file="res://res/translations/dialogues/walter.csv"
+dest_files=["res://res/translations/dialogues/walter.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

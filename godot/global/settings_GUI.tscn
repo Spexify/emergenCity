@@ -120,8 +120,7 @@ text = "Vibration"
 [node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
-text = "Speichern & Zurück
-"
+text = "BACK_SOUND"
 
 [node name="ConfirmationGUI" parent="CanvasLayer" instance=ExtResource("6_cbnpx")]
 visible = false

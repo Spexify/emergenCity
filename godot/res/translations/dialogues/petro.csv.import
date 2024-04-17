@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bd0vhpfw68l65"
+
+[deps]
+
+files=["res://res/translations/dialogues/petro.en.translation"]
+
+source_file="res://res/translations/dialogues/petro.csv"
+dest_files=["res://res/translations/dialogues/petro.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

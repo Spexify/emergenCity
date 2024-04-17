@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://4pol2sg6bfsx"
+
+[deps]
+
+files=["res://res/translations/dialogues/mert.en.translation"]
+
+source_file="res://res/translations/dialogues/mert.csv"
+dest_files=["res://res/translations/dialogues/mert.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

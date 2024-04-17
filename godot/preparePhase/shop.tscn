@@ -79,8 +79,7 @@ size_flags_vertical = 4
 theme = ExtResource("2_duud7")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
-text = "[center]Rucksack[/center]
-"
+text = "[center]Rucksack[/center]"
 
 [node name="InventoryPanel" type="PanelContainer" parent="Background/Margin/Main/InventorySection"]
 custom_minimum_size = Vector2(0, 470)
@@ -165,8 +164,7 @@ theme_override_constants/separation = 40
 [node name="Home" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Bestätigen
-"
+text = "Bestätigen"
 
 [node name="Cancel" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
 layout_mode = 2
