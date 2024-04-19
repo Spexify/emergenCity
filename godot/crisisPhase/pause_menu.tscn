@@ -32,7 +32,7 @@ custom_minimum_size = Vector2(330, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[color=white] Pausiert[/color]"
+text = "PM_TITLE"
 
 [node name="OverworldStates" type="CenterContainer" parent="CanvasLayer_unaffectedByCM/VBC"]
 layout_mode = 2
@@ -59,7 +59,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=white]Strom:[/color]"
+text = "PM_POWER"
 
 [node name="Value" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/ElectricityState"]
 custom_minimum_size = Vector2(350, 40)
@@ -85,7 +85,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=white]Wasser:[/color]"
+text = "PM_WATER"
 
 [node name="Value" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/WaterState"]
 custom_minimum_size = Vector2(350, 40)
@@ -110,8 +110,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=white]Isolation:[/color]
-"
+text = "PM_ISO"
 
 [node name="Value" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/IsolationState"]
 custom_minimum_size = Vector2(350, 40)
@@ -137,7 +136,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=white]Essen:[/color]"
+text = "PM_FOOD"
 
 [node name="Value" type="RichTextLabel" parent="CanvasLayer_unaffectedByCM/VBC/OverworldStates/VBC/FoodContamState"]
 custom_minimum_size = Vector2(350, 40)
@@ -155,25 +154,25 @@ layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="ResumeBtn" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
+custom_minimum_size = Vector2(397, 49)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Fortsetzen"
+text = "PM_RESUME"
 
 [node name="Settings" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Einstellungen"
+text = "PM_SETTINGS"
 
 [node name="CancelCurrCrisis" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Krise abbrechen
-"
+text = "PM_CANCEL"
 
 [node name="SaveAndQuit" parent="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Speichern & Schließen"
+text = "PM_SAVE_AND_EXIT"
 
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/VBC/CenterContainer2/Buttons/Settings" to="." method="_on_settings_pressed"]

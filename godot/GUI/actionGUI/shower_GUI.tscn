@@ -51,16 +51,21 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ConfirmBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_epn3h")]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Ja"
 icon = ExtResource("4_wxuw7")
+expand_icon = true
 
 [node name="ConfirmBtn_WithSoap" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_epn3h")]
+custom_minimum_size = Vector2(220, 42)
 layout_mode = 2
-text = "Ja, mit Seife"
+text = "SG_SOAP"
 icon = ExtResource("4_wxuw7")
+expand_icon = true
 
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_epn3h")]
+custom_minimum_size = Vector2(100, 42)
 layout_mode = 2
 text = "Zurück"
 

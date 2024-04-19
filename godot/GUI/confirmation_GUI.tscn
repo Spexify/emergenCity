@@ -48,10 +48,12 @@ theme_override_constants/separation = 50
 alignment = 1
 
 [node name="ConfirmationBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Bestätigen"
 
 [node name="Cancel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Abbrechen"
 

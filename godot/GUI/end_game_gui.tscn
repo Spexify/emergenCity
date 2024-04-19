@@ -61,7 +61,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "[center]GEWONNEN[/center]"
+text = "EOG_TITLE2"
 
 [node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -111,7 +111,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Zurück zur Hauptmenu"
+text = "EOG_BACK"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -141,7 +141,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "[center]VERLOREN[/center]"
+text = "EOG_TITLE1"
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -187,7 +187,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Zurück zum Hauptmenü"
+text = "EOG_BACK"
 
 [node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
 visible = false

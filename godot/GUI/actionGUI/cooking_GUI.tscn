@@ -57,7 +57,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "[center]Was möchtest du kochen?"
+text = "CG_TITLE"
 
 [node name="RecipeBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2
@@ -101,16 +101,22 @@ texture = ExtResource("2_rmnvb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
 
 [node name="Cook" parent="PanelContainer/MarginContainer/VBC/HBoxContainer" instance=ExtResource("5_kacsq")]
+custom_minimum_size = Vector2(220, 42)
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
 text = "Kochen"
 icon = ExtResource("2_srli2")
+expand_icon = true
 
 [node name="Cancel" parent="PanelContainer/MarginContainer/VBC/HBoxContainer" instance=ExtResource("5_kacsq")]
+custom_minimum_size = Vector2(220, 60)
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
 text = "Abbrechen"
 
 [node name="CookingAnimation" parent="." instance=ExtResource("6_ww8rm")]

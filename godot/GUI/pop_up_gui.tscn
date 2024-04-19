@@ -72,11 +72,13 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="Confirm" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_xot16")]
+custom_minimum_size = Vector2(178, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bestätigen"
 
 [node name="Cancel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_xot16")]
+custom_minimum_size = Vector2(178, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Abbrechen"

@@ -205,7 +205,7 @@ func _check_and_display_game_over() -> bool:
 
 ## Update the visual representation of the current daytime
 func _update_HUD() -> void:
-	$HBoxContainer/RichTextLabel.text = "Tag " + str(get_current_day())
+	$HBoxContainer/RichTextLabel.text = tr("Tag") + " " + str(get_current_day())
 	$HBoxContainer/Container/DayPeriodIcon.frame = get_current_day_period()
 
 

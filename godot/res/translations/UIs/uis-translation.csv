@@ -1,0 +1,72 @@
+keys,de,en
+[center]Titel[/center],[center]Titel[/center],[center]Title[/center]
+Konsumieren,Konsumieren,Consume
+Essen,Essen,Eat
+Trinken,Trinken,Drink
+Filtern,Filtern,Filter
+Entsorgen,Entsorgen,Discard
+Dreckiges Wasser zum Filtern ist nicht verfügbar.,Dreckiges Wasser zum Filtern ist nicht verfügbar.,There is no dirty water available for filtering.
+Zurück,Zurück,Back
+[center]Tagesübersicht[/center],[center]Tagesübersicht[/center],[center]Summary of the day[/center]
+MORGEN,MORGEN,MORNING
+MITTAG,MITTAG,NOON
+ABEND,ABEND,EVENING
+SEOD_DESC,"Kümmer dich um deine Gesundheit, iss und trink etwas.","Take care of your health, eat and drink something."
+Neues Spiel starten,Neues Spiel starten,Start a new game
+Vorräte einkaufen,Vorräte einkaufen,Buy supplies
+Haushalt ausstatten,Haushalt ausstatten,Equip your household
+[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Choose your character[/color][/center]
+[center][color=white]Einstellungen[/color][/center],[center][color=white]Einstellungen[/color][/center],[center][color=white]Settings[/color][/center]
+Speichern & Zurück,Speichern & Zurück,Save and Close
+Charakter auswählen,Charakter auswählen,Change character
+Sound,Sound,Sound
+Spiel zurücksetzen,Spiel zurücksetzen,Reset Game
+[center]Rucksack[/center],[center]Rucksack[/center],[center]Backpack[/center]
+[center]Shop[/center],[center]Shop[/center],[center]Shop[/center]
+Bestätigen,Bestätigen,Confirm
+Abbrechen,Abbrechen,Cancel
+Allgemein,Allgemein,General
+Hintergrund Musik,Hintergrund Musik,Background music
+Sound Effekte,Sound Effekte,Sound effects
+Vibration,Vibration,Vibration
+BACK_SOUND,Speichern & Zurück,Save & Go Back
+[center]Du bist in der Mitte einer Krise.[/center],[center]Du bist in der Mitte einer Krise.[/center],[center]You are in the middle of a crisis.[/center]
+Krise fortsetzen,Krise fortsetzen,Continue crisis
+Krise zurücksetzen,Krise zurücksetzen,Reset crisis
+[center]Statten Sie ihr Zuhause aus[/center],[center]Statten Sie ihr Zuhause aus[/center],[center]Equip your home[/center]
+[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center],[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center],[center]Purchased items are permanently unlocked and available for selection[/center]
+[center]Ausgerüstete Gegenstände[/center],[center]Ausgerüstete Gegenstände[/center],[center]Equipped items[/center]
+[center]Erwerbbare Gegenstände[/center],[center]Erwerbbare Gegenstände[/center],[center]Acquirable Items[/center]
+Auswahl bestätigen,Auswahl bestätigen,Confirm selection
+Gegenstand kaufen,Gegenstand kaufen,Buy item
+Gegenstand ausrüsten,Gegenstand ausrüsten,Equip item
+Kurz,Kurz,Short
+Mittel,Mittel,Medium
+Lang,Lang,Long
+Weiter,Weiter,Continue
+PM_TITLE,[color=white] Pausiert[/color],[color=white] Paused[/color]
+PM_POWER,[color=white]Strom:[/color],[color=white]Power:[/color]
+PM_WATER,[color=white]Wasser:[/color],[color=white]Water:[/color]
+PM_ISO,[color=white]Isolation:[/color],[color=white]Isolation:[/color]
+PM_FOOD,[color=white]Essen:[/color],[color=white]Food:[/color]
+PM_RESUME,Fortsetzen,Resume
+PM_SETTINGS,Einstellungen,Settings
+PM_CANCEL,Krise abbrechen,Cancel crisis
+PM_SAVE_AND_EXIT,Speichern & Schließen,Save and Exit
+CG_TITLE,[center]Was möchtest du kochen?[/center],[center]What would you like to cook?[/center]
+Kochen,Kochen,Cook
+Ja,Ja,Yes
+SG_SOAP,"Ja, mit Seife","Yes, with Soap"
+RBG_TITLE,[center]Wie viel Wasser willst du abschöpfen?[/center],[center]How much water do you want to extract?[/center]
+RGB_DESC,"Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser.","It has rained, there are litres of water in your rain barrel."
+RGB_OPTION1,Eine Flasche (250ml) abschöpfen,Extract one bottle (250ml)
+RGB_OPTION2,Fertig,Complete
+EOG_TITLE1,[center]VERLOREN[/center],[center]GAME OVER[/center]
+EOG_TITLE2,[center]GEWONNEN[/center],[cenrerYOU HAVE WON][/center]
+EOG_BACK,Zurück zum Hauptmenü,Back to main menu
+II_FOOD,[center]Nahrung\nSinkt täglich um 750 kcal.[/center],[center]Nutrition\nDecreases daily by 750 kcal.[/center]
+II_WATER,[center]Hydration\nSinkt täglich um 750 ml.[/center],[center]Hydration\nDecreases by 750 ml daily.[/center]
+II_HEALTH,[center]Gesundheit\nSinkt täglich um 10 %.[/center],[center]Health\nDecreases by 10% daily[/center]
+II_HAPPY,[center]Wohlbefinden\nSinkt täglich um 10 %.[/center],[center]Well-being\nDecreases by 10% daily[/center]
+II_TIME,[center]Zeitabschnitt\nAktion verbraucht Zeit.[/center],[center]Time period\nAction consumes time[/center]
+Tag,Tag,Day
