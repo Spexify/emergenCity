@@ -70,3 +70,13 @@ II_HEALTH,[center]Gesundheit\nSinkt täglich um 10 %.[/center],[center]Health\nD
 II_HAPPY,[center]Wohlbefinden\nSinkt täglich um 10 %.[/center],[center]Well-being\nDecreases by 10% daily[/center]
 II_TIME,[center]Zeitabschnitt\nAktion verbraucht Zeit.[/center],[center]Time period\nAction consumes time[/center]
 Tag,Tag,Day
+[color=black]Willst du duschen?[/color],[color=black]Willst du duschen?[/color],[color=black]Do you want to shower?[/color]
+Getränk,Getränk,Berverage
+Essen,Essen,Food
+Gesund,Gesund,Healthy
+Hydrierend,Hydrierend,Hydrating
+Köstlich,Köstlich,Delicious
+Haltbarkeit,Haltbarkeit,Shelf live
+Ungenießbar,Ungenießbar,Inedible
+Uses,Uses,Uses
+

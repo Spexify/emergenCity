@@ -7,7 +7,7 @@ var _hydration_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_hydration_change : int) -> void:
-	super("Hydrierend", Color.HOT_PINK)
+	super(tr("Hydrierend"), Color.HOT_PINK)
 	_hydration_change = _p_hydration_change
 
 

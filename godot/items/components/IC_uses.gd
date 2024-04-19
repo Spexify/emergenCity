@@ -8,7 +8,7 @@ var _uses: String = "3 uses left"
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func _init(_p_max_uses : int) -> void:
-	super("Uses", Color.DARK_CYAN)
+	super(tr("Uses"), Color.DARK_CYAN)
 	_uses_left = _p_max_uses
 	#_MAX_USES = _p_max_uses
 	#

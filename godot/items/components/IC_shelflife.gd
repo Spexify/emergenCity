@@ -9,7 +9,7 @@ var _shelflife: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_max_shelflife : int) -> void:
-	super("Haltbarkeit", Color.CHOCOLATE)
+	super(tr("Haltbarkeit"), Color.CHOCOLATE)
 	_shelflife = _p_max_shelflife
 
 

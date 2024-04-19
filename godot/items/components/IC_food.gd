@@ -7,7 +7,7 @@ var _nutritionness: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(nutritionness: int, pleasurable: int = 0) -> void:
-	super("Essen", Color.INDIAN_RED)
+	super(tr("Essen"), Color.INDIAN_RED)
 	_nutritionness = nutritionness
 	
 

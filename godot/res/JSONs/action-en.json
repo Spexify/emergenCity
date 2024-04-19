@@ -4,7 +4,7 @@
 		"type": "action",
 		"name": "-",
 		"constraints": {
-			"constraint_no_isolation": "Die City Map ist aufgrund einer Isolationsverordnung nicht betretbar!",
+			"constraint_no_isolation": "The City Map is not accessible due to an isolation order!",
 		},
 		"consequences": {
 		},
@@ -20,7 +20,7 @@
 		"constraints": {},
 		"consequences": {},
 		"type_gui": "CookingGUI",
-		"description": "Hat gekocht",
+		"description": "Has cooked",
 		"e_coins": 20,
 		"sound": "Cooking"
 	},
@@ -36,7 +36,7 @@
 		},
 		"type_gui": "DefaultActionGUI",
 		"description": "-",
-		"prompt": "Willst du Wasser aus dem Hahn zapfen?",
+		"prompt": "Would you like to draw water from the tap?",
 		"e_coins": 0,
 		"progresses_day_period": false,
 		"sound": "TapWater"
@@ -50,8 +50,8 @@
 			"add_health": 1,
 		},
 		"type_gui": "DefaultActionGUI",
-		"description": "Hat sich ausgeruht",
-		"prompt": "Willst du dich ausruhen?",
+		"description": "Has rested",
+		"prompt": "Do you want to rest?",
 		"e_coins": 10,
 		"sound": "PillowRuffle"
 	},
@@ -64,7 +64,7 @@
 		},
 		"consequences": {},
 		"type_gui": "RainwaterBarrelGUI",
-		"description": "Hat Wasser aus der Regentonne geschöpft.",
+		"description": "Has drawn water from the rain barrel.",
 		"prompt": "",
 		"e_coins": 0,
 		"sound": "water"
@@ -76,7 +76,7 @@
 		"constraints": {},
 		"consequences": {},
 		"type_gui": "ShowerGUI",
-		"description": "Hat geduscht.",
+		"description": "Has showered.",
 		"prompt": "",
 		"e_coins": 15,
 		"sound": "Shower"
@@ -91,7 +91,7 @@
 		},
 		"type_gui": "ConfirmationGUI",
 		"description": "-",
-		"prompt": "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
+		"prompt": "Do you want to open the Civil Protection and Disaster Relief brochure in your browser? (just under 8MB)",
 		"e_coins": 0,
 	},
 	{
@@ -107,7 +107,7 @@
 		},
 		"type_gui": "ConfirmationGUI",
 		"description": "-",
-		"prompt": "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
+		"prompt": "Do you want to use the radio? This consumes one battery charge!",
 		"e_coins": 0,
 		"sound": "RadioTuning"
 	},
@@ -121,13 +121,13 @@
 		},
 		"type_gui": "ConfirmationGUI",
 		"description": "-",
-		"prompt": "Willst du das Kurbelradio benutzen?",
+		"prompt": "Do you want to use the crank radio?",
 		"e_coins": 0,
 	},
 	{
 		"id": 2000,
 		"type": "change_stage",
-		"name": "nachhause",
+		"name": "home",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -135,7 +135,7 @@
 				"avatar_pos": {"x": 250, "y": 650}
 			}
 		},
-		"description": "Nach Hause gekehrt.",
+		"description": "Returned home.",
 		"stage_name": "home",
 		"e_coins": 25,
 		"silent": true
@@ -143,10 +143,10 @@
 	{
 		"id": 2001,
 		"type": "change_stage",
-		"name": "zum Marktplatz",
+		"name": "to the marketplace",
 		"constraints": {
 			"constraint_not_evening": "",
-			"constraint_no_limited_public_access": "Der Marktplatz ist nicht betretbar!"
+			"constraint_no_limited_public_access": "The marketplace is not accessible!"
 		},
 		"consequences": {
 			"change_stage": {
@@ -155,16 +155,16 @@
 				"npc_pos": {"Raphael": {"x": 200, "y": 230}}
 			}
 		},
-		"description": "Hat Marktplatz besucht.",
+		"description": "Visited the marketplace.",
 		"stage_name": "market",
 		"e_coins": 25
 	},
 	{
 		"id": 2002,
 		"type": "change_stage",
-		"name": "zum Rathaus",
+		"name": "to the town hall",
 		"constraints": {
-			"constraint_not_evening": "Das Rathaus ist Abends geschlossen.",
+			"constraint_not_evening": "The town hall is closed in the evening.",
 			"constraint_no_limited_public_access": ""
 		},
 		"consequences": {
@@ -174,14 +174,14 @@
 				"npc_pos": {"Leonie": {"x": 430, "y": 300}}
 			}
 		},
-		"description": "Hat Rathaus besucht.",
+		"description": "Visited the town hall.",
 		"stage_name": "townhall",
 		"e_coins": 25
 	},
 	{
 		"id": 2003,
 		"type": "change_stage",
-		"name": "zum Park",
+		"name": "to the park",
 		"constraints": { },
 		"consequences": {
 			"change_stage": {
@@ -193,14 +193,14 @@
 				}
 			}
 		},
-		"description": "Hat den Park besucht.",
+		"description": "Visited the park.",
 		"stage_name": "park",
 		"e_coins": 25
 	},
 	{
 		"id": 2004,
 		"type": "change_stage",
-		"name": "zu Gerhard",
+		"name": "to Gerhard",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -212,14 +212,14 @@
 				}
 			}
 		},
-		"description": "Hat Gerhard besucht.",
+		"description": "Visited Gerhard.",
 		"stage_name": "gardenhouse",
 		"e_coins": 25
 	},
 	{
 		"id": 2005,
 		"type": "change_stage",
-		"name": "zu Julia",
+		"name": "to Julia",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -228,14 +228,14 @@
 				"npc_pos": {"Julia": {"x": 450, "y": 550}}
 			}
 		},
-		"description": "Hat Julia besucht.",
+		"description": "Visited Julia.",
 		"stage_name": "rowhouse",
 		"e_coins": 25
 	},
 	{
 		"id": 2006,
 		"type": "change_stage",
-		"name": "zu Petro & Irena",
+		"name": "to Petro & Irena",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -247,14 +247,14 @@
 				}
 			}
 		},
-		"description": "Hat Petro & Irena besucht.",
+		"description": "Visited Petro & Irena.",
 		"stage_name": "mansion",
 		"e_coins": 25
 	},
 	{
 		"id": 2007,
 		"type": "change_stage",
-		"name": "zu Elias",
+		"name": "to Elias",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -263,14 +263,14 @@
 				"npc_pos": {"Elias": {"x": 440, "y": 800}}
 			}
 		},
-		"description": "Hat Elias besucht.",
+		"description": "Visited Elias.",
 		"stage_name": "penthouse",
 		"e_coins": 25
 	},
 	{
 		"id": 2008,
 		"type": "change_stage",
-		"name": "zu Mert",
+		"name": "to Mert",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -282,14 +282,14 @@
 				}
 			}
 		},
-		"description": "Hat Mert besucht.",
+		"description": "Has visited Mert.",
 		"stage_name": "apartment_mert",
 		"e_coins": 25
 	},
 	{
 		"id": 2009,
 		"type": "change_stage",
-		"name": "zu Kris & Veronika",
+		"name": "to Kris & Veronika",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -301,14 +301,14 @@
 				}
 			}
 		},
-		"description": "Hat Kris & Veronika besucht.",
+		"description": "Visited Kris & Veronika.",
 		"stage_name": "apartment_camper",
 		"e_coins": 25
 	},
 	{
 		"id": 2010,
 		"type": "change_stage",
-		"name": "zu Agathe",
+		"name": "to Agathe",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -317,7 +317,7 @@
 				"npc_pos": {"Agathe": {"x": 490, "y": 400}}
 			}
 		},
-		"description": "Hat Agathe besucht.",
+		"description": "Has visited Agathe.",
 		"stage_name": "apartment_default",
 		"e_coins": 25
 	},
@@ -328,7 +328,7 @@
 		"constraints": {},
 		"consequences": {"add_items_by_name": "JAM"},
 		"type_gui": "",
-		"description": "Mit Agathe geplaudert.",
+		"description": "Chatted with Agathe.",
 		"e_coin": 30
 	},
 	{
@@ -338,7 +338,7 @@
 		"constraints": {},
 		"consequences": {"add_happiness": 2},
 		"type_gui": "",
-		"description": "Mit Agathe geplaudert.",
+		"description": "Chatted with Agathe.",
 		"e_coin": 30
 	},
 	{
@@ -348,7 +348,7 @@
 		"constraints": {},
 		"consequences": {"add_items_by_name": "CHOCOLATE"},
 		"type_gui": "",
-		"description": "Julia geholfen.",
+		"description": "Helped Julia.",
 		"e_coin": 30
 	},
 	{
@@ -358,7 +358,7 @@
 		"constraints": {},
 		"consequences": {"add_happiness": 2},
 		"type_gui": "",
-		"description": "Mit Gerhard nach Friedel gesucht.",
+		"description": "Searched with Gerhard for Friedel.",
 		"e_coin": 30
 	},
 	{
@@ -368,7 +368,7 @@
 		"constraints": {},
 		"consequences": {"add_items_by_name": "BATTERIES"},
 		"type_gui": "",
-		"description": "Mit Irena gespielt.",
+		"description": "Played with Irena.",
 		"e_coin": 30
 	},
 	{
@@ -378,7 +378,7 @@
 		"constraints": {},
 		"consequences": {"add_items_by_name": "WATER", "add_happiness": 2},
 		"type_gui": "",
-		"description": "Mit Mert Wasser verteilt.",
+		"description": "Distributed water with Mert.",
 		"e_coin": 30
 	}
 ]

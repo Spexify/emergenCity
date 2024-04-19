@@ -8,7 +8,7 @@ const INVALID_DICTIONARY_VALUE: Dictionary = {}
 const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 ## ITEMS
-const ITEM_SOURCE := "res://res/JSONs/item.json"
+const ITEM_SOURCE := "res://res/JSONs/item-en.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 ## POPUPS
 const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
@@ -19,7 +19,7 @@ const NPS_Source := "res://res/JSONs/npcs.json"
 ## BOOKS
 const BOOKS_SOURCE := "res://res/JSONs/books.json"
 ## ACTIONS
-const ACTION_SOURCE := "res://res/JSONs/action.json"
+const ACTION_SOURCE := "res://res/JSONs/action-en.json"
 ## DOORBELL
 const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 ## SCENARIOS
