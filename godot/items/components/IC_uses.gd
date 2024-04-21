@@ -4,8 +4,6 @@ class_name EMC_IC_Uses
 var _uses_left : int = 0
 #var _MAX_USES : int = 0
 
-var _uses: String = "3 uses left"
-
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func _init(_p_max_uses : int) -> void:
 	super(tr("Uses"), Color.DARK_CYAN)
@@ -32,7 +30,7 @@ func use_item(_p_uses : int = 1) -> void:
 
 
 func get_name_with_values() -> String:
-	return str(_uses_left) + " Nutzungen übrig."
+	return str(_uses_left) + " " + tr("Nutzungen übrig.")
 
 
 func to_dict() -> Dictionary:

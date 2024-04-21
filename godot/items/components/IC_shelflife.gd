@@ -3,7 +3,7 @@ class_name EMC_IC_Shelflife
 
 const DECAY_RATE_NO_ELECTRICITY: int = 2
 const DECAY_RATE_WITH_ELECTRICITY: int = 1
-const UNIT: String = " Tage"
+const UNIT: String = "Tage"
 var _shelflife: int 
 
 
@@ -40,7 +40,7 @@ func get_name_with_values() -> String:
 	if is_spoiled():
 		return name + ": Verdorben"
 	else:
-		return name + ": " + str(get_shelflife()) + UNIT
+		return name + ": " + str(get_shelflife()) + " " + tr(UNIT)
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

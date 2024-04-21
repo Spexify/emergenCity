@@ -38,8 +38,9 @@ Krise zurücksetzen,Krise zurücksetzen,Reset crisis
 [center]Ausgerüstete Gegenstände[/center],[center]Ausgerüstete Gegenstände[/center],[center]Equipped items[/center]
 [center]Erwerbbare Gegenstände[/center],[center]Erwerbbare Gegenstände[/center],[center]Acquirable Items[/center]
 Auswahl bestätigen,Auswahl bestätigen,Confirm selection
-Gegenstand kaufen,Gegenstand kaufen,Buy item
-Gegenstand ausrüsten,Gegenstand ausrüsten,Equip item
+Item kaufen,Item kaufen,Buy item
+Item ausrüsten,Item ausrüsten,Equip item
+Zurück zum Menü,Zurück zum Menü,Back to menu
 Kurz,Kurz,Short
 Mittel,Mittel,Medium
 Lang,Lang,Long
@@ -79,4 +80,7 @@ Köstlich,Köstlich,Delicious
 Haltbarkeit,Haltbarkeit,Shelf live
 Ungenießbar,Ungenießbar,Inedible
 Uses,Uses,Uses
-
+ICU_HEALTHY,Gesundheit,health
+ICU_HAPPY,Genuss,pleasure
+Tage,Tage,Days
+Nutzungen übrig.,Nutzungen übrig.,uses left.

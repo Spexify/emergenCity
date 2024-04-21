@@ -25,7 +25,7 @@ const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 ## SCENARIOS
 const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
 ## UPGARDE
-const UPGRADES_SOURCE := "res://res/JSONs/upgrades.json"
+const UPGRADES_SOURCE := "res://res/JSONs/upgrades-en.json"
 
 ########################################JSON RECIPES################################################
 
