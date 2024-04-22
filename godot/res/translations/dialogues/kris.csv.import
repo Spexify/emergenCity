@@ -6,10 +6,10 @@ uid="uid://cr0yc68g3v7pv"
 
 [deps]
 
-files=["res://res/translations/dialogues/kris.en.translation"]
+files=["res://res/translations/dialogues/kris.de.translation", "res://res/translations/dialogues/kris.en.translation"]
 
 source_file="res://res/translations/dialogues/kris.csv"
-dest_files=["res://res/translations/dialogues/kris.en.translation"]
+dest_files=["res://res/translations/dialogues/kris.de.translation", "res://res/translations/dialogues/kris.en.translation"]
 
 [params]
 

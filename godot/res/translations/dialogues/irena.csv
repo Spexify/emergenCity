@@ -1,18 +1,17 @@
-keys,en
-t103aebad48,Hast du Spiele auf deinem Handy??
-t85a15bcc1f,Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!
-te76dc08fcb,"Oh, das klingt spaßig."
-t8a5a29b0cc,Ist es auch!
-t5166fab119,Nach Irenas Spielzeug fragen
-t0eccd4e4c2,Mit was spielst du da?
-t8631924513,Mit einer Rakete! [speed=0.3]Wuuuuschhhh!![/speed]
-tb1ea71d8d7,"Ist aber meine[wait=0.5],
-Ääätschi bätsch!"
-t68d7c2077c,Zurück
-t5a67f5781b,Das Feuerwehrauto ist [speed=0.5]SOOOO[/speed] groß!
-t81c428ad31,"Meins zuhause ist kleiner, aber auch cool."
-tc0dfd95d2a,"Ich glaube, wenn ich groß bin will ich vielleicht Feuerwehrfrau werden."
-t166dcae531,[speed=1.5]Oder Schauspielerin.[/speed] [wait=0.5]Im Fernsehen.
-ta13253f067,[speed=1.5]Oder Pilotin.[/speed]
-t00bafd962e,[speed=0.4]Oooooder[/speed] vielleicht Superheldin!
-tcae98dd984,"Aber ich glaube, Astronautin zu werden reicht mir auch."
+keys,de,en
+t103aebad48,Hast du Spiele auf deinem Handy??,Do you have games on your phone?
+t85a15bcc1f,Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!,My favourite game is Krisopolis: Play & Prepare!!!
+te76dc08fcb,"Oh, das klingt spaßig.","Oh, that sounds fun."
+t8a5a29b0cc,Ist es auch!,It is!
+t5166fab119,Nach Irenas Spielzeug fragen,Ask about Irena's toys
+t0eccd4e4c2,Mit was spielst du da?,What are you playing with?
+t8631924513,Mit einer Rakete! [speed=0.3]Wuuuuschhhh!![/speed],With a rocket! [speed=0.3]Whooooosh!!![/speed]
+tb1ea71d8d7,"Ist aber meine[wait=0.5],\nÄäätschi bätsch!","But it's mine [wait=0.5]\n ;p"
+t68d7c2077c,Zurück,Back
+t5a67f5781b,Das Feuerwehrauto ist [speed=0.5]SOOOO[/speed] groß!,The fire engine is [speed=0.5]thiiiiiiis[/speed] big!
+t81c428ad31,"Meins zuhause ist kleiner, aber auch cool.","Mine at home is smaller, but also cool."
+tc0dfd95d2a,"Ich glaube, wenn ich groß bin will ich vielleicht Feuerwehrfrau werden.","I think I might want to be a firefighter when I grow up."
+t166dcae531,[speed=1.5]Oder Schauspielerin.[/speed] [wait=0.5]Im Fernsehen.,[speed=1.5]Or actress[/speed] [wait=0.5]On television.
+ta13253f067,[speed=1.5]Oder Pilotin.[/speed],[speed=1.5]Or Pilot.[/speed]
+t00bafd962e,[speed=0.4]Oooooder[/speed] vielleicht Superheldin!,[speed=0.4]Oooooor[/speed] maybe superheroine!
+tcae98dd984,"Aber ich glaube, Astronautin zu werden reicht mir auch.","But I think becoming an astronaut is good enough for me."

@@ -6,10 +6,10 @@ uid="uid://dmd3otqxnflu"
 
 [deps]
 
-files=["res://res/translations/dialogues/irena.en.translation"]
+files=["res://res/translations/dialogues/irena.de.translation", "res://res/translations/dialogues/irena.en.translation"]
 
 source_file="res://res/translations/dialogues/irena.csv"
-dest_files=["res://res/translations/dialogues/irena.en.translation"]
+dest_files=["res://res/translations/dialogues/irena.de.translation", "res://res/translations/dialogues/irena.en.translation"]
 
 [params]
 

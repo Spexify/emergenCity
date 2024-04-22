@@ -6,10 +6,10 @@ uid="uid://k80yl5judagl"
 
 [deps]
 
-files=["res://res/translations/dialogues/raphael.en.translation"]
+files=["res://res/translations/dialogues/raphael.de.translation", "res://res/translations/dialogues/raphael.en.translation"]
 
 source_file="res://res/translations/dialogues/raphael.csv"
-dest_files=["res://res/translations/dialogues/raphael.en.translation"]
+dest_files=["res://res/translations/dialogues/raphael.de.translation", "res://res/translations/dialogues/raphael.en.translation"]
 
 [params]
 

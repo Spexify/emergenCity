@@ -6,10 +6,10 @@ uid="uid://cv4vwbdauixvt"
 
 [deps]
 
-files=["res://res/translations/dialogues/momo.en.translation"]
+files=["res://res/translations/dialogues/momo.de.translation", "res://res/translations/dialogues/momo.en.translation"]
 
 source_file="res://res/translations/dialogues/momo.csv"
-dest_files=["res://res/translations/dialogues/momo.en.translation"]
+dest_files=["res://res/translations/dialogues/momo.de.translation", "res://res/translations/dialogues/momo.en.translation"]
 
 [params]
 

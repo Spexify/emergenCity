@@ -1,23 +1,23 @@
-keys,en
-t65b7e9963e,Hi! Alles klar bei dir?
-t214a7680e5,Wie läuft's?
-t16544ea171,Hast du was zu tauschen?
-t5e7e8f962c,Tschüss!
-tcb8e59e4d0,Ciao!
-tb9579bfe42,"Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ..."
-t439024cdbe,Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!
-t99f55fc07c,"Du verstehst aber unter ""Planen"" auch nur ""Snacks einkaufen""."
-td10f8354b3,"Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!"
-tc2b3e48680,"Aber auch nur, wenn du bis dahin welche übrig gelassen hast."
-td08cafd700,...
-tee0fa9bf7e,...
-tdcbf21d8c4,Ich kaufe noch ein paar mehr ein.
-td838b50637,Kommt drauf an. Hast du {{TradeMngr.get_sought_items_text()}}? Falls ja würde ich dir {{TradeMngr.get_offered_items_text()}} geben.
-tf7609628ac,Und?
-tf0f217c146,Gebongt.
-t7e9ffeb633,Nice.
-tcd5c056036,"Nee, grad nicht."
-t7ec7a061eb,Okidoki.
-t9abfbd3cb7,"Oh, {{TradeMngr.get_unfeasibility_reason()}}!"
-t4e44633da4,"Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat."
-t024c71db4d,Aber das Essen ist echt lecker[wait=0.5] ...und umsonst!
+keys,de,en
+t65b7e9963e,Hi! Alles klar bei dir?,"Hi, are you all right?"
+t214a7680e5,Wie läuft's?,How's it going?
+t16544ea171,Hast du was zu tauschen?,Do you have anything to trade?
+t5e7e8f962c,Tschüss!,Bye!
+tcb8e59e4d0,Ciao!,Ciao!
+tb9579bfe42,"Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...","We're just planning our next camping trip! Well, actually I'm planning it..."
+t439024cdbe,Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!,I've heard that! I do help with the planning!
+t99f55fc07c,"Du verstehst aber unter ""Planen"" auch nur ""Snacks einkaufen"".","But by 'planning' you just mean 'buying snacks'."
+td10f8354b3,"Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!","The next time you get hungry in the middle of a hike, you'll be glad of any snack!"
+tc2b3e48680,"Aber auch nur, wenn du bis dahin welche übrig gelassen hast.","But only if you've left some by then."
+td08cafd700,...,...
+tee0fa9bf7e,...,...
+tdcbf21d8c4,Ich kaufe noch ein paar mehr ein.,I'll buy a few more.
+td838b50637,Kommt drauf an. Hast du {{TradeMngr.get_sought_items_text()}}? Falls ja würde ich dir {{TradeMngr.get_offered_items_text()}} geben.,"That depends. Do you have {{TradeMngr.get_sought_items_text()}}? If so, I would give you {{TradeMngr.get_offered_items_text()}}."
+tf7609628ac,Und?,And?
+tf0f217c146,Gebongt.,Deal.
+t7e9ffeb633,Nice.,Nice.
+tcd5c056036,"Nee, grad nicht.","No, sorry."
+t7ec7a061eb,Okidoki.,Alrighty
+t9abfbd3cb7,"Oh, {{TradeMngr.get_unfeasibility_reason()}}!","Oh, {{TradeMngr.get_unfeasibility_reason()}}!"
+t4e44633da4,"Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat.","I actually [speed=0.2]only[/speed] came because Kris persuaded me to."
+t024c71db4d,Aber das Essen ist echt lecker[wait=0.5] ...und umsonst!,But the food is really delicious[wait=0.5] ...and for free!

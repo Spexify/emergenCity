@@ -1,16 +1,16 @@
 extends Control
 
-@onready var _label_ecoins := $Background/VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/RichTextLabel
+@onready var _label_ecoins := $Background/MarginContainer/VBoxContainer/PanelContainer3/HBoxContainer/RichTextLabel
 
 # This display only holds copies of the equipped upgrades, which are visually the same but not connected to _on_upgrade_pressed
-@onready var _equipped_upgrades_display := $Background/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer
+@onready var _equipped_upgrades_display := $Background/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer
 
-@onready var _upgrade_list := $Background/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/GridContainer
-@onready var _label_title := $Background/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer/UpgradeName
-@onready var _label_price := $Background/VBoxContainer/WhitePanel/VBoxContainer/Price
-@onready var _label_descr := $Background/VBoxContainer/WhitePanel/VBoxContainer/Description
-@onready var _buy_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn
-@onready var _equip_btn := $Background/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn
+@onready var _upgrade_list := $Background/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/GridContainer
+@onready var _label_title := $Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer/UpgradeName
+@onready var _label_price := $Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer/Price
+@onready var _label_descr := $Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer/Description
+@onready var _buy_btn := $Background/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/BuyBtn
+@onready var _equip_btn := $Background/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer/EquipBtn
 @onready var _star_explosion_VFX := $StarExplosionVFX
 
 const _upgrade_scene := preload("res://preparePhase/upgrade.tscn")

@@ -6,10 +6,10 @@ uid="uid://bd0vhpfw68l65"
 
 [deps]
 
-files=["res://res/translations/dialogues/petro.en.translation"]
+files=["res://res/translations/dialogues/petro.de.translation", "res://res/translations/dialogues/petro.en.translation"]
 
 source_file="res://res/translations/dialogues/petro.csv"
-dest_files=["res://res/translations/dialogues/petro.en.translation"]
+dest_files=["res://res/translations/dialogues/petro.de.translation", "res://res/translations/dialogues/petro.en.translation"]
 
 [params]
 

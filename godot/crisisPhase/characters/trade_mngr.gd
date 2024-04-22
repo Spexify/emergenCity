@@ -120,13 +120,13 @@ func is_trade_feasible() -> bool:
 func get_unfeasibility_reason() -> String:
 	match _trade_feasibility:
 		TradeFeasibility.FEASABLE: #shouldn't happen
-			return "der Handel ist ausführbar"
+			return tr("TRD_FEAS")
 		TradeFeasibility.UNFEASABLE: #shouldn't happen
-			return "der Handel ist nicht ausführbar" 
+			return tr("TRD_UNFEAS" )
 		TradeFeasibility.NO_INVENTORY_SPACE:
-			return "du hast keinen Platz im Inventar" 
+			return tr("TRD_NO_SPACE")
 		TradeFeasibility.MISSING_SOUGHT_ITEMS:
-			return "dir fehlen die nötigen Items für diesen Handel" 
+			return tr("TRD_NO_ITEMS")
 		_:
 			printerr("Unknown feasibility reason")
 			return ""

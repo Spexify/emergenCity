@@ -6,10 +6,10 @@ uid="uid://drmdvmbc6j2uk"
 
 [deps]
 
-files=["res://res/translations/dialogues/gerhard.en.translation"]
+files=["res://res/translations/dialogues/gerhard.de.translation", "res://res/translations/dialogues/gerhard.en.translation"]
 
 source_file="res://res/translations/dialogues/gerhard.csv"
-dest_files=["res://res/translations/dialogues/gerhard.en.translation"]
+dest_files=["res://res/translations/dialogues/gerhard.de.translation", "res://res/translations/dialogues/gerhard.en.translation"]
 
 [params]
 

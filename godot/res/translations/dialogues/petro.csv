@@ -1,45 +1,45 @@
-keys,en
-tc477c2ac7c,Moin!
-t07c68f4ffa,"Alles klar bei dir, kommst du gut durch die Krise?"
-t29f8e6a41f,"Ja, wie läuft's bei dir?"
-t5ea37bc878,Hast du was zu tauschen?
-tc165d270d1,Bis denne!
-t41ef4ed94f,Tschö!
-td9c1bff2ec,"In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen."
-t0878cd5adc,"Irre Idee, nicht?"
-te654095a95,Schon spannend.
-tf2fb3425c9,"Wusste ich doch, dass dich das auch begeistert!"
-t662cee4f9d,Klingt unrealistisch.
-t9e266ee98f,"Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?"
-te7ce08013c,Meine Liebe für die Luftfahrt färbt schon auf Irena ab.
-t0f89ea419b,Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben..
-tcc1ab82237,"Haha. Naja, bis dann."
-t6a7a5de641,"Tschö [wait=0.5], mit Ö."
-t080b0f9e95,"Immer doch. Suche grad nach {{TradeMngr.get_sought_items_text()}}, dafür biete ich {{TradeMngr.get_offered_items_text()}}."
-taba3c13a6d,Wie sieht's aus?
-t873b53310f,Passt.
-t737873588a,"Exzellent, hier."
-tb998b4593a,"Nein, danke."
-t60f48ed5fd,Kein Problem.
-tb90ac4e685,Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}!
-t307a348ad1,Ich sollte wohl meinen Erste-Hilfe-Kasten zuhause austauschen...
-t59a41fe091,"Hallo Nachbar! Ich muss ein paar Besorgungen erledigen und zum Arzt, und kann Irena da schlecht mitnehmen."
-t74dc859b04,Würdest du für zwei Stunden auf sie aufpassen?
-t41ef9a2e25,"Ich habe eine neue Rakete, die muss ich dir unbedingt zeigen!"
-t21d0b44f17,Zustimmen
-te82125d983,Kein Problem!
-t4a94abc3b8,"Super, vielen Dank! Ich bin so schnell es geht wieder zurück!"
-t8124d708c9,"Guck mal, die hier hat noch mehr Antriebe als die andere Rakete!"
-tf4cea59812,Das ist ja klasse! Und wohin fliegt die?
-t4597b37967,Mindestens bis zum Jupiter! [speed=0.3]Wuuuuschhhh!![/speed]
-t0fc0c6a8d8,Du beschäftigst Irena mit Spielen und lernst dabei mehr über Flugzeuge als du willst.
-t36542b72b5,Da bin ich wieder! Hattet ihr zwei Spaß?
-tc1a1f4c4d9,Jaaa!
-t685dff74f9,"Das freut mich! Übrigens, im Baumarkt waren gerade Akkus im Angebot. Ich dachte, du brauchst vielleicht welche?"
-t334943a713,"Oh super, danke!"
-tf4f5a13839,Kein Problem! Man sieht sich!
-t76bfc1c656,Tschüüüüss! [speed=0.3]Wuuuuschhhh!![/speed]
-tdb87e173d7,Ablehnen
-t7b62bcc17d,"Tut mir leid, das passt mir gerade nicht gut."
-ta68937f6d6,"Oh okay, schade."
-te5bc72e6c5,Dann zeige ich sie dir nächstes Mal! [speed=0.3]Wuuuuschhhh!![/speed]
+keys,de,en
+tc477c2ac7c,Moin!,Moin!
+t07c68f4ffa,"Alles klar bei dir, kommst du gut durch die Krise?","Are you all right, are you getting through the crisis okay?"
+t29f8e6a41f,"Ja, wie läuft's bei dir?","Yes, how are things going with you?"
+t5ea37bc878,Hast du was zu tauschen?,Do you have something to trade?
+tc165d270d1,Bis denne!,See you then!
+t41ef4ed94f,Tschö!,Bye!
+td9c1bff2ec,"In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.","Lately I've been thinking about whether we could use drones to supply the population."
+t0878cd5adc,"Irre Idee, nicht?","Crazy idea, isn't it?"
+te654095a95,Schon spannend.,Quite exciting.
+tf2fb3425c9,"Wusste ich doch, dass dich das auch begeistert!","I knew you'd be excited about that too!"
+t662cee4f9d,Klingt unrealistisch.,Sounds unrealistic.
+t9e266ee98f,"Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?","Well, it's certainly still difficult on a large scale. But it would be a huge help, wouldn't it?"
+te7ce08013c,Meine Liebe für die Luftfahrt färbt schon auf Irena ab.,My love of aviation is already rubbing off on Irena.
+t0f89ea419b,Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben..,Maybe I shouldn't constantly take off mentally and stay more [i]down-to-earth[/i]..
+tcc1ab82237,"Haha. Naja, bis dann.","Haha. Well, see you then."
+t6a7a5de641,"Tschö [wait=0.5], mit Ö.","Bye [wait=0.5], with y."
+t080b0f9e95,"Immer doch. Suche grad nach {{TradeMngr.get_sought_items_text()}}, dafür biete ich {{TradeMngr.get_offered_items_text()}}.","Always. I'm currently looking for {{TradeMngr.get_sought_items_text()}}, for wichi I would offer {{TradeMngr.get_offered_items_text()}}."
+taba3c13a6d,Wie sieht's aus?,Do we have a deal?
+t873b53310f,Passt.,Yes
+t737873588a,"Exzellent, hier.","Excellent, here."
+tb998b4593a,"Nein, danke.","No, thank you."
+t60f48ed5fd,Kein Problem.,No Problem
+tb90ac4e685,Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}!,OOh.. I think {{TradeMngr.get_unfeasibility_reason()}}!
+t307a348ad1,Ich sollte wohl meinen Erste-Hilfe-Kasten zuhause austauschen...,I should probably replace my first aid kit at home...
+t59a41fe091,"Hallo Nachbar! Ich muss ein paar Besorgungen erledigen und zum Arzt, und kann Irena da schlecht mitnehmen.","Hello neighbour! I have to run a few errands and go to the doctor, and I can't take Irena with me."
+t74dc859b04,Würdest du für zwei Stunden auf sie aufpassen?,Would you look after her for two hours?
+t41ef9a2e25,"Ich habe eine neue Rakete, die muss ich dir unbedingt zeigen!","I've got a new rocket, I really must show you!"
+t21d0b44f17,Zustimmen,Agree
+te82125d983,Kein Problem!,No Problem!
+t4a94abc3b8,"Super, vielen Dank! Ich bin so schnell es geht wieder zurück!","Great, thank you very much! I'll be back as soon as I can!"
+t8124d708c9,"Guck mal, die hier hat noch mehr Antriebe als die andere Rakete!","Look, this one has even more engines than the other rocket!"
+tf4cea59812,Das ist ja klasse! Und wohin fliegt die?,That's great! And where does it fly to?
+t4597b37967,Mindestens bis zum Jupiter! [speed=0.3]Wuuuuschhhh!![/speed],At least as far as Jupiter! [speed=0.3]Whooooooosh!!![/speed]
+t0fc0c6a8d8,Du beschäftigst Irena mit Spielen und lernst dabei mehr über Flugzeuge als du willst.,You keep Irena busy with games and learn more about aeroplanes than you want to.
+t36542b72b5,Da bin ich wieder! Hattet ihr zwei Spaß?,Here I am again! Did you two have fun?
+tc1a1f4c4d9,Jaaa!,Yeaaaaah!
+t685dff74f9,"Das freut mich! Übrigens, im Baumarkt waren gerade Akkus im Angebot. Ich dachte, du brauchst vielleicht welche?","That makes me happy! By the way, there were batteries on sale at the DIY store. I thought you might need some?"
+t334943a713,"Oh super, danke!","Oh great, thank you!"
+tf4f5a13839,Kein Problem! Man sieht sich!,No problem! See you around!
+t76bfc1c656,Tschüüüüss! [speed=0.3]Wuuuuschhhh!![/speed],Byeeeeee! [speed=0.3]Whooooooosh!!![/speed]
+tdb87e173d7,Ablehnen,Reject
+t7b62bcc17d,"Tut mir leid, das passt mir gerade nicht gut.","Sorry I don't have time right now."
+ta68937f6d6,"Oh okay, schade.","Oh okay, too bad."
+te5bc72e6c5,Dann zeige ich sie dir nächstes Mal! [speed=0.3]Wuuuuschhhh!![/speed],Then I'll show you next time! [speed=0.3]Whoooooooosh!!![/speed]

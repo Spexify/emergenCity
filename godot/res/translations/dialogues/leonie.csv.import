@@ -6,10 +6,10 @@ uid="uid://g1wsrc8rldac"
 
 [deps]
 
-files=["res://res/translations/dialogues/leonie.en.translation"]
+files=["res://res/translations/dialogues/leonie.de.translation", "res://res/translations/dialogues/leonie.en.translation"]
 
 source_file="res://res/translations/dialogues/leonie.csv"
-dest_files=["res://res/translations/dialogues/leonie.en.translation"]
+dest_files=["res://res/translations/dialogues/leonie.de.translation", "res://res/translations/dialogues/leonie.en.translation"]
 
 [params]
 

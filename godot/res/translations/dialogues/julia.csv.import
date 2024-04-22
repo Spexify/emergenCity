@@ -6,10 +6,10 @@ uid="uid://bufip7erhb68w"
 
 [deps]
 
-files=["res://res/translations/dialogues/julia.en.translation"]
+files=["res://res/translations/dialogues/julia.de.translation", "res://res/translations/dialogues/julia.en.translation"]
 
 source_file="res://res/translations/dialogues/julia.csv"
-dest_files=["res://res/translations/dialogues/julia.en.translation"]
+dest_files=["res://res/translations/dialogues/julia.de.translation", "res://res/translations/dialogues/julia.en.translation"]
 
 [params]
 

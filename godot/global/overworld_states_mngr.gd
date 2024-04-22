@@ -131,7 +131,7 @@ func get_electricity_state() -> ElectricityState:
 func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
 	match _electricity_state:
-		ElectricityState.NONE: _active_crises_descr += " Der Strom ist ausgefallen!"
+		ElectricityState.NONE: _active_crises_descr += " " + tr("OSM_NO_ELECT")
 		ElectricityState.UNLIMITED: pass
 
 
@@ -149,8 +149,8 @@ func get_water_state() -> WaterState:
 func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
 	match _water_state:
-		WaterState.NONE: _active_crises_descr += " Das Wasser ist komplett ausgefallen!"
-		WaterState.DIRTY: _active_crises_descr += " Nur verunreinigtes Wasser fließt aus der Leitung!"
+		WaterState.NONE: _active_crises_descr += " " + tr("OSM_NO_WATER")
+		WaterState.DIRTY: _active_crises_descr += " " + tr("OSM_SOM_WATER")
 		WaterState.CLEAN: pass
 
 
@@ -170,15 +170,15 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 	_isolation_state = new_isolation_state
 	match _isolation_state:
 		IsolationState.NONE: pass
-		IsolationState.LIMITED_PUBLIC_ACCESS: _active_crises_descr += " Ein Betretungsverbot öffentlicher Gelände wurde verhangen!"
-		IsolationState.ISOLATION: _active_crises_descr += " Eine Quarantäne wurde angeordnet!"
+		IsolationState.LIMITED_PUBLIC_ACCESS: _active_crises_descr += " " + tr("OSM_SOM_ISO")
+		IsolationState.ISOLATION: _active_crises_descr += " " + tr("OSM_ISO")
 
 
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
 		IsolationState.NONE: return tr("Keine.")
-		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
-		IsolationState.ISOLATION: return "Quarantäne!"
+		IsolationState.LIMITED_PUBLIC_ACCESS: return tr("Einige Betretsverbote.")
+		IsolationState.ISOLATION: return tr("Quarantäne!")
 	return ""
 
 
@@ -190,16 +190,16 @@ func set_food_contamination_state(new_food_contamination_state: FoodContaminatio
 	_food_contamination_state = new_food_contamination_state
 	match _food_contamination_state:
 		FoodContaminationState.NONE: pass
-		FoodContaminationState.FOOD_SPOILED: _active_crises_descr += " Die Essensvorräte sind allesamt verdorben!"
+		FoodContaminationState.FOOD_SPOILED: _active_crises_descr += " " + tr("OSM_FOOD")
 
 
 func get_food_contamination_state_descr() -> String:
 	match _food_contamination_state:
 		FoodContaminationState.NONE:
 			if _electricity_state == ElectricityState.NONE:
-				return "Reduz. Essens-Haltbarkeit"
+				return tr("Reduz. Essens-Haltbarkeit")
 			else: return tr("Kein Problem.")
-		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
+		FoodContaminationState.FOOD_SPOILED: return tr("Kontaminiert!")
 	return ""
 
 

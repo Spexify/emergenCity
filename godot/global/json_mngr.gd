@@ -5,25 +5,25 @@ const INVALID_STRING_VALUE: String = "ERROR"
 const INVALID_DICTIONARY_VALUE: Dictionary = {}
 
 ## RECIPTS
-const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
+const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 ## ITEMS
 const ITEM_SOURCE := "res://res/JSONs/item-en.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 ## POPUPS
-const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
+const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action-en.json"
 ## OPT-EVENTS
-const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events.json"
+const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events-en.json"
 ## NPCS
 const NPS_Source := "res://res/JSONs/npcs.json"
 ## BOOKS
-const BOOKS_SOURCE := "res://res/JSONs/books.json"
+const BOOKS_SOURCE := "res://res/JSONs/books-en.json"
 ## ACTIONS
 const ACTION_SOURCE := "res://res/JSONs/action-en.json"
 ## DOORBELL
 const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 ## SCENARIOS
-const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
+const SCENARIOS_SOURCE := "res://res/JSONs/scenarios-en.json"
 ## UPGARDE
 const UPGRADES_SOURCE := "res://res/JSONs/upgrades-en.json"
 

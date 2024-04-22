@@ -1,19 +1,19 @@
-keys,en
-t3ef0ed51d1,Hi.
-t78004acb04,Brauchen Sie was?
-tdd27ad7a61,Reden
-tba3d38bfd2,Dafür hab ich grad keine Zeit.
-td8dc16df75,[i]Sorry.[/i]
-ta0da2345c3,Handeln
-t010f6ac5d2,Für ein gutes Tauschgeschäft bin ich immer zu haben!
-tea9b0290bc,Nö.
-t2a4bd7c12a,Ich biete dir {{TradeMngr.get_offered_items_text()}} falls du {{TradeMngr.get_sought_items_text()}} hast.
-t7ce92b7821,Wie sieht's aus?
-ta502d50998,Angebot akzeptiert.
-t89310b0cb7,Es war mir eine Freude mit Ihnen Geschäfte zu machen!
-t82661f0b5a,Nein danke.
-t032fda08e5,Vielleicht ein ander' Mal dann.
-ta357a1f173,"Tja, {{TradeMngr.get_unfeasibility_reason()}} leider!"
-t12dab718a7,Warum ich hier bin?
-t118363cbac,Ich will eine Mitarbeiter-Schulung für mein Unternehmen zum Thema Brandmaßnahmen aufsetzen.
-tce44ae763b,"""Safety first"", wie man so schön sagt."
+keys,de,en
+t3ef0ed51d1,Hi.,Hi.
+t78004acb04,Brauchen Sie was?,Do you need somthing?
+tdd27ad7a61,Reden,Chat
+tba3d38bfd2,Dafür hab ich grad keine Zeit.,I don't have time for that right now.
+td8dc16df75,[i]Sorry.[/i],[i]Sorry.[/i]
+ta0da2345c3,Handeln,Trade
+t010f6ac5d2,Für ein gutes Tauschgeschäft bin ich immer zu haben!,I'm always up for a good barter deal!
+tea9b0290bc,Nö.,Nope.
+t2a4bd7c12a,Ich biete dir {{TradeMngr.get_offered_items_text()}} falls du {{TradeMngr.get_sought_items_text()}} hast.,I offer you {{TradeMngr.get_offered_items_text()}} if you have {{TradeMngr.get_sought_items_text()}}.
+t7ce92b7821,Wie sieht's aus?,What do you reckon?
+ta502d50998,Angebot akzeptiert.,Offer accepted.
+t89310b0cb7,Es war mir eine Freude mit Ihnen Geschäfte zu machen!,It was a pleasure doing business with you!
+t82661f0b5a,Nein danke.,No thanks.
+t032fda08e5,Vielleicht ein ander' Mal dann.,Maybe another time then.
+ta357a1f173,"Tja, {{TradeMngr.get_unfeasibility_reason()}} leider!","Well, sadly {{TradeMngr.get_unfeasibility_reason()}}"
+t12dab718a7,Warum ich hier bin?,Why am I here?
+t118363cbac,Ich will eine Mitarbeiter-Schulung für mein Unternehmen zum Thema Brandmaßnahmen aufsetzen.,I want to organise an employee training course for my company on the subject of fire prevention.
+tce44ae763b,"""Safety first"", wie man so schön sagt.","""Safety first"", as the saying goes."

@@ -7,31 +7,31 @@
 Your own hunger, thirst, your health and, last but not least, your happiness.
 Plan your daily routine and make sure you have enough food for your evening meal. Staying hydrated is essential, and every possible source of water, such as rain, must be considered.",
 
-"Sollten Sie nur verunreinigtes Wasser besitzen, haben Sie hoffentlich vorgesorgt und sich mit Chlortabletten zum Filtern eingedeckt.
-Und was wenn der Hunger kommt? Dann müssen Sie natürlich kochen, und das im Zweifel ohne Strom und Wasser! Und vergessen Sie nicht, dass ohne Strom die Haltbarkeit von Lebensmittels halbiert wird! Für eine hohe Gesundheit ist regelmäßiger Schlaf sowie Körperhygiene wie Duschen unerlässlich.",		
+"If you only have contaminated water, you have hopefully taken precautions and stocked up on chlorine tablets for filtering.
+And what if you get hungry? Then of course you'll have to cook, and that possibly without electricity or water! And don't forget that without electricity, the shelf life of food is halved! Regular sleep and personal hygiene such as showering are essential for good health.",		
 
-"Die Psyche darf langfristig aber auch nicht außer Acht gelassen werden. Falls sich Ihnen die Möglichkeit eröffnet, können bestimmte Nahrungsmittel wie beispielsweise Schokolade für einen Dopamin-Boost sorgen.",
+"However, the psyche should also not be ignored in the long term. If you have the opportunity, certain foods such as chocolate can provide a dopamine boost.",
 
-"Sich in seinem sozielen Kreis gegenseitig zu unterstützen kann sich auch auszahlen, eine Hand wäscht die andere, vor allem in Not. Nicht zuletzt sollten Sie versuchen, Neuigkeiten und Informationen zu sammeln: Wenn man zur richtigen Zeit am richtigen Ort ist, kann das die Überlebenschancen erhöhen.
-Mit diesem Wissen sollten Sie für jede Gefahr gewappnet sein. Die nächste Krise kommt bestimmt!\n
-Autor X. Perte",
+"Supporting each other in your social circle can also pay off, one hand washes the other, especially in times of need. Last but not least, try to gather news and information: Being in the right place at the right time can increase your chances of survival.
+With this knowledge, you should be prepared for any danger. The next crisis is sure to come!
+Author X. Pert",
 		],
 	},
 
 	{
 		"ID": 2,
-		"title": "Die Krisen-Chroniken",
+		"title": "The Crisis Chronicles",
 		"content": [
-"Ein Ausschnitt von Katastrophen historischen Ausmaßes.
-Insbesondere im 14. Jahrhundert verbreitete sich die [b]Pest[/b], auch als Schwarzer Tod bekannt, in Europa. Die über viele Jahrzehnte in Infektions-Wellen wütende Krankheit kostete geschätzt zwischen 20 und 50 Millionen Menschen das Leben. Durch das fehlende medizinische Wissen und mangelnde Hygiene konnte die Bevölkerung nicht effektiv die Bedrohung bekämpfen. Noch heute gibt es immer wieder kleinere Krankheits-Ausbrüche, welche jedoch gut behandelbar sind.",
+"EAn excerpt from disasters of historical proportions.
+In the 14th century in particular, the [b]plague[/b], also known as the Black Death, spread across Europe. The disease, which raged in waves of infection over many decades, is estimated to have claimed the lives of between 20 and 50 million people. Due to a lack of medical knowledge and poor hygiene, the population was unable to effectively combat the threat. Even today, there are still small outbreaks of the disease, but these are well treatable.",
 
-"Zwischen 1845 und 1849 ereignete sich in Irland die [i]An Gorta Mór[/i], zu deutsch [b]'Große Hungersnot'[/b]. Da Erdäpfel billig und schnell anbaubar sind, hat sich die irische Bevölkerung zunehmend auf den Anbau von Kartoffeln fokussiert, es entstand eine Monokultur von der die Gesellschaft abhängig war.
-Eine neuartige Krankheit, 'Kartoffelfäule' genannt, befiel die Knollenpflanzen und sorgte für mehrere Ernteausfälle, bei denen u.a. fast vollständig alle Kartoffel-Erzeugnisse und somit die Ernährungsgrundlage der Iren zerstört wurde.",
+"Between 1845 and 1849, Ireland experienced the [i]An Gorta Mór[/i], or [b]'Great Famine'[/b]. As potatoes were cheap and quick to grow, the Irish population increasingly focussed on growing potatoes, creating a monoculture on which society was dependent.
+A new type of disease, called 'potato blight', attacked the tuber plants and caused several crop failures, almost completely destroying all potato products and thus the Irish people's food supply.",
 
-"1931 in Jangtsekiang, Republik China: Nach einigen Jahren von anherrschender Dürre, kam es im Winter 1930 zu heftigen Schneestürmen und später schweren Regenfällen. Dies hatte einen stark steigenden Wasserspiegel zur Folge, welche zahlreiche Städte überschwemmte und dabei mindestens 145.000 Menschen in den Tod führte.
-Viele Menschen starben erst nach der verheerenden [b]Flutkatastrophe[/b] an Seuchen wie Cholera, andere verhungerten. Die Dunkelziffer der Todesopfer liegt insgesamt bei etwa 3,7 Millionen.",
+"1931 in Yangtze River, Republic of China: After several years of severe drought, the winter of 1930 saw heavy snowstorms and later heavy rainfall. This resulted in a sharp rise in water levels, which flooded numerous cities and caused the deaths of at least 145,000 people.
+Many people died of epidemics such as cholera after the devastating [b]flood disaster[/b], while others starved to death. The total number of unreported deaths is around 3.7 million.",
 
-"Erst vor kurzem, ereignete sich mit [b]COVID-19[/b] eine weltweite Pandemie. Für viele hieß das Quarantäne und Isolation, für einige jedoch den Tod. Laut WHO kam es zwischen Anfang 2020 und Ende 2021 zur einer weltweiten Übersterblichkeit von mehr als 14 Millionen Toten - verursacht durch das Corona-Virus.",
+"Only recently, a global pandemic occurred with [b]COVID-19[/b]. For many, this meant quarantine and isolation, but for some it meant death. According to the WHO, there was a global excess mortality rate of more than 14 million deaths between the beginning of 2020 and the end of 2021 - caused by the coronavirus.",
 
 "Quellen:
 	* [url=https://de.wikipedia.org/wiki/Geschichte_der_Pest#Bekannte_Opfer_der_Pest]Geschichte_der_Pest[/url],
@@ -62,41 +62,41 @@ Wenn beispielweise andere Medienplattformen ausfallen, ist es von kritischer Wic
 
 	{
 		"ID": 4,
-		"title": "Kochen 101",
+		"title": "Cooking 101",
 		"content": [
-"Die Fähigkeit der Essenszubereitung ist unerlässlich für eine ausgewogene Ernährung. Gekocht schmecken Nahrungsmittel häufig besser als roh, manche Lebensmittel werden erst durch das Kochen überhaupt essbar.",
+"The ability to prepare food is essential for a balanced diet. Food often tastes better cooked than raw, and some foods only become edible when they are cooked.",
 
-"Dabei benötigt man für viele, aber nicht alle Rezepte eine Herdplatte (wie von einem Elektroherd oder einem Gaskocher), und auch Wasser wird für viele, aber nicht alle Rezepte gebraucht. Hierbei kann Wasser aus der Leitung oder abgefülltes Trinkwasser verwendet werden.",
+"Many, but not all, recipes require a stovetop (such as from an electric cooker or a gas cooker), and water. You can use tap water or bottled drinking water.",
 
-"Rezepte ohne Hitze und ohne Wasser:
-	Brot mit Marmelade: Brot, Marmelade
-	Käsesandwich: Brot, Käse
-	Hummus mit Brot: Brot, Hülsenfrüchte
-	Nudeln mit Soße: Nudeln, Soße im Glas
-	Gesalzener Fisch: Fisch, Salz
-	Saft: Früchte",
+"Recipes without heat and without water:
+	Bread with jam: Bread + jam
+	Cheese sandwich: bread + cheese
+	Hummus with bread: bread + pulses
+	Pasta with sauce: pasta + sauce in a jar
+	Salted fish: fish + salt
+	Juice: fruit",
 
-"Rezepte mit Hitze, ohne Wasser:
-	Bolognese: Nudeln, Fleisch oder Hülsenfrüchte
-	Gemüsereis: Gemüse, Reis
-	Curry mit Reis: Hülsenfrüchte, Reis
-	Gekochte Ravioli: Ravioli-Konserve
-	Bratfisch: Fisch
-	Bratfisch mit Pommes: Fisch, Kartoffeln
-	Milchreis: Milch, Reis, Zucker
-	Heiße Schokolade: Milch, Schokolade
-	Marmelade: Früchte, Zucker",
+"Recipes with heat, without water:
+	Bolognese: pasta + meat or pulses
+	Vegetable rice: vegetables + rice
+	Curry with rice: pulses + rice
+	Cooked ravioli: tinned ravioli
+	Fried fish: Fish
+	Fried fish with chips: fish + potatoes
+	Rice pudding: milk, rice + sugar
+	Hot chocolate: milk + chocolate
+	Jam: fruit + sugar",
 
-"Rezepte ohne Hitze, mit Wasser:
-	Eingelegtes Gemüse: Gemüse, Salz",
+"Recipes without heat, with water:
+	Pickled vegetables: vegetables +salt",
 
-"Rezepte mit Hitze, mit Wasser:
-	Brot: Mehl
-	Nudeln: Ungekochte Nudeln
-	Nudeln mit Soße: Ungekochte Nudeln, Soße im Glas
-	Bolognese: Ungekochte Nudeln, Fleisch oder Hülsenfrüchte
-	Gulasch: Gemüse, Kartoffeln, Fleisch
-	Suppe: Gemüse oder Fisch, Salz",
+"Recipes with heat, with water:
+	Bread: Flour
+	Pasta: Uncooked pasta
+	Pasta with sauce: Uncooked pasta + sauce in a jar
+	Bolognese: Uncooked pasta + meat or pulses
+	Goulash: vegetables + potatoes + meat
+	Soup: Vegetables or fish + salt",
 		],
 	},
 ]

@@ -6,10 +6,10 @@ uid="uid://c0h86xrj42deq"
 
 [deps]
 
-files=["res://res/translations/dialogues/elias.en.translation"]
+files=["res://res/translations/dialogues/elias.de.translation", "res://res/translations/dialogues/elias.en.translation"]
 
 source_file="res://res/translations/dialogues/elias.csv"
-dest_files=["res://res/translations/dialogues/elias.en.translation"]
+dest_files=["res://res/translations/dialogues/elias.de.translation", "res://res/translations/dialogues/elias.en.translation"]
 
 [params]
 

@@ -311,7 +311,7 @@ func _determine_consume_btn_text(p_item: EMC_Item) -> String:
 	
 	var food_comp := p_item.get_comp(EMC_IC_Food)
 	if food_comp != null:
-		return tr("Essen")
+		return tr("BP_EAT")
 	
 	var food_drink := p_item.get_comp(EMC_IC_Drink)
 	if food_drink != null:

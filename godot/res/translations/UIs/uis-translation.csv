@@ -1,7 +1,7 @@
 keys,de,en
 [center]Titel[/center],[center]Titel[/center],[center]Title[/center]
 Konsumieren,Konsumieren,Consume
-Essen,Essen,Eat
+BP_EAT,Essen,Eat
 Trinken,Trinken,Drink
 Filtern,Filtern,Filter
 Entsorgen,Entsorgen,Discard
@@ -63,7 +63,7 @@ RGB_DESC,"Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser.","It
 RGB_OPTION1,Eine Flasche (250ml) abschöpfen,Extract one bottle (250ml)
 RGB_OPTION2,Fertig,Complete
 EOG_TITLE1,[center]VERLOREN[/center],[center]GAME OVER[/center]
-EOG_TITLE2,[center]GEWONNEN[/center],[cenrerYOU HAVE WON][/center]
+EOG_TITLE2,[center]GEWONNEN[/center],[cenrer]YOU HAVE WON][/center]
 EOG_BACK,Zurück zum Hauptmenü,Back to main menu
 II_FOOD,[center]Nahrung\nSinkt täglich um 750 kcal.[/center],[center]Nutrition\nDecreases daily by 750 kcal.[/center]
 II_WATER,[center]Hydration\nSinkt täglich um 750 ml.[/center],[center]Hydration\nDecreases by 750 ml daily.[/center]
@@ -89,3 +89,21 @@ Verdreckt.,Verdreckt.,Dirty.
 Vorhanden.,Vorhanden.,No problem.
 Keine.,Keine.,None.
 Kein Problem.,Kein Problem.,No problem.
+Quarantäne!,Quarantäne!,Isolation
+Einige Betretsverbote.,Einige Betretsverbote.,Some entry restrictions.
+Reduz. Essens-Haltbarkeit,Reduz. Essens-Haltbarkeit,Reduced food shelf life
+Kontaminiert!,Kontaminiert!,Contaminated!
+OSM_NO_ELECT,Der Strom ist ausgefallen!,The power has gone out!
+OSM_NO_WATER,Das Wasser ist komplett ausgefallen!,The water supply is completely out of order!
+OSM_SOM_WATER,Nur verunreinigtes Wasser fließt aus der Leitung!,Only contaminated water flows from the tap!
+OSM_SOM_ISO,Ein Betretungsverbot öffentlicher Gelände wurde verhangen!,A ban on entering public areas was imposed!
+OSM_ISO,Eine Quarantäne wurde angeordnet!,Quarantine has been ordered!
+OSM_FOOD,Die Essensvorräte sind allesamt verdorben!,The food supplies are all spoilt!
+TRD_FEAS,der Handel ist ausführbar,the trade is feasible
+TRD_UNFEAS,der Handel ist nicht ausführbar,the trade is unfeasible
+TRD_NO_SPACE,du hast keinen Platz im Inventar,you don't have enought space in your backpack
+TRD_NO_ITEMS,dir fehlen die nötigen Items für diesen Handel,you don't have the needed items for this trade
+CG_BEFORE,Willst du,Do you want to go
+CG_AFTER1," gehen? Die Rückkehr kostet eine Aktion.",. The way back will cost an action.
+CG_AFTER2," gehen? Dies kostet eine Aktion.",". This will cost one action."
+
