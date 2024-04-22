@@ -137,8 +137,8 @@ func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 
 func get_electricity_state_descr() -> String:
 	match _electricity_state:
-		ElectricityState.NONE: return "Ausgefallen!"
-		ElectricityState.UNLIMITED: return "Vorhanden."
+		ElectricityState.NONE: return tr("Ausgefallen!")
+		ElectricityState.UNLIMITED: return tr("Vorhanden.")
 	return ""
 
 
@@ -156,9 +156,9 @@ func set_water_state(new_water_state: WaterState) -> void:
 
 func get_water_state_descr() -> String:
 	match _water_state:
-		WaterState.NONE: return "Ausgefallen!"
-		WaterState.DIRTY: return "Verdreckt."
-		WaterState.CLEAN: return "Vorhanden."
+		WaterState.NONE: return tr("Ausgefallen!")
+		WaterState.DIRTY: return tr("Verdreckt.")
+		WaterState.CLEAN: return tr("Vorhanden.")
 	return ""
 
 
@@ -176,7 +176,7 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
-		IsolationState.NONE: return "Keine."
+		IsolationState.NONE: return tr("Keine.")
 		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
@@ -198,7 +198,7 @@ func get_food_contamination_state_descr() -> String:
 		FoodContaminationState.NONE:
 			if _electricity_state == ElectricityState.NONE:
 				return "Reduz. Essens-Haltbarkeit"
-			else: return "Kein Problem."
+			else: return tr("Kein Problem.")
 		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
 	return ""
 
