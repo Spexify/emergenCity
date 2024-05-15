@@ -1,44 +1,44 @@
 ~ START
-Veronika: Hi! Alles klar bei dir?
+Veronika: Hi! Alles klar bei dir? [ID:t65b7e9963e]
 ~ BRANCH
-- Avatar: Wie läuft's?
+- Avatar: Wie läuft's? [ID:t214a7680e5]
 	=> TALK
-- Avatar: Hast du was zu tauschen?
+- Avatar: Hast du was zu tauschen? [ID:t16544ea171]
 	=>< TRADE
 	=> BRANCH
-- Avatar: Tschüss!
-	Veronika: Ciao!
+- Avatar: Tschüss! [ID:t5e7e8f962c]
+	Veronika: Ciao! [ID:tcb8e59e4d0]
 	=> END
 
 
 ~ TALK
-Veronika: Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...
-Kris: Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!
-Veronika: Du verstehst aber unter "Planen" auch nur "Snacks einkaufen".
-Kris: Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!
-Veronika: Aber auch nur, wenn du bis dahin welche übrig gelassen hast.
-Kris: ...
-Veronika: ...
-Kris: Ich kaufe noch ein paar mehr ein.
+Veronika: Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ... [ID:tb9579bfe42]
+Kris: Das habe ich gehört! Ich helfe sehr wohl auch beim Planen! [ID:t439024cdbe]
+Veronika: Du verstehst aber unter "Planen" auch nur "Snacks einkaufen". [ID:t99f55fc07c]
+Kris: Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein! [ID:td10f8354b3]
+Veronika: Aber auch nur, wenn du bis dahin welche übrig gelassen hast. [ID:tc2b3e48680]
+Kris: ... [ID:td08cafd700]
+Veronika: ... [ID:tee0fa9bf7e]
+Kris: Ich kaufe noch ein paar mehr ein. [ID:tdcbf21d8c4]
 => END
 
 
 ~ TRADE
 do TradeMngr.setup_next_trade("Veronika")
-Veronika: Kommt drauf an. Hast du {{TradeMngr.get_sought_items_text()}}? Falls ja würde ich dir {{TradeMngr.get_offered_items_text()}} geben.
+Veronika: Kommt drauf an. Hast du {{TradeMngr.get_sought_items_text()}}? Falls ja würde ich dir {{TradeMngr.get_offered_items_text()}} geben. [ID:td838b50637]
 if TradeMngr.is_trade_feasible()
-	Veronika: Und?
-	- Avatar: Gebongt.
+	Veronika: Und? [ID:tf7609628ac]
+	- Avatar: Gebongt. [ID:tf0f217c146]
 		do TradeMngr.execute_trade()
-		Veronika: [#mood=happy]Nice.
-	- Avatar: Nee, grad nicht.
-		Veronika: Okidoki.
+		Veronika: [#mood=happy]Nice. [ID:t7e9ffeb633]
+	- Avatar: Nee, grad nicht. [ID:tcd5c056036]
+		Veronika: Okidoki. [ID:t7ec7a061eb]
 else
-	Veronika: Oh, {{TradeMngr.get_unfeasibility_reason()}}!
+	Veronika: Oh, {{TradeMngr.get_unfeasibility_reason()}}! [ID:t9abfbd3cb7]
 => END
 
 
 ~ NEIGHBORHOOD_PARTY
-Veronika: Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat.
-Veronika: Aber das Essen ist echt lecker[wait=0.5] ...und umsonst!
+Veronika: Eigentlich bin ich [speed=0.2]nur[/speed] gekommen, weil Kris mich dazu überredet hat. [ID:t4e44633da4]
+Veronika: Aber das Essen ist echt lecker[wait=0.5] ...und umsonst! [ID:t024c71db4d]
 => END

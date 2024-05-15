@@ -37,6 +37,10 @@ gdscript/warnings/unsafe_method_access=1
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
 
+[dialogue_manager]
+
+general/default_csv_locale="de"
+
 [display]
 
 window/size/viewport_width=576
@@ -112,7 +116,10 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
+locale/translations=PackedStringArray("res://res/translations/UIs/uis-translation.de.translation", "res://res/translations/UIs/uis-translation.en.translation", "res://res/translations/dialogues/agathe.de.translation", "res://res/translations/dialogues/agathe.en.translation", "res://res/translations/dialogues/elias.de.translation", "res://res/translations/dialogues/elias.en.translation", "res://res/translations/dialogues/friedel.de.translation", "res://res/translations/dialogues/friedel.en.translation", "res://res/translations/dialogues/gerhard.de.translation", "res://res/translations/dialogues/gerhard.en.translation", "res://res/translations/dialogues/irena.de.translation", "res://res/translations/dialogues/irena.en.translation", "res://res/translations/dialogues/julia.de.translation", "res://res/translations/dialogues/julia.en.translation", "res://res/translations/dialogues/kris.de.translation", "res://res/translations/dialogues/kris.en.translation", "res://res/translations/dialogues/leonie.de.translation", "res://res/translations/dialogues/leonie.en.translation", "res://res/translations/dialogues/mert.de.translation", "res://res/translations/dialogues/mert.en.translation", "res://res/translations/dialogues/momo.de.translation", "res://res/translations/dialogues/momo.en.translation", "res://res/translations/dialogues/petro.de.translation", "res://res/translations/dialogues/petro.en.translation", "res://res/translations/dialogues/raphael.de.translation", "res://res/translations/dialogues/raphael.en.translation", "res://res/translations/dialogues/tutorial.de.translation", "res://res/translations/dialogues/tutorial.en.translation", "res://res/translations/dialogues/veronika.de.translation", "res://res/translations/dialogues/veronika.en.translation", "res://res/translations/dialogues/walter.de.translation", "res://res/translations/dialogues/walter.en.translation")
 locale/translations_pot_files=PackedStringArray("res://res/dialogue/gerhard.dialogue", "res://res/dialogue/julia.dialogue", "res://res/dialogue/friedel.dialogue", "res://res/dialogue/agathe.dialogue", "res://res/dialogue/elias.dialogue", "res://res/dialogue/kris.dialogue", "res://res/dialogue/irena.dialogue", "res://res/dialogue/mert.dialogue", "res://res/dialogue/momo.dialogue", "res://res/dialogue/petro.dialogue", "res://res/dialogue/veronika.dialogue", "res://res/dialogue/tutorial.dialogue", "res://res/dialogue/agathe_event.dialogue", "res://res/dialogue/julia_event.dialogue", "res://res/dialogue/gerhard_event.dialogue", "res://res/dialogue/petro_event.dialogue", "res://res/dialogue/mert_event.dialogue", "res://res/dialogue/walter.dialogue", "res://res/dialogue/leonie.dialogue", "res://res/dialogue/raphael.dialogue")
+locale/test="en"
+locale/use_pseudolocalization=false
 
 [rendering]
 

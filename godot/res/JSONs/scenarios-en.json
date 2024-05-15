@@ -1,0 +1,51 @@
+{
+	"Chemie-Unfall": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 0,
+		"notification": "There has been an accident at the chemical plant near Krisopolis. The exact consequences are still difficult to assess, but water and food could be contaminated and a curfew may be imposed.",
+		"water_crisis": 1
+	},
+	"Dürre": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 1,
+		"notification": "Due to the lack of rain in recent weeks, Krisopolis is facing the threat of drought. The exact consequences are still difficult to assess, but there could be a shortage of drinking water and food contamination, and some public places may be closed.",
+		"water_crisis": 0
+	},
+	"Erdbeben": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "The earthquake that recently shook areas near Krisopolis has disrupted some infrastructure. The exact consequences are still difficult to assess, but there could be a drinking water contamination and power cuts, and some public places may be closed.",
+		"water_crisis": 1
+	},
+	"Flut": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "A flood has shaken the area around Krisopolis. The exact consequences are still difficult to assess, but there could be a drinking water contamination and power cuts, and some public places may be closed.",
+		"water_crisis": 1
+	},
+	"Waldbrand": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 1,
+		"notification": "Forest fires have broken out around Krisopolis. The exact consequences are still difficult to assess, but there could be a shortage of drinking water and power cuts, and some public places may be closed.",
+		"water_crisis": 0
+	},
+	"Hurricane": {
+		"electricity_crisis": 0,
+		"food_contamination_crisis": 2,
+		"isolation_crisis": 0,
+		"notification": "A hurricane is heading for Krisopolis. The exact consequences are still difficult to assess, but there could be a shortage of drinking water as well as power cuts, and a curfew may be imposed.",
+		"water_crisis": 0
+	},
+	"Pandemie": {
+		"electricity_crisis": 2,
+		"food_contamination_crisis": 0,
+		"isolation_crisis": 0,
+		"notification": "A disease has broken out around Krisopolis and threatens to trigger a pandemic. The exact consequences are still difficult to assess, but drinking water and food could be contaminated and some public places may be closed.",
+		"water_crisis": 1
+	}
+}

@@ -1,27 +1,27 @@
 ~ START
-Walter: Wir müssen langsam schon mit dem Abbau beginnen...
-Walter: ...aber schau dir sonst gerne noch mal das Feuerwehrfahrzeug an.
+Walter: Wir müssen langsam schon mit dem Abbau beginnen... [ID:t6e5d193af9]
+Walter: ...aber schau dir sonst gerne noch mal das Feuerwehrfahrzeug an. [ID:t6bd1f4e464]
 => END
 
 
 ~ FIRE_DEPARTMENT_DEMONSTRATION
-Walter: Guten Tag!
+Walter: Guten Tag! [ID:t38ce9af659]
 if not has_executed_consequences_of_event("FIRE_DEPARTMENT_DEMONSTRATION")
 	=> TRAINING
 else
-	Walter: Ich hoffe dir hat das Training gefallen.
-	Avatar: Ich habe auf jeden Fall einiges gelernt!
+	Walter: Ich hoffe dir hat das Training gefallen. [ID:t45916635fc]
+	Avatar: Ich habe auf jeden Fall einiges gelernt! [ID:tad31fb5b28]
 => END
 
 
 ~ TRAINING
-Walter: Bist du auch gekommen um bei der Feuerlösch- & Erste Hilfe Übung mitzumachen?
-- Ja!
-	Walter: Alles klar, dann nimm dir einen der Feuerlöscher und los geht's!
+Walter: Bist du auch gekommen um bei der Feuerlösch- & Erste Hilfe Übung mitzumachen? [ID:t50e58d8af1]
+- Ja! [ID:tc2d98c46b6]
+	Walter: Alles klar, dann nimm dir einen der Feuerlöscher und los geht's! [ID:t70047443a7]
 	do execute_consequences("FIRE_DEPARTMENT_DEMONSTRATION")
-	Walter gibt dir und den anderen einen Notfall-Crash-Kurs.
-	Avatar: ...das war lehrreich!
-	Avatar: Mit dem ganzen Programm hier hab ich mich echt körperlich betätigt.
-	Avatar: Das Workout für die Woche kann ich schon mal abhaken.
-- Erst mal nicht, danke.
+	Walter gibt dir und den anderen einen Notfall-Crash-Kurs. [ID:t5af3fdf6ac]
+	Avatar: ...das war lehrreich! [ID:t5edaedce5e]
+	Avatar: Mit dem ganzen Programm hier hab ich mich echt körperlich betätigt. [ID:t0327cf77f5]
+	Avatar: Das Workout für die Woche kann ich schon mal abhaken. [ID:tcb152d37e0]
+- Erst mal nicht, danke. [ID:tff4e0a841b]
 => END

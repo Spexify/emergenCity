@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://wxi5ad7rrjsd"
+
+[deps]
+
+files=["res://res/translations/dialogues/agathe.de.translation", "res://res/translations/dialogues/agathe.en.translation"]
+
+source_file="res://res/translations/dialogues/agathe.csv"
+dest_files=["res://res/translations/dialogues/agathe.de.translation", "res://res/translations/dialogues/agathe.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

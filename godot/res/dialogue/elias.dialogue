@@ -1,35 +1,35 @@
 ~ START
-Elias: Hi.
+Elias: Hi. [ID:t3ef0ed51d1]
 ~ BRANCH
-Elias: Brauchen Sie was?
-- Reden
-	Elias: Dafür hab ich grad keine Zeit.
-	Elias: [i]Sorry.[/i]
-- Handeln
-	Elias: Für ein gutes Tauschgeschäft bin ich immer zu haben!
+Elias: Brauchen Sie was? [ID:t78004acb04]
+- Reden [ID:tdd27ad7a61]
+	Elias: Dafür hab ich grad keine Zeit. [ID:tba3d38bfd2]
+	Elias: [i]Sorry.[/i] [ID:td8dc16df75]
+- Handeln [ID:ta0da2345c3]
+	Elias: Für ein gutes Tauschgeschäft bin ich immer zu haben! [ID:t010f6ac5d2]
 	=>< TRADE
 	=> BRANCH
-- Nö.
+- Nö. [ID:tea9b0290bc]
 => END
 
 
 ~ TRADE
 do TradeMngr.setup_next_trade("Elias")
-Elias: Ich biete dir {{TradeMngr.get_offered_items_text()}} falls du {{TradeMngr.get_sought_items_text()}} hast.
+Elias: Ich biete dir {{TradeMngr.get_offered_items_text()}} falls du {{TradeMngr.get_sought_items_text()}} hast. [ID:t2a4bd7c12a]
 if TradeMngr.is_trade_feasible()
-	Elias: Wie sieht's aus?
-	- Avatar: Angebot akzeptiert.
+	Elias: Wie sieht's aus? [ID:t7ce92b7821]
+	- Avatar: Angebot akzeptiert. [ID:ta502d50998]
 		do TradeMngr.execute_trade()
-		Elias: [#mood=happy]Es war mir eine Freude mit Ihnen Geschäfte zu machen!
-	- Avatar: Nein danke.
-		Elias: Vielleicht ein ander' Mal dann.
+		Elias: [#mood=happy]Es war mir eine Freude mit Ihnen Geschäfte zu machen! [ID:t89310b0cb7]
+	- Avatar: Nein danke. [ID:t82661f0b5a]
+		Elias: Vielleicht ein ander' Mal dann. [ID:t032fda08e5]
 else
-	Elias: [#mood=sad]Tja, {{TradeMngr.get_unfeasibility_reason()}} leider!
+	Elias: [#mood=sad]Tja, {{TradeMngr.get_unfeasibility_reason()}} leider! [ID:ta357a1f173]
 => END
 
 
 ~ FIRE_DEPARTMENT_DEMONSTRATION
-Elias: Warum ich hier bin?
-Elias: Ich will eine Mitarbeiter-Schulung für mein Unternehmen zum Thema Brandmaßnahmen aufsetzen.
-Elias: "Safety first", wie man so schön sagt.
+Elias: Warum ich hier bin? [ID:t12dab718a7]
+Elias: Ich will eine Mitarbeiter-Schulung für mein Unternehmen zum Thema Brandmaßnahmen aufsetzen. [ID:t118363cbac]
+Elias: "Safety first", wie man so schön sagt. [ID:tce44ae763b]
 => END

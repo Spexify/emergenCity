@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b0udjau1xfv11"
+
+[deps]
+
+files=["res://res/translations/dialogues/veronika.de.translation", "res://res/translations/dialogues/veronika.en.translation"]
+
+source_file="res://res/translations/dialogues/veronika.csv"
+dest_files=["res://res/translations/dialogues/veronika.de.translation", "res://res/translations/dialogues/veronika.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

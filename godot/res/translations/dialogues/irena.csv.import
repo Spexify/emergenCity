@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dmd3otqxnflu"
+
+[deps]
+
+files=["res://res/translations/dialogues/irena.de.translation", "res://res/translations/dialogues/irena.en.translation"]
+
+source_file="res://res/translations/dialogues/irena.csv"
+dest_files=["res://res/translations/dialogues/irena.de.translation", "res://res/translations/dialogues/irena.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

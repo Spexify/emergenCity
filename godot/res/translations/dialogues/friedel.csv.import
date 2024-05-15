@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://didg2okm6y24g"
+
+[deps]
+
+files=["res://res/translations/dialogues/friedel.de.translation", "res://res/translations/dialogues/friedel.en.translation"]
+
+source_file="res://res/translations/dialogues/friedel.csv"
+dest_files=["res://res/translations/dialogues/friedel.de.translation", "res://res/translations/dialogues/friedel.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

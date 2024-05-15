@@ -27,11 +27,11 @@ func show_gui(p_action: EMC_Action) -> void:
 		stayed_on_same_stage.emit()
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
-			_richtext_label.text = "Willst du " + \
-				stage_change_action.get_ACTION_NAME() + " gehen? Die Rückkehr kostet eine Aktion."
+			_richtext_label.text = tr("CG_BEFORE") + " " + \
+				stage_change_action.get_ACTION_NAME() + tr("CG_AFTER1")
 		else:
-			_richtext_label.text = "Willst du " + \
-				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
+			_richtext_label.text = tr("CG_BEFORE") + " " + \
+				stage_change_action.get_ACTION_NAME() + tr("CG_AFTER2")
 		show()
 		opened.emit()
 

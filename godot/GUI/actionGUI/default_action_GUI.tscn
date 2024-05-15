@@ -32,6 +32,7 @@ custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/separation = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -49,17 +50,26 @@ theme_override_constants/separation = 50
 alignment = 1
 
 [node name="ConfirmBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
+custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
-text = "Bestätigen"
+size_flags_horizontal = 4
+text = "CONFIRM"
 icon = ExtResource("4_4twlg")
+expand_icon = true
 
 [node name="ConfirmBtn_NoIcon" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
 visible = false
+custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Bestätigen"
 
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
+custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Abbrechen"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]

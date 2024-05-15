@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://7s8l2eukr6vf"
+
+[deps]
+
+files=["res://res/translations/dialogues/tutorial.de.translation", "res://res/translations/dialogues/tutorial.en.translation"]
+
+source_file="res://res/translations/dialogues/tutorial.csv"
+dest_files=["res://res/translations/dialogues/tutorial.de.translation", "res://res/translations/dialogues/tutorial.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

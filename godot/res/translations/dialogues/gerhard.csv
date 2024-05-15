@@ -1,0 +1,42 @@
+keys,de,en
+t17ba1bd507,Hallo!,Hello!
+t9756149d8e,Moin. Willst du handeln?,"Moin, do you want to trade?"
+td6b4b9d5a3,Reden,Chat
+t2ad439437b,Handeln,Trade
+tc08e762d60,Nichts dergleichen,Nothing of the sort
+tfb48017f28,Lass uns reden! Wie geht's dir?,Let's talk! How are you?
+ta1206db9eb,"Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht.","You can't complain. Well, you could, but you don't."
+tf04fcbba4d,Wuff.,Wuff.
+tbdfa3c7b3b,Worüber willst du dich denn beklagen? Zu wenig Essen?,What do you want to complain about? Too little food?
+tbfcdec9507,Wuff ...,Wuff ...
+tae529c1a61,... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!,... All right. One more treat. But that's the last one for today!
+t62f1638df1,Wuff!,Wuff!
+t5bc0e42458,Lass uns reden! Wie geht's Friedel?,Let's talk! How's Friedel?
+tfbef13d3f4,"Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden.","Sometimes I think he senses that we're in a crisis."
+t4656d8b18a,Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.,When he lies by the window and looks sadly outside. Or when he becomes more affectionate than usual.
+t48370a7417,"Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht.","But the next day he's romping through the park again, without a care in the world ... So maybe not after all."
+t24d2ed51bd,Hund müsste man sein ...,"Sometimes I wish to be a dog, without any worries."
+tc8a7f2e7aa,Wuff!,Wuff!
+ta5f6658f86,Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}.,I want {{TradeMngr.get_sought_items_text()}} and would give you {{TradeMngr.get_offered_items_text()}}.
+te8693c9975,Einverstanden?,Deal?
+tc01425872c,Okay!,Okay!
+t686816490d,"Wunderbar, hier.","Marvellous, here."
+t59b80dbbc2,Nein Danke.,No thanks
+ta72fa50b1c,Ok.,Ok.
+t9a5f9ff93b,"Sorry, aber {{TradeMngr.get_unfeasibility_reason()}}!","Sorry, but {{TradeMngr.get_unfeasibility_reason()}}!"
+t4535740b89,Friedel ist schon wieder alleine losgezogen. Hast du ihn gesehen?,Friedel has gone off on his own again. Have you seen him?
+tf4af2a6432,Suchen helfen,Help searching
+t58edbf07ad,"Komm, wir suchen ihn zusammen.","Come on, let's find him together."
+t0191929b7c,"Danke! Wenn er nicht hier ist, ist er vermutlich wieder in den Park gelaufen.","Thank you! If he's not here, he's probably run back to the park."
+t224e8baaf3,"[speed=0.3]FRIEDEL, WO BIST DUUU?[/speed]","[speed=0.3]FRIEDEL, WHERE ARE YOU?[/speed]"
+t6d073ec13d,[speed=0.3]FRIEEEDEL![/speed],[speed=0.3]FRIEEEDEL![/speed]
+t5164aa780a,Gerhard und du suchen in jedem Winkel der Nachbarschaft.,Gerhard and you search every corner of the neighbourhood.
+tb29d137e6a,Nach einer langen Suche findet ihr den Vagabund-Hund.,"After a long search, you find the vagabond dog."
+td007217546,Wuff. *wedel*,Woof. *wag*
+t75ba6e4b8d,"Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten.","Friedel! There you are. You really must stop causing me so much worry."
+t56f623165f,Wuff!,Wuff!
+tbafd4b88ce,Danke für deine Hilfe bei der Suche!,Thanks for your help with the search!
+ta8822207ae,(Friedel scheint sich auch zu freuen.),(Friedel seems to be happy too.)
+t672463efd1,Nicht suchen helfen,Do not help search
+tf6613c2c3a,"Nein, ich habe ihn leider nicht gesehen.","No, unfortunately I haven't seen him."
+tbae7cf35b1,"Okay, schade. Trotzdem danke! Ich suche dann mal weiter.","Okay, too bad. Thanks anyway! I'll keep looking then."

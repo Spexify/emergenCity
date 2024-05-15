@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://drmdvmbc6j2uk"
+
+[deps]
+
+files=["res://res/translations/dialogues/gerhard.de.translation", "res://res/translations/dialogues/gerhard.en.translation"]
+
+source_file="res://res/translations/dialogues/gerhard.csv"
+dest_files=["res://res/translations/dialogues/gerhard.de.translation", "res://res/translations/dialogues/gerhard.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

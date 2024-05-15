@@ -7,7 +7,7 @@ var _hydration_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_hydration_change : int) -> void:
-	super("Hydrierend", Color.HOT_PINK)
+	super(tr("Hydrierend"), Color.HOT_PINK)
 	_hydration_change = _p_hydration_change
 
 
@@ -24,9 +24,9 @@ func get_unit_hydration_change() -> int:
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
 	if _hydration_change < 0:
-		return "De" + name.to_lower() + "(" + str(get_unit_hydration_change()) + UNIT + ")"
+		return "De" + name.to_lower() + "(" + str(get_unit_hydration_change()) + tr(UNIT) + ")"
 	else:
-		return name + "(" + str(get_unit_hydration_change()) + UNIT + ")"
+		return name + "(" + str(get_unit_hydration_change()) + tr(UNIT) + ")"
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

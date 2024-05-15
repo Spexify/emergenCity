@@ -200,7 +200,7 @@
 	{
 		"id": 2004,
 		"type": "change_stage",
-		"name": "zum Gerhard",
+		"name": "zu Gerhard",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -219,7 +219,7 @@
 	{
 		"id": 2005,
 		"type": "change_stage",
-		"name": "zum Julia",
+		"name": "zu Julia",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -235,7 +235,7 @@
 	{
 		"id": 2006,
 		"type": "change_stage",
-		"name": "zum Petro & Irena",
+		"name": "zu Petro & Irena",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -254,7 +254,7 @@
 	{
 		"id": 2007,
 		"type": "change_stage",
-		"name": "zum Elias",
+		"name": "zu Elias",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -270,7 +270,7 @@
 	{
 		"id": 2008,
 		"type": "change_stage",
-		"name": "zum Mert",
+		"name": "zu Mert",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -289,7 +289,7 @@
 	{
 		"id": 2009,
 		"type": "change_stage",
-		"name": "zum Kris & Veronika",
+		"name": "zu Kris & Veronika",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {
@@ -308,7 +308,7 @@
 	{
 		"id": 2010,
 		"type": "change_stage",
-		"name": "zum Agathe",
+		"name": "zu Agathe",
 		"constraints": {},
 		"consequences": {
 			"change_stage": {

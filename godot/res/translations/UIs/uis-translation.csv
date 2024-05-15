@@ -1,0 +1,109 @@
+keys,de,en
+[center]Titel[/center],[center]Titel[/center],[center]Title[/center]
+Konsumieren,Konsumieren,Consume
+BP_EAT,Essen,Eat
+Trinken,Trinken,Drink
+Filtern,Filtern,Filter
+Entsorgen,Entsorgen,Discard
+Dreckiges Wasser zum Filtern ist nicht verfügbar.,Dreckiges Wasser zum Filtern ist nicht verfügbar.,There is no dirty water available for filtering.
+BACK,Zurück,Back
+[center]Tagesübersicht[/center],[center]Tagesübersicht[/center],[center]Summary of the day[/center]
+MORGEN,MORGEN,MORNING
+MITTAG,MITTAG,NOON
+ABEND,ABEND,EVENING
+SEOD_DESC,"Kümmer dich um deine Gesundheit, iss und trink etwas.","Take care of your health, eat and drink something."
+Neues Spiel starten,Neues Spiel starten,Start a new game
+MM_SHOP,Vorräte einkaufen,Buy supplies
+Haushalt ausstatten,Haushalt ausstatten,Equip your household
+CC_TITLE,[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Choose your character[/color][/center]
+ST_TITLE,[center][color=white]Einstellungen[/color][/center],[center][color=white]Settings[/color][/center]
+ST_BACK,Speichern & Zurück,Save and Close
+ST_CHOOSE,Charakter auswählen,Change character
+Sound,Sound,Sound
+ST_RESET,Spiel zurücksetzen,Reset Game
+[center]Rucksack[/center],[center]Rucksack[/center],[center]Backpack[/center]
+[center]Shop[/center],[center]Shop[/center],[center]Shop[/center]
+CONFIRM,Bestätigen,Confirm
+Abbrechen,Abbrechen,Cancel
+Allgemein,Allgemein,General
+Hintergrund Musik,Hintergrund Musik,Background music
+Sound Effekte,Sound Effekte,Sound effects
+Vibration,Vibration,Vibration
+BACK_SOUND,Speichern & Zurück,Save & Go Back
+[center]Du bist in der Mitte einer Krise.[/center],[center]Du bist in der Mitte einer Krise.[/center],[center]You are in the middle of a crisis.[/center]
+Krise fortsetzen,Krise fortsetzen,Continue crisis
+Krise zurücksetzen,Krise zurücksetzen,Reset crisis
+[center]Statten Sie ihr Zuhause aus[/center],[center]Statten Sie ihr Zuhause aus[/center],[center]Equip your home[/center]
+[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center],[center]Gekaufte Gegenstände sind dauerhaft zur Auswahl freigeschaltet[/center],[center]Purchased items are permanently unlocked and available for selection[/center]
+[center]Ausgerüstete Gegenstände[/center],[center]Ausgerüstete Gegenstände[/center],[center]Equipped items[/center]
+[center]Erwerbbare Gegenstände[/center],[center]Erwerbbare Gegenstände[/center],[center]Acquirable Items[/center]
+Auswahl bestätigen,Auswahl bestätigen,Confirm selection
+Item kaufen,Item kaufen,Buy item
+UGC_EQ,Item ausrüsten,Equip item
+UGC_BACK,Zurück zum Menü,Back to menu
+Kurz,Kurz,Short
+Mittel,Mittel,Medium
+Lang,Lang,Long
+Weiter,Weiter,Continue
+PM_TITLE,[color=white] Pausiert[/color],[color=white] Paused[/color]
+PM_POWER,[color=white]Strom:[/color],[color=white]Power:[/color]
+PM_WATER,[color=white]Wasser:[/color],[color=white]Water:[/color]
+PM_ISO,[color=white]Isolation:[/color],[color=white]Isolation:[/color]
+PM_FOOD,[color=white]Essen:[/color],[color=white]Food:[/color]
+PM_RESUME,Fortsetzen,Resume
+PM_SETTINGS,Einstellungen,Settings
+PM_CANCEL,Krise abbrechen,Cancel crisis
+PM_SAVE_AND_EXIT,Speichern & Schließen,Save and Exit
+CG_TITLE,[center]Was möchtest du kochen?[/center],[center]What would you like to cook?[/center]
+Kochen,Kochen,Cook
+Ja,Ja,Yes
+SG_SOAP,"Ja, mit Seife","Yes, with Soap"
+RBG_TITLE,[center]Wie viel Wasser willst du abschöpfen?[/center],[center]How much water do you want to extract?[/center]
+RGB_DESC,"Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser.","It has rained, there are litres of water in your rain barrel."
+RGB_OPTION1,Eine Flasche (250ml) abschöpfen,Extract one bottle (250ml)
+RGB_OPTION2,Fertig,Complete
+EOG_TITLE1,[center]VERLOREN[/center],[center]GAME OVER[/center]
+EOG_TITLE2,[center]GEWONNEN[/center],[cenrer]YOU HAVE WON][/center]
+EOG_BACK,Zurück zum Hauptmenü,Back to main menu
+II_FOOD,[center]Nahrung\nSinkt täglich um 750 kcal.[/center],[center]Nutrition\nDecreases daily by 750 kcal.[/center]
+II_WATER,[center]Hydration\nSinkt täglich um 750 ml.[/center],[center]Hydration\nDecreases by 750 ml daily.[/center]
+II_HEALTH,[center]Gesundheit\nSinkt täglich um 10 %.[/center],[center]Health\nDecreases by 10% daily[/center]
+II_HAPPY,[center]Wohlbefinden\nSinkt täglich um 10 %.[/center],[center]Well-being\nDecreases by 10% daily[/center]
+II_TIME,[center]Zeitabschnitt\nAktion verbraucht Zeit.[/center],[center]Time period\nAction consumes time[/center]
+Tag,Tag,Day
+[color=black]Willst du duschen?[/color],[color=black]Willst du duschen?[/color],[color=black]Do you want to shower?[/color]
+Getränk,Getränk,Berverage
+Essen,Essen,Food
+Gesund,Gesund,Healthy
+Hydrierend,Hydrierend,Hydrating
+Köstlich,Köstlich,Delicious
+Haltbarkeit,Haltbarkeit,Shelf live
+Ungenießbar,Ungenießbar,Inedible
+Uses,Uses,Uses
+ICU_HEALTHY,Gesundheit,health
+ICU_HAPPY,Genuss,pleasure
+Tage,Tage,Days
+Nutzungen übrig.,Nutzungen übrig.,uses left.
+Ausgefallen!,Ausgefallen!,out of order!
+Verdreckt.,Verdreckt.,Dirty.
+Vorhanden.,Vorhanden.,No problem.
+Keine.,Keine.,None.
+Kein Problem.,Kein Problem.,No problem.
+Quarantäne!,Quarantäne!,Isolation
+Einige Betretsverbote.,Einige Betretsverbote.,Some entry restrictions.
+Reduz. Essens-Haltbarkeit,Reduz. Essens-Haltbarkeit,Reduced food shelf life
+Kontaminiert!,Kontaminiert!,Contaminated!
+OSM_NO_ELECT,Der Strom ist ausgefallen!,The power has gone out!
+OSM_NO_WATER,Das Wasser ist komplett ausgefallen!,The water supply is completely out of order!
+OSM_SOM_WATER,Nur verunreinigtes Wasser fließt aus der Leitung!,Only contaminated water flows from the tap!
+OSM_SOM_ISO,Ein Betretungsverbot öffentlicher Gelände wurde verhangen!,A ban on entering public areas was imposed!
+OSM_ISO,Eine Quarantäne wurde angeordnet!,Quarantine has been ordered!
+OSM_FOOD,Die Essensvorräte sind allesamt verdorben!,The food supplies are all spoilt!
+TRD_FEAS,der Handel ist ausführbar,the trade is feasible
+TRD_UNFEAS,der Handel ist nicht ausführbar,the trade is unfeasible
+TRD_NO_SPACE,du hast keinen Platz im Inventar,you don't have enought space in your backpack
+TRD_NO_ITEMS,dir fehlen die nötigen Items für diesen Handel,you don't have the needed items for this trade
+CG_BEFORE,Willst du,Do you want to go
+CG_AFTER1," gehen? Die Rückkehr kostet eine Aktion.",. The way back will cost an action.
+CG_AFTER2," gehen? Dies kostet eine Aktion.",". This will cost one action."
+

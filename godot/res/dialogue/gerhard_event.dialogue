@@ -1,21 +1,21 @@
 ~ START
-Gerhard: Friedel ist schon wieder alleine losgezogen. Hast du ihn gesehen?
-- Suchen helfen
-	Avatar: Komm, wir suchen ihn zusammen.
-	Gerhard: Danke! Wenn er nicht hier ist, ist er vermutlich wieder in den Park gelaufen.
-	Gerhard: [speed=0.3]FRIEDEL, WO BIST DUUU?[/speed]
-	Avatar: [speed=0.3]FRIEEEDEL![/speed]
-	Gerhard und du suchen in jedem Winkel der Nachbarschaft.
-	Nach einer langen Suche findet ihr den Vagabund-Hund.
-	Friedel: Wuff. *wedel* 
-	Gerhard: Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten. 
-	Friedel: Wuff!
-	Gerhard: Danke für deine Hilfe bei der Suche! 
-	Avatar: (Friedel scheint sich auch zu freuen.)
+Gerhard: Friedel ist schon wieder alleine losgezogen. Hast du ihn gesehen? [ID:t4535740b89]
+- Suchen helfen [ID:tf4af2a6432]
+	Avatar: Komm, wir suchen ihn zusammen. [ID:t58edbf07ad]
+	Gerhard: Danke! Wenn er nicht hier ist, ist er vermutlich wieder in den Park gelaufen. [ID:t0191929b7c]
+	Gerhard: [speed=0.3]FRIEDEL, WO BIST DUUU?[/speed] [ID:t224e8baaf3]
+	Avatar: [speed=0.3]FRIEEEDEL![/speed] [ID:t6d073ec13d]
+	Gerhard und du suchen in jedem Winkel der Nachbarschaft. [ID:t5164aa780a]
+	Nach einer langen Suche findet ihr den Vagabund-Hund. [ID:tb29d137e6a]
+	Friedel: Wuff. *wedel* [ID:td007217546] 
+	Gerhard: Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten. [ID:t75ba6e4b8d] 
+	Friedel: Wuff! [ID:t56f623165f]
+	Gerhard: Danke für deine Hilfe bei der Suche! [ID:tbafd4b88ce] 
+	Avatar: (Friedel scheint sich auch zu freuen.) [ID:ta8822207ae]
 	do execute("HELP_GERHARD")
 	=> END
-- Nicht suchen helfen
-	Avatar: Nein, ich habe ihn leider nicht gesehen.
-	Gerhard: Okay, schade. Trotzdem danke! Ich suche dann mal weiter.
+- Nicht suchen helfen [ID:t672463efd1]
+	Avatar: Nein, ich habe ihn leider nicht gesehen. [ID:tf6613c2c3a]
+	Gerhard: Okay, schade. Trotzdem danke! Ich suche dann mal weiter. [ID:tbae7cf35b1]
 	=> END
 

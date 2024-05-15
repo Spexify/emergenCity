@@ -2,12 +2,12 @@ extends EMC_ItemComponent
 class_name EMC_IC_Pleasurable
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = " Glück"
+const UNIT: String = "ICU_HAPPY"
 var _happiness_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_happiness_change : int) -> void:
-	super("Köstlich", Color.HOT_PINK)
+	super(tr("Köstlich"), Color.HOT_PINK)
 	_happiness_change = _p_happiness_change
 
 
@@ -23,7 +23,7 @@ func get_unit_happiness_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return name + "(" + str(get_unit_happiness_change()) + UNIT + ")"
+	return name + "(" + str(get_unit_happiness_change()) + " " + tr(UNIT) + ")"
 
 
 func to_dict() -> Dictionary:

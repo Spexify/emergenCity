@@ -1,14 +1,14 @@
 ~ START
-Avatar: Ah, so ein schöner Morgen! [wait=0.5] Huch, wieso geht mein Licht nicht an?
-Avatar: Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom ist wohl weg.
-Avatar: Oh, da ist jemand an der Tür. 
-Julia: Guten Morgen Nachbar! Hast du auch keinen Strom?
-Avatar: Sieht ganz so aus.
-Julia: Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?
-- Ja, klar.
-	Avatar: Gar kein Problem. Ich habe ja auch noch mein Krisenbewältigungsbuch im Regal.
-	Julia: Klingt gut. Viel Erfolg!
-- Naja.
-	Avatar: Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungs-buch im Regal.
-	Julia: Klingt gut. Viel Erfolg!
+Avatar: Ah, so ein schöner Morgen! [wait=0.5] Huch, wieso geht mein Licht nicht an? [ID:tc2b5b704cf]
+Avatar: Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom ist wohl weg. [ID:t4b45e070c5]
+Avatar: Oh, da ist jemand an der Tür. [ID:t0a52543658] 
+Julia: Guten Morgen Nachbar! Hast du auch keinen Strom? [ID:t87c1d5a041]
+Avatar: Sieht ganz so aus. [ID:t0c11cbf350]
+Julia: Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar? [ID:teb9d81abfc]
+- Ja, klar. [ID:t882c9d3db6]
+	Avatar: Gar kein Problem. Ich habe ja auch noch mein Krisenbewältigungsbuch im Regal. [ID:tb7770a6a77]
+	Julia: Klingt gut. Viel Erfolg! [ID:t300122350a]
+- Naja. [ID:t9a12a080ba]
+	Avatar: Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungs-buch im Regal. [ID:t8142e623d4]
+	Julia: Klingt gut. Viel Erfolg! [ID:t92f3fa9a53]
 => END

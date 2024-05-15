@@ -20,7 +20,7 @@ var _rad_offset: float
 
 ########################################## PUBLIC METHODS ##########################################
 func start(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
-	$RichTextLabel.text = "[center][color=white]Tag " + str(p_curr_day) + "[/color]"
+	$RichTextLabel.text = "[center][color=white]" + tr("Tag") + " " + str(p_curr_day) + "[/color]"
 	#_rad_offset = (1.0 * PI) + ((EMC_DayMngr.DayPeriod.size() - p_new_day_period) * 0.5 * PI)
 	var period: EMC_DayMngr.DayPeriod
 	
