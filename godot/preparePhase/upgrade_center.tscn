@@ -181,7 +181,7 @@ alignment = 1
 [node name="MainMenuBtn" parent="Background/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer2" instance=ExtResource("3_wh8jv")]
 custom_minimum_size = Vector2(194, 50)
 layout_mode = 2
-text = "Zurück zum Menü"
+text = "UGC_BACK"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
 layout_mode = 2
@@ -197,7 +197,7 @@ text = "Item kaufen"
 visible = false
 custom_minimum_size = Vector2(194, 50)
 layout_mode = 2
-text = "Item ausrüsten"
+text = "UGC_EQ"
 
 [node name="Control" type="Control" parent="Background/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(195, 0)

@@ -43,7 +43,7 @@ custom_minimum_size = Vector2(480, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[center][color=white]Einstellungen[/color][/center]"
+text = "ST_TITLE"
 fit_content = true
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
@@ -58,12 +58,12 @@ theme_override_constants/separation = 50
 [node name="Continue" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Speichern & Zurück"
+text = "ST_BACK"
 
 [node name="SelectAvatar" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Charakter auswählen"
+text = "ST_CHOOSE"
 
 [node name="Sound" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
@@ -80,7 +80,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = "Spiel zurücksetzen"
+text = "ST_RESET"
 
 [node name="Sounds" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
 visible = false

@@ -6,24 +6,24 @@ Trinken,Trinken,Drink
 Filtern,Filtern,Filter
 Entsorgen,Entsorgen,Discard
 Dreckiges Wasser zum Filtern ist nicht verfügbar.,Dreckiges Wasser zum Filtern ist nicht verfügbar.,There is no dirty water available for filtering.
-Zurück,Zurück,Back
+BACK,Zurück,Back
 [center]Tagesübersicht[/center],[center]Tagesübersicht[/center],[center]Summary of the day[/center]
 MORGEN,MORGEN,MORNING
 MITTAG,MITTAG,NOON
 ABEND,ABEND,EVENING
 SEOD_DESC,"Kümmer dich um deine Gesundheit, iss und trink etwas.","Take care of your health, eat and drink something."
 Neues Spiel starten,Neues Spiel starten,Start a new game
-Vorräte einkaufen,Vorräte einkaufen,Buy supplies
+MM_SHOP,Vorräte einkaufen,Buy supplies
 Haushalt ausstatten,Haushalt ausstatten,Equip your household
-[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Choose your character[/color][/center]
-[center][color=white]Einstellungen[/color][/center],[center][color=white]Einstellungen[/color][/center],[center][color=white]Settings[/color][/center]
-Speichern & Zurück,Speichern & Zurück,Save and Close
-Charakter auswählen,Charakter auswählen,Change character
+CC_TITLE,[center][color=white] Wähle deinen Charakter[/color][/center],[center][color=white] Choose your character[/color][/center]
+ST_TITLE,[center][color=white]Einstellungen[/color][/center],[center][color=white]Settings[/color][/center]
+ST_BACK,Speichern & Zurück,Save and Close
+ST_CHOOSE,Charakter auswählen,Change character
 Sound,Sound,Sound
-Spiel zurücksetzen,Spiel zurücksetzen,Reset Game
+ST_RESET,Spiel zurücksetzen,Reset Game
 [center]Rucksack[/center],[center]Rucksack[/center],[center]Backpack[/center]
 [center]Shop[/center],[center]Shop[/center],[center]Shop[/center]
-Bestätigen,Bestätigen,Confirm
+CONFIRM,Bestätigen,Confirm
 Abbrechen,Abbrechen,Cancel
 Allgemein,Allgemein,General
 Hintergrund Musik,Hintergrund Musik,Background music
@@ -39,8 +39,8 @@ Krise zurücksetzen,Krise zurücksetzen,Reset crisis
 [center]Erwerbbare Gegenstände[/center],[center]Erwerbbare Gegenstände[/center],[center]Acquirable Items[/center]
 Auswahl bestätigen,Auswahl bestätigen,Confirm selection
 Item kaufen,Item kaufen,Buy item
-Item ausrüsten,Item ausrüsten,Equip item
-Zurück zum Menü,Zurück zum Menü,Back to menu
+UGC_EQ,Item ausrüsten,Equip item
+UGC_BACK,Zurück zum Menü,Back to menu
 Kurz,Kurz,Short
 Mittel,Mittel,Medium
 Lang,Lang,Long

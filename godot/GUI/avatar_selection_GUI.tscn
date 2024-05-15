@@ -63,7 +63,7 @@ custom_minimum_size = Vector2(720, 180)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[center][color=white] Wähle deinen Charakter[/color][/center]"
+text = "CC_TITLE"
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 600)

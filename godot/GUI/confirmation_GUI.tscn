@@ -50,7 +50,7 @@ alignment = 1
 [node name="ConfirmationBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-text = "Bestätigen"
+text = "CONFIRM"
 
 [node name="Cancel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 custom_minimum_size = Vector2(140, 0)
