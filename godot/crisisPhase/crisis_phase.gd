@@ -166,6 +166,16 @@ func _process(delta: float) -> void:
 func play_rain_anim() -> void:
 	await $Animations/RainAnimation.play()
 
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"node_path": get_path(),
+		"pop_up_manager": _pu_event_mngr.save(),
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	if data.has("pop_up_manager"):
+		_pu_event_mngr.load_state(data.get("pop_up_manager"))
 
 ###################################### DIALOGUE HANDLING ###########################################
 func _play_tutorial_dialogue() -> void:

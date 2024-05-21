@@ -34,7 +34,7 @@ size = Vector2(596, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yx03m"]
 size = Vector2(20, 1028)
 
-[node name="CrisisPhase" type="Node2D"]
+[node name="CrisisPhase" type="Node2D" groups=["Save"]]
 process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")

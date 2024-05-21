@@ -31,7 +31,6 @@ func set_constraints(p_constraints: EMC_ActionConstraints) -> void:
 func set_consequences(p_consqeuences: EMC_ActionConsequences) -> void:
 	_executable_consequences = p_consqeuences
 
-
 ## 
 func check_for_new_event() -> bool:
 	_popup_event_countdown -= 1
@@ -46,5 +45,17 @@ func check_for_new_event() -> bool:
 		_popup_event_countdown = _rng.randi_range(PUEC_LOWER_BOUND, PUEC_UPPER_BOUND)
 		return true
 	return false
+
+func _set_count_down(count_down : int) -> void:
+	_popup_event_countdown = count_down
+
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"count_down": _popup_event_countdown,
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	self._set_count_down(data.get("count_down", 0))
 
 ########################################## PRIVATE METHODS #########################################
