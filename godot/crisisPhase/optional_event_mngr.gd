@@ -165,6 +165,14 @@ func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 			_tooltip_GUI.open(new_event.descr)
 			await _tooltip_GUI.closed
 
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"count_down": _opt_event_countdown,
+	}
+	return data
+
+func load_state(data : Dictionary) -> void:
+	_opt_event_countdown = data.get("count_down", _opt_event_countdown)
 
 ########################################## PRIVATE METHODS #########################################
 func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> Event:

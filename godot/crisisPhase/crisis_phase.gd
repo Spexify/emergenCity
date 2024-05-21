@@ -170,12 +170,16 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
 		"pop_up_manager": _pu_event_mngr.save(),
+		"opt_manager": _opt_event_mngr.save(),
 	}
 	return data
 	
 func load_state(data : Dictionary) -> void:
 	if data.has("pop_up_manager"):
 		_pu_event_mngr.load_state(data.get("pop_up_manager"))
+		
+	if data.has("opt_manager"):
+		_opt_event_mngr.load_state(data.get("opt_manager"))
 
 ###################################### DIALOGUE HANDLING ###########################################
 func _play_tutorial_dialogue() -> void:

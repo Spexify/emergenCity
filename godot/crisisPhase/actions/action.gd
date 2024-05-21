@@ -130,19 +130,32 @@ func play_sound(start : float = 0, pitch : float = 1) -> AudioStreamPlayer:
 
 func save() -> Dictionary:
 	var data : Dictionary = {
-		"type": "action",
+		#"type": "action",
 		"action_ID": _action_ID,
-		"ACTION_NAME": _ACTION_NAME,
-		"description": _description,
-		"consequences": EMC_ActionConsequences.to_json(_consequences),
+		#"ACTION_NAME": _ACTION_NAME,
+		#"description": _description,
+		#"consequences": EMC_ActionConsequences.to_json(_consequences),
 	}
 	return data
 
 func load_state(data : Dictionary) -> void:
 	_action_ID = data.get("action_ID")
-	_ACTION_NAME = data.get("ACTION_NAME")
-	_description = data.get("description")
-	_consequences = EMC_ActionConsequences.from_json(data.get("consequences"))
+	
+	if JsonMngr._dict_actions.has(_action_ID):
+		load_from_dict(JsonMngr._dict_actions.get(_action_ID))
+
+func load_from_dict(data : Dictionary) -> void:
+	_action_ID = data.get("id")
+	_ACTION_NAME = data.get("name", "")
+	_constraints_prior = data.get("constraints", {})
+	_consequences = data.get("consequences",{})
+	_type_gui = data.get("type_gui", "")
+	_description = data.get("description", "")
+	_performance_coin_value = data.get("e_coins", 0)
+	_progresses_day_period = data.get("progresses_day_period", true)
+	_sound = data.get("sound", "")
+	
+	_prompt = data.get("prompt", "")
 
 static func empty_action() -> EMC_Action:
 	return EMC_Action.new(NAN, "", {}, {}, "", "")
@@ -154,7 +167,7 @@ static func from_dict(data : Dictionary) -> EMC_Action:
 	var consequences : Dictionary = data.get("consequences",{})
 	var type_gui : String = data.get("type_gui", "")
 	var description : String = data.get("description", "")
-	var e_coin : int = data.get("e_coin", 0)
+	var e_coin : int = data.get("e_coins", 0)
 	var p_progresses_day_period : bool = data.get("progresses_day_period", true)
 	var sound : String = data.get("sound", "")
 	

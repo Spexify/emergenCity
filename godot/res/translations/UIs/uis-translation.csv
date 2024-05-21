@@ -63,7 +63,7 @@ RGB_DESC,"Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser.","It
 RGB_OPTION1,Eine Flasche (250ml) abschöpfen,Extract one bottle (250ml)
 RGB_OPTION2,Fertig,Complete
 EOG_TITLE1,[center]VERLOREN[/center],[center]GAME OVER[/center]
-EOG_TITLE2,[center]GEWONNEN[/center],[cenrer]YOU HAVE WON][/center]
+EOG_TITLE2,[center]GEWONNEN[/center],[center]YOU HAVE WON][/center]
 EOG_BACK,Zurück zum Hauptmenü,Back to main menu
 II_FOOD,[center]Nahrung\nSinkt täglich um 750 kcal.[/center],[center]Nutrition\nDecreases daily by 750 kcal.[/center]
 II_WATER,[center]Hydration\nSinkt täglich um 750 ml.[/center],[center]Hydration\nDecreases by 750 ml daily.[/center]

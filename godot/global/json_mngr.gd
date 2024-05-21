@@ -401,6 +401,7 @@ func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Arr
 ########################################JSON ACTION#################################################
 
 var _actions : Dictionary
+var _dict_actions : Dictionary
 var _is_action_loaded : bool = false
 var ACTION_SCNS : Dictionary = {} 
 
@@ -512,6 +513,7 @@ func load_actions() -> void:
 			ACTION_SCNS[_type] = act_scn
 
 		_actions[_action_id] = act_scn.from_dict(action_data)
+		_dict_actions[_action_id] = action_data
 	
 		act_index += 1
 	_is_action_loaded = true

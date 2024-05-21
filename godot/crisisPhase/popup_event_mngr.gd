@@ -46,9 +46,6 @@ func check_for_new_event() -> bool:
 		return true
 	return false
 
-func _set_count_down(count_down : int) -> void:
-	_popup_event_countdown = count_down
-
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"count_down": _popup_event_countdown,
@@ -56,6 +53,6 @@ func save() -> Dictionary:
 	return data
 	
 func load_state(data : Dictionary) -> void:
-	self._set_count_down(data.get("count_down", 0))
+	_popup_event_countdown = data.get("count_down", _popup_event_countdown)
 
 ########################################## PRIVATE METHODS #########################################

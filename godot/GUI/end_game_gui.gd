@@ -14,58 +14,36 @@ func _ready() -> void:
 ## opens summary end of day GUI/makes visible
 func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
 	
-	$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer.vertical_scroll_mode = true
-	
 	var summary_text_winner : String = ""
 	var summary_text_loser : String = ""
 	var all_action_coins : int = 0
-	var action_coin_value : int = 0
 	var actions_summary := {}
-	var morning : bool = false
-	var noon : bool = false
-	var evening : bool = false
 	
 	Global.get_tree().paused = true
 	
-	for action : int in EMC_Action.IDs.values():
-		var action_frequency_counter := 0
-		var action_name : String = ""
-		for day in p_history:
-			if day.morning_action._action_ID == action :
-				all_action_coins += day.morning_action.get_performance_coin_value()
-				morning = true
-				action_frequency_counter += 1
-			if day.noon_action._action_ID == action :
-				all_action_coins += day.noon_action.get_performance_coin_value()
-				noon = true
-				action_frequency_counter += 1
-			if day.evening_action._action_ID == action :
-				all_action_coins += day.evening_action.get_performance_coin_value()
-				evening = true
-				action_frequency_counter += 1
-			if morning : 
-				action_coin_value = day.morning_action.get_performance_coin_value()
-				action_name = day.morning_action.get_ACTION_NAME()
-				morning = false
-			if noon : 
-				action_coin_value = day.noon_action.get_performance_coin_value()
-				action_name = day.noon_action.get_ACTION_NAME()
-				noon = false
-			if evening : 
-				action_coin_value = day.evening_action.get_performance_coin_value()
-				action_name = day.evening_action.get_ACTION_NAME()
-				evening = false
+	for day in p_history:
+		actions_summary[day.morning_action._ACTION_NAME] = actions_summary.get(day.morning_action._ACTION_NAME, 0) + 1
+		actions_summary[day.morning_action._ACTION_NAME + "CoinValue"] = \
+		actions_summary.get(day.morning_action._ACTION_NAME + "CoinValue", 0) + day.morning_action.get_performance_coin_value()
+		all_action_coins += day.morning_action.get_performance_coin_value()
 		
-		actions_summary[action_name] = action_frequency_counter
-		actions_summary[action_name + "CoinValue"] = action_coin_value
+		actions_summary[day.noon_action._ACTION_NAME] = actions_summary.get(day.noon_action._ACTION_NAME, 0) + 1
+		actions_summary[day.noon_action._ACTION_NAME + "CoinValue"] = \
+		actions_summary.get(day.noon_action._ACTION_NAME + "CoinValue", 0) + day.noon_action.get_performance_coin_value()
+		all_action_coins += day.noon_action.get_performance_coin_value()
+		
+		actions_summary[day.evening_action._ACTION_NAME] = actions_summary.get(day.evening_action._ACTION_NAME, 0) + 1
+		actions_summary[day.evening_action._ACTION_NAME + "CoinValue"] = \
+		actions_summary.get(day.evening_action._ACTION_NAME + "CoinValue", 0) + day.evening_action.get_performance_coin_value()
+		all_action_coins += day.evening_action.get_performance_coin_value()
 	
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):
 			continue
 		if actions_summary.get(key) != 0:
 			summary_text_winner += key + " wurde " + str(actions_summary.get(key)) +\
-						 " Mal ausgeführt und gibt dir jeweils " +\
-						str(actions_summary.get(key+"CoinValue")) + " ECoins.\n"
+						 " Mal ausgeführt: " +\
+						str(actions_summary.get(key+"CoinValue")) + "[img]res://res/sprites/GUI/icons/icon_ecoins.png[/img].\n"
 			summary_text_loser += key + " wurde " + str(actions_summary.get(key)) +\
 						 " Mal ausgeführt .\n"
 						
@@ -78,8 +56,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 		elif _avatar.get_health_status() == 0:
 			losing_reason = "Du hast eine Gesundheitskrise und wurdest vom Notfalldienst gerettet. "
 			
-		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer/Actions.text \
-			= summary_text_loser
+		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll/Actions.append_text(summary_text_loser)
 		var end_coins : int = p_history.size()*LOSER_COIN_FACTOR
 		print(p_history.size())
 		$LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description.text =\
@@ -89,8 +66,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 		Global.set_e_coins(Global.get_e_coins() + end_coins)
 	else: 
 		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
-		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer/Actions.text \
-			= summary_text_winner
+		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll/Actions.append_text(summary_text_winner)
 
 		all_action_coins += _avatar.get_unit_happiness_status()
 		Global.set_e_coins(Global.get_e_coins() + all_action_coins)

@@ -84,17 +84,18 @@ theme_type_variation = &"WhitePanelContainer"
 clip_contents = true
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
+[node name="Scroll" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
+[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll"]
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 mouse_filter = 1
-text = "
-"
-scroll_following = true
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -159,18 +160,18 @@ custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
-clip_contents = false
+[node name="Scroll" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
-clip_contents = false
+[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll"]
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 mouse_filter = 1
 bbcode_enabled = true
-scroll_following = true
+fit_content = true
+scroll_active = false
 
 [node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
