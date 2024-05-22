@@ -7,6 +7,11 @@ class_name EMC_EndGameGUI
 
 const LOSER_COIN_FACTOR : int = 40
 
+@onready var winner_actions := $WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll/Actions
+@onready var winner_description := $WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description
+@onready var loser_actions := $LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll/Actions
+@onready var loser_description := $LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description
+
 func _ready() -> void:
 	hide()
 
@@ -18,8 +23,6 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 	var summary_text_loser : String = ""
 	var all_action_coins : int = 0
 	var actions_summary := {}
-	
-	Global.get_tree().paused = true
 	
 	for day in p_history:
 		actions_summary[day.morning_action._ACTION_NAME] = actions_summary.get(day.morning_action._ACTION_NAME, 0) + 1
@@ -40,12 +43,11 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):
 			continue
-		if actions_summary.get(key) != 0:
-			summary_text_winner += key + " wurde " + str(actions_summary.get(key)) +\
-						 " Mal ausgeführt: " +\
-						str(actions_summary.get(key+"CoinValue")) + "[img]res://res/sprites/GUI/icons/icon_ecoins.png[/img].\n"
-			summary_text_loser += key + " wurde " + str(actions_summary.get(key)) +\
-						 " Mal ausgeführt .\n"
+		summary_text_winner += key + " wurde " + str(actions_summary.get(key)) +\
+					 " Mal ausgeführt: " +\
+					str(actions_summary.get(key+"CoinValue")) + "[img]res://res/sprites/GUI/icons/icon_ecoins.png[/img].\n"
+		summary_text_loser += key + " wurde " + str(actions_summary.get(key)) +\
+					 " Mal ausgeführt .\n"
 						
 	if p_avatar_life_status == false :
 		var losing_reason : String = ""
@@ -56,22 +58,20 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 		elif _avatar.get_health_status() == 0:
 			losing_reason = "Du hast eine Gesundheitskrise und wurdest vom Notfalldienst gerettet. "
 			
-		$LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll/Actions.append_text(summary_text_loser)
+		loser_actions.append_text(summary_text_loser)
 		var end_coins : int = p_history.size()*LOSER_COIN_FACTOR
 		print(p_history.size())
-		$LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description.text =\
-				losing_reason + "Du hast nur " + str(end_coins) +" ECoins erworben."
+		loser_description.set_text(losing_reason + "Du hast nur " + str(end_coins) +" ECoins erworben.")
 		$LoserScreen.show()
 		$WinnerScreen.hide()
 		Global.set_e_coins(Global.get_e_coins() + end_coins)
 	else: 
 		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
-		$WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll/Actions.append_text(summary_text_winner)
+		winner_actions.append_text(summary_text_winner)
 
 		all_action_coins += _avatar.get_unit_happiness_status()
 		Global.set_e_coins(Global.get_e_coins() + all_action_coins)
-		$WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description.text =\
-				"Du hast " + str(all_action_coins) + " ECoins erworben!"
+		winner_description.set_text("Du hast " + str(all_action_coins) + " ECoins erworben!")
 		all_action_coins = 0
 				
 		$LoserScreen.hide()
@@ -84,7 +84,6 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	Global.get_tree().paused = false
 	hide()
 	closed.emit()
 
