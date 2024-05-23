@@ -26,7 +26,7 @@ func _on_done_btn_pressed() -> void:
 	closed.emit()
 
 
-func show_gui(p_action: EMC_Action) -> void:
+func open(p_action: EMC_Action) -> void:
 	$PanelContainer/VBoxContainer/PanelContainer/RichTextLabel.text = "In der Regentonne sind " + str(float(_overworld_states_mngr_ref.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL)) / 4) + "l Wasser."
 	#$SFX/OpenGUISFX.play()
 	show()

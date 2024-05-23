@@ -1,12 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=29 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://res/sprites/GUI/buttons/button_backpack.png" id="4_ef5pu"]
-[ext_resource type="Texture2D" uid="uid://b0bhn1sy8mmli" path="res://res/sprites/GUI/buttons/button_backpack_opened.png" id="5_bkokv"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://res/sprites/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
+[ext_resource type="Script" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://7oi6kcm73lxd" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="9_i2q6e"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 [ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://animations/day_period_transition.tscn" id="21_6msld"]
 [ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
+[ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://crisisPhase/stage/city_map.tscn" id="23_8pknv"]
 [ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
@@ -64,7 +65,15 @@ shape = SubResource("RectangleShape2D_yx03m")
 position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
-[node name="ButtonList" type="Control" parent="."]
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 576.0
+offset_bottom = 1024.0
+mouse_filter = 1
+script = ExtResource("7_lyrib")
+
+[node name="ButtonList" type="Control" parent="GUI"]
 process_mode = 1
 z_index = 2
 layout_mode = 3
@@ -73,8 +82,9 @@ offset_left = 490.0
 offset_top = 750.0
 offset_right = 554.0
 offset_bottom = 1006.0
+mouse_filter = 2
 
-[node name="VBC" type="VBoxContainer" parent="ButtonList"]
+[node name="VBC" type="VBoxContainer" parent="GUI/ButtonList"]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 7
@@ -87,133 +97,129 @@ offset_top = -64.0
 offset_right = 32.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 10
 
-[node name="PauseMenuBtn" type="TextureButton" parent="ButtonList/VBC"]
+[node name="PauseMenuBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 texture_normal = ExtResource("6_tr7dm")
 
-[node name="BackpackBtn" type="TextureButton" parent="ButtonList/VBC"]
+[node name="BackpackBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_force_pass_scroll_events = false
 toggle_mode = true
 texture_normal = ExtResource("4_ef5pu")
-texture_pressed = ExtResource("5_bkokv")
 
-[node name="GUI" type="CenterContainer" parent="."]
-z_index = 3
-custom_minimum_size = Vector2(568, 1024)
+[node name="CanvasModulate" type="CanvasModulate" parent="GUI"]
+visible = false
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="CL" type="CanvasLayer" parent="GUI"]
+
+[node name="VBC" type="VBoxContainer" parent="GUI/CL"]
+offset_top = 8.0
 offset_right = 576.0
-offset_bottom = 1024.0
-pivot_offset = Vector2(-5, -5)
-size_flags_horizontal = 4
-size_flags_vertical = 0
+offset_bottom = 1016.0
 mouse_filter = 2
 
-[node name="VBC" type="VBoxContainer" parent="GUI"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="UpperSection" type="Container" parent="GUI/VBC"]
+[node name="UpperSection" type="Container" parent="GUI/CL/VBC"]
 custom_minimum_size = Vector2(576, 100)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBC" type="HBoxContainer" parent="GUI/VBC/UpperSection"]
+[node name="HBC" type="HBoxContainer" parent="GUI/CL/VBC/UpperSection"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 180
 
-[node name="StatusBars" parent="GUI/VBC/UpperSection/HBC" groups=["Gui"] instance=ExtResource("6_22w2e")]
+[node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" groups=["Gui"] instance=ExtResource("6_22w2e")]
 process_mode = 3
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-mouse_filter = 2
 
-[node name="DayMngr" parent="GUI/VBC/UpperSection/HBC" groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
+[node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-mouse_filter = 2
 
-[node name="MiddleSection" type="Container" parent="GUI/VBC"]
+[node name="MiddleSection" type="Container" parent="GUI/CL/VBC"]
 custom_minimum_size = Vector2(576, 680)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_i2q6e")]
+[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
 
-[node name="PopUpGUI" parent="GUI/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="SummaryEndOfDayGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_owtos")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="EndGameGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("8_saydl")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="CookingGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("10_64vl8")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="RainwaterBarrelGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("12_ad4fq")]
+[node name="PopUpGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
 layout_mode = 2
 
-[node name="PauseMenu" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("15_cjvwy")]
+[node name="SummaryEndOfDayGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
 
-[node name="BookGUI" parent="GUI/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("16_eg1dm")]
+[node name="EndGameGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
 
-[node name="IconInformation" parent="GUI/VBC/MiddleSection" instance=ExtResource("17_yxtkp")]
+[node name="CookingGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("10_64vl8")]
 visible = false
 layout_mode = 2
 
-[node name="LowerSection" type="Container" parent="GUI/VBC"]
+[node name="RainwaterBarrelGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("12_ad4fq")]
+visible = false
+layout_mode = 2
+
+[node name="PauseMenu" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("15_cjvwy")]
+visible = false
+layout_mode = 2
+
+[node name="BookGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("16_eg1dm")]
+visible = false
+layout_mode = 2
+
+[node name="IconInformation" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("17_yxtkp")]
+visible = false
+layout_mode = 2
+
+[node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
 custom_minimum_size = Vector2(576, 220)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ChangeStageGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("13_nblvh")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="TooltipGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("14_0s3fx")]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-
-[node name="DefaultActionGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("19_sb74j")]
+[node name="ChangeStageGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("13_nblvh")]
 visible = false
 layout_mode = 2
 
-[node name="ShowerGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("20_ielcm")]
+[node name="TooltipGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("14_0s3fx")]
 visible = false
 layout_mode = 2
 
-[node name="ConfirmationGUI" parent="GUI/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
+[node name="DefaultActionGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("19_sb74j")]
 visible = false
 layout_mode = 2
+
+[node name="ShowerGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("20_ielcm")]
+visible = false
+layout_mode = 2
+
+[node name="ConfirmationGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
+visible = false
+layout_mode = 2
+
+[node name="CityMap" parent="GUI/CL" instance=ExtResource("23_8pknv")]
+visible = false
 
 [node name="InputBlock" type="Panel" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(600, 1100)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 600.0
+offset_bottom = 1100.0
 
 [node name="Animations" type="Node2D" parent="."]
 
@@ -224,12 +230,10 @@ visible = false
 visible = false
 mouse_filter = 2
 
-[connection signal="city_map_closed" from="StageMngr" to="." method="_on_stage_mngr_city_map_closed"]
-[connection signal="city_map_opened" from="StageMngr" to="." method="_on_stage_mngr_city_map_opened"]
-[connection signal="happiness_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
-[connection signal="health_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
-[connection signal="hydration_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
-[connection signal="nutrition_updated" from="Avatar" to="GUI/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
-[connection signal="pressed" from="ButtonList/VBC/PauseMenuBtn" to="." method="_on_pause_menu_btn_pressed"]
-[connection signal="pressed" from="ButtonList/VBC/BackpackBtn" to="." method="_on_backpack_btn_pressed"]
-[connection signal="closed" from="GUI/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
+[connection signal="happiness_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
+[connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
+[connection signal="hydration_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
+[connection signal="nutrition_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
+[connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
+[connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
+[connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

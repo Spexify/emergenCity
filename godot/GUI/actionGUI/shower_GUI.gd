@@ -9,7 +9,7 @@ func setup(p_inventory: EMC_Inventory) -> void:
 
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
-func show_gui(p_action: EMC_Action) -> void:
+func open(p_action: EMC_Action) -> void:
 	_action = p_action
 	
 	if _inventory.has_item(EMC_Item.IDs.SOAP):

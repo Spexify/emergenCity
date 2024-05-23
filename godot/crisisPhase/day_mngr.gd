@@ -24,12 +24,7 @@ var _period_cnt : int = 0 #Keeps track of the current period (counted/summed up 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 #References to other scenes:
-var _gui_refs : Array[EMC_ActionGUI]
-var _tooltip_GUI : EMC_TooltipGUI
-var _confirmation_GUI: EMC_ConfirmationGUI
-var _seodGUI : EMC_SummaryEndOfDayGUI
-var _egGUI : EMC_EndGameGUI
-var _puGUI : EMC_PopUpGUI
+var _gui_mngr : EMC_GUIMngr
 var _avatar : EMC_Avatar
 var _stage_mngr : EMC_StageMngr
 var _crisis_mngr : EMC_CrisisMngr
@@ -43,11 +38,7 @@ var _day_period_transition: EMC_DayPeriodTransition
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_avatar : EMC_Avatar, p_stage_mngr : EMC_StageMngr,
 p_crisis_mngr : EMC_CrisisMngr,
-p_gui_refs : Array[EMC_ActionGUI],
-p_tooltip_GUI : EMC_TooltipGUI,
-p_confirmation_GUI: EMC_ConfirmationGUI,
-seodGUI: EMC_SummaryEndOfDayGUI,
-egGUI : EMC_EndGameGUI,
+p_gui_mngr : EMC_GUIMngr,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
 p_opt_event_mngr: EMC_OptionalEventMngr,
@@ -56,15 +47,13 @@ p_day_period_transition: EMC_DayPeriodTransition) -> void:
 	_avatar = p_avatar
 	_stage_mngr = p_stage_mngr
 	_crisis_mngr = p_crisis_mngr
-	_gui_refs = p_gui_refs
-	_confirmation_GUI = p_confirmation_GUI
-	_tooltip_GUI = p_tooltip_GUI
-	_seodGUI = seodGUI
-	_egGUI = egGUI
 	_inventory = p_inventory
+	
+	_gui_mngr = p_gui_mngr
+	
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
-		p_lower_gui_node, self, p_tooltip_GUI, p_opt_event_mngr, p_crisis_mngr)
+		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr, p_crisis_mngr)
 	_opt_event_mngr = p_opt_event_mngr
 	_pu_event_mngr = p_pu_event_mngr
 	_day_period_transition = p_day_period_transition
@@ -92,12 +81,12 @@ func on_interacted_with_furniture(p_action_ID : int) -> void:
 	if reject_reasons == EMC_ActionConstraints.NO_REJECTION:
 		var gui_name := current_action.get_type_gui()
 		if gui_name == "ConfirmationGUI":
-			if await _confirmation_GUI.confirm(current_action.get_prompt()):
+			if await _gui_mngr.request_gui("ConfirmationGUI", [current_action.get_prompt()]):
 				_execute_consequences(current_action)
 		else:
-			_get_gui_ref_by_name(gui_name).show_gui(current_action)
+			_gui_mngr.request_gui(gui_name, [current_action])
 	else:
-		_tooltip_GUI.open(reject_reasons)
+		_gui_mngr.request_gui("TooltipGUI", [reject_reasons])
 
 
 func get__current_day_cycle() -> EMC_DayCycle:
@@ -122,11 +111,6 @@ func get_action_consequences() -> EMC_ActionConsequences:
 
 
 ########################################## PRIVATE METHODS #########################################
-func _get_gui_ref_by_name(p_name : String) -> EMC_GUI:
-	for ref: EMC_ActionGUI in _gui_refs:
-		if ref.name == p_name:
-			return ref
-	return null
 
 
 func _on_action_silent_executed(p_action : EMC_Action) -> void:
@@ -151,8 +135,9 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 		DayPeriod.EVENING:
 			_current_day_cycle.evening_action = p_action
 			_history.append(_current_day_cycle)
-			_seodGUI.open(_current_day_cycle)
-			await _seodGUI.closed
+			var callback : Signal = _gui_mngr.request_gui("SummaryEndOfDayGUI", [_current_day_cycle])
+			if not callback.is_null():
+				await callback
 			_avatar.update_vitals()
 		_: push_error("Current day period unassigned!")
 	
@@ -198,7 +183,7 @@ func _check_and_display_game_over() -> bool:
 		avatar_life_status = false
 	
 	if get_current_day() >= _crisis_mngr.get_max_day() || !avatar_life_status:
-		_egGUI.open(_history, avatar_life_status, _avatar)
+		_gui_mngr.request_gui("EndGameGUI", [_history, avatar_life_status, _avatar])
 		return true
 	return false
 

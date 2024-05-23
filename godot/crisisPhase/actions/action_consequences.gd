@@ -10,20 +10,20 @@ var _inventory: EMC_Inventory
 var _stage_mngr : EMC_StageMngr
 var _lower_gui_node : Node
 var _day_mngr : EMC_DayMngr
-var _tooltip_GUI: EMC_TooltipGUI
+var _gui_mngr: EMC_GUIMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
 var _crisis_mngr: EMC_CrisisMngr
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, \
-p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr, p_tooltip_GUI: EMC_TooltipGUI,
+p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr, p_gui_mngr: EMC_GUIMngr,
 p_opt_event_mngr: EMC_OptionalEventMngr, p_crisis_mngr: EMC_CrisisMngr) -> void:
 	_avatar = p_avatar
 	_inventory = p_inventory
 	_stage_mngr = p_stage_mngr
 	_lower_gui_node = p_lower_gui_node
 	_day_mngr = p_day_mngr
-	_tooltip_GUI = p_tooltip_GUI
+	_gui_mngr = p_gui_mngr
 	_opt_event_mngr = p_opt_event_mngr
 	_rng.randomize()
 
@@ -42,14 +42,14 @@ func add_happiness(p_value: int) -> void:
 ## Adds the [EMC_Item]
 func add_item(p_ID: EMC_Item.IDs) -> void:
 	if _inventory.add_new_item(p_ID) == false:
-		_tooltip_GUI.open("Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!")
+		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 
 
 ## Allows multiple items, separated through a semicolon
 func add_items_by_name(p_names : String) -> void:
 	for item_name in p_names.split(";"):
 		if _inventory.add_new_item(JsonMngr.item_name_to_id(item_name)) == false:
-			_tooltip_GUI.open("Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!")
+			_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 			break
 
 
@@ -114,7 +114,7 @@ func use_radio(_dummy: int = NO_PARAM) -> void:
 			radio_msg = OverworldStatesMngr.get_notification()
 		else:
 			radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
-	_tooltip_GUI.open(radio_msg)
+	_gui_mngr.request_gui("TooltipGUI", [radio_msg])
 
 
 func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:

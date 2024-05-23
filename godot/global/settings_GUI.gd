@@ -72,7 +72,7 @@ func _on_font_change_pressed() -> void:
 
 
 func _on_reset_pressed() -> void:
-	var confirmed := await _confirmGUI.confirm("Fortschritt & Einstellungen komplett zurücksetzen?")
+	var confirmed := await _confirmGUI.open("Fortschritt & Einstellungen komplett zurücksetzen?")
 	if !confirmed: return
 	
 	self.close(true)

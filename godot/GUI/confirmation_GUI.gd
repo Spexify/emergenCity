@@ -11,7 +11,7 @@ func _ready() -> void:
 
 #see
 #https://docs.godotengine.org/de/4.x/tutorials/scripting/gdscript/gdscript_basics.html#awaiting-for-signals-or-coroutines
-func confirm(p_question: String) -> bool:
+func open(p_question: String) -> bool:
 	$VBoxContainer/PanelContainer/RichTextLabel.text = p_question
 	show()
 	await decided

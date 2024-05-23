@@ -26,7 +26,6 @@ func _open_summary_window() -> void:
 
 ## opens summary end of day GUI/makes visible
 func open(_p_day_cycle: EMC_DayCycle) -> void:
-	Global.get_tree().paused = true
 	if _p_day_cycle.morning_action._action_ID == 3: #MRM: TODO exchange magic numbers
 		_has_slept +=1
 	if _p_day_cycle.noon_action._action_ID == 3: 
@@ -42,7 +41,6 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	Global.get_tree().paused = false
 	hide()
 	closed.emit()
 	_inventory_GUI.set_consume_idle() #MRM Bugfix
@@ -55,7 +53,9 @@ func _on_continue_pressed() -> void:
 	_inventory_GUI.open()
 	_has_slept = 0
 	#close_gui_sfx.play()
-	hide()
+	
+	# Notice here was just hide
+	close()
 
 
 func _ready() -> void:

@@ -30,7 +30,6 @@ var _avatar : EMC_Avatar
 var _only_inventory : bool #Distinguish between the modes of the normal inventory and the SEOD-version
 var _seod : EMC_SummaryEndOfDayGUI
 var _has_slept : int = 0
-var _previously_paused: bool
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
@@ -46,7 +45,7 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 	set_title(p_title)
 
 	_consume_btn.hide()
-	_continue_btn.hide()
+	#_continue_btn.hide()
 	_discard_btn.hide()
 	$FilterWater.hide()
 	
@@ -69,7 +68,7 @@ func set_consume_active(_p_has_slept : int = 0) -> void:
 
 func set_consume_idle() -> void:
 	_only_inventory = true
-	_continue_btn.hide()
+	#_continue_btn.hide()
 
 
 ## Set the title of inventory GUI
@@ -88,13 +87,10 @@ func clear_items() -> void:
 
 ## Open the GUI
 func open() -> void:
-	_previously_paused = Global.get_tree().paused
-	Global.get_tree().paused = true
 	_clicked_item = null
 	show()
 	opened.emit()
 	_reload_items()
-
 
 ## Close the GUI
 func close() -> void:
@@ -102,7 +98,6 @@ func close() -> void:
 	close_button.emit()
 	#close_gui.play()
 	hide()
-	Global.get_tree().paused = _previously_paused
 	closed.emit()
 	if !_only_inventory:
 		set_consume_idle()

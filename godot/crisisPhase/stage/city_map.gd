@@ -10,21 +10,23 @@ class_name EMC_CityMap
 @onready var _opt_event_pins := $OptEventPins
 
 var _crisis_phase: EMC_CrisisPhase
-var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
 var _previously_paused: bool
+var _gui_mngr : EMC_GUIMngr
+
 @onready var _tween := get_tree().create_tween().set_loops()
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
-	p_cs_GUI: EMC_ChangeStageGUI, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
+func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_gui_mngr : EMC_GUIMngr, \
+ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_phase = p_crisis_phase
 	_day_mngr = p_day_mngr
 	_stage_mngr = p_stage_mngr
-	_tooltip_GUI = p_tooltip_GUI
-	p_cs_GUI.stayed_on_same_stage.connect(_on_change_stage_gui_stayed_on_same_stage)
+	
+	_gui_mngr = p_gui_mngr
+	
 	_opt_event_mngr = p_opt_event_mngr
 	$DoorbellsGUI.setup(p_stage_mngr)
 
@@ -109,57 +111,44 @@ func _ready() -> void:
 	
 	_setup_shader()
 
-
 func _on_back_btn_pressed() -> void:
 	close()
-
 
 func _on_home_btn_pressed() -> void:
 	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_HOME)
 
-
 func _on_marketplace_btn_pressed() -> void:
+	print("HI")
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
-
 
 func _on_elias_flat_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
 
-
 func _on_townhall_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
-
 
 func _on_julias_house_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
 
-
 func _on_complex_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		$DoorbellsGUI.open()
-
 
 func _on_gardenhouse_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
 
-
 func _on_villa_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
 
-
 func _on_park_btn_pressed() -> void:
 	if _is_not_evening_suggest_home_return():
 		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
-
-
-func _on_change_stage_gui_stayed_on_same_stage() -> void:
-	close()
 
 
 ## Helper method to deduce the position of the pin on the basis of the Button
@@ -176,7 +165,7 @@ func _is_not_evening_suggest_home_return() -> bool:
 	_day_mngr.get_current_day_period() != EMC_DayMngr.DayPeriod.EVENING:
 		return true
 	else:
-		_tooltip_GUI.open("Es ist schon spät, ich sollte nach Hause gehen.")
+		_gui_mngr.request_gui("TooltipGUI", ["Es ist schon spät, ich sollte nach Hause gehen."])
 		return false
 
 

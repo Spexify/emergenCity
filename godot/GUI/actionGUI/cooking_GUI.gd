@@ -21,8 +21,7 @@ func setup(p_inventory: EMC_Inventory, p_confirmationGUI: EMC_ConfirmationGUI, p
 		_recipe_list.add_child(recipe)
 		recipe.was_pressed.connect(_on_recipe_pressed)
 
-
-func show_gui(p_action : EMC_Action) -> void:
+func open(p_action : EMC_Action) -> void:
 	_action = p_action
 	for recipe : EMC_Recipe in _recipe_list.get_children():
 		recipe.disabled = !_recipe_cookable(recipe)
@@ -31,11 +30,13 @@ func show_gui(p_action : EMC_Action) -> void:
 	show()
 	opened.emit()
 
+func close() -> void:
+	hide()
+	closed.emit()
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	hide()
-
 
 
 func _on_cook_pressed() -> void:
@@ -48,9 +49,8 @@ func _on_cook_pressed() -> void:
 
 
 func _on_cancel_pressed() -> void:
-	hide()
 	_last_clicked_recipe = null
-	closed.emit()
+	close()
 
 
 func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
@@ -102,8 +102,8 @@ func _cook_recipe() -> void:
 	await $CookingAnimation.play(_last_clicked_recipe)
 	#wait.stop() #Bug on mobile: Doesn't work, and waits endlessly!
 	
-	hide()
 	_action.executed.emit(_action)
+	close()
 
 
 func _try_cooking_with_heat_source() -> void:
