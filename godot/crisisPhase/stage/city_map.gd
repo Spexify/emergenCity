@@ -89,7 +89,7 @@ func close() -> void:
 	#Remove all opt event pins
 	for prev_duplicated_pin in _opt_event_pins.get_children():
 		_opt_event_pins.remove_child(prev_duplicated_pin)
-	closed.emit()
+	closed.emit(self)
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -175,7 +175,6 @@ func _is_not_evening_suggest_home_return() -> bool:
 		_gui_mngr.request_gui("TooltipGUI", ["Es ist schon spät, ich sollte nach Hause gehen."])
 		return false
 
-
 ## Setup Shader stuff (see https://godotshaders.com/shader/2d-controlled-shine-highlight-with-angle-adjustment/)
 ## Can be used freely under CC0 license (see https://creativecommons.org/publicdomain/zero/1.0/)
 func _setup_shader() -> void:
@@ -186,7 +185,5 @@ func _setup_shader() -> void:
 	_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) #Play even though the scene is paused
 	_tween.play()
 	
-
-
 func _on_back_button_pressed() -> void:
 	close()

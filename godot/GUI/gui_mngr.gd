@@ -26,7 +26,7 @@ class_name  EMC_GUIMngr
 
 var all_the_guis : Array[EMC_GUI]
 var _prev_gui : EMC_GUI
-var _handel_input : bool = false
+#var _handel_input : bool = false
 
 var _active_gui_count : int 
 
@@ -38,18 +38,18 @@ func _ready() -> void:
 		all_the_guis.append(child)
 		
 	all_the_guis.append(_city_map)
+	
+	set_mouse_filter(2)
 
 # Called when the node enters the scene tree for the first time.
 func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpack : EMC_Inventory, \
 			p_stage_mngr : EMC_StageMngr, p_avatar : EMC_Avatar, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
-	#Setup-Methoden
-	#all_the_guis.append(p_stage_mngr.get_city_map())
 	
 	_city_map.setup(p_crisis_phase, p_day_mngr, p_stage_mngr, self, p_opt_event_mngr)
 	
 	_backpack_GUI.setup(p_backpack, p_avatar, seodGUI, "Rucksack", true)
 	
-	_status_bars.setup(_tooltip_GUI)
+	_status_bars.setup(self)
 	_cs_GUI.setup(p_stage_mngr)
 	_cooking_GUI.setup(p_backpack, _confirmation_GUI, _tooltip_GUI)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
@@ -57,13 +57,10 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	_showerGUI.setup(p_backpack)
 	seodGUI.setup(p_avatar, p_backpack, _backpack_GUI)
 
-	#if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
-		#action_guis.append($"GUI/VBC/MiddleSection/RainwaterBarrelGUI" as EMC_ActionGUI)
-
 func request_gui(gui_name : String, argv : Array) -> Signal:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
-			_handel_input = true
+			set_mouse_filter(0)
 			_hide_buttons()
 			
 			if gui_name == "CityMap":
@@ -79,17 +76,16 @@ func request_gui(gui_name : String, argv : Array) -> Signal:
 			return gui.closed
 	return Signal()
 
-func gui_closed() -> void:
+func gui_closed(gui : EMC_GUI) -> void:
 	_active_gui_count -= 1
 	
 	if _active_gui_count <= 0:
 		canvas_modulate.hide()
-		_handel_input = false
 		_show_buttons()
+		set_mouse_filter(2)
 
 func _gui_input(event : InputEvent) -> void:
-	if _handel_input:
-		accept_event() #get_viewport().set_input_as_handled()
+	accept_event() #get_viewport().set_input_as_handled()
 		
 func _hide_buttons() -> void:
 	pause_menu_btn.hide()

@@ -23,7 +23,7 @@ func _on_get_water_btn_pressed() -> void:
 
 func _on_done_btn_pressed() -> void:
 	hide() # Replace with function body.
-	closed.emit()
+	closed.emit(self)
 
 
 func open(p_action: EMC_Action) -> void:

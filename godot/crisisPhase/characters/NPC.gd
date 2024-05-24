@@ -53,6 +53,5 @@ func get_trade_bid() -> EMC_TradeMngr.TradeBid:
 func _ready() -> void:
 	$AnimationPlayer.play("idle")
 
-
 func _on_dialogue_hit_box_pressed() -> void:
 	clicked.emit(self)

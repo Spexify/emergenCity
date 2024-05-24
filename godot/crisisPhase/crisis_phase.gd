@@ -114,7 +114,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ToggleGUI"): #G key
 		var guielem := $GUI/VBC/LowerSection
 		guielem.visible = !guielem.visible
-		$GUI/VBC/MiddleSection.visible = !$GUI/VBC/UpperSection.visible
+		$GUI/CL/VBC/MiddleSection.visible = !$GUI/CL/VBC/UpperSection.visible
 	
 	if Input.is_action_just_pressed("Toggle_Electricity"):
 		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -167,7 +167,7 @@ func load_state(data : Dictionary) -> void:
 func _play_tutorial_dialogue() -> void:
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+	$GUI/CL/VBC/LowerSection.add_child(dialogue_GUI)
 	dialogue_GUI.start(TUTORIAL_DIALOG, "START")
 	Global.get_tree().paused = true
 
@@ -176,7 +176,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	var dialogue_resource: DialogueResource
 	#Theoretically the game is paused so no other DialogueGUI should be instantiated,
 	#but for robustness we still make sure there's at most one DialogueGUI
-	for node:Node in $GUI/VBC/LowerSection.get_children():
+	for node:Node in $GUI/CL/VBC/LowerSection.get_children():
 		if node.get_name() == "DialogueGUI":
 			return
 	
@@ -199,7 +199,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	#Workaround: Just instantiate it when needed. It's done the same way in the example code
 	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	$GUI/VBC/LowerSection.add_child(dialogue_GUI)
+	$GUI/CL/VBC/LowerSection.add_child(dialogue_GUI)
 	
 	dialogue_GUI.start(dialogue_resource, starting_tag, [_opt_event_mngr])
 	Global.get_tree().paused = true
@@ -215,5 +215,5 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	
 	Global.get_tree().paused = false
 	if !Global._tutorial_done:
-		$GUI/VBC/MiddleSection/IconInformation.open()
+		$GUI/CL/VBC/MiddleSection/IconInformation.open()
 		Global._tutorial_done = true

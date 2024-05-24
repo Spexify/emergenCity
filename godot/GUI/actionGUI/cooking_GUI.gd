@@ -32,7 +32,7 @@ func open(p_action : EMC_Action) -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:

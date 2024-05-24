@@ -85,7 +85,7 @@ func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar :
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func _on_main_menu_pressed() -> void:

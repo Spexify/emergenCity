@@ -42,7 +42,7 @@ func close(without_signal : bool = false) -> void:
 	canvas_layer.hide()
 	canvas_modulate.hide()
 	if not without_signal:
-		closed.emit()
+		closed.emit(self)
 
 func set_avatar_sprite_suffix(p_avatar_sprite_suffix: String) -> void:
 	_avatar_sprite_suffix = p_avatar_sprite_suffix

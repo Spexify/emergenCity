@@ -2,7 +2,7 @@ extends Control
 class_name EMC_GUI
 
 signal opened
-signal closed
+signal closed(gui : EMC_GUI)
 
 #func _unhandled_input(event : InputEvent) -> void:
 	#if visible:

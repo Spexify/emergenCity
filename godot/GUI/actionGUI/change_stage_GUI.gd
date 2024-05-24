@@ -61,7 +61,7 @@ func _on_confirm_btn_pressed() -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 func _on_cancel_btn_pressed() -> void:
 	close()

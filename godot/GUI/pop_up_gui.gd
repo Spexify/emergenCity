@@ -17,7 +17,7 @@ func open(_p_action : EMC_PopUpAction) -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func _on_confirm_pressed() -> void:

@@ -98,7 +98,7 @@ func close() -> void:
 	close_button.emit()
 	#close_gui.play()
 	hide()
-	closed.emit()
+	closed.emit(self)
 	if !_only_inventory:
 		set_consume_idle()
 		if _has_slept != 0:

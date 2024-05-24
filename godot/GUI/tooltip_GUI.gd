@@ -16,4 +16,4 @@ func open(p_text: String) -> void:
 
 func _on_back_btn_pressed() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)

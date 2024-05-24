@@ -262,6 +262,8 @@ func _physics_process(_delta: float) -> void:
 	velocity = MOVE_SPEED * input_direction
 	_nav_agent.set_velocity(velocity)
 
+# NOTICE: Prevent arrived from being emitted twice
+@onready var _last_pos : Vector2 = get_global_position()
 
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished() -> void:
@@ -269,7 +271,11 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("idle")
 	scale = Vector2(1.0, 1.0)
-	arrived.emit()
+	# NOTICE: Prevent arrived from being emitted twice
+	if get_global_position().distance_to(_last_pos) >= 10:
+		arrived.emit()
+		
+	_last_pos = get_global_position()
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:

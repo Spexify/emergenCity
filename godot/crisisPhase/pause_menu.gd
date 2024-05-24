@@ -20,7 +20,7 @@ func open() -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func update_overworld_states() -> void:

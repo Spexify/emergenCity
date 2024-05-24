@@ -20,7 +20,7 @@ func open(p_question: String) -> bool:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func _on_confirmation_btn_pressed() -> void:

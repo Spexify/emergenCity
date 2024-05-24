@@ -42,7 +42,7 @@ func open(_p_day_cycle: EMC_DayCycle) -> void:
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 	_inventory_GUI.set_consume_idle() #MRM Bugfix
 
 
