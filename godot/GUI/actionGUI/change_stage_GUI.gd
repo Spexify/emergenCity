@@ -6,19 +6,19 @@ class_name EMC_ChangeStageGUI
 var _stage_mngr: EMC_StageMngr
 ## The [EMC_Action]s shall be executed in a "lagging behind" fashion, until you change back to your home
 var _last_SC_action: EMC_StageChangeAction
-
+var _prev_gui : EMC_CityMap
 
 func setup(p_stage_mngr: EMC_StageMngr) -> void:
 	_stage_mngr = p_stage_mngr
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
-func open(p_action: EMC_Action, _prev_gui : EMC_CityMap) -> void:
+func open(p_action: EMC_Action, p_prev_gui : EMC_CityMap) -> void:
 	_action = p_action
+	_prev_gui = p_prev_gui
 	var stage_change_action: EMC_StageChangeAction = _action
 	
 	if _stage_mngr.get_curr_stage_name() == stage_change_action.get_stage_name():
 		close() #Order important: First close yourself, then emit signal
-		_prev_gui.close()
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
 			_richtext_label.text = tr("CG_BEFORE") + " " + \
@@ -55,15 +55,16 @@ func _on_confirm_btn_pressed() -> void:
 		_last_SC_action = null
 	else:
 		_last_SC_action = curr_SC_action
+	
+	# Close CityMap
+	_prev_gui.close()
 
 func close() -> void:
 	hide()
 	closed.emit()
 
-
 func _on_cancel_btn_pressed() -> void:
 	close()
-
 
 func _ready() -> void:
 	hide()

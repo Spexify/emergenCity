@@ -118,6 +118,11 @@ color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="CL" type="CanvasLayer" parent="GUI"]
 
+[node name="CityMap" parent="GUI/CL" instance=ExtResource("23_8pknv")]
+visible = false
+offset_right = 576.0
+offset_bottom = 1024.0
+
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
 offset_right = 576.0
@@ -210,9 +215,6 @@ layout_mode = 2
 [node name="ConfirmationGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
 visible = false
 layout_mode = 2
-
-[node name="CityMap" parent="GUI/CL" instance=ExtResource("23_8pknv")]
-visible = false
 
 [node name="InputBlock" type="Panel" parent="."]
 visible = false

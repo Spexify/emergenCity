@@ -28,6 +28,8 @@ var all_the_guis : Array[EMC_GUI]
 var _prev_gui : EMC_GUI
 var _handel_input : bool = false
 
+var _active_gui_count : int 
+
 func _ready() -> void:
 	for child in middle_section.get_children():
 		all_the_guis.append(child)
@@ -61,27 +63,29 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 func request_gui(gui_name : String, argv : Array) -> Signal:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
+			_handel_input = true
+			_hide_buttons()
+			
 			if gui_name == "CityMap":
 				_prev_gui = gui
-				gui.open()
-				_hide_buttons()
-				gui.closed.connect(gui_closed, CONNECT_ONE_SHOT)
-				return gui.closed
 			if gui_name == "ChangeStageGUI":
 				argv.append(_prev_gui)
-			
-			_handel_input = true
-			gui.callv("open", argv)
+				
 			canvas_modulate.show()
-			_hide_buttons()
 			gui.closed.connect(gui_closed, CONNECT_ONE_SHOT)
+			
+			gui.callv("open", argv)
+			_active_gui_count += 1
 			return gui.closed
 	return Signal()
 
 func gui_closed() -> void:
-	_handel_input = false
-	canvas_modulate.hide()
-	_show_buttons()
+	_active_gui_count -= 1
+	
+	if _active_gui_count <= 0:
+		canvas_modulate.hide()
+		_handel_input = false
+		_show_buttons()
 
 func _gui_input(event : InputEvent) -> void:
 	if _handel_input:
