@@ -33,7 +33,8 @@ func setup(p_gui_mngr : EMC_GUIMngr) -> void:
 	_gui_mngr = p_gui_mngr
 
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:
-	await ready
+	if not is_node_ready():
+		return
 	
 	var perc: int = float(p_new_value)  #float() Casting wichtig!
 	nutrition_bar.max_value = EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION
@@ -47,7 +48,8 @@ func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 
 
 func _on_avatar_hydration_updated(p_new_value: int) -> void:
-	await ready
+	if not is_node_ready():
+		return
 	
 	var perc: int = float(p_new_value)  #float() Casting wichtig!
 	hydration_bar.max_value = EMC_Avatar.MAX_VITALS_HYDRATION*EMC_Avatar.UNIT_FACTOR_HYDRATION
@@ -60,7 +62,8 @@ func _on_avatar_hydration_updated(p_new_value: int) -> void:
 		_smokeVFX_hydration.emitting = true
 
 func _on_avatar_health_updated(p_new_value: int) -> void:
-	await ready
+	if not is_node_ready():
+		return
 	
 	var perc: int = float(p_new_value)  #float() Casting wichtig!
 	health_bar.max_value = EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH
@@ -74,7 +77,8 @@ func _on_avatar_health_updated(p_new_value: int) -> void:
 
 
 func _on_avatar_happiness_updated(p_new_value: int) -> void:
-	await ready
+	if not is_node_ready():
+		return
 	
 	var perc: int = float(p_new_value) #float() Casting wichtig!
 	happiness_bar.max_value = EMC_Avatar.MAX_VITALS_HAPPINESS * EMC_Avatar.UNIT_FACTOR_HAPPINESS

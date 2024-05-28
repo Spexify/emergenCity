@@ -79,6 +79,7 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="NutritionBar" type="ProgressBar" parent="HBC/VBoxContainer/NutritionCont"]
+process_mode = 3
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 max_value = 2200.0
@@ -169,6 +170,7 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HealthBar" type="ProgressBar" parent="HBC/VBoxContainer2/HealthCont"]
+process_mode = 3
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0
@@ -208,6 +210,7 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HappinessBar" type="ProgressBar" parent="HBC/VBoxContainer2/HappinessCont"]
+process_mode = 3
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 step = 1.0

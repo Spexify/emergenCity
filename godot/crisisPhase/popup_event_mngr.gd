@@ -9,16 +9,17 @@ const PUEC_LOWER_BOUND : int = 3
 const PUEC_UPPER_BOUND : int = 6
 
 var _day_mngr: EMC_DayMngr
-var _puGUI: EMC_PopUpGUI
+var _gui_mngr: EMC_GUIMngr
+
 var _executable_constraints: EMC_ActionConstraints
 var _executable_consequences: EMC_ActionConsequences
 
 
 ########################################## PUBLIC METHODS ##########################################
 ## Constructor
-func _init(p_day_mngr: EMC_DayMngr, p_puGUI : EMC_PopUpGUI) -> void:
+func _init(p_day_mngr: EMC_DayMngr, p_gui_mngr : EMC_GUIMngr) -> void:
 	_day_mngr = p_day_mngr
-	_puGUI = p_puGUI
+	_gui_mngr = p_gui_mngr
 	
 	_rng.randomize()
 	_popup_event_countdown = _rng.randi_range(PUEC_LOWER_BOUND, PUEC_UPPER_BOUND)
@@ -39,7 +40,7 @@ func check_for_new_event() -> bool:
 		if _action != null:
 			_action.executed.connect(_day_mngr._on_action_executed)
 			_action.silent_executed.connect(_day_mngr._on_action_silent_executed)
-			_puGUI.open(_action)
+			_gui_mngr.request_gui("PopUpGUI", [_action])
 			#await _puGUI.closed
 		#Reset countdown
 		_popup_event_countdown = _rng.randi_range(PUEC_LOWER_BOUND, PUEC_UPPER_BOUND)

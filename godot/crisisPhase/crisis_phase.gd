@@ -34,8 +34,8 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
-@onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _tooltip_GUI)
-@onready var _pu_event_mngr: EMC_PopupEventMngr = EMC_PopupEventMngr.new(_day_mngr, puGUI)
+@onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _gui_mngr)
+@onready var _pu_event_mngr: EMC_PopupEventMngr = EMC_PopupEventMngr.new(_day_mngr, _gui_mngr)
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -75,6 +75,8 @@ func _ready() -> void:
 	if Global.was_crisis():
 		##LOAD SAVE STATE
 		Global.load_state()
+		
+	_avatar.refresh_vitals()
 
 	#Setup-Methoden
 	$InputBlock.hide()

@@ -69,10 +69,8 @@ func request_gui(gui_name : String, argv : Array) -> Signal:
 			_stage_mngr.set_process_mode(PROCESS_MODE_DISABLED)
 			_avatar.set_process_mode(PROCESS_MODE_DISABLED)
 			
-			if gui_name == "CityMap":
-				_prev_gui = gui
 			if gui_name == "ChangeStageGUI":
-				argv.append(_prev_gui)
+				argv.append(_active_guis.back())
 				
 			canvas_modulate.show()
 			gui.closed.connect(gui_closed, CONNECT_ONE_SHOT)
