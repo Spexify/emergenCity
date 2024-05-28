@@ -135,14 +135,14 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 		DayPeriod.EVENING:
 			_current_day_cycle.evening_action = p_action
 			_history.append(_current_day_cycle)
-			var callback : Signal = _gui_mngr.request_gui("SummaryEndOfDayGUI", [_current_day_cycle])
-			if not callback.is_null():
-				await callback
+			await _gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
 			_avatar.update_vitals()
 		_: push_error("Current day period unassigned!")
 	
 	#Actually advance the time
 	self._period_cnt += 1
+	
+	await _gui_mngr.all_guis_closed
 	
 	#Game over?
 	if _check_and_display_game_over(): return
@@ -183,7 +183,7 @@ func _check_and_display_game_over() -> bool:
 		avatar_life_status = false
 	
 	if get_current_day() >= _crisis_mngr.get_max_day() || !avatar_life_status:
-		_gui_mngr.request_gui("EndGameGUI", [_history, avatar_life_status, _avatar])
+		_gui_mngr.queue_gui("EndGameGUI", [_history, avatar_life_status, _avatar])
 		return true
 	return false
 

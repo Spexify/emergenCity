@@ -24,9 +24,13 @@ class_name  EMC_GUIMngr
 
 @onready var canvas_modulate := $CanvasModulate
 
+
+signal all_guis_closed
+
 var all_the_guis : Array[EMC_GUI]
 var _prev_gui : EMC_GUI
 var _active_guis : Array[EMC_GUI]
+var _gui_queue : Array[QueueEntry]
 
 var _stage_mngr : EMC_StageMngr
 var _avatar : EMC_Avatar
@@ -85,16 +89,44 @@ func request_gui(gui_name : String, argv : Array) -> Signal:
 			return gui.closed
 	return Signal()
 
+func queue_gui(gui_name : String, argv : Array) -> Signal:
+	if _active_guis.is_empty():
+		return request_gui(gui_name, argv)
+	else:
+		for gui in all_the_guis:
+			if gui.name == gui_name:
+				_gui_queue.append(QueueEntry.new(gui, argv))
+				gui.closed.connect(gui_closed, CONNECT_ONE_SHOT)
+				return gui.closed
+	return Signal()
+
 func gui_closed(gui : EMC_GUI) -> void:
 	_active_guis.erase(gui)
 	if not _active_guis.is_empty():
 		_active_guis.back().set_process_mode(PROCESS_MODE_INHERIT)
+	elif not _gui_queue.is_empty():
+		var entry : QueueEntry = _gui_queue.pop_back()
+		entry.gui.callv("open", entry.argv)
+		entry.gui.set_process_mode(PROCESS_MODE_INHERIT)
+		_active_guis.append(entry.gui)
 	else:
 		canvas_modulate.hide()
 		_show_buttons()
 		_status_bars.set_process_mode(PROCESS_MODE_INHERIT)
 		_stage_mngr.set_process_mode(PROCESS_MODE_INHERIT)
 		_avatar.set_process_mode(PROCESS_MODE_INHERIT)
+		
+		all_guis_closed.emit()
+
+########################Signal Handlers############################
+
+func _on_backpack_btn_pressed() -> void:
+	request_gui("BackpackGUI", [])
+
+func _on_pause_menu_btn_pressed() -> void:
+	request_gui("PauseMenu", [])
+
+########################Helper Functions############################
 
 func _set_guis_process_mode(guis : Array[EMC_GUI], mode : int) -> void:
 	for gui in guis:
@@ -107,9 +139,13 @@ func _hide_buttons() -> void:
 func _show_buttons() -> void:
 	pause_menu_btn.show()
 	backpack_btn.show()
-	
-func _on_backpack_btn_pressed() -> void:
-	request_gui("BackpackGUI", [])
 
-func _on_pause_menu_btn_pressed() -> void:
-	request_gui("PauseMenu", [])
+######################Helper Classes##############################
+
+class QueueEntry:
+	var gui : EMC_GUI
+	var argv : Array
+	
+	func _init(p_gui : EMC_GUI, p_argv : Array) -> void:
+		gui = p_gui
+		argv = p_argv
