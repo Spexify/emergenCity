@@ -13,7 +13,6 @@ var _crisis_phase: EMC_CrisisPhase
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
-var _previously_paused: bool
 var _gui_mngr : EMC_GUIMngr
 
 @onready var _tween := get_tree().create_tween().set_loops()

@@ -88,16 +88,16 @@ func _on_avatar_happiness_updated(p_new_value: int) -> void:
 
 func _on_nutrition_cont_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch && event.is_pressed():
-		_gui_mngr.request_gui("Tooltip", ["Diese Leiste stellt deinen Hunger dar."])
+		_gui_mngr.request_gui("TooltipGUI", ["Diese Leiste stellt deinen Hunger dar."])
 
 func _on_hydration_cont_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch && event.is_pressed():
-		_gui_mngr.request_gui("Tooltip", ["Diese Leiste stellt deinen Durst dar."])
+		_gui_mngr.request_gui("TooltipGUI", ["Diese Leiste stellt deinen Durst dar."])
 
 func _on_health_cont_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch && event.is_pressed():
-		_gui_mngr.request_gui("Tooltip", ["Diese Leiste stellt deine Gesundheit & Hygiene dar."])
+		_gui_mngr.request_gui("TooltipGUI", ["Diese Leiste stellt deine Gesundheit & Hygiene dar."])
 
 func _on_happiness_cont_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch && event.is_pressed():
-		_gui_mngr.request_gui("Tooltip", ["Diese Leiste stellt deine Glücklichkeit dar."])
+		_gui_mngr.request_gui("TooltipGUI", ["Diese Leiste stellt deine Glücklichkeit dar."])
