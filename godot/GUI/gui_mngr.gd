@@ -55,7 +55,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	
 	_city_map.setup(p_crisis_phase, p_day_mngr, p_stage_mngr, self, p_opt_event_mngr)
 	
-	_backpack_GUI.setup(p_backpack, p_avatar, "Rucksack")
+	_backpack_GUI.setup(p_backpack, p_avatar, self, "Rucksack")
 	
 	_status_bars.setup(self)
 	_cs_GUI.setup(p_stage_mngr)

@@ -8,37 +8,34 @@ extends EMC_GUI
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
 class_name EMC_InventoryGUI
 
-signal chlor_tablets_clicked
-
 @onready var _label := $Inventory/VBC/Label
 @onready var _slot_grid := $Inventory/VBC/ScrollContainer/GridContainer
 @onready var _label_name := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Name
 @onready var _label_comps := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Components
 @onready var _label_descr := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Description
-@onready var _consume_btn := $Inventory/VBC/MG/HSC/CC/Consume
-@onready var _discard_btn := $Inventory/VBC/MG/HSC/HBC/Discard
-@onready var _continue_btn := $Inventory/VBC/MG/HSC/HBC/Continue
-@onready var _back_btn := $Inventory/VBC/MG/HSC/HBC/Back
+@onready var _consume_btn : Button = $Inventory/VBC/MG/HSC/CC/Consume
+@onready var _discard_btn : Button = $Inventory/VBC/MG/HSC/HBC/Discard
+@onready var _continue_btn : TextureButton = $Inventory/VBC/MG/HSC/HBC/Continue
+@onready var _back_btn : TextureButton = $Inventory/VBC/MG/HSC/HBC/Back
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
-const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar : EMC_Avatar
 var _is_continue : bool #Distinguish between the modes of the normal inventory and the SEOD-version
+var _gui_mngr : EMC_GUIMngr
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 
-func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, p_title: String = "Inventar") -> void:
+func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, p_gui_mngr : EMC_GUIMngr, p_title: String = "Inventar") -> void:
 	_inventory = p_inventory
 	_avatar = _p_avatar
+	_gui_mngr = p_gui_mngr
 	set_title(p_title)
-
-	$FilterWater.hide()
 	
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
@@ -64,8 +61,6 @@ func clear_items() -> void:
 ## Open the GUI
 func open(p_is_continue : bool = false) -> void:
 	_clear_gui()
-	_consume_btn.hide()
-	_discard_btn.hide()
 	
 	_is_continue = p_is_continue
 	if _is_continue:
@@ -94,6 +89,9 @@ func _ready() -> void:
 	$SpoiledVFX_Template.emitting = false
 
 func _clear_gui() -> void:
+	_consume_btn.hide()
+	_discard_btn.hide()
+	
 	_label_name.clear()
 	_label_comps.clear()
 	_label_descr.clear()
@@ -101,17 +99,15 @@ func _clear_gui() -> void:
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
-	_consume_btn.hide()
+	_clear_gui()
 	
 	_clicked_item = p_clicked_item
 	_clicked_item.clicked_sound()
 	#Name of the item
-	_label_name.clear()
 	_label_name.append_text("[color=black]" + _clicked_item.get_name() + "[/color]")
 	
 	#Components of item
 	var comp_string: String = ""
-	_label_comps.clear()
 	
 	var comps := _clicked_item.get_comps()
 	for comp in comps:
@@ -123,7 +119,6 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
-	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
 	
 	#The activate the ones we need in the appropriate situation
@@ -203,7 +198,9 @@ func _on_consume_pressed() -> void:
 	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
 		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
 		if !_inventory.has_item(JsonMngr.item_name_to_id("WATER_DIRTY")):
-			$FilterWater.show()
+			self.set_modulate(Color(0.4, 0.4, 0.4))
+			await _gui_mngr.request_gui("TooltipGUI", ["Dreckiges Wasser zum Filtern ist nicht verfügbar."])
+			self.set_modulate(Color(1.0, 1.0, 1.0))
 		else:
 			##Improvement idea: use new _inventory.use_item() method
 			var comp_uses : EMC_IC_Uses = _clicked_item.get_comp(EMC_IC_Uses)
@@ -262,9 +259,6 @@ func _on_discard_pressed() -> void:
 	SoundMngr.play_sound("TrashBin")
 	_reload_items()
 	_clear_gui()
-
-func _on_cancel_pressed() -> void:
-	$FilterWater.hide()
 
 func _determine_consume_btn_text(p_item: EMC_Item) -> String:
 	if p_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
