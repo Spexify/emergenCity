@@ -135,7 +135,8 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 		DayPeriod.EVENING:
 			_current_day_cycle.evening_action = p_action
 			_history.append(_current_day_cycle)
-			await _gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
+			_gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
+			await _gui_mngr.queue_gui("BackpackGUI", [true])
 			_avatar.update_vitals()
 		_: push_error("Current day period unassigned!")
 	

@@ -55,7 +55,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	
 	_city_map.setup(p_crisis_phase, p_day_mngr, p_stage_mngr, self, p_opt_event_mngr)
 	
-	_backpack_GUI.setup(p_backpack, p_avatar, seodGUI, "Rucksack", true)
+	_backpack_GUI.setup(p_backpack, p_avatar, "Rucksack")
 	
 	_status_bars.setup(self)
 	_cs_GUI.setup(p_stage_mngr)
@@ -63,7 +63,6 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(OverworldStatesMngr, p_backpack)
 	_showerGUI.setup(p_backpack)
-	seodGUI.setup(p_avatar, p_backpack, _backpack_GUI)
 
 func request_gui(gui_name : String, argv : Array) -> Signal:
 	for gui in all_the_guis:

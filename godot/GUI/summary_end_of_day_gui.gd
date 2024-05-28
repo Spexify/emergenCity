@@ -1,62 +1,25 @@
 extends EMC_GUI
 class_name EMC_SummaryEndOfDayGUI
 
-signal on_eat_pressed
-signal on_drink_pressed
-
-const _INV_SCN : PackedScene = preload("res://GUI/inventory_GUI.tscn")
-const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
-
-var _avatar: EMC_Avatar
-var _inventory_GUI : EMC_InventoryGUI
-var _inventory : EMC_Inventory
-var _has_slept : int = 0 #MRM: Should be called slept_cnt as "has_" is conventionally used for bools
-
-
-func setup(_p_avatar: EMC_Avatar, _p_inventory : EMC_Inventory, _p_inventory_GUI_ref: EMC_InventoryGUI) -> void:
-	_avatar = _p_avatar
-	_inventory = _p_inventory
-	_inventory_GUI = _p_inventory_GUI_ref
-	_inventory_GUI.close_button.connect(_open_summary_window)
-
-
-func _open_summary_window() -> void:
-	$SummaryWindow.show()
-
+@onready var morning_content : RichTextLabel = $SummaryWindow/MarginContainer/VBC/VBC/HBC1/TextBox/MorningContent
+@onready var noon_content : RichTextLabel = $SummaryWindow/MarginContainer/VBC/VBC/HBC2/TextBox/NoonContent
+@onready var evening_content : RichTextLabel = $SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent
 
 ## opens summary end of day GUI/makes visible
 func open(_p_day_cycle: EMC_DayCycle) -> void:
-	if _p_day_cycle.morning_action._action_ID == 3: #MRM: TODO exchange magic numbers
-		_has_slept +=1
-	if _p_day_cycle.noon_action._action_ID == 3: 
-		_has_slept +=1
-	if _p_day_cycle.evening_action._action_ID == 3: 
-		_has_slept +=1
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC1/TextBox/MorningContent.text = _p_day_cycle.morning_action.get_description()
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC2/TextBox/NoonContent.text = _p_day_cycle.noon_action.get_description()
-	$SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent.text = _p_day_cycle.evening_action.get_description()
+	morning_content.text = _p_day_cycle.morning_action.get_description()
+	noon_content.text = _p_day_cycle.noon_action.get_description()
+	evening_content.text = _p_day_cycle.evening_action.get_description()
 	show()
 	opened.emit()
-
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
 	hide()
 	closed.emit(self)
-	_inventory_GUI.set_consume_idle() #MRM Bugfix
 
-
-#MRM: Technically the values should be subtracted when opening the screen but the 
-#gameover-conditions should be checked only when a new day section is started inside the DayMngr
 func _on_continue_pressed() -> void:
-	_inventory_GUI.set_consume_active(_has_slept)
-	_inventory_GUI.open()
-	_has_slept = 0
-	#close_gui_sfx.play()
-	
-	# Notice here was just hide
 	close()
-
 
 func _ready() -> void:
 	hide()

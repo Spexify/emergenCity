@@ -8,18 +8,17 @@ extends EMC_GUI
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
 class_name EMC_InventoryGUI
 
-signal close_button
 signal chlor_tablets_clicked
-signal seod_inventory_closed
 
 @onready var _label := $Inventory/VBC/Label
 @onready var _slot_grid := $Inventory/VBC/ScrollContainer/GridContainer
 @onready var _label_name := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Name
 @onready var _label_comps := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Components
 @onready var _label_descr := $Inventory/VBC/MarginContainer/TextBoxBG/VBC/Description
-@onready var _consume_btn := $Inventory/VBC/HBC/Consume
-@onready var _discard_btn := $Inventory/VBC/HBC/Discard
-@onready var _continue_btn := $Inventory/VBC/HBC/Continue
+@onready var _consume_btn := $Inventory/VBC/MG/HSC/CC/Consume
+@onready var _discard_btn := $Inventory/VBC/MG/HSC/HBC/Discard
+@onready var _continue_btn := $Inventory/VBC/MG/HSC/HBC/Continue
+@onready var _back_btn := $Inventory/VBC/MG/HSC/HBC/Back
 
 const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
 const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
@@ -27,26 +26,18 @@ const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
 var _avatar : EMC_Avatar
-var _only_inventory : bool #Distinguish between the modes of the normal inventory and the SEOD-version
-var _seod : EMC_SummaryEndOfDayGUI
-var _has_slept : int = 0
+var _is_continue : bool #Distinguish between the modes of the normal inventory and the SEOD-version
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 
-func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_SummaryEndOfDayGUI, p_title: String = "Inventar",\
-			_p_only_inventory : bool = true) -> void:
+func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, p_title: String = "Inventar") -> void:
 	_inventory = p_inventory
 	_avatar = _p_avatar
-	_only_inventory = _p_only_inventory
-	_seod = _p_seod
 	set_title(p_title)
 
-	_consume_btn.hide()
-	#_continue_btn.hide()
-	_discard_btn.hide()
 	$FilterWater.hide()
 	
 	for slot_idx in _inventory.get_slot_cnt():
@@ -59,34 +50,31 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, _p_seod : EMC_Sum
 			new_slot.set_item(item)
 		_slot_grid.add_child(new_slot)
 
-
-func set_consume_active(_p_has_slept : int = 0) -> void:
-	_has_slept =  _p_has_slept
-	_only_inventory = false
-	_continue_btn.show()
-
-
-func set_consume_idle() -> void:
-	_only_inventory = true
-	#_continue_btn.hide()
-
-
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
 	_label.text = "[center]" + p_new_text + "[/center]"
 
-
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
-
 
 func clear_items() -> void:
 	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
 		slot.remove_item()
 
-
 ## Open the GUI
-func open() -> void:
+func open(p_is_continue : bool = false) -> void:
+	_clear_gui()
+	_consume_btn.hide()
+	_discard_btn.hide()
+	
+	_is_continue = p_is_continue
+	if _is_continue:
+		_back_btn.hide()
+		_continue_btn.show()
+	else:
+		_back_btn.show()
+		_continue_btn.hide()
+	
 	_clicked_item = null
 	show()
 	opened.emit()
@@ -94,19 +82,10 @@ func open() -> void:
 
 ## Close the GUI
 func close() -> void:
-	_clear_gui()
-	close_button.emit()
-	#close_gui.play()
 	hide()
 	closed.emit(self)
-	if !_only_inventory:
-		set_consume_idle()
-		if _has_slept != 0:
-			_avatar.add_health(_has_slept)
-		_has_slept = 0
+	if _is_continue:
 		_avatar.get_home()
-		_seod.close()
-	seod_inventory_closed.emit()
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
@@ -114,19 +93,16 @@ func _ready() -> void:
 	hide()
 	$SpoiledVFX_Template.emitting = false
 
-
 func _clear_gui() -> void:
 	_label_name.clear()
 	_label_comps.clear()
 	_label_descr.clear()
-	
-	_consume_btn.hide()
-	_discard_btn.hide()
-
 
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
 func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
+	_consume_btn.hide()
+	
 	_clicked_item = p_clicked_item
 	_clicked_item.clicked_sound()
 	#Name of the item
@@ -150,18 +126,11 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_descr.clear()
 	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
 	
-	#Reset first, to make things easier to understand
-	_discard_btn.hide()
-	_consume_btn.hide()
-	
 	#The activate the ones we need in the appropriate situation
-	if _only_inventory:
+	if not _is_continue:
 		_discard_btn.show()
-		if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
-			## if the Chlor tablets are clicked, allow consumation
-			_consume_btn.show()
-	elif _item_consumable(_clicked_item):
-			_consume_btn.show()
+	if _item_consumable(_clicked_item) or _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+		_consume_btn.show()
 	
 	#And set the custom text
 	_consume_btn.text = _determine_consume_btn_text(_clicked_item)
@@ -288,17 +257,14 @@ func _on_consume_pressed() -> void:
 	_reload_items()
 	_clear_gui()
 
-
 func _on_discard_pressed() -> void:
 	_inventory.remove_item(_clicked_item.get_ID(),1)
 	SoundMngr.play_sound("TrashBin")
 	_reload_items()
 	_clear_gui()
 
-
 func _on_cancel_pressed() -> void:
 	$FilterWater.hide()
-
 
 func _determine_consume_btn_text(p_item: EMC_Item) -> String:
 	if p_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
