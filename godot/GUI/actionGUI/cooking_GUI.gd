@@ -4,18 +4,19 @@ const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
-var _confirmation_GUI: EMC_ConfirmationGUI
-var _tooltipGUI: EMC_TooltipGUI
+
+var _gui_mngr : EMC_GUIMngr
+
+
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 @onready var _needs_water_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsWater
 @onready var _needs_heat_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsHeat
 
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(p_inventory: EMC_Inventory, p_confirmationGUI: EMC_ConfirmationGUI, p_tooltipGUI: EMC_TooltipGUI) -> void:
+func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr) -> void:
 	_inventory = p_inventory
-	_confirmation_GUI = p_confirmationGUI
-	_tooltipGUI = p_tooltipGUI
+	_gui_mngr = p_gui_mngr
 	
 	for recipe : EMC_Recipe in JsonMngr.load_recipes():
 		_recipe_list.add_child(recipe)
@@ -99,21 +100,24 @@ func _cook_recipe() -> void:
 	#if wait != null:
 		#await wait.finished
 	
-	await $CookingAnimation.play(_last_clicked_recipe)
+	await _gui_mngr.request_gui("CookingAnimation", [_last_clicked_recipe])
 	#wait.stop() #Bug on mobile: Doesn't work, and waits endlessly!
 	
 	_action.executed.emit(_action)
+	
+	_gui_mngr.queue_gui("BackpackGUI", [])
+	
 	close()
 
 
 func _try_cooking_with_heat_source() -> void:
 	if Global.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER):
 		if _inventory.has_item(EMC_Item.IDs.GAS_CARTRIDGE):
-			if await _confirmation_GUI.confirm("Willst eine Gaskartusche zum Kochen verwenden?"):
+			if await _gui_mngr.request_gui("ConfirmationGUI", ["Willst eine Gaskartusche zum Kochen verwenden?"]):
 				_inventory.use_item(EMC_Item.IDs.GAS_CARTRIDGE)
 				_cook_recipe()
 		else:
-			_tooltipGUI.open("Du hast zwar einen Gaskocher, aber keine Gaskartusche um ihn zu betreiben!")
+			_gui_mngr.request_gui("TooltipGUI", ["Du hast zwar einen Gaskocher, aber keine Gaskartusche um ihn zu betreiben!"])
 	else:
-		_tooltipGUI.open("Du hast weder Strom, noch einen Gaskocher zum Kochen!")
+		_gui_mngr.request_gui("TooltipGUI", ["Du hast weder Strom, noch einen Gaskocher zum Kochen!"])
 

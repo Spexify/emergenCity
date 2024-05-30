@@ -59,7 +59,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	
 	_status_bars.setup(self)
 	_cs_GUI.setup(p_stage_mngr)
-	_cooking_GUI.setup(p_backpack, _confirmation_GUI, _tooltip_GUI)
+	_cooking_GUI.setup(p_backpack, self)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(OverworldStatesMngr, p_backpack)
 	_showerGUI.setup(p_backpack)

@@ -1,8 +1,10 @@
-extends Node2D
+extends EMC_GUI
 
+func _ready() -> void:
+	hide()
 
 ## The animation currently only supports up to 4 input items at fixed positions
-func play(p_recipe: EMC_Recipe) -> void:
+func open(p_recipe: EMC_Recipe) -> void:
 	var input_item_IDs := p_recipe.get_input_item_IDs()
 	
 	$PanelContainer/OutputItem.frame = p_recipe._output_item_ID
@@ -32,11 +34,8 @@ func play(p_recipe: EMC_Recipe) -> void:
 	await get_tree().create_timer(1).timeout
 	close()
 
-
 func close() -> void:
 	hide()
+	closed.emit(self)
 
-
-func _ready() -> void:
-	hide()
 

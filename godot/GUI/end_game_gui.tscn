@@ -31,15 +31,28 @@ color_ramp = SubResource("GradientTexture1D_fs814")
 
 [node name="GameOverGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_brneb")
 
 [node name="WinnerScreen" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 667.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -329.0
+offset_right = 218.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="WinnerScreen"]
 layout_mode = 2
@@ -115,12 +128,18 @@ size_flags_horizontal = 3
 text = "EOG_BACK"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 667.0
-metadata/_edit_use_anchors_ = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -329.0
+offset_right = 218.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
 layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=30 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://buhj6araogehg" path="res://GUI/book_GUI.tscn" id="16_eg1dm"]
 [ext_resource type="PackedScene" uid="uid://dmchkorcdvl0d" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
+[ext_resource type="PackedScene" uid="uid://c7423f41j0fg3" path="res://animations/cooking_animation.tscn" id="19_rorhr"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/actionGUI/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://oj0fy8uvcwa5" path="res://GUI/actionGUI/shower_GUI.tscn" id="20_ielcm"]
 [ext_resource type="PackedScene" uid="uid://0ice0vxqhi78" path="res://animations/day_period_transition.tscn" id="21_6msld"]
@@ -156,6 +157,7 @@ mouse_filter = 2
 [node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="PopUpGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
@@ -168,6 +170,8 @@ layout_mode = 2
 [node name="EndGameGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="CookingGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("10_64vl8")]
 visible = false
@@ -188,6 +192,12 @@ layout_mode = 2
 [node name="IconInformation" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("17_yxtkp")]
 visible = false
 layout_mode = 2
+
+[node name="CookingAnimation" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("19_rorhr")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
