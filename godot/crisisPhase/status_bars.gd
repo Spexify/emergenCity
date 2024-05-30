@@ -5,21 +5,21 @@ extends Control
 @onready var _smokeVFX_health := $HBC/VBoxContainer2/HealthCont/ContainerHealth/SmokeVFX
 @onready var _smokeVFX_happiness := $HBC/VBoxContainer2/HappinessCont/ContainerHappiness/SmokeVFX
 
-@onready var nutrition_bar : ProgressBar = $HBC/VBoxContainer/NutritionCont/NutritionBar
-@onready var calories_label : RichTextLabel = $HBC/VBoxContainer/NutritionCont/NutritionBar/CaloriesLabel
+@onready var calories_label : RichTextLabel = $HBC/VBoxContainer/NutritionCont/CaloriesLabel
 @onready var nutrition_icon : Sprite2D = $HBC/VBoxContainer/NutritionCont/ContainerNutrition/NutritionIcon
+@onready var nutrition_quad : MeshInstance2D = $HBC/VBoxContainer/NutritionCont/NutritionQuad
 
-@onready var hydration_bar : ProgressBar = $HBC/VBoxContainer/HydrationCont/HydrationBar
-@onready var milliliters_label : RichTextLabel = $HBC/VBoxContainer/HydrationCont/HydrationBar/MillilitersLabel
+@onready var milliliters_label : RichTextLabel = $HBC/VBoxContainer/HydrationCont/MillilitersLabel
 @onready var hydration_icon : Sprite2D = $HBC/VBoxContainer/HydrationCont/ContainerHydration/HydrationIcon
+@onready var hydration_quad : MeshInstance2D = $HBC/VBoxContainer/HydrationCont/HydrationQuad
 
-@onready var health_bar : ProgressBar = $HBC/VBoxContainer2/HealthCont/HealthBar
-@onready var health_label : RichTextLabel = $HBC/VBoxContainer2/HealthCont/HealthBar/HealthLabel
+@onready var health_label : RichTextLabel = $HBC/VBoxContainer2/HealthCont/HealthLabel
 @onready var health_icon : Sprite2D = $HBC/VBoxContainer2/HealthCont/ContainerHealth/HealthIcon
+@onready var health_quad : MeshInstance2D = $HBC/VBoxContainer2/HealthCont/HealthQuad
 
-@onready var happiness_bar : ProgressBar = $HBC/VBoxContainer2/HappinessCont/HappinessBar
-@onready var happiness_label : RichTextLabel = $HBC/VBoxContainer2/HappinessCont/HappinessBar/HappinessLabel
+@onready var happiness_label : RichTextLabel = $HBC/VBoxContainer2/HappinessCont/HappinessLabel
 @onready var happiness_icon : Sprite2D = $HBC/VBoxContainer2/HappinessCont/ContainerHappiness/HappinessIcon
+@onready var happiness_quad : MeshInstance2D = $HBC/VBoxContainer2/HappinessCont/HappinessQuad
 
 var _gui_mngr : EMC_GUIMngr
 
@@ -32,63 +32,77 @@ func _ready() -> void:
 func setup(p_gui_mngr : EMC_GUIMngr) -> void:
 	_gui_mngr = p_gui_mngr
 
+var _percentage_nutrition : float = 0.0
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 	if not is_node_ready():
 		return
 	
-	var perc: int = float(p_new_value)  #float() Casting wichtig!
-	nutrition_bar.max_value = EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION
-	calories_label.text = "[color=white][center]" + str(perc) +" kcal[/center][/color]"
-	nutrition_bar.set_value_no_signal(perc)
+	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION)
+	calories_label.set_text("[color=white][center]" + str(p_new_value) +" kcal[/center][/color]")
+
+	var tween :Tween = get_tree().create_tween()
+	tween.tween_method(_set_nutrition_shader, _percentage_nutrition, percentage, 1.0)
+	_percentage_nutrition = percentage
+
 	#Play VFX
-	if _smokeVFX_nutrition != null:
-		#_smokeVFX_nutrition.process_material.color = EMC_Palette.LIGHT_GREEN
-		_smokeVFX_nutrition.position = nutrition_icon.global_position
-		_smokeVFX_nutrition.emitting = true
+	_smokeVFX_nutrition.set_emitting(true)
 
+func _set_nutrition_shader(value : float) -> void:
+	nutrition_quad.get_material().set_shader_parameter("progress", value);
 
+var _percentage_hydration : float = 0.0
 func _on_avatar_hydration_updated(p_new_value: int) -> void:
 	if not is_node_ready():
 		return
 	
-	var perc: int = float(p_new_value)  #float() Casting wichtig!
-	hydration_bar.max_value = EMC_Avatar.MAX_VITALS_HYDRATION*EMC_Avatar.UNIT_FACTOR_HYDRATION
-	milliliters_label.text = "[color=white][center]" + str(perc) +" ml[/center][/color]"
-	hydration_bar.set_value_no_signal(perc)
+	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HYDRATION*EMC_Avatar.UNIT_FACTOR_HYDRATION)
+	milliliters_label.set_text("[color=white][center]" + str(p_new_value) +" ml[/center][/color]")
+	
+	var tween :Tween = get_tree().create_tween()
+	tween.tween_method(_set_hydration_shader, _percentage_hydration, percentage, 1.0)
+	_percentage_hydration = percentage
+	
 	#Play VFX
-	if _smokeVFX_hydration != null:
-		#_smokeVFX_hydration.process_material.color = EMC_Palette.LIGHT_BLUE
-		_smokeVFX_hydration.position = hydration_icon.global_position
-		_smokeVFX_hydration.emitting = true
+	_smokeVFX_hydration.set_emitting(true)
+	
+func _set_hydration_shader(value : float) -> void:
+	hydration_quad.get_material().set_shader_parameter("progress", value);
 
+var _percentage_health : float = 0.0
 func _on_avatar_health_updated(p_new_value: int) -> void:
 	if not is_node_ready():
 		return
 	
-	var perc: int = float(p_new_value)  #float() Casting wichtig!
-	health_bar.max_value = EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH
-	health_label.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
-	health_bar.set_value_no_signal(perc)
+	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH)
+	health_label.set_text("[color=white][center]" + str(p_new_value) +" %[/center][/color]")
+	
+	var tween :Tween = get_tree().create_tween()
+	tween.tween_method(_set_health_shader, _percentage_health, percentage, 1.0)
+	_percentage_health = percentage
+	
 	#Play VFX
-	if _smokeVFX_health != null:
-		#_smokeVFX_health.process_material.color = EMC_Palette.LIGHT_RED
-		_smokeVFX_health.position = health_icon.global_position
-		_smokeVFX_health.emitting = true
+	_smokeVFX_health.set_emitting(true)
 
+func _set_health_shader(value : float) -> void:
+	health_quad.get_material().set_shader_parameter("progress", value);
 
+var _percentage_happiness : float = 0.0
 func _on_avatar_happiness_updated(p_new_value: int) -> void:
 	if not is_node_ready():
 		return
 	
-	var perc: int = float(p_new_value) #float() Casting wichtig!
-	happiness_bar.max_value = EMC_Avatar.MAX_VITALS_HAPPINESS * EMC_Avatar.UNIT_FACTOR_HAPPINESS
-	happiness_label.text = "[color=white][center]" + str(perc) +" %[/center][/color]"
-	happiness_bar.set_value_no_signal(perc)
+	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HAPPINESS * EMC_Avatar.UNIT_FACTOR_HAPPINESS)
+	happiness_label.set_text("[color=white][center]" + str(p_new_value) +" %[/center][/color]")
+	
+	var tween :Tween = get_tree().create_tween()
+	tween.tween_method(_set_happpiness_shader, _percentage_happiness, percentage, 1.0)
+	_percentage_happiness = percentage
+	
 	#Play VFX
-	if _smokeVFX_happiness != null:
-		#_smokeVFX_happiness.process_material.color = EMC_Palette.LIGHT_YELLOW
-		_smokeVFX_happiness.position = happiness_icon.global_position
-		_smokeVFX_happiness.emitting = true
+	_smokeVFX_happiness.set_emitting(true)
+	
+func _set_happpiness_shader(value : float) -> void:
+	happiness_quad.get_material().set_shader_parameter("progress", value);
 
 func _on_nutrition_cont_gui_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch && event.is_pressed():
