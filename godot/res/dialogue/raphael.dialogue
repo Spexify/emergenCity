@@ -1,36 +1,36 @@
 ~ START
-Raphael: Guten Tag! [ID:t66cc7fc31e]
-Avatar: Guten Tag. [ID:t06f134ea4d]
+Raphael: Guten Tag!
+Avatar: Guten Tag.
 ~ BRANCH
-- Avatar: Was macht die Arbeit? [ID:t89c11b1118]
+- Avatar: Was macht die Arbeit?
 	=> TALK
-- Avatar: Was hast du so im Angebot? [ID:tc2163dbe55]
+- Avatar: Was hast du so im Angebot?
 	=>< TRADE
 	=> BRANCH
-- Avatar: Tschüss! [ID:t35c53a4d05]
-	Raphael: Bis dann! [ID:t5608e0f93e]
+- Avatar: Tschüss!
+	Raphael: Bis dann!
 	=> END
 
 
 ~ TALK
-Raphael: Momentan handel ich ohne Geld. Wer weiß wie viel es morgen wert ist. [ID:t8d244ed319]
-Avatar: Nur [i]Ware[/i] ist Wahres? [ID:t9243c24e49]
-Raphael: [#mood=happy]Hahaha. So könnte man es ausdrücken. [ID:t4b582df164]
+Raphael: Momentan handel ich ohne Geld. Wer weiß wie viel es morgen wert ist.
+Avatar: Nur [i]Ware[/i] ist Wahres?
+Raphael: [#mood=happy]Hahaha. So könnte man es ausdrücken.
 => END
 
 
 ~ TRADE
 do TradeMngr.setup_next_trade("Raphael")
-Raphael: Für {{TradeMngr.get_sought_items_text()}} biete ich dir {{TradeMngr.get_offered_items_text()}}. [ID:t6efa804990]
+Raphael: Für {{TradeMngr.get_sought_items_text()}} biete ich dir {{TradeMngr.get_offered_items_text()}}.
 if TradeMngr.is_trade_feasible()
-	Raphael: Was meinst du? [ID:t0c98d4d4dd]
-	- Avatar: Geht klar. [ID:tbb47a3e3e1]
+	Raphael: Was meinst du?
+	- Avatar: Geht klar.
 		do TradeMngr.execute_trade()
-		Raphael: [#mood=happy]Danke. [ID:t4809f85b7d]
-	- Avatar: Grade nicht. [ID:t4ec8793761]
-		Raphael: Okay, schönen Tag noch! [ID:t563278f53d]
+		Raphael: [#mood=happy]Danke.
+	- Avatar: Grade nicht.
+		Raphael: Okay, schönen Tag noch!
 else
-	Raphael: Tut mir Leid, aber {{TradeMngr.get_unfeasibility_reason()}}! [ID:tf5e7cc2bca]
+	Raphael: Tut mir Leid, aber {{TradeMngr.get_unfeasibility_reason()}}!
 => END
 
 
@@ -38,26 +38,26 @@ else
 if not has_executed_consequences_of_event("NEIGHBORHOOD_PARTY")
 	=> FREE_FOOD
 else
-	Raphael: Hast du schon mit den anderen geschnackt? [ID:tc234faf9b4]
+	Raphael: Hast du schon mit den anderen geschnackt?
 => END
 
 
 ~ FREE_FOOD
-Raphael: Willkommen auf der Nachbarschaftsfete! [ID:t56b7f9330e]
-Raphael: Wir mussten ja jede Menge Krisen in letzter Zeit durchstehen. [ID:tdd9a7fc9e7]
-Raphael: Endlich hat sich der Bürgermeister durchgerungen, das Fest hier zu finanzieren. [ID:ta2aaee5d92]
-Raphael: Was willst du haben? [ID:t590422d52e]
-- Bratfisch mit Pommes, bitte [ID:tb8441a5660]
-	Raphael: Einmal Bratfisch und Pommes, verstanden! [ID:t2ed4578417]
+Raphael: Willkommen auf der Nachbarschaftsfete!
+Raphael: Wir mussten ja jede Menge Krisen in letzter Zeit durchstehen.
+Raphael: Endlich hat sich der Bürgermeister durchgerungen, das Fest hier zu finanzieren.
+Raphael: Was willst du haben?
+- Bratfisch mit Pommes, bitte
+	Raphael: Einmal Bratfisch und Pommes, verstanden!
 	do execute_extra_consequence("add_items_by_name", "FISH_N_CHIPS")
 	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
-- Einen Teller Gulasch, bitte [ID:tfae3b93ad3]
-	Raphael: Ein Teller Gulasch kommt sofort! [ID:t63bdf38193]
+- Einen Teller Gulasch, bitte
+	Raphael: Ein Teller Gulasch kommt sofort!
 	do execute_extra_consequence("add_items_by_name", "GOULASH")
 	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
-- Reis mit Gemüse, bitte [ID:t041dedfe39]
-	Raphael: Hier! [ID:t66fb1c54db]
+- Reis mit Gemüse, bitte
+	Raphael: Hier!
 	do execute_extra_consequence("add_items_by_name", "RICE_WITH_VEGETABLES")
 	do flag_consequences_as_executed("NEIGHBORHOOD_PARTY")
-Avatar: Danke! [ID:tf93603b6a6]
+Avatar: Danke!
 => END

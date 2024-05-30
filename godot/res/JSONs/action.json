@@ -188,7 +188,7 @@
 				"stage_name": "park",
 				"avatar_pos": {"x": 350, "y": 700},
 				"npc_pos": {
-					"Gerhard": {"x": 460, "y": 960},
+					"Gerhard": {"x": 160, "y": 730},
 					"Friedel": {"x": 80, "y": 730}
 				}
 			}

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dfxjcjkwwvsdy"
+path="res://.godot/imported/leonie.dialogue-eaf92573a0c86b75064c39ef7468fa43.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/leonie.dialogue"
+dest_files=["res://.godot/imported/leonie.dialogue-eaf92573a0c86b75064c39ef7468fa43.tres"]
+
+[params]
+
+defaults=true

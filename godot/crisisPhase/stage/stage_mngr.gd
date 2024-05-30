@@ -133,6 +133,7 @@ func change_stage(p_stage_name: String) -> void:
 
 ## Setup NPC position and (de)activate them
 func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
+	print(p_NPC_spawn_pos)
 	#Hide all NPCs first
 	deactivate_NPCs()
 	

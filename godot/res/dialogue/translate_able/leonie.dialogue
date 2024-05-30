@@ -1,0 +1,10 @@
+~ START
+Leonie: Hi! [wait=0.25] Willkommen im Rathaus. [ID:t7af2ee6b0a]
+Leonie: In den Büchern da drüben findest du hilfreiche Informationen. [ID:tda891b496c]
+=> END
+
+
+~ NEIGHBORHOOD_PARTY
+Leonie: Ich engagiere mich immer gerne für lokale Events. [ID:ta78aa07e98]
+Leonie: Hast du schon den Fisch probiert, den wir gegrillt haben? [ID:tb460957245]
+=> END

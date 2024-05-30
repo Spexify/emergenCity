@@ -31,6 +31,9 @@ const INIT_HAPPINESS_VALUE : int = MAX_VITALS_NUTRITION/2
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
 
+# NOTICE: Prevent arrived from being emitted twice
+@onready var _last_pos : Vector2 = get_global_position()
+
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag, _health_value und _happinness_value gemessen in Prozent
 ## working in untis of 4
 var _nutrition_value : int = INIT_NUTRITION_VALUE
@@ -51,6 +54,7 @@ func set_target(p_target_pos: Vector2) -> void:
 	if (p_target_pos == position):
 		return
 	
+	_last_pos = Vector2(0.0, 0.0)
 	_nav_agent.target_position = p_target_pos
 	if not _walking_SFX.playing:
 		_walking_SFX.play()
@@ -261,9 +265,6 @@ func _physics_process(_delta: float) -> void:
 	# Update velocity
 	velocity = MOVE_SPEED * input_direction
 	_nav_agent.set_velocity(velocity)
-
-# NOTICE: Prevent arrived from being emitted twice
-@onready var _last_pos : Vector2 = get_global_position()
 
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished() -> void:

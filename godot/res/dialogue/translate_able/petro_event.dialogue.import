@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://40gb3uoftut0"
+path="res://.godot/imported/petro_event.dialogue-2e9c8135c1745fa326e79cbca70530a0.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/petro_event.dialogue"
+dest_files=["res://.godot/imported/petro_event.dialogue-2e9c8135c1745fa326e79cbca70530a0.tres"]
+
+[params]
+
+defaults=true

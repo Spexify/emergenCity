@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://8jk0xgeenepv"
+path="res://.godot/imported/friedel.dialogue-e9868cd50fa986614ea5349c1e4f7270.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/friedel.dialogue"
+dest_files=["res://.godot/imported/friedel.dialogue-e9868cd50fa986614ea5349c1e4f7270.tres"]
+
+[params]
+
+defaults=true

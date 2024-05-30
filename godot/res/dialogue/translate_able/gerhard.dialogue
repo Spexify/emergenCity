@@ -1,0 +1,45 @@
+~ START
+Avatar: Hallo! [ID:t17ba1bd507]
+~ BRANCH
+Gerhard: Moin. Willst du handeln? [ID:t9756149d8e]
+- Reden [ID:td6b4b9d5a3]
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Handeln [ID:t2ad439437b]
+	=>< TRADE
+	=> BRANCH
+- Nichts dergleichen [ID:tc08e762d60]
+	=> END
+
+~ DIALOG1
+Avatar: Lass uns reden! Wie geht's dir? [ID:tfb48017f28]
+Gerhard: Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht. [ID:ta1206db9eb]
+Friedel: Wuff. [ID:tf04fcbba4d]
+Gerhard: Worüber willst du dich denn beklagen? Zu wenig Essen? [ID:tbdfa3c7b3b]
+Friedel: Wuff ... [ID:tbfcdec9507]
+Gerhard: ... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute! [ID:tae529c1a61]
+Friedel: Wuff! [ID:t62f1638df1]
+=> END
+
+~ DIALOG2
+Avatar: Lass uns reden! Wie geht's Friedel? [ID:t5bc0e42458]
+Gerhard: Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden. [ID:tfbef13d3f4] 
+Gerhard: Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst. [ID:t4656d8b18a]
+Gerhard: Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht. [ID:t48370a7417]
+Avatar: Hund müsste man sein ... [ID:t24d2ed51bd]
+Friedel: Wuff! [ID:tc8a7f2e7aa]
+=> END
+
+~ TRADE
+do TradeMngr.setup_next_trade("Gerhard")
+Gerhard: Ich will {{TradeMngr.get_sought_items_text()}} und biete dir dafür {{TradeMngr.get_offered_items_text()}}. [ID:ta5f6658f86]
+if TradeMngr.is_trade_feasible()
+	Gerhard: Einverstanden? [ID:te8693c9975]
+	- Avatar: Okay! [ID:tc01425872c]
+		do TradeMngr.execute_trade()
+		Gerhard: [#mood=happy]Wunderbar, hier. [ID:t686816490d]
+	- Avatar: Nein Danke. [ID:t59b80dbbc2]
+		Gerhard: Ok. [ID:ta72fa50b1c]
+else
+	Gerhard: [#mood=sad]Sorry, aber {{TradeMngr.get_unfeasibility_reason()}}! [ID:t9a5f9ff93b]
+=> END

@@ -1,0 +1,24 @@
+~ START
+Petro: Hallo Nachbar! Ich muss ein paar Besorgungen erledigen und zum Arzt, und kann Irena da schlecht mitnehmen. [ID:t59a41fe091] 
+Petro: Würdest du für zwei Stunden auf sie aufpassen? [ID:t74dc859b04]
+Irena: Ich habe eine neue Rakete, die muss ich dir unbedingt zeigen! [ID:t41ef9a2e25]
+- Zustimmen [ID:t21d0b44f17]
+	Avatar: Kein Problem! [ID:te82125d983]
+	Petro: Super, vielen Dank! Ich bin so schnell es geht wieder zurück! [ID:t4a94abc3b8]
+	Irena: Guck mal, die hier hat noch mehr Antriebe als die andere Rakete! [ID:t8124d708c9]
+	Avatar: Das ist ja klasse! Und wohin fliegt die? [ID:tf4cea59812]
+	Irena: Mindestens bis zum Jupiter! [speed=0.3]Wuuuuschhhh!![/speed] [ID:t4597b37967]
+	Du beschäftigst Irena mit Spielen und lernst dabei mehr über Flugzeuge als du willst. [ID:t0fc0c6a8d8]
+	Petro: Da bin ich wieder! Hattet ihr zwei Spaß? [ID:t36542b72b5]
+	Irena: Jaaa! [ID:tc1a1f4c4d9]
+	Petro: Das freut mich! Übrigens, im Baumarkt waren gerade Akkus im Angebot. Ich dachte, du brauchst vielleicht welche? [ID:t685dff74f9]
+	Avatar: Oh super, danke! [ID:t334943a713]
+	Petro: Kein Problem! Man sieht sich! [ID:tf4f5a13839]
+	Irena: Tschüüüüss! [speed=0.3]Wuuuuschhhh!![/speed] [ID:t76bfc1c656]
+	do execute("HELP_PETRO")
+	=> END
+- Ablehnen [ID:tdb87e173d7]
+	Avatar: Tut mir leid, das passt mir gerade nicht gut. [ID:t7b62bcc17d]
+	Petro: Oh okay, schade. [ID:ta68937f6d6]
+	Irena: Dann zeige ich sie dir nächstes Mal! [speed=0.3]Wuuuuschhhh!![/speed] [ID:te5bc72e6c5]
+	=> END

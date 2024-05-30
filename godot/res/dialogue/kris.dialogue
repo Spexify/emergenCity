@@ -1,39 +1,39 @@
 ~ START
-Kris: Oh, hey! [ID:tbd735ad345] 
-- Avatar: Was geht? [ID:ta63693af32]
+Kris: Oh, hey!
+- Avatar: Was geht?
 	%2 => DIALOG1
 	%2 => DIALOG2
-- Avatar: Man sieht sich! [ID:t2fb2332f70]
-	Kris: Okay, bis dann! [ID:tca942807f5]
+- Avatar: Man sieht sich!
+	Kris: Okay, bis dann!
 	=> END
 
 ~ DIALOG1
-Kris: Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch. [ID:tc90f180d66]
-Kris: Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss. [ID:tcd9e787996]
-Kris: Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du? [ID:t34f1c80d01]
-- Kann ich gut nachvollziehen. [ID:ta62449d86d]
-	Avatar: Ohne Spontanität ist das Leben langweilig. [ID:t34f86384c3]
-	Kris: Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte! [ID:tdf0a41b2a0]
-	Kris: Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert. [ID:t7224f997fc]
-	Kris: Mal sehen, was wir dieses Mal finden! [ID:t3a6bba724d]
-- Sehe ich anders. [ID:t98740a22b4]
-	Avatar:  Nur in den Tag hinein leben funktioniert auch nicht. [ID:t0ede5da61c]
-	Kris: Ja, das stimmt natürlich ... [ID:te664aa699a]
-	Kris: Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant. [ID:t3a3ede5b34]
+Kris: Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.
+Kris: Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.
+Kris: Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?
+- Kann ich gut nachvollziehen.
+	Avatar: Ohne Spontanität ist das Leben langweilig.
+	Kris: Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!
+	Kris: Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.
+	Kris: Mal sehen, was wir dieses Mal finden!
+- Sehe ich anders.
+	Avatar:  Nur in den Tag hinein leben funktioniert auch nicht.
+	Kris: Ja, das stimmt natürlich ...
+	Kris: Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant.
 => END
 
 ~ DIALOG2
-Kris: Hast du Lust auf eine heiße Schokolade? [ID:tc36523967c]
-Veronika: Wir haben keine Milch mehr da. [ID:te2ac1519ec]
-Kris: Oh, schade. Aber ich könnte uns einen Smoothie machen! [ID:t05e84c0e84]
-Veronika: Obst haben wir auch keins mehr. [ID:tc88543058f]
-Kris: Stimmt ja. Oh, und was ist mit Milchreis? [ID:t99ffc85fc2]
-Veronika: ... Kris. Keine Milch. [ID:taac689f2d0]
-Kris: Achja. Na gut. Dann nächstes Mal. [ID:t8f9897685e]
+Kris: Hast du Lust auf eine heiße Schokolade?
+Veronika: Wir haben keine Milch mehr da.
+Kris: Oh, schade. Aber ich könnte uns einen Smoothie machen!
+Veronika: Obst haben wir auch keins mehr.
+Kris: Stimmt ja. Oh, und was ist mit Milchreis?
+Veronika: ... Kris. Keine Milch.
+Kris: Achja. Na gut. Dann nächstes Mal.
 => END
 
 
 ~ NEIGHBORHOOD_PARTY
-Kris: Hey, endlich mal keine Krisen gerade. [ID:tcdc916e0b4]
-Kris: Da kann man wieder seine sozialen Kontakte pflegen. [ID:ta8297eb176]
+Kris: Hey, endlich mal keine Krisen gerade.
+Kris: Da kann man wieder seine sozialen Kontakte pflegen.
 => END
