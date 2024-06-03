@@ -6,6 +6,7 @@ var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
 
 var _gui_mngr : EMC_GUIMngr
+var _day_mngr : EMC_DayMngr
 
 
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
@@ -14,9 +15,10 @@ var _gui_mngr : EMC_GUIMngr
 
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr) -> void:
+func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr, p_day_mngr : EMC_DayMngr) -> void:
 	_inventory = p_inventory
 	_gui_mngr = p_gui_mngr
+	_day_mngr = p_day_mngr
 	
 	for recipe : EMC_Recipe in JsonMngr.load_recipes():
 		_recipe_list.add_child(recipe)
@@ -105,7 +107,8 @@ func _cook_recipe() -> void:
 	
 	_action.executed.emit(_action)
 	
-	_gui_mngr.queue_gui("BackpackGUI", [])
+	if not _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING:
+		_gui_mngr.queue_gui("BackpackGUI", [])
 	
 	close()
 

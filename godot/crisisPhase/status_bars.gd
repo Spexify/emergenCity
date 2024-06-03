@@ -76,7 +76,7 @@ func _on_avatar_health_updated(p_new_value: int) -> void:
 	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HEALTH*EMC_Avatar.UNIT_FACTOR_HEALTH)
 	health_label.set_text("[color=white][center]" + str(p_new_value) +" %[/center][/color]")
 	
-	var tween :Tween = get_tree().create_tween()
+	var tween : Tween = Global.get_tree().create_tween()
 	tween.tween_method(_set_health_shader, _percentage_health, percentage, 1.0)
 	_percentage_health = percentage
 	
