@@ -144,15 +144,15 @@ func _reload_items() -> void:
 	
 	for child in _slot_grid.get_children():
 		child.remove_item()
-		_slot_grid.remove_child(child)
-	
+		#_slot_grid.remove_child(child)
+		
 	for slot_idx in _inventory.get_slot_cnt():
 		#Setup slot grid
-		var new_slot := _SLOT_SCN.instantiate()
+		var new_slot := _slot_grid.get_children()[slot_idx]
 		#Add items that already are in the inventory
 		var item := _inventory.get_item_of_slot(slot_idx)
 		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
-			item.modulate = Color(1, 1, 1) #initialize so nothing is visually marked
+			item.reset_modulate()
 			##Code for Issue #25 Doesn't work, because if you click one item, it updates all the
 			##other ones and removes the modulation... To cumbersome to fix rn
 			#if !_only_inventory: 
@@ -207,10 +207,10 @@ func _on_consume_pressed() -> void:
 			comp_uses.use_item(1)
 			_clicked_item.consumed_sound()
 			# Work around to stop gray modulate
-			_clicked_item._on_clicked(EMC_Item.new())
+			_clicked_item.reset_modulate()
 			
 			if comp_uses.no_uses_left():
-				_inventory.remove_item(_clicked_item.get_ID())
+				_inventory.remove_specific_item(_clicked_item)
 			
 			_inventory.remove_item(JsonMngr.item_name_to_id("WATER_DIRTY"))
 			_inventory.add_new_item(JsonMngr.item_name_to_id("WATER"))
@@ -249,13 +249,13 @@ func _on_consume_pressed() -> void:
 
 		# Work around to stop gray modulate
 		_clicked_item._on_clicked(EMC_Item.new())
-		_inventory.remove_item(_clicked_item._ID)
+		_inventory.remove_specific_item(_clicked_item)
 		
 	_reload_items()
 	_clear_gui()
 
 func _on_discard_pressed() -> void:
-	_inventory.remove_item(_clicked_item.get_ID(),1)
+	_inventory.remove_specific_item(_clicked_item)
 	SoundMngr.play_sound("TrashBin")
 	_reload_items()
 	_clear_gui()

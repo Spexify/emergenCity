@@ -52,6 +52,9 @@ enum IDs{
 	SOAP = 42,
 }
 
+const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
+const DEFAULT_COLOR := Color(1, 1, 1)
+
 #FYI: Inherits "name" property from Node
 var _ID: IDs
 var _descr: String = "<No Descr>"
@@ -231,16 +234,15 @@ func _ready() -> void:
 
 ## TODO
 func _on_clicked(sender: EMC_Item) -> void:
-	const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
-	const DEFAULT_COLOR := Color(1, 1, 1)
-	
 	if sender == null:
 		printerr("Item._on_clicked(): Sender ist null!")
 	elif sender == self:
 		self.modulate = HIGHLIGHTED_COLOR
 	else:
 		self.modulate = DEFAULT_COLOR
-
+		
+func reset_modulate() -> void:
+	self.modulate = DEFAULT_COLOR
 
 func _on_texture_button_pressed() -> void:
 	clicked.emit(self)
