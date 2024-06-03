@@ -31,6 +31,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("1_ve5h2")
 
 [node name="Inventory" type="PanelContainer" parent="."]
@@ -170,11 +171,10 @@ stream = ExtResource("6_i2pde")
 bus = &"SFX"
 
 [node name="SpoiledVFX_Template" type="GPUParticles2D" parent="."]
-position = Vector2(-248, -478)
+position = Vector2(-249, -478)
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_3fov1")
 texture = ExtResource("8_m04a3")
-lifetime = 5.0
 speed_scale = 0.5
 explosiveness = 1.0
 
