@@ -1,6 +1,5 @@
 extends TextureButton
 class_name EMC_Recipe
-#
 
 
 ###Tupe-Klasse (alles public und keine Methoden)
@@ -21,18 +20,11 @@ p_needs_heat : bool) -> void:
 	_output_item_ID = p_outputItemID
 	_needs_water = p_needs_water
 	_needs_heat = p_needs_heat
-	#await ready
+
 	var item : EMC_Item = ITEM_SCN.instantiate()
 	item.setup(p_outputItemID)
 	$HBoxContainer.add_child(item)
-	#var item := $HBoxContainer/item
-	#item.setup(p_outputItemID)
 	$HBoxContainer/RichTextLabel.text = item.get_name()
-	#item.set_frame()
-
-
-#func set_disabled(p_disabled: bool = false) -> void:
-	#disabled = p_disabled
 
 func get_input_item_IDs() -> Array[EMC_Item.IDs]:
 	return _input_item_IDs

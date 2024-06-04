@@ -8,7 +8,6 @@ var _last_clicked_recipe: EMC_Recipe
 var _gui_mngr : EMC_GUIMngr
 var _day_mngr : EMC_DayMngr
 
-
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 @onready var _needs_water_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsWater
 @onready var _needs_heat_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsHeat
@@ -20,14 +19,49 @@ func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr, p_day_mngr : EM
 	_gui_mngr = p_gui_mngr
 	_day_mngr = p_day_mngr
 	
+	var recipes_dict : Dictionary
 	for recipe : EMC_Recipe in JsonMngr.load_recipes():
-		_recipe_list.add_child(recipe)
+		#_recipe_list.add_child(recipe)
 		recipe.was_pressed.connect(_on_recipe_pressed)
+		if recipes_dict.has(recipe.get_output_item_ID()):
+			recipes_dict[recipe.get_output_item_ID()].append(recipe)
+		else:
+			recipes_dict[recipe.get_output_item_ID()] = [recipe]
+			
+	for mother : int in recipes_dict:
+		if recipes_dict.get(mother).size() == 1:
+			_recipe_list.add_child(recipes_dict.get(mother)[0])
+		else:
+			var casted_array : Array[EMC_Recipe]
+			casted_array.assign(recipes_dict.get(mother))
+			var mother_scn : EMC_MotherRecipe = EMC_MotherRecipe.make(mother, casted_array)
+			_recipe_list.add_child(mother_scn)
+			closed.connect(mother_scn.hide_children)
+	
 
 func open(p_action : EMC_Action) -> void:
 	_action = p_action
-	for recipe : EMC_Recipe in _recipe_list.get_children():
-		recipe.disabled = !_recipe_cookable(recipe)
+	
+	for recipe : Variant in _recipe_list.get_children():
+		if recipe is EMC_MotherRecipe:
+			
+			var all_disabled : bool = true
+			for child in (recipe as EMC_MotherRecipe).get_child_recipes():
+				if not _recipe_cookable(child):
+					recipe.move_child(child, -1)
+					child.set_disabled(true) 
+				all_disabled = all_disabled and child.is_disabled()
+			if all_disabled:
+				_recipe_list.move_child(recipe, -1)
+				recipe.set_disabled(true)
+		else:
+			if not _recipe_cookable(recipe):
+				_recipe_list.move_child(recipe, -1)
+				recipe.set_disabled(true) 
+	
+	print(_recipe_list.get_children().map(func(recipe:Variant) -> bool: return recipe.is_disabled()))
+	
+			
 	_needs_water_icon.hide()
 	_needs_heat_icon.hide()
 	show()
@@ -36,6 +70,14 @@ func open(p_action : EMC_Action) -> void:
 func close() -> void:
 	hide()
 	closed.emit(self)
+	
+
+static func sort_recipe(a : Variant, b : Variant) -> bool:
+	if a == null:
+		return false
+	if b == null:
+		return true
+	return (not a.is_disabled()) and b.is_disabled()
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
