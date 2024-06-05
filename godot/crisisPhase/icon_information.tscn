@@ -42,7 +42,8 @@ custom_minimum_size = Vector2(350, 64)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "II_FOOD"
+text = "[center]Nahrung
+Sinkt täglich um 750 kcal.[/center]"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -59,7 +60,8 @@ custom_minimum_size = Vector2(350, 64)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "II_WATER"
+text = "[center]Hydration
+Sinkt täglich um 750 ml.[/center]"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -75,7 +77,8 @@ custom_minimum_size = Vector2(350, 64)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "II_HEALTH"
+text = "[center]Gesundheit
+Sinkt täglich um 10 %.[/center]"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -91,7 +94,8 @@ custom_minimum_size = Vector2(350, 64)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "II_HAPPY"
+text = "[center]Wohlbefinden
+Sinkt täglich um 10 %.[/center]"
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -105,7 +109,8 @@ custom_minimum_size = Vector2(350, 64)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
-text = "II_TIME"
+text = "[center]Zeitabschnitt
+Aktion verbraucht Zeit.[/center]"
 fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

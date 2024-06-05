@@ -21,11 +21,11 @@ func open(p_action: EMC_Action, p_prev_gui : EMC_CityMap) -> void:
 		close() #Order important: First close yourself, then emit signal
 	else:
 		if _stage_mngr.get_curr_stage_name() == "home":
-			_richtext_label.text = tr("CG_BEFORE") + " " + \
-				stage_change_action.get_ACTION_NAME() + tr("CG_AFTER1")
+			_richtext_label.text = "Willst du" + " " + \
+				stage_change_action.get_ACTION_NAME() + "gehen? Die Rückkehr kostet eine Aktion."
 		else:
-			_richtext_label.text = tr("CG_BEFORE") + " " + \
-				stage_change_action.get_ACTION_NAME() + tr("CG_AFTER2")
+			_richtext_label.text = "Willst du" + " " + \
+				stage_change_action.get_ACTION_NAME() + " gehen? Dies kostet eine Aktion."
 		show()
 		opened.emit()
 

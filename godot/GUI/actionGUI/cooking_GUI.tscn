@@ -54,7 +54,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "CG_TITLE"
+text = "[center]Was möchtest du kochen?[/center]"
 
 [node name="RecipeBox" type="PanelContainer" parent="PanelContainer/MarginContainer/VBC"]
 layout_mode = 2

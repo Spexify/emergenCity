@@ -28,7 +28,7 @@ custom_minimum_size = Vector2(330, 100)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "PM_TITLE"
+text = "[color=white] Pausiert[/color]"
 
 [node name="OverworldStates" type="CenterContainer" parent="VBC"]
 layout_mode = 2
@@ -55,7 +55,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "PM_POWER"
+text = "[color=white]Strom:[/color]"
 
 [node name="Value" type="RichTextLabel" parent="VBC/OverworldStates/VBC/ElectricityState"]
 custom_minimum_size = Vector2(350, 40)
@@ -81,7 +81,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "PM_WATER"
+text = "[color=white]Wasser:[/color]"
 
 [node name="Value" type="RichTextLabel" parent="VBC/OverworldStates/VBC/WaterState"]
 custom_minimum_size = Vector2(350, 40)
@@ -106,7 +106,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "PM_ISO"
+text = "[color=white]Isolation:[/color]"
 
 [node name="Value" type="RichTextLabel" parent="VBC/OverworldStates/VBC/IsolationState"]
 custom_minimum_size = Vector2(350, 40)
@@ -132,7 +132,7 @@ hframes = 3
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 bbcode_enabled = true
-text = "PM_FOOD"
+text = "[color=white]Essen:[/color]"
 
 [node name="Value" type="RichTextLabel" parent="VBC/OverworldStates/VBC/FoodContamState"]
 custom_minimum_size = Vector2(350, 40)
@@ -153,22 +153,22 @@ theme_override_constants/separation = 50
 custom_minimum_size = Vector2(397, 49)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "PM_RESUME"
+text = "Fortsetzen"
 
 [node name="Settings" parent="VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "PM_SETTINGS"
+text = "Einstellungen"
 
 [node name="CancelCurrCrisis" parent="VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "PM_CANCEL"
+text = "Krise abbrechen"
 
 [node name="SaveAndQuit" parent="VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "PM_SAVE_AND_EXIT"
+text = "Speichern & Schließen"
 
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/Settings" to="." method="_on_settings_pressed"]

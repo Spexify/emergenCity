@@ -137,7 +137,7 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBC/TextBox"]
 custom_minimum_size = Vector2(24, 55)
 layout_mode = 2
-text = "SEOD_DESC"
+text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 fit_content = true
 autowrap_mode = 2
 

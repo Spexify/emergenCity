@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func open(p_text: String) -> void:
-	$VBoxContainer/PanelContainer/RichTextLabel.text = "[color=black]" + tr(p_text) + "[/color]"
+	$VBoxContainer/PanelContainer/RichTextLabel.text = "[color=black]" + p_text + "[/color]"
 	show()
 	opened.emit()
 	await closed

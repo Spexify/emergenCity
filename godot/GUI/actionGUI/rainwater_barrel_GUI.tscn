@@ -39,7 +39,7 @@ theme_type_variation = &"TitleSpacing"
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "RBG_TITLE"
+text = "[center]Wie viel Wasser willst du abschöpfen?[/center]"
 fit_content = true
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
@@ -49,16 +49,16 @@ theme_type_variation = &"WhitePanelContainer"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-text = "RGB_DESC"
+text = "Es hat geregnet, in deiner Regentonne befinden sich Liter Wasser."
 fit_content = true
 
 [node name="GetWaterBtn" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_27xxb")]
 layout_mode = 2
-text = "RGB_OPTION1"
+text = "Eine Flasche (250ml) abschöpfen"
 
 [node name="DoneBtn" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_27xxb")]
 layout_mode = 2
-text = "RGB_OPTION2"
+text = "Fertig"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/GetWaterBtn" to="." method="_on_get_water_btn_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/DoneBtn" to="." method="_on_done_btn_pressed"]

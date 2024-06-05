@@ -60,14 +60,14 @@ expand_icon = true
 [node name="ConfirmBtn_WithSoap" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_epn3h")]
 custom_minimum_size = Vector2(220, 42)
 layout_mode = 2
-text = "SG_SOAP"
+text = "Ja, mit Seife"
 icon = ExtResource("4_wxuw7")
 expand_icon = true
 
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_epn3h")]
 custom_minimum_size = Vector2(100, 42)
 layout_mode = 2
-text = "BACK"
+text = "Zurück"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap" to="." method="_on_confirm_btn_with_soap_pressed"]

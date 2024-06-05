@@ -41,6 +41,7 @@ grow_vertical = 2
 script = ExtResource("1_brneb")
 
 [node name="WinnerScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +75,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "EOG_TITLE2"
+text = "[center]GEWONNEN[/center]"
 
 [node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -125,7 +126,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "EOG_BACK"
+text = "Zurück zum Hauptmenü"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -161,7 +162,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "EOG_TITLE1"
+text = "[center]VERLOREN[/center]"
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -207,7 +208,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "EOG_BACK"
+text = "Zurück zum Hauptmenü"
 
 [node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
 visible = false
