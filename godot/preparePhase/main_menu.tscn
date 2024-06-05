@@ -140,8 +140,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Haushalt ausstatten"
 
-[node name="AvatarSelectionGUI" parent="." instance=ExtResource("7_jnxxn")]
-layout_mode = 1
+[node name="AvatarSelectionGUI" parent="Menu/CanvasLayer_unaffectedByCM" instance=ExtResource("7_jnxxn")]
+visible = false
 
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
@@ -149,4 +149,4 @@ layout_mode = 1
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="closed" from="AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]
+[connection signal="closed" from="Menu/CanvasLayer_unaffectedByCM/AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

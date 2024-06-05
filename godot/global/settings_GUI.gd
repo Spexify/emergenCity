@@ -13,6 +13,7 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var reset : Button = $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
 @onready var _confirmGUI: EMC_ConfirmationGUI = $CanvasLayer/ConfirmationGUI
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
+@onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
 
 const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
 const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
@@ -28,7 +29,7 @@ signal debug_mode
 func open(p_during_crisis: bool = false) -> void:
 	_previous_pause_mode = get_tree().paused
 	get_tree().paused = true
-	($AvatarSelectionGUI as EMC_AvatarSelectionGUI).hide()
+	avatar_selection_gui.hide()
 	canvas_layer.show()
 	canvas_modulate.show()
 	$CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset.visible = !p_during_crisis
@@ -100,8 +101,7 @@ func _on_select_avatar_pressed() -> void:
 	#MRM: Can't call close() because the closed-Signal triggers the opening of the 
 	#normal pause menue. Not a beautiful solution, but works for now, sorry:
 	hide()
-	canvas_layer.hide()
-	($AvatarSelectionGUI as EMC_AvatarSelectionGUI).open()
+	avatar_selection_gui.open()
 
 
 func _on_avatar_selection_gui_closed() -> void:

@@ -1,6 +1,5 @@
 extends EMC_GUI
 
-@onready var _settings : = SettingsGUI #$CanvasLayer_unaffectedByCM/Settings
 @onready var _electricity_state_icon := $VBC/OverworldStates/VBC/ElectricityState/TextureRect/Sprite2D
 @onready var _electricity_state_value := $VBC/OverworldStates/VBC/ElectricityState/Value
 @onready var _water_state_icon := $VBC/OverworldStates/VBC/WaterState/TextureRect/Sprite2D
@@ -12,7 +11,7 @@ extends EMC_GUI
 
 
 ########################################## PUBLIC METHODS #########################################
-func open() -> void:
+func open(irrelevant : EMC_GUI = null) -> void:
 	update_overworld_states()
 	show()
 	opened.emit()
@@ -43,11 +42,11 @@ func update_overworld_states() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide()
-	_settings.close(true)
-	_settings.closed.connect(open)
+	#SettingsGUI.close(true)
+	#SettingsGUI.closed.connect(open)
 
 func _exit_tree() -> void:
-	_settings.closed.disconnect(open)
+	SettingsGUI.closed.disconnect(open)
 
 func _on_resume_btn_pressed() -> void:
 	close()
@@ -55,7 +54,8 @@ func _on_resume_btn_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	hide()
-	_settings.open(true)
+	SettingsGUI.open(true)
+	SettingsGUI.closed.connect(open, CONNECT_ONE_SHOT)
 
 ## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
