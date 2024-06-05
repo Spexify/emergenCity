@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _on_start_round_pressed() -> void:
 	if !Global._tutorial_done:
-		close()
+		#close()
 		avatar_selection_gui.open(true)
 	else: 
 		Global.goto_scene(Global.CRISIS_START_SCENE)

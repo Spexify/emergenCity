@@ -2,7 +2,7 @@ extends EMC_GUI
 class_name EMC_Icon_Information_GUI
 
 
-func open() -> void:
+func open(irrelevant : Variant = null) -> void:
 	show()
 	opened.emit()
 
@@ -13,7 +13,7 @@ func _on_continue_btn_pressed() -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func _ready() -> void:

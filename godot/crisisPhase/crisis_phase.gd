@@ -217,5 +217,5 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	
 	Global.get_tree().paused = false
 	if !Global._tutorial_done:
-		$GUI/CL/VBC/MiddleSection/IconInformation.open()
+		_gui_mngr.request_gui("IconInformation", [])
 		Global._tutorial_done = true
