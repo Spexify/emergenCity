@@ -164,7 +164,7 @@ theme_override_constants/separation = 40
 [node name="Home" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "CONFIRM"
+text = "Bestätigen"
 
 [node name="Cancel" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
 layout_mode = 2

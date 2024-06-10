@@ -168,7 +168,7 @@ func _show_new_crises_info() -> bool:
 	var showed_new_crises: bool = false
 	var active_crises_descr := OverworldStatesMngr.get_active_crises_descr()
 	if active_crises_descr != "":
-		var callback := _gui_mngr.request_gui("TooltipGUI", [active_crises_descr])
+		var callback : Signal = _gui_mngr.request_gui("TooltipGUI", [active_crises_descr])
 		SoundMngr.vibrate(250, 2)
 		if not callback.is_null():
 			await callback

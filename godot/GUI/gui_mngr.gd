@@ -64,7 +64,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 		_rainwater_barrel_gui.setup(OverworldStatesMngr, p_backpack)
 	_showerGUI.setup(p_backpack)
 
-func request_gui(gui_name : String, argv : Array) -> Signal:
+func request_gui(gui_name : String, argv : Array) -> Variant:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
 			_hide_buttons()
@@ -78,12 +78,15 @@ func request_gui(gui_name : String, argv : Array) -> Signal:
 			canvas_modulate.show()
 			gui.closed.connect(gui_closed)
 			
-			gui.callv("open", argv)
+			var result : Variant = gui.callv("open", argv)
 			
 			if not _active_guis.is_empty():
 				_active_guis.back().set_process_mode(PROCESS_MODE_DISABLED)
 			_active_guis.append(gui)
 			gui.set_process_mode(PROCESS_MODE_INHERIT)
+			
+			if gui_name == "ConfirmationGUI":
+				return result
 			
 			return gui.closed
 	return Signal()

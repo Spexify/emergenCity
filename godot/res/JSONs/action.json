@@ -89,10 +89,11 @@
 		"consequences": {
 			"open_bbk_brochure": 0,
 		},
-		"type_gui": "ConfirmationGUI",
+		"type_gui": "DefaultActionGUI",
 		"description": "-",
 		"prompt": "Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
 		"e_coins": 0,
+		"progresses_day_period": false,
 	},
 	{
 		"id": 8,
@@ -105,11 +106,12 @@
 			"use_item_by_name": "BATTERIES",
 			"use_radio": 0,
 		},
-		"type_gui": "ConfirmationGUI",
+		"type_gui": "DefaultActionGUI",
 		"description": "-",
 		"prompt": "Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
 		"e_coins": 0,
-		"sound": "RadioTuning"
+		"sound": "RadioTuning",
+		"progresses_day_period": false,
 	},
 	{
 		"id": 9,
@@ -119,10 +121,11 @@
 		"consequences": {
 			"use_radio": 0,
 		},
-		"type_gui": "ConfirmationGUI",
+		"type_gui": "DefaultActionGUI",
 		"description": "-",
 		"prompt": "Willst du das Kurbelradio benutzen?",
 		"e_coins": 0,
+		"progresses_day_period": false,
 	},
 	{
 		"id": 2000,
