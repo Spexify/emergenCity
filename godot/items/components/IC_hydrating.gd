@@ -1,4 +1,4 @@
-extends EMC_ItemComponent
+extends EMC_IC_Consumable
 class_name EMC_IC_Hydrating
 ## For unenjoyable or enjoyable food or drink items
 
@@ -10,6 +10,8 @@ func _init(_p_hydration_change : int) -> void:
 	super(tr("Hydrierend"), Color.HOT_PINK)
 	_hydration_change = _p_hydration_change
 
+func consume(p_avatar : EMC_Avatar) -> void:
+	p_avatar.update_hydration(self.get_hydration_change())	
 
 ## Get the internal nutritionness value
 func get_hydration_change() -> int:

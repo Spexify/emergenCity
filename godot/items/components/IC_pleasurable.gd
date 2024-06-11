@@ -1,4 +1,4 @@
-extends EMC_ItemComponent
+extends EMC_IC_Consumable
 class_name EMC_IC_Pleasurable
 ## For unenjoyable or enjoyable food or drink items
 
@@ -10,6 +10,8 @@ func _init(_p_happiness_change : int) -> void:
 	super(tr("Köstlich"), Color.HOT_PINK)
 	_happiness_change = _p_happiness_change
 
+func consume(p_avatar : EMC_Avatar) -> void:
+	p_avatar.update_happiness(self.get_happiness_change())	
 
 ## Get the internal nutritionness value
 func get_happiness_change() -> int:

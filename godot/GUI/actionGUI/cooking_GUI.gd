@@ -59,7 +59,8 @@ func open(p_action : EMC_Action) -> void:
 				_recipe_list.move_child(recipe, -1)
 				recipe.set_disabled(true) 
 	
-	print(_recipe_list.get_children().map(func(recipe:Variant) -> bool: return recipe.is_disabled()))
+	# DEBUG: check whether recipes are correctly sorted
+	#print(_recipe_list.get_children().map(func(recipe:Variant) -> bool: return recipe.is_disabled()))
 	
 			
 	_needs_water_icon.hide()
@@ -135,7 +136,9 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 func _cook_recipe() -> void:
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
 		_inventory.remove_item(input_item_ID)
-	_inventory.add_new_item(_last_clicked_recipe.get_output_item_ID())
+		
+	var output_item : EMC_Item = EMC_Item.make_from_id(_last_clicked_recipe.get_output_item_ID())
+	_inventory.add_existing_item(output_item)
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = _action.play_sound()
@@ -144,16 +147,14 @@ func _cook_recipe() -> void:
 	#if wait != null:
 		#await wait.finished
 	
-	await _gui_mngr.request_gui("CookingAnimation", [_last_clicked_recipe])
+	_gui_mngr.queue_gui("CookingAnimation", [_last_clicked_recipe])
 	#wait.stop() #Bug on mobile: Doesn't work, and waits endlessly!
 	
-	_action.executed.emit(_action)
-	
 	if not _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING:
-		_gui_mngr.queue_gui("BackpackGUI", [])
+		_gui_mngr.queue_gui("ItemQuestionGUI", [output_item])
 	
 	close()
-
+	_action.executed.emit(_action)
 
 func _try_cooking_with_heat_source() -> void:
 	if Global.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER):

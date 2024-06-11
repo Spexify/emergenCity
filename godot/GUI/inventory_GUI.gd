@@ -215,41 +215,12 @@ func _on_consume_pressed() -> void:
 			_inventory.remove_item(JsonMngr.item_name_to_id("WATER_DIRTY"))
 			_inventory.add_new_item(JsonMngr.item_name_to_id("WATER"))
 	else:
-		var drink_comp : EMC_IC_Drink = _clicked_item.get_comp(EMC_IC_Drink)
-		var food_comp : EMC_IC_Food = _clicked_item.get_comp(EMC_IC_Food)
-		_clicked_item.consumed_sound()
-		if  drink_comp != null:
-			_avatar.add_hydration(drink_comp.get_hydration())
-		if food_comp != null:
-			_avatar.add_nutrition(food_comp.get_nutritionness())
-		var unpalatable_comp : EMC_IC_Unpalatable = _clicked_item.get_comp(EMC_IC_Unpalatable)
-		if unpalatable_comp != null:
-			_avatar.sub_health(unpalatable_comp.get_health_reduction())
-		
-		var pleasurable_comp : EMC_IC_Pleasurable = _clicked_item.get_comp(EMC_IC_Pleasurable)
-		if pleasurable_comp != null:
-			if pleasurable_comp.get_happiness_change() < 0:
-				_avatar.sub_happiness(pleasurable_comp.get_happiness_change())
-			elif pleasurable_comp.get_happiness_change() >= 0 :
-				_avatar.add_happiness(pleasurable_comp.get_happiness_change())
-				
-		var healthy_comp : EMC_IC_Healthy = _clicked_item.get_comp(EMC_IC_Healthy)
-		if healthy_comp != null:
-			if healthy_comp.get_health_change() < 0:
-				_avatar.sub_health(healthy_comp.get_health_change())
-			elif healthy_comp.get_health_change() >= 0 :
-				_avatar.add_health(healthy_comp.get_health_change())
-				
-		var hydrating_comp : EMC_IC_Hydrating = _clicked_item.get_comp(EMC_IC_Hydrating)
-		if hydrating_comp != null:
-			if hydrating_comp.get_hydration_change() < 0:
-				_avatar.sub_hydration(hydrating_comp.get_hydration_change())
-			elif hydrating_comp.get_hydration_change() >= 0 :
-				_avatar.add_hydration(hydrating_comp.get_hydration_change())
+		_avatar.consume_item(_clicked_item)
 
 		# Work around to stop gray modulate
 		_clicked_item._on_clicked(EMC_Item.new())
 		_inventory.remove_specific_item(_clicked_item)
+		_clicked_item.queue_free()
 		
 	_reload_items()
 	_clear_gui()

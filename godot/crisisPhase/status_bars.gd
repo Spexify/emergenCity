@@ -40,7 +40,7 @@ func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION)
 	calories_label.set_text("[color=white][center]" + str(p_new_value) +" kcal[/center][/color]")
 
-	var tween :Tween = get_tree().create_tween()
+	var tween :Tween = Global.get_tree().create_tween()
 	tween.tween_method(_set_nutrition_shader, _percentage_nutrition, percentage, 1.0)
 	_percentage_nutrition = percentage
 
@@ -58,7 +58,7 @@ func _on_avatar_hydration_updated(p_new_value: int) -> void:
 	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HYDRATION*EMC_Avatar.UNIT_FACTOR_HYDRATION)
 	milliliters_label.set_text("[color=white][center]" + str(p_new_value) +" ml[/center][/color]")
 	
-	var tween :Tween = get_tree().create_tween()
+	var tween :Tween = Global.get_tree().create_tween()
 	tween.tween_method(_set_hydration_shader, _percentage_hydration, percentage, 1.0)
 	_percentage_hydration = percentage
 	
@@ -94,7 +94,7 @@ func _on_avatar_happiness_updated(p_new_value: int) -> void:
 	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_HAPPINESS * EMC_Avatar.UNIT_FACTOR_HAPPINESS)
 	happiness_label.set_text("[color=white][center]" + str(p_new_value) +" %[/center][/color]")
 	
-	var tween :Tween = get_tree().create_tween()
+	var tween :Tween = Global.get_tree().create_tween()
 	tween.tween_method(_set_happpiness_shader, _percentage_happiness, percentage, 1.0)
 	_percentage_happiness = percentage
 	

@@ -1,4 +1,4 @@
-extends EMC_ItemComponent
+extends EMC_IC_Consumable
 class_name EMC_IC_Drink
 
 const UNIT: String = "ml"
@@ -10,16 +10,16 @@ func _init(p_hydration: int) -> void:
 	super(tr("Getränk"), Color.CADET_BLUE)
 	_hydration = p_hydration 
 
+func consume(p_avatar : EMC_Avatar) -> void:
+	p_avatar.update_hydration(self.get_hydration())
 
 ## Get the internal hydration value
 func get_hydration() -> int:
 	return _hydration
 
-
 ## Get the hydration value scaled to fit real-life units
 func get_unit_hydration() -> int:
 	return _hydration * UNIT_FACTOR
-
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:

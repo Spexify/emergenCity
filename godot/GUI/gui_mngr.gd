@@ -7,6 +7,7 @@ class_name  EMC_GUIMngr
 @onready var _backpack_GUI : EMC_InventoryGUI = $CL/VBC/MiddleSection/BackpackGUI
 @onready var _cooking_GUI := $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
+@onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI
@@ -57,12 +58,17 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	
 	_backpack_GUI.setup(p_backpack, p_avatar, self, "Rucksack")
 	
+	item_question_gui.setup(p_backpack, p_avatar)
+	
 	_status_bars.setup(self)
 	_cs_GUI.setup(p_stage_mngr)
 	_cooking_GUI.setup(p_backpack, self, p_day_mngr)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(OverworldStatesMngr, p_backpack)
 	_showerGUI.setup(p_backpack)
+
+func is_any_gui() -> bool:
+	return not (_active_guis.is_empty() and _gui_queue.is_empty())
 
 func request_gui(gui_name : String, argv : Array) -> Variant:
 	for gui in all_the_guis:
@@ -107,7 +113,7 @@ func gui_closed(gui : EMC_GUI) -> void:
 	if not _active_guis.is_empty():
 		_active_guis.back().set_process_mode(PROCESS_MODE_INHERIT)
 	elif not _gui_queue.is_empty():
-		var entry : QueueEntry = _gui_queue.pop_back()
+		var entry : QueueEntry = _gui_queue.pop_front()
 		entry.gui.callv("open", entry.argv)
 		entry.gui.set_process_mode(PROCESS_MODE_INHERIT)
 		_active_guis.append(entry.gui)

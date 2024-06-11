@@ -65,6 +65,13 @@ func cancel_navigation() -> void:
 	_nav_agent.target_position = self.position
 	
 
+func consume_item(p_item : EMC_Item) -> void:
+	var consumable_comps : Array[EMC_IC_Consumable]
+	consumable_comps.assign(p_item.get_all_comps_of(EMC_IC_Consumable))
+	
+	for con : EMC_IC_Consumable in consumable_comps:
+		con.consume(self)
+
 ## Getters für die Statutwerten vom Avatar
 func get_nutrition_status() -> int:
 	return _nutrition_value
@@ -92,6 +99,17 @@ func get_unit_happiness_status() -> int:
 		
 ####################### Setters für die Statutbalken vom Avatar ############################
 
+func update_nutrition(value : int = 1) -> void:
+	var new_value : int = _nutrition_value + value
+	if  new_value <= MAX_VITALS_NUTRITION and new_value >= 0:
+		_nutrition_value = new_value
+	elif new_value < 0:
+		_nutrition_value = 0
+	elif new_value > MAX_VITALS_NUTRITION:
+		_nutrition_value = MAX_VITALS_NUTRITION
+		
+	nutrition_updated.emit(get_unit_nutrition_status())
+
 func add_nutrition(nutrition_change : int = 1) -> void: 
 	if _nutrition_value + nutrition_change <= MAX_VITALS_NUTRITION:
 		_nutrition_value += nutrition_change
@@ -111,6 +129,17 @@ func sub_nutrition(nutrition_change : int = 1) -> bool:
 		nutrition_updated.emit(get_unit_nutrition_status())
 		return true
 	
+func update_hydration(value : int = 1) -> void:
+	var new_value : int = _hydration_value + value
+	if  new_value <= MAX_VITALS_HYDRATION and new_value >= 0:
+		_hydration_value = new_value
+	elif new_value < 0:
+		_hydration_value = 0
+	elif new_value > MAX_VITALS_HYDRATION:
+		_hydration_value = MAX_VITALS_HYDRATION
+		
+	hydration_updated.emit(get_unit_hydration_status())
+
 func add_hydration(hydration_change : int = 1) -> void:
 	if _hydration_value + hydration_change <= MAX_VITALS_HYDRATION:
 		_hydration_value += hydration_change
@@ -128,6 +157,17 @@ func sub_hydration(hydration_change : int = 1) -> bool:
 		_hydration_value -= hydration_change
 		hydration_updated.emit(get_unit_hydration_status())
 		return true
+
+func update_health(value : int = 1) -> void:
+	var new_value : int = _health_value + value
+	if  new_value <= MAX_VITALS_HEALTH and new_value >= 0:
+		_health_value = new_value
+	elif new_value < 0:
+		_health_value = 0
+	elif new_value > MAX_VITALS_HEALTH:
+		_health_value = MAX_VITALS_HEALTH
+		
+	health_updated.emit(get_unit_health_status())
 
 func add_health(health_change : int = 1) -> void:
 	if _health_value + health_change <= MAX_VITALS_HEALTH: 
@@ -150,6 +190,16 @@ func sub_health(health_change : int = 1) -> bool:
 		health_updated.emit(get_unit_health_status())
 		return true
 
+func update_happiness(value : int = 1) -> void:
+	var new_value : int = _happiness_value + value
+	if  new_value <= MAX_VITALS_HAPPINESS and new_value >= 0:
+		_happiness_value = new_value
+	elif new_value < 0:
+		_happiness_value = 0
+	elif new_value > MAX_VITALS_HAPPINESS:
+		_happiness_value = MAX_VITALS_HAPPINESS
+		
+	happiness_updated.emit(get_unit_happiness_status())
 
 func add_happiness(happiness_change : int = 1) -> void:
 	if _happiness_value + happiness_change <= MAX_VITALS_HAPPINESS: 

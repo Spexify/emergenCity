@@ -109,6 +109,12 @@ func get_comp(p_classname: Variant) -> EMC_ItemComponent:
 			return comp
 	return null
 
+func get_all_comps_of(p_classname: Variant) -> Array[EMC_ItemComponent]:
+	var result : Array[EMC_ItemComponent]
+	for comp : EMC_ItemComponent in _comps:
+		if is_instance_of(comp, p_classname):
+			result.append(comp)
+	return result
 
 ## Ability to add components
 func add_comp(p_comp: EMC_ItemComponent) -> void:
@@ -198,7 +204,11 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	
 	return item
-
+	
+static func make_from_id(item_id : int) -> EMC_Item:
+	var item : EMC_Item = _ITEM_SCN.instantiate()
+	item.setup(item_id)
+	return item
 
 func consumed_sound() -> void:
 	SoundMngr.play_sound(_sound_effect["consumed"])
