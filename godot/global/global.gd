@@ -63,7 +63,8 @@ func is_in_crisis_phase() -> bool:
 
 
 func _deferred_goto_scene(path: String) -> void:
-	get_tree().root .remove_child(_current_scene) 
+	get_tree().root.remove_child(_current_scene)
+	_current_scene.queue_free()
 	
 	var scn : PackedScene = ResourceLoader.load(path)
 	_current_scene = scn.instantiate()
