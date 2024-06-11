@@ -7,7 +7,7 @@ var _hydration: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(p_hydration: int) -> void:
-	super(tr("Getränk"), Color.CADET_BLUE)
+	super("Getränk", Color.CADET_BLUE)
 	_hydration = p_hydration 
 
 func consume(p_avatar : EMC_Avatar) -> void:

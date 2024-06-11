@@ -2,12 +2,12 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Healthy
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = "ICU_HEALTHY"
+const UNIT: String = "Gesundheit"
 var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_health_change : int) -> void:
-	super(tr("Gesund"), Color.HOT_PINK)
+	super("Gesund", Color.HOT_PINK)
 	_health_change = _p_health_change
 
 func consume(p_avatar : EMC_Avatar) -> void:
@@ -26,9 +26,9 @@ func get_unit_health_change() -> int:
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
 	if _health_change < 0:
-		return "Un" + name.to_lower() + "(" + str(get_unit_health_change()) + " " + tr(UNIT) + ")"
+		return "Un" + name.to_lower() + "(" + str(get_unit_health_change()) + " " + UNIT + ")"
 	else:
-		return name + "(+" + str(get_unit_health_change()) + " " + tr(UNIT) + ")"
+		return name + "(+" + str(get_unit_health_change()) + " " + UNIT + ")"
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

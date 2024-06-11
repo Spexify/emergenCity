@@ -9,7 +9,7 @@ var _shelflife: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_max_shelflife : int) -> void:
-	super(tr("Haltbarkeit"), Color.CHOCOLATE)
+	super("Haltbarkeit", Color.CHOCOLATE)
 	_shelflife = _p_max_shelflife
 
 
@@ -40,7 +40,7 @@ func get_name_with_values() -> String:
 	if is_spoiled():
 		return name + ": Verdorben"
 	else:
-		return name + ": " + str(get_shelflife()) + " " + tr(UNIT)
+		return name + ": " + str(get_shelflife()) + " " + UNIT
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

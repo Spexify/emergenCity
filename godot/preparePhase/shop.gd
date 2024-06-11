@@ -28,8 +28,6 @@ func _ready() -> void:
 		if item_id == EMC_Item.IDs.DUMMY:
 			continue
 		_add_item_by_id(item_id, true)
-	
-	print("HI")
 
 
 func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
