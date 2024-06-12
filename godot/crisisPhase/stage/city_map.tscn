@@ -126,6 +126,7 @@ _data = {
 }
 
 [node name="CityMap" type="TextureRect"]
+self_modulate = Color(0.72549, 0.72549, 0.72549, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0

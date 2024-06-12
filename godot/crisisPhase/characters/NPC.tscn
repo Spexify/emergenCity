@@ -96,6 +96,7 @@ texture_normal = ExtResource("3_d42ls")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, 9)
+avoidance_enabled = false
 radius = 32.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

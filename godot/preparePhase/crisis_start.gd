@@ -41,7 +41,7 @@ func _on_continue_pressed() -> void:
 		
 	else:
 		OverworldStatesMngr.set_crisis_difficulty()
-	
+		
 	Global.goto_scene(Global.CRISIS_PHASE_SCENE)
 
 

@@ -59,18 +59,19 @@ func _remove_item_by_id(item : EMC_Item) -> void :
 	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
 		if i >= _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
 			SoundMngr.play_sound("Money", 0.1)
-			inventory_grid.remove_child(slot)
-			slot.queue_free()
+			#inventory_grid.remove_child(slot)
+			#slot.queue_free()
+			slot.remove_item()
 			_tmp_inventory.remove_specific_item(item)
 			
 			var comp := item.get_comp(EMC_IC_Cost)
 			assert(comp != null) 
-			_add_balance(comp.get_cost())#
+			_add_balance(comp.get_cost())
 			
 			item.queue_free()
 			
-			var new_slot := _SLOT_SCN.instantiate()
-			inventory_grid.add_child(new_slot)
+			#var new_slot := _SLOT_SCN.instantiate()
+			#inventory_grid.add_child(new_slot)
 			break
 		elif i < _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
 			item.clicked_sound(0.4)
@@ -143,6 +144,9 @@ func _display_info(sender: EMC_Item) -> void:
 
 
 func _on_home_pressed() -> void:
+	for child : EMC_InventorySlot in inventory_grid.get_children():
+		child.remove_item()
+	
 	_tmp_inventory.sort_custom(EMC_Inventory.sort_helper)
 	Global.set_inventory(_tmp_inventory)
 	Global.set_e_coins(_balance)
