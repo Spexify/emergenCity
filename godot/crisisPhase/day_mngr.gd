@@ -228,11 +228,13 @@ func _create_action(p_action_ID: int) -> EMC_Action:
 		var id: 
 			if 1 <= id and id < 2000:
 				result = JsonMngr.id_to_action(id) as EMC_Action
-			if 2000 <= id and id < 3000:
+			elif 2000 <= id and id < 3000:
 				result = JsonMngr.id_to_action(id) as EMC_StageChangeAction
 			else:
-				push_error("Action kann nicht zu einer unbekannten Action-ID instanziiert werden!")
+				push_error("Action kann nicht zu einer unbekannten Action-ID(" + str(id) + ") instanziiert werden!")
 	
-	result.executed.connect(_on_action_executed)
-	result.silent_executed.connect(_on_action_silent_executed)
+	if not result.executed.is_connected(_on_action_executed):
+		result.executed.connect(_on_action_executed)
+	if not result.silent_executed.is_connected(_on_action_silent_executed):
+		result.silent_executed.connect(_on_action_silent_executed)
 	return result

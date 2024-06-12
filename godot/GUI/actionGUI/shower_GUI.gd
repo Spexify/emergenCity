@@ -13,9 +13,9 @@ func open(p_action: EMC_Action) -> void:
 	_action = p_action
 	
 	if _inventory.has_item(EMC_Item.IDs.SOAP):
-		$VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap.show()
+		($VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap as Button).show()
 	else:
-		$VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap.hide()
+		($VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap as Button).hide()
 	show()
 	opened.emit()
 

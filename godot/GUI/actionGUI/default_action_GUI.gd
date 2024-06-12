@@ -1,19 +1,24 @@
 extends EMC_ActionGUI
 class_name EMC_DefaultActionGUI
 
+@onready var confirm_btn : Button = $VBoxContainer/HBoxContainer/ConfirmBtn
+@onready var confirm_btn_no_icon : Button = $VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon
+@onready var back_btn : Button = $VBoxContainer/HBoxContainer/BackBtn
+@onready var description : RichTextLabel = $VBoxContainer/PanelContainer/RichTextLabel
+
 
 ########################################## PUBLIC METHODS ##########################################
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
 func open(p_action: EMC_Action) -> void:
 	_action = p_action
-	$VBoxContainer/PanelContainer/RichTextLabel.text = _action.get_prompt()
+	description.text = _action.get_prompt()
 	
 	if _action.progresses_day_period():
-		$VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon.hide()
-		$VBoxContainer/HBoxContainer/ConfirmBtn.show()
+		confirm_btn_no_icon.hide()
+		confirm_btn.show()
 	else:
-		$VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon.show()
-		$VBoxContainer/HBoxContainer/ConfirmBtn.hide()
+		confirm_btn_no_icon.show()
+		confirm_btn.hide()
 	show()
 	opened.emit()
 

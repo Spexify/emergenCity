@@ -11,6 +11,7 @@ var _day_mngr : EMC_DayMngr
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 @onready var _needs_water_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsWater
 @onready var _needs_heat_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsHeat
+@onready var _input_item_list : HBoxContainer = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer/InputItemList
 
 
 ########################################## PUBLIC METHODS ##########################################
@@ -101,21 +102,18 @@ func _on_cancel_pressed() -> void:
 
 func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 	_last_clicked_recipe = p_recipe
-	var input_items_list := $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer/InputItemList
-	for unwanted_child : EMC_Item in input_items_list.get_children():
-		input_items_list.remove_child(unwanted_child)
+	for unwanted_child : EMC_Item in _input_item_list.get_children():
+		_input_item_list.remove_child(unwanted_child)
+		unwanted_child.queue_free()
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
-		var item : EMC_Item = ITEM_SCN.instantiate()
-		item.setup(input_item_ID)
-		input_items_list.add_child(item)
+		var item : EMC_Item = EMC_Item.make_from_id(input_item_ID)
+		_input_item_list.add_child(item)
 		
 	_needs_water_icon.visible = p_recipe.needs_water()
 	_needs_heat_icon.visible = p_recipe.needs_heat()
-	if p_recipe.needs_water() && \
-	OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:
-		var water : EMC_Item = ITEM_SCN.instantiate()
-		water.setup(EMC_Item.IDs.WATER)
-		input_items_list.add_child(water)
+	if p_recipe.needs_water() && OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:
+		var water : EMC_Item = EMC_Item.make_from_id(EMC_Item.IDs.WATER)
+		_input_item_list.add_child(water)
 
 
 func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:

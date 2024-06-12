@@ -162,10 +162,9 @@ func _reload_items() -> void:
 				#if IC_food == null && IC_drink == null:
 					#item.modulate = Color(0, 0, 0)
 			
-			item.clicked.connect(_on_item_clicked)
+			if not item.clicked.is_connected(_on_item_clicked):
+				item.clicked.connect(_on_item_clicked)
 			new_slot.set_item(item)
-		
-		_slot_grid.add_child(new_slot)
 	
 	call_deferred("_add_VFXs") #see. github.com/godotengine/godot/issues/30113
 

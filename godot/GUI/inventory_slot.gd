@@ -26,6 +26,8 @@ func set_item(p_item: EMC_Item) -> bool:
 
 
 func remove_item() -> void:
+	if self.is_free():
+		return
 	var potential_child := $Slot_BG.get_child(0)
 	if potential_child != null:
 		$Slot_BG.remove_child(potential_child)

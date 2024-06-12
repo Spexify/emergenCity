@@ -48,15 +48,15 @@ func close() -> void:
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
-	$Marker_Morning.position = _get_position_for_period(EMC_DayMngr.DayPeriod.MORNING)
-	$Marker_Noon.position = _get_position_for_period(EMC_DayMngr.DayPeriod.NOON)
-	$Marker_Evening.position = _get_position_for_period(EMC_DayMngr.DayPeriod.EVENING)
+	($Marker_Morning as Sprite2D).position = _get_position_for_period(EMC_DayMngr.DayPeriod.MORNING)
+	($Marker_Noon as Sprite2D).position = _get_position_for_period(EMC_DayMngr.DayPeriod.NOON)
+	($Marker_Evening as Sprite2D).position = _get_position_for_period(EMC_DayMngr.DayPeriod.EVENING)
 	hide()
 
 
 ## 
 func _get_position_for_period(p_day_period: EMC_DayMngr.DayPeriod) -> Vector2:
-	var res: Vector2
+	var res: Vector2 = Vector2(0, 0)
 	#var pos_index := EMC_DayMngr.DayPeriod.size() - p_day_period - 1
 	_rad_offset = ONE_PERIOD_RADIAN * (EMC_DayMngr.DayPeriod.size() - 1) - \
 		(ONE_PERIOD_RADIAN * p_day_period) 

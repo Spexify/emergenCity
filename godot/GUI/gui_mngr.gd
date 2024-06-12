@@ -87,7 +87,6 @@ func request_gui(gui_name : String, argv : Array) -> Variant:
 				argv.append(_active_guis.back())
 				
 			canvas_modulate.show()
-			gui.closed.connect(gui_closed)
 			
 			var result : Variant = gui.callv("open", argv)
 			
@@ -109,7 +108,6 @@ func queue_gui(gui_name : String, argv : Array) -> Signal:
 		for gui in all_the_guis:
 			if gui.name == gui_name:
 				_gui_queue.append(QueueEntry.new(gui, argv))
-				gui.closed.connect(gui_closed)
 				return gui.closed
 	return Signal()
 
@@ -144,6 +142,7 @@ func _on_pause_menu_btn_pressed() -> void:
 func _set_guis_process_mode(guis : Array[EMC_GUI], mode : int) -> void:
 	for gui in guis:
 		gui.set_process_mode(mode)
+		gui.closed.connect(gui_closed)
 		
 func _hide_buttons() -> void:
 	pause_menu_btn.hide()
