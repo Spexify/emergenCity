@@ -31,6 +31,9 @@ const INIT_HAPPINESS_VALUE : int = MAX_VITALS_NUTRITION/2
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
 
+# NOTICE: Prevent arrived from being emitted twice
+@onready var _last_pos : Vector2 = get_global_position()
+
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag, _health_value und _happinness_value gemessen in Prozent
 ## working in untis of 4
 var _nutrition_value : int = INIT_NUTRITION_VALUE
@@ -51,6 +54,7 @@ func set_target(p_target_pos: Vector2) -> void:
 	if (p_target_pos == position):
 		return
 	
+	_last_pos = Vector2(0.0, 0.0)
 	_nav_agent.target_position = p_target_pos
 	if not _walking_SFX.playing:
 		_walking_SFX.play()
@@ -60,6 +64,13 @@ func set_target(p_target_pos: Vector2) -> void:
 func cancel_navigation() -> void:
 	_nav_agent.target_position = self.position
 	
+
+func consume_item(p_item : EMC_Item) -> void:
+	var consumable_comps : Array[EMC_IC_Consumable]
+	consumable_comps.assign(p_item.get_all_comps_of(EMC_IC_Consumable))
+	
+	for con : EMC_IC_Consumable in consumable_comps:
+		con.consume(self)
 
 ## Getters für die Statutwerten vom Avatar
 func get_nutrition_status() -> int:
@@ -88,6 +99,17 @@ func get_unit_happiness_status() -> int:
 		
 ####################### Setters für die Statutbalken vom Avatar ############################
 
+func update_nutrition(value : int = 1) -> void:
+	var new_value : int = _nutrition_value + value
+	if  new_value <= MAX_VITALS_NUTRITION and new_value >= 0:
+		_nutrition_value = new_value
+	elif new_value < 0:
+		_nutrition_value = 0
+	elif new_value > MAX_VITALS_NUTRITION:
+		_nutrition_value = MAX_VITALS_NUTRITION
+		
+	nutrition_updated.emit(get_unit_nutrition_status())
+
 func add_nutrition(nutrition_change : int = 1) -> void: 
 	if _nutrition_value + nutrition_change <= MAX_VITALS_NUTRITION:
 		_nutrition_value += nutrition_change
@@ -107,6 +129,17 @@ func sub_nutrition(nutrition_change : int = 1) -> bool:
 		nutrition_updated.emit(get_unit_nutrition_status())
 		return true
 	
+func update_hydration(value : int = 1) -> void:
+	var new_value : int = _hydration_value + value
+	if  new_value <= MAX_VITALS_HYDRATION and new_value >= 0:
+		_hydration_value = new_value
+	elif new_value < 0:
+		_hydration_value = 0
+	elif new_value > MAX_VITALS_HYDRATION:
+		_hydration_value = MAX_VITALS_HYDRATION
+		
+	hydration_updated.emit(get_unit_hydration_status())
+
 func add_hydration(hydration_change : int = 1) -> void:
 	if _hydration_value + hydration_change <= MAX_VITALS_HYDRATION:
 		_hydration_value += hydration_change
@@ -124,6 +157,17 @@ func sub_hydration(hydration_change : int = 1) -> bool:
 		_hydration_value -= hydration_change
 		hydration_updated.emit(get_unit_hydration_status())
 		return true
+
+func update_health(value : int = 1) -> void:
+	var new_value : int = _health_value + value
+	if  new_value <= MAX_VITALS_HEALTH and new_value >= 0:
+		_health_value = new_value
+	elif new_value < 0:
+		_health_value = 0
+	elif new_value > MAX_VITALS_HEALTH:
+		_health_value = MAX_VITALS_HEALTH
+		
+	health_updated.emit(get_unit_health_status())
 
 func add_health(health_change : int = 1) -> void:
 	if _health_value + health_change <= MAX_VITALS_HEALTH: 
@@ -146,6 +190,16 @@ func sub_health(health_change : int = 1) -> bool:
 		health_updated.emit(get_unit_health_status())
 		return true
 
+func update_happiness(value : int = 1) -> void:
+	var new_value : int = _happiness_value + value
+	if  new_value <= MAX_VITALS_HAPPINESS and new_value >= 0:
+		_happiness_value = new_value
+	elif new_value < 0:
+		_happiness_value = 0
+	elif new_value > MAX_VITALS_HAPPINESS:
+		_happiness_value = MAX_VITALS_HAPPINESS
+		
+	happiness_updated.emit(get_unit_happiness_status())
 
 func add_happiness(happiness_change : int = 1) -> void:
 	if _happiness_value + happiness_change <= MAX_VITALS_HAPPINESS: 
@@ -262,14 +316,17 @@ func _physics_process(_delta: float) -> void:
 	velocity = MOVE_SPEED * input_direction
 	_nav_agent.set_velocity(velocity)
 
-
 ## target_reached() doesn't work for whatever reason
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	_walking_SFX.stop() #Name should be more precise. Walking could be an animation or a state-object
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("idle")
 	scale = Vector2(1.0, 1.0)
-	arrived.emit()
+	# NOTICE: Prevent arrived from being emitted twice
+	if get_global_position().distance_to(_last_pos) >= 10:
+		arrived.emit()
+		
+	_last_pos = get_global_position()
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:

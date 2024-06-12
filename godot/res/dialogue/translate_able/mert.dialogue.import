@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dvoua3v3erbw7"
+path="res://.godot/imported/mert.dialogue-b3db04b45e1be3d43a0437ebcf28f187.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/mert.dialogue"
+dest_files=["res://.godot/imported/mert.dialogue-b3db04b45e1be3d43a0437ebcf28f187.tres"]
+
+[params]
+
+defaults=true

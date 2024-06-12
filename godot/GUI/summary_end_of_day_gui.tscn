@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8qngbqj8n42a"]
+[gd_scene load_steps=7 format=3 uid="uid://c8qngbqj8n42a"]
 
 [ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_p8j38"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://res/SFX/open_GUI.wav" id="2_q6owg"]
-[ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory_GUI.tscn" id="3_e2o6h"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://res/SFX/close_GUI.wav" id="3_hs5pc"]
 [ext_resource type="AudioStream" uid="uid://c16h1eu6d7ay2" path="res://res/SFX/button_pressed.wav" id="4_2a3qa"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_6ek7j"]
@@ -21,6 +20,8 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("2_p8j38")
 script = ExtResource("1_wmmkg")
 
@@ -136,23 +137,9 @@ theme_type_variation = &"WhitePanelContainer"
 [node name="Description" type="RichTextLabel" parent="SummaryWindow/MarginContainer/VBC/TextBox"]
 custom_minimum_size = Vector2(24, 55)
 layout_mode = 2
-text = "SEOD_DESC"
+text = "Kümmer dich um deine Gesundheit, iss und trink etwas."
 fit_content = true
 autowrap_mode = 2
-
-[node name="PanelContainer" type="ScrollContainer" parent="SummaryWindow/MarginContainer/VBC"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="InventoryGUI" parent="SummaryWindow/MarginContainer/VBC/PanelContainer" instance=ExtResource("3_e2o6h")]
-visible = false
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Continue" parent="SummaryWindow/MarginContainer/VBC" instance=ExtResource("4_6ek7j")]
 layout_mode = 2
@@ -169,5 +156,4 @@ stream = ExtResource("3_hs5pc")
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("4_2a3qa")
 
-[connection signal="seod_inventory_closed" from="SummaryWindow/MarginContainer/VBC/PanelContainer/InventoryGUI" to="." method="_on_inventory_gui_seod_inventory_closed"]
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBC/Continue" to="." method="_on_continue_pressed"]

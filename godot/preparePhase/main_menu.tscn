@@ -126,27 +126,30 @@ fit_content = true
 layout_mode = 2
 
 [node name="StartRound" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten"
 
 [node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "MM_SHOP"
+theme_override_font_sizes/font_size = 32
+text = "Vorräte einkaufen"
 
 [node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Haushalt ausstatten"
 
-[node name="AvatarSelectionGUI" parent="." instance=ExtResource("7_jnxxn")]
-layout_mode = 1
+[node name="AvatarSelectionGUI" parent="Menu/CanvasLayer_unaffectedByCM" instance=ExtResource("7_jnxxn")]
+visible = false
 
+[connection signal="gui_input" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer" to="Menu" method="_on_ecoins_gui_input"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/MarginContainer2/Settings" to="Menu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
-[connection signal="closed" from="AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]
+[connection signal="closed" from="Menu/CanvasLayer_unaffectedByCM/AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

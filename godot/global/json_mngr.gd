@@ -8,24 +8,24 @@ const INVALID_DICTIONARY_VALUE: Dictionary = {}
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
 ## ITEMS
-const ITEM_SOURCE := "res://res/JSONs/item-en.json"
+const ITEM_SOURCE := "res://res/JSONs/item.json"
 const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
 ## POPUPS
-const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action-en.json"
+const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
 ## OPT-EVENTS
-const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events-en.json"
+const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events.json"
 ## NPCS
 const NPS_Source := "res://res/JSONs/npcs.json"
 ## BOOKS
-const BOOKS_SOURCE := "res://res/JSONs/books-en.json"
+const BOOKS_SOURCE := "res://res/JSONs/books.json"
 ## ACTIONS
-const ACTION_SOURCE := "res://res/JSONs/action-en.json"
+const ACTION_SOURCE := "res://res/JSONs/action.json"
 ## DOORBELL
 const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 ## SCENARIOS
-const SCENARIOS_SOURCE := "res://res/JSONs/scenarios-en.json"
+const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
 ## UPGARDE
-const UPGRADES_SOURCE := "res://res/JSONs/upgrades-en.json"
+const UPGRADES_SOURCE := "res://res/JSONs/upgrades.json"
 
 ########################################JSON RECIPES################################################
 
@@ -401,6 +401,7 @@ func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Arr
 ########################################JSON ACTION#################################################
 
 var _actions : Dictionary
+var _dict_actions : Dictionary
 var _is_action_loaded : bool = false
 var ACTION_SCNS : Dictionary = {} 
 
@@ -512,6 +513,7 @@ func load_actions() -> void:
 			ACTION_SCNS[_type] = act_scn
 
 		_actions[_action_id] = act_scn.from_dict(action_data)
+		_dict_actions[_action_id] = action_data
 	
 		act_index += 1
 	_is_action_loaded = true

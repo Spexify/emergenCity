@@ -1,0 +1,16 @@
+~ START
+Mert: Hey Kumpel! Ich bin auf dem Weg zum Marktplatz, aber der Kollege der mir beim Wasser verteilen helfen sollte ist krank geworden. [ID:tec9374ddbb] 
+Mert: Hast du Zeit und Lust, mir zu helfen? [ID:tff6329542c]
+- Helfen [ID:tccd8650939]
+	Avatar: Kein Problem! [ID:t46105bc8fa]
+	Mert: Super, danke! Dann steig ein, und los geht's zum Marktplatz! [ID:td74458bcc3]
+	Du hilfst Mert beim Austeilen der Wasser-Hilfspakete. [ID:tbf23fab7c6]
+	Es ist ein langwieriges, repetitives Unterfangen, was dich jedoch mit einem guten Gefühl hinterlässt. [ID:tb61dfc12fb]
+	Mert: Super, wir konnten allen Leuten Wasser zukommen lassen. Und schau mal, es ist noch welches übrig! [ID:t6708af387c]
+	Mert: Danke nochmal für deine Hilfe! Man sieht sich! [ID:tdf029051f2]
+	do execute("HELP_MERT")
+	=> END
+- Nicht helfen [ID:ta7e105dd61]
+	Avatar: Tut mir leid, das passt mir gerade nicht gut. [ID:t06e108624c]
+	Mert: Kann man nichts machen. Beim nächsten Mal vielleicht! [ID:tcbef9f3b9d]
+	=> END

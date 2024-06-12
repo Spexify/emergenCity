@@ -1,0 +1,39 @@
+~ START
+Mert: Hey Kumpel! Alles klar bei dir? [ID:tee78b6ea77]
+- Avatar: Ja, wie läuft's bei dir? [ID:tfe3db0b977]
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Avatar: Ich muss los! [ID:tcd12ac186d]
+	Mert: Man sieht sich! [ID:t21ff82a2c5]
+	=> END
+
+~ DIALOG1
+Mert: Mir gehts super! Kommst du gut durch die Krise? [ID:tf3f00f0908]
+- Ja [ID:t299d0c7878]
+	Avatar: Ich komme klar. [ID:tf0e6d91a55]
+	Mert: Schön zu hören! Aber pass' trotzdem auf dich auf, ja? So eine Krise ist nicht ohne. [ID:t9315a3ea14]
+- Nein [ID:te71ea48c60]
+	Avatar: Ist ehrlich gesagt ganz schön schwierig. [ID:t1209fc10e7]
+	Mert: Tut mir leid, das zu hören. Wenn du jemandem zum Reden brauchst, sag Bescheid, ja? [ID:t2eb95c715f]
+	Mert: Zusammen schaffen wir das schon! [ID:t2cc2725e61]
+=> END
+
+~ DIALOG2
+Mert: Bin ein bisschen gestresst. In solchen Zeiten hat das THW, also das Technische Hilfswerk, mehr zu tun als sonst. [ID:t83a2c6db54]
+Mert: Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - Das ist das Größte. [ID:t15b4ac07d7]
+=> END
+
+
+~ THW_AIDKITS
+if not has_executed_consequences_of_event("THW_AIDKITS")
+	=> FREE_ITEMS
+else
+	Sorry, aber du hast bereits dein Paket erhalten. [ID:td99c060065]
+=> END
+
+
+~ FREE_ITEMS
+Mert: Wir vom Technischen Hilfswerk verteilen momentan kostenlose Hilfspakete um die Krise zu bekämpfen! [ID:t9d3fb7c797]
+Mert: Hier ist dein Paket.[wait=0.5] [b]Weiterhin viel Erfolg![b] [ID:tcaccebacf7]
+do execute_consequences("THW_AIDKITS")
+=> END

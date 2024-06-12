@@ -55,7 +55,7 @@ const OEC_UPPER_BOUND : int = 4
 #const OE_ACTIVE_PERIODS: int = 2 #Amount of periods that an event stays active
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _tooltip_GUI: EMC_TooltipGUI
+var _gui_mngr : EMC_GUIMngr
 var _crisis_phase: EMC_CrisisPhase
 
 var _active_events: Array[Event]
@@ -65,9 +65,9 @@ var _executable_consequences: EMC_ActionConsequences
 
 ########################################## PUBLIC METHODS ##########################################
 ## Constructor
-func _init(p_crisis_phase: EMC_CrisisPhase, p_tooltip_GUI: EMC_TooltipGUI) -> void:
+func _init(p_crisis_phase: EMC_CrisisPhase, p_gui_mngr: EMC_GUIMngr) -> void:
 	_crisis_phase = p_crisis_phase
-	_tooltip_GUI = p_tooltip_GUI
+	_gui_mngr = p_gui_mngr
 	_opt_event_countdown = _rng.randi_range(OEC_LOWER_BOUND, OEC_UPPER_BOUND)
 	_rng.randomize()
 
@@ -160,11 +160,18 @@ func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 		#print("Event started:" + new_event.name) ##Test
 		
 		if new_event.name == "RAIN":
-			await _crisis_phase.play_rain_anim()
+			_gui_mngr.queue_gui("RainAnimation", [])
 		elif !new_event.announce_only_on_radio && new_event.descr != "":
-			_tooltip_GUI.open(new_event.descr)
-			await _tooltip_GUI.closed
+			_gui_mngr.request_gui("TooltipGUI", [new_event.descr])
 
+func save() -> Dictionary:
+	var data : Dictionary = {
+		"count_down": _opt_event_countdown,
+	}
+	return data
+
+func load_state(data : Dictionary) -> void:
+	_opt_event_countdown = data.get("count_down", _opt_event_countdown)
 
 ########################################## PRIVATE METHODS #########################################
 func _create_new_optional_event(p_new_period: EMC_DayMngr.DayPeriod) -> Event:

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dlnhwt803feip"
+path="res://.godot/imported/veronika.dialogue-a4fa9b0b0d0857000fddb17cb26632a2.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/veronika.dialogue"
+dest_files=["res://.godot/imported/veronika.dialogue-a4fa9b0b0d0857000fddb17cb26632a2.tres"]
+
+[params]
+
+defaults=true

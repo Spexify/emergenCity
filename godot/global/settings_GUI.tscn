@@ -32,6 +32,7 @@ texture = ExtResource("3_2gmg0")
 color = Color(0.305882, 0.305882, 0.305882, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_top = 150.0
@@ -56,21 +57,24 @@ layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="Continue" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
+custom_minimum_size = Vector2(400, 49)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "ST_BACK"
+theme_override_font_sizes/font_size = 32
+text = "Speichern & Zurück"
 
 [node name="SelectAvatar" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "ST_CHOOSE"
+theme_override_font_sizes/font_size = 32
+text = "Charakter auswählen"
 
 [node name="Sound" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Sound"
 
 [node name="FontChange" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
+custom_minimum_size = Vector2(0, 63)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Dyslexic Font"
@@ -79,8 +83,8 @@ text = "Dyslexic Font"
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "ST_RESET"
+theme_override_font_sizes/font_size = 32
+text = "Spiel zurücksetzen"
 
 [node name="Sounds" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
 visible = false
@@ -88,6 +92,7 @@ layout_mode = 2
 
 [node name="MasterLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Allgemein"
 
 [node name="Master" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
@@ -97,6 +102,7 @@ bus_name = "Master"
 
 [node name="BGMusicLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Hintergrund Musik"
 
 [node name="Music" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
@@ -106,6 +112,7 @@ bus_name = "Musik"
 
 [node name="SFXLabel" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Sound Effekte"
 
 [node name="SFX" type="HSlider" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
@@ -115,19 +122,20 @@ bus_name = "SFX"
 
 [node name="Vibrate" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Vibration"
 
 [node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
-text = "BACK_SOUND"
+text = "Speichern & Zurück
+"
 
 [node name="ConfirmationGUI" parent="CanvasLayer" instance=ExtResource("6_cbnpx")]
 visible = false
 
-[node name="AvatarSelectionGUI" parent="." instance=ExtResource("4_s3tp7")]
+[node name="AvatarSelectionGUI" parent="CanvasLayer" instance=ExtResource("4_s3tp7")]
 visible = false
-layout_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/SelectAvatar" to="." method="_on_select_avatar_pressed"]
@@ -136,4 +144,4 @@ layout_mode = 1
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate" to="." method="_on_vibrate_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Back" to="." method="_on_back_pressed"]
-[connection signal="closed" from="AvatarSelectionGUI" to="." method="_on_avatar_selection_gui_closed"]
+[connection signal="closed" from="CanvasLayer/AvatarSelectionGUI" to="." method="_on_avatar_selection_gui_closed"]

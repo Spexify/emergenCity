@@ -10,34 +10,26 @@ class_name EMC_CityMap
 @onready var _opt_event_pins := $OptEventPins
 
 var _crisis_phase: EMC_CrisisPhase
-var _tooltip_GUI: EMC_TooltipGUI
 var _stage_mngr: EMC_StageMngr
 var _day_mngr: EMC_DayMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
-var _previously_paused: bool
+var _gui_mngr : EMC_GUIMngr
+
 @onready var _tween := get_tree().create_tween().set_loops()
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_tooltip_GUI: EMC_TooltipGUI, \
-	p_cs_GUI: EMC_ChangeStageGUI, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
+func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mngr: EMC_StageMngr, p_gui_mngr : EMC_GUIMngr, \
+ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_phase = p_crisis_phase
 	_day_mngr = p_day_mngr
 	_stage_mngr = p_stage_mngr
-	_tooltip_GUI = p_tooltip_GUI
-	p_cs_GUI.stayed_on_same_stage.connect(_on_change_stage_gui_stayed_on_same_stage)
+	
+	_gui_mngr = p_gui_mngr
+	
 	_opt_event_mngr = p_opt_event_mngr
 	$DoorbellsGUI.setup(p_stage_mngr)
 
-
-## The inherited ActionGUI-Method.
-## We don't use the action in this case
-func show_gui(p_action : EMC_Action) -> void:
-	open()
-
-
-func open() -> void:
-	_previously_paused = Global.get_tree().paused
-	Global.get_tree().paused = true
+func open(p_action : EMC_Action) -> void:
 	_home_pin.show()
 	
 	#Setup Current-Location-Pin
@@ -85,21 +77,18 @@ func open() -> void:
 	_curr_pos_pin.get_node("AnimationPlayer").play("pin_animation")
 	_home_pin.get_node("AnimationPlayer").play("pin_animation")
 	show()
-	_crisis_phase.add_back_button(_on_back_btn_pressed)
 	opened.emit()
 
 
 func close() -> void:
-	Global.get_tree().paused = _previously_paused
 	_curr_pos_pin.get_node("AnimationPlayer").stop()
 	_home_pin.get_node("AnimationPlayer").stop()
 	hide()
 	$DoorbellsGUI.hide()
-	_crisis_phase.remove_back_button()
 	#Remove all opt event pins
 	for prev_duplicated_pin in _opt_event_pins.get_children():
 		_opt_event_pins.remove_child(prev_duplicated_pin)
-	closed.emit()
+	closed.emit(self)
 
 
 ########################################## PRIVATE METHODS #########################################
@@ -109,57 +98,63 @@ func _ready() -> void:
 	
 	_setup_shader()
 
-
 func _on_back_btn_pressed() -> void:
 	close()
-
+	
+func handle_buttons(stage_name : String) -> void:
+	if stage_name != EMC_StageMngr.STAGENAME_HOME:
+		if not _is_not_evening_suggest_home_return():
+			return
+	
+	if _stage_mngr.get_curr_stage_name() == stage_name:
+		close()
+	else:
+		match stage_name:
+			EMC_StageMngr.STAGENAME_HOME:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_HOME)
+			EMC_StageMngr.STAGENAME_MARKET:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
+			EMC_StageMngr.STAGENAME_PENTHOUSE:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
+			EMC_StageMngr.STAGENAME_TOWNHALL:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
+			EMC_StageMngr.STAGENAME_ROWHOUSE:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
+			EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT:
+				$DoorbellsGUI.open()
+			EMC_StageMngr.STAGENAME_GARDENHOUSE:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
+			EMC_StageMngr.STAGENAME_MANSION:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
+			EMC_StageMngr.STAGENAME_PARK:
+				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
 
 func _on_home_btn_pressed() -> void:
-	_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_HOME)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_HOME)
 
 func _on_marketplace_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_MARKET)
 
 func _on_elias_flat_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_PENTHOUSE)
 
 func _on_townhall_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_TOWNHALL)
 
 func _on_julias_house_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_ROWHOUSE)
 
 func _on_complex_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		$DoorbellsGUI.open()
-
+	handle_buttons(EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT)
 
 func _on_gardenhouse_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_GARDENHOUSE)
 
 func _on_villa_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
-
+	handle_buttons(EMC_StageMngr.STAGENAME_MANSION)
 
 func _on_park_btn_pressed() -> void:
-	if _is_not_evening_suggest_home_return():
-		_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
-
-
-func _on_change_stage_gui_stayed_on_same_stage() -> void:
-	close()
+	handle_buttons(EMC_StageMngr.STAGENAME_PARK)
 
 
 ## Helper method to deduce the position of the pin on the basis of the Button
@@ -176,9 +171,8 @@ func _is_not_evening_suggest_home_return() -> bool:
 	_day_mngr.get_current_day_period() != EMC_DayMngr.DayPeriod.EVENING:
 		return true
 	else:
-		_tooltip_GUI.open("Es ist schon spät, ich sollte nach Hause gehen.")
+		_gui_mngr.request_gui("TooltipGUI", ["Es ist schon spät, ich sollte nach Hause gehen."])
 		return false
-
 
 ## Setup Shader stuff (see https://godotshaders.com/shader/2d-controlled-shine-highlight-with-angle-adjustment/)
 ## Can be used freely under CC0 license (see https://creativecommons.org/publicdomain/zero/1.0/)
@@ -190,3 +184,5 @@ func _setup_shader() -> void:
 	_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) #Play even though the scene is paused
 	_tween.play()
 	
+func _on_back_button_pressed() -> void:
+	close()

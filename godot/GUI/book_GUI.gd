@@ -45,7 +45,7 @@ func open(p_book_ID: IDs) -> void:
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func set_title(p_title: String) -> void:

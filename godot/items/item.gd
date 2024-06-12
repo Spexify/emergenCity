@@ -52,6 +52,9 @@ enum IDs{
 	SOAP = 42,
 }
 
+const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
+const DEFAULT_COLOR := Color(1, 1, 1)
+
 #FYI: Inherits "name" property from Node
 var _ID: IDs
 var _descr: String = "<No Descr>"
@@ -106,6 +109,12 @@ func get_comp(p_classname: Variant) -> EMC_ItemComponent:
 			return comp
 	return null
 
+func get_all_comps_of(p_classname: Variant) -> Array[EMC_ItemComponent]:
+	var result : Array[EMC_ItemComponent]
+	for comp : EMC_ItemComponent in _comps:
+		if is_instance_of(comp, p_classname):
+			result.append(comp)
+	return result
 
 ## Ability to add components
 func add_comp(p_comp: EMC_ItemComponent) -> void:
@@ -195,7 +204,11 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	item._comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
 	
 	return item
-
+	
+static func make_from_id(item_id : int) -> EMC_Item:
+	var item : EMC_Item = _ITEM_SCN.instantiate()
+	item.setup(item_id)
+	return item
 
 func consumed_sound() -> void:
 	SoundMngr.play_sound(_sound_effect["consumed"])
@@ -231,16 +244,15 @@ func _ready() -> void:
 
 ## TODO
 func _on_clicked(sender: EMC_Item) -> void:
-	const HIGHLIGHTED_COLOR := Color(0.4, 0.4, 0.4)
-	const DEFAULT_COLOR := Color(1, 1, 1)
-	
 	if sender == null:
 		printerr("Item._on_clicked(): Sender ist null!")
 	elif sender == self:
 		self.modulate = HIGHLIGHTED_COLOR
 	else:
 		self.modulate = DEFAULT_COLOR
-
+		
+func reset_modulate() -> void:
+	self.modulate = DEFAULT_COLOR
 
 func _on_texture_button_pressed() -> void:
 	clicked.emit(self)

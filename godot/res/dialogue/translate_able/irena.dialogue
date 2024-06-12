@@ -1,0 +1,22 @@
+~ START
+Irena: Hast du Spiele auf deinem Handy?? [ID:t103aebad48]
+Irena: Meine Lieblingsapp ist Krisopolis: Play & Prepare!!! [ID:t85a15bcc1f]
+Avatar: Oh, das klingt spaßig. [ID:te76dc08fcb]
+Irena: Ist es auch! [ID:t8a5a29b0cc]
+- Nach Irenas Spielzeug fragen [ID:t5166fab119]
+	Avatar: Mit was spielst du da? [ID:t0eccd4e4c2]
+	Irena: Mit einer Rakete! [speed=0.3]Wuuuuschhhh!![/speed] [ID:t8631924513]
+	Irena: Ist aber meine[wait=0.5],\nÄäätschi bätsch! [ID:tb1ea71d8d7]
+- Zurück [ID:t68d7c2077c]
+=> END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Irena: Das Feuerwehrauto ist [speed=0.5]SOOOO[/speed] groß! [ID:t5a67f5781b]
+Irena: Meins zuhause ist kleiner, aber auch cool. [ID:t81c428ad31]
+Irena: Ich glaube, wenn ich groß bin will ich vielleicht Feuerwehrfrau werden. [ID:tc0dfd95d2a]
+Irena: [speed=1.5]Oder Schauspielerin.[/speed] [wait=0.5]Im Fernsehen. [ID:t166dcae531]
+Irena: [speed=1.5]Oder Pilotin.[/speed] [ID:ta13253f067]
+Irena: [speed=0.4]Oooooder[/speed] vielleicht Superheldin! [ID:t00bafd962e]
+Irena: Aber ich glaube, Astronautin zu werden reicht mir auch. [ID:tcae98dd984]
+=> END

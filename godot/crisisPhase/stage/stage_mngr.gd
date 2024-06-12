@@ -60,7 +60,6 @@ const TILE_MAX_Y_COORD: int = 16
 
 signal dialogue_initiated(p_NPC_name: String)
 
-@onready var _city_map: EMC_CityMap = $CityMap
 @onready var _curr_stage: TileMap = $StageOffset/CurrStage
 
 var _crisis_phase: EMC_CrisisPhase
@@ -70,8 +69,9 @@ var _GUI: CenterContainer
 var _last_clicked_tile: TileData = null
 var _last_clicked_NPC: EMC_NPC = null
 var _dialogue_pitches: Dictionary
-var _tooltip_GUI : EMC_TooltipGUI
-var _book_GUI: EMC_BookGUI
+
+var _gui_mngr : EMC_GUIMngr
+
 var _initial_stage_name : String = "home"
 var _initial_npc : Dictionary = {}
 var _opt_event_mngr: EMC_OptionalEventMngr
@@ -80,20 +80,18 @@ var _opt_event_mngr: EMC_OptionalEventMngr
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
 func setup(p_crisis_phase: EMC_CrisisPhase, p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, \
-p_tooltip_GUI: EMC_TooltipGUI, p_book_GUI: EMC_BookGUI, p_cs_GUI: EMC_ChangeStageGUI, \
-p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
+p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_phase = p_crisis_phase
 	_avatar = p_avatar
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_day_mngr = p_day_mngr
-	_tooltip_GUI = p_tooltip_GUI
-	_book_GUI = p_book_GUI
 	_opt_event_mngr = p_opt_event_mngr
 	
-	_city_map.setup(_crisis_phase, p_day_mngr, self, p_tooltip_GUI, p_cs_GUI, p_opt_event_mngr)
+	_gui_mngr = p_gui_mngr
+	
+	
 	_dialogue_pitches["Avatar"] = 1.0
 	_setup_NPCs()
-	_city_map.hide()
 	
 	change_stage(_initial_stage_name)
 	respawn_NPCs(_initial_npc)
@@ -117,7 +115,6 @@ func change_stage(p_stage_name: String) -> void:
 	_curr_stage = $StageOffset/CurrStage
 	new_stage.y_sort_enabled = true
 	_curr_stage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
-	_city_map.close()
 	
 	#Manipulate the original Tilemap according to needs:
 	_create_navigation_layer_tiles()
@@ -136,6 +133,7 @@ func change_stage(p_stage_name: String) -> void:
 
 ## Setup NPC position and (de)activate them
 func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
+	print(p_NPC_spawn_pos)
 	#Hide all NPCs first
 	deactivate_NPCs()
 	
@@ -190,11 +188,6 @@ func load_state(data : Dictionary) -> void:
 	_initial_npc = data.get("npc_pos", {})
 	for npc : String in _initial_npc:
 		_initial_npc[npc] = Vector2(_initial_npc[npc].get("x", 0), _initial_npc[npc].get("y", 0))
-
-
-func get_city_map() -> EMC_CityMap:
-	return _city_map
-
 
 func get_NPC(p_NPC_name: String) -> EMC_NPC:
 	for NPC: EMC_NPC in $NPCs.get_children():
@@ -331,10 +324,10 @@ func _on_avatar_arrived() -> void:
 		if _is_tile_furniture(_last_clicked_tile):
 			_last_clicked_tile = null
 			if tooltip != "":
-				_tooltip_GUI.open(tooltip)
+				_gui_mngr.request_gui("TooltipGUI", [tooltip])
 				return
 			if bookID != 0:
-				_book_GUI.open(bookID)
+				_gui_mngr.request_gui("BookGUI", [bookID])
 				return
 			
 			_day_mngr.on_interacted_with_furniture(action_ID)

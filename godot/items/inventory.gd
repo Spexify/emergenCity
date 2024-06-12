@@ -10,7 +10,6 @@ signal item_added(p_item: EMC_Item, p_idx: int)
 ## For the communication with its according GUI
 signal item_removed(p_item: EMC_Item, p_idx: int)
 
-const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
 const MAX_SLOT_CNT: int = 50
 
 var _slot_cnt: int
@@ -44,8 +43,7 @@ func has_space() -> bool:
 ## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
 ## Returns true, if the item was added, else false
 func add_new_item(p_ID: EMC_Item.IDs) -> bool:
-	var new_item: EMC_Item = _ITEM_SCN.instantiate()
-	new_item.setup(p_ID)
+	var new_item: EMC_Item = EMC_Item.make_from_id(p_ID)
 	return add_existing_item(new_item)
 
 

@@ -2,8 +2,6 @@ extends EMC_GUI
 class_name EMC_PopUpGUI #should probably be called "PUEventGUI" as only Pop-up EVENTS use it
 
 var _current_action : EMC_PopUpAction
-#var _previous_pause_state: bool
-
 
 func _ready() -> void:
 	hide()
@@ -11,8 +9,6 @@ func _ready() -> void:
 
 func open(_p_action : EMC_PopUpAction) -> void:
 	_current_action = _p_action
-	#_previous_pause_state = Global.get_tree().paused
-	Global.get_tree().paused = true
 	show()
 	SoundMngr.vibrate(250, 2)
 	opened.emit()
@@ -20,9 +16,8 @@ func open(_p_action : EMC_PopUpAction) -> void:
 
 
 func close() -> void:
-	Global.get_tree().paused = false #_previous_pause_state
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 func _on_confirm_pressed() -> void:

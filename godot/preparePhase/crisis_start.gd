@@ -31,9 +31,13 @@ func _on_continue_pressed() -> void:
 	var _current_scenario := EMC_CrisisScenario.new() #TODO: Load scenario & its state from savefile..
 	
 	if Global._tutorial_done: 
-		OverworldStatesMngr.set_crisis_difficulty(_current_scenario.crisis_name, _current_scenario.allowed_water_crisis, _current_scenario.allowed_electricity_crisis,
-								_current_scenario.allowed_isolation_crisis, _current_scenario.allowed_food_contam_crisis,
-								_crisis_length, _number_crisis_overlap, _current_scenario.notification)
+		OverworldStatesMngr.set_crisis_difficulty(_current_scenario.crisis_name,
+								_current_scenario.allowed_water_crisis,
+								_current_scenario.allowed_electricity_crisis,
+								_current_scenario.allowed_isolation_crisis,
+								_current_scenario.allowed_food_contam_crisis,
+								_crisis_length, _number_crisis_overlap,
+								_current_scenario.notification)
 		
 	else:
 		OverworldStatesMngr.set_crisis_difficulty()

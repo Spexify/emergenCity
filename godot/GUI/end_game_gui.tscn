@@ -31,15 +31,29 @@ color_ramp = SubResource("GradientTexture1D_fs814")
 
 [node name="GameOverGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_brneb")
 
 [node name="WinnerScreen" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 667.0
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -329.0
+offset_right = 218.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="WinnerScreen"]
 layout_mode = 2
@@ -61,7 +75,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "EOG_TITLE2"
+text = "[center]GEWONNEN[/center]"
 
 [node name="TextBox2" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -84,17 +98,18 @@ theme_type_variation = &"WhitePanelContainer"
 clip_contents = true
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
+[node name="Scroll" type="ScrollContainer" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/ScrollContainer"]
+[node name="Actions" type="RichTextLabel" parent="WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll"]
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 mouse_filter = 1
-text = "
-"
-scroll_following = true
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
 
 [node name="TextBox" type="PanelContainer" parent="WinnerScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -111,15 +126,21 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="WinnerScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "EOG_BACK"
+text = "Zurück zum Hauptmenü"
 
 [node name="LoserScreen" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 80.0
-offset_right = 496.0
-offset_bottom = 667.0
-metadata/_edit_use_anchors_ = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -329.0
+offset_right = 218.0
+offset_bottom = 329.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="LoserScreen"]
 layout_mode = 2
@@ -141,7 +162,7 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
-text = "EOG_TITLE1"
+text = "[center]VERLOREN[/center]"
 
 [node name="TextBox" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -159,18 +180,18 @@ custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
-clip_contents = false
+[node name="Scroll" type="ScrollContainer" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/ScrollContainer"]
-clip_contents = false
+[node name="Actions" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll"]
 custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
 mouse_filter = 1
 bbcode_enabled = true
-scroll_following = true
+fit_content = true
+scroll_active = false
 
 [node name="TextBox2" type="PanelContainer" parent="LoserScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -187,7 +208,7 @@ autowrap_mode = 2
 [node name="MainMenu" type="Button" parent="LoserScreen/MarginContainer/VBoxContainer" groups=["Button"]]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "EOG_BACK"
+text = "Zurück zum Hauptmenü"
 
 [node name="StarExplosionVFX" type="GPUParticles2D" parent="."]
 visible = false

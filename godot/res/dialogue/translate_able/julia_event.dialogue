@@ -1,0 +1,13 @@
+~ START
+Julia: Hallo Nachbar! Mein Auto springt schon wieder nicht an, kannst du mir kurz helfen? [ID:t49b0849329]
+- Ja [ID:tffedb2820f]
+	Avatar: Bin dabei! [ID:t1e1ef4edcb]
+	Julia: Vielen Dank! [ID:ted88d47cc6] 
+	Julia: Soo ... Und wenn du jetzt kurz die Zündung drehst ... Der Motor läuft! Super! [ID:t785bc3a456]
+	Julia: Im Handschuhfach ist noch Schokolade, bedien‘ dich ruhig. [ID:t5ec069ff29]
+	Julia: Und danke nochmal für deine Hilfe! [ID:t11d0d59300]
+	do execute("HELP_JULIA")
+	=> END
+- Nein [ID:t7d008ae78f]
+	Julia: Oh okay, kein Problem. Ich frag mal weiter rum, ob jemand gerade Zeit hat. [ID:tba85bc09aa]
+	=> END

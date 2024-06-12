@@ -42,43 +42,37 @@ grow_vertical = 2
 theme = ExtResource("1_71v8c")
 script = ExtResource("2_6drtd")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.12549, 0.12549, 0.12549, 1)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="BackgroundColor" type="TextureRect" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BackgroundColor" type="TextureRect" parent="."]
+offset_right = 700.0
+offset_bottom = 1000.0
 texture = SubResource("GradientTexture2D_uc3mg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 620.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 720.0
 offset_bottom = 1488.0
 scale = Vector2(0.8, 0.8)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(720, 180)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "CC_TITLE"
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer/CenterContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(630, 900)
 layout_mode = 2
 
-[node name="ChosenAvatarFrame" type="TextureRect" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer"]
+[node name="ChosenAvatarFrame" type="TextureRect" parent="VBoxContainer/CenterContainer/ScrollContainer"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("3_wk28i")
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer/ScrollContainer"]
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -86,127 +80,127 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 3
 
-[node name="W01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W01" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("3_7yewj")
 
-[node name="NB01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB01" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("5_pdc1g")
 
-[node name="M01" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M01" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("5_tvfkq")
 
-[node name="W02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W02" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("6_5hypo")
 
-[node name="NB02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB02" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("8_a3nl4")
 
-[node name="M02" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M02" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("7_17xgo")
 
-[node name="W03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W03" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("8_tnd65")
 
-[node name="NB03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB03" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("11_pka4g")
 
-[node name="M03" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M03" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("9_35uxv")
 
-[node name="W04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W04" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("10_0dwwe")
 
-[node name="NB04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB04" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("14_p6eup")
 
-[node name="M04" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M04" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("11_klvuv")
 
-[node name="W05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W05" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("12_aw024")
 
-[node name="NB05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB05" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("17_i51es")
 
-[node name="M05" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M05" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("13_bf2s8")
 
-[node name="W06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="W06" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("14_rq43u")
 
-[node name="NB06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="NB06" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("20_mfpjl")
 
-[node name="M06" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
+[node name="M06" type="TextureButton" parent="VBoxContainer/CenterContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("15_16neq")
 
-[node name="BackBtn" type="TextureButton" parent="CanvasLayer"]
+[node name="BackBtn" type="TextureButton" parent="."]
 offset_left = 500.0
 offset_top = 900.0
 offset_right = 564.0
 offset_bottom = 964.0
 texture_normal = ExtResource("16_vsmkq")
 
-[node name="Continue" type="TextureButton" parent="CanvasLayer"]
+[node name="Continue" type="TextureButton" parent="."]
 offset_left = 500.0
 offset_top = 900.0
 offset_right = 564.0
 offset_bottom = 964.0
 texture_normal = ExtResource("23_4i4uv")
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W01" to="." method="_on_w_01_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB01" to="." method="_on_nb_01_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M01" to="." method="_on_m_01_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W02" to="." method="_on_w_02_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB02" to="." method="_on_nb_02_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M02" to="." method="_on_m_02_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W03" to="." method="_on_w_03_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB03" to="." method="_on_nb_03_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M03" to="." method="_on_m_03_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W04" to="." method="_on_w_04_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB04" to="." method="_on_nb_04_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M04" to="." method="_on_m_04_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W05" to="." method="_on_w_05_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB05" to="." method="_on_nb_05_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M05" to="." method="_on_m_05_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W06" to="." method="_on_w_06_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB06" to="." method="_on_nb_06_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M06" to="." method="_on_m_06_pressed"]
-[connection signal="pressed" from="CanvasLayer/BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Continue" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W01" to="." method="_on_w_01_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB01" to="." method="_on_nb_01_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M01" to="." method="_on_m_01_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W02" to="." method="_on_w_02_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB02" to="." method="_on_nb_02_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M02" to="." method="_on_m_02_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W03" to="." method="_on_w_03_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB03" to="." method="_on_nb_03_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M03" to="." method="_on_m_03_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W04" to="." method="_on_w_04_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB04" to="." method="_on_nb_04_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M04" to="." method="_on_m_04_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W05" to="." method="_on_w_05_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB05" to="." method="_on_nb_05_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M05" to="." method="_on_m_05_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/W06" to="." method="_on_w_06_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/NB06" to="." method="_on_nb_06_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/ScrollContainer/GridContainer/M06" to="." method="_on_m_06_pressed"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="Continue" to="." method="_on_back_btn_pressed"]

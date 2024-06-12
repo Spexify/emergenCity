@@ -6,7 +6,7 @@ var _uses_left : int = 0
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
 func _init(_p_max_uses : int) -> void:
-	super(tr("Uses"), Color.DARK_CYAN)
+	super("Uses", Color.DARK_CYAN)
 	_uses_left = _p_max_uses
 	#_MAX_USES = _p_max_uses
 	#
@@ -30,7 +30,7 @@ func use_item(_p_uses : int = 1) -> void:
 
 
 func get_name_with_values() -> String:
-	return str(_uses_left) + " " + tr("Nutzungen übrig.")
+	return str(_uses_left) + " " + "Nutzungen übrig."
 
 
 func to_dict() -> Dictionary:

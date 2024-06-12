@@ -1,4 +1,4 @@
-extends EMC_ItemComponent
+extends EMC_IC_Consumable
 class_name EMC_IC_Unpalatable
 ## For unhealthy or spoiled items
 
@@ -7,11 +7,13 @@ var _health_reduction: int
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_health_reduction : int) -> void:
-	super(tr("Ungenießbar"), Color.MEDIUM_SEA_GREEN)
+	super("Ungenießbar", Color.MEDIUM_SEA_GREEN)
 	_health_reduction = _p_health_reduction
 	if _health_reduction < 0:
 		_health_reduction = _health_reduction * -1 #only accept positive numbers
 
+func consume(p_avatar : EMC_Avatar) -> void:
+	p_avatar.update_health(-self.get_health_reduction())
 
 ## Get the internal nutritionness value
 func get_health_reduction() -> int:

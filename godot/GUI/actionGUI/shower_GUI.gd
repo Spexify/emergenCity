@@ -9,20 +9,20 @@ func setup(p_inventory: EMC_Inventory) -> void:
 
 
 ## Method that should be overwritten in each class that implements [EMC_ActionGUI]:
-func show_gui(p_action: EMC_Action) -> void:
+func open(p_action: EMC_Action) -> void:
 	_action = p_action
 	
 	if _inventory.has_item(EMC_Item.IDs.SOAP):
-		$VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap.show()
+		($VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap as Button).show()
 	else:
-		$VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap.hide()
+		($VBoxContainer/HBoxContainer/ConfirmBtn_WithSoap as Button).hide()
 	show()
 	opened.emit()
 
 
 func close() -> void:
 	hide()
-	closed.emit()
+	closed.emit(self)
 
 
 ########################################## PRIVATE METHODS #########################################

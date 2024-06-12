@@ -4,16 +4,16 @@ extends Control
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
 @onready var _shop_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop
 @onready var _upgrade_center_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter
+@onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer_unaffectedByCM/AvatarSelectionGUI
 
-func open() -> void: 
+func open(irrelevant : EMC_GUI = null) -> void: 
 	#get_tree().paused = true
 	$".".show()
 	$CanvasLayer_unaffectedByCM.show()
 	$CanvasModulate.show()
 	
 	#opened.emit()
-
-
+	
 #MRM: Added this, because there was a bug (see commit)
 func close() -> void:
 	#get_tree().paused = false
@@ -36,8 +36,8 @@ func _ready() -> void:
 
 func _on_start_round_pressed() -> void:
 	if !Global._tutorial_done:
-		close()
-		$"../AvatarSelectionGUI".open(true)
+		#close()
+		avatar_selection_gui.open(true)
 	else: 
 		Global.goto_scene(Global.CRISIS_START_SCENE)
 
@@ -57,6 +57,7 @@ func _on_settings_pressed() -> void:
 	#MRM: Had a bug (see commit)
 	close()
 	SettingsGUI.open()
+	SettingsGUI.closed.connect(open, CONNECT_ONE_SHOT)
 	#Global.goto_scene("res://global/settings_GUI.tscn")
 	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
 	#for child: Node in _settings.get_children():
@@ -85,3 +86,9 @@ func _on_avatar_selection_gui_closed() -> void:
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
 	close()
+
+func _on_ecoins_gui_input(event : InputEvent) -> void:
+	if event is InputEventScreenTouch:
+		if (event as InputEventScreenTouch).pressed:
+			Global.add_e_coins(250)
+			e_coins.text = str(Global.get_e_coins())

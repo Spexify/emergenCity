@@ -1,4 +1,4 @@
-extends EMC_ItemComponent
+extends EMC_IC_Consumable
 class_name EMC_IC_Food
 
 const UNIT: String = "kcal"
@@ -7,9 +7,11 @@ var _nutritionness: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(nutritionness: int, pleasurable: int = 0) -> void:
-	super(tr("Essen"), Color.INDIAN_RED)
+	super("Essen", Color.INDIAN_RED)
 	_nutritionness = nutritionness
-	
+
+func consume(p_avatar : EMC_Avatar) -> void:
+	p_avatar.update_nutrition(self.get_nutritionness())	
 
 ## Get the internal nutritionness value
 func get_nutritionness() -> int:

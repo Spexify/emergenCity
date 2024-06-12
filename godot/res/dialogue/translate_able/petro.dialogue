@@ -1,0 +1,49 @@
+~ START
+Petro: Moin! [ID:tc477c2ac7c]
+~ BRANCH
+Petro: Alles klar bei dir, kommst du gut durch die Krise? [ID:t07c68f4ffa]
+- Avatar: Ja, wie läuft's bei dir? [ID:t29f8e6a41f]
+	%2 => DIALOG1
+	%2 => DIALOG2
+- Avatar: Hast du was zu tauschen? [ID:t5ea37bc878]
+	=>< TRADE
+	=> BRANCH
+- Avatar: Bis denne! [ID:tc165d270d1]
+	Petro: Tschö! [ID:t41ef4ed94f]
+	=> END
+
+
+~ DIALOG1
+Petro: In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen. [ID:td9c1bff2ec]
+Petro: Irre Idee, nicht? [ID:t0878cd5adc]
+- Schon spannend. [ID:te654095a95]
+	Petro: Wusste ich doch, dass dich das auch begeistert! [ID:tf2fb3425c9] 
+- Klingt unrealistisch. [ID:t662cee4f9d]
+	Petro: Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder? [ID:t9e266ee98f]
+=> END
+
+~ DIALOG2
+Petro: Meine Liebe für die Luftfahrt färbt schon auf Irena ab. [ID:te7ce08013c]
+Petro: Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben.. [ID:t0f89ea419b]
+Avatar: Haha. Naja, bis dann. [ID:tcc1ab82237]
+Petro: Tschö [wait=0.5], mit Ö. [ID:t6a7a5de641]
+=> END
+
+~ TRADE
+do TradeMngr.setup_next_trade("Petro")
+Petro: Immer doch. Suche grad nach {{TradeMngr.get_sought_items_text()}}, dafür biete ich {{TradeMngr.get_offered_items_text()}}. [ID:t080b0f9e95]
+if TradeMngr.is_trade_feasible()
+	Petro: Wie sieht's aus? [ID:taba3c13a6d]
+	- Avatar: Passt. [ID:t873b53310f]
+		do TradeMngr.execute_trade()
+		Petro: [#mood=happy]Exzellent, hier. [ID:t737873588a]
+	- Avatar: Nein, danke. [ID:tb998b4593a]
+		Petro: Kein Problem. [ID:t60f48ed5fd]
+else
+	Petro: Ähh... Glaube {{TradeMngr.get_unfeasibility_reason()}}! [ID:tb90ac4e685]
+=> END
+
+
+~ FIRE_DEPARTMENT_DEMONSTRATION
+Petro: Ich sollte wohl meinen Erste-Hilfe-Kasten zuhause austauschen... [ID:t307a348ad1]
+=> END

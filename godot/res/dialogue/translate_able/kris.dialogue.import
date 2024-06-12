@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bl3aoypra7w3u"
+path="res://.godot/imported/kris.dialogue-a1717bdc6256f129c5cbd5a4537a8de6.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/kris.dialogue"
+dest_files=["res://.godot/imported/kris.dialogue-a1717bdc6256f129c5cbd5a4537a8de6.tres"]
+
+[params]
+
+defaults=true

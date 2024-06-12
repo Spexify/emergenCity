@@ -10,7 +10,7 @@ func setup(p_stage_mngr: EMC_StageMngr) -> void:
 	var data : Dictionary = JsonMngr.load_door_bell()
 	
 	for key : String in data:
-		var doorbell := _DOORBELL_SCN.instantiate()
+		var doorbell : EMC_DoorBell = _DOORBELL_SCN.instantiate()
 		doorbell.setup(key, data[key])
 		doorbell.rang.connect(p_stage_mngr._on_doorbell_rang)
 		_doorbell_list.add_child(doorbell)

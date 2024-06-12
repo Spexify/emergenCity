@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://7odgie80pflw"
+path="res://.godot/imported/julia.dialogue-2a41ebadf62d28f46b2450ead8e30746.tres"
+
+[deps]
+
+source_file="res://res/dialogue/translate_able/julia.dialogue"
+dest_files=["res://.godot/imported/julia.dialogue-2a41ebadf62d28f46b2450ead8e30746.tres"]
+
+[params]
+
+defaults=true

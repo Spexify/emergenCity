@@ -126,7 +126,6 @@ _data = {
 }
 
 [node name="CityMap" type="TextureRect"]
-z_index = 1
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 0
@@ -309,6 +308,14 @@ libraries = {
 visible = false
 layout_mode = 1
 
+[node name="BackButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 939.0
+offset_right = 554.0
+offset_bottom = 1003.0
+texture_normal = ExtResource("4_b0mqi")
+
 [connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="MarketBtn" to="." method="_on_marketplace_btn_pressed"]
@@ -319,3 +326,4 @@ layout_mode = 1
 [connection signal="pressed" from="GardenhouseBtn" to="." method="_on_gardenhouse_btn_pressed"]
 [connection signal="pressed" from="MansionBtn" to="." method="_on_villa_btn_pressed"]
 [connection signal="pressed" from="ParkBtn" to="." method="_on_park_btn_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
