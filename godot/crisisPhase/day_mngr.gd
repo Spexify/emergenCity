@@ -33,7 +33,6 @@ var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
 var _opt_event_mngr: EMC_OptionalEventMngr
 var _pu_event_mngr: EMC_PopupEventMngr
-var _day_period_transition: EMC_DayPeriodTransition
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_avatar : EMC_Avatar, p_stage_mngr : EMC_StageMngr,
@@ -42,8 +41,7 @@ p_gui_mngr : EMC_GUIMngr,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
 p_opt_event_mngr: EMC_OptionalEventMngr,
-p_pu_event_mngr: EMC_PopupEventMngr,
-p_day_period_transition: EMC_DayPeriodTransition) -> void:
+p_pu_event_mngr: EMC_PopupEventMngr) -> void:
 	_avatar = p_avatar
 	_stage_mngr = p_stage_mngr
 	_crisis_mngr = p_crisis_mngr
@@ -56,7 +54,6 @@ p_day_period_transition: EMC_DayPeriodTransition) -> void:
 		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr, p_crisis_mngr)
 	_opt_event_mngr = p_opt_event_mngr
 	_pu_event_mngr = p_pu_event_mngr
-	_day_period_transition = p_day_period_transition
 	
 	_rng.randomize()
 	_update_HUD()
@@ -150,17 +147,18 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	if _check_and_display_game_over(): return
 	
 	#play animation, do stuff and wait for it to finish
-	_day_period_transition.start(get_current_day(), get_current_day_period())
+	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period()])
 	_update_HUD()
 	if get_current_day_period() == DayPeriod.MORNING:
 		_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
 		_stage_mngr.deactivate_NPCs()
 		_avatar.set_global_position(Vector2i(250, 650))
 		_inventory._on_day_mngr_day_ended(get_current_day())
-	await _day_period_transition.finished
+	if not closed.is_null():
+		await closed
 	
 	#Events & Crises stuff
-	await _opt_event_mngr.check_for_new_event(get_current_day_period())
+	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
 	if get_current_day_period() == DayPeriod.MORNING:
 		await _crisis_mngr.check_crisis_status()

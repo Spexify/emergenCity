@@ -78,17 +78,21 @@ _data = {
 "fade_out": SubResource("Animation_rq76k")
 }
 
-[node name="DayPeriodTransition" type="Node2D"]
-process_mode = 3
-z_index = 5
+[node name="DayPeriodTransition" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_fuwqt")
 
 [node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 600.0
 offset_bottom = 1100.0
 texture = SubResource("GradientTexture2D_3ydjh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 84.0
 offset_right = 576.0
@@ -131,6 +135,7 @@ hframes = 3
 frame = 1
 
 [node name="FG" type="TextureRect" parent="."]
+layout_mode = 0
 offset_top = 687.0
 offset_right = 600.0
 offset_bottom = 1100.0

@@ -94,7 +94,7 @@ func _ready() -> void:
 	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
-		_pu_event_mngr, $Animations/DayPeriodTransition)
+		_pu_event_mngr)
 	
 	#Not the nicest of solutions:
 	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
@@ -145,10 +145,6 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
 		_pause_menue.update_overworld_states()
-
-
-func play_rain_anim() -> void:
-	await $Animations/RainAnimation.play()
 
 func save() -> Dictionary:
 	var data : Dictionary = {

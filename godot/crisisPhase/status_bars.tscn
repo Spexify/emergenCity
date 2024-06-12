@@ -84,13 +84,16 @@ shader_parameter/progress = 0.5
 [node name="StatusBars" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_top = 15.0
-offset_bottom = 15.0
+offset_top = 20.0
+offset_right = 295.0
+offset_bottom = 89.0
+size_flags_vertical = 0
 script = ExtResource("1_m4dni")
 
 [node name="HBC" type="HBoxContainer" parent="."]
-layout_mode = 2
-offset_bottom = 30.0
+layout_mode = 1
+offset_right = 310.0
+offset_bottom = 73.0
 scale = Vector2(0.95, 0.95)
 theme_override_constants/separation = -10
 
@@ -101,6 +104,7 @@ theme_override_constants/separation = 13
 [node name="NutritionCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="NutritionQuad" type="MeshInstance2D" parent="HBC/VBoxContainer/NutritionCont"]
 material = SubResource("ShaderMaterial_3vx5e")
@@ -145,6 +149,7 @@ fit_content = true
 [node name="HydrationCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="HydrationQuad" type="MeshInstance2D" parent="HBC/VBoxContainer/HydrationCont"]
 material = SubResource("ShaderMaterial_6carx")
@@ -192,6 +197,7 @@ theme_override_constants/separation = 13
 [node name="HealthCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="HealthQuad" type="MeshInstance2D" parent="HBC/VBoxContainer2/HealthCont"]
 material = SubResource("ShaderMaterial_8s7op")
@@ -233,6 +239,7 @@ fit_content = true
 [node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="HappinessQuad" type="MeshInstance2D" parent="HBC/VBoxContainer2/HappinessCont"]
 material = SubResource("ShaderMaterial_5pkcp")

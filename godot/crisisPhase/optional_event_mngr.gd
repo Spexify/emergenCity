@@ -160,10 +160,9 @@ func check_for_new_event(p_new_period: EMC_DayMngr.DayPeriod) -> void:
 		#print("Event started:" + new_event.name) ##Test
 		
 		if new_event.name == "RAIN":
-			await _crisis_phase.play_rain_anim()
+			_gui_mngr.queue_gui("RainAnimation", [])
 		elif !new_event.announce_only_on_radio && new_event.descr != "":
-			var wait : Signal = _gui_mngr.request_gui("TooltipGUI", [new_event.descr])
-			await wait
+			_gui_mngr.request_gui("TooltipGUI", [new_event.descr])
 
 func save() -> Dictionary:
 	var data : Dictionary = {

@@ -105,12 +105,14 @@ theme_override_constants/separation = 10
 [node name="PauseMenuBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6_tr7dm")
 
 [node name="BackpackBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource("4_ef5pu")
 
@@ -120,10 +122,16 @@ color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="CL" type="CanvasLayer" parent="GUI"]
 
+[node name="DayPeriodTransition" parent="GUI/CL" instance=ExtResource("21_6msld")]
+visible = false
+
 [node name="CityMap" parent="GUI/CL" instance=ExtResource("23_8pknv")]
 visible = false
 offset_right = 576.0
 offset_bottom = 1024.0
+
+[node name="RainAnimation" parent="GUI/CL" instance=ExtResource("24_5kmdu")]
+visible = false
 
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
@@ -139,10 +147,10 @@ mouse_filter = 2
 [node name="HBC" type="HBoxContainer" parent="GUI/CL/VBC/UpperSection"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 180
+theme_override_constants/separation = 56
 
 [node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" groups=["Gui"] instance=ExtResource("6_22w2e")]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(295, 70)
 layout_mode = 2
 
 [node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
@@ -236,15 +244,6 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(600, 1100)
 offset_right = 600.0
 offset_bottom = 1100.0
-
-[node name="Animations" type="Node2D" parent="."]
-
-[node name="DayPeriodTransition" parent="Animations" instance=ExtResource("21_6msld")]
-visible = false
-
-[node name="RainAnimation" parent="Animations" instance=ExtResource("24_5kmdu")]
-visible = false
-mouse_filter = 2
 
 [connection signal="happiness_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]

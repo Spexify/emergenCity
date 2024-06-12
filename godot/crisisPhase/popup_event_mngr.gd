@@ -40,7 +40,7 @@ func check_for_new_event() -> bool:
 		if _action != null:
 			_action.executed.connect(_day_mngr._on_action_executed)
 			_action.silent_executed.connect(_day_mngr._on_action_silent_executed)
-			_gui_mngr.request_gui("PopUpGUI", [_action])
+			_gui_mngr.queue_gui("PopUpGUI", [_action])
 			#await _puGUI.closed
 		#Reset countdown
 		_popup_event_countdown = _rng.randi_range(PUEC_LOWER_BOUND, PUEC_UPPER_BOUND)

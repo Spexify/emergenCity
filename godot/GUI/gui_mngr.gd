@@ -5,7 +5,7 @@ class_name  EMC_GUIMngr
 @onready var _status_bars := $CL/VBC/UpperSection/HBC/StatusBars
 #GUIs Middle Section:
 @onready var _backpack_GUI : EMC_InventoryGUI = $CL/VBC/MiddleSection/BackpackGUI
-@onready var _cooking_GUI := $CL/VBC/MiddleSection/CookingGUI
+@onready var _cooking_GUI : EMC_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
 #GUIs Lower Section:
@@ -15,10 +15,13 @@ class_name  EMC_GUIMngr
 @onready var _cs_GUI : EMC_ChangeStageGUI = $CL/VBC/LowerSection/ChangeStageGUI
 @onready var _rainwater_barrel_gui := $CL/VBC/MiddleSection/RainwaterBarrelGUI
 
+
 @onready var middle_section := $CL/VBC/MiddleSection
 @onready var lower_section := $CL/VBC/LowerSection
 
 @onready var _city_map : EMC_CityMap = $CL/CityMap
+@onready var _day_period_transition : EMC_GUI = $CL/DayPeriodTransition
+@onready var _rain_animation : EMC_GUI = $CL/RainAnimation
 
 @onready var pause_menu_btn := $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn := $ButtonList/VBC/BackpackBtn
@@ -44,6 +47,8 @@ func _ready() -> void:
 		all_the_guis.append(child)
 		
 	all_the_guis.append(_city_map)
+	all_the_guis.append(_rain_animation)
+	all_the_guis.append(_day_period_transition)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 

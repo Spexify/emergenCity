@@ -13,7 +13,7 @@ func _init(_p_health_reduction : int) -> void:
 		_health_reduction = _health_reduction * -1 #only accept positive numbers
 
 func consume(p_avatar : EMC_Avatar) -> void:
-	p_avatar.update_health(self.get_health_reduction())
+	p_avatar.update_health(-self.get_health_reduction())
 
 ## Get the internal nutritionness value
 func get_health_reduction() -> int:
