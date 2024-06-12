@@ -13,8 +13,7 @@ func open(irrelevant : EMC_GUI = null) -> void:
 	$CanvasModulate.show()
 	
 	#opened.emit()
-
-
+	
 #MRM: Added this, because there was a bug (see commit)
 func close() -> void:
 	#get_tree().paused = false
@@ -87,3 +86,9 @@ func _on_avatar_selection_gui_closed() -> void:
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
 	close()
+
+func _on_ecoins_gui_input(event : InputEvent) -> void:
+	if event is InputEventScreenTouch:
+		if (event as InputEventScreenTouch).pressed:
+			Global.add_e_coins(250)
+			e_coins.text = str(Global.get_e_coins())
