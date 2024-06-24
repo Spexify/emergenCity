@@ -199,6 +199,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
 	$GUI/CL/VBC/LowerSection.add_child(dialogue_GUI)
 	
+	$InputBlock.show()
 	dialogue_GUI.start(dialogue_resource, starting_tag, [_opt_event_mngr])
 	Global.get_tree().paused = true
 
