@@ -284,7 +284,6 @@ func _ready() -> void:
 	_on_new_avatar_sprite_changed(SettingsGUI.get_avatar_sprite_suffix()) #init
 	$AnimationPlayer.play("idle")
 
-
 func _process(p_delta: float) -> void:
 	#Set frame to direction that character is currently walking in
 	if !_nav_agent.is_navigation_finished():
@@ -296,12 +295,7 @@ func _process(p_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
-	const MIN_DISTANCE_TO_TARGET: float = 5.0
-	
-	#Stop pathfinding-navigation, if close enough at target (set_target_desired_distance() doesn't seem to work)
-	if (_nav_agent.distance_to_target() < MIN_DISTANCE_TO_TARGET):
-		#arrived.emit()
-		cancel_navigation()
+
 	if (_nav_agent.is_navigation_finished()):
 		#Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up
 		# Get the input direction
@@ -310,32 +304,25 @@ func _physics_process(_delta: float) -> void:
 			Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
 	else: #Navigation via Pathfinding
-		input_direction = to_local(_nav_agent.get_next_path_position()).normalized()
+		input_direction = position.direction_to(_nav_agent.get_next_path_position()) #.normalized()
 	
 	# Update velocity
-	velocity = MOVE_SPEED * input_direction
-	_nav_agent.set_velocity(velocity)
+	var new_velocity := MOVE_SPEED * input_direction
+	_nav_agent.set_velocity(new_velocity)
 
-## target_reached() doesn't work for whatever reason
-func _on_navigation_agent_2d_navigation_finished() -> void:
-	_walking_SFX.stop() #Name should be more precise. Walking could be an animation or a state-object
+# NOTICE: target reched can only be emitted if path desired distance if lower or equal to Traget desired distance
+func _on_navigation_target_reached() -> void:
+	_walking_SFX.stop()
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("idle")
 	scale = Vector2(1.0, 1.0)
-	# NOTICE: Prevent arrived from being emitted twice
-	if get_global_position().distance_to(_last_pos) >= 10:
-		arrived.emit()
-		
-	_last_pos = get_global_position()
-
+	arrived.emit()
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
 	move_and_slide() #uses the characters velocity to move them on the map
 
-
 func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:
 	$Sprite2D.texture = \
 		load("res://res/sprites/characters/sprite_avatar_" + p_avatar_sprite_suffix + ".png")
-
 

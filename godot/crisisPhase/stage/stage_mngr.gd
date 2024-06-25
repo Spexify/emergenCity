@@ -57,6 +57,8 @@ const TILE_MIN_X_COORD: int = 0
 const TILE_MAX_X_COORD: int = 9
 const TILE_MIN_Y_COORD: int = 0
 const TILE_MAX_Y_COORD: int = 16
+const NPC_TILE_COORD: Vector2i = Vector2i(3, 0)
+const NAVI_TILE_COORD = Vector2i(0, 0)
 
 signal dialogue_initiated(p_NPC_name: String)
 
@@ -157,7 +159,10 @@ func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 			return
 		
 		NPC.activate()
-		NPC.position = p_spawn_pos
+		var tile_position := _global_to_map(p_spawn_pos)
+		NPC.position = _map_to_global(tile_position)
+		
+		_curr_stage.erase_cell(EMC_StageMngr.Layers.NAVIGATION, tile_position)
 
 
 ## Returns a Dictonary cotaining every actives NPC position
@@ -209,11 +214,10 @@ func _ready() -> void:
 
 ## Dynamiccaly create Navigation Layer tiles where there is no collision
 func _create_navigation_layer_tiles() -> void:
-	const NAVI_TILE_COORD = Vector2i(0, 0)
 	var tile_coords: Array[Vector2i] = _curr_stage.get_used_cells(Layers.BACKGROUND)
 	
 	## Pro tip to debug this: You can "Force Show" the Navigation visibility:
-	#_curr_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	_curr_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
 	
 	for tile_coord: Vector2i in tile_coords:
 		if !_has_tile_collision(tile_coord):
@@ -278,9 +282,7 @@ p_overwrite_existing_tiles: bool = false) -> void:
 			_curr_stage.set_cell(EMC_StageMngr.Layers.MIDDLEGROUND_1, tilemap_pos, \
 				EMC_StageMngr.Atlases.FURNITURE_PNG, atlas_coord)
 
-
 ### Add NPCs to the scene
-## TODO: should be done by a JSON in the future!
 func _setup_NPCs() -> void:
 	for npc : EMC_NPC in JsonMngr.load_NPC():
 		npc.hide()
@@ -298,14 +300,14 @@ func _unhandled_input(p_event: InputEvent) -> void:
 		_last_clicked_NPC = null
 		var click_position: Vector2 = p_event.position - $StageOffset.position
 		_last_clicked_tile = _get_tile_data_front_to_back(click_position)
-		if _is_tile_out_of_bounds(_get_tile_coord(click_position)): return
+		if _is_tile_out_of_bounds(_global_to_map(click_position)): return
 		if _is_tile_furniture(_last_clicked_tile):
 			var adjacent_free_tile_pos: Vector2 = \
 				_determine_adjacent_free_tile(click_position)
 			if adjacent_free_tile_pos != INVALID_TILE:
 				_avatar.set_target(adjacent_free_tile_pos + $StageOffset.position)
-		elif !_has_tile_collision(_get_tile_coord(click_position)):
-			_avatar.set_target(click_position + $StageOffset.position)
+		elif !_has_tile_collision(_global_to_map(click_position)):
+			_avatar.set_target(_map_to_global(_global_to_map(click_position)))
 
 
 ## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
@@ -378,15 +380,19 @@ func _is_tile_furniture(p_tiledata: TileData) -> bool:
 
 
 ## TODO
-func _get_tile_coord(p_click_pos: Vector2) -> Vector2i:
+func _global_to_map(p_click_pos: Vector2) -> Vector2i:
 	#The click position has to be scaled according to the scale of the stage
 	var scaled_click_pos := to_local(p_click_pos)
 	return _curr_stage.local_to_map(scaled_click_pos)
 
+func _map_to_global(p_click_pos: Vector2) -> Vector2i:
+	#The click position has to be scaled according to the scale of the stage
+	var scaled_click_pos := _curr_stage.map_to_local(p_click_pos)
+	return to_global(scaled_click_pos + $StageOffset.position)
 
 ## TODO
 func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
-	var tile_coord := _get_tile_coord(p_click_pos)
+	var tile_coord := _global_to_map(p_click_pos)
 	var tiledata: TileData
 	
 	#Front to back:
@@ -401,7 +407,7 @@ func _get_tile_data_front_to_back(p_click_pos: Vector2) -> TileData:
 
 ## TODO
 func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
-	var tile_coord := _get_tile_coord(p_click_pos)
+	var tile_coord := _global_to_map(p_click_pos)
 	
 	if !_has_tile_collision(tile_coord) && !_is_tile_out_of_bounds(tile_coord):
 		return to_global(_curr_stage.map_to_local(tile_coord))
