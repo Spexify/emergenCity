@@ -151,16 +151,32 @@ func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
 				for spawn_NPCs in spawn_NPCs_arr:
 					_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
 
-
+## Spawn NPC, the position of NPCs id snaped to the center of tile or edge of two tiles. 
 func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
-		var NPC := $NPCs.get_node(p_NPC_name)
+		var NPC : EMC_NPC = $NPCs.get_node(p_NPC_name)
 		if NPC == null:
 			printerr("StageMngr.update_NPCs(): Unknown NPC Name: " + p_NPC_name)
 			return
 		
+		
+		var tile_position : Vector2 = _global_to_map(p_spawn_pos)
+		var center_position : Vector2 = _map_to_global(tile_position)
+		
+		#print("Before " + str(center_position))
+		
+		if center_position.distance_to(p_spawn_pos) > 16:
+			var direction := p_spawn_pos - center_position
+			direction[direction.abs().min_axis_index()] = 0
+			var norm_direction := direction.normalized()
+			center_position += norm_direction * 32
+			if norm_direction.abs() == Vector2.DOWN:
+				center_position -= Vector2.UP*20
+			_curr_stage.erase_cell(EMC_StageMngr.Layers.NAVIGATION, _global_to_map(center_position + norm_direction*32))
+		
 		NPC.activate()
-		var tile_position := _global_to_map(p_spawn_pos)
-		NPC.position = _map_to_global(tile_position)
+		NPC.position = center_position
+		
+		#print(str(NPC))
 		
 		_curr_stage.erase_cell(EMC_StageMngr.Layers.NAVIGATION, tile_position)
 
@@ -217,7 +233,7 @@ func _create_navigation_layer_tiles() -> void:
 	var tile_coords: Array[Vector2i] = _curr_stage.get_used_cells(Layers.BACKGROUND)
 	
 	## Pro tip to debug this: You can "Force Show" the Navigation visibility:
-	_curr_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	#_curr_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
 	
 	for tile_coord: Vector2i in tile_coords:
 		if !_has_tile_collision(tile_coord):

@@ -71,11 +71,11 @@ script = ExtResource("1_mgugj")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 texture = ExtResource("2_3c1j3")
-offset = Vector2(0, -30)
+offset = Vector2(0, -46)
 hframes = 3
 
 [node name="CollisionCircle" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
+position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_1u2dm")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 

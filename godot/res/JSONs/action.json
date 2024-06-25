@@ -155,7 +155,7 @@
 			"change_stage": {
 				"stage_name": "market",
 				"avatar_pos": {"x": 250, "y": 1000},
-				"npc_pos": {"Raphael": {"x": 200, "y": 230}}
+				"npc_pos": {"Raphael": {"x": 192, "y": 224}}
 			}
 		},
 		"description": "Hat Marktplatz besucht.",
@@ -191,8 +191,8 @@
 				"stage_name": "park",
 				"avatar_pos": {"x": 350, "y": 700},
 				"npc_pos": {
-					"Gerhard": {"x": 160, "y": 730},
-					"Friedel": {"x": 80, "y": 730}
+					"Gerhard": {"x": 128, "y": 704},
+					"Friedel": {"x": 64, "y": 704}
 				}
 			}
 		},
@@ -210,8 +210,8 @@
 				"stage_name": "gardenhouse",
 				"avatar_pos": {"x": 150, "y": 900},
 				"npc_pos": {
-					"Gerhard": {"x": 420, "y": 380},
-					"Friedel": {"x": 80, "y": 700}
+					"Gerhard": {"x": 448, "y": 380},
+					"Friedel": {"x": 96, "y": 704}
 				}
 			}
 		},
@@ -245,7 +245,7 @@
 				"stage_name": "mansion",
 				"avatar_pos": {"x": 120, "y": 900},
 				"npc_pos": {
-					"Petro": {"x": 370, "y": 870},
+					"Petro": {"x": 300, "y": 832},
 					"Irena": {"x": 460, "y": 260}
 				}
 			}
@@ -299,8 +299,8 @@
 				"stage_name": "apartment_camper",
 				"avatar_pos": {"x": 150, "y": 400},
 				"npc_pos": {
-					"Kris": {"x": 460, "y": 300},
-					"Veronika": {"x": 480, "y": 780}
+					"Kris": {"x": 480, "y": 320},
+					"Veronika": {"x": 450, "y": 750}
 				}
 			}
 		},

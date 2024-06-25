@@ -31,16 +31,12 @@ const INIT_HAPPINESS_VALUE : int = MAX_VITALS_NUTRITION/2
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
 
-# NOTICE: Prevent arrived from being emitted twice
-@onready var _last_pos : Vector2 = get_global_position()
-
 ## 2200 kCal Nahrung, 2000 ml Wasser pro Tag, _health_value und _happinness_value gemessen in Prozent
 ## working in untis of 4
 var _nutrition_value : int = INIT_NUTRITION_VALUE
 var _hydration_value : int = INIT_HYDRATION_VALUE
 var _health_value : int = INIT_HEALTH_VALUE
 var _happiness_value : int = INIT_HAPPINESS_VALUE
-
 
 enum Frame{
 	FRONTSIDE = 0,
@@ -54,16 +50,13 @@ func set_target(p_target_pos: Vector2) -> void:
 	if (p_target_pos == position):
 		return
 	
-	_last_pos = Vector2(0.0, 0.0)
 	_nav_agent.target_position = p_target_pos
 	if not _walking_SFX.playing:
 		_walking_SFX.play()
 	$AnimationPlayer.play("walking")
 
-
 func cancel_navigation() -> void:
 	_nav_agent.target_position = self.position
-	
 
 func consume_item(p_item : EMC_Item) -> void:
 	var consumable_comps : Array[EMC_IC_Consumable]

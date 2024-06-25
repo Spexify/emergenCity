@@ -4,7 +4,6 @@
 
 [node name="Gardenhouse" type="TileMap"]
 y_sort_enabled = true
-position = Vector2(45, 21)
 tile_set = ExtResource("1_7a6ek")
 format = 2
 layer_0/name = "Navigation"

@@ -25,29 +25,27 @@ func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 	
 	position = p_spawn_pos
 
-
 func set_frame(p_frame_idx: int) -> void:
 	_sprite.frame = p_frame_idx
-
 
 func deactivate() -> void:
 	hide()
 	_collision_circle.disabled = true
 	_dialogue_hitbox.disabled = true
 
-
 func activate() -> void:
 	show()
 	_collision_circle.disabled = false
 	_dialogue_hitbox.disabled = false
 
-
 func set_trade_bid(p_trade_bid: EMC_TradeMngr.TradeBid) -> void:
 	_trade_bid = p_trade_bid
 
-
 func get_trade_bid() -> EMC_TradeMngr.TradeBid:
 	return _trade_bid
+
+func _to_string() -> String:
+	return str(name) + " @ " + str(position);
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
