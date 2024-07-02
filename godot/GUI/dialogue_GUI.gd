@@ -68,6 +68,11 @@ var dialogue_line: DialogueLine:
 				if not response.is_allowed:
 					item.name = String(item.name) + "Disallowed"
 					item.modulate.a = 0.4
+				match response.get_tag_value("result"):
+					"happy":
+						item.modulate = Color(0.97, 0.94, 0.34, 1)
+					"sad":
+						item.modulate = Color(0.08, 0.33, 0.57, 1)
 				item.text = response.text
 				item.show()
 				responses_menu.add_child(item)

@@ -100,9 +100,7 @@ p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 
 
 func get_curr_stage_name() -> String:
-	var parts := get_curr_stage().get_scene_file_path().split("/")
-	var filename_with_ending: String = parts[parts.size() - 1]
-	return filename_with_ending.substr(0, filename_with_ending.length() - 5)
+	return _curr_stage.name
 
 
 func get_curr_stage() -> TileMap:
@@ -112,9 +110,9 @@ func get_curr_stage() -> TileMap:
 ## Change the stage to the one specified via [param p_stage_name]
 func change_stage(p_stage_name: String) -> void:
 	var new_stage: TileMap = load("res://crisisPhase/stage/" + p_stage_name + ".tscn").instantiate()
-	$StageOffset/CurrStage.replace_by(new_stage)
-	new_stage.name = "CurrStage"
-	_curr_stage = $StageOffset/CurrStage
+	_curr_stage.replace_by(new_stage)
+	new_stage.name = p_stage_name
+	_curr_stage = new_stage
 	new_stage.y_sort_enabled = true
 	_curr_stage.set_scene_file_path("res://crisisPhase/stage/" + p_stage_name + ".tscn")
 	
@@ -471,16 +469,6 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 		offset += Vector2(0, 50)
 		
 	_avatar.set_target(p_NPC.position + offset)
-
-
-func _on_city_map_opened() -> void:
-	_curr_stage.hide() #Hide Stage so clicks don't register on tiles anymore
-	city_map_opened.emit()
-
-
-func _on_city_map_closed() -> void:
-	_curr_stage.show()
-	city_map_closed.emit()
 
 
 func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:

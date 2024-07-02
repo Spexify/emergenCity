@@ -96,12 +96,6 @@ func _ready() -> void:
 	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
 		_pu_event_mngr)
 	
-	#Not the nicest of solutions:
-	_opt_event_mngr.set_constraints(_day_mngr.get_action_constraints())
-	_opt_event_mngr.set_consequences(_day_mngr.get_action_consequences())
-	_pu_event_mngr.set_constraints(_day_mngr.get_action_constraints())
-	_pu_event_mngr.set_consequences(_day_mngr.get_action_consequences())
-	
 	$GUI/CL/VBC/MiddleSection/IconInformation.hide()
 	
 	#Tutorial intro dialogue

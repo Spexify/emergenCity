@@ -55,6 +55,11 @@ p_pu_event_mngr: EMC_PopupEventMngr) -> void:
 	_opt_event_mngr = p_opt_event_mngr
 	_pu_event_mngr = p_pu_event_mngr
 	
+	_opt_event_mngr.set_constraints(_action_constraints)
+	_opt_event_mngr.set_consequences(_action_consequences)
+	_pu_event_mngr.set_constraints(_action_constraints)
+	_pu_event_mngr.set_consequences(_action_consequences)
+	
 	_rng.randomize()
 	_update_HUD()
 
@@ -164,6 +169,7 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 		await _crisis_mngr.check_crisis_status()
 	
 	# Popup last, because it can lead to another _advance_day_period() call!!!
+	print(_stage_mngr.get_curr_stage_name())
 	_pu_event_mngr.check_for_new_event()
 
 
