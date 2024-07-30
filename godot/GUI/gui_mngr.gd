@@ -25,6 +25,7 @@ class_name  EMC_GUIMngr
 
 @onready var pause_menu_btn := $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn := $ButtonList/VBC/BackpackBtn
+@onready var phone_btn := $ButtonList/VBC/PhoneBtn
 
 @onready var canvas_modulate := $CanvasModulate
 
@@ -99,6 +100,7 @@ func request_gui(gui_name : String, argv : Array) -> Variant:
 				return result
 			
 			return gui.closed
+	printerr("Gui with name: '" + gui_name + "' not found")
 	return Signal()
 
 func queue_gui(gui_name : String, argv : Array) -> Signal:
@@ -136,6 +138,9 @@ func _on_backpack_btn_pressed() -> void:
 
 func _on_pause_menu_btn_pressed() -> void:
 	request_gui("PauseMenu", [])
+	
+func _on_phone_btn_pressed() -> void:
+	request_gui("HandyGUI", [])
 
 ########################Helper Functions############################
 
@@ -146,10 +151,12 @@ func _set_guis_process_mode(guis : Array[EMC_GUI], mode : int) -> void:
 		
 func _hide_buttons() -> void:
 	pause_menu_btn.hide()
+	phone_btn.hide()
 	backpack_btn.hide()
 	
 func _show_buttons() -> void:
 	pause_menu_btn.show()
+	phone_btn.show()
 	backpack_btn.show()
 
 ######################Helper Classes##############################

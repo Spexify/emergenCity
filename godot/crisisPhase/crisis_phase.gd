@@ -20,6 +20,7 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 @onready var _backpack_GUI : EMC_InventoryGUI = $GUI/CL/VBC/MiddleSection/BackpackGUI
 @onready var _book_GUI : EMC_BookGUI = $GUI/CL/VBC/MiddleSection/BookGUI
 @onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
+@onready var _handy_gui : EMC_Handy = $GUI/CL/VBC/MiddleSection/HandyGUI
 @onready var _cooking_GUI := $GUI/CL/VBC/MiddleSection/CookingGUI
 @onready var _showerGUI := $GUI/CL/VBC/LowerSection/ShowerGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $GUI/CL/VBC/MiddleSection/SummaryEndOfDayGUI
@@ -118,6 +119,7 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.get_electricity_state() + 1)
 		_pause_menue.update_overworld_states()
+		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Water"):
 		if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -125,6 +127,7 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
 		_pause_menue.update_overworld_states()
+		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Isolation"):
 		if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -132,6 +135,7 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
 		_pause_menue.update_overworld_states()
+		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Food_Contam"):
 		if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -139,6 +143,7 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
 		_pause_menue.update_overworld_states()
+		_handy_gui.restart()
 
 func save() -> Dictionary:
 	var data : Dictionary = {

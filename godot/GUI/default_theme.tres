@@ -1,10 +1,40 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c38cnaco26erq"]
 
+[ext_resource type="Texture2D" uid="uid://bgfeu2ns15jno" path="res://res/sprites/GUI/backgrounds/menu_box_black.png" id="1_707kn"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_g0i34"]
+[ext_resource type="Texture2D" uid="uid://fa2a48tltso1" path="res://res/sprites/GUI/backgrounds/menu_box_blue.png" id="1_oyqmt"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="2_68ab8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_elb5e"]
+texture = ExtResource("1_707kn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4jyva"]
+texture = ExtResource("1_oyqmt")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_54rh3"]
+texture = ExtResource("1_oyqmt")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_278fl"]
 texture = ExtResource("1_g0i34")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xpu0s"]
+texture = ExtResource("1_oyqmt")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
@@ -19,6 +49,10 @@ texture_margin_bottom = 16.0
 
 [resource]
 default_font_size = 25
+BlackPanelContainer/base_type = &"PanelContainer"
+BlackPanelContainer/styles/panel = SubResource("StyleBoxTexture_elb5e")
+BluePanelContainer/base_type = &"PanelContainer"
+BluePanelContainer/styles/panel = SubResource("StyleBoxTexture_4jyva")
 HeaderLarge/base_type = &"RichTextLabel"
 HeaderLarge/font_sizes/bold_font_size = 35
 HeaderLarge/font_sizes/bold_italics_font_size = 35
@@ -26,11 +60,15 @@ HeaderLarge/font_sizes/font_size = 35
 HeaderLarge/font_sizes/italics_font_size = 35
 HeaderLarge/font_sizes/mono_font_size = 35
 HeaderLarge/font_sizes/normal_font_size = 35
+ItemList/colors/font_color = Color(0, 0, 0, 1)
+ItemList/styles/panel = SubResource("StyleBoxTexture_54rh3")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_278fl")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
-TitleSpacing/base_type = &"MarginContainer"
 TitleSpacing/constants/margin_bottom = 12
+Tree/colors/font_color = Color(0, 0, 0, 1)
+Tree/styles/panel = SubResource("StyleBoxTexture_xpu0s")
 WhitePanelContainer/base_type = &"PanelContainer"
+WhitePanelContainer/styles/Styleboxes = null
 WhitePanelContainer/styles/panel = SubResource("StyleBoxTexture_ivrwx")
 WhiteRichTextLabel/base_type = &"RichTextLabel"
 WhiteRichTextLabel/colors/default_color = Color(1, 1, 1, 1)

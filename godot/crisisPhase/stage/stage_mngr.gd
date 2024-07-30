@@ -63,6 +63,7 @@ const NAVI_TILE_COORD = Vector2i(0, 0)
 signal dialogue_initiated(p_NPC_name: String)
 
 @onready var _curr_stage: TileMap = $StageOffset/CurrStage
+@onready var NPCs : Control = $NPCs
 
 var _crisis_phase: EMC_CrisisPhase
 var _avatar: EMC_Avatar
@@ -140,6 +141,21 @@ func respawn_NPCs(p_NPC_spawn_pos: Dictionary) -> void:
 	#Dependend on the stage show and spawn NPCs
 	for NPC_name: String in p_NPC_spawn_pos:
 		_spawn_NPC(NPC_name, p_NPC_spawn_pos[NPC_name])
+		
+	#var list_of_npcs : Array[EMC_NPC]
+	#list_of_npcs.assign(NPCs.get_children())
+	#
+	#var random_list : Array[int] = []
+	#for i in range(list_of_npcs.size()):
+		#var indexes : Array[int] = []
+		#indexes.resize(list_of_npcs[i].get_spawn_ratio(get_curr_stage_name()).fill(i))
+		#random_list.append_array(indexes)
+	#
+	#random_list.resize(int(random_list.size()/2))
+	#
+	#var index : Variant = random_list.pick_random()
+	#if not index == null:
+		#_spawn_NPC(list_of_npcs[index].name, list_of_npcs[index].get_spawn_position(get_curr_stage_name()))
 	
 	#Optional Event NPCs
 	for opt_event in _opt_event_mngr.get_active_events():

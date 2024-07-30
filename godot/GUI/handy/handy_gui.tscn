@@ -1,0 +1,235 @@
+[gd_scene load_steps=25 format=3 uid="uid://druwt2u04fhrc"]
+
+[ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
+[ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
+[ext_resource type="Texture2D" uid="uid://b4iuh38wfe4f4" path="res://res/sprites/GUI/icons/icon_info_app.png" id="2_6tb3d"]
+[ext_resource type="Texture2D" uid="uid://bgfeu2ns15jno" path="res://res/sprites/GUI/backgrounds/menu_box_black.png" id="2_s4v68"]
+[ext_resource type="Texture2D" uid="uid://cno5csi1waa8v" path="res://res/sprites/GUI/icons/icon_warn_app.png" id="3_fdip5"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="5_n7g61"]
+[ext_resource type="Texture2D" uid="uid://bduv6g8pf4rcs" path="res://res/sprites/GUI/icons/icon_store_app.png" id="6_306ny"]
+[ext_resource type="Texture2D" uid="uid://xsfa62fx0vjo" path="res://res/sprites/GUI/buttons/home_button.png" id="8_jwi6o"]
+[ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
+[ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
+[ext_resource type="Texture2D" uid="uid://ckhxcs0p45ige" path="res://res/sprites/GUI/icons/icon_no_electricity.png" id="9_0kjvi"]
+[ext_resource type="Texture2D" uid="uid://b8rm5sphqyjf2" path="res://res/sprites/GUI/icons/icon_fire.png" id="9_ish7q"]
+[ext_resource type="Texture2D" uid="uid://bh1xeb3ienh2a" path="res://res/sprites/GUI/icons/icon_needs_electricity.png" id="9_xog7u"]
+[ext_resource type="Texture2D" uid="uid://c6dw35gsdmd0m" path="res://res/sprites/GUI/icons/icon_no_water.png" id="11_ehmsr"]
+[ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="11_ybny1"]
+[ext_resource type="Texture2D" uid="uid://c658ybh2adj3s" path="res://res/sprites/GUI/icons/icon_dirty_water.png" id="12_813kx"]
+[ext_resource type="Texture2D" uid="uid://c54qxvqksj055" path="res://res/sprites/GUI/icons/icon_isolation.png" id="14_ta5vh"]
+[ext_resource type="Texture2D" uid="uid://da67crywqxpfr" path="res://res/sprites/GUI/icons/icon_limited_isolation.png" id="15_mma0d"]
+[ext_resource type="Texture2D" uid="uid://c250hxbejcp1a" path="res://res/sprites/GUI/icons/icon_needs_health.png" id="16_fx4td"]
+[ext_resource type="Texture2D" uid="uid://dowe2s3gmg3qv" path="res://res/sprites/GUI/icons/icon_dirty_food.png" id="17_daljn"]
+[ext_resource type="Texture2D" uid="uid://dxb3yhd7q16r6" path="res://res/sprites/GUI/icons/icon_no_food.png" id="17_shsgk"]
+[ext_resource type="Texture2D" uid="uid://btclblm0idrd6" path="res://res/sprites/GUI/icons/icon_food.png" id="18_y1kvx"]
+[ext_resource type="Script" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qqt3g"]
+texture = ExtResource("2_s4v68")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="Handy" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_4od8s")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 738)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -427.0
+offset_right = 262.0
+offset_bottom = 311.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qqt3g")
+
+[node name="VBC" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="Panel/VBC"]
+layout_mode = 2
+
+[node name="CC" type="CenterContainer" parent="Panel/VBC/Menu"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Menu/CC"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[color=white]Smartphone"
+
+[node name="Window" type="PanelContainer" parent="Panel/VBC/Menu"]
+custom_minimum_size = Vector2(492, 580)
+layout_mode = 2
+theme_type_variation = &"BluePanelContainer"
+
+[node name="Margin" type="MarginContainer" parent="Panel/VBC/Menu/Window"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Apps" type="GridContainer" parent="Panel/VBC/Menu/Window/Margin"]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 33
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Info" parent="Panel/VBC/Menu/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+size_flags_horizontal = 4
+app = "Info"
+icon = ExtResource("2_6tb3d")
+title = "[center]Info-Center"
+
+[node name="Store" parent="Panel/VBC/Menu/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+app = "Store"
+icon = ExtResource("6_306ny")
+title = "[center]App-Store"
+
+[node name="Store" type="VBoxContainer" parent="Panel/VBC" node_paths=PackedStringArray("handy")]
+visible = false
+layout_mode = 2
+script = ExtResource("8_njk5s")
+handy = NodePath("../../..")
+down_texture = ExtResource("6_306ny")
+
+[node name="CC" type="CenterContainer" parent="Panel/VBC/Store"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBC/Store/CC"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Store/CC/VBoxContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][color=white]App Store"
+
+[node name="Description" type="RichTextLabel" parent="Panel/VBC/Store/CC/VBoxContainer"]
+custom_minimum_size = Vector2(400, 26)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center][color=white]Drücke auf eine App und installiere sie"
+
+[node name="Window" type="PanelContainer" parent="Panel/VBC/Store"]
+custom_minimum_size = Vector2(492, 580)
+layout_mode = 2
+theme_type_variation = &"BluePanelContainer"
+
+[node name="Margin" type="MarginContainer" parent="Panel/VBC/Store/Window"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Apps" type="GridContainer" parent="Panel/VBC/Store/Window/Margin"]
+layout_mode = 2
+columns = 3
+
+[node name="Warn" parent="Panel/VBC/Store/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+app = "Warn"
+icon = ExtResource("3_fdip5")
+title = "[center]Warn-App"
+
+[node name="Info" type="VBoxContainer" parent="Panel/VBC"]
+visible = false
+layout_mode = 2
+script = ExtResource("8_von4c")
+no_elecricity_texture = ExtResource("9_0kjvi")
+elecricity_texture = ExtResource("9_xog7u")
+no_water_texture = ExtResource("11_ehmsr")
+dirty_water_texture = ExtResource("12_813kx")
+water_texture = ExtResource("11_ybny1")
+isolation_texture = ExtResource("14_ta5vh")
+limited_isolation_texture = ExtResource("15_mma0d")
+no_isolation_texture = ExtResource("16_fx4td")
+no_food_texture = ExtResource("17_shsgk")
+food_spoiled_texture = ExtResource("17_daljn")
+food_texture = ExtResource("18_y1kvx")
+
+[node name="CC" type="CenterContainer" parent="Panel/VBC/Info"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Info/CC"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[color=white]Info-Center"
+
+[node name="ItemList" type="ItemList" parent="Panel/VBC/Info"]
+custom_minimum_size = Vector2(0, 580)
+layout_mode = 2
+item_count = 3
+item_0/text = "Ein Feuer ist ausgebrochen"
+item_0/icon = ExtResource("9_ish7q")
+item_1/text = "Es gibt keine Strom mehr"
+item_1/icon = ExtResource("9_xog7u")
+item_2/text = "Wasser ist verunreinigt"
+item_2/icon = ExtResource("11_ybny1")
+
+[node name="Warn" type="VBoxContainer" parent="Panel/VBC"]
+visible = false
+layout_mode = 2
+script = ExtResource("21_hd3ml")
+
+[node name="CC" type="CenterContainer" parent="Panel/VBC/Warn"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Warn/CC"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[color=white]Warn-App"
+
+[node name="Tree" type="Tree" parent="Panel/VBC/Warn"]
+custom_minimum_size = Vector2(0, 580)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Panel/VBC"]
+layout_mode = 2
+theme_override_constants/margin_right = 24
+
+[node name="HomeButton" type="TextureButton" parent="Panel/VBC/Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_jwi6o")
+
+[node name="BackButton" type="TextureButton" parent="Panel/VBC/Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("5_n7g61")
+
+[connection signal="pressed" from="Panel/VBC/Margin/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="Panel/VBC/Margin/BackButton" to="." method="_on_back_button_pressed"]

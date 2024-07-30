@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=33 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://res/sprites/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
+[ext_resource type="Texture2D" uid="uid://crhmjiq7dfpx8" path="res://res/sprites/GUI/buttons/phone_button.png" id="7_3q5yt"]
 [ext_resource type="Script" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://7oi6kcm73lxd" path="res://GUI/pop_up_gui.tscn" id="9_eydb4"]
@@ -27,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="22_ifwb8"]
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://crisisPhase/stage/city_map.tscn" id="23_8pknv"]
 [ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
+[ext_resource type="PackedScene" uid="uid://druwt2u04fhrc" path="res://GUI/handy/handy_gui.tscn" id="24_lodu6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -115,6 +117,12 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource("4_ef5pu")
+
+[node name="PhoneBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_3q5yt")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GUI"]
 visible = false
@@ -212,6 +220,10 @@ size_flags_vertical = 4
 visible = false
 layout_mode = 2
 
+[node name="HandyGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("24_lodu6")]
+visible = false
+layout_mode = 2
+
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
 custom_minimum_size = Vector2(576, 220)
@@ -251,5 +263,6 @@ mouse_force_pass_scroll_events = false
 [connection signal="nutrition_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
+[connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
 [connection signal="gui_input" from="InputBlock" to="." method="_on_input_block_gui_input"]
