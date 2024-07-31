@@ -50,5 +50,11 @@ func start() -> void:
 				item_list.add_item("Lebensmittel haben eine gerningere Haltbarkeit.", food_spoiled_texture)
 			else:
 				item_list.add_item("Es gibt keine Meldungen zu versuchtem Essen.", food_texture)
+				
+	match OverworldStatesMngr.get_mobile_net_state():
+		OverworldStatesMngr.MobileNetState.OFFLINE:
+			item_list.add_item("Das Internet ist ausgefallen.", no_elecricity_texture)
+		OverworldStatesMngr.MobileNetState.ONLINE:
+			item_list.add_item("Du hast Internet.", elecricity_texture)
 	
 	show()

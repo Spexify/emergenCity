@@ -103,6 +103,8 @@ func get_current_day() -> int:
 	#+1 because: Day 1 = period 0, 1, 2, Day 2 = period 3, 4, 5, ....
 	return floor(self._period_cnt / float(3.0)) + 1
 
+func get_period_count() -> int:
+	return self._period_cnt
 
 func get_action_constraints() -> EMC_ActionConstraints:
 	return _action_constraints
@@ -165,11 +167,10 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	#Events & Crises stuff
 	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
-	if get_current_day_period() == DayPeriod.MORNING:
-		await _crisis_mngr.check_crisis_status()
+	#if get_current_day_period() == DayPeriod.MORNING:
+	_crisis_mngr.check_crisis_status()
 	
 	# Popup last, because it can lead to another _advance_day_period() call!!!
-	print(_stage_mngr.get_curr_stage_name())
 	_pu_event_mngr.check_for_new_event()
 
 

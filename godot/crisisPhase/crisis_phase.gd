@@ -88,7 +88,7 @@ func _ready() -> void:
 	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
-	_crisis_mngr.setup(_backpack, _gui_mngr)
+	_crisis_mngr.setup(_backpack, _gui_mngr, _day_mngr)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _gui_mngr, _opt_event_mngr)

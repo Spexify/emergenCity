@@ -42,11 +42,9 @@ var _vibration : bool = false
 func set_started_from_entry_scene(p_value: bool = true) -> void:
 	_started_from_entry_scene = p_value
 
-
 func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
-
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -344,3 +342,23 @@ func set_vibration_enabled(x : bool) -> void:
 
 func is_vibration_enabled() -> bool:
 	return _vibration
+
+################################################UTIL################################################
+
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+func pick_weighted_random(list : Array[Variant], weights : Array[float], count : int) -> Array[Variant]:
+	var result : Array[Variant] = []
+	assert(count <= list.size(), "Count cannot be greater than list size")
+	assert(list.size() == weights.size(), "The size of list and weights must be equal")
+	for i in range(count):
+		var sum_of_weight : float = weights.reduce(func(a : float, b : float) -> float: return a + b)
+		var random : float = _rng.randf_range(0.0, sum_of_weight)
+		for index in range(list.size()):
+			if random < weights[index]:
+				result.append(list[index])
+				list.remove_at(index)
+				weights.remove_at(index)
+				break
+			random -= weights[index]
+	return result

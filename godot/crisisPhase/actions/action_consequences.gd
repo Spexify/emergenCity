@@ -109,9 +109,13 @@ func use_radio(_dummy: int = NO_PARAM) -> void:
 		radio_msg = chosen_event.descr
 		_opt_event_mngr.set_event_as_known(chosen_event.name)
 	else:
-		#50-50 zwischen unnützem Text und Szenario Name
-		if _rng.randi_range(0, 1) == 0:
-			radio_msg = OverworldStatesMngr.get_notification()
+		#30-70 zwischen unnützem Text und Szenario Name
+		if _rng.randi_range(0, 2) <= 1:
+			var notification := OverworldStatesMngr.get_notification()
+			if not notification.is_empty():
+				radio_msg = notification.pick_random()
+			else:
+				radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
 		else:
 			radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
 	_gui_mngr.request_gui("TooltipGUI", [radio_msg])

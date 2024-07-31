@@ -628,6 +628,7 @@ func load_books() -> Array[EMC_BookGUI.Book]:
 
 ######################################JSON SCENARIOS################################################
 
+## DEPRECATED
 func load_scenarios() -> Dictionary:
 	if not FileAccess.file_exists(SCENARIOS_SOURCE):
 			printerr("Could not load PopUps from source: " + SCENARIOS_SOURCE)
