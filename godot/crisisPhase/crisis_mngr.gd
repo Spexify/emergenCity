@@ -3,7 +3,6 @@ class_name EMC_CrisisMngr
 
 ## Improvement idea: Move curr EMC_CrisisScenario reference to here from OverworldStateMngr
 
-var _day_mngr :  EMC_DayMngr
 var _inventory : EMC_Inventory
 var _gui_mngr : EMC_GUIMngr
 var _max_day : int
@@ -21,11 +20,11 @@ var CRISIS : Array[Dictionary] = [
 	{
 		"name" : "0.Tutorial.0",
 		"difficulty" : OverworldStatesMngr.Difficulty.TUTORIAL,
-		"weight" : 1,
-		"notification" : "",
+		"weight" : 10,
+		"notification" : "Dies ist ein Tutorial.",
 		"fcount" : [1, 1],
 		"following" : [{
-			"name" : "0.Turorial.1",
+			"name" : "0.Tutorial.1",
 			"weight" : 1,
 			"delay" : [0,  0],
 			"states" : ["ElectricityState.NONE"],
@@ -50,7 +49,7 @@ var CRISIS : Array[Dictionary] = [
 			"following": [{
 				"name" : "0.Hochwasser.2",
 				"weight" : 5,
-				"delay" : [2, 3],
+				"delay" : [0, 0],
 				"states" : ["ElectricityState.NONE"],
 				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
 				"decay" : [2, 3]
@@ -66,11 +65,10 @@ var CRISIS : Array[Dictionary] = [
 	},
 ]
 
-func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr, p_day_mngr: EMC_DayMngr) -> void: 
+func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr) -> void: 
 	_rng.randomize()
 	_inventory = p_backpack
 	_gui_mngr = p_gui_mngr
-	_day_mngr = p_day_mngr
 
 	_max_day = OverworldStatesMngr.get_crisis_length()
 	_difficulty = OverworldStatesMngr.get_difficulty()
@@ -88,27 +86,27 @@ func set_max_day(_p_max_day : int = 3) -> void:
 
 ## Reduce countdowns and check the new states
 ## Returns the value that showed_new_crises() returns
-func check_crisis_status() -> void:
+func check_crisis_status(p_period_count : int) -> void:
 	if _current_crisis.is_empty() and _next_crisis.is_empty():
 		match _difficulty:
 			OverworldStatesMngr.Difficulty.TUTORIAL:
 				var tutorial_crisis : Array[Dictionary] = [CRISIS[0]]
-				_generate_crisis(tutorial_crisis)
+				_generate_crisis(tutorial_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.EASY:
 				if _days_since_last_crisis >= _rng.randi_range(0, 3):
 					var easy_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] == OverworldStatesMngr.Difficulty.EASY)
-					_generate_crisis(easy_crisis)
+					_generate_crisis(easy_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.MEDIUM:
 				if _days_since_last_crisis >= _rng.randi_range(0, 2):
 					var medium_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] <= OverworldStatesMngr.Difficulty.MEDIUM)
-					_generate_crisis(medium_crisis)
+					_generate_crisis(medium_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.HARD:
 				if _days_since_last_crisis >= _rng.randi_range(0, 1):
 					var hard_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] <= OverworldStatesMngr.Difficulty.HARD)
-					_generate_crisis(hard_crisis)
+					_generate_crisis(hard_crisis, p_period_count)
 	
 	for index : int in range(_current_crisis.size()-1, -1, -1):
-		if _current_crisis[index]["stop"] <= _day_mngr.get_period_count():
+		if _current_crisis[index]["stop"] <= p_period_count:
 			## state
 			if _current_crisis[index].has("states"):
 				for state : Variant in _current_crisis[index]["states"]:
@@ -125,7 +123,7 @@ func check_crisis_status() -> void:
 			break
 	
 	for index : int in range(_next_crisis.size()-1, -1, -1):
-		if _next_crisis[index]["start"] <= _day_mngr.get_period_count():
+		if _next_crisis[index]["start"] <= p_period_count:
 			var jj : int = _current_crisis.bsearch_custom(_next_crisis[index], self.sort_stop_descending)
 			_current_crisis.insert(jj, _next_crisis[index])
 			## state
@@ -162,12 +160,12 @@ func check_crisis_status() -> void:
 	#print(OverworldStatesMngr._crisis_description)
 
 ########################################## PRIVATE METHODS #########################################
-func _generate_crisis(choices : Array[Dictionary]) -> void:
+func _generate_crisis(choices : Array[Dictionary], p_period_count : int) -> void:
 	var weights : Array[float]
 	weights.assign(choices.map(func(dict : Dictionary) -> float: return dict.get("weight")))
 	var scenario : Dictionary = Global.pick_weighted_random(choices, weights, 1)[0]
 	
-	_gen_next_crisis(scenario, _day_mngr.get_period_count(), 0, true)
+	_gen_next_crisis(scenario, p_period_count, 0, true)
 	
 func _gen_next_crisis(scenario : Dictionary, start : int, stop : int, root : bool = false) -> int:
 	if not root:

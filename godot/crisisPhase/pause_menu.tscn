@@ -6,18 +6,29 @@
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 script = ExtResource("1_wnduq")
 
 [node name="VBC" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 575.0
-offset_bottom = 904.0
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -287.0
+offset_top = -295.0
+offset_right = 288.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBC"]
 custom_minimum_size = Vector2(575, 100)

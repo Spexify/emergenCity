@@ -8,6 +8,7 @@ class_name  EMC_GUIMngr
 @onready var _cooking_GUI : EMC_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
+@onready var handy_gui : EMC_Handy = $CL/VBC/MiddleSection/HandyGUI
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI

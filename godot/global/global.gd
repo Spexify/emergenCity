@@ -35,6 +35,7 @@ var _was_crisis : bool
 var _in_crisis_phase: bool
 var _started_from_entry_scene: bool = false
 var _vibration : bool = false
+var _apps_installed : Array[String] = []
 
 
 ## This function and variable are there, so you can later distinguish if the project
@@ -106,6 +107,7 @@ func reset_save() -> void:
 		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
 		"vibration" : false,
+		"apps_installed": [],
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -151,6 +153,7 @@ func save_game(p_was_crisis : bool) -> void:
 		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
 		"tutorial_done" : _tutorial_done,
 		"vibration" : _vibration,
+		"apps_installed" : _apps_installed,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -229,6 +232,8 @@ func load_game() -> void:
 	var avatar_skin: String = data.get(SAVEFILE_AVATAR_SKIN, "ERROR")
 	if avatar_skin != "ERROR" && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
+		
+	_apps_installed.assign(data.get("apps_installed", []))
 		
 	game_loaded.emit()
 

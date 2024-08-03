@@ -5,6 +5,7 @@ class_name EMC_DayMngr
 ## EMC_DayMngr checks [EMC_Action]'s [member EMC_Action.constraints_prior] before calling the apropriated
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
+signal period_increased(new_value : int)
 
 ## Enum describing the periods of a Day.
 enum DayPeriod {
@@ -27,7 +28,7 @@ var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var _gui_mngr : EMC_GUIMngr
 var _avatar : EMC_Avatar
 var _stage_mngr : EMC_StageMngr
-var _crisis_mngr : EMC_CrisisMngr
+var _crisis_mngr : EMC_CrisisMngr = EMC_CrisisMngr.new()
 var _inventory : EMC_Inventory
 var _action_constraints: EMC_ActionConstraints
 var _action_consequences: EMC_ActionConsequences
@@ -36,7 +37,6 @@ var _pu_event_mngr: EMC_PopupEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(p_avatar : EMC_Avatar, p_stage_mngr : EMC_StageMngr,
-p_crisis_mngr : EMC_CrisisMngr,
 p_gui_mngr : EMC_GUIMngr,
 p_inventory: EMC_Inventory,
 p_lower_gui_node : Node,
@@ -44,14 +44,14 @@ p_opt_event_mngr: EMC_OptionalEventMngr,
 p_pu_event_mngr: EMC_PopupEventMngr) -> void:
 	_avatar = p_avatar
 	_stage_mngr = p_stage_mngr
-	_crisis_mngr = p_crisis_mngr
 	_inventory = p_inventory
 	
 	_gui_mngr = p_gui_mngr
+	_crisis_mngr.setup(_inventory, _gui_mngr)
 	
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
-		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr, p_crisis_mngr)
+		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr, _crisis_mngr)
 	_opt_event_mngr = p_opt_event_mngr
 	_pu_event_mngr = p_pu_event_mngr
 	
@@ -146,6 +146,7 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	
 	#Actually advance the time
 	self._period_cnt += 1
+	period_increased.emit(_period_cnt)
 	
 	if _gui_mngr.is_any_gui():
 		await _gui_mngr.all_guis_closed
@@ -168,7 +169,7 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
 	#if get_current_day_period() == DayPeriod.MORNING:
-	_crisis_mngr.check_crisis_status()
+	_crisis_mngr.check_crisis_status(get_period_count())
 	
 	# Popup last, because it can lead to another _advance_day_period() call!!!
 	_pu_event_mngr.check_for_new_event()

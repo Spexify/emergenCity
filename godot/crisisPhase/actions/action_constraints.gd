@@ -138,7 +138,7 @@ func avatar_is_on_stage(stage_name : String = "") -> String:
 
 func is_scenario(p_scenario_names: String = "") -> String:
 	for scenario_name in p_scenario_names.split(";"):
-		if OverworldStatesMngr.get_scenario_name() == scenario_name:
+		if scenario_name in OverworldStatesMngr.get_scenario_names():
 			return NO_REJECTION
 	
 	return "Nicht passendes Szenario!"
@@ -146,7 +146,7 @@ func is_scenario(p_scenario_names: String = "") -> String:
 
 func is_not_scenario(p_scenario_names: String = "") -> String:
 	for scenario_name in p_scenario_names.split(";"):
-		if OverworldStatesMngr.get_scenario_name() == scenario_name:
+		if scenario_name in OverworldStatesMngr.get_scenario_names():
 			return "Aktuelles Szenario nicht erlaubt!"
 	
 	return NO_REJECTION

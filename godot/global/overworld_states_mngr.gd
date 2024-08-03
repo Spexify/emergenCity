@@ -1,8 +1,10 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
+signal change(changes : String)
+
 enum Difficulty{
-	TUTORIAL = -1,
+	TUTORIAL = 3,
 	EASY = 0,
 	MEDIUM = 1,
 	HARD = 2,
@@ -12,6 +14,14 @@ enum SemaphoreColors{
 	RED = 0,
 	YELLOW = 1,
 	GREEN = 2,
+}
+
+const name_to_state : Dictionary = {
+	"MobileNetState" : [MobileNetState, 4],
+	"ElectricityState" : [ElectricityState, 0],
+	"WaterState" : [WaterState, 1],
+	"FoodContaminationState" : [FoodContaminationState, 3],
+	"IsolationState" : [IsolationState, 2],
 }
 
 enum MobileNetState{
@@ -78,9 +88,6 @@ func get_scenario_names() -> Array[String]:
 	var result : Array[String]
 	result.assign(_crisis_description.keys())
 	return result
-	
-func get_scenario_name() -> String:
-	return ""
 
 func get_description_by_name(scenario : String) -> Dictionary:
 	if _crisis_description.has(scenario):
@@ -91,8 +98,11 @@ func get_description_by_name(scenario : String) -> Dictionary:
 func get_description_by_index(index : int) -> Dictionary:
 	return _crisis_description[_crisis_description.keys()[index]]
 	
-func get_descriptions() -> Dictionary:
+func get_description() -> Dictionary:
 	return _crisis_description
+	
+func set_description(p_crisis_description : Dictionary) -> void:
+	_crisis_description = p_crisis_description 
 	
 func add_scenario_notification(scenario_name : String, notification : String) -> void:
 	if not _crisis_description.has(scenario_name):
@@ -154,7 +164,7 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
-		IsolationState.NONE: return "Keine."
+		IsolationState.NONE: return "Keine Betretsverbote."
 		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
@@ -183,9 +193,8 @@ func set_mobile_net_state(new_mobilenet_state: int) -> void:
 
 func get_mobile_net_state_descr() -> String:
 	match _mobilenet_state:
-		MobileNetState.ONLINE:
-			return "Kein Problem."
-		MobileNetState.OFFLINE: return "Keine Verbindung!"
+		MobileNetState.ONLINE: return "Online."
+		MobileNetState.OFFLINE: return "Offline!"
 	return ""
 
 var _water : Array[int] = [0, 0, 0]
@@ -201,24 +210,29 @@ func sub_any_state_by_name(state : String) -> void:
 			_water_state = WaterState.DIRTY
 			if _water[1] == 0:
 				_water_state = WaterState.CLEAN
+		change.emit("WaterState" + WaterState.find_key(_water_state))
 	elif "ElectricityState" in state:
 		_electricity -= 1
 		if _electricity == 0:
 			_electricity_state = ElectricityState.UNLIMITED
+		change.emit("ElectricityState" + ElectricityState.find_key(_electricity_state))
 	elif "FoodContaminationState" in state:
 		_food -= 1
 		if _food == 0:
 			_food_contamination_state = FoodContaminationState.NONE
+		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
 	elif "IsolationState" in state:
 		_isolation[IsolationState.get(state.get_extension())] -= 1
 		if _isolation[0] == 0:
 			_isolation_state = IsolationState.LIMITED_PUBLIC_ACCESS
 			if _isolation[1] == 0:
 				_isolation_state = IsolationState.NONE
+		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
 	elif "MobileNetState" in state:
 		_mobile -= 1
 		if _mobile == 0:
 			_mobilenet_state =  MobileNetState.ONLINE
+		change.emit("MobileNetState" + MobileNetState.find_key(_mobilenet_state))
 
 func add_any_state_by_name(state : String) -> void:
 	if "WaterState" in state:
@@ -226,26 +240,31 @@ func add_any_state_by_name(state : String) -> void:
 		if _water_state > _state:
 			_water_state = _state
 			_water[_state] += 1
+		change.emit("WaterState" + WaterState.find_key(_water_state))
 	elif "ElectricityState" in state:
 		var _state : ElectricityState = ElectricityState.get(state.get_extension())
 		if _electricity_state > _state:
 			_electricity_state = _state
 			_electricity += 1
+		change.emit("ElectricityState" + ElectricityState.find_key(_electricity_state))
 	elif "FoodContaminationState" in state:
 		var _state : FoodContaminationState = FoodContaminationState.get(state.get_extension())
 		if _food_contamination_state > _state:
 			_food_contamination_state = _state
 			_food += 1
+		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
 	elif "IsolationState" in state:
 		var _state : IsolationState = IsolationState.get(state.get_extension())
 		if _isolation_state > _state:
 			_isolation_state = _state
 			_isolation[_state] += 1
+		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
 	elif "MobileNetState" in state:
 		var _state : MobileNetState = MobileNetState.get(state.get_extension())
 		if _mobilenet_state > _state:
 			_mobilenet_state = _state
 			_mobile += 1
+		change.emit("MobileNetState" + MobileNetState.find_key(_mobilenet_state))
 
 func set_any_state_by_name(state : String) -> void:
 	if "WaterState" in state:
@@ -258,6 +277,8 @@ func set_any_state_by_name(state : String) -> void:
 			_isolation_state = IsolationState.get(state.get_extension())
 	elif "MobileNetState" in state:
 			_mobilenet_state = MobileNetState.get(state.get_extension())
+	
+	change.emit(state)
 
 ############################################Furniture###############################################
 
@@ -287,14 +308,9 @@ func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path" : get_path(),
-		#"allowed_water_crisis" : _allowed_water_crisis,
-		#"allowed_electricity_crisis" : _allowed_electricity_crisis, 
-		#"allowed_isolation_crisis" : _allowed_isolation_crisis,
-		#"allowed_food_contamination_crisis" : _allowed_food_contamination_crisis,
-		#"scenario_name" : _scenario_name,
-		#"crisis_length" : _crisis_length,
-		#"number_crisis_overlap" : _number_crisis_overlap,
-		#"notification" : _notification,
+		"difficulty_crisis" : _difficulty_crisis,
+		"run_length" : _run_length,
+		"crisis_description" : _crisis_description,
 		"water_state" : _water_state,
 		"isolation_state" : _isolation_state,
 		"food_contamination_state" : _food_contamination_state,
@@ -304,18 +320,10 @@ func save() -> Dictionary:
 
 ## Load all relevant information. This is used for Saving/loading
 func load_state(data : Dictionary) -> void:
-	#var p_water_crisis : WaterState = data.get("allowed_water_crisis")
-	#var p_electricity_crisis : ElectricityState = data.get("allowed_electricity_crisis")
-	#var p_isolation_crisis : IsolationState = data.get("allowed_isolation_crisis")
-	#var p_food_contamination_crisis : FoodContaminationState = data.get("allowed_food_contamination_crisis")
-	#var p_scenario_name : String = data.get("scenario_name")
-	#var p_crisis_length : int = data.get("crisis_length")
-	#var p_number_crisis_overlap : int = data.get("number_crisis_overlap")
-	#var p_notification : String = data.get("notification")
-	#
-	#set_crisis_difficulty(p_scenario_name, p_water_crisis, p_electricity_crisis,
-							#p_isolation_crisis, p_food_contamination_crisis,
-						#p_crisis_length, p_number_crisis_overlap, p_notification)
+	var p_difficulty_crisis : Difficulty = data.get("difficulty_crisis")
+	var p_run_length : int = data.get("run_length")
+	
+	set_crisis_difficulty(p_run_length, p_difficulty_crisis)
 						
 	var p_water_state : WaterState = data.get("water_state")
 	var p_isolation_state : IsolationState = data.get("isolation_state")
@@ -323,6 +331,10 @@ func load_state(data : Dictionary) -> void:
 	var p_electricity_state : ElectricityState = data.get("electricity_state")
 	
 	_set_all_states(p_water_state, p_isolation_state, p_food_contamination_state, p_electricity_state)
+	
+	var p_crisis_description : Dictionary = data.get("crisis_description")
+	
+	set_description(p_crisis_description)
 	
 ## This function sets all states without verification, it is needed to load save files
 func _set_all_states(p_water_state : WaterState, p_isolation_state : IsolationState,

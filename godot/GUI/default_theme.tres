@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://c38cnaco26erq"]
 
 [ext_resource type="Texture2D" uid="uid://bgfeu2ns15jno" path="res://res/sprites/GUI/backgrounds/menu_box_black.png" id="1_707kn"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_g0i34"]
 [ext_resource type="Texture2D" uid="uid://fa2a48tltso1" path="res://res/sprites/GUI/backgrounds/menu_box_blue.png" id="1_oyqmt"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="2_68ab8"]
+[ext_resource type="Texture2D" uid="uid://cmvvm2rtuidr1" path="res://res/sprites/GUI/backgrounds/menu_box_dark_blue.png" id="3_7dt4j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_elb5e"]
 texture = ExtResource("1_707kn")
@@ -18,6 +19,21 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8aihy"]
+texture = ExtResource("3_7dt4j")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xh6bk"]
+bg_color = Color(0.996078, 0.996078, 0.996078, 0.627451)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dyqjf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luu5g"]
+bg_color = Color(0.873298, 0.873298, 0.873298, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_54rh3"]
 texture = ExtResource("1_oyqmt")
@@ -53,6 +69,8 @@ BlackPanelContainer/base_type = &"PanelContainer"
 BlackPanelContainer/styles/panel = SubResource("StyleBoxTexture_elb5e")
 BluePanelContainer/base_type = &"PanelContainer"
 BluePanelContainer/styles/panel = SubResource("StyleBoxTexture_4jyva")
+DarkBluePanelContainer/base_type = &"PanelContainer"
+DarkBluePanelContainer/styles/panel = SubResource("StyleBoxTexture_8aihy")
 HeaderLarge/base_type = &"RichTextLabel"
 HeaderLarge/font_sizes/bold_font_size = 35
 HeaderLarge/font_sizes/bold_italics_font_size = 35
@@ -60,6 +78,12 @@ HeaderLarge/font_sizes/font_size = 35
 HeaderLarge/font_sizes/italics_font_size = 35
 HeaderLarge/font_sizes/mono_font_size = 35
 HeaderLarge/font_sizes/normal_font_size = 35
+InfoAppButton/base_type = &"Button"
+InfoAppButton/colors/font_color = Color(0, 0, 0, 1)
+InfoAppButton/constants/icon_max_width = 64
+InfoAppButton/styles/hover = SubResource("StyleBoxFlat_xh6bk")
+InfoAppButton/styles/normal = SubResource("StyleBoxEmpty_dyqjf")
+InfoAppButton/styles/pressed = SubResource("StyleBoxFlat_luu5g")
 ItemList/colors/font_color = Color(0, 0, 0, 1)
 ItemList/styles/panel = SubResource("StyleBoxTexture_54rh3")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_278fl")

@@ -9,7 +9,6 @@ const _BACK_BTN_NAME := "BackButton"
 var _backpack: EMC_Inventory = Global.get_inventory()
 var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
-var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 
 @onready var _stage_mngr : EMC_StageMngr = $StageMngr
 @onready var _avatar : EMC_Avatar = $Avatar
@@ -17,19 +16,10 @@ var _crisis_mngr: EMC_CrisisMngr = EMC_CrisisMngr.new()
 #GUIs Upper Section:
 @onready var _day_mngr : EMC_DayMngr = $GUI/CL/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
-@onready var _backpack_GUI : EMC_InventoryGUI = $GUI/CL/VBC/MiddleSection/BackpackGUI
-@onready var _book_GUI : EMC_BookGUI = $GUI/CL/VBC/MiddleSection/BookGUI
 @onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
 @onready var _handy_gui : EMC_Handy = $GUI/CL/VBC/MiddleSection/HandyGUI
-@onready var _cooking_GUI := $GUI/CL/VBC/MiddleSection/CookingGUI
-@onready var _showerGUI := $GUI/CL/VBC/LowerSection/ShowerGUI
-@onready var seodGUI : EMC_SummaryEndOfDayGUI = $GUI/CL/VBC/MiddleSection/SummaryEndOfDayGUI
-@onready var egGUI : EMC_EndGameGUI = $GUI/CL/VBC/MiddleSection/EndGameGUI
-@onready var puGUI : EMC_PopUpGUI = $GUI/CL/VBC/MiddleSection/PopUpGUI
 #GUIs Lower Section:
-@onready var _tooltip_GUI : EMC_TooltipGUI = $GUI/CL/VBC/LowerSection/TooltipGUI
-@onready var _confirmation_GUI : EMC_ConfirmationGUI = $GUI/CL/VBC/LowerSection/ConfirmationGUI
-@onready var _cs_GUI : EMC_ChangeStageGUI = $GUI/CL/VBC/LowerSection/ChangeStageGUI
+# None
 
 @onready var _gui_mngr : EMC_GUIMngr = $GUI
 
@@ -88,13 +78,12 @@ func _ready() -> void:
 	## NOTICE: connected dialog dont know if this is intendet
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
-	_crisis_mngr.setup(_backpack, _gui_mngr, _day_mngr)
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
 	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
 	
-	_day_mngr.setup($Avatar, _stage_mngr, _crisis_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
+	_day_mngr.setup($Avatar, _stage_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
 		_pu_event_mngr)
 	
 	$GUI/CL/VBC/MiddleSection/IconInformation.hide()
@@ -108,10 +97,12 @@ func _ready() -> void:
 ## As there is no analogous input code on mobile phones, this can be called
 ## indiscriminately
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ToggleGUI"): #G key
-		var guielem := $GUI/VBC/LowerSection
-		guielem.visible = !guielem.visible
-		$GUI/CL/VBC/MiddleSection.visible = !$GUI/CL/VBC/UpperSection.visible
+	## DEPRECATED
+	#if Input.is_action_just_pressed("ToggleGUI"): #G key
+		#var guielem := $GUI/CL/VBC/LowerSection
+		#guielem.visible = !guielem.visible
+		#$GUI/CL/VBC/MiddleSection.visible = !$GUI/CL/VBC/UpperSection.visible
+	## END
 	
 	if Input.is_action_just_pressed("Toggle_Electricity"):
 		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -143,6 +134,13 @@ func _process(delta: float) -> void:
 		else:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
 		_pause_menue.update_overworld_states()
+		_handy_gui.restart()
+		
+	if Input.is_action_just_pressed("Toggle_Mobile_Net"):
+		if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			OverworldStatesMngr.set_mobile_net_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		else:
+			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.get_mobile_net_state() + 1)
 		_handy_gui.restart()
 
 func save() -> Dictionary:

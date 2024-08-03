@@ -11,21 +11,28 @@
 
 [node name="BookGUI" type="Control"]
 layout_mode = 3
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ebrn4")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -252.0
+offset_top = -347.0
 offset_right = 252.0
-offset_bottom = 694.0
+offset_bottom = 347.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBC" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

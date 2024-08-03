@@ -201,6 +201,8 @@ layout_mode = 2
 [node name="PauseMenu" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("15_cjvwy")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
 [node name="BookGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("16_eg1dm")]
 visible = false
@@ -220,7 +222,7 @@ size_flags_vertical = 4
 visible = false
 layout_mode = 2
 
-[node name="HandyGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("24_lodu6")]
+[node name="HandyGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Save"] instance=ExtResource("24_lodu6")]
 visible = false
 layout_mode = 2
 
@@ -264,5 +266,6 @@ mouse_force_pass_scroll_events = false
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
+[connection signal="period_increased" from="GUI/CL/VBC/UpperSection/HBC/DayMngr" to="GUI/CL/VBC/MiddleSection/HandyGUI" method="_on_period_increased"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
 [connection signal="gui_input" from="InputBlock" to="." method="_on_input_block_gui_input"]
