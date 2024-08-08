@@ -1,5 +1,5 @@
 class_name EMC_App
-extends VBoxContainer
+extends PanelContainer
 
 func start() -> void:
 	show()

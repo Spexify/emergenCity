@@ -1,20 +1,29 @@
-[gd_scene load_steps=16 format=3 uid="uid://druwt2u04fhrc"]
+[gd_scene load_steps=18 format=3 uid="uid://druwt2u04fhrc"]
 
 [ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
 [ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
 [ext_resource type="Texture2D" uid="uid://b4iuh38wfe4f4" path="res://res/sprites/GUI/icons/icon_info_app.png" id="2_6tb3d"]
+[ext_resource type="Texture2D" uid="uid://5mu0vxw1uan1" path="res://res/sprites/GUI/backgrounds/phone.png" id="2_e701l"]
 [ext_resource type="Texture2D" uid="uid://cno5csi1waa8v" path="res://res/sprites/GUI/icons/icon_warn_app.png" id="3_fdip5"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="5_n7g61"]
 [ext_resource type="Texture2D" uid="uid://bduv6g8pf4rcs" path="res://res/sprites/GUI/icons/icon_store_app.png" id="6_306ny"]
 [ext_resource type="Texture2D" uid="uid://xsfa62fx0vjo" path="res://res/sprites/GUI/buttons/home_button.png" id="8_jwi6o"]
 [ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
-[ext_resource type="Image" uid="uid://dn24jnxvr2sh7" path="res://res/sprites/GUI/icons/icon_world_states_image.png" id="8_uoml3"]
 [ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
 [ext_resource type="Texture2D" uid="uid://bh1xeb3ienh2a" path="res://res/sprites/GUI/icons/icon_needs_electricity.png" id="9_xog7u"]
 [ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://GUI/handy/item_list.tscn" id="11_5x2mn"]
 [ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="11_ybny1"]
 [ext_resource type="Script" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
 [ext_resource type="Texture2D" uid="uid://b2yixgn3oaixk" path="res://res/sprites/GUI/icons/icon_world_states.png" id="22_683kg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ss8d5"]
+texture = ExtResource("2_e701l")
+texture_margin_left = 30.0
+texture_margin_top = 64.0
+texture_margin_right = 30.0
+texture_margin_bottom = 64.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1c2gw"]
 
 [node name="Handy" type="Control"]
 process_mode = 3
@@ -31,71 +40,47 @@ grow_vertical = 2
 script = ExtResource("1_4od8s")
 
 [node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(0, 738)
+custom_minimum_size = Vector2(0, 766)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -262.0
-offset_top = -427.0
-offset_right = 262.0
-offset_bottom = 311.0
+offset_left = -276.0
+offset_top = -441.0
+offset_right = 276.0
+offset_bottom = 325.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"DarkBluePanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ss8d5")
 
 [node name="VBC" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
 
-[node name="Off" type="VBoxContainer" parent="Panel/VBC"]
+[node name="Menu" type="PanelContainer" parent="Panel/VBC"]
 visible = false
+custom_minimum_size = Vector2(492, 650)
 layout_mode = 2
-
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Off"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Off/CC"]
-custom_minimum_size = Vector2(150, 26)
-layout_mode = 2
-size_flags_horizontal = 4
-bbcode_enabled = true
-text = "[color=white]Smartphone"
-
-[node name="Window" type="PanelContainer" parent="Panel/VBC/Off"]
-custom_minimum_size = Vector2(492, 580)
-layout_mode = 2
-theme_type_variation = &"BlackPanelContainer"
-
-[node name="Menu" type="VBoxContainer" parent="Panel/VBC"]
-visible = false
-layout_mode = 2
-
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Menu"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Menu/CC"]
-custom_minimum_size = Vector2(150, 26)
-layout_mode = 2
-size_flags_horizontal = 4
-bbcode_enabled = true
-text = "[color=white]Smartphone"
-
-[node name="Window" type="PanelContainer" parent="Panel/VBC/Menu"]
-custom_minimum_size = Vector2(492, 580)
-layout_mode = 2
+mouse_filter = 1
 theme_type_variation = &"BluePanelContainer"
 
-[node name="Margin" type="MarginContainer" parent="Panel/VBC/Menu/Window"]
+[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Menu"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Menu/VBC"]
+custom_minimum_size = Vector2(200, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][color=white]Hauptmenu[/color][/center]"
+
+[node name="Margin" type="MarginContainer" parent="Panel/VBC/Menu/VBC"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Apps" type="GridContainer" parent="Panel/VBC/Menu/Window/Margin"]
+[node name="Apps" type="GridContainer" parent="Panel/VBC/Menu/VBC/Margin"]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -103,86 +88,93 @@ theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="Info" parent="Panel/VBC/Menu/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Info" parent="Panel/VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 size_flags_horizontal = 4
 app = "Info"
 icon = ExtResource("2_6tb3d")
 title = "[center]Info-Center"
 
-[node name="Store" parent="Panel/VBC/Menu/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Store" parent="Panel/VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Store"
 icon = ExtResource("6_306ny")
 title = "[center]App-Store"
 
-[node name="Store" type="VBoxContainer" parent="Panel/VBC" node_paths=PackedStringArray("handy")]
+[node name="Off" type="PanelContainer" parent="Panel/VBC"]
 visible = false
+custom_minimum_size = Vector2(492, 650)
 layout_mode = 2
+theme_type_variation = &"BlackPanelContainer"
+
+[node name="Store" type="PanelContainer" parent="Panel/VBC" node_paths=PackedStringArray("handy")]
+visible = false
+custom_minimum_size = Vector2(492, 650)
+layout_mode = 2
+theme_type_variation = &"BluePanelContainer"
 script = ExtResource("8_njk5s")
 handy = NodePath("../../..")
 down_texture = ExtResource("6_306ny")
 
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Store"]
+[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Store"]
+layout_mode = 2
+
+[node name="CC" type="CenterContainer" parent="Panel/VBC/Store/VBC"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBC/Store/CC"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBC/Store/VBC/CC"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Store/CC/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Store/VBC/CC/VBoxContainer"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
 text = "[center][color=white]App Store"
 
-[node name="Description" type="RichTextLabel" parent="Panel/VBC/Store/CC/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="Panel/VBC/Store/VBC/CC/VBoxContainer"]
 custom_minimum_size = Vector2(400, 26)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "[center][color=white]Drücke auf eine App und installiere sie"
 
-[node name="Window" type="PanelContainer" parent="Panel/VBC/Store"]
-custom_minimum_size = Vector2(492, 580)
-layout_mode = 2
-theme_type_variation = &"BluePanelContainer"
-
-[node name="Margin" type="MarginContainer" parent="Panel/VBC/Store/Window"]
+[node name="Margin" type="MarginContainer" parent="Panel/VBC/Store/VBC"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Apps" type="GridContainer" parent="Panel/VBC/Store/Window/Margin"]
+[node name="Apps" type="GridContainer" parent="Panel/VBC/Store/VBC/Margin"]
 layout_mode = 2
 columns = 3
 
-[node name="Warn" parent="Panel/VBC/Store/Window/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Warn" parent="Panel/VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Warn"
 icon = ExtResource("3_fdip5")
 title = "[center]Warn-App"
 
-[node name="Info" type="VBoxContainer" parent="Panel/VBC"]
+[node name="Info" type="PanelContainer" parent="Panel/VBC"]
+visible = false
+custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
+theme_type_variation = &"BluePanelContainer"
 script = ExtResource("8_von4c")
-warn_texture = ExtResource("8_uoml3")
+warn_texture = ExtResource("22_683kg")
 
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Info"]
-custom_minimum_size = Vector2(200, 50)
+[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Info"]
 layout_mode = 2
-size_flags_vertical = 0
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Info/CC"]
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Info/VBC"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
-text = "[color=white]Info-Center"
+text = "[center][color=white]Info-Center[/color][/center]"
 
-[node name="ItemList1" type="ItemList" parent="Panel/VBC/Info"]
+[node name="ItemList1" type="ItemList" parent="Panel/VBC/Info/VBC"]
 visible = false
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
@@ -194,46 +186,62 @@ item_0/icon = ExtResource("9_xog7u")
 item_1/text = "Wasser ist verunreinigt"
 item_1/icon = ExtResource("11_ybny1")
 
-[node name="ItemList" parent="Panel/VBC/Info" instance=ExtResource("11_5x2mn")]
+[node name="ItemList" parent="Panel/VBC/Info/VBC" instance=ExtResource("11_5x2mn")]
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
-[node name="Warn" type="VBoxContainer" parent="Panel/VBC"]
-visible = false
+[node name="Warn" type="PanelContainer" parent="Panel/VBC"]
+custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
+theme_type_variation = &"BluePanelContainer"
 script = ExtResource("21_hd3ml")
 warn_texture = ExtResource("22_683kg")
 
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Warn"]
-custom_minimum_size = Vector2(200, 50)
+[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Warn"]
 layout_mode = 2
-size_flags_vertical = 0
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Warn/CC"]
+[node name="Title" type="RichTextLabel" parent="Panel/VBC/Warn/VBC"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
-text = "[color=white]Warn-App"
+text = "[center][color=white]Warn-App[/color][/center]"
 
-[node name="Tree" type="Tree" parent="Panel/VBC/Warn"]
+[node name="Tree" type="Tree" parent="Panel/VBC/Warn/VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1c2gw")
 hide_root = true
 
-[node name="Margin" type="MarginContainer" parent="Panel/VBC"]
+[node name="ItemList" parent="Panel/VBC/Warn/VBC" instance=ExtResource("11_5x2mn")]
 layout_mode = 2
-theme_override_constants/margin_right = 24
 
-[node name="HomeButton" type="TextureButton" parent="Panel/VBC/Margin"]
+[node name="Margin" type="MarginContainer" parent="Panel"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HomeButton" type="TextureButton" parent="Panel/Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 texture_normal = ExtResource("8_jwi6o")
 
-[node name="BackButton" type="TextureButton" parent="Panel/VBC/Margin"]
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_left = 180.0
+offset_top = 266.0
+offset_right = 244.0
+offset_bottom = 330.0
+size_flags_vertical = 8
+
+[node name="BackButton" type="TextureButton" parent="Margin"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 0
 texture_normal = ExtResource("5_n7g61")
 
-[connection signal="pressed" from="Panel/VBC/Margin/HomeButton" to="." method="_on_home_button_pressed"]
-[connection signal="pressed" from="Panel/VBC/Margin/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panel/Margin/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]

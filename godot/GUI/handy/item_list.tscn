@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://l7giak7i5oop"]
+[gd_scene load_steps=3 format=3 uid="uid://l7giak7i5oop"]
 
 [ext_resource type="Script" path="res://GUI/handy/item_list.gd" id="1_s07i1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8htgw"]
 
 [node name="ItemList" type="PanelContainer"]
 anchors_preset = 14
@@ -12,7 +14,7 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
-theme_type_variation = &"BluePanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8htgw")
 script = ExtResource("1_s07i1")
 
 [node name="List" type="VBoxContainer" parent="."]

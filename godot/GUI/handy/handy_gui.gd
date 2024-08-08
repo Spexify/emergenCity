@@ -1,12 +1,11 @@
 extends EMC_GUI
 class_name EMC_Handy
 
-@onready var apps : GridContainer = $Panel/VBC/Menu/Window/Margin/Apps
+@onready var apps : GridContainer = $Panel/VBC/Menu/VBC/Margin/Apps
 @onready var VBC : VBoxContainer = $Panel/VBC
-@onready var menu : VBoxContainer = $Panel/VBC/Menu
-@onready var buttons : MarginContainer = $Panel/VBC/Margin
+@onready var menu : PanelContainer = $Panel/VBC/Menu
 @onready var store : EMC_App_Store = $Panel/VBC/Store
-@onready var off : VBoxContainer = $Panel/VBC/Off
+@onready var off : PanelContainer = $Panel/VBC/Off
 
 var active_app : EMC_App
 
@@ -28,7 +27,6 @@ func _ready() -> void:
 		child.hide()
 		
 	menu.show()
-	buttons.show()
 	
 
 func _on_period_increased(new_value : int) -> void:
@@ -52,7 +50,6 @@ func open() -> void:
 			active_app.start()
 		else:
 			menu.show()
-	buttons.show()
 	opened.emit()
 	
 func close() -> void:
@@ -67,7 +64,8 @@ func add_app_icon(app : EMC_App_Icon) -> void:
 	apps.add_child(app)
 	apps.move_child(app, -2)
 	app.open_app.connect(_on_open_app)
-	Global._apps_installed.append(app.app)
+	if not app.app in Global._apps_installed:
+		Global._apps_installed.append(app.app)
 
 func _on_open_app(app_name : String) -> void:
 	for child in VBC.get_children():
@@ -109,3 +107,7 @@ func load_state(data : Dictionary) -> void:
 	var p_energy : int = data.get("energy", 100)
 	
 	_energy.set_value(p_energy)
+	
+func _gui_input(event : InputEvent) -> void:
+	#print(event)
+	pass

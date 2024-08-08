@@ -4,7 +4,7 @@ extends EMC_App
 @export var handy : EMC_Handy
 @export var down_texture : Texture2D
 
-@onready var apps : GridContainer = $Window/Margin/Apps
+@onready var apps : GridContainer = $VBC/Margin/Apps
 
 func _ready() -> void:
 	for app : EMC_App_Icon in apps.get_children():
