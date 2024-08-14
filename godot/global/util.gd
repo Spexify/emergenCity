@@ -1,5 +1,19 @@
 class_name EMC_Util
 
+class Promise:
+	signal complete(name : String)
+	
+	const signal_or_name : String = "signal_or"
+	
+	func _init(signals : Array[Signal], f_name : String) -> void:
+		var f : Callable = Callable(self, f_name)
+		for sig : Signal in signals:
+			sig.connect(f.bind(sig.get_name()))
+	
+	func signal_or(name : String) -> void:
+		complete.emit(name)
+	
+
 class Icon_Patcher:
 	
 	static func cut_out(texture : Texture2D, region : Rect2) -> Texture2D:
@@ -37,3 +51,21 @@ class Icon_Patcher:
 		#result.blit_rect(img2, Rect2(0, 0, img2.get_width(), img2.get_height()), Vector2i(img1.get_width(), img1.get_height()))
 		
 		return ImageTexture.create_from_image(result)
+
+static var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+static func pick_weighted_random(list : Array[Variant], weights : Array[float], count : int) -> Array[Variant]:
+	var result : Array[Variant] = []
+	assert(count <= list.size(), "Count cannot be greater than list size")
+	assert(list.size() == weights.size(), "The size of list and weights must be equal")
+	for i in range(count):
+		var sum_of_weight : float = weights.reduce(func(a : float, b : float) -> float: return a + b)
+		var random : float = _rng.randf_range(0.0, sum_of_weight)
+		for index in range(list.size()):
+			if random < weights[index]:
+				result.append(list[index])
+				list.remove_at(index)
+				weights.remove_at(index)
+				break
+			random -= weights[index]
+	return result

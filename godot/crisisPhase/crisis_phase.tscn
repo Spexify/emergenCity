@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=34 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://crisisPhase/stage/city_map.tscn" id="23_8pknv"]
 [ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
 [ext_resource type="PackedScene" uid="uid://druwt2u04fhrc" path="res://GUI/handy/handy_gui.tscn" id="24_lodu6"]
+[ext_resource type="PackedScene" uid="uid://dusoswyk1fft6" path="res://GUI/dialogue/dialogue_gui.tscn" id="25_qh0l1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -226,6 +227,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("25_qh0l1")]
+visible = false
+layout_mode = 2
+
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
 custom_minimum_size = Vector2(576, 220)
@@ -266,6 +271,5 @@ mouse_force_pass_scroll_events = false
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
-[connection signal="period_increased" from="GUI/CL/VBC/UpperSection/HBC/DayMngr" to="GUI/CL/VBC/MiddleSection/HandyGUI" method="_on_period_increased"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
 [connection signal="gui_input" from="InputBlock" to="." method="_on_input_block_gui_input"]

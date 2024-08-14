@@ -155,7 +155,7 @@
 			"change_stage": {
 				"stage_name": "market",
 				"avatar_pos": {"x": 250, "y": 1000},
-				"npc_pos": {"Raphael": {"x": 192, "y": 224}}
+				"npc_pos": {"Raphael": {"x": 192, "y": 224}, "Friedel": {"x": 64, "y": 704}}
 			}
 		},
 		"description": "Hat Marktplatz besucht.",

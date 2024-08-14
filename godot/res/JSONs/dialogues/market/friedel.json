@@ -1,0 +1,47 @@
+{
+	"Hello" : {
+		"actors" : ["avatar", "friedel"],
+		"text" : [
+			"avatar#Hi wie gehts dir?",
+			"friedel#Wuff Wuff Wuff Wuff Wuff Wuff"
+		],
+		"options" : {
+			"Test1" : {
+				"weight": 3,
+				"cooldown" : 4,
+				"cooldown_end" : 0,
+				"actors" : ["avatar", "gerhard"],
+				"text" : [
+					"gerhard#Ja Friedel ist auf einmal Weg!",
+					"avatar#Dann müssen wir ihn suchen gehn.",
+					"gerhard#Vielleicht ist er im Park."
+				],
+				"options" : {
+					"#heyho" : "#heyho"
+				}
+			},
+			"Test2" : {
+				"weight": 1,
+				"actors" : ["avatar", "gerhard", "friedel"],
+				"text" : [
+					"gerhard#Ach Friedel ist bei dir ich hab in schon gesucht!",
+					"gerhard#Mein kleiner Friedel",
+					"friedel#Wuff",
+					"avatar#Wie süß."
+				]
+			}
+		}
+	},
+	"#heyho" : {
+		"consequences" : {
+			"change_stage": {
+				"stage_name": "park",
+				"avatar_pos": {"x": 350, "y": 700},
+				"npc_pos": {
+					"Gerhard": {"x": 128, "y": 704},
+					"Friedel": {"x": 64, "y": 704}
+				}
+			}
+		}
+	}
+}

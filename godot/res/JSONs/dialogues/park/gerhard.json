@@ -1,0 +1,60 @@
+{
+  "start": {
+    "weight": 1,
+    "cooldown": 0,
+    "cooldown_end": 0,
+    "actors": ["avatar", "gerhard"],
+    "text": [
+      "avatar#Hallo!",
+      "gerhard#Moin. Willst du handeln?"
+    ],
+    "options": {
+      "#reden": {
+        "prompt": "Reden",
+        "options": { "#reden1": "", "#reden2": "" }
+      },
+      "#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+      "#nichts": { "prompt": "Nichts dergleichen" }
+    }
+  },
+  "#reden1": {
+    "weight": 1,
+    "cooldown": 0,
+    "cooldown_count": 0,
+    "actors": ["avatar", "gerhard", "friedel"],
+    "text": [
+      "avatar#Lass uns reden! Wie geht's dir?",
+      "gerhard#Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht.",
+      "friedel#Wuff.",
+      "gerhard#Worüber willst du dich den beklagen? Zu wenig Essen?",
+      "friedel#Wuff ...",
+      "gerhard#... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!",
+      "friedel#Wuff!"
+    ]
+  },
+  "#reden2": {
+    "weight": 1,
+    "cooldown": 0,
+    "cooldown_count": 0,
+    "actors": ["avatar", "gerhard", "friedel"],
+    "text": [
+      "avatar#Lass uns reden! Wie geht's Friedel?",
+      "gerhard#Manchmal glaub ich, er spürt, dass wir uns in einer Krise befinden.",
+      "gerhard#Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.",
+      "gerhard#Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht.",
+      "avatar#Hund müsste man sein ...",
+      "friedel#Wuff!"
+    ]
+  },
+  "#handeln": {
+    "weight": 1,
+    "cooldown": 0,
+    "cooldown_count": 0,
+    "actors": [""],
+    "prompt": "Handeln",
+    "text": [
+      "#Ups das geht leider noch nicht!"
+    ],
+    "options": { "start":"" }
+  }
+}

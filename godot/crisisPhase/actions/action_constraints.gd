@@ -126,7 +126,7 @@ func avatar_is_home(p_reason : String = "") -> String:
 	if _stage_mngr.get_curr_stage_name() == "home":
 		return NO_REJECTION
 	else:
-		return p_reason
+		return "Der Avatar ist moment nicht Zuhause" if p_reason == "" else p_reason
 
 
 func avatar_is_on_stage(stage_name : String = "") -> String:

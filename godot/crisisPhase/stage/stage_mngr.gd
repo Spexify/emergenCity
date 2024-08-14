@@ -60,7 +60,7 @@ const TILE_MAX_Y_COORD: int = 16
 const NPC_TILE_COORD: Vector2i = Vector2i(3, 0)
 const NAVI_TILE_COORD = Vector2i(0, 0)
 
-signal dialogue_initiated(p_NPC_name: String)
+signal dialogue_initiated(stage_name : String, p_NPC_name: String)
 
 @onready var _curr_stage: TileMap = $StageOffset/CurrStage
 @onready var NPCs : Control = $NPCs
@@ -347,7 +347,7 @@ func _on_avatar_arrived() -> void:
 	if _last_clicked_tile == null:
 		#NPC angeklickt?
 		if _last_clicked_NPC != null:
-			dialogue_initiated.emit(_last_clicked_NPC.get_name())
+			dialogue_initiated.emit(get_curr_stage_name(), _last_clicked_NPC.get_name())
 	else: #FURNITURE angeklickt?
 		var action_ID: EMC_Action.IDs = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
 		var tooltip: String = _last_clicked_tile.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)

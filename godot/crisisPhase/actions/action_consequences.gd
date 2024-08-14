@@ -12,12 +12,11 @@ var _lower_gui_node : Node
 var _day_mngr : EMC_DayMngr
 var _gui_mngr: EMC_GUIMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
-var _crisis_mngr: EMC_CrisisMngr
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, \
 p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr, p_gui_mngr: EMC_GUIMngr,
-p_opt_event_mngr: EMC_OptionalEventMngr, p_crisis_mngr: EMC_CrisisMngr) -> void:
+p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_avatar = p_avatar
 	_inventory = p_inventory
 	_stage_mngr = p_stage_mngr
@@ -176,7 +175,7 @@ static func to_json(data : Dictionary) -> Dictionary:
 
 ## This function converts consequnces in to using more compact json incompatible Datatypes (Vectors)
 static func from_json(data : Dictionary) -> Dictionary:
-	if data.has("change_stage"):
+	if data.has("change_stage") and typeof(data["change_stage"]["avatar_pos"]) != TYPE_VECTOR2I:
 		var avatar_pos : Dictionary = data["change_stage"].get("avatar_pos", {})
 		var x : int = avatar_pos.get("x", NAN)
 		var y : int = avatar_pos.get("y", NAN)

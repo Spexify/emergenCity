@@ -1,6 +1,5 @@
 extends Node
 
-
 const MAX_ECOINS = 99999
 const INITIAL_E_COINS = 300
 
@@ -351,7 +350,7 @@ func is_vibration_enabled() -> bool:
 ################################################UTIL################################################
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-
+## DEPRECATED
 func pick_weighted_random(list : Array[Variant], weights : Array[float], count : int) -> Array[Variant]:
 	var result : Array[Variant] = []
 	assert(count <= list.size(), "Count cannot be greater than list size")

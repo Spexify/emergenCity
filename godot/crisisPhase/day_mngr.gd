@@ -51,7 +51,7 @@ p_pu_event_mngr: EMC_PopupEventMngr) -> void:
 	
 	_action_constraints = EMC_ActionConstraints.new(self, _inventory, _stage_mngr)
 	_action_consequences = EMC_ActionConsequences.new(_avatar, p_inventory, _stage_mngr, \
-		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr, _crisis_mngr)
+		p_lower_gui_node, self, p_gui_mngr, p_opt_event_mngr)
 	_opt_event_mngr = p_opt_event_mngr
 	_pu_event_mngr = p_pu_event_mngr
 	

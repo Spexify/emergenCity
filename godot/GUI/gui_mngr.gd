@@ -9,6 +9,7 @@ class_name  EMC_GUIMngr
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
 @onready var handy_gui : EMC_Handy = $CL/VBC/MiddleSection/HandyGUI
+@onready var _dialogue_gui : EMC_Dialogue = $CL/VBC/MiddleSection/DialogueGui
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI
@@ -56,10 +57,13 @@ func _ready() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpack : EMC_Inventory, \
-			p_stage_mngr : EMC_StageMngr, p_avatar : EMC_Avatar, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
+			p_stage_mngr : EMC_StageMngr, p_avatar : EMC_Avatar, p_opt_event_mngr : EMC_OptionalEventMngr,
+			p_dialogue_mngr : EMC_DialogueMngr) -> void:
 	
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar
+	
+	_dialogue_gui.setup(p_dialogue_mngr)
 	
 	_city_map.setup(p_crisis_phase, p_day_mngr, p_stage_mngr, self, p_opt_event_mngr)
 	

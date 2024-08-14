@@ -1,6 +1,5 @@
-extends Node2D
 class_name EMC_CrisisPhase
-
+extends Node2D
 
 const TUTORIAL_DIALOG : DialogueResource = preload("res://res/dialogue/tutorial.dialogue")
 const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
@@ -8,6 +7,7 @@ const _BACK_BTN_NAME := "BackButton"
 
 var _backpack: EMC_Inventory = Global.get_inventory()
 var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
+var _dialogue_manager : EMC_DialogueMngr
 #MRM: I made the OverworldStatesMngr global, see TechDoku for details:
 
 @onready var _stage_mngr : EMC_StageMngr = $StageMngr
@@ -73,15 +73,28 @@ func _ready() -> void:
 	$InputBlock.hide()
 	OverworldStatesMngr.setup(_upgrades)
 	
-	_gui_mngr.setup(self, _day_mngr, _backpack, _stage_mngr, _avatar, _opt_event_mngr)
+	var _action_constraints := EMC_ActionConstraints.new(_day_mngr, _backpack, _stage_mngr)
+	var _action_consequences := EMC_ActionConsequences.new(_avatar, _backpack, _stage_mngr, \
+		$GUI/CL/VBC/LowerSection, _day_mngr, _gui_mngr, _opt_event_mngr)
 	
-	## NOTICE: connected dialog dont know if this is intendet
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	_dialogue_manager = EMC_DialogueMngr.new(_action_constraints, _action_consequences, _day_mngr, _gui_mngr)
+	
+	_gui_mngr.setup(self, _day_mngr, _backpack, _stage_mngr, _avatar, _opt_event_mngr, _dialogue_manager)
+	
 	
 	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	$StageMngr.setup(self, $Avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
-	$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
+	
+	#### DialogueStuff
+	
+	#$StageMngr.dialogue_initiated.connect(_on_stage_mngr_dialogue_initiated)
+	## NOTICE: connected dialog dont know if this is intendet
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	
+	$StageMngr.dialogue_initiated.connect(_dialogue_manager._on_dialogue_initiated)
+	
+	#### DayMngr
 	
 	_day_mngr.setup($Avatar, _stage_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
 		_pu_event_mngr)
@@ -90,7 +103,8 @@ func _ready() -> void:
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
-		_play_tutorial_dialogue()
+		_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
+		#_play_tutorial_dialogue()
 
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes
@@ -166,7 +180,7 @@ func _play_tutorial_dialogue() -> void:
 	dialogue_GUI.start(TUTORIAL_DIALOG, "START")
 	Global.get_tree().paused = true
 
-
+## DEPRECATED
 func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	var dialogue_resource: DialogueResource
 	#Theoretically the game is paused so no other DialogueGUI should be instantiated,
@@ -200,7 +214,7 @@ func _on_stage_mngr_dialogue_initiated(p_NPC_name: String) -> void:
 	dialogue_GUI.start(dialogue_resource, starting_tag, [_opt_event_mngr])
 	Global.get_tree().paused = true
 
-
+## DEPRECATED
 ## Is called when a dialogue ends
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	#Block input for a while, so no accidental misclicks happen

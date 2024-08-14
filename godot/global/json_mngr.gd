@@ -26,6 +26,8 @@ const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
 const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
 ## UPGARDE
 const UPGRADES_SOURCE := "res://res/JSONs/upgrades.json"
+## DIALOGUES
+const DIALOGUES_SOURCE := "res://res/JSONs/dialogues/"
 
 ########################################JSON RECIPES################################################
 
@@ -649,6 +651,41 @@ func load_scenarios() -> Dictionary:
 	
 	return data
 
+######################################JSON DIALOGUES################################################
+
+func load_dialogues() -> Dictionary:
+	var stage_names : Array[String] #= ["home", "market", "townhall", "park", "gardenhouse", "rowhouse",
+	#"mansion", "penthouse", "apartment_default", "apartment_mert", "apartment_camper", "extra"]
+	var actor_names : Array[String]
+	
+	var result : Dictionary
+	
+	print("JSON: Loading Dialogues.")
+	var dir := DirAccess.open(DIALOGUES_SOURCE)
+	if dir:
+		dir.list_dir_begin()
+		var dir_name : String = dir.get_next()
+		while dir_name != "":
+			if dir.current_is_dir():
+				print("Found stage: " + dir_name)
+				stage_names.append(dir_name)
+				
+				for file : String in DirAccess.get_files_at(dir.get_current_dir() + "/" + dir_name):
+					print("Found actor: " + file.get_basename())
+					actor_names.append(file.get_basename())
+					
+					var source := dir.get_current_dir() + "/" + dir_name + "/" + file
+
+					if not result.has(stage_names[-1]):
+						result[stage_names[-1]] = {}
+					result[stage_names[-1]][file.get_basename()] = load_file_check_type(source, "Dialogue", TYPE_DICTIONARY)
+			
+			dir_name = dir.get_next()
+	else:
+		print("An error occurred when trying to load the Dialogues.")
+		
+	return result
+
 ######################################JSON UPGRADES#################################################
 
 var _is_upgrades_loaded : bool = false
@@ -687,6 +724,8 @@ func load_upgardes() -> void:
 				continue
 			
 	_is_upgrades_loaded = true
+
+#########################################JSON UTILS#################################################
 
 func load_file_check_type(source : String, descr : String, type : Variant.Type) -> Variant:
 	if not FileAccess.file_exists(source):

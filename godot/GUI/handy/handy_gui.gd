@@ -27,7 +27,6 @@ func _ready() -> void:
 		child.hide()
 		
 	menu.show()
-	
 
 func _on_period_increased(new_value : int) -> void:
 	match OverworldStatesMngr.get_electricity_state():
