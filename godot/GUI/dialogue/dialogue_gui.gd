@@ -2,7 +2,7 @@ class_name EMC_Dialogue
 extends EMC_GUI
 
 @onready var portraits : HBoxContainer = $Portraits
-@onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/Box
+@onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
 @onready var talk_sound : AudioStreamPlayer = $TalkSound
 @onready var skip : Button = $Margin/VSplitContainer/Margin/Skip
 @onready var next : Button = $Margin/VSplitContainer/Margin/Next
@@ -42,6 +42,10 @@ func close() -> void:
 	closed.emit(self)
 
 func start(dialogue : Dictionary) -> void:
+	for button : Button in vbc.get_children():
+		if button.pressed.is_connected(start):
+			button.pressed.disconnect(start)
+	
 	if dialogue.is_empty():
 		close()
 		return
@@ -72,12 +76,14 @@ func start(dialogue : Dictionary) -> void:
 	
 	var ii : int = 0
 	for pair in converstation:
-		print(pair[0] + ":" + pair[1])
+		print(pair[0].get_basename() + ":" + pair[1])
 		for portrait : TextureRect in portraits.get_children():
-			if portrait.name != pair[0]:
-				portrait.self_modulate = Color(0.4, 0.4, 0.4)
-			else:
+			if portrait.name == pair[0].get_basename():
 				portrait.self_modulate = Color(1.0, 1.0, 1.0)
+				portrait.set_flip_h(pair[0].get_extension() == "r")
+			else:
+				portrait.self_modulate = Color(0.4, 0.4, 0.4)
+				
 		
 		#dialogue_box.set_visible_ratio(0)
 		
@@ -85,22 +91,27 @@ func start(dialogue : Dictionary) -> void:
 		next.hide()
 		
 		dialogue_box.clear()
+		dialogue_box.append_text(pair[0].get_basename().to_pascal_case() + ":")
+		dialogue_box.newline()
 		talk_effect.set_char_count(pair[1].length())
-		dialogue_box.push_customfx(talk_effect, {"pitch" : 1.0})
-		#dialogue_box.append_text("[talk pitch=1.0]")
+		dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
 		dialogue_box.append_text(pair[1])
 		dialogue_box.pop()
 
 		await promise.complete
 		
 		#dialogue_box.custom_effects.erase(talk_effect)
-		dialogue_box.set_text(pair[1])
+		dialogue_box.clear()
+		dialogue_box.append_text(pair[0].get_basename().to_pascal_case() + ":")
+		dialogue_box.newline()
+		dialogue_box.append_text(pair[1])
 		#dialogue_box.install_effect(talk_effect)
 		
 		skip.hide()
 		next.show()
-		## TODO
-		if not (ii >= converstation.size()-1 and not dialogue.get("options", {}).is_empty() and dialogue["options"].has("prompt")):
+
+		if( ii < converstation.size()-1 or dialogue.get("options", {}).is_empty() 
+		or not dialogue.get("options", {}).values().any(func(dict : Dictionary) -> bool: return dict.has("prompt"))):
 			await next.pressed
 		ii += 1
 		
@@ -130,7 +141,7 @@ func start(dialogue : Dictionary) -> void:
 	var i : int = 0
 	for button : Button in vbc.get_children():
 		if i < dialogue_options.size():
-			button.pressed.connect(start.bind(dialogue_options[i]), CONNECT_ONE_SHOT)
+			button.pressed.connect(start.bind(dialogue_options[i]))
 			button.set_text(dialogue_options[i].get("prompt"))
 			button.show()
 		else:
@@ -140,16 +151,20 @@ func start(dialogue : Dictionary) -> void:
 func _load_actors_display(actors : Array[String]) -> void:
 	assert(actors.size() <= 3, "Dialogues currently only support up to three Actors!")
 	
+	for port : TextureRect in portraits.get_children():
+		port.set_name("option")
+	
 	var i : int = 0
 	for port : TextureRect in portraits.get_children():
 		if i < actors.size():
 			port.show()
-			if actors[i] == "avatar":
-				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i] + \
+			if actors[i].get_basename() == "avatar":
+				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i].get_basename()+ \
 					"_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
 			else:
-				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i] + ".png"))
-			port.set_name(actors[i])
+				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i].get_basename() + ".png"))
+			port.set_name(actors[i].get_basename())
+			port.set_flip_h(actors[i].get_extension() == "r")
 		else:
 			port.hide()
 		i += 1
