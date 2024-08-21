@@ -311,13 +311,14 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
+func get_equipped_upgrades() -> Array[EMC_Upgrade]:
+	return _upgrades_equipped.filter(func(upgrade : EMC_Upgrade) -> bool: return upgrade != null and upgrade.get_id() != EMC_Upgrade.IDs.EMPTY_SLOT)
 
 func get_upgrade_if_equipped(p_ID: EMC_Upgrade.IDs) -> EMC_Upgrade:
 	for upgrade in _upgrades_equipped:
 		if upgrade.get_id() == p_ID:
 			return upgrade
 	return null
-
 
 func get_upgrades() -> Array[EMC_Upgrade]:
 	return _upgrades_equipped

@@ -143,9 +143,8 @@ func trigger_dialogue(p_dialogue_name : String) -> void:
 ############################################ Stage #################################################
 
 func change_stage(p_data : Dictionary) -> void:
-	_stage_mngr.change_stage(p_data.get("stage_name"))
+	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("npc_pos"))
 	_avatar.position = p_data.get("avatar_pos")
-	_stage_mngr.respawn_NPCs(p_data.get("npc_pos"))
 
 ############################################ JSON ##################################################
 

@@ -76,7 +76,7 @@ func start(dialogue : Dictionary) -> void:
 	
 	var ii : int = 0
 	for pair in converstation:
-		print(pair[0].get_basename() + ":" + pair[1])
+		#print(pair[0].get_basename() + ":" + pair[1])
 		for portrait : TextureRect in portraits.get_children():
 			if portrait.name == pair[0].get_basename():
 				portrait.self_modulate = Color(1.0, 1.0, 1.0)
@@ -84,7 +84,6 @@ func start(dialogue : Dictionary) -> void:
 			else:
 				portrait.self_modulate = Color(0.4, 0.4, 0.4)
 				
-		
 		#dialogue_box.set_visible_ratio(0)
 		
 		skip.show()
@@ -127,7 +126,7 @@ func start(dialogue : Dictionary) -> void:
 	if dialogue_options.size() == 1:
 		if dialogue_options[0].has("prompt"):
 			_dialogue_mngr.update_cooldown(dialogue_options[0])
-			var tmp_dialogue : Dictionary = dialogue_options[0].duplicate(true)
+			var tmp_dialogue : Dictionary = dialogue_options[0].duplicate(true) # NOTICE should maybe be false for cooldown to work on next dialogues
 			(tmp_dialogue["text"] as Array[String]).insert(0, "avatar#" + tmp_dialogue.get("prompt"))
 			start.call_deferred(tmp_dialogue)
 			return
@@ -137,6 +136,8 @@ func start(dialogue : Dictionary) -> void:
 	
 	vbc.show()
 	margin.hide()
+	
+	dialogue_options.sort_custom(func (a: Dictionary, b: Dictionary) -> bool: return a.get("prompt").nocasecmp_to(b.get("prompt")) < 0)
 
 	var i : int = 0
 	for button : Button in vbc.get_children():

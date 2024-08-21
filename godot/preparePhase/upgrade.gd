@@ -19,6 +19,9 @@ var _price : int
 var _state : int
 var _state_maximum : int
 var _spawn_pos: Vector2i
+var _atlas_coord : Vector2i
+var _cols : int
+var _rows : int
 
 
 func setup(p_upgrade_id: IDs) -> void:
@@ -31,6 +34,10 @@ func setup(p_upgrade_id: IDs) -> void:
 	_price = data.get("price", 0)
 	_state = data.get("state", 0)
 	_state_maximum = data.get("state_maximum", 0)
+	_atlas_coord = data.get("atlas_coord", Vector2i(1,1))
+	_cols = data.get("tiles_cols", 1)
+	_rows = data.get("tile_rows", 2)
+	
 	if data.has("spawn_pos"):
 		_spawn_pos = data["spawn_pos"]
 	if self.get_sprite() != null:

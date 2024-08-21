@@ -722,6 +722,8 @@ func load_upgardes() -> void:
 			_id_to_upgrade_data[id]["spawn_pos"] = dict_to_vector(dict["spawn_pos"], TYPE_VECTOR2I)
 			if _id_to_upgrade_data[id]["spawn_pos"] == null:
 				continue
+				
+		_id_to_upgrade_data[id]["atlas_coord"] = dict_to_vector(dict["atlas_coord"], TYPE_VECTOR2I)
 			
 	_is_upgrades_loaded = true
 

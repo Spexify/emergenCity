@@ -257,13 +257,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="InputBlock" type="Panel" parent="."]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(600, 1100)
-offset_right = 600.0
-offset_bottom = 1100.0
-mouse_force_pass_scroll_events = false
-
 [connection signal="happiness_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
@@ -272,4 +265,3 @@ mouse_force_pass_scroll_events = false
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]
-[connection signal="gui_input" from="InputBlock" to="." method="_on_input_block_gui_input"]

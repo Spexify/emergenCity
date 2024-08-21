@@ -81,7 +81,11 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 func is_any_gui() -> bool:
 	return not (_active_guis.is_empty() and _gui_queue.is_empty())
 
-func request_gui(gui_name : String, argv : Array) -> Variant:
+func close_current_gui() -> void:
+	if not _active_guis.is_empty():
+		_active_guis.back().close()
+
+func request_gui(gui_name : String, argv : Array) -> Variant:	
 	for gui in all_the_guis:
 		if gui.name == gui_name:
 			_hide_buttons()
