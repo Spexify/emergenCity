@@ -1,3 +1,4 @@
+@tool
 class_name EMC_Stage
 extends Node2D
 
@@ -51,14 +52,15 @@ func load_stage(override_spawn : Dictionary = {}) -> void:
 	#_stage.y_sort_enabled = true
 	add_child(_stage)
 	
-	_load_optional_event()
+	if not Engine.is_editor_hint():
+		_load_optional_event()
 	
-	if name == "home":
-		_place_upgrade_furniture()
-	
-	_create_navigation_layer_tiles()
-	
-	_load_npcs(override_spawn)
+		if name == "home":
+			_place_upgrade_furniture()
+		
+		_create_navigation_layer_tiles()
+		
+		_load_npcs(override_spawn)
 	
 	const INVISIBLE := Color(0, 0, 0, 0)
 	_stage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
@@ -95,8 +97,8 @@ func get_tile_type(p_click_pos : Vector2) -> String:
 	return "background"
 	
 func get_avatar_target(p_click_pos : Vector2) -> Vector2:
-	if get_tile_type(p_click_pos) == "background":
-		return p_click_pos
+	#if get_tile_type(p_click_pos) == "background":
+		#return p_click_pos
 	
 	var _target_position := _determine_adjacent_free_tile(p_click_pos)
 	if _target_position != INVALID_TILE:

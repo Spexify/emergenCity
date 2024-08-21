@@ -7,12 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://c16hlqvrlaup7" path="res://res/sprites/GUI/buttons/button_upgrade_pressed.png" id="4_56spv"]
 
 [node name="Upgrade" type="TextureButton"]
-custom_minimum_size = Vector2(178, 178)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 132.0
+offset_bottom = 133.0
+size_flags_horizontal = 0
 mouse_filter = 1
 toggle_mode = true
 button_group = ExtResource("2_2n5qh")
@@ -21,7 +18,8 @@ texture_pressed = ExtResource("4_56spv")
 script = ExtResource("1_7i8mp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(89, 89)
+position = Vector2(77.5, 77.5)
+scale = Vector2(0.875, 0.875)
 texture = ExtResource("1_fcdnh")
 hframes = 4
 vframes = 4

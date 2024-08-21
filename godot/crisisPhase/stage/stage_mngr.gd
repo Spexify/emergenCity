@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name EMC_StageMngr
 ## TODO
@@ -28,11 +29,10 @@ const _STAGE_SCN = preload("res://crisisPhase/stage/stage.tscn")
 
 signal dialogue_initiated(stage_name : String, p_NPC_name: String)
 
-@onready var _curr_stage: EMC_Stage
+@onready var _curr_stage: EMC_Stage 
 @onready var NPCs : Control = $NPCs
 
 ### Stages
-@onready var home : EMC_Stage = $StageOffset/home
 
 var _avatar: EMC_Avatar
 var _day_mngr: EMC_DayMngr
@@ -114,17 +114,17 @@ func deactivate_NPCs() -> void:
 
 
 ########################################## PRIVATE METHODS #########################################
-#func _ready() -> void:
-	#home.setup("home", $NPCs, _opt_event_mngr)
-	#
-	#_curr_stage = home
-	#_curr_stage.load_stage()
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		_curr_stage = $StageOffset.get_children()[0]
+		_curr_stage.setup("home", $NPCs, _opt_event_mngr)
+		_curr_stage.load_stage()
 
 func _setup_stages() -> void:
 	var stage_names := ["market", "townhall", "park", "gardenhouse", "rowhouse",
 	"mansion", "penthouse", "apartment_default", "apartment_mert", "apartment_camper"]
 	
-	home.setup("home", $NPCs, _opt_event_mngr)
+	$StageOffset.get_children()[0].setup("home", $NPCs, _opt_event_mngr)
 	
 	for stage_name : String in stage_names:
 		var stage := _STAGE_SCN.instantiate()
