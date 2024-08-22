@@ -126,19 +126,30 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 		min(OverworldStatesMngr.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
 		(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
 
+func set_tutorial(value : bool) -> void:
+	Global._tutorial_done = value
+
+############################################ GUI ##################################################
+
+func request_gui(param : Dictionary) -> void:
+	if param.has("name"):
+		_gui_mngr.request_gui(param.get("name"), param.get("args", []))
+
 ########################################## Dialogue ################################################
 
-func trigger_dialogue(p_dialogue_name : String) -> void:
-	var dialog_res : DialogueResource
-	var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
+func trigger_dialogue(p_dialogue : Dictionary) -> void:
+	#var dialog_res : DialogueResource
+	#var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
+	#
+	#dialog_res = load("res://res/dialogue/" + p_dialogue_name + ".dialogue")
+	#
+	#var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
+	#dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
+	#_lower_gui_node.add_child(dialogue_GUI)
+	#dialogue_GUI.start(dialog_res, "START", [executer])
+	#_lower_gui_node.get_tree().paused = true
 	
-	dialog_res = load("res://res/dialogue/" + p_dialogue_name + ".dialogue")
-	
-	var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-	dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	_lower_gui_node.add_child(dialogue_GUI)
-	dialogue_GUI.start(dialog_res, "START", [executer])
-	_lower_gui_node.get_tree().paused = true
+	_gui_mngr.request_gui("DialogueGui", [p_dialogue])
 
 ############################################ Stage #################################################
 

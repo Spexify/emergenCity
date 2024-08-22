@@ -12,18 +12,22 @@ extends EMC_GUI
 #var _dialogue : Dictionary = {}
 var _dialogue_mngr : EMC_DialogueMngr
 
+##TODO
+var _pitches : Dictionary = {
+	"avatar": 1.0, "friedel": 0.6, "gerhard": 0.5, "julia": 1.3, "mert": 0.9,
+}
 
 func setup(p_dialogue_mngr : EMC_DialogueMngr) -> void:
 	_dialogue_mngr = p_dialogue_mngr
 
 func open(dialogue : Dictionary) -> void:
+	if dialogue.has("stage_name"):
+		dialogue = _dialogue_mngr.start_dialogue_headless(dialogue.get("stage_name"), dialogue.get("actor_name"))
+	
 	if dialogue.is_empty():
 		opened.emit()
 		close.call_deferred()
 		return
-	
-	if dialogue.has("stage_name"):
-		dialogue = _dialogue_mngr.next_dialogue(_dialogue_mngr._dialogue_dictonary.get("stage_name").get("actor_name"))[0]
 		
 	dialogue_box.clear()
 	self.show()
@@ -93,7 +97,7 @@ func start(dialogue : Dictionary) -> void:
 		dialogue_box.append_text(pair[0].get_basename().to_pascal_case() + ":")
 		dialogue_box.newline()
 		talk_effect.set_char_count(pair[1].length())
-		dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
+		dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : _pitches.get(pair[0].get_basename(), 1.0)})
 		dialogue_box.append_text(pair[1])
 		dialogue_box.pop()
 

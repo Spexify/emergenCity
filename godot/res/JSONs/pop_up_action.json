@@ -7,7 +7,10 @@
 			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": "agathe_event",
+			"trigger_dialogue": {
+				"stage_name": "home",
+				"actor": "agathe"
+			},
 		},
 		"silent": true,
 		"description": "Mit Agathe geplaudert",
@@ -21,7 +24,10 @@
 			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": "julia_event",
+			"trigger_dialogue": {
+				"stage_name": "home",
+				"actor_name": "julia"
+			},
 		},
 		"silent": true,
 		"description": "Julia geholfen",
@@ -35,7 +41,10 @@
 			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": "gerhard_event",
+			"trigger_dialogue": {
+				"stage_name": "home",
+				"actor_name": "gerhard"
+			},
 		},
 		"silent": true,
 		"description": "Gerhard geholfen",
@@ -49,7 +58,10 @@
 			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue" : "petro_event",
+			"trigger_dialogue" : {
+				"stage_name": "home",
+				"actor_name": "petro"
+			},
 		},
 		"silent": true,
 		"description": "Mit Irena gespielt",
@@ -64,7 +76,10 @@
 			"avatar_is_home": "",
 		},
 		"consequences": {
-			"trigger_dialogue": "mert_event",
+			"trigger_dialogue": {
+				"stage_name": "home",
+				"actor_name": "mert"
+			},
 		},
 		"silent": true,
 		"description": "Mert geholfen",

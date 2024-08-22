@@ -69,13 +69,17 @@ func update_cooldown(dialogue : Dictionary) -> bool:
 		dialogue["cooldown_end"] = _day_mngr.get_period_count() + dialogue["cooldown"]
 		return true
 	return false
-
-func _on_dialogue_initiated(stage_name : String, actor_name : String) -> void:
+	
+func start_dialogue_headless(stage_name : String, actor_name : String) -> Dictionary:
 	_current_dictionary = (_dialogue_dictionary.get(stage_name, {}) as Dictionary).get(actor_name.to_lower(), {})
 	if _current_dictionary.is_empty():
 		push_error("There is no dialogue for " + actor_name.to_lower() + " on stage " + stage_name)
-		return
+		return {}
 	
-	var dialogue := next_dialogue(_current_dictionary, true)
-	update_cooldown(dialogue[0])
-	_gui_mngr.request_gui("DialogueGui", dialogue)
+	var dialogue := next_dialogue(_current_dictionary, true)[0]
+	update_cooldown(dialogue)
+	return dialogue
+	
+func _on_dialogue_initiated(stage_name : String, actor_name : String) -> void:
+	var dialogue := start_dialogue_headless(stage_name, actor_name)
+	_gui_mngr.request_gui("DialogueGui", [dialogue])
