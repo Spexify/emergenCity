@@ -101,11 +101,7 @@ func load_state(data : Dictionary) -> void:
 		_initial_npc[npc] = Vector2(_initial_npc[npc].get("x", 0), _initial_npc[npc].get("y", 0))
 
 func get_NPC(p_NPC_name: String) -> EMC_NPC:
-	for NPC: EMC_NPC in $NPCs.get_children():
-		if NPC.get_name() == p_NPC_name:
-			return NPC
-	
-	return null
+	return $NPCs.get_node(p_NPC_name.to_pascal_case())
 
 ## Remove all NPCs that are currently spawned
 func deactivate_NPCs() -> void:

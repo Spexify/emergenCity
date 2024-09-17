@@ -62,7 +62,10 @@ func next_dialogue(dialogue : Dictionary, top_level : bool = false) -> Array[Dic
 func execute_dialoge_consequences(dialogue : Dictionary) -> void:
 	var consequences : Dictionary = EMC_ActionConsequences.from_json(dialogue.get("consequences", {}))
 	for cons : String in consequences:
-		_action_consequences.call(cons, consequences.get(cons))
+		if _action_consequences.has_method(cons):
+			_action_consequences.call(cons, consequences.get(cons))
+		else:
+			printerr("There is no consequence '" + cons + "'")
 	
 func update_cooldown(dialogue : Dictionary) -> bool:
 	if dialogue.has("cooldown"):

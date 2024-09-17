@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://odvg8lycuwvb"]
+
+[ext_resource type="PackedScene" uid="uid://bok7vi7332765" path="res://GUI/inventory_slot.tscn" id="1_vp0nq"]
+
+[node name="PanelItem" type="PanelContainer"]
+
+[node name="InventorySlot" parent="." instance=ExtResource("1_vp0nq")]
+layout_mode = 2

@@ -60,7 +60,6 @@ custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
 
 [node name="Menu" type="PanelContainer" parent="Panel/VBC"]
-visible = false
 custom_minimum_size = Vector2(492, 650)
 layout_mode = 2
 mouse_filter = 1
@@ -191,6 +190,7 @@ custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
 [node name="Warn" type="PanelContainer" parent="Panel/VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
 theme_type_variation = &"BluePanelContainer"

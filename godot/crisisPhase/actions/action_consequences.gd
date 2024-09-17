@@ -133,7 +133,18 @@ func set_tutorial(value : bool) -> void:
 
 func request_gui(param : Dictionary) -> void:
 	if param.has("name"):
-		_gui_mngr.request_gui(param.get("name"), param.get("args", []))
+		if param.get("name") == "Trade":
+			_gui_mngr.request_gui("Trade", [_stage_mngr.get_NPC(param.get("args", ""))])
+		else:
+			_gui_mngr.request_gui(param.get("name"), param.get("args", []))
+
+func queue_gui(param : Dictionary) -> void:
+	if param.has("name"):
+		match param.get("name"):
+			"Trade":
+				_gui_mngr.queue_gui("Trade", [_stage_mngr.get_NPC(param.get("args", ""))])
+			_:
+				_gui_mngr.queue_gui(param.get("name"), param.get("args", []))
 
 ########################################## Dialogue ################################################
 

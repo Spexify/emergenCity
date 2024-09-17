@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=35 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
 [ext_resource type="PackedScene" uid="uid://druwt2u04fhrc" path="res://GUI/handy/handy_gui.tscn" id="24_lodu6"]
 [ext_resource type="PackedScene" uid="uid://dusoswyk1fft6" path="res://GUI/dialogue/dialogue_gui.tscn" id="25_qh0l1"]
+[ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -141,6 +142,10 @@ offset_bottom = 1024.0
 
 [node name="RainAnimation" parent="GUI/CL" instance=ExtResource("24_5kmdu")]
 visible = false
+
+[node name="Trade" parent="GUI/CL" instance=ExtResource("26_eyapc")]
+visible = false
+size_flags_horizontal = 4
 
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0

@@ -98,12 +98,14 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
-custom_minimum_size = Vector2(0, 190)
+custom_minimum_size = Vector2(416, 190)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="InventoryGrid" type="GridContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Shelf"]
 layout_mode = 2
-columns = 7
+size_flags_horizontal = 4
+columns = 6
 
 [node name="Description" type="PanelContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 200)
@@ -150,11 +152,13 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/ShopSection/ShopPanel"]
+custom_minimum_size = Vector2(416, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ShopGrid" type="GridContainer" parent="Background/Margin/Main/ShopSection/ShopPanel/Shelf"]
 layout_mode = 2
-columns = 7
+columns = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/Margin/Main"]
 layout_mode = 2

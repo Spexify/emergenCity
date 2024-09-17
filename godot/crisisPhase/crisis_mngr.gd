@@ -36,7 +36,7 @@ var CRISIS : Array[Dictionary] = [
 		"name" : "0.Hochwasser.0",
 		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
 		"weight" : 1,
-		"notification" : "Aufgrund von Tage langen Regen ...",
+		"notification" : "Aufgrund von Tage langem Regen ...",
 		"fcount" : [1, 1],
 		"following" : [{
 			"name" : "0.Hochwasser.1",

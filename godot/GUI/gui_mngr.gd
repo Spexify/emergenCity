@@ -21,9 +21,11 @@ class_name  EMC_GUIMngr
 @onready var middle_section := $CL/VBC/MiddleSection
 @onready var lower_section := $CL/VBC/LowerSection
 
+#GUIs Complete Screen
 @onready var _city_map : EMC_CityMap = $CL/CityMap
 @onready var _day_period_transition : EMC_GUI = $CL/DayPeriodTransition
 @onready var _rain_animation : EMC_GUI = $CL/RainAnimation
+@onready var _trade_ui : EMC_TradeUI = $CL/Trade
 
 @onready var pause_menu_btn := $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn := $ButtonList/VBC/BackpackBtn
@@ -52,6 +54,7 @@ func _ready() -> void:
 	all_the_guis.append(_city_map)
 	all_the_guis.append(_rain_animation)
 	all_the_guis.append(_day_period_transition)
+	all_the_guis.append(_trade_ui)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 
@@ -63,7 +66,9 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar
 	
-	_dialogue_gui.setup(p_dialogue_mngr)
+	_trade_ui.setup(p_backpack)
+	
+	_dialogue_gui.setup(p_dialogue_mngr, p_stage_mngr)
 	
 	_city_map.setup(p_crisis_phase, p_day_mngr, p_stage_mngr, self, p_opt_event_mngr)
 	
@@ -120,6 +125,7 @@ func queue_gui(gui_name : String, argv : Array) -> Signal:
 			if gui.name == gui_name:
 				_gui_queue.append(QueueEntry.new(gui, argv))
 				return gui.closed
+	printerr("Gui with name: '" + gui_name + "' not found")
 	return Signal()
 
 func gui_closed(gui : EMC_GUI) -> void:

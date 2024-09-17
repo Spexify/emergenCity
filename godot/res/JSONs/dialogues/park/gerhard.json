@@ -50,11 +50,19 @@
 	"weight": 1,
 	"cooldown": 0,
 	"cooldown_count": 0,
+	"consequences": {
+		"request_gui": {
+			"name": "Trade",
+			"args": "Gerhard",
+		},
+		"queue_gui": {
+			"name" :"DialogueGui",
+			"args": [{
+				"stage_name": "park",
+				"actor_name": "gerhard"}]
+		}
+	},
 	"actors": [""],
 	"prompt": "Handeln",
-	"text": [
-	  "#Ups das geht leider noch nicht!"
-	],
-	"options": { "start":"" }
   }
 }

@@ -11,14 +11,16 @@ extends EMC_GUI
 
 #var _dialogue : Dictionary = {}
 var _dialogue_mngr : EMC_DialogueMngr
+var _stage_mngr : EMC_StageMngr
 
 ##TODO
 var _pitches : Dictionary = {
 	"avatar": 1.0, "friedel": 0.6, "gerhard": 0.5, "julia": 1.3, "mert": 0.9,
 }
 
-func setup(p_dialogue_mngr : EMC_DialogueMngr) -> void:
+func setup(p_dialogue_mngr : EMC_DialogueMngr, p_stage_mngr : EMC_StageMngr) -> void:
 	_dialogue_mngr = p_dialogue_mngr
+	_stage_mngr = p_stage_mngr
 
 func open(dialogue : Dictionary) -> void:
 	if dialogue.has("stage_name"):
@@ -97,7 +99,10 @@ func start(dialogue : Dictionary) -> void:
 		dialogue_box.append_text(pair[0].get_basename().to_pascal_case() + ":")
 		dialogue_box.newline()
 		talk_effect.set_char_count(pair[1].length())
-		dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : _pitches.get(pair[0].get_basename(), 1.0)})
+		if pair[0].get_basename() == "avatar":
+			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
+		else:
+			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : _stage_mngr.get_NPC(pair[0].get_basename())._dialogue_pitch})
 		dialogue_box.append_text(pair[1])
 		dialogue_box.pop()
 
@@ -164,8 +169,9 @@ func _load_actors_display(actors : Array[String]) -> void:
 		if i < actors.size():
 			port.show()
 			if actors[i].get_basename() == "avatar":
-				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i].get_basename()+ \
-					"_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
+				port.set_texture(load("res://res/sprites/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
+			elif actors[i].get_basename() == "":
+				continue
 			else:
 				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i].get_basename() + ".png"))
 			port.set_name(actors[i].get_basename())

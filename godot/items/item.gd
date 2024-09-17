@@ -127,12 +127,13 @@ func remove_comp(p_classname: Variant) -> void:
 	_comps.erase(comp_to_be_removed)
 
 
-##@depracated
+## DEPRECATED
 func copy_item() -> EMC_Item:
 	var copied_item := _ITEM_SCN.instantiate()
 	copied_item._ID = _ID
 	copied_item._descr = _descr
 	copied_item._comps = _comps
+	copied_item._sound_effect = _sound_effect.duplicate()
 	return copied_item
 
 
