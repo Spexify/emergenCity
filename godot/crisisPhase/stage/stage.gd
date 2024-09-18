@@ -38,6 +38,7 @@ const NAVI_TILE_COORD = Vector2i(0, 0)
 
 var _npcs : Control
 var _opt_event_mngr : EMC_OptionalEventMngr
+
 var _stage : TileMap = null
 
 func setup(p_stage_name : String, p_npcs : Control, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
@@ -110,7 +111,7 @@ func get_avatar_target(p_click_pos : Vector2) -> Vector2:
 
 #*****************Navigation************************
 
-## Dynamiccaly create Navigation Layer tiles where there is no collision
+## dynamically create Navigation Layer tiles where there is no collision
 func _create_navigation_layer_tiles() -> void:
 	var tile_coords: Array[Vector2i] = _stage.get_used_cells(Layers.BACKGROUND)
 	
@@ -173,21 +174,21 @@ func _load_npcs(override_spawn : Dictionary = {}) -> void:
 	if not override_spawn.is_empty():
 		for NPC_name: String in override_spawn:
 			_spawn_NPC(NPC_name, override_spawn[NPC_name])
-		
+	
+	#if name == "home":
+		#return
+	#
 	#var list_of_npcs : Array[EMC_NPC]
-	#list_of_npcs.assign(NPCs.get_children())
+	#list_of_npcs.assign(_npcs.get_children())
 	#
-	#var random_list : Array[int] = []
-	#for i in range(list_of_npcs.size()):
-		#var indexes : Array[int] = []
-		#indexes.resize(list_of_npcs[i].get_spawn_ratio(get_curr_stage_name()).fill(i))
-		#random_list.append_array(indexes)
-	#
-	#random_list.resize(int(random_list.size()/2))
-	#
-	#var index : Variant = random_list.pick_random()
-	#if not index == null:
-		#_spawn_NPC(list_of_npcs[index].name, list_of_npcs[index].get_spawn_position(get_curr_stage_name()))
+	#for i in range(2):
+		#var weights : Array[float]
+		#weights.assign(list_of_npcs.map(func(npc : EMC_NPC) -> float: return npc.get_spawn_weight()))
+		#
+		#var npc : EMC_NPC = EMC_Util.pick_weighted_random(list_of_npcs, weights, 1)[0]
+		#_spawn_NPC(npc.name, npc.get_spawn_position())
+		#
+		#list_of_npcs.erase(npc)
 		
 func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 	var NPC : EMC_NPC = _npcs.get_node(p_NPC_name)

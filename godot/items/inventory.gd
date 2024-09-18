@@ -14,6 +14,7 @@ const MAX_SLOT_CNT: int = 50
 
 var _slot_cnt: int
 var _slots: Array[EMC_Item]
+var _item_count: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(p_slot_cnt: int = 30) -> void:
@@ -25,20 +26,16 @@ func _init(p_slot_cnt: int = 30) -> void:
 func get_slot_cnt() -> int:
 	return _slot_cnt
 
-
 func get_free_slot_cnt() -> int:
-	var free_slot_cnt: int
-	
-	for slot_idx in _slot_cnt:
-		if _slots[slot_idx] == null:
-			free_slot_cnt += 1
-	return free_slot_cnt
-
+	return _slot_cnt - _item_count
 
 ## Returns if the inventory has any free slots left
 func has_space() -> bool:
 	return get_item_count_total() < _slot_cnt
 
+## Returns total count of [EMC_Item]s in inventory
+func get_item_count_total() -> int:
+	return _item_count
 
 ## Instantiates an new [EMC_Item] Scene and adds it to this inventory.
 ## Returns true, if the item was added, else false
@@ -57,6 +54,7 @@ func add_existing_item(p_item: EMC_Item) -> bool:
 		if _slots[slot_idx] == null:
 			_slots[slot_idx] = p_item
 			item_added.emit(p_item, slot_idx)
+			_item_count += 1
 			sort()
 			return true
 	return false
@@ -73,6 +71,7 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 		if item != null && item.get_ID() == ID:
 			_slots[slot_idx] = null
 			item_removed.emit(item, slot_idx)
+			_item_count -= 1
 			removedCnt += 1
 			if removedCnt == to_be_removed_cnt: break
 	sort()
@@ -81,12 +80,13 @@ func remove_item(ID: EMC_Item.IDs, to_be_removed_cnt: int = 1) -> int:
 
 ## Remove a concrete [EMC_Item] from this inventory
 ## Returns if the removal was successful
-func remove_specific_item(p_item: EMC_Item) -> bool:	
+func remove_specific_item(p_item: EMC_Item) -> bool:
 	for slot_idx in _slot_cnt:
 		var item := _slots[slot_idx]
 		if item != null && item == p_item:
 			_slots[slot_idx] = null
 			item_removed.emit(item, slot_idx)
+			_item_count -= 1
 			sort()
 	return false
 
@@ -132,21 +132,6 @@ func get_item_count_of_ID(p_ID: EMC_Item.IDs, p_exclude_unpalatable: bool = fals
 			cnt += 1
 	return cnt
 
-
-## Returns total count of [EMC_Item]s in inventory
-func get_item_count_total() -> int:
-	var cnt: int = 0
-	
-	for slot_idx in _slot_cnt:
-		var item := _slots[slot_idx]
-		if item != null:
-			cnt += 1
-		##Mini-Optimization that can be used in the future, when the array is guaranteed to always be sorted:
-		#else:
-			#break
-	return cnt
-
-
 ## Return all items as Array of [EMC_Item]s
 func get_all_items() -> Array[EMC_Item]:
 	var items: Array[EMC_Item] = []
@@ -183,6 +168,7 @@ func get_all_items_of_ID(p_ID: EMC_Item.IDs) -> Array[EMC_Item]:
 	for slot_idx in items.size():
 		if items[slot_idx].get_ID() != p_ID:
 			items.remove_at(slot_idx)
+			_item_count -= 1
 	return items
 
 

@@ -18,7 +18,7 @@ var _npc_inventory : EMC_Inventory
 func setup(p_inventory : EMC_Inventory) -> void:
 	_inventory = p_inventory
 
-func ready() -> void:
+func _ready() -> void:
 	portrait_left.set_texture(load("res://res/sprites/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
 
 func open(npc : EMC_NPC) -> void:
@@ -64,8 +64,12 @@ func _load_inventory(is_avatar : bool) -> void:
 		(gird.get_child(i) as EMC_InventorySlot).set_item(new_item)
 
 func _on_inventory_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
-	if ((is_avatar and to_trader.get_child_count() >= 5) or
-		(not is_avatar and to_avatar.get_child_count() >= 5)):
+	if ((is_avatar and 
+			(to_trader.get_child_count() >= 5
+			or to_trader.get_child_count() > _npc_inventory.get_free_slot_cnt())) or
+		(not is_avatar and
+			(to_avatar.get_child_count() >= 5
+			or to_avatar.get_child_count() > _inventory.get_free_slot_cnt()))):
 		return
 	
 	var gird : GridContainer = inventory_grid if is_avatar else trader_grid
@@ -143,4 +147,5 @@ func _on_deal_pressed() -> void:
 		to_trader.remove_child(child)
 		child.queue_free()
 	
-	close()
+	_load_inventory(true)
+	_load_inventory(false)

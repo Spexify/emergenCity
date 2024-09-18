@@ -15,11 +15,6 @@ var _inventory : EMC_Inventory = EMC_Inventory.new(15)
 
 func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
 	name = p_name
-	#Check bounds, [0] = x-Pos
-	#if (p_spawn_pos[0] < 0 || p_spawn_pos[0] > get_viewport().size[0]) || \
-		#(p_spawn_pos[1] < 0 || p_spawn_pos[1] > get_viewport().size[1]):
-		#printerr("SpawnPosition of NPC " + p_name + " is out of bounds!")	
-	
 	position = p_spawn_pos
 	
 	_inventory.add_new_item(1)
@@ -30,11 +25,14 @@ func _ready() -> void:
 	
 	$AnimationPlayer.play("idle")
 
+func get_spawn_weight() -> float:
+	return 1
+	
+func get_spawn_position() -> Vector2:
+	return position
+
 func get_inventory() -> EMC_Inventory:
 	return _inventory
-
-func set_frame(p_frame_idx: int) -> void:
-	_sprite.frame = p_frame_idx
 
 func deactivate() -> void:
 	hide()
