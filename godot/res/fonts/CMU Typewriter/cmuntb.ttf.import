@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dbsci5ohufhpo"
-path="res://.godot/imported/OpenDyslexic-Regular.otf-229f7958c8333e9101fd19dd2232fadd.fontdata"
+uid="uid://cu3rbjvip5k7x"
+path="res://.godot/imported/cmuntb.ttf-5274f6e11e2d5171822aacbdd8208caf.fontdata"
 
 [deps]
 
-source_file="res://res/fonts/OpenDyslexic-Regular.otf"
-dest_files=["res://.godot/imported/OpenDyslexic-Regular.otf-229f7958c8333e9101fd19dd2232fadd.fontdata"]
+source_file="res://res/fonts/CMU Typewriter/cmuntb.ttf"
+dest_files=["res://.godot/imported/cmuntb.ttf-5274f6e11e2d5171822aacbdd8208caf.fontdata"]
 
 [params]
 

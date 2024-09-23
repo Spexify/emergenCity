@@ -1,51 +1,38 @@
 {
 	"Chemie-Unfall": {
-		"electricity_crisis": 2,
-		"food_contamination_crisis": 0,
-		"isolation_crisis": 0,
-		"notification": "Es gab einen Unfall in der Chemiefabrik nahe Krisopolis. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu Trinkwasserverschmutzung und Lebensmittelverunreinigungen kommen, und es könnte eine Ausgangssperre verhängt werden.",
-		"water_crisis": 1
+		"icon_id": 0,
+		"description": ""
 	},
 	"Dürre": {
-		"electricity_crisis": 2,
-		"food_contamination_crisis": 0,
-		"isolation_crisis": 1,
-		"notification": "Durch den wenigen Regen der letzten Wochen droht für Krisopolis eine Dürre. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserknappheit und Lebensmittelverunreinigungen kommen, und manche öffentlichen Orte könnten gesperrt werden.",
-		"water_crisis": 0
+		"icon_id": 0,
+		"description": ""
 	},
 	"Erdbeben": {
-		"electricity_crisis": 0,
-		"food_contamination_crisis": 2,
-		"isolation_crisis": 1,
-		"notification": "Das Erdbeben, das vor kurzem Gebiete nahe Krisopolis erschütterte, hat einige Infrastruktur gestört. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserverschmutzung und Stromausfällen kommen, und manche öffentlichen Orte könnten gesperrt werden.",
-		"water_crisis": 1
+		"icon_id": 0,
+		"description": ""
 	},
 	"Flut": {
-		"electricity_crisis": 0,
-		"food_contamination_crisis": 2,
-		"isolation_crisis": 1,
-		"notification": "Eine Flut hat die Umgebung um Krisopolis erschüttert. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserverschmutzung und Stromausfällen kommen, und manche öffentlichen Orte könnten gesperrt werden.",
-		"water_crisis": 1
+		"icon_id": 0,
+		"description": ""
 	},
 	"Waldbrand": {
-		"electricity_crisis": 0,
-		"food_contamination_crisis": 2,
-		"isolation_crisis": 1,
-		"notification": "Rund um Krisopolis sind Waldbrände ausgebrochen. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserknappheit und Stromausfällen kommen, und manche öffentlichen Orte könnten gesperrt werden.",
-		"water_crisis": 0
+		"icon_id": 0,
+		"description": ""
 	},
 	"Hurricane": {
-		"electricity_crisis": 0,
-		"food_contamination_crisis": 2,
-		"isolation_crisis": 0,
-		"notification": "Ein Hurricane hält auf Krisopolis zu. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserknappheit und Stromausfällen kommen, und es könnte eine Ausgangssperre verhängt werden.",
-		"water_crisis": 0
+		"icon_id": 0,
+		"description": ""
 	},
 	"Pandemie": {
-		"electricity_crisis": 2,
-		"food_contamination_crisis": 0,
-		"isolation_crisis": 0,
-		"notification": "Eine Krankheit ist rund um Krisopolis ausgebrochen und droht, eine Pandemie auszulösen. Die genauen Folgen sind noch schwer einzuschätzen, aber es könnte zu einer Trinkwasserverschmutzung und Lebensmittelverunreinigungen kommen, und manche öffentlichen Orte könnten gesperrt werden.",
-		"water_crisis": 1
+		"icon_id": 0,
+		"description": ""
+	},
+	"Hochwasser": {
+		"icon_id": 1,
+		"description": ""
+	},
+	"Tutorial": {
+		"icon_id": 0,
+		"description": "[img]res://res/sprites/GUI/icons/icon_no_electricity.png[/img][font_size=30][b]Tutorial[/b][/font_size]\n\nDies is eine Übung. In den folgenden Tagen werden sie kein Strom habe\n\n[img]res://res/sprites/GUI/icons/icon_pin_info.png[/img][b]Handlungsempfehlung:[/b]\nInformieren sie sich über [url=https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Kochen-ohne-Strom/kochen-ohne-strom_node.html]stromloses Kochen[/url]."
 	}
 }

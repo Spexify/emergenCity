@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://l7giak7i5oop"]
 
-[ext_resource type="Script" path="res://GUI/handy/item_list.gd" id="1_s07i1"]
+[ext_resource type="Script" path="res://util/item_list.gd" id="1_wbqoc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8htgw"]
 
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8htgw")
-script = ExtResource("1_s07i1")
+script = ExtResource("1_wbqoc")
 
 [node name="List" type="VBoxContainer" parent="."]
 layout_mode = 2

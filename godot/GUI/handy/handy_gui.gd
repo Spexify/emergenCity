@@ -1,11 +1,11 @@
 extends EMC_GUI
 class_name EMC_Handy
 
-@onready var apps : GridContainer = $Panel/VBC/Menu/VBC/Margin/Apps
-@onready var VBC : VBoxContainer = $Panel/VBC
-@onready var menu : PanelContainer = $Panel/VBC/Menu
-@onready var store : EMC_App_Store = $Panel/VBC/Store
-@onready var off : PanelContainer = $Panel/VBC/Off
+@onready var apps : GridContainer = $VBC/Menu/VBC/Margin/Apps
+@onready var VBC : VBoxContainer = $VBC
+@onready var menu : PanelContainer = $VBC/Menu
+@onready var store : EMC_App_Store = $VBC/Store
+@onready var off : PanelContainer = $VBC/Off
 
 var active_app : EMC_App
 

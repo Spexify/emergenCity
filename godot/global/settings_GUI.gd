@@ -15,8 +15,8 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
 
-const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
-const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
+const dyslexic_font := preload("res://res/fonts/OpenDyslexic/OpenDyslexic-Regular.woff2")
+const normal_font := preload("res://res/fonts/CMU Typewriter/cmuntt.ttf")
 
 
 var _previous_pause_mode: bool

@@ -630,26 +630,14 @@ func load_books() -> Array[EMC_BookGUI.Book]:
 
 ######################################JSON SCENARIOS################################################
 
-## DEPRECATED
-func load_scenarios() -> Dictionary:
-	if not FileAccess.file_exists(SCENARIOS_SOURCE):
-			printerr("Could not load PopUps from source: " + SCENARIOS_SOURCE)
-			return {}
+var scenarios : Dictionary
 
-	var recipe_source : FileAccess = FileAccess.open(SCENARIOS_SOURCE, FileAccess.READ)
-	var json : JSON = JSON.new()
+func load_scenarios() -> void:
+	var data : Dictionary = (load_file_check_type(SCENARIOS_SOURCE, "Scenarios", TYPE_DICTIONARY) as Dictionary)
+	if data == null:
+		return
 	
-	var json_string : String = recipe_source.get_as_text()
-	var parse_result : Error = json.parse(json_string)
-	if not parse_result == OK:
-		printerr("Action-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-		return {}
-
-	var data : Variant = json.get_data()
-	if not typeof(data) == TYPE_DICTIONARY:
-		printerr("Invalid format of Scenarios-JSON (" + SCENARIOS_SOURCE + "). Make sure it is in form of an Dictonarie.")
-	
-	return data
+	scenarios = data
 
 ######################################JSON DIALOGUES################################################
 

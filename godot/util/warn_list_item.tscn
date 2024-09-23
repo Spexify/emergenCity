@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://hurmnm4yg5ew"]
+
+[ext_resource type="Script" path="res://util/warn_list_item.gd" id="1_w75ao"]
+[ext_resource type="Texture2D" uid="uid://b8rm5sphqyjf2" path="res://res/sprites/GUI/icons/icon_fire.png" id="2_14y0w"]
+[ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://res/sprites/GUI/buttons/button_right.png" id="3_nh7dm"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(556, 96)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.0
+offset_top = -48.0
+offset_right = 278.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"WarnListItem"
+alignment = 0
+text_overrun_behavior = 1
+script = ExtResource("1_w75ao")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Margin/HBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_14y0w")
+
+[node name="Text" type="RichTextLabel" parent="Margin/HBox"]
+custom_minimum_size = Vector2(400, 28)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+text = "Hitzewelle"
+fit_content = true
+
+[node name="Arrow" type="TextureRect" parent="Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_nh7dm")

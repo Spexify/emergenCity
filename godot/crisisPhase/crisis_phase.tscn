@@ -147,6 +147,9 @@ visible = false
 visible = false
 size_flags_horizontal = 4
 
+[node name="HandyGUI" parent="GUI/CL" groups=["Save"] instance=ExtResource("24_lodu6")]
+visible = false
+
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
 offset_right = 576.0
@@ -160,6 +163,8 @@ mouse_filter = 2
 
 [node name="HBC" type="HBoxContainer" parent="GUI/CL/VBC/UpperSection"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 56
 
@@ -225,10 +230,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="ItemQuestionGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("20_b3rgh")]
-visible = false
-layout_mode = 2
-
-[node name="HandyGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Save"] instance=ExtResource("24_lodu6")]
 visible = false
 layout_mode = 2
 

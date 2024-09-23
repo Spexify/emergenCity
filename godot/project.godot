@@ -52,7 +52,6 @@ window/handheld/orientation=1
 [gui]
 
 theme/custom="res://GUI/default_theme.tres"
-theme/custom_font="res://res/fonts/Gugi-Regular-Variation.tres"
 
 [input]
 

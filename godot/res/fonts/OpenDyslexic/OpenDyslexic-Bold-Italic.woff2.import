@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c1rf6xy7ekahi"
-path="res://.godot/imported/Gugi-Regular.ttf-5dddf217308ea48f7fe531607225492c.fontdata"
+uid="uid://dkckl7vhh3xm0"
+path="res://.godot/imported/OpenDyslexic-Bold-Italic.woff2-7d7c9bddf3fcd856bd4ee2d5333a4dea.fontdata"
 
 [deps]
 
-source_file="res://res/fonts/Gugi-Regular.ttf"
-dest_files=["res://.godot/imported/Gugi-Regular.ttf-5dddf217308ea48f7fe531607225492c.fontdata"]
+source_file="res://res/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.woff2"
+dest_files=["res://.godot/imported/OpenDyslexic-Bold-Italic.woff2-7d7c9bddf3fcd856bd4ee2d5333a4dea.fontdata"]
 
 [params]
 

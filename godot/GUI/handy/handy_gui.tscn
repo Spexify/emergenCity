@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://druwt2u04fhrc"]
+[gd_scene load_steps=20 format=3 uid="uid://druwt2u04fhrc"]
 
 [ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
 [ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
@@ -10,9 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://xsfa62fx0vjo" path="res://res/sprites/GUI/buttons/home_button.png" id="8_jwi6o"]
 [ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
 [ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
-[ext_resource type="Texture2D" uid="uid://bh1xeb3ienh2a" path="res://res/sprites/GUI/icons/icon_needs_electricity.png" id="9_xog7u"]
-[ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://GUI/handy/item_list.tscn" id="11_5x2mn"]
-[ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="11_ybny1"]
+[ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_vrakr"]
+[ext_resource type="PackedScene" uid="uid://hurmnm4yg5ew" path="res://util/warn_list_item.tscn" id="14_iodyr"]
+[ext_resource type="Texture2D" uid="uid://u55u4lhujyg3" path="res://res/sprites/scenario_icons.png" id="14_w3wqw"]
 [ext_resource type="Script" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
 [ext_resource type="Texture2D" uid="uid://b2yixgn3oaixk" path="res://res/sprites/GUI/icons/icon_world_states.png" id="22_683kg"]
 
@@ -23,23 +23,27 @@ texture_margin_top = 64.0
 texture_margin_right = 30.0
 texture_margin_bottom = 64.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1c2gw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogubb"]
+bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu3e2"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvypq"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Handy" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = 101.0
-offset_bottom = 101.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4od8s")
 
 [node name="Panel" type="PanelContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 766)
 layout_mode = 1
 anchors_preset = 8
@@ -55,31 +59,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ss8d5")
 
-[node name="VBC" type="VBoxContainer" parent="Panel"]
-custom_minimum_size = Vector2(0, 650)
-layout_mode = 2
+[node name="VBC" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 940)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -940.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
 
-[node name="Menu" type="PanelContainer" parent="Panel/VBC"]
-custom_minimum_size = Vector2(492, 650)
+[node name="Menu" type="PanelContainer" parent="VBC"]
+visible = false
+custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
+size_flags_vertical = 8
 mouse_filter = 1
 theme_type_variation = &"BluePanelContainer"
 
-[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Menu"]
+[node name="VBC" type="VBoxContainer" parent="VBC/Menu"]
 layout_mode = 2
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Menu/VBC"]
+[node name="Title" type="RichTextLabel" parent="VBC/Menu/VBC"]
 custom_minimum_size = Vector2(200, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
 text = "[center][color=white]Hauptmenu[/color][/center]"
 
-[node name="Margin" type="MarginContainer" parent="Panel/VBC/Menu/VBC"]
+[node name="Margin" type="MarginContainer" parent="VBC/Menu/VBC"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Apps" type="GridContainer" parent="Panel/VBC/Menu/VBC/Margin"]
+[node name="Apps" type="GridContainer" parent="VBC/Menu/VBC/Margin"]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -87,161 +101,239 @@ theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="Info" parent="Panel/VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Info" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 size_flags_horizontal = 4
 app = "Info"
 icon = ExtResource("2_6tb3d")
 title = "[center]Info-Center"
 
-[node name="Store" parent="Panel/VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Store" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Store"
 icon = ExtResource("6_306ny")
 title = "[center]App-Store"
 
-[node name="Off" type="PanelContainer" parent="Panel/VBC"]
+[node name="Off" type="PanelContainer" parent="VBC"]
 visible = false
-custom_minimum_size = Vector2(492, 650)
+custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
+size_flags_vertical = 8
 theme_type_variation = &"BlackPanelContainer"
 
-[node name="Store" type="PanelContainer" parent="Panel/VBC" node_paths=PackedStringArray("handy")]
+[node name="Store" type="PanelContainer" parent="VBC" node_paths=PackedStringArray("handy")]
 visible = false
-custom_minimum_size = Vector2(492, 650)
+custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
+size_flags_vertical = 8
 theme_type_variation = &"BluePanelContainer"
 script = ExtResource("8_njk5s")
-handy = NodePath("../../..")
+handy = NodePath("../..")
 down_texture = ExtResource("6_306ny")
 
-[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Store"]
+[node name="VBC" type="VBoxContainer" parent="VBC/Store"]
 layout_mode = 2
 
-[node name="CC" type="CenterContainer" parent="Panel/VBC/Store/VBC"]
+[node name="CC" type="CenterContainer" parent="VBC/Store/VBC"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBC/Store/VBC/CC"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBC/Store/VBC/CC"]
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Store/VBC/CC/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="VBC/Store/VBC/CC/VBoxContainer"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
 text = "[center][color=white]App Store"
 
-[node name="Description" type="RichTextLabel" parent="Panel/VBC/Store/VBC/CC/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="VBC/Store/VBC/CC/VBoxContainer"]
 custom_minimum_size = Vector2(400, 26)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "[center][color=white]Drücke auf eine App und installiere sie"
 
-[node name="Margin" type="MarginContainer" parent="Panel/VBC/Store/VBC"]
+[node name="Margin" type="MarginContainer" parent="VBC/Store/VBC"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Apps" type="GridContainer" parent="Panel/VBC/Store/VBC/Margin"]
+[node name="Apps" type="GridContainer" parent="VBC/Store/VBC/Margin"]
 layout_mode = 2
 columns = 3
 
-[node name="Warn" parent="Panel/VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+[node name="Warn" parent="VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Warn"
 icon = ExtResource("3_fdip5")
 title = "[center]Warn-App"
 
-[node name="Info" type="PanelContainer" parent="Panel/VBC"]
+[node name="Info" type="PanelContainer" parent="VBC"]
 visible = false
-custom_minimum_size = Vector2(0, 650)
+custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
+size_flags_vertical = 8
 theme_type_variation = &"BluePanelContainer"
 script = ExtResource("8_von4c")
 warn_texture = ExtResource("22_683kg")
 
-[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Info"]
+[node name="VBC" type="VBoxContainer" parent="VBC/Info"]
 layout_mode = 2
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Info/VBC"]
+[node name="Title" type="RichTextLabel" parent="VBC/Info/VBC"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
 text = "[center][color=white]Info-Center[/color][/center]"
 
-[node name="ItemList1" type="ItemList" parent="Panel/VBC/Info/VBC"]
-visible = false
-custom_minimum_size = Vector2(0, 580)
-layout_mode = 2
-max_text_lines = 20
-text_overrun_behavior = 0
-item_count = 2
-item_0/text = "Das Mobilefunknetz ist momentan  Offline"
-item_0/icon = ExtResource("9_xog7u")
-item_1/text = "Wasser ist verunreinigt"
-item_1/icon = ExtResource("11_ybny1")
-
-[node name="ItemList" parent="Panel/VBC/Info/VBC" instance=ExtResource("11_5x2mn")]
+[node name="ItemList" parent="VBC/Info/VBC" instance=ExtResource("12_vrakr")]
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
-[node name="Warn" type="PanelContainer" parent="Panel/VBC"]
-visible = false
-custom_minimum_size = Vector2(0, 650)
+[node name="Warn" type="PanelContainer" parent="VBC"]
+custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
-theme_type_variation = &"BluePanelContainer"
+size_flags_vertical = 8
+theme_type_variation = &"WarnItemList"
 script = ExtResource("21_hd3ml")
-warn_texture = ExtResource("22_683kg")
+warn_texture = ExtResource("14_w3wqw")
 
-[node name="VBC" type="VBoxContainer" parent="Panel/VBC/Warn"]
+[node name="Notifications" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
-[node name="Title" type="RichTextLabel" parent="Panel/VBC/Warn/VBC"]
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Notifications/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Notifications/Panel/MarginContainer"]
 custom_minimum_size = Vector2(150, 26)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center][color=white]Warn-App[/color][/center]"
+text = "[color=white]Meine Orte[/color]"
+fit_content = true
 
-[node name="Tree" type="Tree" parent="Panel/VBC/Warn/VBC"]
-visible = false
-custom_minimum_size = Vector2(0, 580)
+[node name="Margin" type="MarginContainer" parent="VBC/Warn/Notifications"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1c2gw")
-hide_root = true
+offset_right = 576.0
+offset_bottom = 940.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 106
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="ItemList" parent="Panel/VBC/Warn/VBC" instance=ExtResource("11_5x2mn")]
+[node name="VBC" type="VBoxContainer" parent="VBC/Warn/Notifications/Margin"]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="PanelContainer" type="PanelContainer" parent="VBC/Warn/Notifications/Margin/VBC"]
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
+theme_type_variation = &"WarnItemList"
+theme_override_styles/panel = SubResource("StyleBoxFlat_uu3e2")
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Notifications/Margin/VBC/PanelContainer"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][color=black][b]Krisopolis[/b][/color][/center]"
+
+[node name="ItemList" parent="VBC/Warn/Notifications/Margin/VBC" instance=ExtResource("12_vrakr")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"WarnItemList"
+LIST_ITEM_SCN = ExtResource("14_iodyr")
+
+[node name="Description" type="Control" parent="VBC/Warn"]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Description/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Warn/Description/Infos/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Description"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Description/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Description/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Krisopolis[/color]"
+fit_content = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 383.0
+offset_bottom = 447.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
 
-[node name="HomeButton" type="TextureButton" parent="Panel/Margin"]
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 142
+alignment = 2
+
+[node name="HomeButton" type="TextureButton" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("8_jwi6o")
 
-[node name="Margin" type="MarginContainer" parent="."]
-layout_mode = 2
-offset_left = 180.0
-offset_top = 266.0
-offset_right = 244.0
-offset_bottom = 330.0
-size_flags_vertical = 8
-
-[node name="BackButton" type="TextureButton" parent="Margin"]
+[node name="BackButton" type="TextureButton" parent="Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("5_n7g61")
 
-[connection signal="pressed" from="Panel/Margin/HomeButton" to="." method="_on_home_button_pressed"]
-[connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
+[connection signal="pressed" from="Margin/HBox/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="Margin/HBox/BackButton" to="." method="_on_back_button_pressed"]

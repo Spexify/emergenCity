@@ -12,7 +12,7 @@ var _dialogue_manager : EMC_DialogueMngr
 @onready var _day_mngr : EMC_DayMngr = $GUI/CL/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
 @onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
-@onready var _handy_gui : EMC_Handy = $GUI/CL/VBC/MiddleSection/HandyGUI
+@onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
 #GUIs Lower Section:
 # None
 

@@ -8,7 +8,6 @@ class_name  EMC_GUIMngr
 @onready var _cooking_GUI : EMC_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
-@onready var handy_gui : EMC_Handy = $CL/VBC/MiddleSection/HandyGUI
 @onready var _dialogue_gui : EMC_Dialogue = $CL/VBC/MiddleSection/DialogueGui
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
@@ -26,6 +25,7 @@ class_name  EMC_GUIMngr
 @onready var _day_period_transition : EMC_GUI = $CL/DayPeriodTransition
 @onready var _rain_animation : EMC_GUI = $CL/RainAnimation
 @onready var _trade_ui : EMC_TradeUI = $CL/Trade
+@onready var handy_gui : EMC_Handy = $CL/HandyGUI
 
 @onready var pause_menu_btn := $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn := $ButtonList/VBC/BackpackBtn
@@ -55,6 +55,7 @@ func _ready() -> void:
 	all_the_guis.append(_rain_animation)
 	all_the_guis.append(_day_period_transition)
 	all_the_guis.append(_trade_ui)
+	all_the_guis.append(handy_gui)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 

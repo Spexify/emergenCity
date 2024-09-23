@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1xnedfhtc7p6"]
+[gd_scene load_steps=3 format=3 uid="uid://c1xnedfhtc7p6"]
 
-[ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="1_fyuou"]
+[ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://res/sprites/GUI/icons/icon_needs_water.png" id="1_dk3a2"]
+[ext_resource type="Script" path="res://util/simple_list_item.gd" id="2_diqqw"]
 
 [node name="ListItem" type="Button"]
 custom_minimum_size = Vector2(96, 96)
@@ -14,7 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"InfoAppButton"
 text = "Water"
-icon = ExtResource("1_fyuou")
+icon = ExtResource("1_dk3a2")
 alignment = 0
 text_overrun_behavior = 3
 expand_icon = true
+script = ExtResource("2_diqqw")
