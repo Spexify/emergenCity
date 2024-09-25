@@ -7,8 +7,9 @@ enum Layers{
 	BACKGROUND   = 1,
 	MIDDLEGROUND_1 = 2,
 	MIDDLEGROUND_2 = 3,
-	FOREGROUND   = 4,
-	TOOLTIPS     = 5,
+	MIDDLEGROUND_3 = 4,
+	FOREGROUND   = 5,
+	TOOLTIPS     = 6,
 }
 
 enum Atlases{ #Tileset Atlasses
@@ -106,6 +107,12 @@ func get_avatar_target(p_click_pos : Vector2) -> Vector2:
 		return _target_position
 	
 	return Vector2.INF
+	
+func show_electricity() -> void:
+	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
+		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 0))
+	else:
+		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 1))
 
 ###################Private Methods######################
 

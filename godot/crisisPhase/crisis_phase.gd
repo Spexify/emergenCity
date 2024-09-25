@@ -73,10 +73,10 @@ func _process(delta: float) -> void:
 	## END
 	
 	if Input.is_action_just_pressed("Toggle_Electricity"):
-		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
-			OverworldStatesMngr.set_electricity_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
+			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.NONE)
 		else:
-			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.get_electricity_state() + 1)
+			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.UNLIMITED)
 		_pause_menue.update_overworld_states()
 		_handy_gui.restart()
 	

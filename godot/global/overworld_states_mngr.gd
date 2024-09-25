@@ -134,6 +134,7 @@ func get_electricity_state() -> ElectricityState:
 
 func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
+	change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
 
 func get_electricity_state_descr() -> String:
 	match _electricity_state:
@@ -210,29 +211,29 @@ func sub_any_state_by_name(state : String) -> void:
 			_water_state = WaterState.DIRTY
 			if _water[1] == 0:
 				_water_state = WaterState.CLEAN
-		change.emit("WaterState" + WaterState.find_key(_water_state))
+		change.emit("WaterState." + WaterState.find_key(_water_state))
 	elif "ElectricityState" in state:
 		_electricity -= 1
 		if _electricity == 0:
 			_electricity_state = ElectricityState.UNLIMITED
-		change.emit("ElectricityState" + ElectricityState.find_key(_electricity_state))
+		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
 	elif "FoodContaminationState" in state:
 		_food -= 1
 		if _food == 0:
 			_food_contamination_state = FoodContaminationState.NONE
-		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
 	elif "IsolationState" in state:
 		_isolation[IsolationState.get(state.get_extension())] -= 1
 		if _isolation[0] == 0:
 			_isolation_state = IsolationState.LIMITED_PUBLIC_ACCESS
 			if _isolation[1] == 0:
 				_isolation_state = IsolationState.NONE
-		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
 	elif "MobileNetState" in state:
 		_mobile -= 1
 		if _mobile == 0:
 			_mobilenet_state =  MobileNetState.ONLINE
-		change.emit("MobileNetState" + MobileNetState.find_key(_mobilenet_state))
+		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
 
 func add_any_state_by_name(state : String) -> void:
 	if "WaterState" in state:
@@ -240,31 +241,31 @@ func add_any_state_by_name(state : String) -> void:
 		if _water_state > _state:
 			_water_state = _state
 			_water[_state] += 1
-		change.emit("WaterState" + WaterState.find_key(_water_state))
+		change.emit("WaterState." + WaterState.find_key(_water_state))
 	elif "ElectricityState" in state:
 		var _state : ElectricityState = ElectricityState.get(state.get_extension())
 		if _electricity_state > _state:
 			_electricity_state = _state
 			_electricity += 1
-		change.emit("ElectricityState" + ElectricityState.find_key(_electricity_state))
+		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
 	elif "FoodContaminationState" in state:
 		var _state : FoodContaminationState = FoodContaminationState.get(state.get_extension())
 		if _food_contamination_state > _state:
 			_food_contamination_state = _state
 			_food += 1
-		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
 	elif "IsolationState" in state:
 		var _state : IsolationState = IsolationState.get(state.get_extension())
 		if _isolation_state > _state:
 			_isolation_state = _state
 			_isolation[_state] += 1
-		change.emit("FoodContaminationState" + FoodContaminationState.find_key(_food_contamination_state))
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
 	elif "MobileNetState" in state:
 		var _state : MobileNetState = MobileNetState.get(state.get_extension())
 		if _mobilenet_state > _state:
 			_mobilenet_state = _state
 			_mobile += 1
-		change.emit("MobileNetState" + MobileNetState.find_key(_mobilenet_state))
+		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
 
 func set_any_state_by_name(state : String) -> void:
 	if "WaterState" in state:

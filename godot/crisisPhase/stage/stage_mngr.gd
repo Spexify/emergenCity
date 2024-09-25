@@ -62,6 +62,8 @@ p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_setup_NPCs()
 	
 	change_stage(_initial_stage_name, _initial_npc)
+	
+	OverworldStatesMngr.change.connect(state_changed)
 
 ## Change the stage to the one specified via [param p_stage_name]
 func change_stage(p_stage_name: String, override_spawn : Dictionary = {}) -> void:
@@ -69,6 +71,7 @@ func change_stage(p_stage_name: String, override_spawn : Dictionary = {}) -> voi
 		_curr_stage.unload_stage()
 	_curr_stage = $StageOffset.get_node(p_stage_name)
 	_curr_stage.load_stage(override_spawn)
+	_curr_stage.show_electricity()
 
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
@@ -115,6 +118,10 @@ func _ready() -> void:
 		_curr_stage = $StageOffset.get_children()[0]
 		_curr_stage.setup("home", $NPCs, _opt_event_mngr)
 		_curr_stage.load_stage()
+
+func state_changed(state : String) -> void:
+	if state.get_basename() == "ElectricityState":
+		_curr_stage.show_electricity()
 
 func _setup_stages() -> void:
 	var stage_names := ["market", "townhall", "park", "gardenhouse", "rowhouse",
