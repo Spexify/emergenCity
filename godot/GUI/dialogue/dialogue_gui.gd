@@ -13,6 +13,13 @@ extends EMC_GUI
 var _dialogue_mngr : EMC_DialogueMngr
 var _stage_mngr : EMC_StageMngr
 
+const _icon_list : Dictionary = {
+	"happy" : preload("res://res/sprites/GUI/icons/icon_statusbar_happiness.png"),
+	"health" : preload("res://res/sprites/GUI/icons/icon_statusbar_health.png"),
+	"food" : preload("res://res/sprites/GUI/icons/icon_statusbar_nutrition.png"),
+	"water" : preload("res://res/sprites/GUI/icons/icon_statusbar_hydration.png"),
+}
+
 ##TODO
 var _pitches : Dictionary = {
 	"avatar": 1.0, "friedel": 0.6, "gerhard": 0.5, "julia": 1.3, "mert": 0.9,
@@ -119,7 +126,7 @@ func start(dialogue : Dictionary) -> void:
 		next.show()
 
 		if( ii < converstation.size()-1 or dialogue.get("options", {}).is_empty() 
-		or not dialogue.get("options", {}).values().any(func(dict : Dictionary) -> bool: return dict.has("prompt"))):
+		or not dialogue.get("options", {}).values().any(func(dict : Variant) -> bool: return dict is Dictionary and dict.has("prompt"))):
 			await next.pressed
 		ii += 1
 		
@@ -153,6 +160,7 @@ func start(dialogue : Dictionary) -> void:
 		if i < dialogue_options.size():
 			button.pressed.connect(start.bind(dialogue_options[i]))
 			button.set_text(dialogue_options[i].get("prompt"))
+			button.set_button_icon(_icon_list.get(dialogue_options[i].get("icon", "none"), null))
 			button.show()
 		else:
 			button.hide()
