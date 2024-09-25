@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://druwt2u04fhrc"]
+[gd_scene load_steps=22 format=3 uid="uid://druwt2u04fhrc"]
 
 [ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
 [ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cno5csi1waa8v" path="res://res/sprites/GUI/icons/icon_warn_app.png" id="3_fdip5"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="5_n7g61"]
 [ext_resource type="Texture2D" uid="uid://bduv6g8pf4rcs" path="res://res/sprites/GUI/icons/icon_store_app.png" id="6_306ny"]
-[ext_resource type="Texture2D" uid="uid://xsfa62fx0vjo" path="res://res/sprites/GUI/buttons/home_button.png" id="8_jwi6o"]
 [ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
 [ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
 [ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_vrakr"]
@@ -22,6 +21,15 @@ texture_margin_left = 30.0
 texture_margin_top = 64.0
 texture_margin_right = 30.0
 texture_margin_bottom = 64.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76uwp"]
+bg_color = Color(0.317647, 0.541176, 0.776471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j51c"]
+bg_color = Color(0.823529, 0.788235, 0.701961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c1mi"]
+bg_color = Color(0.317647, 0.541176, 0.776471, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogubb"]
 bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
@@ -72,18 +80,17 @@ grow_vertical = 0
 size_flags_vertical = 8
 
 [node name="Menu" type="PanelContainer" parent="VBC"]
-visible = false
 custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 1
-theme_type_variation = &"BluePanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_76uwp")
 
 [node name="VBC" type="VBoxContainer" parent="VBC/Menu"]
 layout_mode = 2
 
 [node name="Title" type="RichTextLabel" parent="VBC/Menu/VBC"]
-custom_minimum_size = Vector2(200, 26)
+custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
@@ -126,7 +133,7 @@ visible = false
 custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
 size_flags_vertical = 8
-theme_type_variation = &"BluePanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_3j51c")
 script = ExtResource("8_njk5s")
 handy = NodePath("../..")
 down_texture = ExtResource("6_306ny")
@@ -144,7 +151,7 @@ layout_mode = 2
 theme_override_constants/separation = -3
 
 [node name="Title" type="RichTextLabel" parent="VBC/Store/VBC/CC/VBoxContainer"]
-custom_minimum_size = Vector2(150, 26)
+custom_minimum_size = Vector2(150, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
@@ -176,7 +183,7 @@ visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
-theme_type_variation = &"BluePanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_1c1mi")
 script = ExtResource("8_von4c")
 warn_texture = ExtResource("22_683kg")
 
@@ -184,7 +191,7 @@ warn_texture = ExtResource("22_683kg")
 layout_mode = 2
 
 [node name="Title" type="RichTextLabel" parent="VBC/Info/VBC"]
-custom_minimum_size = Vector2(150, 26)
+custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
@@ -195,6 +202,7 @@ custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
 [node name="Warn" type="PanelContainer" parent="VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -203,7 +211,6 @@ script = ExtResource("21_hd3ml")
 warn_texture = ExtResource("14_w3wqw")
 
 [node name="Notifications" type="Control" parent="VBC/Warn"]
-visible = false
 layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
@@ -260,6 +267,7 @@ theme_type_variation = &"WarnItemList"
 LIST_ITEM_SCN = ExtResource("14_iodyr")
 
 [node name="Description" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]
@@ -317,23 +325,11 @@ size_flags_vertical = 8
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="HBox" type="HBoxContainer" parent="Margin"]
-layout_mode = 2
-theme_override_constants/separation = 142
-alignment = 2
-
-[node name="HomeButton" type="TextureButton" parent="Margin/HBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-texture_normal = ExtResource("8_jwi6o")
-
-[node name="BackButton" type="TextureButton" parent="Margin/HBox"]
+[node name="BackButton" type="TextureButton" parent="Margin"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("5_n7g61")
 
 [connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
-[connection signal="pressed" from="Margin/HBox/HomeButton" to="." method="_on_home_button_pressed"]
-[connection signal="pressed" from="Margin/HBox/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]

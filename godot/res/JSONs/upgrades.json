@@ -62,5 +62,17 @@
 		"atlas_coord": {"x": 1, "y": 4},
 		"tiles_cols": 1,
 		"tiles_rows": 2,
+	},
+	{
+		"description": "Ermöglicht längeres Handy nutzen bei Stromausfall",
+		"display_name": "Power Bank",
+		"id": 5,
+		"price": 1000,
+		"state": 0,
+		"state_maximum": 0,
+		"tilemap_position": {"x": 1, "y": 1},
+		"atlas_coord": {"x": 4, "y": 4},
+		"tiles_cols": 1,
+		"tiles_rows": 2,
 	}
 ]

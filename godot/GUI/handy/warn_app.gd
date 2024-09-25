@@ -55,6 +55,13 @@ func start() -> void:
 	
 	show()
 	
+func back() -> bool:
+	if description.visible:
+		description.hide()
+		notifications.show()
+		return false
+	return true
+	
 func _on_item_clicked(id : String) -> void:
 	print("Pressed on: '" + id + "'")
 	
@@ -63,7 +70,6 @@ func _on_item_clicked(id : String) -> void:
 		description.show()
 		text.set_text(JsonMngr.scenarios.get(id.get_extension()).get("description"))
 	
-
 
 func _on_text_meta_clicked(meta : Variant) -> void:
 	var url : String = meta as String

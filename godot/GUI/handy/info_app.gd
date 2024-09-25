@@ -29,3 +29,6 @@ func start() -> void:
 	momentan " + OverworldStatesMngr.get_mobile_net_state_descr(), EMC_Util.Icon_Patcher.cut_out(warn_texture, Rect2(x, y, 64, 64))])
 	
 	show()
+
+func back() -> bool:
+	return true

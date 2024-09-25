@@ -158,7 +158,7 @@ layout_mode = 2
 theme_override_constants/margin_bottom = 12
 
 [node name="Title" type="RichTextLabel" parent="LoserScreen/MarginContainer/VBoxContainer/TitleSpacing"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true

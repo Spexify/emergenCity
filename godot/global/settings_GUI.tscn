@@ -70,13 +70,13 @@ text = "Charakter auswählen"
 [node name="Sound" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 32
 text = "Sound"
 
 [node name="FontChange" type="CheckButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons"]
 custom_minimum_size = Vector2(0, 63)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 32
 text = "Dyslexic Font"
 
 [node name="Reset" parent="CanvasLayer/VBoxContainer/CenterContainer2/Buttons" instance=ExtResource("4_5kd0i")]
@@ -128,6 +128,7 @@ text = "Vibration"
 [node name="Back" type="Button" parent="CanvasLayer/VBoxContainer/CenterContainer2/Sounds" groups=["Button"]]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Speichern & Zurück
 "
 

@@ -101,7 +101,7 @@ text = "[center]Gekaufte Items sind dauerhaft freigeschaltet[/center]"
 fit_content = true
 
 [node name="UpgradePanel" type="PanelContainer" parent="Background/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(556, 530)
+custom_minimum_size = Vector2(556, 510)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -116,7 +116,7 @@ text = "[center]Upgrades[/center]"
 fit_content = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/MarginContainer/VBoxContainer/UpgradePanel/VBC"]
-custom_minimum_size = Vector2(485, 450)
+custom_minimum_size = Vector2(485, 440)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -140,16 +140,16 @@ layout_mode = 2
 theme_type_variation = &"TitleSpacing"
 
 [node name="UpgradeName" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 36)
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 
 [node name="Price" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 
 [node name="Description" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer/WhitePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 108)
 layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer"]

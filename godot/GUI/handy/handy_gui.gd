@@ -12,7 +12,10 @@ var active_app : EMC_App
 var _energy : Range = Range.new()
 
 func _init() -> void:
-	_energy.set_max(100)
+	if Global.has_upgrade(5):
+		_energy.set_max(300)
+	else:
+		_energy.set_max(100)
 	_energy.set_min(0)
 	_energy.set_value(_energy.get_max())
 
@@ -81,16 +84,14 @@ func _on_open_app(app_name : String) -> void:
 			
 
 func _on_back_button_pressed() -> void:
-	close()
-
-func _on_home_button_pressed() -> void:
-	if off.visible:
+	if off.visible or active_app == null:
+		close()
 		return
 	
-	if active_app != null:
+	if active_app != null and active_app.back():
 		active_app.hide()
 		active_app = null
-	menu.show()
+		menu.show()
 
 ###########################################SAVE/LOAD################################################
 

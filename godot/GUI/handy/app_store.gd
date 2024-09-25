@@ -25,3 +25,6 @@ func _on_app_clicked(app_name : String) -> void:
 			apps.remove_child(app)
 			handy.add_app_icon(app)
 			return
+
+func back() -> bool:
+	return true

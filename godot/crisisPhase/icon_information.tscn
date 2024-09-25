@@ -44,7 +44,7 @@ layout_mode = 2
 texture = ExtResource("2_nlkmw")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -62,7 +62,7 @@ layout_mode = 2
 texture = ExtResource("3_75l8e")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -79,7 +79,7 @@ layout_mode = 2
 texture = ExtResource("4_51kyr")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer4"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -96,7 +96,7 @@ layout_mode = 2
 texture = ExtResource("5_ajf1c")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer5"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
