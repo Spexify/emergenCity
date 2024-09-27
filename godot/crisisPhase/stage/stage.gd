@@ -291,6 +291,21 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 			var southwest_tile := tile_coord + Vector2i(-1, 1)
 			if !_has_tile_collision(southwest_tile) && !_is_tile_out_of_bounds(southwest_tile):
 				return _map_to_global(southwest_tile)
+	
+	if tile_coord.y > TILE_MIN_Y_COORD:
+		var north_tile := tile_coord + Vector2i(0, -1)
+		if !_has_tile_collision(north_tile) && !_is_tile_out_of_bounds(north_tile):
+			return _map_to_global(north_tile)
+			
+		if tile_coord.x < TILE_MAX_X_COORD:
+			var northeast_tile := tile_coord + Vector2i(1, -1)
+			if !_has_tile_collision(northeast_tile) && !_is_tile_out_of_bounds(northeast_tile):
+				return _map_to_global(northeast_tile)
+				
+		if tile_coord.x > TILE_MIN_X_COORD:
+			var northwest_tile := tile_coord + Vector2i(-1, -1)
+			if !_has_tile_collision(northwest_tile) && !_is_tile_out_of_bounds(northwest_tile):
+				return _map_to_global(northwest_tile)
 				
 	if tile_coord.x < TILE_MAX_X_COORD:
 		var east_tile := tile_coord + Vector2i(1, 0)

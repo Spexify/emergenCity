@@ -10,7 +10,7 @@ enum IDs{
 	CRANK_RADIO = 3,
 	GAS_COOKER = 4,
 	POWER_BANK = 5,
-	#WATER_RESERVOIR = .., #UNUSED
+	WATER_RESERVOIR = 6,
 }
 
 var _id : IDs

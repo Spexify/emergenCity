@@ -31,14 +31,17 @@
 		"constraints": {
 			"constraint_some_water_available": "",
 		},
-		"consequences": {
-			"add_tap_water" : 0,
-		},
-		"type_gui": "DefaultActionGUI",
-		"description": "-",
-		"prompt": "Willst du Wasser aus dem Hahn zapfen?",
+		"consequences_test": [
+			{
+				"add_hydration": 1,
+			},
+			{
+				"fill_reservoir": "",
+			}
+		],
+		"type_gui": "SinkGUI",
+		"description": "Hat Wasser in das Resorvoir abgefüllt.",
 		"e_coins": 0,
-		"progresses_day_period": false,
 		"sound": "TapWater"
 	},
 	{
@@ -126,6 +129,24 @@
 		"prompt": "Willst du das Kurbelradio benutzen?",
 		"e_coins": 0,
 		"progresses_day_period": false,
+	},
+	{
+		"id": 10,
+		"type": "action",
+		"name": "Wasser Reservoir",
+		"constraints": {
+			"has_water_reservoir_water": "",
+		},
+		"consequences": {
+			"add_item_question": [1, "Möchtest du %s jetzt drinken?", "Drinken"],
+			"remove_from_reservoir": 25
+		},
+		"type_gui": "DefaultActionGUI",
+		"description": "-",
+		"prompt": "Willst du Wasser aus dem Wasser Reservoir abfüllen?",
+		"e_coins": 0,
+		"progresses_day_period": false,
+		"sound": "TapWater"
 	},
 	{
 		"id": 2000,

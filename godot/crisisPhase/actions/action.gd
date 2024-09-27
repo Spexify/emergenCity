@@ -10,13 +10,14 @@ enum IDs{
 	NO_ACTION 		= 0,
 	CITY_MAP 		= 1, #Interaction (never executes)
 	COOKING 		= 2, 
-	TAP_WATER 		= 3, #Interaction (never executes)
+	TAP_WATER 		= 3,
 	REST 			= 4,
 	RAINWATER_BARREL = 5,
 	SHOWER 			= 6,
 	BBK_LINK		= 7,
 	ELECTRIC_RADIO	= 8,
 	CRANK_RADIO		= 9,
+	WATER_RESERVOIR = 10,
 	##1000s = PopupActions
 	POPUP_0 = 1000,
 	POPUP_1 = 1001,

@@ -74,5 +74,18 @@
 		"atlas_coord": {"x": 4, "y": 4},
 		"tiles_cols": 1,
 		"tiles_rows": 2,
+	},
+	{
+		"description": "Ermöglicht abfüllen von Wasser.",
+		"display_name": "Wasser Reservoir",
+		"id": 6,
+		"price": 2000,
+		"state": 0,
+		"state_maximum": 100,
+		"spawn_pos": {"x": 4, "y": 9},
+		"tilemap_position": {"x": 1, "y": 2},
+		"atlas_coord": {"x": 4, "y": 7},
+		"tiles_cols": 1,
+		"tiles_rows": 2,
 	}
 ]

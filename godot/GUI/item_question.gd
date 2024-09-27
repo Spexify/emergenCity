@@ -16,13 +16,14 @@ func setup(p_inventory : EMC_Inventory, p_avatar : EMC_Avatar) -> void:
 	_inventory = p_inventory
 	_avatar = p_avatar
 
-func open(p_item : EMC_Item) -> void:
+func open(p_item : EMC_Item, question_text : String = "Möchstest du %s jetzt essen oder für später aufheben?", answer_text : String = "Essen") -> void:
 	self.show()
 	opened.emit()
 	
 	_item = p_item
 	
-	question.set_text("Möchstest du " + _item.name + " jetzt essen oder für später aufheben?")
+	question.set_text(question_text % _item.name)
+	confirm_btn.set_text(answer_text)
 	
 	slot.set_item(_item)
 	

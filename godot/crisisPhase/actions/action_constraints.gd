@@ -25,6 +25,10 @@ func constraint_cooking(_dummy_param: Variant) -> String:
 	#else:
 	return NO_REJECTION
 
+func has_water_reservoir_water(_dummy : Variant) -> String:
+	if OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.WATER_RESERVOIR) <= 0:
+		return "Das Wasser Reservoir is leer."
+	return NO_REJECTION
 
 func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
 	if OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:

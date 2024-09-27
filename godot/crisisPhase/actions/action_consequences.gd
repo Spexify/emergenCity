@@ -31,10 +31,11 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 func add_health(p_value: int) -> void:
 	_avatar.add_health(p_value)
 
+func add_hydration(p_value: int) -> void:
+	_avatar.add_hydration(p_value)
 
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happiness(p_value)
-
 
 ############################################ Items #################################################
 
@@ -43,6 +44,16 @@ func add_item(p_ID: EMC_Item.IDs) -> void:
 	if _inventory.add_new_item(p_ID) == false:
 		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 
+func add_item_question(params : Array) -> void:
+	var item : = EMC_Item.make_from_id(params[0])
+	if _inventory.add_existing_item(item) == false:
+		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
+	else:
+		if params.size() >= 1:
+			_gui_mngr.queue_gui("ItemQuestionGUI", [item, params[1], params[2]])
+		else:
+			_gui_mngr.queue_gui("ItemQuestionGUI", [item])
+	
 
 ## Allows multiple items, separated through a semicolon
 func add_items_by_name(p_names : String) -> void:
@@ -125,6 +136,14 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 	OverworldStatesMngr.set_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL, 
 		min(OverworldStatesMngr.get_furniture_state_maximum(EMC_Upgrade.IDs.RAINWATER_BARREL), 
 		(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
+		
+func fill_reservoir(_dummy : Variant = NO_PARAM) -> void:
+	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	reservoir.set_state(reservoir.get_state_maximum())
+
+func remove_from_reservoir(amount : int) -> void:
+	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	reservoir.set_state(reservoir.get_state() - amount)
 
 func set_tutorial(value : bool) -> void:
 	Global._tutorial_done = value
