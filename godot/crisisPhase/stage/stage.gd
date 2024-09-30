@@ -137,7 +137,7 @@ func _create_navigation_layer_tiles() -> void:
 func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 	const PHYSICS_LAYER: int = 0
 	if (p_tile_coord.x < 0 || p_tile_coord.y < 0):
-		push_error("Angeklickte Tile-Koordinaten ungültig")
+		#push_error("Angeklickte Tile-Koordinaten ungültig")
 		return true
 	
 	#Back to forth, as this should be the shortest check in most cases:

@@ -142,8 +142,6 @@ size_flags_vertical = 4
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "
-"
 fit_content = true
 
 [node name="HydrationCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
@@ -195,7 +193,7 @@ layout_mode = 2
 theme_override_constants/separation = 13
 
 [node name="HealthCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
@@ -227,17 +225,15 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HealthLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HealthCont"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "
-"
-fit_content = true
 
 [node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
@@ -269,15 +265,12 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HappinessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinessCont"]
-clip_contents = false
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "
-"
-fit_content = true
 
 [connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]

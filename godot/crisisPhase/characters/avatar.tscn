@@ -88,7 +88,6 @@ radius = 32.0
 time_horizon_agents = 0.5
 time_horizon_obstacles = 0.5
 max_speed = 300.0
-debug_enabled = true
 
 [node name="SFX" type="Node" parent="."]
 

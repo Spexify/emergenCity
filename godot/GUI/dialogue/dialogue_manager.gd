@@ -17,7 +17,7 @@ func _init(p_action_constrains : EMC_ActionConstraints, p_action_consequences : 
 	_day_mngr = p_day_mngr
 	_gui_mngr = p_gui_mngr
 	
-	_dialogue_dictionary = JsonMngr.load_dialogues()
+	_dialogue_dictionary = JsonMngr.get_dialogues()
 	
 func next_dialogue(dialogue : Dictionary, top_level : bool = false) -> Array[Dictionary]:
 	if dialogue.is_empty():

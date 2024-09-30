@@ -46,7 +46,10 @@ func _on_confirm_btn_pressed() -> void:
 	#if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
 		#_action.add_consequence("add_health", -1)
 	#_action.add_consequence("add_hydration", 1)
-	_action.add_consequence("add_tap_water", 0)
+	_action.add_consequence("add_item_question", ["WATER", {
+					"question": "Du hast %s abgefüllt. Möchtest du es jetzt trinken?",
+					"answere": "Trinken"
+				}])
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = _action.play_sound()

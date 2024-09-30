@@ -641,7 +641,12 @@ func load_scenarios() -> void:
 
 ######################################JSON DIALOGUES################################################
 
-func load_dialogues() -> Dictionary:
+var _dialogues : Dictionary
+
+func get_dialogues() -> Dictionary:
+	return _dialogues.duplicate(true)
+ 
+func load_dialogues() -> void:
 	var stage_names : Array[String] #= ["home", "market", "townhall", "park", "gardenhouse", "rowhouse",
 	#"mansion", "penthouse", "apartment_default", "apartment_mert", "apartment_camper", "extra"]
 	var actor_names : Array[String]
@@ -672,7 +677,7 @@ func load_dialogues() -> Dictionary:
 	else:
 		print("An error occurred when trying to load the Dialogues.")
 		
-	return result
+	_dialogues = result
 
 ######################################JSON UPGRADES#################################################
 

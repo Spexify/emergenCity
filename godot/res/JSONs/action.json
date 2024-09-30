@@ -141,8 +141,8 @@
 			"add_item_question": [
 				1,
 				{
-					"question": "Möchtest du %s jetzt drinken?",
-					"answere": "Drinken"
+					"question": "Möchtest du %s jetzt trinken?",
+					"answere": "Trinken"
 				}
 			],
 			"remove_from_reservoir": 25
