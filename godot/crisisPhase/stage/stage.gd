@@ -141,7 +141,7 @@ func _has_tile_collision(p_tile_coord: Vector2i) -> bool:
 		return true
 	
 	#Back to forth, as this should be the shortest check in most cases:
-	var collision_layers := [Layers.BACKGROUND, Layers.MIDDLEGROUND_1, Layers.MIDDLEGROUND_2, Layers.TOOLTIPS]
+	var collision_layers := [Layers.BACKGROUND, Layers.FOREGROUND, Layers.MIDDLEGROUND_1, Layers.MIDDLEGROUND_2, Layers.TOOLTIPS]
 	
 	# WARNING may need to check for null
 	return collision_layers.any(func(layer : int) -> bool: 
@@ -277,45 +277,24 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 	if !_has_tile_collision(tile_coord) && !_is_tile_out_of_bounds(tile_coord):
 		return p_click_pos
 		
-	if tile_coord.y < TILE_MAX_Y_COORD:
-		var south_tile := tile_coord + Vector2i(0, 1)
-		if !_has_tile_collision(south_tile) && !_is_tile_out_of_bounds(south_tile):
-			return _map_to_global(south_tile)
-			
-		if tile_coord.x < TILE_MAX_X_COORD:
-			var southeast_tile := tile_coord + Vector2i(1, 1)
-			if !_has_tile_collision(southeast_tile) && !_is_tile_out_of_bounds(southeast_tile):
-				return _map_to_global(southeast_tile)
-				
-		if tile_coord.x > TILE_MIN_X_COORD:
-			var southwest_tile := tile_coord + Vector2i(-1, 1)
-			if !_has_tile_collision(southwest_tile) && !_is_tile_out_of_bounds(southwest_tile):
-				return _map_to_global(southwest_tile)
+	const search_area : Array[Vector2i] = [
+		Vector2i(-1, -1), 	Vector2i(0, -1), 	Vector2i(1, -1),
+		Vector2i(-1, 0), 						Vector2i(1, 0),
+		Vector2i(-1, 1), 	Vector2i(0, 1), 	Vector2i(1, 1)
+	]
 	
-	if tile_coord.y > TILE_MIN_Y_COORD:
-		var north_tile := tile_coord + Vector2i(0, -1)
-		if !_has_tile_collision(north_tile) && !_is_tile_out_of_bounds(north_tile):
-			return _map_to_global(north_tile)
-			
-		if tile_coord.x < TILE_MAX_X_COORD:
-			var northeast_tile := tile_coord + Vector2i(1, -1)
-			if !_has_tile_collision(northeast_tile) && !_is_tile_out_of_bounds(northeast_tile):
-				return _map_to_global(northeast_tile)
-				
-		if tile_coord.x > TILE_MIN_X_COORD:
-			var northwest_tile := tile_coord + Vector2i(-1, -1)
-			if !_has_tile_collision(northwest_tile) && !_is_tile_out_of_bounds(northwest_tile):
-				return _map_to_global(northwest_tile)
-				
-	if tile_coord.x < TILE_MAX_X_COORD:
-		var east_tile := tile_coord + Vector2i(1, 0)
-		if !_has_tile_collision(east_tile) && !_is_tile_out_of_bounds(east_tile):
-			return _map_to_global(east_tile)
-			
-	if tile_coord.x > TILE_MIN_X_COORD:
-		var west_tile := tile_coord + Vector2i(-1, 0)
-		if !_has_tile_collision(west_tile) && !_is_tile_out_of_bounds(west_tile):
-			return _map_to_global(west_tile)
+	var goal : Vector2i = search_area.reduce(
+		func(accum : Vector2i, pos : Vector2i) -> Vector2i:
+			var tile := tile_coord + pos
+			var accum_tile := tile_coord + accum
+			if (!_has_tile_collision(tile) && !_is_tile_out_of_bounds(tile)
+			and (_map_to_global(tile) as Vector2 - p_click_pos).length_squared() < (_map_to_global(accum_tile) as Vector2 - p_click_pos).length_squared()):
+				return pos
+			return accum
+	, Vector2i.MAX)
 	
-	push_error("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
-	return INVALID_TILE
+	if goal == Vector2i.MAX:
+		push_warning("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
+		return INVALID_TILE
+	
+	return _map_to_global(goal + tile_coord) - 2*  goal
