@@ -129,9 +129,14 @@ func queue_gui(gui_name : String, argv : Array) -> Signal:
 	printerr("Gui with name: '" + gui_name + "' not found")
 	return Signal()
 
+func overlay_gui(gui_name : String, argv : Array) -> void:
+	_active_guis.back().hide()
+	request_gui(gui_name, argv)
+
 func gui_closed(gui : EMC_GUI) -> void:
 	_active_guis.erase(gui)
 	if not _active_guis.is_empty():
+		_active_guis.back().show()
 		_active_guis.back().set_process_mode(PROCESS_MODE_INHERIT)
 	elif not _gui_queue.is_empty():
 		var entry : QueueEntry = _gui_queue.pop_front()
@@ -157,6 +162,7 @@ func _on_pause_menu_btn_pressed() -> void:
 	
 func _on_phone_btn_pressed() -> void:
 	request_gui("HandyGUI", [])
+	#request_gui("DialogueGui", [{"stage_name": "penthouse", "actor_name": "elias"}])
 
 ########################Helper Functions############################
 

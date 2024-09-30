@@ -37,6 +37,23 @@ func add_hydration(p_value: int) -> void:
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happiness(p_value)
 
+############################################ Action ################################################
+
+func execute_action(action : Variant) -> void:
+	var id : int = 0
+	if typeof(action) == TYPE_STRING:
+		id = JsonMngr.name_to_action_id(action as String)
+	elif typeof(action) == TYPE_INT:
+		id = action as int
+	_day_mngr.on_interacted_with_furniture(id)
+	
+func progress_day(params : Variant) -> void:
+	var action := EMC_Action.empty_action()
+	action._ACTION_NAME = params[0]
+	action._description = params[1]
+	action._performance_coin_value = params[2]
+	_day_mngr._advance_day_period(action)
+	
 ############################################ Items #################################################
 
 ## Adds the [EMC_Item]
@@ -45,12 +62,17 @@ func add_item(p_ID: EMC_Item.IDs) -> void:
 		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 
 func add_item_question(params : Array) -> void:
-	var item : = EMC_Item.make_from_id(params[0])
+	var id : int = 0
+	if typeof(params[0]) == TYPE_STRING:
+		id = JsonMngr.item_name_to_id(params[0] as String)
+	elif typeof(params[0]) == TYPE_INT:
+		id = params[0] as int
+	var item : = EMC_Item.make_from_id(id)
 	if _inventory.add_existing_item(item) == false:
 		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 	else:
 		if params.size() >= 1:
-			_gui_mngr.queue_gui("ItemQuestionGUI", [item, params[1], params[2]])
+			_gui_mngr.queue_gui("ItemQuestionGUI", [item, params[1]])
 		else:
 			_gui_mngr.queue_gui("ItemQuestionGUI", [item])
 	
@@ -150,20 +172,28 @@ func set_tutorial(value : bool) -> void:
 
 ############################################ GUI ##################################################
 
-func request_gui(param : Dictionary) -> void:
-	if param.has("name"):
-		if param.get("name") == "Trade":
-			_gui_mngr.request_gui("Trade", [_stage_mngr.get_NPC(param.get("args", ""))])
+func request_gui(args : Dictionary) -> void:
+	if args.has("name"):
+		if args.get("name") == "Trade":
+			_gui_mngr.request_gui("Trade", [_stage_mngr.get_NPC(args.get("args", ""))])
 		else:
-			_gui_mngr.request_gui(param.get("name"), param.get("args", []))
+			_gui_mngr.request_gui(args.get("name"), args.get("args", []))
 
-func queue_gui(param : Dictionary) -> void:
-	if param.has("name"):
-		match param.get("name"):
+func queue_gui(args : Dictionary) -> void:
+	if args.has("name"):
+		match args.get("name"):
 			"Trade":
-				_gui_mngr.queue_gui("Trade", [_stage_mngr.get_NPC(param.get("args", ""))])
+				_gui_mngr.queue_gui("Trade", [_stage_mngr.get_NPC(args.get("args", ""))])
 			_:
-				_gui_mngr.queue_gui(param.get("name"), param.get("args", []))
+				_gui_mngr.queue_gui(args.get("name"), args.get("args", []))
+				
+func overlay_gui(args : Dictionary) -> void:
+	if args.has("name"):
+		match args.get("name"):
+			"Trade":
+				_gui_mngr.overlay_gui("Trade", [_stage_mngr.get_NPC(args.get("args", ""))])
+			_:
+				_gui_mngr.overlay_gui(args.get("name"), args.get("args", []))
 
 ########################################## Dialogue ################################################
 

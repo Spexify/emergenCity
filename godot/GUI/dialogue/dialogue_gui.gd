@@ -12,6 +12,7 @@ extends EMC_GUI
 #var _dialogue : Dictionary = {}
 var _dialogue_mngr : EMC_DialogueMngr
 var _stage_mngr : EMC_StageMngr
+var regex := RegEx.new()
 
 const _icon_list : Dictionary = {
 	"happy" : preload("res://res/sprites/GUI/icons/icon_statusbar_happiness.png"),
@@ -24,6 +25,9 @@ const _icon_list : Dictionary = {
 var _pitches : Dictionary = {
 	"avatar": 1.0, "friedel": 0.6, "gerhard": 0.5, "julia": 1.3, "mert": 0.9,
 }
+
+func _init() -> void:
+	regex.compile("\\[.*?\\]")
 
 func setup(p_dialogue_mngr : EMC_DialogueMngr, p_stage_mngr : EMC_StageMngr) -> void:
 	_dialogue_mngr = p_dialogue_mngr
@@ -105,8 +109,8 @@ func start(dialogue : Dictionary) -> void:
 		dialogue_box.clear()
 		dialogue_box.append_text(pair[0].get_basename().to_pascal_case() + ":")
 		dialogue_box.newline()
-		talk_effect.set_char_count(pair[1].length())
-		if pair[0].get_basename() == "avatar":
+		talk_effect.set_char_count(regex.sub(pair[1], "", true).length())
+		if pair[0].get_basename() == "avatar" or pair[0] == "Erzähler":
 			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
 		else:
 			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : _stage_mngr.get_NPC(pair[0].get_basename())._dialogue_pitch})

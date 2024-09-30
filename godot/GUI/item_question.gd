@@ -16,14 +16,23 @@ func setup(p_inventory : EMC_Inventory, p_avatar : EMC_Avatar) -> void:
 	_inventory = p_inventory
 	_avatar = p_avatar
 
-func open(p_item : EMC_Item, question_text : String = "Möchstest du %s jetzt essen oder für später aufheben?", answer_text : String = "Essen") -> void:
+func open(p_item : EMC_Item, text : Dictionary) -> void: 
+	
+	var question_text : String = text.get("question", "Möchstest du %s jetzt essen oder für später aufheben?")
+	var answere_text : String = text.get("answere", "Essen")
+	var decline_text : String = text.get("decline", "Aufheben")
+	
 	self.show()
 	opened.emit()
 	
 	_item = p_item
 	
 	question.set_text(question_text % _item.name)
-	confirm_btn.set_text(answer_text)
+	if not answere_text.is_empty():
+		confirm_btn.set_text(answere_text)
+		confirm_btn.show()
+	else:
+		confirm_btn.hide()
 	
 	slot.set_item(_item)
 	

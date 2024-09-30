@@ -9,10 +9,6 @@ func _init(p_action_ID: int, p_action_name : String, p_constraints : Array[Dicti
 	p_description[0], p_prompt, p_coin[0], p_progresses_day_period[0], p_sound[0])
 
 
-func get_stage_name() -> String:
-	return _stage_name
-
-
 static func from_dict(data : Dictionary) -> EMC_Action:
 	var _action_id : int = data.get("id")
 	var _action_name : String = data.get("name", "")

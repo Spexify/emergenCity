@@ -9,7 +9,7 @@
 		"consequences": {
 			"trigger_dialogue": {
 				"stage_name": "home",
-				"actor": "agathe"
+				"actor_name": "agathe"
 			},
 		},
 		"silent": true,

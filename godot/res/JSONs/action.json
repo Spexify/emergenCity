@@ -138,7 +138,13 @@
 			"has_water_reservoir_water": "",
 		},
 		"consequences": {
-			"add_item_question": [1, "Möchtest du %s jetzt drinken?", "Drinken"],
+			"add_item_question": [
+				1,
+				{
+					"question": "Möchtest du %s jetzt drinken?",
+					"answere": "Drinken"
+				}
+			],
 			"remove_from_reservoir": 25
 		},
 		"type_gui": "DefaultActionGUI",
@@ -350,7 +356,16 @@
 		"type": "action",
 		"name": "HELP_AGATHE_JAM",
 		"constraints": {},
-		"consequences": {"add_items_by_name": "JAM"},
+		"consequences": {
+			"add_item_question": [
+				"JAM",
+				{
+					"question": "Diese %s ist bestimmt was ganz besonderes.\nDu erkennst das sie mit Liebe gemacht wurde.",
+					"answere": "",
+					"decline": "Einpacken"
+				}
+			] 
+		},
 		"type_gui": "",
 		"description": "Mit Agathe geplaudert.",
 		"e_coin": 30

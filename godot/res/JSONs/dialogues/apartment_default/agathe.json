@@ -49,22 +49,17 @@
 		],
 	},
 	"#handeln": {
-	"weight": 1,
-	"cooldown": 0,
-	"cooldown_count": 0,
-	"consequences": {
-		"request_gui": {
-			"name": "Trade",
-			"args": "Agathe",
+		"weight": 1,
+		"cooldown": 0,
+		"cooldown_count": 0,
+		"consequences": {
+			"overlay_gui": {
+				"name": "Trade",
+				"args": "Agathe",
+			},
 		},
-		"queue_gui": {
-			"name" :"DialogueGui",
-			"args": [{
-				"stage_name": "apartment_default",
-				"actor_name": "agathe"}]
-		}
-	},
-	"actors": [""],
-	"prompt": "Ja, ich will handeln.",
-  }
+		"actors": [""],
+		"prompt": "Ja, ich will handeln.",
+		"options": { "start": "" }
+	}
 }
