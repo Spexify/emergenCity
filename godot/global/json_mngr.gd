@@ -15,7 +15,7 @@ const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
 ## OPT-EVENTS
 const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events.json"
 ## NPCS
-const NPS_Source := "res://res/JSONs/npcs.json"
+const NPC_SOURCE := "res://res/JSONs/npcs/"
 ## BOOKS
 const BOOKS_SOURCE := "res://res/JSONs/books.json"
 ## ACTIONS
@@ -87,10 +87,12 @@ func load_recipes() -> Array[EMC_Recipe]:
 	
 	return results
 
-#########################################JSON ITEMS#################################################
 
+#########################################JSON ITEMS#################################################
+#region ITEM
 var _is_items_loaded : bool = false
 var _name_to_id : Dictionary = {}
+var _id_to_name : Dictionary = {}
 var _id_to_item_vars : Dictionary = {}
 
 #...................................Conversion Functions............................................
@@ -124,8 +126,12 @@ func item_id_to_name(ID : int) -> String:
 	if not _is_items_loaded:
 		printerr("Items are not yet loaded.")
 		return "DUMMY"
-		
-	return _name_to_id.find_key(ID)
+	
+	if not _id_to_name.has(ID):
+		printerr("Item with ID " + str(ID) + " cannot be found")
+		return "DUMMY"
+	
+	return _id_to_name[ID]
 	
 func get_all_ids() -> Array[int]:
 	var result : Array[int]
@@ -158,6 +164,9 @@ func load_item_translator() -> void:
 		printerr("Invalid format of Item-Translator-JSON (" + ITEM_TRANSLATE_SOURCE + "). Make sure it is in form of a Dictonarie.")
 		
 	_name_to_id = data
+	
+	for i in len(data.values()):
+		_id_to_name[data.values()[i] as int] = data.keys()[i]
 
 
 func load_items() -> void:
@@ -230,9 +239,9 @@ func load_items() -> void:
 		item_index += 1
 	
 	_is_items_loaded = true
-
+#endregion
 ######################################JSON POPUP-EVENTS#############################################
-
+#region POPUP
 var _pop_up_actions : Array[EMC_PopUpAction]
 var _pop_up_name_to_id : Dictionary
 var _is_pop_ups_loaded : bool = false
@@ -306,9 +315,9 @@ func load_pop_up_actions() -> void:
 		pop_up_id += 1
 	
 	_is_pop_ups_loaded = true
-
-
+#endregion
 ######################################JSON OPT EVENTS#############################################
+#region OP-EVENT
 var _opt_events : Array[EMC_OptionalEventMngr.Event]
 #var _pop_up_name_to_id : Dictionary
 var _is_opt_events_loaded : bool = false
@@ -399,9 +408,9 @@ func get_possible_opt_events(p_action_constraint : EMC_ActionConstraints) -> Arr
 	## active opt. event (otherhwise the events would collide!)
 	
 	return filtered
-
+#endregion
 ########################################JSON ACTION#################################################
-
+#region ACTION
 var _actions : Dictionary
 var _dict_actions : Dictionary
 var _is_action_loaded : bool = false
@@ -519,10 +528,9 @@ func load_actions() -> void:
 	
 		act_index += 1
 	_is_action_loaded = true
-
-
+#endregion
 ##########################################DOOR BELL#################################################
-
+#region DOORBELL
 func load_door_bell() -> Dictionary:
 	if not FileAccess.file_exists(DOORBELL_SOURCE):
 		printerr("Could not load doorbell from source: " + DOORBELL_SOURCE)
@@ -542,56 +550,64 @@ func load_door_bell() -> Dictionary:
 		printerr("Invalid format of DoorBell-JSON (" + DOORBELL_SOURCE + "). Make sure it is in form of a Dictonary.")
 		
 	return data as Dictionary
-
+#endregion
 ##########################################JSON NPCS#################################################
-
+#region NPC
 const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
 
 func load_NPC() -> Array[EMC_NPC]:
 	assert(_is_items_loaded, "NPS-JSON: Items must be loaded before NPCs")
-	
-	if not FileAccess.file_exists(NPS_Source):
-		printerr("Could not load PopUps from source: " + NPS_Source)
-		return []
-
-	var recipe_source : FileAccess = FileAccess.open(NPS_Source, FileAccess.READ)
-	var json : JSON = JSON.new()
-	
-	var json_string : String = recipe_source.get_as_text()
-	var parse_result : Error = json.parse(json_string)
-	if not parse_result == OK:
-		printerr("PopUp-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-		return []
-	
-	var data : Variant = json.get_data()
-	if not typeof(data) == TYPE_ARRAY:
-		printerr("Invalid format of NPC-JSON (" + NPS_Source + "). Make sure it is in form of an Array of Dictonaries.")
 		
 	var result : Array[EMC_NPC]
 	
-	var i : int = 0 
-	for dict_data : Dictionary in data:
-		var p_name : String = dict_data.get("name", "ERROR") 
-		assert(p_name != "ERROR", "NPC-JSON: NPC in position: " + str(i) + " has no name or an invalide name(such as 'ERROR').")
-		var t_pitch : float = dict_data.get("pitch", 0.0)
-		assert(t_pitch != 0.0, "NPC-JSON: NPC in position: " + str(i) + " has no pitch or an invalide pitch(such as 0.0).")
+	for file : String in DirAccess.get_files_at(NPC_SOURCE):
+		var source := NPC_SOURCE + "/" + file
+
+		var data : Dictionary = load_file_check_type(source, "Dialogue", TYPE_DICTIONARY)
 		
-		var npc := _NPC_SCN.instantiate()
-		npc.setup(p_name)
-		npc._dialogue_pitch = t_pitch
+		assert(data.has_all([ "stage", "pitch", "positions", "initial_items", "item_value", "desires", "actions" ]),
+		"NPC-JSON: Missing Parameters in npc: '" + file +"'")
 		
-		var p_trades : Variant = dict_data.get("trade", false)
-		if typeof(p_trades) != TYPE_BOOL:
-			assert(typeof(p_trades) == TYPE_DICTIONARY, "NPC-JSON: NPC in position: " + str(i) + " has invalide trades format.")
-			var trade : EMC_TradeMngr.TradeBid = EMC_TradeMngr.deserialize_tradebid(p_trades)
-			npc.set_trade_bid(trade)
+		for stage_name : String in data["positions"].keys():
+			data["positions"][stage_name] = dict_to_vector(data["positions"][stage_name], TYPE_VECTOR2I)
 		
+		var npc : EMC_NPC = _NPC_SCN.instantiate()
+		
+		var raw_desires : Array[Dictionary]
+		raw_desires.assign(data["desires"])
+		data["desires"] = {}
+		for desire_dict : Dictionary in raw_desires:
+			
+			var new_desire : EMC_NPC.NPC_Desire
+			
+			match desire_dict["type"]:
+				"Desire":
+					new_desire = EMC_NPC.NPC_Desire.new()
+				"Accumulator":
+					new_desire = EMC_NPC.NPC_Accumulator_Desire.new(desire_dict["increase"])
+				"Inventory":
+					new_desire = EMC_NPC.NPC_Inventory_Desire.new(desire_dict["item_score"] as Dictionary, desire_dict["max_reinforce"] as int, npc,
+					desire_dict.get("base_value", 0) as int, desire_dict.get("accel", 1.0) as float)
+			
+			data["desires"][desire_dict["name"]] = new_desire
+		
+		var raw_actions : Array[Dictionary]
+		raw_actions.assign(data["actions"])
+		data["actions"] = [] as Array[EMC_NPC.NPC_Action]
+		for action_dict : Dictionary in raw_actions:
+			assert(action_dict.has_all(["desire_name", "consequnces", "routine"]), "NPC-JSON: action of npc: '" + file + "' is missing paramters!")
+			assert(data["desires"].has(action_dict["desire_name"]), "NPC-JSON: action of npc: '" + file + "' is missing desire: '" + action_dict["desire_name"] + "'")
+			
+			data["actions"].append(EMC_NPC.NPC_Action.new(data["desires"][action_dict["desire_name"]],
+					action_dict["consequnces"], action_dict["routine"], action_dict.get("name", "none")))
+		
+		npc.setup(file.get_basename(), data)
 		result.append(npc)
-		i += 1
+		
 	return result
-
+#endregion
 ########################################JSON RECIPES################################################
-
+#region RECIPES
 func load_books() -> Array[EMC_BookGUI.Book]:
 	if not FileAccess.file_exists(BOOKS_SOURCE):
 		printerr("Could not load books from source: " + BOOKS_SOURCE)
@@ -607,7 +623,7 @@ func load_books() -> Array[EMC_BookGUI.Book]:
 	
 	var data : Variant = json.get_data()
 	if not typeof(data) == TYPE_ARRAY:
-		printerr("Invalid format of NPC-JSON (" + NPS_Source + "). Make sure it is in form of an Array of Dictonaries.")
+		printerr("Invalid format of NPC-JSON (" + BOOKS_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
 		
 	var result : Array[EMC_BookGUI.Book]
 	
@@ -627,7 +643,7 @@ func load_books() -> Array[EMC_BookGUI.Book]:
 		result.append(EMC_BookGUI.Book.new(ID, title, content))
 		i += 1
 	return result
-
+#endregion
 ######################################JSON SCENARIOS################################################
 
 var scenarios : Dictionary
@@ -640,7 +656,7 @@ func load_scenarios() -> void:
 	scenarios = data
 
 ######################################JSON DIALOGUES################################################
-
+#region DIALOGUES
 var _dialogues : Dictionary
 
 func get_dialogues() -> Dictionary:
@@ -653,18 +669,18 @@ func load_dialogues() -> void:
 	
 	var result : Dictionary
 	
-	print("JSON: Loading Dialogues.")
+	#print("JSON: Loading Dialogues.")
 	var dir := DirAccess.open(DIALOGUES_SOURCE)
 	if dir:
 		dir.list_dir_begin()
 		var dir_name : String = dir.get_next()
 		while dir_name != "":
 			if dir.current_is_dir():
-				print("Found stage: " + dir_name)
+				#print("Found stage: " + dir_name)
 				stage_names.append(dir_name)
 				
 				for file : String in DirAccess.get_files_at(dir.get_current_dir() + "/" + dir_name):
-					print("Found actor: " + file.get_basename())
+					#print("Found actor: " + file.get_basename())
 					actor_names.append(file.get_basename())
 					
 					var source := dir.get_current_dir() + "/" + dir_name + "/" + file
@@ -678,9 +694,9 @@ func load_dialogues() -> void:
 		print("An error occurred when trying to load the Dialogues.")
 		
 	_dialogues = result
-
+#endregion
 ######################################JSON UPGRADES#################################################
-
+#region UPGRADES
 var _is_upgrades_loaded : bool = false
 var _id_to_upgrade_data : Dictionary = {}
 
@@ -719,7 +735,7 @@ func load_upgardes() -> void:
 		_id_to_upgrade_data[id]["atlas_coord"] = dict_to_vector(dict["atlas_coord"], TYPE_VECTOR2I)
 			
 	_is_upgrades_loaded = true
-
+#endregion
 #########################################JSON UTILS#################################################
 
 func load_file_check_type(source : String, descr : String, type : Variant.Type) -> Variant:

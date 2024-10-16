@@ -1,0 +1,89 @@
+{
+	"initial_items": {
+		"WATER": 3,
+		"WATER_DIRTY": 2,
+		"VEGETABLES": 3
+	},
+	"stage": "Gardenhouse",
+	"pitch": 0.5,
+	"positions": {
+		"Park": { "x": 128, "y": 704 },
+		"Gardenhouse": { "x": 448, "y": 380 },
+		"Market": { "x": 180, "y": 300 }
+	},
+	"item_value": {
+		"WATER": 1,
+		"WATER_DIRTY": 2,
+		"VEGETABLES": 2
+	},
+	"desires": [
+		{
+			"name": "happiness",
+			"type": "Accumulator",
+			"increase": 4
+		},
+		{
+			"name": "work",
+			"type": "Inventory",
+			"item_score": { "WATER": 1, "WATER_DIRTY":  2 },
+			"max_reinforce": 10,
+			"base_value": 0,
+			"accel": 0.5,
+		},
+		{
+			"name": "needs_water",
+			"type": "Inventory",
+			"item_score": { "WATER": -1, "WATER_DIRTY":  -2 },
+			"max_reinforce": 10,
+			"base_value": 1,
+			"accel": 0.5,
+		},
+		{
+			"name": "idel",
+			"type": "Desire",
+		},
+	],
+	"actions": [
+		{
+			"name": "friedel",
+			"desire_name": "happiness",
+			"consequnces": {
+				"change_stage": {
+					"stage_name": "Park"
+				}
+			},
+			"routine": { "morning": 10, "noon": 2, "evening": 4 }
+		},
+		{
+			"name": "work",
+			"desire_name": "work",
+			"consequnces": {
+				"exchange_items": {
+					"in": { "WATER": 1, "WATER_DIRTY": 2 },
+					"out": { "VEGETABLES": 2 },
+					"max_count": 3,
+				},
+				"change_stage": { "stage_name": "Gardenhouse" }
+			},
+			"routine": { "morning": 1, "noon": 10, "evening": 5 }
+		},
+		{
+			"name": "water",
+			"desire_name": "needs_water",
+			"consequnces": {
+				"get_item": {
+					"name": "WATER",
+					"count": 2,
+				},
+				"change_stage": { "stage_name": "Market" }
+			},
+			"routine": { "morning": 1, "noon": 10, "evening": 5 }
+		},
+		{
+			"name": "idel",
+			"desire_name": "idel",
+			"consequnces": { "change_stage": { "stage_name": "Gardenhouse" } },
+			"routine": { "morning": 3, "noon": 3, "evening": 3 }
+		}
+	]
+}

@@ -210,6 +210,12 @@ func trigger_dialogue(p_dialogue : Dictionary) -> void:
 	#_lower_gui_node.get_tree().paused = true
 	
 	_gui_mngr.request_gui("DialogueGui", [p_dialogue])
+	
+func set_dialogue_state(args : Dictionary) -> void:
+	if args.has_all(["state_name", "value"]):
+		OverworldStatesMngr.set_dialogue_state(args["state_name"], args["value"])
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'set_dialogue_state'")
 
 ############################################ Stage #################################################
 

@@ -17,6 +17,7 @@ var _dialogue_manager : EMC_DialogueMngr
 # None
 
 @onready var _gui_mngr : EMC_GUIMngr = $GUI
+@onready var stage_mngr :EMC_StageMngr = $StageMngr
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _gui_mngr)
@@ -49,9 +50,9 @@ func _ready() -> void:
 	$GUI/CL/VBC/MiddleSection/IconInformation.hide()
 	
 	#### Stage
-	$StageMngr.setup($Avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
+	stage_mngr.setup(_avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
 	
-	$StageMngr.dialogue_initiated.connect(_dialogue_manager._on_dialogue_initiated)
+	stage_mngr.dialogue_initiated.connect(_dialogue_manager._on_dialogue_initiated)
 	
 	#### DayMngr
 	_day_mngr.setup($Avatar, _stage_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \

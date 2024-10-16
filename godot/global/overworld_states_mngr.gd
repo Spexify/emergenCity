@@ -67,11 +67,21 @@ var _run_length : int
 
 var _crisis_description : Dictionary
 
+var _dialogue_states : Dictionary
+
 func _ready() -> void:
 	add_to_group("Save", true)
 
 func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
 	_upgrades = p_upgrades
+
+func set_dialogue_state(state_name : String, value : Variant) -> void:
+	_dialogue_states[state_name] = value
+	
+func is_dialogue_state(state_nane : String, value : Variant) -> bool:
+	if _dialogue_states.has(state_nane):
+		return typeof(_dialogue_states[state_nane]) == typeof(value) and _dialogue_states[state_nane] == value
+	return false
 
 func set_crisis_difficulty(p_run_length : int = 3, p_difficulty_crisis : Difficulty = Difficulty.EASY) -> void:
 	_difficulty_crisis = p_difficulty_crisis

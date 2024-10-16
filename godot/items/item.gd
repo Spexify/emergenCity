@@ -78,7 +78,7 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 	_descr = data.get("descr", "Error: Someone tempered with the JsonMngr.")
 	_sound_effect = data.get("sound", _sound_effect)
 	var tmp_comps : Array = data.get("comps", [])
-	_comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
+	_comps.assign(tmp_comps.map(func (comp_data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(comp_data)))
 
 
 ##Getter for _ID
@@ -110,7 +110,7 @@ func get_comp(p_classname: Variant) -> EMC_ItemComponent:
 	return null
 
 func get_all_comps_of(p_classname: Variant) -> Array[EMC_ItemComponent]:
-	var result : Array[EMC_ItemComponent]
+	var result : Array[EMC_ItemComponent] = []
 	for comp : EMC_ItemComponent in _comps:
 		if is_instance_of(comp, p_classname):
 			result.append(comp)

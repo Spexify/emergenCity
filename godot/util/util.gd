@@ -69,3 +69,14 @@ static func pick_weighted_random(list : Array[Variant], weights : Array[float], 
 				break
 			random -= weights[index]
 	return result
+	
+static func pick_weighted_random_const(list : Array[Variant], weights : Array[float]) -> Variant:
+	assert(1 <= list.size(), "Count cannot be greater than list size")
+	assert(list.size() == weights.size(), "The size of list and weights must be equal")
+	var sum_of_weight : float = weights.reduce(func(a : float, b : float) -> float: return a + b)
+	var random : float = _rng.randf_range(0.0, sum_of_weight)
+	for index in range(list.size()):
+		if random < weights[index]:
+			return list[index]
+		random -= weights[index]
+	return

@@ -153,13 +153,28 @@ func spoil_all_items() -> void:
 				item.add_comp(EMC_IC_Unpalatable.new(1))
 
 
+func get_all_items_as_name() -> Array[String]:
+	var items: Array[String] = []
+	
+	for item in _slots:
+		if item != null:
+			items.push_back(JsonMngr.item_id_to_name(item.get_ID()))
+	return items
+	
+func get_all_items_as_id() -> Array[int]:
+	var items: Array[int] = []
+	
+	for item in _slots:
+		if item != null:
+			items.push_back(item.get_ID())
+	return items
+
 ## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
-func get_all_items_as_ID() -> Array[EMC_Item.IDs]:
-	var items : Array[EMC_Item.IDs] = []
+func get_all_item_slots_as_id() -> Array[int]:
+	var items : Array[int] = []
 	for item in _slots:
 		items.push_back(item.get_ID() if item != null else EMC_Item.IDs.DUMMY)
 	return items
-
 
 ## Return all items as Array of [EMC_Item]s for an ID
 ## CodeReview TODO: Add to_get_cnt parameter, with to_get_cnt = -1 => all items
@@ -196,9 +211,12 @@ func use_item(p_ID: EMC_Item.IDs) -> bool:
 ## Variable food_or_drink hat 2 Werte : 0 falls es nach EMC_IC_Food Items gefiltert wird, 
 ## 										1, falls es nach EMC_IC_Drink gefiltert wird
 
-func filter_items() -> void:
-	pass
-
+func filter_items(f : Callable) -> Array[EMC_Item]:
+	return _slots.filter(f)
+	
+static func filter_ids(list : Array) -> Callable:
+	return func (item : EMC_Item) -> bool:
+		return item != null and item.get_ID() in list
 
 ########################################## PRIVATE METHODS #########################################
 static func sort_helper(a : EMC_Item, b : EMC_Item) -> bool:

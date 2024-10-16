@@ -18,7 +18,7 @@ func _ready() -> void:
 	if _inventory == null:
 		_inventory = EMC_Inventory.new()
 	
-	for item: EMC_Item.IDs in _inventory.get_all_items_as_ID():
+	for item: EMC_Item.IDs in _inventory.get_all_item_slots_as_id():
 		_add_item_by_id(item, false)
 		if item != EMC_Item.IDs.DUMMY:
 			_inventory_occupied += 1

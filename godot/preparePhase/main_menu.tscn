@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
 [ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="7_57rlv"]
-[ext_resource type="Texture2D" uid="uid://cy6hveptr5ap3" path="res://res/sprites/title_logo.png" id="7_77ygh"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="7_jnxxn"]
+[ext_resource type="Texture2D" uid="uid://0x0of8l8rjgt" path="res://res/sprites/Krisopolis_Logo_V04B.png" id="7_u3ywc"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -109,9 +109,11 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="Title" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(576, 244)
 layout_mode = 2
-texture = ExtResource("7_77ygh")
+texture = ExtResource("7_u3ywc")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Slogan" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
 clip_contents = false

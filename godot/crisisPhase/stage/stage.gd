@@ -182,25 +182,19 @@ func _load_npcs(override_spawn : Dictionary = {}) -> void:
 		for NPC_name: String in override_spawn:
 			_spawn_NPC(NPC_name, override_spawn[NPC_name])
 	
-	#if name == "home":
-		#return
-	#
-	#var list_of_npcs : Array[EMC_NPC]
-	#list_of_npcs.assign(_npcs.get_children())
-	#
-	#for i in range(2):
-		#var weights : Array[float]
-		#weights.assign(list_of_npcs.map(func(npc : EMC_NPC) -> float: return npc.get_spawn_weight()))
-		#
-		#var npc : EMC_NPC = EMC_Util.pick_weighted_random(list_of_npcs, weights, 1)[0]
-		#_spawn_NPC(npc.name, npc.get_spawn_position())
-		#
-		#list_of_npcs.erase(npc)
+	if name == "home":
+		return
+	
+	for npc : EMC_NPC in _npcs.get_children():
+		if npc.get_stage_name() == _stage.name:
+			npc.activate()
+		else:
+			npc.deactivate()
 		
 func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 	var NPC : EMC_NPC = _npcs.get_node(p_NPC_name)
 	if NPC == null:
-		printerr("StageMngr.update_NPCs(): Unknown NPC Name: " + p_NPC_name)
+		printerr("Stage._spawn_NPC(): Unknown NPC Name: " + p_NPC_name)
 		return
 	
 	var tile_position : Vector2 = _global_to_map(p_spawn_pos)

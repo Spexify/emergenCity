@@ -13,7 +13,13 @@ extends EMC_GUI
 var _PANEL_ITEM_SCN := preload("res://items/panel_item.tscn")
 
 var _inventory : EMC_Inventory
+
+var _npc: EMC_NPC
 var _npc_inventory : EMC_Inventory
+var _npc_initial_score : int
+
+var _to_trader_items : Array[int]
+var _to_avatar_items : Array[int]
 
 func setup(p_inventory : EMC_Inventory) -> void:
 	_inventory = p_inventory
@@ -22,7 +28,9 @@ func _ready() -> void:
 	portrait_left.set_texture(load("res://res/sprites/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
 
 func open(npc : EMC_NPC) -> void:
+	_npc = npc
 	_npc_inventory = npc.get_inventory()
+	_npc_initial_score = npc.calculate_inventory_score()
 	
 	show()
 	
@@ -64,6 +72,8 @@ func _load_inventory(is_avatar : bool) -> void:
 		(gird.get_child(i) as EMC_InventorySlot).set_item(new_item)
 
 func _on_inventory_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
+	$Portaits/HBC/Text/Margin/TextRight/RichTextLabel.set_text("")
+	
 	if ((is_avatar and 
 			(to_trader.get_child_count() >= 5
 			or to_trader.get_child_count() > _npc_inventory.get_free_slot_cnt())) or
@@ -75,6 +85,7 @@ func _on_inventory_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
 	var gird : GridContainer = inventory_grid if is_avatar else trader_grid
 	var _current_inventory : EMC_Inventory = _inventory if is_avatar else _npc_inventory
 	var to_current : HBoxContainer = to_trader if is_avatar else to_avatar
+	var to_current_items : Array[int] = _to_trader_items if is_avatar else _to_avatar_items
 	
 	for slot : EMC_InventorySlot in gird.get_children():
 		if slot.get_item() == sender:
@@ -83,6 +94,7 @@ func _on_inventory_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
 			(panel_item.get_child(0) as EMC_InventorySlot).set_item(sender)
 			to_current.add_child(panel_item)
 			to_current.move_child(panel_item, 0 if is_avatar else -1)
+			to_current_items.push_back(sender.get_ID())
 			
 			_current_inventory.remove_item(sender.get_ID())
 			
@@ -92,7 +104,9 @@ func _on_inventory_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
 			_load_inventory(is_avatar)
 
 func _on_to_trader_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
+	$Portaits/HBC/Text/Margin/TextRight/RichTextLabel.set_text("")
 	var to_current : HBoxContainer = to_trader if is_avatar else to_avatar
+	var to_current_items : Array[int] = _to_trader_items if is_avatar else _to_avatar_items
 	var _current_inventory : EMC_Inventory = _inventory if is_avatar else _npc_inventory
 	
 	for child : PanelContainer in to_current.get_children():
@@ -103,49 +117,52 @@ func _on_to_trader_item_clicked(sender : EMC_Item, is_avatar : bool) -> void:
 			_current_inventory.add_new_item(sender.get_ID())
 			
 			to_current.remove_child(child)
+			to_current_items.erase(sender.get_ID())
 			child.queue_free()
 			
 			_load_inventory(is_avatar)
 
 func _on_cancel_pressed() -> void:
+	$Portaits/HBC/Text/Margin/TextRight/RichTextLabel.set_text("")
 	for child : PanelContainer in to_trader.get_children().slice(0,-1):
-		var slot : EMC_InventorySlot = child.get_child(0)
-		var item := slot.get_item()
-		if item != null:
-			_inventory.add_new_item(item.get_ID())
-		
 		to_trader.remove_child(child)
 		child.queue_free()
+		
+	for item_id in _to_trader_items:
+		_inventory.add_new_item(item_id)
+	_to_trader_items = []
 	
 	for child : PanelContainer in to_avatar.get_children().slice(1):
-		var slot : EMC_InventorySlot = child.get_child(0)
-		var item := slot.get_item()
-		if item != null:
-			_npc_inventory.add_new_item(item.get_ID())
-		
 		to_avatar.remove_child(child)
 		child.queue_free()
+		
+	for item_id in _to_avatar_items:
+		_npc_inventory.add_new_item(item_id)
+	_to_avatar_items = []
 	
 	close()
 
 func _on_deal_pressed() -> void:
-	for child : PanelContainer in to_avatar.get_children().slice(1):
-		var slot : EMC_InventorySlot = child.get_child(0)
-		var item := slot.get_item()
-		if item != null:
-			_inventory.add_new_item(item.get_ID())
+	var new_score: int = _npc.calculate_trade_score(_to_trader_items) - _npc.calculate_trade_score(_to_avatar_items)
+	if new_score >= 0:
+		_npc_initial_score += new_score
+		for child : PanelContainer in to_avatar.get_children().slice(1):
+			to_avatar.remove_child(child)
+			child.queue_free()
+			
+		for item_id in _to_avatar_items:
+			_inventory.add_new_item(item_id)
+		_to_avatar_items = []
 		
-		to_avatar.remove_child(child)
-		child.queue_free()
-	
-	for child : PanelContainer in to_trader.get_children().slice(0, -1):
-		var slot : EMC_InventorySlot = child.get_child(0)
-		var item := slot.get_item()
-		if item != null:
-			_npc_inventory.add_new_item(item.get_ID())
+		for child : PanelContainer in to_trader.get_children().slice(0,-1):
+			to_trader.remove_child(child)
+			child.queue_free()
+			
+		for item_id in _to_trader_items:
+			_npc_inventory.add_new_item(item_id)
+		_to_trader_items = []
 		
-		to_trader.remove_child(child)
-		child.queue_free()
-	
-	_load_inventory(true)
-	_load_inventory(false)
+		_load_inventory(true)
+		_load_inventory(false)
+	else:
+		$Portaits/HBC/Text/Margin/TextRight/RichTextLabel.set_text("I dont like this Trade")

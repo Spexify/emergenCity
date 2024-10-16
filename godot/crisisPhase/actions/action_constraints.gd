@@ -18,6 +18,11 @@ func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory, p_stage_mngr : E
 	_stage_mngr= p_stage_mngr
 
 
+func is_dialogue_state(args : Dictionary) -> String:
+	if args.has_all(["state_name", "value"]) and OverworldStatesMngr.is_dialogue_state(args["state_name"], args["value"]):
+		return NO_REJECTION
+	return "State not Set"
+
 func constraint_cooking(_dummy_param: Variant) -> String:
 	#TODO: Electricity?
 	##TODO: In the future: Else Gaskocher?

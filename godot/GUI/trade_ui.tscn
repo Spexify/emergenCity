@@ -61,18 +61,24 @@ theme_override_constants/margin_left = 2
 theme_override_constants/margin_right = 2
 
 [node name="TextLeft" type="PanelContainer" parent="Portaits/HBC/Text/Margin"]
+visible = false
 custom_minimum_size = Vector2(295, 120)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = &"WhitePanelContainer"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Portaits/HBC/Text/Margin/TextLeft"]
+layout_mode = 2
+
 [node name="TextRight" type="PanelContainer" parent="Portaits/HBC/Text/Margin"]
-visible = false
 custom_minimum_size = Vector2(295, 120)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_type_variation = &"WhitePanelContainer"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Portaits/HBC/Text/Margin/TextRight"]
+layout_mode = 2
 
 [node name="PortraitRight" type="TextureRect" parent="Portaits/HBC"]
 custom_minimum_size = Vector2(120, 120)
