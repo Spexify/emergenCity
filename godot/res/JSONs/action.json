@@ -168,7 +168,6 @@
 		"description": "Nach Hause gekehrt.",
 		"stage_name": "home",
 		"e_coins": 25,
-		"silent": true
 	},
 	{
 		"id": 2001,

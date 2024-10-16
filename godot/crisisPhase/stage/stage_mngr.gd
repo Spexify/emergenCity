@@ -61,17 +61,21 @@ p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 
 	_setup_NPCs()
 	
-	change_stage(_initial_stage_name, _initial_npc)
+	change_stage(_initial_stage_name, _initial_npc, false)
 	
 	OverworldStatesMngr.change.connect(state_changed)
 
 ## Change the stage to the one specified via [param p_stage_name]
-func change_stage(p_stage_name: String, override_spawn : Dictionary = {}) -> void:
+func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait : bool = true) -> void:
+	#print("Want to change stage to: " + p_stage_name)
+	if wait:
+		await _day_mngr.period_increased
 	if _curr_stage != null:
 		_curr_stage.unload_stage()
 	_curr_stage = $StageOffset.get_node(p_stage_name)
 	_curr_stage.load_stage(override_spawn)
 	_curr_stage.show_electricity()
+	#print("Change stage to: " + p_stage_name)
 
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
@@ -83,7 +87,7 @@ func get_curr_stage() -> TileMap:
 func get_all_active_npcs() -> Dictionary:
 	var data : Dictionary = {}
 	
-	for npc : EMC_NPC in $NPCs.get_children():
+	for npc : EMC_NPC in NPCs.get_children():
 		if npc.visible:
 			data[npc.name] = {"x" : npc.position.x, "y" : npc.position.y}
 			
@@ -104,19 +108,22 @@ func load_state(data : Dictionary) -> void:
 		_initial_npc[npc] = Vector2(_initial_npc[npc].get("x", 0), _initial_npc[npc].get("y", 0))
 
 func get_NPC(p_NPC_name: String) -> EMC_NPC:
-	return $NPCs.get_node(p_NPC_name.to_pascal_case())
+	return NPCs.get_node(p_NPC_name.to_pascal_case())
 
 ## Remove all NPCs that are currently spawned
 func deactivate_NPCs() -> void:
-	for NPC: EMC_NPC in $NPCs.get_children():
+	for NPC: EMC_NPC in NPCs.get_children():
 		NPC.deactivate()
 
+func let_npcs_act() -> void:
+	for npc : EMC_NPC in NPCs.get_children():
+		npc.act()
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		_curr_stage = $StageOffset.get_children()[0]
-		_curr_stage.setup("home", $NPCs, _opt_event_mngr)
+		_curr_stage.setup("home", NPCs, _opt_event_mngr)
 		_curr_stage.load_stage()
 
 func state_changed(state : String) -> void:
@@ -127,19 +134,19 @@ func _setup_stages() -> void:
 	var stage_names := ["market", "townhall", "park", "gardenhouse", "rowhouse",
 	"mansion", "penthouse", "apartment_default", "apartment_mert", "apartment_camper"]
 	
-	$StageOffset.get_children()[0].setup("home", $NPCs, _opt_event_mngr)
+	$StageOffset.get_children()[0].setup("home", NPCs, _opt_event_mngr)
 	
 	for stage_name : String in stage_names:
 		var stage := _STAGE_SCN.instantiate()
 		$StageOffset.add_child(stage)
-		stage.setup(stage_name, $NPCs, _opt_event_mngr)
+		stage.setup(stage_name, NPCs, _opt_event_mngr)
 	
 ### Add NPCs to the scene
 func _setup_NPCs() -> void:
 	for npc : EMC_NPC in JsonMngr.load_NPC():
 		npc.hide()
 		npc.clicked.connect(_on_NPC_clicked)
-		$NPCs.add_child(npc)
+		NPCs.add_child(npc)
 
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target

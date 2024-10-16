@@ -34,16 +34,20 @@ func _on_confirm_btn_pressed() -> void:
 	#First close the GUI (order important, as the pause-mode otherwise isn't set back correctly)
 	close()
 	
-	var curr_SC_action: EMC_StageChangeAction = _action #downcast
+	var curr_SC_action: EMC_StageChangeAction = _action
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = curr_SC_action.play_sound()
 	if wait != null:
 		await wait.finished
 	
-	curr_SC_action.silent_executed.emit(curr_SC_action)
-	
-	if _last_SC_action != null:
+	if _last_SC_action == null:
+		curr_SC_action._progresses_day_period = false
+		curr_SC_action.silent_executed.emit(curr_SC_action)
+		curr_SC_action._progresses_day_period = true
+	else:
+		curr_SC_action.silent_executed.emit(curr_SC_action)
+
 		var tmp : Dictionary = _last_SC_action._consequences.duplicate(true)
 		_last_SC_action._consequences = {}
 		_last_SC_action.executed.emit(_last_SC_action)
@@ -51,7 +55,7 @@ func _on_confirm_btn_pressed() -> void:
 	
 	###The change to home should not be executed (at is was skipped initially and should not
 	###be protocolled in the SEOD)
-	if not curr_SC_action.progresses_day_period(): 
+	if curr_SC_action.get_consequences()["change_stage"]["stage_name"] == "home": 
 		_last_SC_action = null
 	else:
 		_last_SC_action = curr_SC_action

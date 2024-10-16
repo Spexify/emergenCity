@@ -16,7 +16,7 @@ func setup(p_inventory : EMC_Inventory, p_avatar : EMC_Avatar) -> void:
 	_inventory = p_inventory
 	_avatar = p_avatar
 
-func open(p_item : EMC_Item, text : Dictionary) -> void: 
+func open(p_item : EMC_Item, text : Dictionary = {}) -> void: 
 	
 	var question_text : String = text.get("question", "Möchstest du %s jetzt essen oder für später aufheben?")
 	var answere_text : String = text.get("answere", "Essen")

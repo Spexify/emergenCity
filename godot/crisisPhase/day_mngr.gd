@@ -119,12 +119,27 @@ func get_action_consequences() -> EMC_ActionConsequences:
 
 func _on_action_silent_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
+	
+	if !p_action.progresses_day_period():
+		var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), true])
+		
+		_stage_mngr.let_npcs_act()
+	
+		await Global.get_tree().create_timer(0.3).timeout
+		period_increased.emit(_period_cnt)
+		
+		#Events & Crises stuff
+		_opt_event_mngr.check_for_new_event(get_current_day_period())
 
+		#if get_current_day_period() == DayPeriod.MORNING:
+		_crisis_mngr.check_crisis_status(get_period_count())
+
+		# Popup last, because it can lead to another _advance_day_period() call!!!
+		_pu_event_mngr.check_for_new_event
 
 func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
 	_advance_day_period(p_action)
-
 
 ## !!! Important function !!!
 func _advance_day_period(p_action : EMC_Action) -> void:
@@ -139,31 +154,41 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 		DayPeriod.EVENING:
 			_current_day_cycle.evening_action = p_action
 			_history.append(_current_day_cycle)
-			_gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
-			await _gui_mngr.queue_gui("BackpackGUI", [true])
-			_avatar.update_vitals()
 		_: push_error("Current day period unassigned!")
-	
-	#Actually advance the time
-	self._period_cnt += 1
-	period_increased.emit(_period_cnt)
 	
 	if _gui_mngr.is_any_gui():
 		await _gui_mngr.all_guis_closed
 	
-	#Game over?
-	if _check_and_display_game_over(): return
+	#Actually advance the time
+	self._period_cnt += 1
 	
-	#play animation, do stuff and wait for it to finish
 	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period()])
 	_update_HUD()
+	
+	
+	await Global.get_tree().create_timer(0.3).timeout
+	# let npcs act
+	_stage_mngr.let_npcs_act()
+	period_increased.emit(_period_cnt)
+	
 	if get_current_day_period() == DayPeriod.MORNING:
-		_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME)
-		_stage_mngr.deactivate_NPCs()
-		_avatar.set_global_position(Vector2i(250, 650))
+		if _stage_mngr.get_curr_stage_name() != EMC_StageMngr.STAGENAME_HOME:
+			_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME, {}, false)
+			#_stage_mngr.deactivate_NPCs()
+			_avatar.set_global_position(Vector2i(250, 650))
+			
 		_inventory._on_day_mngr_day_ended(get_current_day())
+	
 	if not closed.is_null():
 		await closed
+	
+	if get_current_day_period() == DayPeriod.MORNING:
+		_gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
+		await _gui_mngr.queue_gui("BackpackGUI", [true])
+		_avatar.update_vitals()
+	
+	#Game over?
+	if _check_and_display_game_over(): return
 	
 	#Events & Crises stuff
 	_opt_event_mngr.check_for_new_event(get_current_day_period())

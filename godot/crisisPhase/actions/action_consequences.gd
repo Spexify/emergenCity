@@ -220,7 +220,9 @@ func set_dialogue_state(args : Dictionary) -> void:
 ############################################ Stage #################################################
 
 func change_stage(p_data : Dictionary) -> void:
-	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("npc_pos"))
+	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("npc_pos"), p_data.get("wait", true))
+	
+	# Avatar is moved to early should be handeled in stage or stage_mngr
 	_avatar.position = p_data.get("avatar_pos")
 
 ############################################ JSON ##################################################

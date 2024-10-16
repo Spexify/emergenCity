@@ -22,7 +22,7 @@ var _rad_offset: float
 
 
 ########################################## PUBLIC METHODS ##########################################
-func open(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
+func open(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod, p_no_change: bool = false) -> void:
 	days.text = "[center][color=white]" + "Tag" + " " + str(p_curr_day) + "[/color]"
 	#_rad_offset = (1.0 * PI) + ((EMC_DayMngr.DayPeriod.size() - p_new_day_period) * 0.5 * PI)
 	var period: EMC_DayMngr.DayPeriod
@@ -33,6 +33,11 @@ func open(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
 	else:
 		period = p_new_day_period - 1
 		distance_factor = 1
+	
+	if p_no_change:
+		period = p_new_day_period
+		distance_factor = 0
+	
 	icon_prev_period.position = _get_position_for_period(period)
 	icon_prev_period.frame = period
 	icon_prev_period.modulate = Color(icon_prev_period.modulate, 255)

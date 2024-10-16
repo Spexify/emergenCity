@@ -48,14 +48,14 @@ func _ready() -> void:
 	
 	$AnimationPlayer.play("idle")
 	
-	if name == "Gerhard":
-		for i in range(30):
-			act()
+	#if name == "Gerhard":
+		#for i in range(30):
+			#act()
 
 func get_stage_name() -> String:
 	return _stage
 
-var t : int = 0
+var t : int = 1
 
 func act() -> String:
 	var weights : Array[float]
