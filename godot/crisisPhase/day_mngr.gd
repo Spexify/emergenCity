@@ -62,6 +62,10 @@ p_pu_event_mngr: EMC_PopupEventMngr) -> void:
 	
 	_rng.randomize()
 	_update_HUD()
+	
+	# Called before once game starts
+	_crisis_mngr.check_crisis_status(0)
+	_stage_mngr.let_npcs_act()
 
 
 ## MRM TODO: This function should be renamed, as it is used for other interactions as well!

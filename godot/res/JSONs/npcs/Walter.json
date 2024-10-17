@@ -1,0 +1,15 @@
+{
+	"initial_items": {
+	},
+	"stage": "",
+	"pitch": 1.3,
+	"positions": {
+		"Park": { "x": 300, "y": 440 },
+	},
+	"item_value": {
+	},
+	"desires": [
+	],
+	"actions": [
+	]
+}

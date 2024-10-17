@@ -36,7 +36,7 @@ func setup(p_name: String, args : Dictionary) -> void:
 	else:
 		printerr("NPC Setup: Missing parameters!")
 	
-	position = _positions.get(_stage)
+	position = _positions.get(_stage, Vector2(0, 0))
 	
 	for item_name : String in _initial_inventory.keys():
 		for i : int in range(_initial_inventory[item_name] as int):
@@ -55,9 +55,12 @@ func _ready() -> void:
 func get_stage_name() -> String:
 	return _stage
 
-var t : int = 1
+var t : int = 0
 
 func act() -> String:
+	if _actions.is_empty():
+		return ""
+	
 	var weights : Array[float]
 	weights.assign(_actions.map(func (action : NPC_Action) -> int: return action.get_weight(TIME[t])))
 	var action_key : NPC_Action = EMC_Util.pick_weighted_random_const(_actions, weights)

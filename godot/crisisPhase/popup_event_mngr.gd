@@ -28,7 +28,6 @@ func _init(p_day_mngr: EMC_DayMngr, p_gui_mngr : EMC_GUIMngr) -> void:
 func set_constraints(p_constraints: EMC_ActionConstraints) -> void:
 	_executable_constraints = p_constraints
 
-
 func set_consequences(p_consqeuences: EMC_ActionConsequences) -> void:
 	_executable_consequences = p_consqeuences
 

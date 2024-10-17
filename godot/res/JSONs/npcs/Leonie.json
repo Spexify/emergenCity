@@ -1,0 +1,16 @@
+{
+	"initial_items": {
+	},
+	"stage": "Townhall",
+	"pitch": 0.95,
+	"positions": {
+		"Townhall": { "x": 430, "y": 300 },
+		"Market": { "x": 180, "y": 300 }
+	},
+	"item_value": {
+	},
+	"desires": [
+	],
+	"actions": [
+	]
+}

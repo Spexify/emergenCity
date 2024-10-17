@@ -46,7 +46,9 @@ func _on_confirm_btn_pressed() -> void:
 	#if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
 		#_action.add_consequence("add_health", -1)
 	#_action.add_consequence("add_hydration", 1)
-	_action.add_consequence("add_item_question", ["WATER", {
+	
+	var item : String = "WATER" if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.CLEAN else "WATER_DIRTY"
+	_action.add_consequence("add_item_question", [item, {
 					"question": "Du hast %s abgefüllt. Möchtest du es jetzt trinken?",
 					"answere": "Trinken"
 				}])

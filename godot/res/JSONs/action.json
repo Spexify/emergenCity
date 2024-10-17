@@ -139,7 +139,7 @@
 		},
 		"consequences": {
 			"add_item_question": [
-				1,
+				"WATER",
 				{
 					"question": "Möchtest du %s jetzt trinken?",
 					"answere": "Trinken"
@@ -181,7 +181,7 @@
 			"change_stage": {
 				"stage_name": "market",
 				"avatar_pos": {"x": 250, "y": 1000},
-				"npc_pos": {"Raphael": {"x": 192, "y": 224}, "Friedel": {"x": 64, "y": 704}}
+				"npc_pos": {}
 			}
 		},
 		"description": "Hat Marktplatz besucht.",
@@ -200,7 +200,7 @@
 			"change_stage": {
 				"stage_name": "townhall",
 				"avatar_pos": {"x": 450, "y": 480},
-				"npc_pos": {"Leonie": {"x": 430, "y": 300}}
+				"npc_pos": {}
 			}
 		},
 		"description": "Hat Rathaus besucht.",
@@ -252,7 +252,7 @@
 			"change_stage": {
 				"stage_name": "rowhouse",
 				"avatar_pos": {"x": 250, "y": 400},
-				"npc_pos": {"Julia": {"x": 450, "y": 550}}
+				"npc_pos": {}
 			}
 		},
 		"description": "Hat Julia besucht.",
@@ -269,8 +269,6 @@
 				"stage_name": "mansion",
 				"avatar_pos": {"x": 120, "y": 900},
 				"npc_pos": {
-					"Petro": {"x": 300, "y": 832},
-					"Irena": {"x": 460, "y": 260}
 				}
 			}
 		},
@@ -287,7 +285,7 @@
 			"change_stage": {
 				"stage_name": "penthouse",
 				"avatar_pos": {"x": 250, "y": 1000},
-				"npc_pos": {"Elias": {"x": 440, "y": 800}}
+				"npc_pos": {}
 			}
 		},
 		"description": "Hat Elias besucht.",
@@ -304,8 +302,6 @@
 				"stage_name": "apartment_mert",
 				"avatar_pos": {"x": 150, "y": 400},
 				"npc_pos": {
-					"Mert": {"x": 400, "y": 310},
-					"Momo": {"x": 480, "y": 760}
 				}
 			}
 		},
@@ -341,7 +337,7 @@
 			"change_stage": {
 				"stage_name": "apartment_default",
 				"avatar_pos": {"x": 250, "y": 900},
-				"npc_pos": {"Agathe": {"x": 490, "y": 400}}
+				"npc_pos": {}
 			}
 		},
 		"description": "Hat Agathe besucht.",

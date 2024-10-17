@@ -1,0 +1,16 @@
+{
+	"initial_items": {
+	},
+	"stage": "Mansion",
+	"pitch": 0.65,
+	"positions": {
+		"Mansion": { "x": 300, "y": 832 },
+		"Market": { "x": 180, "y": 300 }
+	},
+	"item_value": {
+	},
+	"desires": [
+	],
+	"actions": [
+	]
+}

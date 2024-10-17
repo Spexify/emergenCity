@@ -28,11 +28,7 @@ func _on_confirm_pressed() -> void:
 	if wait != null:
 		await wait.finished
 	
-	if _current_action.progresses_day_period():
-		_current_action.silent_executed.emit(_current_action) 
-	else:
-		_current_action.executed.emit(_current_action)
-
+	_current_action.silent_executed.emit(_current_action) 
 
 func _on_cancel_pressed() -> void:
 	var tmp_dict : Dictionary = _current_action._consequences	# I know not pretty but fast inplemented

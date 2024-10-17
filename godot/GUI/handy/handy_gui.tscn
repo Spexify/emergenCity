@@ -80,6 +80,7 @@ grow_vertical = 0
 size_flags_vertical = 8
 
 [node name="Menu" type="PanelContainer" parent="VBC"]
+visible = false
 custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -202,7 +203,6 @@ custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
 [node name="Warn" type="PanelContainer" parent="VBC"]
-visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -211,6 +211,7 @@ script = ExtResource("21_hd3ml")
 warn_texture = ExtResource("14_w3wqw")
 
 [node name="Notifications" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
@@ -267,7 +268,6 @@ theme_type_variation = &"WarnItemList"
 LIST_ITEM_SCN = ExtResource("14_iodyr")
 
 [node name="Description" type="Control" parent="VBC/Warn"]
-visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]
@@ -286,7 +286,9 @@ theme_override_constants/margin_top = 110
 theme_override_constants/margin_right = 14
 
 [node name="Text" type="RichTextLabel" parent="VBC/Warn/Description/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 700)
 layout_mode = 2
+size_flags_vertical = 0
 bbcode_enabled = true
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Description"]

@@ -1,0 +1,18 @@
+{
+	"initial_items": {
+	},
+	"stage": "Gardenhouse",
+	"pitch": 0.5,
+	"positions": {
+		"Park": { "x": 64, "y": 704 },
+		"Gardenhouse": { "x": 96, "y": 704 },
+		"Market": { "x": 160, "y": 320 }
+	},
+	"item_value": {
+
+	},
+	"desires": [
+	],
+	"actions": [
+	]
+}

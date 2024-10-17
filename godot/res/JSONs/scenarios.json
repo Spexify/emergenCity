@@ -29,7 +29,7 @@
 	},
 	"Hochwasser": {
 		"icon_id": 1,
-		"description": ""
+		"description": "[img]res://res/sprites/GUI/icons/icon_no_electricity.png[/img][font_size=30][b]Hochwasser[/b][/font_size]\n\nMomentan herscht Hochwasser. In den folgenden Tagen können verschiedene Infrastrukturen ausfallen. Dies beinhalten [b]Stromausfall[/b], [b]Überschwämungen[/b], [b]Wasserverschmutzung[/b] oder [b]Ausfall[/b] sowie [b]Ausfall des Mobilefunknetzes[/b]\n\n[img]res://res/sprites/GUI/icons/icon_pin_info.png[/img][b]Handlungsempfehlung:[/b]\nWenn sie keinen Gaskocher zur verfügung haben infromieren sie sich über [url=https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Kochen-ohne-Strom/kochen-ohne-strom_node.html]stromloses Kochen[/url]. Stellen sie sicher das sie genügend sauberes Wasser zurverfügung haben und füllen sie gegebenenfalls dreckiges Wasser ab um es später mit Chlortabletten zu reiniegen. Wenn sie ein Radio oder Kurbelradio haben infromieren sie sich regelmäßig über den Verlauf der Kriese.\n\nInformieren sie sich über [url=https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Kochen-ohne-Strom/kochen-ohne-strom_node.html]Handlungsempfehlung[/url] im Ernstfall."
 	},
 	"Tutorial": {
 		"icon_id": 0,

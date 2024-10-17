@@ -1,8 +1,6 @@
 extends Control
 class_name EMC_CrisisMngr
 
-## Improvement idea: Move curr EMC_CrisisScenario reference to here from OverworldStateMngr
-
 var _inventory : EMC_Inventory
 var _gui_mngr : EMC_GUIMngr
 var _max_day : int

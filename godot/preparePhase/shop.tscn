@@ -116,7 +116,7 @@ theme_type_variation = &"WhitePanelContainer"
 layout_mode = 2
 
 [node name="Name" type="RichTextLabel" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox"]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
