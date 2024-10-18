@@ -14,5 +14,3 @@ script = ExtResource("1_4o1fj")
 [node name="Slot_BG" type="Sprite2D" parent="."]
 texture = ExtResource("2_7djfd")
 centered = false
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]

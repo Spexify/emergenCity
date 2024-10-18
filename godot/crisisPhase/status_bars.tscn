@@ -142,6 +142,8 @@ size_flags_vertical = 4
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
+text = "
+"
 fit_content = true
 
 [node name="HydrationCont" type="HBoxContainer" parent="HBC/VBoxContainer"]
@@ -225,12 +227,15 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HealthLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HealthCont"]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
+text = "
+"
+fit_content = true
 
 [node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
 custom_minimum_size = Vector2(160, 30)
@@ -265,14 +270,23 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HappinessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinessCont"]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
+text = "
+"
+fit_content = true
+scroll_active = false
 
 [connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont/CaloriesLabel" to="." method="_on_nutrition_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont/MillilitersLabel" to="." method="_on_hydration_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont" to="." method="_on_health_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont/HealthLabel" to="." method="_on_health_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont" to="." method="_on_happiness_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont/HappinessLabel" to="." method="_on_happiness_cont_gui_input"]
