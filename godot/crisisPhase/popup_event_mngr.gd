@@ -33,6 +33,12 @@ func set_consequences(p_consqeuences: EMC_ActionConsequences) -> void:
 
 ## 
 func check_for_new_event() -> bool:
+	#var _action : EMC_PopUpAction = JsonMngr.name_to_pop_up_action("GERHARD_KNOCKS")
+	#_action.executed.connect(_day_mngr._on_action_executed)
+	#_action.silent_executed.connect(_day_mngr._on_action_silent_executed)
+	#_gui_mngr.queue_gui("PopUpGUI", [_action])
+	#return true
+	
 	_popup_event_countdown -= 1
 	if _popup_event_countdown == 0:
 		var _action : EMC_PopUpAction = JsonMngr.get_pop_up_action(_executable_constraints)

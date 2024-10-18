@@ -1,5 +1,10 @@
 {
 	"initial_items": {
+		"WATER": 3,
+		"POTATOES": 3,
+		"SOAP": 1,
+		"MEAT": 2,
+		"BREAD": 3
 	},
 	"stage": "Market",
 	"pitch": 0.7,
@@ -7,6 +12,12 @@
 		"Market": { "x": 224, "y": 254 }
 	},
 	"item_value": {
+		"WATER": 1,
+		"POTATOES": 2,
+		"VEGETABLES": 4,
+		"SOAP": 8,
+		"MEAT": 12,
+		"BREAD": 4
 	},
 	"desires": [
 	],

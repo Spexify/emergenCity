@@ -1,0 +1,74 @@
+{
+    "start": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_end": 0,
+      "actors": ["avatar", "petro.r"],
+      "text": [
+        "petro.r#Moin!",
+        "petro.r#Alles klar bei dir, kommst du gut durch die Krise?"
+      ],
+      "options": {
+        "#reden": {
+          "prompt": "Ja, wie läuft's bei dir?",
+          "options": { "#reden1": "", "#reden2": "" }
+        },
+        "#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+        "#nichts": {
+            "prompt": "Bis denne!",
+            "actors": ["avatar", "petro.r"],
+            "text": [
+               "petro.r#Tschö!"
+            ]
+        }
+      }
+    },
+    "#reden1": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "actors": ["avatar", "petro.r"],
+      "text": [
+        "petro.r#Meine Liebe für die Luftfahrt färbt schon auf Irena ab.",
+        "petro.r#Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben.",
+        "avatar#Haha. Naja, bis dann.",
+        "petro.r#Tschö, mit Ö."
+      ]
+    },
+    "#reden2": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "actors": ["avatar", "petro.r"],
+      "text": [
+        "petro.r#In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.",
+        "petro.r#Irre Idee, nicht?"
+      ],
+      "options": {
+        "spannend": {
+            "prompt": "Schon spannend.",
+            "actors": ["avatar", "petro.r"],
+            "text": [ "petro.r#Wusste ich doch, dass dich das auch begeistert!" ]
+        },
+        "nich": {
+            "prompt": "Klingt unrealistisch.",
+            "actors": ["avatar", "petro.r"],
+            "text": [ "petro.r#Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?" ]
+        }
+      }
+    },
+    "#handeln": {
+      "weight": 1,
+      "prompt": "Hast du was zu tauschen?",
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "consequences": {
+          "request_gui": {
+              "name": "Trade",
+              "args": "Petro"
+          }
+      },
+      "actors": [""]
+    }
+  }
+  

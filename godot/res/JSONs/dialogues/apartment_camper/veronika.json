@@ -1,0 +1,55 @@
+{
+    "start": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_end": 0,
+      "actors": ["avatar", "veronika.r"],
+      "text": [
+        "veronika.r#Veronika: Hi! Alles klar bei dir?"
+      ],
+      "options": {
+        "#reden": {
+          "prompt": "Wie läuft's?",
+          "options": { "#reden1": ""}
+        },
+        "#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+        "#nichts": {
+            "prompt": "Tschüss!",
+            "actors": ["avatar", "veronika.r"],
+            "text": [
+               "veronika.r#Ciao!"
+            ]
+        }
+      }
+    },
+    "#reden1": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "actors": ["avatar", "veronika.r", "kris.r"],
+      "text": [
+        "veronika.r#Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...",
+        "kris.r#Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!",
+        "veronika#Du verstehst aber unter 'Planen' auch nur 'Snacks einkaufen'.",
+        "kris.r#Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!",
+        "veronika#Aber auch nur, wenn du bis dahin welche übrig gelassen hast.",
+        "kris.r#...",
+        "veronika#...",
+        "kris.r#Ich kaufe noch ein paar mehr ein."
+      ]
+    },
+    "#handeln": {
+      "weight": 1,
+      "prompt": "Hast du was zu tauschen?",
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "consequences": {
+          "request_gui": {
+              "name": "Trade",
+              "args": "Veronika"
+          }
+      },
+      "actors": [""]
+    }
+  }
+  

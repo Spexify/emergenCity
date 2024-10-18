@@ -25,23 +25,23 @@
 		{
 			"name": "work",
 			"type": "Inventory",
-			"item_score": { "WATER": 1, "WATER_DIRTY":  2 },
+			"item_score": { "WATER": 1, "WATER_DIRTY": 2 },
 			"max_reinforce": 10,
 			"base_value": 0,
-			"accel": 0.5,
+			"accel": 0.5
 		},
 		{
 			"name": "needs_water",
 			"type": "Inventory",
-			"item_score": { "WATER": -1, "WATER_DIRTY":  -2 },
+			"item_score": { "WATER": -1, "WATER_DIRTY": -2 },
 			"max_reinforce": 10,
 			"base_value": 1,
-			"accel": 0.5,
+			"accel": 0.5
 		},
 		{
 			"name": "idel",
-			"type": "Desire",
-		},
+			"type": "Desire"
+		}
 	],
 	"actions": [
 		{
@@ -61,7 +61,7 @@
 				"exchange_items": {
 					"in": { "WATER": 1, "WATER_DIRTY": 2 },
 					"out": { "VEGETABLES": 2 },
-					"max_count": 3,
+					"max_count": 3
 				},
 				"change_stage": { "stage_name": "Gardenhouse" }
 			},
@@ -73,9 +73,9 @@
 			"consequnces": {
 				"get_item": {
 					"name": "WATER",
-					"count": 2,
+					"count": 2
 				},
-				"change_stage": { "stage_name": "Market" }
+				"change_stage": { "stage_name": "Gardenhouse" }
 			},
 			"routine": { "morning": 1, "noon": 10, "evening": 5 }
 		},

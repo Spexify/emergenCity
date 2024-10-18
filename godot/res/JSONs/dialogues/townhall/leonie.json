@@ -1,0 +1,9 @@
+{
+    "start": {
+        "actors": ["avatar", "leonie.r"],
+        "text": [
+            "leonie#Hi! Willkommen im Rathaus.",
+            "leonie#In den Büchern da drüben findest du hilfreiche Informationen."
+        ]
+    }
+}

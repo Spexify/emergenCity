@@ -1,0 +1,51 @@
+{
+    "start": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_end": 0,
+      "actors": ["avatar", "raphael.r"],
+      "text": [
+        "raphael.r#Guten Tag!",
+        "avatar#Guten Tag."
+      ],
+      "options": {
+        "#reden": {
+          "prompt": "Was macht die Arbeit?",
+          "options": { "#reden1": ""}
+        },
+        "#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+        "#nichts": {
+            "prompt": "Tschüss!",
+            "actors": ["avatar", "raphael.r"],
+            "text": [
+               "raphael.r#Bis dann!"
+            ]
+        }
+      }
+    },
+    "#reden1": {
+      "weight": 1,
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "actors": ["avatar", "raphael.r"],
+      "text": [
+        "raphael.r#Momentan handel ich ohne Geld. Wer weiß wie viel es morgen wert ist.",
+        "avatar#Nur [i]Ware[/i] ist Wahres?",
+        "raphael.r#Hahaha. So könnte man es ausdrücken."
+      ]
+    },
+    "#handeln": {
+      "weight": 1,
+      "prompt": "Was hast du so im Angebot?",
+      "cooldown": 0,
+      "cooldown_count": 0,
+      "consequences": {
+          "request_gui": {
+              "name": "Trade",
+              "args": "Raphael"
+          }
+      },
+      "actors": [""]
+    }
+  }
+  
