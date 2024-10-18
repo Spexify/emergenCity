@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode blend_mix,unshaded;
 
 uniform vec4 color : source_color = vec4(0.48, 0.69, 0.87, 1.0);
-uniform vec4 colorBG : source_color = vec4(1, 1, 1, 1);
+uniform vec4 colorBG : source_color = vec4(0, 0, 0, 0);
 uniform float amp = 0.015;
 uniform float amp_c = 0.02;
 uniform float freq = 8.0;

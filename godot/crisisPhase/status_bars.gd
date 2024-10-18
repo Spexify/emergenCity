@@ -8,6 +8,7 @@ extends Control
 @onready var calories_label : RichTextLabel = $HBC/VBoxContainer/NutritionCont/CaloriesLabel
 @onready var nutrition_icon : Sprite2D = $HBC/VBoxContainer/NutritionCont/ContainerNutrition/NutritionIcon
 @onready var nutrition_quad : MeshInstance2D = $HBC/VBoxContainer/NutritionCont/NutritionQuad
+@onready var nutrition_quad_2 : MeshInstance2D = $HBC/VBoxContainer/NutritionCont/NutritionQuad2
 
 @onready var milliliters_label : RichTextLabel = $HBC/VBoxContainer/HydrationCont/MillilitersLabel
 @onready var hydration_icon : Sprite2D = $HBC/VBoxContainer/HydrationCont/ContainerHydration/HydrationIcon
@@ -38,17 +39,19 @@ func _on_avatar_nutrition_updated(p_new_value: int) -> void:
 		return
 	
 	var percentage: float = float(p_new_value)/float(EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION)
+	var percentage_2: float = float(p_new_value-750)/float(EMC_Avatar.MAX_VITALS_NUTRITION*EMC_Avatar.UNIT_FACTOR_NUTRITION)
 	calories_label.set_text("[color=white][center]" + str(p_new_value) +" kcal[/center][/color]")
 
 	var tween :Tween = Global.get_tree().create_tween()
-	tween.tween_method(_set_nutrition_shader, _percentage_nutrition, percentage, 1.0)
+	tween.tween_method(_set_shader.bind(nutrition_quad), _percentage_nutrition, percentage, 1.0)
+	tween.tween_method(_set_shader.bind(nutrition_quad_2), _percentage_nutrition, percentage_2, 1.0)
 	_percentage_nutrition = percentage
 
 	#Play VFX
 	_smokeVFX_nutrition.set_emitting(true)
 
-func _set_nutrition_shader(value : float) -> void:
-	nutrition_quad.get_material().set_shader_parameter("progress", value);
+func _set_shader(value : float, quad : MeshInstance2D) -> void:
+	quad.get_material().set_shader_parameter("progress", value);
 
 var _percentage_hydration : float = 0.0
 func _on_avatar_hydration_updated(p_new_value: int) -> void:

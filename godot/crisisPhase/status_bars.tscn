@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://tpxumytrh032"]
+[gd_scene load_steps=22 format=3 uid="uid://tpxumytrh032"]
 
 [ext_resource type="Script" path="res://crisisPhase/status_bars.gd" id="1_m4dni"]
 [ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_gr84e"]
@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3vx5e"]
 shader = ExtResource("4_wac0w")
-shader_parameter/color = Color(0.564706, 0.784314, 0.52549, 1)
+shader_parameter/color = Color(0.686275, 0.780392, 0.670588, 1)
 shader_parameter/colorBG = Color(0.529412, 0.529412, 0.529412, 1)
 shader_parameter/amp = 0.015
 shader_parameter/amp_c = 0.02
@@ -25,6 +25,17 @@ shader_parameter/progress = 0.5
 [sub_resource type="QuadMesh" id="QuadMesh_n830g"]
 size = Vector2(124, 30)
 center_offset = Vector3(50, 15, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wniyw"]
+shader = ExtResource("4_wac0w")
+shader_parameter/color = Color(0.564706, 0.784314, 0.52549, 1)
+shader_parameter/colorBG = Color(0, 0, 0, 0)
+shader_parameter/amp = 0.015
+shader_parameter/amp_c = 0.02
+shader_parameter/freq = 8.0
+shader_parameter/freq_c = 5.0
+shader_parameter/shift = 3.0
+shader_parameter/progress = 0.393
 
 [sub_resource type="Gradient" id="Gradient_hix8y"]
 offsets = PackedFloat32Array(0.405594, 1)
@@ -108,6 +119,11 @@ mouse_default_cursor_shape = 2
 
 [node name="NutritionQuad" type="MeshInstance2D" parent="HBC/VBoxContainer/NutritionCont"]
 material = SubResource("ShaderMaterial_3vx5e")
+position = Vector2(48, 0)
+mesh = SubResource("QuadMesh_n830g")
+
+[node name="NutritionQuad2" type="MeshInstance2D" parent="HBC/VBoxContainer/NutritionCont"]
+material = SubResource("ShaderMaterial_wniyw")
 position = Vector2(48, 0)
 mesh = SubResource("QuadMesh_n830g")
 
