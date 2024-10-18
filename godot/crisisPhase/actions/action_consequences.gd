@@ -142,7 +142,7 @@ func use_radio(_dummy: int = NO_PARAM) -> void:
 		_opt_event_mngr.set_event_as_known(chosen_event.name)
 	else:
 		#30-70 zwischen unnützem Text und Szenario Name
-		if _rng.randi_range(0, 2) <= 1:
+		if _rng.randi_range(0, 4) <= 3:
 			var notification := OverworldStatesMngr.get_notification()
 			if not notification.is_empty():
 				radio_msg = notification.pick_random()

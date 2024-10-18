@@ -136,7 +136,9 @@ func remove_scenario_entry(scenario_name : String, index : String) -> void:
 ## Returns notification for radio
 func get_notification() -> Array[String]:
 	var result : Array[String]
-	result.assign(_crisis_description.values().map(func(dict : Dictionary) -> String: return dict["notification"]))
+	for description : Dictionary in _crisis_description.values():
+		result.append(description["notification"])
+		result.append_array(description.values().slice(1).map(func (dict : Dictionary) -> String: return dict["desc"]))
 	return result
 
 func get_electricity_state() -> ElectricityState:

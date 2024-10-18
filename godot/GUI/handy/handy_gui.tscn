@@ -268,6 +268,7 @@ theme_type_variation = &"WarnItemList"
 LIST_ITEM_SCN = ExtResource("14_iodyr")
 
 [node name="Description" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]
@@ -312,6 +313,54 @@ bbcode_enabled = true
 text = "[color=white]Krisopolis[/color]"
 fit_content = true
 
+[node name="Offline" type="Control" parent="VBC/Warn"]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Warn/Offline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Offline/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Warn/Offline/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 202.73)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][img]res://res/sprites/GUI/icons/icon_offline.png[/img]
+ You are currently offline"
+fit_content = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Offline"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Offline/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Offline/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Krisopolis[/color]"
+fit_content = true
+
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 14
@@ -334,4 +383,5 @@ size_flags_vertical = 0
 texture_normal = ExtResource("5_n7g61")
 
 [connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
+[connection signal="meta_clicked" from="VBC/Warn/Offline/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
 [connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]

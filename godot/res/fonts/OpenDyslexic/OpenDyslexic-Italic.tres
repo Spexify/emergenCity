@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://d2pvbdmr3kip1"]
+
+[ext_resource type="FontFile" uid="uid://0kr22gdb7ixe" path="res://res/fonts/OpenDyslexic/OpenDyslexic-Italic.woff2" id="1_m7myk"]
+
+[resource]
+base_font = ExtResource("1_m7myk")
+spacing_glyph = -4
+spacing_space = -10
+spacing_top = -10
+spacing_bottom = -10

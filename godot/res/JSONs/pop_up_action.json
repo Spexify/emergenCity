@@ -25,7 +25,7 @@
 		"consequences": {
 			"trigger_dialogue": {
 				"stage_name": "home",
-				"actor_name": "julia"
+				"actor_name": "agathe"
 			},
 		},
 		"description": "Julia geholfen",
@@ -41,7 +41,7 @@
 		"consequences": {
 			"trigger_dialogue": {
 				"stage_name": "home",
-				"actor_name": "gerhard"
+				"actor_name": "agathe"
 			},
 		},
 		"description": "Gerhard geholfen",
@@ -57,7 +57,7 @@
 		"consequences": {
 			"trigger_dialogue" : {
 				"stage_name": "home",
-				"actor_name": "petro"
+				"actor_name": "agathe"
 			},
 		},
 		"description": "Mit Irena gespielt",
@@ -74,7 +74,7 @@
 		"consequences": {
 			"trigger_dialogue": {
 				"stage_name": "home",
-				"actor_name": "mert"
+				"actor_name": "agathe"
 			},
 		},
 		"description": "Mert geholfen",

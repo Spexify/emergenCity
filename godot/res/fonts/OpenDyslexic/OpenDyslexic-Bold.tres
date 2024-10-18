@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://u2lm5uw3m0mo"]
+
+[ext_resource type="FontFile" uid="uid://bfar2jaycr532" path="res://res/fonts/OpenDyslexic/OpenDyslexic-Bold.woff2" id="1_hy14c"]
+
+[resource]
+base_font = ExtResource("1_hy14c")
+spacing_glyph = -4
+spacing_space = -10
+spacing_top = -10
+spacing_bottom = -10

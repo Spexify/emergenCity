@@ -5,15 +5,23 @@ extends EMC_App
 @onready var notifications : Control = $Notifications
 @onready var description : Control = $Description
 @onready var text : RichTextLabel = $Description/Infos/MarginContainer/Text
-
+@onready var offline : Control = $Offline
 
 
 func _ready() -> void:
 	item_list.item_clicked.connect(_on_item_clicked)
 
 func start() -> void:
+	if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.MobileNetState.OFFLINE:
+		description.hide()
+		notifications.hide()
+		offline.show()
+		show()
+		return
+	
 	description.hide()
 	notifications.show()
+	offline.hide()
 	
 	item_list.clear()
 
@@ -59,6 +67,7 @@ func back() -> bool:
 	if description.visible:
 		description.hide()
 		notifications.show()
+		offline.hide()
 		return false
 	return true
 	

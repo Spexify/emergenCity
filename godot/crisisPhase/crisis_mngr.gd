@@ -34,30 +34,65 @@ var CRISIS : Array[Dictionary] = [
 		"name" : "0.Hochwasser.0",
 		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
 		"weight" : 1,
-		"notification" : "Aufgrund von Tage langem Regen ...",
+		"notification" : "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
 		"fcount" : [1, 1],
 		"following" : [{
 			"name" : "0.Hochwasser.1",
 			"weight" : 1,
-			"delay" : [0, 0],
+			"delay" : [2, 3],
 			"states" : ["WaterState.DIRTY"],
-			"desc" : "Das Wasser ist verschmutzt.",
-			"decay" : [4, 6],
-			"fcount" : [1, 2],
+			"desc" : "Aufgrund des Hochwassers its das Wasser verschmutzt.",
+			"decay" : [3, 6],
+			"fcount" : [0, 1],
 			"following": [{
 				"name" : "0.Hochwasser.2",
 				"weight" : 5,
-				"delay" : [0, 0],
+				"delay" : [0, 2],
 				"states" : ["ElectricityState.NONE"],
 				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
-				"decay" : [2, 3]
-			}, {
-				"name" : "0.Hochwasser.3",
-				"weight" : 2,
-				"delay" : [2, 4],
-				"states" : ["MobileNetState.OFFLINE"],
-				"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
-				"decay" : [2, 3]
+				"decay" : [0, 0],
+				"fcount" : [0, 1],
+				"following": [{
+					"name" : "0.Hochwasser.3",
+					"weight" : 2,
+					"delay" : [2, 4],
+					"states" : ["MobileNetState.OFFLINE"],
+					"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
+					"decay" : [2, 3]
+				}]
+			}]
+		}]
+	},
+	{
+		"name" : "1.Hochwasser.0",
+		"difficulty" : OverworldStatesMngr.Difficulty.MEDIUM,
+		"weight" : 5,
+		"notification" : "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
+		"fcount" : [1, 1],
+		"following" : [{
+			"name" : "1.Hochwasser.1",
+			"weight" : 1,
+			"delay" : [2, 3],
+			"states" : ["WaterState.DIRTY"],
+			"desc" : "Aufgrund des Hochwassers its das Wasser verschmutzt.",
+			"decay" : [3, 6],
+			"fcount" : [1, 1],
+			"following": [{
+				"name" : "1.Hochwasser.2",
+				"weight" : 5,
+				"delay" : [0, 2],
+				"states" : ["ElectricityState.NONE"],
+				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
+				"decay" : [0, 0],
+				"fcount" : [0, 1],
+				"following": [{
+					"name" : "1.Hochwasser.3",
+					"weight" : 2,
+					"delay" : [2, 4],
+					"states" : ["MobileNetState.OFFLINE"],
+					"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
+					"decay" : [2, 3]
+				}]
 			}]
 		}]
 	},
@@ -192,6 +227,9 @@ func _gen_next_crisis(scenario : Dictionary, start : int, stop : int, root : boo
 		for scene : Dictionary in Global.pick_weighted_random(scenario["following"].duplicate(), weights, _rng.randi_range(scenario["fcount"][0], scenario["fcount"][1])):
 			# recursivly generate following crisis
 			returns.append(_gen_next_crisis(scene, start, stop))
+		
+		if returns.is_empty():
+			return stop
 		
 		if root:
 			stop = returns.max()

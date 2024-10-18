@@ -1,10 +1,12 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://c38cnaco26erq"]
 
 [ext_resource type="Texture2D" uid="uid://bgfeu2ns15jno" path="res://res/sprites/GUI/backgrounds/menu_box_black.png" id="1_707kn"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="1_g0i34"]
 [ext_resource type="Texture2D" uid="uid://fa2a48tltso1" path="res://res/sprites/GUI/backgrounds/menu_box_blue.png" id="1_oyqmt"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://res/sprites/GUI/backgrounds/menu_box_white.png" id="2_68ab8"]
 [ext_resource type="Texture2D" uid="uid://cmvvm2rtuidr1" path="res://res/sprites/GUI/backgrounds/menu_box_dark_blue.png" id="3_7dt4j"]
+[ext_resource type="Texture2D" uid="uid://dh1onkg56mwnh" path="res://res/sprites/GUI/buttons/check_button.png" id="3_m8cu7"]
+[ext_resource type="Texture2D" uid="uid://y13b615jd7ju" path="res://res/sprites/GUI/buttons/uncheck_button.png" id="4_wdcg4"]
 [ext_resource type="FontFile" uid="uid://cu3rbjvip5k7x" path="res://res/fonts/CMU Typewriter/cmuntb.ttf" id="5_r6ap8"]
 [ext_resource type="FontFile" uid="uid://ny5k6h2h50l0" path="res://res/fonts/CMU Typewriter/cmuntx.ttf" id="6_r5yqb"]
 [ext_resource type="FontFile" uid="uid://4crhx75u2rbv" path="res://res/fonts/CMU Typewriter/cmunit.ttf" id="7_b0ptd"]
@@ -23,6 +25,18 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i01ti"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8aihy"]
 texture = ExtResource("3_7dt4j")
@@ -80,6 +94,9 @@ BlackPanelContainer/base_type = &"PanelContainer"
 BlackPanelContainer/styles/panel = SubResource("StyleBoxTexture_elb5e")
 BluePanelContainer/base_type = &"PanelContainer"
 BluePanelContainer/styles/panel = SubResource("StyleBoxTexture_4jyva")
+CheckButton/icons/checked = ExtResource("3_m8cu7")
+CheckButton/icons/unchecked = ExtResource("4_wdcg4")
+CheckButton/styles/normal = SubResource("StyleBoxFlat_i01ti")
 DarkBluePanelContainer/base_type = &"PanelContainer"
 DarkBluePanelContainer/styles/panel = SubResource("StyleBoxTexture_8aihy")
 HeaderLarge/base_type = &"RichTextLabel"
