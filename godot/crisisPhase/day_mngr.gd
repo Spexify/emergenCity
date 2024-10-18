@@ -148,7 +148,7 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 func _callback() -> void:
 	if get_current_day_period() == DayPeriod.MORNING:
 		await _gui_mngr.request_gui("SummaryEndOfDayGUI", [_current_day_cycle])
-		_gui_mngr.request_gui("BackpackGUI", [true])
+		await _gui_mngr.request_gui("BackpackGUI", [true])
 		_avatar.update_vitals()
 
 ## !!! Important function !!!
