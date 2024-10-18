@@ -145,6 +145,12 @@ func _on_action_executed(p_action : EMC_Action) -> void:
 	_execute_consequences(p_action)
 	_advance_day_period(p_action)
 
+func _callback() -> void:
+	if get_current_day_period() == DayPeriod.MORNING:
+		await _gui_mngr.request_gui("SummaryEndOfDayGUI", [_current_day_cycle])
+		_gui_mngr.request_gui("BackpackGUI", [true])
+		_avatar.update_vitals()
+
 ## !!! Important function !!!
 func _advance_day_period(p_action : EMC_Action) -> void:
 	if !p_action.progresses_day_period(): return
@@ -166,7 +172,7 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	#Actually advance the time
 	self._period_cnt += 1
 	
-	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period()])
+	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
 	_update_HUD()
 	
 	
@@ -185,11 +191,6 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	
 	if not closed.is_null():
 		await closed
-	
-	if get_current_day_period() == DayPeriod.MORNING:
-		_gui_mngr.queue_gui("SummaryEndOfDayGUI", [_current_day_cycle])
-		await _gui_mngr.queue_gui("BackpackGUI", [true])
-		_avatar.update_vitals()
 	
 	#Game over?
 	if _check_and_display_game_over(): return
