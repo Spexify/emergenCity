@@ -197,6 +197,9 @@ func _advance_day_period(p_action : EMC_Action) -> void:
 	#Events & Crises stuff
 	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
+	if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+		_inventory.spoil_some_items()
+	
 	#if get_current_day_period() == DayPeriod.MORNING:
 	_crisis_mngr.check_crisis_status(get_period_count())
 	

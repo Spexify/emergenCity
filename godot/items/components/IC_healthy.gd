@@ -2,7 +2,7 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Healthy
 ## For unenjoyable or enjoyable food or drink items
 
-const UNIT: String = "Gesundheit"
+const UNIT: String = "% ♡"
 var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################

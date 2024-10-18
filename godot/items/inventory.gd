@@ -143,14 +143,14 @@ func get_all_items() -> Array[EMC_Item]:
 	return items
 
 
-## Spoil all items
-func spoil_all_items() -> void:
+## Spoil some items
+func spoil_some_items() -> void:
 	for slot_idx in _slot_cnt:
 		var item := _slots[slot_idx]
-		if item != null:
+		if item != null and randi_range(0, 2) <= 0:
 			if item.get_comp(EMC_IC_Shelflife) != null:
 				item.remove_comp(EMC_IC_Shelflife)
-				item.add_comp(EMC_IC_Unpalatable.new(1))
+				item.add_comp(EMC_IC_Unpalatable.new(2))
 
 
 func get_all_items_as_name() -> Array[String]:

@@ -95,7 +95,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 bbcode_enabled = true
-text = "[center][color=white]Hauptmenu[/color][/center]"
+text = "[center][color=white]Hauptmenü[/color][/center]"
 
 [node name="Margin" type="MarginContainer" parent="VBC/Menu/VBC"]
 layout_mode = 2
@@ -180,7 +180,6 @@ icon = ExtResource("3_fdip5")
 title = "[center]Warn-App"
 
 [node name="Info" type="PanelContainer" parent="VBC"]
-visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -201,8 +200,10 @@ text = "[center][color=white]Info-Center[/color][/center]"
 [node name="ItemList" parent="VBC/Info/VBC" instance=ExtResource("12_vrakr")]
 custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
+separation = -20
 
 [node name="Warn" type="PanelContainer" parent="VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -211,7 +212,6 @@ script = ExtResource("21_hd3ml")
 warn_texture = ExtResource("14_w3wqw")
 
 [node name="Notifications" type="Control" parent="VBC/Warn"]
-visible = false
 layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
@@ -314,6 +314,7 @@ text = "[color=white]Krisopolis[/color]"
 fit_content = true
 
 [node name="Offline" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Offline"]

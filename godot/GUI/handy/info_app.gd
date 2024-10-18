@@ -21,7 +21,16 @@ func start() -> void:
 	
 	x = OverworldStatesMngr.get_food_contamination_state() * 64
 	y = OverworldStatesMngr.name_to_state["FoodContaminationState"][1] * 64
-	item_list.add_item(["Der Strom ist " + OverworldStatesMngr.get_food_contamination_state_descr(), EMC_Util.Icon_Patcher.cut_out(warn_texture, Rect2(x, y, 64, 64))])	
+	var text : String = ""
+	match OverworldStatesMngr.get_food_contamination_state():
+		OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+			text = "Einige Lebensmittel sind\nKontaminiert."
+		OverworldStatesMngr.FoodContaminationState.NONE:
+			if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
+				text = "Lebensmittel haben\nreduzierte Haltbarkeit."
+			else:
+				text = "Lebensmittel sind genießbar"
+	item_list.add_item([text, EMC_Util.Icon_Patcher.cut_out(warn_texture, Rect2(x, y, 64, 64))])	
 
 	x = OverworldStatesMngr.get_mobile_net_state() * 64
 	y = OverworldStatesMngr.name_to_state["MobileNetState"][1] * 64

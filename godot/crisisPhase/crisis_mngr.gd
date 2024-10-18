@@ -31,6 +31,21 @@ var CRISIS : Array[Dictionary] = [
 		}]
 	},
 	{
+		"name" : "0.Flut.0",
+		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
+		"weight" : 1,
+		"notification" : "Test",
+		"fcount" : [1, 1],
+		"following" : [{
+			"name" : "0.Flut.1",
+			"weight" : 1,
+			"delay" : [0, 0],
+			"states" : ["ElectricityState.NONE"],
+			"desc" : "",
+			"decay" : [1, 1]
+		}]
+	},
+	{
 		"name" : "0.Hochwasser.0",
 		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
 		"weight" : 1,
@@ -64,36 +79,25 @@ var CRISIS : Array[Dictionary] = [
 		}]
 	},
 	{
-		"name" : "1.Hochwasser.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.MEDIUM,
-		"weight" : 5,
-		"notification" : "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
+		"name" : "0.Chemie.0",
+		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
+		"weight" : 1,
+		"notification" : "In der Nähe von Krisopolis kam es zu einem Chemie Unfall.",
 		"fcount" : [1, 1],
 		"following" : [{
-			"name" : "1.Hochwasser.1",
-			"weight" : 1,
+			"name" : "0.Chemie.1",
+			"weight" : 3,
 			"delay" : [2, 3],
 			"states" : ["WaterState.DIRTY"],
-			"desc" : "Aufgrund des Hochwassers its das Wasser verschmutzt.",
+			"desc" : "Durch den Chemie Unfall sind unbekannte Chemikalien in das Trinkwasser gelangt. Vermeiden sie dies zu trinken.",
 			"decay" : [3, 6],
-			"fcount" : [1, 1],
-			"following": [{
-				"name" : "1.Hochwasser.2",
-				"weight" : 5,
-				"delay" : [0, 2],
-				"states" : ["ElectricityState.NONE"],
-				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
-				"decay" : [0, 0],
-				"fcount" : [0, 1],
-				"following": [{
-					"name" : "1.Hochwasser.3",
-					"weight" : 2,
-					"delay" : [2, 4],
-					"states" : ["MobileNetState.OFFLINE"],
-					"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
-					"decay" : [2, 3]
-				}]
-			}]
+		},{
+			"name" : "0.Chemie.2",
+			"weight" : 1,
+			"delay" : [2, 3],
+			"states" : ["FoodContaminationState.FOOD_SPOILED"],
+			"desc" : "Der Chemie Unfall nahe Krisopolis könnte zur eine Verschmutzung der Lebsemittel geführt habe. Bitte überprüfen sie ihre Lebensmittel.",
+			"decay" : [2, 3],
 		}]
 	},
 ]
@@ -126,7 +130,7 @@ func check_crisis_status(p_period_count : int) -> void:
 				var tutorial_crisis : Array[Dictionary] = [CRISIS[0]]
 				_generate_crisis(tutorial_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.EASY:
-				if _days_since_last_crisis >= _rng.randi_range(0, 3):
+				if _days_since_last_crisis >= _rng.randi_range(1, 3):
 					var easy_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] == OverworldStatesMngr.Difficulty.EASY)
 					_generate_crisis(easy_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.MEDIUM:
@@ -164,9 +168,9 @@ func check_crisis_status(p_period_count : int) -> void:
 				for state : Variant in _next_crisis[index]["states"]:
 					OverworldStatesMngr.add_any_state_by_name(state)
 					
-					if (state is OverworldStatesMngr.FoodContaminationState 
-					and (state as  OverworldStatesMngr.FoodContaminationState) == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED):
-						_inventory.spoil_all_items()
+					if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+						_inventory.spoil_some_items()
+						
 			## description
 			var crisis_name : String = _next_crisis[index]["name"].get_basename()
 			var desc_nr : String = _next_crisis[index]["name"].get_extension()
