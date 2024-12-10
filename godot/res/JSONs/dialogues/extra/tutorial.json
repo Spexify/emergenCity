@@ -4,7 +4,7 @@
 		"text": [
 			"avatar#Ah, so ein schöner Morgen! Huch, wieso geht mein Licht nicht an?",
 			"avatar#Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom ist wohl weg.",
-			"avatar#Oh, da ist jemand an der Tür.",
+			"avatar#Oh, da ist jemand an der Tür."
 		],
 		"options" : {
 			"next": {
@@ -12,7 +12,7 @@
 				"text": [
 					"julia.r#Guten Morgen Nachbar! Hast du auch keinen Strom?",
 					"avatar#Sieht ganz so aus.",
-					"julia.r#Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?",
+					"julia.r#Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?"
 				],
 				"options": { "#ja": "", "#naja": "" }
 			}
@@ -31,8 +31,8 @@
 		"prompt": "naja",
 		"actors": ["avatar", "julia.r"],
 		"text": [
-			"avatar#Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungs-buch im Regal.",
-			"julia.r#Wenn du hilfe brauchst komm einfach bei mir vorbei."
+			"avatar#Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungsbuch im Regal.",
+			"julia.r#Wenn du Hilfe brauchst komm einfach bei mir vorbei."
 		],
 		"options": { "#end": "" }
 	},
@@ -42,7 +42,7 @@
 				"name": "IconInformation",
 				"args": []
 			},
-			"set_tutorial": true,
+			"set_tutorial": true
 		}
 	}
 }

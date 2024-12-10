@@ -29,7 +29,7 @@ func start() -> void:
 			if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
 				text = "Lebensmittel haben\nreduzierte Haltbarkeit."
 			else:
-				text = "Lebensmittel sind genießbar"
+				text = "Lebensmittel sind genießbar."
 	item_list.add_item([text, EMC_Util.Icon_Patcher.cut_out(warn_texture, Rect2(x, y, 64, 64))])	
 
 	x = OverworldStatesMngr.get_mobile_net_state() * 64

@@ -4,7 +4,7 @@
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
-			"avatar_is_home": "",
+			"avatar_is_home": ""
 		},
 		"consequences": {
 			"trigger_dialogue": {
@@ -13,71 +13,73 @@
 			},
 		},
 		"description": "Mit Agathe geplaudert",
-		"e_coin": 0,
-	},
-		{
-		"name": "JULIA_KNOCKS",
-		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
-		"constraints": {
-			"constraint_no_isolation": "",
-			"avatar_is_home": "",
-		},
-		"consequences": {
-			"trigger_dialogue": {
-				"stage_name": "home",
-				"actor_name": "julia"
-			},
-		},
-		"description": "Julia geholfen",
-		"e_coin": 0,
+		"e_coin": 0
 	},
 	{
 		"name": "GERHARD_KNOCKS",
 		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
 		"constraints": {
 			"constraint_no_isolation": "",
-			"avatar_is_home": "",
+			"avatar_is_home": ""
 		},
 		"consequences": {
 			"trigger_dialogue": {
 				"stage_name": "home",
 				"actor_name": "gerhard"
-			},
+			}
 		},
 		"description": "Gerhard geholfen",
 		"e_coin": 0,
-	},
-	{
-		"name": "PETRO_KNOCKS",
-		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
-		"constraints": {
-			"constraint_no_isolation": "",
-			"avatar_is_home": "",
-		},
-		"consequences": {
-			"trigger_dialogue" : {
-				"stage_name": "home",
-				"actor_name": "pertro"
+		"KOMMETAR": [
+			{
+				"name": "PETRO_KNOCKS",
+				"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+				"constraints": {
+					"constraint_no_isolation": "",
+					"avatar_is_home": ""
+				},
+				"consequences": {
+					"trigger_dialogue" : {
+						"stage_name": "home",
+						"actor_name": "pertro"
+					},
+				},
+				"description": "Mit Irena gespielt",
+				"e_coin": 0
 			},
-		},
-		"description": "Mit Irena gespielt",
-		"e_coin": 0,
-	},
-	{
-		"name": "MERT_KNOCKS",
-		"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
-		"constraints": {
-			"constraint_no_isolation": "",
-			"constraint_no_clean_water_available": "",
-			"avatar_is_home": "",
-		},
-		"consequences": {
-			"trigger_dialogue": {
-				"stage_name": "home",
-				"actor_name": "mert"
+			{
+				"name": "MERT_KNOCKS",
+				"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+				"constraints": {
+					"constraint_no_isolation": "",
+					"constraint_no_clean_water_available": "",
+					"avatar_is_home": ""
+				},
+				"consequences": {
+					"trigger_dialogue": {
+						"stage_name": "home",
+						"actor_name": "mert"
+					}
+				},
+				"description": "Mert geholfen",
+				"e_coin": 0
 			},
-		},
-		"description": "Mert geholfen",
-		"e_coin": 0,
+			{
+				"name": "JULIA_KNOCKS",
+				"pop_up_text": "Es hat an der Tür geklopft. Soll ich nachschauen, wer da ist?",
+				"constraints": {
+					"constraint_no_isolation": "",
+					"avatar_is_home": ""
+				},
+				"consequences": {
+					"trigger_dialogue": {
+						"stage_name": "home",
+						"actor_name": "julia"
+					}
+				},
+				"description": "Julia geholfen",
+				"e_coin": 0
+			}
+		]
 	}
 ]

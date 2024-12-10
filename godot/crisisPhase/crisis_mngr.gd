@@ -30,21 +30,21 @@ var CRISIS : Array[Dictionary] = [
 			"decay" : [4, 6],
 		}]
 	},
-	{
-		"name" : "0.Flut.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
-		"weight" : 1,
-		"notification" : "Test",
-		"fcount" : [1, 1],
-		"following" : [{
-			"name" : "0.Flut.1",
-			"weight" : 1,
-			"delay" : [0, 0],
-			"states" : ["ElectricityState.NONE"],
-			"desc" : "",
-			"decay" : [1, 1]
-		}]
-	},
+	#{
+		#"name" : "0.Flut.0",
+		#"difficulty" : OverworldStatesMngr.Difficulty.EASY,
+		#"weight" : 1,
+		#"notification" : "Krisopolis wird von Wassermengen geflutet.",
+		#"fcount" : [1, 1],
+		#"following" : [{
+			#"name" : "0.Flut.1",
+			#"weight" : 1,
+			#"delay" : [0, 0],
+			#"states" : ["ElectricityState.NONE"],
+			#"desc" : "",
+			#"decay" : [1, 1]
+		#}]
+	#},
 	{
 		"name" : "0.Hochwasser.0",
 		"difficulty" : OverworldStatesMngr.Difficulty.EASY,

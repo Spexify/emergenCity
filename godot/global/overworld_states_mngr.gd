@@ -150,8 +150,8 @@ func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 
 func get_electricity_state_descr() -> String:
 	match _electricity_state:
-		ElectricityState.NONE: return "Ausgefallen!"
-		ElectricityState.UNLIMITED: return "Vorhanden."
+		ElectricityState.NONE: return "ausgefallen!"
+		ElectricityState.UNLIMITED: return "vorhanden."
 	return ""
 
 
@@ -163,9 +163,9 @@ func set_water_state(new_water_state: WaterState) -> void:
 
 func get_water_state_descr() -> String:
 	match _water_state:
-		WaterState.NONE: return "Ausgefallen!"
-		WaterState.DIRTY: return "Verdreckt."
-		WaterState.CLEAN: return "Vorhanden."
+		WaterState.NONE: return "ausgefallen!"
+		WaterState.DIRTY: return "verdreckt."
+		WaterState.CLEAN: return "vorhanden."
 	return ""
 
 
@@ -177,8 +177,8 @@ func set_isolation_state(new_isolation_state: IsolationState) -> void:
 
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
-		IsolationState.NONE: return "Keine Betretsverbote."
-		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
+		IsolationState.NONE: return "keine Betretungsverbote."
+		IsolationState.LIMITED_PUBLIC_ACCESS: return "einige Betretungsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
 
@@ -193,9 +193,9 @@ func get_food_contamination_state_descr() -> String:
 	match _food_contamination_state:
 		FoodContaminationState.NONE:
 			if _electricity_state == ElectricityState.NONE:
-				return "Reduz. Essens-Haltbarkeit"
-			else: return "Kein Problem."
-		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
+				return "reduz. Essens-Haltbarkeit"
+			else: return "kein Problem."
+		FoodContaminationState.FOOD_SPOILED: return "kontaminiert!"
 	return ""
 	
 func get_mobile_net_state() -> int:
@@ -206,8 +206,8 @@ func set_mobile_net_state(new_mobilenet_state: int) -> void:
 
 func get_mobile_net_state_descr() -> String:
 	match _mobilenet_state:
-		MobileNetState.ONLINE: return "Online."
-		MobileNetState.OFFLINE: return "Offline!"
+		MobileNetState.ONLINE: return "online."
+		MobileNetState.OFFLINE: return "offline!"
 	return ""
 
 var _water : Array[int] = [0, 0, 0]
