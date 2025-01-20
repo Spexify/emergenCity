@@ -6,7 +6,7 @@
 	"positions": {
 		"Park": { "x": 300, "y": 440 },
 	},
-	"item_value": {
+	"item_preference": {
 	},
 	"desires": [
 	],

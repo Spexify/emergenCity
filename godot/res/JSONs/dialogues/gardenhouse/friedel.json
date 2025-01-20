@@ -1,53 +1,53 @@
 {
-    "start": {
-		"actors": ["avatar.r", "friedel"],
-        "options": {
-            "wuff": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuff!"],
-                "options": {"#branch": ""}
-            },
-            "wuff1": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuffwuff!!"],
-                "options": {"#branch": ""}
-            },
-            "wuff2": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuff..."],
-                "options": {"#branch": ""}
-            },
-            "wuff3": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuff??"],
-                "options": {"#branch": ""}
-            },
-            "wuff4": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#WUFF!!!"],
-                "options": {"#branch": ""}
-            },
-            "wuff5": {
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuuuuuuuff."],
-                "options": {"#branch": ""}
-            }
-        }
-    },
-    "#branch": {
-        "actors": ["avatar.r", "friedel"],
-        "text": ["Erzähler#Möchtest du Friedel streicheln?"],
-        "options": {
-            "#Ja": {
-                "prompt": "Ja",
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#Wuff <3"]
-            },
-            "#Nein": {
-                "prompt": "Nein",
-                "actors": ["avatar.r", "friedel"],
-                "text": ["friedel#[i]*winsel*[/i] "]
-            }
-        }
-    }
+	"start": {
+		"actors": ["avatar", "friedel"],
+		"options": {
+			"wuff": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuff!"],
+				"options": {"#branch": ""}
+			},
+			"wuff1": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuffwuff!!"],
+				"options": {"#branch": ""}
+			},
+			"wuff2": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuff..."],
+				"options": {"#branch": ""}
+			},
+			"wuff3": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuff??"],
+				"options": {"#branch": ""}
+			},
+			"wuff4": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#WUFF!!!"],
+				"options": {"#branch": ""}
+			},
+			"wuff5": {
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuuuuuuuff."],
+				"options": {"#branch": ""}
+			}
+		}
+	},
+	"#branch": {
+		"actors": ["avatar", "friedel"],
+		"text": ["Erzähler#Möchtest du Friedel streicheln?"],
+		"options": {
+			"#Ja": {
+				"prompt": "Ja",
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#Wuff <3"]
+			},
+			"#Nein": {
+				"prompt": "Nein",
+				"actors": ["avatar", "friedel"],
+				"text": ["friedel#[i]*winsel*[/i] "]
+			}
+		}
+	}
 }

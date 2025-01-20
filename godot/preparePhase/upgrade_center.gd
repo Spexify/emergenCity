@@ -89,6 +89,8 @@ func _on_buy_btn_pressed() -> void:
 		#Play VFX at position of unlocked upgrade
 		_star_explosion_VFX.position = _last_clicked_upgrade.global_position + _last_clicked_upgrade.size/2
 		_star_explosion_VFX.emitting = true
+		
+		_on_equip_btn_pressed()
 	else:
 		SoundMngr.play_sound("BasicItem", 0, 0.4)
 

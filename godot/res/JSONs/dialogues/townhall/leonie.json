@@ -1,9 +1,9 @@
 {
-    "start": {
-        "actors": ["avatar", "leonie.r"],
-        "text": [
-            "leonie#Hi! Willkommen im Rathaus.",
-            "leonie#In den Büchern da drüben findest du hilfreiche Informationen."
-        ]
-    }
+	"start": {
+		"actors": ["avatar", "leonie.r"],
+		"text": [
+			"leonie.r#Hi! Willkommen im Rathaus.",
+			"leonie.r#In den Büchern da drüben findest du hilfreiche Informationen."
+		]
+	}
 }

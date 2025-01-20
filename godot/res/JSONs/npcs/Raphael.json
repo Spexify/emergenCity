@@ -11,7 +11,7 @@
 	"positions": {
 		"Market": { "x": 224, "y": 254 }
 	},
-	"item_value": {
+	"item_preference": {
 		"WATER": 1,
 		"POTATOES": 2,
 		"VEGETABLES": 4,

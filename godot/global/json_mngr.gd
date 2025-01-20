@@ -565,7 +565,7 @@ func load_NPC() -> Array[EMC_NPC]:
 
 		var data : Dictionary = load_file_check_type(source, "Dialogue", TYPE_DICTIONARY)
 		
-		assert(data.has_all([ "stage", "pitch", "positions", "initial_items", "item_value", "desires", "actions" ]),
+		assert(data.has_all([ "stage", "pitch", "positions", "initial_items", "item_preference", "desires", "actions" ]),
 		"NPC-JSON: Missing Parameters in npc: '" + file +"'")
 		
 		for stage_name : String in data["positions"].keys():

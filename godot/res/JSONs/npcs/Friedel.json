@@ -8,11 +8,32 @@
 		"Gardenhouse": { "x": 96, "y": 704 },
 		"Market": { "x": 160, "y": 320 }
 	},
-	"item_value": {
+	"item_preference": {
 
 	},
 	"desires": [
+		{
+			"name": "happiness",
+			"type": "Accumulator",
+			"increase": 4
+		},
+		{
+			"name": "idel",
+			"type": "Desire"
+		}
 	],
 	"actions": [
+		{
+			"name": "abhauen",
+			"desire_name": "happiness",
+			"consequnces": { "change_stage": { "stage_name": "Market" } },
+			"routine": { "morning": 7, "noon": 7, "evening": 0 }
+		},
+		{
+			"name": "idel",
+			"desire_name": "idel",
+			"consequnces": { "change_stage": { "stage_name": "Gardenhouse" } },
+			"routine": { "morning": 2, "noon": 2, "evening": 2 }
+		}
 	]
 }

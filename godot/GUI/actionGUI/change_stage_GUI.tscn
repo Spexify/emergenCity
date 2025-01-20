@@ -53,6 +53,7 @@ theme_override_constants/separation = 15
 custom_minimum_size = Vector2(130, 70)
 layout_mode = 2
 theme = ExtResource("3_scbir")
+bbcode_enabled = true
 text = "Soll der Ort gewechselt werden? Es wird eine Aktion verbraucht."
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]

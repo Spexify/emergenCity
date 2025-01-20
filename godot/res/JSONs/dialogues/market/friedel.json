@@ -40,7 +40,8 @@
 				"npc_pos": {
 					"Gerhard": {"x": 128, "y": 704},
 					"Friedel": {"x": 64, "y": 704}
-				}
+				},
+				"wait": false
 			}
 		}
 	}

@@ -8,7 +8,7 @@
 		"Rowhouse": { "x": 450, "y": 550 },
 		"Market": { "x": 180, "y": 300 }
 	},
-	"item_value": {
+	"item_preference": {
 	},
 	"desires": [
 	],
