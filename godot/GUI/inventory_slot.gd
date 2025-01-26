@@ -1,7 +1,9 @@
+@tool
 extends Panel
 class_name EMC_InventorySlot
 
 ########################################## PUBLIC METHODS ##########################################
+
 ## Checks if slot is free
 ## Returns true if slot is free, otherwise false
 func is_free() -> bool:
@@ -23,7 +25,6 @@ func set_item(p_item: EMC_Item) -> bool:
 	if !is_free(): return false
 	$Slot_BG.add_child(p_item)
 	return true
-
 
 func remove_item() -> void:
 	if self.is_free():

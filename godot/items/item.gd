@@ -85,6 +85,8 @@ func setup(p_ID: int = IDs.DUMMY) -> void:
 func get_ID() -> IDs:
 	return _ID
 
+func is_dummy() -> bool:
+	return _ID == IDs.DUMMY
 
 ##Getter for _descr
 func get_descr() -> String:

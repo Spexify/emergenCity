@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://odvg8lycuwvb"]
+[gd_scene load_steps=3 format=3 uid="uid://odvg8lycuwvb"]
 
+[ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://res/textures/menu_box_white_tex.tres" id="1_vfcmx"]
 [ext_resource type="PackedScene" uid="uid://bok7vi7332765" path="res://GUI/inventory_slot.tscn" id="1_vp0nq"]
 
 [node name="PanelItem" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_vfcmx")
 
 [node name="InventorySlot" parent="." instance=ExtResource("1_vp0nq")]
 layout_mode = 2

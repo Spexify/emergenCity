@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctlisou6u6wex"]
+[gd_scene load_steps=13 format=3 uid="uid://ctlisou6u6wex"]
 
 [ext_resource type="Script" path="res://GUI/trade_ui.gd" id="1_klull"]
 [ext_resource type="Texture2D" uid="uid://dwwuq7qn72bub" path="res://res/sprites/characters/portrait_raphael.png" id="1_yjcyr"]
-[ext_resource type="PackedScene" uid="uid://bok7vi7332765" path="res://GUI/inventory_slot.tscn" id="2_3q66c"]
-[ext_resource type="Texture2D" uid="uid://dcqomk2j6o16u" path="res://res/sprites/GUI/buttons/button_right_disabled.png" id="3_s1jw7"]
+[ext_resource type="Texture2D" uid="uid://roxqf34j7vb0" path="res://res/sprites/GUI/icons/icon_NPC_relation.png" id="2_aiu0m"]
+[ext_resource type="StyleBox" uid="uid://bwu0dssl63nbv" path="res://res/textures/menu_box_tex.tres" id="4_ksqq8"]
 [ext_resource type="Texture2D" uid="uid://b0whs1kiah54x" path="res://res/sprites/GUI/buttons/button_left_disabled.png" id="4_rclt8"]
+[ext_resource type="StyleBox" uid="uid://3hj7e733ssav" path="res://res/textures/menu_box_light_tex.tres" id="4_s4rwf"]
+[ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://res/textures/menu_box_white_tex.tres" id="4_yink0"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="5_0g0o4"]
+[ext_resource type="StyleBox" uid="uid://om37cubdbi5" path="res://res/textures/menu_box_red_tex.tres" id="6_turif"]
+[ext_resource type="StyleBox" uid="uid://60p250u5pj7l" path="res://res/textures/menu_box_green_tex.tres" id="10_1to8m"]
+[ext_resource type="PackedScene" uid="uid://b42x2hfhnnkci" path="res://GUI/inventory_grid.tscn" id="10_pallt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gqr3"]
+atlas = ExtResource("2_aiu0m")
+region = Rect2(128, 0, 64, 64)
 
 [node name="Trade" type="Control"]
 layout_mode = 3
@@ -15,326 +24,156 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_klull")
+mood_texture = SubResource("AtlasTexture_1gqr3")
 
-[node name="Portaits" type="MarginContainer" parent="."]
+[node name="VBC" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(528, 0)
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -398.0
-offset_bottom = -278.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -924.0
+offset_right = 264.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
+grow_vertical = 0
 
-[node name="HBC" type="HBoxContainer" parent="Portaits"]
+[node name="Header" type="PanelContainer" parent="VBC"]
 layout_mode = 2
-theme_override_constants/separation = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("4_s4rwf")
+
+[node name="HBC" type="HBoxContainer" parent="VBC/Header"]
+layout_mode = 2
+theme_override_constants/separation = 6
 alignment = 1
 
-[node name="PortraitLeft" type="TextureRect" parent="Portaits/HBC"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-texture = ExtResource("1_yjcyr")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Text" type="Control" parent="Portaits/HBC"]
-custom_minimum_size = Vector2(316, 0)
-layout_mode = 2
-
-[node name="Margin" type="MarginContainer" parent="Portaits/HBC/Text"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_right = 2
-
-[node name="TextLeft" type="PanelContainer" parent="Portaits/HBC/Text/Margin"]
-visible = false
-custom_minimum_size = Vector2(295, 120)
+[node name="Baloon" type="PanelContainer" parent="VBC/Header/HBC"]
+custom_minimum_size = Vector2(320, 175)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Portaits/HBC/Text/Margin/TextLeft"]
+[node name="Text" type="RichTextLabel" parent="VBC/Header/HBC/Baloon"]
 layout_mode = 2
 
-[node name="TextRight" type="PanelContainer" parent="Portaits/HBC/Text/Margin"]
-custom_minimum_size = Vector2(295, 120)
-layout_mode = 2
-size_flags_horizontal = 8
-theme_type_variation = &"WhitePanelContainer"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Portaits/HBC/Text/Margin/TextRight"]
+[node name="VBC" type="VBoxContainer" parent="VBC/Header/HBC"]
 layout_mode = 2
 
-[node name="PortraitRight" type="TextureRect" parent="Portaits/HBC"]
+[node name="Portrait" type="TextureRect" parent="VBC/Header/HBC/VBC"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 4
+size_flags_vertical = 0
 texture = ExtResource("1_yjcyr")
 expand_mode = 1
 stretch_mode = 5
 flip_h = true
 
-[node name="Exchange" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -262.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
+[node name="Mood" type="TextureRect" parent="VBC/Header/HBC/VBC"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Exchange" type="VBoxContainer" parent="VBC"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -2
 alignment = 1
 
-[node name="ToTrader" type="HBoxContainer" parent="Exchange"]
+[node name="Sell" type="PanelContainer" parent="VBC/Exchange"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_turif")
+
+[node name="HBC" type="HBoxContainer" parent="VBC/Exchange/Sell"]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 alignment = 1
 
-[node name="Arrow" type="PanelContainer" parent="Exchange/ToTrader"]
+[node name="Arrow" type="PanelContainer" parent="VBC/Exchange/Sell/HBC"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="TextureRect" type="TextureRect" parent="Exchange/ToTrader/Arrow"]
+[node name="TextureRect" type="TextureRect" parent="VBC/Exchange/Sell/HBC/Arrow"]
 layout_mode = 2
-texture = ExtResource("3_s1jw7")
+texture = ExtResource("4_rclt8")
+flip_h = true
 
-[node name="ToAvatar" type="HBoxContainer" parent="Exchange"]
+[node name="Buy" type="PanelContainer" parent="VBC/Exchange"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("10_1to8m")
+
+[node name="HBC" type="HBoxContainer" parent="VBC/Exchange/Buy"]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 alignment = 1
 
-[node name="Arrow" type="PanelContainer" parent="Exchange/ToAvatar"]
+[node name="Arrow" type="PanelContainer" parent="VBC/Exchange/Buy/HBC"]
 layout_mode = 2
 theme_type_variation = &"WhitePanelContainer"
 
-[node name="TextureRect" type="TextureRect" parent="Exchange/ToAvatar/Arrow"]
+[node name="TextureRect" type="TextureRect" parent="VBC/Exchange/Buy/HBC/Arrow"]
 layout_mode = 2
 texture = ExtResource("4_rclt8")
 
-[node name="Storage" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -55.0
-offset_bottom = 294.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 48
-alignment = 1
+[node name="Inventories" type="TabContainer" parent="VBC"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(0, 0, 0, 1)
+theme_override_styles/tab_selected = ExtResource("4_yink0")
+theme_override_styles/tab_hovered = ExtResource("4_s4rwf")
+theme_override_styles/tab_unselected = ExtResource("4_ksqq8")
+theme_override_styles/tab_focus = ExtResource("4_yink0")
+theme_override_styles/panel = ExtResource("4_s4rwf")
+tab_alignment = 1
+clip_tabs = false
 
-[node name="Inventory" type="PanelContainer" parent="Storage"]
-custom_minimum_size = Vector2(240, 350)
+[node name="Inventory" type="PanelContainer" parent="VBC/Inventories"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="SC" type="ScrollContainer" parent="Storage/Inventory"]
+[node name="InventoryGrid" parent="VBC/Inventories/Inventory" instance=ExtResource("10_pallt")]
+custom_minimum_size = Vector2(416, 230)
 layout_mode = 2
-size_flags_horizontal = 0
-horizontal_scroll_mode = 0
+size_flags_horizontal = 8
 
-[node name="Grid" type="GridContainer" parent="Storage/Inventory/SC"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-columns = 3
-
-[node name="InventorySlot" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot2" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot3" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot4" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot5" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot6" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot7" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot8" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot9" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot10" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot11" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot12" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot13" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot14" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot15" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot16" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot17" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot18" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot19" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot20" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot21" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot22" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot23" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot24" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot25" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot26" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot27" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot28" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot29" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot30" parent="Storage/Inventory/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="Trader" type="PanelContainer" parent="Storage"]
-custom_minimum_size = Vector2(240, 350)
+[node name="Trader" type="PanelContainer" parent="VBC/Inventories"]
+visible = false
+custom_minimum_size = Vector2(448, 262)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SC" type="ScrollContainer" parent="Storage/Trader"]
+[node name="InventoryGrid" parent="VBC/Inventories/Trader" instance=ExtResource("10_pallt")]
+custom_minimum_size = Vector2(416, 230)
 layout_mode = 2
-size_flags_horizontal = 0
-horizontal_scroll_mode = 0
+num_slots = 18
 
-[node name="Grid" type="GridContainer" parent="Storage/Trader/SC"]
+[node name="Buttons" type="HBoxContainer" parent="VBC"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-columns = 3
-
-[node name="InventorySlot" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot2" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot3" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot4" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot5" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot6" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot7" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot8" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot9" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot10" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot11" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot12" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot13" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot14" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="InventorySlot15" parent="Storage/Trader/SC/Grid" instance=ExtResource("2_3q66c")]
-layout_mode = 2
-
-[node name="Buttons" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -180.0
-offset_bottom = -106.0
-grow_horizontal = 2
-grow_vertical = 0
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Cancel" parent="Buttons" instance=ExtResource("5_0g0o4")]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Abbrechen"
-
-[node name="Deal" parent="Buttons" instance=ExtResource("5_0g0o4")]
+[node name="Deal" parent="VBC/Buttons" instance=ExtResource("5_0g0o4")]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Deal?"
+theme_type_variation = &"ConfirmButton"
+disabled = true
+text = "Deal"
 
-[connection signal="pressed" from="Buttons/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Buttons/Deal" to="." method="_on_deal_pressed"]
+[node name="Cancel" parent="VBC/Buttons" instance=ExtResource("5_0g0o4")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"CancelButton"
+text = "Abbrechen"
+
+[connection signal="pressed" from="VBC/Buttons/Deal" to="." method="_on_deal_pressed"]
+[connection signal="pressed" from="VBC/Buttons/Cancel" to="." method="_on_cancel_pressed"]

@@ -50,11 +50,13 @@ alignment = 1
 [node name="ConfirmationBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+theme_type_variation = &"ConfirmButton"
 text = "Bestätigen"
 
 [node name="Cancel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_frcv6")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
+theme_type_variation = &"CancelButton"
 text = "Abbrechen"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmationBtn" to="." method="_on_confirmation_btn_pressed"]

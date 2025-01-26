@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b42x2hfhnnkci"]
+
+[ext_resource type="Script" path="res://GUI/inventory_grid.gd" id="1_xa5nl"]
+
+[node name="InventoryGrid" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_xa5nl")
+
+[node name="SC" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="GridContainer" parent="SC"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6

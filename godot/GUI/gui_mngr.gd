@@ -67,7 +67,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar
 	
-	_trade_ui.setup(p_backpack)
+	_trade_ui.setup(p_backpack, self)
 	
 	_dialogue_gui.setup(p_dialogue_mngr, p_stage_mngr)
 	
