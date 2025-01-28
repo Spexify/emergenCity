@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://dn24jnxvr2sh7"
+path="res://.godot/imported/icon_world_states_image.png-7a941ace145eda8d39d617540ae666be.image"
+
+[deps]
+
+source_file="res://assets/GUI/icons/icon_world_states_image.png"
+dest_files=["res://.godot/imported/icon_world_states_image.png-7a941ace145eda8d39d617540ae666be.image"]
+
+[params]
+

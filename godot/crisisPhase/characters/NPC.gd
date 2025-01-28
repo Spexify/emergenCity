@@ -17,7 +17,7 @@ var _stage : String
 var _dialogue_pitch: float
 var _positions : Dictionary
 var _actions: Array[NPC_Action]
-var _item_value: Dictionary
+var _item_preference: Dictionary
 var _desires : Array[NPC_Desire]
 
 ########################################## PUBLIC METHODS ##########################################
@@ -25,12 +25,12 @@ var _desires : Array[NPC_Desire]
 func setup(p_name: String, args : Dictionary) -> void:
 	name = p_name
 	
-	if args.has_all([ "stage", "pitch", "positions", "initial_items", "item_value", "desires", "actions" ]):
+	if args.has_all([ "stage", "pitch", "positions", "initial_items", "item_preference", "desires", "actions" ]):
 		_stage = args["stage"]
 		_dialogue_pitch = args["pitch"]
 		_positions = args["positions"]
 		_initial_inventory = args["initial_items"]
-		_item_value = args["item_value"]
+		_item_preference = args["item_preference"]
 		_desires.assign(args["desires"].values())
 		_actions.assign(args["actions"])
 	else:
@@ -43,7 +43,7 @@ func setup(p_name: String, args : Dictionary) -> void:
 			_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
 	
 func _ready() -> void:
-	var sprite_texture: CompressedTexture2D = load("res://res/sprites/characters/sprite_" + name.to_lower() + ".png")
+	var sprite_texture: CompressedTexture2D = load("res://assets/characters/sprite_" + name.to_lower() + ".png")
 	_sprite.texture = sprite_texture
 	
 	$AnimationPlayer.play("idle")
@@ -82,17 +82,18 @@ func act() -> String:
 	
 	return action_key._name
 
-func calulate_item_score_generic(items : Array[int], score : Dictionary, base_value : int) -> int:
+func calulate_item_score_generic(items : Array[EMC_Item], modifier : Dictionary) -> float:
 	return items.reduce(
-		func (accum : int, item : int) -> int:
-			accum += score.get(JsonMngr.item_id_to_name(item), base_value)
+		func (accum : int, item : EMC_Item) -> int:
+			var value_comp := item.get_comp(EMC_IC_Value)
+			accum += modifier.get(JsonMngr.item_id_to_name(item.get_ID()), 1) * (value_comp.get_value() if value_comp != null else 1)
 			return accum, 0)
 
-func calculate_trade_score(items : Array[int]) -> int:
-	return calulate_item_score_generic(items, _item_value, 1)
+func calculate_trade_score(items : Array[EMC_Item]) -> float:
+	return calulate_item_score_generic(items, _item_preference)
 
-func calculate_inventory_score(score : Dictionary = _item_value, base_value : int = 1) -> int:
-	return calulate_item_score_generic(_inventory.get_all_items_as_id(), score, base_value)
+func calculate_inventory_score(score : Dictionary = _item_preference) -> float:
+	return calulate_item_score_generic(_inventory.get_all_items(), score)
 	
 #func calculate_work_score() -> int:
 	#return (calulate_item_score_generic(_inventory.get_all_item_slots_as_id(), _brain["work"]["has"], 1)
@@ -215,7 +216,7 @@ class NPC_Inventory_Desire:
 		return value + accum
 		
 	func neglected() -> void:
-		accum += floori(_npc.calculate_inventory_score(_item_score, _base_value) as float * _accel)
+		accum += floori(_npc.calculate_inventory_score(_item_score) as float * _accel)
 		accum = clampi(accum, 0, _max_reinfroce)
 		
 	func choosen() -> void:

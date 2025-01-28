@@ -3,7 +3,7 @@ class_name EMC_SoundMngr
 ## MP3-Files don't work on mobile if you just load them, so you have to add another
 ## AudioStreamPlayer Node!! At least I (MRM) didn't get it to work
 
-const SFX_PATH : String = "res://res/SFX/"
+const SFX_PATH : String = "res://assets/SFX/"
 
 var _buttons : Array
 var _guis : Array

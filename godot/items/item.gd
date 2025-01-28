@@ -1,7 +1,7 @@
 extends Control
 class_name EMC_Item
 
-static var ITEMS_TEXTURE : Texture2D = preload("res://res/sprites/items.png")
+static var ITEMS_TEXTURE : Texture2D = preload("res://assets/items.png")
 
 signal clicked(sender: EMC_Item)
 

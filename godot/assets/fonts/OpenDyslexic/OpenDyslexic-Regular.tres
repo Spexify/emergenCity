@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://drmlh24pgfd4q"]
+
+[ext_resource type="FontFile" uid="uid://0domjlhuwlyc" path="res://assets/fonts/OpenDyslexic/OpenDyslexic-Regular.woff2" id="1_h88wl"]
+
+[resource]
+base_font = ExtResource("1_h88wl")
+spacing_glyph = -4
+spacing_space = -10
+spacing_top = -10
+spacing_bottom = -10

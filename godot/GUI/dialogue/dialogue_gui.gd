@@ -15,10 +15,10 @@ var _stage_mngr : EMC_StageMngr
 var regex := RegEx.new()
 
 const _icon_list : Dictionary = {
-	"happy" : preload("res://res/sprites/GUI/icons/icon_statusbar_happiness.png"),
-	"health" : preload("res://res/sprites/GUI/icons/icon_statusbar_health.png"),
-	"food" : preload("res://res/sprites/GUI/icons/icon_statusbar_nutrition.png"),
-	"water" : preload("res://res/sprites/GUI/icons/icon_statusbar_hydration.png"),
+	"happy" : preload("res://assets/GUI/icons/icon_statusbar_happiness.png"),
+	"health" : preload("res://assets/GUI/icons/icon_statusbar_health.png"),
+	"food" : preload("res://assets/GUI/icons/icon_statusbar_nutrition.png"),
+	"water" : preload("res://assets/GUI/icons/icon_statusbar_hydration.png"),
 }
 
 ##TODO
@@ -181,11 +181,11 @@ func _load_actors_display(actors : Array[String]) -> void:
 		if i < actors.size():
 			port.show()
 			if actors[i].get_basename() == "avatar":
-				port.set_texture(load("res://res/sprites/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
+				port.set_texture(load("res://assets/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
 			elif actors[i].get_basename() == "":
 				continue
 			else:
-				port.set_texture(load("res://res/sprites/characters/portrait_" + actors[i].get_basename() + ".png"))
+				port.set_texture(load("res://assets/characters/portrait_" + actors[i].get_basename() + ".png"))
 			port.set_name(actors[i].get_basename())
 			port.set_flip_h(actors[i].get_extension() == "r")
 		else:

@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://doc1tdsx8itqw"]
 
 [ext_resource type="Script" path="res://preparePhase/upgrade_center.gd" id="1_j1ie4"]
-[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="1_xic5p"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_wh8jv"]
-[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://res/VFX/particles/particle_star.png" id="4_c3pkx"]
-[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_o3hl2"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="1_xic5p"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_wh8jv"]
+[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://assets/particles/particle_star.png" id="4_c3pkx"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="4_o3hl2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0cck"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)

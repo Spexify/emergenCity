@@ -6,28 +6,28 @@ const INVALID_DICTIONARY_VALUE: Dictionary = {}
 
 ## RECIPTS
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
-const RECIPT_SOURCE := "res://res/JSONs/recipe.json"
+const RECIPT_SOURCE := "res://JSONs/recipe.json"
 ## ITEMS
-const ITEM_SOURCE := "res://res/JSONs/item.json"
-const ITEM_TRANSLATE_SOURCE := "res://res/JSONs/item_ids.json"
+const ITEM_SOURCE := "res://JSONs/item.json"
+const ITEM_TRANSLATE_SOURCE := "res://JSONs/item_ids.json"
 ## POPUPS
-const POP_UP_ACTION_SOURCE := "res://res/JSONs/pop_up_action.json"
+const POP_UP_ACTION_SOURCE := "res://JSONs/pop_up_action.json"
 ## OPT-EVENTS
-const OPT_EVENTS_SOURCE := "res://res/JSONs/optional_events.json"
+const OPT_EVENTS_SOURCE := "res://JSONs/optional_events.json"
 ## NPCS
-const NPC_SOURCE := "res://res/JSONs/npcs/"
+const NPC_SOURCE := "res://JSONs/npcs/"
 ## BOOKS
-const BOOKS_SOURCE := "res://res/JSONs/books.json"
+const BOOKS_SOURCE := "res://JSONs/books.json"
 ## ACTIONS
-const ACTION_SOURCE := "res://res/JSONs/action.json"
+const ACTION_SOURCE := "res://JSONs/action.json"
 ## DOORBELL
-const DOORBELL_SOURCE := "res://res/JSONs/doorbell.json"
+const DOORBELL_SOURCE := "res://JSONs/doorbell.json"
 ## SCENARIOS
-const SCENARIOS_SOURCE := "res://res/JSONs/scenarios.json"
+const SCENARIOS_SOURCE := "res://JSONs/scenarios.json"
 ## UPGARDE
-const UPGRADES_SOURCE := "res://res/JSONs/upgrades.json"
+const UPGRADES_SOURCE := "res://JSONs/upgrades.json"
 ## DIALOGUES
-const DIALOGUES_SOURCE := "res://res/JSONs/dialogues/"
+const DIALOGUES_SOURCE := "res://JSONs/dialogues/"
 
 ########################################JSON RECIPES################################################
 

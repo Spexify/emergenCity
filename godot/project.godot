@@ -13,12 +13,12 @@ config_version=5
 config/name="emergenCITY_game"
 run/main_scene="res://global/entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://app_icon/app_icon.svg"
+config/icon="res://assets/app_icon/app_icon.svg"
 config/windows_native_icon="res://app_icon.ico"
 
 [audio]
 
-buses/default_bus_layout="res://res/SFX/default_bus_layout.tres"
+buses/default_bus_layout="res://assets/SFX/default_bus_layout.tres"
 
 [autoload]
 

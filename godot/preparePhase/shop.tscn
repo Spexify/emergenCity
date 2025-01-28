@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
-[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="3_spno5"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_egv6r"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="3_spno5"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_egv6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)

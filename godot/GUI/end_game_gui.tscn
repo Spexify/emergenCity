@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnmcmtfl1jq8q"]
 
 [ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
-[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://res/VFX/particles/particle_star.png" id="2_wm8fx"]
+[ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://assets/particles/particle_star.png" id="2_wm8fx"]
 
 [sub_resource type="Gradient" id="Gradient_vswwg"]
 offsets = PackedFloat32Array(0, 0.918803)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8su8e0hk46wu"]
 
 [ext_resource type="Script" path="res://crisisPhase/pause_menu.gd" id="1_wnduq"]
-[ext_resource type="Texture2D" uid="uid://psk280o4uf5a" path="res://res/sprites/GUI/icons/icon_semaphore.png" id="2_wuoxr"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yj78q"]
+[ext_resource type="Texture2D" uid="uid://psk280o4uf5a" path="res://assets/GUI/icons/icon_semaphore.png" id="2_wuoxr"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_yj78q"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3

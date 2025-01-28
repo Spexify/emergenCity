@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://preparePhase/credit_information.gd" id="1_4y0di"]
 [ext_resource type="PackedScene" uid="uid://cul33oq5ev2pa" path="res://crisisPhase/stage/park.tscn" id="2_kmjb8"]
-[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="3_0kg73"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="3_0kg73"]
 [ext_resource type="PackedScene" uid="uid://b7pij2ufkhxje" path="res://preparePhase/license_information.tscn" id="4_r73hg"]
 
 [node name="Information" type="Control"]

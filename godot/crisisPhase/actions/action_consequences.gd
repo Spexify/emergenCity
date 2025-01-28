@@ -2,7 +2,6 @@ extends Node
 class_name EMC_ActionConsequences
 
 const NO_PARAM: int = 0
-const _DIALOGUE_GUI_SCN: PackedScene = preload("res://GUI/dialogue_GUI.tscn")
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var _avatar: EMC_Avatar

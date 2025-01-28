@@ -9,7 +9,7 @@ var _balance : int = Global.get_e_coins()
 @onready var shop_grid := $Background/Margin/Main/ShopSection/ShopPanel/Shelf/ShopGrid
 @onready var label_ecoins := $Background/MarginContainer/PanelContainer/HBoxContainer/RichTextLabel
 
-const _SLOT_SCN: PackedScene = preload("res://GUI/inventory_slot.tscn")
+const _SLOT_SCN: PackedScene = preload("res://GUI/inventory/inventory_slot.tscn")
 
 func _ready() -> void:
 	_add_balance(0)

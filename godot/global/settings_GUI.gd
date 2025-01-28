@@ -15,14 +15,14 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
 
-const dyslexic_font := preload("res://res/fonts/OpenDyslexic/OpenDyslexic-Regular.tres")
-const dyslexic_i_font := preload("res://res/fonts/OpenDyslexic/OpenDyslexic-Italic.tres")
-const dyslexic_b_font := preload("res://res/fonts/OpenDyslexic/OpenDyslexic-Bold.tres")
-const dyslexic_bi_font := preload("res://res/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.tres")
-const normal_font := preload("res://res/fonts/CMU Typewriter/cmuntt.ttf")
-const normal_i_font := preload("res://res/fonts/CMU Typewriter/cmunit.ttf")
-const normal_b_font := preload("res://res/fonts/CMU Typewriter/cmuntb.ttf")
-const normal_bi_font := preload("res://res/fonts/CMU Typewriter/cmuntx.ttf")
+const dyslexic_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Regular.tres")
+const dyslexic_i_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Italic.tres")
+const dyslexic_b_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Bold.tres")
+const dyslexic_bi_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.tres")
+const normal_font := preload("res://assets/fonts/CMU Typewriter/cmuntt.ttf")
+const normal_i_font := preload("res://assets/fonts/CMU Typewriter/cmunit.ttf")
+const normal_b_font := preload("res://assets/fonts/CMU Typewriter/cmuntb.ttf")
+const normal_bi_font := preload("res://assets/fonts/CMU Typewriter/cmuntx.ttf")
 
 
 var _previous_pause_mode: bool

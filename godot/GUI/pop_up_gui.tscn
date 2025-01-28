@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://7oi6kcm73lxd"]
 
 [ext_resource type="Script" path="res://GUI/pop_up_gui.gd" id="1_ii2pp"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="2_xot16"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="2_xot16"]
 
 [node name="PopUpGUI" type="Control" groups=["Gui"]]
 layout_mode = 3

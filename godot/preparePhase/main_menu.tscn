@@ -2,13 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://c7p7h5j8cckif" path="res://preparePhase/prep_theme.tres" id="1_prdod"]
 [ext_resource type="Script" path="res://preparePhase/main_menu.gd" id="2_bbqsv"]
-[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="3_ddmuk"]
-[ext_resource type="Texture2D" uid="uid://18r2pljgx646" path="res://res/sprites/GUI/icons/icon_menu_settings.png" id="4_0v5y1"]
-[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="4_2txvv"]
-[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://res/sprites/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="7_57rlv"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://assets/citymap/citymap.png" id="3_ddmuk"]
+[ext_resource type="Texture2D" uid="uid://18r2pljgx646" path="res://assets/GUI/icons/icon_menu_settings.png" id="4_0v5y1"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="4_2txvv"]
+[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://assets/GUI/icons/icon_menu_information.png" id="6_7kgqm"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="7_57rlv"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="7_jnxxn"]
-[ext_resource type="Texture2D" uid="uid://cvjnrkttd328h" path="res://res/sprites/Krisopolis_Logo_V05B.png" id="7_mlnh7"]
+[ext_resource type="Texture2D" uid="uid://cvjnrkttd328h" path="res://assets/Krisopolis_Logo_V05B.png" id="7_mlnh7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

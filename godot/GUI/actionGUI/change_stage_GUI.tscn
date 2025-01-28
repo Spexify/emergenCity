@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvuhkwet8fnsy"]
 
 [ext_resource type="Script" path="res://GUI/actionGUI/change_stage_GUI.gd" id="1_48h4p"]
-[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://res/sprites/GUI/backgrounds/menu_box_gray.png" id="2_b70k5"]
+[ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://assets/GUI/backgrounds/menu_box_gray.png" id="2_b70k5"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_scbir"]
-[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="4_ee0w8"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="5_ohm0g"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://assets/GUI/icons/icon_needs_time.png" id="4_ee0w8"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="5_ohm0g"]
 
 [node name="ChangeStageGUI" type="Control"]
 layout_mode = 3

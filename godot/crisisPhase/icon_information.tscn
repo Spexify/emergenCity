@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmchkorcdvl0d"]
 
 [ext_resource type="Script" path="res://crisisPhase/icon_information.gd" id="1_y0unm"]
-[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_nlkmw"]
-[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/sprites/GUI/icons/icon_statusbar_hydration.png" id="3_75l8e"]
-[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/sprites/GUI/icons/icon_statusbar_health.png" id="4_51kyr"]
-[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://res/sprites/GUI/icons/icon_statusbar_happiness.png" id="5_ajf1c"]
-[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="6_yt1ay"]
+[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://assets/GUI/icons/icon_statusbar_nutrition.png" id="2_nlkmw"]
+[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://assets/GUI/icons/icon_statusbar_hydration.png" id="3_75l8e"]
+[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://assets/GUI/icons/icon_statusbar_health.png" id="4_51kyr"]
+[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://assets/GUI/icons/icon_statusbar_happiness.png" id="5_ajf1c"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://assets/GUI/icons/icon_needs_time.png" id="6_yt1ay"]
 
 [node name="IconInformation" type="Control"]
 layout_mode = 3

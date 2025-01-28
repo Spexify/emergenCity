@@ -48,7 +48,7 @@ func open(npc : EMC_NPC) -> void:
 	mood_texture.set_region(Rect2(1 * 64, 0, 64, 64))
 	mood.set_texture(mood_texture)
 	
-	portrait.set_texture(load("res://res/sprites/characters/portrait_" + npc.name.to_lower() + ".png"))
+	portrait.set_texture(load("res://assets/characters/portrait_" + npc.name.to_lower() + ".png"))
 	
 	inventory_grid.reload()
 	trader_grid.reload()
@@ -176,6 +176,9 @@ func _on_deal_pressed() -> void:
 		child.get_child(0).remove_item()
 		sell.remove_child(child)
 		child.queue_free()
+		
+	inventory_grid.reload()
+	trader_grid.reload()
 		
 		#if trade_fairness > 1.5:
 			#left_dialoge.set_text("I feel ripped of.")
