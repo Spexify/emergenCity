@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="5_0g0o4"]
 [ext_resource type="StyleBox" uid="uid://om37cubdbi5" path="res://resources/background/menu_box_red_tex.tres" id="6_turif"]
 [ext_resource type="StyleBox" uid="uid://60p250u5pj7l" path="res://resources/background/menu_box_green_tex.tres" id="10_1to8m"]
-[ext_resource type="PackedScene" uid="uid://b42x2hfhnnkci" path="res://GUI/inventory/inventory_grid.tscn" id="10_pallt"]
+[ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="10_knqvd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1gqr3"]
 atlas = ExtResource("2_aiu0m")
@@ -137,10 +137,9 @@ clip_tabs = false
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="InventoryGrid" parent="VBC/Inventories/Inventory" instance=ExtResource("10_pallt")]
+[node name="InventoryGrid" parent="VBC/Inventories/Inventory" instance=ExtResource("10_knqvd")]
 custom_minimum_size = Vector2(416, 230)
 layout_mode = 2
-size_flags_horizontal = 8
 
 [node name="Trader" type="PanelContainer" parent="VBC/Inventories"]
 visible = false
@@ -148,10 +147,9 @@ custom_minimum_size = Vector2(448, 262)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="InventoryGrid" parent="VBC/Inventories/Trader" instance=ExtResource("10_pallt")]
+[node name="InventoryGrid" parent="VBC/Inventories/Trader" instance=ExtResource("10_knqvd")]
 custom_minimum_size = Vector2(416, 230)
 layout_mode = 2
-num_slots = 18
 
 [node name="Buttons" type="HBoxContainer" parent="VBC"]
 layout_mode = 2

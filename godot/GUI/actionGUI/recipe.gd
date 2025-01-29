@@ -4,7 +4,6 @@ class_name EMC_Recipe
 
 ###Tupe-Klasse (alles public und keine Methoden)
 #
-const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 signal was_pressed(p_recipe : EMC_Recipe)
 
 var _input_item_IDs: Array[EMC_Item.IDs]
@@ -21,9 +20,10 @@ p_needs_heat : bool) -> void:
 	_needs_water = p_needs_water
 	_needs_heat = p_needs_heat
 
-	var item : EMC_Item = ITEM_SCN.instantiate()
-	item.setup(p_outputItemID)
-	$HBoxContainer.add_child(item)
+	var item : EMC_Item = EMC_Item.make_from_id(p_outputItemID)
+	var sprite := TextureRect.new()
+	sprite.set_texture(item.get_texture())
+	$HBoxContainer.add_child(sprite)
 	$HBoxContainer/RichTextLabel.text = item.get_name()
 
 func get_input_item_IDs() -> Array[EMC_Item.IDs]:

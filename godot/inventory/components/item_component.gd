@@ -53,7 +53,7 @@ static func from_dict(data : Dictionary) -> EMC_ItemComponent:
 	if comp_scn != null:
 		return comp_scn.new(comp_params)
 	else:
-		var tmp_scn : Resource = load("res://items/components/IC_" + comp_name + ".gd")
+		var tmp_scn : Resource = load("res://inventory/components/IC_" + comp_name + ".gd")
 		
 		if tmp_scn == null:
 			printerr("Comp with name: " + comp_name + ", does not exist.")

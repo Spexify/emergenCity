@@ -43,7 +43,6 @@ func _ready() -> void:
 	
 	#### DialogueStuff
 	_dialogue_manager = EMC_DialogueMngr.new(_action_constraints, _action_consequences, _day_mngr, _gui_mngr)
-	TradeMngr.setup(_stage_mngr, _backpack)
 	
 	#### GUI
 	_gui_mngr.setup(self, _day_mngr, _backpack, _stage_mngr, _avatar, _opt_event_mngr, _dialogue_manager)

@@ -17,8 +17,7 @@ class_name EMC_InventoryGUI
 @onready var _discard_btn : Button = $Inventory/VBC/MG/HSC/HBC/Discard
 @onready var _continue_btn : TextureButton = $Inventory/VBC/MG/HSC/HBC/Continue
 @onready var _back_btn : TextureButton = $Inventory/VBC/MG/HSC/HBC/Back
-
-const _SLOT_SCN: PackedScene = preload("res://GUI/inventory/inventory_slot.tscn")
+@onready var _inventory_ui : EMC_Inventory_UI = $Inventory/VBC/InventoryUI
 
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
@@ -37,15 +36,9 @@ func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, p_gui_mngr : EMC_
 	_gui_mngr = p_gui_mngr
 	set_title(p_title)
 	
-	for slot_idx in _inventory.get_slot_cnt():
-		#Setup slot grid
-		var new_slot := _SLOT_SCN.instantiate()
-		#Add items that already are in the inventory
-		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
-			item.clicked.connect(_on_item_clicked)
-			new_slot.set_item(item)
-		_slot_grid.add_child(new_slot)
+	_inventory_ui.set_inventory(_inventory)
+	_inventory_ui.item_clicked.connect(_on_item_clicked)
+	_inventory_ui.reload()
 
 ## Set the title of inventory GUI
 func set_title(p_new_text: String) -> void:
@@ -53,10 +46,6 @@ func set_title(p_new_text: String) -> void:
 
 func set_grid_height(height : int = 400) -> void:
 	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
-
-func clear_items() -> void:
-	for slot in $Inventory/VBC/ScrollContainer/GridContainer.get_children():
-		slot.remove_item()
 
 ## Open the GUI
 func open(p_is_continue : bool = false) -> void:
@@ -73,7 +62,7 @@ func open(p_is_continue : bool = false) -> void:
 	_clicked_item = null
 	show()
 	opened.emit()
-	_reload_items()
+	#_reload_items()
 
 ## Close the GUI
 func close() -> void:
@@ -98,18 +87,17 @@ func _clear_gui() -> void:
 
 ## Display information of clicked [EMC_Item]
 ## Call with [param sender] == null to clear to default state.
-func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
+func _on_item_clicked(sender: EMC_Item) -> void:
 	_clear_gui()
 	
-	_clicked_item = p_clicked_item
-	_clicked_item.clicked_sound()
-	#Name of the item
-	_label_name.append_text("[color=black]" + _clicked_item.get_name() + "[/color]")
+	_clicked_item = sender
+	sender.clicked_sound()
 	
+	#Name of the item
+	_label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
 	#Components of item
 	var comp_string: String = ""
-	
-	var comps := _clicked_item.get_comps()
+	var comps := sender.get_comps()
 	for comp in comps:
 		var comp_text := comp.get_colored_name_with_vals()
 		if comp_text != "":
@@ -119,16 +107,16 @@ func _on_item_clicked(p_clicked_item: EMC_Item) -> void:
 	_label_comps.append_text("[color=black]" + comp_string + "[/color]")
 	
 	#Description of item:
-	_label_descr.append_text("[color=black][i]" + _clicked_item.get_descr() + "[/i][/color]")
+	_label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
 	
-	#The activate the ones we need in the appropriate situation
+	#The activate the Buttons we need in the appropriate situation
 	if not _is_continue:
 		_discard_btn.show()
-	if _item_consumable(_clicked_item) or _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+	if _item_consumable(sender) or sender.get_id() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
 		_consume_btn.show()
 	
 	#And set the custom text
-	_consume_btn.text = _determine_consume_btn_text(_clicked_item)
+	_consume_btn.text = _determine_consume_btn_text(sender)
 
 
 func _item_consumable(item : EMC_Item) -> bool:
@@ -136,38 +124,7 @@ func _item_consumable(item : EMC_Item) -> bool:
 	#if item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
 		#return true
 	#else:
-	return item.get_comp(EMC_IC_Drink) != null or item.get_comp(EMC_IC_Food) != null
-
-
-func _reload_items() -> void:
-	_inventory.sort_custom(EMC_Inventory.sort_helper)
-	
-	for child in _slot_grid.get_children():
-		child.remove_item()
-		#_slot_grid.remove_child(child)
-		
-	for slot_idx in _inventory.get_slot_cnt():
-		#Setup slot grid
-		var new_slot := _slot_grid.get_children()[slot_idx]
-		#Add items that already are in the inventory
-		var item := _inventory.get_item_of_slot(slot_idx)
-		if item != null and item.get_ID() != JsonMngr.item_name_to_id("DUMMY"):
-			item.reset_modulate()
-			##Code for Issue #25 Doesn't work, because if you click one item, it updates all the
-			##other ones and removes the modulation... To cumbersome to fix rn
-			#if !_only_inventory: 
-				##Mark all items pitch-black, if they can't be consumed (eaten/drunk)
-				#var IC_food := item.get_comp(EMC_IC_Food)
-				#var IC_drink := item.get_comp(EMC_IC_Drink)
-				#if IC_food == null && IC_drink == null:
-					#item.modulate = Color(0, 0, 0)
-			
-			if not item.clicked.is_connected(_on_item_clicked):
-				item.clicked.connect(_on_item_clicked)
-			new_slot.set_item(item)
-	
-	call_deferred("_add_VFXs") #see. github.com/godotengine/godot/issues/30113
-
+	return item.has_comp(EMC_IC_Drink) or item.has_comp(EMC_IC_Food)
 
 ## CAUTION: Don't rename without changing the deffered call in _reload_items()
 ## If this is not called deferred, the positions of the slots are not correct (godot bug #30113)!
@@ -194,8 +151,7 @@ func _add_VFXs() -> void:
 func _on_consume_pressed() -> void:
 	if _clicked_item == null:
 		return
-	if _clicked_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
-		#$Inventory/VBoxContainer/HBoxContainer/Consume.text = "Filtern"
+	if _clicked_item.get_id() == JsonMngr.item_name_to_id("CHLOR_TABLETS"): 
 		if !_inventory.has_item(JsonMngr.item_name_to_id("WATER_DIRTY")):
 			self.set_modulate(Color(0.4, 0.4, 0.4))
 			await _gui_mngr.request_gui("TooltipGUI", ["Dreckiges Wasser zum Filtern ist nicht verfügbar."])
@@ -205,41 +161,32 @@ func _on_consume_pressed() -> void:
 			var comp_uses : EMC_IC_Uses = _clicked_item.get_comp(EMC_IC_Uses)
 			comp_uses.use_item(1)
 			_clicked_item.consumed_sound()
-			# Work around to stop gray modulate
-			_clicked_item.reset_modulate()
 			
 			if comp_uses.no_uses_left():
-				_inventory.remove_specific_item(_clicked_item)
+				_inventory.remove_item(_clicked_item)
 			
-			_inventory.remove_item(JsonMngr.item_name_to_id("WATER_DIRTY"))
+			_inventory.remove_item_by_id(JsonMngr.item_name_to_id("WATER_DIRTY"))
 			_inventory.add_new_item(JsonMngr.item_name_to_id("WATER"))
 	else:
 		_avatar.consume_item(_clicked_item)
-
-		# Work around to stop gray modulate
-		_clicked_item._on_clicked(EMC_Item.new())
-		_inventory.remove_specific_item(_clicked_item)
-		_clicked_item.queue_free()
+		_inventory.remove_item(_clicked_item)
+		#_clicked_item.free()
 		
-	_reload_items()
 	_clear_gui()
 
 func _on_discard_pressed() -> void:
-	_inventory.remove_specific_item(_clicked_item)
+	_inventory.remove_item(_clicked_item)
 	SoundMngr.play_sound("TrashBin")
-	_reload_items()
 	_clear_gui()
 
 func _determine_consume_btn_text(p_item: EMC_Item) -> String:
-	if p_item.get_ID() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
+	if p_item.get_id() == JsonMngr.item_name_to_id("CHLOR_TABLETS"):
 		return "Filtern"
 	
-	var food_comp := p_item.get_comp(EMC_IC_Food)
-	if food_comp != null:
+	if p_item.has_comp(EMC_IC_Food):
 		return "Essen"
 	
-	var food_drink := p_item.get_comp(EMC_IC_Drink)
-	if food_drink != null:
+	if p_item.get_comp(EMC_IC_Drink):
 		return "Trinken"
 	
 	return "Konsumieren"

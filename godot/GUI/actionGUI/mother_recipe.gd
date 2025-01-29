@@ -3,7 +3,6 @@ class_name EMC_MotherRecipe
 #
 ###Tupe-Klasse (alles public und keine Methoden)
 #
-const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const MOTHER_RECIPE = preload("res://GUI/actionGUI/mother_recipe.tscn")
 
 signal was_pressed(p_recipe : EMC_Recipe)
@@ -16,9 +15,10 @@ var _output_item_ID: EMC_Item.IDs
 var _child_recipe : Array[EMC_Recipe]
 
 func _ready() -> void:
-	var item : EMC_Item = ITEM_SCN.instantiate()
-	item.setup(_output_item_ID)
-	content.add_child(item)
+	var item : EMC_Item = EMC_Item.make_from_id(_output_item_ID)
+	var sprite := TextureRect.new()
+	sprite.set_texture(item.get_texture())
+	content.add_child(sprite)
 	item_name.set_text(item.get_name())
 	
 	for child in _child_recipe:

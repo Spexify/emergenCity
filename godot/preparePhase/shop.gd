@@ -2,14 +2,12 @@ extends Control
 
 var _inventory : EMC_Inventory
 var _tmp_inventory := EMC_Inventory.new()
-var _inventory_occupied : int = 0
+var _shop_inventory := EMC_Inventory.new()
 var _balance : int = Global.get_e_coins()
 
-@onready var inventory_grid := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Shelf/InventoryGrid
-@onready var shop_grid := $Background/Margin/Main/ShopSection/ShopPanel/Shelf/ShopGrid
 @onready var label_ecoins := $Background/MarginContainer/PanelContainer/HBoxContainer/RichTextLabel
-
-const _SLOT_SCN: PackedScene = preload("res://GUI/inventory/inventory_slot.tscn")
+@onready var inventory_ui : EMC_Inventory_UI = $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/InventoryUI
+@onready var shop_ui : EMC_Inventory_UI = $Background/Margin/Main/ShopSection/ShopPanel/InventoryUI
 
 func _ready() -> void:
 	_add_balance(0)
@@ -18,105 +16,59 @@ func _ready() -> void:
 	if _inventory == null:
 		_inventory = EMC_Inventory.new()
 	
-	for item: EMC_Item.IDs in _inventory.get_all_item_slots_as_id():
-		_add_item_by_id(item, false)
-		if item != EMC_Item.IDs.DUMMY:
-			_inventory_occupied += 1
-			_tmp_inventory.add_new_item(item)
+	for item in _inventory.get_dup_items():
+		_tmp_inventory.add_item(item)
+	
+	inventory_ui.set_inventory(_tmp_inventory)
+	inventory_ui.reload()
+	inventory_ui.block_first_items(_inventory.get_num_item())
+	inventory_ui.item_clicked.connect(_on_inventory_item_clicked)
 	
 	for item_id : EMC_Item.IDs in JsonMngr.get_all_ids():
 		if item_id == EMC_Item.IDs.DUMMY:
 			continue
-		_add_item_by_id(item_id, true)
-
-
-func _add_item_by_id(item_id : EMC_Item.IDs, shop : bool) -> void:
-	var new_slot := _SLOT_SCN.instantiate()
-	if item_id != EMC_Item.IDs.DUMMY:
-		var new_item: EMC_Item = EMC_Item.make_from_id(item_id)
-		
-		var cost_IC := new_item.get_comp(EMC_IC_Cost)
-		if shop and cost_IC == null: return
-		
-		# Connect to correct handler
-		if shop:
-			new_item.clicked.connect(_on_shop_item_clicked)
-		else:
-			new_item.clicked.connect(_on_inventory_item_clicked)
-			new_slot.modulate = Color(0.3, 0.3, 0.3)
+		var item := EMC_Item.make_from_id(item_id)
+		if item.has_comp(EMC_IC_Cost):
+			_shop_inventory.add_item(item)
 			
-		new_slot.set_item(new_item)
-	
-	# Add to correct Grid
-	if shop:
-		shop_grid.add_child(new_slot)
-	else:
-		inventory_grid.add_child(new_slot)
+	_shop_inventory.num_slots = _shop_inventory.get_num_item()
+	shop_ui.set_inventory(_shop_inventory)
+	shop_ui.item_clicked.connect(_on_shop_item_clicked)
+	shop_ui.reload()
+	#reload()
 
-
-func _remove_item_by_id(item : EMC_Item) -> void :
-	var i : int = 0
-	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
-		if i >= _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
-			SoundMngr.play_sound("Money", 0.1)
-			#inventory_grid.remove_child(slot)
-			#slot.queue_free()
-			slot.remove_item()
-			_tmp_inventory.remove_specific_item(item)
-			
-			var comp := item.get_comp(EMC_IC_Cost)
-			assert(comp != null) 
-			_add_balance(comp.get_cost())
-			
-			item.queue_free()
-			
-			#var new_slot := _SLOT_SCN.instantiate()
-			#inventory_grid.add_child(new_slot)
-			break
-		elif i < _inventory_occupied and slot.get_item() != null and slot.get_item() == item:
-			item.clicked_sound(0.4)
-			break
-		i += 1
-
-
-func _add_item_to_slot_by_id(item: EMC_Item) -> bool :
-	for slot in inventory_grid.get_children() as Array[EMC_InventorySlot]:
-		if slot.get_item() == null:
-			
-			item.clicked.connect(_on_inventory_item_clicked)
-			
-			slot.set_item(item)
-			return true
-	return false
-
+func reload() -> void:
+	shop_ui.reload()
+	inventory_ui.reload()
 
 func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	_display_info(sender)
-	
 	sender.clicked_sound()
 	
 	var comp := sender.get_comp(EMC_IC_Cost)
 	if comp == null:
 		return
-		
+	
 	var cost : int = comp.get_cost()
 
-	var new_item : EMC_Item = EMC_Item.make_from_id(sender.get_ID())
-	if _balance - cost >= 0 and _add_item_to_slot_by_id(new_item):
-		_tmp_inventory.add_existing_item(new_item)
+	var new_item : EMC_Item = EMC_Item.make_from_id(sender.get_id())
+	if _balance - cost >= 0 and _tmp_inventory.has_space():
+		_tmp_inventory.add_item(new_item)
 		_add_balance(-cost)
-
+		
+	shop_ui.reconnect()
 
 func _on_inventory_item_clicked(sender : EMC_Item) -> void:
 	_display_info(sender)
-	_remove_item_by_id.call_deferred(sender)
-
+	_tmp_inventory.remove_item(sender)
+	var comp := sender.get_comp(EMC_IC_Cost)
+	if comp != null:
+		_add_balance(comp.get_cost())
 
 func _add_balance(value : int) -> void:
 	_balance += value
 	label_ecoins.clear()
 	label_ecoins.append_text("[right][color=black]" + str(_balance) + "[/color][/right]")
-
 
 ## Display information of clicked [EMC_Item]
 func _display_info(sender: EMC_Item) -> void:
@@ -144,10 +96,7 @@ func _display_info(sender: EMC_Item) -> void:
 
 
 func _on_home_pressed() -> void:
-	for child : EMC_InventorySlot in inventory_grid.get_children():
-		child.remove_item()
-	
-	_tmp_inventory.sort_custom(EMC_Inventory.sort_helper)
+	_tmp_inventory.sort_custom(EMC_Inventory.sort_by_id)
 	Global.set_inventory(_tmp_inventory)
 	Global.set_e_coins(_balance)
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

@@ -46,7 +46,8 @@ func _ready() -> void:
 	#SettingsGUI.closed.connect(open)
 
 func _exit_tree() -> void:
-	SettingsGUI.closed.disconnect(open)
+	if closed.is_connected(open):
+		SettingsGUI.closed.disconnect(open)
 
 func _on_resume_btn_pressed() -> void:
 	close()

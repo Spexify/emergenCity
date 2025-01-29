@@ -25,8 +25,8 @@ func start() -> void:
 	
 	item_list.clear()
 
-	var description : Dictionary = OverworldStatesMngr.get_description()
-	for scenario_name : String in description:
+	var dict : Dictionary = OverworldStatesMngr.get_description()
+	for scenario_name : String in dict:
 		
 		#var textures : Array[Texture2D] = []
 		#for key : String in description[scenario_name]:

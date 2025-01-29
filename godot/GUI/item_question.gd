@@ -4,9 +4,7 @@ class_name EMC_ItemQuestion
 @onready var confirm_btn : Button = $VBoxContainer/HBoxContainer/ConfirmBtn
 @onready var back_btn : Button = $VBoxContainer/HBoxContainer/BackBtn
 @onready var question : RichTextLabel = $VBoxContainer/PanelContainer/RichTextLabel
-@onready var slot : EMC_InventorySlot = $VBoxContainer/CC/Slot
-
-const ITEM = preload("res://items/item.tscn")
+@onready var slot : EMC_Item_Slot = $VBoxContainer/CC/Slot
 
 var _inventory : EMC_Inventory
 var _item : EMC_Item
@@ -43,8 +41,7 @@ func close() -> void:
 func _on_confirm_btn_pressed() -> void:
 	slot.remove_item()
 	_avatar.consume_item(_item)
-	_inventory.remove_specific_item(_item)
-	_item.queue_free()
+	_inventory.remove_item(_item)
 	close()
 
 func _on_back_btn_pressed() -> void:

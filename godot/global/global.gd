@@ -143,7 +143,7 @@ func save_game(p_was_crisis : bool) -> void:
 	var data : Dictionary = {
 		"e_coins": _e_coins,
 		"was_crisis": p_was_crisis,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		"inventory_data": _inventory.get_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		"upgrade_ids_unlocked": _upgrade_ids_unlocked,
 		"upgrades_equipped" : _upgrades_equipped.map(func (_upgrade : EMC_Upgrade) -> int : return _upgrade.get_id() if _upgrade != null else EMC_Upgrade.IDs.EMPTY_SLOT),
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
@@ -210,9 +210,9 @@ func load_game() -> void:
 	else:
 		_inventory = EMC_Inventory.new()
 		for item_dict : Dictionary in data["inventory_data"]:
-			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
+			_inventory.add_item(EMC_Item.from_save(item_dict))
 			
-		_inventory.sort_custom(EMC_Inventory.sort_helper)
+		_inventory.sort_custom(EMC_Inventory.sort_by_id)
 		
 	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
 	
@@ -252,7 +252,7 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
 	
-	inventory.sort_custom(EMC_Inventory.sort_helper)
+	inventory.sort_custom(EMC_Inventory.sort_by_id)
 	return inventory
 
 

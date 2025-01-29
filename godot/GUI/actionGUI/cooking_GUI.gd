@@ -1,6 +1,5 @@
 extends EMC_ActionGUI
 
-const ITEM_SCN : PackedScene = preload("res://items/item.tscn")
 const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
@@ -102,12 +101,14 @@ func _on_cancel_pressed() -> void:
 
 func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 	_last_clicked_recipe = p_recipe
-	for unwanted_child : EMC_Item in _input_item_list.get_children():
+	for unwanted_child : TextureRect in _input_item_list.get_children():
 		_input_item_list.remove_child(unwanted_child)
 		unwanted_child.queue_free()
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
 		var item : EMC_Item = EMC_Item.make_from_id(input_item_ID)
-		_input_item_list.add_child(item)
+		var sprite := TextureRect.new()
+		sprite.set_texture(item.get_texture())
+		_input_item_list.add_child(sprite)
 		
 	_needs_water_icon.visible = p_recipe.needs_water()
 	_needs_heat_icon.visible = p_recipe.needs_heat()
@@ -115,7 +116,9 @@ func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 		if Global.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR) and Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR).get_state() > 0:
 			return
 		var water : EMC_Item = EMC_Item.make_from_id(EMC_Item.IDs.WATER)
-		_input_item_list.add_child(water)
+		var sprite := TextureRect.new()
+		sprite.set_texture(water.get_texture())
+		_input_item_list.add_child(sprite)
 
 
 func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
@@ -127,8 +130,9 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 			counting_dict[input_item_ID] += 1 
 		else:
 			counting_dict[input_item_ID] = 1 
-	for counted_item_ID: EMC_Item.IDs in counting_dict.keys():
-		if _inventory.get_item_count_of_ID(counted_item_ID, true) < counting_dict[counted_item_ID]:
+	for id: EMC_Item.IDs in counting_dict.keys():
+		var filter := EMC_Util.combine_filters(EMC_Inventory.filter_id(id), EMC_Inventory.filter_not_comp(EMC_IC_Unpalatable))
+		if _inventory.get_items_filterd(filter).size() < counting_dict[id]:
 			return false
 	return true
 
@@ -142,10 +146,10 @@ func _cook_recipe() -> void:
 			
 			
 	for input_item_ID : EMC_Item.IDs in _last_clicked_recipe.get_input_item_IDs():
-		_inventory.remove_item(input_item_ID)
+		_inventory.remove_item_by_id(input_item_ID)
 		
 	var output_item : EMC_Item = EMC_Item.make_from_id(_last_clicked_recipe.get_output_item_ID())
-	_inventory.add_existing_item(output_item)
+	_inventory.add_item(output_item)
 	
 	await SoundMngr.button_finished()
 	var wait : AudioStreamPlayer = _action.play_sound()

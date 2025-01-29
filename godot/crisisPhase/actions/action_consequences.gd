@@ -103,27 +103,27 @@ func add_tap_water(_dummy: int) -> void:
 ## TODO: Improvement idea: change parameter type to string, and use JsonMngr.item_name_to_id
 ## This way, normal actions can be included in the JSON file
 func use_item(p_ID: EMC_Item.IDs) -> void:
-	var item := _inventory.get_item_of_ID(p_ID)
+	var item : EMC_Item = _inventory.get_items_of_id(p_ID).front()
 	if item == null:
 		return
 	
 	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
 	if usesIC != null:
 		usesIC.use_item()
-	if usesIC.no_uses_left():
-		_inventory.remove_specific_item(item)
+		if usesIC.no_uses_left():
+			_inventory.remove_item(item)
 
 
 func use_item_by_name(p_name: String) -> void:
-	var item := _inventory.get_item_of_ID(JsonMngr.item_name_to_id(p_name))
+	var item : EMC_Item = _inventory.get_items_of_id(JsonMngr.item_name_to_id(p_name)).front()
 	if item == null:
 		return
 	
 	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
 	if usesIC != null:
 		usesIC.use_item()
-	if usesIC.no_uses_left():
-		_inventory.remove_specific_item(item)
+		if usesIC.no_uses_left():
+			_inventory.remove_specific_item(item)
 
 
 ############################################ Other ################################################

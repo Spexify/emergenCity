@@ -180,6 +180,7 @@ icon = ExtResource("3_fdip5")
 title = "[center]Warn-App"
 
 [node name="Info" type="PanelContainer" parent="VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -203,7 +204,6 @@ layout_mode = 2
 separation = -20
 
 [node name="Warn" type="PanelContainer" parent="VBC"]
-visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -314,7 +314,6 @@ text = "[color=white]Krisopolis[/color]"
 fit_content = true
 
 [node name="Offline" type="Control" parent="VBC/Warn"]
-visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Offline"]
@@ -337,7 +336,7 @@ custom_minimum_size = Vector2(0, 202.73)
 layout_mode = 2
 size_flags_vertical = 4
 bbcode_enabled = true
-text = "[center][img]res://res/sprites/GUI/icons/icon_offline.png[/img]
+text = "[center][img]res://assets/GUI/icons/icon_offline.png[/img]
  You are currently offline"
 fit_content = true
 

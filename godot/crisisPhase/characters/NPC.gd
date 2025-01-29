@@ -86,14 +86,14 @@ func calulate_item_score_generic(items : Array[EMC_Item], modifier : Dictionary)
 	return items.reduce(
 		func (accum : int, item : EMC_Item) -> int:
 			var value_comp := item.get_comp(EMC_IC_Value)
-			accum += modifier.get(JsonMngr.item_id_to_name(item.get_ID()), 1) * (value_comp.get_value() if value_comp != null else 1)
+			accum += modifier.get(JsonMngr.item_id_to_name(item.get_id()), 1) * (value_comp.get_value() if value_comp != null else 1)
 			return accum, 0)
 
 func calculate_trade_score(items : Array[EMC_Item]) -> float:
 	return calulate_item_score_generic(items, _item_preference)
 
 func calculate_inventory_score(score : Dictionary = _item_preference) -> float:
-	return calulate_item_score_generic(_inventory.get_all_items(), score)
+	return calulate_item_score_generic(_inventory.get_items(), score)
 	
 #func calculate_work_score() -> int:
 	#return (calulate_item_score_generic(_inventory.get_all_item_slots_as_id(), _brain["work"]["has"], 1)
@@ -136,7 +136,7 @@ func get_random_item(args : Dictionary) -> void:
 		_inventory.add_new_item(JsonMngr._id_to_name.keys().pick_random())
 
 func remove_item(args : Dictionary) -> void:
-	_inventory.remove_item(JsonMngr.item_name_to_id(args.get("name")), args.get("count"))
+	_inventory.remove_item_by_id(JsonMngr.item_name_to_id(args.get("name")), args.get("count"))
 	
 func exchange_items(args : Dictionary) -> void:
 	var items : Array[EMC_Item] = _inventory.filter_items(EMC_Inventory.filter_ids(args.get("in").keys().map(func (item_name : String) -> int: return JsonMngr.item_name_to_id(item_name))))
@@ -145,9 +145,9 @@ func exchange_items(args : Dictionary) -> void:
 	while count < args.get("max_count") and items.size() > 0:
 		var item_index : int = range(items.size()).pick_random()
 		var item : EMC_Item = items.pop_at(item_index)
-		_inventory.remove_specific_item(item)
+		_inventory.remove_item(item)
 		
-		_score += args.get("in").get(JsonMngr.item_id_to_name(item.get_ID()))
+		_score += args.get("in").get(JsonMngr.item_id_to_name(item.get_id()))
 		count += 1
 		
 	while _score > 0:

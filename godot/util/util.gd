@@ -1,5 +1,10 @@
 class_name EMC_Util
 
+static func combine_filters(f1 : Callable, f2 : Callable) -> Callable:
+	return \
+		func (value : Variant) -> bool:
+			return f1.call(value) and f2.call(value)
+
 class Promise:
 	signal complete(name : String)
 	

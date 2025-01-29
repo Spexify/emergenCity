@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://diu2wl65n301n"]
+[gd_scene load_steps=12 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" path="res://GUI/inventory/inventory_GUI.gd" id="1_ve5h2"]
+[ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="2_opbok"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="3_270nm"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_2ujqp"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://assets/GUI/backgrounds/menu_box_white.png" id="4_47hfl"]
@@ -62,12 +63,19 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center]Inventory[/center]"
 
+[node name="InventoryUI" parent="Inventory/VBC" instance=ExtResource("2_opbok")]
+custom_minimum_size = Vector2(416, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Inventory/VBC"]
+visible = false
 custom_minimum_size = Vector2(420, 350)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="GridContainer" type="GridContainer" parent="Inventory/VBC/ScrollContainer"]
+visible = false
 custom_minimum_size = Vector2(404, 0)
 layout_mode = 2
 size_flags_horizontal = 8

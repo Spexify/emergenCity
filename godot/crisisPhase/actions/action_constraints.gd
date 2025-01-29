@@ -1,8 +1,6 @@
 extends Node
 class_name EMC_ActionConstraints
 
-const _ITEM_SCN: PackedScene = preload("res://items/item.tscn")
-
 const NO_PARAM: int = 0
 const NO_REJECTION: String = ""
 
@@ -117,8 +115,7 @@ func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 	if _inventory.has_item(p_ID):
 		return NO_REJECTION
 	else:
-		var item := _ITEM_SCN.instantiate()
-		item.setup(p_ID)
+		var item := EMC_Item.make_from_id(p_ID)
 		return "Du brauchst " + item.get_name() + " dafür!"
 		
 func has_item_by_name(p_name : String) -> String:
@@ -126,8 +123,7 @@ func has_item_by_name(p_name : String) -> String:
 	if _inventory.has_item(id):
 		return NO_REJECTION
 	else:
-		var item := _ITEM_SCN.instantiate()
-		item.setup(id)
+		var item := EMC_Item.make_from_id(id)
 		return "Du brauchst " + item.get_name() + " dafür!"
 
 
