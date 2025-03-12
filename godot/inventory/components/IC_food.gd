@@ -1,12 +1,13 @@
 extends EMC_IC_Consumable
 class_name EMC_IC_Food
 
+@export var _nutritionness: int = 0
+
 const UNIT: String = "kcal"
 const UNIT_FACTOR: int = 250 #1 Unit = 250kcal
-var _nutritionness: int = 0
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(nutritionness: int, pleasurable: int = 0) -> void:
+func _init(nutritionness: int = 0, pleasurable: int = 0) -> void:
 	super("Essen", Color.INDIAN_RED)
 	_nutritionness = nutritionness
 

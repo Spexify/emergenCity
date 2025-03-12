@@ -67,7 +67,7 @@ func add_item_question(params : Array) -> void:
 	elif typeof(params[0]) == TYPE_INT:
 		id = params[0] as int
 	var item : = EMC_Item.make_from_id(id)
-	if _inventory.add_existing_item(item) == false:
+	if _inventory.add_item(item) == false:
 		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 	else:
 		if params.size() >= 1:
@@ -123,7 +123,7 @@ func use_item_by_name(p_name: String) -> void:
 	if usesIC != null:
 		usesIC.use_item()
 		if usesIC.no_uses_left():
-			_inventory.remove_specific_item(item)
+			_inventory.remove_item(item)
 
 
 ############################################ Other ################################################

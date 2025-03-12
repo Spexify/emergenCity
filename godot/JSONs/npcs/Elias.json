@@ -1,16 +1,75 @@
 {
-	"initial_items": {
-	},
-	"stage": "Penthouse",
-	"pitch": 0.75,
-	"positions": {
-		"Penthouse": { "x": 440, "y": 800 },
-		"Market": { "x": 180, "y": 300 }
-	},
-	"item_preference": {
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Elias",
+			"descr": "Das hier ist Elias.\nEr ist lieb.",
+			"portait": "elias"
+		},
+		"sprite": {
+			"texture_name": "elias"
+		},
+		"interaction":{
+			"conversation": {
+				"pitch": 0.75
+			},
+			"trading": {
+				"preferences": {},
+				"inventory": {
+					"WATER": 4
+				}
+			}
+		},
+		"stage": {
+			"start": "Penthouse",
+			"positions": {
+				"Penthouse": { "x": 440, "y": 800 },
+				"Market": { "x": 180, "y": 300 },
+				"Park": { "x": 440, "y": 800 }
+			}
+		},
+		"brain": {
+			"actions": {
+				"work": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["market"]
+				},
+				"idle": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["penthouse"]
+				},
+				"stroll": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["park"]
+				}
+			},
+			"decide": {
+				"name": "decide"
+			},
+			"comps": {
+				"routine": {
+					"schedule": {
+						"1": "idle",
+						"2": "work",
+						"0": "idle"
+					}
+				},
+				"impulsive": {
+					"count": {
+						"0": 3.0,
+						"1": 1.0
+					},
+					"actions": {
+						"work": 1.0,
+						"stroll": 1.0
+					}
+				}
+			}
+		}
+	}
 }

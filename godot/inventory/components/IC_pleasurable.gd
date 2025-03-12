@@ -2,11 +2,12 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Pleasurable
 ## For unenjoyable or enjoyable food or drink items
 
+@export var _happiness_change: int
+
 const UNIT: String = "Genuss"
-var _happiness_change: int
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_happiness_change : int) -> void:
+func _init(_p_happiness_change : int = 0) -> void:
 	super("Köstlich", Color.HOT_PINK)
 	_happiness_change = _p_happiness_change
 

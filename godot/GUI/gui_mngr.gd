@@ -26,6 +26,8 @@ class_name  EMC_GUIMngr
 @onready var _rain_animation : EMC_GUI = $CL/RainAnimation
 @onready var _trade_ui : EMC_TradeUI = $CL/Trade
 @onready var handy_gui : EMC_Handy = $CL/HandyGUI
+@onready var npc_interaction : EMC_Interaction_GUI = $CL/NpcInteraction
+
 
 @onready var pause_menu_btn := $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn := $ButtonList/VBC/BackpackBtn
@@ -43,6 +45,7 @@ var _gui_queue : Array[QueueEntry]
 
 var _stage_mngr : EMC_StageMngr
 var _avatar : EMC_Avatar
+var _dialogue_mngr: EMC_DialogueMngr
 
 func _ready() -> void:
 	for child in middle_section.get_children():
@@ -56,6 +59,7 @@ func _ready() -> void:
 	all_the_guis.append(_day_period_transition)
 	all_the_guis.append(_trade_ui)
 	all_the_guis.append(handy_gui)
+	all_the_guis.append(npc_interaction)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 
@@ -66,6 +70,7 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	
 	_stage_mngr = p_stage_mngr
 	_avatar = p_avatar
+	_dialogue_mngr = p_dialogue_mngr
 	
 	_trade_ui.setup(p_backpack, self)
 	
@@ -153,6 +158,11 @@ func gui_closed(gui : EMC_GUI) -> void:
 		all_guis_closed.emit()
 
 ########################Signal Handlers############################
+
+func _on_npc_interaction(npc: EMC_NPC) -> void:
+	request_gui("NpcInteraction", [npc])
+	
+	#_dialogue_mngr._on_dialogue_initiated(_stage_mngr.get_curr_stage_name(), npc.name)
 
 func _on_backpack_btn_pressed() -> void:
 	request_gui("BackpackGUI", [])

@@ -27,6 +27,7 @@ OverworldStatesMngr="*res://global/overworld_states_mngr.gd"
 JsonMngr="*res://global/json_mngr.gd"
 SettingsGUI="*res://global/settings_GUI.tscn"
 SoundMngr="*res://global/sound_mngr.tscn"
+Preloader="*res://global/preloader.gd"
 
 [debug]
 

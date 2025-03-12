@@ -21,11 +21,6 @@ const _icon_list : Dictionary = {
 	"water" : preload("res://assets/GUI/icons/icon_statusbar_hydration.png"),
 }
 
-##TODO
-var _pitches : Dictionary = {
-	"avatar": 1.0, "friedel": 0.6, "gerhard": 0.5, "julia": 1.3, "mert": 0.9,
-}
-
 func _init() -> void:
 	regex.compile("\\[.*?\\]")
 
@@ -113,7 +108,9 @@ func start(dialogue : Dictionary) -> void:
 		if pair[0].get_basename() == "avatar" or pair[0] == "Erzähler":
 			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
 		else:
-			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : _stage_mngr.get_NPC(pair[0].get_basename())._dialogue_pitch})
+			var npc: EMC_NPC = _stage_mngr.get_NPC(pair[0].get_basename())
+			var pitch: float = npc.get_comp(EMC_NPC_Conversation).get_pitch()
+			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : pitch})
 		dialogue_box.append_text(pair[1])
 		dialogue_box.pop()
 
@@ -185,7 +182,9 @@ func _load_actors_display(actors : Array[String]) -> void:
 			elif actors[i].get_basename() == "":
 				continue
 			else:
-				port.set_texture(load("res://assets/characters/portrait_" + actors[i].get_basename() + ".png"))
+				var portrait : Texture2D = \
+					_stage_mngr.get_NPC(actors[i].get_basename()).get_comp(EMC_NPC_Descr).get_portrait()
+				port.set_texture(portrait)
 			port.set_name(actors[i].get_basename())
 			port.set_flip_h(actors[i].get_extension() == "r")
 		else:

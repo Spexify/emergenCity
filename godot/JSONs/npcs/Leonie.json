@@ -1,16 +1,24 @@
 {
-	"initial_items": {
-	},
-	"stage": "Townhall",
-	"pitch": 0.95,
-	"positions": {
-		"Townhall": { "x": 430, "y": 300 },
-		"Market": { "x": 180, "y": 300 }
-	},
-	"item_preference": {
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Leonie",
+			"descr": "Das hier ist Leonie.\nSie ist lieb.",
+			"portait": "leonie"
+		},
+		"sprite": {
+			"texture_name": "leonie"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.95
+			}
+		},
+		"stage": {
+			"start": "Townhall",
+			"positions": {
+				"Townhall": { "x": 430, "y": 300 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
 }

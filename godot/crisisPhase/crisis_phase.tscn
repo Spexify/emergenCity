@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=37 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://druwt2u04fhrc" path="res://GUI/handy/handy_gui.tscn" id="24_lodu6"]
 [ext_resource type="PackedScene" uid="uid://dusoswyk1fft6" path="res://GUI/dialogue/dialogue_gui.tscn" id="25_qh0l1"]
 [ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
+[ext_resource type="PackedScene" uid="uid://cr304u228icot" path="res://GUI/npc_interaction_gui.tscn" id="27_8bng3"]
 [ext_resource type="PackedScene" uid="uid://b2x3ed3yf16xa" path="res://GUI/actionGUI/sink_GUI.tscn" id="32_pnt2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
@@ -150,6 +151,11 @@ size_flags_horizontal = 4
 
 [node name="HandyGUI" parent="GUI/CL" groups=["Save"] instance=ExtResource("24_lodu6")]
 visible = false
+
+[node name="NpcInteraction" parent="GUI/CL" instance=ExtResource("27_8bng3")]
+visible = false
+offset_top = 112.0
+offset_bottom = 112.0
 
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
@@ -275,5 +281,4 @@ layout_mode = 2
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
-[connection signal="period_increased" from="GUI/CL/VBC/UpperSection/HBC/DayMngr" to="GUI/CL/HandyGUI" method="_on_period_increased"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

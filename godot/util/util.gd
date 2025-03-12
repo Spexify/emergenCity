@@ -85,3 +85,56 @@ static func pick_weighted_random_const(list : Array[Variant], weights : Array[fl
 			return list[index]
 		random -= weights[index]
 	return
+
+static func dict_to_vector(data : Dictionary, type : Variant.Type) -> Variant:
+	var x : Variant = data.get("x", NAN)
+	var y : Variant = data.get("y", NAN)
+	var z : Variant = data.get("z", NAN)
+	var w : Variant = data.get("w", NAN)
+	
+	match type:
+		TYPE_VECTOR2:
+			if (x != NAN and y != NAN 
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)):
+				return Vector2(x as float, y as float)
+		TYPE_VECTOR2I:
+			if (x != NAN and y != NAN 
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)):
+				return Vector2i(x as int, y as int)
+		TYPE_VECTOR3:
+			if (x != NAN and y != NAN and z != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)):
+				return Vector3(x as float, y as float, z as float)
+		TYPE_VECTOR3I:
+			if (x != NAN and y != NAN and z != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)):
+				return Vector3i(x as int, y as int, z as int)
+		TYPE_VECTOR4:
+			if (x != NAN and y != NAN and z != NAN and w != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)
+			and (typeof(w) == TYPE_INT or typeof(w) == TYPE_FLOAT)):
+				return Vector4(x as float, y as float, z as float, w as float)
+		TYPE_VECTOR4I:
+			if (x != NAN and y != NAN and z != NAN and w != NAN
+			and (typeof(x) == TYPE_INT or typeof(x) == TYPE_FLOAT)
+			and (typeof(y) == TYPE_INT or typeof(y) == TYPE_FLOAT)
+			and (typeof(z) == TYPE_INT or typeof(z) == TYPE_FLOAT)
+			and (typeof(w) == TYPE_INT or typeof(w) == TYPE_FLOAT)):
+				return Vector4i(x as int, y as int, z as int, w as int)
+		_: 
+			push_error(str(type) + " is not a Type.")
+	push_error("Wrong Type!")
+	return null
+
+
+class JSONUtil:
+	
+	pass

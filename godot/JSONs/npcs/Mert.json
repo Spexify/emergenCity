@@ -1,16 +1,24 @@
 {
-	"initial_items": {
-	},
-	"stage": "ApartmentMert",
-	"pitch": 0.9,
-	"positions": {
-		"ApartmentMert": { "x": 400, "y": 310 },
-		"Market": { "x": 180, "y": 300 }
-	},
-	"item_preference": {
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Mert",
+			"descr": "Das hier ist Mert.\nEr ist lieb.",
+			"portait": "mert"
+		},
+		"sprite": {
+			"texture_name": "mert"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.9
+			}
+		},
+		"stage": {
+			"start": "ApartmentMert",
+			"positions": {
+				"ApartmentMert": { "x": 400, "y": 310 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
 }

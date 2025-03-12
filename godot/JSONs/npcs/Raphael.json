@@ -1,26 +1,40 @@
 {
-	"initial_items": {
-		"WATER": 3,
-		"POTATOES": 3,
-		"SOAP": 1,
-		"MEAT": 2,
-		"BREAD": 3
-	},
-	"stage": "Market",
-	"pitch": 0.7,
-	"positions": {
-		"Market": { "x": 224, "y": 254 }
-	},
-	"item_preference": {
-		"WATER": 1,
-		"POTATOES": 2,
-		"VEGETABLES": 4,
-		"SOAP": 8,
-		"MEAT": 12,
-		"BREAD": 4
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Raphael",
+			"descr": "Das hier ist Raphael.\nEr ist lieb.",
+			"portait": "raphael"
+		},
+		"sprite": {
+			"texture_name": "raphael"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.7
+			},
+			"trading": {
+				"preferences": {
+					"WATER": 1,
+					"POTATOES": 2,
+					"VEGETABLES": 4,
+					"SOAP": 8,
+					"MEAT": 12,
+					"BREAD": 4
+				},
+				"inventory": {
+					"WATER": 3,
+					"POTATOES": 3,
+					"SOAP": 1,
+					"MEAT": 2,
+					"BREAD": 3
+				}
+			}
+		},
+		"stage": {
+			"start": "Market",
+			"positions": {
+				"Market": { "x": 224, "y": 254 }
+			}
+		}
+	}
 }

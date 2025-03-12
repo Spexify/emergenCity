@@ -2,11 +2,12 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Unpalatable
 ## For unhealthy or spoiled items
 
+@export var _health_reduction: int
+
 const UNIT: String = "% ♡"
-var _health_reduction: int
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_health_reduction : int) -> void:
+func _init(_p_health_reduction : int = 0) -> void:
 	super("Ungenießbar", Color.MEDIUM_SEA_GREEN)
 	_health_reduction = _p_health_reduction
 	if _health_reduction < 0:

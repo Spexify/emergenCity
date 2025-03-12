@@ -20,6 +20,7 @@ const UPGRADE_SCENE_PRELOAD = preload("res://preparePhase/upgrade.tscn")
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
 signal game_loaded
+signal game_saved
 signal scene_changed
 
 @onready var _root := get_tree().root
@@ -42,7 +43,7 @@ var _apps_installed : Array[String] = []
 func set_started_from_entry_scene(p_value: bool = true) -> void:
 	_started_from_entry_scene = p_value
 
-func _ready() -> void:
+func _ready() -> void:	
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
 
@@ -178,7 +179,7 @@ func save_game(p_was_crisis : bool) -> void:
 			
 			# Store the save dictionary as a new line in the save file.
 			save_state.store_line(json_string)
-
+	game_saved.emit()
 
 func load_game() -> void:
 	if not FileAccess.file_exists(SAVE_GAME_FILE):

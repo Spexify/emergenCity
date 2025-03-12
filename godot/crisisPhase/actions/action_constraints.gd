@@ -15,6 +15,11 @@ func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory, p_stage_mngr : E
 	_inventory = p_inventory
 	_stage_mngr= p_stage_mngr
 
+func npc_has_comp(args : Dictionary) -> String:
+	if args.has_all(["npc", "comp"]):
+		if _stage_mngr.get_NPC(args["npc"]).get_comp_by_name(args["comp"]) != null:
+			return NO_REJECTION
+	return "Rejected"
 
 func is_dialogue_state(args : Dictionary) -> String:
 	if args.has_all(["state_name", "value"]) and OverworldStatesMngr.is_dialogue_state(args["state_name"], args["value"]):

@@ -1,19 +1,33 @@
 {
-	"initial_items": {
-		"BATTERIES": 3
-	},
-	"stage": "Mansion",
-	"pitch": 0.65,
-	"positions": {
-		"Mansion": { "x": 300, "y": 832 },
-		"Market": { "x": 180, "y": 300 }
-	},
-	"item_preference": {
-		"BATTERIES": 9,
-		"POTATOES": 3
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Petro",
+			"descr": "Das hier ist Petro.\nEr ist lieb.",
+			"portait": "petro"
+		},
+		"sprite": {
+			"texture_name": "petro"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.65
+			},
+			"trading": {
+				"preferences": {
+					"BATTERIES": 9,
+					"POTATOES": 3
+				},
+				"inventory": {
+					"BATTERIES": 3
+				}
+			}
+		},
+		"stage": {
+			"start": "Mansion",
+			"positions": {
+				"Mansion": { "x": 300, "y": 832 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
 }

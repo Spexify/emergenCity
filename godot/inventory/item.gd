@@ -205,8 +205,8 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	item.name = default_info.get("name", "Dummy")
 	item.descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
 	item.sound_effect = default_info.get("sound", item.sound_effect)
-	var tmp_comps : Array = data.get("comps", [])
-	item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
+	var tmp_comps : Array = data.get("comps", default_info.get("comps", []))
+	item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return EMC_ItemComponent.from_dict(data)))
 	
 	return item
 	

@@ -1,39 +1,65 @@
 {
-	"initial_items": {
-	},
-	"stage": "Gardenhouse",
-	"pitch": 0.5,
-	"positions": {
-		"Park": { "x": 64, "y": 704 },
-		"Gardenhouse": { "x": 96, "y": 704 },
-		"Market": { "x": 160, "y": 320 }
-	},
-	"item_preference": {
-
-	},
-	"desires": [
-		{
-			"name": "happiness",
-			"type": "Accumulator",
-			"increase": 4
+	"comp": {
+		"descr": {
+			"name": "Friedel",
+			"descr": "Das hier ist Friedel.\nSie ist lieb.",
+			"portait": "friedel"
 		},
-		{
-			"name": "idel",
-			"type": "Desire"
-		}
-	],
-	"actions": [
-		{
-			"name": "abhauen",
-			"desire_name": "happiness",
-			"consequnces": { "change_stage": { "stage_name": "Market" } },
-			"routine": { "morning": 7, "noon": 7, "evening": 0 }
+		"sprite": {
+			"texture_name": "friedel"
 		},
-		{
-			"name": "idel",
-			"desire_name": "idel",
-			"consequnces": { "change_stage": { "stage_name": "Gardenhouse" } },
-			"routine": { "morning": 2, "noon": 2, "evening": 2 }
+		"interaction": {
+			"conversation": {
+				"pitch": 0.5
+			}
+		},
+		"stage": {
+			"start": "Gardenhouse",
+			"positions": {
+				"Park": { "x": 64, "y": 704 },
+				"Gardenhouse": { "x": 96, "y": 704 },
+				"Market": { "x": 160, "y": 320 }
+			}
+		},
+		"brain": {
+			"actions": {
+				"sleep": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage_pos",
+					"params": ["gardenhouse", {"x": 200, "y": 310}]
+				},
+				"stroll": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["park"]
+				},
+				"idle": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["gardenhouse"]
+				}
+			},
+			"decide": {
+				"name": "weighted_decide",
+				"weight": {
+					"stroll": 100,
+					"idle": 1,
+					"sleep": 3
+				}
+			},
+			"comps": {
+				"routine": {
+					"schedule": {
+						"0": "idle",
+						"1": [ "sleep", "idle"],
+						"2": "idle"
+					}
+				},
+				"cooperation": {}
+			}
 		}
-	]
+	}
 }

@@ -28,6 +28,12 @@
 	},
 	"#trade": {
 		"prompt": "Handeln",
+		"conditions": {
+			"npc_has_comp": {
+				"npc": "elias",
+				"comp": "trading"
+			}
+		},
 		"actors": ["avatar", "elias.r"],
 		"text": [
 			"elias#Für ein gutes Tauschgeschäft bin ich immer zu haben!"
@@ -37,7 +43,7 @@
 			"consequences": {
 				"overlay_gui": {
 					"name": "Trade",
-					"args": "Elias",
+					"args": "Elias"
 				}
 			},
 			"options": { "#branch": "" }

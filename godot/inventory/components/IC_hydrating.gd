@@ -2,11 +2,12 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Hydrating
 ## For unenjoyable or enjoyable food or drink items
 
+@export var _hydration_change: int
+
 const UNIT: String = "Lecker"
-var _hydration_change: int
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_hydration_change : int) -> void:
+func _init(_p_hydration_change : int = 0) -> void:
 	super("Hydrierend", Color.HOT_PINK)
 	_hydration_change = _p_hydration_change
 

@@ -553,58 +553,31 @@ func load_door_bell() -> Dictionary:
 #endregion
 ##########################################JSON NPCS#################################################
 #region NPC
-const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/NPC.tscn")
+const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/Base_NPC.tscn")
 
-func load_NPC() -> Array[EMC_NPC]:
+func load_NPC() -> Dictionary:
 	assert(_is_items_loaded, "NPS-JSON: Items must be loaded before NPCs")
 		
-	var result : Array[EMC_NPC]
+	var result : Dictionary
 	
 	for file : String in DirAccess.get_files_at(NPC_SOURCE):
 		var source := NPC_SOURCE + "/" + file
 
-		var data : Dictionary = load_file_check_type(source, "Dialogue", TYPE_DICTIONARY)
+		var data : Dictionary = load_file_check_type(source, "NPC", TYPE_DICTIONARY)
 		
-		assert(data.has_all([ "stage", "pitch", "positions", "initial_items", "item_preference", "desires", "actions" ]),
-		"NPC-JSON: Missing Parameters in npc: '" + file +"'")
+		assert(data.has_all(["comp"]))
 		
-		for stage_name : String in data["positions"].keys():
-			data["positions"][stage_name] = dict_to_vector(data["positions"][stage_name], TYPE_VECTOR2I)
-		
-		var npc : EMC_NPC = _NPC_SCN.instantiate()
-		
-		var raw_desires : Array[Dictionary]
-		raw_desires.assign(data["desires"])
-		data["desires"] = {}
-		for desire_dict : Dictionary in raw_desires:
+		var new_npc := _NPC_SCN.instantiate()
+		result[new_npc] = []
+
+		for comp_name: String in data["comp"]:
+			var comp : Resource = Preloader.get_resource("res://crisisPhase/characters/npc_" + comp_name + ".gd")
 			
-			var new_desire : EMC_NPC.NPC_Desire
-			
-			match desire_dict["type"]:
-				"Desire":
-					new_desire = EMC_NPC.NPC_Desire.new()
-				"Accumulator":
-					new_desire = EMC_NPC.NPC_Accumulator_Desire.new(desire_dict["increase"])
-				"Inventory":
-					new_desire = EMC_NPC.NPC_Inventory_Desire.new(desire_dict["item_score"] as Dictionary, desire_dict["max_reinforce"] as int, npc,
-					desire_dict.get("base_value", 0) as int, desire_dict.get("accel", 1.0) as float)
-			
-			data["desires"][desire_dict["name"]] = new_desire
-		
-		var raw_actions : Array[Dictionary]
-		raw_actions.assign(data["actions"])
-		data["actions"] = [] as Array[EMC_NPC.NPC_Action]
-		for action_dict : Dictionary in raw_actions:
-			assert(action_dict.has_all(["desire_name", "consequnces", "routine"]), "NPC-JSON: action of npc: '" + file + "' is missing paramters!")
-			assert(data["desires"].has(action_dict["desire_name"]), "NPC-JSON: action of npc: '" + file + "' is missing desire: '" + action_dict["desire_name"] + "'")
-			
-			data["actions"].append(EMC_NPC.NPC_Action.new(data["desires"][action_dict["desire_name"]],
-					action_dict["consequnces"], action_dict["routine"], action_dict.get("name", "none")))
-		
-		npc.setup(file.get_basename(), data)
-		result.append(npc)
-		
+			var new_comp: Variant = comp.new(data["comp"][comp_name])
+			result[new_npc].append(new_comp)
+					
 	return result
+		
 #endregion
 ########################################JSON RECIPES################################################
 #region RECIPES

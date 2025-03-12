@@ -20,9 +20,9 @@ var _ITEM_PANEL_SCN := preload("res://inventory/item_panel.tscn")
 var _inventory : EMC_Inventory
 var _gui_mngr : EMC_GUIMngr
 
-var _npc: EMC_NPC
+var _npc_trade: EMC_NPC_Trading
+var _npc_descr: EMC_NPC_Descr
 var _npc_inventory : EMC_Inventory
-var _npc_initial_score : int
 
 var _sell_items : Array[EMC_Item]
 var _buy_items : Array[EMC_Item]
@@ -39,16 +39,17 @@ func setup(p_inventory : EMC_Inventory, p_gui_mngr : EMC_GUIMngr) -> void:
 	trader_grid.item_clicked.connect(_on_inventory_item_clicked.bind(false))
 
 func open(npc : EMC_NPC) -> void:
-	_npc = npc
-	_npc_inventory = npc.get_inventory()
-	_npc_initial_score = npc.calculate_inventory_score()
+	_npc_trade = npc.get_comp(EMC_NPC_Trading)
+	_npc_descr = npc.get_comp(EMC_NPC_Descr)
+	
+	_npc_inventory = _npc_trade.get_inventory()
 	trader_grid.set_inventory(_npc_inventory)
 	
 	#Reset mood texture
 	mood_texture.set_region(Rect2(1 * 64, 0, 64, 64))
 	mood.set_texture(mood_texture)
 	
-	portrait.set_texture(load("res://assets/characters/portrait_" + npc.name.to_lower() + ".png"))
+	portrait.set_texture(_npc_descr.get_portrait())
 	
 	inventory_grid.reload()
 	trader_grid.reload()
@@ -111,7 +112,7 @@ func _on_exchange_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 	_evaluat_trade()
 
 func _evaluat_trade() -> void:
-	trade_fairness = _npc.calculate_trade_score(_sell_items) / _npc.calculate_trade_score(_buy_items)
+	trade_fairness = _npc_trade.calculate_trade_score(_sell_items) / _npc_trade.calculate_trade_score(_buy_items)
 	
 	# Math magic XD
 	# this is just "step" function to correctly index the smiley faces
@@ -149,7 +150,7 @@ func _on_cancel_pressed() -> void:
 
 func _on_deal_pressed() -> void:
 	if trade_fairness <= 1.0:
-		var answer : bool = await _gui_mngr.request_gui("ConfirmationGUI", [_npc.name + " ist nicht sehr zufrieden mit dem Handel
+		var answer : bool = await _gui_mngr.request_gui("ConfirmationGUI", [_npc_descr.get_npc_name() + " ist nicht sehr zufrieden mit dem Handel
 		\n Sicher das du ihn trotzdem eingehen willst.
 		\nEs könnte negative Einflüsse auf eure Beziehung haben."])
 		

@@ -1,8 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://7e5katrwcpxy"]
+[gd_scene load_steps=21 format=3 uid="uid://7e5katrwcpxy"]
 
 [ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_mgugj"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_sprite.gd" id="2_f3xbs"]
 [ext_resource type="Texture2D" uid="uid://ukcbiovx5a4l" path="res://assets/characters/sprite_dummy.png" id="2_m7joo"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="3_d42ls"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_interaction.gd" id="5_1l80e"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_stage.gd" id="5_nae4e"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_trading.gd" id="5_t5yuq"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_conversation.gd" id="6_800og"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_descr.gd" id="7_1fjhw"]
+[ext_resource type="Texture2D" uid="uid://qrbsrdrlfyro" path="res://assets/characters/portrait_momo.png" id="8_bny1c"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_brain.gd" id="10_pdjrp"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_decide.gd" id="11_p346j"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_routine.gd" id="12_0o7c5"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_impulsive.gd" id="13_xqxvk"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_cooperation.gd" id="15_falgr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u2dm"]
 radius = 18.0
@@ -68,11 +80,11 @@ _data = {
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_mgugj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_m7joo")
 offset = Vector2(0, -46)
 hframes = 3
+script = ExtResource("2_f3xbs")
 
 [node name="CollisionCircle" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -100,5 +112,39 @@ metadata/_edit_use_anchors_ = true
 libraries = {
 "": SubResource("AnimationLibrary_rd3ph")
 }
+
+[node name="EMC_NPC_Interaction" type="Node" parent="."]
+script = ExtResource("5_1l80e")
+
+[node name="EMC_NPC_Conversation" type="Node" parent="EMC_NPC_Interaction"]
+script = ExtResource("6_800og")
+
+[node name="EMC_NPC_Trading" type="Node" parent="EMC_NPC_Interaction"]
+script = ExtResource("5_t5yuq")
+
+[node name="EMC_NPC_Stage" type="Node" parent="."]
+script = ExtResource("5_nae4e")
+
+[node name="EMC_NPC_Descr" type="Node" parent="."]
+script = ExtResource("7_1fjhw")
+npc_name = "Niemand"
+descr = "Das ist Niemand"
+portrait = ExtResource("8_bny1c")
+
+[node name="EMC_NPC_Brain" type="Node" parent="." node_paths=PackedStringArray("decide")]
+script = ExtResource("10_pdjrp")
+decide = NodePath("EMC_NPC_Decide")
+
+[node name="EMC_NPC_Decide" type="Node" parent="EMC_NPC_Brain"]
+script = ExtResource("11_p346j")
+
+[node name="EMC_NPC_Routine" type="Node" parent="EMC_NPC_Brain"]
+script = ExtResource("12_0o7c5")
+
+[node name="EMC_NPC_Impulsive" type="Node" parent="EMC_NPC_Brain"]
+script = ExtResource("13_xqxvk")
+
+[node name="EMC_NPC_Cooperation" type="Node" parent="EMC_NPC_Brain"]
+script = ExtResource("15_falgr")
 
 [connection signal="pressed" from="DialogueHitbox" to="." method="_on_dialogue_hit_box_pressed"]

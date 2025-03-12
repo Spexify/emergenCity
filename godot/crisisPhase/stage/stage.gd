@@ -62,7 +62,8 @@ func load_stage(override_spawn : Dictionary = {}) -> void:
 		
 		_create_navigation_layer_tiles()
 		
-		_load_npcs(override_spawn)
+		if not override_spawn.is_empty():
+			_override_spawn(override_spawn)
 	
 	const INVISIBLE := Color(0, 0, 0, 0)
 	_stage.set_layer_modulate(Layers.TOOLTIPS, INVISIBLE)
@@ -164,39 +165,12 @@ func _load_optional_event() -> void:
 			var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
 			if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
 				for spawn_NPCs in spawn_NPCs_arr:
-					_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
+					_npcs.get_node(spawn_NPCs.NPC_name).override_spawn(spawn_NPCs.pos)
+					#_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
 					
 #********************NPCs******************
 
-## Remove all NPCs that are currently spawned
-func _deactivate_NPCs() -> void:
-	for npc : EMC_NPC in _npcs.get_children():
-		npc.deactivate()
-
-func _load_npcs(override_spawn : Dictionary = {}) -> void:
-	#Hide all NPCs first
-	_deactivate_NPCs()
-	
-	#Dependend on the stage show and spawn NPCs
-	if not override_spawn.is_empty():
-		for NPC_name: String in override_spawn:
-			_spawn_NPC(NPC_name, override_spawn[NPC_name])
-	
-	if name == "home":
-		return
-	
-	for npc : EMC_NPC in _npcs.get_children():
-		if npc.get_stage_name() == _stage.name:
-			npc.activate()
-		else:
-			npc.deactivate()
-		
-func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
-	var NPC : EMC_NPC = _npcs.get_node(p_NPC_name)
-	if NPC == null:
-		printerr("Stage._spawn_NPC(): Unknown NPC Name: " + p_NPC_name)
-		return
-	
+func reserve_spawn_pos(p_spawn_pos: Vector2) -> Vector2:
 	var tile_position : Vector2 = _global_to_map(p_spawn_pos)
 	var center_position : Vector2 = _map_to_global(tile_position)
 	
@@ -208,11 +182,60 @@ func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
 		if norm_direction.abs() == Vector2.DOWN:
 			center_position -= Vector2.UP*20
 		_stage.erase_cell(Layers.NAVIGATION, _global_to_map(center_position + norm_direction*32))
-	
-	NPC.activate()
-	NPC.position = center_position
-	
+
 	_stage.erase_cell(Layers.NAVIGATION, tile_position)
+	return center_position
+
+## Remove all NPCs that are currently spawned
+func _deactivate_NPCs() -> void:
+	for npc : EMC_NPC in _npcs.get_children():
+		npc.hide()
+
+func _override_spawn(dict : Dictionary) -> void:
+	for NPC_name: String in dict:
+		_npcs.get_node(NPC_name).get_comp(EMC_NPC_Stage).override_spawn(dict[NPC_name])
+	
+	##Hide all NPCs first
+	#_deactivate_NPCs()
+	#
+	##Dependend on the stage show and spawn NPCs
+	#if not override_spawn.is_empty():
+		
+		
+		#for NPC_name: String in override_spawn:
+			#_spawn_NPC(NPC_name, override_spawn[NPC_name])
+	#
+	#if name == "home":
+		#return
+	#
+	#for npc : EMC_NPC in _npcs.get_children():
+		#if npc.get_stage_name() == _stage.name:
+			#npc.activate()
+		#else:
+			#npc.deactivate()
+
+#func _spawn_NPC(p_NPC_name: String, p_spawn_pos: Vector2) -> void:
+	#var NPC : EMC_NPC = _npcs.get_node(p_NPC_name)
+	#if NPC == null:
+		#printerr("Stage._spawn_NPC(): Unknown NPC Name: " + p_NPC_name)
+		#return
+	#
+	#var tile_position : Vector2 = _global_to_map(p_spawn_pos)
+	#var center_position : Vector2 = _map_to_global(tile_position)
+	#
+	#if center_position.distance_to(p_spawn_pos) > 16:
+		#var direction := p_spawn_pos - center_position
+		#direction[direction.abs().min_axis_index()] = 0
+		#var norm_direction := direction.normalized()
+		#center_position += norm_direction * 32
+		#if norm_direction.abs() == Vector2.DOWN:
+			#center_position -= Vector2.UP*20
+		#_stage.erase_cell(Layers.NAVIGATION, _global_to_map(center_position + norm_direction*32))
+	#
+	#NPC.activate()
+	#NPC.position = center_position
+	#
+	#_stage.erase_cell(Layers.NAVIGATION, tile_position)
 
 #*************UPGRADES*****************
 

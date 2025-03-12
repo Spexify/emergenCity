@@ -1,14 +1,14 @@
 extends EMC_ItemComponent
 class_name EMC_IC_Shelflife
 
+@export var _shelflife: int 
+
 const DECAY_RATE_NO_ELECTRICITY: int = 2
 const DECAY_RATE_WITH_ELECTRICITY: int = 1
 const UNIT: String = "Tage"
-var _shelflife: int 
-
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_max_shelflife : int) -> void:
+func _init(_p_max_shelflife : int = 0) -> void:
 	super("Haltbarkeit", Color.CHOCOLATE)
 	_shelflife = _p_max_shelflife
 

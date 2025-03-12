@@ -51,7 +51,7 @@ func _ready() -> void:
 	#### Stage
 	stage_mngr.setup(_avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
 	
-	stage_mngr.dialogue_initiated.connect(_dialogue_manager._on_dialogue_initiated)
+	stage_mngr.npc_interaction.connect(_gui_mngr._on_npc_interaction)
 	
 	#### DayMngr
 	_day_mngr.setup($Avatar, _stage_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \

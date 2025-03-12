@@ -1,12 +1,13 @@
 extends EMC_IC_Consumable
 class_name EMC_IC_Drink
 
+@export var _hydration: int = 0 
+
 const UNIT: String = "ml"
 const UNIT_FACTOR: int = 250 #1 Unit = 500ml
-var _hydration: int = 0 
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_hydration: int) -> void:
+func _init(p_hydration: int = 0) -> void:
 	super("Getränk", Color.CADET_BLUE)
 	_hydration = p_hydration 
 

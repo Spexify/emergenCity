@@ -1,89 +1,88 @@
 {
-	"initial_items": {
-		"WATER": 3,
-		"WATER_DIRTY": 2,
-		"VEGETABLES": 3
-	},
-	"stage": "Gardenhouse",
-	"pitch": 0.5,
-	"positions": {
-		"Park": { "x": 128, "y": 704 },
-		"Gardenhouse": { "x": 448, "y": 380 },
-		"Market": { "x": 150, "y": 300 }
-	},
-	"item_preference": {
-		"WATER": 1,
-		"WATER_DIRTY": 2,
-		"VEGETABLES": 2
-	},
-	"desires": [
-		{
-			"name": "happiness",
-			"type": "Accumulator",
-			"increase": 4
+	"comp": {
+		"descr": {
+			"name": "Gerhard",
+			"descr": "Das hier ist Gerhard.\nEr ist lieb.",
+			"portait": "gerhard"
 		},
-		{
-			"name": "work",
-			"type": "Inventory",
-			"item_score": { "WATER": 1, "WATER_DIRTY": 2 },
-			"max_reinforce": 10,
-			"base_value": 0,
-			"accel": 0.5
+		"sprite": {
+			"texture_name": "gerhard"
 		},
-		{
-			"name": "needs_water",
-			"type": "Inventory",
-			"item_score": { "WATER": -1, "WATER_DIRTY": -2 },
-			"max_reinforce": 10,
-			"base_value": 1,
-			"accel": 0.5
+		"interaction": {
+			"conversation": {
+				"pitch": 0.5
+			},
+			"trading": {
+				"preferences": {
+					"WATER": 1,
+					"WATER_DIRTY": 2,
+					"VEGETABLES": 2
+				},
+				"inventory": {
+					"WATER": 3,
+					"WATER_DIRTY": 2,
+					"VEGETABLES": 3
+				}
+			}
 		},
-		{
-			"name": "idel",
-			"type": "Desire"
-		}
-	],
-	"actions": [
-		{
-			"name": "friedel",
-			"desire_name": "happiness",
-			"consequnces": {
-				"change_stage": {
-					"stage_name": "Park"
+		"stage": {
+			"start": "Gardenhouse",
+			"positions": {
+				"Park": { "x": 128, "y": 704 },
+				"Gardenhouse": { "x": 448, "y": 380 },
+				"Market": { "x": 150, "y": 300 }
+			}
+		},
+		"brain": {
+			"actions": {
+				"work": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage_pos",
+					"params": ["gardenhouse", {"x": 290, "y": 725}]
+				},
+				"stroll": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["park"]
+				},
+				"idle": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["gardenhouse"]
+				},
+				"friedel": {
+					"type": "multi",
+					"acc": "array",
+					"0": {
+						"type": "single",
+						"comp": "self",
+						"method": "coop",
+						"params": ["friedel", "stroll"]
+					},
+					"1": {
+						"type": "single",
+						"comp": "stage",
+						"method": "change_stage",
+						"params": ["park"]
+					}
 				}
 			},
-			"routine": { "morning": 10, "noon": 2, "evening": 4 }
-		},
-		{
-			"name": "work",
-			"desire_name": "work",
-			"consequnces": {
-				"exchange_items": {
-					"in": { "WATER": 1, "WATER_DIRTY": 2 },
-					"out": { "VEGETABLES": 2 },
-					"max_count": 3
-				},
-				"change_stage": { "stage_name": "Gardenhouse" }
+			"decide": {
+				"name": "decide"
 			},
-			"routine": { "morning": 1, "noon": 10, "evening": 5 }
-		},
-		{
-			"name": "water",
-			"desire_name": "needs_water",
-			"consequnces": {
-				"get_item": {
-					"name": "WATER",
-					"count": 2
+			"comps": {
+				"routine": {
+					"schedule": {
+						"0": "friedel",
+						"1": "work",
+						"2": "idle"
+					}
 				},
-				"change_stage": { "stage_name": "Gardenhouse" }
-			},
-			"routine": { "morning": 1, "noon": 10, "evening": 5 }
-		},
-		{
-			"name": "idel",
-			"desire_name": "idel",
-			"consequnces": { "change_stage": { "stage_name": "Gardenhouse" } },
-			"routine": { "morning": 3, "noon": 3, "evening": 3 }
+				"cooperation": {}
+			}
 		}
-	]
+	}
 }

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbdje5uw3r4l"]
+[gd_scene load_steps=8 format=3 uid="uid://cfbfb0bprx5a5"]
 
-[ext_resource type="Script" path="res://crisisPhase/characters/Gerhard/gerhard.gd" id="1_slo47"]
-[ext_resource type="Texture2D" uid="uid://bgh34c2ycnpel" path="res://assets/characters/sprite_gerhard.png" id="1_tmdii"]
-[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="2_3mu86"]
+[ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_k3b2r"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="4_1lykm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_537nm"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1chh"]
 radius = 18.0
 
 [sub_resource type="Animation" id="Animation_cxjb2"]
@@ -65,18 +64,12 @@ _data = {
 "walking": SubResource("Animation_v3hvq")
 }
 
-[node name="Gerhard" type="CharacterBody2D"]
-script = ExtResource("1_slo47")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
-texture = ExtResource("1_tmdii")
-offset = Vector2(0, -46)
-hframes = 3
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_k3b2r")
 
 [node name="CollisionCircle" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_537nm")
+shape = SubResource("CircleShape2D_s1chh")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="DialogueHitbox" type="TextureButton" parent="."]
@@ -93,10 +86,12 @@ offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
-texture_normal = ExtResource("2_3mu86")
+texture_normal = ExtResource("4_1lykm")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_rd3ph")
 }
+
+[connection signal="pressed" from="DialogueHitbox" to="." method="_on_dialogue_hit_box_pressed"]

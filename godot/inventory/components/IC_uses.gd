@@ -1,11 +1,11 @@
 extends EMC_ItemComponent
 class_name EMC_IC_Uses
 
-var _uses_left : int = 0
+@export var _uses_left : int = 0
 #var _MAX_USES : int = 0
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(_p_max_uses : int) -> void:
+func _init(_p_max_uses : int = 0) -> void:
 	super("Uses", Color.DARK_CYAN)
 	_uses_left = _p_max_uses
 	#_MAX_USES = _p_max_uses

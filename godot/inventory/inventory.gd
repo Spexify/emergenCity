@@ -224,6 +224,14 @@ static func sort_by_id(a : EMC_Item, b : EMC_Item) -> bool:
 	if b == null:
 		return true
 	return a.get_id() < b.get_id()
+	
+static func inventory_from_dict(dict: Dictionary) -> EMC_Inventory:
+	var inventory := EMC_Inventory.new()
+	for item_dict : Dictionary in dict:
+		inventory.add_item(EMC_Item.from_save(item_dict))
+	
+	inventory.sort()
+	return inventory
 
 ########################################## PRIVATE METHODS #########################################
 func sort_custom(f : Callable) -> void:

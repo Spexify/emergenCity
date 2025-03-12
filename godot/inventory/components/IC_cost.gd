@@ -1,11 +1,11 @@
 extends EMC_ItemComponent
 class_name EMC_IC_Cost
 
-var _cost : int = 0
+@export var _cost : int = 0
 
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(cost : int) -> void:
+func _init(cost : int = 0) -> void:
 	super("Cost", Color.GOLDENROD)
 	_cost = cost
 

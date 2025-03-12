@@ -27,7 +27,9 @@ const STAGENAME_APARTMENT_CAMPER: String = "apartment_camper"
 
 const _STAGE_SCN = preload("res://crisisPhase/stage/stage.tscn")
 
-signal dialogue_initiated(stage_name : String, p_NPC_name: String)
+signal npc_interaction(npc: EMC_NPC)
+signal stage_changed(stage_name: String)
+signal npc_act
 
 @onready var _curr_stage: EMC_Stage 
 @onready var NPCs : Control = $NPCs
@@ -76,12 +78,17 @@ func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait :
 	_curr_stage.load_stage(override_spawn)
 	_curr_stage.show_electricity()
 	#print("Change stage to: " + p_stage_name)
+	
+	stage_changed.emit(get_curr_stage_name())
 
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
 
 func get_curr_stage() -> TileMap:
 	return _curr_stage._stage
+
+func get_stage() -> EMC_Stage:
+	return _curr_stage
 
 ## Returns a Dictonary cotaining every actives NPC position
 func get_all_active_npcs() -> Dictionary:
@@ -113,11 +120,20 @@ func get_NPC(p_NPC_name: String) -> EMC_NPC:
 ## Remove all NPCs that are currently spawned
 func deactivate_NPCs() -> void:
 	for NPC: EMC_NPC in NPCs.get_children():
-		NPC.deactivate()
+		NPC.hide()
 
 func let_npcs_act() -> void:
-	for npc : EMC_NPC in NPCs.get_children():
-		npc.act()
+	var npcs := NPCs.get_children()
+	npcs.shuffle()
+	for npc : EMC_NPC in npcs:
+		var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
+		if brain:
+			brain.act()
+			
+	#get_NPC("Gerhard").get_comp(EMC_NPC_Brain).act()
+	#get_NPC("Friedel").get_comp(EMC_NPC_Brain).act()
+	
+	#npc_act.emit()
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
@@ -143,10 +159,16 @@ func _setup_stages() -> void:
 	
 ### Add NPCs to the scene
 func _setup_NPCs() -> void:
-	for npc : EMC_NPC in JsonMngr.load_NPC():
+	var dict: Dictionary = JsonMngr.load_NPC()
+	for npc : EMC_NPC in dict:
+		npc.setup(_gui_mngr, self, _day_mngr)
+		NPCs.add_child(npc)
+		
+		for comp: Variant in dict[npc]:
+			npc.add_child(comp)
+		
 		npc.hide()
 		npc.clicked.connect(_on_NPC_clicked)
-		NPCs.add_child(npc)
 
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target
@@ -184,7 +206,7 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 func _on_avatar_arrived() -> void:
 	if not _last_click_position.is_finite() and _last_clicked_NPC != null:
 		#NPC
-			dialogue_initiated.emit(get_curr_stage_name(), _last_clicked_NPC.get_name())
+			npc_interaction.emit(_last_clicked_NPC)
 	else: 
 		#FURNITURE
 		var raw_type_content : PackedStringArray = _curr_stage.get_tile_type(_last_click_position).split("\\")

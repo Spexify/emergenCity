@@ -2,11 +2,12 @@ extends EMC_IC_Consumable
 class_name EMC_IC_Healthy
 ## For unenjoyable or enjoyable food or drink items
 
+@export var _health_change: int
+
 const UNIT: String = "% ♡"
-var _health_change: int
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_health_change : int) -> void:
+func _init(_p_health_change : int = 0) -> void:
 	super("Gesund", Color.HOT_PINK)
 	_health_change = _p_health_change
 

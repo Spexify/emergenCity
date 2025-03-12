@@ -1,16 +1,24 @@
 {
-	"initial_items": {
-	},
-	"stage": "ApartmentDefault",
-	"pitch": 1.2,
-	"positions": {
-		"ApartmentDefault": { "x": 490, "y": 400 },
-		"Market": { "x": 180, "y": 300 }
-	},
-	"item_preference": {
-	},
-	"desires": [
-	],
-	"actions": [
-	]
+	"comp": {
+		"descr": {
+			"name": "Agathe",
+			"descr": "Das hier ist Agathe.\nSie ist lieb.",
+			"portait": "agathe"
+		},
+		"sprite": {
+			"texture_name": "agathe"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 1.2
+			}
+		},
+		"stage": {
+			"start": "ApartmentDefault",
+			"positions": {
+				"ApartmentDefault": { "x": 490, "y": 400 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}	
 }

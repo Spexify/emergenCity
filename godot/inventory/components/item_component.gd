@@ -24,7 +24,7 @@ var name : String
 static var COMP_SCNS : Dictionary = {}
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_name: String, p_color: Color = Color.BLACK) -> void:
+func _init(p_name: String = "Dummy", p_color: Color = Color.BLACK) -> void:
 	name = p_name
 	_color = p_color
 
