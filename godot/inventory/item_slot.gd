@@ -37,6 +37,9 @@ func set_item(p_item : EMC_Item) -> void:
 
 func has_item() -> bool:
 	return item.get_id() != EMC_Item.IDs.DUMMY
+
+func is_item(p_item: EMC_Item) -> bool:
+	return item == p_item
 	
 func remove_item() -> void:
 	item = null

@@ -8,6 +8,8 @@
 		"sprite": {
 			"texture_name": "gerhard"
 		},
+		"save": {},
+		"karma": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.5
@@ -15,13 +17,25 @@
 			"trading": {
 				"preferences": {
 					"WATER": 1,
-					"WATER_DIRTY": 2,
-					"VEGETABLES": 2
+					"WATER_DIRTY": 4,
+					"VEGETABLES": 0.5
 				},
 				"inventory": {
 					"WATER": 3,
 					"WATER_DIRTY": 2,
 					"VEGETABLES": 3
+				},
+				"bottom": -0.6,
+				"low": -0.3,
+				"mid": 0.0,
+				"high": 0.3,
+				"top": 0.6,
+				"response": {
+					"BASE": ["Ich mag alles das mir im Garten hilft", "Mmh mal schaun.", "MMh oh ja."],
+					"WATER_DIRTY" : ["Oh das kann ich gut gebrauchen", "Ich benutze dreckiges Wasser immer um meine Pflanzen zu gießen!"],
+					"WATER": ["Oh Wasser ist gut.", "Ich könnte dreckiges Wasser auch gut gebrauchen."],
+					"UNPALATABLE": ["Mmh das ist doch verschimmelt!"],
+					"FOOD": ["Essen kann man immer gebrauchen."]
 				}
 			}
 		},

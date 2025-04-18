@@ -8,6 +8,8 @@
 		"sprite": {
 			"texture_name": "petro"
 		},
+		"save": {},
+		"karma": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.65

@@ -8,6 +8,8 @@
 		"sprite": {
 			"texture_name": "elias"
 		},
+		"save": {},
+		"karma": {},
 		"interaction":{
 			"conversation": {
 				"pitch": 0.75

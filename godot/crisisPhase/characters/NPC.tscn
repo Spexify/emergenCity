@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://7e5katrwcpxy"]
+[gd_scene load_steps=23 format=3 uid="uid://7e5katrwcpxy"]
 
 [ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_mgugj"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_sprite.gd" id="2_f3xbs"]
@@ -11,8 +11,10 @@
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_descr.gd" id="7_1fjhw"]
 [ext_resource type="Texture2D" uid="uid://qrbsrdrlfyro" path="res://assets/characters/portrait_momo.png" id="8_bny1c"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_brain.gd" id="10_pdjrp"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_karma.gd" id="11_2bkwk"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_decide.gd" id="11_p346j"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_routine.gd" id="12_0o7c5"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_save.gd" id="12_cptuo"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_impulsive.gd" id="13_xqxvk"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_cooperation.gd" id="15_falgr"]
 
@@ -130,6 +132,12 @@ script = ExtResource("7_1fjhw")
 npc_name = "Niemand"
 descr = "Das ist Niemand"
 portrait = ExtResource("8_bny1c")
+
+[node name="EMC_NPC_Karma" type="Node" parent="."]
+script = ExtResource("11_2bkwk")
+
+[node name="EMC_NPC_Save" type="Node" parent="."]
+script = ExtResource("12_cptuo")
 
 [node name="EMC_NPC_Brain" type="Node" parent="." node_paths=PackedStringArray("decide")]
 script = ExtResource("10_pdjrp")

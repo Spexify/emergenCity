@@ -13,7 +13,10 @@ extends EMC_GUI
 @onready var sell : HBoxContainer = $VBC/Exchange/Sell/HBC
 @onready var buy : HBoxContainer = $VBC/Exchange/Buy/HBC
 
-@onready var deal : Button = $VBC/Buttons/Deal
+#@onready var deal : Button = $VBC/Buttons/Deal
+@onready var deal: Button = $VBC/Buttons/Control/Deal
+@onready var progress_deal: TextureProgressBar = $VBC/Buttons/Control/ProgressDeal
+@onready var overload: CPUParticles2D = $VBC/Buttons/Control/Deal/Overload
 
 var _ITEM_PANEL_SCN := preload("res://inventory/item_panel.tscn")
 
@@ -27,7 +30,7 @@ var _npc_inventory : EMC_Inventory
 var _sell_items : Array[EMC_Item]
 var _buy_items : Array[EMC_Item]
 
-var trade_fairness : float = 0.0
+var trade_score : float = -1.0
 
 func setup(p_inventory : EMC_Inventory, p_gui_mngr : EMC_GUIMngr) -> void:
 	_inventory = p_inventory
@@ -54,6 +57,8 @@ func open(npc : EMC_NPC) -> void:
 	inventory_grid.reload()
 	trader_grid.reload()
 
+	progress_deal.set_value(-1)
+
 	show()
 	opened.emit()
 	
@@ -76,6 +81,7 @@ func _on_inventory_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 	var to_current : HBoxContainer = sell if backpack else buy
 	var to_current_items : Array[EMC_Item] = _sell_items if backpack else _buy_items
 	
+	
 	grid.get_inventory().remove_item(sender)
 	var item_panel := _ITEM_PANEL_SCN.instantiate()
 	var item_slot : EMC_Item_Slot = item_panel.get_child(0)
@@ -83,18 +89,31 @@ func _on_inventory_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 	to_current.add_child(item_panel)
 	to_current.move_child(item_panel, 0 if backpack else -1)
 	to_current_items.push_back(sender)
+
+	var start_global: Vector2 = grid.get_item_slot(sender).get_global_position()
+	
+	animate.call_deferred(item_slot, start_global)
 	
 	item_slot.item_clicked.connect(_on_exchange_item_clicked.bind(backpack), CONNECT_ONE_SHOT)
 	#sender.call_deferred("set_modulate", Color(1, 1, 1))
 	
+	monologe.set_text(_npc_trade.get_response(sender))
+	
 	_evaluat_trade()
+
+func animate(slot: EMC_Item_Slot, start_pos: Vector2) -> void:
+	var end_pos := slot.get_global_position()
+	
+	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(slot, "position", slot.position, 0.5).from(start_pos-(slot.get_global_position()-Vector2(48, 0)))
+	#slot.set_position(Vector2(16, 16))
 
 func _on_exchange_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 	monologe.set_text("")
 	var to_current : HBoxContainer = sell if backpack else buy
 	var to_current_items : Array[EMC_Item] = _sell_items if backpack else _buy_items
-	var _current_inventory : EMC_Inventory = _inventory if backpack else _npc_inventory
-	#var grid : EMC_Inventory_UI = inventory_grid if backpack else trader_grid
+	#var _current_inventory : EMC_Inventory = _inventory if backpack else _npc_inventory
+	var grid : EMC_Inventory_UI = inventory_grid if backpack else trader_grid
 	
 	for item_panel in to_current.get_children():
 		if item_panel.name == "Arrow":
@@ -106,26 +125,31 @@ func _on_exchange_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 			to_current.remove_child(item_panel)
 			item_panel.queue_free()
 			to_current_items.erase(sender)
-			_current_inventory.add_item(sender)
+			grid.get_inventory().add_item(sender)
+			
 			break
 	
 	_evaluat_trade()
 
 func _evaluat_trade() -> void:
-	trade_fairness = _npc_trade.calculate_trade_score(_sell_items) / _npc_trade.calculate_trade_score(_buy_items)
+	trade_score = _npc_trade.calculate_trade_score(_sell_items, _buy_items)
 	
-	# Math magic XD
-	# this is just "step" function to correctly index the smiley faces
-	var x : int = clampf(floor(-trade_fairness * 2.0 + 5.0), 0, 4)
-	if is_nan(trade_fairness):
-		x = 1
-	mood_texture.set_region(Rect2(x * 64, 0, 64, 64))
-	mood.set_texture(mood_texture)
-	
-	if trade_fairness >= 0.5:
-		deal.disabled = false
+	if trade_score >= _npc_trade._top:
+		overload.emitting = true
 	else:
-		deal.disabled = true
+		overload.emitting = false
+	
+	mood.set_texture(_npc_trade.get_mood_texture(trade_score, mood_texture))
+	
+	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(progress_deal, "value", trade_score, 0.2)
+	deal.disabled = _npc_trade.will_deal(trade_score)
+	if deal.disabled:
+		#progress_deal.tint_progress = Color(0.32, 0.54, 0.78, 1)
+		tween.parallel().tween_property(progress_deal, "tint_progress", Color(0.32, 0.54, 0.78, 1), 0.2)
+	else:
+		#progress_deal.tint_progress = Color(0.3, 0.7, 0.39, 1)
+		tween.parallel().set_trans(Tween.TRANS_SINE).tween_property(progress_deal, "tint_progress", Color(0.3, 0.7, 0.39, 1), 0.2)
 
 func _on_cancel_pressed() -> void:
 	for item in _sell_items:
@@ -149,13 +173,15 @@ func _on_cancel_pressed() -> void:
 	close()
 
 func _on_deal_pressed() -> void:
-	if trade_fairness <= 1.0:
+	if trade_score <= 0.0:
 		var answer : bool = await _gui_mngr.request_gui("ConfirmationGUI", [_npc_descr.get_npc_name() + " ist nicht sehr zufrieden mit dem Handel
 		\n Sicher das du ihn trotzdem eingehen willst.
 		\nEs könnte negative Einflüsse auf eure Beziehung haben."])
 		
 		if not answer:
 			return
+			
+	_npc_trade.deal(trade_score)
 	
 	for item in _buy_items:
 		_inventory.add_item(item)

@@ -165,7 +165,8 @@ func _load_optional_event() -> void:
 			var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
 			if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
 				for spawn_NPCs in spawn_NPCs_arr:
-					_npcs.get_node(spawn_NPCs.NPC_name).override_spawn(spawn_NPCs.pos)
+					var stage_comp :EMC_NPC_Stage = _npcs.get_node(spawn_NPCs.NPC_name).get_comp(EMC_NPC_Stage)
+					stage_comp.override_spawn(spawn_NPCs.pos)
 					#_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
 					
 #********************NPCs******************
@@ -184,7 +185,7 @@ func reserve_spawn_pos(p_spawn_pos: Vector2) -> Vector2:
 		_stage.erase_cell(Layers.NAVIGATION, _global_to_map(center_position + norm_direction*32))
 
 	_stage.erase_cell(Layers.NAVIGATION, tile_position)
-	return center_position
+	return p_spawn_pos #center_position
 
 ## Remove all NPCs that are currently spawned
 func _deactivate_NPCs() -> void:

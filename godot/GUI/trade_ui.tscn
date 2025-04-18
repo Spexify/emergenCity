@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctlisou6u6wex"]
+[gd_scene load_steps=18 format=3 uid="uid://ctlisou6u6wex"]
 
 [ext_resource type="Script" path="res://GUI/trade_ui.gd" id="1_klull"]
 [ext_resource type="Texture2D" uid="uid://dwwuq7qn72bub" path="res://assets/characters/portrait_raphael.png" id="1_yjcyr"]
@@ -11,10 +11,20 @@
 [ext_resource type="StyleBox" uid="uid://om37cubdbi5" path="res://resources/background/menu_box_red_tex.tres" id="6_turif"]
 [ext_resource type="StyleBox" uid="uid://60p250u5pj7l" path="res://resources/background/menu_box_green_tex.tres" id="10_1to8m"]
 [ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="10_knqvd"]
+[ext_resource type="Texture2D" uid="uid://bkgk8l7je072" path="res://assets/GUI/backgrounds/menu_box_dark_gray.png" id="11_tktyo"]
+[ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://assets/GUI/backgrounds/menu_box_white.png" id="12_qrsn6"]
+[ext_resource type="Texture2D" uid="uid://dp8ofl4ea1lse" path="res://assets/particles/particle_smoke_green.png" id="14_2vl8a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1gqr3"]
 atlas = ExtResource("2_aiu0m")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="Curve" id="Curve_onoq7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.618195), -1.87688, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_loj48"]
+colors = PackedColorArray(1, 1, 1, 0.172549, 1, 1, 1, 1)
 
 [node name="Trade" type="Control"]
 layout_mode = 3
@@ -85,7 +95,9 @@ theme_override_constants/separation = -2
 alignment = 1
 
 [node name="Sell" type="PanelContainer" parent="VBC/Exchange"]
+z_index = 1
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("6_turif")
 
 [node name="HBC" type="HBoxContainer" parent="VBC/Exchange/Sell"]
@@ -103,7 +115,9 @@ texture = ExtResource("4_rclt8")
 flip_h = true
 
 [node name="Buy" type="PanelContainer" parent="VBC/Exchange"]
+z_index = 1
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("10_1to8m")
 
 [node name="HBC" type="HBoxContainer" parent="VBC/Exchange/Buy"]
@@ -131,7 +145,6 @@ theme_override_styles/tab_unselected = ExtResource("4_ksqq8")
 theme_override_styles/tab_focus = ExtResource("4_yink0")
 theme_override_styles/panel = ExtResource("4_s4rwf")
 tab_alignment = 1
-clip_tabs = false
 
 [node name="Inventory" type="PanelContainer" parent="VBC/Inventories"]
 layout_mode = 2
@@ -156,14 +169,54 @@ layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Deal" parent="VBC/Buttons" instance=ExtResource("5_0g0o4")]
+[node name="Control" type="Control" parent="VBC/Buttons"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+
+[node name="ProgressDeal" type="TextureProgressBar" parent="VBC/Buttons/Control"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 65.0
+min_value = -1.0
+max_value = 0.0
+step = 0.1
+value = -1.0
+nine_patch_stretch = true
+stretch_margin_left = 16
+stretch_margin_top = 16
+stretch_margin_right = 16
+stretch_margin_bottom = 16
+texture_under = ExtResource("11_tktyo")
+texture_progress = ExtResource("12_qrsn6")
+
+[node name="Deal" parent="VBC/Buttons/Control" instance=ExtResource("5_0g0o4")]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 65.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_type_variation = &"ConfirmButton"
 disabled = true
 text = "Deal"
+flat = true
+
+[node name="Overload" type="CPUParticles2D" parent="VBC/Buttons/Control/Deal"]
+position = Vector2(60, 33)
+emitting = false
+amount = 21
+local_coords = true
+texture = ExtResource("14_2vl8a")
+emission_shape = 3
+emission_rect_extents = Vector2(60, 32)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 19.74
+initial_velocity_max = 78.95
+scale_amount_min = 0.3
+scale_amount_curve = SubResource("Curve_onoq7")
+color_ramp = SubResource("Gradient_loj48")
 
 [node name="Cancel" parent="VBC/Buttons" instance=ExtResource("5_0g0o4")]
 custom_minimum_size = Vector2(200, 0)
@@ -173,5 +226,5 @@ size_flags_vertical = 4
 theme_type_variation = &"CancelButton"
 text = "Abbrechen"
 
-[connection signal="pressed" from="VBC/Buttons/Deal" to="." method="_on_deal_pressed"]
+[connection signal="pressed" from="VBC/Buttons/Control/Deal" to="." method="_on_deal_pressed"]
 [connection signal="pressed" from="VBC/Buttons/Cancel" to="." method="_on_cancel_pressed"]

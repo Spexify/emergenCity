@@ -34,6 +34,8 @@ signal npc_act
 @onready var _curr_stage: EMC_Stage 
 @onready var NPCs : Control = $NPCs
 
+@export var editor_stage: String = "home"
+
 ### Stages
 
 var _avatar: EMC_Avatar
@@ -139,7 +141,7 @@ func let_npcs_act() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		_curr_stage = $StageOffset.get_children()[0]
-		_curr_stage.setup("home", NPCs, _opt_event_mngr)
+		_curr_stage.setup(editor_stage, NPCs, _opt_event_mngr)
 		_curr_stage.load_stage()
 
 func state_changed(state : String) -> void:

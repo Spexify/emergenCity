@@ -8,6 +8,8 @@
 		"sprite": {
 			"texture_name": "raphael"
 		},
+		"save": {},
+		"karma": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.7
@@ -33,7 +35,7 @@
 		"stage": {
 			"start": "Market",
 			"positions": {
-				"Market": { "x": 224, "y": 254 }
+				"Market": { "x": 224, "y": 248 }
 			}
 		}
 	}

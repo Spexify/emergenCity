@@ -141,6 +141,8 @@ func reset_upgrades_equipped() -> void:
 func save_game(p_was_crisis : bool) -> void:
 	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
+	
+	_was_crisis = p_was_crisis
 	var data : Dictionary = {
 		"e_coins": _e_coins,
 		"was_crisis": p_was_crisis,
