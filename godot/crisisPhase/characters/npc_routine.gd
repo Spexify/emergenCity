@@ -22,6 +22,10 @@ func _init(data: Dictionary) -> void:
 
 func _ready() -> void:
 	_day_mngr = npc.get_day_mngr()
+	npc.add_comp(self)
 
 func supply_actions() -> Array[String]:
 	return routine.get(_day_mngr.get_current_day_period())
+
+func is_not_morning() -> bool:
+	return not _day_mngr.get_current_day_period() == _day_mngr.DayPeriod.MORNING

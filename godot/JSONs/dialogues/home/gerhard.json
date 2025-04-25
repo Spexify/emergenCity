@@ -1,5 +1,11 @@
 {
 	"start": {
+		"conditions": {
+			"has_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 1
+			}
+		},
 		"actors": ["avatar", "gerhard.r"],
 		"text": [
 			"gerhard.r#Friedel ist schon wieder alleine losgezogen. Hast du ihn gesehen?"
@@ -11,6 +17,12 @@
 	},
 	"#depp": {
 		"prompt": "Nicht suchen helfen",
+		"consequences": {
+			"set_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 4
+			}
+		},
 		"actors": ["avatar", "gerhard.r"],
 		"text": [
 			"avatar#Nein, ich habe ihn leider nicht gesehen.",
@@ -23,71 +35,13 @@
 		"text": [
 			"avatar#Komm, wir suchen ihn zusammen.",
 			"gerhard.r#Danke! Ich suche ihn im Park, schaust du dich auf dem Marktplatz um?",
-			"gerhard.r#Und dann treffen wir uns in einer Stunde wieder hier, hoffentlich mit Friedel.",
+			"gerhard.r#Und dann treffen wir uns in einer Stunde bei mir, hoffentlich mit Friedel.",
 			"avatar#Alles klar!"
 		],
-		"options": {
-			"markt": {
-				"consequences": {
-					"change_stage": {
-						"stage_name": "market",
-						"avatar_pos": {"x": 250, "y": 1000},
-						"wait": false
-					}
-				},
-				"actors": ["avatar"],
-				"text": [
-					"avatar#FRIEDEL, WO BIST DUUU?",
-					"avatar#FRIEEEDEL!"
-				],
-				"options": {
-					"weiter": {
-						"actors": ["avatar", "friedel"],
-						"text": [
-							"friedel#Wuff. *wedel*",
-							"avatar#Friedel! Zum Glück, dir geht’s gut.",
-							"avatar#Lass uns zum Treffpunkt gehen, bestimmt wartet Gerhard schon.",
-							"friedel#Wuff. *hechel*"
-						],
-						"options": {
-							"#fiedel_end": ""
-						}
-					}
-				}
-			}
-		}
-	},
-	"#fiedel_end": {
 		"consequences": {
-			"change_stage": {
-				"stage_name": "home",
-				"avatar_pos": {"x": 250, "y": 650},
-				"wait": false
-			}
-		},
-		"actors": ["avatar", "friedel", "gerhard.r"],
-		"text": [
-			"gerhard.r#Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten.",
-			"friedel#Wuff!",
-			"gerhard.r#Danke für deine Hilfe bei der Suche! ",
-			"friedel#(Friedel scheint sich auch zu freuen, wieder bei Gerhard zu sein.)",
-			"gerhard.r#Ich hatte gerade etwas Fisch besorgt, um ihn damit vielleicht anzulocken.",
-			"gerhard.r#Jetzt brauche ich den Fisch nicht mehr. Kannst du was damit anfangen?",
-			"avatar#Bestimmt, danke!"
-		],
-		"options": {
-			"next": {
-				"consequences": {
-					"add_item_question": [
-						"FISH",
-						{
-							"question": "Dieser %s ist sehr frisch.",
-							"answere": "",
-							"decline": "Einpacken"
-						}
-					],
-					"progress_day": ["Suche nach Firedel", "Suche nach Firedel", 30]
-				}
+			"set_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 2
 			}
 		}
 	}

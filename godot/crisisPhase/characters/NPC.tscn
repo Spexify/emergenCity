@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://7e5katrwcpxy"]
+[gd_scene load_steps=24 format=3 uid="uid://7e5katrwcpxy"]
 
 [ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_mgugj"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_sprite.gd" id="2_f3xbs"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_decide.gd" id="11_p346j"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_routine.gd" id="12_0o7c5"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_save.gd" id="12_cptuo"]
+[ext_resource type="Script" path="res://crisisPhase/characters/npc_quest.gd" id="13_cv5pj"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_impulsive.gd" id="13_xqxvk"]
 [ext_resource type="Script" path="res://crisisPhase/characters/npc_cooperation.gd" id="15_falgr"]
 
@@ -139,9 +140,9 @@ script = ExtResource("11_2bkwk")
 [node name="EMC_NPC_Save" type="Node" parent="."]
 script = ExtResource("12_cptuo")
 
-[node name="EMC_NPC_Brain" type="Node" parent="." node_paths=PackedStringArray("decide")]
+[node name="EMC_NPC_Brain" type="Node" parent="."]
 script = ExtResource("10_pdjrp")
-decide = NodePath("EMC_NPC_Decide")
+actions = {}
 
 [node name="EMC_NPC_Decide" type="Node" parent="EMC_NPC_Brain"]
 script = ExtResource("11_p346j")
@@ -154,5 +155,8 @@ script = ExtResource("13_xqxvk")
 
 [node name="EMC_NPC_Cooperation" type="Node" parent="EMC_NPC_Brain"]
 script = ExtResource("15_falgr")
+
+[node name="EMC_NPC_Quest" type="Node" parent="EMC_NPC_Brain"]
+script = ExtResource("13_cv5pj")
 
 [connection signal="pressed" from="DialogueHitbox" to="." method="_on_dialogue_hit_box_pressed"]

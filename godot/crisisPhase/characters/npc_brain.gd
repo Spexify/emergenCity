@@ -7,6 +7,7 @@ class_name EMC_NPC_Brain
 }
 
 @export var sub_comps: Array[EMC_NPC_Idee]
+@export var priority_comps: Array[EMC_NPC_Idee]
 @export var decide: EMC_NPC_Decide
 
 @onready var npc : EMC_NPC = $".."
@@ -42,11 +43,16 @@ func _init(data : Dictionary) -> void:
 		var comp_class: Resource = load("res://crisisPhase/characters/npc_" + comp_name + ".gd")
 		var new_comp: Variant = comp_class.new(sub_comps_data[comp_name])
 		if new_comp != null:
-			sub_comps.append(new_comp)
+			if sub_comps_data[comp_name].has("priority"):
+				priority_comps.append(new_comp)
+			else:
+				sub_comps.append(new_comp)
 
 func _get_comp_by_name(comp_name: String) -> Variant:
 	if comp_name == "self":
 		return self
+	elif comp_name == "gui_mngr":
+		return npc.get_gui_mngr()
 	return npc.get_comp_by_name(comp_name)
 
 func _ready() -> void:
@@ -57,10 +63,41 @@ func _ready() -> void:
 	for sub: EMC_NPC_Idee in sub_comps:
 		self.add_child(sub)
 	
+	for sub: EMC_NPC_Idee in priority_comps:
+		self.add_child(sub)
+
+## Executes the behaviour of an NPC
+## First gathers possible actions based on suppliers
+## Second chooses option
+## Third executes option
 func act() -> void:
-	var options: Array[String] = collect_options()
+	# Action to be executed
+	var decision: String
 	
-	var decision: String = decide.choose_option(options)
+	# Actions mit priority
+	var priority: Array[String] = collect_priority()
+	
+	# Execute pre-conditions
+	priority.filter(func (option: String) -> bool:
+		if option.begins_with("!"):
+			return actions[option].pre_cond()
+		return true
+		)
+	
+	# when there is no priority choose normal options
+	if priority.is_empty():
+		var options: Array[String] = collect_options()
+		options.filter(func (option: String) -> bool:
+			if option.begins_with("!"):
+				return actions[option].pre_cond()
+			return true
+			)
+		#choose option
+		decision = decide.choose_option(options)
+	else:
+		#choose priority option
+		decision = decide.choose_option(priority)
+	 
 	
 	print(npc.get_comp(EMC_NPC_Descr).get_npc_name() + ": " + decision)
 	
@@ -89,12 +126,33 @@ func coop(npc_name: String, action: String) -> void:
 	
 	cooperation.request_cooperation(action)
 
+#func check(param: String) -> bool:
+	#return true
+
+func output(msg: String) -> void:
+	print(msg)
+	
 func noop(stuff: Variant) -> void:
 	pass
 
+## Collect action options from the Idea suppilers 
 func collect_options() -> Array[String]:
 	var options: Array[String] = []
+	for sub: EMC_NPC_Idee in priority_comps:
+		options.append_array(sub.supply_actions())
+	
+	if not options.is_empty():
+		return options
+	
 	for sub: EMC_NPC_Idee in sub_comps:
+		options.append_array(sub.supply_actions())
+	
+	return options
+
+## If the is a priority supplied it will be choosen
+func collect_priority() -> Array[String]:
+	var options: Array[String] = []
+	for sub: EMC_NPC_Idee in priority_comps:
 		options.append_array(sub.supply_actions())
 	
 	return options

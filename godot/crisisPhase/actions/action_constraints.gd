@@ -15,9 +15,22 @@ func _init(p_day_mngr: EMC_DayMngr, p_inventory: EMC_Inventory, p_stage_mngr : E
 	_inventory = p_inventory
 	_stage_mngr= p_stage_mngr
 
+func has_quest_stage(args: Dictionary) -> String:
+	if args.has_all(["quest", "stage"]):
+		if OverworldStatesMngr.has_quest(args["quest"]) and OverworldStatesMngr.get_quest_stage(args["quest"]) == args["stage"]:
+			return NO_REJECTION
+	return "Rejected"
+
 func npc_has_comp(args : Dictionary) -> String:
 	if args.has_all(["npc", "comp"]):
 		if _stage_mngr.get_NPC(args["npc"]).get_comp_by_name(args["comp"]) != null:
+			return NO_REJECTION
+	return "Rejected"
+
+func npc_has_dialog_tag(args: Dictionary) -> String:
+	if args.has_all(["npc", "tag"]):
+		var conv: EMC_NPC_Conversation = _stage_mngr.get_NPC(args["npc"]).get_comp(EMC_NPC_Conversation)
+		if conv != null and conv.has_tag(args["tag"]):
 			return NO_REJECTION
 	return "Rejected"
 
@@ -68,6 +81,10 @@ func constraint_not_evening(p_reason: String = "") -> String:
 	else:
 		return NO_REJECTION
 
+func is_state_by_name(args: Dictionary) -> String:
+	if args.has("state") and OverworldStatesMngr.is_any_state_by_name(args["state"]):
+		return NO_REJECTION
+	return "State Bad"
 
 func no_active_crisis(p_reason: String = "") -> String:
 	if OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:

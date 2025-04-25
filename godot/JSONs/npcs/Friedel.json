@@ -16,9 +16,18 @@
 		"stage": {
 			"start": "Gardenhouse",
 			"positions": {
-				"Park": { "x": 64, "y": 704 },
-				"Gardenhouse": { "x": 96, "y": 704 },
-				"Market": { "x": 160, "y": 320 }
+				"Park": {
+					"x": 64,
+					"y": 704
+				},
+				"Gardenhouse": {
+					"x": 96,
+					"y": 704
+				},
+				"Market": {
+					"x": 160,
+					"y": 320
+				}
 			}
 		},
 		"brain": {
@@ -27,19 +36,57 @@
 					"type": "single",
 					"comp": "stage",
 					"method": "change_stage_pos",
-					"params": ["gardenhouse", {"x": 200, "y": 310}]
+					"params": [
+						"gardenhouse",
+						{
+							"x": 200,
+							"y": 310
+						}
+					]
 				},
 				"stroll": {
 					"type": "single",
 					"comp": "stage",
 					"method": "change_stage",
-					"params": ["park"]
+					"params": [
+						"park"
+					]
 				},
 				"idle": {
 					"type": "single",
 					"comp": "stage",
 					"method": "change_stage",
-					"params": ["gardenhouse"]
+					"params": [
+						"gardenhouse"
+					]
+				},
+				"market": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage",
+					"params": ["market"]
+				},
+				"escape": {
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"comp": "quest",
+							"method": "add_quest",
+							"params": [
+								"FRIEDEL_WEG"
+							]
+						},
+						{
+							"type": "single",
+							"comp": "stage",
+							"method": "change_stage",
+							"params": [
+								"market"
+							]
+						}
+					]
 				}
 			},
 			"decide": {
@@ -47,18 +94,54 @@
 				"weight": {
 					"stroll": 100,
 					"idle": 1,
-					"sleep": 3
+					"sleep": 3,
+					"escape": 1,
+					"market": 1
 				}
 			},
 			"comps": {
 				"routine": {
 					"schedule": {
 						"0": "idle",
-						"1": [ "sleep", "idle"],
+						"1": [
+							"sleep",
+							"idle"
+						],
 						"2": "idle"
 					}
 				},
-				"cooperation": {}
+				"cooperation": {},
+				"quest": {
+					"priority": "",
+					"actions":  [
+						{
+							"quest": "FRIEDEL_WEG",
+							"chance": 1,
+							"stage": 0,
+							"action": "escape"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 1,
+							"action": "market"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 2,
+							"action": "market"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 3,
+							"action": "idle"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 4,
+							"action": "idle"
+						}
+					]
+				}
 			}
 		}
 	}

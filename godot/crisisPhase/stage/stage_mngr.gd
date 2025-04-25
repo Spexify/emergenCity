@@ -70,6 +70,8 @@ p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	OverworldStatesMngr.change.connect(state_changed)
 
 ## Change the stage to the one specified via [param p_stage_name]
+## Wait: waits for the day transition to change_stage,
+## if the stage change does not advance the day it should be set to false
 func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait : bool = true) -> void:
 	#print("Want to change stage to: " + p_stage_name)
 	if wait:

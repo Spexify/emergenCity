@@ -216,6 +216,36 @@ func set_dialogue_state(args : Dictionary) -> void:
 	else:
 		printerr("Action-Consequence: wrong or missing Argumrnts for 'set_dialogue_state'")
 
+############################################# NPC ##################################################
+
+func npc_add_dialog_tag(args: Dictionary) -> void:
+	if args.has_all(["npc", "tag"]):
+		var conv: EMC_NPC_Conversation = _stage_mngr.get_NPC(args["npc"]).get_comp(EMC_NPC_Conversation)
+		if conv != null:
+			conv.add_tag(args["tag"])
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'npc_add_dialog_tag'")
+		
+func npc_remove_dialog_tag(args: Dictionary) -> void:
+	if args.has_all(["npc", "tag"]):
+		var conv: EMC_NPC_Conversation = _stage_mngr.get_NPC(args["npc"]).get_comp(EMC_NPC_Conversation)
+		if conv != null:
+			conv.remove_tag(args["tag"])
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'npc_remove_dialog_tag'")
+
+func set_quest_stage(args: Dictionary) -> void:
+	if args.has_all(["quest", "stage"]):
+		OverworldStatesMngr.add_quest(args["quest"], args["stage"])
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'set_quest_stage'")
+
+func remove_quest(args: Dictionary) -> void:
+	if args.has("quest"):
+		OverworldStatesMngr.remove_quest(args["quest"])
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'remove_quest'")
+
 ############################################ Stage #################################################
 
 func change_stage(p_data : Dictionary) -> void:

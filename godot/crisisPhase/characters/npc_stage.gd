@@ -27,6 +27,8 @@ func get_stage_name() -> String:
 func change_stage(stage_name : String) -> void:
 	_stage_name = stage_name
 	
+	_on_stage_changed(_stage_mngr.get_curr_stage_name())
+	
 func override_spawn(position: Vector2) -> void:
 	_override = position
 

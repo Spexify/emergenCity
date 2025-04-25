@@ -23,6 +23,8 @@ func next_dialogue(dialogue : Dictionary, top_level : bool = false) -> Array[Dic
 	if dialogue.is_empty():
 		return [{}]
 	
+	var priority: bool = false
+	
 	var keys : Array[Dictionary] = []
 	var weights : Array[float] = []
 	
@@ -38,14 +40,27 @@ func next_dialogue(dialogue : Dictionary, top_level : bool = false) -> Array[Dic
 			dialogue_option = raw_dialogue_option
 			
 		var result : bool = true
-		var conditions : Dictionary = dialogue_option.get("conditions", {})
-		for cond : String in conditions:
-			result = result and (_action_constrains.call(cond, conditions.get(cond)) == EMC_ActionConstraints.NO_REJECTION)
-		result = result and (dialogue_option.get("cooldown_end", 0) <= _day_mngr.get_period_count())
+		var conditions : Variant = dialogue_option.get("conditions", {})
+		if typeof(conditions) == TYPE_DICTIONARY:
+			for cond : String in conditions:
+				result = result and (_action_constrains.call(cond, conditions.get(cond)) == EMC_ActionConstraints.NO_REJECTION)
+			result = result and (dialogue_option.get("cooldown_end", 0) <= _day_mngr.get_period_count())
+		elif typeof(conditions) == TYPE_ARRAY:
+			for cond: Dictionary in conditions:
+				if not cond.has("method"):
+					printerr("Dialog condition missing method name!!!")
+				result = result and (_action_constrains.call(cond["method"], cond) == EMC_ActionConstraints.NO_REJECTION)
+			result = result and (dialogue_option.get("cooldown_end", 0) <= _day_mngr.get_period_count())
 		
 		if result:
-			keys.append(dialogue_option)
-			weights.append(dialogue_option.get("weight", 1))
+			if not dialogue_option.has("priority") and not priority:
+				keys.append(dialogue_option)
+				weights.append(dialogue_option.get("weight", 1))
+			
+			if dialogue_option.has("priority"):
+				priority = true
+				keys.append(dialogue_option)
+				weights.append(dialogue_option.get("weight", 1))
 	
 	var options : Array[Dictionary]
 	var count : int

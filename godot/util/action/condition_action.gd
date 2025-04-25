@@ -5,6 +5,15 @@ var cond: EMC_Action_v2
 var if_exe: EMC_Action_v2
 var else_exe: EMC_Action_v2
 
+## Format:
+##NAME {
+##	"type": "condition",
+##	"cond": ACTION,
+##	"if": ACTION,
+##	"else": ACTION
+##}
+## If NAME starts with an "!", the condition will be evaluated during the supply
+## ACTION represents any other action
 func _init(data : Dictionary, get_exe: Callable) -> void:
 	if not data.has_all(["cond", "if", "else"]):
 		print_debug("Missing Dictionary entries")
@@ -32,6 +41,9 @@ func execute() -> Variant:
 		return if_exe.execute()
 	else:
 		return else_exe.execute()
+
+func pre_cond() -> bool:
+	return cond.execute()
 
 func _load_helper(type : String, data: Dictionary, parent: Variant) -> EMC_Action_v2:
 	var res: Variant = Preloader.get_resource("res://util/action/" + type + "_action.gd")

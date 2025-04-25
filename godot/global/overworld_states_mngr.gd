@@ -293,6 +293,19 @@ func set_any_state_by_name(state : String) -> void:
 	
 	change.emit(state)
 
+func is_any_state_by_name(state: String) -> bool:
+	if "WaterState" in state:
+		return _water_state == WaterState.get(state.get_extension())
+	elif "ElectricityState" in state:
+		return _electricity_state == ElectricityState.get(state.get_extension())
+	elif "FoodContaminationState" in state:
+		return _food_contamination_state == FoodContaminationState.get(state.get_extension())
+	elif "IsolationState" in state:
+		return _isolation_state == IsolationState.get(state.get_extension())
+	elif "MobileNetState" in state:
+		return _mobilenet_state == MobileNetState.get(state.get_extension())
+	return false
+
 ############################################Furniture###############################################
 
 func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
@@ -315,7 +328,36 @@ func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
 	
-	########################################Save/Load###############################################
+#############################################Quest##################################################
+
+var active_quests: Dictionary = {}
+
+## Returns wether a quest is currently active
+## Does not return the stage of the quest
+func has_quest(id: String) -> bool:
+	return id in active_quests
+
+## Adds a new quest or overrides the stage
+func add_quest(id: String, stage: int = 1) -> void:
+	active_quests[id] = stage
+	print(active_quests)
+
+## Returns the current stage of the quest
+## Should only be called after confirming quest exists
+## with has_quest
+func get_quest_stage(id: String) -> int:
+	return active_quests[id]
+	
+## Removes a quest
+func remove_quest(id: String) -> void:
+	active_quests.erase(id)
+	print(active_quests)
+	
+## Regulate number of cocurrent quest
+func next_quest() -> bool:
+	return active_quests.size() < 3
+
+############################################Save/Load###############################################
 
 ## Save function called to get all relevant information. This is used for Saving/loading
 func save() -> Dictionary:

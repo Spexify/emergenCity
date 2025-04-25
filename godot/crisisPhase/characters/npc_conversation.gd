@@ -2,6 +2,7 @@ extends EMC_NPC_Interaction_Option
 class_name EMC_NPC_Conversation
 
 @export var npc_pitch: float = 1.0
+@export var tags: Array[String]
 
 @onready var npc: EMC_NPC = $"../.."
 
@@ -25,3 +26,17 @@ func run() -> void:
 
 func get_pitch() -> float:
 	return npc_pitch
+
+## TODO: tag ramove functionality
+func add_tag(tag: String) -> void:
+	tags.append(tag)
+
+## TODO: tag ramove functionality
+func has_tag(tag: String) -> bool:
+	if tag in tags:
+		tags.erase(tag)
+		return true
+	return false
+
+func remove_tag(tag: String) -> void:
+	tags.erase(tag)

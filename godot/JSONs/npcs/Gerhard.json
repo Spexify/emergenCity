@@ -55,7 +55,7 @@
 					"method": "change_stage_pos",
 					"params": ["gardenhouse", {"x": 290, "y": 725}]
 				},
-				"stroll": {
+				"park": {
 					"type": "single",
 					"comp": "stage",
 					"method": "change_stage",
@@ -70,22 +70,57 @@
 				"friedel": {
 					"type": "multi",
 					"acc": "array",
-					"0": {
-						"type": "single",
-						"comp": "self",
-						"method": "coop",
-						"params": ["friedel", "stroll"]
-					},
-					"1": {
-						"type": "single",
-						"comp": "stage",
-						"method": "change_stage",
-						"params": ["park"]
-					}
+					"actions":[
+						{
+							"type": "single",
+							"comp": "self",
+							"method": "coop",
+							"params": ["friedel", "stroll"]
+						},
+						{
+							"type": "single",
+							"comp": "stage",
+							"method": "change_stage",
+							"params": ["park"]
+						}
+					]
+				},
+				"friedel_weg": {
+					"type": "single",
+					"comp": "stage",
+					"method": "change_stage_pos",
+					"params": ["home", {"x": 110, "y": 990}]
+				},
+				"ignored": {
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"comp": "quest",
+							"method": "remove_quest",
+							"params": ["FRIEDEL_WEG"]
+						},
+						{
+							"type": "single",
+							"comp": "stage",
+							"method": "change_stage",
+							"params": ["gardenhouse"]
+						}
+					]
 				}
 			},
 			"decide": {
-				"name": "decide"
+				"name": "weighted_decide",
+				"weight": {
+					"work": 1,
+					"stroll": 1,
+					"idle": 1,
+					"friedel": 1,
+					"friedel_weg": 1,
+					"park": 1,
+					"ignored": 1
+				}
 			},
 			"comps": {
 				"routine": {
@@ -95,7 +130,32 @@
 						"2": "idle"
 					}
 				},
-				"cooperation": {}
+				"cooperation": {},
+				"quest": {
+					"priority": "",
+					"actions":  [
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 1,
+							"action": "friedel_weg"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 2,
+							"action": "park"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 3,
+							"action": "idle"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 4,
+							"action": "ignored"
+						}
+					]
+				}
 			}
 		}
 	}

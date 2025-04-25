@@ -1,48 +1,138 @@
 {
-	"Hello" : {
+	"start3" : {
+		"conditions": {
+			"has_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 1
+			}
+		},
 		"actors" : ["avatar", "friedel"],
 		"text" : [
-			"avatar#Hi wie gehts dir?",
-			"friedel#Wuff Wuff Wuff Wuff Wuff Wuff"
+			"avatar#Oh Friedel was machst du denn hier alleine auf dem Markplatz?",
+			"friedel#Wuff Wuff",
+			"avatar#Ich ruf mal schnell Gerhard an!",
+			"friedel#Wuff"
 		],
 		"options" : {
-			"Test1" : {
-				"weight": 3,
-				"cooldown" : 4,
-				"cooldown_end" : 0,
-				"actors" : ["avatar", "gerhard"],
-				"text" : [
-					"gerhard#Ja Friedel ist auf einmal Weg!",
-					"avatar#Dann müssen wir ihn suchen gehn.",
-					"gerhard#Vielleicht ist er im Park."
-				],
-				"options" : {
-					"#heyho" : "#heyho"
-				}
+			"#mobile" : "#mobile",
+			"#offline1": "#offline1",
+			"#offline2": "#offline2"
+		}
+	},
+	"#offline1": {
+		"conditions": [
+			{
+				"method": "is_state_by_name",
+				"state": "MobileNetState.OFFLINE"
+			}
+		],
+		"actors" : ["avatar", "friedel"],
+		"text": [
+			"avatar#Hmm ich hab hier keine Empfang!"
+		],
+		"options": {
+			"#offline": "#offline"
+		}
+	},
+	"#offline2": {
+		"conditions": [
+			{
+				"method": "is_state_by_name",
+				"state": "ElectricityState.NONE"
+			}
+		],
+		"actors" : ["avatar", "friedel"],
+		"text": [
+			"avatar#Ah mein Handy hat kein Strom mehr!"
+		],
+		"options": {
+			"#offline": "#offline"
+		}
+	},
+	"#offline": {
+		"actors" : ["avatar", "friedel"],
+		"text": [
+			"avatar#Ich könnte auch einfach bei Gerhard vorbeit gehn.",
+			"friedel#Wuff"
+		],
+		"options":{
+			"#idiot": "#idiot",
+			"#lieb": "#lieb"
+		}
+	},
+	"#mobile" : {
+		"conditions": [
+			{
+				"method": "is_state_by_name",
+				"state": "MobileNetState.ONLINE"
 			},
-			"Test2" : {
-				"weight": 1,
-				"actors" : ["avatar", "gerhard", "friedel"],
-				"text" : [
-					"gerhard#Ach Friedel ist bei dir ich hab in schon gesucht!",
-					"gerhard#Mein kleiner Friedel",
-					"friedel#Wuff",
-					"avatar#Wie süß."
-				]
+			{
+				"method": "is_state_by_name",
+				"state": "ElectricityState.UNLIMITED"
+			}
+		],
+		"actors": ["avatar", "gerhard.r"],
+		"text": [
+			"gerhard.r#Hallo Gerhard am Apparat.",
+			"avatar#Hi Gerhard, Ich hab hier grad Friedel auf dem Markplatz gefunden!",
+			"gerhard.r#Oh wie schön. Ich hab Friedel schon überall gesucht.",
+			"gerhard.r#Gut das du ihn gefunden hast.",
+			"gerhard.r#Ich bin gerade Zuhause du kannst ihn also gerne vorbei bringen."
+		],
+		"options": {
+			"#idiot": "#idiot",
+			"#lieb": "#lieb"
+		}
+	},
+	"#lieb": {
+		"prompt": "Friedel Nachhause bringen",
+		"actors": ["avatar", "gerhard.r"],
+		"test": [
+			"avatar#Ja ich kann ihn gerne gerade vorbei bringen."
+		],
+		"options": {
+			"#end": "#end"
+		}
+	},
+	"#idiot": {
+		"prompt": "Nicht Helfen",
+		"consequences": {
+			"set_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 4
 			}
 		}
 	},
-	"#heyho" : {
-		"consequences" : {
-			"change_stage": {
-				"stage_name": "park",
-				"avatar_pos": {"x": 350, "y": 700},
-				"npc_pos": {
-					"Gerhard": {"x": 128, "y": 704},
-					"Friedel": {"x": 64, "y": 704}
-				},
-				"wait": false
+	"start2" : {
+		"conditions": {
+			"has_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 2
 			}
+		},
+		"actors" : ["avatar", "friedel"],
+		"text" : [
+			"avatar#Das bist du ja Friedel. Gerhard hat dich schon gesucht.",
+			"friedel#Wuff Wuff Wuff Wuff Wuff Wuff",
+			"avatar#Komm mit mir wir gehn jetzt zum Treffpunkt",
+			"friedel#Wuff"
+		],
+		"options" : {
+			"#end" : "#end"
+		}
+	},
+	"#end" : {
+		"consequences": {
+			"set_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 3
+			},
+			"change_stage": {
+				"stage_name": "gardenhouse",
+				"avatar_pos": {"x": 150, "y": 900},
+				"wait": true
+			},
+			"progress_day": ["Suche nach Friedel", "Suche nach Friedel", 30]
 		}
 	}
 }
