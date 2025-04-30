@@ -15,7 +15,8 @@ class_name  EMC_GUIMngr
 @onready var _showerGUI := $CL/VBC/LowerSection/ShowerGUI
 @onready var _cs_GUI : EMC_ChangeStageGUI = $CL/VBC/LowerSection/ChangeStageGUI
 @onready var _rainwater_barrel_gui := $CL/VBC/MiddleSection/RainwaterBarrelGUI
-
+@onready var two_choice: EMC_TwoChoice = $CL/VBC/LowerSection/TwoChoice
+@onready var default_action_gui: EMC_DefaultActionGUI = $CL/VBC/LowerSection/DefaultActionGUI
 
 @onready var middle_section := $CL/VBC/MiddleSection
 @onready var lower_section := $CL/VBC/LowerSection
@@ -88,6 +89,9 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(p_backpack)
 	_showerGUI.setup(p_backpack)
+	
+	default_action_gui.setup(p_day_mngr)
+	two_choice.setup(p_day_mngr)
 
 func is_any_gui() -> bool:
 	return not (_active_guis.is_empty() and _gui_queue.is_empty())
@@ -95,8 +99,12 @@ func is_any_gui() -> bool:
 func close_current_gui() -> void:
 	if not _active_guis.is_empty():
 		_active_guis.back().close()
+		
+func close_gui(index: int) -> void:
+	if not _active_guis.is_empty():
+		_active_guis[index].close()
 
-func request_gui(gui_name : String, argv : Array) -> Variant:	
+func request_gui(gui_name : String, argv : Array = []) -> Variant:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
 			_hide_buttons()

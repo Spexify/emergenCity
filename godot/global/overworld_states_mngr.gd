@@ -308,6 +308,10 @@ func is_any_state_by_name(state: String) -> bool:
 
 ############################################Furniture###############################################
 
+## TODO: more efficent version
+func has_upgrade(id: EMC_Upgrade.IDs) -> bool:
+	return id in _upgrades.map(func (up: EMC_Upgrade) -> int: return up.get_id())
+
 func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	for upgrade in _upgrades:
 		if upgrade != null && upgrade.get_id() == p_upgrade_id: #MRM: Added null check

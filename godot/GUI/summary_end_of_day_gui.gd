@@ -6,10 +6,10 @@ class_name EMC_SummaryEndOfDayGUI
 @onready var evening_content : RichTextLabel = $SummaryWindow/MarginContainer/VBC/VBC/HBC3/TextBox/EveningContent
 
 ## opens summary end of day GUI/makes visible
-func open(_p_day_cycle: EMC_DayCycle) -> void:
-	morning_content.text = _p_day_cycle.morning_action.get_description()
-	noon_content.text = _p_day_cycle.noon_action.get_description()
-	evening_content.text = _p_day_cycle.evening_action.get_description()
+func open(history: Array[String]) -> void:
+	morning_content.text = history[0]
+	noon_content.text = history[1]
+	evening_content.text = history[2]
 	show()
 	opened.emit()
 

@@ -16,7 +16,7 @@ extends EMC_GUI
 #@onready var deal : Button = $VBC/Buttons/Deal
 @onready var deal: Button = $VBC/Buttons/Control/Deal
 @onready var progress_deal: TextureProgressBar = $VBC/Buttons/Control/ProgressDeal
-@onready var overload: CPUParticles2D = $VBC/Buttons/Control/Deal/Overload
+@onready var overload: CPUParticles2D = $VBC/Header/HBC/VBC/Mood/Overload
 
 var _ITEM_PANEL_SCN := preload("res://inventory/item_panel.tscn")
 
@@ -57,7 +57,7 @@ func open(npc : EMC_NPC) -> void:
 	inventory_grid.reload()
 	trader_grid.reload()
 
-	progress_deal.set_value(-1)
+	progress_deal.set_max(_npc_trade._top)
 
 	show()
 	opened.emit()
@@ -144,12 +144,16 @@ func _evaluat_trade() -> void:
 	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(progress_deal, "value", trade_score, 0.2)
 	deal.disabled = _npc_trade.will_deal(trade_score)
-	if deal.disabled:
-		#progress_deal.tint_progress = Color(0.32, 0.54, 0.78, 1)
-		tween.parallel().tween_property(progress_deal, "tint_progress", Color(0.32, 0.54, 0.78, 1), 0.2)
-	else:
-		#progress_deal.tint_progress = Color(0.3, 0.7, 0.39, 1)
-		tween.parallel().set_trans(Tween.TRANS_SINE).tween_property(progress_deal, "tint_progress", Color(0.3, 0.7, 0.39, 1), 0.2)
+	
+	var color := _npc_trade.get_deal_color(trade_score)
+	tween.parallel().tween_property(progress_deal, "tint_progress", color, 0.2)
+	
+	#if deal.disabled:
+		##progress_deal.tint_progress = Color(0.32, 0.54, 0.78, 1)
+		#tween.parallel().tween_property(progress_deal, "tint_progress", Color(0.32, 0.54, 0.78, 1), 0.2)
+	#else:
+		##progress_deal.tint_progress = Color(0.3, 0.7, 0.39, 1)
+		#tween.parallel().set_trans(Tween.TRANS_SINE).tween_property(progress_deal, "tint_progress", Color(0.3, 0.7, 0.39, 1), 0.2)
 
 func _on_cancel_pressed() -> void:
 	for item in _sell_items:

@@ -29,7 +29,7 @@ func setup(p_crisis_phase: EMC_CrisisPhase, p_day_mngr: EMC_DayMngr, p_stage_mng
 	_opt_event_mngr = p_opt_event_mngr
 	$DoorbellsGUI.setup(p_stage_mngr)
 
-func open(p_action : EMC_Action) -> void:
+func open() -> void:
 	_home_pin.show()
 	
 	#Setup Current-Location-Pin

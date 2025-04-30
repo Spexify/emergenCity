@@ -26,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 script = ExtResource("1_47fy4")
+icon = ExtResource("4_4twlg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(460, 0)
@@ -57,14 +58,6 @@ text = "Bestätigen"
 icon = ExtResource("4_4twlg")
 expand_icon = true
 
-[node name="ConfirmBtn_NoIcon" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
-visible = false
-custom_minimum_size = Vector2(180, 42)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Bestätigen"
-
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_6xb23")]
 custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
@@ -73,5 +66,4 @@ size_flags_vertical = 4
 text = "Abbrechen"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn_NoIcon" to="." method="_on_confirm_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

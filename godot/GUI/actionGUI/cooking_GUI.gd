@@ -39,9 +39,7 @@ func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr, p_day_mngr : EM
 			closed.connect(mother_scn.hide_children)
 	
 
-func open(p_action : EMC_Action) -> void:
-	_action = p_action
-	
+func open() -> void:
 	for recipe : Variant in _recipe_list.get_children():
 		if recipe is EMC_MotherRecipe:
 			
@@ -152,7 +150,7 @@ func _cook_recipe() -> void:
 	_inventory.add_item(output_item)
 	
 	await SoundMngr.button_finished()
-	var wait : AudioStreamPlayer = _action.play_sound()
+	var wait : AudioStreamPlayer = SoundMngr.play_sound("Cooking")
 	##Don't wait, because player has to wait too long otherwhise and there will be an 
 	##animation playing simultatenously (Made SoundMngr process always)
 	#if wait != null:
@@ -165,7 +163,8 @@ func _cook_recipe() -> void:
 		_gui_mngr.queue_gui("ItemQuestionGUI", [output_item])
 	
 	close()
-	_action.executed.emit(_action)
+	#_action.executed.emit(_action)
+	_day_mngr._advance_day_period("Du hast %s gekocht" % output_item.name)
 
 func _try_cooking_with_heat_source() -> void:
 	if Global.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER):

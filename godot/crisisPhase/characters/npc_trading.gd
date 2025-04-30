@@ -1,6 +1,12 @@
 extends EMC_NPC_Interaction_Option
 class_name EMC_NPC_Trading
 
+const RED: Color = Color8(219, 6, 11)
+const ORANGE: Color = Color8(232, 96, 28)
+const YELLOW: Color = Color8(247, 240, 87)
+const GREEN: Color = Color8(77, 178, 100)
+const DARK_GREEN: Color = Color8(36, 111, 64)
+
 @export var _inventory: EMC_Inventory
 @export var _item_preference: Dictionary
 #@export var _tips: Array[String]
@@ -12,9 +18,9 @@ class_name EMC_NPC_Trading
 @export var _high: float = 0.3
 @export var _top: float = 0.6
 
-@export var _karma_weight: float = 1.0
+@export var _karma_weight: float = 0.5
 @export var _value_weight: float = 1.0
-@export var _decision_noise: float = 0.0
+#@export var _decision_noise: float = 0.0
 
 @onready var npc: EMC_NPC = $"../.."
 
@@ -50,9 +56,9 @@ func _init(dict: Dictionary) -> void:
 	_high = dict.get("high", _high)
 	_top = dict.get("top", _top)
 	
-	_karma_weight = dict.get("karma_weight", 1.0)
-	_value_weight = dict.get("value_weight", 1.0)
-	_decision_noise = dict.get("noise", 0.0)
+	_karma_weight = dict.get("karma_weight", _karma_weight)
+	_value_weight = dict.get("value_weight", _value_weight)
+	#_decision_noise = dict.get("noise", 0.0)
 
 func _ready() -> void:
 	_gui_mngr = npc.get_gui_mngr()
@@ -103,17 +109,20 @@ func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_I
 		return -1.0
 	
 	var trade_score := (sell_value - buy_value) / maxf(sell_value, buy_value)
-
-	return trade_score * _value_weight + _karma_comp.get_krama() * _karma_weight + randf_range(-_decision_noise, _decision_noise)
+	print(trade_score)
+	trade_score = trade_score * _value_weight + _karma_comp.get_krama() * _karma_weight
+	print(trade_score)
+	return trade_score
 	
 func get_mood_texture(trade_score: float, mood_texture: AtlasTexture) -> Texture2D:
+	trade_score = trade_score / _value_weight - _karma_comp.get_krama() * _karma_weight
 	if trade_score < _bottom:
 		mood_texture.set_region(Rect2(256, 0, 64, 64))
 	elif trade_score < _low:
 		mood_texture.set_region(Rect2(192, 0, 64, 64))
-	elif trade_score < _high:
+	elif trade_score < _mid:
 		mood_texture.set_region(Rect2(128, 0, 64, 64))
-	elif trade_score < _top:
+	elif trade_score < _high:
 		mood_texture.set_region(Rect2(64, 0, 64, 64))
 	else:
 		mood_texture.set_region(Rect2(0, 0, 64, 64))
@@ -148,68 +157,35 @@ func get_response(item: EMC_Item) -> String:
 		#list.append("Oh diese Item ist recht wertvoll")
 		
 	return [list, base].pick_random().pick_random()
-	#if trade_score < _bottom:
-		#if range(_tip_ratio).pick_random():
-			#if not _resp_bottom.is_empty():
-				#return _resp_bottom.pick_random()
-		#else:
-			#if not _tips.is_empty():
-				#return _tips.pick_random()
-		#return "Das ist eine Scherz"
-	#elif trade_score < _low:
-		#if range(_tip_ratio).pick_random():
-			#if not _resp_low.is_empty():
-				#return _resp_low.pick_random()
-		#else:
-			#if not _tips.is_empty():
-				#return _tips.pick_random()
-		#return "Gefällt mir nicht"
-	#elif trade_score < _mid:
-		#if range(_tip_ratio).pick_random():
-			#if not _resp_mid.is_empty():
-				#return _resp_mid.pick_random()
-		#else:
-			#if not _tips.is_empty():
-				#return _tips.pick_random()
-		#return "Wenn ich muss"
-	#elif trade_score < _high:
-		#if range(_tip_ratio).pick_random():
-			#if not _resp_high.is_empty():
-				#return _resp_high.pick_random()
-		#else:
-			#if not _tips.is_empty():
-				#return _tips.pick_random()
-		#return "Gefällt mir"
-	#elif trade_score < _top:
-		#if range(_tip_ratio).pick_random():
-			#if not _resp_top.is_empty():
-				#return _resp_top.pick_random()
-		#else:
-			#if not _tips.is_empty():
-				#return _tips.pick_random()
-		#return "Gefällt mir sehr"
-	#else:
-		#if not _tips.is_empty() and not range(_tip_ratio).pick_random():
-			#return _tips.pick_random()
-		#return "Du bist zu gut zu mir"
 		
 func will_deal(trade_score: float) -> bool:
-	if trade_score * _value_weight + _karma_comp.get_krama() * _karma_weight + randf_range(-_decision_noise, _decision_noise) >= _low:
+	if (trade_score >= _low):
 		return false
 	else:
 		return true
-		
-func deal(trade_score: float) -> void:
-	trade_score -= _karma_weight * _karma_comp.get_krama()
+
+func get_deal_color(trade_score: float) -> Color:
 	if trade_score < _bottom:
-		_karma_comp.add_karma(-0.3)
+		return RED
 	elif trade_score < _low:
-		_karma_comp.add_karma(-0.2)
+		return ORANGE
+	elif trade_score < _mid:
+		return YELLOW
+	elif trade_score < _high:
+		return GREEN
+	return DARK_GREEN
+
+func deal(trade_score: float) -> void:
+	trade_score = trade_score / _value_weight - _karma_comp.get_krama() * _karma_weight
+	if trade_score < _bottom:
+		_karma_comp.add_karma(-0.6)
+	elif trade_score < _low:
+		_karma_comp.add_karma(-0.3)
 	elif trade_score < _mid:
 		_karma_comp.add_karma(-0.1)
 	elif trade_score < _high:
 		_karma_comp.add_karma(0.1)
 	elif trade_score < _top:
-		_karma_comp.add_karma(0.2)
-	else:
 		_karma_comp.add_karma(0.3)
+	else:
+		_karma_comp.add_karma(0.4)

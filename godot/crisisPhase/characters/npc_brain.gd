@@ -15,10 +15,10 @@ class_name EMC_NPC_Brain
 var _stage_mngr: EMC_StageMngr
 
 func _init(data : Dictionary) -> void:
-	actions = data.get("actions", {})	
+	actions = data.get("actions", {})
 	for key : String in actions:
 		var res: Resource = Preloader.get_resource("res://util/action/" + actions[key]["type"] + "_action.gd")
-		actions[key] = res.new(actions[key], self._get_comp_by_name)
+		actions[key] = res.new(actions[key])
 		#
 		#if typeof(actions[key]) == TYPE_DICTIONARY:
 			#if actions[key].has("0"):
@@ -65,6 +65,9 @@ func _ready() -> void:
 	
 	for sub: EMC_NPC_Idee in priority_comps:
 		self.add_child(sub)
+		
+	for action: EMC_Action_v2 in actions.values():
+		action.set_comp(self._get_comp_by_name)
 
 ## Executes the behaviour of an NPC
 ## First gathers possible actions based on suppliers

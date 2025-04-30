@@ -21,11 +21,31 @@ var _dialogue_manager : EMC_DialogueMngr
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _gui_mngr)
-@onready var _pu_event_mngr: EMC_PopupEventMngr = EMC_PopupEventMngr.new(_day_mngr, _gui_mngr)
+
+@onready var _action_consequences: EMC_ActionConsequences = $EMC_ActionConsequences
+@onready var _action_constraints: EMC_ActionConstraints = $EMC_ActionConstraints
 
 ########################################## PUBLIC METHODS ##########################################
 
 ########################################## PRIVATE METHODS #########################################
+
+func _get_comp(comp_name: String) -> Node:
+	match comp_name:
+		"gui_mngr":
+			return _gui_mngr
+		"day_mngr":
+			return _day_mngr
+		"OSM":
+			return OverworldStatesMngr
+		"SoundMngr":
+			return SoundMngr
+		"ActCons":
+			return _action_consequences
+		"ActCond": 
+			return _action_constraints
+		_:
+			return self
+
 ## Setup all the needed reference for GUIs etc.
 func _ready() -> void:
 	if Global.was_crisis():
@@ -34,12 +54,14 @@ func _ready() -> void:
 		
 	_avatar.refresh_vitals()
 
+	JsonMngr.set_action_comp(_get_comp)
+
 	#Setup-Methoden
 	OverworldStatesMngr.setup(_upgrades)
 	
-	var _action_constraints := EMC_ActionConstraints.new(_day_mngr, _backpack, _stage_mngr)
-	var _action_consequences := EMC_ActionConsequences.new(_avatar, _backpack, _stage_mngr, \
-		$GUI/CL/VBC/LowerSection, _day_mngr, _gui_mngr, _opt_event_mngr)
+	_action_constraints.setup(_backpack)
+	
+	_action_consequences.setup( _backpack, _opt_event_mngr)
 	
 	#### DialogueStuff
 	_dialogue_manager = EMC_DialogueMngr.new(_action_constraints, _action_consequences, _day_mngr, _gui_mngr)
@@ -54,8 +76,7 @@ func _ready() -> void:
 	stage_mngr.npc_interaction.connect(_gui_mngr._on_npc_interaction)
 	
 	#### DayMngr
-	_day_mngr.setup($Avatar, _stage_mngr, _gui_mngr, _backpack, $GUI/CL/VBC/LowerSection, _opt_event_mngr, \
-		_pu_event_mngr)
+	_day_mngr.setup(_backpack, _opt_event_mngr)
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
@@ -114,14 +135,10 @@ func _process(delta: float) -> void:
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
-		"pop_up_manager": _pu_event_mngr.save(),
 		"opt_manager": _opt_event_mngr.save(),
 	}
 	return data
 	
 func load_state(data : Dictionary) -> void:
-	if data.has("pop_up_manager"):
-		_pu_event_mngr.load_state(data.get("pop_up_manager"))
-		
 	if data.has("opt_manager"):
 		_opt_event_mngr.load_state(data.get("opt_manager"))

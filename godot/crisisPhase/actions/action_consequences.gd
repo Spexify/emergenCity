@@ -4,24 +4,17 @@ class_name EMC_ActionConsequences
 const NO_PARAM: int = 0
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var _avatar: EMC_Avatar
+@export var _avatar: EMC_Avatar
 var _inventory: EMC_Inventory
-var _stage_mngr : EMC_StageMngr
-var _lower_gui_node : Node
-var _day_mngr : EMC_DayMngr
-var _gui_mngr: EMC_GUIMngr
+@export var _stage_mngr : EMC_StageMngr
+@export var _lower_gui_node : Node
+@export var _day_mngr : EMC_DayMngr
+@export var _gui_mngr: EMC_GUIMngr
 var _opt_event_mngr: EMC_OptionalEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(p_avatar: EMC_Avatar, p_inventory: EMC_Inventory, p_stage_mngr : EMC_StageMngr, \
-p_lower_gui_node : Node, p_day_mngr : EMC_DayMngr, p_gui_mngr: EMC_GUIMngr,
-p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
-	_avatar = p_avatar
+func setup(p_inventory: EMC_Inventory, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_inventory = p_inventory
-	_stage_mngr = p_stage_mngr
-	_lower_gui_node = p_lower_gui_node
-	_day_mngr = p_day_mngr
-	_gui_mngr = p_gui_mngr
 	_opt_event_mngr = p_opt_event_mngr
 	_rng.randomize()
 
@@ -46,12 +39,8 @@ func execute_action(action : Variant) -> void:
 		id = action as int
 	_day_mngr.on_interacted_with_furniture(id)
 	
-func progress_day(params : Variant) -> void:
-	var action := EMC_Action.empty_action()
-	action._ACTION_NAME = params[0]
-	action._description = params[1]
-	action._performance_coin_value = params[2]
-	_day_mngr._advance_day_period(action)
+func progress_day(descr : String) -> void:
+	_day_mngr._advance_day_period(descr)
 	
 ############################################ Items #################################################
 
@@ -99,31 +88,15 @@ func add_tap_water(_dummy: int) -> void:
 
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
 ## If it is completely used up, the item is removed from the [EMC_Inventory]
-## TODO: inventory has a method for that now!!
-## TODO: Improvement idea: change parameter type to string, and use JsonMngr.item_name_to_id
+## NOTE: inventory has a method for that now!!
+## NOTE: Improvement idea: change parameter type to string, and use JsonMngr.item_name_to_id
 ## This way, normal actions can be included in the JSON file
 func use_item(p_ID: EMC_Item.IDs) -> void:
-	var item : EMC_Item = _inventory.get_items_of_id(p_ID).front()
-	if item == null:
-		return
-	
-	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
-	if usesIC != null:
-		usesIC.use_item()
-		if usesIC.no_uses_left():
-			_inventory.remove_item(item)
+	_inventory.use_item(p_ID)
 
 
 func use_item_by_name(p_name: String) -> void:
-	var item : EMC_Item = _inventory.get_items_of_id(JsonMngr.item_name_to_id(p_name)).front()
-	if item == null:
-		return
-	
-	var usesIC: EMC_IC_Uses = item.get_comp(EMC_IC_Uses)
-	if usesIC != null:
-		usesIC.use_item()
-		if usesIC.no_uses_left():
-			_inventory.remove_item(item)
+	_inventory.use_item(JsonMngr.item_name_to_id(p_name))
 
 
 ############################################ Other ################################################
@@ -249,10 +222,21 @@ func remove_quest(args: Dictionary) -> void:
 ############################################ Stage #################################################
 
 func change_stage(p_data : Dictionary) -> void:
-	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("npc_pos"), p_data.get("wait", true))
+	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("npc_pos", {}), p_data.get("wait", true))
 	
 	# Avatar is moved to early should be handeled in stage or stage_mngr
 	_avatar.position = p_data.get("avatar_pos")
+	
+func change_stage_by_dict(p_data : Dictionary) -> void:
+	var npc_pos: Dictionary = p_data.get("npc_pos", {})
+	if not npc_pos.is_empty():
+		for npc: String in npc_pos:
+			npc_pos[npc] = EMC_Util.dict_to_vector(npc_pos[npc], TYPE_VECTOR2)
+		
+	_stage_mngr.change_stage(p_data.get("stage_name"),  npc_pos, p_data.get("wait", true))
+	
+	# Avatar is moved to early should be handeled in stage or stage_mngr
+	_avatar.position = EMC_Util.dict_to_vector(p_data.get("avatar_pos"), TYPE_VECTOR2)
 
 ############################################ JSON ##################################################
 

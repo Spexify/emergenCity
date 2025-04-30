@@ -8,7 +8,7 @@ const OR := "or"
 var exes: Array[EMC_Action_v2]
 var acc: String = ARRAY
 
-func _init(data : Dictionary, get_exe: Callable) -> void:
+func _init(data : Dictionary) -> void:
 	if not data.has("acc"):
 		print_debug("Missing Accumulator")
 	else:
@@ -24,16 +24,19 @@ func _init(data : Dictionary, get_exe: Callable) -> void:
 			if res == null:
 				res = ResourceLoader.load("res://util/action/" + type + "_action.gd")
 				
-			exes.append(res.new(action, get_exe))
-		
+			exes.append(res.new(action))
+
+func set_comp(get_exe: Callable) -> void:
+	for action in exes:
+		action.set_comp(get_exe)
+
 func execute() -> Variant:
 	if acc == AND:
-		var result := true
 		for exe : EMC_Action_v2 in exes:
 			var r: Variant = exe.execute()
-			if r != null:
-				result &= r
-		return result
+			if r == null or not r:
+				return false
+		return true
 	elif acc == OR:
 		for exe : EMC_Action_v2 in exes:
 			var r: Variant = exe.execute()

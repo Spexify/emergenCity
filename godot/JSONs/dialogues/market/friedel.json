@@ -87,7 +87,7 @@
 	"#lieb": {
 		"prompt": "Friedel Nachhause bringen",
 		"actors": ["avatar", "gerhard.r"],
-		"test": [
+		"text": [
 			"avatar#Ja ich kann ihn gerne gerade vorbei bringen."
 		],
 		"options": {
