@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0oebjhntv2g8"]
+
+[ext_resource type="Texture2D" uid="uid://dhftxjokqdgiu" path="res://assets/GUI/buttons/button_doorbell_normal.png" id="1_oi2wa"]
+[ext_resource type="Texture2D" uid="uid://gfl5egwn4qbu" path="res://assets/GUI/buttons/button_doorbell_pressed.png" id="2_35i7k"]
+[ext_resource type="Script" path="res://GUI/doorbell/doorbell.gd" id="3_t1474"]
+
+[node name="Doorbell" type="TextureButton"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 82.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+texture_normal = ExtResource("1_oi2wa")
+texture_pressed = ExtResource("2_35i7k")
+script = ExtResource("3_t1474")
+
+[node name="RTL" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 40
+bbcode_enabled = true
+text = "[center][i]Dummy[/i][/center]"
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

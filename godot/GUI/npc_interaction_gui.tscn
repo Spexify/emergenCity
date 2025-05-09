@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr304u228icot"]
+
+[ext_resource type="Script" path="res://GUI/npc_interaction_gui.gd" id="1_fosp6"]
+[ext_resource type="Texture2D" uid="uid://byakht1f2qa3a" path="res://assets/characters/portrait_gerhard.png" id="2_t5c1u"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_ricak"]
+
+[node name="NpcInteraction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fosp6")
+
+[node name="Portrait" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_right = 96.0
+offset_bottom = 192.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_t5c1u")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 164)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -290.0
+offset_right = 2.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_type_variation = &"WhitePanelContainer"
+
+[node name="Descr" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+text = "Das hier ist Gerhard
+bla ba
+bkla
+vla"
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 272)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -106.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Cancel" parent="." instance=ExtResource("3_ricak")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 248.0
+offset_right = 0.0
+offset_bottom = 313.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_type_variation = &"CancelButton"
+text = "Abbrechen"
+
+[connection signal="pressed" from="Cancel" to="." method="close"]

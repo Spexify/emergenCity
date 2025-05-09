@@ -1,15 +1,15 @@
 [gd_scene load_steps=21 format=3 uid="uid://tpxumytrh032"]
 
 [ext_resource type="Script" path="res://crisisPhase/status_bars.gd" id="1_m4dni"]
-[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_gr84e"]
-[ext_resource type="Texture2D" uid="uid://dp8ofl4ea1lse" path="res://res/VFX/particles/particle_smoke_green.png" id="3_66xh1"]
-[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/sprites/GUI/icons/icon_statusbar_hydration.png" id="3_idu7t"]
-[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/sprites/GUI/icons/icon_statusbar_health.png" id="4_m4gsd"]
-[ext_resource type="Shader" path="res://res/VFX/shaders/status_bars.gdshader" id="4_wac0w"]
-[ext_resource type="Texture2D" uid="uid://bk4pns81h8ars" path="res://res/VFX/particles/particle_smoke_blue.png" id="5_a7waw"]
-[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://res/sprites/GUI/icons/icon_statusbar_happiness.png" id="5_xfaii"]
-[ext_resource type="Texture2D" uid="uid://bhoni508p4cmx" path="res://res/VFX/particles/particle_smoke_red.png" id="7_5dx1v"]
-[ext_resource type="Texture2D" uid="uid://dny6kkus3j8l3" path="res://res/VFX/particles/particle_smoke_yellow.png" id="7_mjdb6"]
+[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://assets/GUI/icons/icon_statusbar_nutrition.png" id="2_gr84e"]
+[ext_resource type="Texture2D" uid="uid://dp8ofl4ea1lse" path="res://assets/particles/particle_smoke_green.png" id="3_66xh1"]
+[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://assets/GUI/icons/icon_statusbar_hydration.png" id="3_idu7t"]
+[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://assets/GUI/icons/icon_statusbar_health.png" id="4_m4gsd"]
+[ext_resource type="Shader" path="res://shaders/status_bars.gdshader" id="4_wac0w"]
+[ext_resource type="Texture2D" uid="uid://bk4pns81h8ars" path="res://assets/particles/particle_smoke_blue.png" id="5_a7waw"]
+[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://assets/GUI/icons/icon_statusbar_happiness.png" id="5_xfaii"]
+[ext_resource type="Texture2D" uid="uid://bhoni508p4cmx" path="res://assets/particles/particle_smoke_red.png" id="7_5dx1v"]
+[ext_resource type="Texture2D" uid="uid://dny6kkus3j8l3" path="res://assets/particles/particle_smoke_yellow.png" id="7_mjdb6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3vx5e"]
 shader = ExtResource("4_wac0w")
@@ -195,7 +195,7 @@ layout_mode = 2
 theme_override_constants/separation = 13
 
 [node name="HealthCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
@@ -231,13 +231,14 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "
 "
 fit_content = true
 
 [node name="HappinessCont" type="HBoxContainer" parent="HBC/VBoxContainer2"]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
@@ -269,17 +270,23 @@ one_shot = true
 speed_scale = 0.5
 
 [node name="HappinessLabel" type="RichTextLabel" parent="HBC/VBoxContainer2/HappinessCont"]
-clip_contents = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "
 "
 fit_content = true
+scroll_active = false
 
 [connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont" to="." method="_on_nutrition_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer/NutritionCont/CaloriesLabel" to="." method="_on_nutrition_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont" to="." method="_on_hydration_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer/HydrationCont/MillilitersLabel" to="." method="_on_hydration_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont" to="." method="_on_health_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HealthCont/HealthLabel" to="." method="_on_health_cont_gui_input"]
 [connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont" to="." method="_on_happiness_cont_gui_input"]
+[connection signal="gui_input" from="HBC/VBoxContainer2/HappinessCont/HappinessLabel" to="." method="_on_happiness_cont_gui_input"]

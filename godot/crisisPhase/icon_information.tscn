@@ -1,15 +1,21 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmchkorcdvl0d"]
 
 [ext_resource type="Script" path="res://crisisPhase/icon_information.gd" id="1_y0unm"]
-[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://res/sprites/GUI/icons/icon_statusbar_nutrition.png" id="2_nlkmw"]
-[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://res/sprites/GUI/icons/icon_statusbar_hydration.png" id="3_75l8e"]
-[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://res/sprites/GUI/icons/icon_statusbar_health.png" id="4_51kyr"]
-[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://res/sprites/GUI/icons/icon_statusbar_happiness.png" id="5_ajf1c"]
-[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://res/sprites/GUI/icons/icon_needs_time.png" id="6_yt1ay"]
+[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://assets/GUI/icons/icon_statusbar_nutrition.png" id="2_nlkmw"]
+[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://assets/GUI/icons/icon_statusbar_hydration.png" id="3_75l8e"]
+[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://assets/GUI/icons/icon_statusbar_health.png" id="4_51kyr"]
+[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://assets/GUI/icons/icon_statusbar_happiness.png" id="5_ajf1c"]
+[ext_resource type="Texture2D" uid="uid://clxphar2j8ggq" path="res://assets/GUI/icons/icon_needs_time.png" id="6_yt1ay"]
 
 [node name="IconInformation" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_y0unm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -19,10 +25,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 71.0
-offset_top = 235.0
-offset_right = 505.0
-offset_bottom = 789.0
+offset_left = -217.0
+offset_top = -277.0
+offset_right = 217.0
+offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
@@ -38,7 +44,7 @@ layout_mode = 2
 texture = ExtResource("2_nlkmw")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -56,7 +62,7 @@ layout_mode = 2
 texture = ExtResource("3_75l8e")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -73,7 +79,7 @@ layout_mode = 2
 texture = ExtResource("4_51kyr")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer4"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
@@ -90,7 +96,7 @@ layout_mode = 2
 texture = ExtResource("5_ajf1c")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer5"]
-custom_minimum_size = Vector2(350, 64)
+custom_minimum_size = Vector2(350, 66)
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true

@@ -1,6 +1,5 @@
 extends Node
 
-
 const MAX_ECOINS = 99999
 const INITIAL_E_COINS = 300
 
@@ -21,6 +20,7 @@ const UPGRADE_SCENE_PRELOAD = preload("res://preparePhase/upgrade.tscn")
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
 signal game_loaded
+signal game_saved
 signal scene_changed
 
 @onready var _root := get_tree().root
@@ -35,6 +35,7 @@ var _was_crisis : bool
 var _in_crisis_phase: bool
 var _started_from_entry_scene: bool = false
 var _vibration : bool = false
+var _apps_installed : Array[String] = []
 
 
 ## This function and variable are there, so you can later distinguish if the project
@@ -42,11 +43,9 @@ var _vibration : bool = false
 func set_started_from_entry_scene(p_value: bool = true) -> void:
 	_started_from_entry_scene = p_value
 
-
-func _ready() -> void:
+func _ready() -> void:	
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
-
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -108,6 +107,7 @@ func reset_save() -> void:
 		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
 		"vibration" : false,
+		"apps_installed": [],
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -141,10 +141,12 @@ func reset_upgrades_equipped() -> void:
 func save_game(p_was_crisis : bool) -> void:
 	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
 	
+	
+	_was_crisis = p_was_crisis
 	var data : Dictionary = {
 		"e_coins": _e_coins,
 		"was_crisis": p_was_crisis,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		"inventory_data": _inventory.get_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		"upgrade_ids_unlocked": _upgrade_ids_unlocked,
 		"upgrades_equipped" : _upgrades_equipped.map(func (_upgrade : EMC_Upgrade) -> int : return _upgrade.get_id() if _upgrade != null else EMC_Upgrade.IDs.EMPTY_SLOT),
 		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
@@ -153,6 +155,7 @@ func save_game(p_was_crisis : bool) -> void:
 		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
 		"tutorial_done" : _tutorial_done,
 		"vibration" : _vibration,
+		"apps_installed" : _apps_installed,
 	}
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
@@ -178,7 +181,7 @@ func save_game(p_was_crisis : bool) -> void:
 			
 			# Store the save dictionary as a new line in the save file.
 			save_state.store_line(json_string)
-
+	game_saved.emit()
 
 func load_game() -> void:
 	if not FileAccess.file_exists(SAVE_GAME_FILE):
@@ -210,9 +213,9 @@ func load_game() -> void:
 	else:
 		_inventory = EMC_Inventory.new()
 		for item_dict : Dictionary in data["inventory_data"]:
-			_inventory.add_existing_item(EMC_Item.from_save(item_dict))
+			_inventory.add_item(EMC_Item.from_save(item_dict))
 			
-		_inventory.sort_custom(EMC_Inventory.sort_helper)
+		_inventory.sort_custom(EMC_Inventory.sort_by_id)
 		
 	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
 	
@@ -232,6 +235,8 @@ func load_game() -> void:
 	if avatar_skin != "ERROR" && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 		
+	_apps_installed.assign(data.get("apps_installed", []))
+		
 	game_loaded.emit()
 
 
@@ -250,7 +255,7 @@ func create_inventory_with_starting_items() -> EMC_Inventory:
 	inventory.add_new_item(EMC_Item.IDs.BREAD)
 	inventory.add_new_item(EMC_Item.IDs.JAM)
 	
-	inventory.sort_custom(EMC_Inventory.sort_helper)
+	inventory.sort_custom(EMC_Inventory.sort_by_id)
 	return inventory
 
 
@@ -309,13 +314,14 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
+func get_equipped_upgrades() -> Array[EMC_Upgrade]:
+	return _upgrades_equipped.filter(func(upgrade : EMC_Upgrade) -> bool: return upgrade != null and upgrade.get_id() != EMC_Upgrade.IDs.EMPTY_SLOT)
 
 func get_upgrade_if_equipped(p_ID: EMC_Upgrade.IDs) -> EMC_Upgrade:
 	for upgrade in _upgrades_equipped:
 		if upgrade.get_id() == p_ID:
 			return upgrade
 	return null
-
 
 func get_upgrades() -> Array[EMC_Upgrade]:
 	return _upgrades_equipped
@@ -344,3 +350,23 @@ func set_vibration_enabled(x : bool) -> void:
 
 func is_vibration_enabled() -> bool:
 	return _vibration
+
+################################################UTIL################################################
+
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
+## DEPRECATED
+func pick_weighted_random(list : Array[Variant], weights : Array[float], count : int) -> Array[Variant]:
+	var result : Array[Variant] = []
+	assert(count <= list.size(), "Count cannot be greater than list size")
+	assert(list.size() == weights.size(), "The size of list and weights must be equal")
+	for i in range(count):
+		var sum_of_weight : float = weights.reduce(func(a : float, b : float) -> float: return a + b)
+		var random : float = _rng.randf_range(0.0, sum_of_weight)
+		for index in range(list.size()):
+			if random < weights[index]:
+				result.append(list[index])
+				list.remove_at(index)
+				weights.remove_at(index)
+				break
+			random -= weights[index]
+	return result

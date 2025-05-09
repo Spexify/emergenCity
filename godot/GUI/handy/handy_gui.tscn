@@ -1,0 +1,387 @@
+[gd_scene load_steps=22 format=3 uid="uid://druwt2u04fhrc"]
+
+[ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
+[ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
+[ext_resource type="Texture2D" uid="uid://b4iuh38wfe4f4" path="res://assets/GUI/icons/icon_info_app.png" id="2_6tb3d"]
+[ext_resource type="Texture2D" uid="uid://5mu0vxw1uan1" path="res://assets/GUI/backgrounds/phone.png" id="2_e701l"]
+[ext_resource type="Texture2D" uid="uid://cno5csi1waa8v" path="res://assets/GUI/icons/icon_warn_app.png" id="3_fdip5"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="5_n7g61"]
+[ext_resource type="Texture2D" uid="uid://bduv6g8pf4rcs" path="res://assets/GUI/icons/icon_store_app.png" id="6_306ny"]
+[ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
+[ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
+[ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_vrakr"]
+[ext_resource type="PackedScene" uid="uid://hurmnm4yg5ew" path="res://GUI/handy/warn_list_item.tscn" id="14_iodyr"]
+[ext_resource type="Texture2D" uid="uid://u55u4lhujyg3" path="res://res/sprites/scenario_icons.png" id="14_w3wqw"]
+[ext_resource type="Script" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
+[ext_resource type="Texture2D" uid="uid://b2yixgn3oaixk" path="res://assets/GUI/icons/icon_world_states.png" id="22_683kg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ss8d5"]
+texture = ExtResource("2_e701l")
+texture_margin_left = 30.0
+texture_margin_top = 64.0
+texture_margin_right = 30.0
+texture_margin_bottom = 64.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76uwp"]
+bg_color = Color(0.317647, 0.541176, 0.776471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j51c"]
+bg_color = Color(0.823529, 0.788235, 0.701961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c1mi"]
+bg_color = Color(0.317647, 0.541176, 0.776471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogubb"]
+bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu3e2"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvypq"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Handy" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4od8s")
+
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 766)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -441.0
+offset_right = 276.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ss8d5")
+
+[node name="VBC" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 940)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -940.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="Menu" type="PanelContainer" parent="VBC"]
+visible = false
+custom_minimum_size = Vector2(492, 940)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_76uwp")
+
+[node name="VBC" type="VBoxContainer" parent="VBC/Menu"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="VBC/Menu/VBC"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][color=white]Hauptmenü[/color][/center]"
+
+[node name="Margin" type="MarginContainer" parent="VBC/Menu/VBC"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Apps" type="GridContainer" parent="VBC/Menu/VBC/Margin"]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 33
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Info" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+size_flags_horizontal = 4
+app = "Info"
+icon = ExtResource("2_6tb3d")
+title = "[center]Info-Center"
+
+[node name="Store" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+app = "Store"
+icon = ExtResource("6_306ny")
+title = "[center]App-Store"
+
+[node name="Off" type="PanelContainer" parent="VBC"]
+visible = false
+custom_minimum_size = Vector2(492, 940)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"BlackPanelContainer"
+
+[node name="Store" type="PanelContainer" parent="VBC" node_paths=PackedStringArray("handy")]
+visible = false
+custom_minimum_size = Vector2(492, 940)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_3j51c")
+script = ExtResource("8_njk5s")
+handy = NodePath("../..")
+down_texture = ExtResource("6_306ny")
+
+[node name="VBC" type="VBoxContainer" parent="VBC/Store"]
+layout_mode = 2
+
+[node name="CC" type="CenterContainer" parent="VBC/Store/VBC"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBC/Store/VBC/CC"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="Title" type="RichTextLabel" parent="VBC/Store/VBC/CC/VBoxContainer"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][color=white]App Store"
+
+[node name="Description" type="RichTextLabel" parent="VBC/Store/VBC/CC/VBoxContainer"]
+custom_minimum_size = Vector2(400, 26)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center][color=white]Drücke auf eine App und installiere sie"
+
+[node name="Margin" type="MarginContainer" parent="VBC/Store/VBC"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Apps" type="GridContainer" parent="VBC/Store/VBC/Margin"]
+layout_mode = 2
+columns = 3
+
+[node name="Warn" parent="VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+app = "Warn"
+icon = ExtResource("3_fdip5")
+title = "[center]Warn-App"
+
+[node name="Info" type="PanelContainer" parent="VBC"]
+visible = false
+custom_minimum_size = Vector2(0, 940)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_1c1mi")
+script = ExtResource("8_von4c")
+warn_texture = ExtResource("22_683kg")
+
+[node name="VBC" type="VBoxContainer" parent="VBC/Info"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="VBC/Info/VBC"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center][color=white]Info-Center[/color][/center]"
+
+[node name="ItemList" parent="VBC/Info/VBC" instance=ExtResource("12_vrakr")]
+custom_minimum_size = Vector2(0, 580)
+layout_mode = 2
+separation = -20
+
+[node name="Warn" type="PanelContainer" parent="VBC"]
+custom_minimum_size = Vector2(0, 940)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"WarnItemList"
+script = ExtResource("21_hd3ml")
+warn_texture = ExtResource("14_w3wqw")
+
+[node name="Notifications" type="Control" parent="VBC/Warn"]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Notifications/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Notifications/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Meine Orte[/color]"
+fit_content = true
+
+[node name="Margin" type="MarginContainer" parent="VBC/Warn/Notifications"]
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 940.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 106
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBC" type="VBoxContainer" parent="VBC/Warn/Notifications/Margin"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBC/Warn/Notifications/Margin/VBC"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_type_variation = &"WarnItemList"
+theme_override_styles/panel = SubResource("StyleBoxFlat_uu3e2")
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Notifications/Margin/VBC/PanelContainer"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][color=black][b]Krisopolis[/b][/color][/center]"
+
+[node name="ItemList" parent="VBC/Warn/Notifications/Margin/VBC" instance=ExtResource("12_vrakr")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"WarnItemList"
+LIST_ITEM_SCN = ExtResource("14_iodyr")
+
+[node name="Description" type="Control" parent="VBC/Warn"]
+visible = false
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Description/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Warn/Description/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Description"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Description/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Description/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Krisopolis[/color]"
+fit_content = true
+
+[node name="Offline" type="Control" parent="VBC/Warn"]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Warn/Offline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Offline/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Warn/Offline/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 202.73)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][img]res://assets/GUI/icons/icon_offline.png[/img]
+ You are currently offline"
+fit_content = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Warn/Offline"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Warn/Offline/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Warn/Offline/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Krisopolis[/color]"
+fit_content = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 383.0
+offset_bottom = 447.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="BackButton" type="TextureButton" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("5_n7g61")
+
+[connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
+[connection signal="meta_clicked" from="VBC/Warn/Offline/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
+[connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]

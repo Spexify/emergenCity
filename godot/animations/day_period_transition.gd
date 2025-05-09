@@ -20,26 +20,37 @@ var _origin_pos: Vector2 = Vector2(300, 600) #get_viewport_rect().size / 2
 var _time: float 
 var _rad_offset: float
 
+# HACK
+var _callback : Callable
+var _once : bool = true
 
 ########################################## PUBLIC METHODS ##########################################
-func open(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod) -> void:
+func open(p_curr_day: int, p_new_day_period: EMC_DayMngr.DayPeriod, p_no_change: bool = false, p_callback : Callable = Callable()) -> void:
 	days.text = "[center][color=white]" + "Tag" + " " + str(p_curr_day) + "[/color]"
 	#_rad_offset = (1.0 * PI) + ((EMC_DayMngr.DayPeriod.size() - p_new_day_period) * 0.5 * PI)
 	var period: EMC_DayMngr.DayPeriod
 	
+	# HACK
+	_callback = p_callback
+	_once = true
+		
 	if p_new_day_period == EMC_DayMngr.DayPeriod.MORNING:
 		period = EMC_DayMngr.DayPeriod.EVENING
 		distance_factor = 2
 	else:
 		period = p_new_day_period - 1
 		distance_factor = 1
+	
+	if p_no_change:
+		period = p_new_day_period
+		distance_factor = 0
+	
 	icon_prev_period.position = _get_position_for_period(period)
 	icon_prev_period.frame = period
 	icon_prev_period.modulate = Color(icon_prev_period.modulate, 255)
 	icon_next_period.frame = p_new_day_period
 	icon_next_period.modulate = Color(icon_next_period.modulate, 0)
 	show()
-	Global.get_tree().paused = true
 	animation_player.play(FADE_IN_ANIM)
 
 func close() -> void:
@@ -66,11 +77,14 @@ func _get_position_for_period(p_day_period: EMC_DayMngr.DayPeriod) -> Vector2:
 	res.y = _origin_pos.y - sin(_rad_offset) * AMPLITUDE
 	return res
 
-
 func _process(delta: float) -> void:
 	_time += delta
 	
 	if _start_move_anim: #_time > _START_TIME: 
+		if _once and _callback.is_valid():
+			_once = false
+			await _callback.call()
+		
 		#Position
 		var curr_rad_progress := _time * SPEED * ONE_PERIOD_RADIAN * distance_factor
 		var rad := _rad_offset - curr_rad_progress
@@ -94,5 +108,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		_start_move_anim = true
 		_time = 0 #Time has to be 0 when its started, for the sin/cos values to be right!
 	elif anim_name == FADE_OUT_ANIM:
-		Global.get_tree().paused = false
 		close()

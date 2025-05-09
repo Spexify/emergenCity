@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7423f41j0fg3"]
 
-[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://res/sprites/items.png" id="1_7b4jc"]
+[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="1_7b4jc"]
 [ext_resource type="Script" path="res://animations/cooking_animation.gd" id="1_fw5ej"]
-[ext_resource type="Texture2D" uid="uid://cno866v7sk8h4" path="res://res/VFX/particles/particle_bubble.png" id="2_6rmhf"]
-[ext_resource type="Shader" path="res://res/VFX/shaders/white_shader.gdshader" id="2_cs3ij"]
+[ext_resource type="Texture2D" uid="uid://cno866v7sk8h4" path="res://assets/particles/particle_bubble.png" id="2_6rmhf"]
+[ext_resource type="Shader" path="res://shaders/white_shader.gdshader" id="2_cs3ij"]
 [ext_resource type="Material" uid="uid://xsna4pnbmx4w" path="res://animations/cooking_animation_material.tres" id="3_akcjf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xngph"]

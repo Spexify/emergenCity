@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bf1x6jm5o81ck"]
 
 [ext_resource type="Script" path="res://crisisPhase/stage/stage_mngr.gd" id="1_2ergk"]
-[ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://crisisPhase/stage/home.tscn" id="2_epoie"]
+[ext_resource type="PackedScene" uid="uid://denwwuybtt0vq" path="res://crisisPhase/stage/stage.tscn" id="2_xjxou"]
 
 [node name="StageMngr" type="Node2D"]
 process_mode = 1
@@ -12,9 +12,7 @@ script = ExtResource("1_2ergk")
 y_sort_enabled = true
 position = Vector2(-32, -32)
 
-[node name="CurrStage" parent="StageOffset" instance=ExtResource("2_epoie")]
-layer_0/modulate = Color(1, 1, 1, 0.384314)
-layer_3/modulate = Color(1, 1, 1, 0.262745)
+[node name="home" parent="StageOffset" instance=ExtResource("2_xjxou")]
 
 [node name="NPCs" type="Control" parent="."]
 y_sort_enabled = true

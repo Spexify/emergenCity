@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://j8qcqefgbhq4"]
+[gd_scene load_steps=7 format=3 uid="uid://j8qcqefgbhq4"]
 
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
-[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://res/sprites/GUI/icons/icon_ecoins.png" id="3_spno5"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="4_egv6r"]
+[ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="3_spno5"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_egv6r"]
+[ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="4_q2qsc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)
@@ -97,13 +98,10 @@ theme_override_constants/margin_bottom = 10
 [node name="VBox" type="VBoxContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin"]
 layout_mode = 2
 
-[node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
-custom_minimum_size = Vector2(0, 190)
+[node name="InventoryUI" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox" instance=ExtResource("4_q2qsc")]
+custom_minimum_size = Vector2(416, 190)
 layout_mode = 2
-
-[node name="InventoryGrid" type="GridContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Shelf"]
-layout_mode = 2
-columns = 7
+size_flags_horizontal = 4
 
 [node name="Description" type="PanelContainer" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 200)
@@ -114,7 +112,7 @@ theme_type_variation = &"WhitePanelContainer"
 layout_mode = 2
 
 [node name="Name" type="RichTextLabel" parent="Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox"]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
@@ -135,7 +133,7 @@ theme_override_font_sizes/italics_font_size = 18
 layout_mode = 2
 
 [node name="Title" type="RichTextLabel" parent="Background/Margin/Main/ShopSection"]
-custom_minimum_size = Vector2(0, 55)
+custom_minimum_size = Vector2(0, 59)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("2_duud7")
@@ -148,13 +146,12 @@ text = "[center]Shop[/center]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Shelf" type="ScrollContainer" parent="Background/Margin/Main/ShopSection/ShopPanel"]
+[node name="InventoryUI" parent="Background/Margin/Main/ShopSection/ShopPanel" instance=ExtResource("4_q2qsc")]
+custom_minimum_size = Vector2(416, 190)
 layout_mode = 2
-
-[node name="ShopGrid" type="GridContainer" parent="Background/Margin/Main/ShopSection/ShopPanel/Shelf"]
-layout_mode = 2
-columns = 7
+size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/Margin/Main"]
 layout_mode = 2

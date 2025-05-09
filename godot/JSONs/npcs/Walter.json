@@ -1,0 +1,23 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Walter",
+			"descr": "Das hier ist Walter.\nEr ist lieb.",
+			"portait": "walter"
+		},
+		"sprite": {
+			"texture_name": "walter"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 1.3
+			}
+		},
+		"stage": {
+			"start": "",
+			"positions": {
+				"Park": { "x": 300, "y": 440 }
+			}
+		}
+	}
+}

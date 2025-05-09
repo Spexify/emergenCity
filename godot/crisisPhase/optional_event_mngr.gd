@@ -51,7 +51,7 @@ class Event:
 #OEC = Optional Event Countdown
 var _opt_event_countdown : int
 const OEC_LOWER_BOUND : int = 2
-const OEC_UPPER_BOUND : int = 4 
+const OEC_UPPER_BOUND : int = 4
 #const OE_ACTIVE_PERIODS: int = 2 #Amount of periods that an event stays active
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()

@@ -1,13 +1,13 @@
 extends EMC_GUI
 
-@onready var _electricity_state_icon := $VBC/OverworldStates/VBC/ElectricityState/TextureRect/Sprite2D
-@onready var _electricity_state_value := $VBC/OverworldStates/VBC/ElectricityState/Value
-@onready var _water_state_icon := $VBC/OverworldStates/VBC/WaterState/TextureRect/Sprite2D
-@onready var _water_state_value := $VBC/OverworldStates/VBC/WaterState/Value
-@onready var _isolation_state_icon := $VBC/OverworldStates/VBC/IsolationState/TextureRect/Sprite2D
-@onready var _isolation_state_value := $VBC/OverworldStates/VBC/IsolationState/Value
-@onready var _foodcontam_state_icon := $VBC/OverworldStates/VBC/FoodContamState/TextureRect/Sprite2D
-@onready var _foodcontam_state_value := $VBC/OverworldStates/VBC/FoodContamState/Value
+@onready var _electricity_state_icon : Sprite2D= $VBC/OverworldStates/VBC/ElectricityState/TextureRect/Sprite2D
+@onready var _electricity_state_value : RichTextLabel = $VBC/OverworldStates/VBC/ElectricityState/Value
+@onready var _water_state_icon : Sprite2D= $VBC/OverworldStates/VBC/WaterState/TextureRect/Sprite2D
+@onready var _water_state_value : RichTextLabel = $VBC/OverworldStates/VBC/WaterState/Value
+@onready var _isolation_state_icon : Sprite2D= $VBC/OverworldStates/VBC/IsolationState/TextureRect/Sprite2D
+@onready var _isolation_state_value : RichTextLabel = $VBC/OverworldStates/VBC/IsolationState/Value
+@onready var _foodcontam_state_icon : Sprite2D= $VBC/OverworldStates/VBC/FoodContamState/TextureRect/Sprite2D
+@onready var _foodcontam_state_value : RichTextLabel = $VBC/OverworldStates/VBC/FoodContamState/Value
 
 
 ########################################## PUBLIC METHODS #########################################
@@ -46,7 +46,8 @@ func _ready() -> void:
 	#SettingsGUI.closed.connect(open)
 
 func _exit_tree() -> void:
-	SettingsGUI.closed.disconnect(open)
+	if closed.is_connected(open):
+		SettingsGUI.closed.disconnect(open)
 
 func _on_resume_btn_pressed() -> void:
 	close()
@@ -59,6 +60,7 @@ func _on_settings_pressed() -> void:
 
 ## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
+	OverworldStatesMngr._set_all_states(2, 2, 2, 2)
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
@@ -69,6 +71,6 @@ func _on_cancel_curr_crisis_pressed() -> void:
 
 ## TODO
 func _on_save_and_quit_pressed() -> void:
-	await Global.save_game(true)
+	Global.save_game(true)
 	Global.get_tree().quit()
 

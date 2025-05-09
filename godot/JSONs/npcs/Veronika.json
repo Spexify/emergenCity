@@ -1,0 +1,24 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Veronika",
+			"descr": "Das hier ist Veronika.\nSie ist lieb.",
+			"portait": "veronika"
+		},
+		"sprite": {
+			"texture_name": "veronika"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 1.1
+			}
+		},
+		"stage": {
+			"start": "ApartmentCamper",
+			"positions": {
+				"ApartmentCamper": { "x": 450, "y": 750 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
+}

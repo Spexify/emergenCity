@@ -17,28 +17,28 @@ func _ready() -> void:
 
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array[EMC_DayCycle], p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
+func open(p_history: Array, p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
 	
 	var summary_text_winner : String = ""
 	var summary_text_loser : String = ""
 	var all_action_coins : int = 0
 	var actions_summary := {}
 	
-	for day in p_history:
-		actions_summary[day.morning_action._ACTION_NAME] = actions_summary.get(day.morning_action._ACTION_NAME, 0) + 1
-		actions_summary[day.morning_action._ACTION_NAME + "CoinValue"] = \
-		actions_summary.get(day.morning_action._ACTION_NAME + "CoinValue", 0) + day.morning_action.get_performance_coin_value()
-		all_action_coins += day.morning_action.get_performance_coin_value()
-		
-		actions_summary[day.noon_action._ACTION_NAME] = actions_summary.get(day.noon_action._ACTION_NAME, 0) + 1
-		actions_summary[day.noon_action._ACTION_NAME + "CoinValue"] = \
-		actions_summary.get(day.noon_action._ACTION_NAME + "CoinValue", 0) + day.noon_action.get_performance_coin_value()
-		all_action_coins += day.noon_action.get_performance_coin_value()
-		
-		actions_summary[day.evening_action._ACTION_NAME] = actions_summary.get(day.evening_action._ACTION_NAME, 0) + 1
-		actions_summary[day.evening_action._ACTION_NAME + "CoinValue"] = \
-		actions_summary.get(day.evening_action._ACTION_NAME + "CoinValue", 0) + day.evening_action.get_performance_coin_value()
-		all_action_coins += day.evening_action.get_performance_coin_value()
+	#for day: Array[String] in p_history:
+		#actions_summary[day.morning_action._ACTION_NAME] = actions_summary.get(day.morning_action._ACTION_NAME, 0) + 1
+		#actions_summary[day.morning_action._ACTION_NAME + "CoinValue"] = \
+		#actions_summary.get(day.morning_action._ACTION_NAME + "CoinValue", 0) + day.morning_action.get_performance_coin_value()
+		#all_action_coins += day.morning_action.get_performance_coin_value()
+		#
+		#actions_summary[day.noon_action._ACTION_NAME] = actions_summary.get(day.noon_action._ACTION_NAME, 0) + 1
+		#actions_summary[day.noon_action._ACTION_NAME + "CoinValue"] = \
+		#actions_summary.get(day.noon_action._ACTION_NAME + "CoinValue", 0) + day.noon_action.get_performance_coin_value()
+		#all_action_coins += day.noon_action.get_performance_coin_value()
+		#
+		#actions_summary[day.evening_action._ACTION_NAME] = actions_summary.get(day.evening_action._ACTION_NAME, 0) + 1
+		#actions_summary[day.evening_action._ACTION_NAME + "CoinValue"] = \
+		#actions_summary.get(day.evening_action._ACTION_NAME + "CoinValue", 0) + day.evening_action.get_performance_coin_value()
+		#all_action_coins += day.evening_action.get_performance_coin_value()
 	
 	for key : String in actions_summary:
 		if key.contains("CoinValue"):

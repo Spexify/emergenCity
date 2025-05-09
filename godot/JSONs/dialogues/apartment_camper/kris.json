@@ -1,0 +1,65 @@
+{
+    "start": {
+        "actors": ["avatar", "kris.r"],
+        "text": [
+            "kris.r#Oh, hey!"
+        ],
+        "options": {
+            "end": {
+                "prompt": "Man sieht sich!",
+                "actors": ["avatar", "kris.r"],
+                "text": [
+                    "kris.r#Okay, bis dann!"
+                ]
+            },
+            "weiter": {
+                "prompt": "Was geht?",
+                "options": {
+                    "#option1": "",
+                    "#option2": ""
+                }
+            }
+        }
+    },
+    "#option1": {
+        "actors": ["avatar", "kris.r", "veronika.r"],
+        "text": [
+            "kris.r#Hast du Lust auf eine heiße Schokolade?",
+            "veronika.r#Wir haben keine Milch mehr da.",
+            "kris#Oh, schade. Aber ich könnte uns einen Smoothie machen!",
+            "veronika.r#Obst haben wir auch keins mehr.",
+            "kris#Stimmt ja. Oh, und was ist mit Milchreis?",
+            "veronika.r#... Kris. Keine Milch.",
+            "kris.r#Achja. Na gut. Dann nächstes Mal."
+        ]
+    },
+    "#option2": {
+        "actors": ["avatar", "kris.r"],
+        "text": [
+            "kris.r#Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.",
+            "kris.r#Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.",
+            "kris.r#Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?"
+        ],
+        "options": {
+            "same": {
+                "prompt": "Kann ich gut nachvollziehen.",
+                "actors": ["avatar", "kris.r"],
+                "text": [
+                    "avatar#Ohne Spontanität ist das Leben langweilig.",
+                    "kris.r#Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!",
+                    "kris.r#Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.",
+                    "kris.r#Mal sehen, was wir dieses Mal finden!"
+                ]
+            },
+            "no": {
+                "prompt": "Sehe ich anders.",
+                "actors": ["avatar", "kris.r"],
+                "text": [
+                    "avatar#Nur in den Tag hinein leben funktioniert auch nicht.",
+                    "kris#Ja, das stimmt natürlich ...",
+                    "kris#Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant."
+                ]
+            }
+        }
+    }
+}

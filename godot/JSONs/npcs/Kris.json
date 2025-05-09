@@ -1,0 +1,24 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Kris",
+			"descr": "Das hier ist Kris.\nSie ist lieb.",
+			"portait": "kris"
+		},
+		"sprite": {
+			"texture_name": "kris"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 1.0
+			}
+		},
+		"stage": {
+			"start": "ApartmentCamper",
+			"positions": {
+				"ApartmentCamper": { "x": 480, "y": 320 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
+}

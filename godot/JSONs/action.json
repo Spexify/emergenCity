@@ -1,0 +1,1729 @@
+{
+	"1": {
+		"type": "condition",
+		"cond": {
+			"type": "multi",
+			"acc": "or",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"IsolationState.NONE"
+					]
+				},
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"IsolationState.LIMITED_PUBLIC_ACCESS"
+					]
+				}
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"CityMap"
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Die Stadt ist aufgrund einer Isolationsverordnung nicht betretbar!"
+				]
+			]
+		}
+	},
+	"2": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"CookingGUI"
+		]
+	},
+	"SFX_Water": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [
+			"TapWater"
+		]
+	},
+	"IQ_DirtyWater": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "add_item_question",
+		"params": [
+			[
+				"WATER_DIRTY",
+				{
+					"question": "Dieses %s ist recht dreckig.",
+					"answere": "Trinken",
+					"decline": "Einpacken"
+				}
+			]
+		]
+	},
+	"IQ_Water": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "add_item_question",
+		"params": [
+			[
+				"WATER",
+				{
+					"question": "Frisches %s",
+					"answere": "Trinken",
+					"decline": "Einpacken"
+				}
+			]
+		]
+	},
+	"Fill_Reservoir": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "fill_reservoir",
+		"params": []
+	},
+	"3": {
+		"type": "condition",
+		"cond": {
+			"type": "multi",
+			"acc": "or",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"WaterState.CLEAN"
+					]
+				},
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"WaterState.DIRTY"
+					]
+				}
+			]
+		},
+		"if": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "OSM",
+				"method": "is_any_state_by_name",
+				"params": [
+					"WaterState.CLEAN"
+				]
+			},
+			"if": {
+				"type": "condition",
+				"cond": {
+					"type": "single",
+					"comp": "OSM",
+					"method": "has_upgrade",
+					"params": [
+						6
+					]
+				},
+				"if": {
+					"type": "single",
+					"comp": "gui_mngr",
+					"method": "request_gui",
+					"params": [
+						"TwoChoice",
+						[
+							"Willst du Wasser in eine Flasche oder ins Reservoir abfüllen?",
+							{
+								"text": "Reservoir",
+								"time": true,
+								"descr": "Wasser ins Reservoir gefüllt.",
+								"action": "Fill_Reservoir",
+								"sound": "SFX_Water"
+							},
+							{
+								"text": "Flasche",
+								"time": false,
+								"action": "IQ_Water",
+								"sound": "SFX_Water"
+							}
+						]
+					]
+				},
+				"else": {
+					"type": "single",
+					"comp": "gui_mngr",
+					"method": "request_gui",
+					"params": [
+						"DefaultActionGUI",
+						[
+							"Willst du Wasser in eine Flasche abfüllen?",
+							"IQ_Water",
+							"SFX_Water"
+						]
+					]
+				}
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Das Wasser ist verdreckt. Sicher das du es in eine Flasche abfüllen willst?.",
+						"IQ_DirtyWater",
+						"SFX_Water"
+					]
+				]
+			}
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Es kommt kein Wasser aus dem Wasserhahn!"
+				]
+			]
+		}
+	},
+	"SFX_PillowRuffle": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [
+			"PillowRuffle"
+		]
+	},
+	"Add_Health": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "add_health",
+		"params": [
+			1
+		]
+	},
+	"4": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DefaultActionGUI",
+			[
+				"Willst du dich ausruhen?",
+				"SFX_PillowRuffle",
+				"Add_Health",
+				true,
+				"Hat sich ausgeruht"
+			]
+		]
+	},
+	"5": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "upgrade_state_greater",
+			"params": [1, 1]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"RainwaterBarrelGUI"
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Die Regentonne ist leer."
+				]
+			]
+		}
+	},
+	"SFX_Shower": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [
+			"Shower"
+		]
+	},
+	"Shower": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "OSM",
+			"method": "is_any_state_by_name",
+			"params": [
+				"WaterState.CLEAN"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "ActCons",
+			"method": "add_health",
+			"params": [
+				2
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "ActCons",
+			"method": "add_health",
+			"params": [
+				1
+			]
+		}
+	},
+	"Shower_Soap": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "use_item_by_name",
+				"params": [
+					"SOAP"
+				]
+			},
+			{
+				"type": "condition",
+				"cond": {
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"WaterState.CLEAN"
+					]
+				},
+				"if": {
+					"type": "single",
+					"comp": "ActCons",
+					"method": "add_health",
+					"params": [
+						3
+					]
+				},
+				"else": {
+					"type": "single",
+					"comp": "ActCons",
+					"method": "add_health",
+					"params": [
+						2
+					]
+				}
+			}
+		]
+	},
+	"6": {
+		"type": "condition",
+		"cond": {
+			"type": "multi",
+			"acc": "or",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"WaterState.CLEAN"
+					]
+				},
+				{
+					"type": "single",
+					"comp": "OSM",
+					"method": "is_any_state_by_name",
+					"params": [
+						"WaterState.DIRTY"
+					]
+				}
+			]
+		},
+		"if": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "has_item",
+				"params": [
+					"SOAP"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"TwoChoice",
+					[
+						"Willst du duschen?",
+						{
+							"text": "Ja",
+							"time": true,
+							"descr": "Hat geduscht.",
+							"action": "Shower",
+							"sound": "SFX_Shower"
+						},
+						{
+							"text": "Ja, mit Seife.",
+							"time": true,
+							"descr": "Hat mit Seife geduscht.",
+							"action": "Shower_Soap",
+							"sound": "SFX_Shower"
+						}
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du duschen?",
+						"Shower",
+						"SFX_Shower",
+						true,
+						"Hat geduscht."
+					]
+				]
+			}
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Es ist leider gerade kein Wasser verfügbar!"
+				]
+			]
+		}
+	},
+	"bbk": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "open_bbk_brochure",
+		"params": []
+	},
+	"7": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DefaultActionGUI",
+			[
+				"Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
+				"bbk",
+				false
+			]
+		]
+	},
+	"SFX_Radio": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [
+			"RadioTuning"
+		]
+	},
+	"Radio_Batteries": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "use_item_by_name",
+				"params": [
+					"BATTERIES"
+				]
+			},
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "use_radio",
+				"params": []
+			}
+		]
+	},
+	"8": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "has_item",
+			"params": [
+				"BATTERIES"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
+					"Radio_Batteries",
+					"SFX_Radio"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Du brauchst Batterien um dieses Radio zu bedienen."
+				]
+			]
+		}
+	},
+	"Radio": {
+		"type": "single",
+		"comp": "ActCons",
+		"method": "use_radio",
+		"params": []
+	},
+	"9": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DefaultActionGUI",
+			[
+				"Willst du das Kurbelradio benutzen?",
+				"Radio",
+				"SFX_Radio"
+			]
+		]
+	},
+	"Take_Reservoir": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "remove_from_reservoir",
+				"params": [
+					25
+				]
+			},
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "add_item_question",
+				"params": [
+					[
+						"WATER",
+						{
+							"question": "Möchtest du %s jetzt trinken?",
+							"answere": "Trinken"
+						}
+					]
+				]
+			}
+		]
+	},
+	"10": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "upgrade_state_greater",
+			"params": [
+				6,
+				0
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Wasser aus dem Wasser Reservoir abfüllen?",
+					"Take_Reservoir",
+					"SFX_Water"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Das Wasser Reservoir is leer."
+				]
+			]
+		}
+	},
+	"SFX_Stage": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [
+			"BasicItem"
+		]
+	},
+	"Go_Home": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "home",
+						"avatar_pos": {
+							"x": 250,
+							"y": 650
+						}
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2000": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DefaultActionGUI",
+			[
+				"Willst du Nachhause gehen?",
+				"Go_Home",
+				"SFX_Stage",
+				true,
+				"Nach Hause gekehrt."
+			]
+		]
+	},
+	"Go_Market": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "market",
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Market_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "market",
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2001": {
+		"type": "condition",
+		"cond": {
+			"type": "multi",
+			"acc": "and",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "ActCond",
+					"method": "not_evening",
+					"params": []
+				},
+				{
+					"type": "single",
+					"comp": "ActCond",
+					"method": "no_limited_public_access",
+					"params": []
+				}
+			]
+		},
+		"if": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du zum Markplatz gehen?",
+						"Go_Market",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du zum Markplatz gehen?",
+						"Go_Market_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Marktplatz besucht."
+					]
+				]
+			}
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Der Marktplatz ist nicht betretbar!"
+				]
+			]
+		}
+	},
+	"Go_Townhall": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "townhall",
+						"avatar_pos": {
+							"x": 450,
+							"y": 480
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Townhall_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "townhall",
+						"avatar_pos": {
+							"x": 450,
+							"y": 480
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2002": {
+		"type": "condition",
+		"cond": {
+			"type": "multi",
+			"acc": "and",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "ActCond",
+					"method": "not_evening",
+					"params": []
+				},
+				{
+					"type": "single",
+					"comp": "ActCond",
+					"method": "no_limited_public_access",
+					"params": []
+				}
+			]
+		},
+		"if": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du zum Rathaus gehen?",
+						"Go_Townhall",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du zum Rathaus gehen?",
+						"Go_Townhall_Wait",
+						"SFX_Stage",
+						true,
+						"Hat das Rathaus besucht."
+					]
+				]
+			}
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"Der Rathaus ist nicht betretbar!"
+				]
+			]
+		}
+	},
+	"Go_Park": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "park",
+						"avatar_pos": {
+							"x": 350,
+							"y": 700
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Park_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "park",
+						"avatar_pos": {
+							"x": 350,
+							"y": 700
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2003": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"home"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du in den Park gehen?",
+					"Go_Park",
+					"SFX_Stage"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du in den Park gehen?",
+					"Go_Park_Wait",
+					"SFX_Stage",
+					true,
+					"Hat den Park besucht."
+				]
+			]
+		}
+	},
+	"Go_Garden": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "gardenhouse",
+						"avatar_pos": {
+							"x": 150,
+							"y": 900
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Garden_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "gardenhouse",
+						"avatar_pos": {
+							"x": 150,
+							"y": 900
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2004": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"home"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Gerhard besuchen?",
+					"Go_Garden",
+					"SFX_Stage"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Gerhard besuchen?",
+					"Go_Garden_Wait",
+					"SFX_Stage",
+					true,
+					"Hat Gerhard besucht."
+				]
+			]
+		}
+	},
+	"Go_Rowhouse": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "rowhouse",
+						"avatar_pos": {
+							"x": 250,
+							"y": 400
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Rowhouse_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "rowhouse",
+						"avatar_pos": {
+							"x": 250,
+							"y": 400
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2005": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"home"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Julia besuchen?",
+					"Go_Rowhouse",
+					"SFX_Stage"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Julia besuchen?",
+					"Go_Rowhouse_Wait",
+					"SFX_Stage",
+					true,
+					"Hat Julia besucht."
+				]
+			]
+		}
+	},
+	"Go_Mansion": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "mansion",
+						"avatar_pos": {
+							"x": 120,
+							"y": 900
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Mansion_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "mansion",
+						"avatar_pos": {
+							"x": 120,
+							"y": 900
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2006": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"home"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Petro & Irena besuchen?",
+					"Go_Mansion",
+					"SFX_Stage"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Petro & Irena besuchen?",
+					"Go_Mansion_Wait",
+					"SFX_Stage",
+					true,
+					"Hat Petro & Irena besucht."
+				]
+			]
+		}
+	},
+	"Go_Penthouse": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "penthouse",
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Penthouse_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "penthouse",
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2007": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"home"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Elias besuchen?",
+					"Go_Penthouse",
+					"SFX_Stage"
+				]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"DefaultActionGUI",
+				[
+					"Willst du Elias besuchen?",
+					"Go_Penthouse_Wait",
+					"SFX_Stage",
+					true,
+					"Hat Elias besucht."
+				]
+			]
+		}
+	},
+	"Go_Mert": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_mert",
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Mert_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_mert",
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2008": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"apartment_mert"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "close_current_gui",
+			"params": []
+		},
+		"else": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Mert besuchen?",
+						"Go_Mert",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Mert besuchen?",
+						"Go_Mert_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Mert besucht."
+					]
+				]
+			}
+		}
+	},
+	"Go_Camper": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_camper",
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Camper_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_camper",
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2009": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"apartment_camper"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "close_current_gui",
+			"params": []
+		},
+		"else": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Kris & Veronika besuchen?",
+						"Go_Camper",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Kris & Veronika besuchen?",
+						"Go_Camper_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Kris & Veronika besucht."
+					]
+				]
+			}
+		}
+	},
+	"Go_Default": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_default",
+						"avatar_pos": {
+							"x": 250,
+							"y": 900
+						},
+						"wait": false
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"Go_Default_Wait": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "change_stage_by_dict",
+				"params": [
+					{
+						"stage_name": "apartment_default",
+						"avatar_pos": {
+							"x": 250,
+							"y": 900
+						},
+						"wait": true
+					}
+				]
+			},
+			{
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "close_gui",
+				"params": [
+					-2
+				]
+			}
+		]
+	},
+	"2010": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "ActCond",
+			"method": "is_current_stage",
+			"params": [
+				"apartment_default"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "close_current_gui",
+			"params": []
+		},
+		"else": {
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Agathe besuchen?",
+						"Go_Default",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Agathe besuchen?",
+						"Go_Default_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Agathe besucht."
+					]
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Momo",
+			"descr": "Das hier ist Momo.\nSie ist super.",
+			"portait": "momo"
+		},
+		"sprite": {
+			"texture_name": "momo"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.8
+			}
+		},
+		"stage": {
+			"start": "ApartmentMert",
+			"positions": {
+				"ApartmentMert": { "x": 480, "y": 760 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
+}

@@ -13,22 +13,21 @@ config_version=5
 config/name="emergenCITY_game"
 run/main_scene="res://global/entry.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://app_icon/app_icon.svg"
+config/icon="res://assets/app_icon/app_icon.svg"
 config/windows_native_icon="res://app_icon.ico"
 
 [audio]
 
-buses/default_bus_layout="res://res/SFX/default_bus_layout.tres"
+buses/default_bus_layout="res://assets/SFX/default_bus_layout.tres"
 
 [autoload]
 
 Global="*res://global/global.tscn"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 OverworldStatesMngr="*res://global/overworld_states_mngr.gd"
 JsonMngr="*res://global/json_mngr.gd"
 SettingsGUI="*res://global/settings_GUI.tscn"
-TradeMngr="*res://crisisPhase/characters/trade_mngr.gd"
 SoundMngr="*res://global/sound_mngr.tscn"
+Preloader="*res://global/preloader.gd"
 
 [debug]
 
@@ -50,14 +49,9 @@ window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
-
 [gui]
 
 theme/custom="res://GUI/default_theme.tres"
-theme/custom_font="res://res/fonts/Gugi-Regular-Variation.tres"
 
 [input]
 
@@ -109,6 +103,11 @@ Toggle_Isolation={
 Toggle_Food_Contam={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194335,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+Toggle_Mobile_Net={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194336,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

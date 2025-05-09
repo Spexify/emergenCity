@@ -1,0 +1,56 @@
+{
+    "start": {
+        "actors": ["avatar", "mert.r"],
+        "text": [
+            "mert.r#Hey Kumpel! Alles klar bei dir?"
+        ],
+        "options": {
+            "end": {
+                "prompt": "Ich muss los!",
+                "actors": ["avatar", "mert.r"],
+                "text": [
+                    "mert.r#Man sieht sich!"
+                ]
+            },
+            "weiter": {
+                "prompt": "Ja, wie läuft's bei dir",
+                "options": {
+                    "#option1": "",
+                    "#option2": ""
+                }
+            }
+        }
+    },
+    "#option1": {
+        "actors": ["avatar", "mert.r"],
+        "text": [
+            "mert.r#Bin ein bisschen gestresst. In solchen Zeiten hat das THW, also das Technische Hilfswerk, mehr zu tun als sonst.",
+            "mert.r#Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - Das ist das Größte."
+        ]
+    },
+    "#option2": {
+        "actors": ["avatar", "mert.r"],
+        "text": [
+            "mert.r#Mir gehts super! Kommst du gut durch die Krise?"
+        ],
+        "options": {
+            "ja": {
+                "prompt": "ja",
+                "actors": ["avatar", "mert.r"],
+                "text": [
+                    "avatar#Ich komme klar.",
+	                "mert.r#Schön zu hören! Aber pass' trotzdem auf dich auf, ja? So eine Krise ist nicht ohne."
+                ]
+            },
+            "nein": {
+                "prompt": "Nein",
+                "actors": ["avatar", "mert.r"],
+                "text": [
+                    "avatar#Ist ehrlich gesagt ganz schön schwierig.",
+                    "mert.r#Tut mir leid, das zu hören. Wenn du jemandem zum Reden brauchst, sag Bescheid, ja?",
+                    "mert.r#Zusammen schaffen wir das schon!"
+                ]
+            }
+        }
+    }
+}

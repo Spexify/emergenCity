@@ -1,0 +1,25 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Julia",
+			"descr": "Das hier ist Julia.\nSie ist lieb.",
+			"portait": "julia"
+		},
+		"sprite": {
+			"texture_name": "julia"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 1.3
+			}
+		},
+		"stage": {
+			"start": "Rowhouse",
+			"positions": {
+				"Park": { "x": 128, "y": 704 },
+				"Rowhouse": { "x": 450, "y": 550 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
+}

@@ -1,0 +1,53 @@
+{
+	"start": {
+		"actors": ["avatar", "elias.r"],
+		"text": [
+			"elias#Hi"
+		],
+		"options": {
+			"#branch": ""
+		}
+	},
+	"#branch": {
+		"actors": ["avatar", "elias.r"],
+		"text": [
+			"elias#Brauchen Sie was?"
+		],
+		"options": {
+			"reden": {
+				"prompt": "Reden",
+				"actors": ["avatar", "elias.r"],
+				"text": [
+					"elias#Dafür hab ich grad keine Zeit.",
+					"elias#[i]Sorry.[/i]"
+				]
+			},
+			"#trade": "",
+			"end": { "prompt": "Nö" }
+		}
+	},
+	"#trade": {
+		"prompt": "Handeln",
+		"conditions": {
+			"npc_has_comp": {
+				"npc": "elias",
+				"comp": "trading"
+			}
+		},
+		"actors": ["avatar", "elias.r"],
+		"text": [
+			"elias#Für ein gutes Tauschgeschäft bin ich immer zu haben!"
+		],
+		"options": { 
+			"trade": {
+			"consequences": {
+				"overlay_gui": {
+					"name": "Trade",
+					"args": "Elias"
+				}
+			},
+			"options": { "#branch": "" }
+			}
+		}
+	}
+}

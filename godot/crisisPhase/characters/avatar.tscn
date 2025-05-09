@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://cku3etpcuk085"]
 
 [ext_resource type="Script" path="res://crisisPhase/characters/avatar.gd" id="1_6xgqy"]
-[ext_resource type="Texture2D" uid="uid://ppdc880khrdn" path="res://res/sprites/characters/sprite_avatar.png" id="2_fbrni"]
-[ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://res/SFX/walking.wav" id="3_nintj"]
+[ext_resource type="Texture2D" uid="uid://ppdc880khrdn" path="res://assets/characters/sprite_avatar.png" id="2_fbrni"]
+[ext_resource type="AudioStream" uid="uid://cue08qspeb5te" path="res://assets/SFX/walking.wav" id="3_nintj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pu6g1"]
-height = 52.0
+height = 22.6
 
 [sub_resource type="Animation" id="Animation_cxjb2"]
 length = 0.001
@@ -66,22 +66,22 @@ _data = {
 }
 
 [node name="Avatar" type="CharacterBody2D"]
-position = Vector2(0, -15)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_6xgqy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_fbrni")
-offset = Vector2(0, -30)
+offset = Vector2(0, -46)
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pu6g1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 32.0
@@ -100,4 +100,5 @@ libraries = {
 }
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

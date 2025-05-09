@@ -1,21 +1,35 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
-var _crisis_length : int = 3 #Length of entire crisis phase, name could be changed to max_day or so
-var _number_crisis_overlap : int = 3
-var _allowed_water_crisis : WaterState
-var _allowed_electricity_crisis : ElectricityState
-var _allowed_isolation_crisis : IsolationState
-var _allowed_food_contamination_crisis : FoodContaminationState
-var _scenario_name : String = ""
-var _active_crises_descr: String = ""
-var _notification: String
+signal change(changes : String)
+
+enum Difficulty{
+	TUTORIAL = 3,
+	EASY = 0,
+	MEDIUM = 1,
+	HARD = 2,
+}
 
 enum SemaphoreColors{
 	RED = 0,
 	YELLOW = 1,
 	GREEN = 2,
 }
+
+const name_to_state : Dictionary = {
+	"MobileNetState" : [MobileNetState, 4],
+	"ElectricityState" : [ElectricityState, 0],
+	"WaterState" : [WaterState, 1],
+	"FoodContaminationState" : [FoodContaminationState, 3],
+	"IsolationState" : [IsolationState, 2],
+}
+
+enum MobileNetState{
+	ONLINE = SemaphoreColors.GREEN,
+	OFFLINE = SemaphoreColors.RED
+}
+
+var _mobilenet_state : MobileNetState = MobileNetState.ONLINE
 
 enum ElectricityState{
 	NONE = SemaphoreColors.RED,
@@ -48,136 +62,123 @@ var _food_contamination_state: FoodContaminationState = FoodContaminationState.N
 
 var _upgrades: Array[EMC_Upgrade]
 
+var _difficulty_crisis : Difficulty
+var _run_length : int
+
+var _crisis_description : Dictionary
+
+var _dialogue_states : Dictionary
+
 func _ready() -> void:
 	add_to_group("Save", true)
 
 func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
 	_upgrades = p_upgrades
 
-
-## Idea: instead of all the members of EMC_CrisisScenario, just pass one reference of it to there
-## This way, it is more ordered, and you can still access all the necessary data through the CrisisScenario object!
-func set_crisis_difficulty(p_scenario_name : String = "", _p_water_crisis: WaterState = WaterState.CLEAN, _p_electricity_crisis : ElectricityState = ElectricityState.UNLIMITED,
-							_p_isolation_crisis : IsolationState = IsolationState.NONE, _p_food_contamination_crisis : FoodContaminationState = FoodContaminationState.NONE,
-						_p_crisis_length : int = 2, _p_number_crisis_overlap : int = 2, p_notification : String = "") -> void:
-	_allowed_water_crisis = _p_water_crisis
-	_allowed_electricity_crisis =_p_electricity_crisis
-	_allowed_isolation_crisis = _p_isolation_crisis
-	_allowed_food_contamination_crisis = _p_food_contamination_crisis
-	_scenario_name = p_scenario_name
-	_crisis_length = _p_crisis_length
-	_number_crisis_overlap = _p_number_crisis_overlap
-	_notification = p_notification
+func set_dialogue_state(state_name : String, value : Variant) -> void:
+	_dialogue_states[state_name] = value
 	
-	#if !Global._tutorial_done:
-		#_electricity_state = ElectricityState.NONE
+func is_dialogue_state(state_nane : String, value : Variant) -> bool:
+	if _dialogue_states.has(state_nane):
+		return typeof(_dialogue_states[state_nane]) == typeof(value) and _dialogue_states[state_nane] == value
+	return false
 
-
-func get_number_crisis_overlap() -> int:
-	return _number_crisis_overlap
-
+func set_crisis_difficulty(p_run_length : int = 3, p_difficulty_crisis : Difficulty = Difficulty.EASY) -> void:
+	_difficulty_crisis = p_difficulty_crisis
+	_run_length = p_run_length
 
 func get_crisis_length() -> int:
-	return _crisis_length
+	return _run_length
 
+func get_difficulty() -> Difficulty:
+	return _difficulty_crisis
 
 ## Returns scenario name
-func get_scenario_name() -> String:
-	return _scenario_name
+func get_scenario_names() -> Array[String]:
+	var result : Array[String]
+	result.assign(_crisis_description.keys())
+	return result
 
+func get_description_by_name(scenario : String) -> Dictionary:
+	if _crisis_description.has(scenario):
+		return _crisis_description[scenario]
+	else:
+		return {"Error" : "No such Scenario"}
+		
+func get_description_by_index(index : int) -> Dictionary:
+	return _crisis_description[_crisis_description.keys()[index]]
+	
+func get_description() -> Dictionary:
+	return _crisis_description
+	
+func set_description(p_crisis_description : Dictionary) -> void:
+	_crisis_description = p_crisis_description 
+	
+func add_scenario_notification(scenario_name : String, notification : String) -> void:
+	if not _crisis_description.has(scenario_name):
+		_crisis_description[scenario_name] = {"notification": notification}
+	else:
+		_crisis_description[scenario_name]["notification"]= notification
+	
+func add_scenario_entry(scenario_name : String, index : String, desc : String, states : Array[String]) -> void:
+	if not _crisis_description.has(scenario_name):
+		return
+	_crisis_description[scenario_name][index] = { "desc": desc, "states": states }
+	
+func remove_scenario_by_name(scenario_name : String) -> void:
+	if _crisis_description.has(scenario_name):
+		_crisis_description.erase(scenario_name)
+		
+func remove_scenario_entry(scenario_name : String, index : String) -> void:
+	if _crisis_description.has(scenario_name):
+		_crisis_description[scenario_name].erase(index)
 
 ## Returns notification for radio
-func get_notification() -> String:
-	return _notification
-
-
-## Not really nicely solved, but no time lol
-func clear_active_crises_descr() -> void:
-	_active_crises_descr = ""
-
-
-## Returns a concatenation of all active crises
-func get_active_crises_descr() -> String:
-	var res := _active_crises_descr
-	if res != "":
-		res = "Ohje..." + res
-	return res
-
-
-## TODO Bad name, should be renamed!
-func get_water_crisis_status() -> WaterState:
-	return _allowed_water_crisis
-
-
-## TODO Bad name, should be renamed!
-func get_electricity_crisis_status() -> ElectricityState:
-	return _allowed_electricity_crisis
-
-
-## TODO Bad name, should be renamed!
-func get_isolation_crisis_status() -> IsolationState:
-	return _allowed_isolation_crisis
-
-
-## TODO Bad name, should be renamed!
-func get_food_contamination_crisis_status() -> FoodContaminationState:
-	return _allowed_food_contamination_crisis
-
+func get_notification() -> Array[String]:
+	var result : Array[String]
+	for description : Dictionary in _crisis_description.values():
+		result.append(description["notification"])
+		result.append_array(description.values().slice(1).map(func (dict : Dictionary) -> String: return dict["desc"]))
+	return result
 
 func get_electricity_state() -> ElectricityState:
 	return _electricity_state
 
-
 func set_electricity_state(new_electricity_state: ElectricityState) -> void:
 	_electricity_state = new_electricity_state
-	match _electricity_state:
-		ElectricityState.NONE: _active_crises_descr += " " + "Der Strom ist ausgefallen!"
-		ElectricityState.UNLIMITED: pass
-
+	change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
 
 func get_electricity_state_descr() -> String:
 	match _electricity_state:
-		ElectricityState.NONE: return "Ausgefallen!"
-		ElectricityState.UNLIMITED: return "Vorhanden."
+		ElectricityState.NONE: return "ausgefallen!"
+		ElectricityState.UNLIMITED: return "vorhanden."
 	return ""
 
 
 func get_water_state() -> WaterState:
 	return _water_state
 
-
 func set_water_state(new_water_state: WaterState) -> void:
 	_water_state = new_water_state
-	match _water_state:
-		WaterState.NONE: _active_crises_descr += " " + "Das Wasser ist komplett ausgefallen!"
-		WaterState.DIRTY: _active_crises_descr += " " + "Nur verunreinigtes Wasser fließt aus der Leitung!"
-		WaterState.CLEAN: pass
-
 
 func get_water_state_descr() -> String:
 	match _water_state:
-		WaterState.NONE: return "Ausgefallen!"
-		WaterState.DIRTY: return "Verdreckt."
-		WaterState.CLEAN: return "Vorhanden."
+		WaterState.NONE: return "ausgefallen!"
+		WaterState.DIRTY: return "verdreckt."
+		WaterState.CLEAN: return "vorhanden."
 	return ""
 
 
 func get_isolation_state() -> IsolationState:
 	return _isolation_state
 
-
 func set_isolation_state(new_isolation_state: IsolationState) -> void:
 	_isolation_state = new_isolation_state
-	match _isolation_state:
-		IsolationState.NONE: pass
-		IsolationState.LIMITED_PUBLIC_ACCESS: _active_crises_descr += " " + "Ein Betretungsverbot öffentlicher Gelände wurde verhangen!"
-		IsolationState.ISOLATION: _active_crises_descr += " " + "Eine Quarantäne wurde angeordnet!"
-
 
 func get_isolation_state_descr() -> String:
 	match _isolation_state:
-		IsolationState.NONE: return "Keine."
-		IsolationState.LIMITED_PUBLIC_ACCESS: return "Einige Betretsverbote."
+		IsolationState.NONE: return "keine Betretungsverbote."
+		IsolationState.LIMITED_PUBLIC_ACCESS: return "einige Betretungsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
 
@@ -185,23 +186,131 @@ func get_isolation_state_descr() -> String:
 func get_food_contamination_state() -> FoodContaminationState:
 	return _food_contamination_state
 
-
 func set_food_contamination_state(new_food_contamination_state: FoodContaminationState) -> void:
 	_food_contamination_state = new_food_contamination_state
-	match _food_contamination_state:
-		FoodContaminationState.NONE: pass
-		FoodContaminationState.FOOD_SPOILED: _active_crises_descr += " " + "Die Essensvorräte sind allesamt verdorben!"
-
 
 func get_food_contamination_state_descr() -> String:
 	match _food_contamination_state:
 		FoodContaminationState.NONE:
 			if _electricity_state == ElectricityState.NONE:
-				return "Reduz. Essens-Haltbarkeit"
-			else: return "Kein Problem."
-		FoodContaminationState.FOOD_SPOILED: return "Kontaminiert!"
+				return "reduz. Essens-Haltbarkeit"
+			else: return "kein Problem."
+		FoodContaminationState.FOOD_SPOILED: return "kontaminiert!"
+	return ""
+	
+func get_mobile_net_state() -> int:
+	return _mobilenet_state
+
+func set_mobile_net_state(new_mobilenet_state: int) -> void:
+	_mobilenet_state = new_mobilenet_state
+
+func get_mobile_net_state_descr() -> String:
+	match _mobilenet_state:
+		MobileNetState.ONLINE: return "online."
+		MobileNetState.OFFLINE: return "offline!"
 	return ""
 
+var _water : Array[int] = [0, 0, 0]
+var _electricity : int = 0
+var _food : int = 0
+var _isolation : Array[int] = [0, 0, 0]
+var _mobile : int = 0
+
+func sub_any_state_by_name(state : String) -> void:
+	if "WaterState" in state:
+		_water[WaterState.get(state.get_extension())] -= 1
+		if _water[0] == 0:
+			_water_state = WaterState.DIRTY
+			if _water[1] == 0:
+				_water_state = WaterState.CLEAN
+		change.emit("WaterState." + WaterState.find_key(_water_state))
+	elif "ElectricityState" in state:
+		_electricity -= 1
+		if _electricity == 0:
+			_electricity_state = ElectricityState.UNLIMITED
+		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
+	elif "FoodContaminationState" in state:
+		_food -= 1
+		if _food == 0:
+			_food_contamination_state = FoodContaminationState.NONE
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
+	elif "IsolationState" in state:
+		_isolation[IsolationState.get(state.get_extension())] -= 1
+		if _isolation[0] == 0:
+			_isolation_state = IsolationState.LIMITED_PUBLIC_ACCESS
+			if _isolation[1] == 0:
+				_isolation_state = IsolationState.NONE
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
+	elif "MobileNetState" in state:
+		_mobile -= 1
+		if _mobile == 0:
+			_mobilenet_state =  MobileNetState.ONLINE
+		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
+
+func add_any_state_by_name(state : String) -> void:
+	if "WaterState" in state:
+		var _state : WaterState = WaterState.get(state.get_extension())
+		if _water_state > _state:
+			_water_state = _state
+			_water[_state] += 1
+		change.emit("WaterState." + WaterState.find_key(_water_state))
+	elif "ElectricityState" in state:
+		var _state : ElectricityState = ElectricityState.get(state.get_extension())
+		if _electricity_state > _state:
+			_electricity_state = _state
+			_electricity += 1
+		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
+	elif "FoodContaminationState" in state:
+		var _state : FoodContaminationState = FoodContaminationState.get(state.get_extension())
+		if _food_contamination_state > _state:
+			_food_contamination_state = _state
+			_food += 1
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
+	elif "IsolationState" in state:
+		var _state : IsolationState = IsolationState.get(state.get_extension())
+		if _isolation_state > _state:
+			_isolation_state = _state
+			_isolation[_state] += 1
+		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
+	elif "MobileNetState" in state:
+		var _state : MobileNetState = MobileNetState.get(state.get_extension())
+		if _mobilenet_state > _state:
+			_mobilenet_state = _state
+			_mobile += 1
+		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
+
+func set_any_state_by_name(state : String) -> void:
+	if "WaterState" in state:
+			_water_state = WaterState.get(state.get_extension())
+	elif "ElectricityState" in state:
+			_electricity_state = ElectricityState.get(state.get_extension())
+	elif "FoodContaminationState" in state:
+			_food_contamination_state = FoodContaminationState.get(state.get_extension())
+	elif "IsolationState" in state:
+			_isolation_state = IsolationState.get(state.get_extension())
+	elif "MobileNetState" in state:
+			_mobilenet_state = MobileNetState.get(state.get_extension())
+	
+	change.emit(state)
+
+func is_any_state_by_name(state: String) -> bool:
+	if "WaterState" in state:
+		return _water_state == WaterState.get(state.get_extension())
+	elif "ElectricityState" in state:
+		return _electricity_state == ElectricityState.get(state.get_extension())
+	elif "FoodContaminationState" in state:
+		return _food_contamination_state == FoodContaminationState.get(state.get_extension())
+	elif "IsolationState" in state:
+		return _isolation_state == IsolationState.get(state.get_extension())
+	elif "MobileNetState" in state:
+		return _mobilenet_state == MobileNetState.get(state.get_extension())
+	return false
+
+############################################Furniture###############################################
+
+## TODO: more efficent version
+func has_upgrade(id: EMC_Upgrade.IDs) -> bool:
+	return id in _upgrades.map(func (up: EMC_Upgrade) -> int: return up.get_id())
 
 func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	for upgrade in _upgrades:
@@ -210,13 +319,11 @@ func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
 
-
 func set_furniture_state(p_upgrade_id: EMC_Upgrade.IDs, new_state: int) -> void:
 	for upgrade in _upgrades:
 		if upgrade != null && upgrade.get_id() == p_upgrade_id: #MRM: Added null check
 			upgrade.set_state(new_state)
 	push_error("Upgrade nicht ausgerüstet!")
-
 
 func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	for upgrade in _upgrades:
@@ -224,19 +331,45 @@ func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 			return upgrade.get_state_maximum()
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
+	
+#############################################Quest##################################################
+
+var active_quests: Dictionary = {}
+
+## Returns wether a quest is currently active
+## Does not return the stage of the quest
+func has_quest(id: String) -> bool:
+	return id in active_quests
+
+## Adds a new quest or overrides the stage
+func add_quest(id: String, stage: int = 1) -> void:
+	active_quests[id] = stage
+	print(active_quests)
+
+## Returns the current stage of the quest
+## Should only be called after confirming quest exists
+## with has_quest
+func get_quest_stage(id: String) -> int:
+	return active_quests[id]
+	
+## Removes a quest
+func remove_quest(id: String) -> void:
+	active_quests.erase(id)
+	print(active_quests)
+	
+## Regulate number of cocurrent quest
+func next_quest() -> bool:
+	return active_quests.size() < 3
+
+############################################Save/Load###############################################
 
 ## Save function called to get all relevant information. This is used for Saving/loading
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path" : get_path(),
-		"allowed_water_crisis" : _allowed_water_crisis,
-		"allowed_electricity_crisis" : _allowed_electricity_crisis, 
-		"allowed_isolation_crisis" : _allowed_isolation_crisis,
-		"allowed_food_contamination_crisis" : _allowed_food_contamination_crisis,
-		"scenario_name" : _scenario_name,
-		"crisis_length" : _crisis_length,
-		"number_crisis_overlap" : _number_crisis_overlap,
-		"notification" : _notification,
+		"difficulty_crisis" : _difficulty_crisis,
+		"run_length" : _run_length,
+		"crisis_description" : _crisis_description,
 		"water_state" : _water_state,
 		"isolation_state" : _isolation_state,
 		"food_contamination_state" : _food_contamination_state,
@@ -246,18 +379,10 @@ func save() -> Dictionary:
 
 ## Load all relevant information. This is used for Saving/loading
 func load_state(data : Dictionary) -> void:
-	var p_water_crisis : WaterState = data.get("allowed_water_crisis")
-	var p_electricity_crisis : ElectricityState = data.get("allowed_electricity_crisis")
-	var p_isolation_crisis : IsolationState = data.get("allowed_isolation_crisis")
-	var p_food_contamination_crisis : FoodContaminationState = data.get("allowed_food_contamination_crisis")
-	var p_scenario_name : String = data.get("scenario_name")
-	var p_crisis_length : int = data.get("crisis_length")
-	var p_number_crisis_overlap : int = data.get("number_crisis_overlap")
-	var p_notification : String = data.get("notification")
+	var p_difficulty_crisis : Difficulty = data.get("difficulty_crisis")
+	var p_run_length : int = data.get("run_length")
 	
-	set_crisis_difficulty(p_scenario_name, p_water_crisis, p_electricity_crisis,
-							p_isolation_crisis, p_food_contamination_crisis,
-						p_crisis_length, p_number_crisis_overlap, p_notification)
+	set_crisis_difficulty(p_run_length, p_difficulty_crisis)
 						
 	var p_water_state : WaterState = data.get("water_state")
 	var p_isolation_state : IsolationState = data.get("isolation_state")
@@ -265,6 +390,10 @@ func load_state(data : Dictionary) -> void:
 	var p_electricity_state : ElectricityState = data.get("electricity_state")
 	
 	_set_all_states(p_water_state, p_isolation_state, p_food_contamination_state, p_electricity_state)
+	
+	var p_crisis_description : Dictionary = data.get("crisis_description")
+	
+	set_description(p_crisis_description)
 	
 ## This function sets all states without verification, it is needed to load save files
 func _set_all_states(p_water_state : WaterState, p_isolation_state : IsolationState,

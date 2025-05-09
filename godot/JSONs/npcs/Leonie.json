@@ -1,0 +1,24 @@
+{
+	"comp": {
+		"descr": {
+			"name": "Leonie",
+			"descr": "Das hier ist Leonie.\nSie ist lieb.",
+			"portait": "leonie"
+		},
+		"sprite": {
+			"texture_name": "leonie"
+		},
+		"interaction": {
+			"conversation": {
+				"pitch": 0.95
+			}
+		},
+		"stage": {
+			"start": "Townhall",
+			"positions": {
+				"Townhall": { "x": 416, "y": 312 },
+				"Market": { "x": 180, "y": 300 }
+			}
+		}
+	}
+}

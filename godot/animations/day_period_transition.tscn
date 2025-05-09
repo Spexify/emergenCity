@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="1_c43s7"]
 [ext_resource type="Script" path="res://animations/day_period_transition.gd" id="1_fuwqt"]
-[ext_resource type="Texture2D" uid="uid://mlwfi58qelas" path="res://res/sprites/GUI/icons/icon_dayperiods.png" id="1_vmejx"]
-[ext_resource type="Texture2D" uid="uid://b66j3vf3g1dwc" path="res://res/sprites/GUI/icons/icon_marker.png" id="4_76uvx"]
+[ext_resource type="Texture2D" uid="uid://mlwfi58qelas" path="res://assets/GUI/icons/icon_dayperiods.png" id="1_vmejx"]
+[ext_resource type="Texture2D" uid="uid://b66j3vf3g1dwc" path="res://assets/GUI/icons/icon_marker.png" id="4_76uvx"]
 
 [sub_resource type="Gradient" id="Gradient_hfb0w"]
 
@@ -92,6 +92,7 @@ offset_bottom = 1100.0
 texture = SubResource("GradientTexture2D_3ydjh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 102)
 layout_mode = 0
 offset_left = 5.0
 offset_top = 84.0

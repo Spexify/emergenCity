@@ -1,0 +1,26 @@
+{
+    "start": {
+        "actors": ["avatar", "julia.r", "leonie"],
+        "text": [
+            "julia.r#Ich reden gerade mit Leonie über Bücher.",
+            "julia.r#Liest du lieber was oder schaust du eher Filme?"
+        ],
+        "options": {
+            "film": {
+                "prompt": "Filme",
+                "actors": ["avatar", "julia.r", "leonie"],
+                "text": [
+                    "#leonie#Ehrlich gesagt mag ich Filme genauso sehr! Kommt wirklich auf den Film an.",
+                    "#julia#Wird Zeit für nen Filmabend, Leonie!"
+                ]
+            },
+            "buch": {
+                "prompt": "Bücher",
+                "actors": ["avatar", "julia.r", "leonie"],
+                "text": [
+                    "#julia#Wir sollten unseren eigenen Buchclub gründen!"
+                ]
+            }
+        }
+    }
+}

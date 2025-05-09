@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfk7h3ji5pkne"]
+
+[ext_resource type="Texture2D" uid="uid://cp0iweoxe0jx2" path="res://assets/GUI/buttons/button_inventory_slot.png" id="1_l71h0"]
+[ext_resource type="Script" path="res://inventory/item_slot.gd" id="1_lvpcn"]
+[ext_resource type="Script" path="res://inventory/item.gd" id="2_dgih1"]
+[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="3_1r3we"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvlci"]
+atlas = ExtResource("3_1r3we")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_7h3iq"]
+resource_name = "Dummy"
+script = ExtResource("2_dgih1")
+id = 0
+name = "Dummy"
+descr = "<No Descr>"
+comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_mvlci")
+
+[node name="ItemSlot" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchor_left = 0.056
+anchor_top = 0.031
+anchor_right = 0.056
+anchor_bottom = 0.031
+offset_left = -32.256
+offset_top = -31.744
+offset_right = 31.744
+offset_bottom = 32.256
+script = ExtResource("1_lvpcn")
+item = SubResource("Resource_7h3iq")
+
+[node name="Slot_BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_l71h0")
+centered = false
+
+[node name="ItemButton" type="TextureButton" parent="Slot_BG"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.5
+offset_right = 32.0
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_mvlci")
+
+[connection signal="focus_entered" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_entered"]
+[connection signal="focus_exited" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_exited"]
+[connection signal="pressed" from="Slot_BG/ItemButton" to="." method="_on_item_button_pressed"]

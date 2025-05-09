@@ -1,0 +1,25 @@
+{
+    "start": {
+        "actors": ["avatar", "irena.r"],
+        "text": [
+            "irena.r#Hast du Spiele auf deinem Handy??",
+            "irena.r#Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!",
+            "avatar#Oh, das klingt spaßig.",
+            "irena.r#Ist es auch!"
+        ],
+        "options": {
+            "fragen": {
+                "prompt": "Nach Ireans Spielzeug fragen",
+                "actors": ["avatar", "irena.r"],
+                "text": [
+                    "avatar#Mit was spielst du da?",
+                    "irena.r#Mit einer Rakete! Wuuuuschhhh!!",
+                    "irena.r#Ist aber meine,\nÄäätschi bätsch!"
+                ]
+            },
+            "back": {
+                "prompt": "Zurück"
+            }
+        }
+    }
+}

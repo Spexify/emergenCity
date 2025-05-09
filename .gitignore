@@ -1,6 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 
+# notes
+notes/
+
 # Godot-specific ignores
 .import/
 export.cfg
@@ -15,3 +18,6 @@ data_*/
 mono_crash.*.json
 
 *.tmp
+
+# VsCode
+.vscode/

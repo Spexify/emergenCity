@@ -15,8 +15,14 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
 
-const dyslexic_font := preload("res://res/fonts/Dyslexic-Regular-Variation.tres")
-const normal_font := preload("res://res/fonts/Gugi-Regular-Variation.tres")
+const dyslexic_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Regular.tres")
+const dyslexic_i_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Italic.tres")
+const dyslexic_b_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Bold.tres")
+const dyslexic_bi_font := preload("res://assets/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.tres")
+const normal_font := preload("res://assets/fonts/CMU Typewriter/cmuntt.ttf")
+const normal_i_font := preload("res://assets/fonts/CMU Typewriter/cmunit.ttf")
+const normal_b_font := preload("res://assets/fonts/CMU Typewriter/cmuntb.ttf")
+const normal_bi_font := preload("res://assets/fonts/CMU Typewriter/cmuntx.ttf")
 
 
 var _previous_pause_mode: bool
@@ -66,8 +72,16 @@ func _ready() -> void:
 func _on_font_change_pressed() -> void:
 	if (is_dyslexic):
 		theme.set_default_font(normal_font)
+		theme.set_font("normal_font", "RichTextLabel", normal_font)
+		theme.set_font("italics_font", "RichTextLabel", normal_i_font)
+		theme.set_font("bold_font", "RichTextLabel", normal_b_font)
+		theme.set_font("bols_italics_font", "RichTextLabel", normal_bi_font)
 	else:
 		theme.set_default_font(dyslexic_font)
+		theme.set_font("normal_font", "RichTextLabel", dyslexic_font)
+		theme.set_font("italics_font", "RichTextLabel", dyslexic_font)
+		theme.set_font("bold_font", "RichTextLabel", dyslexic_font)
+		theme.set_font("bols_italics_font", "RichTextLabel", dyslexic_font)
 	
 	is_dyslexic = !is_dyslexic
 

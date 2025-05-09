@@ -1,57 +1,59 @@
 extends CharacterBody2D
 class_name EMC_NPC
 
+class EMC_NPC_Comp extends Node:
+	pass 
+
 signal clicked(p_NPC: EMC_NPC)
-@onready var _sprite := $Sprite2D
-@onready var _collision_circle := $CollisionCircle
-@onready var _dialogue_hitbox := $DialogueHitbox
 
-var _dialogue_pitch: float = 1.0 #TODO: link this to the dialogue_GUI.gd
-var _trade_bid: EMC_TradeMngr.TradeBid
+const TIME := ["morning", "noon", "evening"]
 
-########################################## PUBLIC METHODS ##########################################
-func setup(p_name: String, p_spawn_pos: Vector2 = Vector2.ZERO) -> void:
-	name = p_name
-	#Check bounds, [0] = x-Pos
-	#if (p_spawn_pos[0] < 0 || p_spawn_pos[0] > get_viewport().size[0]) || \
-		#(p_spawn_pos[1] < 0 || p_spawn_pos[1] > get_viewport().size[1]):
-		#printerr("SpawnPosition of NPC " + p_name + " is out of bounds!")
-	
-	await ready #important, otherwhise the sprite might not be instantiated yet, and thus null
-	
-	#MRM: You have to use CompressedTextures with load, otherwhise it doesn't work on the exported APK 
-	var sprite_texture: CompressedTexture2D = load("res://res/sprites/characters/sprite_" + name.to_lower() + ".png")
-	_sprite.texture = sprite_texture
-	
-	position = p_spawn_pos
+@export var comps: Array[EMC_NPC_Comp]
 
+@onready var hitbox : CollisionShape2D = $CollisionCircle
+@onready var prompt_button : TextureButton = $DialogueHitbox
 
-func set_frame(p_frame_idx: int) -> void:
-	_sprite.frame = p_frame_idx
+var _gui_mngr : EMC_GUIMngr
+var _stage_mngr : EMC_StageMngr
+var _day_mngr: EMC_DayMngr
 
+var _comps: Array[Variant]
 
-func deactivate() -> void:
-	hide()
-	_collision_circle.disabled = true
-	_dialogue_hitbox.disabled = true
+func setup(p_gui_mngr : EMC_GUIMngr, p_stage_mngr: EMC_StageMngr, p_day_mngr: EMC_DayMngr) -> void:
+	_gui_mngr = p_gui_mngr
+	_stage_mngr = p_stage_mngr
+	_day_mngr = p_day_mngr
 
-
-func activate() -> void:
-	show()
-	_collision_circle.disabled = false
-	_dialogue_hitbox.disabled = false
-
-
-func set_trade_bid(p_trade_bid: EMC_TradeMngr.TradeBid) -> void:
-	_trade_bid = p_trade_bid
-
-
-func get_trade_bid() -> EMC_TradeMngr.TradeBid:
-	return _trade_bid
-
-########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	$AnimationPlayer.play("idle")
+	
+	prompt_button.pressed.connect(_on_button_pressed)
 
-func _on_dialogue_hit_box_pressed() -> void:
+func add_comp(comp: Variant) -> void:
+	_comps.append(comp)
+
+func get_comp(comp_class: Variant) -> Variant:
+	for comp: Variant in _comps:
+		if  is_instance_of(comp, comp_class):
+			return comp
+	return null
+
+func get_comp_by_name(comp_name: String) -> Variant:
+	for comp: Variant in _comps:
+		if comp.get_script().resource_path.get_file().split(".")[0].split("_")[1] == comp_name:
+			return comp
+	return null
+	
+func get_gui_mngr() -> EMC_GUIMngr:
+	return _gui_mngr
+	
+func get_stage_mngr() -> EMC_StageMngr:
+	return _stage_mngr
+	
+func get_day_mngr() -> EMC_DayMngr:
+	return _day_mngr
+
+func _on_button_pressed() -> void:
 	clicked.emit(self)
+
+##############################################

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://iov3iav204i4"]
 
 [ext_resource type="Script" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
-[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://res/sprites/citymap/citymap.png" id="2_oi1nj"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yuscm"]
-[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://res/sprites/GUI/buttons/button_back.png" id="4_ak74w"]
+[ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://assets/citymap/citymap.png" id="2_oi1nj"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_yuscm"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="4_ak74w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svi03"]
 

@@ -5,12 +5,15 @@ extends Control
 @onready var _shop_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop
 @onready var _upgrade_center_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer_unaffectedByCM/AvatarSelectionGUI
+@onready var canvas_modulate : CanvasModulate = $CanvasModulate
+@onready var canvas_layer_unaffected_by_cm : CanvasLayer = $CanvasLayer_unaffectedByCM
+
 
 func open(irrelevant : EMC_GUI = null) -> void: 
 	#get_tree().paused = true
-	$".".show()
-	$CanvasLayer_unaffectedByCM.show()
-	$CanvasModulate.show()
+	show()
+	canvas_layer_unaffected_by_cm.show()
+	canvas_modulate.show()
 	
 	#opened.emit()
 	
@@ -18,8 +21,8 @@ func open(irrelevant : EMC_GUI = null) -> void:
 func close() -> void:
 	#get_tree().paused = false
 	hide()
-	$CanvasLayer_unaffectedByCM.hide()
-	$CanvasModulate.hide()
+	canvas_layer_unaffected_by_cm.hide()
+	canvas_modulate.hide()
 	#closed.emit()
 
 
@@ -78,9 +81,7 @@ func _on_credit_screen_pressed() -> void:
 
 func _on_avatar_selection_gui_closed() -> void:
 	Global.load_game()
-	OverworldStatesMngr.set_crisis_difficulty("Tutorial Scenario", EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.ElectricityState.NONE,
-							EMC_OverworldStatesMngr.IsolationState.NONE, EMC_OverworldStatesMngr.FoodContaminationState.NONE,
-							3, 1, "Das ist die erste Krise seit langem! Es gab einen regionalen Stromausfall!")
+	OverworldStatesMngr.set_crisis_difficulty(3, OverworldStatesMngr.Difficulty.TUTORIAL)
 	OverworldStatesMngr._set_all_states(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.IsolationState.NONE,
 										EMC_OverworldStatesMngr.FoodContaminationState.NONE, EMC_OverworldStatesMngr.ElectricityState.NONE,)
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE

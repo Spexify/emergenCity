@@ -1,34 +1,45 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8su8e0hk46wu"]
 
 [ext_resource type="Script" path="res://crisisPhase/pause_menu.gd" id="1_wnduq"]
-[ext_resource type="Texture2D" uid="uid://psk280o4uf5a" path="res://res/sprites/GUI/icons/icon_semaphore.png" id="2_wuoxr"]
-[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://GUI/UX_button.tscn" id="3_yj78q"]
+[ext_resource type="Texture2D" uid="uid://psk280o4uf5a" path="res://assets/GUI/icons/icon_semaphore.png" id="2_wuoxr"]
+[ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_yj78q"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 script = ExtResource("1_wnduq")
 
 [node name="VBC" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 575.0
-offset_bottom = 904.0
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -287.0
+offset_top = -295.0
+offset_right = 288.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBC"]
 custom_minimum_size = Vector2(575, 100)
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBC/CenterContainer"]
-custom_minimum_size = Vector2(330, 100)
+custom_minimum_size = Vector2(500, 89)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
-text = "[color=white] Pausiert[/color]"
+text = "[center][color=white]Pausiert[/color][/center]"
 
 [node name="OverworldStates" type="CenterContainer" parent="VBC"]
 layout_mode = 2
@@ -39,6 +50,7 @@ custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 
 [node name="ElectricityState" type="HBoxContainer" parent="VBC/OverworldStates/VBC"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBC/OverworldStates/VBC/ElectricityState"]
@@ -65,6 +77,7 @@ text = "-
 "
 
 [node name="WaterState" type="HBoxContainer" parent="VBC/OverworldStates/VBC"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBC/OverworldStates/VBC/WaterState"]
@@ -90,6 +103,7 @@ bbcode_enabled = true
 text = "-"
 
 [node name="IsolationState" type="HBoxContainer" parent="VBC/OverworldStates/VBC"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBC/OverworldStates/VBC/IsolationState"]
@@ -116,6 +130,7 @@ text = "-
 "
 
 [node name="FoodContamState" type="HBoxContainer" parent="VBC/OverworldStates/VBC"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBC/OverworldStates/VBC/FoodContamState"]

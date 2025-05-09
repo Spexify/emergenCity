@@ -1,0 +1,125 @@
+{
+	"start2": {
+		"priority": "",
+		"conditions": {
+			"has_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 3
+			}
+		},
+		"actors": [ "avatar", "friedel", "gerhard.r" ],
+		"text": [
+			"gerhard.r#Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten.",
+			"friedel#Wuff!",
+			"gerhard.r#Danke für deine Hilfe bei der Suche! ",
+			"friedel#(Friedel scheint sich auch zu freuen, wieder bei Gerhard zu sein.)",
+			"gerhard.r#Ich hatte gerade etwas Fisch besorgt, um ihn damit vielleicht anzulocken.",
+			"gerhard.r#Jetzt brauche ich den Fisch nicht mehr. Kannst du was damit anfangen?",
+			"avatar#Bestimmt, danke!"
+		],
+		"options": {
+			"next": {
+				"consequences": {
+					"add_item_question": [
+						"FISH",
+						{
+							"question": "Dieser %s ist sehr frisch.",
+							"answere": "",
+							"decline": "Einpacken"
+						}
+					],
+					"remove_quest": {
+						"quest": "FRIEDEL_WEG"
+					}
+				}
+			}
+		}
+	},
+	"start": {
+		"weight": 1,
+		"cooldown": 0,
+		"cooldown_end": 0,
+		"actors": [
+			"avatar",
+			"gerhard.r"
+		],
+		"text": [
+			"avatar#Hallo!",
+			"gerhard.r#Moin. Willst du handeln?"
+		],
+		"options": {
+			"#reden": {
+				"prompt": "Reden",
+				"options": {
+					"#reden1": "",
+					"#reden2": ""
+				}
+			},
+			"#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+			"#nichts": {
+				"prompt": "Nichts dergleichen"
+			}
+		}
+	},
+	"#reden1": {
+		"weight": 1,
+		"cooldown": 0,
+		"cooldown_count": 0,
+		"actors": [
+			"avatar",
+			"gerhard.r",
+			"friedel"
+		],
+		"text": [
+			"avatar#Lass uns reden! Wie geht's dir?",
+			"gerhard.r#Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht.",
+			"friedel#Wuff.",
+			"gerhard#Worüber willst du dich den beklagen? Zu wenig Essen?",
+			"friedel#Wuff ...",
+			"gerhard#... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!",
+			"friedel#Wuff!"
+		]
+	},
+	"#reden2": {
+		"weight": 1,
+		"cooldown": 0,
+		"cooldown_count": 0,
+		"actors": [
+			"avatar",
+			"friedel",
+			"gerhard.r"
+		],
+		"text": [
+			"avatar#Lass uns reden! Wie geht's Friedel?",
+			"gerhard.r#Manchmal glaub ich, er spürt, dass wir uns in einer Krise befinden.",
+			"gerhard.r#Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.",
+			"gerhard.r#Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht.",
+			"avatar#Hund müsste man sein ...",
+			"friedel#Wuff!"
+		]
+	},
+	"#handeln": {
+		"weight": 1,
+		"cooldown": 0,
+		"cooldown_count": 0,
+		"consequences": {
+			"request_gui": {
+				"name": "Trade",
+				"args": "Gerhard"
+			},
+			"queue_gui": {
+				"name": "DialogueGui",
+				"args": [
+					{
+						"stage_name": "park",
+						"actor_name": "gerhard"
+					}
+				]
+			}
+		},
+		"actors": [
+			""
+		],
+		"prompt": "Handeln"
+	}
+}
