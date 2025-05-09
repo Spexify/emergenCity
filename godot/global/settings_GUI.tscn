@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://volume_slider.gd" id="3_n24n2"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_5kd0i"]
 [ext_resource type="PackedScene" uid="uid://ctqd8vvfeado1" path="res://GUI/avatar_selection_GUI.tscn" id="4_s3tp7"]
-[ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/confirmation_GUI.tscn" id="6_cbnpx"]
+[ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/actionGUI/confirmation_GUI.tscn" id="6_cbnpx"]
 
 [node name="SettingsGUI" type="Control"]
 process_mode = 2

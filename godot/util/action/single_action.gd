@@ -1,4 +1,4 @@
-extends EMC_Action_v2
+extends EMC_Action
 class_name EMC_Single_Action
 
 var exe: Callable

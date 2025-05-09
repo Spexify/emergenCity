@@ -37,13 +37,6 @@ func is_dialogue_state(args : Dictionary) -> String:
 		return NO_REJECTION
 	return "State not Set"
 
-func constraint_cooking(_dummy_param: Variant) -> String:
-	#TODO: Electricity?
-	##TODO: In the future: Else Gaskocher?
-	return "Grund warum kochen nicht möglich ist."
-	#else:
-	return NO_REJECTION
-
 func has_water_reservoir_water(_dummy : Variant) -> String:
 	if OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.WATER_RESERVOIR) <= 0:
 		return "Das Wasser Reservoir is leer."
@@ -58,10 +51,8 @@ func upgrade_state_smaller(id: int, value: int) -> bool:
 func upgrade_state_equal(id: int, value: int) -> bool:
 	return OverworldStatesMngr.get_furniture_state(id) == value
 
-func has_upgrade(args : Dictionary) -> String:
-	if args.has("id") and OverworldStatesMngr.has_upgrade(args["id"]):
-		return NO_REJECTION
-	return "Wasser Reservoir nicht ausgerüstet!"
+func has_upgrade(args : Dictionary) -> bool:
+	return args.has("id") and OverworldStatesMngr.has_upgrade(args["id"])
 
 func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
 	if OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) == 0:

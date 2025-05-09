@@ -1,11 +1,11 @@
-extends EMC_Action_v2
+extends EMC_Action
 class_name EMC_Multi_Action
 
 const AND := "and"
 const ARRAY := "array"
 const OR := "or"
 
-var exes: Array[EMC_Action_v2]
+var exes: Array[EMC_Action]
 var acc: String = ARRAY
 
 func _init(data : Dictionary) -> void:
@@ -32,20 +32,20 @@ func set_comp(get_exe: Callable) -> void:
 
 func execute() -> Variant:
 	if acc == AND:
-		for exe : EMC_Action_v2 in exes:
+		for exe : EMC_Action in exes:
 			var r: Variant = exe.execute()
 			if r == null or not r:
 				return false
 		return true
 	elif acc == OR:
-		for exe : EMC_Action_v2 in exes:
+		for exe : EMC_Action in exes:
 			var r: Variant = exe.execute()
 			if r != null and r:
 				return true
 		return false
 	elif acc == ARRAY:
 		var result := []
-		for exe : EMC_Action_v2 in exes:
+		for exe : EMC_Action in exes:
 			var r: Variant = exe.execute()
 			if r != null:
 				result.append(r)

@@ -1,4 +1,4 @@
-extends EMC_ActionGUI
+extends EMC_GUI
 class_name EMC_TwoChoice
 
 @export var option_1_dict: Dictionary

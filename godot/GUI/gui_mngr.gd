@@ -12,8 +12,6 @@ class_name  EMC_GUIMngr
 #GUIs Lower Section:
 @onready var _tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 @onready var _confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI
-@onready var _showerGUI := $CL/VBC/LowerSection/ShowerGUI
-@onready var _cs_GUI : EMC_ChangeStageGUI = $CL/VBC/LowerSection/ChangeStageGUI
 @onready var _rainwater_barrel_gui := $CL/VBC/MiddleSection/RainwaterBarrelGUI
 @onready var two_choice: EMC_TwoChoice = $CL/VBC/LowerSection/TwoChoice
 @onready var default_action_gui: EMC_DefaultActionGUI = $CL/VBC/LowerSection/DefaultActionGUI
@@ -84,11 +82,9 @@ func setup(p_crisis_phase : EMC_CrisisPhase, p_day_mngr : EMC_DayMngr,  p_backpa
 	item_question_gui.setup(p_backpack, p_avatar)
 	
 	_status_bars.setup(self)
-	_cs_GUI.setup(p_stage_mngr)
 	_cooking_GUI.setup(p_backpack, self, p_day_mngr)
 	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(p_backpack)
-	_showerGUI.setup(p_backpack)
 	
 	default_action_gui.setup(p_day_mngr)
 	two_choice.setup(p_day_mngr)

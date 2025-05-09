@@ -5,8 +5,8 @@ class_name EMC_PopUpGUI
 
 @export var _day_mngr: EMC_DayMngr
 
-var _action: EMC_Action_v2
-var _sound: EMC_Action_v2
+var _action: EMC_Action
+var _sound: EMC_Action
 
 var _time: bool = false
 var _descr: String

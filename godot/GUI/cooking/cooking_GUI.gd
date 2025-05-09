@@ -1,6 +1,6 @@
-extends EMC_ActionGUI
+extends EMC_GUI
 
-const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
+const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
 

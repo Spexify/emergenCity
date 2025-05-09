@@ -227,8 +227,5 @@ func _on_avatar_arrived() -> void:
 				_day_mngr.on_interacted_with_furniture(content.to_int())
 
 
-func _on_doorbell_rang(p_stage_change_ID: EMC_Action.IDs) -> void:
-	if JsonMngr.id_to_action(p_stage_change_ID).get_stage_name() == _curr_stage.name:
-		_gui_mngr.close_current_gui()
-		return
+func _on_doorbell_rang(p_stage_change_ID: int) -> void:
 	_day_mngr.on_interacted_with_furniture(p_stage_change_ID)

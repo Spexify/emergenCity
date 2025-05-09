@@ -86,7 +86,7 @@
 							"decline": "Einpacken"
 						}
 					],
-					"progress_day": ["Suche nach Friedel", "Suche nach Friedel", 30]
+					"progress_day": ["Suche nach Friedel"]
 				}
 			}
 		}

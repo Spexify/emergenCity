@@ -1,15 +1,15 @@
 extends TextureButton
 class_name EMC_DoorBell
 
-signal rang(p_stage_change_ID: EMC_Action.IDs)
+signal rang(p_stage_change_ID: int)
 
 const POS_NORMAL := Vector2(0, 20)
 const POS_PRESSED := Vector2(0, 30)
 
-var _stage_change_ID: EMC_Action.IDs
+var _stage_change_ID: int
 
 ########################################### PUBLIC METHODS #########################################
-func setup(p_text: String, p_stage_change_ID: EMC_Action.IDs) -> void:
+func setup(p_text: String, p_stage_change_ID: int) -> void:
 	($RTL as RichTextLabel).text = "[center][i]" + p_text + "[/i][/center]"
 	_stage_change_ID = p_stage_change_ID
 

@@ -5,7 +5,7 @@ const INVALID_STRING_VALUE: String = "ERROR"
 const INVALID_DICTIONARY_VALUE: Dictionary = {}
 
 ## RECIPTS
-const RECIPE_SCN: PackedScene = preload("res://GUI/actionGUI/recipe.tscn")
+const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
 const RECIPT_SOURCE := "res://JSONs/recipe.json"
 ## ITEMS
 const ITEM_SOURCE := "res://JSONs/item.json"
@@ -341,30 +341,7 @@ var ACTION_SCNS : Dictionary = {}
 const DEFAULT_ACTION_STR = "action" 
 const ACTION_SCN_PATH = "res://crisisPhase/actions/"
 
-func name_to_action_id(p_name : String) -> int:
-	if not _is_action_loaded:
-		printerr("Actions not loaded")
-		return NAN
-	for key : int in _actions.keys():
-		if _actions[key].get_ACTION_NAME() == p_name:
-			return key
-	return NAN
-
-
-func name_to_action(p_name : String) -> EMC_Action:
-	if not _is_action_loaded:
-		printerr("Actions not loaded")
-		return null
-	return _actions.get(name_to_action_id(p_name))
-
-
-func id_to_action(id : int) -> EMC_Action:
-	if not _is_action_loaded:
-		printerr("Actions not loaded")
-		return null
-	return _actions.get(id)
-
-func get_action(id: String) -> EMC_Action_v2:
+func get_action(id: String) -> EMC_Action:
 	return _actions.get(id, null)
 
 func load_actions() -> void:
@@ -377,95 +354,11 @@ func load_actions() -> void:
 
 func set_action_comp(get_exe: Callable) -> void:
 	if not _is_action_loaded:
-		for action: EMC_Action_v2 in _actions.values():
+		for action: EMC_Action in _actions.values():
 			action.set_comp(get_exe)
 
 		_is_action_loaded = true
 
-	#if not FileAccess.file_exists(ACTION_SOURCE):
-			#printerr("Could not load PopUps from source: " + ACTION_SOURCE)
-			#return
-#
-	#var recipe_source : FileAccess = FileAccess.open(ACTION_SOURCE, FileAccess.READ)
-	#var json : JSON = JSON.new()
-	#
-	#var json_string : String = recipe_source.get_as_text()
-	#var parse_result : Error = json.parse(json_string)
-	#if not parse_result == OK:
-		#printerr("Action-JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-		#return
-#
-	#var data : Variant = json.get_data()
-	#if not typeof(data) == TYPE_ARRAY:
-		#printerr("Invalid format of Item-JSON (" + ITEM_SOURCE + "). Make sure it is in form of an Array of Dictonaries.")
-	
-	#var act_index : int = 0
-	#for act : Dictionary in data:
-		#var _type : String = act.get("type", INVALID_STRING_VALUE)
-		#if _type == INVALID_STRING_VALUE:
-			#printerr("Action-JSON: Action in position: " + str(act_index)+ " has not type declared. (Skipped)")
-			#continue
-		#_type = _type.to_lower()
-		#
-		#var _action_id : int = act.get("id", NAN)
-		#if _action_id == NAN:
-			#printerr("Action-JSON: Action in position: " + str(act_index)+ " has not action_id declared. (Skipped)")
-			#continue
-		#
-		#var _consequences : Dictionary = act.get("consequences", INVALID_DICTIONARY_VALUE)
-		#if _consequences != INVALID_DICTIONARY_VALUE:
-			#if _consequences.has("change_stage"):
-				#var avatar_pos : Dictionary = _consequences["change_stage"].get("avatar_pos", INVALID_DICTIONARY_VALUE)
-				#if avatar_pos == INVALID_DICTIONARY_VALUE:
-					#printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
-					#continue
-				#var x : int = avatar_pos.get("x", NAN)
-				#if x == NAN:
-					#printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
-					#continue
-				#var y : int = avatar_pos.get("y", NAN)
-				#if y == NAN:
-					#printerr("Action-JSON: Action in position: " + str(act_index)+ " has invalid parameters for consequence 'change_stage'. (Skipped)")
-					#continue
-				#
-				#var npc_pos : Dictionary = _consequences["change_stage"].get("npc_pos", {})
-				#
-				#for npc : String in npc_pos:
-					#npc_pos[npc] = Vector2(npc_pos[npc]["x"], npc_pos[npc]["y"])
-					#
-				#var tmp_data := {
-					#"avatar_pos": Vector2i(x, y),
-					#"npc_pos" : npc_pos,
-				#}
-				#tmp_data.merge(_consequences["change_stage"])
-				#_consequences["change_stage"] = tmp_data
-		#
-		#var action_data : Dictionary = {
-			#"id": _action_id,
-			#"type": _type,
-		#}
-		#
-		#action_data.merge(act)
-				#
-		#var act_scn : Resource = ACTION_SCNS.get(_type, null)
-			#
-		#if act_scn == null:
-			#if _type == DEFAULT_ACTION_STR:
-				#act_scn = load(ACTION_SCN_PATH + "action.gd")
-			#else:
-				#act_scn = load(ACTION_SCN_PATH + _type + "_action.gd")
-			#
-			#if act_scn == null:
-				#printerr("Action-JSON: Action in position: " + str(act_index) + " has an invalid Action-Type: " + _type)
-				#assert(act_scn != null)
-			#
-			#ACTION_SCNS[_type] = act_scn
-#
-		#_actions[_action_id] = act_scn.from_dict(action_data)
-		#_dict_actions[_action_id] = action_data
-	#
-		#act_index += 1
-	#_is_action_loaded = true
 #endregion
 ##########################################DOOR BELL#################################################
 #region DOORBELL

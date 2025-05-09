@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8c6lclmuiqum"]
 
-[ext_resource type="Script" path="res://GUI/actionGUI/rainwater_barrel_GUI.gd" id="1_u6c7a"]
+[ext_resource type="Script" path="res://GUI/rainwater_barrel_GUI.gd" id="1_u6c7a"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="2_27xxb"]
 
 [node name="RainwaterBarrelGUI" type="Control"]

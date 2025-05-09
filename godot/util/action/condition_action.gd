@@ -1,9 +1,9 @@
-extends EMC_Action_v2
+extends EMC_Action
 class_name EMC_Condition_Action
 
-var cond: EMC_Action_v2
-var if_exe: EMC_Action_v2
-var else_exe: EMC_Action_v2
+var cond: EMC_Action
+var if_exe: EMC_Action
+var else_exe: EMC_Action
 
 ## Format:
 ##NAME {
@@ -50,7 +50,7 @@ func execute() -> Variant:
 func pre_cond() -> bool:
 	return cond.execute()
 
-func _load_helper(type : String, data: Dictionary) -> EMC_Action_v2:
+func _load_helper(type : String, data: Dictionary) -> EMC_Action:
 	var res: Variant = Preloader.get_resource("res://util/action/" + type + "_action.gd")
 	assert(res != null, "Resource with path: res://util/action/" + type + "_action.gd not found!")
 	return res.new(data)

@@ -1,4 +1,4 @@
-extends EMC_ActionGUI
+extends EMC_GUI
 class_name EMC_DefaultActionGUI
 
 @export var icon: Texture2D
@@ -7,8 +7,8 @@ class_name EMC_DefaultActionGUI
 @onready var back_btn : Button = $VBoxContainer/HBoxContainer/BackBtn
 @onready var description : RichTextLabel = $VBoxContainer/PanelContainer/RichTextLabel
 
-var action: EMC_Action_v2
-var sound: EMC_Action_v2
+var action: EMC_Action
+var sound: EMC_Action
 var time: bool = false
 var descr: String = ""
 

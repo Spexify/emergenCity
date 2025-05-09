@@ -132,7 +132,7 @@
 				"avatar_pos": {"x": 150, "y": 900},
 				"wait": true
 			},
-			"progress_day": ["Suche nach Friedel", "Suche nach Friedel", 30]
+			"progress_day": ["Suche nach Friedel"]
 		}
 	}
 }

@@ -6,7 +6,7 @@
 		],
 		"options": {
 			"#ja": "",
-			"#nein": "",
+			"#nein": ""
 		}
 	},
 	"#ja" : {
@@ -20,7 +20,7 @@
 					"decline": "Einpacken"
 				}
 			],
-			"progress_day": ["Mit Agathe plaudern", "Mit Agathe geplaudert.", 30],
+			"progress_day": ["Mit Agathe plaudern"]
 		},
 		"actors": ["avatar", "agathe.r"],
 		"text": [

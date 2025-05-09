@@ -3,7 +3,7 @@ class_name EMC_MotherRecipe
 #
 ###Tupe-Klasse (alles public und keine Methoden)
 #
-const MOTHER_RECIPE = preload("res://GUI/actionGUI/mother_recipe.tscn")
+const MOTHER_RECIPE = preload("res://GUI/cooking/mother_recipe.tscn")
 
 signal was_pressed(p_recipe : EMC_Recipe)
 

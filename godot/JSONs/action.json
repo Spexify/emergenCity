@@ -215,7 +215,9 @@
 		"type": "single",
 		"comp": "ActCons",
 		"method": "add_health",
-		"params": [ 1 ]
+		"params": [
+			1
+		]
 	},
 	"4": {
 		"type": "single",
@@ -236,9 +238,9 @@
 		"type": "condition",
 		"cond": {
 			"type": "single",
-			"comp": "OSM",
-			"method": "",
-			"params": []
+			"comp": "ActCond",
+			"method": "upgrade_state_greater",
+			"params": [1, 1]
 		},
 		"if": {
 			"type": "single",
@@ -264,7 +266,9 @@
 		"type": "single",
 		"comp": "SoundMngr",
 		"method": "play_sound",
-		"params": [ "Shower" ]
+		"params": [
+			"Shower"
+		]
 	},
 	"Shower": {
 		"type": "condition",
@@ -272,19 +276,25 @@
 			"type": "single",
 			"comp": "OSM",
 			"method": "is_any_state_by_name",
-			"params": [ "WaterState.CLEAN" ]
+			"params": [
+				"WaterState.CLEAN"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "ActCons",
 			"method": "add_health",
-			"params": [ 2 ]
+			"params": [
+				2
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "ActCons",
 			"method": "add_health",
-			"params": [ 1 ]
+			"params": [
+				1
+			]
 		}
 	},
 	"Shower_Soap": {
@@ -295,7 +305,9 @@
 				"type": "single",
 				"comp": "ActCons",
 				"method": "use_item_by_name",
-				"params": [ "SOAP" ]
+				"params": [
+					"SOAP"
+				]
 			},
 			{
 				"type": "condition",
@@ -303,19 +315,25 @@
 					"type": "single",
 					"comp": "OSM",
 					"method": "is_any_state_by_name",
-					"params": [ "WaterState.CLEAN" ]
+					"params": [
+						"WaterState.CLEAN"
+					]
 				},
 				"if": {
 					"type": "single",
 					"comp": "ActCons",
 					"method": "add_health",
-					"params": [ 3 ]
+					"params": [
+						3
+					]
 				},
 				"else": {
 					"type": "single",
 					"comp": "ActCons",
 					"method": "add_health",
-					"params": [ 2 ]
+					"params": [
+						2
+					]
 				}
 			}
 		]
@@ -350,7 +368,9 @@
 				"type": "single",
 				"comp": "ActCond",
 				"method": "has_item",
-				"params": [ "SOAP" ]
+				"params": [
+					"SOAP"
+				]
 			},
 			"if": {
 				"type": "single",
@@ -428,7 +448,9 @@
 		"type": "single",
 		"comp": "SoundMngr",
 		"method": "play_sound",
-		"params": [ "RadioTuning" ]
+		"params": [
+			"RadioTuning"
+		]
 	},
 	"Radio_Batteries": {
 		"type": "multi",
@@ -438,7 +460,9 @@
 				"type": "single",
 				"comp": "ActCons",
 				"method": "use_item_by_name",
-				"params": [ "BATTERIES" ]
+				"params": [
+					"BATTERIES"
+				]
 			},
 			{
 				"type": "single",
@@ -454,13 +478,15 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "has_item",
-			"params": [ "BATTERIES" ]
+			"params": [
+				"BATTERIES"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
@@ -508,7 +534,9 @@
 				"type": "single",
 				"comp": "ActCons",
 				"method": "remove_from_reservoir",
-				"params": [ 25 ]
+				"params": [
+					25
+				]
 			},
 			{
 				"type": "single",
@@ -532,7 +560,10 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "upgrade_state_greater",
-			"params": [ 6, 0 ]
+			"params": [
+				6,
+				0
+			]
 		},
 		"if": {
 			"type": "single",
@@ -563,7 +594,9 @@
 		"type": "single",
 		"comp": "SoundMngr",
 		"method": "play_sound",
-		"params": [ "BasicItem" ]
+		"params": [
+			"BasicItem"
+		]
 	},
 	"Go_Home": {
 		"type": "multi",
@@ -576,7 +609,10 @@
 				"params": [
 					{
 						"stage_name": "home",
-						"avatar_pos": {"x": 250, "y": 650}
+						"avatar_pos": {
+							"x": 250,
+							"y": 650
+						}
 					}
 				]
 			},
@@ -584,7 +620,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -592,7 +630,7 @@
 		"type": "single",
 		"comp": "gui_mngr",
 		"method": "request_gui",
-		"params": [ 
+		"params": [
 			"DefaultActionGUI",
 			[
 				"Willst du Nachhause gehen?",
@@ -601,7 +639,7 @@
 				true,
 				"Nach Hause gekehrt."
 			]
-		 ]
+		]
 	},
 	"Go_Market": {
 		"type": "multi",
@@ -614,7 +652,10 @@
 				"params": [
 					{
 						"stage_name": "market",
-						"avatar_pos": {"x": 250, "y": 1000},
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
 						"wait": false
 					}
 				]
@@ -623,7 +664,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -638,7 +681,10 @@
 				"params": [
 					{
 						"stage_name": "market",
-						"avatar_pos": {"x": 250, "y": 1000},
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
 						"wait": true
 					}
 				]
@@ -647,7 +693,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -677,26 +725,28 @@
 				"type": "single",
 				"comp": "ActCond",
 				"method": "is_current_stage",
-				"params": [ "home" ]
+				"params": [
+					"home"
+				]
 			},
 			"if": {
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "request_gui",
-				"params": [ 
+				"params": [
 					"DefaultActionGUI",
 					[
 						"Willst du zum Markplatz gehen?",
 						"Go_Market",
 						"SFX_Stage"
 					]
-				 ]
+				]
 			},
 			"else": {
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "request_gui",
-				"params": [ 
+				"params": [
 					"DefaultActionGUI",
 					[
 						"Willst du zum Markplatz gehen?",
@@ -705,7 +755,7 @@
 						true,
 						"Hat Marktplatz besucht."
 					]
-				 ]
+				]
 			}
 		},
 		"else": {
@@ -731,7 +781,10 @@
 				"params": [
 					{
 						"stage_name": "townhall",
-						"avatar_pos": {"x": 450, "y": 480},
+						"avatar_pos": {
+							"x": 450,
+							"y": 480
+						},
 						"wait": false
 					}
 				]
@@ -740,7 +793,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -755,7 +810,10 @@
 				"params": [
 					{
 						"stage_name": "townhall",
-						"avatar_pos": {"x": 450, "y": 480},
+						"avatar_pos": {
+							"x": 450,
+							"y": 480
+						},
 						"wait": true
 					}
 				]
@@ -764,7 +822,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -794,26 +854,28 @@
 				"type": "single",
 				"comp": "ActCond",
 				"method": "is_current_stage",
-				"params": [ "home" ]
+				"params": [
+					"home"
+				]
 			},
 			"if": {
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "request_gui",
-				"params": [ 
+				"params": [
 					"DefaultActionGUI",
 					[
 						"Willst du zum Rathaus gehen?",
 						"Go_Townhall",
 						"SFX_Stage"
 					]
-				 ]
+				]
 			},
 			"else": {
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "request_gui",
-				"params": [ 
+				"params": [
 					"DefaultActionGUI",
 					[
 						"Willst du zum Rathaus gehen?",
@@ -822,7 +884,7 @@
 						true,
 						"Hat das Rathaus besucht."
 					]
-				 ]
+				]
 			}
 		},
 		"else": {
@@ -848,7 +910,10 @@
 				"params": [
 					{
 						"stage_name": "park",
-						"avatar_pos": {"x": 350, "y": 700},
+						"avatar_pos": {
+							"x": 350,
+							"y": 700
+						},
 						"wait": false
 					}
 				]
@@ -857,7 +922,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -872,7 +939,10 @@
 				"params": [
 					{
 						"stage_name": "park",
-						"avatar_pos": {"x": 350, "y": 700},
+						"avatar_pos": {
+							"x": 350,
+							"y": 700
+						},
 						"wait": true
 					}
 				]
@@ -881,7 +951,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -891,26 +963,28 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"home"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du in den Park gehen?",
 					"Go_Park",
 					"SFX_Stage"
 				]
-			 ]
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du in den Park gehen?",
@@ -919,7 +993,7 @@
 					true,
 					"Hat den Park besucht."
 				]
-			 ]
+			]
 		}
 	},
 	"Go_Garden": {
@@ -933,7 +1007,10 @@
 				"params": [
 					{
 						"stage_name": "gardenhouse",
-					"avatar_pos": {"x": 150, "y": 900},
+						"avatar_pos": {
+							"x": 150,
+							"y": 900
+						},
 						"wait": false
 					}
 				]
@@ -942,7 +1019,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -957,7 +1036,10 @@
 				"params": [
 					{
 						"stage_name": "gardenhouse",
-					"avatar_pos": {"x": 150, "y": 900},
+						"avatar_pos": {
+							"x": 150,
+							"y": 900
+						},
 						"wait": true
 					}
 				]
@@ -966,7 +1048,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -976,26 +1060,28 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"home"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Gerhard besuchen?",
 					"Go_Garden",
 					"SFX_Stage"
 				]
-			 ]
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Gerhard besuchen?",
@@ -1004,7 +1090,7 @@
 					true,
 					"Hat Gerhard besucht."
 				]
-			 ]
+			]
 		}
 	},
 	"Go_Rowhouse": {
@@ -1018,7 +1104,10 @@
 				"params": [
 					{
 						"stage_name": "rowhouse",
-						"avatar_pos": {"x": 250, "y": 400},
+						"avatar_pos": {
+							"x": 250,
+							"y": 400
+						},
 						"wait": false
 					}
 				]
@@ -1027,7 +1116,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1042,7 +1133,10 @@
 				"params": [
 					{
 						"stage_name": "rowhouse",
-						"avatar_pos": {"x": 250, "y": 400},
+						"avatar_pos": {
+							"x": 250,
+							"y": 400
+						},
 						"wait": true
 					}
 				]
@@ -1051,7 +1145,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1061,26 +1157,28 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"home"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Julia besuchen?",
 					"Go_Rowhouse",
 					"SFX_Stage"
 				]
-			 ]
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Julia besuchen?",
@@ -1089,7 +1187,7 @@
 					true,
 					"Hat Julia besucht."
 				]
-			 ]
+			]
 		}
 	},
 	"Go_Mansion": {
@@ -1103,7 +1201,10 @@
 				"params": [
 					{
 						"stage_name": "mansion",
-						"avatar_pos": {"x": 120, "y": 900},
+						"avatar_pos": {
+							"x": 120,
+							"y": 900
+						},
 						"wait": false
 					}
 				]
@@ -1112,7 +1213,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1127,7 +1230,10 @@
 				"params": [
 					{
 						"stage_name": "mansion",
-						"avatar_pos": {"x": 120, "y": 900},
+						"avatar_pos": {
+							"x": 120,
+							"y": 900
+						},
 						"wait": true
 					}
 				]
@@ -1136,7 +1242,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1146,26 +1254,28 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"home"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Petro & Irena besuchen?",
 					"Go_Mansion",
 					"SFX_Stage"
 				]
-			 ]
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Petro & Irena besuchen?",
@@ -1174,7 +1284,7 @@
 					true,
 					"Hat Petro & Irena besucht."
 				]
-			 ]
+			]
 		}
 	},
 	"Go_Penthouse": {
@@ -1188,7 +1298,10 @@
 				"params": [
 					{
 						"stage_name": "penthouse",
-						"avatar_pos": {"x": 250, "y": 1000},
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
 						"wait": false
 					}
 				]
@@ -1197,7 +1310,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1212,7 +1327,10 @@
 				"params": [
 					{
 						"stage_name": "penthouse",
-						"avatar_pos": {"x": 250, "y": 1000},
+						"avatar_pos": {
+							"x": 250,
+							"y": 1000
+						},
 						"wait": true
 					}
 				]
@@ -1221,7 +1339,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1231,26 +1351,28 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"home"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Elias besuchen?",
 					"Go_Penthouse",
 					"SFX_Stage"
 				]
-			 ]
+			]
 		},
 		"else": {
 			"type": "single",
 			"comp": "gui_mngr",
 			"method": "request_gui",
-			"params": [ 
+			"params": [
 				"DefaultActionGUI",
 				[
 					"Willst du Elias besuchen?",
@@ -1259,7 +1381,7 @@
 					true,
 					"Hat Elias besucht."
 				]
-			 ]
+			]
 		}
 	},
 	"Go_Mert": {
@@ -1273,7 +1395,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_mert",
-						"avatar_pos": {"x": 150, "y": 400},
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
 						"wait": false
 					}
 				]
@@ -1282,7 +1407,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1297,7 +1424,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_mert",
-						"avatar_pos": {"x": 150, "y": 400},
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
 						"wait": true
 					}
 				]
@@ -1306,7 +1436,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1316,35 +1448,54 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"apartment_mert"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Mert besuchen?",
-					"Go_Mert",
-					"SFX_Stage"
-				]
-			 ]
+			"method": "close_current_gui",
+			"params": []
 		},
 		"else": {
-			"type": "single",
-			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Mert besuchen?",
-					"Go_Mert_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Mert besucht."
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
 				]
-			 ]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Mert besuchen?",
+						"Go_Mert",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Mert besuchen?",
+						"Go_Mert_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Mert besucht."
+					]
+				]
+			}
 		}
 	},
 	"Go_Camper": {
@@ -1358,7 +1509,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_camper",
-						"avatar_pos": {"x": 150, "y": 400},
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
 						"wait": false
 					}
 				]
@@ -1367,7 +1521,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1382,7 +1538,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_camper",
-						"avatar_pos": {"x": 150, "y": 400},
+						"avatar_pos": {
+							"x": 150,
+							"y": 400
+						},
 						"wait": true
 					}
 				]
@@ -1391,7 +1550,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1401,35 +1562,54 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"apartment_camper"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Kris & Veronika besuchen?",
-					"Go_Camper",
-					"SFX_Stage"
-				]
-			 ]
+			"method": "close_current_gui",
+			"params": []
 		},
 		"else": {
-			"type": "single",
-			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Kris & Veronika besuchen?",
-					"Go_Camper_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Kris & Veronika besucht."
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
 				]
-			 ]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Kris & Veronika besuchen?",
+						"Go_Camper",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Kris & Veronika besuchen?",
+						"Go_Camper_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Kris & Veronika besucht."
+					]
+				]
+			}
 		}
 	},
 	"Go_Default": {
@@ -1443,7 +1623,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_default",
-						"avatar_pos": {"x": 250, "y": 900},
+						"avatar_pos": {
+							"x": 250,
+							"y": 900
+						},
 						"wait": false
 					}
 				]
@@ -1452,7 +1635,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1467,7 +1652,10 @@
 				"params": [
 					{
 						"stage_name": "apartment_default",
-						"avatar_pos": {"x": 250, "y": 900},
+						"avatar_pos": {
+							"x": 250,
+							"y": 900
+						},
 						"wait": true
 					}
 				]
@@ -1476,7 +1664,9 @@
 				"type": "single",
 				"comp": "gui_mngr",
 				"method": "close_gui",
-				"params": [ -2 ]
+				"params": [
+					-2
+				]
 			}
 		]
 	},
@@ -1486,35 +1676,54 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "is_current_stage",
-			"params": [ "home" ]
+			"params": [
+				"apartment_default"
+			]
 		},
 		"if": {
 			"type": "single",
 			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Agathe besuchen?",
-					"Go_Default",
-					"SFX_Stage"
-				]
-			 ]
+			"method": "close_current_gui",
+			"params": []
 		},
 		"else": {
-			"type": "single",
-			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [ 
-				"DefaultActionGUI",
-				[
-					"Willst du Agathe besuchen?",
-					"Go_Default_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Agathe besucht."
+			"type": "condition",
+			"cond": {
+				"type": "single",
+				"comp": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
 				]
-			 ]
+			},
+			"if": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Agathe besuchen?",
+						"Go_Default",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"comp": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"Willst du Agathe besuchen?",
+						"Go_Default_Wait",
+						"SFX_Stage",
+						true,
+						"Hat Agathe besucht."
+					]
+				]
+			}
 		}
 	}
 }
