@@ -66,7 +66,7 @@ func _ready() -> void:
 	for sub: EMC_NPC_Idee in priority_comps:
 		self.add_child(sub)
 		
-	for action: EMC_Action_v2 in actions.values():
+	for action: EMC_Action in actions.values():
 		action.set_comp(self._get_comp_by_name)
 
 ## Executes the behaviour of an NPC

@@ -55,8 +55,8 @@ const DEFAULT_COLOR := Color(1, 1, 1)
 #FYI: Inherits "name" property from Node
 @export var id: IDs = 0
 @export var name: String = "Dummy"
-@export var descr: String = "<No Descr>"
-@export var comps: Array[EMC_ItemComponent]
+@export var descr: String = "No Descr"
+@export var comps: Array[EMC_ItemComponent] = []
 @export var sound_effect : Dictionary = { 
 	"clicked" : "BasicItem",
 	"consumed" : "",

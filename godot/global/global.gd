@@ -43,9 +43,10 @@ var _apps_installed : Array[String] = []
 func set_started_from_entry_scene(p_value: bool = true) -> void:
 	_started_from_entry_scene = p_value
 
-func _ready() -> void:	
+func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
+	
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -184,6 +185,7 @@ func save_game(p_was_crisis : bool) -> void:
 	game_saved.emit()
 
 func load_game() -> void:
+			
 	if not FileAccess.file_exists(SAVE_GAME_FILE):
 		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
 

@@ -116,7 +116,7 @@
 					"actions":  [
 						{
 							"quest": "FRIEDEL_WEG",
-							"chance": 1,
+							"chance": 0.1,
 							"stage": 0,
 							"action": "escape"
 						},

@@ -24,17 +24,21 @@ func _ready() -> void:
 func get_stage_name() -> String:
 	return _stage_name
 	
-func change_stage(stage_name : String) -> void:
+func change_stage(stage_name : String, wait: bool = true) -> void:
 	_stage_name = stage_name
 	
-	_on_stage_changed(_stage_mngr.get_curr_stage_name())
+	if not wait:
+		_stage_mngr.get_stage()._create_navigation_layer_tiles()
+
+		_on_stage_changed(_stage_mngr.get_curr_stage_name())
 	
 func override_spawn(position: Vector2) -> void:
 	_override = position
 
-func change_stage_pos(stage_name: String, data: Dictionary) -> void:
+func change_stage_pos(stage_name: String, data: Dictionary, wait: bool = true) -> void:
 	_position = EMC_Util.dict_to_vector(data, TYPE_VECTOR2)
-	change_stage(stage_name)
+
+	change_stage(stage_name, wait)
 
 func _on_stage_changed(stage_name: String) -> void:
 	#print("Current stage %s, my stage " % stage_name + _stage_name)
@@ -42,7 +46,7 @@ func _on_stage_changed(stage_name: String) -> void:
 		_stage_name = stage_name
 		var postion : Vector2 = _stage_mngr.get_stage().reserve_spawn_pos(_override)
 		npc.set_position(postion)
-		npc.show()
+		npc.enable()
 		_override = Vector2.INF
 		_position = Vector2.INF
 		return
@@ -54,7 +58,7 @@ func _on_stage_changed(stage_name: String) -> void:
 		else:
 			position = _stage_mngr.get_stage().reserve_spawn_pos(positions.get(stage_name.to_pascal_case(), Vector2.ZERO))
 		npc.set_position(position)
-		npc.show()
+		npc.enable()
 	else:
-		npc.hide()
+		npc.disbale()
 	_position = Vector2.INF

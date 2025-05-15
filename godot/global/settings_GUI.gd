@@ -12,6 +12,7 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var sfx : EMC_VolumeSlider = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/SFX
 @onready var reset : Button = $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
 @onready var _confirmGUI: EMC_ConfirmationGUI = $CanvasLayer/ConfirmationGUI
+
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
 

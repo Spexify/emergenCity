@@ -18,8 +18,8 @@ extends Resource
 class_name EMC_ItemComponent
 
 #FYI: Inherits "name" property of Node
-var _color: Color
-var name : String
+@export var _color: Color
+@export var name : String
 
 static var COMP_SCNS : Dictionary = {}
 

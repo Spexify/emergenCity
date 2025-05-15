@@ -124,7 +124,7 @@ func _create_navigation_layer_tiles() -> void:
 	var tile_coords: Array[Vector2i] = _stage.get_used_cells(Layers.BACKGROUND)
 	
 	## Pro tip to debug this: You can "Force Show" the Navigation visibility:
-	_stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	## _stage.navigation_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
 	
 	for tile_coord: Vector2i in tile_coords:
 		if !_has_tile_collision(tile_coord):

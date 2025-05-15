@@ -55,5 +55,13 @@ func get_day_mngr() -> EMC_DayMngr:
 
 func _on_button_pressed() -> void:
 	clicked.emit(self)
+	
+func enable() -> void:
+	show()
+	hitbox.set_deferred("disabled", false)#
+	
+func disbale() -> void:
+	hide()
+	hitbox.set_deferred("disabled", true)
 
 ##############################################
