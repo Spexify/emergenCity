@@ -444,7 +444,7 @@
 		"descr": "Fettig, aber lecker.",
 		"comps": [
 			{"name": "food", "params": 2},
-			{"name": "pleasurable", "params": 1},
+			{"name": "pleasurable", "params": 1}
 		]
 	},
 	{
@@ -453,7 +453,7 @@
 		"descr": "Genau das, wonach es klingt: Gebratener Fisch.",
 		"comps": [
 			{"name": "food", "params": 1},
-			{"name": "pleasurable", "params": 1},
+			{"name": "pleasurable", "params": 1}
 		]
-	},
+	}
 ]
