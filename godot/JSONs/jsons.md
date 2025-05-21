@@ -60,6 +60,26 @@ For example when requesting a GUI:
 }
 ```
 
+```json
+{
+    "type": "single",
+    "comp": "ActCons",
+    "method": "add_item_question",
+    "params": [
+        [
+            ITEM,
+            {
+                "question": "TEXT MIT %s",
+                "answere": "TEXT"
+            }
+        ]
+    ]
+}
+```
+
+In the example above ITEM is replaced by the name of an item (the names of items can be seen in [items](item.json) and [item Ids](item_ids.json)).
+The value of key `"question"` must contain `%s`. In the GUI `%s` will be replaced with the name of the item.
+
 ## Books
 
 Books have the following format:
@@ -138,7 +158,7 @@ They have the following format:
 {
     KEY: {
         "priority": "",
-        "prompt": ...,
+        "prompt": TEXT,
         "weight": ...,
 		"cooldown": ...,
 		"cooldown_end": ...,
