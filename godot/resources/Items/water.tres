@@ -11,7 +11,7 @@ region = Rect2(64, 0, 64, 64)
 script = ExtResource("1_dlqwi")
 id = 1
 name = "Wasser"
-descr = "Wasser is gesund"
+descr = "Wasser ist gesund"
 comps = Array[Resource("res://items/components/item_component.gd")]([])
 sound_effect = {
 "clicked": "BasicItem",

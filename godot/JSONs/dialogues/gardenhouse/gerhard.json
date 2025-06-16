@@ -72,7 +72,7 @@
 		],
 		"text": [
 			"avatar#Lass uns reden! Wie geht's dir?",
-			"gerhard.r#Man kann sich nicht beklagen. Also, man könnte schon, aber man tuts ja nicht.",
+			"gerhard.r#Man kann sich nicht beklagen. Also, man könnte schon, aber man tut es ja nicht.",
 			"friedel#Wuff.",
 			"gerhard#Worüber willst du dich den beklagen? Zu wenig Essen?",
 			"friedel#Wuff ...",
@@ -90,10 +90,10 @@
 			"gerhard.r"
 		],
 		"text": [
-			"avatar#Lass uns reden! Wie geht's Friedel?",
-			"gerhard.r#Manchmal glaub ich, er spürt, dass wir uns in einer Krise befinden.",
+			"avatar#Lass uns reden! Wie geht es Friedel?",
+			"gerhard.r#Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden.",
 			"gerhard.r#Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.",
-			"gerhard.r#Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... Also vielleicht doch nicht.",
+			"gerhard.r#Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... also vielleicht doch nicht.",
 			"avatar#Hund müsste man sein ...",
 			"friedel#Wuff!"
 		]

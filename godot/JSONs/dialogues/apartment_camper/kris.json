@@ -28,7 +28,7 @@
             "veronika.r#Wir haben keine Milch mehr da.",
             "kris#Oh, schade. Aber ich könnte uns einen Smoothie machen!",
             "veronika.r#Obst haben wir auch keins mehr.",
-            "kris#Stimmt ja. Oh, und was ist mit Milchreis?",
+            "kris#Stimmt ja. Oh – und was ist mit Milchreis?",
             "veronika.r#... Kris. Keine Milch.",
             "kris.r#Achja. Na gut. Dann nächstes Mal."
         ]
@@ -45,7 +45,7 @@
                 "prompt": "Kann ich gut nachvollziehen.",
                 "actors": ["avatar", "kris.r"],
                 "text": [
-                    "avatar#Ohne Spontanität ist das Leben langweilig.",
+                    "avatar#Ohne Spontaneität ist das Leben langweilig.",
                     "kris.r#Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!",
                     "kris.r#Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.",
                     "kris.r#Mal sehen, was wir dieses Mal finden!"

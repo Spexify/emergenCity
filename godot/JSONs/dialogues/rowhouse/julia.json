@@ -31,7 +31,7 @@
         "actors": ["avatar", "julia.r"],
         "text": [
             "julia.r#Hast du heute schon etwas gekocht? Wenn du tagsüber etwas kochst, kannst du abends eine warme Mahlzeit zu dir nehmen.",
-            "julia.r#Das schmeckt nicht nur besser; viele Lebensmittel sind ungekocht gar nicht genießbar. Keiner möchte gerne ungekochte Nudeln kauen.",
+            "julia.r#Das schmeckt nicht nur besser; viele Lebensmittel sind ungekocht gar nicht genießbar. Niemand möchte gerne ungekochte Nudeln kauen.",
             "julia.r#Aber gekochtes Essen hält sich häufig nicht sehr lange und sollte daher bald gegessen werden.",
             "avatar#Danke für den Tipp!"
             
@@ -43,7 +43,7 @@
             "julia.r#Es gibt viele Möglichkeiten, an Wasser zu gelangen: Schön ist natürlich, wenn einfach sauberes Wasser aus deinem Wasserhahn kommt.",
             "julia.r#Wenn das Wasser mal ausfällt, kann man welches aus der Regentonne schöpfen. Das ist dann allerdings nicht sehr sauber.",
             "julia.r#Dafür gibt es Chlortabletten: Die reinigen verschmutztes Wasser aus der Regentonne oder bei Verschmutzungen in der Leitung.",
-            "julia.r#Manchmal teilt der THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt.",
+            "julia.r#Manchmal teilt das THW auch sauberes Wasser auf dem Marktplatz aus. Das wird dann im Radio angekündigt.",
             "avatar#Danke für den Tipp!"
         ]
     }

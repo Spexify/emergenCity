@@ -64,8 +64,8 @@
 		"tiles_rows": 2,
 	},
 	{
-		"description": "Ermöglicht längeres Handy nutzen bei Stromausfall",
-		"display_name": "Power Bank",
+		"description": "Ermöglicht längere Handynutzung bei Stromausfall",
+		"display_name": "Powerbank",
 		"id": 5,
 		"price": 1000,
 		"state": 0,
@@ -77,7 +77,7 @@
 	},
 	{
 		"description": "Ermöglicht abfüllen von Wasser.",
-		"display_name": "Wasser Reservoir",
+		"display_name": "Wasserreservoir",
 		"id": 6,
 		"price": 2000,
 		"state": 0,

@@ -10,8 +10,8 @@ region = Rect2(128, 0, 64, 64)
 [resource]
 script = ExtResource("1_yc75y")
 id = 2
-name = "Deckiges Wasser"
-descr = "Dreckiges Wasser is ungesund"
+name = "Dreckiges Wasser"
+descr = "Dreckiges Wasser ist ungesund"
 comps = Array[Resource("res://items/components/item_component.gd")]([])
 sound_effect = {
 "clicked": "BasicItem",

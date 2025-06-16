@@ -184,7 +184,7 @@
 				"params": [
 					"DefaultActionGUI",
 					[
-						"Das Wasser ist verdreckt. Sicher das du es in eine Flasche abfüllen willst?.",
+						"Das Wasser ist verdreckt. Sicher, dass du es in eine Flasche abfüllen willst?.",
 						"IQ_DirtyWater",
 						"SFX_Water"
 					]
@@ -489,7 +489,7 @@
 			"params": [
 				"DefaultActionGUI",
 				[
-					"Willst du das Radio benutzen? Dies verbraucht eine Batterie-Ladung!",
+					"Willst du das Radio benutzen? Dies verbraucht eine Batterieladung!",
 					"Radio_Batteries",
 					"SFX_Radio"
 				]
@@ -585,7 +585,7 @@
 			"params": [
 				"TooltipGUI",
 				[
-					"Das Wasser Reservoir is leer."
+					"Das Wasser Reservoir ist leer."
 				]
 			]
 		}
@@ -633,7 +633,7 @@
 		"params": [
 			"DefaultActionGUI",
 			[
-				"Willst du Nachhause gehen?",
+				"Willst du nach Hause gehen?",
 				"Go_Home",
 				"SFX_Stage",
 				true,
