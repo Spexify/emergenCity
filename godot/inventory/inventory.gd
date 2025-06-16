@@ -134,6 +134,17 @@ func get_items_as_id() -> Array[int]:
 			items.push_back(item.get_id())
 	return items
 
+func get_items_count() -> Dictionary:
+	var result: Dictionary = {}
+	for item: EMC_Item in slots:
+		if item != null:
+			var name: String = JsonMngr.item_id_to_name(item.get_id())
+			if result.has(name):
+				result[name] += 1
+			else:
+				result[name] = 1
+	return result
+
 ## Spoil some items
 func spoil_some_items() -> void:
 	for item in get_items_filterd(filter_comp(EMC_IC_Shelflife)):

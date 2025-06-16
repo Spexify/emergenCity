@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=38 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
 [ext_resource type="PackedScene" uid="uid://cr304u228icot" path="res://GUI/npc_interaction_gui.tscn" id="27_8bng3"]
 [ext_resource type="PackedScene" uid="uid://b6rt1srdy2k6h" path="res://GUI/default/two_choice.tscn" id="33_52q5c"]
+[ext_resource type="PackedScene" uid="uid://dwklogkejltna" path="res://global/scoreboard.tscn" id="34_0pmq5"]
 [ext_resource type="Script" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
 [ext_resource type="Script" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
 
@@ -48,7 +49,10 @@ process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
-[node name="StageMngr" parent="." groups=["Save"] instance=ExtResource("13_8jkao")]
+[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr") groups=["Save"] instance=ExtResource("13_8jkao")]
+_avatar = NodePath("../Avatar")
+_day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
+_gui_mngr = NodePath("../GUI")
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
@@ -137,17 +141,22 @@ color = Color(0.470588, 0.470588, 0.470588, 1)
 [node name="DayPeriodTransition" parent="GUI/CL" instance=ExtResource("21_6msld")]
 visible = false
 
-[node name="CityMap" parent="GUI/CL" instance=ExtResource("23_8pknv")]
+[node name="CityMap" parent="GUI/CL" node_paths=PackedStringArray("_crisis_phase", "_stage_mngr", "_day_mngr", "_gui_mngr") instance=ExtResource("23_8pknv")]
 visible = false
 offset_right = 576.0
 offset_bottom = 1024.0
+_crisis_phase = NodePath("../../..")
+_stage_mngr = NodePath("../../../StageMngr")
+_day_mngr = NodePath("../VBC/UpperSection/HBC/DayMngr")
+_gui_mngr = NodePath("../..")
 
 [node name="RainAnimation" parent="GUI/CL" instance=ExtResource("24_5kmdu")]
 visible = false
 
-[node name="Trade" parent="GUI/CL" instance=ExtResource("26_eyapc")]
+[node name="Trade" parent="GUI/CL" node_paths=PackedStringArray("gui_mngr") instance=ExtResource("26_eyapc")]
 visible = false
 size_flags_horizontal = 4
+gui_mngr = NodePath("../..")
 
 [node name="HandyGUI" parent="GUI/CL" groups=["Save"] instance=ExtResource("24_lodu6")]
 visible = false
@@ -173,11 +182,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 mouse_filter = 2
-theme_override_constants/separation = 56
+theme_override_constants/separation = 36
 
-[node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" groups=["Gui"] instance=ExtResource("6_22w2e")]
+[node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr") groups=["Gui"] instance=ExtResource("6_22w2e")]
 custom_minimum_size = Vector2(295, 70)
 layout_mode = 2
+_gui_mngr = NodePath("../../../../..")
 
 [node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
@@ -194,28 +204,35 @@ custom_minimum_size = Vector2(576, 680)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_i2q6e")]
+[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr") groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
+_avatar = NodePath("../../../../../Avatar")
+_gui_mngr = NodePath("../../../..")
 
 [node name="PopUpGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
 layout_mode = 2
 
-[node name="SummaryEndOfDayGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("9_owtos")]
+[node name="SummaryEndOfDayGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_scoreboard") groups=["Gui"] instance=ExtResource("9_owtos")]
 visible = false
 layout_mode = 2
+_scoreboard = NodePath("../../../../../EMC_Scoreboard")
 
-[node name="EndGameGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("8_saydl")]
+[node name="EndGameGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_scoreboard") groups=["Gui"] instance=ExtResource("8_saydl")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+_scoreboard = NodePath("../../../../../EMC_Scoreboard")
 
-[node name="CookingGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("10_64vl8")]
+[node name="CookingGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_gui_mngr", "_day_mngr", "_scoreboard") groups=["Gui"] instance=ExtResource("10_64vl8")]
 visible = false
 layout_mode = 2
+_gui_mngr = NodePath("../../../..")
+_day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
+_scoreboard = NodePath("../../../../../EMC_Scoreboard")
 
 [node name="RainwaterBarrelGUI" parent="GUI/CL/VBC/MiddleSection" groups=["Gui"] instance=ExtResource("12_ad4fq")]
 visible = false
@@ -241,13 +258,15 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ItemQuestionGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("20_b3rgh")]
+[node name="ItemQuestionGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar") instance=ExtResource("20_b3rgh")]
 visible = false
 layout_mode = 2
+_avatar = NodePath("../../../../../Avatar")
 
-[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("25_qh0l1")]
+[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr") instance=ExtResource("25_qh0l1")]
 visible = false
 layout_mode = 2
+stage_mngr = NodePath("../../../../../StageMngr")
 
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
@@ -259,17 +278,19 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
-[node name="DefaultActionGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("19_sb74j")]
+[node name="DefaultActionGUI" parent="GUI/CL/VBC/LowerSection" node_paths=PackedStringArray("_day_mngr") groups=["Gui"] instance=ExtResource("19_sb74j")]
 visible = false
 layout_mode = 2
+_day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
 
 [node name="ConfirmationGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
 visible = false
 layout_mode = 2
 
-[node name="TwoChoice" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("33_52q5c")]
+[node name="TwoChoice" parent="GUI/CL/VBC/LowerSection" node_paths=PackedStringArray("_day_mngr") groups=["Gui"] instance=ExtResource("33_52q5c")]
 visible = false
 layout_mode = 2
+_day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
 
 [node name="EMC_ActionConsequences" type="Node" parent="." node_paths=PackedStringArray("_avatar", "_stage_mngr", "_lower_gui_node", "_day_mngr", "_gui_mngr")]
 script = ExtResource("34_gwktw")
@@ -283,6 +304,10 @@ _gui_mngr = NodePath("../GUI")
 script = ExtResource("35_kkbik")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _stage_mngr = NodePath("../StageMngr")
+
+[node name="EMC_Scoreboard" parent="." node_paths=PackedStringArray("_day_mngr") instance=ExtResource("34_0pmq5")]
+spawn_rect = Rect2i(90, 200, 332, 160)
+_day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 
 [connection signal="happiness_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]

@@ -58,7 +58,6 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 func on_interacted_with_furniture(p_action_ID : int) -> void:
 	JsonMngr.get_action(str(p_action_ID)).execute()
 
-
 func get_current_day_period() -> DayPeriod:
 	return self._period_cnt % DayPeriod.size() as DayPeriod
 
@@ -100,6 +99,7 @@ func _advance_day_period(description : String) -> void:
 	#Actually advance the time
 	self._period_cnt += 1
 	
+	## NOTICE: see callback: It opens SummaryEndOfDay and Backpack
 	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
 	_update_HUD()
 	
@@ -140,7 +140,7 @@ func _check_and_display_game_over() -> bool:
 	_avatar.get_health_status() <= 0 :
 		avatar_life_status = false
 	
-	if get_current_day() >= _crisis_mngr.get_max_day() || !avatar_life_status:
+	if get_current_day() >= OverworldStatesMngr.get_crisis_length() || !avatar_life_status:
 		_gui_mngr.queue_gui("EndGameGUI", [_history, avatar_life_status, _avatar])
 		return true
 	return false

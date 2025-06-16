@@ -1,6 +1,8 @@
 class_name EMC_Dialogue
 extends EMC_GUI
 
+@export var stage_mngr : EMC_StageMngr
+
 @onready var portraits : HBoxContainer = $Portraits
 @onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
 @onready var talk_sound : AudioStreamPlayer = $TalkSound
@@ -11,7 +13,6 @@ extends EMC_GUI
 
 #var _dialogue : Dictionary = {}
 var _dialogue_mngr : EMC_DialogueMngr
-var _stage_mngr : EMC_StageMngr
 var regex := RegEx.new()
 
 const _icon_list : Dictionary = {
@@ -24,9 +25,8 @@ const _icon_list : Dictionary = {
 func _init() -> void:
 	regex.compile("\\[.*?\\]")
 
-func setup(p_dialogue_mngr : EMC_DialogueMngr, p_stage_mngr : EMC_StageMngr) -> void:
+func setup(p_dialogue_mngr : EMC_DialogueMngr) -> void:
 	_dialogue_mngr = p_dialogue_mngr
-	_stage_mngr = p_stage_mngr
 
 func open(dialogue : Dictionary) -> void:
 	if dialogue.has("stage_name"):
@@ -108,7 +108,7 @@ func start(dialogue : Dictionary) -> void:
 		if pair[0].get_basename() == "avatar" or pair[0] == "Erzähler":
 			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
 		else:
-			var npc: EMC_NPC = _stage_mngr.get_NPC(pair[0].get_basename())
+			var npc: EMC_NPC = stage_mngr.get_NPC(pair[0].get_basename())
 			var pitch: float = npc.get_comp(EMC_NPC_Conversation).get_pitch()
 			dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : pitch})
 		dialogue_box.append_text(pair[1])
@@ -183,7 +183,7 @@ func _load_actors_display(actors : Array[String]) -> void:
 				continue
 			else:
 				var portrait : Texture2D = \
-					_stage_mngr.get_NPC(actors[i].get_basename()).get_comp(EMC_NPC_Descr).get_portrait()
+					stage_mngr.get_NPC(actors[i].get_basename()).get_comp(EMC_NPC_Descr).get_portrait()
 				port.set_texture(portrait)
 			port.set_name(actors[i].get_basename())
 			port.set_flip_h(actors[i].get_extension() == "r")

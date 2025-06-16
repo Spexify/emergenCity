@@ -57,10 +57,12 @@ func goto_scene(path: String) -> void:
 	
 	call_deferred("_deferred_goto_scene", path)
 
+func start_run() -> void:
+	_in_crisis_phase = true
+	call_deferred("_deferred_goto_scene", CONTINUE_SCENE)
 
 func is_in_crisis_phase() -> bool:
 	return _in_crisis_phase
-
 
 func _deferred_goto_scene(path: String) -> void:
 	get_tree().root.remove_child(_current_scene)
@@ -336,6 +338,10 @@ func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
 func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
 	return _upgrade_ids_unlocked
 
+func get_upgarde_id_equipped() -> Array[int]:
+	var result: Array[int]
+	result.assign(get_equipped_upgrades().map(func(upgrade: EMC_Upgrade) -> int: return upgrade.get_id()))
+	return result
 
 func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
 	_upgrade_ids_unlocked.append(upgrade_id)

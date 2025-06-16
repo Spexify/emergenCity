@@ -38,12 +38,12 @@ signal npc_act
 
 ### Stages
 
-var _avatar: EMC_Avatar
-var _day_mngr: EMC_DayMngr
+@export var _avatar: EMC_Avatar
+@export var _day_mngr: EMC_DayMngr
+@export var _gui_mngr : EMC_GUIMngr
+
 var _last_click_position: Vector2 = Vector2.INF
 var _last_clicked_NPC: EMC_NPC = null
-
-var _gui_mngr : EMC_GUIMngr
 
 var _initial_stage_name : String = "home"
 var _initial_npc : Dictionary = {}
@@ -52,14 +52,9 @@ var _opt_event_mngr: EMC_OptionalEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, \
-p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
-	_avatar = p_avatar
+func setup(p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_avatar.arrived.connect(_on_avatar_arrived)
-	_day_mngr = p_day_mngr
 	_opt_event_mngr = p_opt_event_mngr
-	
-	_gui_mngr = p_gui_mngr
 	
 	_setup_stages()
 

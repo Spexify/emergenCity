@@ -6,81 +6,66 @@ class_name EMC_EndGameGUI
 ## changes for both)
 
 const LOSER_COIN_FACTOR : int = 40
+const WON := "GEWONNEN"
+const LOST := "VERLOREN"
+const ACTION_LOG_UI = preload("res://GUI/action_log_ui.tscn")
 
-@onready var winner_actions := $WinnerScreen/MarginContainer/VBoxContainer/TextBox3/MarginContainer/Scroll/Actions
-@onready var winner_description := $WinnerScreen/MarginContainer/VBoxContainer/TextBox/Description
-@onready var loser_actions := $LoserScreen/MarginContainer/VBoxContainer/TextBox3/Scroll/Actions
-@onready var loser_description := $LoserScreen/MarginContainer/VBoxContainer/TextBox2/Description
+@export var _scoreboard: EMC_Scoreboard
+
+@onready var title: RichTextLabel = $SummaryWindow/MarginContainer/VBC/TitleSpacing/Title
+@onready var logs: VBoxContainer = $SummaryWindow/MarginContainer/VBC/SC/Logs
+@onready var score: RichTextLabel = $SummaryWindow/MarginContainer/VBC/PCScore/Score
+@onready var e_coins: RichTextLabel = $SummaryWindow/MarginContainer/VBC/TextBox/ECoins
+
+@onready var pc_status: PanelContainer = $SummaryWindow/MarginContainer/VBC/PCStatus
+@onready var water: TextureProgressBar = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Water
+@onready var food: TextureProgressBar = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Food
+@onready var heart: TextureProgressBar = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Heart
+@onready var smile: TextureProgressBar = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Smile
 
 func _ready() -> void:
 	hide()
 
 
 ## opens summary end of day GUI/makes visible
-func open(p_history: Array, p_avatar_life_status : bool, _avatar : EMC_Avatar) -> void:
+func open(p_history: Array, p_won : bool, _avatar : EMC_Avatar) -> void:
+	if p_won:
+		title.set_text(WON)
+		
+		#pc_status.hide()
 	
-	var summary_text_winner : String = ""
-	var summary_text_loser : String = ""
-	var all_action_coins : int = 0
-	var actions_summary := {}
+	else:
+		title.set_text(LOST)
+		
+		#pc_status.show()
+		
+		smile.set_value(_avatar.get_happiness_status())
+		water.set_value(_avatar.get_hydration_status())
+		food.set_value(_avatar.get_nutrition_status())
+		heart.set_value(_avatar.get_health_status())
 	
-	#for day: Array[String] in p_history:
-		#actions_summary[day.morning_action._ACTION_NAME] = actions_summary.get(day.morning_action._ACTION_NAME, 0) + 1
-		#actions_summary[day.morning_action._ACTION_NAME + "CoinValue"] = \
-		#actions_summary.get(day.morning_action._ACTION_NAME + "CoinValue", 0) + day.morning_action.get_performance_coin_value()
-		#all_action_coins += day.morning_action.get_performance_coin_value()
-		#
-		#actions_summary[day.noon_action._ACTION_NAME] = actions_summary.get(day.noon_action._ACTION_NAME, 0) + 1
-		#actions_summary[day.noon_action._ACTION_NAME + "CoinValue"] = \
-		#actions_summary.get(day.noon_action._ACTION_NAME + "CoinValue", 0) + day.noon_action.get_performance_coin_value()
-		#all_action_coins += day.noon_action.get_performance_coin_value()
-		#
-		#actions_summary[day.evening_action._ACTION_NAME] = actions_summary.get(day.evening_action._ACTION_NAME, 0) + 1
-		#actions_summary[day.evening_action._ACTION_NAME + "CoinValue"] = \
-		#actions_summary.get(day.evening_action._ACTION_NAME + "CoinValue", 0) + day.evening_action.get_performance_coin_value()
-		#all_action_coins += day.evening_action.get_performance_coin_value()
+	clear()
 	
-	for key : String in actions_summary:
-		if key.contains("CoinValue"):
-			continue
-		summary_text_winner += key + " wurde " + str(actions_summary.get(key)) +\
-					 " Mal ausgeführt: " +\
-					str(actions_summary.get(key+"CoinValue")) + "[img]res://res/sprites/GUI/icons/icon_ecoins.png[/img].\n"
-		summary_text_loser += key + " wurde " + str(actions_summary.get(key)) +\
-					 " Mal ausgeführt .\n"
-						
-	if p_avatar_life_status == false :
-		var losing_reason : String = ""
-		if _avatar.get_nutrition_status() == 0:
-			losing_reason = "Du bist unterernährt und wurdest vom Notfalldienst gerettet. "
-		elif _avatar.get_hydration_status() == 0:
-			losing_reason = "Du bist dehydriert und wurdest vom Notfalldienst gerettet. "
-		elif _avatar.get_health_status() == 0:
-			losing_reason = "Du hast eine Gesundheitskrise und wurdest vom Notfalldienst gerettet. "
-			
-		loser_actions.append_text(summary_text_loser)
-		var end_coins : int = p_history.size()*LOSER_COIN_FACTOR
-		print(p_history.size())
-		loser_description.set_text(losing_reason + "Du hast nur " + str(end_coins) +" ECoins erworben.")
-		$LoserScreen.show()
-		$WinnerScreen.hide()
-		Global.set_e_coins(Global.get_e_coins() + end_coins)
-	else: 
-		summary_text_winner += "BONUS: Glücklichkeitsbalke beträgt " + str(_avatar.get_unit_happiness_status()) + " Prozent."
-		winner_actions.append_text(summary_text_winner)
-
-		all_action_coins += _avatar.get_unit_happiness_status()
-		Global.set_e_coins(Global.get_e_coins() + all_action_coins)
-		winner_description.set_text("Du hast " + str(all_action_coins) + " ECoins erworben!")
-		all_action_coins = 0
-				
-		$LoserScreen.hide()
-		$WinnerScreen.show()
-		$StarExplosionVFX.emitting = true
+	score.set_text("[center]" + str(_scoreboard.get_game_score()))
+	var summary: Dictionary = _scoreboard.get_game_summary()
+	for cat: EMC_Scoreboard.ScoreCat in summary.keys():
+		var new_log_ui: EMC_Action_Log_UI = ACTION_LOG_UI.instantiate()
+		new_log_ui.cat_name = EMC_Scoreboard.score_cat_to_text[cat]
+		new_log_ui.score = summary[cat]
+		new_log_ui.color = EMC_Scoreboard.score_cat_to_color[cat]
+		logs.add_child(new_log_ui)
+		
+	var coins: int = _scoreboard.calculate_e_coins(p_won)
+	e_coins.set_text("Du hast " + str(coins) + " [img]res://assets/GUI/icons/icon_ecoins.png[/img] erhalten")
+	
+	Global.add_e_coins(coins)
 	
 	show()
 	opened.emit()
 
+func clear() -> void:
+	for child: EMC_Action_Log_UI in logs.get_children():
+		child.queue_free()
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:

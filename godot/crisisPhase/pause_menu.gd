@@ -1,18 +1,8 @@
 extends EMC_GUI
 
-@onready var _electricity_state_icon : Sprite2D= $VBC/OverworldStates/VBC/ElectricityState/TextureRect/Sprite2D
-@onready var _electricity_state_value : RichTextLabel = $VBC/OverworldStates/VBC/ElectricityState/Value
-@onready var _water_state_icon : Sprite2D= $VBC/OverworldStates/VBC/WaterState/TextureRect/Sprite2D
-@onready var _water_state_value : RichTextLabel = $VBC/OverworldStates/VBC/WaterState/Value
-@onready var _isolation_state_icon : Sprite2D= $VBC/OverworldStates/VBC/IsolationState/TextureRect/Sprite2D
-@onready var _isolation_state_value : RichTextLabel = $VBC/OverworldStates/VBC/IsolationState/Value
-@onready var _foodcontam_state_icon : Sprite2D= $VBC/OverworldStates/VBC/FoodContamState/TextureRect/Sprite2D
-@onready var _foodcontam_state_value : RichTextLabel = $VBC/OverworldStates/VBC/FoodContamState/Value
-
 
 ########################################## PUBLIC METHODS #########################################
 func open(irrelevant : EMC_GUI = null) -> void:
-	update_overworld_states()
 	show()
 	opened.emit()
 
@@ -20,23 +10,6 @@ func open(irrelevant : EMC_GUI = null) -> void:
 func close() -> void:
 	hide()
 	closed.emit(self)
-
-
-func update_overworld_states() -> void:
-	_electricity_state_icon.frame =  OverworldStatesMngr.get_electricity_state()
-	_electricity_state_value.text = "[color=white]" + OverworldStatesMngr.get_electricity_state_descr() + "[/color]"
-	_water_state_icon.frame =  OverworldStatesMngr.get_water_state()
-	_water_state_value.text = "[color=white]" + OverworldStatesMngr.get_water_state_descr() + "[/color]"
-	_isolation_state_icon.frame =  OverworldStatesMngr.get_isolation_state()
-	_isolation_state_value.text = "[color=white]" + OverworldStatesMngr.get_isolation_state_descr() + "[/color]"
-	
-	#Reduced shelflive of food is a special case:
-	_foodcontam_state_icon.frame =  OverworldStatesMngr.get_food_contamination_state()
-	if _foodcontam_state_icon.frame == OverworldStatesMngr.SemaphoreColors.GREEN && \
-	_electricity_state_icon.frame != OverworldStatesMngr.SemaphoreColors.GREEN:
-		_foodcontam_state_icon.frame = OverworldStatesMngr.SemaphoreColors.YELLOW
-	_foodcontam_state_value.text = "[color=white]" + OverworldStatesMngr.get_food_contamination_state_descr() + "[/color]"
-
 
 ########################################## PRIVATE METHODS #########################################
 # Called when the node enters the scene tree for the first time.
