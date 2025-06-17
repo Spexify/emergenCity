@@ -165,7 +165,7 @@ func _load_optional_event() -> void:
 			var spawn_NPCs_arr := opt_event.spawn_NPCs_arr
 			if spawn_NPCs_arr != null && !spawn_NPCs_arr.is_empty():
 				for spawn_NPCs in spawn_NPCs_arr:
-					var stage_comp :EMC_NPC_Stage = _npcs.get_node(spawn_NPCs.NPC_name).get_comp(EMC_NPC_Stage)
+					var stage_comp: EMC_NPC_Stage = (_npcs.get_node(spawn_NPCs.NPC_name) as EMC_NPC).get_comp(EMC_NPC_Stage)
 					stage_comp.override_spawn(spawn_NPCs.pos)
 					#_spawn_NPC(spawn_NPCs.NPC_name, spawn_NPCs.pos)
 					
@@ -194,7 +194,7 @@ func _deactivate_NPCs() -> void:
 
 func _override_spawn(dict : Dictionary) -> void:
 	for NPC_name: String in dict:
-		_npcs.get_node(NPC_name).get_comp(EMC_NPC_Stage).override_spawn(dict[NPC_name])
+		((_npcs.get_node(NPC_name) as EMC_NPC).get_comp(EMC_NPC_Stage) as EMC_NPC_Stage).override_spawn(dict[NPC_name])
 	
 	##Hide all NPCs first
 	#_deactivate_NPCs()

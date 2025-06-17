@@ -106,7 +106,7 @@ func reset_save() -> void:
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		"inventory_data": _inventory.get_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
 		"vibration" : false,

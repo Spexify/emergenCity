@@ -5,14 +5,15 @@ var _backpack: EMC_Inventory = Global.get_inventory()
 var _upgrades: Array[EMC_Upgrade] = Global.get_equipped_upgrades()
 var _dialogue_manager : EMC_DialogueMngr
 
-@onready var _stage_mngr : EMC_StageMngr = $StageMngr
+#@onready var _stage_mngr : EMC_StageMngr = $StageMngr
 @onready var _avatar : EMC_Avatar = $Avatar
 
 #GUIs Upper Section:
 @onready var _day_mngr : EMC_DayMngr = $GUI/CL/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
-@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
+#@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
 @onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
+@onready var icon_information: EMC_Icon_Information_GUI = $GUI/CL/VBC/MiddleSection/IconInformation
 #GUIs Lower Section:
 # None
 
@@ -74,7 +75,7 @@ func _ready() -> void:
 	
 	#### GUI
 	_gui_mngr.setup(_backpack, _opt_event_mngr, _dialogue_manager)
-	$GUI/CL/VBC/MiddleSection/IconInformation.hide()
+	icon_information.hide()
 	
 	#### Stage
 	stage_mngr.setup(_opt_event_mngr)

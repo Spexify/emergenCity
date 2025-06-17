@@ -39,18 +39,27 @@ const score_cat_to_multiplier: Dictionary = {
 
 const win_lose_multiplier: Dictionary = {
 	true: 1,
-	false: 0.7
+	false: 0.5
+}
+
+const difficulty_multiplier: Dictionary = {
+	EMC_OverworldStatesMngr.Difficulty.TUTORIAL: 1.0,
+	EMC_OverworldStatesMngr.Difficulty.EASY: 1.1,
+	EMC_OverworldStatesMngr.Difficulty.MEDIUM: 1.2,
+	EMC_OverworldStatesMngr.Difficulty.HARD: 1.3
 }
 
 class ActionLog extends Resource:
 	@export var descr: String = "NONAME"
 	@export var rule: Callable = ScoreRule.Default
 	@export var context: Dictionary = {}
+	# Format: {ScoreCat: VALUE, ScoreCat: VALUE, ...}
 	@export var eval: Dictionary = {}
 	
-	func setup(_descr: String, _rule: Callable = ScoreRule.Default) -> ActionLog:
+	func setup(_descr: String = "", _rule: Callable = ScoreRule.Default, _eval: Dictionary = {}) -> ActionLog:
 		self.descr = _descr
 		self.rule = _rule
+		self.eval = _eval
 		return self
 	
 	# Calulates the score and returns duplicate
@@ -68,35 +77,35 @@ static var state: Dictionary = {
 }
 
 class ScoreRule:
-	static var Default: Callable = (func (log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
+	static var Default: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
 	# TODO: Make Score dependent on items used nd produced
-	static var Cook: Callable = (func (log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
-	static var Shower: Callable = (func (log: ActionLog) -> Dictionary: 
+	static var Cook: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
+	static var Shower: Callable = (func (alog: ActionLog) -> Dictionary: 
 		return {
-			ScoreCat.SELF_SUFFICIENCY: 10 + 10 * log.context["water"],
-			ScoreCat.RESOURCE_EFFICIENCY: 10 * log.context["soap"]
+			ScoreCat.SELF_SUFFICIENCY: 10 + 10 * alog.context["water"],
+			ScoreCat.RESOURCE_EFFICIENCY: 10 * alog.context["soap"]
 		})
-	static var BBK: Callable = (func (log: ActionLog) -> Dictionary: 
+	static var BBK: Callable = (func (_log: ActionLog) -> Dictionary: 
 		if not EMC_Scoreboard.state["bbk"]:
 			EMC_Scoreboard.state["bbk"] = true
 			return {ScoreCat.INFOMRATION: 10}
 		return {}
 		)
 	# TODO: radio boolena value
-	static var Radio: Callable = (func (log: ActionLog) -> Dictionary:
+	static var Radio: Callable = (func (alog: ActionLog) -> Dictionary:
 		if not EMC_Scoreboard.state["radio"]:
 			EMC_Scoreboard.state["radio"] = true
 			return {
 				ScoreCat.INFOMRATION: 10,
-				ScoreCat.RESOURCE_EFFICIENCY: 10 * log.context["batteries"]
+				ScoreCat.RESOURCE_EFFICIENCY: 10 * alog.context["batteries"]
 			}
 		return {
-			ScoreCat.INFOMRATION: 10 * log.context["batteries"]
+			ScoreCat.INFOMRATION: 10 * alog.context["batteries"]
 		})
-	static var Reservoir: Callable = (func (log: ActionLog) -> Dictionary: 
+	static var Reservoir: Callable = (func (alog: ActionLog) -> Dictionary: 
 		return {
-			ScoreCat.PREPAREDNESS: 10 * log.context["fill"],
-			ScoreCat.RESOURCE_EFFICIENCY: 10 - 10 * log.context["fill"]
+			ScoreCat.PREPAREDNESS: 10 * alog.context["fill"],
+			ScoreCat.RESOURCE_EFFICIENCY: 10 - 10 * alog.context["fill"]
 		})
 	
 ## WARNING: returns reference to the same object
@@ -152,23 +161,23 @@ func start_run(_inventory: EMC_Inventory, difficulty: EMC_OverworldStatesMngr.Di
 
 func add_score(log_name: String, context: Dictionary = {}) -> void:
 	var day: int = _day_mngr.get_current_day()
-	var log: ActionLog = name_to_log.get(log_name, ActionLog.new())
-	log.context = context
-	log = log.dup_calculate()
+	var alog: ActionLog = name_to_log.get(log_name, ActionLog.new())
+	alog.context = context
+	alog = alog.dup_calculate()
 	if score_log.has(day):
-		score_log[day].append(log)
+		score_log[day].append(alog)
 	else:
-		score_log[day] = [log]
+		score_log[day] = [alog]
 		
-	for cat: ScoreCat in log.eval:
-		if log.eval[cat] > 0:
-			animate_score(log.eval[cat], score_cat_to_color[cat])
+	for cat: ScoreCat in alog.eval:
+		if alog.eval[cat] > 0:
+			animate_score(alog.eval[cat], score_cat_to_color[cat])
 	
 func get_day_score() -> int:
 	var score: int = 0
 	if score_log.has(_day_mngr.get_current_day()-1):
-		for log: ActionLog in score_log[_day_mngr.get_current_day()-1]:
-			score += log.eval.values().reduce(func (acc: int, v: int) -> int: return acc + v)
+		for alog: ActionLog in score_log[_day_mngr.get_current_day()-1]:
+			score += alog.eval.values().reduce(func (acc: int, v: int) -> int: return acc + v)
 			
 		return score
 	return 0
@@ -182,22 +191,23 @@ func get_day_summary() -> Dictionary:
 		ScoreCat.INFOMRATION: 0
 	}
 	if score_log.has(_day_mngr.get_current_day()-1):
-		for log: ActionLog in score_log[_day_mngr.get_current_day()-1]:
-			for cat: ScoreCat in log.eval.keys():
-				result[cat] += log.eval[cat]
+		for alog: ActionLog in score_log[_day_mngr.get_current_day()-1]:
+			for cat: ScoreCat in alog.eval.keys():
+				result[cat] += alog.eval[cat]
 	
 	return result
 
+## TODO: Add infulence of StatusBars and rework Difficulty and stuff...
 func get_game_score() -> int:
-	var total_score: Array
+	var total_score: Array = []
 	for day_score: Array in score_log.values():
 		total_score.append_array(day_score)
 	
 	return total_score.reduce(
-		func (acc: int, v: ActionLog) -> int:
-			return acc + (v.eval.values().reduce(
-				func(acc: int, v: int) -> int: 
-					return acc + v)), 0)
+		func (p_acc: int, p_v: ActionLog) -> int:
+			return p_acc + (p_v.eval.values().reduce(
+				func(c_acc: int, c_v: int) -> int: 
+					return c_acc + c_v)), 0)
 	
 func get_game_summary() -> Dictionary:
 	var result: Dictionary = {
@@ -208,13 +218,13 @@ func get_game_summary() -> Dictionary:
 		ScoreCat.INFOMRATION: 0
 	}
 	
-	var total_score: Array
+	var total_score: Array = []
 	for day_score: Array in score_log.values():
 		total_score.append_array(day_score)
 	
-	for log: ActionLog in total_score:
-		for cat: ScoreCat in log.eval.keys():
-			result[cat] += log.eval[cat]
+	for alog: ActionLog in total_score:
+		for cat: ScoreCat in alog.eval.keys():
+			result[cat] += alog.eval[cat]
 	
 	return result
 	
@@ -224,7 +234,7 @@ func calculate_e_coins(p_won: bool) -> int:
 	for cat: ScoreCat in summary:
 		e_coins += summary[cat] * score_cat_to_multiplier[cat]
 	
-	return int(e_coins * win_lose_multiplier[p_won])
+	return int(e_coins * win_lose_multiplier[p_won] * difficulty_multiplier[current_difficulty])
 
 func animate_score(value: int, color: Color) -> void:
 	var number: Label = Label.new()
@@ -256,3 +266,54 @@ func animate_score(value: int, color: Color) -> void:
 	
 	await tween.finished
 	number.queue_free()
+	
+#var num_run: int = 0
+#var prep_tot_items: Dictionary = {}
+#var tot_difficulty: Dictionary = {
+	#OverworldStatesMngr.Difficulty.TUTORIAL: 0,
+	#OverworldStatesMngr.Difficulty.EASY: 0,
+	#OverworldStatesMngr.Difficulty.MEDIUM: 0,
+	#OverworldStatesMngr.Difficulty.HARD: 0
+#}
+#var tot_upgrades_equipped: Dictionary = {}
+### Prepare Phase Sequence
+##var prep_seq_items: Array[Dictionary] = [{}]
+##var seq_difficulty: Array = []
+##var seq_upgrades_bougth: Dictionary = { 0: [] }
+##var seq_upgrades_equipped: Array = [ [ ] ]
+#
+#var current_difficulty: EMC_OverworldStatesMngr.Difficulty
+## Format: { day: [ACTIONLOG, ACTIONLOG, ACTIONLOG], day: [...], ... }
+#var score_log: Dictionary
+	
+func save() -> Dictionary:
+	#Format: {day: [ ActionLog.eval, ActionLog.eval, ActionLog.eval ], [ {ScoreCat: Value, ...}, ...], ... }
+	var json_log: Dictionary = {}
+	for key: int in score_log:
+		json_log[key] = (score_log[key] as Array).map(func (alog: ActionLog) -> Dictionary: return alog.eval)
+	
+	var data : Dictionary = {
+		"node_path": get_path(),
+		"current_difficulty": current_difficulty,
+		"score_log": json_log
+	}
+	return data
+	
+func load_state(data : Dictionary) -> void:
+	current_difficulty = (data.get("current_difficulty", EMC_OverworldStatesMngr.Difficulty.EASY)
+	 as EMC_OverworldStatesMngr.Difficulty)
+	
+	var raw_log: Dictionary = data.get("score_log", {})
+	score_log = {}
+	for key: String in raw_log:
+		score_log[key.to_int()] = (raw_log[key] as Array).map(
+			func(raw_eval: Dictionary) -> ActionLog:
+				var eval: Dictionary = {}
+				for cat: String in raw_eval:
+					eval[cat.to_int() as ScoreCat] = raw_eval[cat]
+				return ActionLog.new().setup("", ScoreRule.Default, eval)
+		)
+			
+		#score_log[key.to_int()] = raw_log[key].map(
+			#func(eval: Dictionary) -> ActionLog: 
+				#return ActionLog.new().setup("", ScoreRule.Default, eval))

@@ -138,7 +138,7 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 func _cook_recipe() -> void:
 	if (_last_clicked_recipe.needs_water() and OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN
 		and Global.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR)):
-			var  reservoir := Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+			var reservoir: EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 			if reservoir.get_state() > 0:
 				reservoir.set_state(reservoir.get_state() - 25)
 			

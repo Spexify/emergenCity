@@ -16,22 +16,32 @@ const TIPS = [
 
 
 ## opens summary end of day GUI/makes visible
-func open(history: Array[String]) -> void:
+func open() -> void:
 	clear()
 	
-	score.set_text("[center]" + str(_scoreboard.get_day_score()))
+	show()
+	opened.emit()
+	
+	var tween: Tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_method(func (v: int) -> void: score.set_text(str(v)), 0, _scoreboard.get_day_score(), 1.0)
+	#score.set_text("[center]" + str(_scoreboard.get_day_score()))
+	
+	var i: int = 0
 	var summary: Dictionary = _scoreboard.get_day_summary()
 	for cat: EMC_Scoreboard.ScoreCat in summary.keys():
 		var new_log_ui: EMC_Action_Log_UI = ACTION_LOG_UI.instantiate()
 		new_log_ui.cat_name = EMC_Scoreboard.score_cat_to_text[cat]
 		new_log_ui.score = summary[cat]
 		new_log_ui.color = EMC_Scoreboard.score_cat_to_color[cat]
+		new_log_ui.modulate = Color(1, 1, 1, 0)
 		logs.add_child(new_log_ui)
 		
-	tips.set_text(TIPS.pick_random())
+		tween.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(new_log_ui, "modulate", Color(1, 1, 1, 1), 0.2).set_delay(i * 0.2)
+		i += 1
 		
-	show()
-	opened.emit()
+	tips.set_text(TIPS.pick_random())
 
 func clear() -> void:
 	for child: EMC_Action_Log_UI in logs.get_children():

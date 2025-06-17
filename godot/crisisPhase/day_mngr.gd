@@ -17,9 +17,6 @@ enum DayPeriod {
 	EVENING = 2
 }
 
-#var _history : Array[EMC_DayCycle]
-var _day_hist: Array[String]
-var _history: Array
 #MRM: Technically redundant: _current_day_cycle = history[get_current_day()], if array initialized accordingly:
 var _period_cnt : int = 0 #Keeps track of the current period (counted/summed up over all days)
 
@@ -80,19 +77,12 @@ func get_action_consequences() -> EMC_ActionConsequences:
 
 func _callback() -> void:
 	if get_current_day_period() == DayPeriod.MORNING:
-		await _gui_mngr.request_gui("SummaryEndOfDayGUI", [_day_hist])
+		await _gui_mngr.request_gui("SummaryEndOfDayGUI")
 		await _gui_mngr.request_gui("BackpackGUI", [true])
 		_avatar.update_vitals()
-		_day_hist = []
 
 ## !!! Important function !!!
 func _advance_day_period(description : String) -> void:
-	if get_current_day_period() == DayPeriod.EVENING:
-		_day_hist.append(description)
-		_history.append(_day_hist)
-	else:
-		_day_hist.append(description)
-	
 	if _gui_mngr.is_any_gui():
 		await _gui_mngr.all_guis_closed
 	
@@ -141,7 +131,7 @@ func _check_and_display_game_over() -> bool:
 		avatar_life_status = false
 	
 	if get_current_day() >= OverworldStatesMngr.get_crisis_length() || !avatar_life_status:
-		_gui_mngr.queue_gui("EndGameGUI", [_history, avatar_life_status, _avatar])
+		_gui_mngr.queue_gui("EndGameGUI", [avatar_life_status, _avatar])
 		return true
 	return false
 
@@ -156,16 +146,9 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
 		"period_cnt": _period_cnt,
-		"_current_day_cycle": _day_hist,
-		"history" : _history,
 	}
 	return data
 
-
 func load_state(data : Dictionary) -> void:
 	_period_cnt = data.get("period_cnt", 0)
-	_day_hist = data.get("_current_day_cycle")
-	_history.assign(data.get("history"))
 	_update_HUD()
-	if _day_hist.size() < 3:
-		print("Ha du versuchst zu cheaten")

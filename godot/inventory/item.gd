@@ -203,6 +203,7 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	var default_info : Dictionary = JsonMngr.get_item_vars_from_id(item.id)
 	
 	item.name = default_info.get("name", "Dummy")
+	item.set_name(item.name)
 	item.descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
 	item.sound_effect = default_info.get("sound", item.sound_effect)
 	var tmp_comps : Array = data.get("comps", default_info.get("comps", []))

@@ -1,17 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://bnmcmtfl1jq8q"]
+[gd_scene load_steps=20 format=3 uid="uid://bnmcmtfl1jq8q"]
 
 [ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="2_c2i0o"]
-[ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://assets/GUI/icons/icon_statusbar_health.png" id="2_sndn4"]
 [ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://assets/particles/particle_star.png" id="2_wm8fx"]
-[ext_resource type="Texture2D" uid="uid://gcdjdctkg3xv" path="res://assets/GUI/icons/icon_statusbar_happiness.png" id="3_i58fv"]
+[ext_resource type="Texture2D" uid="uid://biq6rkvttsy7w" path="res://assets/GUI/icons/empyt_big_water_icon.png" id="3_cm15d"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_jq4mf"]
-[ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://assets/GUI/icons/icon_statusbar_hydration.png" id="4_iwow7"]
-[ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://assets/GUI/icons/icon_statusbar_nutrition.png" id="5_3p8fh"]
-[ext_resource type="Texture2D" uid="uid://ixkeid2a18ox" path="res://assets/GUI/icons/empty_food_icon.png" id="5_dgcjw"]
-[ext_resource type="Texture2D" uid="uid://difmqj35bhoor" path="res://assets/GUI/icons/empty_heart_icon.png" id="7_c6lke"]
-[ext_resource type="Texture2D" uid="uid://cd2nt254qkmm1" path="res://assets/GUI/icons/empty_water_icon.png" id="7_qsvo0"]
-[ext_resource type="Texture2D" uid="uid://d22b4770wcsov" path="res://assets/GUI/icons/empty_smile_icon.png" id="9_gvbvr"]
+[ext_resource type="Texture2D" uid="uid://5vkk1hy7to2c" path="res://assets/GUI/icons/big_water_icon.png" id="4_ji60q"]
+[ext_resource type="Texture2D" uid="uid://beasjnrq61yqq" path="res://assets/GUI/icons/empyt_big_food_icon.png" id="5_0o3ah"]
+[ext_resource type="Texture2D" uid="uid://b8mtd6d75g4xc" path="res://assets/GUI/icons/cross_icon.png" id="5_4gypq"]
+[ext_resource type="Texture2D" uid="uid://bmim23ipkim6l" path="res://assets/GUI/icons/big_food_icon.png" id="6_1hsn2"]
+[ext_resource type="Texture2D" uid="uid://sb7e0xow2nrn" path="res://assets/GUI/icons/empyt_big_heart_icon.png" id="7_ykpya"]
+[ext_resource type="Texture2D" uid="uid://bmaimpm6yaeu3" path="res://assets/GUI/icons/big_heart_icon.png" id="8_k3pof"]
+[ext_resource type="Texture2D" uid="uid://bn44e46c4gwnt" path="res://assets/GUI/icons/empyt_big_smile_icon.png" id="9_es11y"]
+[ext_resource type="Texture2D" uid="uid://bsu6de4kj4y2v" path="res://assets/GUI/icons/big_smile_icon.png" id="10_7x6eh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_edsbq"]
 
@@ -103,7 +104,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "1"
+text = "0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -119,35 +120,63 @@ layout_mode = 2
 
 [node name="Water" type="TextureProgressBar" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC"]
 layout_mode = 2
-max_value = 10.0
-value = 10.0
 fill_mode = 3
-texture_under = ExtResource("7_qsvo0")
-texture_progress = ExtResource("4_iwow7")
+texture_under = ExtResource("3_cm15d")
+texture_progress = ExtResource("4_ji60q")
+
+[node name="Cross" type="TextureRect" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Water"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 52.0
+offset_bottom = 54.0
+texture = ExtResource("5_4gypq")
 
 [node name="Food" type="TextureProgressBar" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC"]
 layout_mode = 2
-max_value = 10.0
-value = 10.0
 fill_mode = 3
-texture_under = ExtResource("5_dgcjw")
-texture_progress = ExtResource("5_3p8fh")
+texture_under = ExtResource("5_0o3ah")
+texture_progress = ExtResource("6_1hsn2")
+
+[node name="Cross" type="TextureRect" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Food"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 52.0
+offset_bottom = 54.0
+texture = ExtResource("5_4gypq")
 
 [node name="Heart" type="TextureProgressBar" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC"]
 layout_mode = 2
-max_value = 10.0
-value = 10.0
 fill_mode = 3
-texture_under = ExtResource("7_c6lke")
-texture_progress = ExtResource("2_sndn4")
+texture_under = ExtResource("7_ykpya")
+texture_progress = ExtResource("8_k3pof")
+
+[node name="Cross" type="TextureRect" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Heart"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 52.0
+offset_bottom = 54.0
+texture = ExtResource("5_4gypq")
 
 [node name="Smile" type="TextureProgressBar" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC"]
 layout_mode = 2
-max_value = 10.0
-value = 10.0
 fill_mode = 3
-texture_under = ExtResource("9_gvbvr")
-texture_progress = ExtResource("3_i58fv")
+texture_under = ExtResource("9_es11y")
+texture_progress = ExtResource("10_7x6eh")
+
+[node name="Cross" type="TextureRect" parent="SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Smile"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 52.0
+offset_bottom = 54.0
+texture = ExtResource("5_4gypq")
 
 [node name="SC" type="ScrollContainer" parent="SummaryWindow/MarginContainer/VBC"]
 custom_minimum_size = Vector2(0, 218)
@@ -165,7 +194,7 @@ theme_type_variation = &"WhitePanelContainer"
 custom_minimum_size = Vector2(24, 55)
 layout_mode = 2
 bbcode_enabled = true
-text = "Du hast 10 [img]res://assets/GUI/icons/icon_ecoins.png[/img] erhalten"
+text = "Du erhältst 0 [img]res://assets/GUI/icons/icon_ecoins.png[/img]."
 fit_content = true
 autowrap_mode = 2
 

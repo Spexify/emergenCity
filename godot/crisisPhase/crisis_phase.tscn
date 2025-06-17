@@ -77,13 +77,15 @@ shape = SubResource("RectangleShape2D_yx03m")
 position = Vector2(587, 511)
 shape = SubResource("RectangleShape2D_yx03m")
 
-[node name="GUI" type="Control" parent="."]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("_stage_mngr", "_avatar")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 576.0
 offset_bottom = 1024.0
 mouse_filter = 2
 script = ExtResource("7_lyrib")
+_stage_mngr = NodePath("../StageMngr")
+_avatar = NodePath("../Avatar")
 
 [node name="ButtonList" type="Control" parent="GUI"]
 process_mode = 1
@@ -305,7 +307,7 @@ script = ExtResource("35_kkbik")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _stage_mngr = NodePath("../StageMngr")
 
-[node name="EMC_Scoreboard" parent="." node_paths=PackedStringArray("_day_mngr") instance=ExtResource("34_0pmq5")]
+[node name="EMC_Scoreboard" parent="." node_paths=PackedStringArray("_day_mngr") groups=["Save"] instance=ExtResource("34_0pmq5")]
 spawn_rect = Rect2i(90, 200, 332, 160)
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 

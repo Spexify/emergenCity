@@ -37,3 +37,16 @@ func _ready() -> void:
 	score_cat.set_text(cat_name)
 	score_text.set_text("[right]" + str(score))
 	color_rect.set_color(color)
+	
+func set_score_text(p_score: int) -> void:
+	score_text.set_text("[right]" + str(p_score))
+	
+func animate(p_tween: Tween = null, duration: float = 0.2, delay: float = 0.0) -> void:
+	var tween: Tween
+	if p_tween != null:
+		tween = p_tween
+	else:
+		tween = get_tree().create_tween()
+	
+	tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_method(func (v: int) -> void: score_text.set_text("[right]" + str(v)), 0, score, duration).set_delay(delay)
