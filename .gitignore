@@ -22,4 +22,7 @@ mono_crash.*.json
 # VsCode
 .vscode/
 
+# IntelliJ
+.idea/
+
 bin/

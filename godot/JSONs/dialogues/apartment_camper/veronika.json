@@ -12,7 +12,7 @@
           "prompt": "Wie läuft's?",
           "options": { "#reden1": ""}
         },
-        "#handeln": "tatsächlich überhaupt nicht relevant was hier steht",
+        "#handeln": "Tatsächlich überhaupt nicht relevant was hier steht",
         "#nichts": {
             "prompt": "Tschüss!",
             "actors": ["avatar", "veronika.r"],

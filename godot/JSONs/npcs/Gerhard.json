@@ -31,10 +31,10 @@
 				"high": 0.3,
 				"top": 0.6,
 				"response": {
-					"BASE": ["Ich mag alles das mir im Garten hilft", "Mmh mal schaun.", "MMh oh ja."],
-					"WATER_DIRTY" : ["Oh das kann ich gut gebrauchen", "Ich benutze dreckiges Wasser immer um meine Pflanzen zu gießen!"],
-					"WATER": ["Oh Wasser ist gut.", "Ich könnte dreckiges Wasser auch gut gebrauchen."],
-					"UNPALATABLE": ["Mmh das ist doch verschimmelt!"],
+					"BASE": ["Ich mag alles, was mir im Garten hilft", "Mmh mal schaun.", "MMh, oh ja."],
+					"WATER_DIRTY" : ["Oh, das kann ich gut gebrauchen", "Ich benutze dreckiges Wasser immer, um meine Pflanzen zu gießen!"],
+					"WATER": ["Oh, Wasser ist gut.", "Ich könnte dreckiges Wasser auch gut gebrauchen."],
+					"UNPALATABLE": ["Mmh, das ist doch verschimmelt!"],
 					"FOOD": ["Essen kann man immer gebrauchen."]
 				}
 			}

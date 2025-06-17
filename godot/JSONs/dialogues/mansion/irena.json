@@ -9,12 +9,12 @@
         ],
         "options": {
             "fragen": {
-                "prompt": "Nach Ireans Spielzeug fragen",
+                "prompt": "Nach Irenas Spielzeug fragen",
                 "actors": ["avatar", "irena.r"],
                 "text": [
                     "avatar#Mit was spielst du da?",
                     "irena.r#Mit einer Rakete! Wuuuuschhhh!!",
-                    "irena.r#Ist aber meine,\nÄäätschi bätsch!"
+                    "irena.r#Ist aber meine!\nÄäätschi bätsch!"
                 ]
             },
             "back": {

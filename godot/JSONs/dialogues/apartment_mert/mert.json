@@ -25,13 +25,13 @@
         "actors": ["avatar", "mert.r"],
         "text": [
             "mert.r#Bin ein bisschen gestresst. In solchen Zeiten hat das THW, also das Technische Hilfswerk, mehr zu tun als sonst.",
-            "mert.r#Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - Das ist das Größte."
+            "mert.r#Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - das ist das Größte."
         ]
     },
     "#option2": {
         "actors": ["avatar", "mert.r"],
         "text": [
-            "mert.r#Mir gehts super! Kommst du gut durch die Krise?"
+            "mert.r#Mir geht es super! Kommst du gut durch die Krise?"
         ],
         "options": {
             "ja": {
@@ -39,7 +39,7 @@
                 "actors": ["avatar", "mert.r"],
                 "text": [
                     "avatar#Ich komme klar.",
-	                "mert.r#Schön zu hören! Aber pass' trotzdem auf dich auf, ja? So eine Krise ist nicht ohne."
+	                "mert.r#Schön zu hören! Aber pass trotzdem auf dich auf, ja? So eine Krise ist nicht ohne."
                 ]
             },
             "nein": {

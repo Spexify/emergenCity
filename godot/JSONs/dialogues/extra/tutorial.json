@@ -32,7 +32,7 @@
 		"actors": ["avatar", "julia.r"],
 		"text": [
 			"avatar#Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungsbuch im Regal.",
-			"julia.r#Wenn du Hilfe brauchst komm einfach bei mir vorbei."
+			"julia.r#Wenn du Hilfe brauchst, komm einfach bei mir vorbei."
 		],
 		"options": { "#end": "" }
 	},
