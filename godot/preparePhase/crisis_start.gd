@@ -2,7 +2,7 @@ extends Control
 class_name EMC_CrisisStart
 
 var _crisis_length : int
-var _difficulty : OverworldStatesMngr.Difficulty
+var _difficulty : EMC_OverworldStatesMngr.Difficulty
 #Until beginning of length-day (so minus 1 quasi)
 const LENGTH_LOWER_BOUND_EASY : int = 4
 const LENGTH_UPPER_BOUND_EASY : int = 6

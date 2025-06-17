@@ -38,12 +38,12 @@ signal npc_act
 
 ### Stages
 
-var _avatar: EMC_Avatar
-var _day_mngr: EMC_DayMngr
+@export var _avatar: EMC_Avatar
+@export var _day_mngr: EMC_DayMngr
+@export var _gui_mngr : EMC_GUIMngr
+
 var _last_click_position: Vector2 = Vector2.INF
 var _last_clicked_NPC: EMC_NPC = null
-
-var _gui_mngr : EMC_GUIMngr
 
 var _initial_stage_name : String = "home"
 var _initial_npc : Dictionary = {}
@@ -52,14 +52,9 @@ var _opt_event_mngr: EMC_OptionalEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktor: Interne Avatar-Referenz setzen
-func setup(p_avatar: EMC_Avatar, p_day_mngr: EMC_DayMngr, \
-p_gui_mngr : EMC_GUIMngr, p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
-	_avatar = p_avatar
+func setup(p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_avatar.arrived.connect(_on_avatar_arrived)
-	_day_mngr = p_day_mngr
 	_opt_event_mngr = p_opt_event_mngr
-	
-	_gui_mngr = p_gui_mngr
 	
 	_setup_stages()
 
@@ -157,7 +152,7 @@ func _setup_stages() -> void:
 	$StageOffset.get_children()[0].setup("home", NPCs, _opt_event_mngr)
 	
 	for stage_name : String in stage_names:
-		var stage := _STAGE_SCN.instantiate()
+		var stage: EMC_Stage = _STAGE_SCN.instantiate()
 		$StageOffset.add_child(stage)
 		stage.setup(stage_name, NPCs, _opt_event_mngr)
 	
@@ -168,7 +163,7 @@ func _setup_NPCs() -> void:
 		npc.setup(_gui_mngr, self, _day_mngr)
 		NPCs.add_child(npc)
 		
-		for comp: Variant in dict[npc]:
+		for comp: Node in dict[npc]:
 			npc.add_child(comp)
 		
 		npc.hide()
@@ -178,7 +173,7 @@ func _setup_NPCs() -> void:
 ## If necessary, set the [EMC_Avatar]s navigation target
 ## To see the consequences, once arrived, see func _on_avatar_arrived
 func _unhandled_input(p_event: InputEvent) -> void:
-	if ((p_event is InputEventMouseButton && p_event.pressed == true)
+	if ((p_event is InputEventMouseButton && (p_event as InputEventMouseButton).pressed == true)
 	or (p_event is InputEventScreenTouch)):
 		_last_clicked_NPC = null
 		var click_position: Vector2 = p_event.position

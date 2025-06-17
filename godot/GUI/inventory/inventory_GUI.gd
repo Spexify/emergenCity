@@ -19,21 +19,21 @@ class_name EMC_InventoryGUI
 @onready var _back_btn : TextureButton = $Inventory/VBC/MG/HSC/HBC/Back
 @onready var _inventory_ui : EMC_Inventory_UI = $Inventory/VBC/InventoryUI
 
+@export var _avatar : EMC_Avatar
+@export var _gui_mngr : EMC_GUIMngr
+
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
-var _avatar : EMC_Avatar
 var _is_continue : bool #Distinguish between the modes of the normal inventory and the SEOD-version
-var _gui_mngr : EMC_GUIMngr
+
 
 ########################################## PUBLIC METHODS ##########################################
 ## Konstruktror des Inventars
 ## Es können die Anzahl der Slots ([param p_slot_cnt]) sowie der initiale Titel
 ## ([param p_title]) gesetzt werden
 
-func setup(p_inventory: EMC_Inventory, _p_avatar : EMC_Avatar, p_gui_mngr : EMC_GUIMngr, p_title: String = "Inventar") -> void:
+func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
 	_inventory = p_inventory
-	_avatar = _p_avatar
-	_gui_mngr = p_gui_mngr
 	set_title(p_title)
 	
 	_inventory_ui.set_inventory(_inventory)

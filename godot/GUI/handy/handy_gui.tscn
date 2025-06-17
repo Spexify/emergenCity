@@ -179,6 +179,10 @@ app = "Warn"
 icon = ExtResource("3_fdip5")
 title = "[center]Warn-App"
 
+[node name="Check" parent="VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+layout_mode = 2
+app = "Check"
+
 [node name="Info" type="PanelContainer" parent="VBC"]
 visible = false
 custom_minimum_size = Vector2(0, 940)
@@ -268,7 +272,6 @@ theme_type_variation = &"WarnItemList"
 LIST_ITEM_SCN = ExtResource("14_iodyr")
 
 [node name="Description" type="Control" parent="VBC/Warn"]
-visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Description"]

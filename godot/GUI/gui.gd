@@ -9,4 +9,9 @@ signal closed(gui : EMC_GUI)
 		#get_viewport().set_input_as_handled()
 
 #func open() -> void:
+	#pass
 	#opened.emit()
+
+func close() -> void:
+	pass
+	#closed.emit()

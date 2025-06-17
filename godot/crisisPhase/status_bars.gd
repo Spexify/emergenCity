@@ -21,16 +21,13 @@ extends Control
 @onready var happiness_icon : Sprite2D = $HBC/VBoxContainer2/HappinessCont/ContainerHappiness/HappinessIcon
 @onready var happiness_quad : MeshInstance2D = $HBC/VBoxContainer2/HappinessCont/HappinessQuad
 
-var _gui_mngr : EMC_GUIMngr
+@export var _gui_mngr : EMC_GUIMngr
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var sb := StyleBoxFlat.new()
 	add_theme_stylebox_override("fill", sb)
 	sb.bg_color = Color("ff0000")
-
-func setup(p_gui_mngr : EMC_GUIMngr) -> void:
-	_gui_mngr = p_gui_mngr
 
 var _percentage_nutrition : float = 0.0
 func _on_avatar_nutrition_updated(p_new_value: int) -> void:

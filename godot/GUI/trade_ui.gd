@@ -2,6 +2,7 @@ class_name EMC_TradeUI
 extends EMC_GUI
 
 @export var mood_texture : AtlasTexture
+@export var gui_mngr : EMC_GUIMngr
 
 @onready var portrait : TextureRect = $VBC/Header/HBC/VBC/Portrait
 @onready var monologe : RichTextLabel = $VBC/Header/HBC/Baloon/Text
@@ -21,7 +22,6 @@ extends EMC_GUI
 var _ITEM_PANEL_SCN := preload("res://inventory/item_panel.tscn")
 
 var _inventory : EMC_Inventory
-var _gui_mngr : EMC_GUIMngr
 
 var _npc_trade: EMC_NPC_Trading
 var _npc_descr: EMC_NPC_Descr
@@ -32,9 +32,8 @@ var _buy_items : Array[EMC_Item]
 
 var trade_score : float = -1.0
 
-func setup(p_inventory : EMC_Inventory, p_gui_mngr : EMC_GUIMngr) -> void:
+func setup(p_inventory : EMC_Inventory) -> void:
 	_inventory = p_inventory
-	_gui_mngr = p_gui_mngr
 	
 	inventory_grid.set_inventory(_inventory)
 	
@@ -178,7 +177,7 @@ func _on_cancel_pressed() -> void:
 
 func _on_deal_pressed() -> void:
 	if trade_score <= 0.0:
-		var answer : bool = await _gui_mngr.request_gui("ConfirmationGUI", [_npc_descr.get_npc_name() + " ist nicht sehr zufrieden mit dem Handel
+		var answer : bool = await gui_mngr.request_gui("ConfirmationGUI", [_npc_descr.get_npc_name() + " ist nicht sehr zufrieden mit dem Handel
 		\n Sicher das du ihn trotzdem eingehen willst.
 		\nEs könnte negative Einflüsse auf eure Beziehung haben."])
 		

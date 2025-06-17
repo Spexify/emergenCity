@@ -1,10 +1,10 @@
 extends EMC_ItemComponent
 class_name EMC_IC_Value
 
-var _value : int = 0
+@export var _value : int = 0
 
 #------------------------------------------ PUBLIC METHODS -----------------------------------------
-func _init(value : int) -> void:
+func _init(value : int = 5) -> void:
 	super("Value", Color.GOLDENROD)
 	_value = value
 

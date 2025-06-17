@@ -30,6 +30,21 @@ var CRISIS : Array[Dictionary] = [
 			"decay" : [4, 6],
 		}]
 	},
+	{
+		"name": "0.Dürre.0",
+		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
+		"weight": 100,
+		"notification": "Krisopolis ist von einer Hitzewelle befallen.",
+		"fcount" : [1, 1],
+		"following": [{
+			"name": "0.Dürre.1",
+			"weight": 1,
+			"delay": [0, 0],
+			"states": ["ElectricityState.NONE"],
+			"desc" : "Dürre ist da!!!",
+			"decay" : [4, 6]
+		}]
+	},
 	#{
 		#"name" : "0.Flut.0",
 		#"difficulty" : OverworldStatesMngr.Difficulty.EASY,
@@ -56,7 +71,7 @@ var CRISIS : Array[Dictionary] = [
 			"weight" : 1,
 			"delay" : [2, 3],
 			"states" : ["WaterState.DIRTY"],
-			"desc" : "Aufgrund des Hochwassers its das Wasser verschmutzt.",
+			"desc" : "Aufgrund des Hochwassers ist das Wasser verschmutzt.",
 			"decay" : [3, 6],
 			"fcount" : [0, 1],
 			"following": [{

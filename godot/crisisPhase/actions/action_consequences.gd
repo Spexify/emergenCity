@@ -219,6 +219,17 @@ func remove_quest(args: Dictionary) -> void:
 	else:
 		printerr("Action-Consequence: wrong or missing Argumrnts for 'remove_quest'")
 
+func npc_change_stage(args: Dictionary) -> void:
+	if args.has_all(["npc", "stage"]):
+		var stage: EMC_NPC_Stage = _stage_mngr.get_NPC(args["npc"]).get_comp(EMC_NPC_Stage)
+		if stage != null:
+			if args.has("pos"):
+				stage.change_stage_pos(args["stage"], args["pos"], args.get("wait", true))
+			else:
+				stage.change_stage(args["stage"], args.get("wait", true))
+	else:
+		printerr("Action-Consequence: wrong or missing Arguments for 'npc_change_stage'")
+
 ############################################ Stage #################################################
 
 func change_stage(p_data : Dictionary) -> void:

@@ -25,6 +25,6 @@ func save() -> void:
 func load_res() -> void:
 	var npc_name: String = npc.get_comp(EMC_NPC_Descr).get_npc_name()
 	if ResourceLoader.exists("user://" + npc_name + ".tres"):
-		res = ResourceLoader.load("user://" + npc_name + ".tres", "EMC_AllRes")
+		res = ResourceLoader.load("user://" + npc_name + ".tres")
 	else:
 		res = EMC_AllRes.new()

@@ -90,10 +90,27 @@
 		]
 	},
 	"Fill_Reservoir": {
-		"type": "single",
-		"comp": "ActCons",
-		"method": "fill_reservoir",
-		"params": []
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "fill_reservoir",
+				"params": []
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"reservoir",
+					{
+						"fill": 1
+					}
+				]
+			}
+		]
 	},
 	"3": {
 		"type": "condition",
@@ -211,12 +228,26 @@
 			"PillowRuffle"
 		]
 	},
-	"Add_Health": {
-		"type": "single",
-		"comp": "ActCons",
-		"method": "add_health",
-		"params": [
-			1
+	"Sleep": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "add_health",
+				"params": [
+					1
+				]
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"sleep"
+				]
+			}
 		]
 	},
 	"4": {
@@ -227,8 +258,8 @@
 			"DefaultActionGUI",
 			[
 				"Willst du dich ausruhen?",
+				"Sleep",
 				"SFX_PillowRuffle",
-				"Add_Health",
 				true,
 				"Hat sich ausgeruht"
 			]
@@ -240,7 +271,10 @@
 			"type": "single",
 			"comp": "ActCond",
 			"method": "upgrade_state_greater",
-			"params": [1, 1]
+			"params": [
+				1,
+				1
+			]
 		},
 		"if": {
 			"type": "single",
@@ -281,19 +315,55 @@
 			]
 		},
 		"if": {
-			"type": "single",
-			"comp": "ActCons",
-			"method": "add_health",
-			"params": [
-				2
+			"type": "multi",
+			"acc": "array",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "ActCons",
+					"method": "add_health",
+					"params": [
+						2
+					]
+				},
+				{
+					"type": "single",
+					"comp": "Score",
+					"method": "add_score",
+					"params": [
+						"shower",
+						{
+							"water": 1,
+							"soap": 0
+						}
+					]
+				}
 			]
 		},
 		"else": {
-			"type": "single",
-			"comp": "ActCons",
-			"method": "add_health",
-			"params": [
-				1
+			"type": "multi",
+			"acc": "array",
+			"actions": [
+				{
+					"type": "single",
+					"comp": "ActCons",
+					"method": "add_health",
+					"params": [
+						1
+					]
+				},
+				{
+					"type": "single",
+					"comp": "Score",
+					"method": "add_score",
+					"params": [
+						"shower",
+						{
+							"water": 0,
+							"soap": 0
+						}
+					]
+				}
 			]
 		}
 	},
@@ -320,19 +390,55 @@
 					]
 				},
 				"if": {
-					"type": "single",
-					"comp": "ActCons",
-					"method": "add_health",
-					"params": [
-						3
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"comp": "ActCons",
+							"method": "add_health",
+							"params": [
+								3
+							]
+						},
+						{
+							"type": "single",
+							"comp": "Score",
+							"method": "add_score",
+							"params": [
+								"shower",
+								{
+									"water": 1,
+									"soap": 1
+								}
+							]
+						}
 					]
 				},
 				"else": {
-					"type": "single",
-					"comp": "ActCons",
-					"method": "add_health",
-					"params": [
-						2
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"comp": "ActCons",
+							"method": "add_health",
+							"params": [
+								2
+							]
+						},
+						{
+							"type": "single",
+							"comp": "Score",
+							"method": "add_score",
+							"params": [
+								"shower",
+								{
+									"water": 0,
+									"soap": 1
+								}
+							]
+						}
 					]
 				}
 			}
@@ -426,10 +532,24 @@
 		}
 	},
 	"bbk": {
-		"type": "single",
-		"comp": "ActCons",
-		"method": "open_bbk_brochure",
-		"params": []
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "open_bbk_brochure",
+				"params": []
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"bbk"
+				]
+			}
+		]
 	},
 	"7": {
 		"type": "single",
@@ -469,6 +589,17 @@
 				"comp": "ActCons",
 				"method": "use_radio",
 				"params": []
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"radio",
+					{
+						"batteries": 1
+					}
+				]
 			}
 		]
 	},
@@ -508,10 +639,27 @@
 		}
 	},
 	"Radio": {
-		"type": "single",
-		"comp": "ActCons",
-		"method": "use_radio",
-		"params": []
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"comp": "ActCons",
+				"method": "use_radio",
+				"params": []
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"radio",
+					{
+						"batteries": 0
+					}
+				]
+			}
+		]
 	},
 	"9": {
 		"type": "single",
@@ -550,6 +698,17 @@
 							"answere": "Trinken"
 						}
 					]
+				]
+			},
+			{
+				"type": "single",
+				"comp": "Score",
+				"method": "add_score",
+				"params": [
+					"reservoir",
+					{
+						"fill": 0
+					}
 				]
 			}
 		]

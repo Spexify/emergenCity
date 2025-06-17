@@ -5,7 +5,7 @@
 	},
 	"Dürre": {
 		"icon_id": 0,
-		"description": ""
+		"description": "[img]res://assets/GUI/icons/heat_icon.png[/img][font_size=30][b]Dürre[/b][/font_size]\n\nWarnung vor anhaltender extremer Trockenheit. In der Folge kann es zu Störungen in der [b]Trinkwasserversorgung[/b] und zu [b]gesundheitlichen Beeinträchtigungen [/b] kommen.\n\n[img]res://assets/GUI/icons/icon_pin_info.png[/img][b]Handlungsempfehlung:[/b]\nVermeiden Sie körperliche Anstrengungen bei hohen Temperaturen und achten Sie auf eine ausreichende Hydration! \nGehen Sie sparsam mit Trinkwasser um. Nutzen Sie dieses nur für den unbedingt notwendigen Gebrauch. \nVerzichten Sie auf das Bewässern von Gärten, Autowaschen und Poolbefüllungen. \nInformieren Sie sich über mögliche weitere Einschränkungen der Wasserversorgung via Warn-App und Radio. \nWeitere Informationen zum Verhalten bei [b]Hitze und Dürre[/b] erhalten Sie beim Bundesamt für Bevölkerungsschutz und Katastrophenvorsorge: [url=https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Weitere-Gefahrensituationen/Extremwetter/Hitze-Duerre/hitze-duerre_node.html]Hitze und Dürre[/url]"
 	},
 	"Erdbeben": {
 		"icon_id": 0,

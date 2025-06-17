@@ -2,6 +2,7 @@ extends EMC_GUI
 class_name EMC_DefaultActionGUI
 
 @export var icon: Texture2D
+@export var _day_mngr: EMC_DayMngr
 
 @onready var confirm_btn : Button = $VBoxContainer/HBoxContainer/ConfirmBtn
 @onready var back_btn : Button = $VBoxContainer/HBoxContainer/BackBtn
@@ -12,12 +13,8 @@ var sound: EMC_Action
 var time: bool = false
 var descr: String = ""
 
-var _day_mngr: EMC_DayMngr
 
 ########################################## PUBLIC METHODS ##########################################
-
-func setup(p_day_mngr: EMC_DayMngr) -> void:
-	_day_mngr = p_day_mngr
 
 func open(text: String, p_action_id: String, p_sound_id: String, p_time: bool = false, p_descr: String = "") -> void:
 	description.text = text

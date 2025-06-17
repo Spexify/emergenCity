@@ -55,8 +55,8 @@ const DEFAULT_COLOR := Color(1, 1, 1)
 #FYI: Inherits "name" property from Node
 @export var id: IDs = 0
 @export var name: String = "Dummy"
-@export var descr: String = "<No Descr>"
-@export var comps: Array[EMC_ItemComponent]
+@export var descr: String = "No Descr"
+@export var comps: Array[EMC_ItemComponent] = []
 @export var sound_effect : Dictionary = { 
 	"clicked" : "BasicItem",
 	"consumed" : "",
@@ -203,6 +203,7 @@ static func from_save(data : Dictionary) -> EMC_Item:
 	var default_info : Dictionary = JsonMngr.get_item_vars_from_id(item.id)
 	
 	item.name = default_info.get("name", "Dummy")
+	item.set_name(item.name)
 	item.descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
 	item.sound_effect = default_info.get("sound", item.sound_effect)
 	var tmp_comps : Array = data.get("comps", default_info.get("comps", []))

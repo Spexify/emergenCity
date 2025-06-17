@@ -6,13 +6,13 @@ class_name EMC_ItemQuestion
 @onready var question : RichTextLabel = $VBoxContainer/PanelContainer/RichTextLabel
 @onready var slot : EMC_Item_Slot = $VBoxContainer/CC/Slot
 
+@export var _avatar : EMC_Avatar
+
 var _inventory : EMC_Inventory
 var _item : EMC_Item
-var _avatar : EMC_Avatar
 
-func setup(p_inventory : EMC_Inventory, p_avatar : EMC_Avatar) -> void:
+func setup(p_inventory : EMC_Inventory) -> void:
 	_inventory = p_inventory
-	_avatar = p_avatar
 
 func open(p_item : EMC_Item, text : Dictionary = {}) -> void: 
 	

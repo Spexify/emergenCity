@@ -43,9 +43,10 @@ var _apps_installed : Array[String] = []
 func set_started_from_entry_scene(p_value: bool = true) -> void:
 	_started_from_entry_scene = p_value
 
-func _ready() -> void:	
+func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
+	
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -56,10 +57,12 @@ func goto_scene(path: String) -> void:
 	
 	call_deferred("_deferred_goto_scene", path)
 
+func start_run() -> void:
+	_in_crisis_phase = true
+	call_deferred("_deferred_goto_scene", CONTINUE_SCENE)
 
 func is_in_crisis_phase() -> bool:
 	return _in_crisis_phase
-
 
 func _deferred_goto_scene(path: String) -> void:
 	get_tree().root.remove_child(_current_scene)
@@ -103,7 +106,7 @@ func reset_save() -> void:
 		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
 		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
 		SAVEFILE_AVATAR_SKIN: EMC_AvatarSelectionGUI.SPRITE_NB03,
-		"inventory_data": _inventory.get_all_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
+		"inventory_data": _inventory.get_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
 		#"upgrade_ids_unlocked": _upgrade_ids_unlocked, # Should upgrades be persisitent over resets?
 		"tutorial_done" : false,
 		"vibration" : false,
@@ -184,6 +187,7 @@ func save_game(p_was_crisis : bool) -> void:
 	game_saved.emit()
 
 func load_game() -> void:
+			
 	if not FileAccess.file_exists(SAVE_GAME_FILE):
 		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
 
@@ -334,6 +338,10 @@ func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
 func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
 	return _upgrade_ids_unlocked
 
+func get_upgarde_id_equipped() -> Array[int]:
+	var result: Array[int]
+	result.assign(get_equipped_upgrades().map(func(upgrade: EMC_Upgrade) -> int: return upgrade.get_id()))
+	return result
 
 func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
 	_upgrade_ids_unlocked.append(upgrade_id)

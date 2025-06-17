@@ -2,17 +2,18 @@ class_name EMC_CrisisPhase
 extends Node2D
 
 var _backpack: EMC_Inventory = Global.get_inventory()
-var _upgrades: Array[EMC_Upgrade] = Global.get_upgrades()
+var _upgrades: Array[EMC_Upgrade] = Global.get_equipped_upgrades()
 var _dialogue_manager : EMC_DialogueMngr
 
-@onready var _stage_mngr : EMC_StageMngr = $StageMngr
+#@onready var _stage_mngr : EMC_StageMngr = $StageMngr
 @onready var _avatar : EMC_Avatar = $Avatar
 
 #GUIs Upper Section:
 @onready var _day_mngr : EMC_DayMngr = $GUI/CL/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
-@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
+#@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
 @onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
+@onready var icon_information: EMC_Icon_Information_GUI = $GUI/CL/VBC/MiddleSection/IconInformation
 #GUIs Lower Section:
 # None
 
@@ -24,6 +25,8 @@ var _dialogue_manager : EMC_DialogueMngr
 
 @onready var _action_consequences: EMC_ActionConsequences = $EMC_ActionConsequences
 @onready var _action_constraints: EMC_ActionConstraints = $EMC_ActionConstraints
+@onready var _scoreboard: EMC_Scoreboard = $EMC_Scoreboard
+
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -43,6 +46,8 @@ func _get_comp(comp_name: String) -> Node:
 			return _action_consequences
 		"ActCond": 
 			return _action_constraints
+		"Score":
+			return _scoreboard
 		_:
 			return self
 
@@ -55,7 +60,9 @@ func _ready() -> void:
 	_avatar.refresh_vitals()
 
 	JsonMngr.set_action_comp(_get_comp)
-
+	
+	_scoreboard.start_run(_backpack, OverworldStatesMngr.get_difficulty(), Global.get_upgarde_id_equipped())
+	
 	#Setup-Methoden
 	OverworldStatesMngr.setup(_upgrades)
 	
@@ -67,11 +74,11 @@ func _ready() -> void:
 	_dialogue_manager = EMC_DialogueMngr.new(_action_constraints, _action_consequences, _day_mngr, _gui_mngr)
 	
 	#### GUI
-	_gui_mngr.setup(self, _day_mngr, _backpack, _stage_mngr, _avatar, _opt_event_mngr, _dialogue_manager)
-	$GUI/CL/VBC/MiddleSection/IconInformation.hide()
+	_gui_mngr.setup(_backpack, _opt_event_mngr, _dialogue_manager)
+	icon_information.hide()
 	
 	#### Stage
-	stage_mngr.setup(_avatar, _day_mngr, _gui_mngr, _opt_event_mngr)
+	stage_mngr.setup(_opt_event_mngr)
 	
 	stage_mngr.npc_interaction.connect(_gui_mngr._on_npc_interaction)
 	
@@ -98,7 +105,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.NONE)
 		else:
 			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.UNLIMITED)
-		_pause_menue.update_overworld_states()
+		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Water"):
@@ -106,7 +113,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_water_state(int(OverworldStatesMngr.SemaphoreColors.RED))
 		else:
 			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
-		_pause_menue.update_overworld_states()
+		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Isolation"):
@@ -114,7 +121,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_isolation_state(int(OverworldStatesMngr.SemaphoreColors.RED))
 		else:
 			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
-		_pause_menue.update_overworld_states()
+		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
 	
 	if Input.is_action_just_pressed("Toggle_Food_Contam"):
@@ -122,7 +129,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_food_contamination_state(int(OverworldStatesMngr.SemaphoreColors.RED))
 		else:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
-		_pause_menue.update_overworld_states()
+		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
 		
 	if Input.is_action_just_pressed("Toggle_Mobile_Net"):

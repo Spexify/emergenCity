@@ -89,7 +89,7 @@
 					"type": "single",
 					"comp": "stage",
 					"method": "change_stage_pos",
-					"params": ["home", {"x": 110, "y": 990}]
+					"params": ["home", {"x": 110, "y": 990}, false]
 				},
 				"ignored": {
 					"type": "multi",

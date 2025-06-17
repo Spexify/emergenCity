@@ -1,11 +1,13 @@
 extends EMC_GUI
+class_name EMC_Cooking_GUI
 
 const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
 
-var _gui_mngr : EMC_GUIMngr
-var _day_mngr : EMC_DayMngr
+@export var _gui_mngr : EMC_GUIMngr
+@export var _day_mngr : EMC_DayMngr
+@export var _scoreboard: EMC_Scoreboard
 
 @onready var _recipe_list := $PanelContainer/MarginContainer/VBC/RecipeBox/ScrollContainer/RecipeList
 @onready var _needs_water_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsWater
@@ -14,10 +16,8 @@ var _day_mngr : EMC_DayMngr
 
 
 ########################################## PUBLIC METHODS ##########################################
-func setup(p_inventory: EMC_Inventory, p_gui_mngr : EMC_GUIMngr, p_day_mngr : EMC_DayMngr) -> void:
+func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory
-	_gui_mngr = p_gui_mngr
-	_day_mngr = p_day_mngr
 	
 	var recipes_dict : Dictionary
 	for recipe : EMC_Recipe in JsonMngr.load_recipes():
@@ -138,7 +138,7 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 func _cook_recipe() -> void:
 	if (_last_clicked_recipe.needs_water() and OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN
 		and Global.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR)):
-			var  reservoir := Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+			var reservoir: EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 			if reservoir.get_state() > 0:
 				reservoir.set_state(reservoir.get_state() - 25)
 			
@@ -159,11 +159,13 @@ func _cook_recipe() -> void:
 	_gui_mngr.queue_gui("CookingAnimation", [_last_clicked_recipe])
 	#wait.stop() #Bug on mobile: Doesn't work, and waits endlessly!
 	
-	if not _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING:
-		_gui_mngr.queue_gui("ItemQuestionGUI", [output_item])
-	
 	close()
+	
+	if not _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING:
+		await _gui_mngr.queue_gui("ItemQuestionGUI", [output_item])
+	
 	#_action.executed.emit(_action)
+	_scoreboard.add_score("cook", {"input": _last_clicked_recipe.get_input_item_IDs(), "output": _last_clicked_recipe.get_output_item_ID()})
 	_day_mngr._advance_day_period("Du hast %s gekocht" % output_item.name)
 
 func _try_cooking_with_heat_source() -> void:
