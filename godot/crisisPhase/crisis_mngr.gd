@@ -10,112 +10,14 @@ var _difficulty : OverworldStatesMngr.Difficulty
 var _current_crisis : Array[Dictionary] = []
 # Sorted Array (sorted according to the beginning of the crisis > )
 var _next_crisis : Array[Dictionary] = []
-var _days_since_last_crisis : int = 0
+
+# NOTICE: the Delay between Crisis will be cotrolled via delay
+# This way there will always be a "looming" crisis, while the start and length will be dependent on the selected crisis
+#var _days_since_last_crisis : int = 0
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-var CRISIS : Array[Dictionary] = [
-	{
-		"name" : "0.Tutorial.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.TUTORIAL,
-		"weight" : 10,
-		"notification" : "Dies ist ein Tutorial.",
-		"fcount" : [1, 1],
-		"following" : [{
-			"name" : "0.Tutorial.1",
-			"weight" : 1,
-			"delay" : [0,  0],
-			"states" : ["ElectricityState.NONE"],
-			"desc" : "Kein Strom",
-			"decay" : [4, 6],
-		}]
-	},
-	{
-		"name": "0.Dürre.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
-		"weight": 100,
-		"notification": "Krisopolis ist von einer Hitzewelle befallen.",
-		"fcount" : [1, 1],
-		"following": [{
-			"name": "0.Dürre.1",
-			"weight": 1,
-			"delay": [0, 0],
-			"states": ["ElectricityState.NONE"],
-			"desc" : "Dürre ist da!!!",
-			"decay" : [4, 6]
-		}]
-	},
-	#{
-		#"name" : "0.Flut.0",
-		#"difficulty" : OverworldStatesMngr.Difficulty.EASY,
-		#"weight" : 1,
-		#"notification" : "Krisopolis wird von Wassermengen geflutet.",
-		#"fcount" : [1, 1],
-		#"following" : [{
-			#"name" : "0.Flut.1",
-			#"weight" : 1,
-			#"delay" : [0, 0],
-			#"states" : ["ElectricityState.NONE"],
-			#"desc" : "",
-			#"decay" : [1, 1]
-		#}]
-	#},
-	{
-		"name" : "0.Hochwasser.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
-		"weight" : 1,
-		"notification" : "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
-		"fcount" : [1, 1],
-		"following" : [{
-			"name" : "0.Hochwasser.1",
-			"weight" : 1,
-			"delay" : [2, 3],
-			"states" : ["WaterState.DIRTY"],
-			"desc" : "Aufgrund des Hochwassers ist das Wasser verschmutzt.",
-			"decay" : [3, 6],
-			"fcount" : [0, 1],
-			"following": [{
-				"name" : "0.Hochwasser.2",
-				"weight" : 5,
-				"delay" : [0, 2],
-				"states" : ["ElectricityState.NONE"],
-				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
-				"decay" : [0, 0],
-				"fcount" : [0, 1],
-				"following": [{
-					"name" : "0.Hochwasser.3",
-					"weight" : 2,
-					"delay" : [2, 4],
-					"states" : ["MobileNetState.OFFLINE"],
-					"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
-					"decay" : [2, 3]
-				}]
-			}]
-		}]
-	},
-	{
-		"name" : "0.Chemie.0",
-		"difficulty" : OverworldStatesMngr.Difficulty.EASY,
-		"weight" : 1,
-		"notification" : "In der Nähe von Krisopolis kam es zu einem Chemie Unfall.",
-		"fcount" : [1, 1],
-		"following" : [{
-			"name" : "0.Chemie.1",
-			"weight" : 3,
-			"delay" : [2, 3],
-			"states" : ["WaterState.DIRTY"],
-			"desc" : "Durch den Chemie Unfall sind unbekannte Chemikalien in das Trinkwasser gelangt. Vermeiden sie dies zu trinken.",
-			"decay" : [3, 6],
-		},{
-			"name" : "0.Chemie.2",
-			"weight" : 1,
-			"delay" : [2, 3],
-			"states" : ["FoodContaminationState.FOOD_SPOILED"],
-			"desc" : "Der Chemie Unfall nahe Krisopolis könnte zur eine Verschmutzung der Lebsemittel geführt habe. Bitte überprüfen sie ihre Lebensmittel.",
-			"decay" : [2, 3],
-		}]
-	},
-]
+var CRISIS : Array[Dictionary] = []
 
 func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr) -> void: 
 	_rng.randomize()
@@ -124,6 +26,7 @@ func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr) -> void:
 
 	_max_day = OverworldStatesMngr.get_crisis_length()
 	_difficulty = OverworldStatesMngr.get_difficulty()
+	CRISIS = JsonMngr.crisis
 		
 ############################# GETTERS AND SETTERS ##################################################
 
@@ -145,17 +48,25 @@ func check_crisis_status(p_period_count : int) -> void:
 				var tutorial_crisis : Array[Dictionary] = [CRISIS[0]]
 				_generate_crisis(tutorial_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.EASY:
-				if _days_since_last_crisis >= _rng.randi_range(1, 3):
-					var easy_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] == OverworldStatesMngr.Difficulty.EASY)
-					_generate_crisis(easy_crisis, p_period_count)
+				# NOTICE: the Delay between Crisis will be cotrolled via delay
+				# This way there will always be a "looming" crisis, while the start and length will be dependent on the selected crisis
+				#if _days_since_last_crisis >= _rng.randi_range(1, 3):
+				var easy_crisis : Array[Dictionary] = CRISIS.filter(
+					func (dict : Dictionary) -> bool: 
+						return dict["difficulty"] as OverworldStatesMngr.Difficulty == OverworldStatesMngr.Difficulty.EASY)
+				_generate_crisis(easy_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.MEDIUM:
-				if _days_since_last_crisis >= _rng.randi_range(0, 2):
-					var medium_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] <= OverworldStatesMngr.Difficulty.MEDIUM)
-					_generate_crisis(medium_crisis, p_period_count)
+				#if _days_since_last_crisis >= _rng.randi_range(0, 2):
+				var medium_crisis : Array[Dictionary] = CRISIS.filter(
+					func (dict : Dictionary) -> bool: 
+						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.MEDIUM)
+				_generate_crisis(medium_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.HARD:
-				if _days_since_last_crisis >= _rng.randi_range(0, 1):
-					var hard_crisis : Array[Dictionary] = CRISIS.filter(func (dict : Dictionary) -> bool: return dict["difficulty"] <= OverworldStatesMngr.Difficulty.HARD)
-					_generate_crisis(hard_crisis, p_period_count)
+				#if _days_since_last_crisis >= _rng.randi_range(0, 1):
+				var hard_crisis : Array[Dictionary] = CRISIS.filter(
+					func (dict : Dictionary) -> bool: 
+						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.HARD)
+				_generate_crisis(hard_crisis, p_period_count)
 	
 	for index : int in range(_current_crisis.size()-1, -1, -1):
 		if _current_crisis[index]["stop"] <= p_period_count:
@@ -199,16 +110,16 @@ func check_crisis_status(p_period_count : int) -> void:
 		else:
 			break
 	
-	if _current_crisis.is_empty():
-		_days_since_last_crisis += 1
-	else:
-		_days_since_last_crisis = 0
+	#if _current_crisis.is_empty():
+		#_days_since_last_crisis += 1
+	#else:
+		#_days_since_last_crisis = 0
 	
 	#print("Current Crisis:")
 	#print(_current_crisis)
 	#print("Next Crisis:")
 	#print(_next_crisis)
-	##print(_day_mngr.get_period_count())
+	#print(_day_mngr.get_period_count())
 	#print(OverworldStatesMngr._crisis_description)
 
 ########################################## PRIVATE METHODS #########################################

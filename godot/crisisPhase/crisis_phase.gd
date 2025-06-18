@@ -17,8 +17,8 @@ var _dialogue_manager : EMC_DialogueMngr
 #GUIs Lower Section:
 # None
 
-@onready var _gui_mngr : EMC_GUIMngr = $GUI
-@onready var stage_mngr :EMC_StageMngr = $StageMngr
+@onready var _gui_mngr: EMC_GUIMngr = $GUI
+@onready var stage_mngr: EMC_StageMngr = $StageMngr
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _gui_mngr)

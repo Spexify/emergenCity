@@ -22,6 +22,8 @@ const ACTION_SOURCE := "res://JSONs/action.json"
 const DOORBELL_SOURCE := "res://JSONs/doorbell.json"
 ## SCENARIOS
 const SCENARIOS_SOURCE := "res://JSONs/scenarios.json"
+## CRISIS
+const CRISIS_SOURCE := "res://JSONs/crisis.json"
 ## UPGARDE
 const UPGRADES_SOURCE := "res://JSONs/upgrades.json"
 ## DIALOGUES
@@ -458,6 +460,19 @@ func load_scenarios() -> void:
 		return
 	
 	scenarios = data
+
+#######################################JSON CIRISIS#################################################
+
+var crisis: Array[Dictionary]
+
+func load_crisis() -> void:
+	var data : Array = (load_file_check_type(CRISIS_SOURCE, "Crisis", TYPE_ARRAY) as Array)
+	if data == null or data.is_empty():
+		return
+		
+	assert(data[0] is Dictionary) 
+	
+	crisis.assign(data)
 
 ######################################JSON DIALOGUES################################################
 #region DIALOGUES

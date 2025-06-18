@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://druwt2u04fhrc"]
+[gd_scene load_steps=32 format=3 uid="uid://druwt2u04fhrc"]
 
 [ext_resource type="Script" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
 [ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
@@ -9,10 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://bduv6g8pf4rcs" path="res://assets/GUI/icons/icon_store_app.png" id="6_306ny"]
 [ext_resource type="Script" path="res://GUI/handy/app_store.gd" id="8_njk5s"]
 [ext_resource type="Script" path="res://GUI/handy/info_app.gd" id="8_von4c"]
+[ext_resource type="Texture2D" uid="uid://dcgwu2rccab6r" path="res://assets/GUI/icons/chemie_icon.png" id="12_mwwyw"]
 [ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_vrakr"]
+[ext_resource type="Texture2D" uid="uid://cg6otwnlnqjd3" path="res://assets/GUI/icons/lkw_icon.png" id="13_erivy"]
 [ext_resource type="PackedScene" uid="uid://hurmnm4yg5ew" path="res://GUI/handy/warn_list_item.tscn" id="14_iodyr"]
-[ext_resource type="Texture2D" uid="uid://u55u4lhujyg3" path="res://res/sprites/scenario_icons.png" id="14_w3wqw"]
+[ext_resource type="Texture2D" uid="uid://ckjuxbkx78uml" path="res://assets/GUI/icons/storm_icon.png" id="15_gn6mf"]
+[ext_resource type="Texture2D" uid="uid://ckhxcs0p45ige" path="res://assets/GUI/icons/icon_no_electricity.png" id="15_wyg6i"]
+[ext_resource type="Texture2D" uid="uid://djbl2wksd35ha" path="res://assets/GUI/icons/heat_icon.png" id="16_cqoi2"]
+[ext_resource type="Texture2D" uid="uid://fporcnwl6csd" path="res://assets/GUI/icons/highwater_icon.png" id="16_yt3fb"]
+[ext_resource type="Texture2D" uid="uid://bjd8nobhmauco" path="res://assets/GUI/icons/riskana_icon.png" id="17_67dn7"]
+[ext_resource type="Texture2D" uid="uid://cejau2hhujec5" path="res://assets/GUI/icons/pandemie_icon.png" id="19_eh1bh"]
+[ext_resource type="Texture2D" uid="uid://xuhitwogmglt" path="res://assets/GUI/icons/flutaris_icon.png" id="20_s715n"]
 [ext_resource type="Script" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
+[ext_resource type="Texture2D" uid="uid://c0hmfc280arn3" path="res://assets/GUI/icons/forestfire_icon.png" id="21_rgsqc"]
 [ext_resource type="Texture2D" uid="uid://b2yixgn3oaixk" path="res://assets/GUI/icons/icon_world_states.png" id="22_683kg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ss8d5"]
@@ -30,6 +39,8 @@ bg_color = Color(0.823529, 0.788235, 0.701961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1c1mi"]
 bg_color = Color(0.317647, 0.541176, 0.776471, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_vp7jv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogubb"]
 bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
@@ -213,7 +224,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"WarnItemList"
 script = ExtResource("21_hd3ml")
-warn_texture = ExtResource("14_w3wqw")
+scenario_icons = Array[Texture2D]([SubResource("ImageTexture_vp7jv"), ExtResource("12_mwwyw"), ExtResource("13_erivy"), ExtResource("16_cqoi2"), ExtResource("15_gn6mf"), ExtResource("16_yt3fb"), ExtResource("17_67dn7"), ExtResource("15_wyg6i"), ExtResource("19_eh1bh"), ExtResource("20_s715n"), ExtResource("21_rgsqc")])
 
 [node name="Notifications" type="Control" parent="VBC/Warn"]
 layout_mode = 2
@@ -317,6 +328,7 @@ text = "[color=white]Krisopolis[/color]"
 fit_content = true
 
 [node name="Offline" type="Control" parent="VBC/Warn"]
+visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="VBC/Warn/Offline"]
