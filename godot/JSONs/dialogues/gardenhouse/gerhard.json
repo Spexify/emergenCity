@@ -30,6 +30,12 @@
 					],
 					"remove_quest": {
 						"quest": "FRIEDEL_WEG"
+					},
+					"add_score": {
+						"name": "quest",
+						"context": {
+							"value": 30
+						}
 					}
 				}
 			}

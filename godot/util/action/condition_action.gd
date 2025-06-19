@@ -47,6 +47,9 @@ func execute() -> Variant:
 	else:
 		return else_exe.execute()
 
+func execute_if() -> Variant:
+	return if_exe.execute()
+
 func pre_cond() -> bool:
 	return cond.execute()
 

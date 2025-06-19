@@ -91,7 +91,6 @@ class ScoreRule:
 			return {ScoreCat.INFOMRATION: 10}
 		return {}
 		)
-	# TODO: radio boolena value
 	static var Radio: Callable = (func (alog: ActionLog) -> Dictionary:
 		if not EMC_Scoreboard.state["radio"]:
 			EMC_Scoreboard.state["radio"] = true
@@ -107,6 +106,8 @@ class ScoreRule:
 			ScoreCat.PREPAREDNESS: 10 * alog.context["fill"],
 			ScoreCat.RESOURCE_EFFICIENCY: 10 - 10 * alog.context["fill"]
 		})
+	static var Item_Use: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.RESOURCE_EFFICIENCY: 5})
+	static var Quest: Callable = (func (alog: ActionLog) -> Dictionary: return {ScoreCat.COMMUNITY: alog.context.get("value", 10)})
 	
 ## WARNING: returns reference to the same object
 var name_to_log: Dictionary = {
@@ -116,6 +117,8 @@ var name_to_log: Dictionary = {
 	"bbk": ActionLog.new().setup("Broschüre", ScoreRule.BBK),
 	"radio": ActionLog.new().setup("Radio", ScoreRule.Radio),
 	"reservoir": ActionLog.new().setup("Reservoir", ScoreRule.Reservoir),
+	"chlor": ActionLog.new().setup("Chlor", ScoreRule.Item_Use),
+	"quest": ActionLog.new().setup("Quest", ScoreRule.Quest)
 }
 
 ## Prepare Phase Total
@@ -246,6 +249,8 @@ func animate_score(value: int, color: Color) -> void:
 	
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 25
+	number.label_settings.outline_color = Color.BLACK
+	number.label_settings.outline_size = 1
 	
 	canvas_layer.add_child.call_deferred(number)
 	

@@ -10,6 +10,7 @@ var _inventory: EMC_Inventory
 @export var _lower_gui_node : Node
 @export var _day_mngr : EMC_DayMngr
 @export var _gui_mngr: EMC_GUIMngr
+@export var _scoreboard: EMC_Scoreboard
 var _opt_event_mngr: EMC_OptionalEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
@@ -189,6 +190,14 @@ func set_dialogue_state(args : Dictionary) -> void:
 	else:
 		printerr("Action-Consequence: wrong or missing Argumrnts for 'set_dialogue_state'")
 
+############################################ Score #################################################
+
+func add_score(args: Dictionary) -> void:
+	if args.has("name"):
+		_scoreboard.add_score(args["name"], args.get("context", {}))
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'add_score'")
+		
 ############################################# NPC ##################################################
 
 func npc_add_dialog_tag(args: Dictionary) -> void:

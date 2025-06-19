@@ -124,13 +124,42 @@ func deactivate_NPCs() -> void:
 func let_npcs_act() -> void:
 	var npcs := NPCs.get_children()
 	npcs.shuffle()
+	print("\n\nDay: " + str(_day_mngr.get_current_day()) + " Preiod: " + str(_day_mngr.get_current_day_period()))
 	for npc : EMC_NPC in npcs:
 		var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
 		if brain:
 			brain.act()
+
+	var i: int = 0
+	while true:
+		OverworldStatesMngr.npc_intention_swap()
+		print("\n" + str(OverworldStatesMngr._npc_intention))
+		print("\nIteration: " + str(i))
+		#OverworldStatesMngr.npc_intention_unchanged()
+		for npc : EMC_NPC in npcs:
+			var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
+			if brain and npc.has_comp(EMC_NPC_Cooperation):
+				brain.coop_act()
+		
+		# When resultion is found stop loop.
+		if not OverworldStatesMngr._npc_intention_changed:
+			break
+		
+		# When no resultion is found after 7 steps, NPCS will act idle.
+		if i > 7:
+			for npc : EMC_NPC in npcs:
+				var coop : EMC_NPC_Cooperation = npc.get_comp(EMC_NPC_Cooperation)
+				if coop:
+					coop.add_intention("idle")
+			printerr("NPC act idle")
+			break
 			
+		i += 1
+	
+	print("\n" + str(OverworldStatesMngr._npc_intention))
+	OverworldStatesMngr.clear_npc_intention()
+	
 	#get_NPC("Gerhard").get_comp(EMC_NPC_Brain).act()
-	#get_NPC("Friedel").get_comp(EMC_NPC_Brain).act()
 	
 	#npc_act.emit()
 

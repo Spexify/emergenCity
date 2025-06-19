@@ -53,6 +53,12 @@ func _get_comp_by_name(comp_name: String) -> Variant:
 		return self
 	elif comp_name == "gui_mngr":
 		return npc.get_gui_mngr()
+	elif comp_name == "OSM":
+		return OverworldStatesMngr
+	elif comp_name == "ActCond":
+		return npc.get_act_cond()
+	elif comp_name == "Score":
+		return npc.get_scoreboard()
 	return npc.get_comp_by_name(comp_name)
 
 func _ready() -> void:
@@ -81,7 +87,7 @@ func act() -> void:
 	var priority: Array[String] = collect_priority()
 	
 	# Execute pre-conditions
-	priority.filter(func (option: String) -> bool:
+	priority = priority.filter(func (option: String) -> bool:
 		if option.begins_with("!"):
 			return actions[option].pre_cond()
 		return true
@@ -90,7 +96,7 @@ func act() -> void:
 	# when there is no priority choose normal options
 	if priority.is_empty():
 		var options: Array[String] = collect_options()
-		options.filter(func (option: String) -> bool:
+		options = options.filter(func (option: String) -> bool:
 			if option.begins_with("!"):
 				return actions[option].pre_cond()
 			return true
@@ -104,7 +110,10 @@ func act() -> void:
 	
 	print(npc.get_comp(EMC_NPC_Descr).get_npc_name() + ": " + decision)
 	
-	actions[decision].execute()
+	if decision.begins_with("!"):
+		actions[decision].execute_if()
+	else:
+		actions[decision].execute()
 	#if len(decision) == 1:
 		#var action : Variant  = actions.get(decision[0])
 		#if has_method(action.method_name):
@@ -112,7 +121,33 @@ func act() -> void:
 	#else :
 		#if has_method(actions.get(decision[0])):
 			#callv(actions.get(decision[0]), decision.slice(1))
+
+func coop_act() -> void:
+	if not OverworldStatesMngr._npc_intention.has(npc.get_comp(EMC_NPC_Descr).get_npc_name()):
+		return
 	
+	# Action to be executed
+	var decision: String
+	
+	var options: Array[String] = []
+	
+	var coop: EMC_NPC_Cooperation = npc.get_comp(EMC_NPC_Cooperation)
+	if coop:
+		options.append_array(coop.supply_actions())
+		
+		options = options.filter(func (option: String) -> bool:
+			if option.begins_with("!"):
+				return actions[option].pre_cond()
+			return true
+			)
+		#choose option
+		decision = decide.choose_option(options)
+		 
+		
+		print(npc.get_comp(EMC_NPC_Descr).get_npc_name() + ": " + decision)
+		
+		actions[decision].execute()
+
 func change_stage(stage_name: String, x: String = "", y: String = "") -> void:
 	var position: Vector2 = Vector2(x.to_float(), y.to_float())
 	if position == Vector2.ZERO:
@@ -122,12 +157,12 @@ func change_stage(stage_name: String, x: String = "", y: String = "") -> void:
 	stage.override_spawn(position)
 	stage.change_stage(stage_name)
 
-func coop(npc_name: String, action: String) -> void:
-	var cooperation: EMC_NPC_Cooperation = _stage_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Cooperation)
-	
-	action = action.replace("@", "#")
-	
-	cooperation.request_cooperation(action)
+#func coop(npc_name: String, action: String) -> void:
+	#var cooperation: EMC_NPC_Cooperation = _stage_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Cooperation)
+	#
+	#action = action.replace("@", "#")
+	#
+	#cooperation.request_cooperation(action)
 
 #func check(param: String) -> bool:
 	#return true
@@ -135,19 +170,23 @@ func coop(npc_name: String, action: String) -> void:
 func output(msg: String) -> void:
 	print(msg)
 	
-func noop(stuff: Variant) -> void:
+func noop(stuff: Variant = null) -> void:
 	pass
 
 ## Collect action options from the Idea suppilers 
 func collect_options() -> Array[String]:
 	var options: Array[String] = []
 	for sub: EMC_NPC_Idee in priority_comps:
+		if is_instance_of(sub, EMC_NPC_Cooperation):
+			continue
 		options.append_array(sub.supply_actions())
 	
 	if not options.is_empty():
 		return options
 	
 	for sub: EMC_NPC_Idee in sub_comps:
+		if is_instance_of(sub, EMC_NPC_Cooperation):
+			continue
 		options.append_array(sub.supply_actions())
 	
 	return options
@@ -156,6 +195,8 @@ func collect_options() -> Array[String]:
 func collect_priority() -> Array[String]:
 	var options: Array[String] = []
 	for sub: EMC_NPC_Idee in priority_comps:
+		if is_instance_of(sub, EMC_NPC_Cooperation):
+			continue
 		options.append_array(sub.supply_actions())
 	
 	return options

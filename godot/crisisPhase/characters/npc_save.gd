@@ -7,7 +7,7 @@ class_name EMC_NPC_Save
 func _ready() -> void:
 	Global.game_saved.connect(save)
 	npc.add_comp(self)
-	load_res.call_deferred()
+	load_res()
 
 func add_res(p_name: String, p_data: Variant) -> void:
 	res.add_res(p_name, p_data)
@@ -23,7 +23,10 @@ func save() -> void:
 	ResourceSaver.save(res, "user://" + npc_name + ".tres")
 
 func load_res() -> void:
-	var npc_name: String = npc.get_comp(EMC_NPC_Descr).get_npc_name()
+	var descr: EMC_NPC_Descr = npc.get_comp(EMC_NPC_Descr)
+	if not descr.is_node_ready():
+		await descr.ready
+	var npc_name: String = descr.get_npc_name()
 	if ResourceLoader.exists("user://" + npc_name + ".tres"):
 		res = ResourceLoader.load("user://" + npc_name + ".tres")
 	else:

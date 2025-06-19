@@ -21,6 +21,7 @@ class_name EMC_InventoryGUI
 
 @export var _avatar : EMC_Avatar
 @export var _gui_mngr : EMC_GUIMngr
+@export var _scoreboard: EMC_Scoreboard
 
 var _inventory: EMC_Inventory
 var _clicked_item : EMC_Item
@@ -167,6 +168,8 @@ func _on_consume_pressed() -> void:
 			
 			_inventory.remove_item_by_id(JsonMngr.item_name_to_id("WATER_DIRTY"))
 			_inventory.add_new_item(JsonMngr.item_name_to_id("WATER"))
+			
+			_scoreboard.add_score("chlor")
 	else:
 		_avatar.consume_item(_clicked_item)
 		_inventory.remove_item(_clicked_item)

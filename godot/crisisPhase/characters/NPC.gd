@@ -37,6 +37,12 @@ func get_comp(comp_class: Variant) -> Variant:
 		if  is_instance_of(comp, comp_class):
 			return comp
 	return null
+	
+func has_comp(comp_class: Variant) -> bool:
+	for comp: Variant in _comps:
+		if  is_instance_of(comp, comp_class):
+			return true
+	return false
 
 func get_comp_by_name(comp_name: String) -> Variant:
 	for comp: Variant in _comps:
@@ -52,6 +58,12 @@ func get_stage_mngr() -> EMC_StageMngr:
 	
 func get_day_mngr() -> EMC_DayMngr:
 	return _day_mngr
+
+func get_act_cond() -> EMC_ActionConstraints:
+	return _day_mngr.get_action_constraints()
+
+func get_scoreboard() -> EMC_Scoreboard:
+	return _day_mngr._scoreboard
 
 func _on_button_pressed() -> void:
 	clicked.emit(self)

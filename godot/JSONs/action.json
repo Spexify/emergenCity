@@ -1884,5 +1884,24 @@
 				]
 			}
 		}
+	},
+	"Q!_Gerhard": {
+		"type": "single",
+		"comp": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DialogueGui", [
+				{
+					"stage_name": "home",
+					"actor_name": "Gerhard"
+				}
+			]
+		]
+	},
+	"SFX_Door": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [ "Door" ]
 	}
 }

@@ -66,7 +66,7 @@ func _ready() -> void:
 	npc.add_comp(self)
 	
 	## INFO Needs to be called deferred to ensure that all components are loaded
-	load_dependencies.call_deferred()
+	load_dependencies()
 
 #func _accquire_karma_comp() -> void:
 	#_karma_comp = npc.get_comp(EMC_NPC_Descr)
@@ -80,12 +80,25 @@ func run() -> void:
 func get_inventory() -> EMC_Inventory:
 	return _inventory
 
+func has_item(item_name: String, count: int = 1) -> bool:
+	return _inventory.has_item(JsonMngr.item_name_to_id(item_name), count)
+	
+func remove_item(item_name: String, count: int = 1) -> int:
+	return _inventory.remove_item_by_id(JsonMngr.item_name_to_id(item_name), count)
+
+func add_item(item_name: String, count: int = 1) -> void:
+	for i in range(count+1):
+		_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
+
 ## Loads dependencies, which include the inventory and karam component
 ## Needs to be called after all components are loaded
 func load_dependencies() -> void:
 	_karma_comp = npc.get_comp(EMC_NPC_Karma)
 	
-	_inventory = npc.get_comp(EMC_NPC_Save).get_res("Inventory", EMC_Inventory)
+	var save: EMC_NPC_Save = npc.get_comp(EMC_NPC_Save)
+	if not save.is_node_ready():
+		await save.ready
+	_inventory = save.get_res("Inventory", EMC_Inventory)
 	if _inventory == null or not Global.was_crisis():
 		_inventory = EMC_Inventory.new(18)
 		for item_name : String in _initial_inventory.keys():
@@ -109,9 +122,9 @@ func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_I
 		return -1.0
 	
 	var trade_score := (sell_value - buy_value) / maxf(sell_value, buy_value)
-	print(trade_score)
+	#print("Without Karma: " + str(trade_score))
 	trade_score = trade_score * _value_weight + _karma_comp.get_krama() * _karma_weight
-	print(trade_score)
+	#print("With Karma: " + str(trade_score))
 	return trade_score
 	
 func get_mood_texture(trade_score: float, mood_texture: AtlasTexture) -> Texture2D:

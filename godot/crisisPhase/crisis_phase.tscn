@@ -191,7 +191,7 @@ custom_minimum_size = Vector2(295, 70)
 layout_mode = 2
 _gui_mngr = NodePath("../../../../..")
 
-[node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
+[node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences", "_scoreboard") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -200,18 +200,20 @@ _avatar = NodePath("../../../../../../Avatar")
 _stage_mngr = NodePath("../../../../../../StageMngr")
 _action_constraints = NodePath("../../../../../../EMC_ActionConstraints")
 _action_consequences = NodePath("../../../../../../EMC_ActionConsequences")
+_scoreboard = NodePath("../../../../../../EMC_Scoreboard")
 
 [node name="MiddleSection" type="Container" parent="GUI/CL/VBC"]
 custom_minimum_size = Vector2(576, 680)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr") groups=["Gui"] instance=ExtResource("9_i2q6e")]
+[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr", "_scoreboard") groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 _avatar = NodePath("../../../../../Avatar")
 _gui_mngr = NodePath("../../../..")
+_scoreboard = NodePath("../../../../../EMC_Scoreboard")
 
 [node name="PopUpGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
@@ -294,13 +296,14 @@ visible = false
 layout_mode = 2
 _day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
 
-[node name="EMC_ActionConsequences" type="Node" parent="." node_paths=PackedStringArray("_avatar", "_stage_mngr", "_lower_gui_node", "_day_mngr", "_gui_mngr")]
+[node name="EMC_ActionConsequences" type="Node" parent="." node_paths=PackedStringArray("_avatar", "_stage_mngr", "_lower_gui_node", "_day_mngr", "_gui_mngr", "_scoreboard")]
 script = ExtResource("34_gwktw")
 _avatar = NodePath("../Avatar")
 _stage_mngr = NodePath("../StageMngr")
 _lower_gui_node = NodePath("../GUI/CL/VBC/LowerSection")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _gui_mngr = NodePath("../GUI")
+_scoreboard = NodePath("../EMC_Scoreboard")
 
 [node name="EMC_ActionConstraints" type="Node" parent="." node_paths=PackedStringArray("_day_mngr", "_stage_mngr")]
 script = ExtResource("35_kkbik")

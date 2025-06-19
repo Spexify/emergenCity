@@ -69,11 +69,33 @@ var _crisis_description : Dictionary
 
 var _dialogue_states : Dictionary
 
+# Format: {NPC: ACTION_ID}
+var _npc_intention: Dictionary
+var _npc_intention_back: Dictionary
+var _npc_intention_changed: bool = false
+
 func _ready() -> void:
 	add_to_group("Save", true)
-
+	
 func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
 	_upgrades = p_upgrades
+
+func add_npc_intention(npc: String, action_id: String) -> void:
+	_npc_intention_back[npc] = action_id
+	if _npc_intention.get(npc) != action_id:
+		_npc_intention_changed = true
+
+#func npc_intention_unchanged() -> void:
+	#_npc_intention_changed = false
+
+func npc_intention_swap() -> void:
+	_npc_intention = _npc_intention_back.duplicate()
+	_npc_intention_back.clear()
+	_npc_intention_changed = false
+
+func clear_npc_intention() -> void:
+	_npc_intention.clear()
+	_npc_intention_changed = false
 
 func set_dialogue_state(state_name : String, value : Variant) -> void:
 	_dialogue_states[state_name] = value
@@ -360,6 +382,9 @@ func remove_quest(id: String) -> void:
 ## Regulate number of cocurrent quest
 func next_quest() -> bool:
 	return active_quests.size() < 3
+
+func clear_quest() -> void:
+	active_quests.clear()
 
 ############################################Save/Load###############################################
 

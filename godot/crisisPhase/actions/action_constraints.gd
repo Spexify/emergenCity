@@ -60,6 +60,8 @@ func constraint_rainwater_barrel(_dummy_param: Variant) -> String:
 	else:
 		return NO_REJECTION
 
+func random_bool(prob: float) -> bool:
+	return EMC_Util.pick_weighted_random([true, false], [prob, 1-prob], 1)[0]
 
 func constraint_not_morning(p_reason: String = "") -> String:
 	if _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.MORNING:

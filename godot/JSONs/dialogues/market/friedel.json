@@ -19,6 +19,26 @@
 			"#offline2": "#offline2"
 		}
 	},
+	"start5" : {
+		"conditions": {
+			"has_quest_stage": {
+				"quest": "FRIEDEL_WEG",
+				"stage": 5
+			}
+		},
+		"actors" : ["avatar", "friedel"],
+		"text" : [
+			"avatar#Oh, Friedel, was machst du denn hier alleine auf dem Marktplatz?",
+			"friedel#Wuff Wuff",
+			"avatar#Ich ruf mal schnell Gerhard an!",
+			"friedel#Wuff"
+		],
+		"options" : {
+			"#mobile" : "#mobile",
+			"#offline1": "#offline1",
+			"#offline2": "#offline2"
+		}
+	},
 	"#offline1": {
 		"conditions": [
 			{
@@ -132,7 +152,7 @@
 				"avatar_pos": {"x": 150, "y": 900},
 				"wait": true
 			},
-			"progress_day": ["Suche nach Friedel"]
+			"progress_day": "Suche nach Friedel"
 		}
 	}
 }

@@ -26,7 +26,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund des Hochwassers ist das Wasser verschmutzt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.DIRTY"]
 			},
 			{
@@ -34,7 +34,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund des Hochwassers ist die Wasserversorgung ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.NONE"]
 			},
 			{
@@ -42,7 +42,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund des Hochwassers ist der Strom ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["ElectricityState.NONE"]
 			},
 			{
@@ -50,7 +50,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["MobileNetState.OFFLINE"]
 			}
 		]
@@ -67,7 +67,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund der Überflutung der Riskana ist das Wasser verschmutzt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.DIRTY"]
 			},
 			{
@@ -75,7 +75,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund der Überflutung der Riskana ist die Wasserversorgung ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.NONE"]
 			},
 			{
@@ -83,7 +83,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund der Überflutung der Riskana ist das Stromnetz ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["ElectricityState.NONE"]
 			},
 			{
@@ -91,7 +91,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund der Überflutung der Riskana ist das Mobilefunknetz ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["MobileNetState.OFFLINE"]
 			}
 		]
@@ -108,7 +108,7 @@
 				"weight" : 1,
 				"desc" : "Achtung das Wasser nahe Krisoplis wurde verunreinigt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.DIRTY"]
 			},
 			{
@@ -133,7 +133,7 @@
 				"weight" : 1,
 				"desc" : "Achtung das Wasser nahe Krisoplis wurde verunreinigt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.DIRTY"]
 			},
 			{
@@ -158,7 +158,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund anhaltender Trockenheit ist die Wasserversorgung mangelhaft.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.NONE"]
 			}
 		]
@@ -175,7 +175,7 @@
 				"weight" : 1,
 				"desc" : "Sturmtief Regnetvielandra hat das Stromnetzwerk destabilisieren.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["ElectricityState.NONE"]
 			},
 			{
@@ -183,7 +183,7 @@
 				"weight" : 1,
 				"desc" : "Sturmtief Regnetvielandra sorgt für erheblichen Störungen des Mobilefunknetzes.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["MobileNetState.OFFLINE"]
 			}
 		]
@@ -200,7 +200,7 @@
 				"weight" : 3,
 				"desc" : "Aufgrund der steigenden Fallzahlen ist die Betretung öffentlicher Raume eingeschränkt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["IsolationState.LIMITED_PUBLIC_ACCESS"]
 			},
 			{
@@ -225,7 +225,7 @@
 				"weight" : 1,
 				"desc" : "Flutaris sorgt für eine verschmutzung des Wassers.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.DIRTY"]
 			},
 			{
@@ -233,7 +233,7 @@
 				"weight" : 1,
 				"desc" : "Flutaris hat die Wasserversorgung unterbrochen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.NONE"]
 			},
 			{
@@ -241,7 +241,7 @@
 				"weight" : 1,
 				"desc" : "Flutaris hat wichtige Infrastruktur der Stromversorgung zerstört.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["ElectricityState.NONE"]
 			},
 			{
@@ -249,7 +249,7 @@
 				"weight" : 1,
 				"desc" : "Flutaris beeinträchtigt das Mobilefunknetz erheblich.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["MobileNetState.OFFLINE"]
 			}
 		]
@@ -266,7 +266,7 @@
 				"weight" : 1,
 				"desc" : "Aufgrund der weitflächingen Brände in Gluthain ist die Wasserversorgung zum erliegen gekommen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["WaterState.NONE"]
 			},
 			{
@@ -274,7 +274,7 @@
 				"weight" : 1,
 				"desc" : "Der Waltbrand in Gluthain hat wichtige Infrastruktur zerstört. Die Stromversorgung ist eingeschränkt.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["ElectricityState.NONE"]
 			},
 			{
@@ -282,7 +282,7 @@
 				"weight" : 1,
 				"desc" : "Der Waltbrand in Gluthain hat wichtige Infrastruktur zerstört. Das Mobilefunknetz ist ausgefallen.",
 				"delay" : [2, 3],
-				"decay" : [2, 3],
+				"decay" : [3, 4],
 				"states" : ["MobileNetState.OFFLINE"]
 			}
 		]
@@ -327,28 +327,6 @@
 					"decay" : [2, 3]
 				}]
 			}]
-		}]
-	},
-	{
-		"name" : "1.Chemie.0",
-		"difficulty" : 1,
-		"weight" : 1,
-		"notification" : "In der Nähe von Krisopolis kam es zu einem Chemie Unfall.",
-		"fcount" : [1, 1],
-		"following" : [{
-			"name" : "1.Chemie.1",
-			"weight" : 3,
-			"delay" : [2, 3],
-			"states" : ["WaterState.DIRTY"],
-			"desc" : "Durch den Chemie Unfall sind unbekannte Chemikalien in das Trinkwasser gelangt. Vermeiden sie dies zu trinken.",
-			"decay" : [3, 6]
-		},{
-			"name" : "1.Chemie.2",
-			"weight" : 1,
-			"delay" : [2, 3],
-			"states" : ["FoodContaminationState.FOOD_SPOILED"],
-			"desc" : "Der Chemie Unfall nahe Krisopolis könnte zur eine Verschmutzung der Lebsemittel geführt habe. Bitte überprüfen sie ihre Lebensmittel.",
-			"decay" : [2, 3]
 		}]
 	}
 ]

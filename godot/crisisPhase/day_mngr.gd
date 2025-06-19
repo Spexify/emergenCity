@@ -31,6 +31,7 @@ var _inventory : EMC_Inventory
 @export var _action_constraints: EMC_ActionConstraints
 @export var _action_consequences: EMC_ActionConsequences
 var _opt_event_mngr: EMC_OptionalEventMngr
+@export var _scoreboard: EMC_Scoreboard
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(

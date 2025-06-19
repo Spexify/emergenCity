@@ -42,7 +42,7 @@ func set_max_day(_p_max_day : int = 3) -> void:
 ## Reduce countdowns and check the new states
 ## Returns the value that showed_new_crises() returns
 func check_crisis_status(p_period_count : int) -> void:
-	if _current_crisis.is_empty() and _next_crisis.is_empty():
+	if _current_crisis.is_empty(): # and _next_crisis.is_empty():
 		match _difficulty:
 			OverworldStatesMngr.Difficulty.TUTORIAL:
 				var tutorial_crisis : Array[Dictionary] = [CRISIS[0]]
@@ -59,7 +59,7 @@ func check_crisis_status(p_period_count : int) -> void:
 				#if _days_since_last_crisis >= _rng.randi_range(0, 2):
 				var medium_crisis : Array[Dictionary] = CRISIS.filter(
 					func (dict : Dictionary) -> bool: 
-						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.MEDIUM)
+						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.EASY)
 				_generate_crisis(medium_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.HARD:
 				#if _days_since_last_crisis >= _rng.randi_range(0, 1):
@@ -115,11 +115,11 @@ func check_crisis_status(p_period_count : int) -> void:
 	#else:
 		#_days_since_last_crisis = 0
 	
-	#print("Current Crisis:")
-	#print(_current_crisis)
-	#print("Next Crisis:")
-	#print(_next_crisis)
-	#print(_day_mngr.get_period_count())
+	print("Current Period: " + str(p_period_count))
+	print("Current Crisis:")
+	print(_current_crisis)
+	print("Next Crisis:")
+	print(_next_crisis)
 	#print(OverworldStatesMngr._crisis_description)
 
 ########################################## PRIVATE METHODS #########################################
@@ -134,8 +134,8 @@ func _gen_next_crisis(scenario : Dictionary, start : int, stop : int, root : boo
 	if not root:
 		# start with delay from parent crisis
 		start = start + _rng.randi_range(scenario["delay"][0], scenario["delay"][1])
-		# stop with decay from parent crisis
-		stop = stop + _rng.randi_range(scenario["decay"][0], scenario["decay"][1])
+		# stop with decay from start
+		stop = start + _rng.randi_range(scenario["decay"][0], scenario["decay"][1])
 		var states : Array[String]
 		states.assign(scenario["states"])
 		
