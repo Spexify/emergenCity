@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://j8qcqefgbhq4"]
+[gd_scene load_steps=8 format=3 uid="uid://j8qcqefgbhq4"]
 
 [ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="3_spno5"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_egv6r"]
 [ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="4_q2qsc"]
+[ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="6_spdxm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l86im"]
 bg_color = Color(0.360784, 0.333333, 0.301961, 1)
@@ -31,7 +32,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_l86im")
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 19
 
 [node name="PanelContainer" type="PanelContainer" parent="Background/MarginContainer"]
 layout_mode = 2
@@ -81,6 +82,7 @@ theme = ExtResource("2_duud7")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "[center]Rucksack[/center]"
+scroll_active = false
 
 [node name="InventoryPanel" type="PanelContainer" parent="Background/Margin/Main/InventorySection"]
 custom_minimum_size = Vector2(0, 470)
@@ -155,18 +157,23 @@ size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/Margin/Main"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 40
+size_flags_horizontal = 8
+theme_override_constants/separation = 123
 
 [node name="Home" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"ConfirmButton"
 text = "Bestätigen"
 
-[node name="Cancel" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
+[node name="Cancel_old" parent="Background/Margin/Main/HBoxContainer" instance=ExtResource("4_egv6r")]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Abbrechen"
+
+[node name="Cancel" type="TextureButton" parent="Background/Margin/Main/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_spdxm")
 
 [connection signal="pressed" from="Background/Margin/Main/HBoxContainer/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="Background/Margin/Main/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

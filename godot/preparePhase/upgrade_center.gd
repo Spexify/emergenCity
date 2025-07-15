@@ -127,4 +127,6 @@ func _on_main_menu_btn_pressed() -> void:
 		tmp.append(up)
 	
 	Global.set_upgrades(tmp)
-	Global.goto_scene(Global.MAIN_MENU_SCENE)
+	#Global.goto_scene(Global.MAIN_MENU_SCENE)
+	Global.goto_scene(Global.SHOP_SCENE)
+	

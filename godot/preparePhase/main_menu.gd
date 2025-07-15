@@ -42,7 +42,8 @@ func _on_start_round_pressed() -> void:
 		#close()
 		avatar_selection_gui.open(true)
 	else: 
-		Global.goto_scene(Global.CRISIS_START_SCENE)
+		#Global.goto_scene(Global.CRISIS_START_SCENE)
+		Global.goto_scene(Global.UPGRADE_CENTER_SCENE)
 
 
 func _on_shop_pressed() -> void:
