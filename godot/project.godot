@@ -49,6 +49,15 @@ window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/handheld/orientation=1
 
+[file_customization]
+
+folder_colors={
+"res://GUI/": "green",
+"res://assets/": "blue",
+"res://crisisPhase/": "red",
+"res://preparePhase/": "purple"
+}
+
 [gui]
 
 theme/custom="res://GUI/default_theme.tres"

@@ -59,7 +59,7 @@ func check_crisis_status(p_period_count : int) -> void:
 				#if _days_since_last_crisis >= _rng.randi_range(0, 2):
 				var medium_crisis : Array[Dictionary] = CRISIS.filter(
 					func (dict : Dictionary) -> bool: 
-						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.EASY)
+						return dict["difficulty"] as OverworldStatesMngr.Difficulty <= OverworldStatesMngr.Difficulty.MEDIUM)
 				_generate_crisis(medium_crisis, p_period_count)
 			OverworldStatesMngr.Difficulty.HARD:
 				#if _days_since_last_crisis >= _rng.randi_range(0, 1):
@@ -115,11 +115,11 @@ func check_crisis_status(p_period_count : int) -> void:
 	#else:
 		#_days_since_last_crisis = 0
 	
-	print("Current Period: " + str(p_period_count))
-	print("Current Crisis:")
-	print(_current_crisis)
-	print("Next Crisis:")
-	print(_next_crisis)
+	#print("Current Period: " + str(p_period_count))
+	#print("Current Crisis:")
+	#print(_current_crisis)
+	#print("Next Crisis:")
+	#print(_next_crisis)
 	#print(OverworldStatesMngr._crisis_description)
 
 ########################################## PRIVATE METHODS #########################################

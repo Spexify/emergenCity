@@ -31,15 +31,14 @@ func _ready() -> void:
 func load_karma() -> void:
 	var raw_data: Variant = npc.get_comp(EMC_NPC_Save).get_res("Karma", TYPE_PACKED_FLOAT64_ARRAY)
 	if raw_data == null:
-		#karma = 0
-		#mood = mood
 		npc.get_comp(EMC_NPC_Save).add_res("Karma", PackedFloat64Array([karma, mood]))
 	else:
 		if len(raw_data) == 2:
 			karma = raw_data[0]
-			mood = raw_data[1]
-			#print("Loaded karma: " + str(karma))
-			#print("Loaded mood: " + str(mood))
+			if Global.was_crisis():
+				mood = raw_data[1]
+			else:
+				npc.get_comp(EMC_NPC_Save).add_res("Karma", PackedFloat64Array([karma, mood]))
 
 func set_mood(p_mood: float) -> void:
 	mood = p_mood

@@ -551,6 +551,12 @@
 			}
 		]
 	},
+	"SFX_GUI": {
+		"type": "single",
+		"comp": "SoundMngr",
+		"method": "play_sound",
+		"params": [ "open_GUI" ]
+	},
 	"7": {
 		"type": "single",
 		"comp": "gui_mngr",
@@ -560,6 +566,7 @@
 			[
 				"Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
 				"bbk",
+				"SFX_GUI",
 				false
 			]
 		]
@@ -861,22 +868,10 @@
 	"2001": {
 		"type": "condition",
 		"cond": {
-			"type": "multi",
-			"acc": "and",
-			"actions": [
-				{
-					"type": "single",
-					"comp": "ActCond",
-					"method": "not_evening",
-					"params": []
-				},
-				{
-					"type": "single",
-					"comp": "ActCond",
-					"method": "no_limited_public_access",
-					"params": []
-				}
-			]
+			"type": "single",
+			"comp": "ActCond",
+			"method": "no_limited_public_access",
+			"params": []
 		},
 		"if": {
 			"type": "condition",
@@ -990,22 +985,10 @@
 	"2002": {
 		"type": "condition",
 		"cond": {
-			"type": "multi",
-			"acc": "and",
-			"actions": [
-				{
-					"type": "single",
-					"comp": "ActCond",
-					"method": "not_evening",
-					"params": []
-				},
-				{
-					"type": "single",
-					"comp": "ActCond",
-					"method": "no_limited_public_access",
-					"params": []
-				}
-			]
+			"type": "single",
+			"comp": "ActCond",
+			"method": "no_limited_public_access",
+			"params": []
 		},
 		"if": {
 			"type": "condition",
@@ -1890,7 +1873,8 @@
 		"comp": "gui_mngr",
 		"method": "request_gui",
 		"params": [
-			"DialogueGui", [
+			"DialogueGui",
+			[
 				{
 					"stage_name": "home",
 					"actor_name": "Gerhard"
@@ -1902,6 +1886,8 @@
 		"type": "single",
 		"comp": "SoundMngr",
 		"method": "play_sound",
-		"params": [ "Door" ]
+		"params": [
+			"Door"
+		]
 	}
 }

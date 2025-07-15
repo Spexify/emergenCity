@@ -80,6 +80,10 @@ func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait :
 	
 	stage_changed.emit(get_curr_stage_name())
 
+func reload_stage() -> void:
+	_curr_stage._create_navigation_layer_tiles()
+	OverworldStatesMngr.change.connect(state_changed)
+
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
 
@@ -156,7 +160,6 @@ func let_npcs_act() -> void:
 			
 		i += 1
 	
-	print("\n" + str(OverworldStatesMngr._npc_intention))
 	OverworldStatesMngr.clear_npc_intention()
 	
 	#get_NPC("Gerhard").get_comp(EMC_NPC_Brain).act()

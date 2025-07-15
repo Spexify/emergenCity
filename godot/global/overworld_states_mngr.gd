@@ -3,6 +3,7 @@ class_name EMC_OverworldStatesMngr
 
 signal change(changes : String)
 
+#region Enums
 enum Difficulty{
 	TUTORIAL = 3,
 	EASY = 0,
@@ -16,6 +17,34 @@ enum SemaphoreColors{
 	GREEN = 2,
 }
 
+enum MobileNetState{
+	ONLINE = SemaphoreColors.GREEN,
+	OFFLINE = SemaphoreColors.RED
+}
+
+enum ElectricityState{
+	NONE = SemaphoreColors.RED,
+	UNLIMITED = SemaphoreColors.GREEN
+}
+
+enum WaterState{
+	NONE = SemaphoreColors.RED,
+	DIRTY = SemaphoreColors.YELLOW,
+	CLEAN = SemaphoreColors.GREEN
+}
+
+enum IsolationState{
+	NONE = SemaphoreColors.GREEN,
+	LIMITED_PUBLIC_ACCESS = SemaphoreColors.YELLOW,
+	ISOLATION = SemaphoreColors.RED,
+}
+
+enum FoodContaminationState{
+	NONE = SemaphoreColors.GREEN,
+	FOOD_SPOILED = SemaphoreColors.RED
+}
+#endregion
+
 const name_to_state : Dictionary = {
 	"MobileNetState" : [MobileNetState, 4],
 	"ElectricityState" : [ElectricityState, 0],
@@ -24,40 +53,10 @@ const name_to_state : Dictionary = {
 	"IsolationState" : [IsolationState, 2],
 }
 
-enum MobileNetState{
-	ONLINE = SemaphoreColors.GREEN,
-	OFFLINE = SemaphoreColors.RED
-}
-
 var _mobilenet_state : MobileNetState = MobileNetState.ONLINE
-
-enum ElectricityState{
-	NONE = SemaphoreColors.RED,
-	UNLIMITED = SemaphoreColors.GREEN
-}
 var _electricity_state: ElectricityState = ElectricityState.UNLIMITED
-
-enum WaterState{
-	NONE = SemaphoreColors.RED,
-	DIRTY = SemaphoreColors.YELLOW,
-	CLEAN = SemaphoreColors.GREEN
-}
-
 var _water_state: WaterState = WaterState.CLEAN
-
-enum IsolationState{
-	NONE = SemaphoreColors.GREEN,
-	LIMITED_PUBLIC_ACCESS = SemaphoreColors.YELLOW,
-	ISOLATION = SemaphoreColors.RED,
-}
-
 var _isolation_state: IsolationState = IsolationState.NONE
-
-enum FoodContaminationState{
-	NONE = SemaphoreColors.GREEN,
-	FOOD_SPOILED = SemaphoreColors.RED
-}
-
 var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE
 
 var _upgrades: Array[EMC_Upgrade]
@@ -65,45 +64,34 @@ var _upgrades: Array[EMC_Upgrade]
 var _difficulty_crisis : Difficulty
 var _run_length : int
 
-var _crisis_description : Dictionary
-
-var _dialogue_states : Dictionary
-
-# Format: {NPC: ACTION_ID}
-var _npc_intention: Dictionary
-var _npc_intention_back: Dictionary
-var _npc_intention_changed: bool = false
 
 func _ready() -> void:
 	add_to_group("Save", true)
 	
 func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
 	_upgrades = p_upgrades
-
-func add_npc_intention(npc: String, action_id: String) -> void:
-	_npc_intention_back[npc] = action_id
-	if _npc_intention.get(npc) != action_id:
-		_npc_intention_changed = true
-
-#func npc_intention_unchanged() -> void:
-	#_npc_intention_changed = false
-
-func npc_intention_swap() -> void:
-	_npc_intention = _npc_intention_back.duplicate()
-	_npc_intention_back.clear()
-	_npc_intention_changed = false
-
-func clear_npc_intention() -> void:
-	_npc_intention.clear()
-	_npc_intention_changed = false
-
-func set_dialogue_state(state_name : String, value : Variant) -> void:
-	_dialogue_states[state_name] = value
 	
-func is_dialogue_state(state_nane : String, value : Variant) -> bool:
-	if _dialogue_states.has(state_nane):
-		return typeof(_dialogue_states[state_nane]) == typeof(value) and _dialogue_states[state_nane] == value
-	return false
+func reset() -> void:
+	#Scenario
+	clear_crisis_description()
+	
+	#State	
+	_set_all_states(2, 2, 2, 2)
+	_water = [0, 0, 0]
+	_electricity = 0
+	_food = 0
+	_isolation = [0, 0, 0]
+	_mobile = 0
+	
+	# Quest
+	clear_quest()
+	
+	# NPC
+	_npc_intention_back.clear()
+	clear_npc_intention()
+	
+	# Dialoge
+	clear_dialoge_states()
 
 func set_crisis_difficulty(p_run_length : int = 3, p_difficulty_crisis : Difficulty = Difficulty.EASY) -> void:
 	_difficulty_crisis = p_difficulty_crisis
@@ -114,6 +102,10 @@ func get_crisis_length() -> int:
 
 func get_difficulty() -> Difficulty:
 	return _difficulty_crisis
+
+############################################Scenario################################################
+#region Scenario
+var _crisis_description : Dictionary
 
 ## Returns scenario name
 func get_scenario_names() -> Array[String]:
@@ -162,7 +154,14 @@ func get_notification() -> Array[String]:
 		result.append(description["notification"])
 		result.append_array(description.values().slice(1).map(func (dict : Dictionary) -> String: return dict["desc"]))
 	return result
+	
+func clear_crisis_description() -> void:
+	_crisis_description.clear()
+#endregion
 
+#############################################States#################################################
+
+#region States
 func get_electricity_state() -> ElectricityState:
 	return _electricity_state
 
@@ -203,7 +202,6 @@ func get_isolation_state_descr() -> String:
 		IsolationState.LIMITED_PUBLIC_ACCESS: return "einige Betretungsverbote."
 		IsolationState.ISOLATION: return "Quarantäne!"
 	return ""
-
 
 func get_food_contamination_state() -> FoodContaminationState:
 	return _food_contamination_state
@@ -327,8 +325,26 @@ func is_any_state_by_name(state: String) -> bool:
 	elif "MobileNetState" in state:
 		return _mobilenet_state == MobileNetState.get(state.get_extension())
 	return false
+#endregion
+
+############################################Dialogue################################################
+#region Dialogue
+var _dialogue_states : Dictionary
+
+func set_dialogue_state(state_name : String, value : Variant) -> void:
+	_dialogue_states[state_name] = value
+	
+func is_dialogue_state(state_nane : String, value : Variant) -> bool:
+	if _dialogue_states.has(state_nane):
+		return typeof(_dialogue_states[state_nane]) == typeof(value) and _dialogue_states[state_nane] == value
+	return false
+	
+func clear_dialoge_states() -> void:
+	_dialogue_states.clear()
+#endregion
 
 ############################################Furniture###############################################
+#region Furniture
 
 ## TODO: more efficent version
 func has_upgrade(id: EMC_Upgrade.IDs) -> bool:
@@ -353,9 +369,10 @@ func get_furniture_state_maximum(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 			return upgrade.get_state_maximum()
 	push_error("Upgrade nicht ausgerüstet!")
 	return -1
+#endregion
 	
 #############################################Quest##################################################
-
+#region Quest
 var active_quests: Dictionary = {}
 
 ## Returns wether a quest is currently active
@@ -366,7 +383,7 @@ func has_quest(id: String) -> bool:
 ## Adds a new quest or overrides the stage
 func add_quest(id: String, stage: int = 1) -> void:
 	active_quests[id] = stage
-	print(active_quests)
+	#print(active_quests)
 
 ## Returns the current stage of the quest
 ## Should only be called after confirming quest exists
@@ -377,7 +394,6 @@ func get_quest_stage(id: String) -> int:
 ## Removes a quest
 func remove_quest(id: String) -> void:
 	active_quests.erase(id)
-	print(active_quests)
 	
 ## Regulate number of cocurrent quest
 func next_quest() -> bool:
@@ -385,6 +401,30 @@ func next_quest() -> bool:
 
 func clear_quest() -> void:
 	active_quests.clear()
+#endregion
+
+##############################################NPC###################################################
+#region NPC
+
+# Format: {NPC: ACTION_ID}
+var _npc_intention: Dictionary
+var _npc_intention_back: Dictionary
+var _npc_intention_changed: bool = false
+
+func add_npc_intention(npc: String, action_id: String) -> void:
+	_npc_intention_back[npc] = action_id
+	if _npc_intention.get(npc) != action_id:
+		_npc_intention_changed = true
+
+func npc_intention_swap() -> void:
+	_npc_intention = _npc_intention_back.duplicate()
+	_npc_intention_back.clear()
+	_npc_intention_changed = false
+
+func clear_npc_intention() -> void:
+	_npc_intention.clear()
+	_npc_intention_changed = false
+#endregion
 
 ############################################Save/Load###############################################
 

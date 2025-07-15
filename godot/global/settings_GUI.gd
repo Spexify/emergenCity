@@ -92,6 +92,7 @@ func _on_reset_pressed() -> void:
 	if !confirmed: return
 	
 	self.close(true)
+	OverworldStatesMngr.reset()
 	Global.reset_state()
 	Global.reset_save()
 	get_tree().paused = false

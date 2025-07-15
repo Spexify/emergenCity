@@ -95,6 +95,14 @@ func add_item(item_name: String, count: int = 1) -> void:
 func load_dependencies() -> void:
 	_karma_comp = npc.get_comp(EMC_NPC_Karma)
 	
+	## Check for missing karma comp
+	#if _karma_comp == null:
+		#var descr: EMC_NPC_Descr = npc.get_comp(EMC_NPC_Descr)
+		#if not descr.is_node_ready():
+			#await descr.ready
+		#
+		#printerr("Missing Karma comp in NPC: " + descr.get_npc_name())
+	
 	var save: EMC_NPC_Save = npc.get_comp(EMC_NPC_Save)
 	if not save.is_node_ready():
 		await save.ready

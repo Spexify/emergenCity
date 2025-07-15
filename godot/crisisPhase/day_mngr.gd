@@ -98,6 +98,7 @@ func _advance_day_period(description : String) -> void:
 	await Global.get_tree().create_timer(0.3).timeout
 	# let npcs act
 	_stage_mngr.let_npcs_act()
+	_stage_mngr.reload_stage()
 	period_increased.emit(_period_cnt)
 	
 	if get_current_day_period() == DayPeriod.MORNING:

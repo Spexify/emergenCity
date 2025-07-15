@@ -143,6 +143,12 @@ var score_log: Dictionary
 
 @export var _day_mngr: EMC_DayMngr
 
+func _ready() -> void:
+	_day_mngr.period_increased.connect(reset_radio)
+
+func reset_radio(_tmp : int) -> void:
+	state["radio"] = false
+
 func start_run(_inventory: EMC_Inventory, difficulty: EMC_OverworldStatesMngr.Difficulty, _upgrades: Array[int]) -> void:
 	num_run += 1
 	for item: EMC_Item in _inventory.get_items():

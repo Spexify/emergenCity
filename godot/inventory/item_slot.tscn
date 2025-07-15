@@ -59,4 +59,5 @@ texture_normal = SubResource("AtlasTexture_mvlci")
 
 [connection signal="focus_entered" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_entered"]
 [connection signal="focus_exited" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_exited"]
+[connection signal="mouse_exited" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_exited"]
 [connection signal="pressed" from="Slot_BG/ItemButton" to="." method="_on_item_button_pressed"]

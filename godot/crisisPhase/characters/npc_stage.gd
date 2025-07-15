@@ -28,9 +28,9 @@ func change_stage(stage_name : String, wait: bool = true) -> void:
 	_stage_name = stage_name
 	
 	if not wait:
-		_stage_mngr.get_stage()._create_navigation_layer_tiles()
-
 		_on_stage_changed(_stage_mngr.get_curr_stage_name())
+		
+		_stage_mngr.get_stage()._create_navigation_layer_tiles()
 	
 func override_spawn(position: Vector2) -> void:
 	_override = position
@@ -53,10 +53,10 @@ func _on_stage_changed(stage_name: String) -> void:
 	
 	if stage_name == _stage_name:
 		var position : Vector2
-		if _position.is_finite():
-			position = _stage_mngr.get_stage().reserve_spawn_pos(_position)
-		else:
-			position = _stage_mngr.get_stage().reserve_spawn_pos(positions.get(stage_name.to_pascal_case(), Vector2.ZERO))
+		#if _position.is_finite():
+			#position = _stage_mngr.get_stage().reserve_spawn_pos(_position)
+		#else:
+		position = _stage_mngr.get_stage().reserve_spawn_pos(positions.get(stage_name.to_pascal_case(), Vector2.ZERO))
 		npc.set_position(position)
 		npc.enable()
 	else:
