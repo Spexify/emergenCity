@@ -18,7 +18,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="Grid" type="GridContainer" parent="SC"]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 6

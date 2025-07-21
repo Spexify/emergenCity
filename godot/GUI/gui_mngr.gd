@@ -169,6 +169,9 @@ func _on_pause_menu_btn_pressed() -> void:
 func _on_phone_btn_pressed() -> void:
 	request_gui("HandyGUI", [])
 	#request_gui("DialogueGui", [{"stage_name": "penthouse", "actor_name": "elias"}])
+	#var info: Array[Dictionary]
+	#info.assign([])
+	#request_gui("ItemQuestionGUI", [EMC_Item.new().setup(1)])
 
 ########################Helper Functions############################
 

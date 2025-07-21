@@ -22,7 +22,7 @@ sound_effect = {
 }
 texture = SubResource("AtlasTexture_mvlci")
 
-[node name="ItemSlot" type="Control"]
+[node name="ItemSlot" type="Control" groups=["slot"]]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchor_left = 0.056
@@ -55,9 +55,7 @@ offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+action_mode = 0
 texture_normal = SubResource("AtlasTexture_mvlci")
 
-[connection signal="focus_entered" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_entered"]
-[connection signal="focus_exited" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_exited"]
-[connection signal="mouse_exited" from="Slot_BG/ItemButton" to="." method="_on_item_button_focus_exited"]
 [connection signal="pressed" from="Slot_BG/ItemButton" to="." method="_on_item_button_pressed"]

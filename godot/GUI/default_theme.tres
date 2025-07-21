@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://c38cnaco26erq"]
+[gd_resource type="Theme" load_steps=31 format=3 uid="uid://c38cnaco26erq"]
 
 [ext_resource type="Texture2D" uid="uid://bgfeu2ns15jno" path="res://assets/GUI/backgrounds/menu_box_black.png" id="1_707kn"]
 [ext_resource type="Texture2D" uid="uid://cvbhl3b6g5y3j" path="res://assets/GUI/backgrounds/menu_box_gray.png" id="1_g0i34"]
@@ -78,6 +78,10 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruees"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nupbd"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq76b"]
 bg_color = Color(0.878431, 0.870588, 0.87451, 1)
 
@@ -148,6 +152,8 @@ RichTextLabel/fonts/normal_font = ExtResource("8_no5pd")
 TitleSpacing/constants/margin_bottom = 12
 Tree/colors/font_color = Color(0, 0, 0, 1)
 Tree/styles/panel = SubResource("StyleBoxTexture_xpu0s")
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_ruees")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_nupbd")
 WarnItemList/base_type = &"PanelContainer"
 WarnItemList/styles/panel = SubResource("StyleBoxFlat_mq76b")
 WarnListItem/base_type = &"Button"
