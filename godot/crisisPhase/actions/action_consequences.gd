@@ -32,13 +32,8 @@ func add_happiness(p_value: int) -> void:
 
 ############################################ Action ################################################
 
-func execute_action(action : Variant) -> void:
-	var id : int = 0
-	if typeof(action) == TYPE_STRING:
-		id = JsonMngr.name_to_action_id(action as String)
-	elif typeof(action) == TYPE_INT:
-		id = action as int
-	_day_mngr.on_interacted_with_furniture(id)
+func execute_action(action : String) -> void:
+	JsonMngr.get_action(action).execute()
 	
 func progress_day(descr : String) -> void:
 	_day_mngr._advance_day_period(descr)

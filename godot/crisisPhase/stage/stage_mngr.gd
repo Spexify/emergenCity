@@ -82,7 +82,8 @@ func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait :
 
 func reload_stage() -> void:
 	_curr_stage._create_navigation_layer_tiles()
-	OverworldStatesMngr.change.connect(state_changed)
+	if not OverworldStatesMngr.change.is_connected(state_changed):
+		OverworldStatesMngr.change.connect(state_changed)
 
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
@@ -251,8 +252,8 @@ func _on_avatar_arrived() -> void:
 			"book":
 				_gui_mngr.request_gui("BookGUI", [content.to_int()])
 			"action":
-				_day_mngr.on_interacted_with_furniture(content.to_int())
+				_day_mngr.on_interacted_with_furniture(content)
 
 
 func _on_doorbell_rang(p_stage_change_ID: int) -> void:
-	_day_mngr.on_interacted_with_furniture(p_stage_change_ID)
+	_day_mngr.on_interacted_with_furniture(str(p_stage_change_ID))

@@ -1,5 +1,5 @@
 {
-	"1": {
+	"INT_EXIT": {
 		"type": "condition",
 		"cond": {
 			"type": "multi",
@@ -43,7 +43,7 @@
 			]
 		}
 	},
-	"2": {
+	"INT_COOK": {
 		"type": "single",
 		"comp": "gui_mngr",
 		"method": "request_gui",
@@ -112,7 +112,7 @@
 			}
 		]
 	},
-	"3": {
+	"INT_SINK": {
 		"type": "condition",
 		"cond": {
 			"type": "multi",
@@ -250,7 +250,7 @@
 			}
 		]
 	},
-	"4": {
+	"INT_SLEEP": {
 		"type": "single",
 		"comp": "gui_mngr",
 		"method": "request_gui",
@@ -265,7 +265,7 @@
 			]
 		]
 	},
-	"5": {
+	"INT_RAIN": {
 		"type": "condition",
 		"cond": {
 			"type": "single",
@@ -444,7 +444,7 @@
 			}
 		]
 	},
-	"6": {
+	"INT_SHOWER": {
 		"type": "condition",
 		"cond": {
 			"type": "multi",
@@ -557,7 +557,7 @@
 		"method": "play_sound",
 		"params": [ "open_GUI" ]
 	},
-	"7": {
+	"INT_BBK": {
 		"type": "single",
 		"comp": "gui_mngr",
 		"method": "request_gui",
@@ -610,7 +610,7 @@
 			}
 		]
 	},
-	"8": {
+	"INT_RADIO": {
 		"type": "condition",
 		"cond": {
 			"type": "single",
@@ -668,7 +668,7 @@
 			}
 		]
 	},
-	"9": {
+	"INT_RADIO_V2": {
 		"type": "single",
 		"comp": "gui_mngr",
 		"method": "request_gui",
@@ -720,7 +720,7 @@
 			}
 		]
 	},
-	"10": {
+	"INT_RESERVOIR": {
 		"type": "condition",
 		"cond": {
 			"type": "single",
@@ -756,6 +756,33 @@
 			]
 		}
 	},
+	"INT_TV": {
+		"type": "condition",
+		"cond": {
+			"type": "single",
+			"comp": "OSM",
+			"method": "is_any_state_by_name",
+			"params": [
+				"ElectricityState.NONE"
+			]
+		},
+		"if": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI", ["Der Fernseher lässt sich nicht einschalten!"]
+			]
+		},
+		"else": {
+			"type": "single",
+			"comp": "gui_mngr",
+			"method": "request_gui",
+			"params": ["TooltipGUI", ["Die Werbung läuft endlos lang."]]
+		}
+	},
+
+
 	"SFX_Stage": {
 		"type": "single",
 		"comp": "SoundMngr",

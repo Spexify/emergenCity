@@ -53,8 +53,8 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_crisis_mngr.check_crisis_status(0)
 	_stage_mngr.let_npcs_act()
 
-func on_interacted_with_furniture(p_action_ID : int) -> void:
-	JsonMngr.get_action(str(p_action_ID)).execute()
+func on_interacted_with_furniture(p_action_ID : String) -> void:
+	JsonMngr.get_action(p_action_ID).execute()
 
 func get_current_day_period() -> DayPeriod:
 	return self._period_cnt % DayPeriod.size() as DayPeriod

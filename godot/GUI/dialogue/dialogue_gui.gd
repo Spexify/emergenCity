@@ -6,7 +6,9 @@ extends EMC_GUI
 @onready var portraits : HBoxContainer = $Portraits
 @onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
 @onready var talk_sound : AudioStreamPlayer = $TalkSound
-@onready var skip : Button = $Margin/VSplitContainer/Margin/Skip
+#@onready var skip : Button = $Margin/VSplitContainer/Margin/Skip
+@onready var skip: TextureButton = $Margin/VSplitContainer/TextPanel/Box/Skip
+
 @onready var next : Button = $Margin/VSplitContainer/Margin/Next
 @onready var vbc : VBoxContainer = $Margin/VSplitContainer/VBC
 @onready var margin : MarginContainer = $Margin/VSplitContainer/Margin

@@ -90,11 +90,19 @@ sefsef
  sef s
 fs efseffe f"
 
+[node name="Skip" type="TextureButton" parent="Margin/VSplitContainer/TextPanel/Box"]
+layout_mode = 2
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 483.0
+offset_bottom = 216.0
+
 [node name="Margin" type="MarginContainer" parent="Margin/VSplitContainer"]
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 
 [node name="Skip" parent="Margin/VSplitContainer/Margin" instance=ExtResource("3_t61v8")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

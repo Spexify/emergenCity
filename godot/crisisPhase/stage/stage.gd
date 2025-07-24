@@ -93,9 +93,9 @@ func get_tile_type(p_click_pos : Vector2) -> String:
 	if book_id != 0:
 		return "book\\" + str(book_id) 
 		
-	var action_id : int = tile_data.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
-	if action_id != 0:
-		return "action\\" + str(action_id) 
+	var action_id : String = tile_data.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+	if not action_id.is_empty():
+		return "action\\" + action_id 
 	
 	return "background"
 	
