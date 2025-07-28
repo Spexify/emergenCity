@@ -2,7 +2,6 @@ class_name EMC_CrisisPhase
 extends Node2D
 
 var _backpack: EMC_Inventory = Global.get_inventory()
-var _upgrades: Array[EMC_Upgrade] = Global.get_equipped_upgrades()
 var _dialogue_manager : EMC_DialogueMngr
 
 #@onready var _stage_mngr : EMC_StageMngr = $StageMngr
@@ -56,15 +55,13 @@ func _ready() -> void:
 	if Global.was_crisis():
 		##LOAD SAVE STATE
 		Global.load_state()
-		
+	
+	#Setup-Methoden
 	_avatar.refresh_vitals()
 
 	JsonMngr.set_action_comp(_get_comp)
 	
-	_scoreboard.start_run(_backpack, OverworldStatesMngr.get_difficulty(), Global.get_upgarde_id_equipped())
-	
-	#Setup-Methoden
-	OverworldStatesMngr.setup(_upgrades)
+	_scoreboard.start_run(_backpack, OverworldStatesMngr.get_difficulty(), OverworldStatesMngr.get_upgardes_id())
 	
 	_action_constraints.setup(_backpack)
 	

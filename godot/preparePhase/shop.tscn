@@ -224,9 +224,9 @@ Die Items im Rucksack welche leicht durchsichtig sind, sind die Standarditems, w
 [node name="TuBack" type="TextureButton" parent="CanvasLayer/Tutorial"]
 layout_mode = 0
 offset_left = 475.0
-offset_top = 940.0
+offset_top = 939.0
 offset_right = 539.0
-offset_bottom = 1004.0
+offset_bottom = 1003.0
 texture_normal = ExtResource("6_spdxm")
 
 [connection signal="pressed" from="ColorRect/Margin/Main/ShopPanel/ShopSection/HBC/Help" to="." method="_on_help_pressed"]

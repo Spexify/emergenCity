@@ -3,19 +3,17 @@ extends Node
 const MAX_ECOINS = 99999
 const INITIAL_E_COINS = 300
 
-const SAVE_GAME_FILE = "user://savegame.save"
+const SAVE_GAME_FILE = "user://savegame.res"
 const SAVE_STATE_FILE = "user://savestate.save"
 const MAIN_MENU_SCENE = "res://preparePhase/main_menu.tscn"
 const CONTINUE_SCENE = "res://preparePhase/continue.tscn"
 const CRISIS_PHASE_SCENE = "res://crisisPhase/crisis_phase.tscn"
-const FIRST_GAME_SCENE = "res://global/first_game.tscn"
-const INFORMATION_SCENE = "res://preparePhase/information.tscn"
-const CREDIT_SCENE = "res://preparePhase/credit_information.tscn"
-const CRISIS_START_SCENE = "res://preparePhase/crisis_start.tscn"
-const SHOP_SCENE = "res://preparePhase/shop.tscn"
-const UPGRADE_CENTER_SCENE = "res://preparePhase/upgrade_center.tscn"
-
-const UPGRADE_SCENE_PRELOAD = preload("res://preparePhase/upgrade.tscn")
+#const FIRST_GAME_SCENE = "res://global/first_game.tscn"
+#const INFORMATION_SCENE = "res://preparePhase/information.tscn"
+#const CREDIT_SCENE = "res://preparePhase/credit_information.tscn"
+#const CRISIS_START_SCENE = "res://preparePhase/crisis_start.tscn"
+#const SHOP_SCENE = "res://preparePhase/shop.tscn"
+#const UPGRADE_CENTER_SCENE = "res://preparePhase/upgrade_center.tscn"
 
 const SAVEFILE_AVATAR_SKIN := "avatar_skin"
 
@@ -142,31 +140,28 @@ func reset_upgrades_equipped() -> void:
 
 
 func save_game(p_was_crisis : bool) -> void:
-	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE)
-	
-	
 	_was_crisis = p_was_crisis
-	var data : Dictionary = {
-		"e_coins": _e_coins,
-		"was_crisis": p_was_crisis,
-		"inventory_data": _inventory.get_items().map(func (item : EMC_Item) -> Dictionary: return item.to_save()),
-		"upgrade_ids_unlocked": _upgrade_ids_unlocked,
-		"upgrades_equipped" : _upgrades_equipped.map(func (_upgrade : EMC_Upgrade) -> int : return _upgrade.get_id() if _upgrade != null else EMC_Upgrade.IDs.EMPTY_SLOT),
-		"master_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))),
-		"sfx_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))),
-		"musik_volume": db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))),
-		SAVEFILE_AVATAR_SKIN: SettingsGUI.get_avatar_sprite_suffix(),
-		"tutorial_done" : _tutorial_done,
-		"vibration" : _vibration,
-		"apps_installed" : _apps_installed,
-	}
+	
+	var data: EMC_AllRes = EMC_AllRes.new()
+	data.add_res("e_coins", _e_coins)
+	data.add_res("was_crisis", p_was_crisis)
+	data.add_res("inventory", _inventory)
+	data.add_res("upgrade_ids_unlocked", _upgrade_ids_unlocked)
+	data.add_res("upgrades_equipped", _upgrades_equipped)
+	data.add_res("master_volume", db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))))
+	data.add_res("sfx_volume", db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))))
+	data.add_res("musik_volume", db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))))
+	data.add_res(SAVEFILE_AVATAR_SKIN, SettingsGUI.get_avatar_sprite_suffix())
+	data.add_res("tutorial_done", _tutorial_done)
+	data.add_res("vibration", _vibration)
+	data.add_res("apps_installed", _apps_installed)
+	
+	ResourceSaver.save(data, SAVE_GAME_FILE)
+	
+	##################SAVE STATE#####################
 	# JSON provides a static method to serialized JSON string.
 	var json_string : String = JSON.stringify(data)
 	
-	# Store the save dictionary as a new line in the save file.
-	save_game_file.store_line(json_string)
-	
-	##################SAVE STATE#####################
 	if p_was_crisis:
 		var save_state : FileAccess = FileAccess.open(SAVE_STATE_FILE, FileAccess.WRITE)
 		var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Save")
@@ -187,32 +182,21 @@ func save_game(p_was_crisis : bool) -> void:
 	game_saved.emit()
 
 func load_game() -> void:
-			
-	if not FileAccess.file_exists(SAVE_GAME_FILE):
-		FileAccess.open(SAVE_GAME_FILE, FileAccess.WRITE).store_string("")
-
-	var save_game_file : FileAccess = FileAccess.open(SAVE_GAME_FILE, FileAccess.READ)
-	var json_string : String = save_game_file.get_line()
-	var json : JSON = JSON.new()
-
-	var data : Dictionary
-
-	var parse_result : Error = json.parse(json_string)
-	if not parse_result == OK:
-		printerr("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-		data = {}
+	var data : EMC_AllRes
+	if ResourceLoader.exists(SAVE_GAME_FILE):
+		data = ResourceLoader.load(SAVE_GAME_FILE)
 	else:
-		data = json.get_data()
+		data = EMC_AllRes.new()
 	
-	_e_coins = data.get("e_coins", INITIAL_E_COINS)
+	_e_coins = data.get_res("e_coins", INITIAL_E_COINS)
 	
-	_was_crisis = data.get("was_crisis", false)
+	_was_crisis = data.get_res("was_crisis", false)
 	if not _was_crisis:
 		_start_scene = MAIN_MENU_SCENE
 	else:
 		_start_scene = CONTINUE_SCENE
 	
-	if data.get("inventory_data") == null:
+	if data.get_res("inventory_data") == null:
 		_inventory = create_inventory_with_starting_items()
 	else:
 		_inventory = EMC_Inventory.new()
@@ -221,25 +205,25 @@ func load_game() -> void:
 			
 		_inventory.sort_custom(EMC_Inventory.sort_by_id)
 		
-	_upgrade_ids_unlocked.assign(data.get("upgrade_ids_unlocked", []))
+	_upgrade_ids_unlocked.assign(data.get_res("upgrade_ids_unlocked", []))
 	
-	_upgrades_equipped.assign(data.get("upgrades_equipped", [0, 0, 0]).map(func (id : int) -> EMC_Upgrade: var res := UPGRADE_SCENE_PRELOAD.instantiate(); res.setup(id); return res))
+	_upgrades_equipped.assign(data.get_res("upgrades_equipped", [EMC_Upgrade.new().setup(0), EMC_Upgrade.new().setup(0), EMC_Upgrade.new().setup(0)]))
 	
-	_vibration = data.get("vibration", false)
+	_vibration = data.get_res("vibration", false)
 		
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get("master_volume", 1)))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get("sfx_volume", 1)))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get("musik_volume", 1)))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get_res("master_volume", 1)))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get_res("sfx_volume", 1)))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get_res("musik_volume", 1)))
 	if not SoundMngr.is_musik_playing():
 		SoundMngr.play_musik() 
 	
-	_tutorial_done = data.get("tutorial_done", false)
+	_tutorial_done = data.get_res("tutorial_done", false)
 	
-	var avatar_skin: String = data.get(SAVEFILE_AVATAR_SKIN, "ERROR")
+	var avatar_skin: String = data.get_res(SAVEFILE_AVATAR_SKIN, "ERROR")
 	if avatar_skin != "ERROR" && Global._tutorial_done:
 		SettingsGUI.set_avatar_sprite_suffix(avatar_skin)
 		
-	_apps_installed.assign(data.get("apps_installed", []))
+	_apps_installed.assign(data.get_res("apps_installed", []))
 		
 	game_loaded.emit()
 
@@ -318,40 +302,11 @@ func get_inventory() -> EMC_Inventory:
 func set_inventory(inventory : EMC_Inventory) -> void:
 	_inventory = inventory
 
-func get_equipped_upgrades() -> Array[EMC_Upgrade]:
-	return _upgrades_equipped.filter(func(upgrade : EMC_Upgrade) -> bool: return upgrade != null and upgrade.get_id() != EMC_Upgrade.IDs.EMPTY_SLOT)
-
-func get_upgrade_if_equipped(p_ID: EMC_Upgrade.IDs) -> EMC_Upgrade:
-	for upgrade in _upgrades_equipped:
-		if upgrade.get_id() == p_ID:
-			return upgrade
-	return null
-
-func get_upgrades() -> Array[EMC_Upgrade]:
-	return _upgrades_equipped
-
-
-func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
-	_upgrades_equipped = upgrades
-
-
 func get_upgrade_ids_unlocked() -> Array[EMC_Upgrade.IDs]:
 	return _upgrade_ids_unlocked
 
-func get_upgarde_id_equipped() -> Array[int]:
-	var result: Array[int]
-	result.assign(get_equipped_upgrades().map(func(upgrade: EMC_Upgrade) -> int: return upgrade.get_id()))
-	return result
-
 func unlock_upgrade_id(upgrade_id : EMC_Upgrade.IDs) -> void:
 	_upgrade_ids_unlocked.append(upgrade_id)
-
-
-func has_upgrade(upgrade_id : EMC_Upgrade.IDs) -> bool:
-	for upgrade in _upgrades_equipped:
-		if upgrade != null && upgrade.get_id() == upgrade_id:
-			return true
-	return false
 
 func set_vibration_enabled(x : bool) -> void:
 	_vibration = x

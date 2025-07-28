@@ -20,14 +20,14 @@ func get_res(p_name: String, type: Variant) -> Variant:
 
 func save() -> void:
 	var npc_name: String = npc.get_comp(EMC_NPC_Descr).get_npc_name()
-	ResourceSaver.save(res, "user://" + npc_name + ".tres")
+	ResourceSaver.save(res, "user://" + npc_name + ".res")
 
 func load_res() -> void:
 	var descr: EMC_NPC_Descr = npc.get_comp(EMC_NPC_Descr)
 	if not descr.is_node_ready():
 		await descr.ready
 	var npc_name: String = descr.get_npc_name()
-	if ResourceLoader.exists("user://" + npc_name + ".tres"):
-		res = ResourceLoader.load("user://" + npc_name + ".tres")
+	if ResourceLoader.exists("user://" + npc_name + ".res"):
+		res = ResourceLoader.load("user://" + npc_name + ".res")
 	else:
 		res = EMC_AllRes.new()

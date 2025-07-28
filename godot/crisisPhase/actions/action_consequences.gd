@@ -128,11 +128,11 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 		(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
 		
 func fill_reservoir(_dummy : Variant = NO_PARAM) -> void:
-	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	var reservoir : EMC_Upgrade = OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 	reservoir.set_state(reservoir.get_state_maximum())
 
 func remove_from_reservoir(amount : int) -> void:
-	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	var reservoir : EMC_Upgrade = OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 	reservoir.set_state(reservoir.get_state() - amount)
 
 func set_tutorial(value : bool) -> void:

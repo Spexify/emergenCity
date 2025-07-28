@@ -78,7 +78,7 @@ func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr,
 	item_question_gui.setup(p_backpack)
 	
 	_cooking_GUI.setup(p_backpack)
-	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
+	if(OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(p_backpack)
 
 func is_any_gui() -> bool:

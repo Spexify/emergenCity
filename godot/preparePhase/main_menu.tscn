@@ -67,7 +67,7 @@ text = "10"
 horizontal_alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(49, 0)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("4_2txvv")
 

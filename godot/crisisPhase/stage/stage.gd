@@ -241,11 +241,11 @@ func _override_spawn(dict : Dictionary) -> void:
 #*************UPGRADES*****************
 
 func _place_upgrade_furniture() -> void:
-	for upgrade: EMC_Upgrade in Global.get_equipped_upgrades():
+	for upgrade: EMC_Upgrade in OverworldStatesMngr.get_upgrades():
 		var spawn_pos : Vector2i = upgrade.get_spawn_pos()
 		var atlas_coords : Vector2i = upgrade._atlas_coord
 		_place_furniture_on_position(spawn_pos, Layers.MIDDLEGROUND_2,
-		atlas_coords, Atlases.UPGRADE_FURNITURE_PNG, upgrade._cols, upgrade._rows, true)
+		atlas_coords, Atlases.UPGRADE_FURNITURE_PNG, 1, 2, true)
 
 #***************UTIL******************
 

@@ -3,6 +3,8 @@ class_name EMC_OverworldStatesMngr
 
 signal change(changes : String)
 
+const SAVE_FILE = "user://OSM.res"
+
 #region Enums
 enum Difficulty{
 	TUTORIAL = 3,
@@ -67,9 +69,6 @@ var _run_length : int
 
 func _ready() -> void:
 	add_to_group("Save", true)
-	
-func setup(p_upgrades: Array[EMC_Upgrade]) -> void:
-	_upgrades = p_upgrades
 	
 func reset() -> void:
 	#Scenario
@@ -346,9 +345,26 @@ func clear_dialoge_states() -> void:
 ############################################Furniture###############################################
 #region Furniture
 
+func set_upgrades(upgrades : Array[EMC_Upgrade]) -> void:
+	_upgrades = upgrades
+
 ## TODO: more efficent version
 func has_upgrade(id: EMC_Upgrade.IDs) -> bool:
 	return id in _upgrades.map(func (up: EMC_Upgrade) -> int: return up.get_id())
+
+func get_upgrades() -> Array[EMC_Upgrade]:
+	return _upgrades
+
+func get_upgardes_id() -> Array[int]:
+	var result: Array[int]
+	result.assign(_upgrades.map(func(upgrade: EMC_Upgrade) -> int: return upgrade.get_id()))
+	return result
+
+func get_upgrade_if_equipped(p_ID: EMC_Upgrade.IDs) -> EMC_Upgrade:
+	for upgrade in _upgrades:
+		if upgrade.get_id() == p_ID:
+			return upgrade
+	return null
 
 func get_furniture_state(p_upgrade_id: EMC_Upgrade.IDs) -> int:
 	for upgrade in _upgrades:
@@ -430,35 +446,43 @@ func clear_npc_intention() -> void:
 
 ## Save function called to get all relevant information. This is used for Saving/loading
 func save() -> Dictionary:
-	var data : Dictionary = {
-		"node_path" : get_path(),
-		"difficulty_crisis" : _difficulty_crisis,
-		"run_length" : _run_length,
-		"crisis_description" : _crisis_description,
-		"water_state" : _water_state,
-		"isolation_state" : _isolation_state,
-		"food_contamination_state" : _food_contamination_state,
-		"electricity_state" : _electricity_state,
-	}
-	return data
+	var data: EMC_AllRes = EMC_AllRes.new()
+	data.add_res("difficulty_crisis", _difficulty_crisis)
+	data.add_res("run_length", _run_length)
+	data.add_res("crisis_description", _crisis_description)
+	data.add_res("water_state", _water_state)
+	data.add_res("isolation_state", _isolation_state)
+	data.add_res("food_contamination_state", _food_contamination_state)
+	data.add_res("electricity_state", _electricity_state)
+	data.add_res("upgrades", _upgrades)
+	
+	ResourceSaver.save(data, SAVE_FILE)
+	
+	return {"node_path": get_path()}
 
 ## Load all relevant information. This is used for Saving/loading
-func load_state(data : Dictionary) -> void:
-	var p_difficulty_crisis : Difficulty = data.get("difficulty_crisis")
-	var p_run_length : int = data.get("run_length")
+func load_state(p_data : Dictionary) -> void:
+	var data : EMC_AllRes = EMC_AllRes.load_res(SAVE_FILE)
+	
+	var p_difficulty_crisis : Difficulty = data.get_res("difficulty_crisis")
+	var p_run_length : int = data.get_res("run_length")
 	
 	set_crisis_difficulty(p_run_length, p_difficulty_crisis)
 						
-	var p_water_state : WaterState = data.get("water_state")
-	var p_isolation_state : IsolationState = data.get("isolation_state")
-	var p_food_contamination_state : FoodContaminationState = data.get("food_contamination_state")
-	var p_electricity_state : ElectricityState = data.get("electricity_state")
+	var p_water_state : WaterState = data.get_res("water_state")
+	var p_isolation_state : IsolationState = data.get_res("isolation_state")
+	var p_food_contamination_state : FoodContaminationState = data.get_res("food_contamination_state")
+	var p_electricity_state : ElectricityState = data.get_res("electricity_state")
 	
 	_set_all_states(p_water_state, p_isolation_state, p_food_contamination_state, p_electricity_state)
 	
-	var p_crisis_description : Dictionary = data.get("crisis_description")
+	var p_crisis_description : Dictionary = data.get_res("crisis_description")
 	
 	set_description(p_crisis_description)
+	
+	var upgrades: Array[EMC_Upgrade]
+	upgrades.assign(data.get_res("upgrades", []))
+	set_upgrades(upgrades)
 	
 ## This function sets all states without verification, it is needed to load save files
 func _set_all_states(p_water_state : WaterState, p_isolation_state : IsolationState,

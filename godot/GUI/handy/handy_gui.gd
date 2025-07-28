@@ -12,7 +12,7 @@ var active_app : EMC_App
 var _energy : Range = Range.new()
 
 func _init() -> void:
-	if Global.has_upgrade(5):
+	if OverworldStatesMngr.has_upgrade(5):
 		_energy.set_max(300)
 	else:
 		_energy.set_max(100)

@@ -111,7 +111,7 @@ func _on_recipe_pressed(p_recipe: EMC_Recipe) -> void:
 	_needs_water_icon.visible = p_recipe.needs_water()
 	_needs_heat_icon.visible = p_recipe.needs_heat()
 	if (p_recipe.needs_water() and OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN):
-		if Global.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR) and Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR).get_state() > 0:
+		if OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR) and OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR).get_state() > 0:
 			return
 		var water : EMC_Item = EMC_Item.make_from_id(EMC_Item.IDs.WATER)
 		var sprite := TextureRect.new()
@@ -137,8 +137,8 @@ func _recipe_cookable(p_recipe: EMC_Recipe) -> bool:
 
 func _cook_recipe() -> void:
 	if (_last_clicked_recipe.needs_water() and OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN
-		and Global.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR)):
-			var reservoir: EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+		and OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.WATER_RESERVOIR)):
+			var reservoir: EMC_Upgrade = OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 			if reservoir.get_state() > 0:
 				reservoir.set_state(reservoir.get_state() - 25)
 			
@@ -169,7 +169,7 @@ func _cook_recipe() -> void:
 	_day_mngr._advance_day_period("Du hast %s gekocht" % output_item.name)
 
 func _try_cooking_with_heat_source() -> void:
-	if Global.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER):
+	if OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.GAS_COOKER):
 		if _inventory.has_item(EMC_Item.IDs.GAS_CARTRIDGE):
 			if await _gui_mngr.request_gui("ConfirmationGUI", ["Willst eine Gaskartusche zum Kochen verwenden?"]):
 				_inventory.use_item(EMC_Item.IDs.GAS_CARTRIDGE)
