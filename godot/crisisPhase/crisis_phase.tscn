@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=41 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://assets/GUI/buttons/button_backpack.png" id="4_ef5pu"]
+[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://assets/GUI/icons/icon_menu_information.png" id="5_1wb3a"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://assets/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
@@ -31,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
 [ext_resource type="PackedScene" uid="uid://cr304u228icot" path="res://GUI/npc_interaction_gui.tscn" id="27_8bng3"]
 [ext_resource type="PackedScene" uid="uid://dpabqqngimcqo" path="res://GUI/item_info_gui.tscn" id="28_v2liu"]
+[ext_resource type="PackedScene" uid="uid://cxdptvo5x7o3t" path="res://GUI/info_center/info_center_gui.tscn" id="30_31x86"]
 [ext_resource type="PackedScene" uid="uid://b6rt1srdy2k6h" path="res://GUI/default/two_choice.tscn" id="33_52q5c"]
 [ext_resource type="PackedScene" uid="uid://dwklogkejltna" path="res://global/scoreboard.tscn" id="34_0pmq5"]
 [ext_resource type="Script" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
@@ -114,6 +116,10 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 10
+
+[node name="InfoCenterBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
+layout_mode = 2
+texture_normal = ExtResource("5_1wb3a")
 
 [node name="PauseMenuBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
@@ -278,6 +284,10 @@ stage_mngr = NodePath("../../../../../StageMngr")
 visible = false
 layout_mode = 2
 
+[node name="InfoCenterGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("30_31x86")]
+visible = false
+layout_mode = 2
+
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
 custom_minimum_size = Vector2(576, 220)
@@ -324,6 +334,7 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 [connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
+[connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]

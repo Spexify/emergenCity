@@ -27,10 +27,10 @@ class_name  EMC_GUIMngr
 @onready var handy_gui : EMC_Handy = $CL/HandyGUI
 @onready var npc_interaction : EMC_Interaction_GUI = $CL/NpcInteraction
 
-
 @onready var pause_menu_btn: TextureButton = $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn: TextureButton = $ButtonList/VBC/BackpackBtn
 @onready var phone_btn: TextureButton = $ButtonList/VBC/PhoneBtn
+@onready var info_center_btn: TextureButton = $ButtonList/VBC/InfoCenterBtn
 
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
@@ -61,6 +61,11 @@ func _ready() -> void:
 	all_the_guis.append(npc_interaction)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
+	
+	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
+		info_center_btn.show()
+	else:
+		info_center_btn.hide()
 
 # Called when the node enters the scene tree for the first time.
 func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr, p_dialogue_mngr : EMC_DialogueMngr) -> void:
@@ -173,6 +178,9 @@ func _on_phone_btn_pressed() -> void:
 	#info.assign([])
 	#request_gui("ItemQuestionGUI", [EMC_Item.new().setup(1)])
 
+func _on_info_center_btn_pressed() -> void:
+	request_gui("InfoCenterGui", [])
+
 ########################Helper Functions############################
 
 func _set_guis_process_mode(guis : Array[EMC_GUI], mode : int) -> void:
@@ -184,11 +192,15 @@ func _hide_buttons() -> void:
 	pause_menu_btn.hide()
 	phone_btn.hide()
 	backpack_btn.hide()
+	info_center_btn.hide()
 	
 func _show_buttons() -> void:
 	pause_menu_btn.show()
 	phone_btn.show()
 	backpack_btn.show()
+	
+	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
+		info_center_btn.show()
 
 ######################Helper Classes##############################
 

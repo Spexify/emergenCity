@@ -12,6 +12,6 @@ signal closed(gui : EMC_GUI)
 	#pass
 	#opened.emit()
 
-func close() -> void:
-	pass
+#func close() -> void:
+	#pass
 	#closed.emit()

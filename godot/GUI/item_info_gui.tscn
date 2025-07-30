@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="4_arpum"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="4_m3myp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7a0jo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfw66"]
 atlas = ExtResource("4_arpum")
 region = Rect2(0, 0, 64, 64)
 
@@ -23,7 +23,7 @@ sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
 }
-texture = SubResource("AtlasTexture_7a0jo")
+texture = SubResource("AtlasTexture_hfw66")
 
 [node name="ItemInfoGui" type="Control"]
 layout_mode = 3

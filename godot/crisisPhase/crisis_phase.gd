@@ -12,6 +12,7 @@ var _dialogue_manager : EMC_DialogueMngr
 #GUIs Middle Section:
 #@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
 @onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
+@onready var info_center_gui: EMC_Info_Center = $GUI/CL/VBC/MiddleSection/InfoCenterGui
 @onready var icon_information: EMC_Icon_Information_GUI = $GUI/CL/VBC/MiddleSection/IconInformation
 #GUIs Lower Section:
 # None
@@ -104,6 +105,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.UNLIMITED)
 		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
+		info_center_gui.reload()
 	
 	if Input.is_action_just_pressed("Toggle_Water"):
 		if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -112,6 +114,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
 		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
+		info_center_gui.reload()
 	
 	if Input.is_action_just_pressed("Toggle_Isolation"):
 		if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -120,6 +123,7 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
 		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
+		info_center_gui.reload()
 	
 	if Input.is_action_just_pressed("Toggle_Food_Contam"):
 		if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
@@ -128,14 +132,16 @@ func _process(delta: float) -> void:
 			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
 		#_pause_menue.update_overworld_states()
 		_handy_gui.restart()
+		info_center_gui.reload()
 		
 	if Input.is_action_just_pressed("Toggle_Mobile_Net"):
-		if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
-			OverworldStatesMngr.set_mobile_net_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.MobileNetState.ONLINE:
+			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.OFFLINE)
 		else:
-			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.get_mobile_net_state() + 1)
+			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.ONLINE)
 		_handy_gui.restart()
-
+		info_center_gui.reload()
+		
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),

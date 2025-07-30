@@ -91,7 +91,6 @@ grow_vertical = 0
 size_flags_vertical = 8
 
 [node name="Menu" type="PanelContainer" parent="VBC"]
-visible = false
 custom_minimum_size = Vector2(492, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -120,18 +119,11 @@ theme_override_constants/h_separation = 33
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="Info" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
-layout_mode = 2
-size_flags_horizontal = 4
-app = "Info"
-icon = ExtResource("2_6tb3d")
-title = "[center]Info-Center"
-
 [node name="Store" parent="VBC/Menu/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Store"
 icon = ExtResource("6_306ny")
-title = "[center]App-Store"
+title = "[center]App Store[/center]"
 
 [node name="Off" type="PanelContainer" parent="VBC"]
 visible = false
@@ -188,11 +180,12 @@ columns = 3
 layout_mode = 2
 app = "Warn"
 icon = ExtResource("3_fdip5")
-title = "[center]Warn-App"
+title = "[center]Warn App[/center]"
 
 [node name="Check" parent="VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
 layout_mode = 2
 app = "Check"
+title = "[center]Check Liste[/center]"
 
 [node name="Info" type="PanelContainer" parent="VBC"]
 visible = false
@@ -219,6 +212,7 @@ layout_mode = 2
 separation = -20
 
 [node name="Warn" type="PanelContainer" parent="VBC"]
+visible = false
 custom_minimum_size = Vector2(0, 940)
 layout_mode = 2
 size_flags_vertical = 8
@@ -396,6 +390,18 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("5_n7g61")
+
+[node name="Trash" type="Node" parent="."]
+
+[node name="Info" parent="Trash" instance_placeholder="res://GUI/handy/app_icon.tscn"]
+visible = false
+offset_top = 122.0
+offset_right = 128.0
+offset_bottom = 311.0
+size_flags_horizontal = 4
+app = "Info"
+icon = ExtResource("2_6tb3d")
+title = "[center]Info-Center"
 
 [connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
 [connection signal="meta_clicked" from="VBC/Warn/Offline/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]

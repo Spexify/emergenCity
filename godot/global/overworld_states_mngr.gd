@@ -55,6 +55,36 @@ const name_to_state : Dictionary = {
 	"IsolationState" : [IsolationState, 2],
 }
 
+const state_to_icon: Dictionary = {
+	"MobileNetState.ONLINE" : preload("res://assets/GUI/icons/online_icon.png"),
+	"MobileNetState.OFFLINE" : preload("res://assets/GUI/icons/offline_icon.png"),
+	"ElectricityState.NONE" : preload("res://assets/GUI/icons/no_power_icon.png"),
+	"ElectricityState.UNLIMITED" : preload("res://assets/GUI/icons/power_icon.png"),
+	"WaterState.NONE" : preload("res://assets/GUI/icons/no_water_icon.png"),
+	"WaterState.DIRTY" : preload("res://assets/GUI/icons/dirty_water_icon.png"),
+	"WaterState.CLEAN" : preload("res://assets/GUI/icons/water_icon.png"),
+	"FoodContaminationState.NONE" : preload("res://assets/GUI/icons/food_icon.png"),
+	"FoodContaminationState.FOOD_SPOILED" : preload("res://assets/GUI/icons/food_contaminated_icon.png"),
+	"IsolationState.NONE" : preload("res://assets/GUI/icons/no_power_icon.png"),
+	"IsolationState.LIMITED_PUBLIC_ACCESS" : preload("res://assets/GUI/icons/no_power_icon.png"),
+	"IsolationState.ISOLATION" : preload("res://assets/GUI/icons/no_power_icon.png"),
+}
+
+@export var state_to_descr: Dictionary = {
+	"MobileNetState.ONLINE" : "Du hast eine Verbinung zum Internet",
+	"MobileNetState.OFFLINE" : "Das Internet ist ausgefallen",
+	"ElectricityState.NONE" : "Der Strom ist ausgefallen",
+	"ElectricityState.UNLIMITED" : "Du hast Strom",
+	"WaterState.NONE" : "Das Wasser ist ausgefallen",
+	"WaterState.DIRTY" : "Das Wasser ist verdreckt",
+	"WaterState.CLEAN" : "Du hast sauberes Wasser",
+	"FoodContaminationState.NONE" : "",
+	"FoodContaminationState.FOOD_SPOILED" : "",
+	"IsolationState.NONE" : "",
+	"IsolationState.LIMITED_PUBLIC_ACCESS" : "",
+	"IsolationState.ISOLATION" : "",
+}
+
 var _mobilenet_state : MobileNetState = MobileNetState.ONLINE
 var _electricity_state: ElectricityState = ElectricityState.UNLIMITED
 var _water_state: WaterState = WaterState.CLEAN
@@ -228,6 +258,15 @@ func get_mobile_net_state_descr() -> String:
 		MobileNetState.ONLINE: return "online."
 		MobileNetState.OFFLINE: return "offline!"
 	return ""
+
+func get_every_state_as_name() -> Array[String]:
+	return [
+		"WaterState." + WaterState.find_key(_water_state),
+		"ElectricityState." + ElectricityState.find_key(_electricity_state),
+		"MobileNetState." + MobileNetState.find_key(_mobilenet_state),
+		"FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state),
+		"IsolationState." + IsolationState.find_key(_isolation_state)
+	]
 
 var _water : Array[int] = [0, 0, 0]
 var _electricity : int = 0
