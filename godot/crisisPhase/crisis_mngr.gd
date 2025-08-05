@@ -71,9 +71,10 @@ func check_crisis_status(p_period_count : int) -> void:
 	for index : int in range(_current_crisis.size()-1, -1, -1):
 		if _current_crisis[index]["stop"] <= p_period_count:
 			## state
-			if _current_crisis[index].has("states"):
-				for state : Variant in _current_crisis[index]["states"]:
-					OverworldStatesMngr.sub_any_state_by_name(state)
+			if _current_crisis[index].has("effects"):
+				for effect : Dictionary in _current_crisis[index]["effects"]:
+					OverworldStatesMngr.remove_effect(effect)
+					#OverworldStatesMngr.sub_any_state_by_name(state)
 			## description
 			var crisis_name : String = _current_crisis[index]["name"].get_basename()
 			var desc_nr : String = _current_crisis[index]["name"].get_extension()
@@ -90,19 +91,20 @@ func check_crisis_status(p_period_count : int) -> void:
 			var jj : int = _current_crisis.bsearch_custom(_next_crisis[index], self.sort_stop_descending)
 			_current_crisis.insert(jj, _next_crisis[index])
 			## state
-			if _next_crisis[index].has("states"):
-				for state : Variant in _next_crisis[index]["states"]:
-					OverworldStatesMngr.add_any_state_by_name(state)
+			if _next_crisis[index].has("effects"):
+				for effect : Dictionary in _next_crisis[index]["effects"]:
+					OverworldStatesMngr.apply_effect(effect)
+					#OverworldStatesMngr.add_any_state_by_name(state)
 					
-					if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
-						_inventory.spoil_some_items()
+					# if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+					# 	_inventory.spoil_some_items()
 						
 			## description
 			var crisis_name : String = _next_crisis[index]["name"].get_basename()
 			var desc_nr : String = _next_crisis[index]["name"].get_extension()
 			if _next_crisis[index].has("desc"):
 				OverworldStatesMngr.add_scenario_entry(crisis_name, desc_nr,
-				_next_crisis[index]["desc"], _next_crisis[index]["states"])
+				_next_crisis[index]["desc"], _next_crisis[index]["effects"])
 			## notification
 			if _next_crisis[index].has("notification"):
 				OverworldStatesMngr.add_scenario_notification(crisis_name,  _next_crisis[index]["notification"])
@@ -135,15 +137,15 @@ func _gen_next_crisis(scenario : Dictionary, start : int, stop : int, root : boo
 		# start with delay from parent crisis
 		start = start + _rng.randi_range(scenario["delay"][0], scenario["delay"][1])
 		# stop with decay from start
-		stop = start + _rng.randi_range(scenario["decay"][0], scenario["decay"][1])
-		var states : Array[String]
-		states.assign(scenario["states"])
+		stop = start + _rng.randi_range(scenario["duration"][0], scenario["duration"][1])
+		var effects : Array[Dictionary]
+		effects.assign(scenario["effects"])
 		
 		var dict : Dictionary = {
 			"name": scenario["name"],
 			"start": start,
 			"stop": stop,
-			"states": states,
+			"effects": effects,
 			"desc": scenario["desc"]
 		}
 		# sorted array

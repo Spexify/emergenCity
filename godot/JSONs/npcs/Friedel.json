@@ -42,7 +42,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage_pos",
 							"params": [
 								"gardenhouse",
@@ -54,7 +54,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "karma",
+							"system": "karma",
 							"method": "add_mood",
 							"params": [
 								0.3
@@ -64,27 +64,27 @@
 				},
 				"stroll_int": {
 					"type": "condition",
-					"cond": {
+					"if": {
 						"type": "single",
-						"comp": "OSM",
-						"method": "is_any_state_by_name",
+						"system": "OSM",
+						"method": "has_not_flag",
 						"params": [
-							"IsolationState.NONE"
+							"NoEntry", "Park"
 						]
 					},
-					"if": {
+					"then": {
 						"type": "condition",
-						"cond": {
+						"if": {
 							"type": "single",
-							"comp": "karma",
+							"system": "karma",
 							"method": "mood_less_than",
 							"params": [
 								2
 							]
 						},
-						"if": {
+						"then": {
 							"type": "single",
-							"comp": "cooperation",
+							"system": "cooperation",
 							"method": "add_intention",
 							"params": [
 								"sleep_mood"
@@ -92,7 +92,7 @@
 						},
 						"else": {
 							"type": "single",
-							"comp": "cooperation",
+							"system": "cooperation",
 							"method": "stop_intention",
 							"params": [
 								"stroll"
@@ -101,7 +101,7 @@
 					},
 					"else": {
 						"type": "single",
-						"comp": "cooperation",
+						"system": "cooperation",
 						"method": "add_intention",
 						"params": [
 							"idle"
@@ -110,7 +110,7 @@
 				},
 				"stroll": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": [
 						"park"
@@ -118,7 +118,7 @@
 				},
 				"noop": {
 					"type": "single",
-					"comp": "cooperation",
+					"system": "cooperation",
 					"method": "add_intention",
 					"params": [
 						"noop"
@@ -130,7 +130,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "cooperation",
+							"system": "cooperation",
 							"method": "stop_intention",
 							"params": [
 								"fish"
@@ -140,7 +140,7 @@
 				},
 				"fish": {
 					"type": "single",
-					"comp": "karma",
+					"system": "karma",
 					"method": "set_mood",
 					"params": [
 						2
@@ -152,7 +152,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage",
 							"params": [
 								"gardenhouse"
@@ -160,7 +160,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "karma",
+							"system": "karma",
 							"method": "sub_mood",
 							"params": [
 								0.5
@@ -170,7 +170,7 @@
 				},
 				"market": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": [
 						"market"
@@ -178,13 +178,13 @@
 				},
 				"!escape": {
 					"type": "condition",
-					"cond": {
+					"if": {
 						"type": "multi",
 						"acc": "and",
 						"actions": [
 							{
 								"type": "single",
-								"comp": "karma",
+								"system": "karma",
 								"method": "mood_less_than",
 								"params": [
 									3
@@ -192,7 +192,7 @@
 							},
 							{
 								"type": "single",
-								"comp": "ActCond",
+								"system": "ActCond",
 								"method": "random_bool",
 								"params": [
 									0.6
@@ -200,13 +200,13 @@
 							}
 						]
 					},
-					"if": {
+					"then": {
 						"type": "multi",
 						"acc": "array",
 						"actions": [
 							{
 								"type": "single",
-								"comp": "quest",
+								"system": "quest",
 								"method": "add_quest",
 								"params": [
 									"FRIEDEL_WEG",
@@ -215,7 +215,7 @@
 							},
 							{
 								"type": "single",
-								"comp": "stage",
+								"system": "stage",
 								"method": "change_stage",
 								"params": [
 									"market"
@@ -225,7 +225,7 @@
 					},
 					"else": {
 						"type": "single",
-						"comp": "self",
+						"system": "self",
 						"method": "noop",
 						"params": []
 					}
@@ -236,7 +236,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage_pos",
 							"params": [
 								"gardenhouse",
@@ -248,7 +248,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "karma",
+							"system": "karma",
 							"method": "add_mood",
 							"params": [
 								0.2

@@ -90,59 +90,17 @@ func not_evening() -> bool:
 	return not _day_mngr.get_current_day_period() == EMC_DayMngr.DayPeriod.EVENING
 
 func is_state_by_name(args: Dictionary) -> String:
-	if args.has("state") and OverworldStatesMngr.is_any_state_by_name(args["state"]):
+	if args.has("state") and OverworldStatesMngr.is_effective_state_eq(args["state"].get_basename(), args["state"].get_extension()):
 		return NO_REJECTION
 	return "State Bad"
-
-func no_active_crisis(p_reason: String = "") -> String:
-	if OverworldStatesMngr.get_water_state() != OverworldStatesMngr.WaterState.CLEAN:
-		return "Momentan ist das Wasser nicht OK!"
-	if OverworldStatesMngr.get_electricity_state() != OverworldStatesMngr.ElectricityState.UNLIMITED:
-		return "Momentan ist der Strom nicht OK!"
-	if OverworldStatesMngr.get_isolation_state() != OverworldStatesMngr.IsolationState.NONE:
-		return "Momentan ist eine Isolations-Krise aktiv!"
-	if OverworldStatesMngr.get_food_contamination_state() != OverworldStatesMngr.FoodContaminationState.NONE:
-		return "Momentan ist eine Essensbefall-Krise aktiv!"
-	
-	return NO_REJECTION
 	
 
 func constraint_no_limited_public_access(p_reason: String = "") -> String:
-	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS:
+	if OverworldStatesMngr.has_all_flag("NoEntry", ["Market", "Townhall"]):
 		var reason := "Es herrscht momentan ein Betretugsverbot öffentlicher Gelände!" if p_reason == "" else p_reason 
 		return reason 
 	else:
 		return NO_REJECTION
-		
-func no_limited_public_access() -> bool:
-	return not OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.LIMITED_PUBLIC_ACCESS
-
-
-func constraint_no_isolation(p_reason: String = "") -> String:
-	if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.IsolationState.ISOLATION:
-		var reason := "Es herrscht momentan eine Isolations-Verordnung!" if p_reason == "" else p_reason 
-		return reason 
-	else:
-		return NO_REJECTION
-
-
-func constraint_some_water_available(p_reason: String = "") -> String:
-	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.CLEAN || \
-		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
-		return NO_REJECTION
-	else:
-		var reason := "Kein Wasser verfügbar!" if p_reason == "" else p_reason 
-		return reason 
-
-
-func constraint_no_clean_water_available(p_reason: String = "") -> String:
-	if  OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.NONE || \
-		OverworldStatesMngr.get_water_state() == OverworldStatesMngr.WaterState.DIRTY:
-		return NO_REJECTION
-	else:
-		var reason := "Sauberes Wasser verfügbar!" if p_reason == "" else p_reason 
-		return reason 
-
 
 func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 	if _inventory.has_item(p_ID):

@@ -1,51 +1,15 @@
 {
 	"INT_EXIT": {
-		"type": "condition",
-		"cond": {
-			"type": "multi",
-			"acc": "or",
-			"actions": [
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"IsolationState.NONE"
-					]
-				},
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"IsolationState.LIMITED_PUBLIC_ACCESS"
-					]
-				}
-			]
-		},
-		"if": {
-			"type": "single",
-			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"CityMap"
-			]
-		},
-		"else": {
-			"type": "single",
-			"comp": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Die Stadt ist aufgrund einer Isolationsverordnung nicht betretbar!"
-				]
-			]
-		}
+		"type": "single",
+		"system": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"CityMap"
+		]
 	},
 	"INT_COOK": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"CookingGUI"
@@ -53,7 +17,7 @@
 	},
 	"SFX_Water": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"TapWater"
@@ -61,7 +25,7 @@
 	},
 	"IQ_DirtyWater": {
 		"type": "single",
-		"comp": "ActCons",
+		"system": "ActCons",
 		"method": "add_item_question",
 		"params": [
 			[
@@ -76,7 +40,7 @@
 	},
 	"IQ_Water": {
 		"type": "single",
-		"comp": "ActCons",
+		"system": "ActCons",
 		"method": "add_item_question",
 		"params": [
 			[
@@ -95,13 +59,13 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "fill_reservoir",
 				"params": []
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"reservoir",
@@ -114,51 +78,37 @@
 	},
 	"INT_SINK": {
 		"type": "condition",
-		"cond": {
-			"type": "multi",
-			"acc": "or",
-			"actions": [
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"WaterState.CLEAN"
-					]
-				},
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"WaterState.DIRTY"
-					]
-				}
+		"if": {
+			"type": "single",
+			"system": "OSM",
+			"method": "is_effective_state_gt",
+			"params": [
+				"WaterState", "NONE"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "OSM",
-				"method": "is_any_state_by_name",
+				"system": "OSM",
+				"method": "is_effective_state_eq",
 				"params": [
-					"WaterState.CLEAN"
+					"WaterState", "CLEAN"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "condition",
-				"cond": {
+				"if": {
 					"type": "single",
-					"comp": "OSM",
+					"system": "OSM",
 					"method": "has_upgrade",
 					"params": [
 						6
 					]
 				},
-				"if": {
+				"then": {
 					"type": "single",
-					"comp": "gui_mngr",
+					"system": "gui_mngr",
 					"method": "request_gui",
 					"params": [
 						"TwoChoice",
@@ -182,7 +132,7 @@
 				},
 				"else": {
 					"type": "single",
-					"comp": "gui_mngr",
+					"system": "gui_mngr",
 					"method": "request_gui",
 					"params": [
 						"DefaultActionGUI",
@@ -196,7 +146,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -210,7 +160,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -222,7 +172,7 @@
 	},
 	"SFX_PillowRuffle": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"PillowRuffle"
@@ -234,7 +184,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "add_health",
 				"params": [
 					1
@@ -242,7 +192,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"sleep"
@@ -252,7 +202,7 @@
 	},
 	"INT_SLEEP": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
@@ -267,18 +217,18 @@
 	},
 	"INT_RAIN": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "upgrade_state_greater",
 			"params": [
 				1,
 				1
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"RainwaterBarrelGUI"
@@ -286,7 +236,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -298,7 +248,7 @@
 	},
 	"SFX_Shower": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"Shower"
@@ -306,21 +256,21 @@
 	},
 	"Shower": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "OSM",
-			"method": "is_any_state_by_name",
+			"system": "OSM",
+			"method": "is_effective_state_eq",
 			"params": [
-				"WaterState.CLEAN"
+				"WaterState", "CLEAN"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "multi",
 			"acc": "array",
 			"actions": [
 				{
 					"type": "single",
-					"comp": "ActCons",
+					"system": "ActCons",
 					"method": "add_health",
 					"params": [
 						2
@@ -328,7 +278,7 @@
 				},
 				{
 					"type": "single",
-					"comp": "Score",
+					"system": "Score",
 					"method": "add_score",
 					"params": [
 						"shower",
@@ -346,7 +296,7 @@
 			"actions": [
 				{
 					"type": "single",
-					"comp": "ActCons",
+					"system": "ActCons",
 					"method": "add_health",
 					"params": [
 						1
@@ -354,7 +304,7 @@
 				},
 				{
 					"type": "single",
-					"comp": "Score",
+					"system": "Score",
 					"method": "add_score",
 					"params": [
 						"shower",
@@ -373,7 +323,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "use_item_by_name",
 				"params": [
 					"SOAP"
@@ -381,21 +331,21 @@
 			},
 			{
 				"type": "condition",
-				"cond": {
+				"if": {
 					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
+					"system": "OSM",
+					"method": "is_effective_state_eq",
 					"params": [
-						"WaterState.CLEAN"
+						"WaterState", "CLEAN"
 					]
 				},
-				"if": {
+				"then": {
 					"type": "multi",
 					"acc": "array",
 					"actions": [
 						{
 							"type": "single",
-							"comp": "ActCons",
+							"system": "ActCons",
 							"method": "add_health",
 							"params": [
 								3
@@ -403,7 +353,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "Score",
+							"system": "Score",
 							"method": "add_score",
 							"params": [
 								"shower",
@@ -421,7 +371,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "ActCons",
+							"system": "ActCons",
 							"method": "add_health",
 							"params": [
 								2
@@ -429,7 +379,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "Score",
+							"system": "Score",
 							"method": "add_score",
 							"params": [
 								"shower",
@@ -446,41 +396,27 @@
 	},
 	"INT_SHOWER": {
 		"type": "condition",
-		"cond": {
-			"type": "multi",
-			"acc": "or",
-			"actions": [
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"WaterState.CLEAN"
-					]
-				},
-				{
-					"type": "single",
-					"comp": "OSM",
-					"method": "is_any_state_by_name",
-					"params": [
-						"WaterState.DIRTY"
-					]
-				}
+		"if": {
+			"type": "single",
+			"system": "OSM",
+			"method": "is_effective_state_gt",
+			"params": [
+				"WaterState", "NONE"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "has_item",
 				"params": [
 					"SOAP"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"TwoChoice",
@@ -505,7 +441,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -521,7 +457,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -537,13 +473,13 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "open_bbk_brochure",
 				"params": []
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"bbk"
@@ -553,13 +489,13 @@
 	},
 	"SFX_GUI": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [ "open_GUI" ]
 	},
 	"INT_BBK": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
@@ -573,7 +509,7 @@
 	},
 	"SFX_Radio": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"RadioTuning"
@@ -585,7 +521,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "use_item_by_name",
 				"params": [
 					"BATTERIES"
@@ -593,13 +529,13 @@
 			},
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "use_radio",
 				"params": []
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"radio",
@@ -612,17 +548,17 @@
 	},
 	"INT_RADIO": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "has_item",
 			"params": [
 				"BATTERIES"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -635,7 +571,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -651,13 +587,13 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "use_radio",
 				"params": []
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"radio",
@@ -670,7 +606,7 @@
 	},
 	"INT_RADIO_V2": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
@@ -687,7 +623,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "remove_from_reservoir",
 				"params": [
 					25
@@ -695,7 +631,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "add_item_question",
 				"params": [
 					[
@@ -709,7 +645,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "Score",
+				"system": "Score",
 				"method": "add_score",
 				"params": [
 					"reservoir",
@@ -722,18 +658,18 @@
 	},
 	"INT_RESERVOIR": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "upgrade_state_greater",
 			"params": [
 				6,
 				0
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -746,7 +682,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -758,17 +694,17 @@
 	},
 	"INT_TV": {
 		"type": "condition",
-		"cond": {
-			"type": "single",
-			"comp": "OSM",
-			"method": "is_any_state_by_name",
-			"params": [
-				"ElectricityState.NONE"
-			]
-		},
 		"if": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "OSM",
+			"method": "is_effective_state_eq",
+			"params": [
+				"ElectricityState", "NONE"
+			]
+		},
+		"then": {
+			"type": "single",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI", ["Der Fernseher lässt sich nicht einschalten!"]
@@ -776,7 +712,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": ["TooltipGUI", ["Die Werbung läuft endlos lang."]]
 		}
@@ -785,7 +721,7 @@
 
 	"SFX_Stage": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"BasicItem"
@@ -797,7 +733,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -811,7 +747,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -821,7 +757,7 @@
 	},
 	"2000": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
@@ -840,7 +776,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -855,7 +791,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -869,7 +805,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -884,7 +820,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -894,25 +830,25 @@
 	},
 	"2001": {
 		"type": "condition",
-		"cond": {
-			"type": "single",
-			"comp": "ActCond",
-			"method": "no_limited_public_access",
-			"params": []
-		},
 		"if": {
+			"type": "single",
+			"system": "OSM",
+			"method": "has_not_flag",
+			"params": ["NoEntry", "Market"]
+		},
+		"then": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "is_current_stage",
 				"params": [
 					"home"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -925,7 +861,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -941,7 +877,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -957,7 +893,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -972,7 +908,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -986,7 +922,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1001,7 +937,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1011,25 +947,25 @@
 	},
 	"2002": {
 		"type": "condition",
-		"cond": {
-			"type": "single",
-			"comp": "ActCond",
-			"method": "no_limited_public_access",
-			"params": []
-		},
 		"if": {
+			"type": "single",
+			"system": "OSM",
+			"method": "has_not_flag",
+			"params": ["NoEntry", "Townhall"]
+		},
+		"then": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "is_current_stage",
 				"params": [
 					"home"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1042,7 +978,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1058,7 +994,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
@@ -1074,7 +1010,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1089,7 +1025,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1103,7 +1039,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1118,7 +1054,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1128,17 +1064,17 @@
 	},
 	"2003": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"home"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1151,7 +1087,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1171,7 +1107,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1186,7 +1122,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1200,7 +1136,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1215,7 +1151,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1225,17 +1161,17 @@
 	},
 	"2004": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"home"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1248,7 +1184,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1268,7 +1204,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1283,7 +1219,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1297,7 +1233,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1312,7 +1248,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1322,17 +1258,17 @@
 	},
 	"2005": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"home"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1345,7 +1281,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1365,7 +1301,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1380,7 +1316,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1394,7 +1330,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1409,7 +1345,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1419,17 +1355,17 @@
 	},
 	"2006": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"home"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1442,7 +1378,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1462,7 +1398,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1477,7 +1413,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1491,7 +1427,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1506,7 +1442,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1516,17 +1452,17 @@
 	},
 	"2007": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"home"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1539,7 +1475,7 @@
 		},
 		"else": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "request_gui",
 			"params": [
 				"DefaultActionGUI",
@@ -1559,7 +1495,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1574,7 +1510,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1588,7 +1524,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1603,7 +1539,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1613,33 +1549,33 @@
 	},
 	"2008": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"apartment_mert"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "close_current_gui",
 			"params": []
 		},
 		"else": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "is_current_stage",
 				"params": [
 					"home"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1652,7 +1588,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1673,7 +1609,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1688,7 +1624,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1702,7 +1638,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1717,7 +1653,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1727,33 +1663,33 @@
 	},
 	"2009": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"apartment_camper"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "close_current_gui",
 			"params": []
 		},
 		"else": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "is_current_stage",
 				"params": [
 					"home"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1766,7 +1702,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1787,7 +1723,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1802,7 +1738,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1816,7 +1752,7 @@
 		"actions": [
 			{
 				"type": "single",
-				"comp": "ActCons",
+				"system": "ActCons",
 				"method": "change_stage_by_dict",
 				"params": [
 					{
@@ -1831,7 +1767,7 @@
 			},
 			{
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "close_gui",
 				"params": [
 					-2
@@ -1841,33 +1777,33 @@
 	},
 	"2010": {
 		"type": "condition",
-		"cond": {
+		"if": {
 			"type": "single",
-			"comp": "ActCond",
+			"system": "ActCond",
 			"method": "is_current_stage",
 			"params": [
 				"apartment_default"
 			]
 		},
-		"if": {
+		"then": {
 			"type": "single",
-			"comp": "gui_mngr",
+			"system": "gui_mngr",
 			"method": "close_current_gui",
 			"params": []
 		},
 		"else": {
 			"type": "condition",
-			"cond": {
+			"if": {
 				"type": "single",
-				"comp": "ActCond",
+				"system": "ActCond",
 				"method": "is_current_stage",
 				"params": [
 					"home"
 				]
 			},
-			"if": {
+			"then": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1880,7 +1816,7 @@
 			},
 			"else": {
 				"type": "single",
-				"comp": "gui_mngr",
+				"system": "gui_mngr",
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
@@ -1897,7 +1833,7 @@
 	},
 	"Q!_Gerhard": {
 		"type": "single",
-		"comp": "gui_mngr",
+		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
 			"DialogueGui",
@@ -1911,7 +1847,7 @@
 	},
 	"SFX_Door": {
 		"type": "single",
-		"comp": "SoundMngr",
+		"system": "SoundMngr",
 		"method": "play_sound",
 		"params": [
 			"Door"

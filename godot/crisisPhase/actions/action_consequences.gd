@@ -33,7 +33,7 @@ func add_happiness(p_value: int) -> void:
 ############################################ Action ################################################
 
 func execute_action(action : String) -> void:
-	JsonMngr.get_action(action).execute()
+	JsonMngr.get_action(action).execute({"result": {}})
 	
 func progress_day(descr : String) -> void:
 	_day_mngr._advance_day_period(descr)
@@ -71,15 +71,26 @@ func add_items_by_name(p_names : String) -> void:
 
 ## Adds either Water depended on the Water-State
 func add_tap_water(_dummy: int) -> void:
-	match OverworldStatesMngr.get_water_state():
-		OverworldStatesMngr.WaterState.CLEAN:
+	match OverworldStatesMngr.get_effective_state_str("WaterState"):
+		"CLEAN":
 			_inventory.add_new_item(EMC_Item.IDs.WATER)
-		OverworldStatesMngr.WaterState.DIRTY:
+		"DIRTY":
 			_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-		OverworldStatesMngr.WaterState.NONE:
+		"NONE":
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
+
+	# REMOVE
+	# match OverworldStatesMngr.get_water_state():
+	# 	OverworldStatesMngr.WaterState.CLEAN:
+	# 		_inventory.add_new_item(EMC_Item.IDs.WATER)
+	# 	OverworldStatesMngr.WaterState.DIRTY:
+	# 		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	# 	OverworldStatesMngr.WaterState.NONE:
+	# 		printerr("Can't add water while there is no water available! \
+	# 			This should be checked in the constraints!")
+	# 	_: printerr("Unknown Water state!")
 
 
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]

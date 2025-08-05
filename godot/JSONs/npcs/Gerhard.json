@@ -74,21 +74,21 @@
 			"actions": {
 				"friedel_weg": {
 					"type": "condition",
-					"cond": {
+					"if": {
 						"type": "single",
-						"comp": "ActCond",
+						"system": "ActCond",
 						"method": "is_current_stage",
 						"params": [
 							"home"
 						]
 					},
-					"if": {
+					"then": {
 						"type": "multi",
 						"acc": "array",
 						"actions": [
 							{
 								"type": "single",
-								"comp": "quest",
+								"system": "quest",
 								"method": "add_quest",
 								"params": [
 									"FRIEDEL_WEG",
@@ -97,7 +97,7 @@
 							},
 							{
 								"type": "single",
-								"comp": "gui_mngr",
+								"system": "gui_mngr",
 								"method": "queue_gui",
 								"params": [
 									"PopUpGUI",
@@ -112,7 +112,7 @@
 					},
 					"else": {
 						"type": "single",
-						"comp": "quest",
+						"system": "quest",
 						"method": "add_quest",
 						"params": [
 							"FRIEDEL_WEG",
@@ -126,7 +126,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "quest",
+							"system": "quest",
 							"method": "remove_quest",
 							"params": [
 								"FRIEDEL_WEG"
@@ -134,7 +134,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage",
 							"params": [
 								"gardenhouse"
@@ -142,7 +142,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "Score",
+							"system": "Score",
 							"method": "add_score",
 							"params": [
 								"quest",
@@ -153,7 +153,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "karma",
+							"system": "karma",
 							"method": "add_karma",
 							"params": [
 								-0.1
@@ -167,7 +167,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "quest",
+							"system": "quest",
 							"method": "remove_quest",
 							"params": [
 								"FRIEDEL_WEG"
@@ -175,7 +175,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage",
 							"params": [
 								"gardenhouse"
@@ -189,7 +189,7 @@
 					"actions": [
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "stage",
 							"method": "change_stage",
 							"params": [
 								"park"
@@ -197,7 +197,7 @@
 						},
 						{
 							"type": "single",
-							"comp": "quest",
+							"system": "quest",
 							"method": "add_quest",
 							"params": [
 								"FRIEDEL_WEG",
@@ -208,7 +208,7 @@
 				},
 				"idle": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": [
 						"gardenhouse"
@@ -216,17 +216,17 @@
 				},
 				"stroll_int": {
 					"type": "condition",
-					"cond": {
-						"type": "single",
-						"comp": "OSM",
-						"method": "is_any_state_by_name",
-						"params": [
-							"IsolationState.NONE"
-						]
-					},
 					"if": {
 						"type": "single",
-						"comp": "cooperation",
+						"system": "OSM",
+						"method": "has_not_flag",
+						"params": [
+							"NoEntry", "Park"
+						]
+					},
+					"then": {
+						"type": "single",
+						"system": "cooperation",
 						"method": "add_intention",
 						"params": [
 							"stroll"
@@ -234,7 +234,7 @@
 					},
 					"else": {
 						"type": "single",
-						"comp": "cooperation",
+						"system": "cooperation",
 						"method": "add_intention",
 						"params": [
 							"idle"
@@ -243,7 +243,7 @@
 				},
 				"stroll": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": [
 						"park"
@@ -251,7 +251,7 @@
 				},
 				"fish_int": {
 					"type": "single",
-					"comp": "cooperation",
+					"system": "cooperation",
 					"method": "add_intention",
 					"params": [
 						"fish"
@@ -259,7 +259,7 @@
 				},
 				"fish": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": [
 						"market"
@@ -267,7 +267,7 @@
 				},
 				"noop": {
 					"type": "single",
-					"comp": "cooperation",
+					"system": "cooperation",
 					"method": "add_intention",
 					"params": [
 						"noop"
@@ -275,22 +275,22 @@
 				},
 				"work": {
 					"type": "condition",
-					"cond": {
+					"if": {
 						"type": "single",
-						"comp": "trading",
+						"system": "trading",
 						"method": "has_item",
 						"params": [
 							"VEGETABLES",
 							5
 						]
 					},
-					"if": {
+					"then": {
 						"type": "multi",
 						"acc": "array",
 						"actions": [
 							{
 								"type": "single",
-								"comp": "trading",
+								"system": "trading",
 								"method": "remove_item",
 								"params": [
 									"VEGETABLES"
@@ -298,7 +298,7 @@
 							},
 							{
 								"type": "single",
-								"comp": "stage",
+								"system": "stage",
 								"method": "change_stage",
 								"params": [
 									"gardenhouse"
@@ -308,21 +308,21 @@
 					},
 					"else": {
 						"type": "condition",
-						"cond": {
+						"if": {
 							"type": "single",
-							"comp": "trading",
+							"system": "trading",
 							"method": "has_item",
 							"params": [
 								"WATER_DIRTY"
 							]
 						},
-						"if": {
+						"then": {
 							"type": "multi",
 							"acc": "array",
 							"actions": [
 								{
 									"type": "single",
-									"comp": "trading",
+									"system": "trading",
 									"method": "remove_item",
 									"params": [
 										"WATER_DIRTY"
@@ -330,7 +330,7 @@
 								},
 								{
 									"type": "single",
-									"comp": "trading",
+									"system": "trading",
 									"method": "add_item",
 									"params": [
 										"VEGETABLES"
@@ -338,7 +338,7 @@
 								},
 								{
 									"type": "single",
-									"comp": "stage",
+									"system": "stage",
 									"method": "change_stage_pos",
 									"params": [
 										"gardenhouse",
@@ -352,35 +352,21 @@
 						},
 						"else": {
 							"type": "condition",
-							"cond": {
-								"type": "multi",
-								"acc": "or",
-								"actions": [
-									{
-										"type": "single",
-										"comp": "OSM",
-										"method": "is_any_state_by_name",
-										"params": [
-											"WaterState.DIRTY"
-										]
-									},
-									{
-										"type": "single",
-										"comp": "OSM",
-										"method": "is_any_state_by_name",
-										"params": [
-											"WaterState.CLEAN"
-										]
-									}
+							"if": {
+								"type": "single",
+								"system": "OSM",
+								"method": "is_effective_state_gt",
+								"params": [
+									"WaterState", "NONE"
 								]
 							},
-							"if": {
+							"then": {
 								"type": "multi",
 								"acc": "array",
 								"actions": [
 									{
 										"type": "single",
-										"comp": "trading",
+										"system": "trading",
 										"method": "add_item",
 										"params": [
 											"WATER_DIRTY"
@@ -388,7 +374,7 @@
 									},
 									{
 										"type": "single",
-										"comp": "stage",
+										"system": "stage",
 										"method": "change_stage",
 										"params": [
 											"gardenhouse"
@@ -398,7 +384,7 @@
 							},
 							"else": {
 								"type": "single",
-								"comp": "stage",
+								"system": "stage",
 								"method": "change_stage",
 								"params": [
 									"gardenhouse"

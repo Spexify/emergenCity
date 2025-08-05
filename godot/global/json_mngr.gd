@@ -351,8 +351,7 @@ func load_actions() -> void:
 	assert(data != null, "Failed to load Actions!")
 	
 	for key: String in data:
-		var res: Resource = ResourceLoader.load("res://util/action/" + data[key]["type"] + "_action.gd")
-		_actions[key] = res.new(data[key])
+		_actions[key] = EMC_Action.load_action(data[key])
 
 func set_action_comp(get_exe: Callable) -> void:
 	if not _is_action_loaded:

@@ -36,19 +36,19 @@
 			"actions": {
 				"work": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["market"]
 				},
 				"idle": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["penthouse"]
 				},
 				"stroll": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["park"]
 				}

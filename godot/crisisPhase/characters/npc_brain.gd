@@ -111,9 +111,9 @@ func act() -> void:
 	print(npc.get_comp(EMC_NPC_Descr).get_npc_name() + ": " + decision)
 	
 	if decision.begins_with("!"):
-		actions[decision].execute_if()
+		actions[decision].execute_then({"result": {}})
 	else:
-		actions[decision].execute()
+		actions[decision].execute({"result": {}})
 	#if len(decision) == 1:
 		#var action : Variant  = actions.get(decision[0])
 		#if has_method(action.method_name):
@@ -146,7 +146,7 @@ func coop_act() -> void:
 		
 		print(npc.get_comp(EMC_NPC_Descr).get_npc_name() + ": " + decision)
 		
-		actions[decision].execute()
+		actions[decision].execute({"result": {}})
 
 func change_stage(stage_name: String, x: String = "", y: String = "") -> void:
 	var position: Vector2 = Vector2(x.to_float(), y.to_float())

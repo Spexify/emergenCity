@@ -13,7 +13,7 @@ func _ready() -> void:
 	item_list.item_clicked.connect(_on_item_clicked)
 
 func start() -> void:
-	if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.MobileNetState.OFFLINE:
+	if OverworldStatesMngr.is_effective_state_eq("MobileNetState", "OFFLINE"):
 		description.hide()
 		notifications.hide()
 		offline.show()

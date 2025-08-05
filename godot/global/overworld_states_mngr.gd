@@ -13,48 +13,6 @@ enum Difficulty{
 	HARD = 2,
 }
 
-enum SemaphoreColors{
-	RED = 0,
-	YELLOW = 1,
-	GREEN = 2,
-}
-
-enum MobileNetState{
-	ONLINE = SemaphoreColors.GREEN,
-	OFFLINE = SemaphoreColors.RED
-}
-
-enum ElectricityState{
-	NONE = SemaphoreColors.RED,
-	UNLIMITED = SemaphoreColors.GREEN
-}
-
-enum WaterState{
-	NONE = SemaphoreColors.RED,
-	DIRTY = SemaphoreColors.YELLOW,
-	CLEAN = SemaphoreColors.GREEN
-}
-
-enum IsolationState{
-	NONE = SemaphoreColors.GREEN,
-	LIMITED_PUBLIC_ACCESS = SemaphoreColors.YELLOW,
-	ISOLATION = SemaphoreColors.RED,
-}
-
-enum FoodContaminationState{
-	NONE = SemaphoreColors.GREEN,
-	FOOD_SPOILED = SemaphoreColors.RED
-}
-#endregion
-
-const name_to_state : Dictionary = {
-	"MobileNetState" : [MobileNetState, 4],
-	"ElectricityState" : [ElectricityState, 0],
-	"WaterState" : [WaterState, 1],
-	"FoodContaminationState" : [FoodContaminationState, 3],
-	"IsolationState" : [IsolationState, 2],
-}
-
 const state_to_icon: Dictionary = {
 	"MobileNetState.ONLINE" : preload("res://assets/GUI/icons/online_icon.png"),
 	"MobileNetState.OFFLINE" : preload("res://assets/GUI/icons/offline_icon.png"),
@@ -85,12 +43,6 @@ const state_to_icon: Dictionary = {
 	"IsolationState.ISOLATION" : "",
 }
 
-var _mobilenet_state : MobileNetState = MobileNetState.ONLINE
-var _electricity_state: ElectricityState = ElectricityState.UNLIMITED
-var _water_state: WaterState = WaterState.CLEAN
-var _isolation_state: IsolationState = IsolationState.NONE
-var _food_contamination_state: FoodContaminationState = FoodContaminationState.NONE
-
 var _upgrades: Array[EMC_Upgrade]
 
 var _difficulty_crisis : Difficulty
@@ -104,13 +56,12 @@ func reset() -> void:
 	#Scenario
 	clear_crisis_description()
 	
-	#State	
-	_set_all_states(2, 2, 2, 2)
-	_water = [0, 0, 0]
-	_electricity = 0
-	_food = 0
-	_isolation = [0, 0, 0]
-	_mobile = 0
+	#State
+	facility_states = FACILITY_STATES_DEFAULT.duplicate(true)
+	facility_effective_states = {}
+	for state: String in facility_states:
+		facility_effective_states[state] = facility_states[state]["default"]
+	modifiers = BASE_MODIFIERS.duplicate(true)
 	
 	# Quest
 	clear_quest()
@@ -157,13 +108,13 @@ func get_description() -> Dictionary:
 func set_description(p_crisis_description : Dictionary) -> void:
 	_crisis_description = p_crisis_description 
 	
-func add_scenario_notification(scenario_name : String, notification : String) -> void:
+func add_scenario_notification(scenario_name : String, p_notification : String) -> void:
 	if not _crisis_description.has(scenario_name):
-		_crisis_description[scenario_name] = {"notification": notification}
+		_crisis_description[scenario_name] = {"notification": p_notification}
 	else:
-		_crisis_description[scenario_name]["notification"]= notification
+		_crisis_description[scenario_name]["notification"] = p_notification
 	
-func add_scenario_entry(scenario_name : String, index : String, desc : String, states : Array[String]) -> void:
+func add_scenario_entry(scenario_name : String, index : String, desc : String, states : Array[Dictionary]) -> void:
 	if not _crisis_description.has(scenario_name):
 		return
 	_crisis_description[scenario_name][index] = { "desc": desc, "states": states }
@@ -191,179 +142,198 @@ func clear_crisis_description() -> void:
 #############################################States#################################################
 
 #region States
-func get_electricity_state() -> ElectricityState:
-	return _electricity_state
 
-func set_electricity_state(new_electricity_state: ElectricityState) -> void:
-	_electricity_state = new_electricity_state
-	change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
+const STATE_TRANSLATOR: Dictionary = {
+	"ElectricityState": {"NONE": 0, "UNLIMITED": 1},
+	"WaterState": {"NONE": 0, "DIRTY": 1, "CLEAN": 2},
+	"MobileNetState": {"OFFLINE": 0, "ONLINE": 1}
+}
 
-func get_electricity_state_descr() -> String:
-	match _electricity_state:
-		ElectricityState.NONE: return "ausgefallen!"
-		ElectricityState.UNLIMITED: return "vorhanden."
-	return ""
+const FACILITY_STATES_DEFAULT: Dictionary = {
+	"ElectricityState": {"default": 1},
+	"WaterState": {"default": 2},
+	"MobileNetState": {"default": 1}
+}
 
+var facility_states: Dictionary = {
+	"ElectricityState": {"default": 1},
+	"WaterState": {"default": 2},
+	"MobileNetState": {"default": 1}
+}
 
-func get_water_state() -> WaterState:
-	return _water_state
+var facility_effective_states: Dictionary = {
+	"ElectricityState": 1,
+	"WaterState": 2,
+	"MobileNetState": 1
+}
 
-func set_water_state(new_water_state: WaterState) -> void:
-	_water_state = new_water_state
-
-func get_water_state_descr() -> String:
-	match _water_state:
-		WaterState.NONE: return "ausgefallen!"
-		WaterState.DIRTY: return "verdreckt."
-		WaterState.CLEAN: return "vorhanden."
-	return ""
-
-
-func get_isolation_state() -> IsolationState:
-	return _isolation_state
-
-func set_isolation_state(new_isolation_state: IsolationState) -> void:
-	_isolation_state = new_isolation_state
-
-func get_isolation_state_descr() -> String:
-	match _isolation_state:
-		IsolationState.NONE: return "keine Betretungsverbote."
-		IsolationState.LIMITED_PUBLIC_ACCESS: return "einige Betretungsverbote."
-		IsolationState.ISOLATION: return "Quarantäne!"
-	return ""
-
-func get_food_contamination_state() -> FoodContaminationState:
-	return _food_contamination_state
-
-func set_food_contamination_state(new_food_contamination_state: FoodContaminationState) -> void:
-	_food_contamination_state = new_food_contamination_state
-
-func get_food_contamination_state_descr() -> String:
-	match _food_contamination_state:
-		FoodContaminationState.NONE:
-			if _electricity_state == ElectricityState.NONE:
-				return "reduz. Essens-Haltbarkeit"
-			else: return "kein Problem."
-		FoodContaminationState.FOOD_SPOILED: return "kontaminiert!"
-	return ""
+func add_state_layer_int(state: String, id: String, value: int) -> void:
+	if not facility_states.has(state):
+		facility_states[state] = {}
+	facility_states[state]["stuff"] = value
 	
-func get_mobile_net_state() -> int:
-	return _mobilenet_state
-
-func set_mobile_net_state(new_mobilenet_state: int) -> void:
-	_mobilenet_state = new_mobilenet_state
-
-func get_mobile_net_state_descr() -> String:
-	match _mobilenet_state:
-		MobileNetState.ONLINE: return "online."
-		MobileNetState.OFFLINE: return "offline!"
-	return ""
-
-func get_every_state_as_name() -> Array[String]:
-	return [
-		"WaterState." + WaterState.find_key(_water_state),
-		"ElectricityState." + ElectricityState.find_key(_electricity_state),
-		"MobileNetState." + MobileNetState.find_key(_mobilenet_state),
-		"FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state),
-		"IsolationState." + IsolationState.find_key(_isolation_state)
-	]
-
-var _water : Array[int] = [0, 0, 0]
-var _electricity : int = 0
-var _food : int = 0
-var _isolation : Array[int] = [0, 0, 0]
-var _mobile : int = 0
-
-func sub_any_state_by_name(state : String) -> void:
-	if "WaterState" in state:
-		_water[WaterState.get(state.get_extension())] -= 1
-		if _water[0] == 0:
-			_water_state = WaterState.DIRTY
-			if _water[1] == 0:
-				_water_state = WaterState.CLEAN
-		change.emit("WaterState." + WaterState.find_key(_water_state))
-	elif "ElectricityState" in state:
-		_electricity -= 1
-		if _electricity == 0:
-			_electricity_state = ElectricityState.UNLIMITED
-		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
-	elif "FoodContaminationState" in state:
-		_food -= 1
-		if _food == 0:
-			_food_contamination_state = FoodContaminationState.NONE
-		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
-	elif "IsolationState" in state:
-		_isolation[IsolationState.get(state.get_extension())] -= 1
-		if _isolation[0] == 0:
-			_isolation_state = IsolationState.LIMITED_PUBLIC_ACCESS
-			if _isolation[1] == 0:
-				_isolation_state = IsolationState.NONE
-		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
-	elif "MobileNetState" in state:
-		_mobile -= 1
-		if _mobile == 0:
-			_mobilenet_state =  MobileNetState.ONLINE
-		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
-
-func add_any_state_by_name(state : String) -> void:
-	if "WaterState" in state:
-		var _state : WaterState = WaterState.get(state.get_extension())
-		if _water_state > _state:
-			_water_state = _state
-			_water[_state] += 1
-		change.emit("WaterState." + WaterState.find_key(_water_state))
-	elif "ElectricityState" in state:
-		var _state : ElectricityState = ElectricityState.get(state.get_extension())
-		if _electricity_state > _state:
-			_electricity_state = _state
-			_electricity += 1
-		change.emit("ElectricityState." + ElectricityState.find_key(_electricity_state))
-	elif "FoodContaminationState" in state:
-		var _state : FoodContaminationState = FoodContaminationState.get(state.get_extension())
-		if _food_contamination_state > _state:
-			_food_contamination_state = _state
-			_food += 1
-		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
-	elif "IsolationState" in state:
-		var _state : IsolationState = IsolationState.get(state.get_extension())
-		if _isolation_state > _state:
-			_isolation_state = _state
-			_isolation[_state] += 1
-		change.emit("FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state))
-	elif "MobileNetState" in state:
-		var _state : MobileNetState = MobileNetState.get(state.get_extension())
-		if _mobilenet_state > _state:
-			_mobilenet_state = _state
-			_mobile += 1
-		change.emit("MobileNetState." + MobileNetState.find_key(_mobilenet_state))
-
-func set_any_state_by_name(state : String) -> void:
-	if "WaterState" in state:
-			_water_state = WaterState.get(state.get_extension())
-	elif "ElectricityState" in state:
-			_electricity_state = ElectricityState.get(state.get_extension())
-	elif "FoodContaminationState" in state:
-			_food_contamination_state = FoodContaminationState.get(state.get_extension())
-	elif "IsolationState" in state:
-			_isolation_state = IsolationState.get(state.get_extension())
-	elif "MobileNetState" in state:
-			_mobilenet_state = MobileNetState.get(state.get_extension())
+	facility_effective_states[state] = _calculate_effective_state(state)
 	
 	change.emit(state)
 
-func is_any_state_by_name(state: String) -> bool:
-	if "WaterState" in state:
-		return _water_state == WaterState.get(state.get_extension())
-	elif "ElectricityState" in state:
-		return _electricity_state == ElectricityState.get(state.get_extension())
-	elif "FoodContaminationState" in state:
-		return _food_contamination_state == FoodContaminationState.get(state.get_extension())
-	elif "IsolationState" in state:
-		return _isolation_state == IsolationState.get(state.get_extension())
-	elif "MobileNetState" in state:
-		return _mobilenet_state == MobileNetState.get(state.get_extension())
-	return false
+func add_state_layer_str(state: String, id: String, value: String) -> void:
+	add_state_layer_int(state, id, STATE_TRANSLATOR[state][value])
+	
+func remove_state_layer(state: String, id: String) -> void:
+	if facility_states.has(state):
+		facility_states[state].erase(id)
+		
+	facility_effective_states[state] = _calculate_effective_state(state)
+
+func _calculate_effective_state(state: String) -> int:
+	var values: Array[int]
+	values.assign(facility_states.get(state, {}).values())
+	if not values.is_empty():
+		return values.min()
+	return -1
+
+func get_effective_state_int(state: String) -> int:
+	return facility_effective_states.get(state, -1)
+
+func get_effective_state_str(state: String) -> String:
+	if facility_effective_states.has(state):
+		return STATE_TRANSLATOR[state].find_key(facility_effective_states[state])
+	return "NULL"
+	
+func is_effective_state_eq(state: String, value: String) -> bool:
+	return get_effective_state_int(state) == STATE_TRANSLATOR[state][value]
+
+func is_effective_state_neq(state: String, value: String) -> bool:
+	return get_effective_state_int(state) != STATE_TRANSLATOR[state][value]
+	
+func is_effective_state_lt(state: String, value: String) -> bool:
+	return get_effective_state_int(state) < STATE_TRANSLATOR[state][value]
+	
+func is_effective_state_gt(state: String, value: String) -> bool:
+	return get_effective_state_int(state) > STATE_TRANSLATOR[state][value]
+
 #endregion
+
+#region flags
+var flags: Dictionary = {
+	"NoEntry": {}
+}
+
+func add_flag_layer(state: String, flag: String) -> void:
+	if not flags.has(state):
+		flags[state] = {}
+	if flags[state].has(flag):
+		flags[state][flag] += 1
+	else:
+		flags[state][flag] = 1
+	
+func remove_flag_layer(state: String, flag: String) -> void:
+	if flags.has(state) and flags[state].has(flag):
+		flags[state][flag] -= 1
+		
+		if flags[state][flag] <= 0:
+			flags[state].erase(flag)
+
+func get_flags(state: String) -> Array[String]:
+	if flags.has(state):
+		return flags[state].keys()
+	return ["NULL"]
+	
+func has_flag(state: String, flag: String) -> bool:
+	return flags.get(state, {}).has(flag)
+
+func has_not_flag(state: String, flag: String) -> bool:
+	return not flags.get(state, {}).has(flag)	
+	
+func has_any_flag(p_state: String, p_flags: Array[String]) -> bool:
+	var state: Dictionary = flags.get(p_state, {})
+	if state.is_empty():
+		return p_flags.is_empty()
+	for flag in p_flags:
+		if state.has(flag):
+			return true
+	return false
+	
+func has_all_flag(state: String, p_flags: Array[String]) -> bool:
+	return flags.get(state, {}).has_all(p_flags)
+
+#endregion
+
+#region modifiers
+
+const BASE_MODIFIERS: Dictionary = {
+	"food_decay_rate": 0.6
+}
+
+var modifiers: Dictionary = {
+	"food_decay_rate": 0.6
+}
+
+func add_modifier(state: String, value: float) -> void:
+	if modifiers.has(state):
+		modifiers[state] += value
+	else:
+		modifiers[state] = BASE_MODIFIERS.get(state, 0) + value
+
+func remove_modifier(state: String) -> void:
+	modifiers.erase(state)
+
+func get_modifier(state: String) -> float:
+	return modifiers.get(state, BASE_MODIFIERS.get(state, INF))
+
+#endregion
+
+func ask_OSM_api(dict: Dictionary) -> bool:
+	if dict.has("state"):
+		if dict.has("is"):
+			var state: String = dict["state"]
+			return STATE_TRANSLATOR[state][dict["is"]] == get_effective_state_int(state)
+		elif dict.has("is_not"):
+			var state: String = dict["state"]
+			return STATE_TRANSLATOR[state][dict["is_not"]] !=  get_effective_state_int(state)
+		elif dict.has("is_gt"):
+			var state: String = dict["state"]
+			return STATE_TRANSLATOR[state][dict["is_gt"]] < get_effective_state_int(state)
+		elif dict.has("is_lt"):
+			var state: String = dict["state"]
+			return STATE_TRANSLATOR[state][dict["is_lt"]] > get_effective_state_int(state)
+	elif dict.has("flag"):
+		if dict.has("has"):
+			return has_flag(dict["flag"], dict["has"])
+		elif dict.has("has_not"):
+			return has_not_flag(dict["flag"], dict["has_not"])
+		elif dict.has("has_any"):
+			return has_any_flag(dict["flag"], dict["has_any"])
+		elif dict.has("has_all"):
+			return has_all_flag(dict["flag"], dict["has_all"])
+	
+	return false
+
+func apply_effect(data: Dictionary) -> void:
+	if data.has_all(["state", "value", "layer"]):
+		add_state_layer_str(data["state"], data["layer"], data["value"])
+	elif data.has_all(["flag", "value"]):
+		add_flag_layer(data["flag"], data["value"])
+	elif data.has_all(["modifier", "value"]):
+		add_modifier(data["modifier"], data["value"])
+
+func remove_effect(data: Dictionary) -> void:
+	if data.has_all(["state", "layer"]):
+		remove_state_layer(data["state"], data["layer"])
+	elif data.has_all(["flag", "value"]):
+		remove_flag_layer(data["flag"], data["value"])
+	elif data.has_all(["modifier", "value"]):
+		add_modifier(data["modifier"], -data["value"])
+
+
+func get_every_state_as_name() -> Array[String]:
+	return [
+		"WaterState." + get_effective_state_str("WaterState"),
+		"ElectricityState." + get_effective_state_str("ElectricityState"),
+		"MobileNetState." + get_effective_state_str("MobileNetState"),
+		#"FoodContaminationState." + FoodContaminationState.find_key(_food_contamination_state),
+		#"IsolationState." + IsolationState.find_key(_isolation_state)
+	]
 
 ############################################Dialogue################################################
 #region Dialogue
@@ -489,10 +459,10 @@ func save() -> Dictionary:
 	data.add_res("difficulty_crisis", _difficulty_crisis)
 	data.add_res("run_length", _run_length)
 	data.add_res("crisis_description", _crisis_description)
-	data.add_res("water_state", _water_state)
-	data.add_res("isolation_state", _isolation_state)
-	data.add_res("food_contamination_state", _food_contamination_state)
-	data.add_res("electricity_state", _electricity_state)
+	data.add_res("facility_effective_states", facility_effective_states)
+	data.add_res("facility_states", facility_states)
+	data.add_res("flags", flags)
+	data.add_res("modifiers", modifiers)
 	data.add_res("upgrades", _upgrades)
 	
 	ResourceSaver.save(data, SAVE_FILE)
@@ -507,13 +477,11 @@ func load_state(p_data : Dictionary) -> void:
 	var p_run_length : int = data.get_res("run_length")
 	
 	set_crisis_difficulty(p_run_length, p_difficulty_crisis)
-						
-	var p_water_state : WaterState = data.get_res("water_state")
-	var p_isolation_state : IsolationState = data.get_res("isolation_state")
-	var p_food_contamination_state : FoodContaminationState = data.get_res("food_contamination_state")
-	var p_electricity_state : ElectricityState = data.get_res("electricity_state")
 	
-	_set_all_states(p_water_state, p_isolation_state, p_food_contamination_state, p_electricity_state)
+	facility_effective_states = data.get_res("facility_effective_states")
+	facility_states = data.get_res("facility_states")
+	flags = data.get_res("flags")
+	modifiers = data.get_res("modifiers")
 	
 	var p_crisis_description : Dictionary = data.get_res("crisis_description")
 	
@@ -522,11 +490,3 @@ func load_state(p_data : Dictionary) -> void:
 	var upgrades: Array[EMC_Upgrade]
 	upgrades.assign(data.get_res("upgrades", []))
 	set_upgrades(upgrades)
-	
-## This function sets all states without verification, it is needed to load save files
-func _set_all_states(p_water_state : WaterState, p_isolation_state : IsolationState,
-					p_food_contamination_state : FoodContaminationState, p_electricity_state : ElectricityState) -> void:
-	_water_state = p_water_state
-	_isolation_state = p_isolation_state
-	_food_contamination_state = p_food_contamination_state
-	_electricity_state = p_electricity_state

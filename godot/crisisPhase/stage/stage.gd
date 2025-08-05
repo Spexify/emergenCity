@@ -110,7 +110,7 @@ func get_avatar_target(p_click_pos : Vector2) -> Vector2:
 	return Vector2.INF
 	
 func show_electricity() -> void:
-	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
+	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"): # REMOVE OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
 		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 0))
 	else:
 		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 1))

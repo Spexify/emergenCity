@@ -54,7 +54,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_stage_mngr.let_npcs_act()
 
 func on_interacted_with_furniture(p_action_ID : String) -> void:
-	JsonMngr.get_action(p_action_ID).execute()
+	JsonMngr.get_action(p_action_ID).execute({"result": {}})
 
 func get_current_day_period() -> DayPeriod:
 	return self._period_cnt % DayPeriod.size() as DayPeriod
@@ -118,8 +118,8 @@ func _advance_day_period(description : String) -> void:
 	#Events & Crises stuff
 	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
-	if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
-		_inventory.spoil_some_items()
+	# if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+	# 	_inventory.spoil_some_items()
 	
 	#if get_current_day_period() == DayPeriod.MORNING:
 	_crisis_mngr.check_crisis_status(get_period_count())

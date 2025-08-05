@@ -32,11 +32,17 @@ func _ready() -> void:
 	menu.show()
 
 func _on_period_increased(new_value : int) -> void:
-	match OverworldStatesMngr.get_electricity_state():
-		OverworldStatesMngr.ElectricityState.NONE:
-			_energy.set_value(_energy.value -  34)
-		OverworldStatesMngr.ElectricityState.UNLIMITED:
-			_energy.set_value(_energy.get_max())
+	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"):
+		_energy.set_value(_energy.get_max())
+	else:
+		_energy.set_value(_energy.value -  34)
+
+	# REMOVE
+	# match OverworldStatesMngr.get_electricity_state():
+	# 	OverworldStatesMngr.ElectricityState.NONE:
+	# 		_energy.set_value(_energy.value -  34)
+	# 	OverworldStatesMngr.ElectricityState.UNLIMITED:
+	# 		_energy.set_value(_energy.get_max())
 
 func open() -> void:
 	self.show()

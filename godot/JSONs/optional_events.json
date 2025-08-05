@@ -26,7 +26,6 @@
 		"constraints": {
 			"constraint_not_evening": "",
 			"constraint_no_limited_public_access": "",
-			"constraint_no_isolation": "",
 		},
 		"consequences": {
 			"add_items_by_name" : "WATER;WATER;WATER",
@@ -81,7 +80,6 @@
 		"constraints": {
 			"constraint_not_evening": "",
 			"constraint_no_limited_public_access": "",
-			"constraint_no_isolation": "",
 			"is_not_scenario": "Flut;Hurricane",
 		},
 		"consequences": {
@@ -171,7 +169,6 @@
 		"announce_only_on_radio": true,
 		"active_periods": 1,
 		"constraints": {
-			"no_active_crisis": "",
 		},
 		"consequences": {
 			"JSON KOMMENTAR": "Is chosen by dialogue-option, see raphael.dialogue",

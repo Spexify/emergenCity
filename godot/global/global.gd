@@ -44,7 +44,6 @@ func set_started_from_entry_scene(p_value: bool = true) -> void:
 func _ready() -> void:
 	var root := get_tree().root 
 	_current_scene = root.get_child(root.get_child_count() - 1)
-	
 
 func goto_scene(path: String) -> void:
 	match path:
@@ -185,7 +184,8 @@ func load_game() -> void:
 	var data : EMC_AllRes
 	if ResourceLoader.exists(SAVE_GAME_FILE):
 		data = ResourceLoader.load(SAVE_GAME_FILE)
-	else:
+		
+	if data == null:
 		data = EMC_AllRes.new()
 	
 	_e_coins = data.get_res("e_coins", INITIAL_E_COINS)

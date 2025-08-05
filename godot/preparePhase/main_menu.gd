@@ -83,8 +83,8 @@ func _on_credit_screen_pressed() -> void:
 func _on_avatar_selection_gui_closed() -> void:
 	Global.load_game()
 	OverworldStatesMngr.set_crisis_difficulty(3, OverworldStatesMngr.Difficulty.TUTORIAL)
-	OverworldStatesMngr._set_all_states(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.IsolationState.NONE,
-										EMC_OverworldStatesMngr.FoodContaminationState.NONE, EMC_OverworldStatesMngr.ElectricityState.NONE,)
+	#OverworldStatesMngr._set_all_states(EMC_OverworldStatesMngr.WaterState.CLEAN, EMC_OverworldStatesMngr.IsolationState.NONE,
+										#EMC_OverworldStatesMngr.FoodContaminationState.NONE, EMC_OverworldStatesMngr.ElectricityState.NONE,)
 	var start_scene_name : String = Global.CRISIS_PHASE_SCENE
 	Global.goto_scene(start_scene_name)
 	close()

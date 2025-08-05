@@ -30,24 +30,27 @@ func set_comp(get_exe: Callable) -> void:
 	for action in exes:
 		action.set_comp(get_exe)
 
-func execute() -> Variant:
+func execute(context: Dictionary = {"result": {}}) -> Dictionary:
 	if acc == AND:
 		for exe : EMC_Action in exes:
-			var r: Variant = exe.execute()
-			if r == null or not r:
-				return false
-		return true
+			context = exe.execute(context)
+			if context["current"] == null or not context["current"]:
+				context["current"] = false
+				return context
+		context["current"] = true
+		return context
 	elif acc == OR:
 		for exe : EMC_Action in exes:
-			var r: Variant = exe.execute()
-			if r != null and r:
-				return true
-		return false
+			context = exe.execute(context)
+			if context["current"] != null and context["current"]:
+				context["current"] = true
+				return context
+		context["current"] = false
+		return context
 	elif acc == ARRAY:
 		var result := []
 		for exe : EMC_Action in exes:
-			var r: Variant = exe.execute()
-			if r != null:
-				result.append(r)
-		return result
-	return null
+			context = exe.execute(context)
+		return context
+	context["current"] = null
+	return context

@@ -91,56 +91,51 @@ func _ready() -> void:
 ## As there is no analogous input code on mobile phones, this can be called
 ## indiscriminately
 func _process(delta: float) -> void:
-	## DEPRECATED
-	#if Input.is_action_just_pressed("ToggleGUI"): #G key
-		#var guielem := $GUI/CL/VBC/LowerSection
-		#guielem.visible = !guielem.visible
-		#$GUI/CL/VBC/MiddleSection.visible = !$GUI/CL/VBC/UpperSection.visible
-	## END
-	
-	if Input.is_action_just_pressed("Toggle_Electricity"):
-		if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
-			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.NONE)
-		else:
-			OverworldStatesMngr.set_electricity_state(OverworldStatesMngr.ElectricityState.UNLIMITED)
-		#_pause_menue.update_overworld_states()
-		_handy_gui.restart()
-		info_center_gui.reload()
-	
-	if Input.is_action_just_pressed("Toggle_Water"):
-		if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
-			OverworldStatesMngr.set_water_state(int(OverworldStatesMngr.SemaphoreColors.RED))
-		else:
-			OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
-		#_pause_menue.update_overworld_states()
-		_handy_gui.restart()
-		info_center_gui.reload()
-	
-	if Input.is_action_just_pressed("Toggle_Isolation"):
-		if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
-			OverworldStatesMngr.set_isolation_state(int(OverworldStatesMngr.SemaphoreColors.RED))
-		else:
-			OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
-		#_pause_menue.update_overworld_states()
-		_handy_gui.restart()
-		info_center_gui.reload()
-	
-	if Input.is_action_just_pressed("Toggle_Food_Contam"):
-		if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
-			OverworldStatesMngr.set_food_contamination_state(int(OverworldStatesMngr.SemaphoreColors.RED))
-		else:
-			OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
-		#_pause_menue.update_overworld_states()
-		_handy_gui.restart()
-		info_center_gui.reload()
-		
-	if Input.is_action_just_pressed("Toggle_Mobile_Net"):
-		if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.MobileNetState.ONLINE:
-			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.OFFLINE)
-		else:
-			OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.ONLINE)
-		_handy_gui.restart()
-		info_center_gui.reload()
+	pass
+	#if Input.is_action_just_pressed("Toggle_Electricity"):
+		#if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"):
+			### Overrides effective state, this will be reset when a new crisis changes the state
+			#OverworldStatesMngr.facility_effective_states["ElectricityState"] = OverworldStatesMngr.STATE_TRANSLATOR["ElectricityState"]["NONE"]
+		#else:
+			#OverworldStatesMngr.facility_effective_states["ElectricityState"] = OverworldStatesMngr.STATE_TRANSLATOR["ElectricityState"]["UNLIMITED"]
+		##_pause_menue.update_overworld_states()
+		#_handy_gui.restart()
+		#info_center_gui.reload()
+	#
+	#if Input.is_action_just_pressed("Toggle_Water"):
+		#if OverworldStatesMngr.get_water_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			#OverworldStatesMngr.set_water_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		#else:
+			#OverworldStatesMngr.set_water_state(OverworldStatesMngr.get_water_state() + 1)
+		##_pause_menue.update_overworld_states()
+		#_handy_gui.restart()
+		#info_center_gui.reload()
+	#
+	#if Input.is_action_just_pressed("Toggle_Isolation"):
+		#if OverworldStatesMngr.get_isolation_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			#OverworldStatesMngr.set_isolation_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		#else:
+			#OverworldStatesMngr.set_isolation_state(OverworldStatesMngr.get_isolation_state() + 1)
+		##_pause_menue.update_overworld_states()
+		#_handy_gui.restart()
+		#info_center_gui.reload()
+	#
+	#if Input.is_action_just_pressed("Toggle_Food_Contam"):
+		#if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.SemaphoreColors.GREEN:
+			#OverworldStatesMngr.set_food_contamination_state(int(OverworldStatesMngr.SemaphoreColors.RED))
+		#else:
+			#OverworldStatesMngr.set_food_contamination_state(OverworldStatesMngr.get_food_contamination_state() + 1)
+		##_pause_menue.update_overworld_states()
+		#_handy_gui.restart()
+		#info_center_gui.reload()
+		#
+	#if Input.is_action_just_pressed("Toggle_Mobile_Net"):
+		#if OverworldStatesMngr.get_mobile_net_state() == OverworldStatesMngr.MobileNetState.ONLINE:
+			#OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.OFFLINE)
+		#else:
+			#OverworldStatesMngr.set_mobile_net_state(OverworldStatesMngr.MobileNetState.ONLINE)
+		#_handy_gui.restart()
+		#info_center_gui.reload()
 		
 func save() -> Dictionary:
 	var data : Dictionary = {

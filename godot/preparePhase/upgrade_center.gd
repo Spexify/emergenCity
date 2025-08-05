@@ -76,14 +76,14 @@ func _on_upgrade_long_pressed(p_slot: EMC_Upgrade_Slot) -> void:
 	_un_equip_btn.hide()
 	info.hide()
 	
-	var info: Array[Dictionary]
+	var _info: Array[Dictionary]
 	
 	if p_slot.equipped:
-		info.append({"text": "Abrüsten", "callback": _on_un_equip_btn_pressed, "design": "CancelButton"})
+		_info.append({"text": "Abrüsten", "callback": _on_un_equip_btn_pressed, "design": "CancelButton"})
 	elif not p_slot.locked:
-		info.append({"text": "Ausrüsten", "callback": _on_equip_btn_pressed, "design": "ConfirmButton"})
+		_info.append({"text": "Ausrüsten", "callback": _on_equip_btn_pressed, "design": "ConfirmButton"})
 	else:
-		info.append(
+		_info.append(
 			{
 				"text": "Freischalten",
 				"callback": _on_buy_btn_pressed,
@@ -92,7 +92,7 @@ func _on_upgrade_long_pressed(p_slot: EMC_Upgrade_Slot) -> void:
 			})
 	
 	canvas_modulate.show()
-	upgrade_info_gui.open(p_slot.get_upgrade(), info)
+	upgrade_info_gui.open(p_slot.get_upgrade(), _info)
 
 func _on_upgrade_clicked(p_slot : EMC_Upgrade_Slot) -> void:
 	_last_clicked_upgrade = p_slot.get_upgrade()
