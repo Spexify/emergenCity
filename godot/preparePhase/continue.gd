@@ -6,7 +6,6 @@ func _on_continue_pressed() -> void:
 
 
 func _on_reset_pressed() -> void:
-	OverworldStatesMngr.reset()
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()

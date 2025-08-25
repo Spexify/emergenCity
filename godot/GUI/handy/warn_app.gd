@@ -26,8 +26,10 @@ func start() -> void:
 	
 	item_list.clear()
 
-	var dict : Dictionary = OverworldStatesMngr.get_description()
+	var dict : Array[String]
+	dict.assign(OverworldStatesMngr.get_scenario().keys())
 	for scenario_id : String in dict:
+		scenario_id = scenario_id.get_basename().get_extension()
 		
 		#var textures : Array[Texture2D] = []
 		#for key : String in description[scenario_name]:
@@ -38,9 +40,9 @@ func start() -> void:
 					#var y : int = state_info[1] * 64
 					#textures.append(EMC_Util.Icon_Patcher.cut_out(warn_texture, Rect2(x, y, 64, 64)))
 		
-		var scenario: Dictionary = JsonMngr.scenarios.get(scenario_id.get_extension())
+		var scenario: Dictionary = JsonMngr.scenarios.get(scenario_id)
 		var icon_id: int = scenario.get("icon_id")
-		var title: String = scenario.get("title", scenario_id.get_extension())
+		var title: String = scenario.get("title", scenario_id)
 		item_list.add_item([title, scenario_icons[icon_id]], scenario_id)
 	
 	if item_list.is_empty():
@@ -77,7 +79,7 @@ func _on_item_clicked(id : String) -> void:
 	if id != "Nothing":
 		notifications.hide()
 		description.show()
-		text.set_text(JsonMngr.scenarios.get(id.get_extension()).get("description"))
+		text.set_text(JsonMngr.scenarios.get(id).get("description"))
 	
 
 func _on_text_meta_clicked(meta : Variant) -> void:

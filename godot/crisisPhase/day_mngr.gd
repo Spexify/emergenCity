@@ -89,6 +89,7 @@ func _advance_day_period(description : String) -> void:
 	
 	#Actually advance the time
 	self._period_cnt += 1
+	OverworldStatesMngr.next_day(_period_cnt)
 	
 	## NOTICE: see callback: It opens SummaryEndOfDay and Backpack
 	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])

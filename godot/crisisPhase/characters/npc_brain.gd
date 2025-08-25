@@ -17,8 +17,9 @@ var _stage_mngr: EMC_StageMngr
 func _init(data : Dictionary) -> void:
 	actions = data.get("actions", {})
 	for key : String in actions:
-		var res: Resource = Preloader.get_resource("res://util/action/" + actions[key]["type"] + "_action.gd")
-		actions[key] = res.new(actions[key])
+		#var res: Resource = Preloader.get_resource("res://util/action/" + actions[key]["type"] + "_action.gd")
+		#actions[key] = res.new(actions[key])
+		actions[key] = EMC_Action.load_action(actions[key])
 		#
 		#if typeof(actions[key]) == TYPE_DICTIONARY:
 			#if actions[key].has("0"):

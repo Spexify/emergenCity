@@ -123,6 +123,7 @@ func use_radio(_dummy: int = NO_PARAM) -> void:
 		#30-70 zwischen unnützem Text und Szenario Name
 		#if _rng.randi_range(0, 4) <= 3:
 		var notification := OverworldStatesMngr.get_notification()
+		print(notification)
 		if not notification.is_empty():
 			radio_msg = notification.pick_random()
 		else:

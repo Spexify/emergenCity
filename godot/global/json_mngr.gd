@@ -462,16 +462,16 @@ func load_scenarios() -> void:
 
 #######################################JSON CIRISIS#################################################
 
-var crisis: Array[Dictionary]
+var crisis: Dictionary
 
 func load_crisis() -> void:
-	var data : Array = (load_file_check_type(CRISIS_SOURCE, "Crisis", TYPE_ARRAY) as Array)
+	var data : Dictionary = (load_file_check_type(CRISIS_SOURCE, "Crisis", TYPE_DICTIONARY) as Dictionary)
 	if data == null or data.is_empty():
 		return
 		
-	assert(data[0] is Dictionary) 
+	assert(data.has_all(["TUTORIAL", "EASY", "following"])) 
 	
-	crisis.assign(data)
+	crisis = data
 
 ######################################JSON DIALOGUES################################################
 #region DIALOGUES

@@ -152,7 +152,6 @@ func close() -> void:
 
 func _on_main_menu_pressed() -> void:
 	Global.get_tree().paused = false
-	OverworldStatesMngr.reset()
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()

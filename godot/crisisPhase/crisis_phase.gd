@@ -53,6 +53,8 @@ func _get_comp(comp_name: String) -> Node:
 
 ## Setup all the needed reference for GUIs etc.
 func _ready() -> void:
+	OverworldStatesMngr.reset()
+	
 	if Global.was_crisis():
 		##LOAD SAVE STATE
 		Global.load_state()

@@ -55,13 +55,17 @@ func _ready() -> void:
 func reset() -> void:
 	#Scenario
 	clear_crisis_description()
+	crisis_end = 0
 	
 	#State
-	facility_states = FACILITY_STATES_DEFAULT.duplicate(true)
-	facility_effective_states = {}
-	for state: String in facility_states:
-		facility_effective_states[state] = facility_states[state]["default"]
+	facility_states.clear()
+	facility_states[0] = FACILITY_STATES_DEFAULT.duplicate(true)
+	facility_effective_states.clear()
+	facility_effective_states[0]= {}
+	for state: String in facility_states[0]:
+		facility_effective_states[0][state] = facility_states[0][state]["default"]
 	modifiers = BASE_MODIFIERS.duplicate(true)
+	current_t = 0
 	
 	# Quest
 	clear_quest()
@@ -82,57 +86,38 @@ func get_crisis_length() -> int:
 
 func get_difficulty() -> Difficulty:
 	return _difficulty_crisis
+	
+func get_difficulty_str() -> String:
+	return Difficulty.find_key(_difficulty_crisis)
 
 ############################################Scenario################################################
 #region Scenario
 var _crisis_description : Dictionary
 
-## Returns scenario name
-func get_scenario_names() -> Array[String]:
-	var result : Array[String]
-	result.assign(_crisis_description.keys())
+func add_scenario(id: String, descr: String, _t : int) -> void:
+	var t: int = current_t + _t
+	if not _crisis_description.has(t):
+		_crisis_description[t] = {}
+	
+	if not _crisis_description[t].has(id):
+		_crisis_description[t][id] = []
+	_crisis_description[t][id].append(descr)
+	
+func get_scenario(_t: int = 0) -> Dictionary:
+	var t: int = current_t + _t
+	return _crisis_description.get(t, {})
+	
+func get_scenario_names(_t: int = 0) -> Array[String]:
+	var result: Array[String] = []
+	for key: String in _crisis_description.get(current_t + _t, ""):
+		result.append(key.get_basename().get_extension())
 	return result
-
-func get_description_by_name(scenario : String) -> Dictionary:
-	if _crisis_description.has(scenario):
-		return _crisis_description[scenario]
-	else:
-		return {"Error" : "No such Scenario"}
-		
-func get_description_by_index(index : int) -> Dictionary:
-	return _crisis_description[_crisis_description.keys()[index]]
-	
-func get_description() -> Dictionary:
-	return _crisis_description
-	
-func set_description(p_crisis_description : Dictionary) -> void:
-	_crisis_description = p_crisis_description 
-	
-func add_scenario_notification(scenario_name : String, p_notification : String) -> void:
-	if not _crisis_description.has(scenario_name):
-		_crisis_description[scenario_name] = {"notification": p_notification}
-	else:
-		_crisis_description[scenario_name]["notification"] = p_notification
-	
-func add_scenario_entry(scenario_name : String, index : String, desc : String, states : Array[Dictionary]) -> void:
-	if not _crisis_description.has(scenario_name):
-		return
-	_crisis_description[scenario_name][index] = { "desc": desc, "states": states }
-	
-func remove_scenario_by_name(scenario_name : String) -> void:
-	if _crisis_description.has(scenario_name):
-		_crisis_description.erase(scenario_name)
-		
-func remove_scenario_entry(scenario_name : String, index : String) -> void:
-	if _crisis_description.has(scenario_name):
-		_crisis_description[scenario_name].erase(index)
 
 ## Returns notification for radio
 func get_notification() -> Array[String]:
 	var result : Array[String]
-	for description : Dictionary in _crisis_description.values():
-		result.append(description["notification"])
-		result.append_array(description.values().slice(1).map(func (dict : Dictionary) -> String: return dict["desc"]))
+	for descr : Array in _crisis_description[current_t].values():
+		result.append_array(descr)
 	return result
 	
 func clear_crisis_description() -> void:
@@ -140,6 +125,8 @@ func clear_crisis_description() -> void:
 #endregion
 
 #############################################States#################################################
+
+var crisis_end: int = 0
 
 #region States
 
@@ -156,97 +143,168 @@ const FACILITY_STATES_DEFAULT: Dictionary = {
 }
 
 var facility_states: Dictionary = {
-	"ElectricityState": {"default": 1},
-	"WaterState": {"default": 2},
-	"MobileNetState": {"default": 1}
+	0: {
+		"ElectricityState": {"default": 1},
+		"WaterState": {"default": 2},
+		"MobileNetState": {"default": 1}
+	}
 }
 
 var facility_effective_states: Dictionary = {
-	"ElectricityState": 1,
-	"WaterState": 2,
-	"MobileNetState": 1
+	0: {
+		"ElectricityState": 1,
+		"WaterState": 2,
+		"MobileNetState": 1
+	}
 }
 
-func add_state_layer_int(state: String, id: String, value: int) -> void:
-	if not facility_states.has(state):
-		facility_states[state] = {}
-	facility_states[state]["stuff"] = value
+var current_t: int = 0
+var _batch_depth: int = 0
+
+## TODO: Efficency
+func begin_batch() -> void:
+	_batch_depth = 1
 	
-	facility_effective_states[state] = _calculate_effective_state(state)
+func end_batch() -> void:
+	_batch_depth = max(_batch_depth - 1, 0)
+	if _batch_depth == 0:
+		_calculate_all_effective_states(facility_states.keys().max())
+
+func add_state_layer_int(state: String, id: String, value: int, _t: int = 0) -> void:
+	var t: int = current_t + _t
+	for i in range(current_t, t+1):
+		if not facility_states.has(i):
+			facility_states[i] = FACILITY_STATES_DEFAULT.duplicate(true)
+	
+	if not facility_states[t].has(state):
+		facility_states[t][state] = {}
+	facility_states[t][state][id] = value
+	
+	if _batch_depth > 0:
+		return
+		
+	for i in range(current_t, t+1):
+		if not facility_effective_states.has(i):
+			facility_effective_states[i] = {}
+		facility_effective_states[i][state] = _calculate_effective_state(state, i-current_t)
 	
 	change.emit(state)
 
-func add_state_layer_str(state: String, id: String, value: String) -> void:
-	add_state_layer_int(state, id, STATE_TRANSLATOR[state][value])
+func add_state_layer_str(state: String, id: String, value: String, _t: int = 0) -> void:
+	add_state_layer_int(state, id, STATE_TRANSLATOR[state][value], _t)
 	
-func remove_state_layer(state: String, id: String) -> void:
-	if facility_states.has(state):
+func remove_state_layer(state: String, id: String, _t: int = 0) -> void:
+	var t: int = current_t + _t
+	if facility_states[t].has(state):
 		facility_states[state].erase(id)
 		
-	facility_effective_states[state] = _calculate_effective_state(state)
+	if _batch_depth > 0:
+		return
+		
+	facility_effective_states[t][state] = _calculate_effective_state(state, _t)
 
-func _calculate_effective_state(state: String) -> int:
+func _calculate_all_effective_states(_t: int = 0) -> void:
+	var t: int = current_t + _t
 	var values: Array[int]
-	values.assign(facility_states.get(state, {}).values())
+	for state: String in FACILITY_STATES_DEFAULT.keys():
+		for i in range(current_t, t):
+			if not facility_states.has(i):
+				facility_states[i] = FACILITY_STATES_DEFAULT.duplicate(true)
+			
+			values.assign(facility_states[i].get(state, {}).values())
+			if not values.is_empty():
+				if not facility_effective_states.has(i):
+					facility_effective_states[i] = {}
+				
+				facility_effective_states[i][state] = values.min()
+
+func _calculate_effective_state(state: String, _t: int = 0) -> int:
+	var t: int = current_t + _t
+	var values: Array[int]
+	values.assign(facility_states[t].get(state, {}).values())
 	if not values.is_empty():
 		return values.min()
 	return -1
 
-func get_effective_state_int(state: String) -> int:
-	return facility_effective_states.get(state, -1)
+func get_effective_state_int(state: String, _t: int = 0) -> int:
+	var t: int = current_t + _t
+	if not facility_effective_states.has(t):
+		facility_states[t] = FACILITY_STATES_DEFAULT.duplicate(true)
+		facility_effective_states[t] = {}
+	facility_effective_states[t][state] = _calculate_effective_state(state, _t)
+		
+	return facility_effective_states[t].get(state, -1)
 
-func get_effective_state_str(state: String) -> String:
-	if facility_effective_states.has(state):
-		return STATE_TRANSLATOR[state].find_key(facility_effective_states[state])
+func get_effective_state_str(state: String, _t: int = 0) -> String:
+	var t: int = current_t + _t
+	if not facility_effective_states.has(t):
+		facility_states[t] = FACILITY_STATES_DEFAULT.duplicate(true)
+		facility_effective_states[t] = {}
+	facility_effective_states[t][state] = _calculate_effective_state(state, _t)
+	
+	if facility_effective_states[t].has(state):
+		return STATE_TRANSLATOR[state].find_key(facility_effective_states[t][state])
 	return "NULL"
 	
-func is_effective_state_eq(state: String, value: String) -> bool:
-	return get_effective_state_int(state) == STATE_TRANSLATOR[state][value]
+func is_effective_state_eq(state: String, value: String, _t: int = 0) -> bool:
+	return get_effective_state_int(state, _t) == STATE_TRANSLATOR[state][value]
 
-func is_effective_state_neq(state: String, value: String) -> bool:
-	return get_effective_state_int(state) != STATE_TRANSLATOR[state][value]
+func is_effective_state_neq(state: String, value: String, _t: int = 0) -> bool:
+	return get_effective_state_int(state, _t) != STATE_TRANSLATOR[state][value]
 	
-func is_effective_state_lt(state: String, value: String) -> bool:
-	return get_effective_state_int(state) < STATE_TRANSLATOR[state][value]
+func is_effective_state_lt(state: String, value: String, _t: int = 0) -> bool:
+	return get_effective_state_int(state, _t) < STATE_TRANSLATOR[state][value]
 	
-func is_effective_state_gt(state: String, value: String) -> bool:
-	return get_effective_state_int(state) > STATE_TRANSLATOR[state][value]
+func is_effective_state_gt(state: String, value: String, _t: int = 0) -> bool:
+	return get_effective_state_int(state, _t) > STATE_TRANSLATOR[state][value]
 
 #endregion
 
 #region flags
 var flags: Dictionary = {
-	"NoEntry": {}
 }
 
-func add_flag_layer(state: String, flag: String) -> void:
-	if not flags.has(state):
-		flags[state] = {}
-	if flags[state].has(flag):
-		flags[state][flag] += 1
-	else:
-		flags[state][flag] = 1
+func add_flag_layer(state: String, flag: String, _t: int = 0) -> void:
+	var t: int = current_t + _t
+	for i in range(current_t, t+1):
+		if not flags.has(i):
+			flags[i] = {}
 	
-func remove_flag_layer(state: String, flag: String) -> void:
-	if flags.has(state) and flags[state].has(flag):
-		flags[state][flag] -= 1
+	if not flags[t].has(state):
+		flags[t][state] = {}
+	if flags[t][state].has(flag):
+		flags[t][state][flag] += 1
+	else:
+		flags[t][state][flag] = 1
+	
+func remove_flag_layer(state: String, flag: String, _t: int = 0) -> void:
+	var t: int = current_t + _t
+	if not flags.has(t):
+		return
+	
+	if flags[t].has(state) and flags[t][state].has(flag):
+		flags[t][state][flag] -= 1
 		
-		if flags[state][flag] <= 0:
-			flags[state].erase(flag)
+		if flags[t][state][flag] <= 0:
+			flags[t][state].erase(flag)
 
-func get_flags(state: String) -> Array[String]:
-	if flags.has(state):
-		return flags[state].keys()
+func get_flags(state: String, _t: int = 0) -> Array[String]:
+	var t: int = current_t + _t
+	if flags.has(t) and flags[t].has(state):
+		return flags[t][state].keys()
 	return ["NULL"]
 	
-func has_flag(state: String, flag: String) -> bool:
-	return flags.get(state, {}).has(flag)
+func has_flag(state: String, flag: String, _t: int = 0) -> bool:
+	var t: int = current_t + _t
+	return flags.get(t, {}).get(state, {}).has(flag)
 
-func has_not_flag(state: String, flag: String) -> bool:
-	return not flags.get(state, {}).has(flag)	
+func has_not_flag(state: String, flag: String, _t: int = 0) -> bool:
+	var t: int = current_t + _t
+	return not flags.get(t, {}).get(state, {}).has(flag)	
 	
-func has_any_flag(p_state: String, p_flags: Array[String]) -> bool:
-	var state: Dictionary = flags.get(p_state, {})
+func has_any_flag(p_state: String, p_flags: Array[String], _t: int = 0) -> bool:
+	var t: int = current_t + _t
+	var state: Dictionary = flags.get(t, {}).get(p_state, {})
 	if state.is_empty():
 		return p_flags.is_empty()
 	for flag in p_flags:
@@ -254,8 +312,9 @@ func has_any_flag(p_state: String, p_flags: Array[String]) -> bool:
 			return true
 	return false
 	
-func has_all_flag(state: String, p_flags: Array[String]) -> bool:
-	return flags.get(state, {}).has_all(p_flags)
+func has_all_flag(state: String, p_flags: Array[String], _t: int = 0) -> bool:
+	var t: int = current_t + _t
+	return flags.get(t, {}).get(state, {}).has_all(p_flags)
 
 #endregion
 
@@ -282,6 +341,13 @@ func get_modifier(state: String) -> float:
 	return modifiers.get(state, BASE_MODIFIERS.get(state, INF))
 
 #endregion
+
+func next_day(t: int) -> void:
+	current_t = t
+	facility_effective_states.erase(t-1)
+	facility_states.erase(t-1)
+	flags.erase(t-1)
+	_crisis_description.erase(t-1)
 
 func ask_OSM_api(dict: Dictionary) -> bool:
 	if dict.has("state"):
@@ -464,6 +530,8 @@ func save() -> Dictionary:
 	data.add_res("flags", flags)
 	data.add_res("modifiers", modifiers)
 	data.add_res("upgrades", _upgrades)
+	data.add_res("crisis_end", crisis_end)
+	data.add_res("current_t", current_t)
 	
 	ResourceSaver.save(data, SAVE_FILE)
 	
@@ -482,10 +550,12 @@ func load_state(p_data : Dictionary) -> void:
 	facility_states = data.get_res("facility_states")
 	flags = data.get_res("flags")
 	modifiers = data.get_res("modifiers")
+	current_t = data.get_res("current_t", 0)
 	
 	var p_crisis_description : Dictionary = data.get_res("crisis_description")
 	
-	set_description(p_crisis_description)
+	_crisis_description = p_crisis_description
+	crisis_end = data.get_res("crisis_end", 0)
 	
 	var upgrades: Array[EMC_Upgrade]
 	upgrades.assign(data.get_res("upgrades", []))

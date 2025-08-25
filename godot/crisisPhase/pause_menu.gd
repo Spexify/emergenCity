@@ -33,7 +33,6 @@ func _on_settings_pressed() -> void:
 
 ## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
-	OverworldStatesMngr.reset()
 	Global.reset_state()
 	Global.reset_inventory()
 	Global.reset_upgrades_equipped()
