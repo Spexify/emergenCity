@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://j8qcqefgbhq4"]
 
-[ext_resource type="Script" path="res://preparePhase/shop.gd" id="1_mfqhx"]
+[ext_resource type="Script" uid="uid://cm8alivdahvmt" path="res://preparePhase/shop.gd" id="1_mfqhx"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_duud7"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://assets/citymap/citymap.png" id="3_bnbfs"]
 [ext_resource type="Texture2D" uid="uid://b4cvdmct7qdxn" path="res://assets/GUI/icons/icon_ecoins.png" id="3_spno5"]

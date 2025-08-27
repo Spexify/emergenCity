@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxdptvo5x7o3t"]
 
-[ext_resource type="Script" path="res://GUI/info_center/info_center_gui.gd" id="1_sjylv"]
+[ext_resource type="Script" uid="uid://5wijx6txjy0g" path="res://GUI/info_center/info_center_gui.gd" id="1_sjylv"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="5_f6nx5"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="6_i3a0i"]
 

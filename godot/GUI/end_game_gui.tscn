@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://bnmcmtfl1jq8q"]
 
-[ext_resource type="Script" path="res://GUI/end_game_gui.gd" id="1_brneb"]
+[ext_resource type="Script" uid="uid://cyti3p2j30tvq" path="res://GUI/end_game_gui.gd" id="1_brneb"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="2_c2i0o"]
 [ext_resource type="Texture2D" uid="uid://d35pi0p7mtby6" path="res://assets/particles/particle_star.png" id="2_wm8fx"]
 [ext_resource type="Texture2D" uid="uid://biq6rkvttsy7w" path="res://assets/GUI/icons/empyt_big_water_icon.png" id="3_cm15d"]

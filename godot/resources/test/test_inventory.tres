@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EMC_Inventory" load_steps=64 format=3 uid="uid://bayr86p850dt"]
+[gd_resource type="Resource" script_class="EMC_Inventory" load_steps=65 format=3 uid="uid://bayr86p850dt"]
 
-[ext_resource type="Script" path="res://inventory/inventory.gd" id="1_w3uv3"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="2_bivd5"]
+[ext_resource type="Script" uid="uid://b0ymg5og4kujm" path="res://inventory/inventory.gd" id="1_w3uv3"]
+[ext_resource type="Script" uid="uid://dg0wue01hcvsg" path="res://inventory/item.gd" id="2_bivd5"]
+[ext_resource type="Script" uid="uid://d374ckeaba1lx" path="res://inventory/components/item_component.gd" id="3_fl1kr"]
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="3_yhqop"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uon1f"]
@@ -14,7 +15,7 @@ script = ExtResource("2_bivd5")
 id = 1
 name = "Wasser"
 descr = "Das ist Wasser"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -31,7 +32,7 @@ script = ExtResource("2_bivd5")
 id = 1
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -48,7 +49,7 @@ script = ExtResource("2_bivd5")
 id = 1
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -65,7 +66,7 @@ script = ExtResource("2_bivd5")
 id = 2
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -82,7 +83,7 @@ script = ExtResource("2_bivd5")
 id = 2
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -99,7 +100,7 @@ script = ExtResource("2_bivd5")
 id = 3
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -116,7 +117,7 @@ script = ExtResource("2_bivd5")
 id = 3
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -133,7 +134,7 @@ script = ExtResource("2_bivd5")
 id = 6
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -150,7 +151,7 @@ script = ExtResource("2_bivd5")
 id = 8
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -167,7 +168,7 @@ script = ExtResource("2_bivd5")
 id = 10
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -184,7 +185,7 @@ script = ExtResource("2_bivd5")
 id = 11
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -201,7 +202,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -218,7 +219,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -235,7 +236,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -252,7 +253,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -269,7 +270,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -286,7 +287,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -303,7 +304,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -320,7 +321,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -337,7 +338,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -354,7 +355,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -371,7 +372,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -388,7 +389,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -405,7 +406,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -422,7 +423,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -439,7 +440,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -456,7 +457,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -473,7 +474,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -490,7 +491,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""
@@ -507,7 +508,7 @@ script = ExtResource("2_bivd5")
 id = 0
 name = "Dummy"
 descr = "No Descr"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_fl1kr")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""

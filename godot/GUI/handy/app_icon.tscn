@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7njvi1qsgdon"]
 
-[ext_resource type="Script" path="res://GUI/handy/app_icon.gd" id="1_al724"]
+[ext_resource type="Script" uid="uid://cjc7mcy5dxrjr" path="res://GUI/handy/app_icon.gd" id="1_al724"]
 [ext_resource type="Texture2D" uid="uid://b4iuh38wfe4f4" path="res://assets/GUI/icons/icon_info_app.png" id="1_boyfp"]
 
 [node name="AppIcon" type="VBoxContainer"]

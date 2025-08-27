@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfk7h3ji5pkne"]
+[gd_scene load_steps=8 format=3 uid="uid://cfk7h3ji5pkne"]
 
 [ext_resource type="Texture2D" uid="uid://cp0iweoxe0jx2" path="res://assets/GUI/buttons/button_inventory_slot.png" id="1_l71h0"]
-[ext_resource type="Script" path="res://inventory/item_slot.gd" id="1_lvpcn"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="2_dgih1"]
+[ext_resource type="Script" uid="uid://b7tpvnn3lxhy4" path="res://inventory/item_slot.gd" id="1_lvpcn"]
+[ext_resource type="Script" uid="uid://d374ckeaba1lx" path="res://inventory/components/item_component.gd" id="2_2xwh8"]
+[ext_resource type="Script" uid="uid://dg0wue01hcvsg" path="res://inventory/item.gd" id="2_dgih1"]
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="3_1r3we"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvlci"]
@@ -15,7 +16,7 @@ script = ExtResource("2_dgih1")
 id = 0
 name = "Dummy"
 descr = "<No Descr>"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("2_2xwh8")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpabqqngimcqo"]
+[gd_scene load_steps=11 format=3 uid="uid://dpabqqngimcqo"]
 
-[ext_resource type="Script" path="res://GUI/item_info_gui.gd" id="1_tv8oo"]
+[ext_resource type="Script" uid="uid://bndol2f6mp560" path="res://GUI/item_info_gui.gd" id="1_tv8oo"]
 [ext_resource type="PackedScene" uid="uid://cfk7h3ji5pkne" path="res://inventory/item_slot.tscn" id="2_3qs2r"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_nyu1n"]
-[ext_resource type="Script" path="res://inventory/item.gd" id="3_ee7pr"]
+[ext_resource type="Script" uid="uid://dg0wue01hcvsg" path="res://inventory/item.gd" id="3_ee7pr"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_l3pph"]
+[ext_resource type="Script" uid="uid://d374ckeaba1lx" path="res://inventory/components/item_component.gd" id="3_uks4k"]
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="4_arpum"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="4_m3myp"]
 
@@ -18,7 +19,7 @@ script = ExtResource("3_ee7pr")
 id = 0
 name = "Dummy"
 descr = "<No Descr>"
-comps = Array[Resource("res://inventory/components/item_component.gd")]([])
+comps = Array[ExtResource("3_uks4k")]([])
 sound_effect = {
 "clicked": "BasicItem",
 "consumed": ""

@@ -1,6 +1,6 @@
 [gd_scene load_steps=41 format=3 uid="uid://cdqgsn775dgsp"]
 
-[ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
+[ext_resource type="Script" uid="uid://bayw2phrdam5s" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://assets/GUI/buttons/button_backpack.png" id="4_ef5pu"]
 [ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://assets/GUI/icons/icon_menu_information.png" id="5_1wb3a"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://assets/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
 [ext_resource type="Texture2D" uid="uid://crhmjiq7dfpx8" path="res://assets/GUI/buttons/phone_button.png" id="7_3q5yt"]
-[ext_resource type="Script" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
+[ext_resource type="Script" uid="uid://c6dafj2rku3sd" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://7oi6kcm73lxd" path="res://GUI/default/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory/inventory_GUI.tscn" id="9_i2q6e"]
@@ -35,8 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://cxdptvo5x7o3t" path="res://GUI/info_center/info_center_gui.tscn" id="30_31x86"]
 [ext_resource type="PackedScene" uid="uid://b6rt1srdy2k6h" path="res://GUI/default/two_choice.tscn" id="33_52q5c"]
 [ext_resource type="PackedScene" uid="uid://dwklogkejltna" path="res://global/scoreboard.tscn" id="34_0pmq5"]
-[ext_resource type="Script" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
-[ext_resource type="Script" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
+[ext_resource type="Script" uid="uid://c0xaaimi1qp8e" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
+[ext_resource type="Script" uid="uid://bd2g8sc41awon" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)

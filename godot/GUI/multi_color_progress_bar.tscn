@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfvannwhsjdtl"]
 
-[ext_resource type="Script" path="res://GUI/multi_color_progress_bar.gd" id="1_go723"]
+[ext_resource type="Script" uid="uid://dv0nyybs6jt0s" path="res://GUI/multi_color_progress_bar.gd" id="1_go723"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="2_byw0o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ix80a"]

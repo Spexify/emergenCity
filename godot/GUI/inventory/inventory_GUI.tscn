@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://diu2wl65n301n"]
 
-[ext_resource type="Script" path="res://GUI/inventory/inventory_GUI.gd" id="1_ve5h2"]
+[ext_resource type="Script" uid="uid://dtx4jipwjswfb" path="res://GUI/inventory/inventory_GUI.gd" id="1_ve5h2"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="2_8srdv"]
 [ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="2_opbok"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_2ujqp"]
@@ -17,6 +17,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 26.0
 emission_ring_radius = 26.0
 emission_ring_inner_radius = 8.0
+emission_ring_cone_angle = 90.0
 orbit_velocity_min = 1.0
 orbit_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)

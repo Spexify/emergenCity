@@ -173,7 +173,7 @@ func load_items() -> void:
 	load_item_translator()
 	
 	if not FileAccess.file_exists(ITEM_SOURCE):
-		printerr("Could not load recipes from source: " + ITEM_SOURCE)
+		printerr("Could not load item from source: " + ITEM_SOURCE)
 		return
 
 	var recipe_source : FileAccess = FileAccess.open(ITEM_SOURCE, FileAccess.READ)
@@ -234,7 +234,7 @@ func load_items() -> void:
 			#"sound": _sound,
 		}
 		
-		_id_to_item_vars[str(_id)] = item_data
+		_id_to_item_vars[str(int(_id))] = item_data
 		
 		item_index += 1
 	
@@ -625,23 +625,3 @@ func dict_to_vector(data : Dictionary, type : Variant.Type) -> Variant:
 			push_error(str(type) + " is not a Type.")
 	push_error("Wrong Type!")
 	return null
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

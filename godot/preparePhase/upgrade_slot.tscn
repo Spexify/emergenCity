@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://drj36g2wu4xb5"]
 
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://assets/GUI/backgrounds/menu_box_white.png" id="2_tx6h5"]
-[ext_resource type="Script" path="res://preparePhase/upgrade_slot.gd" id="4_i3ycy"]
-[ext_resource type="Script" path="res://preparePhase/upgrade.gd" id="5_hjhv1"]
+[ext_resource type="Script" uid="uid://c8mx6oqssmdk5" path="res://preparePhase/upgrade_slot.gd" id="4_i3ycy"]
+[ext_resource type="Script" uid="uid://bjtih34qfq135" path="res://preparePhase/upgrade.gd" id="5_hjhv1"]
 [ext_resource type="Texture2D" uid="uid://l58ao4wefomo" path="res://assets/tilesets/furniture_upgrades.png" id="5_jqoma"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ns0jc"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c8qngbqj8n42a"]
 
-[ext_resource type="Script" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
+[ext_resource type="Script" uid="uid://bomp3w7is7lht" path="res://GUI/summary_end_of_day_gui.gd" id="1_wmmkg"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="2_p8j38"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://assets/SFX/open_GUI.wav" id="2_q6owg"]
 [ext_resource type="AudioStream" uid="uid://csooiooxhwkj0" path="res://assets/SFX/close_GUI.wav" id="3_hs5pc"]

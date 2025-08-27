@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://djhelv5xr4djt"]
 
-[ext_resource type="Script" path="res://GUI/upgrade_info_gui.gd" id="1_o26t6"]
+[ext_resource type="Script" uid="uid://cxsdblq40rhdj" path="res://GUI/upgrade_info_gui.gd" id="1_o26t6"]
 [ext_resource type="PackedScene" uid="uid://drj36g2wu4xb5" path="res://preparePhase/upgrade_slot.tscn" id="2_1jnh3"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="5_1oeci"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="6_7uyur"]

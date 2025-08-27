@@ -42,6 +42,7 @@ const state_to_icon: Dictionary = {
 	"IsolationState.LIMITED_PUBLIC_ACCESS" : "",
 	"IsolationState.ISOLATION" : "",
 }
+#endregion
 
 var _upgrades: Array[EMC_Upgrade]
 
@@ -207,7 +208,7 @@ func _calculate_all_effective_states(_t: int = 0) -> void:
 	var t: int = current_t + _t
 	var values: Array[int]
 	for state: String in FACILITY_STATES_DEFAULT.keys():
-		for i in range(current_t, t):
+		for i in range(current_t, t+1):
 			if not facility_states.has(i):
 				facility_states[i] = FACILITY_STATES_DEFAULT.duplicate(true)
 			

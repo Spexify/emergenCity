@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://ctlisou6u6wex"]
 
-[ext_resource type="Script" path="res://GUI/trade_ui.gd" id="1_klull"]
+[ext_resource type="Script" uid="uid://cf6lot0tm7q1v" path="res://GUI/trade_ui.gd" id="1_klull"]
 [ext_resource type="Texture2D" uid="uid://dwwuq7qn72bub" path="res://assets/characters/portrait_raphael.png" id="1_yjcyr"]
 [ext_resource type="Texture2D" uid="uid://roxqf34j7vb0" path="res://assets/GUI/icons/icon_NPC_relation.png" id="2_aiu0m"]
 [ext_resource type="StyleBox" uid="uid://bwu0dssl63nbv" path="res://resources/background/menu_box_tex.tres" id="4_ksqq8"]
