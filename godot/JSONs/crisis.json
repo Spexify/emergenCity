@@ -100,7 +100,7 @@
 		},
 		{
 			"name": "0.Pandemie.0",
-			"weight": 100,
+			"weight": 1,
 			"desc": "Warnung vor steigenden Fallzahlen von Infektionen mit den hochansteckenden Krisoviren in Krisopolis.",
 			"fcount": [
 				1,
@@ -458,7 +458,7 @@
 			]
 		},
 		"0.Pandemie.1": {
-			"weight": 30,
+			"weight": 5,
 			"desc": "Aufgrund der steigenden Fallzahlen ist die Betretung öffentlicher Raume eingeschränkt.",
 			"delay": [
 				2,
@@ -487,9 +487,8 @@
 				1,
 				2
 			],
-			"effects": [],
-			"states": [
-				"IsolationState.ISOLATION"
+			"effects": [
+				{"flag": "NoEntry", "value": "all"}
 			]
 		},
 		"0.Starkregen.1": {
@@ -666,8 +665,8 @@
 			],
 			"desc": "Aufgrund des Hochwassers ist der Strom ausgefallen.",
 			"duration": [
-				0,
-				0
+				2,
+				3
 			],
 			"fcount": [
 				0,

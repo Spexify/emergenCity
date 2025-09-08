@@ -15,6 +15,8 @@ func open(irrelevant : EMC_GUI = null) -> void:
 	canvas_layer_unaffected_by_cm.show()
 	canvas_modulate.show()
 	
+	#SettingsGUI.closed.connect(open, CONNECT_ONE_SHOT)
+	
 	#opened.emit()
 	
 #MRM: Added this, because there was a bug (see commit)
@@ -61,7 +63,6 @@ func _on_settings_pressed() -> void:
 	#MRM: Had a bug (see commit)
 	close()
 	SettingsGUI.open()
-	SettingsGUI.closed.connect(open, CONNECT_ONE_SHOT)
 	#Global.goto_scene("res://global/settings_GUI.tscn")
 	#MRM: Don't get why this is necessary, but it won't open up reliably without this:
 	#for child: Node in _settings.get_children():

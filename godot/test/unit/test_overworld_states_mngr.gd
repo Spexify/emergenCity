@@ -1,11 +1,11 @@
 extends GutTest
 
 func before_each() -> void:
+	OverworldStatesMngr.reset()
+	
 	gut.p("ran setup", 2)
 
 func after_each() -> void:
-	OverworldStatesMngr.reset()
-	
 	gut.p("ran teardown", 2)
 
 func before_all() -> void:
@@ -55,4 +55,15 @@ func test_facility_states_batched() -> void:
 	_effective_state_tests(time-3)
 
 func test_flags() -> void:
-	pass_test("yay")
+	OverworldStatesMngr.add_flag_layer("NoEntry", "Market", 1)
+	
+	assert_false(OverworldStatesMngr.has_flag("NoEntry", "Market", 0))
+	assert_true(OverworldStatesMngr.has_flag("NoEntry", "Market", 1))
+	
+	OverworldStatesMngr.next_day(1)
+	
+	assert_true(OverworldStatesMngr.has_flag("NoEntry", "Market", 0))
+	assert_false(OverworldStatesMngr.has_flag("NoEntry", "Market", 1))
+
+func test_modifiers() -> void:
+	pass

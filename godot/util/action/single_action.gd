@@ -18,9 +18,15 @@ func _init(data : Dictionary) -> void:
 	method = data["method"]
 	params = data["params"]
 	for param: Variant in params:
-		if typeof(param) == TYPE_STRING and (param as String).begins_with("$result."):
+		if typeof(param) == TYPE_ARRAY:
+			for p: Variant in param:
+				if typeof(p) == TYPE_STRING and (p as String).begins_with("$"):
+					needs_resolve = true
+					break
+		elif typeof(param) == TYPE_STRING and (param as String).begins_with("$"):
 			needs_resolve = true
 			break
+					
 	comp_name = data["system"]
 	result_name = data.get("as", "")
 
@@ -44,19 +50,42 @@ func execute(context: Dictionary = {"result": {}}) -> Dictionary:
 		
 	var result: Variant = exe.callv(resolved_params)
 	if not result_name.is_empty():
-		context["resut"][result_name] 
+		context["result"][result_name] = result
 	context["current"] = result
 	return context
 
 func resolve_params(context: Dictionary) -> Array:
 	var result: Array = []
 	for param: Variant in params:
-		if typeof(param) == TYPE_STRING and (param as String).begins_with("$result."):
-			param = param.substr(8)
-			if context["result"].has(param):
-				result.append(context["result"][param])
+		if typeof(param) == TYPE_ARRAY:
+			var deep_result: Array = []
+			for p: Variant in param:
+				if typeof(p) == TYPE_STRING:
+					if (p as String).begins_with("$result."):
+						p = p.substr(8)
+						if context["result"].has(p):
+							deep_result.append(context["result"][p])
+						else:
+							printerr("Action: %s with method %s, parameter %s not set" % [comp_name, method, p])
+					elif (p as String) == "$context":
+						deep_result.append(context)
+					else:
+						deep_result.append(p)
+				else:
+					deep_result.append(p)
+			result.append(deep_result)
+			
+		elif typeof(param) == TYPE_STRING:
+			if (param as String).begins_with("$result."):
+				param = param.substr(8)
+				if context["result"].has(param):
+					result.append(context["result"][param])
+				else:
+					printerr("Action: %s with method %s, parameter %s not set" % [comp_name, method, param])
+			elif (param as String) == "$context":
+				result.append(context)
 			else:
-				printerr("Action: %s with method %s, parameter %s not set" % [comp_name, method, param])
+				result.append(param)
 		else:
 			result.append(param)
 	return result

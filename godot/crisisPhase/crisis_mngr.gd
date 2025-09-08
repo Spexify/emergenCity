@@ -24,64 +24,7 @@ func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr) -> void:
 	_difficulty = OverworldStatesMngr.get_difficulty_str()
 	
 	CRISIS = JsonMngr.crisis
-		#{
-		#"Tutorial": [
-			#{
-				#"name": "0.Tutorial.0",
-				#"weight": 1,
-				#"descr": "Tutorial",
-				#"fcount": [1, 1],
-				#"following": ["0.Tutorial.1", "0.Tutorial.2"]
-			#}
-		#],
-		#"Easy": [
-			#{
-				#"name": "0.Hochwaser.0",
-				#"weight": 1,
-				#"fcount": [1, 1],
-				#"following": ["0.Hochwaser.1", "0.Hochwaser.2"]
-			#},
-			#{
-				#"name": "0.Flut.0",
-				#"weight": 1,
-				#"fcount": [1, 1],
-				#"following": ["0.Flut.1", "0.Flut.2"]
-			#}
-		#],
-		#"following": {
-			#"0.Tutorial.1": {
-				#"weight": 1,
-				#"descr": "Der Strom ist ausgefallen",
-				#"duration": [2, 3],
-				#"delay": [2, 3],
-				#"effects": [
-					#{
-						#"state": "ElectricityState",
-						#"layer": "0.Tutorial",
-						#"value": "NONE"
-					#}
-				#],
-				#"fcount": [0, 1],
-				#"following": ["0.Tutorial.2"]
-			#},
-			#"0.Tutorial.2": {
-				#"weight": 1,
-				#"descr": "Der Strom ist ausgefallen",
-				#"duration": [2, 3],
-				#"delay": [2, 3],
-				#"effects": [
-					#{
-						#"state": "WaterState",
-						#"layer": "0.Tutorial",
-						#"value": "NONE"
-					#}
-				#],
-				#"fcount": [0, 0],
-				#"following": []
-			#}
-		#}
-	#}#{"": JsonMngr.crisis}
-		
+
 ############################# GETTERS AND SETTERS ##################################################
 
 func get_max_day() -> int:
@@ -101,10 +44,10 @@ func check_crisis_status(p_period_count : int) -> void:
 	
 		var weights : Array[float]
 		weights.assign(CRISIS[_difficulty].map(func(dict : Dictionary) -> float: return dict.get("weight")))
-		var scenario : Dictionary = Global.pick_weighted_random(CRISIS[_difficulty], weights, 1)[0]
+		var scenario : Dictionary = EMC_Util.pick_weighted_random_const(CRISIS[_difficulty], weights)
 		
 		OverworldStatesMngr.begin_batch()
-		var total_duration: int = _helper(scenario, 0, 0) -1
+		var total_duration: int = _helper(scenario["name"], scenario, 0, 0) -1
 		OverworldStatesMngr.end_batch()
 		
 		for i in range(total_duration):
@@ -112,12 +55,12 @@ func check_crisis_status(p_period_count : int) -> void:
 		
 		OverworldStatesMngr.crisis_end = p_period_count + total_duration
 	
-		print(total_duration)
-	print(OverworldStatesMngr.facility_states)
+		#print(total_duration)
+	#print(OverworldStatesMngr.facility_states)
 	print(OverworldStatesMngr.facility_effective_states)
 	print()
 
-func _helper(scenario: Dictionary, total_duration: int, start: int) -> int:
+func _helper(_name: String, scenario: Dictionary, total_duration: int, start: int) -> int:
 	var weights : Array[float]
 	var fcount: int = _rng.randi_range(scenario["fcount"][0], scenario["fcount"][1])
 	
@@ -136,15 +79,17 @@ func _helper(scenario: Dictionary, total_duration: int, start: int) -> int:
 			
 			total_duration = max(total_duration, delay + duration)
 			
+			OverworldStatesMngr.begin_batch()
 			for effect: Dictionary in next_crisis["effects"]:
 				for i in range(duration):
 					if effect.has("state"):
 						OverworldStatesMngr.add_state_layer_str(effect["state"], effect["layer"], effect["value"], delay+i)
 					elif effect.has("flag"):
 						OverworldStatesMngr.add_flag_layer(effect["flag"], effect["value"], delay+i)
-					OverworldStatesMngr.add_scenario(scenario["name"], next_crisis["desc"], delay+i)
+					OverworldStatesMngr.add_scenario(_name, next_crisis["desc"], delay+i)
+			OverworldStatesMngr.end_batch()
 			
 			if next_crisis.has("fcount"):
-				total_duration = _helper(next_crisis, total_duration, delay + duration)
+				total_duration = _helper(_name, next_crisis, total_duration, delay + duration)
 			
 	return total_duration

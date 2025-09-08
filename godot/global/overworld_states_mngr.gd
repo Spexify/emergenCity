@@ -1,8 +1,6 @@
 extends Node
 class_name EMC_OverworldStatesMngr
 
-signal change(changes : String)
-
 const SAVE_FILE = "user://OSM.res"
 
 #region Enums
@@ -188,8 +186,6 @@ func add_state_layer_int(state: String, id: String, value: int, _t: int = 0) -> 
 		if not facility_effective_states.has(i):
 			facility_effective_states[i] = {}
 		facility_effective_states[i][state] = _calculate_effective_state(state, i-current_t)
-	
-	change.emit(state)
 
 func add_state_layer_str(state: String, id: String, value: String, _t: int = 0) -> void:
 	add_state_layer_int(state, id, STATE_TRANSLATOR[state][value], _t)
@@ -262,7 +258,8 @@ func is_effective_state_gt(state: String, value: String, _t: int = 0) -> bool:
 #endregion
 
 #region flags
-var flags: Dictionary = {
+# Format: { 0: { "NoEntry" : { "market": 1 } } }
+var flags: Dictionary[int, Dictionary] = {
 }
 
 func add_flag_layer(state: String, flag: String, _t: int = 0) -> void:

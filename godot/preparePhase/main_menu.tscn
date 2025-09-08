@@ -108,14 +108,18 @@ offset_bottom = 707.0
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Title" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+[node name="VBC" type="VBoxContainer" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+layout_mode = 2
+theme_override_constants/separation = -14
+
+[node name="Title" type="TextureRect" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/VBC"]
 custom_minimum_size = Vector2(576, 244)
 layout_mode = 2
 texture = ExtResource("7_mlnh7")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Slogan" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
+[node name="Slogan" type="RichTextLabel" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/VBC"]
 clip_contents = false
 custom_minimum_size = Vector2(450, 50)
 layout_mode = 2
@@ -126,6 +130,7 @@ fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="StartRound" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 custom_minimum_size = Vector2(0, 60)

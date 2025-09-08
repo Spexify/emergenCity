@@ -26,6 +26,7 @@ var _dialogue_manager : EMC_DialogueMngr
 @onready var _action_consequences: EMC_ActionConsequences = $EMC_ActionConsequences
 @onready var _action_constraints: EMC_ActionConstraints = $EMC_ActionConstraints
 @onready var _scoreboard: EMC_Scoreboard = $EMC_Scoreboard
+@onready var _builtin: EMC_Builtin = $EMC_Builtin
 
 
 ########################################## PUBLIC METHODS ##########################################
@@ -48,6 +49,8 @@ func _get_comp(comp_name: String) -> Node:
 			return _action_constraints
 		"Score":
 			return _scoreboard
+		"builtin":
+			return _builtin
 		_:
 			return self
 

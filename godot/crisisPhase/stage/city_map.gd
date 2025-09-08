@@ -139,7 +139,8 @@ func _on_julias_house_btn_pressed() -> void:
 	handle_buttons(EMC_StageMngr.STAGENAME_ROWHOUSE)
 
 func _on_complex_btn_pressed() -> void:
-	handle_buttons(EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT)
+	#handle_buttons(EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT)
+	$DoorbellsGUI.open()
 
 func _on_gardenhouse_btn_pressed() -> void:
 	handle_buttons(EMC_StageMngr.STAGENAME_GARDENHOUSE)

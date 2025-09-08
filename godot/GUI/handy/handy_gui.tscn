@@ -183,6 +183,7 @@ icon = ExtResource("3_fdip5")
 title = "[center]Warn App[/center]"
 
 [node name="Check" parent="VBC/Store/VBC/Margin/Apps" instance=ExtResource("1_xwilm")]
+visible = false
 layout_mode = 2
 app = "Check"
 title = "[center]Check Liste[/center]"

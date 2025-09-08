@@ -131,7 +131,7 @@ size_flags_vertical = 4
 theme = ExtResource("2_duud7")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
-text = "[center]Shop[/center]
+text = "[center]Laden[/center]
 "
 
 [node name="Help" type="TextureButton" parent="ColorRect/Margin/Main/ShopPanel/ShopSection/HBC"]
@@ -215,7 +215,7 @@ text = "Hier können Items gekauft werden, um sich auf mögliche Krisen vorzuber
 
 Um mehr Informationen über ein Item zu erhalten, drücken sie lange auf jenes Item.
 
-Um ein Item aus dem Shop zu kaufen können sie kurz tippen.
+Um ein Item aus dem Laden zu kaufen können sie kurz tippen.
 
 Um ein Item aus dem Rucksack wieder zurückzugeben können sie ebenfalls kurz tippen.
 

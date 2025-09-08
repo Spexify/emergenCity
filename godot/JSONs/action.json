@@ -719,6 +719,7 @@
 	},
 
 
+
 	"SFX_Stage": {
 		"type": "single",
 		"system": "SoundMngr",
@@ -769,6 +770,77 @@
 				"Nach Hause gekehrt."
 			]
 		]
+	},
+	"stage": {
+		"type": "condition",
+		"if": {
+			"type": "multi",
+			"acc": "and",
+			"actions": [
+				{
+					"type": "single",
+					"system": "OSM",
+					"method": "has_not_flag",
+					"params": ["NoEntry", "$result.stage"]
+				},
+				{
+					"type": "single",
+					"system": "OSM",
+					"method": "has_not_flag",
+					"params": ["NoEntry", "all"]
+				}
+			]
+		},
+		"then": {
+			"type": "condition",
+			"if": {
+				"type": "single",
+				"system": "ActCond",
+				"method": "is_current_stage",
+				"params": [
+					"home"
+				]
+			},
+			"then": {
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"$result.question",
+						"$result.stage_act",
+						"SFX_Stage"
+					]
+				]
+			},
+			"else": {
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"DefaultActionGUI",
+					[
+						"$result.question",
+						"$result.stage_act_wait",
+						"SFX_Stage",
+						true,
+						"Hat Marktplatz besucht."
+					]
+				]
+			}
+		},
+		"else": {
+			"type": "single",
+			"system": "gui_mngr",
+			"method": "request_gui",
+			"params": [
+				"TooltipGUI",
+				[
+					"$result.no_entry"
+				]
+			]
+		}
 	},
 	"Go_Market": {
 		"type": "multi",
@@ -829,64 +901,52 @@
 		]
 	},
 	"2001": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "OSM",
-			"method": "has_not_flag",
-			"params": ["NoEntry", "Market"]
-		},
-		"then": {
-			"type": "condition",
-			"if": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
 				"type": "single",
-				"system": "ActCond",
-				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "market" ],
+				"as": "stage"
 			},
-			"then": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du zum Markplatz gehen?",
-						"Go_Market",
-						"SFX_Stage"
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Market" ],
+				"as": "stage_act"
 			},
-			"else": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du zum Markplatz gehen?",
-						"Go_Market_Wait",
-						"SFX_Stage",
-						true,
-						"Hat Marktplatz besucht."
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Market_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du zum Marktplatz gehen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Der Marktplatz ist leider nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
 			}
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Der Marktplatz ist nicht betretbar!"
-				]
-			]
-		}
-	},
+		]
+	}, 
 	"Go_Townhall": {
 		"type": "multi",
 		"acc": "array",
@@ -946,64 +1006,52 @@
 		]
 	},
 	"2002": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "OSM",
-			"method": "has_not_flag",
-			"params": ["NoEntry", "Townhall"]
-		},
-		"then": {
-			"type": "condition",
-			"if": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
 				"type": "single",
-				"system": "ActCond",
-				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "townhall" ],
+				"as": "stage"
 			},
-			"then": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du zum Rathaus gehen?",
-						"Go_Townhall",
-						"SFX_Stage"
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Townhall" ],
+				"as": "stage_act"
 			},
-			"else": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du zum Rathaus gehen?",
-						"Go_Townhall_Wait",
-						"SFX_Stage",
-						true,
-						"Hat das Rathaus besucht."
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Townhall_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du zum Rathaus gehen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Der Rathaus ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
 			}
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Der Rathaus ist nicht betretbar!"
-				]
-			]
-		}
-	},
+		]
+	}, 
 	"Go_Park": {
 		"type": "multi",
 		"acc": "array",
@@ -1063,44 +1111,52 @@
 		]
 	},
 	"2003": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"home"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du in den Park gehen?",
-					"Go_Park",
-					"SFX_Stage"
-				]
-			]
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du in den Park gehen?",
-					"Go_Park_Wait",
-					"SFX_Stage",
-					true,
-					"Hat den Park besucht."
-				]
-			]
-		}
-	},
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "park" ],
+				"as": "stage"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Park" ],
+				"as": "stage_act"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Park_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du in den Park gehen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Der Park ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
+			}
+		]
+	}, 
 	"Go_Garden": {
 		"type": "multi",
 		"acc": "array",
@@ -1160,43 +1216,51 @@
 		]
 	},
 	"2004": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"home"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Gerhard besuchen?",
-					"Go_Garden",
-					"SFX_Stage"
-				]
-			]
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Gerhard besuchen?",
-					"Go_Garden_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Gerhard besucht."
-				]
-			]
-		}
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "gardenhouse" ],
+				"as": "stage"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Garden" ],
+				"as": "stage_act"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Garden_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Gerhard besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Das Gartenhaus ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
+			}
+		]
 	},
 	"Go_Rowhouse": {
 		"type": "multi",
@@ -1257,43 +1321,51 @@
 		]
 	},
 	"2005": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"home"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Julia besuchen?",
-					"Go_Rowhouse",
-					"SFX_Stage"
-				]
-			]
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Julia besuchen?",
-					"Go_Rowhouse_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Julia besucht."
-				]
-			]
-		}
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "rowhouse" ],
+				"as": "stage"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Rowhouse" ],
+				"as": "stage_act"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Rowhouse_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Julia besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Das Reihenhaus ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
+			}
+		]
 	},
 	"Go_Mansion": {
 		"type": "multi",
@@ -1354,43 +1426,51 @@
 		]
 	},
 	"2006": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"home"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Petro & Irena besuchen?",
-					"Go_Mansion",
-					"SFX_Stage"
-				]
-			]
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Petro & Irena besuchen?",
-					"Go_Mansion_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Petro & Irena besucht."
-				]
-			]
-		}
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "mansion" ],
+				"as": "stage"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Mansion" ],
+				"as": "stage_act"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Mansion_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Petro & Irena besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Das Wohnhaus ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
+			}
+		]
 	},
 	"Go_Penthouse": {
 		"type": "multi",
@@ -1451,43 +1531,51 @@
 		]
 	},
 	"2007": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"home"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Elias besuchen?",
-					"Go_Penthouse",
-					"SFX_Stage"
-				]
-			]
-		},
-		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": [
-				"DefaultActionGUI",
-				[
-					"Willst du Elias besuchen?",
-					"Go_Penthouse_Wait",
-					"SFX_Stage",
-					true,
-					"Hat Elias besucht."
-				]
-			]
-		}
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "penthouse" ],
+				"as": "stage"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Penthouse" ],
+				"as": "stage_act"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Penthouse_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Elias besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Das Penthouse ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "call_act",
+				"params": [ "stage", "$context" ]
+			}
+		]
 	},
 	"Go_Mert": {
 		"type": "multi",
@@ -1548,60 +1636,68 @@
 		]
 	},
 	"2008": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"apartment_mert"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "close_current_gui",
-			"params": []
-		},
-		"else": {
-			"type": "condition",
-			"if": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
 				"type": "single",
-				"system": "ActCond",
-				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "apartment_mert" ],
+				"as": "stage"
 			},
-			"then": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Mert besuchen?",
-						"Go_Mert",
-						"SFX_Stage"
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Mert" ],
+				"as": "stage_act"
 			},
-			"else": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Mert besuchen?",
-						"Go_Mert_Wait",
-						"SFX_Stage",
-						true,
-						"Hat Mert besucht."
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Mert_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Mert besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "condition",
+				"if": {
+					"type": "single",
+					"system": "ActCond",
+					"method": "is_current_stage",
+					"params": [
+						"$result.stage"
 					]
-				]
+				},
+				"then": {
+					"type": "single",
+					"system": "gui_mngr",
+					"method": "close_current_gui",
+					"params": []
+				},
+				"else": {
+					"type": "single",
+					"system": "builtin",
+					"method": "call_act",
+					"params": [ "stage", "$context" ]
+				}
 			}
-		}
+		]
 	},
 	"Go_Camper": {
 		"type": "multi",
@@ -1662,60 +1758,68 @@
 		]
 	},
 	"2009": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"apartment_camper"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "close_current_gui",
-			"params": []
-		},
-		"else": {
-			"type": "condition",
-			"if": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
 				"type": "single",
-				"system": "ActCond",
-				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "apartment_camper" ],
+				"as": "stage"
 			},
-			"then": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Kris & Veronika besuchen?",
-						"Go_Camper",
-						"SFX_Stage"
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Camper" ],
+				"as": "stage_act"
 			},
-			"else": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Kris & Veronika besuchen?",
-						"Go_Camper_Wait",
-						"SFX_Stage",
-						true,
-						"Hat Kris & Veronika besucht."
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Camper_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Kris & Veronika besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "condition",
+				"if": {
+					"type": "single",
+					"system": "ActCond",
+					"method": "is_current_stage",
+					"params": [
+						"$result.stage"
 					]
-				]
+				},
+				"then": {
+					"type": "single",
+					"system": "gui_mngr",
+					"method": "close_current_gui",
+					"params": []
+				},
+				"else": {
+					"type": "single",
+					"system": "builtin",
+					"method": "call_act",
+					"params": [ "stage", "$context" ]
+				}
 			}
-		}
+		]
 	},
 	"Go_Default": {
 		"type": "multi",
@@ -1776,60 +1880,68 @@
 		]
 	},
 	"2010": {
-		"type": "condition",
-		"if": {
-			"type": "single",
-			"system": "ActCond",
-			"method": "is_current_stage",
-			"params": [
-				"apartment_default"
-			]
-		},
-		"then": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "close_current_gui",
-			"params": []
-		},
-		"else": {
-			"type": "condition",
-			"if": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
 				"type": "single",
-				"system": "ActCond",
-				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "apartment_default" ],
+				"as": "stage"
 			},
-			"then": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Agathe besuchen?",
-						"Go_Default",
-						"SFX_Stage"
-					]
-				]
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Default" ],
+				"as": "stage_act"
 			},
-			"else": {
+			{
 				"type": "single",
-				"system": "gui_mngr",
-				"method": "request_gui",
-				"params": [
-					"DefaultActionGUI",
-					[
-						"Willst du Agathe besuchen?",
-						"Go_Default_Wait",
-						"SFX_Stage",
-						true,
-						"Hat Agathe besucht."
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Go_Default_Wait" ],
+				"as": "stage_act_wait"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Willst du Agathe besuchen?" ],
+				"as": "question"
+			},
+			{
+				"type": "single",
+				"system": "builtin",
+				"method": "define",
+				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"as": "no_entry"
+			},
+			{
+				"type": "condition",
+				"if": {
+					"type": "single",
+					"system": "ActCond",
+					"method": "is_current_stage",
+					"params": [
+						"$result.stage"
 					]
-				]
+				},
+				"then": {
+					"type": "single",
+					"system": "gui_mngr",
+					"method": "close_current_gui",
+					"params": []
+				},
+				"else": {
+					"type": "single",
+					"system": "builtin",
+					"method": "call_act",
+					"params": [ "stage", "$context" ]
+				}
 			}
-		}
+		]
 	},
 	"Q!_Gerhard": {
 		"type": "single",

@@ -52,6 +52,7 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	# Called before once game starts
 	_crisis_mngr.check_crisis_status(0)
 	_stage_mngr.let_npcs_act()
+	_stage_mngr.reload_stage()
 
 func on_interacted_with_furniture(p_action_ID : String) -> void:
 	JsonMngr.get_action(p_action_ID).execute({"result": {}})
@@ -122,7 +123,6 @@ func _advance_day_period(description : String) -> void:
 	# if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
 	# 	_inventory.spoil_some_items()
 	
-	#if get_current_day_period() == DayPeriod.MORNING:
 	_crisis_mngr.check_crisis_status(get_period_count())
 
 
