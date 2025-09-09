@@ -318,4 +318,3 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_new_avatar_sprite_changed(p_avatar_sprite_suffix: String) -> void:
 	$Sprite2D.texture = \
 		load("res://assets/characters/sprite_avatar_" + p_avatar_sprite_suffix + ".png")
-

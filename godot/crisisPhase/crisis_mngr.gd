@@ -13,7 +13,7 @@ var _next_crisis : Array[Dictionary] = []
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-var CRISIS : Dictionary = {}
+var CRISIS : Dictionary[String, Dictionary] = {}
 
 func setup(p_backpack : EMC_Inventory, p_gui_mngr: EMC_GUIMngr) -> void: 
 	_rng.randomize()
@@ -43,15 +43,17 @@ func check_crisis_status(p_period_count : int) -> void:
 	
 	
 		var weights : Array[float]
-		weights.assign(CRISIS[_difficulty].map(func(dict : Dictionary) -> float: return dict.get("weight")))
-		var scenario : Dictionary = EMC_Util.pick_weighted_random_const(CRISIS[_difficulty], weights)
+		weights.assign(CRISIS[_difficulty].values().map(func(dict : Dictionary) -> float: return dict.get("weight")))
+		var scenario_name : String = EMC_Util.pick_weighted_random_const(CRISIS[_difficulty].keys(), weights)
+		var scenario : Dictionary[String, Variant]
+		scenario.assign(CRISIS[_difficulty][scenario_name])
 		
 		OverworldStatesMngr.begin_batch()
-		var total_duration: int = _helper(scenario["name"], scenario, 0, 0) -1
+		var total_duration: int = _helper(scenario_name, scenario, 0, 0) -1
 		OverworldStatesMngr.end_batch()
 		
 		for i in range(total_duration):
-			OverworldStatesMngr.add_scenario(scenario["name"], scenario["desc"], i)
+			OverworldStatesMngr.add_scenario(scenario_name, scenario["desc"], i)
 		
 		OverworldStatesMngr.crisis_end = p_period_count + total_duration
 	

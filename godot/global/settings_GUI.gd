@@ -12,6 +12,7 @@ signal avatar_sprite_changed(p_avatar_sprite_suffix: String)
 @onready var sfx : EMC_VolumeSlider = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/SFX
 @onready var reset : Button = $CanvasLayer/VBoxContainer/CenterContainer2/Buttons/Reset
 @onready var _confirmGUI: EMC_ConfirmationGUI = $CanvasLayer/ConfirmationGUI
+@onready var tooltip_gui : EMC_TooltipGUI = $CanvasLayer/TooltipGUI
 
 @onready var vibrate_button : CheckButton = $CanvasLayer/VBoxContainer/CenterContainer2/Sounds/Vibrate
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer/AvatarSelectionGUI
@@ -128,3 +129,7 @@ func _on_avatar_selection_gui_closed() -> void:
 
 func _on_vibrate_pressed() -> void:
 	Global.set_vibration_enabled(vibrate_button.button_pressed)
+
+
+func _on_info_pressed() -> void:
+	tooltip_gui.open("Godot version 4.4.1\n Game Version 1.3.2")

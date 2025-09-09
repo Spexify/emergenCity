@@ -83,8 +83,6 @@ func _on_item_button_pressed() -> void:
 	
 	var tween: Tween = get_tree().create_tween()
 	
-	item.clicked_sound()
-	
 	var start_pos: Vector2 = get_viewport().get_mouse_position()
 	
 	tween.tween_property(slot_bg, "modulate", HIGHLIGHTED_COLOR, 0.4)
@@ -92,12 +90,14 @@ func _on_item_button_pressed() -> void:
 	if item_button.button_pressed:
 		item_long_pressed.emit(item, disabled)
 		slot_bg.set_modulate(DEFAULT_COLOR)
+		item.clicked_sound()
 	else:
 		var mouse_position: Vector2 = get_viewport().get_mouse_position()
+		tween.stop()
 		if not disabled and mouse_position.distance_to(start_pos) < DRAG_THRESHOLD: #item_button.get_global_rect().has_point(mouse_position):
-			tween.stop()
 			slot_bg.set_modulate(HIGHLIGHTED_COLOR)
 			item_clicked.emit(item)
+			item.clicked_sound()
 		else:
 			slot_bg.set_modulate(DEFAULT_COLOR)
 

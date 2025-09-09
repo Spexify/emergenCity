@@ -32,7 +32,7 @@ func _ready() -> void:
 func add_comp(comp: Variant) -> void:
 	_comps.append(comp)
 
-func get_comp(comp_class: Variant) -> Variant:
+func get_comp(comp_class: Script) -> Variant:
 	for comp: Variant in _comps:
 		if  is_instance_of(comp, comp_class):
 			return comp

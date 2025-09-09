@@ -21,9 +21,6 @@ const state_to_icon: Dictionary = {
 	"WaterState.CLEAN" : preload("res://assets/GUI/icons/water_icon.png"),
 	"FoodContaminationState.NONE" : preload("res://assets/GUI/icons/food_icon.png"),
 	"FoodContaminationState.FOOD_SPOILED" : preload("res://assets/GUI/icons/food_contaminated_icon.png"),
-	"IsolationState.NONE" : preload("res://assets/GUI/icons/no_power_icon.png"),
-	"IsolationState.LIMITED_PUBLIC_ACCESS" : preload("res://assets/GUI/icons/no_power_icon.png"),
-	"IsolationState.ISOLATION" : preload("res://assets/GUI/icons/no_power_icon.png"),
 }
 
 @export var state_to_descr: Dictionary = {
@@ -35,10 +32,7 @@ const state_to_icon: Dictionary = {
 	"WaterState.DIRTY" : "Das Wasser ist verdreckt",
 	"WaterState.CLEAN" : "Du hast sauberes Wasser",
 	"FoodContaminationState.NONE" : "",
-	"FoodContaminationState.FOOD_SPOILED" : "",
-	"IsolationState.NONE" : "",
-	"IsolationState.LIMITED_PUBLIC_ACCESS" : "",
-	"IsolationState.ISOLATION" : "",
+	"FoodContaminationState.FOOD_SPOILED" : ""
 }
 #endregion
 
@@ -289,8 +283,10 @@ func remove_flag_layer(state: String, flag: String, _t: int = 0) -> void:
 func get_flags(state: String, _t: int = 0) -> Array[String]:
 	var t: int = current_t + _t
 	if flags.has(t) and flags[t].has(state):
-		return flags[t][state].keys()
-	return ["NULL"]
+		var result : Array[String]
+		result.assign(flags[t][state].keys())
+		return result
+	return []
 	
 func has_flag(state: String, flag: String, _t: int = 0) -> bool:
 	var t: int = current_t + _t

@@ -36,7 +36,9 @@ func open(sender: EMC_Item, p_buttons: Array[Dictionary] = []) -> void:
 	var comps := sender.get_comps()
 	var comp_string: String = ""
 	for comp in comps:
-		comp_string += comp.get_colored_name_with_vals() + ", "
+		var str: String = comp.get_colored_name_with_vals()
+		if not str.is_empty():
+			comp_string += str + ", "
 	#Remove superfluous comma:
 	comp_string = comp_string.left(comp_string.length() - 2)
 	

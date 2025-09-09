@@ -73,7 +73,7 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 	#item_info_gui.hide()
 	
 	#_display_info(sender)
-	sender.clicked_sound()
+	#sender.clicked_sound()
 	
 	var comp := sender.get_comp(EMC_IC_Cost)
 	if comp == null:

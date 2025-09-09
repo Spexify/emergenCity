@@ -1,7 +1,6 @@
 {
-	"TUTORIAL": [
-		{
-			"name": "0.Tutorial.0",
+	"TUTORIAL": {
+		"0.Tutorial.0": {
 			"weight": 1,
 			"desc": "Dies ist ein Tutorial.",
 			"fcount": [
@@ -12,10 +11,9 @@
 				"0.Tutorial.1"
 			]
 		}
-	],
-	"EASY": [
-		{
-			"name": "0.Hochwasser.0",
+	},
+	"EASY": {
+		"0.Hochwasser.0": {
 			"weight": 1,
 			"desc": "Krisopolis ist von Hochwasser befallen.",
 			"fcount": [
@@ -27,11 +25,9 @@
 				"0.Hochwasser.2",
 				"0.Hochwasser.3",
 				"0.Hochwasser.4"
-				
 			]
 		},
-		{
-			"name": "0.Riskana.0",
+		"0.Riskana.0": {
 			"weight": 1,
 			"desc": "Der Pegel der Riskana hat die Meldestufe 2 erreicht und steigt weiter an.",
 			"fcount": [
@@ -45,8 +41,7 @@
 				"0.Riskana.4"
 			]
 		},
-		{
-			"name": "0.Chemie.0",
+		"0.Chemie.0": {
 			"weight": 1,
 			"desc": "In der Nähe von Krisopolis gab es einen Chemieunfall.",
 			"fcount": [
@@ -56,11 +51,9 @@
 			"following": [
 				"0.Chemie.1",
 				"0.Chemie.2"
-				
 			]
 		},
-		{
-			"name": "0.LKW.0",
+		"0.LKW.0": {
 			"difficulty": 0,
 			"weight": 1,
 			"desc": "Austritt von Gefahrstoffen nach Chemieunfall in der Industriestraße 34-40.",
@@ -73,8 +66,7 @@
 				"0.LKW.2"
 			]
 		},
-		{
-			"name": "0.Duerre.0",
+		"0.Duerre.0": {
 			"weight": 1,
 			"desc": "Warnung vor anhaltender extremer Trockenheit.",
 			"fcount": [
@@ -85,8 +77,7 @@
 				"0.Duerre.1"
 			]
 		},
-		{
-			"name": "0.Sturmtief.0",
+		"0.Sturmtief.0": {
 			"weight": 1,
 			"desc": "Warnung vor Sturm mit orkanartigen Böen.",
 			"fcount": [
@@ -98,8 +89,7 @@
 				"0.Sturmtief.2"
 			]
 		},
-		{
-			"name": "0.Pandemie.0",
+		"0.Pandemie.0": {
 			"weight": 1,
 			"desc": "Warnung vor steigenden Fallzahlen von Infektionen mit den hochansteckenden Krisoviren in Krisopolis.",
 			"fcount": [
@@ -111,8 +101,7 @@
 				"0.Pandemie.2"
 			]
 		},
-		{
-			"name": "0.Starkregen.0",
+		"0.Starkregen.0": {
 			"weight": 1,
 			"desc": "Warnung vor lokalem extremen Niederschlag durch Tief Flutaris.",
 			"fcount": [
@@ -126,8 +115,7 @@
 				"0.Starkregen.4"
 			]
 		},
-		{
-			"name": "0.Waldbrand.0",
+		"0.Waldbrand.0": {
 			"weight": 1,
 			"desc": "Warnung vor großflächigem Brand im Waldgebiet Gluthain.",
 			"fcount": [
@@ -140,24 +128,21 @@
 				"0.Waldbrand.3"
 			]
 		}
-	],
-	"MEDIUM": [
-		{
-		"name": "1.Hochwasser.0",
-		"weight": 1,
-		"desc": "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
-		"fcount": [
-			1,
-			1
-		],
-		"following": [
-			"1.Hochwasser.1"
-		]
-	}
-	],
-	"HARD": [
-
-	],
+	},
+	"MEDIUM": {
+		"1.Hochwasser.0": {
+			"weight": 1,
+			"desc": "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"1.Hochwasser.1"
+			]
+		}
+	},
+	"HARD": {},
 	"following": {
 		"0.Tutorial.1": {
 			"weight": 1,
@@ -469,8 +454,14 @@
 				4
 			],
 			"effects": [
-				{"flag": "NoEntry", "value": "Market"},
-				{"flag": "NoEntry", "value": "Park"}
+				{
+					"flag": "NoEntry",
+					"value": "Market"
+				},
+				{
+					"flag": "NoEntry",
+					"value": "Park"
+				}
 			],
 			"states": [
 				"IsolationState.LIMITED_PUBLIC_ACCESS"
@@ -488,7 +479,10 @@
 				2
 			],
 			"effects": [
-				{"flag": "NoEntry", "value": "all"}
+				{
+					"flag": "NoEntry",
+					"value": "all"
+				}
 			]
 		},
 		"0.Starkregen.1": {
