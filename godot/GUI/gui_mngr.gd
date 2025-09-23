@@ -8,7 +8,7 @@ class_name  EMC_GUIMngr
 @onready var _cooking_GUI : EMC_Cooking_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
-@onready var _dialogue_gui : EMC_Dialogue = $CL/VBC/MiddleSection/DialogueGui
+#@onready var _dialogue_gui : EMC_Dialogue_GUI = $CL/VBC/MiddleSection/DialogueGui
 #GUIs Lower Section:
 #@onready var tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 #@onready var confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI
@@ -44,7 +44,6 @@ var _gui_queue : Array[QueueEntry]
 
 @export var _stage_mngr : EMC_StageMngr
 @export var _avatar : EMC_Avatar
-var _dialogue_mngr: EMC_DialogueMngr
 
 func _ready() -> void:
 	for child in middle_section.get_children():
@@ -68,13 +67,8 @@ func _ready() -> void:
 		info_center_btn.hide()
 
 # Called when the node enters the scene tree for the first time.
-func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr, p_dialogue_mngr : EMC_DialogueMngr) -> void:
-	
-	_dialogue_mngr = p_dialogue_mngr
-	
+func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
 	_trade_ui.setup(p_backpack)
-	
-	_dialogue_gui.setup(p_dialogue_mngr)
 	
 	_city_map.setup(p_opt_event_mngr)
 	

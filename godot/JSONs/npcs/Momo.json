@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "momo"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.8

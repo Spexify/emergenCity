@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "walter"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.3

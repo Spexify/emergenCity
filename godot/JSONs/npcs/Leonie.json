@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "leonie"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.95

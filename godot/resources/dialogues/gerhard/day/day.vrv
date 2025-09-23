@@ -1,0 +1,50 @@
+[Node] start
+[actors] avatar gerhard.t
+[text]
+avatar:Hallo!
+gerhard:Moin. Willst du handeln?
+[Choice]
+- talk
+- trade
+- stop
+
+[Node] talk
+[Prompt] Reden
+[random]
+- [jump] talk1
+- [jump] talk2
+
+[Node] talk1
+[Condition]
+
+[actors] avatar gerhard.t friedel
+[text]
+avatar:Lass uns reden! Wie geht's dir?
+gerhard:Man kann sich nicht beklagen. Also, man könnte schon, aber man tut es ja nicht.
+friedel:Wuff.
+[actors] avatar gerhard friedel
+[text]
+gerhard:Worüber willst du dich den beklagen? Zu wenig Essen?
+friedel:Wuff ...
+gerhard:... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
+friedel:Wuff!
+
+[Node] talk2
+[actors] avatar friedel gerhard.t
+[text]
+avatar:Lass uns reden! Wie geht es Friedel?
+gerhard:Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden.
+gerhard:Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.
+gerhard:Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... also vielleicht doch nicht.
+avatar:Hund müsste man sein ...
+friedel:Wuff!
+
+
+[Node] trade
+[Prompt] Handeln
+[action] DLG_Trade
+
+[Node] stop
+[Prompt] Nichts dergleichen
+
+[end]

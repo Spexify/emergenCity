@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "irena"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.3

@@ -12,7 +12,10 @@
 		"karma": {},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.5
+				"pitch": 0.5,
+				"paths": {
+					"day": "res://resources/dialogues/gerhard/day/"
+				}
 			},
 			"trading": {
 				"preferences": {

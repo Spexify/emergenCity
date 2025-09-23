@@ -1,28 +1,125 @@
 extends EMC_NPC_Interaction_Option
 class_name EMC_NPC_Conversation
 
+const FLAG_DAY_SEEN     = 1 << 0  # 01
+const FLAG_PURPOSE_SEEN = 1 << 1  # 10
+
 @export var npc_pitch: float = 1.0
 @export var tags: Array[String]
+@export var day: int = 0
+@export var dialogue_flags: int = 0
 
 @onready var npc: EMC_NPC = $"../.."
 
 var _gui_mngr: EMC_GUIMngr
+var _stage_mngr: EMC_StageMngr
+var _checker: EMC_ActionConstraints
+
+var _small_talk: Array[VRV_Dialogue]
+var _day_dialogues: Dictionary[String, Array]
+var _purpose: Dictionary[String, VRV_Dialogue]
+var _event: Dictionary[String, VRV_Dialogue]
 
 func _init(dict: Dictionary) -> void:
 	npc_pitch = dict.get("pitch", 1.0)
+	var npc_paths: Dictionary[String, String]
+	npc_paths.assign(dict.get("paths", {}))
+	_load_dialoges(npc_paths)
 
 func _ready() -> void:
 	_gui_mngr = npc.get_gui_mngr()
+	_stage_mngr = npc.get_stage_mngr()
+	_checker = npc.get_act_cond()
+	
+	npc.get_day_mngr().period_increased.connect(reset)
+	
 	npc.add_comp(self)
+	load_save.call_deferred()
+
+## TODO loading day dialogues
+func _load_dialoges(npc_paths: Dictionary[String, String]) -> void:
+	if npc_paths.has("day"):
+		_day_dialogues["0"] = _load_dir(npc_paths["day"]).values()
+	if  npc_paths.has("event"):
+		_event = _load_dir(npc_paths["purpose"])
+	if npc_paths.has("purpose"):
+		_purpose = _load_dir(npc_paths["purpose"])
+	if npc_paths.has("small_talk"):
+		_small_talk = _load_dir(npc_paths["small_talk"]).values()
+	else:
+		_small_talk = _load_dir("res://resources/dialogues/small_talk/").values()
+
+func _load_dir(path: String) -> Dictionary[String, VRV_Dialogue]:
+	var result: Dictionary[String, VRV_Dialogue]
+	var dir := DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name : String = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".vrv"):
+				var raw_dialoge := ResourceLoader.load(path + file_name, "VRV_Dialogue")
+				if raw_dialoge is VRV_Dialogue:
+					result[file_name] = raw_dialoge
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path.")
+	return result
+
+func load_save() -> void:
+	var save: EMC_NPC_Save = npc.get_comp(EMC_NPC_Save)
+	if not save:
+		printerr("No Save comp")
+		return
+	var raw_data: Variant = save.get_res("Conv", TYPE_PACKED_FLOAT64_ARRAY)
+	if raw_data == null:
+		save.add_res("Conv", PackedInt32Array([day, dialogue_flags]))
+	else:
+		if len(raw_data) == 2 and Global.was_crisis():
+			day = raw_data[0]
+			dialogue_flags = raw_data[1]
+		else:
+			save.add_res("Conv", PackedInt32Array([day, dialogue_flags]))
+
 
 func get_title() -> String:
 	return "Reden"
 
+func reset(_tmp: int) -> void:
+	dialogue_flags = 0
+
 func run() -> void:
 	var npc_name : String = npc.get_comp(EMC_NPC_Descr).get_npc_name()
-	var stage_name: String = npc.get_comp(EMC_NPC_Stage).get_stage_name()
+	#var stage_name: String = npc.get_comp(EMC_NPC_Stage).get_stage_name()
 	
-	_gui_mngr.request_gui("DialogueGui", [{"stage_name": stage_name, "actor_name": npc_name}])
+	var purpose: String = ""
+	
+	# Purpose not yet seen
+	if (dialogue_flags & FLAG_PURPOSE_SEEN == 0
+		and not purpose.is_empty()
+		and _purpose.has(purpose)):
+		
+		var dialogue: VRV_Dialogue = _purpose.get(purpose)
+		dialogue._start_npc = npc_name
+		_gui_mngr.request_gui("DialogueGui", [dialogue])
+		dialogue_flags |= FLAG_PURPOSE_SEEN
+	
+	# Day Dialoge not yet seen
+	elif dialogue_flags & FLAG_DAY_SEEN == 0 and _day_dialogues.has("0"):
+		var dialogues: Array[VRV_Dialogue]
+		if not _day_dialogues.has(str(day)):
+			day = 0
+		dialogues.assign(_day_dialogues[str(day)])
+		var dialogue: VRV_Dialogue = dialogues.filter(
+			func (dia: VRV_Dialogue) -> bool: return dia.check_start()).pick_random()
+		
+		dialogue._start_npc = npc_name
+		_gui_mngr.request_gui("DialogueGui", [dialogue])
+		dialogue_flags |= FLAG_DAY_SEEN
+		day += 1
+	else:
+		var dialogue: VRV_Dialogue = _small_talk.pick_random()
+		dialogue._start_npc = npc_name
+		_gui_mngr.request_gui("DialogueGui", [dialogue])
 
 func get_pitch() -> float:
 	return npc_pitch

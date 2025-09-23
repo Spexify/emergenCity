@@ -2,7 +2,6 @@ class_name EMC_CrisisPhase
 extends Node2D
 
 var _backpack: EMC_Inventory = Global.get_inventory()
-var _dialogue_manager : EMC_DialogueMngr
 
 #@onready var _stage_mngr : EMC_StageMngr = $StageMngr
 @onready var _avatar : EMC_Avatar = $Avatar
@@ -51,6 +50,8 @@ func _get_comp(comp_name: String) -> Node:
 			return _scoreboard
 		"builtin":
 			return _builtin
+		"stage_mngr":
+			return stage_mngr
 		_:
 			return self
 
@@ -73,11 +74,8 @@ func _ready() -> void:
 	
 	_action_consequences.setup( _backpack, _opt_event_mngr)
 	
-	#### DialogueStuff
-	_dialogue_manager = EMC_DialogueMngr.new(_action_constraints, _action_consequences, _day_mngr, _gui_mngr)
-	
 	#### GUI
-	_gui_mngr.setup(_backpack, _opt_event_mngr, _dialogue_manager)
+	_gui_mngr.setup(_backpack, _opt_event_mngr)
 	icon_information.hide()
 	
 	#### Stage
@@ -90,7 +88,9 @@ func _ready() -> void:
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
-		_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
+		const TUTORIAL = preload("res://resources/dialogues/tutorial.vrv")
+		_gui_mngr.request_gui("DialogueGui", [TUTORIAL])
+		#_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes
 ## As there is no analogous input code on mobile phones, this can be called

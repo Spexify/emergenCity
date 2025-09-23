@@ -1,4 +1,43 @@
 {
+	"DLG_Trade": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "stage_mngr",
+				"method": "get_NPC",
+				"params": ["gerhard"],
+				"as": "npc"
+			},
+			{
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"Trade", ["$result.npc"]
+				]
+			}
+		]
+	},
+	"END_TUTORIAL": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [ "IconInformation" ]
+			},
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "set_tutorial",
+				"params": [ true ]
+			}
+		]
+	},
 	"INT_EXIT": {
 		"type": "single",
 		"system": "gui_mngr",

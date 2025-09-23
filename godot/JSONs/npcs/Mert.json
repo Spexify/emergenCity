@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "mert"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.9
