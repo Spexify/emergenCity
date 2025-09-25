@@ -262,7 +262,7 @@
 				"params": [
 					"DefaultActionGUI",
 					[
-						"Das Wasser ist verdreckt. Sicher, dass du es in eine Flasche abfüllen willst?.",
+						"Das Wasser ist verdreckt. Sicher, dass du es in eine Flasche abfüllen willst?",
 						"IQ_DirtyWater",
 						"SFX_Water"
 					]
