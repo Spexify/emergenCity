@@ -134,15 +134,15 @@ static func parse_sequence(directive: String, inline_params: PackedStringArray, 
 						var raw_name := raw_line[0].split(".", false)
 						data["system"] = raw_name[0]
 						data["method"] = raw_name[1]
-						var raw_params = "[" + ", ".join(raw_line.slice(1)) + "]"
+						var raw_params = " ".join(raw_line.slice(1))
+						#print(raw_params)
 						
 						var json := JSON.new()
 						var error := json.parse(raw_params)
 						if error != OK or typeof(json.data) != TYPE_ARRAY:
-							print("JSON Parse Error: ", json.get_error_message(), "in ", raw_params)
+							print("JSON Parse Error: ", json.get_error_message(), " in ", raw_params)
 							continue
 						
-						#print(raw_params)
 						data["params"] = json.data
 						data["type"] = "single"
 						

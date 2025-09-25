@@ -31,7 +31,7 @@ julia:Wenn du Hilfe brauchst, komm einfach bei mir vorbei.
 
 [Node] info
 [action]
-- gui_mngr.request_gui "IconInformation"
-- ActCons.set_tutorial true
+- gui_mngr.request_gui ["IconInformation"]
+- ActCons.set_tutorial [true]
 
 [end]

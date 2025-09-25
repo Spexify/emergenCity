@@ -60,6 +60,8 @@ func _get_comp_by_name(comp_name: String) -> Variant:
 		return npc.get_act_cond()
 	elif comp_name == "Score":
 		return npc.get_scoreboard()
+	elif comp_name == "Global":
+		return Global
 	return npc.get_comp_by_name(comp_name)
 
 func _ready() -> void:

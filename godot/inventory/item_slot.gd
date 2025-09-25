@@ -87,7 +87,8 @@ func _on_item_button_pressed() -> void:
 	
 	tween.tween_property(slot_bg, "modulate", HIGHLIGHTED_COLOR, 0.4)
 	await EMC_Util.Promise.new([get_tree().create_timer(0.5).timeout, item_button.button_up], EMC_Util.Promise.signal_or_name).complete
-	if item_button.button_pressed:
+	if (item_button.button_pressed 
+	or (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and get_viewport().get_mouse_position().distance_to(start_pos) < DRAG_THRESHOLD)):
 		item_long_pressed.emit(item, disabled)
 		slot_bg.set_modulate(DEFAULT_COLOR)
 		item.clicked_sound()

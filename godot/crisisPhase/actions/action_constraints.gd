@@ -19,6 +19,12 @@ func has_quest_stage(args: Dictionary) -> String:
 			return NO_REJECTION
 	return "Rejected"
 	
+func quest_has_stage(quest: String, stage: String) -> bool:
+	return OverworldStatesMngr.has_quest(quest) and OverworldStatesMngr.get_quest_stage(quest) == int(stage)
+	
+func has_quest(quest: String) -> bool:
+	return OverworldStatesMngr.has_quest(quest)
+	
 func npc_mood_less_than(npc_name: String, mood: String) -> bool:
 	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
 	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)

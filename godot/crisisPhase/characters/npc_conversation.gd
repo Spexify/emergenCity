@@ -21,6 +21,7 @@ var _small_talk: Array[VRV_Dialogue]
 var _day_dialogues: Dictionary[String, Array]
 var _purpose: Dictionary[String, VRV_Dialogue]
 var _event: Dictionary[String, VRV_Dialogue]
+var _quest: Array[VRV_Dialogue]
 
 func _init(dict: Dictionary) -> void:
 	npc_pitch = dict.get("pitch", 1.0)
@@ -48,6 +49,8 @@ func _load_dialoges(npc_paths: Dictionary[String, String]) -> void:
 		_purpose = _load_dir(npc_paths["purpose"])
 	if npc_paths.has("small_talk"):
 		_small_talk = _load_dir(npc_paths["small_talk"]).values()
+	if npc_paths.has("quest"):
+		_quest = _load_dir(npc_paths["quest"]).values()
 	else:
 		_small_talk = _load_dir("res://resources/dialogues/small_talk/").values()
 
@@ -102,6 +105,18 @@ func run() -> void:
 	
 	var purpose: String = ""
 	
+	if not OverworldStatesMngr.active_quests.is_empty() and not _quest.is_empty():
+		var dialogues: Array[VRV_Dialogue]
+		dialogues.assign(_quest)
+		var dialogue: VRV_Dialogue = dialogues.filter(
+			func (dia: VRV_Dialogue) -> bool: return dia.check_start(_checker)).pick_random()
+		
+		if dialogue != null:
+			dialogue._start_npc_name = npc_name
+			dialogue._start_npc = npc
+			_gui_mngr.request_gui("DialogueGui", [dialogue])
+			return
+	
 	# Purpose not yet seen
 	if (dialogue_flags & FLAG_PURPOSE_SEEN == 0
 		and not purpose.is_empty()
@@ -122,7 +137,7 @@ func run() -> void:
 			_save.add_res("conv_day", day)
 		dialogues.assign(_day_dialogues[str(day)])
 		var dialogue: VRV_Dialogue = dialogues.filter(
-			func (dia: VRV_Dialogue) -> bool: return dia.check_start()).pick_random()
+			func (dia: VRV_Dialogue) -> bool: return dia.check_start(_checker)).pick_random()
 		
 		dialogue._start_npc_name = npc_name
 		dialogue._start_npc = npc

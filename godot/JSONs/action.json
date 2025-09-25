@@ -2056,17 +2056,9 @@
 	},
 	"Q!_Gerhard": {
 		"type": "single",
-		"system": "gui_mngr",
-		"method": "request_gui",
-		"params": [
-			"DialogueGui",
-			[
-				{
-					"stage_name": "home",
-					"actor_name": "Gerhard"
-				}
-			]
-		]
+		"system": "ActCons",
+		"method": "friedel_weg",
+		"params": [ ]
 	},
 	"SFX_Door": {
 		"type": "single",

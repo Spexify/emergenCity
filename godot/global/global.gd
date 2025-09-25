@@ -78,10 +78,13 @@ var session: Dictionary
 #var _config: Array
 
 enum State {
-	CRISIS,
-	SCENARIO,
-	START
+	CRISIS = 0,
+	SCENARIO = 1,
+	START = 2
 }
+
+func game_state_neq(value: int) -> bool:
+	return _game_state != value
 
 ## This function and variable are there, so you can later distinguish if the project
 ## was started normally (F5) or only for a certain scene (F6)

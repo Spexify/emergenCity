@@ -476,6 +476,9 @@ func add_quest(id: String, stage: int = 1) -> void:
 	active_quests[id] = stage
 	#print(active_quests)
 
+func add_quest_str(id: String, stage: String = "1") -> void:
+	active_quests[id] = int(stage)
+
 ## Returns the current stage of the quest
 ## Should only be called after confirming quest exists
 ## with has_quest

@@ -213,6 +213,9 @@ func add_score(args: Dictionary) -> void:
 		
 ############################################# NPC ##################################################
 
+func friedel_weg() -> void:
+	_stage_mngr.get_NPC("gerhard").get_comp(EMC_NPC_Conversation).run()
+
 func npc_add_dialog_tag(args: Dictionary) -> void:
 	if args.has_all(["npc", "tag"]):
 		var conv: EMC_NPC_Conversation = _stage_mngr.get_NPC(args["npc"]).get_comp(EMC_NPC_Conversation)

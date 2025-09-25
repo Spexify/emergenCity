@@ -35,7 +35,8 @@ func set_api(p_stage_mngr: EMC_StageMngr, p_checker: EMC_ActionConstraints) -> v
 func is_empty() -> bool:
 	return data.is_empty()
 
-func check_start() -> bool:
+func check_start(p_checker: EMC_ActionConstraints) -> bool:
+	_checker = p_checker
 	if nodes["start"].has("Condition"):
 		return _check_conditions(nodes["start"]["Condition"])
 	return true
@@ -133,8 +134,7 @@ func _check_conditions(conditions: Array) -> bool:
 			printerr("Methode: \"%s\" missing in action_costraints" % method_name)
 			continue
 		
-		if not _checker.callv(method_name, params):
-			return false
+		return _checker.callv(method_name, params)
 	return true
 
 func _jump(node_name: String) -> void:

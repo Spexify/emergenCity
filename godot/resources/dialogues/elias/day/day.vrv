@@ -155,8 +155,8 @@ elias:Aber es spart so viel Zeit, mit dem Scooter zu fahren, statt zu Fuß zu ge
 [text]
 elias:Für ein gutes Tauschgeschäft bin ich immer zu haben!
 [action]
-- npc=self.get_self
-- gui_mngr.request_gui "Trade" ["$result.npc"]
+- npc=self.get_self []
+- gui_mngr.request_gui ["Trade", ["$result.npc"]]
 
 [Node] stop
 [Prompt] Nö

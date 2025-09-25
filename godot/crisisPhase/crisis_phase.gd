@@ -51,6 +51,8 @@ func _get_comp(comp_name: String) -> Node:
 			return _builtin
 		"stage_mngr":
 			return stage_mngr
+		"Global":
+			return Global
 		_:
 			return self
 

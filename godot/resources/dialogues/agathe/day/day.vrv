@@ -334,8 +334,8 @@ agathe:Nein, den Stress spare ich mir.
 [Node] trade
 [Prompt] Handeln
 [action]
-- npc=self.get_self
-- gui_mngr.request_gui "Trade" ["$result.npc"]
+- npc=self.get_self []
+- gui_mngr.request_gui ["Trade", ["$result.npc"]]
 
 [Node] stop
 [Prompt] Nichts dergleichen

@@ -14,7 +14,11 @@
 		},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.5
+				"pitch": 0.5,
+				"paths": {
+					"1day": "res://resources/dialogues/friedel/day/",
+					"quest": "res://resources/dialogues/friedel/quest/"
+				}
 			}
 		},
 		"stage": {
@@ -197,6 +201,12 @@
 								"params": [
 									0.6
 								]
+							},
+							{
+								"type": "single",
+								"system": "Global",
+								"method": "game_state_neq",
+								"params": [ 1 ]
 							}
 						]
 					},

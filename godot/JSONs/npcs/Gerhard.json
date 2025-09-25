@@ -14,7 +14,8 @@
 			"conversation": {
 				"pitch": 0.5,
 				"paths": {
-					"day": "res://resources/dialogues/gerhard/day/"
+					"day": "res://resources/dialogues/gerhard/day/",
+					"quest": "res://resources/dialogues/gerhard/quest/"
 				}
 			},
 			"trading": {

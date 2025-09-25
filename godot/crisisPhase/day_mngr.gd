@@ -104,10 +104,10 @@ func _advance_day_period(description : String) -> void:
 	period_increased.emit(_period_cnt)
 	
 	if get_current_day_period() == DayPeriod.MORNING:
-		if _stage_mngr.get_curr_stage_name() != EMC_StageMngr.STAGENAME_HOME:
-			_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME, {}, false)
-			#_stage_mngr.deactivate_NPCs()
-			_avatar.set_global_position(Vector2i(250, 650))
+		#if _stage_mngr.get_curr_stage_name() != EMC_StageMngr.STAGENAME_HOME:
+			#_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME, {}, false)
+			##_stage_mngr.deactivate_NPCs()
+			#_avatar.set_global_position(Vector2i(250, 650))
 			
 		_inventory._on_day_mngr_day_ended(get_current_day())
 	
