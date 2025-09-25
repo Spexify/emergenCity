@@ -92,9 +92,64 @@ static func parse_sequence(directive: String, inline_params: PackedStringArray, 
 				return {"actors": actors}
 		"action":
 			if not inline_params.is_empty():
-				return {"action": inline_params[0]}
+				var data: Dictionary
+				var raw_name := inline_params[0].split(".")
+				data["system"] = raw_name[0]
+				data["method"] = raw_name[1]
+				data["params"] = inline_params.slice(1)
+				data["type"] = "single"
+				
+				var action := EMC_Action.load_action(data)
+				return {"action": action}
 			if not list_params.is_empty():
-				return {"action": list_params[0]}
+				if list_params.size() == 1:
+					var data: Dictionary
+					var raw_name := list_params[0].split(".")
+					data["system"] = raw_name[0]
+					data["method"] = raw_name[1]
+					
+					var raw_params = "[" + " ".join(list_params.slice(1)) + "]"
+					var json := JSON.new()
+					var error := json.parse(raw_params)
+					if error != OK or typeof(json.data) != TYPE_ARRAY:
+						print("JSON Parse Error: ", json.get_error_message(), "in ", raw_params)
+						return {}
+					
+					data["params"] = json.data
+					data["type"] = "single"
+					
+					var action := EMC_Action.load_action(data)
+					return {"action": action}
+				else:
+					var multi_data: Dictionary
+					multi_data["acc"] = "array"
+					multi_data["type"] = "multi"
+					multi_data["actions"] = []
+					for entry: String in list_params:
+						var data: Dictionary
+						var raw_var := entry.substr(2).split("=", false)
+						if raw_var.size() > 1:
+							data["as"] = raw_var[0]
+						var raw_line := raw_var[-1].split(" ", false)
+						var raw_name := raw_line[0].split(".", false)
+						data["system"] = raw_name[0]
+						data["method"] = raw_name[1]
+						var raw_params = "[" + ", ".join(raw_line.slice(1)) + "]"
+						
+						var json := JSON.new()
+						var error := json.parse(raw_params)
+						if error != OK or typeof(json.data) != TYPE_ARRAY:
+							print("JSON Parse Error: ", json.get_error_message(), "in ", raw_params)
+							continue
+						
+						#print(raw_params)
+						data["params"] = json.data
+						data["type"] = "single"
+						
+						multi_data["actions"].append(data)
+					
+					var multi_action := EMC_Action.load_action(multi_data)
+					return {"action": multi_action}
 		"if":
 			return {"if": "some"}
 		"than":
@@ -151,12 +206,12 @@ static func parse_dialogue(script: String) -> VRV_Dialogue:
 					
 			"Condition":
 				if not inline_params.is_empty():
-					current_node["Condition"] = [{"mathod_name": inline_params[0], "params": inline_params.slice(1)}]
+					current_node["Condition"] = [{"method_name": inline_params[0], "params": inline_params.slice(1)}]
 				elif not list_params.is_empty():
 					current_node["Condition"] = []
 					for raw_param: String in list_params:
 						var param: PackedStringArray = raw_param.split(" ", false)
-						current_node["Condition"].append({"mathod_name": param[0], "params": param.slice(1)})
+						current_node["Condition"].append({"method_name": param[0], "params": param.slice(1)})
 						
 			"Choice":
 				if not list_params.is_empty():

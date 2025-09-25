@@ -12,7 +12,10 @@
 		"karma": {},
 		"interaction": {
 			"conversation": {
-				"pitch": 1.2
+				"pitch": 1.2,
+				"paths": {
+					"day": "res://resources/dialogues/agathe/day/"
+				}
 			},
 			"trading": {
 				"inventory": {

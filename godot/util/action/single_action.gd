@@ -1,19 +1,20 @@
 extends EMC_Action
 class_name EMC_Single_Action
 
+@export var method: String
+@export var params: Array
+@export var comp_name: String
+@export var result_name: String
+@export var needs_resolve: bool
 var exe: Callable
-var method: String
 var get_exe: Callable
-var params: Array
 var comp: Node = null
-var comp_name: String
 var comp_path: NodePath
-var result_name: String
-var needs_resolve: bool
 
-func _init(data : Dictionary) -> void:
+func _init(data : Dictionary = {}) -> void:
 	if not data.has_all(["method", "params", "system"]):
-		print_debug("Missing Dictionary entries")
+		#print_debug("Missing Dictionary entries")
+		return
 		
 	method = data["method"]
 	params = data["params"]

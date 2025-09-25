@@ -53,10 +53,11 @@ process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
-[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr") groups=["Save"] instance=ExtResource("13_8jkao")]
+[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr", "_crisis_phase") groups=["Save"] instance=ExtResource("13_8jkao")]
 _avatar = NodePath("../Avatar")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _gui_mngr = NodePath("../GUI")
+_crisis_phase = NodePath("..")
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1

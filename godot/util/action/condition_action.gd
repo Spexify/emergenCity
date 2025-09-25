@@ -1,9 +1,9 @@
 extends EMC_Action
 class_name EMC_Condition_Action
 
-var then_exe: EMC_Action
-var if_exe: EMC_Action
-var else_exe: EMC_Action
+@export var then_exe: EMC_Action
+@export var if_exe: EMC_Action
+@export var else_exe: EMC_Action
 
 ## Format:
 ##NAME {
@@ -14,9 +14,10 @@ var else_exe: EMC_Action
 ##}
 ## If NAME starts with an "!", the condition will be evaluated during the supply
 ## ACTION represents any other action
-func _init(data : Dictionary) -> void:
+func _init(data : Dictionary = {}) -> void:
 	if not data.has_all(["if", "then", "else"]):
-		print_debug("Missing Dictionary entries")
+		#print_debug("Missing Dictionary entries")
+		return
 	
 	var type: String = data["if"].get("type", "")
 	if type != "":

@@ -30,6 +30,8 @@ julia:Wenn du Hilfe brauchst, komm einfach bei mir vorbei.
 [jump] info
 
 [Node] info
-[action] END_TUTORIAL
+[action]
+- gui_mngr.request_gui "IconInformation"
+- ActCons.set_tutorial true
 
 [end]

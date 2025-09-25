@@ -75,8 +75,8 @@ func start(dialogue : VRV_Dialogue) -> void:
 				var i: int = 0
 				for entry: Dictionary in text:
 					var speaker: String = entry.get("speaker")
-					if speaker == "@npc" and not dialogue._start_npc.is_empty():
-						speaker = dialogue._start_npc
+					if speaker == "@npc" and not dialogue._start_npc_name.is_empty():
+						speaker = dialogue._start_npc_name
 					var line: String = entry.get("line")
 					# highlight speaking actor
 					for portrait : TextureRect in portrait_box.get_children():
@@ -95,8 +95,7 @@ func start(dialogue : VRV_Dialogue) -> void:
 					if speaker == "avatar" or speaker == "erzähler":
 						dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
 					else:
-						var npc: EMC_NPC = stage_mngr.get_NPC(speaker)
-						var pitch: float = npc.get_comp(EMC_NPC_Conversation).get_pitch()
+						var pitch: float = dialogue._start_npc.get_comp(EMC_NPC_Conversation).get_pitch()
 						dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : pitch})
 					dialogue_box.append_text(line)
 					dialogue_box.pop()

@@ -113,8 +113,10 @@ func _ready() -> void:
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
-		const TUTORIAL = preload("res://resources/dialogues/tutorial.vrv")
-		_gui_mngr.request_gui("DialogueGui", [TUTORIAL])
+		var tutorial: VRV_Dialogue = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
+		tutorial._start_npc = stage_mngr.get_NPC("julia")
+		tutorial._start_npc_name = "julia"
+		_gui_mngr.request_gui("DialogueGui", [tutorial])
 		#_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes

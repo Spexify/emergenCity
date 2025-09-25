@@ -19,7 +19,8 @@ var current_entry: int = 0
 
 var _stage_mngr: EMC_StageMngr
 var _checker: EMC_ActionConstraints
-var _start_npc: String = ""
+var _start_npc_name: String = ""
+var _start_npc: EMC_NPC
 
 func _init() -> void:
 	self.setup(data)
@@ -35,8 +36,8 @@ func is_empty() -> bool:
 	return data.is_empty()
 
 func check_start() -> bool:
-	if nodes["start"].has("Conditions"):
-		return _check_conditions(nodes["start"]["Conditions"])
+	if nodes["start"].has("Condition"):
+		return _check_conditions(nodes["start"]["Condition"])
 	return true
 	
 func get_next() -> Array:
@@ -53,7 +54,7 @@ func get_next() -> Array:
 					var portrait: Texture2D
 					var name: String = data["name"] 
 					if data["name"] == "@npc":
-						name = _start_npc
+						name = _start_npc_name
 					
 					if name == "avatar":
 						portrait = (load("res://assets/characters/portrait_avatar_" + SettingsGUI.get_avatar_sprite_suffix() + ".png"))
@@ -73,8 +74,8 @@ func get_next() -> Array:
 				options = options.filter(
 					func (data: Dictionary) -> bool:
 						if data.has("jump"):
-							if nodes.get(data["jump"]).has("Conditions"):
-								return _check_conditions(nodes.get(data["jump"])["Conditions"])
+							if nodes.get(data["jump"]).has("Condition"):
+								return _check_conditions(nodes.get(data["jump"])["Condition"])
 						return true)
 				
 				var choose: Dictionary = options.pick_random()
@@ -90,10 +91,17 @@ func get_next() -> Array:
 				var eager: bool = current_node.has("Choice") and current_entry >= current_sequence.size()
 				return [VRV_Dialogue.TEXT, text, eager]
 			{"jump": var node_name}:
-				_jump(node_name)
+				if not nodes.get(node_name).has("Condition"):
+					_jump(node_name)
+				elif _check_conditions(nodes.get(node_name)["Condition"]):
+					_jump(node_name)
+				else:
+					current_entry += 1
 				return get_next()
-			{"action": var action_name}:
-				JsonMngr.get_action(action_name).execute()
+			{"action": var action}:
+				#JsonMngr.get_action(action_name).execute()
+				action.set_comp(_start_npc._get_sys_by_name)
+				action.execute()
 				current_entry += 1
 				return get_next()
 	

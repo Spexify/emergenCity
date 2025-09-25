@@ -18,7 +18,42 @@ func has_quest_stage(args: Dictionary) -> String:
 		if OverworldStatesMngr.has_quest(args["quest"]) and OverworldStatesMngr.get_quest_stage(args["quest"]) == args["stage"]:
 			return NO_REJECTION
 	return "Rejected"
+	
+func npc_mood_less_than(npc_name: String, mood: String) -> bool:
+	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
+	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)
+	if karma:
+		return karma.mood_less_than(EMC_NPC_Karma.string_to_mood.get(mood, "MID"))
+	return false
 
+func npc_mood_higher_than(npc_name: String, mood: String) -> bool:
+	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
+	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)
+	if karma:
+		return karma.mood_greater_than(EMC_NPC_Karma.string_to_mood.get(mood, "MID"))
+	return false
+	
+func npc_mood_equal(npc_name: String, mood: String) -> bool:
+	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
+	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)
+	if karma:
+		return karma.get_mood() == (EMC_NPC_Karma.string_to_mood.get(mood, "MID"))
+	return false
+	
+func npc_karma_higher_than(npc_name: String, value: String) -> bool:
+	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
+	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)
+	if karma:
+		return karma.get_krama() > float(value)
+	return false
+	
+func npc_karma_less_than(npc_name: String, value: String) -> bool:
+	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name.to_lower())
+	var karma: EMC_NPC_Karma = npc.get_comp(EMC_NPC_Karma)
+	if karma:
+		return karma.get_krama() < float(value)
+	return false
+	
 func npc_has_comp(args : Dictionary) -> String:
 	if args.has_all(["npc", "comp"]):
 		if _stage_mngr.get_NPC(args["npc"]).get_comp_by_name(args["comp"]) != null:
@@ -93,7 +128,9 @@ func is_state_by_name(args: Dictionary) -> String:
 	if args.has("state") and OverworldStatesMngr.is_effective_state_eq(args["state"].get_basename(), args["state"].get_extension()):
 		return NO_REJECTION
 	return "State Bad"
-	
+
+func is_state_by_name_str(state: String) -> bool:
+	return OverworldStatesMngr.is_effective_state_eq(state.get_basename(), state.get_extension())
 
 func constraint_no_limited_public_access(p_reason: String = "") -> String:
 	if OverworldStatesMngr.has_all_flag("NoEntry", ["Market", "Townhall"]):

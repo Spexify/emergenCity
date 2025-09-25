@@ -13,10 +13,11 @@ gerhard:Moin. Willst du handeln?
 [random]
 - [jump] talk1
 - [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
 
 [Node] talk1
-[Condition]
-
 [actors] avatar gerhard.t friedel
 [text]
 avatar:Lass uns reden! Wie geht's dir?
@@ -29,6 +30,7 @@ friedel:Wuff ...
 gerhard:... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
 friedel:Wuff!
 
+
 [Node] talk2
 [actors] avatar friedel gerhard.t
 [text]
@@ -40,9 +42,39 @@ avatar:Hund müsste man sein ...
 friedel:Wuff!
 
 
+[Node] talk3
+[actors] avatar friedel gerhard.t
+[text]
+avatar:Lass uns reden! Was macht die Gartenarbeit?
+gerhard:Arbeit? So würde ich das nicht nennen.
+gerhard:Der Garten war immer mein Rückzugsort nach der Arbeit.
+gerhard:Und heute ist er mein ganzer Stolz.
+friedel:Wuff?
+gerhard:Zusammen mit Friedel, natürlich.
+friedel:Wuff!
+
+
+[Node] talk4
+[Condition]
+npc_mood_less_than gerhard MID
+[actors] avatar friedel gerhard.t
+[text]
+avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
+gerhard:Wirklich? Hm, ja. Ich habe mich in der Tat etwas geärgert.
+gerhard:Dieser junge Bursche mit seinem E-Scooter ist Schuld.
+gerhard:Der im Anzug und mit diesen Stöpseln im Ohr.
+gerhard:Düst immer durch den Park, als sei er auf ner Rennstrecke.
+gerhard:Rast keine Handbreit an mir und Friedel vorbei, als gäbe es niemanden außer ihm auf der Welt.
+gerhard:Friedel ist ja wirklich nicht leicht aus der Ruhe zu bringen, aber die E-Scooter machen ihn wahnsinnig.
+gerhard:Das ärgert mich.
+friedel:Winsel.
+
+
 [Node] trade
 [Prompt] Handeln
-[action] DLG_Trade
+[action]
+- npc=self.get_self
+- gui_mngr.request_gui "Trade" ["$result.npc"]
 
 [Node] stop
 [Prompt] Nichts dergleichen

@@ -12,7 +12,10 @@
 		"karma": {},
 		"interaction":{
 			"conversation": {
-				"pitch": 0.75
+				"pitch": 0.75,
+				"paths": {
+					"day": "res://resources/dialogues/elias/day/"
+				}
 			},
 			"trading": {
 				"preferences": {},

@@ -3,7 +3,7 @@
 		"actors": [ "agathe", "avatar.r"],
 		"text": [
 			"agathe#Oh toll, endlich wieder Besuch!",
-			"agathe#Bist du zum Tauschen hier?",
+			"agathe#Bist du zum Tauschen hier?"
 		],
 		"options": {
 			"random": {
@@ -62,8 +62,8 @@
 			"agathe#Wie schön! Kennst du schon meinen Nachbarn Mert? Ein sehr netter Mensch.",
 			"agathe#Seine Katze Momo ist sehr niedlich, aber leider auch sehr scheu.",
 			"agathe#Ob ich mir auch ein Haustier zulegen sollte? Es wäre schön, Gesellschaft zu haben.",
-			"agathe#Aber es ist auch viel Verantwortung, besonders in Krisenzeiten.",
-		],
+			"agathe#Aber es ist auch viel Verantwortung, besonders in Krisenzeiten."
+		]
 	},
 	"#dialog3": {
 		"actors": [ "agathe", "avatar.r"],
@@ -72,8 +72,8 @@
 			"agathe#Veronika ist sehr organisiert und akribisch, aber wusstest du, dass von den beiden Kris sich um die Pflanzen kümmert?",
 			"agathe#Kris wirkt zwar oft etwas verträumt, aber die Pflanzen sind Kris wichtig, das merkt man.",
 			"agathe#Als die beiden das letzte Mal im Camping-Urlaub waren, hat Kris mir genau erklärt, welche Pflanze wie oft gegossen werden muss.",
-			"agathe#Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Urlaub bestimmt wieder gießen.",
-		],
+			"agathe#Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Urlaub bestimmt wieder gießen."
+		]
 	},
 	"#dialog4": {
 		"actors": [ "agathe", "avatar.r"],

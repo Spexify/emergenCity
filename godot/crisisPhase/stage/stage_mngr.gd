@@ -41,6 +41,7 @@ signal npc_act
 @export var _avatar: EMC_Avatar
 @export var _day_mngr: EMC_DayMngr
 @export var _gui_mngr : EMC_GUIMngr
+@export var _crisis_phase: EMC_CrisisPhase
 
 var _last_click_position: Vector2 = Vector2.INF
 var _last_clicked_NPC: EMC_NPC = null
@@ -187,7 +188,7 @@ func _setup_stages() -> void:
 func _setup_NPCs() -> void:
 	var dict: Dictionary = JsonMngr.load_NPC()
 	for npc : EMC_NPC in dict:
-		npc.setup(_gui_mngr, self, _day_mngr)
+		npc.setup(_gui_mngr, self, _day_mngr, _crisis_phase)
 		NPCs.add_child(npc)
 		
 		for comp: Node in dict[npc]:

@@ -9,6 +9,14 @@ enum Mood{
 	HAPPY = 4
 }
 
+const string_to_mood: Dictionary[String, Mood] = {
+	"BAD": Mood.BAD,
+	"SAD": Mood.SAD,
+	"MID": Mood.MID,
+	"GOOD": Mood.GOOD,
+	"HAPPY": Mood.HAPPY
+}
+
 ## HACK: using a Vector2 instead of float allows karma to be passed by reference
 ## to the save comp, thus we don't need to manually update the karma value 
 ## for the save comp 

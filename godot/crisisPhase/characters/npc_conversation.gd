@@ -108,7 +108,8 @@ func run() -> void:
 		and _purpose.has(purpose)):
 		
 		var dialogue: VRV_Dialogue = _purpose.get(purpose)
-		dialogue._start_npc = npc_name
+		dialogue._start_npc_name = npc_name
+		dialogue._start_npc = npc
 		_gui_mngr.request_gui("DialogueGui", [dialogue])
 		dialogue_flags |= FLAG_PURPOSE_SEEN
 		_save.add_res("conv_flags", dialogue_flags)
@@ -123,15 +124,17 @@ func run() -> void:
 		var dialogue: VRV_Dialogue = dialogues.filter(
 			func (dia: VRV_Dialogue) -> bool: return dia.check_start()).pick_random()
 		
-		dialogue._start_npc = npc_name
+		dialogue._start_npc_name = npc_name
+		dialogue._start_npc = npc
 		_gui_mngr.request_gui("DialogueGui", [dialogue])
-		dialogue_flags |= FLAG_DAY_SEEN
+		#dialogue_flags |= FLAG_DAY_SEEN
 		_save.add_res("conv_flags", dialogue_flags)
 		day += 1
 		_save.add_res("conv_day", day)
 	else:
 		var dialogue: VRV_Dialogue = _small_talk.pick_random()
-		dialogue._start_npc = npc_name
+		dialogue._start_npc_name = npc_name
+		dialogue._start_npc = npc
 		_gui_mngr.request_gui("DialogueGui", [dialogue])
 
 func get_pitch() -> float:

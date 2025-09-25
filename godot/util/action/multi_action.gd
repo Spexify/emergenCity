@@ -5,14 +5,15 @@ const AND := "and"
 const ARRAY := "array"
 const OR := "or"
 
-var exes: Array[EMC_Action]
-var acc: String = ARRAY
+@export var exes: Array[EMC_Action]
+@export var acc: String = ARRAY
 
-func _init(data : Dictionary) -> void:
-	if not data.has("acc"):
-		print_debug("Missing Accumulator")
-	else:
-		acc = data["acc"]
+func _init(data : Dictionary = {}) -> void:
+	if not data.has_all(["acc", "actions"]):
+		#print_debug("Missing Accumulator")
+		return
+	#else:
+		#acc = data["acc"]
 	
 	for action: Dictionary in data.get("actions"):
 		if typeof(action) != TYPE_DICTIONARY:
@@ -20,9 +21,9 @@ func _init(data : Dictionary) -> void:
 		
 		var type: String = action.get("type", "")
 		if type != "":
-			var res: Variant = Preloader.get_resource("res://util/action/" + type + "_action.gd")
-			if res == null:
-				res = ResourceLoader.load("res://util/action/" + type + "_action.gd")
+			var res: Variant = ResourceLoader.load("res://util/action/" + type + "_action.gd")
+			#if res == null:
+				#res = ResourceLoader.load("res://util/action/" + type + "_action.gd")
 				
 			exes.append(res.new(action))
 
