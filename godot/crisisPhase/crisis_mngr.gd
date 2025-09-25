@@ -72,7 +72,8 @@ func _helper(_name: String, scenario: Dictionary, total_duration: int, start: in
 			var crisis: Dictionary = CRISIS["following"][cr_name]
 			following.append(crisis)
 			weights.append(crisis["weight"])
-			
+		
+		## DEPRECATED
 		following.assign(Global.pick_weighted_random(following, weights, fcount))
 		
 		for next_crisis: Dictionary in following:

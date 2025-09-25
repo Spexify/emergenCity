@@ -29,7 +29,13 @@ func add_hydration(p_value: int) -> void:
 
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happiness(p_value)
-
+	
+func make_hungry() -> void:
+	_avatar.sub_nutrition(_avatar.get_nutrition_status()-1)
+	
+func make_thirsty() -> void:
+	_avatar.sub_hydration(_avatar.get_hydration_status()-1)
+	
 ############################################ Action ################################################
 
 func execute_action(action : String) -> void:

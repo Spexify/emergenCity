@@ -206,11 +206,11 @@ text = "Zurück zum Hauptmenü"
 position = Vector2(297, 221)
 emitting = false
 amount = 80
-process_material = SubResource("ParticleProcessMaterial_txb1w")
 texture = ExtResource("2_wm8fx")
 lifetime = 5.0
 one_shot = true
 explosiveness = 0.88
 randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_txb1w")
 
 [connection signal="pressed" from="SummaryWindow/MarginContainer/VBC/MainMenu" to="." method="_on_main_menu_pressed"]

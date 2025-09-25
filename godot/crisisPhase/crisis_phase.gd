@@ -1,9 +1,8 @@
 class_name EMC_CrisisPhase
 extends Node2D
 
-var _backpack: EMC_Inventory = Global.get_inventory()
+var _backpack: EMC_Inventory# = Global.get_inventory()
 
-#@onready var _stage_mngr : EMC_StageMngr = $StageMngr
 @onready var _avatar : EMC_Avatar = $Avatar
 
 #GUIs Upper Section:
@@ -59,9 +58,35 @@ func _get_comp(comp_name: String) -> Node:
 func _ready() -> void:
 	OverworldStatesMngr.reset()
 	
-	if Global.was_crisis():
-		##LOAD SAVE STATE
-		Global.load_state()
+	match Global.get_game_state():
+		Global.State.CRISIS:
+			#_backpack = Global.session["inventory"]
+			#var upgrades: Array[EMC_Upgrade]
+			#upgrades.assign(Global.session["upgrades"])
+			#OverworldStatesMngr.set_upgrades(upgrades)
+			Global.load_crisis()
+			Global.session = {}
+			
+		Global.State.SCENARIO:
+			_backpack = Global.session["inventory"]
+			var upgrades: Array[EMC_Upgrade]
+			upgrades.assign(Global.session["upgrades"])
+			OverworldStatesMngr.set_upgrades(upgrades)
+			for action_name: String in Global.session.get("changes", []):
+				JsonMngr.get_action(action_name).execute.call_deferred()
+			
+			Global.session = {}
+			
+		Global.State.START:
+			_backpack = Global.session["inventory"]
+			var upgrades: Array[EMC_Upgrade]
+			upgrades.assign(Global.session["upgrades"])
+			OverworldStatesMngr.set_upgrades(upgrades)
+			Global.session = {}
+	
+	#if Global.was_crisis():
+		###LOAD SAVE STATE
+		#Global.load_state()
 	
 	#Setup-Methoden
 	_avatar.refresh_vitals()
@@ -146,9 +171,12 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
 		"opt_manager": _opt_event_mngr.save(),
+		"inventory": _backpack
 	}
 	return data
 	
 func load_state(data : Dictionary) -> void:
 	if data.has("opt_manager"):
 		_opt_event_mngr.load_state(data.get("opt_manager"))
+		
+	_backpack = data.get("inventory", Global.create_inventory_with_starting_items())

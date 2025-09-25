@@ -152,8 +152,9 @@ func close() -> void:
 
 func _on_main_menu_pressed() -> void:
 	Global.get_tree().paused = false
-	Global.reset_state()
-	Global.reset_inventory()
-	Global.reset_upgrades_equipped()
-	Global.save_game(false)
+	#Global.reset_state()
+	#Global.reset_inventory()
+	#Global.reset_upgrades_equipped()
+	Global.save_game(Global.State.START)
+	Global.load_game()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

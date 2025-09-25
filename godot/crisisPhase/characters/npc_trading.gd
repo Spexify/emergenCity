@@ -107,7 +107,7 @@ func load_dependencies() -> void:
 	if not save.is_node_ready():
 		await save.ready
 	_inventory = save.get_res("Inventory", EMC_Inventory)
-	if _inventory == null or not Global.was_crisis():
+	if _inventory == null or not Global.get_game_state() == Global.State.CRISIS:
 		_inventory = EMC_Inventory.new(18)
 		for item_name : String in _initial_inventory.keys():
 			for i : int in range(_initial_inventory[item_name] as int):

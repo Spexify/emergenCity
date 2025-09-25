@@ -61,10 +61,6 @@ func _ready() -> void:
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 	
-	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
-		info_center_btn.show()
-	else:
-		info_center_btn.hide()
 
 # Called when the node enters the scene tree for the first time.
 func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
@@ -79,6 +75,11 @@ func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr)
 	_cooking_GUI.setup(p_backpack)
 	if(OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(p_backpack)
+		
+	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
+		info_center_btn.show()
+	else:
+		info_center_btn.hide()
 
 func is_any_gui() -> bool:
 	return not (_active_guis.is_empty() and _gui_queue.is_empty())

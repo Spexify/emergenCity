@@ -26,5 +26,3 @@ func _on_cooking_button_pressed() -> void:
 
 func _on_bbk_button_pressed() -> void:
 	open_bbk_brochure()
-
-

@@ -38,6 +38,78 @@
 			}
 		]
 	},
+	"SEN_ONE": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "make_hungry",
+				"params": []
+			},
+			{
+				"type": "single",
+				"system": "OSM",
+				"method": "add_state_layer_str_range",
+				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+			}
+		]
+	},
+	"SEN_TWO": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "OSM",
+				"method": "add_state_layer_str_range",
+				"params": ["MobileNetState","Scenario", "OFFLINE", 0, 5]
+			}
+		]
+	},
+	"SEN_THREE": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "make_thirsty",
+				"params": []
+			},
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "fill_reservoir",
+				"params": []
+			},
+			{
+				"type": "single",
+				"system": "OSM",
+				"method": "add_state_layer_str_range",
+				"params": ["WaterState", "Scenario", "DIRTY", 0, 5]
+			}
+		]
+	},
+	"SEN_FOUR": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "make_hungry",
+				"params": []
+			},
+			{
+				"type": "single",
+				"system": "OSM",
+				"method": "add_state_layer_str_range",
+				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+			}
+		]
+	},
 	"INT_EXIT": {
 		"type": "single",
 		"system": "gui_mngr",

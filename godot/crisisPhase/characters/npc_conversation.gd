@@ -15,6 +15,8 @@ var _gui_mngr: EMC_GUIMngr
 var _stage_mngr: EMC_StageMngr
 var _checker: EMC_ActionConstraints
 
+var _save: EMC_NPC_Save
+
 var _small_talk: Array[VRV_Dialogue]
 var _day_dialogues: Dictionary[String, Array]
 var _purpose: Dictionary[String, VRV_Dialogue]
@@ -66,26 +68,33 @@ func _load_dir(path: String) -> Dictionary[String, VRV_Dialogue]:
 	return result
 
 func load_save() -> void:
-	var save: EMC_NPC_Save = npc.get_comp(EMC_NPC_Save)
-	if not save:
+	_save = npc.get_comp(EMC_NPC_Save)
+	if not _save:
 		printerr("No Save comp")
 		return
-	var raw_data: Variant = save.get_res("Conv", TYPE_PACKED_FLOAT64_ARRAY)
-	if raw_data == null:
-		save.add_res("Conv", PackedInt32Array([day, dialogue_flags]))
-	else:
-		if len(raw_data) == 2 and Global.was_crisis():
-			day = raw_data[0]
-			dialogue_flags = raw_data[1]
+	
+	if Global.get_game_state() == Global.State.CRISIS:
+		var raw_day: Variant = _save.get_res("conv_day", TYPE_INT)
+		if raw_day is int and not is_nan(raw_day as int):
+			day = raw_day
 		else:
-			save.add_res("Conv", PackedInt32Array([day, dialogue_flags]))
-
+			_save.add_res("conv_day", day)
+			
+		var raw_flags: Variant = _save.get_res("conv_flags", TYPE_INT)
+		if raw_flags is int and not is_nan(raw_flags as int):
+			dialogue_flags = raw_flags
+		else:
+			_save.add_res("conv_flags", dialogue_flags)
+	else:
+		_save.add_res("conv_day", day)
+		_save.add_res("conv_flags", dialogue_flags)
 
 func get_title() -> String:
 	return "Reden"
 
 func reset(_tmp: int) -> void:
 	dialogue_flags = 0
+	_save.add_res("conv_flags", dialogue_flags)
 
 func run() -> void:
 	var npc_name : String = npc.get_comp(EMC_NPC_Descr).get_npc_name()
@@ -102,12 +111,14 @@ func run() -> void:
 		dialogue._start_npc = npc_name
 		_gui_mngr.request_gui("DialogueGui", [dialogue])
 		dialogue_flags |= FLAG_PURPOSE_SEEN
+		_save.add_res("conv_flags", dialogue_flags)
 	
 	# Day Dialoge not yet seen
 	elif dialogue_flags & FLAG_DAY_SEEN == 0 and _day_dialogues.has("0"):
 		var dialogues: Array[VRV_Dialogue]
 		if not _day_dialogues.has(str(day)):
 			day = 0
+			_save.add_res("conv_day", day)
 		dialogues.assign(_day_dialogues[str(day)])
 		var dialogue: VRV_Dialogue = dialogues.filter(
 			func (dia: VRV_Dialogue) -> bool: return dia.check_start()).pick_random()
@@ -115,7 +126,9 @@ func run() -> void:
 		dialogue._start_npc = npc_name
 		_gui_mngr.request_gui("DialogueGui", [dialogue])
 		dialogue_flags |= FLAG_DAY_SEEN
+		_save.add_res("conv_flags", dialogue_flags)
 		day += 1
+		_save.add_res("conv_day", day)
 	else:
 		var dialogue: VRV_Dialogue = _small_talk.pick_random()
 		dialogue._start_npc = npc_name

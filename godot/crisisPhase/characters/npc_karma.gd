@@ -15,7 +15,7 @@ enum Mood{
 @export var karma: float = 0
 @export var mood: float = Mood.MID
 
-var data: PackedFloat64Array = [0, 0]
+var _save: EMC_NPC_Save
 
 @onready var npc : EMC_NPC = $".."
 
@@ -29,25 +29,35 @@ func _ready() -> void:
 	load_karma.call_deferred()
 
 func load_karma() -> void:
-	var raw_data: Variant = npc.get_comp(EMC_NPC_Save).get_res("Karma", TYPE_PACKED_FLOAT64_ARRAY)
-	if raw_data == null:
-		npc.get_comp(EMC_NPC_Save).add_res("Karma", PackedFloat64Array([karma, mood]))
+	_save = npc.get_comp(EMC_NPC_Save)
+	if not _save:
+		printerr("No Save comp")
+		return
+	
+	var raw_karma: Variant = _save.get_res("karma", TYPE_FLOAT)
+	if raw_karma is float and not is_nan(raw_karma as float):
+		karma = raw_karma
 	else:
-		if len(raw_data) == 2:
-			karma = raw_data[0]
-			if Global.was_crisis():
-				mood = raw_data[1]
-			else:
-				npc.get_comp(EMC_NPC_Save).add_res("Karma", PackedFloat64Array([karma, mood]))
+		_save.add_res("karma", karma)
+	
+	if Global.get_game_state() == Global.State.CRISIS:
+		var raw_mood: Variant = _save.get_res("mood", TYPE_FLOAT)
+		if raw_mood is float and not is_nan(raw_mood as float):
+			mood = raw_mood
+			return
+	_save.add_res("mood", mood)
 
 func set_mood(p_mood: float) -> void:
 	mood = p_mood
+	_save.add_res("mood", mood)
 
 func add_mood(p_mood: float) -> void:
 	mood = clamp(mood + p_mood, 0, 4)
+	_save.add_res("mood", mood)
 	
 func sub_mood(p_mood: float) -> void:
 	mood = clamp(mood - p_mood, 0, 4)
+	_save.add_res("mood", mood)
 
 func get_mood() -> Mood:
 	return ceili(mood) as Mood
@@ -64,3 +74,4 @@ func get_krama() -> float:
 func add_karma(value: float) -> void:
 	karma += value
 	karma = clampf(karma, -1.0, 1.0)
+	_save.add_res("karma", karma)

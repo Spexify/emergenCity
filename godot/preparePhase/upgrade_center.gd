@@ -25,7 +25,7 @@ var _equipped_upgrades : Array[EMC_Upgrade]
 var _equpped_id: Array[int]
 
 func _ready() -> void:
-	_equpped_id = OverworldStatesMngr.get_upgardes_id()
+	_equpped_id.assign(Global.session["upgrades"].map(func (up: EMC_Upgrade) -> int: return up.get_id())) #OverworldStatesMngr.get_upgardes_id()
 	
 	_add_balance(0)
 	
@@ -181,12 +181,14 @@ func _on_un_equip_btn_pressed() -> void:
 	_clicked_slot = null
 
 func _on_main_menu_btn_pressed() -> void:
-	OverworldStatesMngr.set_upgrades(_equipped_upgrades)
+	Global.session["upgrades"] = _equipped_upgrades
+	#OverworldStatesMngr.set_upgrades(_equipped_upgrades)
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
 	#Global.goto_scene(Global.SHOP_SCENE)
 	
 func _on_continue_btn_pressed() -> void:
-	OverworldStatesMngr.set_upgrades(_equipped_upgrades)
+	Global.session["upgrades"] = _equipped_upgrades
+	#OverworldStatesMngr.set_upgrades(_equipped_upgrades)
 	Global.goto_scene(Global.SHOP_SCENE)
 
 func _on_help_pressed() -> void:

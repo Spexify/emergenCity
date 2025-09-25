@@ -138,12 +138,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten"
 
-[node name="Shop" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
-visible = false
+[node name="Scenario" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Vorräte einkaufen"
+text = "Szenario starten"
 
 [node name="UpgradeCenter" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
 visible = false
@@ -160,6 +159,6 @@ visible = false
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/Information" to="Menu" method="_on_information_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/InformationButtons/CreditScreen" to="Menu" method="_on_credit_screen_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/StartRound" to="Menu" method="_on_start_round_pressed"]
-[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop" to="Menu" method="_on_shop_pressed"]
+[connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Scenario" to="Menu" method="_on_scenario_pressed"]
 [connection signal="pressed" from="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter" to="Menu" method="_on_upgrade_center_pressed"]
 [connection signal="closed" from="Menu/CanvasLayer_unaffectedByCM/AvatarSelectionGUI" to="Menu" method="_on_avatar_selection_gui_closed"]

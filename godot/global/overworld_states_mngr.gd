@@ -183,6 +183,12 @@ func add_state_layer_int(state: String, id: String, value: int, _t: int = 0) -> 
 
 func add_state_layer_str(state: String, id: String, value: String, _t: int = 0) -> void:
 	add_state_layer_int(state, id, STATE_TRANSLATOR[state][value], _t)
+
+func add_state_layer_str_range(state: String, id: String, value: String, start: int = 0, end: int = 0) -> void:
+	begin_batch()
+	for _t in range(start, end):
+		add_state_layer_int(state, id, STATE_TRANSLATOR[state][value], _t)
+	end_batch()
 	
 func remove_state_layer(state: String, id: String, _t: int = 0) -> void:
 	var t: int = current_t + _t
@@ -533,7 +539,11 @@ func save() -> Dictionary:
 
 ## Load all relevant information. This is used for Saving/loading
 func load_state(p_data : Dictionary) -> void:
-	var data : EMC_AllRes = EMC_AllRes.load_res(SAVE_FILE)
+	var data : EMC_AllRes
+	if p_data.has("override"):
+		data = EMC_AllRes.load_res(p_data["override"])
+	else:
+		data = EMC_AllRes.load_res(SAVE_FILE)
 	
 	var p_difficulty_crisis : Difficulty = data.get_res("difficulty_crisis")
 	var p_run_length : int = data.get_res("run_length")
@@ -542,7 +552,7 @@ func load_state(p_data : Dictionary) -> void:
 	
 	facility_effective_states = data.get_res("facility_effective_states")
 	facility_states = data.get_res("facility_states")
-	flags = data.get_res("flags")
+	flags.assign(data.get_res("flags"))
 	modifiers = data.get_res("modifiers")
 	current_t = data.get_res("current_t", 0)
 	

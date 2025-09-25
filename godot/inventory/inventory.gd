@@ -114,14 +114,14 @@ func get_items_or_dummy() -> Array[EMC_Item]:
 ## Return all items as Array of [EMC_Item]s
 func get_dup_items() -> Array[EMC_Item]:
 	var result : Array[EMC_Item] = []
-	for item in slots:
+	for item: EMC_Item in slots:
 		result.append(EMC_Item.make_from_id(item.get_id()))
 	return result
 
 func get_items_as_name() -> Array[String]:
 	var items: Array[String] = []
 	
-	for item in slots:
+	for item: EMC_Item in slots:
 		if item != null:
 			items.push_back(JsonMngr.item_id_to_name(item.get_id()))
 	return items
@@ -129,7 +129,7 @@ func get_items_as_name() -> Array[String]:
 func get_items_as_id() -> Array[int]:
 	var items: Array[int] = []
 	
-	for item in slots:
+	for item: EMC_Item in slots:
 		if item != null:
 			items.push_back(item.get_id())
 	return items
@@ -155,7 +155,7 @@ func spoil_some_items() -> void:
 ## Returns copy of all item IDs ([EMC_Item.IDs]) and empty spaces as [EMC_Item.IDs.DUMMY]
 func get_slots_as_id() -> Array[int]:
 	var items : Array[int] = []
-	for item in slots:
+	for item: EMC_Item in slots:
 		items.push_back(item.get_id() if item != null else EMC_Item.IDs.DUMMY)
 	return items
 

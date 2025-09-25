@@ -28,7 +28,6 @@ const normal_bi_font := preload("res://assets/fonts/CMU Typewriter/cmuntx.ttf")
 
 
 var _previous_pause_mode: bool
-var is_dyslexic := false
 var _avatar_sprite_suffix: String = EMC_AvatarSelectionGUI.SPRITE_NB03
 signal debug_mode
 	
@@ -57,35 +56,37 @@ func set_avatar_sprite_suffix(p_avatar_sprite_suffix: String) -> void:
 	_avatar_sprite_suffix = p_avatar_sprite_suffix
 	avatar_sprite_changed.emit(_avatar_sprite_suffix)
 
-
 func get_avatar_sprite_suffix() -> String:
 	return _avatar_sprite_suffix
 
 ########################################## PRIVATE METHODS #########################################
 
 func _ready() -> void:
-	is_dyslexic = theme.get_default_font() == dyslexic_font
-	font_change.set_pressed_no_signal(is_dyslexic)
 	await Global.game_loaded
+	change_default_font()
+	font_change.set_pressed_no_signal(Global._is_dyslexic)
 	vibrate_button.set_pressed_no_signal(Global.is_vibration_enabled())
 	close()
 
-
-func _on_font_change_pressed() -> void:
-	if (is_dyslexic):
-		theme.set_default_font(normal_font)
-		theme.set_font("normal_font", "RichTextLabel", normal_font)
-		theme.set_font("italics_font", "RichTextLabel", normal_i_font)
-		theme.set_font("bold_font", "RichTextLabel", normal_b_font)
-		theme.set_font("bols_italics_font", "RichTextLabel", normal_bi_font)
-	else:
+func change_default_font() -> void:
+	if (Global._is_dyslexic):
 		theme.set_default_font(dyslexic_font)
 		theme.set_font("normal_font", "RichTextLabel", dyslexic_font)
 		theme.set_font("italics_font", "RichTextLabel", dyslexic_font)
 		theme.set_font("bold_font", "RichTextLabel", dyslexic_font)
 		theme.set_font("bols_italics_font", "RichTextLabel", dyslexic_font)
-	
-	is_dyslexic = !is_dyslexic
+	else:
+		theme.set_default_font(normal_font)
+		theme.set_font("normal_font", "RichTextLabel", normal_font)
+		theme.set_font("italics_font", "RichTextLabel", normal_i_font)
+		theme.set_font("bold_font", "RichTextLabel", normal_b_font)
+		theme.set_font("bols_italics_font", "RichTextLabel", normal_bi_font)
+		
+
+func _on_font_change_pressed() -> void:
+	Global._is_dyslexic = !Global._is_dyslexic
+
+	change_default_font()
 
 
 func _on_reset_pressed() -> void:
@@ -94,8 +95,11 @@ func _on_reset_pressed() -> void:
 	
 	self.close(true)
 	OverworldStatesMngr.reset()
-	Global.reset_state()
-	Global.reset_save()
+	#Global.reset_state()
+	#Global.reset_save()
+	Global.reset_meta()
+	Global.save_game(Global.State.START)
+	Global.load_game()
 	get_tree().paused = false
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
 

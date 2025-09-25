@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 	item_info_gui.closed.connect(hide_canvas)
 	
-	_inventory = Global.get_inventory()
+	_inventory = Global.session["inventory"]# Global.get_inventory()
 	if _inventory == null:
 		_inventory = EMC_Inventory.new()
 	
@@ -130,13 +130,15 @@ func _add_balance(value : int) -> void:
 
 func _on_home_pressed() -> void:
 	_tmp_inventory.sort_custom(EMC_Inventory.sort_by_id)
-	Global.set_inventory(_tmp_inventory)
+	Global.session["inventory"] = _tmp_inventory
+	#Global.set_inventory(_tmp_inventory)
 	Global.set_e_coins(_balance)
 	Global.goto_scene(Global.CRISIS_START_SCENE)
 
 
 func _on_cancel_pressed() -> void:
-	Global.set_inventory(_inventory)
+	Global.session["inventory"] = _inventory
+	#Global.set_inventory(_inventory)
 	#Global.goto_scene(Global.MAIN_MENU_SCENE)
 	Global.goto_scene(Global.UPGRADE_CENTER_SCENE)
 

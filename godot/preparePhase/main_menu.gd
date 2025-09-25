@@ -2,8 +2,8 @@ extends Control
 
 @onready var _settings := SettingsGUI
 @onready var e_coins := $CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer/eCoins
-@onready var _shop_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop
-@onready var _upgrade_center_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter
+#@onready var _shop_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/Shop
+#@onready var _upgrade_center_btn := $CanvasLayer_unaffectedByCM/CenterContainer/GameButtons/UpgradeCenter
 @onready var avatar_selection_gui : EMC_AvatarSelectionGUI = $CanvasLayer_unaffectedByCM/AvatarSelectionGUI
 @onready var canvas_modulate : CanvasModulate = $CanvasModulate
 @onready var canvas_layer_unaffected_by_cm : CanvasLayer = $CanvasLayer_unaffectedByCM
@@ -35,8 +35,8 @@ func _ready() -> void:
 		$CanvasLayer_unaffectedByCM/MarginContainer/HBoxContainer.hide()
 		$CanvasLayer_unaffectedByCM/MarginContainer2.hide()
 		$CanvasLayer_unaffectedByCM/InformationButtons.hide()
-		_shop_btn.hide()
-		_upgrade_center_btn.hide()
+		#_shop_btn.hide()
+		#_upgrade_center_btn.hide()
 
 
 func _on_start_round_pressed() -> void:
@@ -95,3 +95,6 @@ func _on_ecoins_gui_input(event : InputEvent) -> void:
 		if (event as InputEventScreenTouch).pressed:
 			Global.add_e_coins(250)
 			e_coins.text = str(Global.get_e_coins())
+
+func _on_scenario_pressed() -> void:
+	Global.goto_scene(Global.EDU_SCENE)
