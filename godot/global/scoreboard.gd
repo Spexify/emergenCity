@@ -74,6 +74,7 @@ static var state: Dictionary = {
 	"bbk": false,
 	"help": false,
 	"radio": false,
+	"tip_source": {}
 }
 
 class ScoreRule:
@@ -108,6 +109,13 @@ class ScoreRule:
 		})
 	static var Item_Use: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.RESOURCE_EFFICIENCY: 5})
 	static var Quest: Callable = (func (alog: ActionLog) -> Dictionary: return {ScoreCat.COMMUNITY: alog.context.get("value", 10)})
+	static var Tip: Callable = (func (alog: ActionLog) -> Dictionary:
+		var source: String = alog.context.get("source", "none")
+		if EMC_Scoreboard.state["tip_source"].has(source):
+			return {ScoreCat.COMMUNITY: 2}
+		else:
+			EMC_Scoreboard.state["tip_source"][source] = ""
+			return {ScoreCat.INFOMRATION: 10, ScoreCat.COMMUNITY: 5})
 	
 ## WARNING: returns reference to the same object
 var name_to_log: Dictionary = {
@@ -118,7 +126,8 @@ var name_to_log: Dictionary = {
 	"radio": ActionLog.new().setup("Radio", ScoreRule.Radio),
 	"reservoir": ActionLog.new().setup("Reservoir", ScoreRule.Reservoir),
 	"chlor": ActionLog.new().setup("Chlor", ScoreRule.Item_Use),
-	"quest": ActionLog.new().setup("Quest", ScoreRule.Quest)
+	"quest": ActionLog.new().setup("Quest", ScoreRule.Quest),
+	"tip": ActionLog.new().setup("Tip", ScoreRule.Tip)
 }
 
 ## Prepare Phase Total
@@ -181,7 +190,7 @@ func add_score(log_name: String, context: Dictionary = {}) -> void:
 	for cat: ScoreCat in alog.eval:
 		if alog.eval[cat] > 0:
 			animate_score(alog.eval[cat], score_cat_to_color[cat])
-	
+
 func get_day_score() -> int:
 	var score: int = 0
 	if score_log.has(_day_mngr.get_current_day()-1):

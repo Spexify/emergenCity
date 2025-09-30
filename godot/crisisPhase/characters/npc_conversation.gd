@@ -56,18 +56,26 @@ func _load_dialoges(npc_paths: Dictionary[String, String]) -> void:
 
 func _load_dir(path: String) -> Dictionary[String, VRV_Dialogue]:
 	var result: Dictionary[String, VRV_Dialogue]
-	var dir := DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name : String = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".vrv"):
-				var raw_dialoge := ResourceLoader.load(path + file_name, "VRV_Dialogue")
-				if raw_dialoge is VRV_Dialogue:
-					result[file_name] = raw_dialoge
-			file_name = dir.get_next()
-	else:
-		printerr("An error occurred when trying to access the path.")
+	for file_name in ResourceLoader.list_directory(path):
+		var raw_dialoge := ResourceLoader.load(path + file_name, "VRV_Dialogue")
+		if raw_dialoge is VRV_Dialogue:
+			result[file_name] = raw_dialoge
+		
+	#var dir := DirAccess.open(path)
+	#if dir:
+		#dir.list_dir_begin()
+		#var file_name : String = dir.get_next()
+		#while file_name != "":
+			#print(file_name)
+			#if not dir.current_is_dir() and (file_name.ends_with(".vrv")):# or file_name.ends_with(".vrv.import")):
+				##if file_name.ends_with(".import"):
+				##	file_name = file_name.trim_suffix(".import")
+				#var raw_dialoge := ResourceLoader.load(path + file_name, "VRV_Dialogue")
+				#if raw_dialoge is VRV_Dialogue:
+					#result[file_name] = raw_dialoge
+			#file_name = dir.get_next()
+	#else:
+		#printerr("An error occurred when trying to access the path.")
 	return result
 
 func load_save() -> void:
