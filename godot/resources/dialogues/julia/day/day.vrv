@@ -9,14 +9,14 @@ julia:Hi Nachbar!
 [Node] reden
 [Prompt] Was geht?
 [random]
+- [jump] reden1
+- [jump] reden2
+- [jump] reden3
+- [jump] reden4
+- [jump] reden5
+- [jump] reden6
 - [jump] reden7
-- [jump] reden7
-- [jump] reden7
-- [jump] reden7
-- [jump] reden7
-- [jump] reden7
-- [jump] reden7
-- [jump] reden7
+- [jump] reden8
 
 [Node] reden1
 [actors] avatar julia.t

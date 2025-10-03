@@ -16,7 +16,6 @@ gerhard:Moin. Willst du handeln?
 - [jump] talk3
 - [jump] talk4
 
-
 [Node] talk1
 [actors] avatar gerhard.t friedel
 [text]
