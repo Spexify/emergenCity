@@ -345,6 +345,9 @@ func set_vibration_enabled(x : bool) -> void:
 func is_vibration_enabled() -> bool:
 	return _vibration
 
+func tutorial_finished() -> bool:
+	return _tutorial_done
+
 ################################################UTIL################################################
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()

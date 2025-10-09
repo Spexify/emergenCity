@@ -45,14 +45,14 @@ func load_karma() -> void:
 	var raw_karma: Variant = _save.get_res("karma", TYPE_FLOAT)
 	if raw_karma is float and not is_nan(raw_karma as float):
 		karma = raw_karma
-	else:
-		_save.add_res("karma", karma)
+	_save.add_res("karma", karma)
 	
 	if Global.get_game_state() == Global.State.CRISIS:
 		var raw_mood: Variant = _save.get_res("mood", TYPE_FLOAT)
 		if raw_mood is float and not is_nan(raw_mood as float):
 			mood = raw_mood
-			return
+	else:
+		mood = 3
 	_save.add_res("mood", mood)
 
 func set_mood(p_mood: float) -> void:

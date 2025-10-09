@@ -43,6 +43,14 @@ func _on_continue_pressed() -> void:
 			Global.session["inventory"] = _inventory
 			Global.session["upgrades"] = [EMC_Upgrade.new().setup(4)]
 			Global.session["changes"].append("SEN_FOUR")
+		"five":
+			var _inventory := Global.create_inventory_with_starting_items()
+			_inventory.add_new_item(4)
+			_inventory.add_new_item(4)
+			Global.session["inventory"] = _inventory
+			Global.session["changes"].append("SEN_FIVE")
+			
+			
 	Global.goto_scene(Global.CRISIS_PHASE_SCENE)
 
 func _on_cancel_pressed() -> void:

@@ -147,7 +147,7 @@
 					"system": "karma",
 					"method": "set_mood",
 					"params": [
-						2
+						4
 					]
 				},
 				"idle": {
@@ -191,7 +191,7 @@
 								"system": "karma",
 								"method": "mood_less_than",
 								"params": [
-									3
+									2
 								]
 							},
 							{
@@ -207,6 +207,12 @@
 								"system": "Global",
 								"method": "game_state_neq",
 								"params": [ 1 ]
+							},
+							{
+								"type": "single",
+								"system": "Global",
+								"method": "tutorial_finished",
+								"params": []
 							}
 						]
 					},
@@ -278,7 +284,7 @@
 					"fish_mood": 1,
 					"idle": 1,
 					"noop": 1,
-					"!escape": 100,
+					"!escape": 0,
 					"market": 1
 				}
 			},

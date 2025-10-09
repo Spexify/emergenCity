@@ -53,6 +53,12 @@
 				"system": "OSM",
 				"method": "add_state_layer_str_range",
 				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+			},
+			{
+				"type": "single",
+				"system": "stage_mngr",
+				"method": "reload_stage",
+				"params": []
 			}
 		]
 	},
@@ -107,6 +113,36 @@
 				"system": "OSM",
 				"method": "add_state_layer_str_range",
 				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+			},
+			{
+				"type": "single",
+				"system": "stage_mngr",
+				"method": "reload_stage",
+				"params": []
+			}
+		]
+	},
+	"SEN_FIVE": {
+		"type": "multi",
+		"acc": "array",
+		"actions": [
+			{
+				"type": "single",
+				"system": "OSM",
+				"method": "add_quest",
+				"params": [ "FRIEDEL_WEG", 1 ]
+			},
+			{
+				"type": "single",
+				"system": "ActCons",
+				"method": "npc_change_stage",
+				"params": [
+					{
+						"npc": "friedel",
+						"stage": "market",
+						"wait": false
+					}
+				]
 			}
 		]
 	},
