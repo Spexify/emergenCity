@@ -1,6 +1,22 @@
 @tool
-extends Script
 class_name VRV_Dialoge_Parser
+## Vervain is a simple specialized dialoge language
+## 
+## Syntax:
+##
+## [Node] NAME
+##
+## [Prompt] LINE
+## [Prompt]
+## LINE
+##
+##
+## [Choice]
+## - NODE_NAME
+## - NODE_NAME
+## ...
+
+
 
 static var regex := RegEx.new()
 
@@ -22,16 +38,16 @@ static func _extract_info(matche: RegExMatch) -> Array:
 	var directive: String = matche.get_string("directive")
 	
 	var list_params: PackedStringArray
-	var inline_params: PackedStringArray
+	var inline_params: String
 	if section.has("in"):
-		inline_params = matche.get_string("in").split(" ", false)
+		inline_params = matche.get_string("in")#.split(" ", false)
 	elif section.has("out"):
 		list_params = matche.get_string("out").split("\n", false)
 		
 	return [directive, inline_params, list_params]
 
 # Parsing sequance directives
-static func parse_sequence(directive: String, inline_params: PackedStringArray, list_params: PackedStringArray) -> Dictionary:
+static func parse_sequence(directive: String, raw_inline_params: String, list_params: PackedStringArray) -> Dictionary:
 	match directive:
 		"text":
 			var text: Array[Dictionary]
@@ -173,52 +189,69 @@ static func parse_dialogue(script: String) -> VRV_Dialogue:
 	var current_node: Dictionary
 	while i < len(matches):
 		var directive: String
-		var inline_params: PackedStringArray
+		var raw_inline_params: String
 		var list_params: PackedStringArray
 		
 		var info: Array = _extract_info(matches[i])
 		directive = info[0]
-		inline_params = info[1]
+		raw_inline_params = info[1]
 		list_params = info[2]
 		
 		
 		match directive:
-			"Import":
-				if not inline_params.is_empty():
-					data["Imports"].append_array(inline_params)
-				elif not list_params.is_empty():
-					data["Imports"].append_array(list_params)
+			#"Import":
+				#if not inline_params.is_empty():
+					#data["Imports"].append_array(inline_params)
+				#elif not list_params.is_empty():
+					#data["Imports"].append_array(list_params)
 			"Node":
+				var inline_params: PackedStringArray = raw_inline_params.split(" ", false)
 				var node_name: String
-				if not inline_params.is_empty():
+				if inline_params.size() >= 1:
 					node_name = inline_params[0]
-				elif not list_params.is_empty():
-					node_name = list_params[0]
-				
-				data["Nodes"][node_name] = {}
-				current_node = data["Nodes"][node_name]
+					data["Nodes"][node_name] = {}
+					current_node = data["Nodes"][node_name]
+					if inline_params.size() > 1:
+						push_warning("In Node ", inline_params.size(), " parameters given, needs 1.")
+				else:
+					push_error("No Node name given!!")
 				
 			"Prompt":
-				if not inline_params.is_empty():
-					current_node["Prompt"] = " ".join(inline_params)
+				if not raw_inline_params.is_empty() and not list_params.is_empty():
+					push_warning("In Prompt inline and list parameters given, ingnoring list.")
+				
+				if not raw_inline_params.is_empty():
+					current_node["Prompt"] = raw_inline_params
 				elif not list_params.is_empty():
 					current_node["Prompt"] = list_params[0]
+					if list_params.size() > 1:
+						push_warning("In Node ", list_params.size(), " parameters given, needs 1.")
+				else:
+					push_error("In Prompt: no parameter given!")
 					
-			"Condition":
-				if not inline_params.is_empty():
-					current_node["Condition"] = [{"method_name": inline_params[0], "params": inline_params.slice(1)}]
-				elif not list_params.is_empty():
-					current_node["Condition"] = []
-					for raw_param: String in list_params:
-						var param: PackedStringArray = raw_param.split(" ", false)
-						current_node["Condition"].append({"method_name": param[0], "params": param.slice(1)})
+			#"Condition":
+				#if not inline_params.is_empty():
+					#current_node["Condition"] = [{"method_name": inline_params[0], "params": inline_params.slice(1)}]
+				#elif not list_params.is_empty():
+					#current_node["Condition"] = []
+					#for raw_param: String in list_params:
+						#var param: PackedStringArray = raw_param.split(" ", false)
+						#current_node["Condition"].append({"method_name": param[0], "params": param.slice(1)})
 						
 			"Choice":
+				if not raw_inline_params.is_empty():
+					push_warning("In Choice: inline parameters will be ignored.")
+				
 				if not list_params.is_empty():
 					var choices: Array[String]
-					choices.assign(Array(list_params).map(func (param: String) -> String: return param.right(-2)))
-				
+					for line: String in list_params:
+						if line.begins_with("- "):
+							choices.append(line.substr(2))
+						else:
+							push_warning("In Choice: missing list notation entry will be ignored.")
 					current_node["Choice"] = choices
+				else:
+					push_error("In Choice: no list parameters given!")
 			"End":
 				var dialoge: VRV_Dialogue = VRV_Dialogue.new()
 				dialoge.setup(data)
@@ -227,7 +260,7 @@ static func parse_dialogue(script: String) -> VRV_Dialogue:
 				if not current_node.has("sequence"):
 					current_node["sequence"] = []
 				
-				current_node["sequence"].append(parse_sequence(directive, inline_params, list_params))
+				current_node["sequence"].append(parse_sequence(directive, raw_inline_params, list_params))
 	
 		i += 1
 	
