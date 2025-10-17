@@ -93,10 +93,10 @@ func start(dialogue : VRV_Dialogue) -> void:
 					dialogue_box.newline()
 					talk_effect.set_char_count(regex.sub(line, "", true).length())
 					if speaker == "avatar" or speaker == "erzähler":
-						dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : 1.0})
+						dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : 1.0})
 					else:
 						var pitch: float = dialogue._start_npc.get_comp(EMC_NPC_Conversation).get_pitch()
-						dialogue_box.push_customfx(talk_effect, {"speed" : 15.0, "pitch" : pitch})
+						dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : pitch})
 					dialogue_box.append_text(line)
 					dialogue_box.pop()
 
