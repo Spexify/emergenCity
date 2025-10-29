@@ -7,6 +7,7 @@ class_name EMC_ItemQuestion
 @onready var slot : EMC_Item_Slot = $VBoxContainer/CC/Slot
 
 @export var _avatar : EMC_Avatar
+@export var _gui_mngr: EMC_GUIMngr
 
 var _inventory : EMC_Inventory
 var _item : EMC_Item
@@ -33,6 +34,7 @@ func open(p_item : EMC_Item, text : Dictionary = {}) -> void:
 		confirm_btn.hide()
 	
 	slot.set_item(_item)
+	slot.item_long_pressed.connect(item_long_pressed)
 	
 func close() -> void:
 	self.hide()
@@ -47,3 +49,6 @@ func _on_confirm_btn_pressed() -> void:
 func _on_back_btn_pressed() -> void:
 	slot.remove_item()
 	close()
+
+func item_long_pressed(item: EMC_Item, blocked: bool) -> void:
+	_gui_mngr.request_gui("ItemInfoGui", [item])

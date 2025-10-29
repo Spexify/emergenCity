@@ -1,0 +1,37 @@
+[Node] start
+[actors] avatar
+[text]
+avatar:Ah, so ein schöner Morgen! Huch, wieso geht mein Licht nicht an?
+avatar:Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom ist wohl weg.
+avatar:Oh, da ist jemand an der Tür.
+[actors] avatar julia.t
+[text]
+julia:Guten Morgen Nachbar! Hast du auch keinen Strom?
+avatar:Sieht ganz so aus.
+julia:Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?
+[Choice]
+- ja
+- naja
+
+[Node] ja
+[Prompt] ja
+[actors] avatar julia.t
+[text]
+avatar:Gar kein Problem. Ich habe ja auch noch mein Krisenbewältigungsbuch im Regal.
+julia:Klingt gut. Viel Erfolg!
+[jump] info
+
+[Node] naja
+[Prompt] naja
+[actors] avatar julia.t
+[text]
+avatar:Das trifft mich etwas unvorbereitet. Aber immerhin habe ich noch mein Krisenbewältigungsbuch im Regal.
+julia:Wenn du Hilfe brauchst, komm einfach bei mir vorbei.
+[jump] info
+
+[Node] info
+[action]
+- gui_mngr.request_gui ["IconInformation"]
+- ActCons.set_tutorial [true]
+
+[end]

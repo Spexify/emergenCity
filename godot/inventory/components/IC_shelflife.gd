@@ -15,7 +15,7 @@ func _init(_p_max_shelflife : int = 0) -> void:
 
 ## Get the internal nutritionness value
 func get_shelflife() -> int:
-	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
+	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "NONE"):
 		# Note: When electricity is missing, the shelflife is reduced by 2 each day, and thus
 		# has to be displayed by half of its amount, rounded up:
 		return ceil(_shelflife / 2.0)
@@ -28,7 +28,7 @@ func is_spoiled() -> bool:
 
 
 func reduce_shelflife() -> void:
-	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
+	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "NONE"):
 		_shelflife -= DECAY_RATE_NO_ELECTRICITY
 		if _shelflife < 0: _shelflife = 0
 	else:

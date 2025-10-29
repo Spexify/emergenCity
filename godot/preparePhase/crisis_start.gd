@@ -49,4 +49,5 @@ func _on_hard_pressed() -> void:
 
 
 func _on_back_btn_pressed() -> void:
-	Global.goto_scene("res://preparePhase/main_menu.tscn")
+	#Global.goto_scene("res://preparePhase/main_menu.tscn")
+		Global.goto_scene(Global.SHOP_SCENE)

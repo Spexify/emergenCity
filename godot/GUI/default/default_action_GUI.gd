@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func _on_confirm_btn_pressed() -> void:
 	await SoundMngr.button_finished()
-	var wait : AudioStreamPlayer = sound.execute()
+	var wait : AudioStreamPlayer = sound.execute()["current"]
 	
 	action.execute()
 	if time:
@@ -50,4 +50,3 @@ func _on_confirm_btn_pressed() -> void:
 
 func _on_back_btn_pressed() -> void:
 	close()
-

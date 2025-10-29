@@ -93,9 +93,9 @@ func get_tile_type(p_click_pos : Vector2) -> String:
 	if book_id != 0:
 		return "book\\" + str(book_id) 
 		
-	var action_id : int = tile_data.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
-	if action_id != 0:
-		return "action\\" + str(action_id) 
+	var action_id : String = tile_data.get_custom_data_by_layer_id(CustomDataLayers.ACTION_ID)
+	if not action_id.is_empty():
+		return "action\\" + action_id 
 	
 	return "background"
 	
@@ -110,7 +110,7 @@ func get_avatar_target(p_click_pos : Vector2) -> Vector2:
 	return Vector2.INF
 	
 func show_electricity() -> void:
-	if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
+	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"): # REMOVE OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
 		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 0))
 	else:
 		_stage.set_layer_modulate(Layers.MIDDLEGROUND_3, Color(1, 1, 1, 1))
@@ -241,11 +241,11 @@ func _override_spawn(dict : Dictionary) -> void:
 #*************UPGRADES*****************
 
 func _place_upgrade_furniture() -> void:
-	for upgrade: EMC_Upgrade in Global.get_equipped_upgrades():
+	for upgrade: EMC_Upgrade in OverworldStatesMngr.get_upgrades():
 		var spawn_pos : Vector2i = upgrade.get_spawn_pos()
 		var atlas_coords : Vector2i = upgrade._atlas_coord
 		_place_furniture_on_position(spawn_pos, Layers.MIDDLEGROUND_2,
-		atlas_coords, Atlases.UPGRADE_FURNITURE_PNG, upgrade._cols, upgrade._rows, true)
+		atlas_coords, Atlases.UPGRADE_FURNITURE_PNG, 1, 2, true)
 
 #***************UTIL******************
 

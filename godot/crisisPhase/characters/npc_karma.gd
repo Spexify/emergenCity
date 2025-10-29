@@ -2,22 +2,34 @@ extends Node
 class_name EMC_NPC_Karma
 
 enum Mood{
-	BAD,
-	SAD,
-	MID,
-	GOOD,
-	HAPPY
+	BAD = 0,
+	SAD = 1,
+	MID = 2,
+	GOOD = 3,
+	HAPPY = 4
+}
+
+const string_to_mood: Dictionary[String, Mood] = {
+	"BAD": Mood.BAD,
+	"SAD": Mood.SAD,
+	"MID": Mood.MID,
+	"GOOD": Mood.GOOD,
+	"HAPPY": Mood.HAPPY
 }
 
 ## HACK: using a Vector2 instead of float allows karma to be passed by reference
 ## to the save comp, thus we don't need to manually update the karma value 
 ## for the save comp 
-@export var karma : PackedFloat64Array = [0]
+@export var karma: float = 0
+@export var mood: float = Mood.MID
+
+var _save: EMC_NPC_Save
 
 @onready var npc : EMC_NPC = $".."
 
 func _init(dict: Dictionary) -> void:
-	karma = dict.get("karma", [0])
+	karma = dict.get("karma", karma)
+	mood = dict.get("mood", mood)
 
 func _ready() -> void:
 	#Global.game_saved.connect(save)
@@ -25,27 +37,49 @@ func _ready() -> void:
 	load_karma.call_deferred()
 
 func load_karma() -> void:
-	var tmp_karma: Variant = npc.get_comp(EMC_NPC_Save).get_res("Karma", TYPE_PACKED_FLOAT64_ARRAY)
-	if tmp_karma == null:
-		karma = [0]
-		npc.get_comp(EMC_NPC_Save).add_res("Karma", karma)
-	else:
-		karma = tmp_karma
+	_save = npc.get_comp(EMC_NPC_Save)
+	if not _save:
+		printerr("No Save comp")
+		return
 	
-func get_karma_enum() -> Mood:
-	if karma[0] < -0.8:
-		return Mood.BAD
-	elif karma[0] < -0.4:
-		return Mood.SAD
-	elif karma[0] < 0.0:
-		return Mood.MID
-	elif karma[0] < 0.4:
-		return Mood.GOOD
-	return Mood.HAPPY
+	var raw_karma: Variant = _save.get_res("karma", TYPE_FLOAT)
+	if raw_karma is float and not is_nan(raw_karma as float):
+		karma = raw_karma
+	_save.add_res("karma", karma)
+	
+	if Global.get_game_state() == Global.State.CRISIS:
+		var raw_mood: Variant = _save.get_res("mood", TYPE_FLOAT)
+		if raw_mood is float and not is_nan(raw_mood as float):
+			mood = raw_mood
+	else:
+		mood = 3
+	_save.add_res("mood", mood)
+
+func set_mood(p_mood: float) -> void:
+	mood = p_mood
+	_save.add_res("mood", mood)
+
+func add_mood(p_mood: float) -> void:
+	mood = clamp(mood + p_mood, 0, 4)
+	_save.add_res("mood", mood)
+	
+func sub_mood(p_mood: float) -> void:
+	mood = clamp(mood - p_mood, 0, 4)
+	_save.add_res("mood", mood)
+
+func get_mood() -> Mood:
+	return ceili(mood) as Mood
+
+func mood_less_than(p_mood: int) -> bool:
+	return get_mood() < p_mood
+	
+func mood_greater_than(p_mood: int) -> bool:
+	return get_mood() > p_mood
 
 func get_krama() -> float:
-	return karma[0]
+	return karma
 
 func add_karma(value: float) -> void:
-	karma[0] += value
-	karma[0] = clampf(karma[0], -1.0, 1.0)
+	karma += value
+	karma = clampf(karma, -1.0, 1.0)
+	_save.add_res("karma", karma)

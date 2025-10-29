@@ -1,0 +1,164 @@
+is_state[Node] start
+[actors] avatar elias.t
+[text]
+elias:Hi
+[random]
+- [jump] branchRedetNicht
+- [jump] branchRedet
+
+[Node] branchRedetNicht
+[Condition]
+npc_mood_less_than elias SAD
+npc_karma_less_than elias  -0.8
+[actors] avatar elias.t
+[text]
+elias:Brauchen Sie was?
+[Choice]
+- no_time
+- trade
+- stop
+
+[Node] no_time
+[Prompt] Reden
+[actors] avatar elias.t
+[text]
+elias:Dafür hab ich gerade keine Zeit.,
+elias:Sorry.
+
+[Node] branchRedet
+[actors] avatar elias.t
+[text]
+elias:Brauchen Sie was?
+[Choice]
+- talk
+- trade
+- top
+
+[Node] talk
+[Prompt] Nein, lass uns quatschen!
+[actors] avatar elias.t
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[Node] talk1
+[actors] avatar elias.t
+[text]
+elias:Gefällt Ihnen meine Einrichtung?
+[Choice]
+- EinrichtungGefaellt
+- EinrichtungGefaelltNicht
+
+[Node] EinrichtungGefaellt
+[Prompt] Ja
+[actors] avatar elias.t
+[text]
+avatar:Ja, gefällt mir gut.
+elias:Endlich jemand mit Geschmack in dieser Katastrophe von einer Stadt.
+
+[Node] EinrichtungGefaelltNicht
+[Prompt] Naja
+[actors] avatar elias.t
+[text]
+avatar:Sie wirkt etwas unpersönlich.
+elias:Ha! Sie sind genau wie die alte Tante, von der ich die Wohnung übernommen habe.
+elias:Kam mal hier vorbei. Auf dem Weg vom Rathaus, meinte sie.
+elias:Wollte ihrer Nostalgie frönen. Oder so ähnlich.
+elias:Als sie die Couch gesehen hat, dachte ich, sie kriegt nen Herzinfarkt. Hab sie nicht mehr hier gesehen.
+
+[Node] talk2
+[actors] avatar elias.t
+[text]
+elias:Ich weiß nicht, warum ich hierher gezogen bin.
+elias:Wie soll man bei diesen ständigen Internetausfällen vernünftig arbeiten?
+elias:Ich bin Geschäftsmann! Diese Krisen sind unkalkulierbare Risiken!
+[Choice]
+- WarumHergezogen
+- Wegziehen
+
+[Node] WarumHergezogen
+[Prompt] Warum dann herziehen?
+[actors] avatar elias.t
+[text]
+avatar:Warum sind Sie dann hergezogen?
+elias:Frag ich mich auch...
+[random]
+- [jump] dialog2Mood1
+- [jump] dialog2Mood2
+- [jump] dialog2Mood3
+
+[Node] dialog2Mood1
+[Condition]
+npc_mood_higher_than elias MID
+[actors] avatar elias.t
+[text]
+elias:Mein Vater kam von hier.
+elias:Hat immer von der Stadt geschwärmt. Wollte immer zurück.
+elias:Aber meine Mutter wollte nicht. Zu gefährlich, meint sie.
+elias:Ich schätze, ich war einfach neugierig.
+[jump] ZuVielErzaehlt
+
+[Node] ZuVielErzaehlt
+[Condition]
+npc_karma_less_than elias 0.5
+[actors] avatar elias.t
+[text]
+elias:Aber warum erzähle ich Ihnen das überhaupt? Das geht Sie gar nichts an.
+elias:Gehen Sie, damit ich meine gute Laune nicht noch verliere!
+
+[Node] dialog2Mood2
+[Condition]
+npc_mood_equal elias MID
+[actors] avatar elias.t
+[text]
+elias:...
+elias:Mein Vater hat hier mal gewohnt.
+elias:Ich wollte einen Ortswechsel. Ich wusste von diesem Ort.
+elias:Ich schätze, es braucht keinen guten Grund, nur die Gelegenheit.
+
+[Node] dialog2Mood3
+[Condition]
+npc_mood_less_than elias MID
+[actors] avatar elias.t
+[text]
+elias:Irgendein sentimentaler Unsinn.
+elias:Auf den Spuren meines Vaters. So ein Quatsch.
+
+[Node] Wegziehen
+[Prompt] Warum nicht wegziehen?
+[actors] avatar elias.t
+[text]
+avatar:Warum ziehen Sie dann nicht weg?
+elias:Sollte ich vielleicht.
+
+[Node] talk3
+[actors] avatar elias.t
+[text]
+elias:Ich hatte heute wieder ein Meeting, in dem einer nie zum Ende kam.
+elias:Keine Ahnung, was er gesagt hat. Ich hab parallel Mails beantwortet.
+elias:Aber sowas regt mich auf. Zeit ist Geld! Es gibt Leute, die das einfach nicht begreifen!
+
+[Node] talk4
+[actors] avatar elias.t
+[text]
+elias:Ich hab mir einen neuen E-Scooter geleistet.
+elias:Unbezahlbar die Dinger.
+avatar:Ja, die sind schon sehr teuer.
+elias:Teuer? Nein, ich meinte doch nicht in der Anschaffung, das ist ja ein Klacks.
+elias:Aber es spart so viel Zeit, mit dem Scooter zu fahren, statt zu Fuß zu gehen.
+
+[Node] trade
+[Prompt] Handeln
+[actors] avatar elias.t
+[text]
+elias:Für ein gutes Tauschgeschäft bin ich immer zu haben!
+[action]
+- npc=self.get_self []
+- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+
+[Node] stop
+[Prompt] Nö
+
+[end]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3idrrmeeqvy6"]
 
-[ext_resource type="Script" path="res://GUI/action_log_ui.gd" id="1_g2wwf"]
+[ext_resource type="Script" uid="uid://bqrt3eqa7obu1" path="res://GUI/action_log_ui.gd" id="1_g2wwf"]
 
 [node name="ActionLogUI" type="HBoxContainer"]
 custom_minimum_size = Vector2(350, 30)

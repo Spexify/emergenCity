@@ -8,7 +8,7 @@ class_name  EMC_GUIMngr
 @onready var _cooking_GUI : EMC_Cooking_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
-@onready var _dialogue_gui : EMC_Dialogue = $CL/VBC/MiddleSection/DialogueGui
+#@onready var _dialogue_gui : EMC_Dialogue_GUI = $CL/VBC/MiddleSection/DialogueGui
 #GUIs Lower Section:
 #@onready var tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
 #@onready var confirmation_GUI := $CL/VBC/LowerSection/ConfirmationGUI
@@ -27,10 +27,10 @@ class_name  EMC_GUIMngr
 @onready var handy_gui : EMC_Handy = $CL/HandyGUI
 @onready var npc_interaction : EMC_Interaction_GUI = $CL/NpcInteraction
 
-
 @onready var pause_menu_btn: TextureButton = $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn: TextureButton = $ButtonList/VBC/BackpackBtn
 @onready var phone_btn: TextureButton = $ButtonList/VBC/PhoneBtn
+@onready var info_center_btn: TextureButton = $ButtonList/VBC/InfoCenterBtn
 
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
@@ -44,7 +44,6 @@ var _gui_queue : Array[QueueEntry]
 
 @export var _stage_mngr : EMC_StageMngr
 @export var _avatar : EMC_Avatar
-var _dialogue_mngr: EMC_DialogueMngr
 
 func _ready() -> void:
 	for child in middle_section.get_children():
@@ -61,15 +60,11 @@ func _ready() -> void:
 	all_the_guis.append(npc_interaction)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
+	
 
 # Called when the node enters the scene tree for the first time.
-func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr, p_dialogue_mngr : EMC_DialogueMngr) -> void:
-	
-	_dialogue_mngr = p_dialogue_mngr
-	
+func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
 	_trade_ui.setup(p_backpack)
-	
-	_dialogue_gui.setup(p_dialogue_mngr)
 	
 	_city_map.setup(p_opt_event_mngr)
 	
@@ -78,8 +73,13 @@ func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr,
 	item_question_gui.setup(p_backpack)
 	
 	_cooking_GUI.setup(p_backpack)
-	if(Global.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
+	if(OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):
 		_rainwater_barrel_gui.setup(p_backpack)
+		
+	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
+		info_center_btn.show()
+	else:
+		info_center_btn.hide()
 
 func is_any_gui() -> bool:
 	return not (_active_guis.is_empty() and _gui_queue.is_empty())
@@ -169,6 +169,12 @@ func _on_pause_menu_btn_pressed() -> void:
 func _on_phone_btn_pressed() -> void:
 	request_gui("HandyGUI", [])
 	#request_gui("DialogueGui", [{"stage_name": "penthouse", "actor_name": "elias"}])
+	#var info: Array[Dictionary]
+	#info.assign([])
+	#request_gui("ItemQuestionGUI", [EMC_Item.new().setup(1)])
+
+func _on_info_center_btn_pressed() -> void:
+	request_gui("InfoCenterGui", [])
 
 ########################Helper Functions############################
 
@@ -181,11 +187,15 @@ func _hide_buttons() -> void:
 	pause_menu_btn.hide()
 	phone_btn.hide()
 	backpack_btn.hide()
+	info_center_btn.hide()
 	
 func _show_buttons() -> void:
 	pause_menu_btn.show()
 	phone_btn.show()
 	backpack_btn.show()
+	
+	if (OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.EASY or OverworldStatesMngr.get_difficulty() == OverworldStatesMngr.Difficulty.TUTORIAL):
+		info_center_btn.show()
 
 ######################Helper Classes##############################
 

@@ -10,6 +10,7 @@ extends EMC_GUI
 
 @onready var inventory_grid : EMC_Inventory_UI = $VBC/Inventories/Inventory/InventoryGrid
 @onready var trader_grid : EMC_Inventory_UI = $VBC/Inventories/Trader/InventoryGrid
+@onready var inventories : TabContainer = $VBC/Inventories
 
 @onready var sell : HBoxContainer = $VBC/Exchange/Sell/HBC
 @onready var buy : HBoxContainer = $VBC/Exchange/Buy/HBC
@@ -39,10 +40,14 @@ func setup(p_inventory : EMC_Inventory) -> void:
 	
 	inventory_grid.item_clicked.connect(_on_inventory_item_clicked.bind(true))
 	trader_grid.item_clicked.connect(_on_inventory_item_clicked.bind(false))
+	
+	inventories.set_tab_title(0, "Rucksack")
 
 func open(npc : EMC_NPC) -> void:
 	_npc_trade = npc.get_comp(EMC_NPC_Trading)
 	_npc_descr = npc.get_comp(EMC_NPC_Descr)
+	
+	inventories.set_tab_title(1, _npc_descr.get_npc_name())
 	
 	_npc_inventory = _npc_trade.get_inventory()
 	trader_grid.set_inventory(_npc_inventory)

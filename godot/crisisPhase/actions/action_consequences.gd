@@ -10,6 +10,7 @@ var _inventory: EMC_Inventory
 @export var _lower_gui_node : Node
 @export var _day_mngr : EMC_DayMngr
 @export var _gui_mngr: EMC_GUIMngr
+@export var _scoreboard: EMC_Scoreboard
 var _opt_event_mngr: EMC_OptionalEventMngr
 
 ########################################## PUBLIC METHODS ##########################################
@@ -28,16 +29,17 @@ func add_hydration(p_value: int) -> void:
 
 func add_happiness(p_value: int) -> void:
 	_avatar.add_happiness(p_value)
-
+	
+func make_hungry() -> void:
+	_avatar.sub_nutrition(_avatar.get_nutrition_status()-1)
+	
+func make_thirsty() -> void:
+	_avatar.sub_hydration(_avatar.get_hydration_status()-1)
+	
 ############################################ Action ################################################
 
-func execute_action(action : Variant) -> void:
-	var id : int = 0
-	if typeof(action) == TYPE_STRING:
-		id = JsonMngr.name_to_action_id(action as String)
-	elif typeof(action) == TYPE_INT:
-		id = action as int
-	_day_mngr.on_interacted_with_furniture(id)
+func execute_action(action : String) -> void:
+	JsonMngr.get_action(action).execute({"result": {}})
 	
 func progress_day(descr : String) -> void:
 	_day_mngr._advance_day_period(descr)
@@ -75,15 +77,26 @@ func add_items_by_name(p_names : String) -> void:
 
 ## Adds either Water depended on the Water-State
 func add_tap_water(_dummy: int) -> void:
-	match OverworldStatesMngr.get_water_state():
-		OverworldStatesMngr.WaterState.CLEAN:
+	match OverworldStatesMngr.get_effective_state_str("WaterState"):
+		"CLEAN":
 			_inventory.add_new_item(EMC_Item.IDs.WATER)
-		OverworldStatesMngr.WaterState.DIRTY:
+		"DIRTY":
 			_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-		OverworldStatesMngr.WaterState.NONE:
+		"NONE":
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
+
+	# REMOVE
+	# match OverworldStatesMngr.get_water_state():
+	# 	OverworldStatesMngr.WaterState.CLEAN:
+	# 		_inventory.add_new_item(EMC_Item.IDs.WATER)
+	# 	OverworldStatesMngr.WaterState.DIRTY:
+	# 		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
+	# 	OverworldStatesMngr.WaterState.NONE:
+	# 		printerr("Can't add water while there is no water available! \
+	# 			This should be checked in the constraints!")
+	# 	_: printerr("Unknown Water state!")
 
 
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
@@ -114,14 +127,15 @@ func use_radio(_dummy: int = NO_PARAM) -> void:
 		_opt_event_mngr.set_event_as_known(chosen_event.name)
 	else:
 		#30-70 zwischen unnützem Text und Szenario Name
-		if _rng.randi_range(0, 4) <= 3:
-			var notification := OverworldStatesMngr.get_notification()
-			if not notification.is_empty():
-				radio_msg = notification.pick_random()
-			else:
-				radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
+		#if _rng.randi_range(0, 4) <= 3:
+		var notification := OverworldStatesMngr.get_notification()
+		print(notification)
+		if not notification.is_empty():
+			radio_msg = notification.pick_random()
 		else:
 			radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
+		#else:
+			#radio_msg = "Es läuft mal wieder viel zu laute Werbung..."
 	_gui_mngr.request_gui("TooltipGUI", [radio_msg])
 
 
@@ -132,11 +146,11 @@ func fill_rainbarrel(_dummy: int = NO_PARAM) -> void:
 		(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL) + _added_water_quantity)))
 		
 func fill_reservoir(_dummy : Variant = NO_PARAM) -> void:
-	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	var reservoir : EMC_Upgrade = OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 	reservoir.set_state(reservoir.get_state_maximum())
 
 func remove_from_reservoir(amount : int) -> void:
-	var reservoir : EMC_Upgrade = Global.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
+	var reservoir : EMC_Upgrade = OverworldStatesMngr.get_upgrade_if_equipped(EMC_Upgrade.IDs.WATER_RESERVOIR)
 	reservoir.set_state(reservoir.get_state() - amount)
 
 func set_tutorial(value : bool) -> void:
@@ -189,7 +203,18 @@ func set_dialogue_state(args : Dictionary) -> void:
 	else:
 		printerr("Action-Consequence: wrong or missing Argumrnts for 'set_dialogue_state'")
 
+############################################ Score #################################################
+
+func add_score(args: Dictionary) -> void:
+	if args.has("name"):
+		_scoreboard.add_score(args["name"], args.get("context", {}))
+	else:
+		printerr("Action-Consequence: wrong or missing Argumrnts for 'add_score'")
+		
 ############################################# NPC ##################################################
+
+func friedel_weg() -> void:
+	_stage_mngr.get_NPC("gerhard").get_comp(EMC_NPC_Conversation).run()
 
 func npc_add_dialog_tag(args: Dictionary) -> void:
 	if args.has_all(["npc", "tag"]):

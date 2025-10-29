@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfbfb0bprx5a5"]
 
-[ext_resource type="Script" path="res://crisisPhase/characters/NPC.gd" id="1_k3b2r"]
+[ext_resource type="Script" uid="uid://t0seirtllwh7" path="res://crisisPhase/characters/NPC.gd" id="1_k3b2r"]
 [ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="4_1lykm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1chh"]
@@ -59,9 +59,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rd3ph"]
 _data = {
-"RESET": SubResource("Animation_cxjb2"),
-"idle": SubResource("Animation_5s4w8"),
-"walking": SubResource("Animation_v3hvq")
+&"RESET": SubResource("Animation_cxjb2"),
+&"idle": SubResource("Animation_5s4w8"),
+&"walking": SubResource("Animation_v3hvq")
 }
 
 [node name="NPC" type="CharacterBody2D"]

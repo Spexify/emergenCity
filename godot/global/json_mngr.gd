@@ -22,6 +22,8 @@ const ACTION_SOURCE := "res://JSONs/action.json"
 const DOORBELL_SOURCE := "res://JSONs/doorbell.json"
 ## SCENARIOS
 const SCENARIOS_SOURCE := "res://JSONs/scenarios.json"
+## CRISIS
+const CRISIS_SOURCE := "res://JSONs/crisis.json"
 ## UPGARDE
 const UPGRADES_SOURCE := "res://JSONs/upgrades.json"
 ## DIALOGUES
@@ -171,7 +173,7 @@ func load_items() -> void:
 	load_item_translator()
 	
 	if not FileAccess.file_exists(ITEM_SOURCE):
-		printerr("Could not load recipes from source: " + ITEM_SOURCE)
+		printerr("Could not load item from source: " + ITEM_SOURCE)
 		return
 
 	var recipe_source : FileAccess = FileAccess.open(ITEM_SOURCE, FileAccess.READ)
@@ -232,7 +234,7 @@ func load_items() -> void:
 			#"sound": _sound,
 		}
 		
-		_id_to_item_vars[str(_id)] = item_data
+		_id_to_item_vars[str(int(_id))] = item_data
 		
 		item_index += 1
 	
@@ -349,8 +351,7 @@ func load_actions() -> void:
 	assert(data != null, "Failed to load Actions!")
 	
 	for key: String in data:
-		var res: Resource = ResourceLoader.load("res://util/action/" + data[key]["type"] + "_action.gd")
-		_actions[key] = res.new(data[key])
+		_actions[key] = EMC_Action.load_action(data[key])
 
 func set_action_comp(get_exe: Callable) -> void:
 	if not _is_action_loaded:
@@ -458,6 +459,19 @@ func load_scenarios() -> void:
 		return
 	
 	scenarios = data
+
+#######################################JSON CIRISIS#################################################
+
+var crisis: Dictionary[String, Dictionary]
+
+func load_crisis() -> void:
+	var data : Dictionary = (load_file_check_type(CRISIS_SOURCE, "Crisis", TYPE_DICTIONARY) as Dictionary)
+	if data == null or data.is_empty():
+		return
+		
+	assert(data.has_all(["TUTORIAL", "EASY", "following"])) 
+	
+	crisis.assign(data)
 
 ######################################JSON DIALOGUES################################################
 #region DIALOGUES
@@ -611,23 +625,3 @@ func dict_to_vector(data : Dictionary, type : Variant.Type) -> Variant:
 			push_error(str(type) + " is not a Type.")
 	push_error("Wrong Type!")
 	return null
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

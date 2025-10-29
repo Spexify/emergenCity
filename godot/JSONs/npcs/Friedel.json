@@ -2,15 +2,23 @@
 	"comp": {
 		"descr": {
 			"name": "Friedel",
-			"descr": "Das hier ist Friedel.\nSie ist lieb.",
+			"descr": "Das hier ist Friedel.\nEr ist lieb.",
 			"portait": "friedel"
 		},
 		"sprite": {
 			"texture_name": "friedel"
 		},
+		"save": {},
+		"karma": {
+			"mood": 3
+		},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.5
+				"pitch": 0.5,
+				"paths": {
+					"1day": "res://resources/dialogues/friedel/day/",
+					"quest": "res://resources/dialogues/friedel/quest/"
+				}
 			}
 		},
 		"stage": {
@@ -32,58 +40,234 @@
 		},
 		"brain": {
 			"actions": {
-				"sleep": {
-					"type": "single",
-					"comp": "stage",
-					"method": "change_stage_pos",
-					"params": [
-						"gardenhouse",
-						{
-							"x": 200,
-							"y": 310
-						}
-					]
-				},
-				"stroll": {
-					"type": "single",
-					"comp": "stage",
-					"method": "change_stage",
-					"params": [
-						"park"
-					]
-				},
-				"idle": {
-					"type": "single",
-					"comp": "stage",
-					"method": "change_stage",
-					"params": [
-						"gardenhouse"
-					]
-				},
-				"market": {
-					"type": "single",
-					"comp": "stage",
-					"method": "change_stage",
-					"params": ["market"]
-				},
-				"escape": {
+				"sleep_mood": {
 					"type": "multi",
 					"acc": "array",
 					"actions": [
 						{
 							"type": "single",
-							"comp": "quest",
-							"method": "add_quest",
+							"system": "stage",
+							"method": "change_stage_pos",
 							"params": [
-								"FRIEDEL_WEG"
+								"gardenhouse",
+								{
+									"x": 200,
+									"y": 310
+								}
 							]
 						},
 						{
 							"type": "single",
-							"comp": "stage",
+							"system": "karma",
+							"method": "add_mood",
+							"params": [
+								0.3
+							]
+						}
+					]
+				},
+				"stroll_int": {
+					"type": "condition",
+					"if": {
+						"type": "single",
+						"system": "OSM",
+						"method": "has_not_flag",
+						"params": [
+							"NoEntry", "Park"
+						]
+					},
+					"then": {
+						"type": "condition",
+						"if": {
+							"type": "single",
+							"system": "karma",
+							"method": "mood_less_than",
+							"params": [
+								2
+							]
+						},
+						"then": {
+							"type": "single",
+							"system": "cooperation",
+							"method": "add_intention",
+							"params": [
+								"sleep_mood"
+							]
+						},
+						"else": {
+							"type": "single",
+							"system": "cooperation",
+							"method": "stop_intention",
+							"params": [
+								"stroll"
+							]
+						}
+					},
+					"else": {
+						"type": "single",
+						"system": "cooperation",
+						"method": "add_intention",
+						"params": [
+							"idle"
+						]
+					}
+				},
+				"stroll": {
+					"type": "single",
+					"system": "stage",
+					"method": "change_stage",
+					"params": [
+						"park"
+					]
+				},
+				"noop": {
+					"type": "single",
+					"system": "cooperation",
+					"method": "add_intention",
+					"params": [
+						"noop"
+					]
+				},
+				"fish_mood": {
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"system": "cooperation",
+							"method": "stop_intention",
+							"params": [
+								"fish"
+							]
+						}
+					]
+				},
+				"fish": {
+					"type": "single",
+					"system": "karma",
+					"method": "set_mood",
+					"params": [
+						4
+					]
+				},
+				"idle": {
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"system": "stage",
 							"method": "change_stage",
 							"params": [
-								"market"
+								"gardenhouse"
+							]
+						},
+						{
+							"type": "single",
+							"system": "karma",
+							"method": "sub_mood",
+							"params": [
+								0.5
+							]
+						}
+					]
+				},
+				"market": {
+					"type": "single",
+					"system": "stage",
+					"method": "change_stage",
+					"params": [
+						"market"
+					]
+				},
+				"!escape": {
+					"type": "condition",
+					"if": {
+						"type": "multi",
+						"acc": "and",
+						"actions": [
+							{
+								"type": "single",
+								"system": "karma",
+								"method": "mood_less_than",
+								"params": [
+									2
+								]
+							},
+							{
+								"type": "single",
+								"system": "ActCond",
+								"method": "random_bool",
+								"params": [
+									0.6
+								]
+							},
+							{
+								"type": "single",
+								"system": "Global",
+								"method": "game_state_neq",
+								"params": [ 1 ]
+							},
+							{
+								"type": "single",
+								"system": "Global",
+								"method": "tutorial_finished",
+								"params": []
+							}
+						]
+					},
+					"then": {
+						"type": "multi",
+						"acc": "array",
+						"actions": [
+							{
+								"type": "single",
+								"system": "quest",
+								"method": "add_quest",
+								"params": [
+									"FRIEDEL_WEG",
+									1
+								]
+							},
+							{
+								"type": "single",
+								"system": "stage",
+								"method": "change_stage",
+								"params": [
+									"market"
+								]
+							}
+						]
+					},
+					"else": {
+						"type": "single",
+						"system": "self",
+						"method": "noop",
+						"params": []
+					}
+				},
+				"sleep": {
+					"type": "multi",
+					"acc": "array",
+					"actions": [
+						{
+							"type": "single",
+							"system": "stage",
+							"method": "change_stage_pos",
+							"params": [
+								"gardenhouse",
+								{
+									"x": 200,
+									"y": 310
+								}
+							]
+						},
+						{
+							"type": "single",
+							"system": "karma",
+							"method": "add_mood",
+							"params": [
+								0.2
 							]
 						}
 					]
@@ -92,34 +276,46 @@
 			"decide": {
 				"name": "weighted_decide",
 				"weight": {
-					"stroll": 100,
+					"sleep_mood": 1,
+					"sleep": 1,
+					"stroll_int": 1,
+					"stroll": 1,
+					"fish": 1,
+					"fish_mood": 1,
 					"idle": 1,
-					"sleep": 3,
-					"escape": 1,
+					"noop": 1,
+					"!escape": 0,
 					"market": 1
 				}
 			},
 			"comps": {
 				"routine": {
 					"schedule": {
-						"0": "idle",
+						"0": [
+							"noop",
+							"!escape"
+						],
 						"1": [
 							"sleep",
-							"idle"
+							"idle",
+							"!escape"
 						],
-						"2": "idle"
+						"2": [
+							"idle",
+							"!escape"
+						]
 					}
 				},
-				"cooperation": {},
+				"cooperation": {
+					"Gerhard": {
+						"stroll": "stroll_int",
+						"fish": "fish_mood",
+						"noop": "noop"
+					}
+				},
 				"quest": {
 					"priority": "",
-					"actions":  [
-						{
-							"quest": "FRIEDEL_WEG",
-							"chance": 1,
-							"stage": 0,
-							"action": "escape"
-						},
+					"actions": [
 						{
 							"quest": "FRIEDEL_WEG",
 							"stage": 1,
@@ -139,6 +335,11 @@
 							"quest": "FRIEDEL_WEG",
 							"stage": 4,
 							"action": "idle"
+						},
+						{
+							"quest": "FRIEDEL_WEG",
+							"stage": 5,
+							"action": "market"
 						}
 					]
 				}

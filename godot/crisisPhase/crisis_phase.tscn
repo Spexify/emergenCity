@@ -1,13 +1,15 @@
-[gd_scene load_steps=38 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=42 format=3 uid="uid://cdqgsn775dgsp"]
 
-[ext_resource type="Script" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
+[ext_resource type="Script" uid="uid://bayw2phrdam5s" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
+[ext_resource type="Script" uid="uid://d3edunqiuj2ih" path="res://util/builtin.gd" id="1_r1qqu"]
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://assets/GUI/buttons/button_backpack.png" id="4_ef5pu"]
+[ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://assets/GUI/icons/icon_menu_information.png" id="5_1wb3a"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
 [ext_resource type="Texture2D" uid="uid://cgub5cilq325g" path="res://assets/GUI/buttons/button_pause_menu.png" id="6_tr7dm"]
 [ext_resource type="Texture2D" uid="uid://crhmjiq7dfpx8" path="res://assets/GUI/buttons/phone_button.png" id="7_3q5yt"]
-[ext_resource type="Script" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
+[ext_resource type="Script" uid="uid://c6dafj2rku3sd" path="res://GUI/gui_mngr.gd" id="7_lyrib"]
 [ext_resource type="PackedScene" uid="uid://bnmcmtfl1jq8q" path="res://GUI/end_game_gui.tscn" id="8_saydl"]
 [ext_resource type="PackedScene" uid="uid://7oi6kcm73lxd" path="res://GUI/default/pop_up_gui.tscn" id="9_eydb4"]
 [ext_resource type="PackedScene" uid="uid://diu2wl65n301n" path="res://GUI/inventory/inventory_GUI.tscn" id="9_i2q6e"]
@@ -30,10 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://dusoswyk1fft6" path="res://GUI/dialogue/dialogue_gui.tscn" id="25_qh0l1"]
 [ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
 [ext_resource type="PackedScene" uid="uid://cr304u228icot" path="res://GUI/npc_interaction_gui.tscn" id="27_8bng3"]
+[ext_resource type="PackedScene" uid="uid://dpabqqngimcqo" path="res://GUI/item_info_gui.tscn" id="28_v2liu"]
+[ext_resource type="PackedScene" uid="uid://cxdptvo5x7o3t" path="res://GUI/info_center/info_center_gui.tscn" id="30_31x86"]
 [ext_resource type="PackedScene" uid="uid://b6rt1srdy2k6h" path="res://GUI/default/two_choice.tscn" id="33_52q5c"]
 [ext_resource type="PackedScene" uid="uid://dwklogkejltna" path="res://global/scoreboard.tscn" id="34_0pmq5"]
-[ext_resource type="Script" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
-[ext_resource type="Script" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
+[ext_resource type="Script" uid="uid://c0xaaimi1qp8e" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
+[ext_resource type="Script" uid="uid://bd2g8sc41awon" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j7vf"]
 size = Vector2(596, 20)
@@ -49,10 +53,11 @@ process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
-[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr") groups=["Save"] instance=ExtResource("13_8jkao")]
+[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr", "_crisis_phase") groups=["Save"] instance=ExtResource("13_8jkao")]
 _avatar = NodePath("../Avatar")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _gui_mngr = NodePath("../GUI")
+_crisis_phase = NodePath("..")
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
@@ -113,6 +118,10 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 10
+
+[node name="InfoCenterBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
+layout_mode = 2
+texture_normal = ExtResource("5_1wb3a")
 
 [node name="PauseMenuBtn" type="TextureButton" parent="GUI/ButtonList/VBC"]
 layout_mode = 2
@@ -191,7 +200,7 @@ custom_minimum_size = Vector2(295, 70)
 layout_mode = 2
 _gui_mngr = NodePath("../../../../..")
 
-[node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
+[node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences", "_scoreboard") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -200,18 +209,20 @@ _avatar = NodePath("../../../../../../Avatar")
 _stage_mngr = NodePath("../../../../../../StageMngr")
 _action_constraints = NodePath("../../../../../../EMC_ActionConstraints")
 _action_consequences = NodePath("../../../../../../EMC_ActionConsequences")
+_scoreboard = NodePath("../../../../../../EMC_Scoreboard")
 
 [node name="MiddleSection" type="Container" parent="GUI/CL/VBC"]
 custom_minimum_size = Vector2(576, 680)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr") groups=["Gui"] instance=ExtResource("9_i2q6e")]
+[node name="BackpackGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr", "_scoreboard") groups=["Gui"] instance=ExtResource("9_i2q6e")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 _avatar = NodePath("../../../../../Avatar")
 _gui_mngr = NodePath("../../../..")
+_scoreboard = NodePath("../../../../../EMC_Scoreboard")
 
 [node name="PopUpGUI" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("9_eydb4")]
 visible = false
@@ -260,15 +271,25 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ItemQuestionGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar") instance=ExtResource("20_b3rgh")]
+[node name="ItemQuestionGUI" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_avatar", "_gui_mngr") instance=ExtResource("20_b3rgh")]
 visible = false
 layout_mode = 2
 _avatar = NodePath("../../../../../Avatar")
+_gui_mngr = NodePath("../../../..")
 
-[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr") instance=ExtResource("25_qh0l1")]
+[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr", "checker") instance=ExtResource("25_qh0l1")]
 visible = false
 layout_mode = 2
 stage_mngr = NodePath("../../../../../StageMngr")
+checker = NodePath("../../../../../EMC_ActionConstraints")
+
+[node name="ItemInfoGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("28_v2liu")]
+visible = false
+layout_mode = 2
+
+[node name="InfoCenterGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("30_31x86")]
+visible = false
+layout_mode = 2
 
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3
@@ -294,13 +315,14 @@ visible = false
 layout_mode = 2
 _day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
 
-[node name="EMC_ActionConsequences" type="Node" parent="." node_paths=PackedStringArray("_avatar", "_stage_mngr", "_lower_gui_node", "_day_mngr", "_gui_mngr")]
+[node name="EMC_ActionConsequences" type="Node" parent="." node_paths=PackedStringArray("_avatar", "_stage_mngr", "_lower_gui_node", "_day_mngr", "_gui_mngr", "_scoreboard")]
 script = ExtResource("34_gwktw")
 _avatar = NodePath("../Avatar")
 _stage_mngr = NodePath("../StageMngr")
 _lower_gui_node = NodePath("../GUI/CL/VBC/LowerSection")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _gui_mngr = NodePath("../GUI")
+_scoreboard = NodePath("../EMC_Scoreboard")
 
 [node name="EMC_ActionConstraints" type="Node" parent="." node_paths=PackedStringArray("_day_mngr", "_stage_mngr")]
 script = ExtResource("35_kkbik")
@@ -311,10 +333,15 @@ _stage_mngr = NodePath("../StageMngr")
 spawn_rect = Rect2i(90, 200, 332, 160)
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 
+[node name="EMC_Builtin" type="Node" parent="."]
+script = ExtResource("1_r1qqu")
+metadata/_custom_type_script = "uid://d3edunqiuj2ih"
+
 [connection signal="happiness_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_happiness_updated"]
 [connection signal="health_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_health_updated"]
 [connection signal="hydration_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_hydration_updated"]
 [connection signal="nutrition_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="_on_avatar_nutrition_updated"]
+[connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]

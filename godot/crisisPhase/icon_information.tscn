@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dmchkorcdvl0d"]
 
-[ext_resource type="Script" path="res://crisisPhase/icon_information.gd" id="1_y0unm"]
+[ext_resource type="Script" uid="uid://4jx0xxvbryhf" path="res://crisisPhase/icon_information.gd" id="1_y0unm"]
 [ext_resource type="Texture2D" uid="uid://dodrjlcgbbf5j" path="res://assets/GUI/icons/icon_statusbar_nutrition.png" id="2_nlkmw"]
 [ext_resource type="Texture2D" uid="uid://bqq5vbmiv8nrr" path="res://assets/GUI/icons/icon_statusbar_hydration.png" id="3_75l8e"]
 [ext_resource type="Texture2D" uid="uid://dhj4hfky75aeg" path="res://assets/GUI/icons/icon_statusbar_health.png" id="4_51kyr"]

@@ -1,0 +1,98 @@
+{
+    "import": ["Greetings", "gerhard/quest"],
+    "nodes": {
+        "start": {
+            "random": [
+                {"jump": "one"},
+                {"text": [{"speaker": "Gerhard", "line": "HI"}]}
+            ],
+            "match": {
+                "value": "get_distinct_day",
+                "with": {
+                    "1": {"jump": "one"},
+                    "2": {"jump": "two"}
+                }
+            }
+        },
+        "one": {
+            "prompt": "No Way",
+            "condition": [
+                {"state": "is_weather", "value": "nice"},
+                {"state": "is_crisis", "value": "none"}
+            ],
+            "sequence": [
+                {"text": [
+                    {"speaker": "$greetings", "line": "pool gerhard"},
+                    {"speaker": "gerhard", "line": "What a nice weather!"},
+                    {"speaker": "avatar", "line": "Yes you are right"}
+                ]},
+                {"jump": "end"}
+            ]
+        },
+        "two": {
+            "prompt": "Yes Way",
+            "sequence": [
+                {"choice": ["one", "two"]},
+                {"text": [
+                    {"speaker": "gerhard", "line": "Yes sir"},
+                    {"speaker": "avatar", "line": "No sire"}
+                ]},
+                {"actors": ["avatar", "gerhard"]},
+                {"match": {
+                    "value": "mood",
+                    "with": {
+                        "0.1": {"speaker": "gerhard", "line": "hello"},
+                        "0.4": {"jump": "one"}
+                    }
+                }}
+            ]
+        }
+    }
+}
+
+
+[import] greetings
+
+[Node] start
+[actors] avatar gerhard
+[random]
+- [jump] one
+- [text] Gerhard: HI
+[match] day
+[1] [jump] one
+[2] [jump] two
+
+[Node] one
+[prompt]
+No Way
+[condition]
+is_weather nice
+is_crisis none
+[text]
+$greetings pool gerhard
+gerhard: What a nice weather!
+avatar: Yes you are right
+[jump] end
+
+[Node] two
+[prompt]
+Yes Way
+[Choice]
+- one
+- two
+[text]
+gerhard: Yes sir
+avatar: no Sire
+
+[actors] avatar gerhard
+[match] mood
+[0.1] [text] gerhard: Hello
+[0.4] [jump] one
+[if]
+is_effective_state WaterState.NONE
+[then]
+[jump] one
+[else]
+[jump] end
+
+[end]

@@ -12,12 +12,18 @@
 		"karma": {},
 		"interaction":{
 			"conversation": {
-				"pitch": 0.75
+				"pitch": 0.75,
+				"paths": {
+					"day": "res://resources/dialogues/elias/day/"
+				}
 			},
 			"trading": {
 				"preferences": {},
 				"inventory": {
-					"WATER": 4
+					"WATER": 4,
+					"BREAD": 1,
+					"FLOUR": 2,
+					"SALT": 2
 				}
 			}
 		},
@@ -33,19 +39,19 @@
 			"actions": {
 				"work": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["market"]
 				},
 				"idle": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["penthouse"]
 				},
 				"stroll": {
 					"type": "single",
-					"comp": "stage",
+					"system": "stage",
 					"method": "change_stage",
 					"params": ["park"]
 				}
@@ -64,10 +70,9 @@
 				"impulsive": {
 					"count": {
 						"0": 3.0,
-						"1": 1.0
+						"1": 0.0
 					},
 					"actions": {
-						"work": 1.0,
 						"stroll": 1.0
 					}
 				}

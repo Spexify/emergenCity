@@ -72,7 +72,7 @@ func _init() -> void:
 	set_name(name)
 
 ##Initialize properties
-func setup(p_id : int) -> void:
+func setup(p_id : int) -> EMC_Item:
 	#await ready
 	id = p_id
 	var data : Dictionary = JsonMngr.get_item_vars_from_id(p_id)
@@ -85,6 +85,7 @@ func setup(p_id : int) -> void:
 	comps.assign(tmp_comps.map(func (comp_data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(comp_data)))
 
 	load_texture()
+	return self
 
 func load_texture() -> void:
 	const ITEM_ICON_WIDTH := 64

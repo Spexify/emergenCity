@@ -8,6 +8,7 @@
 		"sprite": {
 			"texture_name": "kris"
 		},
+		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.0

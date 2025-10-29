@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://iov3iav204i4"]
 
-[ext_resource type="Script" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
+[ext_resource type="Script" uid="uid://xavneyyav6a" path="res://preparePhase/crisis_start.gd" id="1_7i0f1"]
 [ext_resource type="Texture2D" uid="uid://dnbnxosef5r58" path="res://assets/citymap/citymap.png" id="2_oi1nj"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="3_yuscm"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="4_ak74w"]
@@ -89,7 +89,6 @@ text = "Lang"
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 max_value = 2.0
-value = 1.0
 tick_count = 3
 ticks_on_borders = true
 
@@ -112,7 +111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"ConfirmButton"
 text = "Weiter"
 
 [node name="BackBtn" type="TextureButton" parent="CanvasLayer/VBoxContainer/Control"]

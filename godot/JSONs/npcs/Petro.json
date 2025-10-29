@@ -20,7 +20,8 @@
 					"POTATOES": 3
 				},
 				"inventory": {
-					"BATTERIES": 3
+					"BATTERIES": 3,
+					"UNCOOKED_PASTA": 3
 				}
 			}
 		},

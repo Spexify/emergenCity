@@ -8,9 +8,21 @@
 		"sprite": {
 			"texture_name": "agathe"
 		},
+		"save": {},
+		"karma": {},
 		"interaction": {
 			"conversation": {
-				"pitch": 1.2
+				"pitch": 1.2,
+				"paths": {
+					"day": "res://resources/dialogues/agathe/day/"
+				}
+			},
+			"trading": {
+				"inventory": {
+					"WATER": 2,
+					"RAVIOLI_TIN": 2,
+					"CHOCOLATE": 1
+				}
 			}
 		},
 		"stage": {

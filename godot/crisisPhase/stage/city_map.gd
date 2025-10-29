@@ -105,23 +105,23 @@ func handle_buttons(stage_name : String) -> void:
 	else:
 		match stage_name:
 			EMC_StageMngr.STAGENAME_HOME:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_HOME)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_HOME))
 			EMC_StageMngr.STAGENAME_MARKET:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MARKET)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_MARKET))
 			EMC_StageMngr.STAGENAME_PENTHOUSE:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PENTHOUSE)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_PENTHOUSE))
 			EMC_StageMngr.STAGENAME_TOWNHALL:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_TOWNHALL)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_TOWNHALL))
 			EMC_StageMngr.STAGENAME_ROWHOUSE:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_ROWHOUSE)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_ROWHOUSE))
 			EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT:
 				$DoorbellsGUI.open()
 			EMC_StageMngr.STAGENAME_GARDENHOUSE:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_GARDENHOUSE)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_GARDENHOUSE))
 			EMC_StageMngr.STAGENAME_MANSION:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_MANSION)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_MANSION))
 			EMC_StageMngr.STAGENAME_PARK:
-				_day_mngr.on_interacted_with_furniture(EMC_Action.IDs.SC_PARK)
+				_day_mngr.on_interacted_with_furniture(str(EMC_Action.IDs.SC_PARK))
 
 func _on_home_btn_pressed() -> void:
 	handle_buttons(EMC_StageMngr.STAGENAME_HOME)
@@ -139,7 +139,8 @@ func _on_julias_house_btn_pressed() -> void:
 	handle_buttons(EMC_StageMngr.STAGENAME_ROWHOUSE)
 
 func _on_complex_btn_pressed() -> void:
-	handle_buttons(EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT)
+	#handle_buttons(EMC_StageMngr.STAGENAME_APARTMENT_DEFAULT)
+	$DoorbellsGUI.open()
 
 func _on_gardenhouse_btn_pressed() -> void:
 	handle_buttons(EMC_StageMngr.STAGENAME_GARDENHOUSE)

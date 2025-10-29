@@ -33,17 +33,16 @@ func _on_settings_pressed() -> void:
 
 ## TODO
 func _on_cancel_curr_crisis_pressed() -> void:
-	OverworldStatesMngr._set_all_states(2, 2, 2, 2)
-	Global.reset_state()
-	Global.reset_inventory()
-	Global.reset_upgrades_equipped()
-	Global.save_game(false)
-	Global.get_tree().paused = false
+	#Global.reset_state()
+	#Global.reset_inventory()
+	#Global.reset_upgrades_equipped()
+	#Global.get_tree().paused = false
+	Global.save_game(Global.State.START)
+	Global.load_game()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
 ## TODO
 func _on_save_and_quit_pressed() -> void:
-	Global.save_game(true)
+	Global.save_game(Global.State.CRISIS)
 	Global.get_tree().quit()
-

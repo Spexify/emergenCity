@@ -1,6 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 
+# Gradel build files
+godot/android
+
 # notes
 notes/
 

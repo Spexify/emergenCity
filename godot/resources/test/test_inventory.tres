@@ -1,0 +1,521 @@
+[gd_resource type="Resource" script_class="EMC_Inventory" load_steps=65 format=3 uid="uid://bayr86p850dt"]
+
+[ext_resource type="Script" uid="uid://b0ymg5og4kujm" path="res://inventory/inventory.gd" id="1_w3uv3"]
+[ext_resource type="Script" uid="uid://dg0wue01hcvsg" path="res://inventory/item.gd" id="2_bivd5"]
+[ext_resource type="Script" uid="uid://d374ckeaba1lx" path="res://inventory/components/item_component.gd" id="3_fl1kr"]
+[ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="3_yhqop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uon1f"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_cek5r"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 1
+name = "Wasser"
+descr = "Das ist Wasser"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_uon1f")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_063xa"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_sne3k"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 1
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_063xa")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqf05"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_jfg7s"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 1
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_mqf05")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atlad"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_qopyf"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 2
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_atlad")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71555"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_h6djs"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 2
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_71555")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fbwu"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_nf4yk"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 3
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_4fbwu")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu133"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_dtp41"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 3
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_fu133")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj805"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_qlra2"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 6
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_bj805")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul36d"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_qxkll"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 8
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_ul36d")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nptj4"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="Resource" id="Resource_om82k"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 10
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_nptj4")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auvoi"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="Resource" id="Resource_vvy1j"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 11
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_auvoi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq4yb"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_8cmd1"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_rq4yb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flj32"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_cejxl"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_flj32")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bir7x"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_gvlji"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_bir7x")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4486r"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_0k4v5"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_4486r")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhjrf"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_g78ee"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_vhjrf")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1sgi"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_cate3"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_r1sgi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21g0q"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_t2t57"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_21g0q")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8ka3"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_teff6"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_m8ka3")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eegmd"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_07ofy"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_eegmd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prdfh"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_gsp7l"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_prdfh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8sku"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_0m8j8"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_i8sku")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pqw2"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_r3mwb"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_3pqw2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b574t"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_j6eqq"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_b574t")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb0oc"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_5i23s"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_bb0oc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkw2a"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_k3dc1"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_dkw2a")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk5vy"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_ywlth"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_yk5vy")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rn0r"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_7w187"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_5rn0r")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qahqt"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_f50nd"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_qahqt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6krwd"]
+atlas = ExtResource("3_yhqop")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Resource" id="Resource_qika0"]
+resource_name = "Dummy"
+script = ExtResource("2_bivd5")
+id = 0
+name = "Dummy"
+descr = "No Descr"
+comps = Array[ExtResource("3_fl1kr")]([])
+sound_effect = {
+"clicked": "BasicItem",
+"consumed": ""
+}
+texture = SubResource("AtlasTexture_6krwd")
+
+[resource]
+script = ExtResource("1_w3uv3")
+num_slots = 30
+slots = Array[ExtResource("2_bivd5")]([SubResource("Resource_cek5r"), SubResource("Resource_sne3k"), SubResource("Resource_jfg7s"), SubResource("Resource_qopyf"), SubResource("Resource_h6djs"), SubResource("Resource_nf4yk"), SubResource("Resource_dtp41"), SubResource("Resource_qlra2"), SubResource("Resource_qxkll"), SubResource("Resource_om82k"), SubResource("Resource_vvy1j"), SubResource("Resource_8cmd1"), SubResource("Resource_cejxl"), SubResource("Resource_gvlji"), SubResource("Resource_0k4v5"), SubResource("Resource_g78ee"), SubResource("Resource_cate3"), SubResource("Resource_t2t57"), SubResource("Resource_teff6"), SubResource("Resource_07ofy"), SubResource("Resource_gsp7l"), SubResource("Resource_0m8j8"), SubResource("Resource_r3mwb"), SubResource("Resource_j6eqq"), SubResource("Resource_5i23s"), SubResource("Resource_k3dc1"), SubResource("Resource_ywlth"), SubResource("Resource_7w187"), SubResource("Resource_f50nd"), SubResource("Resource_qika0")])

@@ -31,6 +31,7 @@ var _inventory : EMC_Inventory
 @export var _action_constraints: EMC_ActionConstraints
 @export var _action_consequences: EMC_ActionConsequences
 var _opt_event_mngr: EMC_OptionalEventMngr
+@export var _scoreboard: EMC_Scoreboard
 
 ########################################## PUBLIC METHODS ##########################################
 func setup(
@@ -51,9 +52,10 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	# Called before once game starts
 	_crisis_mngr.check_crisis_status(0)
 	_stage_mngr.let_npcs_act()
+	_stage_mngr.reload_stage()
 
-func on_interacted_with_furniture(p_action_ID : int) -> void:
-	JsonMngr.get_action(str(p_action_ID)).execute()
+func on_interacted_with_furniture(p_action_ID : String) -> void:
+	JsonMngr.get_action(p_action_ID).execute({"result": {}})
 
 func get_current_day_period() -> DayPeriod:
 	return self._period_cnt % DayPeriod.size() as DayPeriod
@@ -88,6 +90,7 @@ func _advance_day_period(description : String) -> void:
 	
 	#Actually advance the time
 	self._period_cnt += 1
+	OverworldStatesMngr.next_day(_period_cnt)
 	
 	## NOTICE: see callback: It opens SummaryEndOfDay and Backpack
 	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
@@ -97,13 +100,14 @@ func _advance_day_period(description : String) -> void:
 	await Global.get_tree().create_timer(0.3).timeout
 	# let npcs act
 	_stage_mngr.let_npcs_act()
+	_stage_mngr.reload_stage()
 	period_increased.emit(_period_cnt)
 	
 	if get_current_day_period() == DayPeriod.MORNING:
-		if _stage_mngr.get_curr_stage_name() != EMC_StageMngr.STAGENAME_HOME:
-			_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME, {}, false)
-			#_stage_mngr.deactivate_NPCs()
-			_avatar.set_global_position(Vector2i(250, 650))
+		#if _stage_mngr.get_curr_stage_name() != EMC_StageMngr.STAGENAME_HOME:
+			#_stage_mngr.change_stage(EMC_StageMngr.STAGENAME_HOME, {}, false)
+			##_stage_mngr.deactivate_NPCs()
+			#_avatar.set_global_position(Vector2i(250, 650))
 			
 		_inventory._on_day_mngr_day_ended(get_current_day())
 	
@@ -116,10 +120,9 @@ func _advance_day_period(description : String) -> void:
 	#Events & Crises stuff
 	_opt_event_mngr.check_for_new_event(get_current_day_period())
 	
-	if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
-		_inventory.spoil_some_items()
+	# if OverworldStatesMngr.get_food_contamination_state() == OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
+	# 	_inventory.spoil_some_items()
 	
-	#if get_current_day_period() == DayPeriod.MORNING:
 	_crisis_mngr.check_crisis_status(get_period_count())
 
 
