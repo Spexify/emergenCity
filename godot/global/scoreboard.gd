@@ -74,11 +74,18 @@ static var state: Dictionary = {
 	"bbk": false,
 	"help": false,
 	"radio": false,
-	"tip_source": {}
+	"tip_source": {},
+	"social_source": {}
 }
 
 class ScoreRule:
 	static var Default: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
+	static var Social: Callable = (func (alog: ActionLog) -> Dictionary:
+		var source: String = alog.context.get("source", "none")
+		if EMC_Scoreboard.state["social_source"].has(source):
+			return {}
+		EMC_Scoreboard.state["social_source"][source] = ""
+		return {ScoreCat.COMMUNITY: 5})
 	# TODO: Make Score dependent on items used nd produced
 	static var Cook: Callable = (func (_log: ActionLog) -> Dictionary: return {ScoreCat.SELF_SUFFICIENCY: 10})
 	static var Shower: Callable = (func (alog: ActionLog) -> Dictionary: 
@@ -112,7 +119,7 @@ class ScoreRule:
 	static var Tip: Callable = (func (alog: ActionLog) -> Dictionary:
 		var source: String = alog.context.get("source", "none")
 		if EMC_Scoreboard.state["tip_source"].has(source):
-			return {ScoreCat.COMMUNITY: 2}
+			return {}
 		else:
 			EMC_Scoreboard.state["tip_source"][source] = ""
 			return {ScoreCat.INFOMRATION: 10, ScoreCat.COMMUNITY: 5})
@@ -127,7 +134,8 @@ var name_to_log: Dictionary = {
 	"reservoir": ActionLog.new().setup("Reservoir", ScoreRule.Reservoir),
 	"chlor": ActionLog.new().setup("Chlor", ScoreRule.Item_Use),
 	"quest": ActionLog.new().setup("Quest", ScoreRule.Quest),
-	"tip": ActionLog.new().setup("Tip", ScoreRule.Tip)
+	"tip": ActionLog.new().setup("Tip", ScoreRule.Tip),
+	"social": ActionLog.new().setup("social", ScoreRule.Social)
 }
 
 ## Prepare Phase Total
@@ -157,6 +165,8 @@ func _ready() -> void:
 
 func reset_radio(_tmp : int) -> void:
 	state["radio"] = false
+	state["tip_source"] = {}
+	state["social_source"] = {}
 
 func start_run(_inventory: EMC_Inventory, difficulty: EMC_OverworldStatesMngr.Difficulty, _upgrades: Array[int]) -> void:
 	num_run += 1
@@ -183,9 +193,11 @@ func add_score(log_name: String, context: Dictionary = {}) -> void:
 	alog.context = context
 	alog = alog.dup_calculate()
 	if score_log.has(day):
-		score_log[day].append(alog)
+		if not alog.eval.is_empty():
+			score_log[day].append(alog)
 	else:
-		score_log[day] = [alog]
+		if not alog.eval.is_empty():
+			score_log[day] = [alog]
 		
 	for cat: ScoreCat in alog.eval:
 		if alog.eval[cat] > 0:
@@ -325,12 +337,12 @@ func load_state(data : Dictionary) -> void:
 	
 	var raw_log: Dictionary = data.get("score_log", {})
 	score_log = {}
-	for key: String in raw_log:
-		score_log[key.to_int()] = (raw_log[key] as Array).map(
+	for key: int in raw_log:
+		score_log[key] = (raw_log[key] as Array).map(
 			func(raw_eval: Dictionary) -> ActionLog:
 				var eval: Dictionary = {}
-				for cat: String in raw_eval:
-					eval[cat.to_int() as ScoreCat] = raw_eval[cat]
+				for cat: int in raw_eval:
+					eval[cat as ScoreCat] = raw_eval[cat]
 				return ActionLog.new().setup("", ScoreRule.Default, eval)
 		)
 			

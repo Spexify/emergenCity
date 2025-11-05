@@ -40,8 +40,17 @@ func setup(p_inventory : EMC_Inventory) -> void:
 	
 	inventory_grid.item_clicked.connect(_on_inventory_item_clicked.bind(true))
 	trader_grid.item_clicked.connect(_on_inventory_item_clicked.bind(false))
+	inventory_grid.item_long_pressed.connect(
+		_on_item_long_pressed.bind([{"text": "Verkaufen", "callback": _on_inventory_item_clicked.bind(true), "design": "CancelButton"}]))
+	trader_grid.item_long_pressed.connect(
+		_on_item_long_pressed.bind([{"text": "Einkaufen", "callback": _on_inventory_item_clicked.bind(false), "design": "ConfirmButton"}]))
+		#gui_mngr.request_gui.bind("ItemInfoGui", [self, {"text": "Einkaufen", "callback": _on_inventory_item_clicked.bind(false), "design": "ConfirmButton"}]))
 	
 	inventories.set_tab_title(0, "Rucksack")
+
+func _on_item_long_pressed(sender: EMC_Item, blocked: bool, info: Array) -> void:
+	#self.modulate = Color("#787878")
+	gui_mngr.overlay_gui("ItemInfoGui", [sender, info])
 
 func open(npc : EMC_NPC) -> void:
 	_npc_trade = npc.get_comp(EMC_NPC_Trading)
@@ -79,7 +88,9 @@ func _on_inventory_item_clicked(sender : EMC_Item, backpack : bool) -> void:
 		(not backpack and
 			(buy.get_child_count() >= 5
 			or buy.get_child_count() > _inventory.get_free_num_slot()))):
+		SoundMngr.play_sound("talk", 0, 1.5)
 		return
+	sender.clicked_sound()
 	
 	var grid : EMC_Inventory_UI = inventory_grid if backpack else trader_grid
 	var to_current : HBoxContainer = sell if backpack else buy

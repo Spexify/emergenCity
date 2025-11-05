@@ -277,14 +277,16 @@ layout_mode = 2
 _avatar = NodePath("../../../../../Avatar")
 _gui_mngr = NodePath("../../../..")
 
-[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr", "checker") instance=ExtResource("25_qh0l1")]
+[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr", "checker", "score") instance=ExtResource("25_qh0l1")]
 visible = false
 layout_mode = 2
 stage_mngr = NodePath("../../../../../StageMngr")
 checker = NodePath("../../../../../EMC_ActionConstraints")
+score = NodePath("../../../../../EMC_Scoreboard")
 
 [node name="ItemInfoGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("28_v2liu")]
 visible = false
+z_index = 1
 layout_mode = 2
 
 [node name="InfoCenterGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("30_31x86")]

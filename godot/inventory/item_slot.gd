@@ -91,13 +91,13 @@ func _on_item_button_pressed() -> void:
 	or (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and get_viewport().get_mouse_position().distance_to(start_pos) < DRAG_THRESHOLD)):
 		item_long_pressed.emit(item, disabled)
 		slot_bg.set_modulate(DEFAULT_COLOR)
-		item.clicked_sound()
+		#item.clicked_sound()
 	else:
 		var mouse_position: Vector2 = get_viewport().get_mouse_position()
 		tween.stop()
 		if not disabled and mouse_position.distance_to(start_pos) < DRAG_THRESHOLD: #item_button.get_global_rect().has_point(mouse_position):
 			slot_bg.set_modulate(HIGHLIGHTED_COLOR)
-			item.clicked_sound()
+			#item.clicked_sound()
 			item_clicked.emit(item)
 		else:
 			slot_bg.set_modulate(DEFAULT_COLOR)

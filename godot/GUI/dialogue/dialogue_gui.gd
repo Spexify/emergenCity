@@ -3,6 +3,7 @@ extends EMC_GUI
 
 @export var stage_mngr : EMC_StageMngr
 @export var checker: EMC_ActionConstraints
+@export var score: EMC_Scoreboard
 
 @onready var portrait_box : HBoxContainer = $Portraits
 @onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
@@ -145,7 +146,8 @@ func start(dialogue : VRV_Dialogue) -> void:
 				break
 			_:
 				break
-				
+	
+	score.add_score("tip", {"source": dialogue._start_npc_name})
 	close()
 
 func _disconnect_buttons() -> void:
