@@ -58,6 +58,9 @@ func _get_comp(comp_name: String) -> Node:
 
 ## Setup all the needed reference for GUIs etc.
 func _ready() -> void:
+	OverworldStatesMngr.game_won.connect(func () -> void: _gui_mngr.queue_gui("EndGameGUI", [true, _avatar]))
+	_avatar.died.connect(func () -> void: _gui_mngr.queue_gui("EndGameGUI", [false, _avatar]))
+	
 	OverworldStatesMngr.reset()
 	
 	match Global.get_game_state():
@@ -91,7 +94,7 @@ func _ready() -> void:
 		#Global.load_state()
 	
 	#Setup-Methoden
-	_avatar.refresh_vitals()
+	#_avatar.refresh_vitals()
 
 	JsonMngr.set_action_comp(_get_comp)
 	

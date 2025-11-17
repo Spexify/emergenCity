@@ -22,19 +22,19 @@ func setup(p_inventory: EMC_Inventory, p_opt_event_mngr: EMC_OptionalEventMngr) 
 ############################################ Avatar ################################################
 
 func add_health(p_value: int) -> void:
-	_avatar.add_health(p_value)
+	_avatar.modify_health_delta(p_value)
 
 func add_hydration(p_value: int) -> void:
-	_avatar.add_hydration(p_value)
+	_avatar.modify_drink_delta(p_value)
 
 func add_happiness(p_value: int) -> void:
-	_avatar.add_happiness(p_value)
+	_avatar.modify_social_delta(p_value)
 	
 func make_hungry() -> void:
-	_avatar.sub_nutrition(_avatar.get_nutrition_status()-1)
+	_avatar.modify_food_delta(_avatar._food_status*-0.8)
 	
 func make_thirsty() -> void:
-	_avatar.sub_hydration(_avatar.get_hydration_status()-1)
+	_avatar.modify_drink_delta(_avatar._drink_status*-0.8)
 	
 ############################################ Action ################################################
 

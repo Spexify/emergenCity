@@ -12,7 +12,7 @@ func _init(p_hydration: int = 0) -> void:
 	_hydration = p_hydration 
 
 func consume(p_avatar : EMC_Avatar) -> void:
-	p_avatar.update_hydration(self.get_hydration())
+	p_avatar.modify_drink_delta(self.get_hydration())
 
 ## Get the internal hydration value
 func get_hydration() -> int:
