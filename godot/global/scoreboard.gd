@@ -127,7 +127,7 @@ var name_to_log: Dictionary = {
 	"reservoir": ActionLog.new().setup("Reservoir", ScoreRule.Reservoir),
 	"chlor": ActionLog.new().setup("Chlor", ScoreRule.Item_Use),
 	"quest": ActionLog.new().setup("Quest", ScoreRule.Quest),
-	"tip": ActionLog.new().setup("Tip", ScoreRule.Tip)
+	"tip": ActionLog.new().setup("Tipp", ScoreRule.Tip)
 }
 
 ## Prepare Phase Total

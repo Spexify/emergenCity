@@ -35,7 +35,7 @@
                 {"choice": ["one", "two"]},
                 {"text": [
                     {"speaker": "gerhard", "line": "Yes sir"},
-                    {"speaker": "avatar", "line": "No sire"}
+                    {"speaker": "avatar", "line": "No sir"}
                 ]},
                 {"actors": ["avatar", "gerhard"]},
                 {"match": {
@@ -70,8 +70,8 @@ is_weather nice
 is_crisis none
 [text]
 $greetings pool gerhard
-gerhard: What a nice weather!
-avatar: Yes you are right
+gerhard: Such nice weather!
+avatar: Yes, you are right
 [jump] end
 
 [Node] two
@@ -81,8 +81,8 @@ Yes Way
 - one
 - two
 [text]
-gerhard: Yes sir
-avatar: no Sire
+gerhard: Yes, sir
+avatar: No, sir
 
 [actors] avatar gerhard
 [match] mood

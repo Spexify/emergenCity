@@ -647,7 +647,7 @@
 		"params": [
 			"DefaultActionGUI",
 			[
-				"Willst du die Bevölkerungsschutz und Katastrophenhilfe Broschüre im Browser öffnen? (knapp 8MB)",
+				"Willst du die Bevölkerungsschutz- und Katastrophenhilfe-Broschüre im Browser öffnen? (knapp 8MB)",
 				"bbk",
 				"SFX_GUI",
 				false
@@ -723,7 +723,7 @@
 			"params": [
 				"TooltipGUI",
 				[
-					"Du brauchst Batterien um dieses Radio zu bedienen."
+					"Du brauchst Batterien, um dieses Radio zu bedienen."
 				]
 			]
 		}
@@ -1188,7 +1188,7 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Der Rathaus ist nicht betretbar!" ],
+				"params": [ "Das Rathaus ist nicht betretbar!" ],
 				"as": "no_entry"
 			},
 			{

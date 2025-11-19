@@ -24,7 +24,7 @@ gerhard:Man kann sich nicht beklagen. Also, man könnte schon, aber man tut es j
 friedel:Wuff.
 [actors] avatar gerhard friedel
 [text]
-gerhard:Worüber willst du dich den beklagen? Zu wenig Essen?
+gerhard:Worüber willst du dich denn beklagen? Zu wenig Essen?
 friedel:Wuff ...
 gerhard:... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
 friedel:Wuff!
@@ -60,7 +60,7 @@ npc_mood_less_than gerhard MID
 [text]
 avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
 gerhard:Wirklich? Hm, ja. Ich habe mich in der Tat etwas geärgert.
-gerhard:Dieser junge Bursche mit seinem E-Scooter ist Schuld.
+gerhard:Dieser junge Bursche mit seinem E-Scooter ist schuld.
 gerhard:Der im Anzug und mit diesen Stöpseln im Ohr.
 gerhard:Düst immer durch den Park, als sei er auf ner Rennstrecke.
 gerhard:Rast keine Handbreit an mir und Friedel vorbei, als gäbe es niemanden außer ihm auf der Welt.

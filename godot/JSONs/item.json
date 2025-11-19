@@ -23,7 +23,7 @@
 	{
 		"ID": 3,
 		"name": "Ravioli-Konserve",
-		"descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus..",
+		"descr": "Auch kalt genießbar, aber ein Festmahl sieht anders aus...",
 		"comps": [
 			{"name": "cost", "params": 10},
 			{"name": "food", "params": 1},

@@ -10,7 +10,7 @@
 			"next": {
 				"actors": ["avatar", "julia.r"],
 				"text": [
-					"julia.r#Guten Morgen Nachbar! Hast du auch keinen Strom?",
+					"julia.r#Guten Morgen, Nachbar! Hast du auch keinen Strom?",
 					"avatar#Sieht ganz so aus.",
 					"julia.r#Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?"
 				],

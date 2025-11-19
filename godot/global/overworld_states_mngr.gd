@@ -24,7 +24,7 @@ const state_to_icon: Dictionary = {
 }
 
 @export var state_to_descr: Dictionary = {
-	"MobileNetState.ONLINE" : "Du hast eine Verbinung zum Internet",
+	"MobileNetState.ONLINE" : "Du hast eine Verbindung zum Internet",
 	"MobileNetState.OFFLINE" : "Das Internet ist ausgefallen",
 	"ElectricityState.NONE" : "Der Strom ist ausgefallen",
 	"ElectricityState.UNLIMITED" : "Du hast Strom",

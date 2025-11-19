@@ -4,8 +4,8 @@ class_name EMC_SummaryEndOfDayGUI
 const ACTION_LOG_UI = preload("res://GUI/action_log_ui.tscn")
 
 const TIPS = [
-	"Kümmer dich um deine Gesundheit, iss und trink etwas.",
-	"Helfen deinen Nachbarn um Gesellschaftspunkte zu bekommen"
+	"Kümmere dich um deine Gesundheit, iss und trink etwas.",
+	"Helfe deinen Nachbarn um Gesellschaftspunkte zu bekommen"
 ]
 
 @export var _scoreboard: EMC_Scoreboard

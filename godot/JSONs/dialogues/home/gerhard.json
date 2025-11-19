@@ -11,7 +11,7 @@
 			"gerhard.r"
 		],
 		"text": [
-			"gerhard.r#Friedel ist schon wieder alleine losgezogen. Kannst du mir helfen ihn zu suchen?"
+			"gerhard.r#Friedel ist schon wieder alleine losgezogen. Kannst du mir helfen, ihn zu suchen?"
 		],
 		"options": {
 			"#helfen": "",
@@ -37,11 +37,11 @@
 		],
 		"text": [
 			"avatar#Das schaffst du schon alleine.",
-			"gerhard.r#Oh Okay, schade. Ich suche dann mal weiter."
+			"gerhard.r#Oh, okay, schade. Ich suche dann mal weiter."
 		]
 	},
 	"#helfen": {
-		"prompt": "Suchen Helfen",
+		"prompt": "Suchen helfen",
 		"consequences": {
 			"set_quest_stage": {
 				"quest": "FRIEDEL_WEG",
