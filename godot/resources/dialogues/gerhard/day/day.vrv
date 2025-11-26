@@ -1,23 +1,22 @@
-[Node] start
-[actors] avatar gerhard.t
+[[Node]] start
+[actors] avatar gerhard.flipped
 [text]
 avatar:Hallo!
 gerhard:Moin. Willst du handeln?
 [Choice]
-- talk
-- trade
-- stop
+- [talk] Reden
+- [trade] Handeln
+- [end] Nichts dergleichen
 
-[Node] talk
-[Prompt] Reden
+[[Node]] talk
 [random]
 - [jump] talk1
 - [jump] talk2
 - [jump] talk3
 - [jump] talk4
 
-[Node] talk1
-[actors] avatar gerhard.t friedel
+[[Node]] talk1
+[actors] avatar gerhard.flipped friedel
 [text]
 avatar:Lass uns reden! Wie geht's dir?
 gerhard:Man kann sich nicht beklagen. Also, man könnte schon, aber man tut es ja nicht.
@@ -30,8 +29,8 @@ gerhard:... na gut. Ein Leckerli noch. Aber das ist das Letzte für heute!
 friedel:Wuff!
 
 
-[Node] talk2
-[actors] avatar friedel gerhard.t
+[[Node]] talk2
+[actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Wie geht es Friedel?
 gerhard:Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden.
@@ -41,8 +40,8 @@ avatar:Hund müsste man sein ...
 friedel:Wuff!
 
 
-[Node] talk3
-[actors] avatar friedel gerhard.t
+[[Node]] talk3
+[actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Was macht die Gartenarbeit?
 gerhard:Arbeit? So würde ich das nicht nennen.
@@ -53,10 +52,9 @@ gerhard:Zusammen mit Friedel, natürlich.
 friedel:Wuff!
 
 
-[Node] talk4
-[Condition]
-npc_mood_less_than gerhard MID
-[actors] avatar friedel gerhard.t
+[[Node]] talk4
+[Condition] npc_mood_less_than("gerhard", "MID")
+[actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
 gerhard:Wirklich? Hm, ja. Ich habe mich in der Tat etwas geärgert.
@@ -69,13 +67,7 @@ gerhard:Das ärgert mich.
 friedel:Winsel.
 
 
-[Node] trade
-[Prompt] Handeln
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[[Node]] trade
+[action] request_trade_gui("gerhard")
 
-[Node] stop
-[Prompt] Nichts dergleichen
-
-[end]
+[[Node]] end

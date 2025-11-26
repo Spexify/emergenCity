@@ -87,17 +87,6 @@ func add_tap_water(_dummy: int) -> void:
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
 
-	# REMOVE
-	# match OverworldStatesMngr.get_water_state():
-	# 	OverworldStatesMngr.WaterState.CLEAN:
-	# 		_inventory.add_new_item(EMC_Item.IDs.WATER)
-	# 	OverworldStatesMngr.WaterState.DIRTY:
-	# 		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	# 	OverworldStatesMngr.WaterState.NONE:
-	# 		printerr("Can't add water while there is no water available! \
-	# 			This should be checked in the constraints!")
-	# 	_: printerr("Unknown Water state!")
-
 
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
 ## If it is completely used up, the item is removed from the [EMC_Inventory]
@@ -184,17 +173,6 @@ func overlay_gui(args : Dictionary) -> void:
 ########################################## Dialogue ################################################
 
 func trigger_dialogue(p_dialogue : Dictionary) -> void:
-	#var dialog_res : DialogueResource
-	#var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
-	#
-	#dialog_res = load("res://res/dialogue/" + p_dialogue_name + ".dialogue")
-	#
-	#var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-	#dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	#_lower_gui_node.add_child(dialogue_GUI)
-	#dialogue_GUI.start(dialog_res, "START", [executer])
-	#_lower_gui_node.get_tree().paused = true
-	
 	_gui_mngr.request_gui("DialogueGui", [p_dialogue])
 	
 func set_dialogue_state(args : Dictionary) -> void:

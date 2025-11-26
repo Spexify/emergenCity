@@ -1,0 +1,9 @@
+[[Node]] start
+[set] @addition add(1, 5)
+[set] @yes 6
+[action] output(int_to_string(@addition))
+[match] @addition
+- [4] [action] output("No WAY")
+- [6] [action] output("Ofcourse")
+
+[[Node]] end

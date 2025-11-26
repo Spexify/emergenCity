@@ -15,6 +15,7 @@ signal status_updated(
 signal died
 
 const MOVE_SPEED: float = 300.0 #real movespeed set in NavAgent Node under Avoidance (Max Speed)!
+const PITCH: float = 1.0
 
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
