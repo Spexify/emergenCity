@@ -38,7 +38,7 @@
 			"agathe#Wie reizend! Seitdem diese Krise angefangen hat, traue ich mich kaum raus.",
 			"agathe#Einkaufen kann man auch nichts mehr! Gut, dass mich meine Nichte ab und zu besucht.",
 			"agathe#Sie hat ja wenig Zeit. Mit Arbeit und Familie.",
-			"agathe#Aber es ist jedesmal schön, wenn sie hier ist."
+			"agathe#Aber es ist jedes Mal schön, wenn sie hier ist."
 		],
 		"options": {
 			"BesucheSchoen": {
@@ -90,7 +90,7 @@
 		"actors": [ "agathe", "avatar.r"],
 		"text": [
 			"agathe#Wie reizend, dass du dir Zeit für deine Mitmenschen nimmst.",
-			"agathe#Wenn ich da an mich zurück denke... Ich hatte immer nur meine Karriere im Kopf.",
+			"agathe#Wenn ich da an mich zurückdenke... Ich hatte immer nur meine Karriere im Kopf.",
 			"agathe#Ganz wie Elias, fürchte ich. Kennst du Elias?"
 			],
 		"options": {
@@ -131,7 +131,7 @@
 		"text": [
 			"agathe#Wie schön! Manchmal denke ich doch noch an meine alte Wohnung zurück.",
 			"agathe#Mitten unter Menschen, weit weg von meiner Arbeit. Aber der Kopf war immer bei der Arbeit.",
-			"agathe#Heute schaut mein Fester raus aufs Industriegebiet. Ganz hinten kann man die Schornsteine der Fabrik sehen.",
+			"agathe#Heute schaut mein Fenster raus aufs Industriegebiet. Ganz hinten kann man die Schornsteine der Fabrik sehen.",
 			"agathe#Aber jetzt genieße ich es, mich mit meinen Nachbarn zu unterhalten."
 		],
 		"options": { "#dialog6Mood1": "", "#dialog6Mood2": "", "#dialog6Mood3": ""}
@@ -288,7 +288,7 @@
 	"#dialog11": {
 		"actors": [ "agathe", "avatar.r"],
 		"text": [
-			"agathe#Wie schön! Habe ich dir schonmal von der großen Flut von 1977 erzählt?"
+			"agathe#Wie schön! Habe ich dir schon mal von der großen Flut von 1977 erzählt?"
 		],
 		"options": {
 			"#Flut1977Ja": {
@@ -376,7 +376,7 @@
 		"text": [
 			"agathe#Wie reizend! Es gibt so einiges, was man sich angewöhnt, wenn man hier wohnt.",
 			"agathe#Andernorts schauen einen die Leute immer komisch an.",
-			"agathe#Wenn man bei Sturm sofort raus geht und die Sachen auf dem Balkon befestigt, zum Beispiel.",
+			"agathe#Wenn man bei Sturm sofort rausgeht und die Sachen auf dem Balkon befestigt, zum Beispiel.",
 			"agathe#Und dann passiert etwas und plötzlich wird man ganz anders angeschaut.",
 			"agathe#Und die Leute fangen an zu fragen.",
 			"agathe#So ist das wohl. Man kocht mit den Zutaten, die man kennt.",

@@ -15,7 +15,7 @@
 			"add_item_question": [
 				"JAM",
 				{
-					"question": "Diese %s ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.",
+					"question": "Diese %s ist bestimmt was ganz Besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.",
 					"answere": "",
 					"decline": "Einpacken"
 				}

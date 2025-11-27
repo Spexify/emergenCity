@@ -40,7 +40,7 @@ is_state_by_name_str MobileNetState.OFFLINE
 [actors] avatar friedel
 [text]
 avatar:Hmm, ich hab hier keinen Empfang!
-avatar:Ich könnte auch einfach bei Gerhard vorbei gehen.
+avatar:Ich könnte auch einfach bei Gerhard vorbeigehen.
 friedel:Wuff
 [Choice]
 - idiot
@@ -66,7 +66,7 @@ gerhard:Ich bin gerade zu Hause. Du kannst ihn also gerne vorbei bringen.
 - OSM.add_quest_str ["FRIEDEL_WEG", "4"]
 
 [[Node]] lieb
-[Prompt] Friedel Nachhause bringen
+[Prompt] Friedel nach Hause bringen
 [actors] avatar gerhard.flipped
 [text]
 avatar:Ja, ich kann ihn gerne gerade vorbeibringen.

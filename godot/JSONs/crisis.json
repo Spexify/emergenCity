@@ -132,7 +132,7 @@
 	"MEDIUM": {
 		"1.Hochwasser.0": {
 			"weight": 1,
-			"desc": "Aufgrund von Tage langem Regen besteht in Teilen der Stadt Hochwassergefahr.",
+			"desc": "Aufgrund von tagelangem Regen besteht in Teilen der Stadt Hochwassergefahr.",
 			"fcount": [
 				1,
 				1
@@ -222,7 +222,7 @@
 		},
 		"0.Hochwasser.4": {
 			"weight": 1,
-			"desc": "Aufgrund des Hochwassers ist das Mobilfunknext eingebrochen.",
+			"desc": "Aufgrund des Hochwassers ist das Mobilfunknetz eingebrochen.",
 			"delay": [
 				2,
 				3
@@ -406,7 +406,7 @@
 		},
 		"0.Sturmtief.1": {
 			"weight": 1,
-			"desc": "Sturmtief Regnetvielandra hat das Stromnetzwerk destabilisiert.",
+			"desc": "Sturmtief Regnetvielandra hat das Stromnetz destabilisiert.",
 			"delay": [
 				2,
 				3
@@ -444,7 +444,7 @@
 		},
 		"0.Pandemie.1": {
 			"weight": 5,
-			"desc": "Aufgrund der steigenden Fallzahlen ist die Betretung öffentlicher Raume eingeschränkt.",
+			"desc": "Aufgrund der steigenden Fallzahlen ist die Betretung öffentlicher Räume eingeschränkt.",
 			"delay": [
 				2,
 				3
@@ -563,7 +563,7 @@
 		},
 		"0.Waldbrand.1": {
 			"weight": 1,
-			"desc": "Aufgrund der weitflächigen Brände in Gluthain ist die Wasserversorgung zum erliegen gekommen.",
+			"desc": "Aufgrund der weitflächigen Brände in Gluthain ist die Wasserversorgung zum Erliegen gekommen.",
 			"delay": [
 				2,
 				3
@@ -601,7 +601,7 @@
 		},
 		"0.Waldbrand.3": {
 			"weight": 1,
-			"desc": "Der Waldbrand in Gluthain hat wichtige Infrastruktur zerstört. Das Mobilefunknetz ist ausgefallen.",
+			"desc": "Der Waldbrand in Gluthain hat wichtige Infrastruktur zerstört. Das Mobilfunknetz ist ausgefallen.",
 			"delay": [
 				2,
 				3

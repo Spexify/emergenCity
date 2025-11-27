@@ -21,9 +21,9 @@
 			"leonie.r#Nett, dass du fragst. Hier im Rathaus ist ja kaum was los.",
 			"leonie.r#Bücher sind ja schön und gut, aber wenn du mich fragst, reicht das nicht aus.",
 			"avatar#Wofür?",
-			"leonie.r#Um hier ein bisschen Leben rein zu bringen, natürlich.",
+			"leonie.r#Um hier ein bisschen Leben reinzubringen, natürlich.",
 			"leonie.r#Wir bräuchten eine Spieleecke für die Kinder. Bällebad, Kletterturm. All das.",
-			"leonie.r#Und eine Spielekonsole für die älteren.",
+			"leonie.r#Und eine Spielekonsole für die Älteren.",
 			"leonie.r#Und einen Bildschirm für Filmabende.",
 			"leonie.r#So kriegt man die Leute her!"
 		],
@@ -34,9 +34,9 @@
             	"text": [ "leonie.r#Ja, definitiv spannender als diese Echokammer hier." ]
 			},
 			"CommunityCenterMeh": {
-				"prompt": "Das hat doch ohnehin jeder zuhause.",
+				"prompt": "Das hat doch ohnehin jeder zu Hause.",
 				"actors": ["avatar", "leonie.r"],
-            	"text": [ "leonie.r#Ja, aber zuhause ist man allein. Das ist auf Dauer langweilig." ]
+            	"text": [ "leonie.r#Ja, aber zu Hause ist man allein. Das ist auf Dauer langweilig." ]
 			}
 		}
 	},
@@ -52,7 +52,7 @@
 				"actors": ["avatar", "leonie.r"],
             	"text": [
 					"leonie.r#Kommt auf den Film an. Gestern war es eher emotional.",
-					"leonie.r#Aber wir schauen alles mögliche. Ich sag dir Bescheid.",
+					"leonie.r#Aber wir schauen alles Mögliche. Ich sag dir Bescheid.",
 					"avatar#Danke!"
 				]
 			},
@@ -96,7 +96,7 @@
 			"leonie.r#Am besten irgendwas, wo du denkst, 'oh Gott, das geht ja gar nicht!'",
 			"leonie.r#Sich auf was ganz Neues einzulassen, das ist wie ne Dusche fürs Gehirn.",
 			"avatar#Okay, das merk ich mir.",
-			"leonie.r#Sag Bescheid, wenn du ne Empfehlung brauchst. Ich kenn juicy Bücher für alle Genre."
+			"leonie.r#Sag Bescheid, wenn du ne Empfehlung brauchst. Ich kenne juicy Bücher für alle Genres."
 		]
 	}
 }

@@ -50,9 +50,9 @@ avatar:Danke für den Tipp!
 [[Node]] reden4
 [actors] avatar julia.flipped
 [text]
-julia:Schön, dass du vorbeischaust. Es ist wichtig, regelmäßig raus zu kommen.
-julia:In Krisenzeiten ist es ja besonders leicht, einfach zuhause zu bleiben.
-julia:Aber wir gewöhnen uns so schnell daran, nichts zu tun. Und dann versauern wir zuhause.
+julia:Schön, dass du vorbeischaust. Es ist wichtig, regelmäßig rauszukommen.
+julia:In Krisenzeiten ist es ja besonders leicht, einfach zu Hause zu bleiben.
+julia:Aber wir gewöhnen uns so schnell daran, nichts zu tun. Und dann versauern wir zu Hause.
 julia:Besser ist es, jeden Tag etwas außer Haus zu unternehmen.
 
 [[Node]] reden5
@@ -84,14 +84,14 @@ julia:Obwohl die meisten, die hier wohnen, sich wirklich gut auskennen. Krisen b
 [[Node]] reden6
 [actors] avatar julia.flipped
 [text]
-julia:Bewegung, Schlaf, gute Ernährung und Routine gehört zu den wichtigsten Elementen für ein glückliches Leben.
+julia:Bewegung, Schlaf, gute Ernährung und Routine gehören zu den wichtigsten Elementen für ein glückliches Leben.
 julia:Krisen können das erschweren. Die Routine geht oft zuerst über Bord.
 julia:Aber letztlich ist alles betroffen. Wenn man nicht mehr ins Fitnesscenter oder in den Park darf.
 julia:Oder man nicht schlafen kann, weil man sich Sorgen macht.
 julia:Oder die Nahrungsmittel verderben.
 julia:Deshalb ist es so wichtig, sich vorzubereiten. Ich habe eine Krisenroutine. Weißt du, was der Trick dabei ist?
 avatar:Was?
-julia:Mein Kalender bleibt, wie er ist. Ich ersetze nur das Fitnesscenter mit dem Hometrainer und frische mit haltbaren Zutaten.
+julia:Mein Kalender bleibt, wie er ist. Ich ersetze nur das Fitnesscenter mit dem Hometrainer und frische Zutaten mit haltbaren Zutaten.
 avatar:Das klingt einfach!
 [action] add_score("tip", {"source": "julia4"})
 
@@ -139,7 +139,7 @@ julia:Aber am liebsten lese ich oder höre Musik.
 julia:Neulich kamen überraschend drei Freunde zu Besuch.
 julia:Eigentlich waren sie nur auf der Durchreise, aber wie das so ist, wir kamen ins Gespräch und es wurde spät.
 julia:Und ich hatte gar nichts eingekauft.
-julia:In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zuhause zu haben.
+julia:In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zu Hause zu haben.
 julia:Man braucht nicht immer frische Zutaten, um etwas Leckeres zu zaubern.
 avatar:Das stimmt!
 

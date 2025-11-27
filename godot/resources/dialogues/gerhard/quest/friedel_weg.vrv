@@ -21,14 +21,14 @@ gerhard:Friedel ist schon wieder alleine losgezogen. Kannst du mir helfen ihn zu
 [actors] avatar gerhard.flipped
 [text]
 avatar:Das schaffst du schon alleine.
-gerhard:Oh Okay, schade. Ich suche dann mal weiter.
+gerhard:Oh, okay, schade. Ich suche dann mal weiter.
 [action]
 - OSM.add_quest_str ["FRIEDEL_WEG", "4"]
 - ActCons.npc_change_stage [{"npc":"Friedel", "stage":"gardenhouse","wait":false}]
 - stage.change_stage ["gardenhouse", false]
 
 [[Node]] helfen
-[Prompt] Suchen Helfen
+[Prompt] Suchen helfen
 [actors] avatar gerhard.flipped
 [text]
 avatar:Komm, wir suchen ihn zusammen.

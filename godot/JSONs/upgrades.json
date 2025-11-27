@@ -76,7 +76,7 @@
 		"tiles_rows": 2
 	},
 	{
-		"description": "Ermöglicht abfüllen von Wasser.",
+		"description": "Ermöglicht das Abfüllen von Wasser.",
 		"display_name": "Wasserreservoir",
 		"id": 6,
 		"price": 2000,
