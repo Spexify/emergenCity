@@ -70,10 +70,15 @@ Directive in this category start with a capital letter. They describe the attrib
 These functions calls can be nested.
 
 ```
-[Condition] and_bool(npc_is_happy("Gerhard"), time_is_morning())
+[Condition] and_bool(npc_is_happy("gerhard"), time_is_morning())
 ```
 
 If only of of the conditions need to be true, you can use `or_bool`.
+
+To negate the conditional value, use not_bool, e.g. to query if a given NPC is not happy (but either mid or sad) you can use:
+```
+[Condition] not_bool(npc_is_happy("npc_name"))
+```
 
 ### Choice
 `Choice` jumps to the next selected node. It takes list arguments, where each entries `latent` is the name of the node to jump to and `list` is the prompt the player may select.
@@ -209,13 +214,134 @@ Possible values are floats, integers, strings, booleans or even actions, e.g.:
 ```
 
 ### action
-`action` interacts with the game over the same api as [Condition](#condition). It always returns a value.
+`action` interacts with the game over the same api as [Condition](#condition). It always returns a value. Each action needs to be preceded by the `action` directive:
 
 ```
-[action] change_stage("HOME")
+[action] action1
+[action] action2
 ```
 
+The following is an overview of available actions.
+
+#### Stage Manipulation
+
+- **Move player**: `change_stage("HOME")` This action can be used to move the player to a different stage.
+- **Add NPC**: `arrive("npc_name")` This action can be used to spawn the NPC ‘npc_name’ in the stage (walks in).
+- **Remove NPC**: `leave("npc_name")` This action can be used to remove the NPC ‘npc_name’ from the stage (walks out).
+
+Possible stages are: `HOME`, `MARKET`, `TOWNHALL`, `PARK`, and all npc homes.
+
+#### Time Manipulation
+
+This action can be used to progress the day if an action takes time (e.g. eating a meal with NPCs). A description is provided of what is taking time.
 ```
-[action] give_player_item(@item)
+progress_day("Suche nach Friedel")
 ```
 
+#### Gain Item
+
+This action can be used to gain an item.
+```
+give_player_item(@item)
+```
+
+#### Gain Scores
+
+- **Gain knowledge**: `add_score("tip", {"source": "julia1"})` This action can be used to add points to the knowledge score. Each source must be unique to add points only once.
+- **Gain calories**: `add_points_calories(OPTIONAL_AMOUNT)` This action can be used to gain calories (e.g. due to eating a meal with NPCs).
+- **Gain water**: `add_points_water(OPTIONAL_AMOUNT)` This action can be used to gain water.
+
+If no amount is given, a default amount will be used.
+
+#### Initiate trade
+
+```request_trade_gui("npc_name")```
+
+### Conditional actions
+
+The following is a list of actions used to query game states.
+
+#### Variables
+
+Variables set with `[set]` can be checked like this for their value:
+
+```
+eq_TYPE(@LOCAL_VAR_NAME, VALUE)
+eq_TYPE(#GLOBAL_VAR_NAME, VALUE)
+```
+
+where TYPE is the data type (currently either a string, integer or bool) e.g.
+
+```
+eq_bool(#visited_node_1,true)
+```
+
+#### Karma and Friendship
+
+Karma is a float between `-1` and `1`. It's influenced by trade. Friendship is an integer that is `0` initially and increased when talking to an NPC and slowly decreases over time when not talking to an NPC.
+
+Both of them can be queried using the following:
+
+```
+npc_PROPERTY_higher_than("npc_name", VALUE)
+npc_PROPERTY_less_than("npc_name", VALUE)
+npc_PROPERTY_equal("npc_name", VALUE)
+```
+
+For example, like this:
+
+```
+npc_karma_higher_than("gerhard",0.5)
+npc_friendship_higher_than("gerhard", 8)
+```
+
+#### Mood
+
+Mood is an NPC state that can be either sad, happy or mid (i.e. neutral).
+```
+npc_is_happy("gerhard")
+npc_is_sad("gerhard")
+```
+
+#### Crisis
+
+The current main crisis can be queried like this:
+
+```
+crisis_is("CRISIS_NAME")
+```
+
+`CRISIS_NAME` can be any of: Chemie, LKW, Duerre, Sturmtief, Hochwasser, Starkregen, Waldbrand, Pandemie.
+
+#### Crises Effects
+
+The current crises effects can be queried like this:
+
+```
+is_state_by_name_str("ElectricityState.NONE")
+```
+
+Possible states are: `MobileNetState.ONLINE`, `MobileNetState.OFFLINE`, `ElectricityState.NONE`, `ElectricityState.UNLIMITED`, `WaterState.NONE`, `WaterState.DIRTY`, `WaterState.CLEAN`, `FoodContaminationState.NONE`, `FoodContaminationState.FOOD_SPOILED`, `IsolationState.NONE`, `IsolationState.LIMITED_PUBLIC_ACCESS`, `IsolationState.ISOLATION`.
+
+#### Stage
+
+The current stage can be queried like this:
+
+```is_current_stage("MARKET")```
+
+Possible stages are: `HOME`, `MARKET`, `TOWNHALL`, `PARK`, and all npc homes.
+
+#### Time
+
+The current time can be queried like this:
+```
+time_is_morning()
+```
+
+Possible times are: `morning`, `midday`, `evening`.
+
+#### Roll a dice
+
+```randomize(INT,MAX)```
+
+Returns true when a random number between 1 and the integer `MAX` equals the integer `INT`.
