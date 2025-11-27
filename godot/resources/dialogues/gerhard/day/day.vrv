@@ -4,27 +4,47 @@
 avatar:Hallo!
 gerhard:Moin. Willst du handeln?
 [Choice]
-- talk
-- trade
-- stop
+- [talk] Reden
+- [trade] Handeln
+- [end] Nichts dergleichen
 
 [[Node]] talk
-[Prompt] Reden
+[jump] cooldown
+[match] @last_option
+- [1] [jump] talk1
+- [2] [jump] talk2
+- [3] [jump] talk3
+- [4] [jump] talk4
+- [5] [jump] talk5
+- [6] [jump] talk6
+- [7] [jump] talk7
+- [8] [jump] talk8
+- [9] [jump] talk9
+- [10] [jump] talk10
+- [11] [jump] talk11
+- [12] [jump] talk12
+- [13] [jump] talk13
+- [14] [jump] talk14
+
+[[Node]] cooldown
+[Condition] neq_int(@last_day, get_period_count())
+[set] @last_day get_period_count()
 [random]
-- [jump] talk1
-- [jump] talk2
-- [jump] talk3
-- [jump] talk4
-- [jump] talk5
-- [jump] talk6
-- [jump] talk7
-- [jump] talk8
-- [jump] talk9
-- [jump] talk10
-- [jump] talk11
-- [jump] talk12
-- [jump] talk13
-- [jump] talk14
+- [set] @last_option 1
+- [set] @last_option 2
+- [set] @last_option 3
+- [set] @last_option 4
+- [set] @last_option 5
+- [set] @last_option 6
+- [set] @last_option 7
+- [set] @last_option 8
+- [set] @last_option 9
+- [set] @last_option 10
+- [set] @last_option 11
+- [set] @last_option 12
+- [set] @last_option 13
+- [set] @last_option 14
+[jump] talk
 
 [[Node]] talk1
 [actors] avatar gerhard.flipped friedel
@@ -64,8 +84,7 @@ friedel:Wuff!
 
 
 [[Node]] talk4
-[Condition]
-npc_mood_less_than gerhard MID
+[Condition] npc_mood_less_than("gerhard", "MID")
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
@@ -262,12 +281,6 @@ friedel:Wuuuff.
 
 
 [[Node]] trade
-[Prompt] Handeln
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[action] request_trade_gui("gerhard")
 
-[[Node]] stop
-[Prompt] Nichts dergleichen
-
-[end]
+[[Node]] end

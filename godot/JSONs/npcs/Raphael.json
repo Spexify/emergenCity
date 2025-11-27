@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Raphael",
 			"descr": "Das hier ist Raphael.\nEr ist lieb.",
-			"portait": "raphael"
+			"portait": "raphael",
+			"sprite": "raphael"
 		},
-		"sprite": {
-			"texture_name": "raphael"
-		},
-		"save": {},
 		"karma": {},
 		"interaction": {
 			"conversation": {
@@ -33,6 +30,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "market",
+			"position": {"x": 224, "y": 248},
 			"start": "Market",
 			"positions": {
 				"Market": { "x": 224, "y": 248 }

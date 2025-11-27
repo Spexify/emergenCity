@@ -7,14 +7,12 @@ elias:Hi
 - [jump] branchRedet
 
 [[Node]] branchRedetNicht
-[Condition]
-npc_mood_less_than elias SAD
-npc_karma_less_than elias  -0.8
-[actors] avatar elias.flipped
+[Condition] and_bool(npc_mood_less_than("elias", "SAD"), npc_karma_less_than("elias", -0.8))
+[actors] avatar elias.t
 [text]
 elias:Brauchen Sie was?
 [Choice]
-- no_time
+- [no_time] Reden
 - trade
 - stop
 
@@ -30,18 +28,27 @@ elias:Sorry.
 [text]
 elias:Brauchen Sie was?
 [Choice]
-- talk
+- [talk] Nein, lass uns quatschen!
 - trade
 - top
 
 [[Node]] talk
-[Prompt] Nein, lass uns quatschen!
-[actors] avatar elias.flipped
+[jump] cooldown
+[match] @last_option
+- [1] [jump] talk1
+- [2] [jump] talk2
+- [3] [jump] talk3
+- [4] [jump] talk4
+
+[[Node]] cooldown
+[Condition] neq_int(@last_day, get_period_count())
+[set] @last_day get_period_count()
 [random]
-- [jump] talk1
-- [jump] talk2
-- [jump] talk3
-- [jump] talk4
+- [set] @last_option 1
+- [set] @last_option 2
+- [set] @last_option 3
+- [set] @last_option 4
+[jump] talk
 
 [[Node]] talk1
 [actors] avatar elias.flipped

@@ -7,7 +7,7 @@ const YELLOW: Color = Color8(247, 240, 87)
 const GREEN: Color = Color8(77, 178, 100)
 const DARK_GREEN: Color = Color8(36, 111, 64)
 
-@export var _inventory: EMC_Inventory
+@export var _inventory: EMC_Inventory = EMC_Inventory.new()
 @export var _item_preference: Dictionary
 #@export var _tips: Array[String]
 #@export var _tip_ratio: int
@@ -22,22 +22,20 @@ const DARK_GREEN: Color = Color8(36, 111, 64)
 @export var _value_weight: float = 1.0
 #@export var _decision_noise: float = 0.0
 
-@onready var npc: EMC_NPC = $"../.."
-
 #var _resp_bottom: Array[String]
 #var _resp_top: Array[String]
 #var _resp_low: Array[String]
 #var _resp_mid: Array[String]
 #var _resp_high: Array[String]
 
-var _gui_mngr: EMC_GUIMngr
-var _day_mngr: EMC_DayMngr
-var _initial_inventory: Dictionary
-
-var _karma_comp: EMC_NPC_Karma
-
-func _init(dict: Dictionary) -> void:
-	_initial_inventory = dict.get("inventory", {})
+func setup(dict: Dictionary) -> void:
+	var _initial_inventory: Dictionary = dict.get("inventory", {})
+	
+	_inventory = EMC_Inventory.new(18)
+	for item_name : String in _initial_inventory.keys():
+		for i : int in range(_initial_inventory[item_name] as int):
+			_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
+	
 	_item_preference = dict.get("preferences", {})
 	
 	_response = dict.get("response", {})
@@ -60,22 +58,16 @@ func _init(dict: Dictionary) -> void:
 	_value_weight = dict.get("value_weight", _value_weight)
 	#_decision_noise = dict.get("noise", 0.0)
 
-func _ready() -> void:
-	_gui_mngr = npc.get_gui_mngr()
-	_day_mngr = npc.get_day_mngr()
-	npc.add_comp(self)
-	
-	## INFO Needs to be called deferred to ensure that all components are loaded
-	load_dependencies()
+var owner: EMC_NPC = null
 
-#func _accquire_karma_comp() -> void:
-	#_karma_comp = npc.get_comp(EMC_NPC_Descr)
+func set_owner(_owner: EMC_NPC) -> void:
+	owner = _owner
 
 func get_title() -> String:
 	return "Handeln"
 
-func run() -> void:
-	_gui_mngr.request_gui("Trade", [npc])
+func run(_gui_mngr: EMC_GUIMngr) -> void:
+	_gui_mngr.request_gui("Trade", [owner])
 
 func get_inventory() -> EMC_Inventory:
 	return _inventory
@@ -90,31 +82,6 @@ func add_item(item_name: String, count: int = 1) -> void:
 	for i in range(count+1):
 		_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
 
-## Loads dependencies, which include the inventory and karam component
-## Needs to be called after all components are loaded
-func load_dependencies() -> void:
-	_karma_comp = npc.get_comp(EMC_NPC_Karma)
-	
-	## Check for missing karma comp
-	#if _karma_comp == null:
-		#var descr: EMC_NPC_Descr = npc.get_comp(EMC_NPC_Descr)
-		#if not descr.is_node_ready():
-			#await descr.ready
-		#
-		#printerr("Missing Karma comp in NPC: " + descr.get_npc_name())
-	
-	var save: EMC_NPC_Save = npc.get_comp(EMC_NPC_Save)
-	if not save.is_node_ready():
-		await save.ready
-	_inventory = save.get_res("Inventory", EMC_Inventory)
-	if _inventory == null or not Global.get_game_state() == Global.State.CRISIS:
-		_inventory = EMC_Inventory.new(18)
-		for item_name : String in _initial_inventory.keys():
-			for i : int in range(_initial_inventory[item_name] as int):
-				_inventory.add_new_item(JsonMngr.item_name_to_id(item_name))
-		
-		npc.get_comp(EMC_NPC_Save).add_res("Inventory", _inventory)
-
 func calulate_item_score_generic(items : Array[EMC_Item]) -> float:
 	return items.reduce(
 		func (accum : int, item : EMC_Item) -> int:
@@ -123,6 +90,8 @@ func calulate_item_score_generic(items : Array[EMC_Item]) -> float:
 			return accum, 0)
 
 func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_Item]) -> float:
+	var _karma_comp: EMC_NPC_Karma = owner.npc_resource.get_comp(EMC_NPC_Karma)
+	
 	var sell_value := calulate_item_score_generic(sell_items)
 	var buy_value := calulate_item_score_generic(buy_items)
 	
@@ -136,6 +105,7 @@ func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_I
 	return trade_score
 	
 func get_mood_texture(trade_score: float, mood_texture: AtlasTexture) -> Texture2D:
+	var _karma_comp: EMC_NPC_Karma = owner.npc_resource.get_comp(EMC_NPC_Karma)
 	trade_score = trade_score / _value_weight - _karma_comp.get_krama() * _karma_weight
 	if trade_score < _bottom:
 		mood_texture.set_region(Rect2(256, 0, 64, 64))
@@ -197,6 +167,7 @@ func get_deal_color(trade_score: float) -> Color:
 	return DARK_GREEN
 
 func deal(trade_score: float) -> void:
+	var _karma_comp: EMC_NPC_Karma = owner.npc_resource.get_comp(EMC_NPC_Karma)
 	trade_score = trade_score / _value_weight - _karma_comp.get_krama() * _karma_weight
 	if trade_score < _bottom:
 		_karma_comp.add_karma(-0.6)

@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="EMC_NPC_Resource" load_steps=21 format=3 uid="uid://cc1ijq77tb0d7"]
+
+[ext_resource type="Script" uid="uid://r2xfpbx2vf" path="res://crisisPhase/npc/npc_interaction_option.gd" id="1_2pkob"]
+[ext_resource type="Script" uid="uid://c1jq44nbvrvkd" path="res://crisisPhase/npc/npc_resource.gd" id="1_2v3ii"]
+[ext_resource type="Resource" uid="uid://dkki6cdk1qlsv" path="res://resources/dialogues/gerhard/day/day.vrv" id="2_a421k"]
+[ext_resource type="Script" uid="uid://d03dgr6ppq377" path="res://crisisPhase/npc/npc_conversation.gd" id="2_b07hb"]
+[ext_resource type="Script" uid="uid://bu8aystlqq0al" path="res://crisisPhase/npc/npc_interaction.gd" id="2_hwvw0"]
+[ext_resource type="Script" uid="uid://dqtohlqytdu3g" path="res://crisisPhase/npc/npc_stage.gd" id="3_b07hb"]
+[ext_resource type="Texture2D" uid="uid://byakht1f2qa3a" path="res://assets/characters/portrait_gerhard.png" id="4_a421k"]
+[ext_resource type="Script" uid="uid://b0ymg5og4kujm" path="res://inventory/inventory.gd" id="4_q7v7i"]
+[ext_resource type="Script" uid="uid://dg0wue01hcvsg" path="res://inventory/item.gd" id="5_5ab4a"]
+[ext_resource type="Script" uid="uid://b3ea452du483" path="res://crisisPhase/npc/npc_descr.gd" id="5_ki2y7"]
+[ext_resource type="Texture2D" uid="uid://bgh34c2ycnpel" path="res://assets/characters/sprite_gerhard.png" id="6_q7v7i"]
+[ext_resource type="Script" uid="uid://byw25c2nk2e3r" path="res://crisisPhase/npc/npc_trading.gd" id="6_w3ch7"]
+[ext_resource type="Script" uid="uid://22a6mqmr1ln3" path="res://crisisPhase/npc/npc_karma.gd" id="7_5ab4a"]
+
+[sub_resource type="Resource" id="Resource_ki2y7"]
+script = ExtResource("2_b07hb")
+day_dialogue = ExtResource("2_a421k")
+context = {
+"@last_day": 0
+}
+npc_pitch = 1.0
+title = ""
+metadata/_custom_type_script = "uid://d03dgr6ppq377"
+
+[sub_resource type="Resource" id="Resource_0t7li"]
+script = ExtResource("4_q7v7i")
+num_slots = 30
+slots = Array[ExtResource("5_5ab4a")]([])
+metadata/_custom_type_script = "uid://b0ymg5og4kujm"
+
+[sub_resource type="Resource" id="Resource_p7bab"]
+script = ExtResource("6_w3ch7")
+_inventory = SubResource("Resource_0t7li")
+_item_preference = {}
+_response = {}
+_bottom = -0.6
+_low = -0.3
+_mid = 0.0
+_high = 0.3
+_top = 0.6
+_karma_weight = 0.5
+_value_weight = 1.0
+title = ""
+metadata/_custom_type_script = "uid://byw25c2nk2e3r"
+
+[sub_resource type="Resource" id="Resource_w3ch7"]
+script = ExtResource("2_hwvw0")
+interactions = Dictionary[String, ExtResource("1_2pkob")]({
+"Handeln": SubResource("Resource_p7bab"),
+"Reden": SubResource("Resource_ki2y7")
+})
+metadata/_custom_type_script = "uid://bu8aystlqq0al"
+
+[sub_resource type="Resource" id="Resource_0a1l1"]
+script = ExtResource("3_b07hb")
+stage_name = "home"
+position = Vector2(200, 500)
+metadata/_custom_type_script = "uid://dqtohlqytdu3g"
+
+[sub_resource type="Resource" id="Resource_awuxc"]
+script = ExtResource("5_ki2y7")
+npc_name = "noNone"
+descr = "Das ist ein Test-Gerhard"
+portrait = ExtResource("4_a421k")
+sprite = ExtResource("6_q7v7i")
+metadata/_custom_type_script = "uid://b3ea452du483"
+
+[sub_resource type="Resource" id="Resource_ossfg"]
+script = ExtResource("7_5ab4a")
+karma = 0.0
+mood = 2.0
+metadata/_custom_type_script = "uid://22a6mqmr1ln3"
+
+[resource]
+script = ExtResource("1_2v3ii")
+comps = Array[Resource]([SubResource("Resource_w3ch7"), SubResource("Resource_0a1l1"), SubResource("Resource_awuxc"), SubResource("Resource_ossfg")])
+metadata/_custom_type_script = "uid://c1jq44nbvrvkd"

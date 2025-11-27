@@ -25,6 +25,7 @@ sound_effect = {
 "consumed": ""
 }
 texture = SubResource("AtlasTexture_hfw66")
+dimensions = Array[Array]([[1, 1]])
 
 [node name="ItemInfoGui" type="Control"]
 layout_mode = 3

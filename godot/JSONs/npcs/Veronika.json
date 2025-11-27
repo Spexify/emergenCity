@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Veronika",
 			"descr": "Das hier ist Veronika.\nSie ist lieb.",
-			"portait": "veronika"
+			"portait": "veronika",
+			"sprite": "veronika"
 		},
-		"sprite": {
-			"texture_name": "veronika"
-		},
-		"save": {},
 		"karma": {},
 		"interaction": {
 			"conversation": {
@@ -23,6 +20,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "apartment_camper",
+			"position": {"x": 450, "y": 750},
 			"start": "ApartmentCamper",
 			"positions": {
 				"ApartmentCamper": { "x": 450, "y": 750 },

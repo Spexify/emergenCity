@@ -96,7 +96,7 @@ stream = ExtResource("3_nintj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rd3ph")
+&"": SubResource("AnimationLibrary_rd3ph")
 }
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]

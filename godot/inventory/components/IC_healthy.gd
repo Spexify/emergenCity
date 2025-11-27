@@ -5,6 +5,7 @@ class_name EMC_IC_Healthy
 @export var _health_change: int
 
 const UNIT: String = "% ♡"
+const UNIT_FACTOR: int = 10
 
 ########################################## PUBLIC METHODS ##########################################
 func _init(_p_health_change : int = 0) -> void:
@@ -12,7 +13,7 @@ func _init(_p_health_change : int = 0) -> void:
 	_health_change = _p_health_change
 
 func consume(p_avatar : EMC_Avatar) -> void:
-	p_avatar.update_health(self.get_health_change())	
+	p_avatar.modify_health_delta(self.get_health_change())
 
 ## Get the internal nutritionness value
 func get_health_change() -> int:
@@ -21,7 +22,7 @@ func get_health_change() -> int:
 
 ## Get the hydration value scaled to fit real-life units
 func get_unit_health_change() -> int:
-	return get_health_change() * EMC_Avatar.UNIT_FACTOR_HEALTH
+	return get_health_change() * UNIT_FACTOR
 
 
 ## RENAME WITH CAUTION: It overrides superclass method!

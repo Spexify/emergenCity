@@ -58,6 +58,9 @@ func _get_comp(comp_name: String) -> Node:
 
 ## Setup all the needed reference for GUIs etc.
 func _ready() -> void:
+	OverworldStatesMngr.game_won.connect(func () -> void: _gui_mngr.queue_gui("EndGameGUI", [true, _avatar]))
+	_avatar.died.connect(func () -> void: _gui_mngr.queue_gui("EndGameGUI", [false, _avatar]))
+	
 	OverworldStatesMngr.reset()
 	
 	match Global.get_game_state():
@@ -91,7 +94,7 @@ func _ready() -> void:
 		#Global.load_state()
 	
 	#Setup-Methoden
-	_avatar.refresh_vitals()
+	#_avatar.refresh_vitals()
 
 	JsonMngr.set_action_comp(_get_comp)
 	
@@ -115,7 +118,7 @@ func _ready() -> void:
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
-		var tutorial: VRV_Dialogue = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
+		var tutorial: VRV_Script = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
 		tutorial._start_npc = stage_mngr.get_NPC("julia")
 		tutorial._start_npc_name = "julia"
 		_gui_mngr.request_gui("DialogueGui", [tutorial])
