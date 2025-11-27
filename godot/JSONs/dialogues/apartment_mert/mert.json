@@ -13,7 +13,7 @@
                 ]
             },
             "weiter": {
-                "prompt": "Ja, wie läuft's bei dir",
+                "prompt": "Ja, wie läuft's bei dir?",
                 "options": {"#reden1": "", "#reden2": "", "#reden3": "", "#reden4": ""}
             }
         }
@@ -32,7 +32,7 @@
         ],
         "options": {
             "ja": {
-                "prompt": "ja",
+                "prompt": "Ja",
                 "actors": ["avatar", "mert.r"],
                 "text": [
                     "avatar#Ich komme klar.",

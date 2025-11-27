@@ -46,7 +46,7 @@ func start() -> void:
 		item_list.add_item([title, scenario_icons[icon_id]], scenario_id)
 	
 	if item_list.is_empty():
-		item_list.add_item(["Aktuell Gibt es\nkeine Warn Hinweise", scenario_icons[0], false], "Nothing")
+		item_list.add_item(["Aktuell gibt es\nkeine Warnhinweise", scenario_icons[0], false], "Nothing")
 		
 		#for desc : String in description[scenario_name]:
 			#if description[scenario_name][desc] is Dictionary:

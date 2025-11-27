@@ -35,7 +35,7 @@
                 {"choice": ["one", "two"]},
                 {"text": [
                     {"speaker": "gerhard", "line": "Yes sir"},
-                    {"speaker": "avatar", "line": "No sire"}
+                    {"speaker": "avatar", "line": "No sir"}
                 ]},
                 {"actors": ["avatar", "gerhard"]},
                 {"match": {
@@ -201,8 +201,8 @@ Yes Way
 - [one] Hallo
 - [two] Prompt
 [text]
-gerhard: Yes sir
-avatar: no Sire
+gerhard: Yes, sir
+avatar: No, sir
 
 [actors] avatar gerhard
 [match] mood

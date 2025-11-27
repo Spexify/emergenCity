@@ -72,7 +72,7 @@
 	"#offline": {
 		"actors" : ["avatar", "friedel"],
 		"text": [
-			"avatar#Ich könnte auch einfach bei Gerhard vorbei gehen.",
+			"avatar#Ich könnte auch einfach bei Gerhard vorbeigehen.",
 			"friedel#Wuff"
 		],
 		"options":{
@@ -97,7 +97,7 @@
 			"avatar#Hi Gerhard, ich hab hier gerade Friedel auf dem Marktplatz gefunden!",
 			"gerhard.r#Oh, wie schön. Ich habe Friedel schon überall gesucht.",
 			"gerhard.r#Gut, dass du ihn gefunden hast.",
-			"gerhard.r#Ich bin gerade zu Hause. Du kannst ihn also gerne vorbei bringen."
+			"gerhard.r#Ich bin gerade zu Hause. Du kannst ihn also gerne vorbeibringen."
 		],
 		"options": {
 			"#idiot": "#idiot",

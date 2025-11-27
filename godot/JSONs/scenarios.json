@@ -1,8 +1,8 @@
 {
 	"Chemie": {
 		"icon_id": 1,
-		"title": "Chemie Unfall",
-		"description": "[img]res://assets/GUI/icons/chemie_icon.png[/img][font_size=30][b]Chemieunfall[/b][/font_size]\n\nIn der Nähe von Krisopolis gab es einen Chemieunfall. Dies könnte zu [b]Wasserverschmutzung[/b] und [b]Lebensmittel Verschmutzung[/b] führen.\n\n[img]res://assets/GUI/icons/icon_pin_info.png[/img][b]Handlungsempfehlung:[/b]\nÜberprüfen Sie regelmäßig die Genießbarkeit Ihrer Lebensmittel. Stellen Sie sicher, dass Sie genügend sauberes Wasser zur Verfügung haben. Wenn Sie ein Radio oder Kurbelradio haben, informieren Sie sich regelmäßig über den Verlauf der Krise.\n\nInformieren Sie sich über [url=https://www.bbk.bund.de/DE/Themen/CBRN-Schutz/Chemische-Gefahren/chemische-gefahren_node.html]Handlungsempfehlung[/url] im Ernstfall."
+		"title": "Chemieunfall",
+		"description": "[img]res://assets/GUI/icons/chemie_icon.png[/img][font_size=30][b]Chemieunfall[/b][/font_size]\n\nIn der Nähe von Krisopolis gab es einen Chemieunfall. Dies könnte zu [b]Wasserverschmutzung[/b] und [b]Lebensmittelverschmutzung[/b] führen.\n\n[img]res://assets/GUI/icons/icon_pin_info.png[/img][b]Handlungsempfehlung:[/b]\nÜberprüfen Sie regelmäßig die Genießbarkeit Ihrer Lebensmittel. Stellen Sie sicher, dass Sie genügend sauberes Wasser zur Verfügung haben. Wenn Sie ein Radio oder Kurbelradio haben, informieren Sie sich regelmäßig über den Verlauf der Krise.\n\nInformieren Sie sich über [url=https://www.bbk.bund.de/DE/Themen/CBRN-Schutz/Chemische-Gefahren/chemische-gefahren_node.html]Handlungsempfehlung[/url] im Ernstfall."
 	},
 	"LKW" :{
 		"icon_id": 2,

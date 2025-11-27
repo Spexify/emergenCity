@@ -22,7 +22,7 @@
         "actors": ["avatar", "irena.r"],
         "text": [
             "irena.r#Hast du Spiele auf deinem Handy??",
-            "irena.r#Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!",
+            "irena.r#Meine Lieblings-App ist Krisopolis: Play & Prepare!!!",
             "avatar#Oh, das klingt spaßig.",
             "irena.r#Ist es auch!"
         ],
@@ -46,7 +46,7 @@
         "text": [
             "irena.r#Papa ist der Größte! Und Mert ist der Größte. Nur Mert ist natürlich nicht Papa.",
             "irena.r#Ich darf jetzt auf Momo aufpassen, wenn Mert weg ist.",
-            "irena.r#Momo ist so süß! Ich hoffe, dass ich sie zum Schnurren krieg, wenn sie sich an mich gewöhnt hat.",
+            "irena.r#Momo ist so süß! Ich hoffe, dass ich sie zum Schnurren kriege, wenn sie sich an mich gewöhnt hat.",
             "irena.r#Streicheln kann ich sie schon!",
             "irena.r#Aber versuchs besser nicht, sie kriegt ganz schnell Angst bei Erwachsenen."
         ]
@@ -59,7 +59,7 @@
         ],
         "options": {
             "#GemeinsameEroberungAnbieten": {
-                "prompt": "Wie wärs zu zweit?",
+                "prompt": "Wie wär's zu zweit?",
                 "actors": ["avatar", "irena.r"],
                 "text": [
                     "avatar#Ich könnte dir bei der Eroberung helfen."

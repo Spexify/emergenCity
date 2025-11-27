@@ -6,7 +6,7 @@ avatar:Herd geht auch nicht, der Kühlschrank ist auch aus ... Mist. Mein Strom 
 avatar:Oh, da ist jemand an der Tür.
 [actors] avatar julia.flipped
 [text]
-julia:Guten Morgen Nachbar! Hast du auch keinen Strom?
+julia:Guten Morgen, Nachbar! Hast du auch keinen Strom?
 avatar:Sieht ganz so aus.
 julia:Dann scheint es wohl ein größeres Problem zu sein. Kommst du klar?
 [Choice]

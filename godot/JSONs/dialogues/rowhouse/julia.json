@@ -47,8 +47,8 @@
         "actors": ["avatar", "julia.r"],
         "text": [
             "julia.r#Schön, dass du vorbeischaust. Es ist wichtig, regelmäßig raus zu kommen.",
-            "julia.r#In Krisenzeiten ist es ja besonders leicht, einfach zuhause zu bleiben.",
-            "julia.r#Aber wir gewöhnen uns so schnell daran, nichts zu tun. Und dann versauern wir zuhause.",
+            "julia.r#In Krisenzeiten ist es ja besonders leicht, einfach zu Hause zu bleiben.",
+            "julia.r#Aber wir gewöhnen uns so schnell daran, nichts zu tun. Und dann versauern wir zu Hause.",
             "julia.r#Besser ist es, jeden Tag etwas außer Haus zu unternehmen.",
             "avatar#Danke für den Tipp!"
         ]
@@ -85,14 +85,14 @@
     "#reden6": {
         "actors": ["avatar", "julia.r"],
         "text": [
-            "julia.r#Bewegung, Schlaf, gute Ernährung und Routine gehört zu den wichtigsten Elementen für ein glückliches Leben.",
+            "julia.r#Bewegung, Schlaf, gute Ernährung und Routine gehören zu den wichtigsten Elementen für ein glückliches Leben.",
             "julia.r#Krisen können das erschweren. Die Routine geht oft zuerst über Bord.",
             "julia.r#Aber letztlich ist alles betroffen. Wenn man nicht mehr ins Fitnesscenter oder in den Park darf.",
             "julia.r#Oder man nicht schlafen kann, weil man sich Sorgen macht.",
             "julia.r#Oder die Nahrungsmittel verderben.",
             "julia.r#Deshalb ist es so wichtig, sich vorzubereiten. Ich habe eine Krisenroutine. Weißt du, was der Trick dabei ist?",
             "avatar#Was?",
-            "julia.r#Mein Kalender bleibt, wie er ist. Ich ersetze nur das Fitnesscenter mit dem Hometrainer und frische mit haltbaren Zutaten.",
+            "julia.r#Mein Kalender bleibt, wie er ist. Ich ersetze nur das Fitnesscenter mit dem Hometrainer und frische Zutaten mit haltbaren Zutaten.",
             "avatar#Das klingt einfach!"
         ]
     },
@@ -145,7 +145,7 @@
             "julia.r#Neulich kamen überraschend drei Freunde zu Besuch.",
             "julia.r#Eigentlich waren sie nur auf der Durchreise, aber wie das so ist, wir kamen ins Gespräch und es wurde spät.",
             "julia.r#Und ich hatte gar nichts eingekauft.",
-            "julia.r#In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zuhause zu haben.",
+            "julia.r#In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zu Hause zu haben.",
             "julia.r#Man braucht nicht immer frische Zutaten, um etwas Leckeres zu zaubern.",
             "avatar#Das stimmt!"
         ]
