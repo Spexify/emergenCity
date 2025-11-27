@@ -22,19 +22,19 @@ func setup(p_inventory: EMC_Inventory, p_opt_event_mngr: EMC_OptionalEventMngr) 
 ############################################ Avatar ################################################
 
 func add_health(p_value: int) -> void:
-	_avatar.add_health(p_value)
+	_avatar.modify_health_delta(p_value)
 
 func add_hydration(p_value: int) -> void:
-	_avatar.add_hydration(p_value)
+	_avatar.modify_drink_delta(p_value)
 
 func add_happiness(p_value: int) -> void:
-	_avatar.add_happiness(p_value)
+	_avatar.modify_social_delta(p_value)
 	
 func make_hungry() -> void:
-	_avatar.sub_nutrition(_avatar.get_nutrition_status()-1)
+	_avatar.modify_food_delta(_avatar._food_status*-0.8)
 	
 func make_thirsty() -> void:
-	_avatar.sub_hydration(_avatar.get_hydration_status()-1)
+	_avatar.modify_drink_delta(_avatar._drink_status*-0.8)
 	
 ############################################ Action ################################################
 
@@ -86,17 +86,6 @@ func add_tap_water(_dummy: int) -> void:
 			printerr("Can't add water while there is no water available! \
 				This should be checked in the constraints!")
 		_: printerr("Unknown Water state!")
-
-	# REMOVE
-	# match OverworldStatesMngr.get_water_state():
-	# 	OverworldStatesMngr.WaterState.CLEAN:
-	# 		_inventory.add_new_item(EMC_Item.IDs.WATER)
-	# 	OverworldStatesMngr.WaterState.DIRTY:
-	# 		_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-	# 	OverworldStatesMngr.WaterState.NONE:
-	# 		printerr("Can't add water while there is no water available! \
-	# 			This should be checked in the constraints!")
-	# 	_: printerr("Unknown Water state!")
 
 
 ## Reduces the uses of the Uses-[EMC_ItemComponent] of the [EMC_Item]
@@ -184,17 +173,6 @@ func overlay_gui(args : Dictionary) -> void:
 ########################################## Dialogue ################################################
 
 func trigger_dialogue(p_dialogue : Dictionary) -> void:
-	#var dialog_res : DialogueResource
-	#var executer := EMC_ActionExecuter.new(_day_mngr._on_action_executed)
-	#
-	#dialog_res = load("res://res/dialogue/" + p_dialogue_name + ".dialogue")
-	#
-	#var dialogue_GUI: EMC_DialogueGUI = _DIALOGUE_GUI_SCN.instantiate()
-	#dialogue_GUI.setup(_stage_mngr.get_dialogue_pitches())
-	#_lower_gui_node.add_child(dialogue_GUI)
-	#dialogue_GUI.start(dialog_res, "START", [executer])
-	#_lower_gui_node.get_tree().paused = true
-	
 	_gui_mngr.request_gui("DialogueGui", [p_dialogue])
 	
 func set_dialogue_state(args : Dictionary) -> void:

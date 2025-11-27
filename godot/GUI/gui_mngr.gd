@@ -1,6 +1,5 @@
 extends Control
 class_name  EMC_GUIMngr
-
 #GUIs Upper Section:
 @onready var _status_bars := $CL/VBC/UpperSection/HBC/StatusBars
 #GUIs Middle Section:
@@ -34,6 +33,7 @@ class_name  EMC_GUIMngr
 
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
+#@onready var emc_gsi: EMC_GSI = $"../EMC_GSI"
 
 signal all_guis_closed
 
@@ -44,6 +44,8 @@ var _gui_queue : Array[QueueEntry]
 
 @export var _stage_mngr : EMC_StageMngr
 @export var _avatar : EMC_Avatar
+
+#@export var dialogue_test: VRV_Script
 
 func _ready() -> void:
 	for child in middle_section.get_children():
@@ -172,6 +174,8 @@ func _on_phone_btn_pressed() -> void:
 	#var info: Array[Dictionary]
 	#info.assign([])
 	#request_gui("ItemQuestionGUI", [EMC_Item.new().setup(1)])
+	#dialogue_test.gsi = emc_gsi
+	#request_gui("DialogueGui", [dialogue_test])
 
 func _on_info_center_btn_pressed() -> void:
 	request_gui("InfoCenterGui", [])

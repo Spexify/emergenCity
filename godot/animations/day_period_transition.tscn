@@ -105,7 +105,7 @@ text = "[center][color=white]Tag 1[/color]"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_t043m")
+&"": SubResource("AnimationLibrary_t043m")
 }
 
 [node name="Marker_Morning" type="Sprite2D" parent="."]

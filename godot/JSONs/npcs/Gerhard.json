@@ -3,16 +3,14 @@
 		"descr": {
 			"name": "Gerhard",
 			"descr": "Das hier ist Gerhard.\nEr hegt einen Garten und ein Herz aus Gold.",
-			"portait": "gerhard"
+			"portait": "gerhard",
+      "sprite": "gerhard"
 		},
-		"sprite": {
-			"texture_name": "gerhard"
-		},
-		"save": {},
 		"karma": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.5,
+				"day": "res://resources/dialogues/gerhard/day/day.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/gerhard/day/",
 					"quest": "res://resources/dialogues/gerhard/quest/"
@@ -58,6 +56,11 @@
 			}
 		},
 		"stage": {
+			"stage_name": "gardenhouse",
+			"position": {
+					"x": 448,
+					"y": 380
+				},
 			"start": "Gardenhouse",
 			"positions": {
 				"Park": {

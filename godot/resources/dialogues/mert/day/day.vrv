@@ -1,0 +1,73 @@
+[[Node]] start
+[actors] avatar mert.flipped
+[text]
+mert:Hey Kumpel! Alles klar bei dir?
+[Choice]
+- talk
+- stop
+
+[[Node]] talk
+[Prompt] Ja, wie läuft's bei dir?
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[[Node]] stop
+[Prompt] Ich muss los!
+[actors] avatar mert.flipped
+[text]
+mert:Man sieht sich!
+
+[[Node]] talk1
+[actors] avatar mert.flipped
+[text]
+mert:Bin ein bisschen gestresst. In solchen Zeiten hat das THW, also das Technische Hilfswerk, mehr zu tun als sonst.,
+mert:Aber zu sehen, wie viel Hilfsbereitschaft und Dankbarkeit die Menschen haben - das ist das Größte.
+
+[[Node]] talk2
+[actors] avatar mert.flipped
+[text]
+mert:Mir geht es super! Kommst du gut durch die Krise?
+[Choice]
+- ja
+- nein
+
+[[Node]] ja
+[Prompt] Ja.
+[actors] avatar mert.flipped
+[text]
+avatar:Ich komme klar.,
+mert:Schön zu hören! Aber pass trotzdem auf dich auf, ja? So eine Krise ist nicht ohne.
+
+[[Node]] nein
+[Prompt] Nein.
+[actors] avatar mert.flipped
+[text]
+avatar:Ist ehrlich gesagt ganz schön schwierig.,
+mert:Tut mir leid, das zu hören. Wenn du jemandem zum Reden brauchst, sag Bescheid, ja?,
+mert:Zusammen schaffen wir das schon!
+
+[[Node]] talk3
+[actors] avatar mert.flipped
+[text]
+mert:Grad wieder viel los beim THW. War heute Nacht bis 4 Uhr im Einsatz.,
+avatar:Uff, das klingt hart.,
+mert:Aber ich kanns nur absolut empfehlen. Hab schon so viele nette Leute kennengelernt.,
+mert:Sowas stärkt einem den Rücken.,
+mert:Sport tut das natürlich auch. Sogar ganz wörtlich.,
+mert:Freunde und Sport und das Gefühl, nen Beitrag zu leisten. Gibt nix Wichtigeres, das kann ich dir sagen.
+
+[[Node]] talk4
+[actors] avatar mert.flipped
+[text]
+mert:Ich mach mir ein bisschen Sorgen um Momo.,
+mert:Sie mag ihre Zeiten und ich kann sie manchmal nicht rechtzeitig füttern, weil ich beim Einsatz bin.,
+mert:Hab schon ne Futtermaschine versucht, aber sie hat sie aufgekriegt und sich vollgefressen.,
+mert:Jetzt kommt Irena vorbei, um sie zu füttern. Eigentlich ist sie auch ganz vorsichtig mit Momo.,
+mert:Aber ich glaub Momo mag es nicht, wenn wer anders hier ist, aber ich nicht.,
+avatar:Sie gewöhnt sich sicher daran.,
+mert:Das hoff ich auch!
+
+[end]

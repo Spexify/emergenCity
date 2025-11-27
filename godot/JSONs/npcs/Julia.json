@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Julia",
 			"descr": "Das hier ist Julia.\nSie hilft gerne jedem, auch ungefragt.",
-			"portait": "julia"
+			"portait": "julia",
+      "sprite": "julia"
 		},
-		"sprite": {
-			"texture_name": "julia"
-		},
-		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.3,
@@ -18,6 +15,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "rowhouse",
+			"position": {"x": 450, "y": 550},
 			"start": "Rowhouse",
 			"positions": {
 				"Park": { "x": 128, "y": 704 },

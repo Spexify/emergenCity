@@ -178,4 +178,3 @@ func _try_cooking_with_heat_source() -> void:
 			_gui_mngr.request_gui("TooltipGUI", ["Du hast zwar einen Gaskocher, aber keine Gaskartusche um ihn zu betreiben!"])
 	else:
 		_gui_mngr.request_gui("TooltipGUI", ["Du hast weder Strom, noch einen Gaskocher zum Kochen!"])
-

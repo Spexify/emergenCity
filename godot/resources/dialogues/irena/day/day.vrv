@@ -1,0 +1,126 @@
+[[Node]] start
+[actors] avatar irena.flipped
+[text]
+irena:Moin Moin!
+[Choice]
+- talk
+- stop
+
+[[Node]] talk
+[Prompt] Möchtest du mit mir reden?
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[[Node]] stop
+[Prompt] Spiel schön!
+[actors] avatar irena.flipped
+[text]
+irena:Klaro!
+
+[[Node]] talk1
+[actors] avatar irena.flipped
+[text]
+irena:Hast du Spiele auf deinem Handy??,
+irena:Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!,
+avatar:Oh, das klingt spaßig.,
+irena:Ist es auch!
+[Choice]
+- spielzeug
+- stop
+
+[[Node]] spielzeug
+[actors] avatar irena.flipped
+[Prompt] Nach Irenas Spielzeug fragen
+[text]
+avatar:Mit was spielst du da?,
+irena:Mit einer Rakete! Wuuuuschhhh!!,
+irena:Ist aber meine! Ääätschi bätsch!
+
+[[Node]] talk2
+[actors] avatar irena.flipped
+[text]
+irena:Papa ist der Größte! Und Mert ist der Größte. Nur Mert ist natürlich nicht Papa.,
+irena:Ich darf jetzt auf Momo aufpassen, wenn Mert weg ist.,
+irena:Momo ist so süß! Ich hoffe, dass ich sie zum Schnurren krieg, wenn sie sich an mich gewöhnt hat.,
+irena:Streicheln kann ich sie schon!,
+irena:Aber versuchs besser nicht, sie kriegt ganz schnell Angst bei Erwachsenen.
+
+[[Node]] talk3
+[actors] avatar irena.flipped
+[text]
+irena:Mmmmnh. Ich hab zu tun.,
+irena:Der Weltraum erobert sich nicht von alleine!
+[Choice]
+- nicht_gemeinsam_erkunden
+- gemeinsam_erkunden
+
+[[Node]] nicht_gemeinsam_erkunden
+[Prompt] Stimmt.
+[actors] avatar irena.flipped
+[text]
+avatar:Dann viel Erfolg bei der Eroberung!,
+irena:Wir haben immer Erfolg! Wuuuuusch!
+
+[[Node]] gemeinsam_erkunden
+[Prompt] Wie wärs zu zweit?
+[actors] avatar irena.flipped
+[text]
+avatar:Ich könnte dir bei der Eroberung helfen.
+[jump]
+- gemeinsam_erkunden_klappt
+- gemeinsam_erkunden_klappt_nicht
+
+[[Node]] gemeinsam_erkunden_klappt
+[Condition]
+npc_karma_higher_than irena 0.7
+npc_friendship_higher_than irena 4
+[actors] avatar irena.flipped
+[text]
+irena:Okay. Du bist Mission Control!
+[random]
+- MCNoName
+- MCName
+
+[[Node]] gemeinsam_erkunden_klappt_nicht
+[actors] avatar irena.flipped
+[text]
+irena:irena:Nö! Wuuuuusch!
+
+[[Node]] MCNoName
+[actors] avatar irena.flipped
+[text]
+avatar:Mission Control. Alles klar. Mission Control an Rakete: alles bereit zum Start?,
+irena:Das ist keine Rakete! Das ist Launcher272ab mit Ziel zum Pluto!
+[jump] IrenaBeschaeftigt
+
+[[Node]] MCName
+[actors] avatar irena.flipped
+[text]
+avatar:Mission Control. Alles klar. Mission Control an LauncherT404 auf Mission zu Alpha Centauri: alles bereit zum Start?,
+irena:Alles bereit!
+[jump] IrenaBeschaeftigt
+
+[[Node]] IrenaBeschaeftigt
+[actors] avatar irena.flipped petro.flipped
+[text]
+[action]
+- ActCons.progress_day ["Mit Irena den Weltraum erobern"]
+petro:Lieb von dir, mit Irena zu spielen.,
+petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.,
+petro:Vielleicht hilft dir das hier weiter.
+[action]
+- ActCons.add_item_question [["BATTERIES", {"question":"Diese %s kann man immer mal gebrauchen.","answere":"","decline":"Einpacken"}]]
+
+[[Node]] talk4
+[actors] avatar irena.flipped
+[text]
+irena:Ich hab noch Hausaufgaben.,
+irena:Die sollte ich eigentlich schon fertig haben.,
+irena:Aber sags Papa nicht, okay?,
+avatar:Ich schweige wie das Weltall!,
+irena:Hihi. Das ist gut.
+
+[end]

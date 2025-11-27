@@ -7,8 +7,10 @@ const UX_BUTTON := preload("res://util/UX_button.tscn")
 @onready var buttons : VBoxContainer = $Buttons
 @onready var descr : RichTextLabel = $Panel/Descr
 
+@export var _gui_mngr: EMC_GUIMngr
+
 func open(npc : EMC_NPC) -> void:
-	var npc_descr: EMC_NPC_Descr = npc.get_comp(EMC_NPC_Descr)
+	var npc_descr: EMC_NPC_Descr = npc.npc_resource.get_comp(EMC_NPC_Descr)
 	
 	descr.set_text(npc_descr.get_desc())
 	
@@ -17,7 +19,7 @@ func open(npc : EMC_NPC) -> void:
 	for child in buttons.get_children():
 		buttons.remove_child(child)
 		
-	var npc_interactions: EMC_NPC_Interaction = npc.get_comp(EMC_NPC_Interaction)
+	var npc_interactions: EMC_NPC_Interaction = npc.npc_resource.get_comp(EMC_NPC_Interaction)
 	var interaction: Dictionary = npc_interactions.get_interactions()
 	
 	for option : String in interaction:
@@ -37,4 +39,4 @@ func close() -> void:
 
 func _on_option_pressed(option : EMC_NPC_Interaction_Option) -> void:
 	close()
-	option.run()
+	option.run(_gui_mngr)

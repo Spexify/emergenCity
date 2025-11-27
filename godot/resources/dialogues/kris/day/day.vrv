@@ -1,0 +1,158 @@
+[[Node]] start
+[actors] avatar kris.flipped
+[text]
+kris:Oh, hey!
+kris:Was geht?
+[Choice]
+- talk
+- stop
+
+[[Node]] talk
+[Prompt] Möchtest du mit mir reden?
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[[Node]] stop
+[Prompt] Man sieht sich!
+[actors] avatar kris.flipped
+[text]
+kris:Okay, bis dann!
+
+[[Node]] talk1
+[actors] avatar kris.flipped veronika.flipped
+[text]
+kris:Hast du Lust auf eine heiße Schokolade?,
+veronika:Wir haben keine Milch mehr da.,
+[actors] avatar kris veronika.flipped
+kris:Oh, schade. Aber ich könnte uns einen Smoothie machen!,
+veronika:Obst haben wir auch keins mehr.,
+[actors] avatar kris veronika.flipped
+kris:Stimmt ja. Oh – und was ist mit Milchreis?,
+veronika:... Kris. Keine Milch.,
+[actors] avatar kris.flipped veronika.flipped
+kris:Achja. Na gut. Dann nächstes Mal.
+
+[[Node]] talk2
+[actors] avatar kris.flipped
+[text]
+kris:Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.,
+kris:Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.,
+kris:Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?
+[Choice]
+- same
+- no
+
+[[Node]] same
+[Prompt] Kann ich gut nachvollziehen.
+[actors] avatar kris.flipped
+[text]
+avatar:Ohne Spontaneität ist das Leben langweilig.,
+kris:Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!,
+kris:Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.,
+kris:Mal sehen, was wir dieses Mal finden!
+
+[[Node]] no
+[Prompt] Sehe ich anders.
+[actors] avatar kris.flipped
+[text]
+avatar:Nur in den Tag hinein leben funktioniert auch nicht.",
+[actors] avatar kris
+kris:Ja, das stimmt natürlich ...,
+kris:Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant.
+
+[[Node]] talk3
+[actors] avatar kris.flipped
+[text]
+kris:Du siehst nicht zufällig meinen Schlüssel? Ich suche ihn schon seit Ewigkeiten.
+[random]
+- [jump] BraucheSchluessel
+- [jump] BraucheSchluessel2
+
+[[Node]] BraucheSchluessel
+[actors] avatar kris.flipped
+[Condition]
+is_state_by_name_str IsolationState.NONE
+[text]
+kris:Ich brauche ihn erst heute Abend, wenn ich auf die Arbeit gehe.,
+kris:Aber eigentlich wollte ich vorher nochmal spazieren.
+[random]
+- [jump] SchluesselPosition1
+- [jump] SchluesselPosition2
+- [jump] SchluesselPosition3
+- [jump] SchluesselPosition4
+
+[[Node]] BraucheSchluessel2
+[actors] avatar kris.flipped
+[text]
+kris:Vielleicht hab ich ihn verloren? Ich hab schon überall gesucht.,
+kris:Keine Ahnung, wo er stecken könnte...
+[random]
+- [jump] SchluesselPosition1
+- [jump] SchluesselPosition2
+- [jump] SchluesselPosition3
+- [jump] SchluesselPosition4
+
+[[Node]] SchluesselPosition1
+[actors] avatar kris veronika.flipped
+[text]
+veronika:Neben der Gießkanne unter der Spüle.,
+kris:Oh. Wie kommt er denn da hin?,
+veronika:Das hab ich mich auch gefragt.
+
+[[Node]] SchluesselPosition2
+[actors] avatar kris veronika.flipped
+[text]
+veronika:Auf der Ablage im Bad.,
+kris:Ah ja, stimmt. Jetzt fällt es mir wieder ein!,
+kris:Du bist ein Schatz, Vero!
+
+[[Node]] SchluesselPosition3
+[actors] avatar kris veronika.flipped
+[text]
+veronika:Am Haken neben der Tür.,
+kris:Aber das ist doch deiner!,
+veronika:Nein, meiner steckt in meiner Kameratasche.,
+kris:Oh. Dann war er ja die ganze Zeit da!
+
+[[Node]] SchluesselPosition4
+[actors] avatar kris.flipped veronika.flipped
+[text]
+veronika:Vielleicht kannst du uns suchen helfen. Ich weiß auch nicht, wo er ist.
+[Choice]
+- SchluesselSuchenJa
+- SchluesselSuchenNein
+
+[[Node]] SchluesselSuchenJa
+[Prompt] Okay.
+[actors] avatar kris.flipped veronika.flipped
+[text]
+avatar:Klar, gerne!,
+kris:Mega! Ich hab auch was für dich, als Dankeschön!
+[action]
+- ActCons.add_item_question [["CHLOR_TABLETS", {"question":"Diese %s kann man immer mal gebrauchen.","answere":"","decline":"Einpacken"}]]
+- ActCons.progress_day ["Bei der Schlüsselsuche helfen"]
+
+[[Node]] SchluesselSuchenNein
+[Prompt] Heute nicht, sorry.
+[actors] avatar kris.flipped veronika.flipped
+[text]
+avatar:Viel Glück bei der Suche!,
+kris:Danke. Das brauchen wir.
+
+[[Node]] talk4
+[actors] avatar kris.flipped veronika.flipped
+[text]
+kris:Krisopolis ist der beste Ort der Welt, um zu entspannen!,
+veronika:Kris stört sich nicht an den Krisen.,
+[actors] avatar kris veronika.flipped
+kris:Warum soll ich auch? Ist ja auch nicht so viel anders als Camping.,
+[actors] avatar kris.flipped veronika.flipped
+kris:Meine Pflanzen. Kochen auf dem Balkon. Kellnern muss ich auch nicht.,
+kris:Wenn man sich keinen Kopf macht, sind diese Krisen gar nicht schlimm.,
+kris:Mehr wie schlechtes Wetter. Bisschen ungemütlich, aber dafür hat man ja die passende Kleidung.,
+veronika:Es geht nichts über Kris' Gelassenheit während Krisen. Das muss ich schon sagen.
+
+[end]

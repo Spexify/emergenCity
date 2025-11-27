@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Elias",
 			"descr": "Das hier ist Elias.\nZeit sparen ist sein liebster Zeitvertreib.",
-			"portait": "elias"
+			"portait": "elias",
+      "sprite": "elias"
 		},
-		"sprite": {
-			"texture_name": "elias"
-		},
-		"save": {},
 		"karma": {},
 		"interaction":{
 			"conversation": {
@@ -28,6 +25,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "penthouse",
+			"position": { "x": 440, "y": 800 },
 			"start": "Penthouse",
 			"positions": {
 				"Penthouse": { "x": 440, "y": 800 },

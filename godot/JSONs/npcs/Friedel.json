@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Friedel",
 			"descr": "Das hier ist Friedel.\nDer geheime Star der Nachbarschaft.",
-			"portait": "friedel"
+			"portait": "friedel",
+      "sprite": "friedel"
 		},
-		"sprite": {
-			"texture_name": "friedel"
-		},
-		"save": {},
 		"karma": {
 			"mood": 3
 		},
@@ -22,6 +19,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "gardenhouse",
+			"position": {"x": 96, "y": 704},
 			"start": "Gardenhouse",
 			"positions": {
 				"Park": {

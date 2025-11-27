@@ -385,12 +385,11 @@ func load_door_bell() -> Dictionary:
 #endregion
 ##########################################JSON NPCS#################################################
 #region NPC
-const _NPC_SCN: PackedScene = preload("res://crisisPhase/characters/Base_NPC.tscn")
 
-func load_NPC() -> Dictionary:
+func load_NPC() -> Array[EMC_NPC_Resource]:
 	assert(_is_items_loaded, "NPS-JSON: Items must be loaded before NPCs")
 		
-	var result : Dictionary
+	var result : Array[EMC_NPC_Resource]
 	
 	for file : String in DirAccess.get_files_at(NPC_SOURCE):
 		var source := NPC_SOURCE + "/" + file
@@ -399,14 +398,17 @@ func load_NPC() -> Dictionary:
 		
 		assert(data.has_all(["comp"]))
 		
-		var new_npc := _NPC_SCN.instantiate()
-		result[new_npc] = []
+		var new_npc: EMC_NPC_Resource = EMC_NPC_Resource.new()
 
 		for comp_name: String in data["comp"]:
-			var comp : Resource = Preloader.get_resource("res://crisisPhase/characters/npc_" + comp_name + ".gd")
-			
-			var new_comp: Variant = comp.new(data["comp"][comp_name])
-			result[new_npc].append(new_comp)
+			var comp : Resource = ResourceLoader.load("res://crisisPhase/npc/npc_" + comp_name + ".gd")
+			if not comp:
+				continue
+			var new_comp: Resource = comp.new()
+			new_comp.setup(data["comp"][comp_name])
+			new_npc.add_comp(new_comp)
+		
+		result.append(new_npc)
 					
 	return result
 		

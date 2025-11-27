@@ -12,7 +12,7 @@ func _init(nutritionness: int = 0, pleasurable: int = 0) -> void:
 	_nutritionness = nutritionness
 
 func consume(p_avatar : EMC_Avatar) -> void:
-	p_avatar.update_nutrition(self.get_nutritionness())	
+	p_avatar.modify_food_delta(self.get_nutritionness())
 
 ## Get the internal nutritionness value
 func get_nutritionness() -> int:

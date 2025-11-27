@@ -3,18 +3,17 @@
 		"descr": {
 			"name": "Mert",
 			"descr": "Das hier ist Mert.\nEr ist unauffällig, aber unverzichtbar.",
-			"portait": "mert"
+			"portait": "mert",
+      "sprite": "mert"
 		},
-		"sprite": {
-			"texture_name": "mert"
-		},
-		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.9
 			}
 		},
 		"stage": {
+			"stage_name": "apartment_mert",
+			"position": {"x": 400, "y": 310},
 			"start": "ApartmentMert",
 			"positions": {
 				"ApartmentMert": { "x": 400, "y": 310 },
