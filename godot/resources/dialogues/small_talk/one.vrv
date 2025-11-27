@@ -1,23 +1,23 @@
-[Node] start
+[[Node]] start
 [random]
 - [jump] one
 - [jump] two
 - [jump] three
 
-[Node] one
-[actors] avatar @npc.t
+[[Node]] one
+[actors] avatar @npc.flipped
 [text]
 avatar:Hallo wie geht es dir?
 @npc:Ach mich bedrückt das Wetter so.
 
-[Node] two
-[actors] avatar @npc.t
+[[Node]] two
+[actors] avatar @npc.flipped
 [text]
 @npc:Hallo schön dich zusehen.
 avatar:Danke
 
-[Node] three
-[actors] avatar @npc.t
+[[Node]] three
+[actors] avatar @npc.flipped
 [text]
 @npc:Manchmal weiß man gar nicht was man sagen soll.
 avatar:...

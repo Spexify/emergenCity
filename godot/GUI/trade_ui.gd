@@ -53,8 +53,8 @@ func _on_item_long_pressed(sender: EMC_Item, blocked: bool, info: Array) -> void
 	gui_mngr.overlay_gui("ItemInfoGui", [sender, info])
 
 func open(npc : EMC_NPC) -> void:
-	_npc_trade = npc.get_comp(EMC_NPC_Trading)
-	_npc_descr = npc.get_comp(EMC_NPC_Descr)
+	_npc_trade = npc.npc_resource.get_comp(EMC_NPC_Trading)
+	_npc_descr = npc.npc_resource.get_comp(EMC_NPC_Descr)
 	
 	inventories.set_tab_title(1, _npc_descr.get_npc_name())
 	

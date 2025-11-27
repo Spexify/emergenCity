@@ -3,12 +3,9 @@
 		"descr": {
 			"name": "Agathe",
 			"descr": "Das hier ist Agathe.\nSie ist lieb.",
-			"portait": "agathe"
+			"portait": "agathe",
+			"sprite": "agathe"
 		},
-		"sprite": {
-			"texture_name": "agathe"
-		},
-		"save": {},
 		"karma": {},
 		"interaction": {
 			"conversation": {
@@ -26,6 +23,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "apartment_default",
+			"position": { "x": 490, "y": 400 },
 			"start": "ApartmentDefault",
 			"positions": {
 				"ApartmentDefault": { "x": 490, "y": 400 },
