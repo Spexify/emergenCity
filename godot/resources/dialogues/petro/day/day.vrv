@@ -26,15 +26,15 @@ petro:Tschö!
 [[Node]] talk1
 [actors] avatar petro.flipped
 [text]
-petro:Meine Liebe für die Luftfahrt färbt schon auf Irena ab.,
-petro:Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben.,
-avatar:Haha. Naja, bis dann.,
+petro:Meine Liebe für die Luftfahrt färbt schon auf Irena ab.
+petro:Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben.
+avatar:Haha. Naja, bis dann.
 petro:Tschö, mit Ö.
 
 [[Node]] talk2
 [actors] avatar petro.flipped
 [text]
-petro:In letzter Zeit überlege ich, ob wir nicht Modellflugzeuge einsetzen könnten, um die Bevölkerung zu versorgen.,
+petro:In letzter Zeit überlege ich, ob wir nicht Modellflugzeuge einsetzen könnten, um die Bevölkerung zu versorgen.
 petro:Irre Idee, nicht?
 [Choice]
 - [irre] Klingt unrealistisch.
@@ -65,21 +65,21 @@ petro:Ich merke, wir verstehen uns!
 [[Node]] talk3
 [actors] avatar petro.flipped
 [text]
-petro:Ich dachte mal, ich werde Pilot. Aber wie das Leben so spielt...,
-petro:Dass ich mal als Journalist arbeiten würde, hätte ich nie gedacht.,
-petro:Und Youtube und Blogs gab es noch gar nicht, als ich damals fliegen wollte.,
-petro:Aber ich liebe meine Arbeit,
-avatar:Bist du mal geflogen?,
-petro:Selbst? Nein. Das war nie mehr als ein Wunsch.,
+petro:Ich dachte mal, ich werde Pilot. Aber wie das Leben so spielt...
+petro:Dass ich mal als Journalist arbeiten würde, hätte ich nie gedacht.
+petro:Und Youtube und Blogs gab es noch gar nicht, als ich damals fliegen wollte.
+petro:Aber ich liebe meine Arbeit
+avatar:Bist du mal geflogen?
+petro:Selbst? Nein. Das war nie mehr als ein Wunsch.
 petro:Vielleicht kommt Irenas Wunsch, Pilot zu werden, eigentlich von mir.
 
 [[Node]] talk4
 [actors] avatar petro.flipped
 [text]
-petro:Es ist faszinierend, wenn man über die technologischen Fortschritte des letzten Jahrhunderts nachdenkt.,
-petro:Und trotzdem verwenden wir noch viele alte Technologien, weil sie so robust sind.,
-petro:Die Funktechnologie zum Beispiel. Keine komplexe Software, einfach nur Physik.,
-petro:Sowas braucht es, während einer Krise. Einfache Dinge, die immer noch funktionieren.,
+petro:Es ist faszinierend, wenn man über die technologischen Fortschritte des letzten Jahrhunderts nachdenkt.
+petro:Und trotzdem verwenden wir noch viele alte Technologien, weil sie so robust sind.
+petro:Die Funktechnologie zum Beispiel. Keine komplexe Software, einfach nur Physik.
+petro:Sowas braucht es, während einer Krise. Einfache Dinge, die immer noch funktionieren.
 avatar:Stimmt schon.
 
 [[Node]] talk5

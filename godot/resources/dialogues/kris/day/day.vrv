@@ -26,22 +26,22 @@ kris:Okay, bis dann!
 [[Node]] talk1
 [actors] avatar kris.flipped veronika.flipped
 [text]
-kris:Hast du Lust auf eine heiße Schokolade?,
-veronika:Wir haben keine Milch mehr da.,
+kris:Hast du Lust auf eine heiße Schokolade?
+veronika:Wir haben keine Milch mehr da.
 [actors] avatar kris veronika.flipped
-kris:Oh, schade. Aber ich könnte uns einen Smoothie machen!,
-veronika:Obst haben wir auch keins mehr.,
+kris:Oh, schade. Aber ich könnte uns einen Smoothie machen!
+veronika:Obst haben wir auch keins mehr.
 [actors] avatar kris veronika.flipped
-kris:Stimmt ja. Oh – und was ist mit Milchreis?,
-veronika:... Kris. Keine Milch.,
+kris:Stimmt ja. Oh – und was ist mit Milchreis?
+veronika:... Kris. Keine Milch.
 [actors] avatar kris.flipped veronika.flipped
 kris:Achja. Na gut. Dann nächstes Mal.
 
 [[Node]] talk2
 [actors] avatar kris.flipped
 [text]
-kris:Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.,
-kris:Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.,
+kris:Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.
+kris:Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.
 kris:Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?
 [Choice]
 - [same] Kann ich gut nachvollziehen.
@@ -50,17 +50,17 @@ kris:Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan f
 [[Node]] same
 [actors] avatar kris.flipped
 [text]
-avatar:Ohne Spontaneität ist das Leben langweilig.,
-kris:Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!,
-kris:Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.,
+avatar:Ohne Spontaneität ist das Leben langweilig.
+kris:Genau! Wenn ich nie vom Wanderweg abweiche, verpasse ich so viele schöne Orte!
+kris:Und als ich letztes Mal den Wasserfall gefunden habe, war Vero auch total begeistert.
 kris:Mal sehen, was wir dieses Mal finden!
 
 [[Node]] no
 [actors] avatar kris.flipped
 [text]
-avatar:Nur in den Tag hinein leben funktioniert auch nicht.",
+avatar:Nur in den Tag hinein leben funktioniert auch nicht."
 [actors] avatar kris
-kris:Ja, das stimmt natürlich ...,
+kris:Ja, das stimmt natürlich ...
 kris:Vermutlich hast du recht. Ich sollte dankbar sein, dass Vero alles für uns plant.
 
 [[Node]] talk3
@@ -76,7 +76,7 @@ kris:Du siehst nicht zufällig meinen Schlüssel? Ich suche ihn schon seit Ewigk
 [Condition]
 is_state_by_name_str IsolationState.NONE
 [text]
-kris:Ich brauche ihn erst heute Abend, wenn ich auf die Arbeit gehe.,
+kris:Ich brauche ihn erst heute Abend, wenn ich auf die Arbeit gehe.
 kris:Aber eigentlich wollte ich vorher nochmal spazieren.
 [random]
 - [jump] SchluesselPosition1
@@ -87,7 +87,7 @@ kris:Aber eigentlich wollte ich vorher nochmal spazieren.
 [[Node]] BraucheSchluessel2
 [actors] avatar kris.flipped
 [text]
-kris:Vielleicht hab ich ihn verloren? Ich hab schon überall gesucht.,
+kris:Vielleicht hab ich ihn verloren? Ich hab schon überall gesucht.
 kris:Keine Ahnung, wo er stecken könnte...
 [random]
 - [jump] SchluesselPosition1
@@ -98,23 +98,23 @@ kris:Keine Ahnung, wo er stecken könnte...
 [[Node]] SchluesselPosition1
 [actors] avatar kris veronika.flipped
 [text]
-veronika:Neben der Gießkanne unter der Spüle.,
-kris:Oh. Wie kommt er denn da hin?,
+veronika:Neben der Gießkanne unter der Spüle.
+kris:Oh. Wie kommt er denn da hin?
 veronika:Das hab ich mich auch gefragt.
 
 [[Node]] SchluesselPosition2
 [actors] avatar kris veronika.flipped
 [text]
-veronika:Auf der Ablage im Bad.,
-kris:Ah ja, stimmt. Jetzt fällt es mir wieder ein!,
+veronika:Auf der Ablage im Bad.
+kris:Ah ja, stimmt. Jetzt fällt es mir wieder ein!
 kris:Du bist ein Schatz, Vero!
 
 [[Node]] SchluesselPosition3
 [actors] avatar kris veronika.flipped
 [text]
-veronika:Am Haken neben der Tür.,
-kris:Aber das ist doch deiner!,
-veronika:Nein, meiner steckt in meiner Kameratasche.,
+veronika:Am Haken neben der Tür.
+kris:Aber das ist doch deiner!
+veronika:Nein, meiner steckt in meiner Kameratasche.
 kris:Oh. Dann war er ja die ganze Zeit da!
 
 [[Node]] SchluesselPosition4
@@ -128,7 +128,7 @@ veronika:Vielleicht kannst du uns suchen helfen. Ich weiß auch nicht, wo er ist
 [[Node]] SchluesselSuchenJa
 [actors] avatar kris.flipped veronika.flipped
 [text]
-avatar:Klar, gerne!,
+avatar:Klar, gerne!
 kris:Mega! Ich hab auch was für dich, als Dankeschön!
 [action]
 - ActCons.add_item_question [["CHLOR_TABLETS", {"question":"Diese %s kann man immer mal gebrauchen.","answere":"","decline":"Einpacken"}]]
@@ -137,20 +137,20 @@ kris:Mega! Ich hab auch was für dich, als Dankeschön!
 [[Node]] SchluesselSuchenNein
 [actors] avatar kris.flipped veronika.flipped
 [text]
-avatar:Viel Glück bei der Suche!,
+avatar:Viel Glück bei der Suche!
 kris:Danke. Das brauchen wir.
 
 [[Node]] talk4
 [actors] avatar kris.flipped veronika.flipped
 [text]
-kris:Krisopolis ist der beste Ort der Welt, um zu entspannen!,
-veronika:Kris stört sich nicht an den Krisen.,
+kris:Krisopolis ist der beste Ort der Welt, um zu entspannen!
+veronika:Kris stört sich nicht an den Krisen.
 [actors] avatar kris veronika.flipped
-kris:Warum soll ich auch? Ist ja auch nicht so viel anders als Camping.,
+kris:Warum soll ich auch? Ist ja auch nicht so viel anders als Camping.
 [actors] avatar kris.flipped veronika.flipped
-kris:Meine Pflanzen. Kochen auf dem Balkon. Kellnern muss ich auch nicht.,
-kris:Wenn man sich keinen Kopf macht, sind diese Krisen gar nicht schlimm.,
-kris:Mehr wie schlechtes Wetter. Bisschen ungemütlich, aber dafür hat man ja die passende Kleidung.,
+kris:Meine Pflanzen. Kochen auf dem Balkon. Kellnern muss ich auch nicht.
+kris:Wenn man sich keinen Kopf macht, sind diese Krisen gar nicht schlimm.
+kris:Mehr wie schlechtes Wetter. Bisschen ungemütlich, aber dafür hat man ja die passende Kleidung.
 veronika:Es geht nichts über Kris' Gelassenheit während Krisen. Das muss ich schon sagen.
 
 [[Node]] talk5

@@ -25,9 +25,9 @@ irena:Klaro!
 [[Node]] talk1
 [actors] avatar irena.flipped
 [text]
-irena:Hast du Spiele auf deinem Handy??,
-irena:Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!,
-avatar:Oh, das klingt spaßig.,
+irena:Hast du Spiele auf deinem Handy??
+irena:Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!
+avatar:Oh, das klingt spaßig.
 irena:Ist es auch!
 [Choice]
 - [spielzeug] Nach Irenas Spielzeug fragen
@@ -36,23 +36,23 @@ irena:Ist es auch!
 [[Node]] spielzeug
 [actors] avatar irena.flipped
 [text]
-avatar:Mit was spielst du da?,
-irena:Mit einer Rakete! Wuuuuschhhh!!,
+avatar:Mit was spielst du da?
+irena:Mit einer Rakete! Wuuuuschhhh!!
 irena:Ist aber meine! Ääätschi bätsch!
 
 [[Node]] talk2
 [actors] avatar irena.flipped
 [text]
-irena:Papa ist der Größte! Und Mert ist der Größte. Nur Mert ist natürlich nicht Papa.,
-irena:Ich darf jetzt auf Momo aufpassen, wenn Mert weg ist.,
-irena:Momo ist so süß! Ich hoffe, dass ich sie zum Schnurren krieg, wenn sie sich an mich gewöhnt hat.,
-irena:Streicheln kann ich sie schon!,
+irena:Papa ist der Größte! Und Mert ist der Größte. Nur Mert ist natürlich nicht Papa.
+irena:Ich darf jetzt auf Momo aufpassen, wenn Mert weg ist.
+irena:Momo ist so süß! Ich hoffe, dass ich sie zum Schnurren krieg, wenn sie sich an mich gewöhnt hat.
+irena:Streicheln kann ich sie schon!
 irena:Aber versuchs besser nicht, sie kriegt ganz schnell Angst bei Erwachsenen.
 
 [[Node]] talk3
 [actors] avatar irena.flipped
 [text]
-irena:Mmmmnh. Ich hab zu tun.,
+irena:Mmmmnh. Ich hab zu tun.
 irena:Der Weltraum erobert sich nicht von alleine!
 [Choice]
 - [nicht_gemeinsam_erkunden] Stimmt.
@@ -61,7 +61,7 @@ irena:Der Weltraum erobert sich nicht von alleine!
 [[Node]] nicht_gemeinsam_erkunden
 [actors] avatar irena.flipped
 [text]
-avatar:Dann viel Erfolg bei der Eroberung!,
+avatar:Dann viel Erfolg bei der Eroberung!
 irena:Wir haben immer Erfolg! Wuuuuusch!
 
 [[Node]] gemeinsam_erkunden
@@ -91,14 +91,14 @@ irena:irena:Nö! Wuuuuusch!
 [[Node]] MCNoName
 [actors] avatar irena.flipped
 [text]
-avatar:Mission Control. Alles klar. Mission Control an Rakete: alles bereit zum Start?,
+avatar:Mission Control. Alles klar. Mission Control an Rakete: alles bereit zum Start?
 irena:Das ist keine Rakete! Das ist Launcher272ab mit Ziel zum Pluto!
 [jump] IrenaBeschaeftigt
 
 [[Node]] MCName
 [actors] avatar irena.flipped
 [text]
-avatar:Mission Control. Alles klar. Mission Control an LauncherT404 auf Mission zu Alpha Centauri: alles bereit zum Start?,
+avatar:Mission Control. Alles klar. Mission Control an LauncherT404 auf Mission zu Alpha Centauri: alles bereit zum Start?
 irena:Alles bereit!
 [jump] IrenaBeschaeftigt
 
@@ -107,8 +107,8 @@ irena:Alles bereit!
 [text]
 [action]
 - ActCons.progress_day ["Mit Irena den Weltraum erobern"]
-petro:Lieb von dir, mit Irena zu spielen.,
-petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.,
+petro:Lieb von dir, mit Irena zu spielen.
+petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.
 petro:Vielleicht hilft dir das hier weiter.
 [action]
 - ActCons.add_item_question [["BATTERIES", {"question":"Diese %s kann man immer mal gebrauchen.","answere":"","decline":"Einpacken"}]]
@@ -116,10 +116,10 @@ petro:Vielleicht hilft dir das hier weiter.
 [[Node]] talk4
 [actors] avatar irena.flipped
 [text]
-irena:Ich hab noch Hausaufgaben.,
-irena:Die sollte ich eigentlich schon fertig haben.,
-irena:Aber sags Papa nicht, okay?,
-avatar:Ich schweige wie das Weltall!,
+irena:Ich hab noch Hausaufgaben.
+irena:Die sollte ich eigentlich schon fertig haben.
+irena:Aber sags Papa nicht, okay?
+avatar:Ich schweige wie das Weltall!
 irena:Hihi. Das ist gut.
 
 [[Node]] talk5
