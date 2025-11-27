@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Mert",
-			"descr": "Das hier ist Mert.\nEr ist lieb.",
+			"descr": "Das hier ist Mert.\nEr ist unauffällig, aber unverzichtbar.",
 			"portait": "mert",
-			"sprite": "mert"
+      "sprite": "mert"
 		},
 		"interaction": {
 			"conversation": {

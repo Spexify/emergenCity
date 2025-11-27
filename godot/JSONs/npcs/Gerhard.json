@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Gerhard",
-			"descr": "Das hier ist Gerhard.\nEr ist lieb.",
+			"descr": "Das hier ist Gerhard.\nEr hegt einen Garten und ein Herz aus Gold.",
 			"portait": "gerhard",
-			"sprite": "gerhard"
+      "sprite": "gerhard"
 		},
 		"karma": {},
 		"interaction": {

@@ -2,8 +2,8 @@
 	"comp": {
 		"descr": {
 			"name": "Agathe",
-			"descr": "Das hier ist Agathe.\nSie ist lieb.",
-			"portait": "agathe",
+			"descr": "Das hier ist Agathe.\nSie macht aus jeder Krise eine Geschichte.",
+			"portait": "agathe"
 			"sprite": "agathe"
 		},
 		"karma": {},

@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Veronika",
-			"descr": "Das hier ist Veronika.\nSie ist lieb.",
+			"descr": "Das hier ist Veronika.\nSie hat einen Backup-Plan für ihren Backup-Plan.",
 			"portait": "veronika",
-			"sprite": "veronika"
+      "sprite": "veronika"
 		},
 		"karma": {},
 		"interaction": {

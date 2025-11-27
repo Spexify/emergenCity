@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Friedel",
-			"descr": "Das hier ist Friedel.\nEr ist lieb.",
+			"descr": "Das hier ist Friedel.\nDer geheime Star der Nachbarschaft.",
 			"portait": "friedel",
-			"sprite": "friedel"
+      "sprite": "friedel"
 		},
 		"karma": {
 			"mood": 3

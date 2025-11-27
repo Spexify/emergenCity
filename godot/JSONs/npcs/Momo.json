@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Momo",
-			"descr": "Das hier ist Momo.\nSie ist super.",
+			"descr": "Das hier ist Momo.\nSie findet, Erwachsene eignen sich prima als Kratzbäume.",
 			"portait": "momo",
-			"sprite": "momo"
+      "sprite": "momo"
 		},
 		"interaction": {
 			"conversation": {

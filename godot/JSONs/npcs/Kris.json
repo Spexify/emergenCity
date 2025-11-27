@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Kris",
-			"descr": "Das hier ist Kris.\nSie ist lieb.",
+			"descr": "Das hier ist Kris.\nKris vergisst gelegentlich, zu essen, aber nie, die Pflanzen zu gießen.",
 			"portait": "kris",
-			"sprite": "kris"
+      "sprite": "kris"
 		},
 		"interaction": {
 			"conversation": {

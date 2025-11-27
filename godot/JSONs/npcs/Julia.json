@@ -2,9 +2,9 @@
 	"comp": {
 		"descr": {
 			"name": "Julia",
-			"descr": "Das hier ist Julia.\nSie ist lieb.",
+			"descr": "Das hier ist Julia.\nSie hilft gerne jedem, auch ungefragt.",
 			"portait": "julia",
-			"sprite": "julia"
+      "sprite": "julia"
 		},
 		"interaction": {
 			"conversation": {
