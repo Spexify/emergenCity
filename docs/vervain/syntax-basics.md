@@ -242,7 +242,13 @@ progress_day("Suche nach Friedel")
 
 This action can be used to gain an item.
 ```
-give_player_item(@item)
+gain_player_item("ITEM_NAME", "description")
+```
+
+e.g.
+
+```
+gain_player_item("JAM", "This is special jam!")
 ```
 
 #### Gain Scores
