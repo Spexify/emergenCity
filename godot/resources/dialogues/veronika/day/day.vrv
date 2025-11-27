@@ -3,19 +3,21 @@
 [text]
 veronika: Hi! Alles klar bei dir?
 [Choice]
-- talk
-- stop
+- [talk] Wie läuft's?
+- [stop] Tschüss!
 
 [[Node]] talk
-[Prompt] Wie läuft's?
 [random]
 - [jump] talk1
 - [jump] talk2
 - [jump] talk3
 - [jump] talk4
+- [jump] talk5
+- [jump] talk6
+- [jump] talk7
+- [jump] talk8
 
 [[Node]] stop
-[Prompt] Tschüss!
 [actors] avatar veronika.flipped
 [text]
 veronika:Ciao!
@@ -68,6 +70,111 @@ veronika:Dann kannst du ja froh sein, dass das Gas noch zum Aufkochen gereicht h
 [action]
 - npc=self.get_self []
 - Score.add_score ["tip", {"source": "veronika2"}]
+
+[[Node]] talk5
+[actors] avatar veronika.flipped
+[text]
+veronika:Wenn du immer auf das Schlimmste vorbereitet bist, gibt es keine bösen Überraschungen.
+[Choice]
+- [skeptic_bad_surprises] Aber man kann doch gar nicht auf alles vorbereitet sein.
+- [acknowledging_bad_surprises] Das stimmt wohl.
+
+[[Node]] skeptic_bad_surprises
+[actors] avatar veronika.flipped
+[text]
+veronika:Ja, aber zumindest auf die wahrscheinlichsten Risiken.,
+veronika:Kris würde auch unvorbereitet in die Wildnis losziehen.
+[actors] avatar veronika.flipped kris.flipped
+kris:He! Würde ich nicht.,
+veronika:Ich gebs zu, das war übertrieben. Aber du machst dir kaum Gedanken darüber, was alles passieren kann.,
+kris:Doch. Ich hab immer alles über die Gegend und ihre Gefahren gelesen. Und mit Locals geredet.,
+veronika:Okay, aber was, wenn du nicht weißt, wo du bist, und der Empfang ist weg?,
+kris:Hab Offline-Karten.,
+veronika:Aber weißt du immer, wo wir auf der Karte sind?,
+kris:Haben wir schonmal nicht zurück zum Weg gefunden?,
+veronika:Kann mich nicht erinnern.,
+kris:Eben. Ich bin vorbereitet. Ich mach mir nur keinen Kopf.,
+veronika:... Das endet trotzdem oft im Chaos. Im Alltag zumindest. Du hast auch schon Wäsche mit dem Fön trocknen müssen, weil du vergessen hast, zu waschen.,
+kris:Joa. Ging aber doch.,
+veronika:Ich gebs auf.
+
+[[Node]] acknowledging_bad_surprises
+[actors] avatar veronika.flipped
+[text]
+veronika:Nicht wahr? Kris beschwert sich manchmal, dass ich so negativ bin. Aber ich bin einfach nur vorbereitet.,
+[actors] avatar veronika.flipped kris.flipped
+kris:Wenn du mich fragst, sorgt das einfach nur dafür, dass du dich nicht auf irgendwas freuen kannst.,
+[actors] avatar veronika kris.flipped
+veronika:Ich freue mich auf unseren Urlaub!,
+kris:Echt? Das hör ich zum ersten Mal. Sonst erzählst du mir nur von deinen Sorgen.,
+kris:'Was, wenn der Strom ausfällt, und wir unsere Akkus vor der Fahrt nicht laden können?',
+veronika:Ja, das mit den Solarmodulen war ein Argument. Aber es war trotzdem eine relevante Überlegung.,
+kris:Und ab wann ziehst du die Grenze? Was, wenn du krank wirst vor lauter Stress?,
+veronika:Das hab ich auch schon überlegt. Was, wenn wir krank werden? Die Versicherung hätte sich aber nicht gelohnt. Und die Fahrkarten sind leider nicht übertragbar ...,
+kris:...,
+kris:Ich lass mich lieber überraschen und wenns doch böse wird, geh ich damit um, sobald es soweit ist. Weniger Kopfschmerzen, mehr Lebensfreude.
+
+[[Node]] talk6
+[actors] avatar veronika.flipped
+[text]
+veronika:Letztes Wochenende waren wir wandern.,
+veronika:Bei nebligem Wetter kann man wunderbare Fotos machen. Mystische Stimmung. Gestalten im Nebel.
+[if]
+#kids_on_trail true
+[then]
+veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...,
+veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
+[set] #kids_on_trail false
+[else]
+veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!,
+veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
+[end]
+veronika:Ich habe einige eindrucksvolle Fotos geschossen, von Sonnenstrahlen, die sich als Lichtkegel durch den Nebel filtern.,
+veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografieren.
+
+[[Node]] talk7
+[actors] avatar veronika.flipped
+[text]
+veronika:Ich bin so müde ...
+avatar:Mach doch ein Nickerchen.
+[if]
+npc_friendship_higher_than veronika 10
+[then]
+veronika:Das hat Kris auch schon gesagt.,
+veronika:Vielleicht habt ihr Recht ...
+[else]
+[random]
+[jump] cant_sleep
+[jump] wont_sleep
+[end]
+
+[[Node]] cant_sleep
+[Condition]
+npc_mood_less_than veronika MID
+[actors] avatar veronika.flipped
+[text]
+veronika:Kann nicht schlafen. Sonst wär ich auch nicht so müde.,
+veronika:Viel Stress gerade wegen der Arbeit.,
+veronika:Kann mich nicht konzentrieren.,
+veronika:Und der Kaffee geht uns auch aus.,
+veronika:Seufzt.
+
+[[Node]] wont_sleep
+[actors] avatar veronika.flipped
+[text]
+veronika:Kann nicht, zu viel zu tun.,
+veronika:Ich muss einfach mehr Kaffee trinken. Mit Zucker. Das macht mich wach.
+
+[[Node]] talk8
+[actors] avatar veronika.flipped
+[text]
+veronika:Manchmal kriege ich wochenlang kein gutes Motiv vor die Kamera.
+veronika:Und manchmal kann ich gar nicht schnell genug abdrücken.
+veronika:Kris hat mal gesagt, meine Arbeit passt zu Krisopolis. 'Unvorhersehbar schön.'
+veronika:Sie mag eben das Chaos.
+veronika:Aber ich muss sagen, der Vergleich gefällt mir.
+avatar:Kris hat eine besondere Begabung, das Gute zu sehen und es anderen zu zeigen.
+veronika:Absolut ...
 
 [[Node]] trade
 [Prompt] Handeln

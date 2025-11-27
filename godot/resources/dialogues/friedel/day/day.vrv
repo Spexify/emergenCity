@@ -49,8 +49,8 @@ friedel:Wuuuuuuuff.
 [text]
 Erzähler:Möchtest du Friedel streicheln?
 [Choice]
-- streicheln_ja
-- streicheln_nein
+- [streicheln_ja] Unbedingt!
+- [streicheln_nein] Jetzt nicht.
 
 [[Node]] streicheln_ja
 [actors] avatar friedel

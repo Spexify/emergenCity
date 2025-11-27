@@ -4,12 +4,11 @@
 agathe:Oh toll, endlich wieder Besuch!
 agathe:Bist du zum Tauschen hier?
 [Choice]
-- talk
-- trade
-- stop
+- [talk] Nein, lass uns reden!
+- [trade] Handeln.
+- [stop] Nichts dergleichen.
 
 [[Node]] talk
-[Prompt] Nein, lass uns reden!
 [random]
 - [jump] talk1
 - [jump] talk2
@@ -26,6 +25,11 @@ agathe:Bist du zum Tauschen hier?
 - [jump] talk13
 - [jump] talk14
 - [jump] talk15
+
+[[Node]] stop
+[actors] agathe avatar.flipped
+[text]
+agathe:Komm gerne wieder.
 
 [[Node]] talk1
 [actors] agathe avatar.flipped
@@ -78,22 +82,17 @@ agathe:Wie reizend, dass du dir Zeit für deine Mitmenschen nimmst.
 agathe:Wenn ich da an mich zurückdenke... Ich hatte immer nur meine Karriere im Kopf.
 agathe:Ganz wie Elias, fürchte ich. Kennst du Elias?
 [Choice]
-- EliasBekannt
-- EliasNichtBekannt
+- [EliasBekannt] Ich kenne ihn.
+- [EliasNichtBekannt] Nur flüchtig.
 
 [[Node]] EliasBekannt
-[Prompt] ja
 [actors] agathe avatar.flipped
-[text]
-avatar:Ja, ich kenne ihn.
 [jump] EliasWeiter
 
 [[Node]] EliasNichtBekannt
-[Prompt] Kaum
 [actors] agathe avatar.flipped
 [text]
-avatar:Ja, aber nur flüchtig.
-agathe:Das ist genau was ich meine. Keine Zeit für niemanden.
+agathe:Das ist genau, was ich meine. Keine Zeit für niemanden.
 [jump] EliasWeiter
 
 [[Node]] EliasWeiter
@@ -112,9 +111,9 @@ agathe:Mitten unter Menschen, weit weg von meiner Arbeit. Aber der Kopf war imme
 agathe:Heute schaut mein Fenster raus aufs Industriegebiet. Ganz hinten kann man die Schornsteine der Fabrik sehen.
 agathe:Aber jetzt genieße ich es, mich mit meinen Nachbarn zu unterhalten.
 [random]
-- dialog6Mood1
-- dialog6Mood2
-- dialog6Mood3
+- [jump] dialog6Mood1
+- [jump] dialog6Mood2
+- [jump] dialog6Mood3
 
 [[Node]] dialog6Mood1
 [Condition]
@@ -155,8 +154,8 @@ agathe:Wie reizend! Ich bin auch gleich mit Kris und Veronika verabredet.
 agathe:Ich leihe mir nämlich immer ihren Campingkocher aus, wenn der Strom ausgefallen ist.
 agathe:Es ist zwar etwas mühsamer, auf dem Balkon zu kochen, aber ich koche so gerne.
 [random]
-- MarmeladeFuerAvatar
-- ChemieUndKochen
+- [jump] MarmeladeFuerAvatar
+- [jump] ChemieUndKochen
 
 [[Node]] MarmeladeFuerAvatar
 [Condition]
@@ -178,11 +177,10 @@ agathe:Vielleicht bin ich deshalb in die Chemie gegangen.
 agathe:Wie reizend! Ich habe eben in einem alten Fotobuch geblättert.
 agathe:Veronika möchte ein paar meiner Bilder für ihr Buch verwenden.
 [Choice]
-- FotosTeilenSuper
-- FotosTeilenMeh
+- [FotosTeilenSuper] Super!
+- [FotosTeilenMeh] Okay ...
 
 [[Node]] FotosTeilenSuper
-[Prompt] Super!
 [actors] agathe avatar.flipped
 [text]
 avatar:Das ist ja toll!,
@@ -191,7 +189,6 @@ agathe:Ein Nachbar hatte damals eine Dunkelkammer.
 agathe:Er hat mir gezeigt, wie man Fotos entwickelt. Da war ich noch ein Kind.
 
 [[Node]] FotosTeilenMeh
-[Prompt] Okay...
 [actors] agathe avatar.flipped
 [text]
 avatar:Ja, ich weiß, ich bin nur Amateur.
@@ -203,22 +200,18 @@ agathe:Und der Erinnerungen wegen...
 [text]
 agathe:Wie reizend! Hast du dich gut eingelebt in Krisopolis?
 [Choice]
-- EingelebtJa
-- EingelebtNein
+- [EingelebtJa] Ja, es ist wirklich schön hier!
+- [EingelebtNein] Ich weiß nicht so recht.
 
 [[Node]] EingelebtJa
-[Prompt] Ja
 [actors] agathe avatar.flipped
 [text]
-avatar:Ja, es ist wirklich schön hier!
 agathe:Ja, nicht wahr?
 agathe:Es freut mich, dass du das auch so siehst.
 
 [[Node]] EingelebtNein
-[Prompt] Weiß nicht
 [actors] agathe avatar.flipped
 [text]
-avatar:Ich weiß nicht so recht.
 agathe:Ich verstehe, was du meinst.
 
 [[Node]] EingelebtWeiter
@@ -233,21 +226,17 @@ avatar:Da hast du recht.
 [text]
 agathe:Wie schön! Habe ich dir schon mal von der großen Flut von 1977 erzählt?
 [Choice]
-- Flut1977Ja
-- Flut1977Nein
+- [Flut1977Ja] Ja, schon mehr als einmal.
+- [Flut1977Nein] Noch nicht.
 
 [[Node]] Flut1977Ja
-[Prompt] Ja
 [actors] agathe avatar.flipped
 [text]
-avatar:Ja, schon mehr als einmal.
 agathe:Oh, wirklich? Wie schade.
 
 [[Node]] Flut1977Nein
-[Prompt] Nein
 [actors] agathe avatar.flipped
 [text]
-avatar:Noch nicht.
 agathe:Das war ein Jahr! Die Riskana tritt ja häufiger über die Ufer, aber damals...
 agathe:Wir sind mit Booten durch die Straßen gefahren. Wie in Venedig!
 [random]
@@ -331,12 +320,8 @@ agathe:Wer hat denn schon die Zeit, alles von Grund auf zuzubereiten?
 agathe:Nein, den Stress spare ich mir.
 
 [[Node]] trade
-[Prompt] Handeln
 [action]
 - npc=self.get_self []
 - gui_mngr.request_gui ["Trade", ["$result.npc"]]
-
-[[Node]] stop
-[Prompt] Nichts dergleichen
 
 [end]

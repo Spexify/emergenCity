@@ -4,15 +4,13 @@
 momo:...
 mert:Momo ist etwas scheu.
 [Choice]
-- talk
-- stop
+- [talk] Warum denn?
+- [stop] Muss los.
 
 [[Node]] stop
-[Prompt] Muss los.
 [actors] avatar momo mert.flipped
 
 [[Node]] talk
-[Prompt] Warum denn?
 [actors] avatar momo mert.flipped
 mert:Gute Frage. Vielleicht hat sie in der Vergangenheit keine guten Erfahrungen mit Menschen gemacht.,
 mert:Manchmal klettert sie sogar auf hohe Bäume, um ihre Ruhe vor Menschen zu haben ... und kommt dann alleine nicht mehr herunter.,

@@ -3,19 +3,21 @@
 [text]
 irena:Moin Moin!
 [Choice]
-- talk
-- stop
+- [talk] Möchtest du mit mir reden?
+- [stop] Spiel schön!
 
 [[Node]] talk
-[Prompt] Möchtest du mit mir reden?
 [random]
 - [jump] talk1
 - [jump] talk2
 - [jump] talk3
 - [jump] talk4
+- [jump] talk5
+- [jump] talk6
+- [jump] talk7
+- [jump] talk8
 
 [[Node]] stop
-[Prompt] Spiel schön!
 [actors] avatar irena.flipped
 [text]
 irena:Klaro!
@@ -28,12 +30,11 @@ irena:Meine Lieblingsapp ist Krisopolis: Play & Prepare!!!,
 avatar:Oh, das klingt spaßig.,
 irena:Ist es auch!
 [Choice]
-- spielzeug
-- stop
+- [spielzeug] Nach Irenas Spielzeug fragen
+- [stop] Spiel schön!
 
 [[Node]] spielzeug
 [actors] avatar irena.flipped
-[Prompt] Nach Irenas Spielzeug fragen
 [text]
 avatar:Mit was spielst du da?,
 irena:Mit einer Rakete! Wuuuuschhhh!!,
@@ -54,24 +55,22 @@ irena:Aber versuchs besser nicht, sie kriegt ganz schnell Angst bei Erwachsenen.
 irena:Mmmmnh. Ich hab zu tun.,
 irena:Der Weltraum erobert sich nicht von alleine!
 [Choice]
-- nicht_gemeinsam_erkunden
-- gemeinsam_erkunden
+- [nicht_gemeinsam_erkunden] Stimmt.
+- [gemeinsam_erkunden] Wie wärs zu zweit?
 
 [[Node]] nicht_gemeinsam_erkunden
-[Prompt] Stimmt.
 [actors] avatar irena.flipped
 [text]
 avatar:Dann viel Erfolg bei der Eroberung!,
 irena:Wir haben immer Erfolg! Wuuuuusch!
 
 [[Node]] gemeinsam_erkunden
-[Prompt] Wie wärs zu zweit?
 [actors] avatar irena.flipped
 [text]
 avatar:Ich könnte dir bei der Eroberung helfen.
-[jump]
-- gemeinsam_erkunden_klappt
-- gemeinsam_erkunden_klappt_nicht
+[random]
+- [jump] gemeinsam_erkunden_klappt
+- [jump] gemeinsam_erkunden_klappt_nicht
 
 [[Node]] gemeinsam_erkunden_klappt
 [Condition]
@@ -81,8 +80,8 @@ npc_friendship_higher_than irena 4
 [text]
 irena:Okay. Du bist Mission Control!
 [random]
-- MCNoName
-- MCName
+- [jump] MCNoName
+- [jump] MCName
 
 [[Node]] gemeinsam_erkunden_klappt_nicht
 [actors] avatar irena.flipped
@@ -122,5 +121,97 @@ irena:Die sollte ich eigentlich schon fertig haben.,
 irena:Aber sags Papa nicht, okay?,
 avatar:Ich schweige wie das Weltall!,
 irena:Hihi. Das ist gut.
+
+[[Node]] talk5
+[actors] avatar irena.flipped
+[text]
+[if]
+npc_friendship_less_than irena 9
+[then]
+irena:Magst du Fisch?
+[Choice]
+- [mag_fisch] Na klar.
+- [mag_keinen_fisch] Nein.
+[else]
+irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
+avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
+irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
+irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
+[end]
+
+[[Node]] mag_keinen_fisch
+[actors] avatar irena.flipped
+[text]
+irena:Ich auch nicht. Ekelhaftes Zeug!
+
+[[Node]] mag_fisch
+[actors] avatar irena.flipped
+[text]
+irena:Du bist wie Papa. Er sagt, Fisch macht groß und stark.
+irena:Aber Onkel Mert ist groß und stark und der isst keinen Fisch und kein Fleisch.
+irena:Aber Würstchen mag ich schon ...
+
+[[Node]] talk6
+[actors] avatar irena.flipped
+[text]
+irena:Diese Woche hatten wir in der Schule Krisenschulung.
+irena:Da kriegen wir beigebracht, wie wir uns verhalten sollen, wenn eine Krise kommt.
+irena:Eigentlich kennen wir das alle. Aber die Gäste sind immer interessant.
+[random]
+- [jump] polizei
+- [jump] feuerwehr
+- [jump] johanniter
+- [jump] mert
+
+[[Node]] polizei
+[actors] avatar irena.flipped
+[text]
+irena:Diesmal waren zwei Polizisten da.
+irena:Eine Frau und ein Mann.
+irena:Die Frau war voll cool!
+irena:Ich will trotzdem lieber Astronautin werden.
+
+[[Node]] feuerwehr
+[actors] avatar irena.flipped
+[text]
+irena:Diesmal war die Feuerwehr da.
+irena:Das war lustig. Wir durften alle mal über die Feuerwehrleiter gerettet werden.
+irena:Und wusstest du, dass man gar nicht vom Feuer stirbt, sondern vom Rauch?
+avatar:Ja. Deshalb muss man brennende Gebäude so schnell es geht verlassen.
+irena:Eine Landekapsel der NASA hat mal gebrannt und sie haben die Türen nicht aufbekommen ... Aber dann haben sie die Türen verbessert.
+
+[[Node]] johanniter
+[actors] avatar irena.flipped
+[text]
+irena:Diesmal hatten wir die Johannisser.
+avatar:Die Johanniter, meinst du?
+irena:Ja, die helfen, wenn man sich weh tut.
+
+[[Node]] mert
+[actors] avatar irena.flipped
+[text]
+irena:Mert war noch nie da. Aber er könnte ja auch mal kommen und das THW erklären.
+avatar:Das stimmt. Hast du ihm das schon gesagt?
+irena:Noch nicht. Muss ich mal machen.
+
+[[Node]] talk7
+[actors] avatar irena.flipped
+[text]
+irena:Uns Kindern traut man gar nichts zu während einer Krise.
+irena:Aber ich hab mein eigenes Radio. Selbstgebastelt! Also mit Papas Hilfe.
+irena:Wenn etwas nicht stimmt, kann ich Papa warnen. Und dann kann ich ihm helfen.
+irena:Es ist nämlich leichter, wenn ich einkaufe und so. In der Stadt gibt es ganz viele Hindernisse für den Rolli und wenn dann noch Straßensperren dazukommen ...
+irena:Papa meint immer, er muss das alles allein machen. Das ist doch Unsinn! Ich kann das doch viel besser!
+avatar:Du kannst ihm zumindest helfen.
+irena:Genau. Es ist gut, dass Papa mich hat!
+avatar:Das stimmt!
+
+[[Node]] talk8
+[actors] avatar irena.flipped
+[text]
+irena:Papa und ich spielen manchmal Brettspiele. Ich mag besonders die, die im Weltall spielen.
+irena:Er sagt, die wären eigentlich für ältere Kinder. Aber ich bin schon ganz gut.
+irena:Irgendwann bin ich besser als Papa.
+avatar:Bestimmt!
 
 [end]

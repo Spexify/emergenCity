@@ -6,7 +6,7 @@ gerhard:Moin. Willst du handeln?
 [Choice]
 - [talk] Reden
 - [trade] Handeln
-- [end] Nichts dergleichen
+- [stop] Nichts dergleichen
 
 [[Node]] talk
 [jump] cooldown
@@ -45,6 +45,11 @@ gerhard:Moin. Willst du handeln?
 - [set] @last_option 13
 - [set] @last_option 14
 [jump] talk
+
+[[Node]] stop
+[actors] avatar gerhard.flipped friedel
+[text]
+gerhard:Wir sehen uns.
 
 [[Node]] talk1
 [actors] avatar gerhard.flipped friedel
@@ -165,11 +170,10 @@ friedel:Wuff!
 avatar:Lass uns reden! Wird dir auch nicht langweilig hier?,
 gerhard:Langweilig? In Krisopolis? Wohl kaum. Ist dir etwa langweilig?
 [Choice]
-- nicht_langweilig
-- langweilig
+- [nicht_langweilig] Nein.
+- [langweilig] Manchmal.
 
 [[Node]] nicht_langweilig
-[Prompt] Nein.
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Nein, du hast Recht, hier wird es nicht langweilig.,
@@ -184,25 +188,22 @@ gerhard:Aber bald wieder!,
 friedel:Wuff!
 
 [[Node]] langweilig
-[Prompt] Manchmal.
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Manchmal wünsche ich mir schon mehr Abwechslung.,
 gerhard:Oh, wirklich? Dann müssen wir mal wieder eine Gartenparty feiern!
 [set] #gerhard_will_gartenparty_feiern true
 [Choice]
-- gartenparty_ja
-- gartenparty_nein
+- [gartenparty_ja] Gern.
+- [gartenparty_nein] Weiß nicht.
 
 [[Node]] gartenparty_ja
-[Prompt] Gern.
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Das klingt gut!,
 gerhard:Meine ich auch. Ich sag dir Bescheid!
 
 [[Node]] gartenparty_nein
-[Prompt] Weiß nicht.
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Ich weiß nicht, ob das gerade das Richtige ist.,

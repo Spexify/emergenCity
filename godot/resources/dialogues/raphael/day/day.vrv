@@ -4,19 +4,18 @@
 raphael:Guten Tag!
 avatar:Guten Tag.
 [Choice]
-- talk
-- stop
+- [talk] Was macht die Arbeit?
+- [stop] Tschüss!
 
 [[Node]] talk
-[Prompt] Was macht die Arbeit?
 [random]
 - [jump] talk1
 - [jump] talk2
 - [jump] talk3
 - [jump] talk4
+- [jump] talk5
 
 [[Node]] stop
-[Prompt] Tschüss!
 [actors] avatar raphael.flipped
 [text]
 raphael:Bis dann!
@@ -33,9 +32,11 @@ raphael:Hahaha. So könnte man es ausdrücken.
 [text]
 raphael:Es gibt so Typen, denen riecht man an, dass sie auf Geld sitzen.,
 raphael:Dieser Elias zum Beispiel, kennst du den?
+[Choice]
+- [KenneElias] Ja.
+- [KenneEliasNicht] Nein.
 
 [[Node]] KenneElias
-[Prompt] Ja.
 [actors] avatar raphael.flipped
 [text]
 raphael:Dann weißte ja, was ich meine.,
@@ -43,7 +44,6 @@ raphael:Der mit seiner Penthouse-Wohnung. Glaubt, auf uns andere runter schauen 
 raphael:Aber nicht mit mir! Der zahlt bei mir extra.
 
 [[Node]] KenneEliasNicht
-[Prompt] Nein.
 [actors] avatar raphael.flipped
 [text]
 raphael:Jo, da haste auch nix verpasst.,
@@ -65,13 +65,92 @@ avatar:Das merk ich mir, danke!
 [text]
 raphael:Noch gehts. Aber hast du schon gehört? Die Krise soll noch zwei Wochen dauern!,
 avatar:Sowas kann man doch gar nicht voraussagen.,
-raphael:Dacht ich auch. Aber der Kumpel von nem Mann von meiner Kusine hats mir verraten.,
+raphael:Dacht ich auch. Aber der Kumpel von nem Mann von meiner Kusine hats mir verraten.
+
+[[Node]] talk5
+[actors] avatar raphael.flipped
+[text]
 raphael:Ich sag dir was, diese Krisen in Krisopolis - die sind nicht echt.,
 avatar:Nicht echt?,
 raphael:Ne, da steht jemand dahinter, der plant das alles.,
-avatar:Aber was hätte derjenige davon? Und wer sollte das sein?,
+avatar:Aber was hätte der- oder diejenige davon? Und wer sollte das sein?,
 raphael:Keine Ahnung. Spaß vielleicht. Oder Wählerstimmen. Geht mich nix an, was die sich ausdenken.
 
+[[Node]] talk6
+[actors] avatar raphael.flipped
+[text]
+raphael:Wer weiß, wie lange ich noch hier sitzen kann.,
+raphael:Wahrscheinlich kriegen wir bald wieder ne Ausgangssperre.,
+[if]
+[action] crisis_is(Pandemie)
+[then]
+avatar:Könnte passieren.
+raphael:Schlecht fürs Geschäft, sowas. Und für die Auswahl beim Abendessen.
+raphael:Außerdem ist doch eh kaum jemand hier. Wie soll man sich da anstecken?
+avatar:Das geht wohl nach dem Motto 'Vorsicht ist besser als Nachsicht'.
+raphael:Hrmpf. Die sollten lieber Nachsicht mit Leuten wie mir haben.
+raphael:Geld verdienen ist schließlich auch ne Sache von Leben und Tod. Muss mir ja mein Essen leisten können. Aber das schert ja keinen.
+[else]
+avatar:Die gibt es doch nur bei Ansteckungsgefahr.
+[jump] chemie_krise
+[end]
+
+[[Node]] chemie_krise
+[actors] avatar raphael.flipped
+[text]
+[if]
+[action] crisis_is(Chemie)
+[then]
+raphael:Wer weiß, was die in dieser Höllenfabrik alles zusammengemischt haben.
+raphael:Würd mich nicht wundern, wenn die da irgendwelche Killer-Viren züchten.
+avatar:In einer Chemiefabrik?
+raphael:Und was ist mit toxischen Gasen?
+raphael:Du wirst schon sehen.
+[else]
+raphael:Du wirst schon sehen.
+[end]
+
+[[Node]] talk7
+[actors] avatar raphael.flipped
+[text]
+raphael:Bin gar nicht sicher, ob ich meine Sachen wirklich tauschen sollte.
+raphael:Ich brauch ja schließlich meine Vorräte, wenn das hier noch lange dauert.
+raphael:Also verstehst du sicher, dass ich nen hohen Gegenwert verlangen muss.
+raphael:Sonst komm ich selbst nicht durch die Krise.
+[jump] billiger
+
+[[Node]] billiger
+[Condition]
+npc_friendship_higher_than raphael 13
+[actors] avatar raphael.flipped
+[text]
+raphael:Für dich mach ichs trotzdem günstiger. Sind ja alte Kumpels.
+[Choice]
+- [thx] Danke, das freut mich.
+- [andere] Was ist mit den anderen? Die brauchen doch auch ihre Vorräte.
+
+[[Node]] thx
+[actors] avatar raphael.flipped
+[text]
+raphael:Jaja. Erzähls nur nicht rum. Vor allem nicht diesem Elias.
+avatar:Klar!
+
+[[Node]] andere
+[actors] avatar raphael.flipped
+[text]
+raphael:Die kommen zurecht. Ist noch keiner verhungert. Du bist der Grünschnabel hier.
+avatar:Oh.
+raphael:Schadet nix, den Neuen etwas unter die Arme zu greifen. Wenn sie es verdienen. Krisopolis kann n raues Pflaster sein.
+avatar:Danke!
+raphael:Nix zu danken.
+
+[[Node]] talk8
+[actors] avatar raphael.flipped
+[text]
+raphael:Alles braucht heutzutage Internet. Wollte Geld abheben und der Automat ging nicht. Demnächst brauchts vermutlich noch AI.
+raphael:Aber ich sag dir was. In ner Krise brauchst du deine Mitmenschen. Die Computer kannst du vergessen. Die helfen dir nicht. Und die verhungern auch nicht.
+raphael:Wir Menschen, wir sitzen in einem Boot. Vergiss das nicht.
+avatar:Da hast du Recht.
 
 [[Node]] trade
 [Prompt] Handeln
