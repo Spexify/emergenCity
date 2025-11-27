@@ -1,9 +1,11 @@
 class_name EMC_Dialogue_GUI
 extends EMC_GUI
 
-@export var stage_mngr : EMC_StageMngr
-@export var checker: EMC_ActionConstraints
-@export var score: EMC_Scoreboard
+#@export var stage_mngr : EMC_StageMngr
+#@export var checker: EMC_ActionConstraints
+#@export var score: EMC_Scoreboard
+
+@export var gsi: EMC_GSI
 
 @onready var portrait_box : HBoxContainer = $Portraits
 @onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
@@ -56,6 +58,7 @@ func open(dialogue: VRV_Script) -> void:
 	
 	opened.emit()
 	#dialogue.set_api(stage_mngr, checker)
+	dialogue.gsi = gsi
 	start.call_deferred(dialogue)
 
 func close() -> void:

@@ -59,7 +59,8 @@ func setup(p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	
 	_setup_stages()
 
-	_setup_NPCs()
+	if NPCs.get_child_count() == 0:
+		_setup_NPCs(JsonMngr.load_NPC())
 	
 	change_stage(_initial_stage_name, _initial_npc, false)
 
@@ -107,15 +108,16 @@ func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path" : get_path(),
 		"stage_name" : get_curr_stage_name(),
-		"npc_pos" : get_all_active_npcs(), 
+		"npcs" : NPCs.get_children().map(func (npc: EMC_NPC) -> EMC_NPC_Resource: return npc.npc_resource), 
 	}
 	return data
 
 func load_state(data : Dictionary) -> void:
 	_initial_stage_name = data.get("stage_name", "home")
-	_initial_npc = data.get("npc_pos", {})
-	for npc : String in _initial_npc:
-		_initial_npc[npc] = Vector2(_initial_npc[npc].get("x", 0), _initial_npc[npc].get("y", 0))
+	var npcs: Array[EMC_NPC_Resource]
+	npcs.assign(data.get("npcs", JsonMngr.load_NPC()))
+	_setup_NPCs(npcs)
+
 
 func get_NPC(p_NPC_name: String) -> EMC_NPC:
 	return NPCs.get_node(p_NPC_name.to_pascal_case())
@@ -126,41 +128,42 @@ func deactivate_NPCs() -> void:
 		NPC.hide()
 
 func let_npcs_act() -> void:
-	var npcs := NPCs.get_children()
-	npcs.shuffle()
-	print("\n\nDay: " + str(_day_mngr.get_current_day()) + " Preiod: " + str(_day_mngr.get_current_day_period()))
-	for npc : EMC_NPC in npcs:
-		var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
-		if brain:
-			brain.act()
-
-	var i: int = 0
-	while true:
-		OverworldStatesMngr.npc_intention_swap()
-		print("\n" + str(OverworldStatesMngr._npc_intention))
-		print("\nIteration: " + str(i))
-		#OverworldStatesMngr.npc_intention_unchanged()
-		for npc : EMC_NPC in npcs:
-			var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
-			if brain and npc.has_comp(EMC_NPC_Cooperation):
-				brain.coop_act()
-		
-		# When resultion is found stop loop.
-		if not OverworldStatesMngr._npc_intention_changed:
-			break
-		
-		# When no resultion is found after 7 steps, NPCS will act idle.
-		if i > 7:
-			for npc : EMC_NPC in npcs:
-				var coop : EMC_NPC_Cooperation = npc.get_comp(EMC_NPC_Cooperation)
-				if coop:
-					coop.add_intention("idle")
-			printerr("NPC act idle")
-			break
-			
-		i += 1
-	
-	OverworldStatesMngr.clear_npc_intention()
+	pass
+	#var npcs := NPCs.get_children()
+	#npcs.shuffle()
+	#print("\n\nDay: " + str(_day_mngr.get_current_day()) + " Preiod: " + str(_day_mngr.get_current_day_period()))
+	#for npc : EMC_NPC in npcs:
+		#var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
+		#if brain:
+			#brain.act()
+#
+	#var i: int = 0
+	#while true:
+		#OverworldStatesMngr.npc_intention_swap()
+		#print("\n" + str(OverworldStatesMngr._npc_intention))
+		#print("\nIteration: " + str(i))
+		##OverworldStatesMngr.npc_intention_unchanged()
+		#for npc : EMC_NPC in npcs:
+			#var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
+			#if brain and npc.has_comp(EMC_NPC_Cooperation):
+				#brain.coop_act()
+		#
+		## When resultion is found stop loop.
+		#if not OverworldStatesMngr._npc_intention_changed:
+			#break
+		#
+		## When no resultion is found after 7 steps, NPCS will act idle.
+		#if i > 7:
+			#for npc : EMC_NPC in npcs:
+				#var coop : EMC_NPC_Cooperation = npc.get_comp(EMC_NPC_Cooperation)
+				#if coop:
+					#coop.add_intention("idle")
+			#printerr("NPC act idle")
+			#break
+			#
+		#i += 1
+	#
+	#OverworldStatesMngr.clear_npc_intention()
 	
 	#get_NPC("Gerhard").get_comp(EMC_NPC_Brain).act()
 	
@@ -183,19 +186,29 @@ func _setup_stages() -> void:
 		var stage: EMC_Stage = _STAGE_SCN.instantiate()
 		$StageOffset.add_child(stage)
 		stage.setup(stage_name, NPCs, _opt_event_mngr)
-	
+
+const _NPC_SCN: PackedScene = preload("res://crisisPhase/npc/Base_NPC.tscn")
+
 ### Add NPCs to the scene
-func _setup_NPCs() -> void:
-	var dict: Dictionary = JsonMngr.load_NPC()
-	for npc : EMC_NPC in dict:
-		npc.setup(_gui_mngr, self, _day_mngr, _crisis_phase)
-		NPCs.add_child(npc)
+func _setup_NPCs(npc_resources: Array[EMC_NPC_Resource]) -> void:
+	for npc_res: EMC_NPC_Resource in npc_resources:
+		var new_npc: EMC_NPC = _NPC_SCN.instantiate()
+		new_npc.npc_resource = npc_res
+		new_npc.clicked.connect(_on_NPC_clicked)
+		stage_changed.connect(new_npc._on_stage_changed)
 		
-		for comp: Node in dict[npc]:
-			npc.add_child(comp)
-		
-		npc.hide()
-		npc.clicked.connect(_on_NPC_clicked)
+		NPCs.add_child(new_npc)
+	
+	#var dict: Dictionary = JsonMngr.load_NPC()
+	#for npc : EMC_NPC in dict:
+		#npc.setup(_gui_mngr, self, _day_mngr, _crisis_phase)
+		#NPCs.add_child(npc)
+		#
+		#for comp: Node in dict[npc]:
+			#npc.add_child(comp)
+		#
+		#npc.hide()
+		#npc.clicked.connect(_on_NPC_clicked)
 
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target

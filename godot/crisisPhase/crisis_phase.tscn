@@ -173,10 +173,11 @@ gui_mngr = NodePath("../..")
 [node name="HandyGUI" parent="GUI/CL" groups=["Save"] instance=ExtResource("24_lodu6")]
 visible = false
 
-[node name="NpcInteraction" parent="GUI/CL" instance=ExtResource("27_8bng3")]
+[node name="NpcInteraction" parent="GUI/CL" node_paths=PackedStringArray("_gui_mngr") instance=ExtResource("27_8bng3")]
 visible = false
 offset_top = 112.0
 offset_bottom = 112.0
+_gui_mngr = NodePath("../..")
 
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
@@ -279,12 +280,10 @@ layout_mode = 2
 _avatar = NodePath("../../../../../Avatar")
 _gui_mngr = NodePath("../../../..")
 
-[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("stage_mngr", "checker", "score") instance=ExtResource("25_qh0l1")]
+[node name="DialogueGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("gsi") instance=ExtResource("25_qh0l1")]
 visible = false
 layout_mode = 2
-stage_mngr = NodePath("../../../../../StageMngr")
-checker = NodePath("../../../../../EMC_ActionConstraints")
-score = NodePath("../../../../../EMC_Scoreboard")
+gsi = NodePath("../../../../../EMC_GSI")
 
 [node name="ItemInfoGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("28_v2liu")]
 visible = false
@@ -341,10 +340,11 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 script = ExtResource("1_r1qqu")
 metadata/_custom_type_script = "uid://d3edunqiuj2ih"
 
-[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr")]
+[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr")]
 script = ExtResource("40_ak664")
 _gui_mngr = NodePath("../GUI")
 _stage_mngr = NodePath("../StageMngr")
+_day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 metadata/_custom_type_script = "uid://daje87lka1imw"
 
 [connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]

@@ -3,18 +3,17 @@
 		"descr": {
 			"name": "Leonie",
 			"descr": "Das hier ist Leonie.\nSie ist lieb.",
-			"portait": "leonie"
+			"portait": "leonie",
+			"sprite": "leonie"
 		},
-		"sprite": {
-			"texture_name": "leonie"
-		},
-		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.95
 			}
 		},
 		"stage": {
+			"stage_name": "townhall",
+			"position": {"x": 416, "y": 312},
 			"start": "Townhall",
 			"positions": {
 				"Townhall": { "x": 416, "y": 312 },

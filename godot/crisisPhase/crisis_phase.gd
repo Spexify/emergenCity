@@ -118,7 +118,7 @@ func _ready() -> void:
 	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
-		var tutorial: VRV_Dialogue = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
+		var tutorial: VRV_Script = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
 		tutorial._start_npc = stage_mngr.get_NPC("julia")
 		tutorial._start_npc_name = "julia"
 		_gui_mngr.request_gui("DialogueGui", [tutorial])

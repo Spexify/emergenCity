@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfbfb0bprx5a5"]
 
-[ext_resource type="Script" uid="uid://t0seirtllwh7" path="res://crisisPhase/characters/NPC.gd" id="1_k3b2r"]
-[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="4_1lykm"]
+[ext_resource type="Script" uid="uid://bgixgy0o0ycs5" path="res://crisisPhase/npc/npc.gd" id="1_udbjw"]
+[ext_resource type="Texture2D" uid="uid://f8j852tv3e22" path="res://assets/GUI/buttons/invisible_button.png" id="2_oovmt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1chh"]
 radius = 18.0
@@ -65,7 +65,7 @@ _data = {
 }
 
 [node name="NPC" type="CharacterBody2D"]
-script = ExtResource("1_k3b2r")
+script = ExtResource("1_udbjw")
 
 [node name="CollisionCircle" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -86,12 +86,14 @@ offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
-texture_normal = ExtResource("4_1lykm")
+texture_normal = ExtResource("2_oovmt")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rd3ph")
+&"": SubResource("AnimationLibrary_rd3ph")
 }
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="pressed" from="DialogueHitbox" to="." method="_on_dialogue_hit_box_pressed"]

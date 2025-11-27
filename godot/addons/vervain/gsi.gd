@@ -28,6 +28,12 @@ func has_method_name(method_name: String) -> bool:
 func add(a: int, b: int) -> int:
 	return a + b
 
+func neq_int(a: int, b: int) -> bool:
+	return a != b 
+	
+func eq_int(a: int, b: int) -> bool:
+	return a == b 
+
 func int_to_string(v: int) -> String:
 	return String.num(v)
 

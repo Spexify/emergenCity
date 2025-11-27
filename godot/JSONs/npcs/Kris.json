@@ -3,18 +3,17 @@
 		"descr": {
 			"name": "Kris",
 			"descr": "Das hier ist Kris.\nSie ist lieb.",
-			"portait": "kris"
+			"portait": "kris",
+			"sprite": "kris"
 		},
-		"sprite": {
-			"texture_name": "kris"
-		},
-		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.0
 			}
 		},
 		"stage": {
+			"stage_name": "apartment_camper",
+			"position": {"x": 480, "y": 320},
 			"start": "ApartmentCamper",
 			"positions": {
 				"ApartmentCamper": { "x": 480, "y": 320 },

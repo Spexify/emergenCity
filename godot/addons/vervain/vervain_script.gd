@@ -25,8 +25,13 @@ var gsi: VRV_GSI
 
 var _context: Dictionary
 
+signal ended(context: Dictionary)
+
 #func _init() -> void:
 	#self.setup(data)
+	
+func get_meta_data() -> Dictionary:
+	return nodes.get("meta", {})
 	
 func setup(data: Dictionary) -> void:
 	nodes = data.get("Nodes")
@@ -100,12 +105,9 @@ func get_next() -> Array:
 						return true)
 				
 				var choose: Dictionary = options.pick_random()
-				current_node = {
-					"type": current_node["type"],
-					"sequence": [choose]
-				}
+				current_node["sequence"].insert(current_entry+1, choose)
 				current_sequence.assign(current_node.get("sequence", []))
-				current_entry = 0
+				current_entry += 1
 				
 				return get_next()
 			
@@ -161,15 +163,13 @@ func get_next() -> Array:
 			{"match": [var action, var options]}:
 				var value: Variant = action.execute(gsi, _context)
 				
+				print(value)
 				print(options.keys())
 				
 				var choose: Dictionary = options.get(value, {"jump": "end"})
-				current_node = {
-					"type": current_node["type"],
-					"sequence": [choose]
-				}
+				current_node["sequence"].insert(current_entry+1, choose)
 				current_sequence.assign(current_node.get("sequence", []))
-				current_entry = 0
+				current_entry += 1
 				
 				return get_next()
 				
@@ -191,6 +191,7 @@ func get_next() -> Array:
 			#return [VRV_Script.TEXT, [{"speaker": "Avatar", "pitch": EMC_Avatar.PITCH, "line": choices[0]["prompt"]}], false]
 	
 	current_node = {}
+	ended.emit(_context)
 	return [VRV_Script.END]
 	
 func resolve_variable(raw: String) -> Variant:
