@@ -14,6 +14,9 @@ avatar:Guten Tag.
 - [jump] talk3
 - [jump] talk4
 - [jump] talk5
+- [jump] talk6
+- [jump] talk7
+- [jump] talk8
 
 [[Node]] stop
 [actors] avatar raphael.flipped
@@ -81,34 +84,33 @@ raphael:Keine Ahnung. Spaß vielleicht. Oder Wählerstimmen. Geht mich nix an, w
 [text]
 raphael:Wer weiß, wie lange ich noch hier sitzen kann.
 raphael:Wahrscheinlich kriegen wir bald wieder ne Ausgangssperre.
-[if]
-[action] crisis_is(Pandemie)
-[then]
-avatar:Könnte passieren.
-raphael:Schlecht fürs Geschäft, sowas. Und für die Auswahl beim Abendessen.
-raphael:Außerdem ist doch eh kaum jemand hier. Wie soll man sich da anstecken?
-avatar:Das geht wohl nach dem Motto 'Vorsicht ist besser als Nachsicht'.
-raphael:Hrmpf. Die sollten lieber Nachsicht mit Leuten wie mir haben.
-raphael:Geld verdienen ist schließlich auch ne Sache von Leben und Tod. Muss mir ja mein Essen leisten können. Aber das schert ja keinen.
-[else]
-avatar:Die gibt es doch nur bei Ansteckungsgefahr.
-[jump] chemie_krise
-[end]
+[if] crisis_is("Pandemie")
+    [then]
+        [text]
+        avatar:Könnte passieren.
+        raphael:Schlecht fürs Geschäft, sowas. Und für die Auswahl beim Abendessen.
+        raphael:Außerdem ist doch eh kaum jemand hier. Wie soll man sich da anstecken?
+        avatar:Das geht wohl nach dem Motto 'Vorsicht ist besser als Nachsicht'.
+        raphael:Hrmpf. Die sollten lieber Nachsicht mit Leuten wie mir haben.
+        raphael:Geld verdienen ist schließlich auch ne Sache von Leben und Tod. Muss mir ja mein Essen leisten können. Aber das schert ja keinen.
+    [else]
+        [text]
+        avatar:Die gibt es doch nur bei Ansteckungsgefahr.
+        [jump] chemie_krise
 
 [[Node]] chemie_krise
 [actors] avatar raphael.flipped
-[text]
-[if]
-[action] crisis_is(Chemie)
-[then]
-raphael:Wer weiß, was die in dieser Höllenfabrik alles zusammengemischt haben.
-raphael:Würd mich nicht wundern, wenn die da irgendwelche Killer-Viren züchten.
-avatar:In einer Chemiefabrik?
-raphael:Und was ist mit toxischen Gasen?
-raphael:Du wirst schon sehen.
-[else]
-raphael:Du wirst schon sehen.
-[end]
+[if] crisis_is("Chemie")
+    [then]
+        [text]
+        raphael:Wer weiß, was die in dieser Höllenfabrik alles zusammengemischt haben.
+        raphael:Würd mich nicht wundern, wenn die da irgendwelche Killer-Viren züchten.
+        avatar:In einer Chemiefabrik?
+        raphael:Und was ist mit toxischen Gasen?
+        raphael:Du wirst schon sehen.
+    [else]
+        [text]
+        raphael:Du wirst schon sehen.
 
 [[Node]] talk7
 [actors] avatar raphael.flipped
@@ -120,8 +122,7 @@ raphael:Sonst komm ich selbst nicht durch die Krise.
 [jump] billiger
 
 [[Node]] billiger
-[Condition]
-npc_friendship_higher_than raphael 13
+[Condition] npc_friendship_higher_than("raphael",13)
 [actors] avatar raphael.flipped
 [text]
 raphael:Für dich mach ichs trotzdem günstiger. Sind ja alte Kumpels.
@@ -154,8 +155,6 @@ avatar:Da hast du Recht.
 
 [[Node]] trade
 [Prompt] Handeln
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[action] request_trade_gui("raphael")
 
 [end]

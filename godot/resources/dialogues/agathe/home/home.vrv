@@ -1,7 +1,6 @@
 [[Node]] start
 [[Type]] stage
-[Condition]
-is_current_stage home
+[Condition] is_current_stage("HOME")
 [actors] agathe avatar.flipped
 [text]
 agathe:Hallo Schätzchen! Ich habe noch ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen?
@@ -16,13 +15,11 @@ agathe:Hallo Schätzchen! Ich habe noch ein altes Fotobuch gefunden. Hast du Lus
 avatar:Klar, gerne!
 agathe:Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten.
 agathe:Solche Frisuren waren damals total angesagt ...
-[action]
-- ActCons.progress_day ["Mit Agathe plaudern"]
+[action] progress_day("Mit Agathe plaudern")
 agathe:Ach ja, ich habe viel zu viel Obst gekauft und mehr Marmelade gekocht als ich selbst essen kann.
 agathe:Magst du ein Glas haben?
 avatar:Oh ja, danke!
-[action]
-- ActCons.add_item_question [["JAM", {"question":"Diese %s ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.","answere":"","decline":"Einpacken"}]]
+[action] gain_player_item("JAM", "Diese Marmelade ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.")
 
 [[Node]] nein
 [Prompt] Nein.

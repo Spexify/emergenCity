@@ -92,28 +92,28 @@ mert:Verstehst du, was ich meine?
 [text]
 mert:Hm. Ich frage mich ...
 avatar:Was?
-[if]
-npc_friendship_less_than mert 10
-[then]
-mert:Egal.
-[else]
-mert:Ich glaube, man muss es erlebt haben, um es zu verstehen.
-mert:Aber vielleicht hast du das ja. Es würde erklären, warum ich gleich das Gefühl hatte, mit dir kann man gut reden.
-avatar:Danke, das Kompliment geb ich gern zurück!
-[end]
+[if] npc_friendship_less_than("mert",10)
+    [then]
+        [text]
+        mert:Egal.
+    [else]
+        [text]
+        mert:Ich glaube, man muss es erlebt haben, um es zu verstehen.
+        mert:Aber vielleicht hast du das ja. Es würde erklären, warum ich gleich das Gefühl hatte, mit dir kann man gut reden.
+        avatar:Danke, das Kompliment geb ich gern zurück!
 
 [[Node]] understand_no
 [actors] avatar mert.flipped
 [text]
-[if]
-npc_friendship_less_than mert 10
-[then]
-mert:Das hab ich befürchtet. Ist auch nicht so wichtig.
-[else]
-mert:Das hab ich befürchtet. Wie erkläre ich es besser?
-mert:...
-mert:Vielleicht fällt mir noch was ein.
-[end]
+[if] npc_friendship_less_than("mert",10)
+    [then]
+        [text]
+        mert:Das hab ich befürchtet. Ist auch nicht so wichtig.
+    [else]
+        [text]
+        mert:Das hab ich befürchtet. Wie erkläre ich es besser?
+        mert:...
+        mert:Vielleicht fällt mir noch was ein.
 
 [[Node]] talk6
 [actors] avatar mert.flipped
@@ -134,16 +134,14 @@ mert:Ich denke über alte Zeiten nach. Ich war je früher auf dem Bau. Da hab ic
 - [jump] bau_sensoren
 
 [[Node]] bau_starkregen
-[Condition]
-[action] crisis_is(Starkregen)
+[Condition] crisis_is("Starkregen")
 [actors] avatar mert.flipped
 [text]
 mert:Die Häuser in Krisopolis haben alle einen Rückstauverschluss, damit das Abwasser bei Starkregen nicht zurück in die Häuser laufen kann.
 mert:Das war eine Schweinerei, als es das noch nicht gab!
 
 [[Node]] bau_hochwasser
-[Condition]
-[action] crisis_is(Hochwasser)
+[Condition] crisis_is("Hochwasser")
 [actors] avatar mert.flipped
 [text]
 mert:Hochwasser ist so ne Sache. Da haben modernere Gebäude tatsächlich einen Nachteil.
@@ -167,8 +165,7 @@ mert:Der Strom muss natürlich aus sein, bevor man in die Brühe rein kann.
 [jump] wie_oft
 
 [[Node]] wie_oft
-[Condition]
-npc_karma_higher_than mert 0.5
+[Condition] npc_karma_higher_than("mert",0.5)
 [actors] avatar mert.flipped
 [text]
 avatar: Wie oft ist das denn schon passiert?
@@ -230,8 +227,7 @@ mert:Möchtest du darüber reden, was dich bedrückt? Ich mach uns auch einen Te
 [actors] avatar mert.flipped
 [text]
 mert:Sehr gut!
-[action]
-- ActCons.progress_day ["Sprich dich bei Mert aus"]
+[action] progress_day("Sprich dich bei Mert aus")
 [action] add_points_water(300)
 avatar:Es tat gut, darüber zu sprechen. Danke dir!
 mert:Jederzeit!

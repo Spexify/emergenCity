@@ -51,8 +51,7 @@ petro:Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine ri
 - nicht_befreundet
 
 [[Node]] befreundet
-[Condition]
-npc_friendship_higher_than petro 4
+[Condition] npc_friendship_higher_than("petro",4)
 [actors] avatar petro.flipped
 [text]
 petro:Wusste ich doch, dass dich das auch begeistert!
@@ -92,8 +91,7 @@ petro:So wie ich das mit meinen Videos versuche. Meine Follower sind lauter Nerd
 [jump] bad_social_media
 
 [[Node]] bad_social_media
-[Condition]
-npc_mood_less_than petro MID
+[Condition] npc_is_sad("petro")
 [actors] avatar petro.flipped
 [text]
 petro:Aber wenn ich mir den Rest von Social Media anschaue, dann ist da so viel Hass und Polarisation.
@@ -110,8 +108,7 @@ avatar:Das kann ich mir gut vorstellen.
 - [jump] kein_spielplatz
 
 [[Node]] spielplatz
-[Condition]
-npc_friendship_higher_than petro 10
+[Condition] npc_friendship_higher_than("petro",10)
 [actors] avatar petro.flipped
 [text]
 petro:Als Irena klein war, musste ich höllisch aufpassen, dass sie nicht auf die Straße rennt.
@@ -195,8 +192,6 @@ petro:Zum Glück passiert das nur selten.
 
 [[Node]] trade
 [Prompt] Hast du was zu tauschen?
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[action] request_trade_gui("petro")
 
 [end]

@@ -41,8 +41,7 @@ agathe:Aber es ist jedes Mal schön, wenn sie hier ist.
 [jump] BesucheSchoen
 
 [[Node]] BesucheSchoen
-[Condition]
-npc_karma_higher_than agathe 0.5
+[Condition] npc_karma_higher_than("agathe",0.5)
 [actors] agathe avatar.flipped
 [text]
 agathe:Und deine Besuche sind auch immer sehr schön.
@@ -116,22 +115,19 @@ agathe:Aber jetzt genieße ich es, mich mit meinen Nachbarn zu unterhalten.
 - [jump] dialog6Mood3
 
 [[Node]] dialog6Mood1
-[Condition]
-npc_mood_higher_than agathe MID
+[Condition] npc_is_happy("agathe")
 [actors] agathe avatar.flipped
 [text]
 agathe:Und denke sogar über ein Haustier nach. Wer hätte das gedacht?
 
 [[Node]] dialog6Mood2
-[Condition]
-npc_mood_equal agathe MID
+[Condition] and_bool(not_bool(npc_is_happy("agathe")), not_bool(npc_is_sad("agathe")))
 [actors] agathe avatar.flipped
 [text]
 agathe:Seltsam, nicht wahr? Aber so ist das Leben manchmal.
 
 [[Node]] dialog6Mood3
-[Condition]
-npc_mood_less_than agathe MID
+[Condition] npc_is_sad("agathe")
 [actors] agathe avatar.flipped
 [text]
 agathe:Es kommt mir vor, als hätte ich all die Zeit zuvor vergeudet...
@@ -146,8 +142,7 @@ agathe:Ich helfe ihr ein wenig. Meine Familie lebt schon seit Generationen in Kr
 agathe:Als ich jung war, wollte ich hier weg. Aber anderswo wurde es mir schnell zu langweilig.
 
 [[Node]] talk8
-[Condition]
-is_state_by_name_str ElectricityState.NONE
+[Condition] is_state_by_name_str("ElectricityState.NONE")
 [actors] agathe avatar.flipped
 [text]
 agathe:Wie reizend! Ich bin auch gleich mit Kris und Veronika verabredet.
@@ -158,8 +153,7 @@ agathe:Es ist zwar etwas mühsamer, auf dem Balkon zu kochen, aber ich koche so 
 - [jump] ChemieUndKochen
 
 [[Node]] MarmeladeFuerAvatar
-[Condition]
-npc_karma_higher_than agathe 0.8
+[Condition] npc_karma_higher_than("agathe",0.8)
 [actors] agathe avatar.flipped
 [text]
 agathe:Ganz besonders Marmelade.
@@ -245,8 +239,7 @@ agathe:Wir sind mit Booten durch die Straßen gefahren. Wie in Venedig!
 - [jump] dialogFlutMood3
 
 [[Node]] dialogFlutMood3
-[Condition]
-npc_mood_less_than agathe MID
+[Condition] npc_is_sad("agathe")
 [actors] agathe avatar.flipped
 [text]
 agathe:Meine Eltern haben mich damals gefragt, ob ich ihr Haus übernehmen will.
@@ -255,8 +248,7 @@ agathe:Als ich ablehnte, sind sie umgezogen. Renovieren war ihnen zu viel Arbeit
 agathe:Schade eigentlich.
 
 [[Node]] dialogFlutMood2
-[Condition]
-npc_mood_equal agathe MID
+[Condition] and_bool(not_bool(npc_is_happy("agathe")), not_bool(npc_is_sad("agathe")))
 [actors] agathe avatar.flipped
 [text]
 agathe:Wir waren tagelang ohne sauberes Trinkwasser.
@@ -264,8 +256,7 @@ agathe:Alle Vorräte im Keller vernichtet.
 agathe:Das ist etwas, was ich damals gelernt habe. Hier oben sind immer Notfallvorräte.
 
 [[Node]] dialogFlutMood1
-[Condition]
-npc_mood_higher_than agathe MID
+[Condition] npc_is_happy("agathe")
 [actors] agathe avatar.flipped
 [text]
 agathe:Ich habe noch im Kopf, wie mein Bruder sich im Boot aufstellte und anfing zu singen.
@@ -320,8 +311,6 @@ agathe:Wer hat denn schon die Zeit, alles von Grund auf zuzubereiten?
 agathe:Nein, den Stress spare ich mir.
 
 [[Node]] trade
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[action] request_trade_gui("agathe")
 
 [end]

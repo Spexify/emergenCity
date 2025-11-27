@@ -73,9 +73,7 @@ avatar:Ich könnte dir bei der Eroberung helfen.
 - [jump] gemeinsam_erkunden_klappt_nicht
 
 [[Node]] gemeinsam_erkunden_klappt
-[Condition]
-npc_karma_higher_than irena 0.7
-npc_friendship_higher_than irena 4
+[Condition] and_bool(npc_karma_higher_than("irena",0.7),npc_friendship_higher_than("irena",4))
 [actors] avatar irena.flipped
 [text]
 irena:Okay. Du bist Mission Control!
@@ -105,13 +103,11 @@ irena:Alles bereit!
 [[Node]] IrenaBeschaeftigt
 [actors] avatar irena.flipped petro.flipped
 [text]
-[action]
-- ActCons.progress_day ["Mit Irena den Weltraum erobern"]
+[action] progress_day()"Mit Irena den Weltraum erobern")
 petro:Lieb von dir, mit Irena zu spielen.
 petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.
 petro:Vielleicht hilft dir das hier weiter.
-[action]
-- ActCons.add_item_question [["BATTERIES", {"question":"Diese %s kann man immer mal gebrauchen.","answere":"","decline":"Einpacken"}]]
+[action] gain_player_item("BATTERIES", "Batterien kann man immer mal gebrauchen!")
 
 [[Node]] talk4
 [actors] avatar irena.flipped
@@ -125,19 +121,19 @@ irena:Hihi. Das ist gut.
 [[Node]] talk5
 [actors] avatar irena.flipped
 [text]
-[if]
-npc_friendship_less_than irena 9
-[then]
-irena:Magst du Fisch?
-[Choice]
-- [mag_fisch] Na klar.
-- [mag_keinen_fisch] Nein.
-[else]
-irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
-avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
-irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
-irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
-[end]
+[if] npc_friendship_less_than("irena",9)
+    [then]
+        [text]
+        irena:Magst du Fisch?
+        [Choice]
+        - [mag_fisch] Na klar.
+        - [mag_keinen_fisch] Nein.
+    [else]
+        [text]
+        irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
+        avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
+        irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
+        irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
 
 [[Node]] mag_keinen_fisch
 [actors] avatar irena.flipped

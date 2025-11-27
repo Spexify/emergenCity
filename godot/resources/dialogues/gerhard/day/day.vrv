@@ -89,7 +89,7 @@ friedel:Wuff!
 
 
 [[Node]] talk4
-[Condition] npc_mood_less_than("gerhard", "MID")
+[Condition] npc_is_sad("gerhard")
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
@@ -113,8 +113,7 @@ gerhard:Nicht wahr, Friedel?
 friedel:[i]*Hechel.*[/i] Wuff!
 
 [[Node]] talk6
-[Condition]
-[action] crisis_is("Duerre")
+[Condition] crisis_is("Duerre")
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Wie läuft es bei dir?
@@ -128,8 +127,7 @@ gerhard:Ich weiß, du kannst nichts dafür. Aber du magst es doch auch, wenn bei
 friedel:Wuff!
 
 [[Node]] talk7
-[Condition]
-[action] crisis_is("Hochwasser")
+[Condition] crisis_is("Hochwasser")
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Zu viel Sonne ist nicht gut für meinen Garten.
@@ -223,9 +221,7 @@ gerhard:Kris weiß wirklich eine Menge über Pflanzen. Wir teilen gerne unsere E
 - besuche_ok
 
 [[Node]] besuche_schoen
-[Condition]
-npc_karma_higher_than gerhard 0.5
-npc_friendship_higher_than gerhard 8
+[Condition] and_bool(npc_karma_higher_than("gerhard",0.5), npc_friendship_higher_than("gerhard",8))
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Und auf deine Besuche freuen wir uns auch immer. Nicht wahr, Friedel?
@@ -233,8 +229,7 @@ friedel:Wuff!
 avatar:Ich mich auch!
 
 [[Node]] besuche_ok
-[Condition]
-npc_karma_higher_than gerhard 0
+[Condition] npc_karma_higher_than("gerhard",0)
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Und du kommst ja auch oft vorbei.

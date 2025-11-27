@@ -28,6 +28,7 @@ veronika:Ciao!
 veronika:Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...
 kris:Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!
 [actors] avatar veronika kris.flipped
+[text]
 veronika:Du verstehst aber unter 'Planen' auch nur 'Snacks einkaufen'.
 kris:Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!
 veronika:Aber auch nur, wenn du bis dahin welche übrig gelassen hast.
@@ -53,9 +54,7 @@ veronika:Deshalb haben wir immer Chlortabletten vorrätig. Für den Campingurlau
 veronika:Abkochen geht natürlich auch, aber dafür bräuchte man wieder Strom oder Gas.
 kris:Vero hat sich da schon alles mögliche angeschaut. Filtersysteme, Tabletten...
 kris:Meinen Pflanzen macht das dreckige Wasser meist nichts aus. Die sind viel anspruchsloser als wir.
-[action]
-- npc=self.get_self []
-- Score.add_score ["tip", {"source": "veronika1"}]
+[action] add_score ["tip", {"source": "veronika1"}]
 
 [[Node]] talk4
 [actors] avatar veronika.flipped kris.flipped
@@ -67,9 +66,7 @@ kris:Oh ja, Vero war wirklich sauer. Wir haben uns ewig gestritten.
 veronika:Stellt sich raus, einmal aufgekocht werden Nudeln auch im warmen Wasser gar, dauert nur länger.
 kris:Und du willst wirklich nicht in Veros Nähe sein, wenn sie hungrig ist.
 veronika:Dann kannst du ja froh sein, dass das Gas noch zum Aufkochen gereicht hat!
-[action]
-- npc=self.get_self []
-- Score.add_score ["tip", {"source": "veronika2"}]
+[action] add_score ["tip", {"source": "veronika2"}]
 
 [[Node]] talk5
 [actors] avatar veronika.flipped
@@ -85,6 +82,7 @@ veronika:Wenn du immer auf das Schlimmste vorbereitet bist, gibt es keine bösen
 veronika:Ja, aber zumindest auf die wahrscheinlichsten Risiken.
 veronika:Kris würde auch unvorbereitet in die Wildnis losziehen.
 [actors] avatar veronika.flipped kris.flipped
+[text]
 kris:He! Würde ich nicht.
 veronika:Ich gebs zu, das war übertrieben. Aber du machst dir kaum Gedanken darüber, was alles passieren kann.
 kris:Doch. Ich hab immer alles über die Gegend und ihre Gefahren gelesen. Und mit Locals geredet.
@@ -103,8 +101,10 @@ veronika:Ich gebs auf.
 [text]
 veronika:Nicht wahr? Kris beschwert sich manchmal, dass ich so negativ bin. Aber ich bin einfach nur vorbereitet.
 [actors] avatar veronika.flipped kris.flipped
+[text]
 kris:Wenn du mich fragst, sorgt das einfach nur dafür, dass du dich nicht auf irgendwas freuen kannst.
 [actors] avatar veronika kris.flipped
+[text]
 veronika:Ich freue mich auf unseren Urlaub!
 kris:Echt? Das hör ich zum ersten Mal. Sonst erzählst du mir nur von deinen Sorgen.
 kris:'Was, wenn der Strom ausfällt, und wir unsere Akkus vor der Fahrt nicht laden können?'
@@ -119,16 +119,16 @@ kris:Ich lass mich lieber überraschen und wenns doch böse wird, geh ich damit 
 [text]
 veronika:Letztes Wochenende waren wir wandern.
 veronika:Bei nebligem Wetter kann man wunderbare Fotos machen. Mystische Stimmung. Gestalten im Nebel.
-[if]
-#kids_on_trail true
-[then]
-veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
-veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
-[set] #kids_on_trail false
-[else]
-veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!
-veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
-[end]
+[if] eq_bool(#kids_on_trail,true)
+    [then]
+        [text]
+        veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
+        veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
+        [set] #kids_on_trail false
+    [else]
+        [text]
+        veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!
+        veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
 veronika:Ich habe einige eindrucksvolle Fotos geschossen, von Sonnenstrahlen, die sich als Lichtkegel durch den Nebel filtern.
 veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografieren.
 
@@ -137,20 +137,18 @@ veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografi
 [text]
 veronika:Ich bin so müde ...
 avatar:Mach doch ein Nickerchen.
-[if]
-npc_friendship_higher_than veronika 10
-[then]
-veronika:Das hat Kris auch schon gesagt.
-veronika:Vielleicht habt ihr Recht ...
-[else]
-[random]
-[jump] cant_sleep
-[jump] wont_sleep
-[end]
+[if] npc_friendship_higher_than("veronika",10)
+    [then]
+        [text]
+        veronika:Das hat Kris auch schon gesagt.
+        veronika:Vielleicht habt ihr Recht ...
+    [else]
+        [random]
+        - [jump] cant_sleep
+        - [jump] wont_sleep
 
 [[Node]] cant_sleep
-[Condition]
-npc_mood_less_than veronika MID
+[Condition] npc_is_sad("veronika")
 [actors] avatar veronika.flipped
 [text]
 veronika:Kann nicht schlafen. Sonst wär ich auch nicht so müde.
@@ -178,8 +176,6 @@ veronika:Absolut ...
 
 [[Node]] trade
 [Prompt] Handeln
-[action]
-- npc=self.get_self []
-- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+[action] request_trade_gui("veronika")
 
 [end]
