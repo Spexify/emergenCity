@@ -10,7 +10,10 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 0.65,
-				"small_talk": "res://resources/dialogues/petro/small_talk.vrv"
+				"small_talk": "res://resources/dialogues/petro/small_talk.vrv",
+				"paths": {
+					"day": "res://resources/dialogues/petro/day/"
+				}
 			},
 			"trading": {
 				"preferences": {

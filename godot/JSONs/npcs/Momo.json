@@ -8,7 +8,8 @@
 		},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.8
+				"pitch": 0.8,
+				"day": "res://resources/dialogues/momo/day.vrv"
 			}
 		},
 		"stage": {

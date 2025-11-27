@@ -9,7 +9,10 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 1.0,
-				"small_talk": "res://resources/dialogues/kris/small_talk.vrv"
+				"small_talk": "res://resources/dialogues/kris/small_talk.vrv",
+				"paths": {
+					"day": "res://resources/dialogues/kris/day/"
+				}
 			}
 		},
 		"stage": {
