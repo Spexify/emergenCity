@@ -25,6 +25,12 @@ func call_method(method_name: String, args: Array) -> Variant:
 func has_method_name(method_name: String) -> bool:
 	return method_cache.has(method_name)
 
+func and_bool(a: bool, b: bool) -> bool:
+	return a and b
+
+func or_bool(a: bool, b: bool) -> bool:
+	return a or b
+
 func add(a: int, b: int) -> int:
 	return a + b
 

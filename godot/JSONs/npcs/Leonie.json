@@ -8,7 +8,8 @@
 		},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.95
+				"pitch": 0.95,
+				"small_talk": "res://resources/dialogues/leonie/small_talk.vrv"
 			}
 		},
 		"stage": {

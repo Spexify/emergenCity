@@ -9,6 +9,8 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 1.3,
+				"small_talk": "res://resources/dialogues/julia/small_talk.vrv",
+				"day": "res://resources/dialogues/julia/day/day.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/julia/day/"
 				}

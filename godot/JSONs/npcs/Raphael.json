@@ -9,7 +9,8 @@
 		"karma": {},
 		"interaction": {
 			"conversation": {
-				"pitch": 0.7
+				"pitch": 0.7,
+				"small_talk": "res://resources/dialogues/raphael/small_talk.vrv"
 			},
 			"trading": {
 				"preferences": {

@@ -10,6 +10,7 @@
 		"interaction":{
 			"conversation": {
 				"pitch": 0.75,
+				"small_talk": "res://resources/dialogues/elias/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/elias/day/"
 				}

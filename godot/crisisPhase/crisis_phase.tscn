@@ -340,11 +340,12 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 script = ExtResource("1_r1qqu")
 metadata/_custom_type_script = "uid://d3edunqiuj2ih"
 
-[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr")]
+[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr", "_score")]
 script = ExtResource("40_ak664")
 _gui_mngr = NodePath("../GUI")
 _stage_mngr = NodePath("../StageMngr")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
+_score = NodePath("../EMC_Scoreboard")
 metadata/_custom_type_script = "uid://daje87lka1imw"
 
 [connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]

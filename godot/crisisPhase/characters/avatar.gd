@@ -20,7 +20,7 @@ const PITCH: float = 1.0
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
 
-const MAX_STATUS: int = EMC_DayMngr.TIME_PRE_DAY/3*10*3
+const MAX_STATUS: int = 8 #EMC_DayMngr.TIME_PRE_DAY/3*10*3
 
 var INIT_FOOD: int = MAX_STATUS/2
 var INIT_DRINK: int = MAX_STATUS/2
@@ -32,8 +32,8 @@ var _drink_status: int = 0
 var _health_status: int = 0
 var _social_status: int = 0
 
-var _food_decay: int = 3
-var _drink_decay: int = 3
+var _food_decay: int = 1
+var _drink_decay: int = 1
 var _health_decay: int = 1
 var _social_decay: int = 1
 
@@ -132,10 +132,10 @@ func _apply_delta() -> void:
 
 func advance_time(delta: int) -> void:
 	begin_batch()
-	modify_food_delta(-_food_decay*delta)
-	modify_drink_delta(-_drink_decay*delta)
-	modify_health_delta(-_health_decay*delta)
-	modify_social_delta(-_social_decay*delta)
+	modify_food_delta(-_food_decay)
+	modify_drink_delta(-_drink_decay)
+	modify_health_delta(-_health_decay)
+	modify_social_delta(-_social_decay)
 	end_batch()
 
 #region old

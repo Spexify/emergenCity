@@ -3,13 +3,14 @@
 		"descr": {
 			"name": "Agathe",
 			"descr": "Das hier ist Agathe.\nSie macht aus jeder Krise eine Geschichte.",
-			"portait": "agathe"
+			"portait": "agathe",
 			"sprite": "agathe"
 		},
 		"karma": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 1.2,
+				"small_talk": "res://resources/dialogues/agathe/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/agathe/day/"
 				}

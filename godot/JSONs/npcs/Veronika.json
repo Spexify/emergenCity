@@ -9,7 +9,8 @@
 		"karma": {},
 		"interaction": {
 			"conversation": {
-				"pitch": 1.1
+				"pitch": 1.1,
+				"small_talk": "res://resources/dialogues/veronika/small_talk.vrv"
 			},
 			"trading": {
 				"inventory": {

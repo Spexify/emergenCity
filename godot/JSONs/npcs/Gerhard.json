@@ -11,6 +11,7 @@
 			"conversation": {
 				"pitch": 0.5,
 				"day": "res://resources/dialogues/gerhard/day/day.vrv",
+				"small_talk": "res://resources/dialogues/gerhard/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/gerhard/day/",
 					"quest": "res://resources/dialogues/gerhard/quest/"

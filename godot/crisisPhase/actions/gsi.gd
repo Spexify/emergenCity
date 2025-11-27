@@ -4,6 +4,7 @@ class_name EMC_GSI
 @export var _gui_mngr: EMC_GUIMngr
 @export var _stage_mngr: EMC_StageMngr
 @export var _day_mngr: EMC_DayMngr
+@export var _score: EMC_Scoreboard
 
 func request_trade_gui(npc_name: String) -> bool:
 	var npc: EMC_NPC = _stage_mngr.get_NPC(npc_name)
@@ -26,3 +27,15 @@ func get_pitch(char_name: String) -> float:
 
 func get_period_count() -> int:
 	return _day_mngr.get_period_count()
+
+func set_tutorial(value: bool) -> bool:
+	Global._tutorial_done = value
+	return value
+	
+func request_gui(gui_name: String, args: Array) -> bool:
+	_gui_mngr.request_gui(gui_name, args)
+	return true
+
+func add_score(log_name: String, context: Dictionary) -> bool:
+	_score.add_score(log_name, context)
+	return true

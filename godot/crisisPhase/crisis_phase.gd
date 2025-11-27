@@ -26,6 +26,7 @@ var _backpack: EMC_Inventory# = Global.get_inventory()
 @onready var _scoreboard: EMC_Scoreboard = $EMC_Scoreboard
 @onready var _builtin: EMC_Builtin = $EMC_Builtin
 
+@onready var emc_gsi: EMC_GSI = $EMC_GSI
 
 ########################################## PUBLIC METHODS ##########################################
 
@@ -119,8 +120,9 @@ func _ready() -> void:
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
 		var tutorial: VRV_Script = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
-		tutorial._start_npc = stage_mngr.get_NPC("julia")
-		tutorial._start_npc_name = "julia"
+		#tutorial._start_npc = stage_mngr.get_NPC("julia")
+		#tutorial._start_npc_name = "julia"
+		tutorial.gsi = emc_gsi
 		_gui_mngr.request_gui("DialogueGui", [tutorial])
 		#_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
 
