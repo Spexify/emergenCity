@@ -62,6 +62,7 @@ const DEFAULT_COLOR := Color(1, 1, 1)
 	"consumed" : "",
 	}
 @export var texture: AtlasTexture = preload("res://resources/Items/item_atlas.tres")
+@export var dimensions: Array[Array] = [[1, 1]]
 
 ########################################## PUBLIC METHODS ##########################################
 func _init() -> void:

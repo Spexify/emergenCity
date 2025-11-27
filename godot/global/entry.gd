@@ -1,6 +1,8 @@
 extends Node
 
 func _ready() -> void:
+	OS.request_permission("android.permission.MANAGE_EXTERNAL_STORAGE")
+	
 	Global.set_started_from_entry_scene()
 	JsonMngr.load_items()
 	JsonMngr.load_upgardes()

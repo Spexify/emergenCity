@@ -2,19 +2,18 @@
 	"comp": {
 		"descr": {
 			"name": "Momo",
-			"descr": "Das hier ist Momo.\nSie ist super.",
-			"portait": "momo"
+			"descr": "Das hier ist Momo.\nSie findet, Erwachsene eignen sich prima als Kratzbäume.",
+			"portait": "momo",
+      "sprite": "momo"
 		},
-		"sprite": {
-			"texture_name": "momo"
-		},
-		"save": {},
 		"interaction": {
 			"conversation": {
 				"pitch": 0.8
 			}
 		},
 		"stage": {
+			"stage_name": "apartment_mert",
+			"position": {"x": 480, "y": 760},
 			"start": "ApartmentMert",
 			"positions": {
 				"ApartmentMert": { "x": 480, "y": 760 },

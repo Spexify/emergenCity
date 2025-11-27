@@ -1,0 +1,16 @@
+[[Node]] start
+[random]
+- [jump] one
+- [jump] two
+
+[[Node]] one
+[set] @yes 6
+[jump] two
+
+[[Node]] two
+[match] @yes
+- [4] [action] output("No WAY")
+- [6] [action] output("Ofcourse")
+[jump] end
+
+[[Node]] end

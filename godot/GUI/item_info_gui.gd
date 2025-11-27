@@ -10,11 +10,11 @@ const UX_BUTTON = preload("res://util/UX_button.tscn")
 
 @onready var buttons: HBoxContainer = $Panel/Margin/VBC/HBC/Buttons
 
-func open(sender: EMC_Item, p_buttons: Array[Dictionary] = []) -> void:
+func open(sender: EMC_Item, p_buttons: Array = []) -> void:
 	for button in buttons.get_children():
 		button.queue_free()
 	
-	for button_dict in p_buttons:
+	for button_dict: Dictionary in p_buttons:
 		if not button_dict.has_all(["text", "callback", "design"]):
 			printerr("In ItemInfoGui: missing button entries!")
 			

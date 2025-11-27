@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name EMC_NPC
+class_name EMC_NPC_1
 
 signal clicked(p_NPC: EMC_NPC)
 
@@ -62,7 +62,7 @@ func get_act_cond() -> EMC_ActionConstraints:
 func get_scoreboard() -> EMC_Scoreboard:
 	return _day_mngr._scoreboard
 
-func get_self() -> EMC_NPC:
+func get_self() -> EMC_NPC_1:
 	return self
 
 func _get_sys_by_name(sys_name: String) -> Variant:

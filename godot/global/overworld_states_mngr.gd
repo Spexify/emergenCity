@@ -36,6 +36,8 @@ const state_to_icon: Dictionary = {
 }
 #endregion
 
+signal game_won
+
 var _upgrades: Array[EMC_Upgrade]
 
 var _difficulty_crisis : Difficulty
@@ -160,7 +162,7 @@ func begin_batch() -> void:
 	
 func end_batch() -> void:
 	_batch_depth = max(_batch_depth - 1, 0)
-	if _batch_depth == 0:
+	if _batch_depth == 0 and not facility_states.is_empty():
 		_calculate_all_effective_states(facility_states.keys().max())
 
 func add_state_layer_int(state: String, id: String, value: int, _t: int = 0) -> void:
@@ -348,6 +350,9 @@ func next_day(t: int) -> void:
 	facility_states.erase(t-1)
 	flags.erase(t-1)
 	_crisis_description.erase(t-1)
+	
+	if t > OverworldStatesMngr.get_crisis_length():
+		game_won.emit()
 
 func ask_OSM_api(dict: Dictionary) -> bool:
 	if dict.has("state"):

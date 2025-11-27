@@ -163,9 +163,10 @@ theme_override_styles/tab_selected = ExtResource("4_yink0")
 theme_override_styles/tab_hovered = ExtResource("4_s4rwf")
 theme_override_styles/tab_unselected = ExtResource("4_ksqq8")
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Inventory" type="PanelContainer" parent="VBC/Inventories"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 metadata/_tab_index = 0
@@ -175,7 +176,6 @@ custom_minimum_size = Vector2(416, 230)
 layout_mode = 2
 
 [node name="Trader" type="PanelContainer" parent="VBC/Inventories"]
-visible = false
 custom_minimum_size = Vector2(448, 262)
 layout_mode = 2
 size_flags_horizontal = 4

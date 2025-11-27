@@ -61,6 +61,7 @@ func reload() -> void:
 
 func _on_item_long_pressed(sender: EMC_Item, blocked: bool, text: String, callback: Callable, design: String) -> void:
 	#_display_info(sender)
+	sender.clicked_sound()
 	canvas_modulate.show()
 	var info: Array[Dictionary]
 	info.assign([] if blocked else [{"text": text, "callback": callback, "design": design}])
@@ -69,6 +70,7 @@ func _on_item_long_pressed(sender: EMC_Item, blocked: bool, text: String, callba
 	#callback.call(sender)
 
 func _on_shop_item_clicked(sender: EMC_Item) -> void:
+	sender.clicked_sound()
 	canvas_modulate.hide()
 	#item_info_gui.hide()
 	
@@ -90,6 +92,7 @@ func _on_shop_item_clicked(sender: EMC_Item) -> void:
 
 func _on_inventory_item_clicked(sender : EMC_Item) -> void:
 	canvas_modulate.hide()
+	sender.clicked_sound()
 	#item_info_gui.hide()
 	
 	#_display_info(sender)

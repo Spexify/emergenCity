@@ -2,13 +2,10 @@
 	"comp": {
 		"descr": {
 			"name": "Petro",
-			"descr": "Das hier ist Petro.\nEr ist lieb.",
-			"portait": "petro"
+			"descr": "Das hier ist Petro.\nEr ist überzeugt, jedes Problem verdient eine technische Lösung.",
+			"portait": "petro",
+      "sprite": "petro"
 		},
-		"sprite": {
-			"texture_name": "petro"
-		},
-		"save": {},
 		"karma": {},
 		"interaction": {
 			"conversation": {
@@ -26,6 +23,8 @@
 			}
 		},
 		"stage": {
+			"stage_name": "mansion",
+			"position": {"x": 300, "y": 832},
 			"start": "Mansion",
 			"positions": {
 				"Mansion": { "x": 300, "y": 832 },

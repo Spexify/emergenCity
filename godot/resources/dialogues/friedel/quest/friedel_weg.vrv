@@ -1,4 +1,4 @@
-[Node] start
+[[Node]] start
 [Condition]
 has_quest FRIEDEL_WEG
 [random]
@@ -6,7 +6,7 @@ has_quest FRIEDEL_WEG
 - [jump] stage_2
 - [jump] stage_5
 
-[Node] stage_1
+[[Node]] stage_1
 [Condition]
 quest_has_stage FRIEDEL_WEG 1
 is_current_stage market
@@ -20,7 +20,7 @@ friedel:Wuff
 - [jump] mobile
 - [jump] offline1
 
-[Node] stage_5
+[[Node]] stage_5
 [Condition]
 quest_has_stage FRIEDEL_WEG 5
 is_current_stage market
@@ -34,7 +34,7 @@ friedel:Wuff
 - [jump] mobile
 - [jump] offline1
 
-[Node] offline1
+[[Node]] offline1
 [Condition]
 is_state_by_name_str MobileNetState.OFFLINE
 [actors] avatar friedel
@@ -46,10 +46,10 @@ friedel:Wuff
 - idiot
 - lieb
 
-[Node] mobile
+[[Node]] mobile
 [Condition]
 is_state_by_name_str MobileNetState.ONLINE
-[actors] avatar gerhard.t
+[actors] avatar gerhard.flipped
 [text]
 gerhard:Hallo, Gerhard am Apparat.
 avatar:Hi Gerhard, ich hab hier gerade Friedel auf dem Marktplatz gefunden!
@@ -60,19 +60,19 @@ gerhard:Ich bin gerade zu Hause. Du kannst ihn also gerne vorbei bringen.
 - idiot
 - lieb
 
-[Node] idiot
+[[Node]] idiot
 [Prompt] Nicht Helfen
 [action]
 - OSM.add_quest_str ["FRIEDEL_WEG", "4"]
 
-[Node] lieb
+[[Node]] lieb
 [Prompt] Friedel nach Hause bringen
-[actors] avatar gerhard.t
+[actors] avatar gerhard.flipped
 [text]
 avatar:Ja, ich kann ihn gerne gerade vorbeibringen.
 [jump] stop
 
-[Node] stage_2
+[[Node]] stage_2
 [Condition]
 quest_has_stage FRIEDEL_WEG 2
 is_current_stage market
@@ -84,7 +84,7 @@ avatar:Komm mit mir, wir gehen jetzt zum Treffpunkt.
 friedel:Wuff
 [jump] stop
 
-[Node] stop
+[[Node]] stop
 [action]
 - ActCons.change_stage_by_dict [{"stage_name": "gardenhouse","avatar_pos": {"x": 150, "y": 900},"wait": true}]
 - OSM.add_quest_str ["FRIEDEL_WEG", "3"]

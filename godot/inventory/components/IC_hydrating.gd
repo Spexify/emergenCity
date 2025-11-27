@@ -12,7 +12,7 @@ func _init(_p_hydration_change : int = 0) -> void:
 	_hydration_change = _p_hydration_change
 
 func consume(p_avatar : EMC_Avatar) -> void:
-	p_avatar.update_hydration(self.get_hydration_change())	
+	p_avatar.modify_drink_delta(self.get_hydration_change())
 
 ## Get the internal nutritionness value
 func get_hydration_change() -> int:
@@ -21,7 +21,7 @@ func get_hydration_change() -> int:
 
 ## Get the hydration value scaled to fit real-life units
 func get_unit_hydration_change() -> int:
-	return get_hydration_change() * EMC_Avatar.UNIT_FACTOR_HYDRATION
+	return get_hydration_change() * EMC_IC_Food.UNIT_FACTOR
 
 
 ## RENAME WITH CAUTION: It overrides superclass method!

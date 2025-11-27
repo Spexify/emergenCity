@@ -28,12 +28,15 @@ const ACTION_LOG_UI = preload("res://GUI/action_log_ui.tscn")
 @onready var heart_cross: TextureRect = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Heart/Cross
 @onready var smile_cross: TextureRect = $SummaryWindow/MarginContainer/VBC/PCStatus/HBC/Smile/Cross
 
-
-
 @onready var main_menu: Button = $SummaryWindow/MarginContainer/VBC/MainMenu
 
 func _ready() -> void:
 	hide()
+	
+	water.max_value = EMC_Avatar.MAX_STATUS
+	food.max_value = EMC_Avatar.MAX_STATUS
+	heart.max_value = EMC_Avatar.MAX_STATUS
+	smile.max_value = EMC_Avatar.MAX_STATUS
 	
 	
 	## NOTICE: Code to debug animations when running current scene
@@ -88,10 +91,10 @@ func open(p_won : bool, _avatar : EMC_Avatar) -> void:
 	heart.value = 0
 	
 	tween.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
-	tween.tween_property(smile, "value", _avatar.get_happiness_status()*10, status_time)
-	tween.parallel().tween_property(water, "value", _avatar.get_hydration_status()*10, status_time)
-	tween.parallel().tween_property(food, "value", _avatar.get_nutrition_status()*10, status_time)
-	tween.parallel().tween_property(heart, "value", _avatar.get_health_status()*10, status_time)
+	tween.tween_property(smile, "value", _avatar._social_status, status_time)
+	tween.parallel().tween_property(water, "value", _avatar._drink_status, status_time)
+	tween.parallel().tween_property(food, "value", _avatar._food_status, status_time)
+	tween.parallel().tween_property(heart, "value", _avatar._health_status, status_time)
 	
 	water_cross.modulate = Color(1, 1, 1, 0)
 	food_cross.modulate = Color(1, 1, 1, 0)
@@ -99,13 +102,13 @@ func open(p_won : bool, _avatar : EMC_Avatar) -> void:
 	smile_cross.modulate = Color(1, 1, 1, 0)
 	
 	tween.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
-	if _avatar.get_hydration_status() == 0:
+	if _avatar._drink_status == 0:
 		tween.tween_property(water_cross, "modulate", Color(1, 1, 1, 1), 0.1)
-	if _avatar.get_nutrition_status() == 0:
+	if _avatar._food_status == 0:
 		tween.tween_property(food_cross, "modulate", Color(1, 1, 1, 1), 0.1)
-	if _avatar.get_health_status() == 0:
+	if _avatar._health_status == 0:
 		tween.tween_property(heart_cross, "modulate", Color(1, 1, 1, 1), 0.1)
-	if _avatar.get_happiness_status() == 0:
+	if _avatar._social_status == 0:
 		tween.tween_property(smile_cross, "modulate", Color(1, 1, 1, 1), 0.1)
 	
 	tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)

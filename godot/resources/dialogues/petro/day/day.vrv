@@ -1,0 +1,92 @@
+[[Node]] start
+[actors] avatar petro.flipped
+[text]
+petro:Moin!
+petro:Alles klar bei dir, kommst du gut durch die Krise?
+[Choice]
+- talk
+- stop
+
+[[Node]] talk
+[Prompt] Ja, wie läuft's bei dir?
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[[Node]] stop
+[Prompt] Bis denne!
+[actors] avatar petro.flipped
+[text]
+petro:Tschö!
+
+[[Node]] talk1
+[actors] avatar petro.flipped
+[text]
+petro:Meine Liebe für die Luftfahrt färbt schon auf Irena ab.,
+petro:Vielleicht sollte ich nicht ständig gedanklich abheben und eher [i]bodenständiger[/i] bleiben.,
+avatar:Haha. Naja, bis dann.,
+petro:Tschö, mit Ö.
+
+[[Node]] talk2
+[actors] avatar petro.flipped
+[text]
+petro:In letzter Zeit überlege ich, ob wir nicht Drohnen einsetzen könnten, um die Bevölkerung zu versorgen.,
+petro:Irre Idee, nicht?
+[Choice]
+- irre
+- spannend
+
+[[Node]] irre
+[Prompt] Klingt unrealistisch.
+[actors] avatar petro.flipped
+[text]
+petro:Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?
+
+[[Node]] spannend
+[Prompt] Schon spannend.
+[jump]
+- befreundet
+- nicht_befreundet
+
+[[Node]] befreundet
+[Condition]
+npc_friendship_higher_than petro 4
+[actors] avatar petro.flipped
+[text]
+petro:Wusste ich doch, dass dich das auch begeistert!
+
+[[Node]] nicht_befreundet
+[actors] avatar petro.flipped
+[text]
+petro:Ich merke, wir verstehen uns!
+
+[[Node]] talk3
+[actors] avatar petro.flipped
+[text]
+petro:Ich dachte mal, ich werde Pilot. Aber wie das Leben so spielt...,
+petro:Dass ich mal als Journalist arbeiten würde, hätte ich nie gedacht.,
+petro:Und Youtube und Blogs gab es noch gar nicht, als ich damals fliegen wollte.,
+petro:Aber ich liebe meine Arbeit,
+avatar:Bist du mal geflogen?,
+petro:Selbst? Nein. Das war nie mehr als ein Wunsch.,
+petro:Vielleicht kommt Irenas Wunsch, Pilot zu werden, eigentlich von mir.
+
+[[Node]] talk4
+[actors] avatar petro.flipped
+[text]
+petro:Es ist faszinierend, wenn man über die technologischen Fortschritte des letzten Jahrhunderts nachdenkt.,
+petro:Und trotzdem verwenden wir noch viele alte Technologien, weil sie so robust sind.,
+petro:Die Funktechnologie zum Beispiel. Keine komplexe Software, einfach nur Physik.,
+petro:Sowas braucht es, während einer Krise. Einfache Dinge, die immer noch funktionieren.,
+avatar:Stimmt schon.
+
+
+[[Node]] trade
+[Prompt] Hast du was zu tauschen?
+[action]
+- npc=self.get_self []
+- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+
+[end]

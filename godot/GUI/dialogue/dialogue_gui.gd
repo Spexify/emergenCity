@@ -1,8 +1,11 @@
 class_name EMC_Dialogue_GUI
 extends EMC_GUI
 
-@export var stage_mngr : EMC_StageMngr
-@export var checker: EMC_ActionConstraints
+#@export var stage_mngr : EMC_StageMngr
+#@export var checker: EMC_ActionConstraints
+#@export var score: EMC_Scoreboard
+
+@export var gsi: EMC_GSI
 
 @onready var portrait_box : HBoxContainer = $Portraits
 @onready var dialogue_box : RichTextLabel = $Margin/VSplitContainer/TextPanel/Box
@@ -44,7 +47,7 @@ func set_actor_portraits(portraits: Array[Texture2D], names: Array[String], flip
 			text_rect.name = "none"
 		i += 1
 
-func open(dialogue: VRV_Dialogue) -> void:
+func open(dialogue: VRV_Script) -> void:
 	if dialogue.is_empty():
 		opened.emit()
 		close.call_deferred()
@@ -54,20 +57,21 @@ func open(dialogue: VRV_Dialogue) -> void:
 	self.show()
 	
 	opened.emit()
-	dialogue.set_api(stage_mngr, checker)
+	#dialogue.set_api(stage_mngr, checker)
+	dialogue.gsi = gsi
 	start.call_deferred(dialogue)
 
 func close() -> void:
 	self.hide()
 	closed.emit(self)
 
-func start(dialogue : VRV_Dialogue) -> void:
+func start(dialogue : VRV_Script) -> void:
 	vbc.hide()
 	margin.show()
 	
 	while true:
 		match dialogue.get_next():
-			[VRV_Dialogue.TEXT, var text, var eager]:
+			[VRV_Script.TEXT, var text, var eager]:
 				var talk_effect := EMC_RichTextTalkEffect.new()
 				#dialogue_box.install_effect(talk_effect)
 				var promise := EMC_Util.Promise.new([talk_effect.finished, skip.pressed], EMC_Util.Promise.signal_or_name)
@@ -75,9 +79,8 @@ func start(dialogue : VRV_Dialogue) -> void:
 				var i: int = 0
 				for entry: Dictionary in text:
 					var speaker: String = entry.get("speaker")
-					if speaker == "@npc" and not dialogue._start_npc_name.is_empty():
-						speaker = dialogue._start_npc_name
 					var line: String = entry.get("line")
+					var pitch: float = entry.get("pitch")
 					# highlight speaking actor
 					for portrait : TextureRect in portrait_box.get_children():
 						if portrait.name == speaker.to_lower():
@@ -92,11 +95,10 @@ func start(dialogue : VRV_Dialogue) -> void:
 					dialogue_box.append_text(speaker.capitalize() + ":")
 					dialogue_box.newline()
 					talk_effect.set_char_count(regex.sub(line, "", true).length())
-					if speaker == "avatar" or speaker == "erzähler":
-						dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : 1.0})
-					else:
-						var pitch: float = dialogue._start_npc.get_comp(EMC_NPC_Conversation).get_pitch()
-						dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : pitch})
+					#if speaker == "avatar" or speaker == "erzähler":
+						#dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : 1.0})
+					#else:
+					dialogue_box.push_customfx(talk_effect, {"speed" : 32.0, "pitch" : pitch})
 					dialogue_box.append_text(line)
 					dialogue_box.pop()
 
@@ -117,7 +119,7 @@ func start(dialogue : VRV_Dialogue) -> void:
 					
 					i += 1
 					
-			[VRV_Dialogue.CHOICE, var choices]:
+			[VRV_Script.CHOICE, var choices]:
 				var promise: EMC_Util.Promise
 				var signals: Array[Signal]
 				var i : int = 0
@@ -139,17 +141,20 @@ func start(dialogue : VRV_Dialogue) -> void:
 				await promise.complete
 				vbc.hide()
 				margin.show()
-			[VRV_Dialogue.ACTORS, var textures, var names, var flip]:
+				
+			[VRV_Script.ACTORS, var textures, var names, var flip]:
 				set_actor_portraits(textures, names, flip)
-			[VRV_Dialogue.END, _]:
+				
+			[VRV_Script.END, _]:
 				break
 			_:
 				break
-				
+	
+	#score.add_score("tip", {"source": dialogue._start_npc_name})
 	close()
 
 func _disconnect_buttons() -> void:
 	for button: Button in vbc.get_children():
 		for conn: Dictionary in button.pressed.get_connections():
-			if (conn["callable"] as Callable).get_object() is VRV_Dialogue:
+			if (conn["callable"] as Callable).get_object() is VRV_Script:
 				button.pressed.disconnect(conn["callable"])
