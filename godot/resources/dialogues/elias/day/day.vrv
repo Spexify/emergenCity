@@ -1,5 +1,5 @@
 [[Node]] start
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Hi
 [random]
@@ -7,7 +7,7 @@ elias:Hi
 - [jump] branchRedet
 
 [[Node]] branchRedetNicht
-[Condition] and(npc_mood_less_than("elias", "SAD"), npc_karma_less_than("elias", -0.8))
+[Condition] and_bool(npc_mood_less_than("elias", "SAD"), npc_karma_less_than("elias", -0.8))
 [actors] avatar elias.t
 [text]
 elias:Brauchen Sie was?
@@ -17,13 +17,14 @@ elias:Brauchen Sie was?
 - stop
 
 [[Node]] no_time
-[actors] avatar elias.t
+[Prompt] Reden
+[actors] avatar elias.flipped
 [text]
 elias:Dafür hab ich gerade keine Zeit.,
 elias:Sorry.
 
 [[Node]] branchRedet
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Brauchen Sie was?
 [Choice]
@@ -50,7 +51,7 @@ elias:Brauchen Sie was?
 [jump] talk
 
 [[Node]] talk1
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Gefällt Ihnen meine Einrichtung?
 [Choice]
@@ -59,14 +60,14 @@ elias:Gefällt Ihnen meine Einrichtung?
 
 [[Node]] EinrichtungGefaellt
 [Prompt] Ja
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 avatar:Ja, gefällt mir gut.
 elias:Endlich jemand mit Geschmack in dieser Katastrophe von einer Stadt.
 
 [[Node]] EinrichtungGefaelltNicht
 [Prompt] Naja
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 avatar:Sie wirkt etwas unpersönlich.
 elias:Ha! Sie sind genau wie die alte Tante, von der ich die Wohnung übernommen habe.
@@ -75,7 +76,7 @@ elias:Wollte ihrer Nostalgie frönen. Oder so ähnlich.
 elias:Als sie die Couch gesehen hat, dachte ich, sie kriegt nen Herzinfarkt. Hab sie nicht mehr hier gesehen.
 
 [[Node]] talk2
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Ich weiß nicht, warum ich hierher gezogen bin.
 elias:Wie soll man bei diesen ständigen Internetausfällen vernünftig arbeiten?
@@ -86,7 +87,7 @@ elias:Ich bin Geschäftsmann! Diese Krisen sind unkalkulierbare Risiken!
 
 [[Node]] WarumHergezogen
 [Prompt] Warum dann herziehen?
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 avatar:Warum sind Sie dann hergezogen?
 elias:Frag ich mich auch...
@@ -98,7 +99,7 @@ elias:Frag ich mich auch...
 [[Node]] dialog2Mood1
 [Condition]
 npc_mood_higher_than elias MID
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Mein Vater kam von hier.
 elias:Hat immer von der Stadt geschwärmt. Wollte immer zurück.
@@ -109,7 +110,7 @@ elias:Ich schätze, ich war einfach neugierig.
 [[Node]] ZuVielErzaehlt
 [Condition]
 npc_karma_less_than elias 0.5
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Aber warum erzähle ich Ihnen das überhaupt? Das geht Sie gar nichts an.
 elias:Gehen Sie, damit ich meine gute Laune nicht noch verliere!
@@ -117,7 +118,7 @@ elias:Gehen Sie, damit ich meine gute Laune nicht noch verliere!
 [[Node]] dialog2Mood2
 [Condition]
 npc_mood_equal elias MID
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:...
 elias:Mein Vater hat hier mal gewohnt.
@@ -127,27 +128,27 @@ elias:Ich schätze, es braucht keinen guten Grund, nur die Gelegenheit.
 [[Node]] dialog2Mood3
 [Condition]
 npc_mood_less_than elias MID
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Irgendein sentimentaler Unsinn.
 elias:Auf den Spuren meines Vaters. So ein Quatsch.
 
 [[Node]] Wegziehen
 [Prompt] Warum nicht wegziehen?
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 avatar:Warum ziehen Sie dann nicht weg?
 elias:Sollte ich vielleicht.
 
 [[Node]] talk3
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Ich hatte heute wieder ein Meeting, in dem einer nie zum Ende kam.
 elias:Keine Ahnung, was er gesagt hat. Ich hab parallel Mails beantwortet.
 elias:Aber sowas regt mich auf. Zeit ist Geld! Es gibt Leute, die das einfach nicht begreifen!
 
 [[Node]] talk4
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Ich hab mir einen neuen E-Scooter geleistet.
 elias:Unbezahlbar die Dinger.
@@ -157,7 +158,7 @@ elias:Aber es spart so viel Zeit, mit dem Scooter zu fahren, statt zu Fuß zu ge
 
 [[Node]] trade
 [Prompt] Handeln
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Für ein gutes Tauschgeschäft bin ich immer zu haben!
 [action]

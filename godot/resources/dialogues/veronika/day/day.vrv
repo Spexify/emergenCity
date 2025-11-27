@@ -1,0 +1,78 @@
+[[Node]] start
+[actors] avatar veronika.flipped
+[text]
+veronika: Hi! Alles klar bei dir?
+[Choice]
+- talk
+- stop
+
+[[Node]] talk
+[Prompt] Wie läuft's?
+[random]
+- [jump] talk1
+- [jump] talk2
+- [jump] talk3
+- [jump] talk4
+
+[[Node]] stop
+[Prompt] Tschüss!
+[actors] avatar veronika.flipped
+[text]
+veronika:Ciao!
+
+[[Node]] talk1
+[actors] avatar veronika.flipped kris.flipped
+[text]
+veronika:Wir planen gerade unseren nächsten Camping-Ausflug! Na gut, eigentlich plane ich ihn ...,
+kris:Das habe ich gehört! Ich helfe sehr wohl auch beim Planen!,
+[actors] avatar veronika kris.flipped
+veronika:Du verstehst aber unter 'Planen' auch nur 'Snacks einkaufen'.,
+kris:Wenn du das nächste Mal mitten in einer Wanderung Hunger kriegst, wirst du um jeden Snack froh sein!,
+veronika:Aber auch nur, wenn du bis dahin welche übrig gelassen hast.,
+kris:...,
+veronika:...,
+kris:Ich kaufe noch ein paar mehr ein.
+
+[[Node]] talk2
+[actors] avatar veronika.flipped
+[text]
+veronika:Ich liebe die Fotografie.,
+veronika:Aber du hättest meine ersten Fotos sehen sollen! Zwanzigmal dasselbe platte Motiv!,
+veronika:Ich hatte Angst, dass das Foto nichts wird. Damals hatte ich noch eine analoge Kamera.,
+veronika:Mein Vater hat trotzdem Abzüge von allen gemacht. Und dann hat er mich mitgenommen auf einen Spaziergang.,
+veronika:Und mir drei Tipps verraten, die bis heute meine besten Bilder ausmachen.
+
+[[Node]] talk3
+[actors] avatar veronika.flipped kris.flipped
+[text]
+veronika:Als Kind dachte ich, man dürfte aus klaren Bächen trinken.,
+veronika:In Kinderbüchern machen sie das oft so. Aber die meisten Bäche sind verschmutzt.,
+veronika:Deshalb haben wir immer Chlortabletten vorrätig. Für den Campingurlaub oder wenn das Wasser ausfällt.,
+veronika:Abkochen geht natürlich auch, aber dafür bräuchte man wieder Strom oder Gas.,
+kris:Vero hat sich da schon alles mögliche angeschaut. Filtersysteme, Tabletten...,
+kris:Meinen Pflanzen macht das dreckige Wasser meist nichts aus. Die sind viel anspruchsloser als wir.
+[action]
+- npc=self.get_self []
+- Score.add_score ["tip", {"source": "veronika1"}]
+
+[[Node]] talk4
+[actors] avatar veronika.flipped kris.flipped
+[text]
+veronika:Bei einem unserer ersten Campingwochenenden sind Kris uns ich ganz schön aneinander geraten.,
+veronika:Ich hatte Kris gebeten, vor dem Ausflug die Gaskartusche zu prüfen. Ob das Gas noch reicht.,
+veronika:Kris hat es vergessen. Die Nudeln hatten grade 30 Sekunden gekocht, da war das Gas alle.,
+kris:Oh ja, Vero war wirklich sauer. Wir haben uns ewig gestritten.,
+veronika:Stellt sich raus, einmal aufgekocht werden Nudeln auch im warmen Wasser gar, dauert nur länger.,
+kris:Und du willst wirklich nicht in Veros Nähe sein, wenn sie hungrig ist.,
+veronika:Dann kannst du ja froh sein, dass das Gas noch zum Aufkochen gereicht hat!
+[action]
+- npc=self.get_self []
+- Score.add_score ["tip", {"source": "veronika2"}]
+
+[[Node]] trade
+[Prompt] Handeln
+[action]
+- npc=self.get_self []
+- gui_mngr.request_gui ["Trade", ["$result.npc"]]
+
+[end]

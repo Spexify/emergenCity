@@ -1,0 +1,32 @@
+[[Node]] start
+[[Type]] stage
+[Condition]
+is_current_stage home
+[actors] agathe avatar.flipped
+[text]
+agathe:Hallo Schätzchen! Ich habe noch ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen?
+[Choice]
+- ja
+- nein
+
+[[Node]] ja
+[Prompt] Ja.
+[actors] agathe avatar.flipped
+[text]
+avatar:Klar, gerne!,
+agathe:Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten.,
+agathe:Solche Frisuren waren damals total angesagt ...,
+[action]
+- ActCons.progress_day ["Mit Agathe plaudern"]
+agathe:Ach ja, ich habe viel zu viel Obst gekauft und mehr Marmelade gekocht als ich selbst essen kann.,
+agathe:Magst du ein Glas haben?,
+avatar:Oh ja, danke!
+[action]
+- ActCons.add_item_question [["JAM", {"question":"Diese %s ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.","answere":"","decline":"Einpacken"}]]
+
+[[Node]] nein
+[Prompt] Nein.
+[actors] agathe avatar.flipped
+[text]
+avatar:Tut mir leid, das passt mir gerade nicht gut.,
+agathe:Oh, hast du gerade keine Zeit? Schade. Dann vielleicht ein andermal.

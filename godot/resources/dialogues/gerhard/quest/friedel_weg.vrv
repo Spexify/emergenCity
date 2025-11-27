@@ -1,24 +1,24 @@
-[Node] start
+[[Node]] start
 [Condition]
 has_quest FRIEDEL_WEG
 [random]
 - [jump] stage_5
 - [jump] stage_3
 
-[Node] stage_5
+[[Node]] stage_5
 [Condition]
 quest_has_stage FRIEDEL_WEG 5
 is_current_stage home
-[actors] avatar gerhard.t
+[actors] avatar gerhard.flipped
 [text]
 gerhard:Friedel ist schon wieder alleine losgezogen. Kannst du mir helfen ihn zu suchen?
 [Choice]
 - helfen
 - depp
 
-[Node] depp
+[[Node]] depp
 [Prompt] Neee
-[actors] avatar gerhard.t
+[actors] avatar gerhard.flipped
 [text]
 avatar:Das schaffst du schon alleine.
 gerhard:Oh Okay, schade. Ich suche dann mal weiter.
@@ -27,9 +27,9 @@ gerhard:Oh Okay, schade. Ich suche dann mal weiter.
 - ActCons.npc_change_stage [{"npc":"Friedel", "stage":"gardenhouse","wait":false}]
 - stage.change_stage ["gardenhouse", false]
 
-[Node] helfen
+[[Node]] helfen
 [Prompt] Suchen Helfen
-[actors] avatar gerhard.t
+[actors] avatar gerhard.flipped
 [text]
 avatar:Komm, wir suchen ihn zusammen.
 gerhard:Danke! Ich suche ihn im Park, schaust du dich auf dem Marktplatz um?
@@ -39,11 +39,11 @@ avatar:Alles klar!
 - OSM.add_quest_str ["FRIEDEL_WEG", "2"]
 - stage.change_stage ["park", false]
 
-[Node] stage_3
+[[Node]] stage_3
 [Condition]
 quest_has_stage FRIEDEL_WEG 3
 is_current_stage gardenhouse
-[actors] avatar friedel gerhard.t
+[actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Friedel! Da bist du ja. Du musst wirklich aufhören, mir solche Sorgen zu bereiten.
 friedel:Wuff!
