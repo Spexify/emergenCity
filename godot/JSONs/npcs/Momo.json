@@ -9,7 +9,10 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 0.8,
-				"day": "res://resources/dialogues/momo/day.vrv"
+				"day": "res://resources/dialogues/momo/day/day.vrv",
+				"paths": {
+					"day": "res://resources/dialogues/momo/day/"
+				}
 			}
 		},
 		"stage": {

@@ -9,6 +9,7 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 0.9,
+				"day": "res://resources/dialogues/mert/day/day.vrv",
 				"small_talk": "res://resources/dialogues/mert/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/mert/day/"

@@ -9,6 +9,7 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 1.3,
+				"day": "res://resources/dialogues/irena/day/day.vrv",
 				"small_talk": "res://resources/dialogues/irena/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/irena/day/"
