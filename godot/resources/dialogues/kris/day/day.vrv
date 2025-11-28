@@ -2,7 +2,6 @@
 [actors] avatar kris.flipped
 [text]
 kris:Oh, hey!
-kris:Was geht?
 [Choice]
 - [talk] Was geht?
 - [stop] Man sieht sich!
