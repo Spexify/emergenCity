@@ -73,7 +73,7 @@ veronika:Dann kannst du ja froh sein, dass das Gas noch zum Aufkochen gereicht h
 [text]
 veronika:Wenn du immer auf das Schlimmste vorbereitet bist, gibt es keine bösen Überraschungen.
 [Choice]
-- [skeptic_bad_surprises] Aber man kann doch gar nicht auf alles vorbereitet sein.
+- [skeptic_bad_surprises] Auf alles vorbereitet sein geht doch nicht.
 - [acknowledging_bad_surprises] Das stimmt wohl.
 
 [[Node]] skeptic_bad_surprises
@@ -84,6 +84,8 @@ veronika:Kris würde auch unvorbereitet in die Wildnis losziehen.
 [actors] avatar veronika.flipped kris.flipped
 [text]
 kris:He! Würde ich nicht.
+[actors] avatar veronika kris.flipped
+[text]
 veronika:Ich gebs zu, das war übertrieben. Aber du machst dir kaum Gedanken darüber, was alles passieren kann.
 kris:Doch. Ich hab immer alles über die Gegend und ihre Gefahren gelesen. Und mit Locals geredet.
 veronika:Okay, aber was, wenn du nicht weißt, wo du bist, und der Empfang ist weg?
@@ -94,6 +96,8 @@ veronika:Kann mich nicht erinnern.
 kris:Eben. Ich bin vorbereitet. Ich mach mir nur keinen Kopf.
 veronika:... Das endet trotzdem oft im Chaos. Im Alltag zumindest. Du hast auch schon Wäsche mit dem Fön trocknen müssen, weil du vergessen hast, zu waschen.
 kris:Joa. Ging aber doch.
+[actors] avatar veronika.flipped kris.flipped
+[text]
 veronika:Ich gebs auf.
 
 [[Node]] acknowledging_bad_surprises
