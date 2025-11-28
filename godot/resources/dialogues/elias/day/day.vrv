@@ -1,18 +1,18 @@
 [[Node]] start
 [actors] avatar elias.flipped
 [text]
-elias:Hi
+elias:Hi.
 [random]
 - [jump] branchRedetNicht
 - [jump] branchRedet
 
 [[Node]] branchRedetNicht
 [Condition] and_bool(npc_is_sad("elias"), npc_karma_less_than("elias", -0.8))
-[actors] avatar elias.t
+[actors] avatar elias.flipped
 [text]
 elias:Brauchen Sie was?
 [Choice]
-- [no_time] Reden.
+- [no_time] Nein, lass uns reden!
 - [trade] Handeln.
 - [stop] Nö.
 
@@ -29,7 +29,9 @@ elias:Brauchen Sie was?
 [Choice]
 - [talk] Nein, lass uns reden!
 - [trade] Handeln.
-- [stop]
+- [stop] Nö.
+
+[[Node]] stop
 
 [[Node]] talk
 [jump] cooldown
