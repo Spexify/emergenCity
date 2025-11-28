@@ -6,7 +6,7 @@
 		"descr": "Sauberes Trinkwasser. Eignet sich auch zum Kochen oder Waschen.",
 		"comps": [
 			{"name": "cost", "params": 10},
-			{"name": "drink", "params": 1},
+			{"name": "drink", "params": 2},
 			{"name": "value", "params": 2}
 		]
 	},

@@ -118,6 +118,12 @@ func load_state(data : Dictionary) -> void:
 	npcs.assign(data.get("npcs", JsonMngr.load_NPC()))
 	_setup_NPCs(npcs)
 
+func request_spot(spot_name: String) -> Node2D:
+	if spot_name == "middle":
+		var n := Node2D.new()
+		n.global_position = get_stage().reserve_spawn_pos(Vector2(250, 500))
+		return n
+	return Node2D.new()
 
 func get_NPC(p_NPC_name: String) -> EMC_NPC:
 	return NPCs.get_node(p_NPC_name.to_pascal_case())

@@ -12,6 +12,7 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 0.5,
+				"small_talk": "res://resources/dialogues/friedel/small_talk.vrv",
 				"paths": {
 					"1day": "res://resources/dialogues/friedel/day/",
 					"quest": "res://resources/dialogues/friedel/quest/"

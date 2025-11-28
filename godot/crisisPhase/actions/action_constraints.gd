@@ -150,7 +150,7 @@ func constraint_has_item(p_ID: EMC_Item.IDs) -> String:
 		return NO_REJECTION
 	else:
 		var item := EMC_Item.make_from_id(p_ID)
-		return "Du brauchst " + item.get_name() + " dafür!"
+		return "Du brauchst " + item.get_item_name() + " dafür!"
 		
 func has_item(item_name: String) -> bool:
 	return _inventory.has_item(JsonMngr.item_name_to_id(item_name))
@@ -161,7 +161,7 @@ func has_item_by_name(p_name : String) -> String:
 		return NO_REJECTION
 	else:
 		var item := EMC_Item.make_from_id(id)
-		return "Du brauchst " + item.get_name() + " dafür!"
+		return "Du brauchst " + item.get_item_name() + " dafür!"
 
 
 func avatar_is_home(p_reason : String = "") -> String:

@@ -20,7 +20,7 @@ func setup(dict: Dictionary) -> void:
 		day_dialogue = ResourceLoader.load(dialogue_path, "VRV_Script")
 		day_dialogue.ended.connect(set_context)
 	
-	dialogue_path = dict.get("samll_talk", "")
+	dialogue_path = dict.get("small_talk", "")
 	if dialogue_path.is_empty():
 		small_talk = ResourceLoader.load("res://resources/dialogues/small_talk/one.vrv", "VRV_Script", ResourceLoader.CACHE_MODE_IGNORE)
 	else:
