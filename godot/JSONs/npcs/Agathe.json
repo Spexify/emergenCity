@@ -10,6 +10,7 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 1.2,
+				"day": "res://resources/dialogues/agathe/day/day.vrv",
 				"small_talk": "res://resources/dialogues/agathe/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/agathe/day/"

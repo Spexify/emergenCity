@@ -30,8 +30,7 @@ mert:Bin heute Abend noch mit Petro beim Training verabredet. Er hat wirklich gu
 mert:Manchmal ist es schwer, eine Routine zu entwickeln, wenn Einsätze dazwischen kommen. Aber das THW ist mir wichtiger als die Routine.
 
 [[Node]] five
-[Condition]
-npc_mood_higher_than mert SAD
+[Condition] not_bool(npc_is_sad("mert"))
 [actors] avatar mert.flipped
 [text]
 mert:Wunderbarer Tag. Es gibt so viel Gutes im Leben, wenn man nur darauf achtet.

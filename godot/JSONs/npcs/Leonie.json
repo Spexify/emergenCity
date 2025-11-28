@@ -9,7 +9,11 @@
 		"interaction": {
 			"conversation": {
 				"pitch": 0.95,
-				"small_talk": "res://resources/dialogues/leonie/small_talk.vrv"
+				"day": "res://resources/dialogues/leonie/day/day.vrv",
+				"small_talk": "res://resources/dialogues/leonie/small_talk.vrv",
+				"paths": {
+					"day": "res://resources/dialogues/leonie/day/"
+				}
 			}
 		},
 		"stage": {
