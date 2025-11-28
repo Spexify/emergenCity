@@ -140,7 +140,7 @@
 					{
 						"npc": "friedel",
 						"stage": "market",
-						"wait": false
+						"spot": "middle"
 					}
 				]
 			}

@@ -30,7 +30,7 @@ func open(sender: EMC_Item, p_buttons: Array = []) -> void:
 	
 	# Item Name
 	item_name.clear()
-	item_name.append_text("[color=black]" + sender.get_name() + "[/color]")
+	item_name.append_text("[color=black]" + sender.get_item_name() + "[/color]")
 	
 	#Components of item
 	var comps := sender.get_comps()

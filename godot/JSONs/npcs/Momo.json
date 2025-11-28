@@ -10,6 +10,7 @@
 			"conversation": {
 				"pitch": 0.8,
 				"day": "res://resources/dialogues/momo/day/day.vrv",
+        "small_talk": "res://resources/dialogues/momo/small_talk.vrv",
 				"paths": {
 					"day": "res://resources/dialogues/momo/day/"
 				}

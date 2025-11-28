@@ -153,7 +153,7 @@ agathe:Es ist zwar etwas mühsamer, auf dem Balkon zu kochen, aber ich koche so 
 - [jump] ChemieUndKochen
 
 [[Node]] MarmeladeFuerAvatar
-[Condition] npc_karma_higher_than("agathe",0.8)
+[Condition] npc_karma_higher_than("agathe", 0.8)
 [actors] agathe avatar.flipped
 [text]
 agathe:Ganz besonders Marmelade.

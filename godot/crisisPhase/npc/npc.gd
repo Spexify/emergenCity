@@ -37,7 +37,7 @@ func _ready() -> void:
 	
 func change_stage(stage_name: String, slot: Node2D) -> void:
 	var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
-	npc_stage.set_stage("stage_name", slot)
+	npc_stage.change_stage(stage_name, slot)
 	global_position = slot.global_position
 
 func _on_stage_changed(stage_name: String) -> void:

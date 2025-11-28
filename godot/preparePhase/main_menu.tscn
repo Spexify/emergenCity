@@ -139,6 +139,7 @@ theme_override_font_sizes/font_size = 40
 text = "Neues Spiel starten"
 
 [node name="Scenario" parent="Menu/CanvasLayer_unaffectedByCM/CenterContainer/GameButtons" instance=ExtResource("7_57rlv")]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40

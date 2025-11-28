@@ -19,7 +19,7 @@ func _ready() -> void:
 	var sprite := TextureRect.new()
 	sprite.set_texture(item.get_texture())
 	content.add_child(sprite)
-	item_name.set_text(item.get_name())
+	item_name.set_text(item.get_item_name())
 	
 	for child in _child_recipe:
 		add_child(child)

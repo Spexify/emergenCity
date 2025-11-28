@@ -24,7 +24,7 @@ p_needs_heat : bool) -> void:
 	var sprite := TextureRect.new()
 	sprite.set_texture(item.get_texture())
 	$HBoxContainer.add_child(sprite)
-	$HBoxContainer/RichTextLabel.text = item.get_name()
+	$HBoxContainer/RichTextLabel.text = item.get_item_name()
 
 func get_input_item_IDs() -> Array[EMC_Item.IDs]:
 	return _input_item_IDs
