@@ -17,13 +17,13 @@ agathe:Mir scheint, du hast dich gut eingelebt. Das freut mich.
 [[Node]] two
 [actors] avatar agathe.flipped
 [text]
-agathe:Meine Nichte ist diese Woche noch nicht hier gewesen. Wohl wieder viel zu tun.
-agathe:Ich wünschte, sie wäre weniger arbeitswütig als ich, damals. Ich war wohl ein schlechtes Vorbild.
+agathe:Meine Nichte ist diese Woche noch nicht hier gewesen. Sie hat wohl wieder viel zu tun.
+agathe:Ich wünschte, sie wäre weniger arbeitswütig als ich damals. Ich war wohl ein schlechtes Vorbild.
 
 [[Node]] three
 [actors] avatar agathe.flipped
 [text]
-agathe:Meine Eltern hatten ständig zu tun, um unser Haus vor Hochwasser zu schützen. Deshalb liebe ich es, so weit oben zu wohnen.
+agathe:Als ich ein Kind war, waren meine Eltern ständig damit beschäftigt, unser Haus vor Hochwasser zu schützen. Deshalb liebe ich es, so hoch oben zu wohnen.
 
 [[Node]] four
 [actors] avatar agathe.flipped
@@ -33,13 +33,13 @@ agathe:Ich bin froh, dass du auch so viel Wert auf gute Nachbarschaft legst.
 [[Node]] five
 [actors] avatar agathe.flipped
 [text]
-agathe:Meine Großmutter hat damals Marmelade eingekocht und Gemüse eingelegt. Von ihr habe ich meine Rezepte.
+agathe:Meine Großmutter hat früher Marmelade eingekocht und Gemüse eingelegt. Von ihr stammen auch meine Rezepte.
 agathe:Ich habe sie natürlich vereinfacht.
 
 [[Node]] six
 [actors] avatar agathe.flipped
 [text]
-agathe:Leonie und Julia haben mich gefragt, ob ich an einem Buchclub interessiert wäre. Ich habe gesagt, es kommt auf die Bücher an.
+agathe:Leonie und Julia haben mich gefragt, ob ich an einem Buchclub teilnehmen möchte. Ich habe gesagt, es kommt auf die Bücher an, die sie lesen.
 agathe:Du könntest auch mitmachen.
 
 [[Node]] seven
