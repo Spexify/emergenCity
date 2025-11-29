@@ -54,7 +54,7 @@ veronika:Deshalb haben wir immer Chlortabletten vorrätig. Für den Campingurlau
 veronika:Abkochen geht natürlich auch, aber dafür bräuchte man wieder Strom oder Gas.
 kris:Vero hat sich da schon alles mögliche angeschaut. Filtersysteme, Tabletten...
 kris:Meinen Pflanzen macht das dreckige Wasser meist nichts aus. Die sind viel anspruchsloser als wir.
-[action] add_score ["tip", {"source": "veronika1"}]
+[action] add_score("tip", {"source": "veronika1"})
 
 [[Node]] talk4
 [actors] avatar veronika.flipped kris.flipped
@@ -66,7 +66,7 @@ kris:Oh ja, Vero war wirklich sauer. Wir haben uns ewig gestritten.
 veronika:Stellt sich raus, einmal aufgekocht werden Nudeln auch im warmen Wasser gar, dauert nur länger.
 kris:Und du willst wirklich nicht in Veros Nähe sein, wenn sie hungrig ist.
 veronika:Dann kannst du ja froh sein, dass das Gas noch zum Aufkochen gereicht hat!
-[action] add_score ["tip", {"source": "veronika2"}]
+[action] add_score("tip", {"source": "veronika2"})
 
 [[Node]] talk5
 [actors] avatar veronika.flipped
@@ -174,8 +174,9 @@ veronika:Aber ich muss sagen, der Vergleich gefällt mir.
 avatar:Kris hat eine besondere Begabung, das Gute zu sehen und es anderen zu zeigen.
 veronika:Absolut ...
 
-[[Node]] trade
-[Prompt] Handeln
-[action] request_trade_gui("veronika")
+[Comment]
+    Ist das absichtlich nicht mehr Teil vom dialoge?
+    [[Node]] trade
+    [Prompt] Handeln
+    [action] request_trade_gui("veronika")
 
-[end]

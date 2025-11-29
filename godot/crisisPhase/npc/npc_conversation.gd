@@ -14,11 +14,11 @@ func set_owner(_owner: EMC_NPC) -> void:
 func setup(dict: Dictionary) -> void:
 	npc_pitch = dict.get("pitch", npc_pitch)
 	var dialogue_path: String = dict.get("day", "")
-	if dialogue_path.is_empty():
-		printerr("EMC_NPC_Conversation: Invalid path.")
-	else:
+	if not dialogue_path.is_empty():
 		day_dialogue = ResourceLoader.load(dialogue_path, "VRV_Script")
 		day_dialogue.ended.connect(set_context)
+	#elif OS.is_debug_build():
+		#printerr("EMC_NPC_Conversation: Invalid path.")
 	
 	dialogue_path = dict.get("small_talk", "")
 	if dialogue_path.is_empty():

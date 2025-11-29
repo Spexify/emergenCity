@@ -1,4 +1,7 @@
 [[Node]] start
+[action] output(get_var_or(@hello, 1.0))
+[set] @hello "Hello, World!"
+[action] output(get_var_or(@hello, "Oh No"))
 [random]
 - [jump] one
 - [jump] two

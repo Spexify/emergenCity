@@ -216,12 +216,11 @@ gerhard:Ich und einsam? Ich hab doch Friedel.
 friedel:Wuff!
 gerhard:Und ab und zu treffe ich junge Leute im Park. So wie dich und Kris.
 gerhard:Kris weiß wirklich eine Menge über Pflanzen. Wir teilen gerne unsere Erfahrungen.
-[jump]
-- besuche_schoen
-- besuche_ok
+[jump] besuche_schoen
+[jump] besuche_ok
 
 [[Node]] besuche_schoen
-[Condition] and_bool(npc_karma_higher_than("gerhard",0.5), npc_friendship_higher_than("gerhard",8))
+[Condition] and_bool(npc_karma_higher_than("gerhard", 0.5), npc_friendship_higher_than("gerhard", 8))
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Und auf deine Besuche freuen wir uns auch immer. Nicht wahr, Friedel?
@@ -229,7 +228,7 @@ friedel:Wuff!
 avatar:Ich mich auch!
 
 [[Node]] besuche_ok
-[Condition] npc_karma_higher_than("gerhard",0)
+[Condition] npc_karma_higher_than("gerhard", 0)
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Und du kommst ja auch oft vorbei.

@@ -30,5 +30,3 @@ julia:Wenn du Hilfe brauchst, komm einfach bei mir vorbei.
 [[Node]] info
 [action] request_gui("IconInformation", [])
 [action] set_tutorial(true)
-
-[end]

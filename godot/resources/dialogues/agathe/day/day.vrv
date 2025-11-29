@@ -312,5 +312,3 @@ agathe:Nein, den Stress spare ich mir.
 
 [[Node]] trade
 [action] request_trade_gui("agathe")
-
-[end]

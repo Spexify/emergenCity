@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://s5s2c8twanri" path="res://addons/vervain/test.gd" id="1_cqq1j"]
 [ext_resource type="Script" uid="uid://b3o5taqg4mgxm" path="res://addons/vervain/gsi.gd" id="1_fsge4"]
-[ext_resource type="Resource" uid="uid://dpqt8stwoiuwy" path="res://addons/vervain/test.vrv" id="2_dppyw"]
+[ext_resource type="Resource" uid="uid://c0ur6m46qklvf" path="res://resources/dialogues/petro/day/day.vrv" id="2_dppyw"]
 
 [node name="Test" type="Node"]
 script = ExtResource("1_cqq1j")

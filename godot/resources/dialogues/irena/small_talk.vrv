@@ -1,10 +1,10 @@
 [[Node]] start
-- [jump] starkregen
-- [jump] kein_starkregen
+[jump] starkregen
+[jump] kein_starkregen
 
 [[Node]] starkregen
 [Condition] crisis_is("Starkregen")
-[if] eq_bool(#visited_irena_talks_about_fear,true)
+[if] eq_bool(#visited_irena_talks_about_fear, true)
     [then]
         [text]
         irena:Ich mag so viel Regen nicht ...

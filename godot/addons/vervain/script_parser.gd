@@ -152,8 +152,9 @@ static func parse_sequence(directive: String, raw_inline_params: String, multili
 					var line: String = entry[case]["inline"]
 					var matches := get_node_level.search(line)
 					if matches == null:
-						printerr("Vervain error parsing line:\n%s" % line)
-						continue 
+						printerr("VRV_Script_Parser: parsing line:\n%s" % line)
+						return null
+						#continue 
 					var dir := matches.get_string(1)
 					var raw_inline := matches.get_string(2)
 					
@@ -188,8 +189,8 @@ static func parse_sequence(directive: String, raw_inline_params: String, multili
 					result.append({"id": id, "prompt": prompt})
 				
 				return result
-
-	push_warning("Missing directive or wrong parameter on line: %s directive: %s" % [line_nr+1, directive])
+				
+	EMC_Util.print_warn("VRV_Script_Parser: Missing directive or wrong parameter on line: %s directive: %s" % [line_nr+1, directive])
 	return {}
 
 static func parse_script(script: String) -> VRV_Script:
@@ -206,8 +207,8 @@ static func parse_script(script: String) -> VRV_Script:
 		if line.begins_with("[["):
 			var matches := get_file_level.search(line)
 			if matches == null:
-				printerr("Vervain error parsing line:\n%s" % line)
-				continue 
+				printerr("VRV_Script_Parser: parsing line:\n%s" % line)
+				return null
 			var directive := matches.get_string(1)
 			var name := matches.get_string(2) 
 			current_node_name = name
@@ -216,27 +217,39 @@ static func parse_script(script: String) -> VRV_Script:
 		elif line.begins_with("["):
 			var matches := get_node_level.search(line)
 			if matches == null:
-				printerr("Vervain error parsing line:\n%s" % line)
-				continue 
+				printerr("VRV_Script_Parser: parsing line:\n%s" % line)
+				return null
 			var directive := matches.get_string(1)
 			var raw_inline_param := matches.get_string(2)
 			var raw_multiline_params: Array[String] = []
-			for l: String in lines.slice(i+1):
+			
+			var tmp_lines = lines.slice(i+1)
+			for l: String in tmp_lines:
 				if l.begins_with("["):
 					break
 				i += 1
 				raw_multiline_params.append(l)
+			
 			var multiline_params := clean_multiline(raw_multiline_params)
 			
+			if directive == "Comment":
+				i += 1
+				continue
+				
+			var parsed_sequence := parse_sequence(directive, raw_inline_param, multiline_params, i)
+			if parsed_sequence == null:
+				return null
+				
 			if directive.to_lower() == directive:
 				if not result.nodes[current_node_name].has("sequence"):
 					result.nodes[current_node_name]["sequence"] = []
-				result.nodes[current_node_name]["sequence"].append({directive: parse_sequence(directive, raw_inline_param, multiline_params, i)})
+				result.nodes[current_node_name]["sequence"].append({directive: parsed_sequence})
 			else:
-				result.nodes[current_node_name][directive] = parse_sequence(directive, raw_inline_param, multiline_params, i)
+				result.nodes[current_node_name][directive] = parsed_sequence
 			
 		else:
-			printerr("Vervain error: What the hell did you do?")
+			printerr("VRV_Script_Parser: What the hell did you do?")
+			return null
 		
 		i += 1
 		

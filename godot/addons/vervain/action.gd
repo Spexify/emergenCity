@@ -5,7 +5,7 @@ class_name VRV_Action
 
 func execute(gsi: VRV_GSI, context: Dictionary = {}) -> Variant:
 	if ast.is_empty():
-		printerr("Action: Executed empty action")
+		printerr("VRV_Action: Executed empty action")
 		return null
 	
 	return _execute_helper(ast, gsi, context)
@@ -18,8 +18,7 @@ func _execute_helper(branch: Dictionary, gsi: VRV_GSI, context: Dictionary = {})
 			var name: String = branch.get("name", "")
 			var value: Variant = context.get(name, null)
 			if value == null:
-				printerr("Action: Variable with name %s not in context" % name)
-				return false
+				EMC_Util.print_warn("VRV_Action: Variable with name %s not in context" % name)
 			return value
 		"call":
 			var method_name: String = branch.get("name")
@@ -32,23 +31,23 @@ func _execute_helper(branch: Dictionary, gsi: VRV_GSI, context: Dictionary = {})
 					return gsi.call_method(method_name, args)
 				return false
 			else:
-				printerr("Action: No method of name %s" % method_name)
+				printerr("VRV_Action: No method of name %s" % method_name)
 				return false
 		"empty":
-			printerr("Action: Type not found in branch %s of action %s" % [branch, ast])
+			printerr("VRV_Action: Type not found in branch %s of action %s" % [branch, ast])
 			return false
 	
-	printerr("Action: Unrecognised type: %s" % [branch["type"]])
+	printerr("VRV_Action: Unrecognised type: %s" % [branch["type"]])
 	return null
 
 func _check_args(args: Array, expected: Array) -> bool:
 	if args.size() != expected.size():
-		printerr("Action: Parameter count missmatch is %s expected %s" % [args.size(), expected.size()])
+		printerr("VRV_Action: Parameter count missmatch is %s expected %s" % [args.size(), expected.size()])
 		return false
 		
 	for i: int in range(args.size()):
-		if typeof(args[i]) != expected[i]:
-			printerr("Action: Parameter type missmatch is %s expected %s" % [type_string(typeof(args[i])), type_string(expected[i])])
+		if typeof(args[i]) != expected[i] and expected[i] != 0:
+			printerr("VRV_Action: Parameter type missmatch is %s expected %s" % [type_string(typeof(args[i])), type_string(expected[i])])
 			return false
 	
 	return true

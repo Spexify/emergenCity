@@ -25,6 +25,11 @@ func call_method(method_name: String, args: Array) -> Variant:
 func has_method_name(method_name: String) -> bool:
 	return method_cache.has(method_name)
 
+func get_var_or(variable: Variant, value: Variant) -> Variant:
+	if variable:
+		return variable
+	return value
+
 func and_bool(a: bool, b: bool) -> bool:
 	return a and b
 
@@ -43,6 +48,6 @@ func eq_int(a: int, b: int) -> bool:
 func int_to_string(v: int) -> String:
 	return String.num(v)
 
-func output(stuff: String) -> String:
+func output(stuff: Variant) -> Variant:
 	print(stuff)
 	return stuff

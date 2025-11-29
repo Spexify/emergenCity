@@ -44,9 +44,13 @@ func _import(source_file, save_path, options, r_platform_variants, r_gen_files):
 		return FileAccess.get_open_error()
 
 	var line = file.get_as_text(true)
+	print("Vervain: Importing VRV_Script %s" % source_file)
 	var dialogue: VRV_Script = VRV_Script_Parser.parse_script(line) # VRV_Dialogue.parse_dialogue(line)
-	
-	return ResourceSaver.save(dialogue, "%s.%s" % [save_path, _get_save_extension()])
+	if dialogue != null:
+		EMC_Util.print_success("Vervain: Imported %s" % source_file)
+		return ResourceSaver.save(dialogue, "%s.%s" % [save_path, _get_save_extension()])
+	else:
+		printerr("Vervain: Import Failed %s" % source_file)
 
 func _get_priority():
 	return 1.0

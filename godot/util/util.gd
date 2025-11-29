@@ -1,5 +1,11 @@
 class_name EMC_Util
 
+static func print_warn(line: String) -> void:
+	print_rich("[color=#ffde66][b]● WARNING:[/b] %s[/color]" % line)
+
+static func print_success(line: String) -> void:
+	print_rich("[color=#8fffdb][b]● SUCCESS:[/b] %s[/color]" % line)
+
 static func combine_filters(f1 : Callable, f2 : Callable) -> Callable:
 	return \
 		func (value : Variant) -> bool:

@@ -46,9 +46,8 @@ petro:Irre Idee, nicht?
 petro:Naja, ist in großem Maßstab sicher noch schwierig. Aber es wäre eine riesige Hilfe, oder?
 
 [[Node]] spannend
-[jump]
-- befreundet
-- nicht_befreundet
+[jump] befreundet
+[jump] nicht_befreundet
 
 [[Node]] befreundet
 [Condition] npc_friendship_higher_than("petro",4)
@@ -190,8 +189,8 @@ petro:Ich gebe mir dann Mühe, mehr Zeit mit Irena zu verbringen. Aber gleichzei
 petro:Am schlimmsten ist es, wenn die Schule ausfällt und Irena den ganzen vormittag allein am Bildschirm hockt.
 petro:Zum Glück passiert das nur selten.
 
-[[Node]] trade
-[Prompt] Hast du was zu tauschen?
-[action] request_trade_gui("petro")
-
-[end]
+[Comment]
+    Ist das absichtlich nicht mehr Teil vom dialoge?
+    [[Node]] trade
+    [Prompt] Hast du was zu tauschen?
+    [action] request_trade_gui("petro")

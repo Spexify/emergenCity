@@ -9,7 +9,7 @@ static func parse(text: String) -> Variant:
 	pos = 0
 	var expr = parse_expr()
 	if pos < tokens.size():
-		printerr("ActionParser: Unexpected token: %s" % tokens[pos])
+		printerr("VRV_ActionParser: Unexpected token: %s" % tokens[pos])
 	return expr
 
 # -------------------------------------------------------
@@ -33,7 +33,7 @@ static func tokenize(text: String) -> Array:
 			while j < text.length() and text[j] != '"':
 				j += 1
 			if j >= text.length():
-				printerr("ActionParser: Unterminated string literal")
+				printerr("VRV_ActionParser: Unterminated string literal")
 			result.append(text.substr(i, j - i + 1))
 			i = j + 1
 		elif c == '{':
@@ -41,7 +41,7 @@ static func tokenize(text: String) -> Array:
 			while j < text.length() and text[j] != '}':
 				j += 1
 			if j >= text.length():
-				printerr("ActionParser: Unterminated json")
+				printerr("VRV_ActionParser: Unterminated json")
 			result.append(text.substr(i, j - i + 1))
 			i = j + 1
 		elif c == '[':
@@ -49,7 +49,7 @@ static func tokenize(text: String) -> Array:
 			while j < text.length() and text[j] != ']':
 				j += 1
 			if j >= text.length():
-				printerr("ActionParser: Unterminated array")
+				printerr("VRV_ActionParser: Unterminated array")
 			result.append(text.substr(i, j - i + 1))
 			i = j + 1
 		#elif c == '@':
@@ -65,7 +65,7 @@ static func tokenize(text: String) -> Array:
 			result.append(text.substr(i, j - i))
 			i = j
 		else:
-			printerr("ActionParser: Unexpected character: '%s'" % c)
+			printerr("VRV_ActionParser: Unexpected character: '%s'" % c)
 			i += 1
 
 	return result
@@ -90,7 +90,7 @@ static func parse_expr() -> Variant:
 		var json := JSON.new()
 		var error := json.parse(token)
 		if error != OK:
-			printerr("ActionParser: JSON Parse Error: ", json.get_error_message(), "in ", token)
+			printerr("VRV_ActionParser: JSON Parse Error: ", json.get_error_message(), "in ", token)
 			return {}
 		return {
 			"type": "json",
@@ -101,7 +101,7 @@ static func parse_expr() -> Variant:
 		var json := JSON.new()
 		var error := json.parse(token)
 		if error != OK:
-			printerr("ActionParser: JSON Parse Error: ", json.get_error_message(), "in ", token)
+			printerr("VRV_ActionParser: JSON Parse Error: ", json.get_error_message(), "in ", token)
 			return {}
 		return {
 			"type": "array",
@@ -135,7 +135,7 @@ static func parse_expr() -> Variant:
 	elif is_identifier(token):
 		return parse_identifier_or_call()
 
-	printerr("ActionParser: Unexpected expression token: %s" % token)
+	printerr("VRV_ActionParser: Unexpected expression token: %s" % token)
 	return null
 
 static func parse_identifier_or_call() -> Variant:
@@ -184,11 +184,11 @@ static func advance() -> void:
 
 static func expect(t: String) -> void:
 	if peek() != t:
-		printerr("ActionParser: Expected '%s' but found '%s'" % [t, peek()])
+		printerr("VRV_ActionParser: Expected '%s' but found '%s'" % [t, peek()])
 	advance()
 
 static func is_identifier(t: String) -> bool:
-	return t.length() > 0 and ((t.is_valid_ascii_identifier()) or t[0] == "@")
+	return t.length() > 0 and ((t.is_valid_ascii_identifier()) or t[0] == "@" or t[0] == "#")
 	
 static func is_valid_prim(ch: String) -> bool:
 	return ch.length() > 0 and not (ch == " " or ch == "\t" or ch == "\n" or ch == "\r" or ch == "(" or ch == ")" or ch == ",")

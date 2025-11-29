@@ -153,8 +153,10 @@ raphael:Aber ich sag dir was. In ner Krise brauchst du deine Mitmenschen. Die Co
 raphael:Wir Menschen, wir sitzen in einem Boot. Vergiss das nicht.
 avatar:Da hast du Recht.
 
-[[Node]] trade
-[Prompt] Handeln
-[action] request_trade_gui("raphael")
+[Comment]
+    Ist das absichtlich nicht mehr Teil vom dialoge?
+    [[Node]] trade
+    [Prompt] Handeln
+    [action] request_trade_gui("raphael")
 
-[end]
+

@@ -5,11 +5,10 @@
 [text]
 agathe:Hallo Schätzchen! Ich habe noch ein altes Fotobuch gefunden. Hast du Lust, dir das mit mir anzuschauen?
 [Choice]
-- ja
-- nein
+- [ja] Ja.
+- [nein] Nein.
 
 [[Node]] ja
-[Prompt] Ja.
 [actors] agathe avatar.flipped
 [text]
 avatar:Klar, gerne!
@@ -22,7 +21,6 @@ avatar:Oh ja, danke!
 [action] gain_player_item("JAM", "Diese Marmelade ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.")
 
 [[Node]] nein
-[Prompt] Nein.
 [actors] agathe avatar.flipped
 [text]
 avatar:Tut mir leid, das passt mir gerade nicht gut.

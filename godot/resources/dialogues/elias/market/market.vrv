@@ -4,11 +4,10 @@
 [text]
 elias:Hi. Auch zum Handeln hier?
 [Choice]
-- talk
-- stop
+- [talk] Wir könnten reden.
+- [stop] Ja
 
 [[Node]] talk
-[Prompt] Wir könnten reden.
 [actors] avatar elias.flipped
 [text]
 avatar:Eigentlich schon, aber wo ich Sie schon sehe, könnten wir uns ja kurz unterhalten.
@@ -19,7 +18,6 @@ avatar:Eigentlich schon, aber wo ich Sie schon sehe, könnten wir uns ja kurz un
 - [jump] talk4
 
 [[Node]] stop
-[Prompt] Ja
 [actors] avatar elias.flipped
 [text]
 elias:Gut. Hab eh keine Zeit.
@@ -65,5 +63,3 @@ elias:In der Großstadt passiert einem das nicht.
 elias:Da passieren auch nicht so viele Krisen.
 elias:Und man kann sich die Einkäufe nach Hause liefern lassen...
 elias:[i]Seufzt.[/i]
-
-[end]

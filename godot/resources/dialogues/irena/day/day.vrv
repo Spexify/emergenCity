@@ -103,7 +103,7 @@ irena:Alles bereit!
 [[Node]] IrenaBeschaeftigt
 [actors] avatar irena.flipped petro.flipped
 [text]
-[action] progress_day()"Mit Irena den Weltraum erobern")
+[action] progress_day("Mit Irena den Weltraum erobern")
 petro:Lieb von dir, mit Irena zu spielen.
 petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.
 petro:Vielleicht hilft dir das hier weiter.
@@ -210,4 +210,3 @@ irena:Er sagt, die wären eigentlich für ältere Kinder. Aber ich bin schon gan
 irena:Irgendwann bin ich besser als Papa.
 avatar:Bestimmt!
 
-[end]
