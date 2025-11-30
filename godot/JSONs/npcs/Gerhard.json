@@ -58,6 +58,8 @@
 		},
 		"stage": {
 			"stage_name": "gardenhouse",
+			"spot": "default",
+
 			"position": {
 					"x": 448,
 					"y": 380

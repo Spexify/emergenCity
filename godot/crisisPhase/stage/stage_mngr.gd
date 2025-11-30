@@ -7,9 +7,6 @@ class_name EMC_StageMngr
 ## Cell = An instanciated Tile of a Tileset on a Tilemap
 ## Tilemap = Many cells
 
-#signal city_map_opened
-#signal city_map_closed
-
 const STAGENAME_HOME: String = "home"
 #Public Locations:
 const STAGENAME_MARKET: String = "market"
@@ -25,29 +22,27 @@ const STAGENAME_APARTMENT_DEFAULT: String = "apartment_default"
 const STAGENAME_APARTMENT_MERT: String = "apartment_mert"
 const STAGENAME_APARTMENT_CAMPER: String = "apartment_camper"
 
-const _STAGE_SCN = preload("res://crisisPhase/stage/stage.tscn")
 
 signal npc_interaction(npc: EMC_NPC)
 signal stage_changed(stage_name: String)
-signal npc_act
+#signal npc_act
 
-@onready var _curr_stage: EMC_Stage 
-@onready var NPCs : Control = $NPCs
-
+# Cache of Stages and default stages 
+@export var _stages: Dictionary[String, PackedScene]
 @export var editor_stage: String = "home"
-
-### Stages
 
 @export var _avatar: EMC_Avatar
 @export var _day_mngr: EMC_DayMngr
 @export var _gui_mngr : EMC_GUIMngr
-@export var _crisis_phase: EMC_CrisisPhase
+
+@onready var stage_offset: Node2D = $StageOffset
+
+var _curr_stage: EMC_Stage
 
 var _last_click_position: Vector2 = Vector2.INF
 var _last_clicked_NPC: EMC_NPC = null
 
 var _initial_stage_name : String = "home"
-var _initial_npc : Dictionary = {}
 var _opt_event_mngr: EMC_OptionalEventMngr
 
 
@@ -56,165 +51,67 @@ var _opt_event_mngr: EMC_OptionalEventMngr
 func setup(p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_avatar.arrived.connect(_on_avatar_arrived)
 	_opt_event_mngr = p_opt_event_mngr
-	
-	_setup_stages()
 
-	if NPCs.get_child_count() == 0:
-		_setup_NPCs(JsonMngr.load_NPC())
-	
-	change_stage(_initial_stage_name, _initial_npc, false)
+	change_stage(_initial_stage_name, false)
 
 ## Change the stage to the one specified via [param p_stage_name]
 ## Wait: waits for the day transition to change_stage,
 ## if the stage change does not advance the day it should be set to false
-func change_stage(p_stage_name: String, override_spawn : Dictionary = {}, wait : bool = true) -> void:
-	#print("Want to change stage to: " + p_stage_name)
+func change_stage(p_stage_name: String, wait : bool = true) -> void:
 	if wait:
 		await _day_mngr.period_increased
-	if _curr_stage != null:
-		_curr_stage.unload_stage()
-	_curr_stage = $StageOffset.get_node(p_stage_name)
-	_curr_stage.load_stage(override_spawn)
-	_curr_stage.show_electricity()
-	#print("Change stage to: " + p_stage_name)
-	
+		
+	unload_stage()
+	load_stage(p_stage_name)
 	stage_changed.emit(get_curr_stage_name())
 
-func reload_stage() -> void:
-	_curr_stage._create_navigation_layer_tiles()
+func load_stage(stage_name: String) -> void:
+	if _curr_stage != null:
+		EMC_Util.print_warn("EMC_Stage_Mngr: fogot to unload stage!")
+		unload_stage()
 	
+	var _stage_scn: PackedScene
+	if not _stages.has(stage_name):
+		_stage_scn = (load("res://crisisPhase/stage/" + stage_name + ".tscn") as PackedScene)
+		_stages[stage_name] = _stage_scn
+	else:
+		_stage_scn = _stages[stage_name]
+		
+	_curr_stage = _stage_scn.instantiate()
+	stage_offset.add_child(_curr_stage)
+	_curr_stage.show_electricity()
+	
+func unload_stage() -> void:
+	if _curr_stage == null:
+		return
+		
+	stage_offset.remove_child(_curr_stage)
+	# Current Stage will not be free as a Reference still remains in _stages
+	_curr_stage = null
+
+func reload_state() -> void:
 	_curr_stage.show_electricity()
 
 func get_curr_stage_name() -> String:
 	return _curr_stage.name
 
-func get_curr_stage() -> TileMap:
-	return _curr_stage._stage
-
-func get_stage() -> EMC_Stage:
-	return _curr_stage
-
-## Returns a Dictonary cotaining every actives NPC position
-func get_all_active_npcs() -> Dictionary:
-	var data : Dictionary = {}
-	
-	for npc : EMC_NPC in NPCs.get_children():
-		if npc.visible:
-			data[npc.name] = {"x" : npc.position.x, "y" : npc.position.y}
-			
-	return data
-
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path" : get_path(),
 		"stage_name" : get_curr_stage_name(),
-		"npcs" : NPCs.get_children().map(func (npc: EMC_NPC) -> EMC_NPC_Resource: return npc.npc_resource), 
 	}
 	return data
 
 func load_state(data : Dictionary) -> void:
 	_initial_stage_name = data.get("stage_name", "home")
-	var npcs: Array[EMC_NPC_Resource]
-	npcs.assign(data.get("npcs", JsonMngr.load_NPC()))
-	_setup_NPCs(npcs)
 
-func request_spot(spot_name: String) -> Node2D:
-	if spot_name == "middle":
-		var n := Node2D.new()
-		n.global_position = get_stage().reserve_spawn_pos(Vector2(250, 500))
-		return n
-	return Node2D.new()
-
-func get_NPC(p_NPC_name: String) -> EMC_NPC:
-	return NPCs.get_node(p_NPC_name.to_pascal_case())
-
-## Remove all NPCs that are currently spawned
-func deactivate_NPCs() -> void:
-	for NPC: EMC_NPC in NPCs.get_children():
-		NPC.hide()
-
-func let_npcs_act() -> void:
-	pass
-	#var npcs := NPCs.get_children()
-	#npcs.shuffle()
-	#print("\n\nDay: " + str(_day_mngr.get_current_day()) + " Preiod: " + str(_day_mngr.get_current_day_period()))
-	#for npc : EMC_NPC in npcs:
-		#var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
-		#if brain:
-			#brain.act()
-#
-	#var i: int = 0
-	#while true:
-		#OverworldStatesMngr.npc_intention_swap()
-		#print("\n" + str(OverworldStatesMngr._npc_intention))
-		#print("\nIteration: " + str(i))
-		##OverworldStatesMngr.npc_intention_unchanged()
-		#for npc : EMC_NPC in npcs:
-			#var brain : EMC_NPC_Brain = npc.get_comp(EMC_NPC_Brain)
-			#if brain and npc.has_comp(EMC_NPC_Cooperation):
-				#brain.coop_act()
-		#
-		## When resultion is found stop loop.
-		#if not OverworldStatesMngr._npc_intention_changed:
-			#break
-		#
-		## When no resultion is found after 7 steps, NPCS will act idle.
-		#if i > 7:
-			#for npc : EMC_NPC in npcs:
-				#var coop : EMC_NPC_Cooperation = npc.get_comp(EMC_NPC_Cooperation)
-				#if coop:
-					#coop.add_intention("idle")
-			#printerr("NPC act idle")
-			#break
-			#
-		#i += 1
-	#
-	#OverworldStatesMngr.clear_npc_intention()
-	
-	#get_NPC("Gerhard").get_comp(EMC_NPC_Brain).act()
-	
-	#npc_act.emit()
+func request_spot(spot_name: String) -> EMC_Stage_Spot:
+	return _curr_stage.request_spot(spot_name)
 
 ########################################## PRIVATE METHODS #########################################
 func _ready() -> void:
 	if Engine.is_editor_hint():
-		_curr_stage = $StageOffset.get_children()[0]
-		_curr_stage.setup(editor_stage, NPCs, _opt_event_mngr)
-		_curr_stage.load_stage()
-
-func _setup_stages() -> void:
-	var stage_names := ["market", "townhall", "park", "gardenhouse", "rowhouse",
-	"mansion", "penthouse", "apartment_default", "apartment_mert", "apartment_camper"]
-	
-	$StageOffset.get_children()[0].setup("home", NPCs, _opt_event_mngr)
-	
-	for stage_name : String in stage_names:
-		var stage: EMC_Stage = _STAGE_SCN.instantiate()
-		$StageOffset.add_child(stage)
-		stage.setup(stage_name, NPCs, _opt_event_mngr)
-
-const _NPC_SCN: PackedScene = preload("res://crisisPhase/npc/Base_NPC.tscn")
-
-### Add NPCs to the scene
-func _setup_NPCs(npc_resources: Array[EMC_NPC_Resource]) -> void:
-	for npc_res: EMC_NPC_Resource in npc_resources:
-		var new_npc: EMC_NPC = _NPC_SCN.instantiate()
-		new_npc.npc_resource = npc_res
-		new_npc.clicked.connect(_on_NPC_clicked)
-		stage_changed.connect(new_npc._on_stage_changed)
-		
-		NPCs.add_child(new_npc)
-	
-	#var dict: Dictionary = JsonMngr.load_NPC()
-	#for npc : EMC_NPC in dict:
-		#npc.setup(_gui_mngr, self, _day_mngr, _crisis_phase)
-		#NPCs.add_child(npc)
-		#
-		#for comp: Node in dict[npc]:
-			#npc.add_child(comp)
-		#
-		#npc.hide()
-		#npc.clicked.connect(_on_NPC_clicked)
+		load_stage("home")
 
 ## Handle Tap/Mouse-Input
 ## If necessary, set the [EMC_Avatar]s navigation target

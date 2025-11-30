@@ -18,6 +18,8 @@
 		},
 		"stage": {
 			"stage_name": "rowhouse",
+			"spot": "table",
+
 			"position": {"x": 450, "y": 550},
 			"start": "Rowhouse",
 			"positions": {

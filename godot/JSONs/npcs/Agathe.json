@@ -26,6 +26,8 @@
 		},
 		"stage": {
 			"stage_name": "apartment_default",
+			"spot": "book",
+
 			"position": { "x": 490, "y": 400 },
 			"start": "ApartmentDefault",
 			"positions": {

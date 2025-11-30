@@ -354,15 +354,15 @@ func _process(p_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2
 
-	if (_nav_agent.is_navigation_finished()):
-		#Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up
-		# Get the input direction
-		input_direction = Vector2(
-			Input.get_action_strength("right") - Input.get_action_strength("left"),
-			Input.get_action_strength("down") - Input.get_action_strength("up")
-		)
-	else: #Navigation via Pathfinding
-		input_direction = position.direction_to(_nav_agent.get_next_path_position()) #.normalized()
+	#if (_nav_agent.is_navigation_finished()):
+		##Keyboard-Input only relevant if no Pathfinding-Direction, so it's not mixed up
+		## Get the input direction
+		#input_direction = Vector2(
+			#Input.get_action_strength("right") - Input.get_action_strength("left"),
+			#Input.get_action_strength("down") - Input.get_action_strength("up")
+		#)
+	#else: #Navigation via Pathfinding
+	input_direction = position.direction_to(_nav_agent.get_next_path_position()) #.normalized()
 	
 	# Update velocity
 	var new_velocity := MOVE_SPEED * input_direction

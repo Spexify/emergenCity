@@ -41,11 +41,11 @@ func _execute_helper(branch: Dictionary, gsi: VRV_GSI, context: Dictionary = {})
 	return null
 
 func _check_args(args: Array, expected: Array) -> bool:
-	if args.size() != expected.size():
+	if args.size() != expected.size() and expected.size() != 0:
 		printerr("VRV_Action: Parameter count missmatch is %s expected %s" % [args.size(), expected.size()])
 		return false
 		
-	for i: int in range(args.size()):
+	for i: int in range(expected.size()):
 		if typeof(args[i]) != expected[i] and expected[i] != 0:
 			printerr("VRV_Action: Parameter type missmatch is %s expected %s" % [type_string(typeof(args[i])), type_string(expected[i])])
 			return false

@@ -36,6 +36,8 @@
 		},
 		"stage": {
 			"stage_name": "market",
+			"spot": "sell",
+
 			"position": {"x": 224, "y": 248},
 			"start": "Market",
 			"positions": {

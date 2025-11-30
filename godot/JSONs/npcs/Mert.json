@@ -18,6 +18,8 @@
 		},
 		"stage": {
 			"stage_name": "apartment_mert",
+			"spot": "cooking",
+
 			"position": {"x": 400, "y": 310},
 			"start": "ApartmentMert",
 			"positions": {

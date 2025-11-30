@@ -1,4 +1,10 @@
 [[Node]] start
+[set] @s true
+[jump] test1
+[jump] test2
+[jump] next
+
+[[Node]] next
 [action] output(get_var_or(@hello, 1.0))
 [set] @hello "Hello, World!"
 [action] output(get_var_or(@hello, "Oh No"))
@@ -17,3 +23,12 @@
 [jump] end
 
 [[Node]] end
+
+[[Node]] test1
+[Condition] _and(true, true, false)
+[action] output("Thats wrong!!!")
+
+[[Node]] test2
+[Condition] _and(true, true, @s)
+[action] output("As you were.")
+[jump] next

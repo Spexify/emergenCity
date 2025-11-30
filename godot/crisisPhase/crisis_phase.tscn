@@ -1,9 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=45 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" uid="uid://bayw2phrdam5s" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
 [ext_resource type="Script" uid="uid://d3edunqiuj2ih" path="res://util/builtin.gd" id="1_r1qqu"]
+[ext_resource type="PackedScene" uid="uid://riay0ilweh8c" path="res://crisisPhase/stage/home.tscn" id="3_ak664"]
 [ext_resource type="Texture2D" uid="uid://c343c8eflu7yf" path="res://assets/GUI/buttons/button_backpack.png" id="4_ef5pu"]
+[ext_resource type="Script" uid="uid://dpqv4b1nwiy6x" path="res://crisisPhase/npc/npc_mngr.gd" id="4_uunlr"]
 [ext_resource type="Texture2D" uid="uid://b8il3d8xuk2h3" path="res://assets/GUI/icons/icon_menu_information.png" id="5_1wb3a"]
 [ext_resource type="PackedScene" uid="uid://cqjid78osbso6" path="res://crisisPhase/day_mngr.tscn" id="5_gk1jp"]
 [ext_resource type="PackedScene" uid="uid://tpxumytrh032" path="res://crisisPhase/status_bars.tscn" id="6_22w2e"]
@@ -54,11 +56,22 @@ process_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_23hjb")
 
-[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr", "_crisis_phase") groups=["Save"] instance=ExtResource("13_8jkao")]
+[node name="StageMngr" parent="." node_paths=PackedStringArray("_avatar", "_day_mngr", "_gui_mngr") groups=["Save"] instance=ExtResource("13_8jkao")]
+_stages = Dictionary[String, PackedScene]({
+"home": ExtResource("3_ak664")
+})
 _avatar = NodePath("../Avatar")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _gui_mngr = NodePath("../GUI")
-_crisis_phase = NodePath("..")
+
+[node name="NPCMngr" type="Control" parent="." node_paths=PackedStringArray("_stage_mngr") groups=["Save"]]
+physics_interpolation_mode = 0
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("4_uunlr")
+_stage_mngr = NodePath("../StageMngr")
+metadata/_custom_type_script = "uid://dpqv4b1nwiy6x"
 
 [node name="Avatar" parent="." groups=["Save"] instance=ExtResource("1_mrtgi")]
 process_mode = 1
@@ -96,7 +109,6 @@ _avatar = NodePath("../Avatar")
 [node name="ButtonList" type="Control" parent="GUI"]
 process_mode = 1
 z_index = 2
-layout_mode = 3
 anchors_preset = 0
 offset_left = 490.0
 offset_top = 750.0
@@ -340,14 +352,16 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 script = ExtResource("1_r1qqu")
 metadata/_custom_type_script = "uid://d3edunqiuj2ih"
 
-[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr", "_score")]
+[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr", "_score", "_npc_mngr")]
 script = ExtResource("40_ak664")
 _gui_mngr = NodePath("../GUI")
 _stage_mngr = NodePath("../StageMngr")
 _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _score = NodePath("../EMC_Scoreboard")
+_npc_mngr = NodePath("../NPCMngr")
 metadata/_custom_type_script = "uid://daje87lka1imw"
 
+[connection signal="stage_changed" from="StageMngr" to="NPCMngr" method="_on_stage_changed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]

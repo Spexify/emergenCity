@@ -18,6 +18,8 @@
 		},
 		"stage": {
 			"stage_name": "mansion",
+			"spot": "bedside",
+
 			"position": {"x": 460, "y": 260},
 			"start": "Mansion",
 			"positions": {

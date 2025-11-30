@@ -55,8 +55,8 @@ p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	
 	# Called before once game starts
 	_crisis_mngr.check_crisis_status(0)
-	_stage_mngr.let_npcs_act()
-	_stage_mngr.reload_stage()
+	#_stage_mngr.let_npcs_act()
+	_stage_mngr.reload_state()
 
 func on_interacted_with_furniture(p_action_ID : String) -> void:
 	JsonMngr.get_action(p_action_ID).execute({"result": {}})

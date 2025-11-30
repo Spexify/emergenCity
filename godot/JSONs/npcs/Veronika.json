@@ -26,6 +26,8 @@
 		},
 		"stage": {
 			"stage_name": "apartment_camper",
+			"spot": "bedside",
+			
 			"position": {"x": 450, "y": 750},
 			"start": "ApartmentCamper",
 			"positions": {

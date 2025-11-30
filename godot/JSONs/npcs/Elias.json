@@ -28,6 +28,8 @@
 		},
 		"stage": {
 			"stage_name": "penthouse",
+			"spot": "couch",
+
 			"position": { "x": 440, "y": 800 },
 			"start": "Penthouse",
 			"positions": {

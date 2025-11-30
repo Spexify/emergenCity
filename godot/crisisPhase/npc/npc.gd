@@ -35,18 +35,26 @@ func _ready() -> void:
 	
 	prompt_button.pressed.connect(_on_button_pressed)
 	
-func change_stage(stage_name: String, slot: Node2D) -> void:
+func change_stage(stage_name: String, spot: EMC_Stage_Spot) -> void:
 	var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
-	npc_stage.change_stage(stage_name, slot)
-	global_position = slot.global_position
+	npc_stage.change_stage(stage_name, spot.name)
+	global_position = spot.global_position
 
-func _on_stage_changed(stage_name: String) -> void:
+func get_current_stage_name() -> String:
 	var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
-	if stage_name == npc_stage.stage_name:
-		global_position = npc_stage.position
-		enable()
-	else:
-		disable()
+	return npc_stage.stage_name
+	
+func get_current_spot() -> String:
+	var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
+	return npc_stage.spot
+
+#func _on_stage_changed(stage_name: String) -> void:
+	#var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
+	#if stage_name == npc_stage.stage_name:
+		#global_position = npc_stage.position
+		#enable()
+	#else:
+		#disable()
 
 func _on_button_pressed() -> void:
 	clicked.emit(self)

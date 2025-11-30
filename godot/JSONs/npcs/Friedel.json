@@ -22,6 +22,8 @@
 		},
 		"stage": {
 			"stage_name": "gardenhouse",
+			"spot": "waiting",
+			
 			"position": {"x": 96, "y": 704},
 			"start": "Gardenhouse",
 			"positions": {

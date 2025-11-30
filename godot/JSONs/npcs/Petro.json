@@ -29,6 +29,8 @@
 		},
 		"stage": {
 			"stage_name": "mansion",
+			"spot": "kitchen",
+
 			"position": {"x": 300, "y": 832},
 			"start": "Mansion",
 			"positions": {

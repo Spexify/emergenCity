@@ -18,6 +18,8 @@
 		},
 		"stage": {
 			"stage_name": "apartment_camper",
+			"spot": "cooking",
+
 			"position": {"x": 480, "y": 320},
 			"start": "ApartmentCamper",
 			"positions": {

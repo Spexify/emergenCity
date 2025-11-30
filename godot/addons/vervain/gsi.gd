@@ -33,6 +33,9 @@ func get_var_or(variable: Variant, value: Variant) -> Variant:
 func and_bool(a: bool, b: bool) -> bool:
 	return a and b
 
+func _and(...values: Array) -> bool:
+	return values.all(func(a: bool) -> bool: return a)
+
 func or_bool(a: bool, b: bool) -> bool:
 	return a or b
 

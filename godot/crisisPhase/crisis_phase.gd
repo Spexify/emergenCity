@@ -17,6 +17,7 @@ var _backpack: EMC_Inventory# = Global.get_inventory()
 
 @onready var _gui_mngr: EMC_GUIMngr = $GUI
 @onready var stage_mngr: EMC_StageMngr = $StageMngr
+@onready var npc_mngr: EMC_NPC_Mngr = $NPCMngr
 
 #event managers needs to be instantiated here without all parameters because the references are passed to the day_mngr
 @onready var _opt_event_mngr: EMC_OptionalEventMngr = EMC_OptionalEventMngr.new(self, _gui_mngr)
@@ -113,6 +114,9 @@ func _ready() -> void:
 	stage_mngr.setup(_opt_event_mngr)
 	
 	stage_mngr.npc_interaction.connect(_gui_mngr._on_npc_interaction)
+	
+	#### NPC
+	npc_mngr.setup()
 	
 	#### DayMngr
 	_day_mngr.setup(_backpack, _opt_event_mngr)

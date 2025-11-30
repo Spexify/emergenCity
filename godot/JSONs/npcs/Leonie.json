@@ -18,6 +18,8 @@
 		},
 		"stage": {
 			"stage_name": "townhall",
+			"spot": "bureau",
+
 			"position": {"x": 416, "y": 312},
 			"start": "Townhall",
 			"positions": {
