@@ -352,7 +352,7 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 script = ExtResource("1_r1qqu")
 metadata/_custom_type_script = "uid://d3edunqiuj2ih"
 
-[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr", "_score", "_npc_mngr", "_vervain_runtime")]
+[node name="EMC_GSI" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "_stage_mngr", "_day_mngr", "_score", "_npc_mngr", "_vervain_runtime", "_crisis_phase", "_avatar")]
 script = ExtResource("40_ak664")
 _gui_mngr = NodePath("../GUI")
 _stage_mngr = NodePath("../StageMngr")
@@ -360,6 +360,8 @@ _day_mngr = NodePath("../GUI/CL/VBC/UpperSection/HBC/DayMngr")
 _score = NodePath("../EMC_Scoreboard")
 _npc_mngr = NodePath("../NPCMngr")
 _vervain_runtime = NodePath("../EMC_VervainExecuter")
+_crisis_phase = NodePath("..")
+_avatar = NodePath("../Avatar")
 metadata/_custom_type_script = "uid://daje87lka1imw"
 
 [node name="EMC_VervainExecuter" type="Node" parent="." node_paths=PackedStringArray("_gui_mngr", "gsi")]
