@@ -183,7 +183,7 @@ func is_current_stage(stage_name: String) -> bool:
 
 func is_scenario(p_scenario_names: String = "") -> String:
 	for scenario_name in p_scenario_names.split(";"):
-		if scenario_name in OverworldStatesMngr.get_scenario_names():
+		if scenario_name in OverworldStatesMngr.cenario_names():
 			return NO_REJECTION
 	
 	return "Nicht passendes Szenario!"

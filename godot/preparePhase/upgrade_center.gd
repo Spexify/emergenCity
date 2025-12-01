@@ -25,6 +25,8 @@ var _equipped_upgrades : Array[EMC_Upgrade]
 var _equpped_id: Array[int]
 
 func _ready() -> void:
+	SoundMngr.play_slow_musik()
+	
 	_equpped_id.assign(Global.session["upgrades"].map(func (up: EMC_Upgrade) -> int: return up.get_id())) #OverworldStatesMngr.get_upgardes_id()
 	
 	_add_balance(0)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=4 uid="uid://c4o7v5wq5yd3"]
+[gd_scene load_steps=18 format=4 uid="uid://c4o7v5wq5yd3"]
 
-[ext_resource type="AudioStream" uid="uid://dafnpxmsjb4v7" path="res://assets/SFX/Lofi.wav" id="1_cpl1b"]
 [ext_resource type="Script" uid="uid://cwimywwhig2fk" path="res://global/sound_mngr.gd" id="1_ps8k0"]
+[ext_resource type="AudioStream" uid="uid://dpkpdtlxa58h7" path="res://assets/music/Krisopolis_maintheme_ruhigerer_loop_final_001.wav" id="2_n1fn7"]
+[ext_resource type="AudioStream" uid="uid://cf8obv40ritrt" path="res://assets/music/Krisopolis_maintheme_final_001.wav" id="3_4dwxt"]
 [ext_resource type="AudioStream" uid="uid://hoycd11nwt3j" path="res://assets/SFX/button.wav" id="3_udcud"]
+[ext_resource type="AudioStream" uid="uid://c3348wmqbae6w" path="res://assets/music/Krisopolis_Krisentheme_final_001.wav" id="4_re4d6"]
+[ext_resource type="AudioStream" uid="uid://fdesht5r72ny" path="res://assets/music/Krisopolis_Krisen-Stinger_final_001.wav" id="5_f0cvh"]
 [ext_resource type="AudioStream" uid="uid://bh31f44ha5wdr" path="res://assets/SFX/trash-can-falling-41919.mp3" id="6_booga"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://assets/SFX/open_GUI.wav" id="6_qnn1w"]
 [ext_resource type="AudioStream" uid="uid://dctig2q5dt48y" path="res://assets/SFX/cooking.mp3" id="7_m6qxg"]
@@ -21,9 +24,24 @@ data = PackedByteArray("SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU5LjI3LjEwMAAAAAAAAAAA
 process_mode = 3
 script = ExtResource("1_ps8k0")
 
+[node name="SlowMusik" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_n1fn7")
+bus = &"Musik"
+
 [node name="Musik" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("1_cpl1b")
+stream = ExtResource("3_4dwxt")
+bus = &"Musik"
+
+[node name="CrisisMusik" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_re4d6")
+bus = &"Musik"
+
+[node name="Stinger" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_f0cvh")
 bus = &"Musik"
 
 [node name="Button" type="AudioStreamPlayer" parent="."]

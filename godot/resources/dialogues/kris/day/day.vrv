@@ -203,14 +203,30 @@ kris:Na also. So gefällst du mir besser.
 [text]
 kris:Neulich waren wir bei Nebel und Regen wandern. Richtig mystische Stimmung.
 kris:Und so ruhig. Kaum jemand auf dem Trail.
-[if] and_bool(randomize(1,10),eq_bool(#kids_on_trail,false))
-    [then]
-        [text]
-        kris:Wobei da eine Familie war mit kleinen Kindern, alle im Poncho. Ich hab so getan, als würde ich von Geistern gejagt. Das war spitze!
-        [set] #kids_on_trail true
-    [else]
-        [text]
-        kris:Ich liebe diese Stille.
+[match] and_bool(randomize(1, 10), eq_bool(get_var_or(#kids_on_trail, false), false))
+- [true] [jump] set_kids_trail_dialogue
+- [false] [text] kris:Ich liebe diese Stille.
+[jump] talk6_1
+[Comment]
+	[if] and_bool(randomize(1,10),eq_bool(#kids_on_trail,false))
+		[then]
+			[text]
+			kris:Wobei da eine Familie war mit kleinen Kindern, alle im Poncho. Ich hab so getan, als würde ich von Geistern gejagt. Das war spitze!
+			[set] #kids_on_trail true
+		[else]
+			[text]
+			kris:Ich liebe diese Stille.
+
+[[Node]] set_kids_trail_dialogue
+[actors] avatar kris.flipped
+[text]
+kris:Wobei da eine Familie war mit kleinen Kindern, alle im Poncho. Ich hab so getan, als würde ich von Geistern gejagt. Das war spitze!
+[set] #kids_on_trail true
+[jump] talk6_1
+
+[[Node]] talk6_1
+[actors] avatar kris.flipped
+[text]
 kris:Und dann kamen wir auf einen Hügel und die Sonnenstrahlen zogen sich durch den Nebel zwischen den Bäumen ...
 kris:Sag das nicht Vero, aber das war schöner als auf jedem Foto.
 kris:Am Ende lag der Nebel wie ein weißes Meer vor uns und wir standen in der Sonne.
@@ -242,17 +258,27 @@ kris:Kinder lernen heutzutage kaum noch was über die Natur. Das ist richtig sch
 kris:Ich hab schon ein paarmal als Wanderführer mit der Grundschule Ausflüge organisiert.
 kris:Von sowas sollte es viel mehr geben. Leider sind es nur die interessierten Lehrer, die sich darauf einlassen.
 kris:Viel zu viele Leute sind heute viel zu überarbeitet. Da geht so viel Magie verloren.
-[if] randomize(1,3)
-    [then]
-        [actors] avatar kris.flipped veronika.flipped
-        [text]
-        veronika:Redest du da gerade über mich?
-        kris:Nö. Über Lehrer.
-        veronika:Ach so.
-    [else]
-        [Choice]
-        - [disagree_overworked] Na ja, man muss ja auch Geld verdienen, um zu leben.
-        - [agree_overworked] Das stimmt.
+[match] eq_int(randomize(1, 3), 1)
+- [true] [actors] avatar kris.flipped veronika.flipped
+- [false] [Choice]
+	- [disagree_overworked] Na ja, man muss ja auch Geld verdienen, um zu leben.
+	- [agree_overworked] Das stimmt.
+[text]
+veronika:Redest du da gerade über mich?
+kris:Nö. Über Lehrer.
+veronika:Ach so.
+[Comment]
+	[if] randomize(1,3)
+		[then]
+			[actors] avatar kris.flipped veronika.flipped
+			[text]
+			veronika:Redest du da gerade über mich?
+			kris:Nö. Über Lehrer.
+			veronika:Ach so.
+		[else]
+			[Choice]
+			- [disagree_overworked] Na ja, man muss ja auch Geld verdienen, um zu leben.
+			- [agree_overworked] Das stimmt.
 
 [[Node]] disagree_overworked
 [actors] avatar kris.flipped

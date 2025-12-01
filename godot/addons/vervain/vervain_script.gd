@@ -14,21 +14,10 @@ enum {
 var data: Dictionary = { "Imports": ["util"], "Nodes": { "start": { "sequence": [{ "actors": [{ "name": "Avatar", "flip": false }] }], "Choice": ["one", "two"] }, "one": { "Prompt": "Hello There", "sequence": [{ "actors": [{ "name": "Avatar", "flip": false }, { "name": "Gerhard", "flip": true }] }, { "random": [{ "text": [{ "speaker": "Gerhard", "line": "Hi" }] }, { "text": [{ "speaker": "Gerhard", "line": "ello" }] }] }, { "text": [{ "speaker": "Gerhard", "line": "Wie gehts dir?" }, { "speaker": "Avatar", "line": "Gut" }] }, { "jump": "two" }] }, "two": { "Prompt": "Hallo Friedel", "Condition": [{ "state": "is_npcs_on_current_stage", "value": "Friedel" }, { "state": "is_state", "value": "WaterState.CLEAN" }], "sequence": [{ "actors": [{ "name": "Friedel", "flip": false }, { "name": "Avatar", "flip": true }] }, { "text": [{ "speaker": "Friedel", "line": "wuff" }, { "speaker": "Avatar", "line": "Süß!!!" }] }] } } }
 
 @export var nodes: Dictionary
-var current_actors: Array[String] = []
-var current_node: Dictionary = {}
-var current_sequence: Array[Dictionary] = []
-var current_entry: int = -1
 
-var last_node: Dictionary = {}
+
 
 var gsi: VRV_GSI
-
-var _context: Dictionary
-
-signal ended(context: Dictionary)
-
-#func _init() -> void:
-	#self.setup(data)
 	
 func get_meta_data() -> Dictionary:
 	return nodes.get("meta", {})
@@ -39,23 +28,23 @@ func setup(data: Dictionary) -> void:
 func is_empty() -> bool:
 	return data.is_empty()
 
-func check_start() -> bool:
+func check_start(state: VRV_InstanceData) -> bool:
 	if nodes["start"].has("Condition"):
-		return nodes["start"]["Condition"].execute(gsi, _context)
+		return nodes["start"]["Condition"].execute(gsi, state.context)
 	return true
 	
-func get_next() -> Array:
-	if current_node.is_empty():
-		_jump("start")
+func get_next(state: VRV_InstanceData) -> Array:
+	if state.current_node.is_empty():
+		_jump("start", state)
 	
 	## if Node changed
-	if current_entry < 0:
-		current_entry = 0
-		if not last_node.is_empty() and last_node["type"] != current_node["type"]:
-			return [VRV_Script.NODE, current_node["type"]]
+	if state.current_entry < 0:
+		state.current_entry = 0
+		if not state.last_node.is_empty() and state.last_node["type"] != state.current_node["type"]:
+			return [VRV_Script.NODE, state.current_node["type"]]
 	
-	if current_entry < current_sequence.size():
-		match current_sequence[current_entry]:
+	if state.current_entry < state.current_sequence.size():
+		match state.current_sequence[state.current_entry]:
 			
 			{"content": var content}:
 				return [VRV_Script.CONTENT, content]
@@ -73,7 +62,7 @@ func get_next() -> Array:
 					var portrait: Texture2D
 					var name: String = data["name"] 
 					if (data["name"] as String).begins_with("@"):
-						name = resolve_variable(data["name"])
+						name = resolve_variable(data["name"], state)
 					
 					if name == "avatar":
 						portrait = gsi.call_method("get_avatar_portrait", [])
@@ -89,7 +78,7 @@ func get_next() -> Array:
 					flip.append(data["flip"])
 					textures.append(portrait)
 				
-				current_entry += 1
+				state.current_entry += 1
 				return [VRV_Script.ACTORS, textures, actors, flip]
 			
 			## random: [SEQUENCE, SEQUENCE]
@@ -101,85 +90,85 @@ func get_next() -> Array:
 					func (data: Dictionary) -> bool:
 						if data.has("jump"):
 							if nodes.get(data["jump"]).has("Condition"):
-								return nodes.get(data["jump"])["Condition"].execute(gsi, _context)
+								return nodes.get(data["jump"])["Condition"].execute(gsi, state.context)
 						return true)
 				
 				var choose: Dictionary = options.pick_random()
-				current_node["sequence"].insert(current_entry+1, choose)
-				current_sequence.assign(current_node.get("sequence", []))
-				current_entry += 1
+				state.current_node["sequence"].insert(state.current_entry+1, choose)
+				state.current_sequence.assign(state.current_node.get("sequence", []))
+				state.current_entry += 1
 				
-				return get_next()
+				return get_next(state)
 			
 			## text: [{"speaker": NAME, "line": LINE}, ...]
 			{"text": var text}:
-				current_entry += 1
+				state.current_entry += 1
 				for line: Dictionary in text:
-					var name := resolve_variable(line["speaker"])
+					var name := resolve_variable(line["speaker"], state)
 					line["speaker"] = name
 					line["pitch"] = gsi.call_method("get_pitch", [name])
 					#text["pitch"] = _stage_mngr.get_NPC(name).get_comp(EMC_NPC_Descr).get_pitch()
 					## See change in Choice: maybe we wont need eagerness anymore
-				var eager: bool = current_node.has("Choice") and current_entry >= current_sequence.size()
+				var eager: bool = state.current_node.has("Choice") and state.current_entry >= state.current_sequence.size()
 				return [VRV_Script.TEXT, text, eager]
 			
 			## jump: NODE_NAME
 			{"jump": var raw_node_name}:
-				var node_name := resolve_variable(raw_node_name)
+				var node_name := resolve_variable(raw_node_name, state)
 				
 				if not nodes.get(node_name).has("Condition"):
-					_jump(node_name)
-				elif nodes.get(node_name)["Condition"].execute(gsi, _context):
-					_jump(node_name)
+					_jump(node_name, state)
+				elif nodes.get(node_name)["Condition"].execute(gsi, state.context):
+					_jump(node_name, state)
 				else:
-					current_entry += 1
-				return get_next()
+					state.current_entry += 1
+				return get_next(state)
 			
 			## goto: NODE_NAME
 			{"goto": var raw_node_name}:
-				var node_name := resolve_variable(raw_node_name)
-				_jump(node_name)
-				return get_next()
+				var node_name := resolve_variable(raw_node_name, state)
+				_jump(node_name, state)
+				return get_next(state)
 			
 			## set: [NAME, VALUE/ACTION]
 			{"set": [var name, var raw_value]}:
 				var value: Variant = raw_value
 				if is_instance_of(raw_value, VRV_Action):
 					var action : VRV_Action = raw_value
-					value = action.execute(gsi, _context)
+					value = action.execute(gsi, state.context)
 				
-				_context[name] = value
-				current_entry += 1
-				return get_next()
+				state.context[name] = value
+				state.current_entry += 1
+				return get_next(state)
 			
 			## action: ACTION
 			{"action": var action}:
 				#JsonMngr.get_action(action_name).execute()
-				action.execute(gsi, _context)
-				current_entry += 1
-				return get_next()
+				action.execute(gsi, state.context)
+				state.current_entry += 1
+				return get_next(state)
 			
 			## match: [VALUE/VARIABLE/ACTION, {VALUE: SEQUENCE, VALUE: SEQUENCE, ...}]
 			{"match": [var action, var options]}:
-				var value: Variant = action.execute(gsi, _context)
+				var value: Variant = action.execute(gsi, state.context)
 				
 				print(value)
 				print(options.keys())
 				
 				var choose: Dictionary = options.get(value, {"jump": "end"})
-				current_node["sequence"].insert(current_entry+1, choose)
-				current_sequence.assign(current_node.get("sequence", []))
-				current_entry += 1
+				state.current_node["sequence"].insert(state.current_entry+1, choose)
+				state.current_sequence.assign(state.current_node.get("sequence", []))
+				state.current_entry += 1
 				
-				return get_next()
+				return get_next(state)
 				
 	# Choice is executed after sequence operations as it always jumps
-	if current_entry >= current_sequence.size() and current_node.has("Choice"):
+	if state.current_entry >= state.current_sequence.size() and state.current_node.has("Choice"):
 		## Choices: [{"prompt": "Bla Bla", "id": "NODE_NAME", "icon": ""}] 
 		var choices: Array[Dictionary]
-		for choice: Dictionary in current_node["Choice"]:
+		for choice: Dictionary in state.current_node["Choice"]:
 			var node: Dictionary = nodes.get(choice["id"], {})
-			if node.has("Condition") and not node["Condition"].execute(gsi, _context):
+			if node.has("Condition") and not node["Condition"].execute(gsi, state.context):
 				continue
 			choices.append({"id": choice["id"], "prompt": choice["prompt"], "icon": node.get("icon", "none")})
 		
@@ -190,13 +179,12 @@ func get_next() -> Array:
 			#_jump(choices[0]["id"])
 			#return [VRV_Script.TEXT, [{"speaker": "Avatar", "pitch": EMC_Avatar.PITCH, "line": choices[0]["prompt"]}], false]
 	
-	current_node = {}
-	ended.emit(_context)
+	state.current_node = {}
 	return [VRV_Script.END]
 	
-func resolve_variable(raw: String) -> Variant:
-	if raw.begins_with("@"):
-		var result = _context.get(raw, null)
+func resolve_variable(raw: String, state: VRV_InstanceData) -> Variant:
+	if raw.begins_with("@") or raw.begins_with("#"):
+		var result = state.context.get(raw, null)
 		assert(result != null, "Variable %s not found in context" % raw)
 		return result
 	return raw
@@ -212,11 +200,11 @@ func resolve_variable(raw: String) -> Variant:
 		#return gsi.callv(method_name, params)
 	#return true
 
-func _jump(node_name: String) -> void:
-	last_node = current_node
-	current_node = nodes.get(node_name)
-	current_sequence.assign(current_node.get("sequence", []))
-	current_entry = -1
+func _jump(node_name: String, state: VRV_InstanceData) -> void:
+	state.last_node = state.current_node
+	state.current_node = nodes.get(node_name)
+	state.current_sequence.assign(state.current_node.get("sequence", []))
+	state.current_entry = -1
 
-func choose(id: String) -> void:
-	_jump(id)
+func choose(id: String, state: VRV_InstanceData) -> void:
+	_jump(id, state)

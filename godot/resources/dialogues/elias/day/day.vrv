@@ -34,29 +34,10 @@ elias:Brauchen Sie was?
 [[Node]] stop
 
 [[Node]] talk
-[jump] cooldown
-[match] @last_option
-- [1] [jump] talk1
-- [2] [jump] talk2
-- [3] [jump] talk3
-- [4] [jump] talk4
-- [5] [jump] talk5
-- [6] [jump] talk6
-- [7] [jump] talk7
-- [8] [jump] talk8
-
-[[Node]] cooldown
-[Condition] neq_int(@last_day, get_period_count())
+[set] @last_talk get_talk_from_range(8, get_var_or(@last_talk, "talk-1"), get_var_or(@last_day, -1))
 [set] @last_day get_period_count()
-[random]
-- [set] @last_option 1
-- [set] @last_option 2
-- [set] @last_option 3
-- [set] @last_option 4
-- [set] @last_option 5
-- [set] @last_option 6
-- [set] @last_option 7
-- [set] @last_option 8
+[jump] @last_talk
+[set] @last_talk "talk-1"
 [jump] talk
 
 [[Node]] talk1
@@ -174,16 +155,25 @@ elias:Der Termin war in meinem Kalender, aber ich hab keine Erinnerung bekommen.
 elias:Wie soll ich denn so arbeiten? Ich hab doch keine Zeit, ständig meinen Kalender zu prüfen, welche Termine ich hab.
 elias:Wenn der Kunde wenigstens so intelligent gewesen wäre, mich anzurufen. Aber nein.
 elias:Er hat nur ne Mail geschickt. Als ob ich es mir leisten könnte, auf alle Notifications zu reagieren.
-[if] npc_friendship_higher_than("elias",15)
-    [then]
-        [text]
-        elias:Hab zurückgeschrieben, dass hier wieder das Internet ausgefallen war.
-        elias:Das war immerhin der Vorteil davon, dass er nicht angerufen hat. Konnte so tun, als ob es nicht an meiner Technik gelegen hätte.
-        elias:Am Ende denkt er sonst noch, ich bin unfähig.
-    [else]
-        [text]
-        elias:Ich bräuchte ne Sekretärin. Wenn die mich nicht an Termine erinnert, kann ich sie wenigstens ersetzen.
-        elias:Der Technik ist man ausgeliefert.
+[match] npc_friendship_higher_than("elias",15)
+- [true] [text]
+	elias:Hab zurückgeschrieben, dass hier wieder das Internet ausgefallen war.
+	elias:Das war immerhin der Vorteil davon, dass er nicht angerufen hat. Konnte so tun, als ob es nicht an meiner Technik gelegen hätte.
+	elias:Am Ende denkt er sonst noch, ich bin unfähig.
+- [false] [text]
+	elias:Ich bräuchte ne Sekretärin. Wenn die mich nicht an Termine erinnert, kann ich sie wenigstens ersetzen.
+	elias:Der Technik ist man ausgeliefert.
+[Comment]
+	[if] npc_friendship_higher_than("elias",15)
+		[then]
+			[text]
+			elias:Hab zurückgeschrieben, dass hier wieder das Internet ausgefallen war.
+			elias:Das war immerhin der Vorteil davon, dass er nicht angerufen hat. Konnte so tun, als ob es nicht an meiner Technik gelegen hätte.
+			elias:Am Ende denkt er sonst noch, ich bin unfähig.
+		[else]
+			[text]
+			elias:Ich bräuchte ne Sekretärin. Wenn die mich nicht an Termine erinnert, kann ich sie wenigstens ersetzen.
+			elias:Der Technik ist man ausgeliefert.
 
 [[Node]] talk7
 [actors] avatar elias.flipped
@@ -214,17 +204,31 @@ elias:Gut.
 elias:Ich war bei einem Meetup für Geschäftsleute.
 elias:Gute Connections sind alles. Da kann man sich auch mal sowas antun.
 elias:Wenn du mit 100 Leuten redest, kriegst du einen neuen Kontakt. Reine Statistik.
-[if] eq_bool(@talked_of_veronika,false)
-    [then]
-        [text]
-        elias:Hab mit ner Fotografin geredet. Workaholic und absolut perfektionistisch.
-        elias:Bleibt einem wohl auch nicht viel übrig, wenn man so ersetzbar ist.
-        elias:Aber wenn ich mal wieder ein Businessfoto brauche, weiß ich, wen ich anfrage.
-        [set] @talked_of_veronika true
-    [else]
-        [text]
-        elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder.
-        elias:Dafür ist das Essen gut.
+[match] @talked_of_veronika
+- [false] [jump] set_talked_veronika
+- [true] [text]
+	elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder.
+	elias:Dafür ist das Essen gut.
+[Comment]
+	[if] eq_bool(@talked_of_veronika, false)
+		[then]
+			[text]
+			elias:Hab mit ner Fotografin geredet. Workaholic und absolut perfektionistisch.
+			elias:Bleibt einem wohl auch nicht viel übrig, wenn man so ersetzbar ist.
+			elias:Aber wenn ich mal wieder ein Businessfoto brauche, weiß ich, wen ich anfrage.
+			[set] @talked_of_veronika true
+		[else]
+			[text]
+			elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder.
+			elias:Dafür ist das Essen gut.
+
+[[Node]] set_talked_veronika
+[actors] avatar elias.flipped
+[text]
+elias:Hab mit ner Fotografin geredet. Workaholic und absolut perfektionistisch.
+elias:Bleibt einem wohl auch nicht viel übrig, wenn man so ersetzbar ist.
+elias:Aber wenn ich mal wieder ein Businessfoto brauche, weiß ich, wen ich anfrage.
+[set] @talked_of_veronika true
 
 [[Node]] trade
 [actors] avatar elias.flipped

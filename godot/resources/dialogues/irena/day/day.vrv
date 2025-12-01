@@ -102,8 +102,8 @@ irena:Alles bereit!
 
 [[Node]] IrenaBeschaeftigt
 [actors] avatar irena.flipped petro.flipped
-[text]
 [action] progress_day("Mit Irena den Weltraum erobern")
+[text]
 petro:Lieb von dir, mit Irena zu spielen.
 petro:In der Krise findet man ja kaum Zeit für sich. Ich bin sicher, das geht dir auch ähnlich.
 petro:Vielleicht hilft dir das hier weiter.
@@ -121,19 +121,35 @@ irena:Hihi. Das ist gut.
 [[Node]] talk5
 [actors] avatar irena.flipped
 [text]
-[if] npc_friendship_less_than("irena",9)
-    [then]
-        [text]
-        irena:Magst du Fisch?
-        [Choice]
-        - [mag_fisch] Na klar.
-        - [mag_keinen_fisch] Nein.
-    [else]
-        [text]
-        irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
-        avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
-        irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
-        irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
+[match] npc_friendship_less_than("irena",9)
+- [true] [jump] fish_question
+- [false] [text]
+	irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
+	avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
+	irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
+	irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
+[Comment]
+	[if] npc_friendship_less_than("irena",9)
+		[then]
+			[text]
+			irena:Magst du Fisch?
+			[Choice]
+			- [mag_fisch] Na klar.
+			- [mag_keinen_fisch] Nein.
+		[else]
+			[text]
+			irena:Papa hat schon wieder Fisch gemacht. Ich hasse Fisch!
+			avatar:Du musst ihn doch nicht essen, wenn du ihn nicht magst.
+			irena:Ich esse nie Fisch! Aber das ganze Haus stinkt, wenn er den macht. Bääääh!
+			irena:Wenn ich groß bin, ziehe ich auf den Mond, da gibt es keinen Fisch!
+
+[[Node]] fish_question
+[actors] avatar irena.flipped
+[text]
+irena:Magst du Fisch?
+[Choice]
+- [mag_fisch] Na klar.
+- [mag_keinen_fisch] Nein.
 
 [[Node]] mag_keinen_fisch
 [actors] avatar irena.flipped

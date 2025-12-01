@@ -1,6 +1,5 @@
 extends EMC_GUI
 
-
 ########################################## PUBLIC METHODS #########################################
 func open(irrelevant : EMC_GUI = null) -> void:
 	show()
@@ -37,6 +36,7 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	#Global.reset_inventory()
 	#Global.reset_upgrades_equipped()
 	#Global.get_tree().paused = false
+	SoundMngr.play_slow_musik()
 	Global.save_game(Global.State.START)
 	Global.load_game()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
@@ -45,4 +45,5 @@ func _on_cancel_curr_crisis_pressed() -> void:
 ## TODO
 func _on_save_and_quit_pressed() -> void:
 	Global.save_game(Global.State.CRISIS)
+	await SoundMngr.close_game()
 	Global.get_tree().quit()

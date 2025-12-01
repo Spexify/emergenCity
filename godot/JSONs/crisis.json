@@ -142,7 +142,23 @@
 			]
 		}
 	},
-	"HARD": {},
+	"HARD": {
+		"2.Hochwasser.0": {
+			"weight": 1,
+			"desc": "Aufgrund von tagelangem Regen besteht in Teilen der Stadt Hochwassergefahr.",
+			"fcount": [
+				2,
+				3
+			],
+			"following": [
+				"0.Hochwasser.1",
+				"0.Hochwasser.2",
+				"0.Hochwasser.3",
+				"0.Hochwasser.4",
+				"1.Hochwasser.1"
+			]
+		}
+	},
 	"following": {
 		"0.Tutorial.1": {
 			"weight": 1,

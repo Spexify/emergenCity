@@ -26,12 +26,18 @@ func has_method_name(method_name: String) -> bool:
 	return method_cache.has(method_name)
 
 func get_var_or(variable: Variant, value: Variant) -> Variant:
-	if variable:
-		return variable
-	return value
+	if variable == null:
+		return value
+	return variable
 
 func and_bool(a: bool, b: bool) -> bool:
 	return a and b
+
+func not_bool(a: bool) -> bool:
+	return not a
+
+func eq_bool(a: bool, b: bool) -> bool:
+	return a == b
 
 func _and(...values: Array) -> bool:
 	return values.all(func(a: bool) -> bool: return a)

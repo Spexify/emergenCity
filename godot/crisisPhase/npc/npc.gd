@@ -9,6 +9,8 @@ signal clicked(p_NPC: EMC_NPC)
 
 @export var npc_resource: EMC_NPC_Resource
 
+var interactions: Array[EMC_NPC_Interaction]
+
 func _ready() -> void:
 	$AnimationPlayer.play("idle")
 	
@@ -20,18 +22,16 @@ func _ready() -> void:
 	
 	set_name(npc_descr.get_npc_name())
 	
-	var interaction: EMC_NPC_Interaction = npc_resource.get_comp(EMC_NPC_Interaction)
-	if interaction:
-		for c : Resource in interaction.get_interactions().values():
-			npc_resource.add_comp(c)
+	var convers: EMC_NPC_Conversation = npc_resource.get_comp(EMC_NPC_Conversation)
+	if convers:
+		convers.set_owner(self)
+		insert_interaction(0, convers)
 	
 	var trading: EMC_NPC_Trading = npc_resource.get_comp(EMC_NPC_Trading)
 	if trading:
 		trading.set_owner(self)
+		insert_interaction(1, trading)
 	
-	var convers: EMC_NPC_Conversation = npc_resource.get_comp(EMC_NPC_Conversation)
-	if convers:
-		convers.set_owner(self)
 	
 	prompt_button.pressed.connect(_on_button_pressed)
 	
@@ -48,13 +48,14 @@ func get_current_spot() -> String:
 	var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
 	return npc_stage.spot
 
-#func _on_stage_changed(stage_name: String) -> void:
-	#var npc_stage: EMC_NPC_Stage = npc_resource.get_comp(EMC_NPC_Stage)
-	#if stage_name == npc_stage.stage_name:
-		#global_position = npc_stage.position
-		#enable()
-	#else:
-		#disable()
+func add_interaction(interaction: EMC_NPC_Interaction) -> void:
+	interactions.append(interaction)
+
+func insert_interaction(idx: int, interaction: EMC_NPC_Interaction) -> void:
+	interactions.insert(idx, interaction)
+
+func get_interactions() -> Array[EMC_NPC_Interaction]:
+	return interactions
 
 func _on_button_pressed() -> void:
 	clicked.emit(self)

@@ -79,7 +79,7 @@ func get_avatar_target(p_click_pos : Vector2) -> Vector2:
 	
 	return Vector2.INF
 	
-func show_electricity() -> void:
+func show_electricity(_tmp: int = 0) -> void:
 	if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"): # REMOVE OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.UNLIMITED:
 		middleground_3.hide()
 	else:

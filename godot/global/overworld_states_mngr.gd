@@ -345,6 +345,11 @@ func get_modifier(state: String) -> float:
 #endregion
 
 func next_day(t: int) -> void:
+	#if not get_scenario(1).keys().is_empty() and get_scenario().keys() != get_scenario(1).keys():
+		#SoundMngr.play_stinger()
+	#
+	#SoundMngr.next_day()
+	
 	current_t = t
 	facility_effective_states.erase(t-1)
 	facility_states.erase(t-1)

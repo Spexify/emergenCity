@@ -91,13 +91,14 @@ sefsef
 fs efseffe f"
 
 [node name="Skip" type="TextureButton" parent="Margin/VSplitContainer/TextPanel/Box"]
-layout_mode = 2
+layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 483.0
 offset_bottom = 216.0
 
 [node name="Margin" type="MarginContainer" parent="Margin/VSplitContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 122)
 layout_mode = 2
 
@@ -117,7 +118,6 @@ theme_type_variation = &"ConfirmButton"
 text = "Weiter"
 
 [node name="VBC" type="VBoxContainer" parent="Margin/VSplitContainer"]
-visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_vertical = 8
@@ -130,6 +130,7 @@ size_flags_horizontal = 4
 theme_type_variation = &"BlueButton"
 text = "Option 1"
 alignment = 0
+autowrap_mode = 2
 
 [node name="Option2" parent="Margin/VSplitContainer/VBC" instance=ExtResource("3_t61v8")]
 custom_minimum_size = Vector2(490, 0)
@@ -138,6 +139,7 @@ size_flags_horizontal = 4
 theme_type_variation = &"BlueButton"
 text = "Option 1"
 alignment = 0
+autowrap_mode = 2
 
 [node name="Option3" parent="Margin/VSplitContainer/VBC" instance=ExtResource("3_t61v8")]
 custom_minimum_size = Vector2(490, 0)
@@ -146,6 +148,7 @@ size_flags_horizontal = 4
 theme_type_variation = &"BlueButton"
 text = "Option 1"
 alignment = 0
+autowrap_mode = 2
 
 [node name="TalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3e82l")

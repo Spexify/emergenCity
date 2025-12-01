@@ -226,7 +226,7 @@ layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Notifications"]
 custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 96.0
 size_flags_vertical = 0
@@ -246,7 +246,7 @@ text = "[color=white]Meine Orte[/color]"
 fit_content = true
 
 [node name="Margin" type="MarginContainer" parent="VBC/Warn/Notifications"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 940.0
 theme_override_constants/margin_left = 10
@@ -303,7 +303,7 @@ bbcode_enabled = true
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Description"]
 custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 96.0
 size_flags_vertical = 0
@@ -352,7 +352,7 @@ fit_content = true
 
 [node name="Panel" type="PanelContainer" parent="VBC/Warn/Offline"]
 custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 96.0
 size_flags_vertical = 0

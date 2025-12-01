@@ -28,6 +28,7 @@ func start() -> void:
 
 	var dict : Array[String]
 	dict.assign(OverworldStatesMngr.get_scenario().keys())
+	print(OverworldStatesMngr.get_scenario().keys())
 	for scenario_id : String in dict:
 		scenario_id = scenario_id.get_basename().get_extension()
 		

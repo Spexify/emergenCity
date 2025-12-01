@@ -121,6 +121,8 @@ func _ready() -> void:
 	#### DayMngr
 	_day_mngr.setup(_backpack, _opt_event_mngr)
 	
+	await SoundMngr.play_musik()
+	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
 		var tutorial: VRV_Script = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")

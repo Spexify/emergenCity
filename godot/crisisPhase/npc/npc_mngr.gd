@@ -1,7 +1,7 @@
 extends Control
 class_name EMC_NPC_Mngr
 
-const _NPC_SCN: PackedScene = preload("res://crisisPhase/npc/Base_NPC.tscn")
+const _NPC_SCN: PackedScene = preload("res://crisisPhase/npc/npc.tscn")
 
 @export var _stage_mngr: EMC_StageMngr
 

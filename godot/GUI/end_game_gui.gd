@@ -152,9 +152,8 @@ func close() -> void:
 	hide()
 	closed.emit(self)
 
-
 func _on_main_menu_pressed() -> void:
-	Global.get_tree().paused = false
+	SoundMngr.play_slow_musik()
 	#Global.reset_state()
 	#Global.reset_inventory()
 	#Global.reset_upgrades_equipped()

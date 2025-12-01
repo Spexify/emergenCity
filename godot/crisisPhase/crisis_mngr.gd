@@ -6,10 +6,10 @@ var _gui_mngr : EMC_GUIMngr
 var _max_day : int
 var _difficulty : String# OverworldStatesMngr.Difficulty
 
-# Sorted Array (sorted according to the end of the crisis > )
-var _current_crisis : Array[Dictionary] = []
-# Sorted Array (sorted according to the beginning of the crisis > )
-var _next_crisis : Array[Dictionary] = []
+## Sorted Array (sorted according to the end of the crisis > )
+#var _current_crisis : Array[Dictionary] = []
+## Sorted Array (sorted according to the beginning of the crisis > )
+#var _next_crisis : Array[Dictionary] = []
 
 var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -39,9 +39,12 @@ func set_max_day(_p_max_day : int = 3) -> void:
 ## Reduce countdowns and check the new states
 ## Returns the value that showed_new_crises() returns
 func check_crisis_status(p_period_count : int) -> void:
+	SoundMngr.next_day()
+	
 	if p_period_count >= OverworldStatesMngr.crisis_end:
-	
-	
+		
+		SoundMngr.play_stinger()
+		
 		var weights : Array[float]
 		weights.assign(CRISIS[_difficulty].values().map(func(dict : Dictionary) -> float: return dict.get("weight")))
 		var scenario_name : String = EMC_Util.pick_weighted_random_const(CRISIS[_difficulty].keys(), weights)

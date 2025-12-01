@@ -14,6 +14,7 @@ var _item : EMC_Item
 
 func setup(p_inventory : EMC_Inventory) -> void:
 	_inventory = p_inventory
+	slot.item_long_pressed.connect(item_long_pressed)
 
 func open(p_item : EMC_Item, text : Dictionary = {}) -> void: 
 	
@@ -34,7 +35,6 @@ func open(p_item : EMC_Item, text : Dictionary = {}) -> void:
 		confirm_btn.hide()
 	
 	slot.set_item(_item)
-	slot.item_long_pressed.connect(item_long_pressed)
 	
 func close() -> void:
 	self.hide()

@@ -4,13 +4,19 @@
 
 [[Node]] starkregen
 [Condition] crisis_is("Starkregen")
-[if] eq_bool(#visited_irena_talks_about_fear, true)
-    [then]
-        [text]
-        irena:Ich mag so viel Regen nicht ...
-    [else]
-        [text]
-        irena:...
+[match] get_var_or(#visited_irena_talks_about_fear, false)
+- [true] [text]
+	irena:Ich mag so viel Regen nicht ...
+- [false] [text]
+	irena:...
+[Comment]
+	[if] eq_bool(#visited_irena_talks_about_fear, true)
+		[then]
+			[text]
+			irena:Ich mag so viel Regen nicht ...
+		[else]
+			[text]
+			irena:...
 
 [[Node]] kein_starkregen
 [random]

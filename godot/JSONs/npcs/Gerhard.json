@@ -4,56 +4,50 @@
 			"name": "Gerhard",
 			"descr": "Das hier ist Gerhard.\nEr hegt einen Garten und ein Herz aus Gold.",
 			"portait": "gerhard",
-      "sprite": "gerhard"
+			"sprite": "gerhard"
 		},
 		"karma": {},
-		"interaction": {
-			"conversation": {
-				"pitch": 0.5,
-				"day": "res://resources/dialogues/gerhard/day/day.vrv",
-				"small_talk": "res://resources/dialogues/gerhard/small_talk.vrv",
-				"paths": {
-					"day": "res://resources/dialogues/gerhard/day/",
-					"quest": "res://resources/dialogues/gerhard/quest/"
-				}
+		"conversation": {
+			"pitch": 0.5,
+			"day": "res://resources/dialogues/gerhard/day/day.vrv",
+			"small_talk": "res://resources/dialogues/gerhard/small_talk.vrv",
+			"paths": {
+				"day": "res://resources/dialogues/gerhard/day/",
+				"quest": "res://resources/dialogues/gerhard/quest/"
+			}
+		},
+		"trading": {
+			"preferences": {
+				"WATER": 1,
+				"WATER_DIRTY": 4,
+				"VEGETABLES": 0.5
 			},
-			"trading": {
-				"preferences": {
-					"WATER": 1,
-					"WATER_DIRTY": 4,
-					"VEGETABLES": 0.5
-				},
-				"inventory": {
-					"WATER": 3,
-					"WATER_DIRTY": 2,
-					"VEGETABLES": 3
-				},
-				"bottom": -0.6,
-				"low": -0.3,
-				"mid": 0.0,
-				"high": 0.3,
-				"top": 0.6,
-				"response": {
-					"BASE": [
-						"Ich mag alles, was mir im Garten hilft",
-						"Mmh mal schaun.",
-						"MMh, oh ja."
-					],
-					"WATER_DIRTY": [
-						"Oh, das kann ich gut gebrauchen",
-						"Ich benutze dreckiges Wasser immer, um meine Pflanzen zu gießen!"
-					],
-					"WATER": [
-						"Oh, Wasser ist gut.",
-						"Ich könnte dreckiges Wasser auch gut gebrauchen."
-					],
-					"UNPALATABLE": [
-						"Mmh, das ist doch verschimmelt!"
-					],
-					"FOOD": [
-						"Essen kann man immer gebrauchen."
-					]
-				}
+			"inventory": {
+				"WATER": 3,
+				"WATER_DIRTY": 2,
+				"VEGETABLES": 3
+			},
+			"bottom": -0.6,
+			"low": -0.3,
+			"mid": 0.0,
+			"high": 0.3,
+			"top": 0.6,
+			"response": {
+				"BASE": [
+					"Ich mag alles, was mir im Garten hilft",
+					"Mmh mal schaun.",
+					"MMh, oh ja."
+				],
+				"WATER_DIRTY": [
+					"Oh, das kann ich gut gebrauchen",
+					"Ich benutze dreckiges Wasser immer, um meine Pflanzen zu gießen!"
+				],
+				"WATER": [
+					"Oh, Wasser ist gut.",
+					"Ich könnte dreckiges Wasser auch gut gebrauchen."
+				],
+				"UNPALATABLE": ["Mmh, das ist doch verschimmelt!"],
+				"FOOD": ["Essen kann man immer gebrauchen."]
 			}
 		},
 		"stage": {
@@ -61,9 +55,9 @@
 			"spot": "default",
 
 			"position": {
-					"x": 448,
-					"y": 380
-				},
+				"x": 448,
+				"y": 380
+			},
 			"start": "Gardenhouse",
 			"positions": {
 				"Park": {
@@ -77,394 +71,6 @@
 				"Market": {
 					"x": 150,
 					"y": 300
-				}
-			}
-		},
-		"brain": {
-			"actions": {
-				"friedel_weg": {
-					"type": "condition",
-					"if": {
-						"type": "single",
-						"system": "ActCond",
-						"method": "is_current_stage",
-						"params": [
-							"home"
-						]
-					},
-					"then": {
-						"type": "multi",
-						"acc": "array",
-						"actions": [
-							{
-								"type": "single",
-								"system": "quest",
-								"method": "add_quest",
-								"params": [
-									"FRIEDEL_WEG",
-									5
-								]
-							},
-							{
-								"type": "single",
-								"system": "gui_mngr",
-								"method": "queue_gui",
-								"params": [
-									"PopUpGUI",
-									[
-										"Gerhard klopft an der Tür. Vielleicht braucht er deine Hilfe.",
-										"Q!_Gerhard",
-										"SFX_Door"
-									]
-								]
-							}
-						]
-					},
-					"else": {
-						"type": "single",
-						"system": "quest",
-						"method": "add_quest",
-						"params": [
-							"FRIEDEL_WEG",
-							5
-						]
-					}
-				},
-				"ignored": {
-					"type": "multi",
-					"acc": "array",
-					"actions": [
-						{
-							"type": "single",
-							"system": "quest",
-							"method": "remove_quest",
-							"params": [
-								"FRIEDEL_WEG"
-							]
-						},
-						{
-							"type": "single",
-							"system": "stage",
-							"method": "change_stage",
-							"params": [
-								"gardenhouse"
-							]
-						},
-						{
-							"type": "single",
-							"system": "Score",
-							"method": "add_score",
-							"params": [
-								"quest",
-								{
-									"value": -10
-								}
-							]
-						},
-						{
-							"type": "single",
-							"system": "karma",
-							"method": "add_karma",
-							"params": [
-								-0.1
-							]
-						}
-					]
-				},
-				"canceled": {
-					"type": "multi",
-					"acc": "array",
-					"actions": [
-						{
-							"type": "single",
-							"system": "quest",
-							"method": "remove_quest",
-							"params": [
-								"FRIEDEL_WEG"
-							]
-						},
-						{
-							"type": "single",
-							"system": "stage",
-							"method": "change_stage",
-							"params": [
-								"gardenhouse"
-							]
-						}
-					]
-				},
-				"park": {
-					"type": "multi",
-					"acc": "array",
-					"actions": [
-						{
-							"type": "single",
-							"system": "stage",
-							"method": "change_stage",
-							"params": [
-								"park"
-							]
-						},
-						{
-							"type": "single",
-							"system": "quest",
-							"method": "add_quest",
-							"params": [
-								"FRIEDEL_WEG",
-								4
-							]
-						}
-					]
-				},
-				"idle": {
-					"type": "single",
-					"system": "stage",
-					"method": "change_stage",
-					"params": [
-						"gardenhouse"
-					]
-				},
-				"stroll_int": {
-					"type": "condition",
-					"if": {
-						"type": "single",
-						"system": "OSM",
-						"method": "has_not_flag",
-						"params": [
-							"NoEntry", "Park"
-						]
-					},
-					"then": {
-						"type": "single",
-						"system": "cooperation",
-						"method": "add_intention",
-						"params": [
-							"stroll"
-						]
-					},
-					"else": {
-						"type": "single",
-						"system": "cooperation",
-						"method": "add_intention",
-						"params": [
-							"idle"
-						]
-					}
-				},
-				"stroll": {
-					"type": "single",
-					"system": "stage",
-					"method": "change_stage",
-					"params": [
-						"park"
-					]
-				},
-				"fish_int": {
-					"type": "single",
-					"system": "cooperation",
-					"method": "add_intention",
-					"params": [
-						"fish"
-					]
-				},
-				"fish": {
-					"type": "single",
-					"system": "stage",
-					"method": "change_stage",
-					"params": [
-						"market"
-					]
-				},
-				"noop": {
-					"type": "single",
-					"system": "cooperation",
-					"method": "add_intention",
-					"params": [
-						"noop"
-					]
-				},
-				"work": {
-					"type": "condition",
-					"if": {
-						"type": "single",
-						"system": "trading",
-						"method": "has_item",
-						"params": [
-							"VEGETABLES",
-							5
-						]
-					},
-					"then": {
-						"type": "multi",
-						"acc": "array",
-						"actions": [
-							{
-								"type": "single",
-								"system": "trading",
-								"method": "remove_item",
-								"params": [
-									"VEGETABLES"
-								]
-							},
-							{
-								"type": "single",
-								"system": "stage",
-								"method": "change_stage",
-								"params": [
-									"gardenhouse"
-								]
-							}
-						]
-					},
-					"else": {
-						"type": "condition",
-						"if": {
-							"type": "single",
-							"system": "trading",
-							"method": "has_item",
-							"params": [
-								"WATER_DIRTY"
-							]
-						},
-						"then": {
-							"type": "multi",
-							"acc": "array",
-							"actions": [
-								{
-									"type": "single",
-									"system": "trading",
-									"method": "remove_item",
-									"params": [
-										"WATER_DIRTY"
-									]
-								},
-								{
-									"type": "single",
-									"system": "trading",
-									"method": "add_item",
-									"params": [
-										"VEGETABLES"
-									]
-								},
-								{
-									"type": "single",
-									"system": "stage",
-									"method": "change_stage_pos",
-									"params": [
-										"gardenhouse",
-										{
-											"x": 290,
-											"y": 725
-										}
-									]
-								}
-							]
-						},
-						"else": {
-							"type": "condition",
-							"if": {
-								"type": "single",
-								"system": "OSM",
-								"method": "is_effective_state_gt",
-								"params": [
-									"WaterState", "NONE"
-								]
-							},
-							"then": {
-								"type": "multi",
-								"acc": "array",
-								"actions": [
-									{
-										"type": "single",
-										"system": "trading",
-										"method": "add_item",
-										"params": [
-											"WATER_DIRTY"
-										]
-									},
-									{
-										"type": "single",
-										"system": "stage",
-										"method": "change_stage",
-										"params": [
-											"gardenhouse"
-										]
-									}
-								]
-							},
-							"else": {
-								"type": "single",
-								"system": "stage",
-								"method": "change_stage",
-								"params": [
-									"gardenhouse"
-								]
-							}
-						}
-					}
-				}
-			},
-			"decide": {
-				"name": "weighted_decide",
-				"weight": {
-					"stroll": 1,
-					"stroll_int": 1,
-					"idle": 1,
-					"friedel_weg": 1,
-					"park": 1,
-					"ignored": 1,
-					"fish_int": 1,
-					"fish": 1,
-					"noop": 1,
-					"work": 1,
-					"canceled": 1
-				}
-			},
-			"comps": {
-				"routine": {
-					"schedule": {
-						"0": "stroll_int",
-						"1": "work",
-						"2": "idle"
-					}
-				},
-				"cooperation": {
-					"Friedel": {
-						"sleep_mood": "fish_int",
-						"noop": "noop",
-						"fish": "fish",
-						"stroll": "stroll"
-					}
-				},
-				"quest": {
-					"priority": "",
-					"actions": [
-						{
-							"quest": "FRIEDEL_WEG",
-							"stage": 1,
-							"action": "friedel_weg"
-						},
-						{
-							"quest": "FRIEDEL_WEG",
-							"stage": 2,
-							"action": "park"
-						},
-						{
-							"quest": "FRIEDEL_WEG",
-							"stage": 3,
-							"action": "idle"
-						},
-						{
-							"quest": "FRIEDEL_WEG",
-							"stage": 4,
-							"action": "ignored"
-						},
-						{
-							"quest": "FRIEDEL_WEG",
-							"stage": 5,
-							"action": "canceled"
-						}
-					]
 				}
 			}
 		}

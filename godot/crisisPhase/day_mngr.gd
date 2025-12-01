@@ -175,10 +175,14 @@ func _update_HUD() -> void:
 func save() -> Dictionary:
 	var data : Dictionary = {
 		"node_path": get_path(),
-		"period_cnt": _period_cnt,
+		#"period_cnt": _period_cnt,
+		"time": _time,
+		"day": _day
 	}
 	return data
 
 func load_state(data : Dictionary) -> void:
-	_period_cnt = data.get("period_cnt", 0)
+	#_period_cnt = data.get("period_cnt", 0)
+	_time = data.get("time", 0)
+	_day = data.get("day", 0)
 	_update_HUD()

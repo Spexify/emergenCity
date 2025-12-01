@@ -9,4 +9,4 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-	s.get_next()
+	s.get_next(VRV_InstanceData.new())

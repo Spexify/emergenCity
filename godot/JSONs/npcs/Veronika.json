@@ -4,31 +4,29 @@
 			"name": "Veronika",
 			"descr": "Das hier ist Veronika.\nSie hat einen Backup-Plan für ihren Backup-Plan.",
 			"portait": "veronika",
-      "sprite": "veronika"
+			"sprite": "veronika"
 		},
 		"karma": {},
-		"interaction": {
-			"conversation": {
-				"pitch": 1.1,
-				"day": "res://resources/dialogues/veronika/day/day.vrv",
-				"small_talk": "res://resources/dialogues/veronika/small_talk.vrv",
-				"paths": {
-					"day": "res://resources/dialogues/veronika/day/"
-				}
-			},
-			"trading": {
-				"inventory": {
-					"CHLOR_TABLETS": 3,
-					"GAS_CARTRIDGE": 2,
-					"SOAP": 2
-				}
+		"conversation": {
+			"pitch": 1.1,
+			"day": "res://resources/dialogues/veronika/day/day.vrv",
+			"small_talk": "res://resources/dialogues/veronika/small_talk.vrv",
+			"paths": {
+				"day": "res://resources/dialogues/veronika/day/"
+			}
+		},
+		"trading": {
+			"inventory": {
+				"CHLOR_TABLETS": 3,
+				"GAS_CARTRIDGE": 2,
+				"SOAP": 2
 			}
 		},
 		"stage": {
 			"stage_name": "apartment_camper",
 			"spot": "bedside",
-			
-			"position": {"x": 450, "y": 750},
+
+			"position": { "x": 450, "y": 750 },
 			"start": "ApartmentCamper",
 			"positions": {
 				"ApartmentCamper": { "x": 450, "y": 750 },

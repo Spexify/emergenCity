@@ -7,21 +7,19 @@
 			"sprite": "agathe"
 		},
 		"karma": {},
-		"interaction": {
-			"conversation": {
-				"pitch": 1.2,
-				"day": "res://resources/dialogues/agathe/day/day.vrv",
-				"small_talk": "res://resources/dialogues/agathe/small_talk.vrv",
-				"paths": {
-					"day": "res://resources/dialogues/agathe/day/"
-				}
-			},
-			"trading": {
-				"inventory": {
-					"WATER": 2,
-					"RAVIOLI_TIN": 2,
-					"CHOCOLATE": 1
-				}
+		"conversation": {
+			"pitch": 1.2,
+			"day": "res://resources/dialogues/agathe/day/day.vrv",
+			"small_talk": "res://resources/dialogues/agathe/small_talk.vrv",
+			"paths": {
+				"day": "res://resources/dialogues/agathe/day/"
+			}
+		},
+		"trading": {
+			"inventory": {
+				"WATER": 2,
+				"RAVIOLI_TIN": 2,
+				"CHOCOLATE": 1
 			}
 		},
 		"stage": {
@@ -35,5 +33,5 @@
 				"Market": { "x": 180, "y": 300 }
 			}
 		}
-	}	
+	}
 }

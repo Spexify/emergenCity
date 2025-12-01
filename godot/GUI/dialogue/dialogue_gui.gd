@@ -47,7 +47,7 @@ func set_actor_portraits(portraits: Array[Texture2D], names: Array[String], flip
 			text_rect.name = "none"
 		i += 1
 
-func open(dialogue: VRV_Script) -> void:
+func open(dialogue: VRV_Script, state: VRV_InstanceData = VRV_InstanceData.new()) -> void:
 	if dialogue.is_empty():
 		opened.emit()
 		close.call_deferred()
@@ -59,18 +59,18 @@ func open(dialogue: VRV_Script) -> void:
 	opened.emit()
 	#dialogue.set_api(stage_mngr, checker)
 	dialogue.gsi = gsi
-	start.call_deferred(dialogue)
+	start.call_deferred(dialogue, state)
 
 func close() -> void:
 	self.hide()
 	closed.emit(self)
 
-func start(dialogue : VRV_Script) -> void:
+func start(dialogue : VRV_Script, state: VRV_InstanceData) -> void:
 	vbc.hide()
 	margin.show()
 	
 	while true:
-		match dialogue.get_next():
+		match dialogue.get_next(state):
 			[VRV_Script.TEXT, var text, var eager]:
 				var talk_effect := EMC_RichTextTalkEffect.new()
 				#dialogue_box.install_effect(talk_effect)
@@ -128,7 +128,7 @@ func start(dialogue : VRV_Script) -> void:
 				_disconnect_buttons() # INFO: here we could improve performance
 				for button : Button in vbc.get_children():
 					if i < choices.size():
-						button.pressed.connect(dialogue.choose.bind(choices[i].get("id")))
+						button.pressed.connect(dialogue.choose.bind(choices[i].get("id"), state))
 						signals.append(button.pressed)
 						button.set_text(choices[i].get("prompt"))
 						button.set_button_icon(_icon_list.get(choices[i].get("icon", "none"), null))

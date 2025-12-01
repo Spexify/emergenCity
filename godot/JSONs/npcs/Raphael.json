@@ -4,41 +4,39 @@
 			"name": "Raphael",
 			"descr": "Das hier ist Raphael.\nSeine Waren halten länger als seine Meinungen.",
 			"portait": "raphael",
-      "sprite": "raphael"
+			"sprite": "raphael"
 		},
 		"karma": {},
-		"interaction": {
-			"conversation": {
-				"pitch": 0.7,
-				"day": "res://resources/dialogues/raphael/day/day.vrv",
-				"small_talk": "res://resources/dialogues/raphael/small_talk.vrv",
-				"paths": {
-					"day": "res://resources/dialogues/raphael/day/"
-				}
+		"conversation": {
+			"pitch": 0.7,
+			"day": "res://resources/dialogues/raphael/day/day.vrv",
+			"small_talk": "res://resources/dialogues/raphael/small_talk.vrv",
+			"paths": {
+				"day": "res://resources/dialogues/raphael/day/"
+			}
+		},
+		"trading": {
+			"preferences": {
+				"WATER": 1,
+				"POTATOES": 2,
+				"VEGETABLES": 4,
+				"SOAP": 8,
+				"MEAT": 12,
+				"BREAD": 4
 			},
-			"trading": {
-				"preferences": {
-					"WATER": 1,
-					"POTATOES": 2,
-					"VEGETABLES": 4,
-					"SOAP": 8,
-					"MEAT": 12,
-					"BREAD": 4
-				},
-				"inventory": {
-					"WATER": 3,
-					"POTATOES": 3,
-					"SOAP": 1,
-					"MEAT": 2,
-					"BREAD": 3
-				}
+			"inventory": {
+				"WATER": 3,
+				"POTATOES": 3,
+				"SOAP": 1,
+				"MEAT": 2,
+				"BREAD": 3
 			}
 		},
 		"stage": {
 			"stage_name": "market",
 			"spot": "sell",
 
-			"position": {"x": 224, "y": 248},
+			"position": { "x": 224, "y": 248 },
 			"start": "Market",
 			"positions": {
 				"Market": { "x": 224, "y": 248 }

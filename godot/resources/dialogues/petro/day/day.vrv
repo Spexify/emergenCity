@@ -190,7 +190,7 @@ petro:Am schlimmsten ist es, wenn die Schule ausfällt und Irena den ganzen vorm
 petro:Zum Glück passiert das nur selten.
 
 [Comment]
-    Ist das absichtlich nicht mehr Teil vom dialoge?
-    [[Node]] trade
-    [Prompt] Hast du was zu tauschen?
-    [action] request_trade_gui("petro")
+	Ist das absichtlich nicht mehr Teil vom dialoge?
+	[[Node]] trade
+	[Prompt] Hast du was zu tauschen?
+	[action] request_trade_gui("petro")

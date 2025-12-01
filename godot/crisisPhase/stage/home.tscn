@@ -51,6 +51,7 @@ tile_set = ExtResource("1_nnisn")
 navigation_enabled = false
 
 [node name="Tooltips" type="TileMapLayer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.537255)
 z_index = 1
 use_parent_material = true

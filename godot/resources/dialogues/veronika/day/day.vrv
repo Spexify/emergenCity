@@ -119,33 +119,64 @@ kris:Ich lass mich lieber überraschen und wenns doch böse wird, geh ich damit 
 [text]
 veronika:Letztes Wochenende waren wir wandern.
 veronika:Bei nebligem Wetter kann man wunderbare Fotos machen. Mystische Stimmung. Gestalten im Nebel.
-[if] eq_bool(#kids_on_trail,true)
-    [then]
-        [text]
-        veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
-        veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
-        [set] #kids_on_trail false
-    [else]
-        [text]
-        veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!
-        veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
+[match] get_var_or(#kids_on_trail, false)
+- [false] [text]
+	veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!
+	veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
+- [true] [jump] set_kids_trail_dialogue
+[jump] talk6_1
+
+[[Node]] set_kids_trail_dialogue
+[actors] avatar veronika.flipped
+[text]
+veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
+veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
+[set] #kids_on_trail false
+[jump] talk6_1
+
+[[Node]] talk6_1
+[actors] avatar veronika.flipped
+[text]
 veronika:Ich habe einige eindrucksvolle Fotos geschossen, von Sonnenstrahlen, die sich als Lichtkegel durch den Nebel filtern.
 veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografieren.
+
+
+[Comment]
+	[if] eq_bool(#kids_on_trail,true)
+		[then]
+			[text]
+			veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
+			veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
+			[set] #kids_on_trail false
+		[else]
+			[text]
+			veronika:Ich habe ein Bild von einem Rothirsch als Silhouette im Nebel. Herrlich!
+			veronika:Später kam dann die Sonne noch durch. Das hat sich auch gelohnt.
+	veronika:Ich habe einige eindrucksvolle Fotos geschossen, von Sonnenstrahlen, die sich als Lichtkegel durch den Nebel filtern.
+	veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografieren.
 
 [[Node]] talk7
 [actors] avatar veronika.flipped
 [text]
 veronika:Ich bin so müde ...
 avatar:Mach doch ein Nickerchen.
-[if] npc_friendship_higher_than("veronika",10)
-    [then]
-        [text]
-        veronika:Das hat Kris auch schon gesagt.
-        veronika:Vielleicht habt ihr Recht ...
-    [else]
-        [random]
-        - [jump] cant_sleep
-        - [jump] wont_sleep
+[match] npc_friendship_higher_than("veronika", 10)
+- [true] [text]
+	veronika:Das hat Kris auch schon gesagt.
+	veronika:Vielleicht habt ihr Recht ...
+- [false] [random]
+	- [jump] cant_sleep
+	- [jump] wont_sleep
+[Comment]
+	[if] npc_friendship_higher_than("veronika",10)
+		[then]
+			[text]
+			veronika:Das hat Kris auch schon gesagt.
+			veronika:Vielleicht habt ihr Recht ...
+		[else]
+			[random]
+			- [jump] cant_sleep
+			- [jump] wont_sleep
 
 [[Node]] cant_sleep
 [Condition] npc_is_sad("veronika")
@@ -175,8 +206,8 @@ avatar:Kris hat eine besondere Begabung, das Gute zu sehen und es anderen zu zei
 veronika:Absolut ...
 
 [Comment]
-    Ist das absichtlich nicht mehr Teil vom dialoge?
-    [[Node]] trade
-    [Prompt] Handeln
-    [action] request_trade_gui("veronika")
+	Ist das absichtlich nicht mehr Teil vom dialoge?
+	[[Node]] trade
+	[Prompt] Handeln
+	[action] request_trade_gui("veronika")
 

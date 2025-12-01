@@ -92,28 +92,42 @@ mert:Verstehst du, was ich meine?
 [text]
 mert:Hm. Ich frage mich ...
 avatar:Was?
-[if] npc_friendship_less_than("mert",10)
-    [then]
-        [text]
-        mert:Egal.
-    [else]
-        [text]
-        mert:Ich glaube, man muss es erlebt haben, um es zu verstehen.
-        mert:Aber vielleicht hast du das ja. Es würde erklären, warum ich gleich das Gefühl hatte, mit dir kann man gut reden.
-        avatar:Danke, das Kompliment geb ich gern zurück!
+[match] npc_friendship_less_than("mert", 10)
+- [true] [text] mert:Egal.
+- [false] [text]
+	mert:Ich glaube, man muss es erlebt haben, um es zu verstehen.
+	mert:Aber vielleicht hast du das ja. Es würde erklären, warum ich gleich das Gefühl hatte, mit dir kann man gut reden.
+	avatar:Danke, das Kompliment geb ich gern zurück!
+[Comment]
+	[if] npc_friendship_less_than("mert", 10)
+		[then]
+			[text]
+			mert:Egal.
+		[else]
+			[text]
+			mert:Ich glaube, man muss es erlebt haben, um es zu verstehen.
+			mert:Aber vielleicht hast du das ja. Es würde erklären, warum ich gleich das Gefühl hatte, mit dir kann man gut reden.
+			avatar:Danke, das Kompliment geb ich gern zurück!
 
 [[Node]] understand_no
 [actors] avatar mert.flipped
 [text]
-[if] npc_friendship_less_than("mert",10)
-    [then]
-        [text]
-        mert:Das hab ich befürchtet. Ist auch nicht so wichtig.
-    [else]
-        [text]
-        mert:Das hab ich befürchtet. Wie erkläre ich es besser?
-        mert:...
-        mert:Vielleicht fällt mir noch was ein.
+[match] npc_friendship_less_than("mert", 10)
+- [true] [text] mert:Das hab ich befürchtet. Ist auch nicht so wichtig.
+- [false] [text]
+	mert:Das hab ich befürchtet. Wie erkläre ich es besser?
+	mert:...
+	mert:Vielleicht fällt mir noch was ein.
+[Comment]
+	[if] npc_friendship_less_than("mert", 10)
+		[then]
+			[text]
+			mert:Das hab ich befürchtet. Ist auch nicht so wichtig.
+		[else]
+			[text]
+			mert:Das hab ich befürchtet. Wie erkläre ich es besser?
+			mert:...
+			mert:Vielleicht fällt mir noch was ein.
 
 [[Node]] talk6
 [actors] avatar mert.flipped
@@ -228,7 +242,8 @@ mert:Möchtest du darüber reden, was dich bedrückt? Ich mach uns auch einen Te
 [text]
 mert:Sehr gut!
 [action] progress_day("Sprich dich bei Mert aus")
-[action] add_points_water(300)
+[action] add_points_water()
+[text]
 avatar:Es tat gut, darüber zu sprechen. Danke dir!
 mert:Jederzeit!
 

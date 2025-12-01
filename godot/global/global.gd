@@ -59,6 +59,9 @@ signal scene_changed
 var _vibration : bool = true
 var _is_dyslexic: bool = false
 
+# Once
+var _data: bool = false
+
 # Meta
 var _e_coins : int = 500
 var _tutorial_done : bool = false
@@ -140,6 +143,7 @@ func save_settings() -> void:
 	data.add_res("musik_volume", db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Musik"))))
 	data.add_res("vibration", _vibration)
 	data.add_res("is_dyslexic", _is_dyslexic)
+	data.add_res("data", _data)
 	
 	ResourceSaver.save(data, SAVE_SETTINGS_FILE)
 
@@ -148,12 +152,14 @@ func load_settings() -> void:
 	
 	_vibration = data.get_res("vibration", true)
 	_is_dyslexic = data.get_res("is_dyslexic", false)
+	_data = data.get_res("data", false)
 	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data.get_res("master_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(data.get_res("sfx_volume", 1)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Musik"), linear_to_db(data.get_res("musik_volume", 1)))
-	if not SoundMngr.is_musik_playing():
-		SoundMngr.play_musik() 
+	
+	#if not SoundMngr.is_musik_playing():
+		#SoundMngr.play_musik()
 		
 func reset_settings() -> void:
 	var data: EMC_AllRes = EMC_AllRes.new()

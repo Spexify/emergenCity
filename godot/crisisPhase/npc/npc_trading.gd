@@ -1,4 +1,4 @@
-extends EMC_NPC_Interaction_Option
+extends EMC_NPC_Interaction
 class_name EMC_NPC_Trading
 
 const RED: Color = Color8(219, 6, 11)
@@ -65,9 +65,12 @@ func set_owner(_owner: EMC_NPC) -> void:
 
 func get_title() -> String:
 	return "Handeln"
+	
+func get_style_name() -> String:
+	return "BlueButton"
 
-func run(_gui_mngr: EMC_GUIMngr) -> void:
-	_gui_mngr.request_gui("Trade", [owner])
+func run(gsi: EMC_GSI) -> void:
+	gsi.request_gui("Trade", [owner])
 
 func get_inventory() -> EMC_Inventory:
 	return _inventory

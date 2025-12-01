@@ -1,9 +1,10 @@
-extends EMC_NPC_Interaction_Option
+extends EMC_NPC_Interaction
 class_name EMC_NPC_Conversation
 
-@export var day_dialogue: VRV_Script = null
+@export var day_dialogue: VRV_Script
+@export var day_dialogue_state: VRV_InstanceData
 @export var small_talk: VRV_Script
-@export var context: Dictionary = {"@last_day": -1, "@last_option": 1}
+#@export var context: Dictionary = {}
 @export var npc_pitch: float = 1.0
 
 var owner: EMC_NPC
@@ -15,39 +16,43 @@ func setup(dict: Dictionary) -> void:
 	npc_pitch = dict.get("pitch", npc_pitch)
 	var dialogue_path: String = dict.get("day", "")
 	if not dialogue_path.is_empty():
-		day_dialogue = ResourceLoader.load(dialogue_path, "VRV_Script")
-		day_dialogue.ended.connect(set_context)
+		day_dialogue = ResourceLoader.load(dialogue_path, "VRV_Script")#.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+		#day_dialogue.update.connect(set_context)
 	#elif OS.is_debug_build():
 		#printerr("EMC_NPC_Conversation: Invalid path.")
+	day_dialogue_state = VRV_InstanceData.new()
 	
 	dialogue_path = dict.get("small_talk", "")
 	if dialogue_path.is_empty():
 		small_talk = ResourceLoader.load("res://resources/dialogues/small_talk/one.vrv", "VRV_Script", ResourceLoader.CACHE_MODE_IGNORE)
 	else:
 		small_talk = ResourceLoader.load(dialogue_path, "VRV_Script")
-	
 
 func get_title() -> String:
 	return "Reden"
 
-func run(_gui_mngr: EMC_GUIMngr) -> void:
+func get_style_name() -> String:
+	return "ConfirmButton"
+
+func run(gsi: EMC_GSI) -> void:
 	var script: VRV_Script = _choose_dialogue()
 	
-	_gui_mngr.request_gui("DialogueGui", [script])
+	#gsi.run_script(script)
+	day_dialogue_state.to_start()
+	gsi.request_gui("DialogueGui", [script, day_dialogue_state])
 
 func _choose_dialogue() -> VRV_Script:
 	if day_dialogue != null:
-		day_dialogue._context.merge(context, true)
 		return day_dialogue
 	
-	small_talk._context = {"@npc": owner.get_name()}
+	small_talk.context = {"@npc": owner.get_name()}
 	return small_talk
 
 func get_pitch() -> float:
 	return npc_pitch
 	
-func set_context(_context: Dictionary) -> void:
-	context = _context
+#func set_context(_context: Dictionary) -> void:
+	#context = _context
 
 #const FLAG_DAY_SEEN     = 1 << 0  # 01
 #const FLAG_PURPOSE_SEEN = 1 << 1  # 10

@@ -79,7 +79,9 @@ func load_stage(stage_name: String) -> void:
 		
 	_curr_stage = _stage_scn.instantiate()
 	stage_offset.add_child(_curr_stage)
-	_curr_stage.show_electricity()
+	_day_mngr.period_increased.connect(_curr_stage.show_electricity)
+	if not Engine.is_editor_hint():
+		_curr_stage.show_electricity()
 	
 func unload_stage() -> void:
 	if _curr_stage == null:

@@ -15,6 +15,7 @@ avatar:Klar, gerne!
 agathe:Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten.
 agathe:Solche Frisuren waren damals total angesagt ...
 [action] progress_day("Mit Agathe plaudern")
+[text]
 agathe:Ach ja, ich habe viel zu viel Obst gekauft und mehr Marmelade gekocht als ich selbst essen kann.
 agathe:Magst du ein Glas haben?
 avatar:Oh ja, danke!
