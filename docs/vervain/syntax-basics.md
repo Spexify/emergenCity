@@ -55,11 +55,9 @@ Nodes are the central building blocks of Vervain dialogues. They store every oth
 [[Node]] NAME
 ```
 
-The special node named **start** is the starting point of each dialogue. `[end]` ends every dialogue. Thus, each dialogue has the following frame:
+The special node named **start** is the starting point of each dialogue:
 ```
 [[Node]] start
-...
-[end]
 ```
 
 ## Node level
@@ -351,3 +349,13 @@ Possible times are: `morning`, `midday`, `evening`.
 ```randomize(INT,MAX)```
 
 Returns true when a random number between 1 and the integer `MAX` equals the integer `INT`.
+
+## Comments
+
+To add comments, use the `command` directive and indentation:
+
+```
+[Comment]
+    All of this will be ignored
+    [...] directives will also be ignored
+```
