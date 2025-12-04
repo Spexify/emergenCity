@@ -77,13 +77,23 @@ raphael:Dacht ich auch. Aber der Kumpel von nem Mann von meiner Kusine hats uns 
 [[Node]] skeptisch
 [actors] avatar raphael.flipped
 [text]
-[if] is_state_by_name_str("MobileNetState.ONLINE")
-    [then]
-        [text]
-        raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Tante im Chat geschrieben.
-    [else]
-        [text]
-        raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Kusine gesagt.
+[match] is_state_by_name_str("MobileNetState.ONLINE")
+- [true] [text]
+	raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Tante im Chat geschrieben.
+- [false] [jump] skeptisch_intermediate
+[Comment]
+    [if] is_state_by_name_str("MobileNetState.ONLINE")
+        [then]
+            [text]
+            raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Tante im Chat geschrieben.
+        [else]
+            [text]
+            raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Kusine gesagt.
+
+[[Node]] skeptisch_intermediate
+[actors] avatar raphael.flipped
+[text]
+raphael:Keine Ahnung. Hab ja nicht mit ihm geredet. Das hat meine Kusine gesagt.
 
 [[Node]] ablehnend
 [actors] avatar raphael.flipped
