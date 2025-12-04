@@ -359,3 +359,48 @@ To add comments, use the `command` directive and indentation:
     All of this will be ignored
     [...] directives will also be ignored
 ```
+
+## File Structure
+
+The dialogue file structure looks like the following:
+
+```
+NPC_1/
+    small_talk.vrv (contains small talk specific to this NPC, one is randomly selected each day)
+    purpose/ (contains different purposes)
+    	purpose1.vrv
+    	purpose2.vrv
+        ...
+    quest/ (contains different quests)
+    	quest1.vrv
+    	quest2.vrv
+        ...
+    event/ (contains the dialogues for events the NPC participates in)
+    	event1.vrv
+    	event2.vrv
+        ...
+    secrets/ (contains the secrets, each file is called exactly once)
+    	first_secret.vrv
+    	first_secret_part_2.vrv (optional, used only if the first secret is split into two conversations)
+    	second_secret.vrv
+    day/ (contains the day dialogues, one is randomly selected each day)
+    	day.vrv
+    market (contains dialogues for the stage `market`, if the NPC can be met there)
+    	market.vrv
+    park (contains dialogues for the stage `park`, if the NPC can be met there)
+    	park.vrv
+    townhall (contains dialogues for the stage townhall, if the NPC can be met there)
+    	townhall.vrv
+    home (contains dialogues for when the avatar is home and an NPC visits)
+        home.vrv
+NPC_2/
+...
+small_talk/ (contains all small talk shared across NPCs)
+    one.vrv
+```
+
+Note:
+- `market`, `park` and `townhall` are special stage dialogues. The probability that one of them is selected is higher than the probability that a day dialogue will be used instead.
+- `home` is a special stage dialogue that is triggered when an NPC visits and always overwrites the day dialogue.
+- `secrets` and `quest` are special dialogues that overwrite the day dialogue.
+- `small_talk` are short dialogues used additionally to any of the larger dialogues (i.e. stage, secret, quests).
