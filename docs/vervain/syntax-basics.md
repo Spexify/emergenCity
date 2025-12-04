@@ -385,13 +385,13 @@ NPC_1/
     	second_secret.vrv
     day/ (contains the day dialogues, one is randomly selected each day)
     	day.vrv
-    market (contains dialogues for the stage `market`, if the NPC can be met there)
+    market/ (contains dialogues for the stage `market`, if the NPC can be met there)
     	market.vrv
-    park (contains dialogues for the stage `park`, if the NPC can be met there)
+    park/ (contains dialogues for the stage `park`, if the NPC can be met there)
     	park.vrv
-    townhall (contains dialogues for the stage townhall, if the NPC can be met there)
+    townhall/ (contains dialogues for the stage townhall, if the NPC can be met there)
     	townhall.vrv
-    home (contains dialogues for when the avatar is home and an NPC visits)
+    home/ (contains dialogues for when the avatar is home and an NPC visits)
         home.vrv
 NPC_2/
 ...
