@@ -24,7 +24,7 @@ func start() -> void:
 	var text : String = ""
 	match OverworldStatesMngr.get_food_contamination_state():
 		OverworldStatesMngr.FoodContaminationState.FOOD_SPOILED:
-			text = "Einige Lebensmittel sind\nKontaminiert."
+			text = "Einige Lebensmittel sind\nkontaminiert."
 		OverworldStatesMngr.FoodContaminationState.NONE:
 			if OverworldStatesMngr.get_electricity_state() == OverworldStatesMngr.ElectricityState.NONE:
 				text = "Lebensmittel haben\nreduzierte Haltbarkeit."
