@@ -12,7 +12,7 @@
 		"tiles_rows": 2,
 	},
 	{
-		"description": "Sammelt Regenwasser. Das gesammelte Wasser ist schmutzig und sollte nicht getrunken werden.",
+		"description": "Sammelt Regenwasser. Regenwasser ist schmutzig und sollte nicht unbehandelt getrunken werden.",
 		"display_name": "Regentonne",
 		"id": 1,
 		"price": 800,
@@ -25,7 +25,7 @@
 		"tiles_rows": 2,
 	},
 	{
-		"description": "Radio, das durch Akkus betrieben wird. Der lokale Radiosender berichtet über alle wichtigen Neuigkeiten der Stadt.",
+		"description": "Radio, das durch Batterien betrieben wird. Der lokale Radiosender berichtet über alle wichtigen Neuigkeiten der Stadt.",
 		"display_name": "Elektrisches Radio",
 		"id": 2,
 		"price": 500,
@@ -64,8 +64,8 @@
 		"tiles_rows": 2,
 	},
 	{
-		"description": "Ermöglicht längeres Handy nutzen bei Stromausfall",
-		"display_name": "Power Bank",
+		"description": "Ermöglicht eine längere Handynutzung bei Stromausfall.",
+		"display_name": "Powerbank",
 		"id": 5,
 		"price": 1000,
 		"state": 0,
@@ -76,8 +76,8 @@
 		"tiles_rows": 2,
 	},
 	{
-		"description": "Ermöglicht abfüllen von Wasser.",
-		"display_name": "Wasser Reservoir",
+		"description": "Ermöglicht das Abfüllen von Wasser.",
+		"display_name": "Wasserspeicher",
 		"id": 6,
 		"price": 2000,
 		"state": 0,
