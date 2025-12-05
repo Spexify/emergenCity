@@ -68,7 +68,7 @@ avatar:Das merk ich mir, danke!
 [text]
 raphael:Noch gehts. Aber haste schon gehört? Die Krise soll noch zwei Wochen dauern!
 avatar:Sowas kann man doch gar nicht voraussagen.
-raphael:Dacht ich auch. Aber der Kumpel von nem Mann von meiner Kusine hats uns gesagt.
+raphael:Dacht ich auch. Aber der Kumpel von dem Mann von meiner Kusine hats uns gesagt.
 [Choice]
 - [skeptisch] Und woher weiß er es?
 - [ablehnend] Ich wäre vorsichtig bei sowas.
@@ -103,7 +103,7 @@ raphael:Dein Bier. Ich bin jedenfalls vorbereitet.
 [[Node]] werden_sehen
 [actors] avatar raphael.flipped
 [text]
-raphael:Da haste Recht. Ich bin jedenfalls vorbereitet.
+raphael:Da haste recht. Ich bin jedenfalls vorbereitet.
 
 [[Node]] talk5
 [actors] avatar raphael.flipped
@@ -218,7 +218,7 @@ raphael:Nix zu danken.
 raphael:Alles braucht heutzutage Internet. Wollte Geld abheben und der Automat ging nicht. Bald brauchts vermutlich noch AI.
 raphael:Aber ich sag dir was. In ner Krise brauchste deine Mitmenschen. Die Computer kannste vergessen. Die helfen dir nicht. Und die verhungern auch nicht.
 raphael:Wir Menschen, wir sitzen zusammen in nem Boot. Vergiss das nicht.
-avatar:Da hast du Recht.
+avatar:Da hast du recht.
 
 [Comment]
 	Ist das absichtlich nicht mehr Teil vom dialoge?
