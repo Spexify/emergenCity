@@ -178,7 +178,7 @@ agathe:Er hat mir gezeigt, wie man Fotos entwickelt. Damals war ich noch ein Kin
 [[Node]] FotosTeilenMeh
 [actors] agathe avatar.flipped
 [text]
-avatar:Ja, ich weiß, ich bin nur ein Amateur.
+agathe:Ja, ich weiß, ich bin nur ein Amateur.
 agathe:Ich habe die Alben ja nur, weil es mir so einen Spaß gemacht hat, die Fotos zu entwickeln.
 agathe:Und der Erinnerungen wegen ...
 
@@ -207,7 +207,7 @@ agathe:Ich verstehe, was du meinst.
 [text]
 agathe:Es ist ja nicht immer so leicht, hier zu leben.
 agathe:Aber uns kann auch nicht mehr viel überraschen, nicht wahr?
-avatar:Da hast du Recht.
+avatar:Da hast du recht.
 
 [[Node]] talk11
 [actors] agathe avatar.flipped
@@ -247,7 +247,7 @@ agathe:Eigentlich schade um das Haus.
 [text]
 agathe:Wir hatten tagelang kein sauberes Trinkwasser.
 agathe:Alle Vorräte im Keller waren vernichtet.
-agathe:Das ist etwas, was ich damals gelernt habe. Hier oben sind immer Notfallvorräte.
+agathe:Das ist etwas, was ich damals gelernt habe. Hier oben habe ich immer Notfallvorräte.
 agathe:Das kann ich dir auch nur ans Herz legen. Ein Notfallvorrat an Nahrung und Wasser in der Wohnung, nicht nur im Keller, ist Gold wert!
 avatar:Danke für den Tipp!
 [action] add_score("tip", {"source": "agathe1"})
@@ -271,7 +271,7 @@ agathe:Wir hatten sonst fast alles. Hochwasser, Dürre, Sturm, Erdbeben, Unfäll
 agathe:Es gab auch Häuserbrände. Aber in meinen ersten sechzig Lebensjahren habe ich nur einen einzigen Waldbrand erlebt.
 agathe:Seitdem gab es drei Waldbrände! Oder waren es vier? Ich erinnere mich nicht genau, wie viele es waren. Aber deutlich mehr waren es.
 agathe:Die Dürren heute sind schlimmer als damals und der Wald ist trockener.
-agathe:Den letzten schlimmen Brand hat ein Zigarettenstummel ausgelöst. Furchtbar sowas!
+agathe:Den letzten schlimmen Brand hat ein Zigarettenstummel ausgelöst. Furchtbar, so etwas!
 avatar:Das stimmt.
 
 [[Node]] talk13
@@ -281,7 +281,7 @@ agathe:Wie reizend! Es gibt so einiges, an das man sich gewöhnt, wenn man hier 
 agathe:Wenn man bei Sturm sofort rausgeht und die Sachen auf dem Balkon befestigt, zum Beispiel.
 agathe:Aber wenn dann etwas passiert, schauen einen die Leute plötzlich ganz anders an. Meistens kommen dann die Fragen ...
 agathe:Nun, so ist das wohl. Man kocht mit den Zutaten, die man kennt.
-agathe:Ich bin froh, dass ich weiß, was ich tun muss - egal was passiert.
+agathe:Ich bin froh, dass ich weiß, was ich tun muss - egal, was passiert.
 
 [[Node]] talk14
 [actors] agathe avatar.flipped
