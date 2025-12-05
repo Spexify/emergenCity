@@ -82,7 +82,7 @@ gerhard:Nicht wahr, Friedel?
 friedel:[i]*Hechel.*[/i] Wuff!
 
 [[Node]] talk6
-[Condition] crisis_is("Duerre")
+[Condition] crisis_is("Hochwasser")
 [actors] avatar friedel gerhard.flipped
 [text]
 avatar:Lass uns reden! Wie läuft es bei dir?
@@ -96,7 +96,7 @@ gerhard:Ich weiß, du kannst nichts dafür. Aber du magst es doch auch, wenn bei
 friedel:Wuff!
 
 [[Node]] talk7
-[Condition] crisis_is("Hochwasser")
+[Condition] crisis_is("Duerre")
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Zu viel Sonne ist nicht gut für meinen Garten.
