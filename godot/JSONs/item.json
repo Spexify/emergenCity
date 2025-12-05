@@ -54,7 +54,7 @@
 	{
 		"ID": 6,
 		"name": "Ungekochte Nudeln",
-		"descr": "Zu hart um sie roh zu essen, müssen erst gekocht werden.",
+		"descr": "Zu hart, um sie roh zu essen, müssen erst gekocht werden.",
 		"comps": [
 			{"name": "cost", "params": 10},
 			{"name": "value", "params": 2}
@@ -124,7 +124,7 @@
 	},
 	{
 		"ID": 13,
-		"name": "Chlortablette",
+		"name": "Chlortabletten",
 		"descr": "Können genutzt werden, um schmutziges Wasser zu reinigen.",
 		"comps": [
 			{"name": "cost", "params": 70},
@@ -144,7 +144,7 @@
 	{
 		"ID": 15,
 		"name": "Salz",
-		"descr": "Das beliebteste Gewürz; nicht zu Verwechseln mit Zucker.",
+		"descr": "Das beliebteste Gewürz; nicht zu verwechseln mit Zucker.",
 		"comps": [
 			{"name": "cost", "params": 10},
 			{"name": "value", "params": 2}
@@ -153,7 +153,7 @@
 	{
 		"ID": 16,
 		"name": "Zucker",
-		"descr": "Das beliebteste Süßungsmittel; nicht zu Verwechseln mit Salz.",
+		"descr": "Das beliebteste Süßungsmittel; nicht zu verwechseln mit Salz.",
 		"comps": [
 			{"name": "cost", "params": 15},
 			{"name": "value", "params": 2.5}
@@ -305,7 +305,7 @@
 	{
 		"ID": 30,
 		"name": "Saft",
-		"descr": "Schmeckt frisch gepresst am Besten.",
+		"descr": "Schmeckt frisch gepresst am besten.",
 		"comps": [
 			{"name": "cost", "params": 30},
 			{"name": "shelflife", "params": 3},
@@ -391,7 +391,7 @@
 	{
 		"ID": 38,
 		"name": "Gulasch",
-		"descr": "Das Eintopf-artige Gericht wärmt von innen.",
+		"descr": "Das eintopfartige Gericht wärmt von innen.",
 		"comps": [
 			{"name": "food", "params": 1},
 			{"name": "shelflife", "params": 3},
