@@ -52,14 +52,14 @@ veronika:Als Kind dachte ich, man dürfte aus klaren Bächen trinken.
 veronika:In Kinderbüchern machen sie das oft so. Aber die meisten Bäche sind verschmutzt.
 veronika:Deshalb haben wir immer Chlortabletten vorrätig. Für den Campingurlaub oder wenn das Wasser ausfällt.
 veronika:Abkochen geht natürlich auch, aber dafür bräuchte man wieder Strom oder Gas.
-kris:Vero hat sich da schon alles mögliche angeschaut. Filtersysteme, Tabletten...
+kris:Vero hat sich da schon alles Mögliche angeschaut. Filtersysteme, Tabletten...
 kris:Meinen Pflanzen macht das dreckige Wasser meist nichts aus. Die sind viel anspruchsloser als wir.
 [action] add_score("tip", {"source": "veronika1"})
 
 [[Node]] talk4
 [actors] avatar veronika.flipped kris.flipped
 [text]
-veronika:Bei einem unserer ersten Campingwochenenden sind Kris uns ich ganz schön aneinander geraten.
+veronika:Bei einem unserer ersten Campingwochenenden sind Kris und ich ganz schön aneinander geraten.
 veronika:Ich hatte Kris gebeten, vor dem Ausflug die Gaskartusche zu prüfen. Ob das Gas noch reicht.
 veronika:Kris hat es vergessen. Die Nudeln hatten grade 30 Sekunden gekocht, da war das Gas alle.
 kris:Oh ja, Vero war wirklich sauer. Wir haben uns ewig gestritten.
@@ -91,7 +91,7 @@ kris:Doch. Ich hab immer alles über die Gegend und ihre Gefahren gelesen. Und m
 veronika:Okay, aber was, wenn du nicht weißt, wo du bist, und der Empfang ist weg?
 kris:Hab Offline-Karten.
 veronika:Aber weißt du immer, wo wir auf der Karte sind?
-kris:Haben wir schonmal nicht zurück zum Weg gefunden?
+kris:Haben wir schon mal nicht zurück zum Weg gefunden?
 veronika:Kann mich nicht erinnern.
 kris:Eben. Ich bin vorbereitet. Ich mach mir nur keinen Kopf.
 veronika:... Das endet trotzdem oft im Chaos. Im Alltag zumindest. Du hast auch schon Wäsche mit dem Fön trocknen müssen, weil du vergessen hast, zu waschen.
@@ -204,7 +204,7 @@ veronika:Ich muss einfach mehr Kaffee trinken. Mit Zucker. Das macht mich wach.
 veronika:Manchmal kriege ich wochenlang kein gutes Motiv vor die Kamera.
 veronika:Und manchmal kann ich gar nicht schnell genug abdrücken.
 veronika:Kris hat mal gesagt, meine Arbeit passt zu Krisopolis. 'Unvorhersehbar schön.'
-veronika:Sie mag eben das Chaos.
+veronika:Kris mag eben das Chaos.
 veronika:Aber ich muss sagen, der Vergleich gefällt mir.
 avatar:Kris hat eine besondere Begabung, das Gute zu sehen und es anderen zu zeigen.
 veronika:Absolut ...
