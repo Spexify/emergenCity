@@ -84,7 +84,7 @@ irena:Okay. Du bist Mission Control!
 [[Node]] gemeinsam_erkunden_klappt_nicht
 [actors] avatar irena.flipped
 [text]
-irena:irena:Nö! Wuuuuusch!
+irena:Nö! Wuuuuusch!
 
 [[Node]] MCNoName
 [actors] avatar irena.flipped
