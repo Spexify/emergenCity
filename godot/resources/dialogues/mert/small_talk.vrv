@@ -27,7 +27,7 @@ mert:Bin heute Abend noch mit Petro beim Training verabredet. Er hat wirklich gu
 [[Node]] four
 [actors] avatar mert.flipped
 [text]
-mert:Manchmal ist es schwer, eine Routine zu entwickeln, wenn Einsätze dazwischen kommen. Aber das THW ist mir wichtiger als die Routine.
+mert:Manchmal ist es schwer, eine Routine zu entwickeln, wenn Einsätze dazwischenkommen. Aber das THW ist mir wichtiger als die Routine.
 
 [[Node]] five
 [Condition] not_bool(npc_is_sad("mert"))
