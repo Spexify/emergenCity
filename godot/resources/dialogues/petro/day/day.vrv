@@ -65,11 +65,11 @@ petro:Ich merke, wir verstehen uns!
 [text]
 petro:Ich dachte mal, ich werde Pilot. Aber wie das Leben so spielt...
 petro:Dass ich mal als Journalist arbeiten würde, hätte ich nie gedacht.
-petro:Und Youtube und Blogs gab es noch gar nicht, als ich damals fliegen wollte.
-petro:Aber ich liebe meine Arbeit
+petro:Und Vlogs und Blogs gab es noch gar nicht, als ich damals fliegen wollte.
+petro:Aber ich liebe meine Arbeit.
 avatar:Bist du mal geflogen?
 petro:Selbst? Nein. Das war nie mehr als ein Wunsch.
-petro:Vielleicht kommt Irenas Wunsch, Pilot zu werden, eigentlich von mir.
+petro:Vielleicht kommt Irenas Wunsch, Pilotin zu werden, eigentlich von mir.
 
 [[Node]] talk4
 [actors] avatar petro.flipped
@@ -150,7 +150,7 @@ petro:Wenn wir andere Planeten besiedeln.
 [[Node]] zukunft_schlecht
 [actors] avatar petro.flipped
 [text]
-petro:Das ist gut. Das heißt, du siehst Probleme, und Probleme kann man lösen, sobald man sie identifiziert hat. Oder zumindest kann man sein bestes zur Lösung beitragen.
+petro:Das ist gut. Das heißt, du siehst Probleme, und Probleme kann man lösen, sobald man sie identifiziert hat. Oder zumindest kann man sein Bestes zur Lösung beitragen.
 avatar:Hm. Da hast du wohl recht.
 
 [[Node]] zukunft_nein
@@ -169,7 +169,7 @@ petro:Die Vergangenheit kann auch sehr spannend sein. Gerade wenn man sich die E
 [actors] avatar petro.flipped
 [text]
 petro:Irena beschwert sich immer wieder, weil sie keinen Taschenrechner verwenden darf. Ich weiß nie so recht, was ich dazu sagen soll.
-petro:Es stimmt ja. Wir müssen nicht mehr kopfrechnen, das macht der Taschenrechner.
+petro:Es stimmt ja. Wir müssen nicht mehr Kopfrechnen, das macht der Taschenrechner.
 petro:Wir müssen uns nicht mehr orientieren, das macht das Navi.
 petro:Wir müssen keine anderen Sprachen mehr lernen, das Übersetzen macht die AI. Sag Irena aber nicht, dass ich das gesagt hab.
 petro:Was werden LLMs ersetzen? Experten? Entscheidungen?
@@ -178,7 +178,7 @@ petro:Ja. Aber die eigentliche Frage ist, was passiert, wenn das Internet ausfä
 petro:Der Taschenrechner funktioniert offline, aber Karten oft nicht mehr und Navigation schon gar nicht. Übersetzen oder mit LLMs chatten kannst du vergessen. Und ohne Strom geht gar nichts.
 petro:Fortschritt ist super. Aber wir sollten uns gut überlegen, was offline für alle verfügbar sein sollte. Ich hab zum Beispiel eine ausgedruckte Liste wichtiger Adressen und Telefonnummern.
 petro:Und was in der Schule gelehrt werden sollte, weil es sonst einfach niemand mehr lernt.
-avatar:So wie kopfrechnen?
+avatar:So wie Kopfrechnen?
 petro:Vermutlich ...
 
 [[Node]] talk8
@@ -186,7 +186,7 @@ petro:Vermutlich ...
 [text]
 petro:Krisen sind immer ein bisschen anstrengend, egal wie gut man vorbereitet ist.
 petro:Ich gebe mir dann Mühe, mehr Zeit mit Irena zu verbringen. Aber gleichzeitig den Alltag noch so gut es geht zu bewahren.
-petro:Am schlimmsten ist es, wenn die Schule ausfällt und Irena den ganzen vormittag allein am Bildschirm hockt.
+petro:Am schlimmsten ist es, wenn die Schule ausfällt und Irena den ganzen Vormittag allein am Bildschirm hockt.
 petro:Zum Glück passiert das nur selten.
 
 [Comment]

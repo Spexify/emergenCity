@@ -16,10 +16,10 @@ agathe:Wie schön! Schau mal, das bin ich mit Freunden zu Schulzeiten.
 agathe:Solche Frisuren waren damals ganz modern ...
 [action] progress_day("Mit Agathe plaudern")
 [text]
-agathe:Ach ja, ich habe viel zu viel Obst gekauft und mehr Marmelade gekocht als ich selbst essen kann.
+agathe:Ach ja, ich habe viel zu viel Obst gekauft und mehr Marmelade gekocht, als ich selbst essen kann.
 agathe:Möchtest du ein Glas haben?
 avatar:Oh ja, danke!
-[action] gain_player_item("JAM", "Diese Marmelade ist bestimmt was ganz besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.")
+[action] gain_player_item("JAM", "Diese Marmelade ist bestimmt was ganz Besonderes.\nDu erkennst, dass sie mit Liebe gemacht wurde.")
 
 [[Node]] nein
 [actors] agathe avatar.flipped

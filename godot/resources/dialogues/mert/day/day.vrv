@@ -69,7 +69,7 @@ mert:Ich mach mir ein bisschen Sorgen um Momo.
 mert:Sie mag ihre Zeiten und ich kann sie manchmal nicht rechtzeitig füttern, weil ich beim Einsatz bin.
 mert:Hab schon ne Futtermaschine versucht, aber sie hat sie aufgekriegt und sich vollgefressen.
 mert:Jetzt kommt Irena vorbei, um sie zu füttern. Eigentlich ist sie auch ganz vorsichtig mit Momo.
-mert:Aber ich glaub Momo mag es nicht, wenn wer anders hier ist, aber ich nicht.
+mert:Aber ich glaub, Momo mag es nicht, wenn wer anders hier ist, aber ich nicht.
 avatar:Sie gewöhnt sich sicher daran.
 mert:Das hoff ich auch!
 
@@ -132,7 +132,7 @@ avatar:Was?
 [[Node]] talk6
 [actors] avatar mert.flipped
 [text]
-mert:Manchmal, wenn ich allein zuhause bin, überfällt mich diese trübe Stimmung.
+mert:Manchmal, wenn ich allein zu Hause bin, überfällt mich diese trübe Stimmung.
 mert:Dann kommt Momo zu mir und tröstet mich.
 mert:Und dann merke ich, dass alles gar nicht so schlimm ist.
 mert:Sie ist großartig!
@@ -140,7 +140,7 @@ mert:Sie ist großartig!
 [[Node]] talk7
 [actors] avatar mert.flipped
 [text]
-mert:Ich denke über alte Zeiten nach. Ich war je früher auf dem Bau. Da hab ich schon so manches gelernt was bei Krisen und bei meiner Arbeit beim THW hilft.
+mert:Ich denke über alte Zeiten nach. Ich war ja früher auf dem Bau. Da hab ich schon so manches gelernt was bei Krisen und bei meiner Arbeit beim THW hilft.
 [random]
 - [jump] bau_starkregen
 - [jump] bau_erdbeben
@@ -217,7 +217,7 @@ mert:Nett, dass du fragst. Mir gehts gut, aber du siehst gestresst aus?
 [actors] avatar mert.flipped
 [text]
 avatar:So eine Krise bringt einem den Alltag durcheinander. Das ist schon anstrengend.
-mert:Da hast du Recht. Viele von uns haben inzwischen so eine Art Krisenalltag. Das macht es leichter.
+mert:Da hast du recht. Viele von uns haben inzwischen so eine Art Krisenalltag. Das macht es leichter.
 mert:Wenn du Krisopolis erstmal gut kennst, geht es dir bald genauso.
 mert:Dann weiß man auch, wen man fragen kann, wenn das Tofu ausgegangen ist.
 avatar:Guter Tipp, danke.
@@ -260,5 +260,5 @@ mert:Es kann schnell gruselig werden, wenn Krisen wichtige Infrastruktur treffen
 mert:Stell dir vor, du hast eine wichtige Behandlung, und sie kann nicht durchgeführt werden, weil die Geräte nicht laufen.
 mert:Je nach Situation kann man Behandlungen gar nicht folgenlos verschieben.
 mert:Oder stell dir vor, eine OP muss abgebrochen werden. Das kann lebensgefährlich sein.
-mert:Tut mir Leid, ich grüble schon wieder. Zum Glück hat das Krankenhaus in Krisopolis eine gute Notstromversorgung.
+mert:Tut mir leid, ich grüble schon wieder. Zum Glück hat das Krankenhaus in Krisopolis eine gute Notstromversorgung.
 

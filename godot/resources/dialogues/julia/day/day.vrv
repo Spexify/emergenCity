@@ -64,7 +64,7 @@ julia:Besser ist es, jeden Tag etwas außer Haus zu unternehmen.
 [[Node]] reden5
 [actors] avatar julia.flipped
 [text]
-julia:Tut mir Leid, wenn ich so viel rede.
+julia:Tut mir leid, wenn ich so viel rede.
 julia:Ich bin als Psychologin oft den ganzen Tag damit beschäftigt, anderen zuzuhören.
 julia:Es tut auch gut, einfach mal draufloszureden.
 julia:Aber erzähl doch mal, wie geht es dir?
@@ -109,7 +109,7 @@ julia:Womit verbringst du deine Freizeit am liebsten?
 - [FreizeitSport] Sport.
 - [FreizeitLesen] Lesen.
 - [FreizeitLeuteTreffen] Leute treffen.
-- [FreizeitAlles] Alles mögliche.
+- [FreizeitAlles] Alles Mögliche.
 
 [[Node]] FreizeitSport
 [actors] avatar julia.flipped
