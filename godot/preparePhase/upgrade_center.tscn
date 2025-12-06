@@ -250,13 +250,11 @@ offset_top = 200.0
 offset_right = 538.0
 offset_bottom = 824.0
 theme_type_variation = &"WhiteRichTextLabel"
-text = "Hier können Upgrades gekauft werden, um sich auf mögliche Krisen vorzubereiten.
-
-Um mehr Informationen über ein Upgrade zu erhalten, drücken sie lange auf jenes Upgrade.
-
-Es können maximal 3 Upgrades ausgerüstet werden.
-
-Upgrades die ausgerüstet sind, leuchten grün."
+text = "Rüste deinen Haushalt aus!
+Hier findest du Gegenstände, die dir im Ernstfall den entscheidenen Vorteil bringen.
+Drücke lange auf ein Item, um herauszufinden, was es draufhat.
+Du kannst bis zu 3 Gegenstände gleichzeitig ausrüsten.
+Alle aktiven Items leuchten grün."
 
 [node name="TuBack" type="TextureButton" parent="CanvasLayer/Tutorial"]
 layout_mode = 0
