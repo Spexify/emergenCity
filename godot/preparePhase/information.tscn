@@ -73,3 +73,7 @@ texture_normal = ExtResource("5_4en81")
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer/CookingButton" to="." method="_on_cooking_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/HBoxContainer/VBoxContainer2/BBKButton" to="." method="_on_bbk_button_pressed"]
 [connection signal="pressed" from="CanvasLayer_unaffectedByCM/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+
+
+comment
+Nadja: hier noch die aktuelle bbk-Broschüre einfügen und das Icon ändern: https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/BBK-Vorsorgen-fuer-Krisen-und-Katastrophen.pdf?__blob=publicationFile&v=40
