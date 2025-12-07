@@ -58,7 +58,6 @@ static func from_dict(data : Dictionary) -> EMC_ItemComponent:
 		if tmp_scn == null:
 			printerr("Comp with name: " + comp_name + ", does not exist.")
 			return null
-			assert(tmp_scn != null)
 		
 		COMP_SCNS[comp_name] = tmp_scn
 		return COMP_SCNS[comp_name].new(comp_params)

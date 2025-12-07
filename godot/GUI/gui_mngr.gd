@@ -97,6 +97,7 @@ func close_gui(index: int) -> void:
 func request_gui(gui_name : String, argv : Array = []) -> Variant:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
+			
 			_hide_buttons()
 			_status_bars.set_process_mode(PROCESS_MODE_DISABLED)
 			_stage_mngr.set_process_mode(PROCESS_MODE_DISABLED)

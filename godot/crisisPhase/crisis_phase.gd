@@ -121,8 +121,6 @@ func _ready() -> void:
 	#### DayMngr
 	_day_mngr.setup(_backpack, _opt_event_mngr)
 	
-	await SoundMngr.play_musik()
-	
 	#Tutorial intro dialogue
 	if !Global._tutorial_done: 
 		var tutorial: VRV_Script = ResourceLoader.load("res://resources/dialogues/tutorial.vrv")
@@ -131,6 +129,8 @@ func _ready() -> void:
 		tutorial.gsi = emc_gsi
 		_gui_mngr.request_gui("DialogueGui", [tutorial])
 		#_dialogue_manager._on_dialogue_initiated("extra", "tutorial")
+		
+	#SoundMngr.play_musik()
 
 ## Up until now, this is only used for keyboard-inputs for debbuging purposes
 ## As there is no analogous input code on mobile phones, this can be called

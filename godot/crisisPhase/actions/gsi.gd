@@ -87,22 +87,22 @@ func add_points_water() -> bool:
 	return true
 
 func npc_karma_higher_than(npc_name: String, value: float) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_krama() > value
 
 func npc_karma_less_than(npc_name: String, value: float) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_krama() < value
 
 func npc_friendship_higher_than(npc_name: String, value: int) -> bool:
 	return true
 
 func npc_is_happy(npc_name: String) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_mood() > EMC_NPC_Karma.Mood.MID
 
 func npc_is_sad(npc_name: String) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_mood() < EMC_NPC_Karma.Mood.MID
 
 func is_state_by_name_str(state_name_value: String) -> bool:

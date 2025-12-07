@@ -1,7 +1,17 @@
 extends EMC_GUI
 
+@onready var save_and_quit: Button = $VBC/CenterContainer2/Buttons/SaveAndQuit
+@onready var save: Button = $VBC/CenterContainer2/Buttons/Save
+
 ########################################## PUBLIC METHODS #########################################
-func open(irrelevant : EMC_GUI = null) -> void:
+func open(_irrelevant : EMC_GUI = null) -> void:
+	if OS.has_feature("ios") or OS.has_feature("android"):
+		save_and_quit.hide()
+		save.show()
+	else:
+		save_and_quit.show()
+		save.hide()
+
 	show()
 	opened.emit()
 
@@ -36,14 +46,25 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	#Global.reset_inventory()
 	#Global.reset_upgrades_equipped()
 	#Global.get_tree().paused = false
-	SoundMngr.play_slow_musik()
+	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.START)
+	await SoundMngr.play_slow_musik()
 	Global.load_game()
+	Global.save_ani_canvas.hide()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
 
 
 ## TODO
 func _on_save_and_quit_pressed() -> void:
+	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.CRISIS)
 	await SoundMngr.close_game()
 	Global.get_tree().quit()
+
+
+func _on_save_pressed() -> void:
+	Global.save_ani_canvas.show()
+	Global.save_game(Global.State.CRISIS)
+	await SoundMngr.close_game()
+	Global.save_ani_canvas.hide()
+	#SoundMngr.play_sound("stinger")

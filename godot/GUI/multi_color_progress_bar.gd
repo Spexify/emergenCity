@@ -44,7 +44,8 @@ func add_progressbar(index: int) -> void:
 	p.set_value(100)
 	
 func set_progress_values(values: Array[float]) -> void:
-	assert(len(values) == len(colors))
+	if len(values) != len(colors):
+		return
 	var total: float = values.reduce(func (acc: float, v: float) -> float: return acc+ v)
 	var offset: float = 0
 	

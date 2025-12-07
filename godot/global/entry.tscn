@@ -121,6 +121,7 @@ theme_type_variation = &"CancelButton"
 text = "Schließen"
 
 [connection signal="finished" from="IntoVideo" to="." method="_on_into_finished"]
+[connection signal="finished" from="BootVideo" to="." method="_on_boot_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="DataGui/VBoxContainer/HBoxContainer/ConfirmationBtn" to="." method="_on_confirmation_btn_pressed"]
 [connection signal="pressed" from="DataGui/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

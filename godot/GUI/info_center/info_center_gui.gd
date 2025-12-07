@@ -29,9 +29,6 @@ func open() -> void:
 	show()
 	opened.emit()
 	
-func reload() -> void:
-	_ready()
-	
 func close() -> void:
 	hide()
 	closed.emit(self)

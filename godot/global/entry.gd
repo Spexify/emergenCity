@@ -59,4 +59,13 @@ func _on_confirmation_btn_pressed() -> void:
 	Global._data = true
 
 func _on_cancel_pressed() -> void:
-	Global.get_tree().quit()
+	if OS.has_feature("ios") or OS.has_feature("android"):
+		return
+	else:
+		Global.get_tree().quit()
+
+
+func _on_boot_finished() -> void:
+	boot_video.stop()
+	boot_video.hide()
+	into_video.play()

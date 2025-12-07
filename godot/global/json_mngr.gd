@@ -349,7 +349,10 @@ func get_action(id: String) -> EMC_Action:
 func load_actions() -> void:
 	var data: Dictionary = load_file_check_type(ACTION_SOURCE, "Actions", TYPE_DICTIONARY)
 	assert(data != null, "Failed to load Actions!")
-	
+	if data == null:
+		printerr("Failed to load Actions!")
+		return
+
 	for key: String in data:
 		_actions[key] = EMC_Action.load_action(data[key])
 
@@ -396,11 +399,13 @@ func load_NPC() -> Array[EMC_NPC_Resource]:
 
 		var data : Dictionary = load_file_check_type(source, "NPC", TYPE_DICTIONARY)
 		
-		assert(data.has_all(["comp"]))
+		# assert(data.has_all(["comp"]))
+		if not data.has("comp"):
+			printerr("NPC has no comps!")
 		
 		var new_npc: EMC_NPC_Resource = EMC_NPC_Resource.new()
 
-		for comp_name: String in data["comp"]:
+		for comp_name: String in data.get("comp", []):
 			var comp : Resource = ResourceLoader.load("res://crisisPhase/npc/npc_" + comp_name + ".gd")
 			if not comp:
 				continue
