@@ -95,6 +95,9 @@ func npc_karma_less_than(npc_name: String, value: float) -> bool:
 	return karma.get_krama() < value
 
 func npc_friendship_higher_than(npc_name: String, value: int) -> bool:
+	return false
+
+func npc_friendship_less_than(npc_name: String, value: int) -> bool:
 	return true
 
 func npc_is_happy(npc_name: String) -> bool:
