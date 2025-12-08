@@ -13,7 +13,7 @@ elias:Hi.
 elias:Brauchen Sie was?
 [Choice]
 - [no_time] Nein, lass uns reden!
-- [trade] Handeln.
+- [trade] Ja, lass uns handeln.
 - [stop] Nö.
 
 [[Node]] no_time
@@ -28,7 +28,7 @@ elias:Sorry.
 elias:Brauchen Sie was?
 [Choice]
 - [talk] Nein, lass uns reden!
-- [trade] Handeln.
+- [trade] Ja, lass uns handeln.
 - [stop] Nö.
 
 [[Node]] stop
