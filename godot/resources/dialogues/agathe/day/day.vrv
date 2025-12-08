@@ -1,12 +1,8 @@
 [[Node]] start
 [actors] agathe avatar.flipped
-[text]
-agathe:Oh toll, endlich wieder Besuch!
-agathe:Bist du zum Tauschen hier?
-[Choice]
-- [talk] Nein, lass uns reden!
-- [trade] Handeln.
-- [stop] Nichts dergleichen.
+agathe:Oh, endlich wieder Besuch!
+avatar:Ich komme vorbei, um ein bisschen zu plaudern.
+[jump] talk
 
 [[Node]] talk
 [random]

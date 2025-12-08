@@ -1,10 +1,8 @@
 [[Node]] start
 [actors] avatar julia.flipped
 [text]
-julia:Hi Nachbar!
-[Choice]
-- [reden] Möchtest du mit mir reden?
-- [stop] Bis dann!
+julia:Hi! Das ist aber nett, dass du vorbeischaust.
+[jump] reden
 
 [[Node]] reden
 [random]

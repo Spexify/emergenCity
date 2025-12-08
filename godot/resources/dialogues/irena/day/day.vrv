@@ -2,9 +2,8 @@
 [actors] avatar irena.flipped
 [text]
 irena:Moin Moin!
-[Choice]
-- [talk] Möchtest du mit mir reden?
-- [stop] Spiel schön!
+avatar:Möchtest du mit mir reden?
+[jump] talk
 
 [[Node]] talk
 [random]
