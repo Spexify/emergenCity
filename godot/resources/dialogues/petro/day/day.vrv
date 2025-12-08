@@ -150,7 +150,8 @@ petro:Wenn wir andere Planeten besiedeln.
 [[Node]] zukunft_schlecht
 [actors] avatar petro.flipped
 [text]
-petro:Das ist gut. Das heißt, du siehst Probleme, und Probleme kann man lösen, sobald man sie identifiziert hat. Oder zumindest kann man sein Bestes zur Lösung beitragen.
+petro:Das ist gut. Das heißt, du siehst Probleme, und Probleme kann man lösen, sobald man sie identifiziert hat.
+petro:Oder zumindest kann man sein Bestes zur Lösung beitragen.
 avatar:Hm. Da hast du wohl recht.
 
 [[Node]] zukunft_nein
@@ -175,9 +176,11 @@ petro:Wir müssen keine anderen Sprachen mehr lernen, das Übersetzen macht die 
 petro:Was werden LLMs ersetzen? Experten? Entscheidungen?
 avatar:Wir werden sehen.
 petro:Ja. Aber die eigentliche Frage ist, was passiert, wenn das Internet ausfällt oder das Smartphone keinen Strom hat?
-petro:Der Taschenrechner funktioniert offline, aber Karten oft nicht mehr und Navigation schon gar nicht. Übersetzen oder mit LLMs chatten kannst du vergessen. Und ohne Strom geht gar nichts.
-petro:Fortschritt ist super. Aber wir sollten uns gut überlegen, was offline für alle verfügbar sein sollte. Ich hab zum Beispiel eine ausgedruckte Liste wichtiger Adressen und Telefonnummern.
-petro:Und was in der Schule gelehrt werden sollte, weil es sonst einfach niemand mehr lernt.
+petro:Der Taschenrechner funktioniert offline, aber Karten oft nicht mehr und Navigation schon gar nicht. Übersetzen oder mit LLMs chatten kannst du vergessen.
+petro:Und ohne Strom geht gar nichts.
+petro:Fortschritt ist super. Aber wir sollten uns gut überlegen, was offline für alle verfügbar sein sollte.
+petro:Ich hab zum Beispiel eine ausgedruckte Liste wichtiger Adressen und Telefonnummern.
+petro:Und wir sollten überlegen, was in der Schule gelehrt werden sollte, weil es sonst einfach niemand mehr lernt.
 avatar:So wie Kopfrechnen?
 petro:Vermutlich ...
 

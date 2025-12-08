@@ -195,7 +195,8 @@ avatar:Das stimmt.
 mert:Manchmal ist es auch einfach beruhigend zu wissen, was alles getan wird.
 mert:Krisopolis ist zum Beispiel gut gegen Erdbeben gewappnet. Die Gebäude haben alle Stahlbetonrahmen für Wände, Fenster und Türen.
 mert:Wände sind ja an sich sehr stabil, nur die Öffnungen machen sie anfällig. Da hilft der Stahlbeton.
-mert:Weicher oder sandiger Boden ist natürlich noch ein Problem, da können Gebäude kippen oder absinken. Aber den gibts eigentlich nur am Ufer der Riskana und das ist kaum bebaut.
+mert:Weicher oder sandiger Boden ist natürlich noch ein Problem, da können Gebäude kippen oder absinken.
+mert:Aber sandigen Boden gibts eigentlich nur am Ufer der Riskana und das ist kaum bebaut.
 
 [[Node]] bau_sensoren
 [actors] avatar mert.flipped

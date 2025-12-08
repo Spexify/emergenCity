@@ -114,7 +114,7 @@ kris:Echt? Das hör ich zum ersten Mal. Sonst erzählst du mir nur von deinen So
 kris:'Was, wenn der Strom ausfällt, und wir unsere Akkus vor der Fahrt nicht laden können?'
 veronika:Ja, das mit den Solarmodulen war ein Argument. Aber es war trotzdem eine relevante Überlegung.
 kris:Und ab wann ziehst du die Grenze? Was, wenn du krank wirst vor lauter Stress?
-veronika:Das hab ich auch schon überlegt. Was, wenn wir krank werden? Die Versicherung hätte sich aber nicht gelohnt. Und die Fahrkarten sind leider nicht übertragbar ...
+veronika:Das hab ich auch schon überlegt. Die Fahrkarten sind leider nicht übertragbar. Die Versicherung hätte sich aber nicht gelohnt ...
 kris:...
 kris:Ich lass mich lieber überraschen und wenns doch böse wird, geh ich damit um, sobald es soweit ist. Weniger Kopfschmerzen, mehr Lebensfreude.
 
@@ -133,7 +133,7 @@ veronika:Bei nebligem Wetter kann man wunderbare Fotos machen. Mystische Stimmun
 [[Node]] set_kids_trail_dialogue
 [actors] avatar veronika.flipped
 [text]
-veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
+veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen.
 veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
 [set] #kids_on_trail false
 [jump] talk6_1
@@ -149,7 +149,7 @@ veronika:Luftverhältnisse und Wetter spielen eine wichtige Rolle beim Fotografi
 	[if] eq_bool(#kids_on_trail,true)
 		[then]
 			[text]
-			veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen...
+			veronika:Ich hatte gehofft, vielleicht ein Tier vor die Kamera zu bekommen, aber Kris hat beschlossen, mit ein paar fremden Kindern eine Verfolgungsjagd anzufangen.
 			veronika:Naja, wir hatten dann noch Glück. Die Sonne kam durch, als wir weiter nach oben gestiegen sind.
 			[set] #kids_on_trail false
 		[else]
