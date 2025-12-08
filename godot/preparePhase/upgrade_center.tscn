@@ -193,7 +193,7 @@ layout_mode = 2
 [node name="Continue" parent="ColorRect/Margin/HBC/CC" instance=ExtResource("3_wh8jv")]
 layout_mode = 2
 theme_type_variation = &"ConfirmButton"
-text = "Ausrüstung Bestätigen"
+text = "Ausrüstung bestätigen"
 
 [node name="BackButton" type="TextureButton" parent="ColorRect/Margin/HBC"]
 layout_mode = 2
@@ -251,9 +251,13 @@ offset_right = 538.0
 offset_bottom = 824.0
 theme_type_variation = &"WhiteRichTextLabel"
 text = "Rüste deinen Haushalt aus!
-Hier findest du Gegenstände, die dir im Ernstfall den entscheidenen Vorteil bringen.
+
+Hier findest du Gegenstände, die dir im Ernstfall den entscheidenden  Vorteil bringen.
+
 Drücke lange auf ein Item, um herauszufinden, was es draufhat.
+
 Du kannst bis zu 3 Gegenstände gleichzeitig ausrüsten.
+
 Alle aktiven Items leuchten grün."
 
 [node name="TuBack" type="TextureButton" parent="CanvasLayer/Tutorial"]
