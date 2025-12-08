@@ -5,6 +5,7 @@ class_name EMC_Information
 
 
 const BBK_BROCHURE_LINK := "https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/BBK-Vorsorgen-fuer-Krisen-und-Katastrophen.pdf?__blob=publicationFile&v=40"
+const COOKING_LINK := "https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Stromausfall/Kochen-ohne-Strom/kochen-ohne-strom_node.html"
 
 func open() -> void:
 	show()
@@ -24,7 +25,7 @@ func _on_texture_button_pressed() -> void:
 
 ## TODO: Name could be improved: "cooking" sounds like the in-game mechanic
 func _on_cooking_button_pressed() -> void:
-	OS.shell_open("https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Kochen-ohne-Strom/kochen-ohne-strom_node.html")
+	OS.shell_open(COOKING_LINK)
 
 
 func _on_bbk_button_pressed() -> void:
