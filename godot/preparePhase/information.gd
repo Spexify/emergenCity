@@ -1,7 +1,10 @@
 extends Control
 class_name EMC_Information
 
-const BBK_BROCHURE_LINK := "https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/ratgeber-notfallvorsorge.pdf?__blob=publicationFile&v=15"
+# Nadja: hier noch die aktuelle bbk-Broschüre einfügen und das Icon ändern: https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/BBK-Vorsorgen-fuer-Krisen-und-Katastrophen.pdf?__blob=publicationFile&v=40
+
+
+const BBK_BROCHURE_LINK := "https://www.bbk.bund.de/SharedDocs/Downloads/DE/Mediathek/Publikationen/Buergerinformationen/Ratgeber/BBK-Vorsorgen-fuer-Krisen-und-Katastrophen.pdf?__blob=publicationFile&v=40"
 
 func open() -> void:
 	show()
