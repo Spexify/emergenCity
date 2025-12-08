@@ -124,8 +124,8 @@
 	},
 	{
 		"ID": 13,
-		"name": "Chlortablette",
-		"descr": "Kann genutzt werden, um schmutziges Wasser zu reinigen.",
+		"name": "Chlortabletten",
+		"descr": "Können genutzt werden, um schmutziges Wasser zu reinigen.",
 		"comps": [
 			{"name": "cost", "params": 70},
 			{"name": "uses", "params": 3},
@@ -144,7 +144,7 @@
 	{
 		"ID": 15,
 		"name": "Salz",
-		"descr": "Das beliebteste Gewürz – nicht zu verwechseln mit Zucker.",
+		"descr": "Das beliebteste Gewürz; nicht zu verwechseln mit Zucker.",
 		"comps": [
 			{"name": "cost", "params": 10},
 			{"name": "value", "params": 2}
@@ -153,7 +153,7 @@
 	{
 		"ID": 16,
 		"name": "Zucker",
-		"descr": "Das beliebteste Süßungsmittel – nicht zu verwechseln mit Salz.",
+		"descr": "Das beliebteste Süßungsmittel; nicht zu verwechseln mit Salz.",
 		"comps": [
 			{"name": "cost", "params": 15},
 			{"name": "value", "params": 2.5}
