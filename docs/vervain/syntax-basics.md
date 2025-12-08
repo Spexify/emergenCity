@@ -151,9 +151,7 @@ avatar: Hello
 [random]
 - [directive] ARGUMENT
 - [jump] one
-- [text]
-    gerhard: Hello.
-    avatar: hi
+- [text] gerhard: Hello.
 ```
 
 ### match
