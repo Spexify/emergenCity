@@ -100,13 +100,35 @@ friedel:Wuff!
 [actors] avatar friedel gerhard.flipped
 [text]
 gerhard:Zu viel Sonne ist nicht gut für meinen Garten.
-gerhard:Außerdem vertrag ich die Hitze nicht mehr so gut wie früher.
-gerhard:Friedel schwitzt auch in seinem dichten Fell.
+gerhard:Außerdem vertrag ich die Hitze nicht mehr so gut wie früher. Friedel schwitzt auch in seinem dichten Fell.
 friedel:[i]*Hechel.*[/i] [i]*Hechel.*[/i]
 gerhard:Er liegt eigentlich den ganzen Tag nur rum.
 avatar:Klingt beneidenswert.
 gerhard:Schon, aber ich merke auch, dass ihn die Hitze mitnimmt.
 friedel:[i]*Hechel.*[/i]
+gerhard:Wir trinken einfach ganz viel und bleiben im Kühlen, dann wird das schon, nicht wahr, Friedel?
+friedel:[i]*Hechel.*[/i] [i]*Hechel.*[/i]
+gerhard:Vielleicht sollte ich doch eine Klimaanlage einbauen lassen.
+gerhard:Dann muss ich auch nicht mehr so mit den Medikamenten aufpassen. Da kann es auch ganz unterschiedliche Probleme bei Hitze geben.
+[Choice]
+- [medikamente_nachfragen] Was meinst du?
+- [medikamente_ignorieren] Das sind gute Tipps!
+
+[[Node]] medikamente_nachfragen
+[actors] avatar friedel gerhard.flipped
+[text]
+gerhard:Manche Medikamente verändern ihre Wirkung, wenn sie zu warm werden. Besonders flüssige Medikamente, also Salben und Tropfen und so.
+gerhard:Aber Tabletten darf man auch nicht einfach so im Auto lassen.
+gerhard:Manche Medikamente machen einen aber auch empfindlicher für die Sonne oder man schwitzt nicht mehr so leicht und überhitzt. Egal, wie man sie lagert.
+gerhard:Da muss man wirklich aufpassen.
+avatar:Das ist gut zu wissen!
+[action] add_score("tip", {"source": "gerhard1"})
+
+[[Node]] medikamente_ignorieren
+[actors] avatar friedel gerhard.flipped
+[text]
+gerhard:Ja, man muss schon auf sich Acht geben.
+[action] add_score("tip", {"source": "gerhard2"})
 
 [[Node]] talk8
 [actors] avatar friedel gerhard.flipped
@@ -119,6 +141,7 @@ gerhard:Aber für mich sind die meisten Krisen ja auch nichts Neues mehr.
 gerhard:Man darf natürlich trotzdem nicht aufhören, wachsam zu sein. Es kann ja immer noch alles mögliche passieren.
 gerhard:Aber es ist gut, vorbereitet zu sein.
 avatar:Das stimmt.
+[action] add_score("tip", {"source": "gerhard3"})
 
 [[Node]] talk9
 [actors] avatar friedel gerhard.flipped

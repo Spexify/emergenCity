@@ -153,6 +153,7 @@ mert:Ich denke über alte Zeiten nach. Ich war ja früher auf dem Bau. Da hab ic
 [text]
 mert:Die Häuser in Krisopolis haben alle einen Rückstauverschluss, damit das Abwasser bei Starkregen nicht zurück in die Häuser laufen kann.
 mert:Das war eine Schweinerei, als es das noch nicht gab!
+[action] add_score("tip", {"source": "mert1"})
 
 [[Node]] bau_hochwasser
 [Condition] crisis_is("Hochwasser")
@@ -169,6 +170,7 @@ mert:Hochwasser ist so ne Sache. Da haben modernere Gebäude tatsächlich einen 
 mert:Wenn der Keller zu gut abgedichtet ist, kann das Grundwasser von außen die Wände zusammendrücken und das Haus einstürzen.
 mert:Deshalb heißt es bei Hochwasser immer, Sandsäcke schleppen, für den Gegendruck.
 mert:Wenns gar nicht anders geht, müssen wir selbst den Keller fluten.
+[action] add_score("tip", {"source": "mert2"})
 
 [[Node]] nicht_nachfragen_hochwasser
 [actors] avatar mert.flipped
@@ -197,6 +199,7 @@ mert:Krisopolis ist zum Beispiel gut gegen Erdbeben gewappnet. Die Gebäude habe
 mert:Wände sind ja an sich sehr stabil, nur die Öffnungen machen sie anfällig. Da hilft der Stahlbeton.
 mert:Weicher oder sandiger Boden ist natürlich noch ein Problem, da können Gebäude kippen oder absinken.
 mert:Aber sandigen Boden gibts eigentlich nur am Ufer der Riskana und das ist kaum bebaut.
+[action] add_score("tip", {"source": "mert3"})
 
 [[Node]] bau_sensoren
 [actors] avatar mert.flipped
@@ -205,6 +208,7 @@ mert:In Krisopolis gibt es ne Menge Sensoren, damit wir frühzeitig vor Krisen g
 mert:Die messen Wind, Temperatur, Feuchtigkeit, Luftdruck, Wasserstand der Riskana und sogar die Stabilität von Brücken und öffentlichen Gebäuden.
 mert:Wenn man die Daten alle zusammennimmt und die Daten anderer Gebiete noch mit reinnimmt, kann man erstaunlich gute Vorhersagen machen.
 mert:Manchmal allerdings nur ganz knapp im Voraus, weil es zu viele Möglichkeiten gibt, in welche Richtung es geht.
+[action] add_score("tip", {"source": "mert4"})
 
 [[Node]] talk8
 [actors] avatar mert.flipped
@@ -222,6 +226,7 @@ mert:Da hast du recht. Viele von uns haben inzwischen so eine Art Krisenalltag. 
 mert:Wenn du Krisopolis erstmal gut kennst, geht es dir bald genauso.
 mert:Dann weiß man auch, wen man fragen kann, wenn das Tofu ausgegangen ist.
 avatar:Guter Tipp, danke.
+[action] add_score("tip", {"source": "mert5"})
 
 [[Node]] schon
 [actors] avatar mert.flipped

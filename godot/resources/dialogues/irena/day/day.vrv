@@ -189,7 +189,22 @@ irena:Ich will trotzdem lieber Astronautin werden.
 irena:Diesmal war die Feuerwehr da.
 irena:Das war lustig. Wir durften alle mal über die Feuerwehrleiter gerettet werden.
 irena:Und wusstest du, dass man gar nicht vom Feuer stirbt, sondern vom Rauch?
-avatar:Ja. Deshalb muss man brennende Gebäude so schnell es geht verlassen.
+[Choice]
+- [rauch_unbekannt] Nein, das ist mir neu.
+- [rauch_bekannt] Ja. Deshalb muss man brennende Gebäude so schnell es geht verlassen.
+
+[[Node]] rauch_unbekannt
+[actors] avatar irena.flipped
+[text]
+irena:Ich wusste es auch nicht. Aber man sollte trotzdem nicht rennen, weil man sich selbst und anderen dann weh tun kann und das ist gefährlich.
+irena:Deshalb soll man bei Feueralarm auch seine Tasche nicht mitnehmen.
+irena:Und Papa hat gesagt, er ersetzt mir alles, wenn ich meine Sachen in einem Feuer verliere. Ich hoffe trotzdem, dass das nicht passiert.
+avatar:Na, hoffentlich nicht!
+[action] add_score("tip", {"source": "irena1"})
+
+[[Node]] rauch_bekannt
+[actors] avatar irena.flipped
+[text]
 irena:Eine Landekapsel der NASA hat mal gebrannt und sie haben die Türen nicht aufbekommen ... Aber dann haben sie die Türen verbessert.
 
 [[Node]] johanniter
@@ -204,7 +219,7 @@ irena:Ja, die helfen, wenn man sich weh tut.
 [text]
 irena:Mert war noch nie da. Aber er könnte ja auch mal kommen und das THW erklären.
 avatar:Das stimmt. Hast du ihm das schon gesagt?
-irena:Noch nicht. Muss ich mal machen.
+irena:Noch nicht. Muss ich noch machen.
 
 [[Node]] talk7
 [actors] avatar irena.flipped

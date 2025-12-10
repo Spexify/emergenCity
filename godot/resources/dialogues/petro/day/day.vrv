@@ -180,7 +180,11 @@ petro:Der Taschenrechner funktioniert offline, aber Karten oft nicht mehr und Na
 petro:Und ohne Strom geht gar nichts.
 petro:Fortschritt ist super. Aber wir sollten uns gut überlegen, was offline für alle verfügbar sein sollte.
 petro:Ich hab zum Beispiel eine ausgedruckte Liste wichtiger Adressen und Telefonnummern.
-petro:Und wir sollten überlegen, was in der Schule gelehrt werden sollte, weil es sonst einfach niemand mehr lernt.
+avatar:Das klingt nach einer guten Idee.
+[action] add_score("tip", {"source": "petro1"})
+[actors] avatar petro.flipped
+[text]
+petro:War schon mal sehr wertvoll. Wir sollten aber auch überlegen, was in der Schule gelehrt werden sollte, weil es sonst einfach niemand mehr lernt.
 avatar:So wie Kopfrechnen?
 petro:Vermutlich ...
 

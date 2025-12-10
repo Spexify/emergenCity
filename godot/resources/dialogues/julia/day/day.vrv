@@ -148,6 +148,7 @@ julia:Und ich hatte gar nichts eingekauft.
 julia:In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zu Hause zu haben.
 julia:Man braucht nicht immer frische Zutaten, um etwas Leckeres zu zaubern.
 avatar:Das stimmt!
+[action] add_score("tip", {"source": "julia5"})
 
 [[Node]] reden9
 [actors] avatar julia.flipped

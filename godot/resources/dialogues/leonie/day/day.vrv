@@ -154,6 +154,7 @@ avatar:Klar!
 leonie:Puh, gut. Dann bist du immerhin vorbereitet.
 leonie:Natürlich gibt es Menschen, die ihre Vorbereitung so perfektionieren, dass sie von nix überrascht werden. Ich gehör da nicht dazu.
 leonie:Einmal ist mir während einer Krise der Kaffee ausgegangen. Nie wieder, sag ich dir! Wenn jetzt eine Warnung kommt, checke ich als allererstes meinen Vorrat.
+[action] add_score("tip", {"source": "leonie1"})
 
 [[Node]] talk6
 [actors] avatar leonie.flipped
@@ -204,11 +205,13 @@ leonie:Warn-App und Radio haben verlässliche Infos.
 [text]
 leonie:Es gibt Menschen, die sagen, denen kann man nicht vertrauen, weil es ständig neue Empfehlungen gibt. Aber in Krisen ändert sich die Situation eben ständig.
 leonie:Auch wenn man das selbst vielleicht nicht so mitbekommt.
+[action] add_score("tip", {"source": "leonie2"})
 
 [[Node]] rand_2
 [actors] avatar leonie.flipped
 [text]
 leonie:Und die Einsatzkräfte natürlich.
+[action] add_score("tip", {"source": "leonie3"})
 
 [[Node]] talk8
 [actors] avatar leonie.flipped

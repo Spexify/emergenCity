@@ -90,6 +90,9 @@ veronika:Ich gebs zu, das war übertrieben. Aber du machst dir kaum Gedanken dar
 kris:Doch. Ich hab immer alles über die Gegend und ihre Gefahren gelesen. Und mit Locals geredet.
 veronika:Okay, aber was, wenn du nicht weißt, wo du bist, und der Empfang ist weg?
 kris:Hab Offline-Karten.
+[action] add_score("tip", {"source": "kris1"})
+[actors] avatar veronika kris.flipped
+[text]
 veronika:Aber weißt du immer, wo wir auf der Karte sind?
 kris:Haben wir schon mal nicht zurück zum Weg gefunden?
 veronika:Kann mich nicht erinnern.
@@ -113,6 +116,9 @@ veronika:Ich freue mich auf unseren Urlaub!
 kris:Echt? Das hör ich zum ersten Mal. Sonst erzählst du mir nur von deinen Sorgen.
 kris:'Was, wenn der Strom ausfällt, und wir unsere Akkus vor der Fahrt nicht laden können?'
 veronika:Ja, das mit den Solarmodulen war ein Argument. Aber es war trotzdem eine relevante Überlegung.
+[action] add_score("tip", {"source": "veronika3"})
+[actors] avatar veronika kris.flipped
+[text]
 kris:Und ab wann ziehst du die Grenze? Was, wenn du krank wirst vor lauter Stress?
 veronika:Das hab ich auch schon überlegt. Die Fahrkarten sind leider nicht übertragbar. Die Versicherung hätte sich aber nicht gelohnt ...
 kris:...
