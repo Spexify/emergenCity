@@ -2,10 +2,8 @@
 [actors] avatar raphael.flipped
 [text]
 raphael:Guten Tag!
-avatar:Guten Tag.
-[Choice]
-- [talk] Was macht die Arbeit?
-- [stop] Tschüss!
+avatar:Guten Tag. Was macht die Arbeit?
+[jump] talk
 
 [[Node]] talk
 [random]

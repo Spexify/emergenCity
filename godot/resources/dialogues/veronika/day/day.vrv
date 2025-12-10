@@ -2,9 +2,8 @@
 [actors] avatar veronika.flipped
 [text]
 veronika: Hi! Alles klar bei dir?
-[Choice]
-- [talk] Wie läuft's?
-- [stop] Tschüss!
+avatar:Ja, wie läuft's?
+[jump] talk
 
 [[Node]] talk
 [random]

@@ -2,9 +2,8 @@
 [actors] avatar kris.flipped
 [text]
 kris:Oh, hey!
-[Choice]
-- [talk] Was geht?
-- [stop] Man sieht sich!
+avatar:Was geht?
+[jump] talk
 
 [[Node]] talk
 [random]

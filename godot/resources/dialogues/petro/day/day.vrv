@@ -1,11 +1,17 @@
 [[Node]] start
 [actors] avatar petro.flipped
 [text]
-petro:Moin!
-petro:Alles klar bei dir, kommst du gut durch die Krise?
-[Choice]
-- [talk] Ja, wie läuft's bei dir?
-- [stop] Bis denne!
+petro:Moin! Alles klar bei dir, kommst du gut durch die Krise?
+avatar:Ja, wie läuft's bei dir?
+[random]
+- [text] petro:YOLO.
+- [text] petro:Es läuft. Zwar nicht rund, aber es läuft.
+- [text] petro:Same procedure as every crisis.
+- [text] petro:Schlimmer geht immer.
+- [text] petro:Keine Panik auf der Titanic.
+- [text] petro:Wird schon.
+- [text] petro:Kommt Zeit, kommt Rat.
+[jump] talk
 
 [[Node]] talk
 [random]

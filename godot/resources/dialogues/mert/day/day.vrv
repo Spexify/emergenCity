@@ -2,9 +2,8 @@
 [actors] avatar mert.flipped
 [text]
 mert:Hey Kumpel! Alles klar bei dir?
-[Choice]
-- [talk] Ja, wie läuft's bei dir?
-- [stop] Ich muss los!
+avatar:Ja, wie läuft's bei dir?
+[jump] talk
 
 [[Node]] talk
 [random]
