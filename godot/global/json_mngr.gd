@@ -221,8 +221,8 @@ func load_items() -> void:
 		else:
 			item_data["sound"] = _sound
 			
-		var _comp_dicts : Variant = item.get("comps", [])
-		if typeof(_comp_dicts) != TYPE_ARRAY:
+		var _comp_dicts : Variant = item.get("comps", {})
+		if typeof(_comp_dicts) != TYPE_DICTIONARY:
 			printerr("Item-JSON: item in position " + str(item_index) + " has an invalid item 'comps'.")
 			item_index += 1
 			continue

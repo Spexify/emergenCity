@@ -222,4 +222,4 @@ func _determine_adjacent_free_tile(p_click_pos: Vector2) -> Vector2:
 		push_warning("The clicked furniture has no adjacent free tiles that the Avatar can navigate towards!")
 		return INVALID_TILE
 	
-	return _map_to_global(goal + tile_coord) - 2*  goal
+	return _map_to_global(goal + tile_coord)# - 2*  goal

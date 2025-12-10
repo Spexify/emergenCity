@@ -19,7 +19,8 @@ enum DayPeriod {
 
 var _period_cnt : int = 0 #Keeps track of the current period (counted/summed up over all days)
 
-const TIME_PRE_DAY: int = 96
+const TIME_PRE_DAY: float = 96
+const ACTION_PER_DAY: int = 6
 
 var _time: int = 0
 var _day: int = 0
@@ -82,13 +83,12 @@ func get_action_consequences() -> EMC_ActionConsequences:
 
 ########################################## PRIVATE METHODS #########################################
 
-func _advance_time(delta: int) -> void:
+func _advance_time(delta: float) -> void:
 	var tmp := get_current_day_period()
-	self._time += delta
+	self._time += int(delta)
 	
 	# per time step update
 	_avatar.advance_time(delta)
-	var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
 	
 	# per day update
 	if self._time >= TIME_PRE_DAY:
@@ -99,6 +99,8 @@ func _advance_time(delta: int) -> void:
 	
 	# per period update
 	if tmp != get_current_day_period():
+		var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
+		
 		#if get_current_day_period() == DayPeriod.MORNING:
 			#await _gui_mngr.request_gui("SummaryEndOfDayGUI", [])
 			#await _gui_mngr.request_gui("BackpackGUI", [true])
@@ -123,7 +125,7 @@ func _callback() -> void:
 
 ## !!! Important function !!!
 func _advance_day_period(description : String) -> void:
-	_advance_time(32)
+	_advance_time(TIME_PRE_DAY/ACTION_PER_DAY)
 
 	#if _gui_mngr.is_any_gui():
 		#await _gui_mngr.all_guis_closed

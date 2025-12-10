@@ -8,9 +8,13 @@ const UNIT: String = "Genuss"
 const UNIT_FACTOR: int = 10
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_happiness_change : int = 0) -> void:
-	super("Köstlich", Color.HOT_PINK)
-	_happiness_change = _p_happiness_change
+func _init() -> void:
+	super("Köstlich", EMC_Palette.ORNAGE)
+
+func setup(data: Dictionary) -> EMC_IC_Pleasurable:
+	_happiness_change = data.get("value", _happiness_change)
+	
+	return self 
 
 func consume(p_avatar : EMC_Avatar) -> void:
 	p_avatar.modify_social_delta(self.get_happiness_change())
@@ -27,7 +31,12 @@ func get_unit_happiness_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	return name + "(" + str(get_unit_happiness_change()) + " " + UNIT + ")"
+	if _happiness_change >= 0:
+		return "Lecker: " + "+\u2060".repeat(_happiness_change).left(-1)
+	else:
+		return "Ekelhaft: " + "-\u2060".repeat(-_happiness_change).left(-1)
+	
+	#return name + "(" + str(get_unit_happiness_change()) + " " + UNIT + ")"
 
 
 func to_dict() -> Dictionary:

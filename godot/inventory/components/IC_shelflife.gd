@@ -8,10 +8,13 @@ const DECAY_RATE_WITH_ELECTRICITY: int = 1
 const UNIT: String = "Tage"
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_max_shelflife : int = 0) -> void:
+func _init() -> void:
 	super("Haltbarkeit", Color.CHOCOLATE)
-	_shelflife = _p_max_shelflife
 
+func setup(data: Dictionary) -> EMC_IC_Shelflife:
+	_shelflife = data.get("value", _shelflife)
+	
+	return self
 
 ## Get the internal nutritionness value
 func get_shelflife() -> int:

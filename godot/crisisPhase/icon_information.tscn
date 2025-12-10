@@ -49,7 +49,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Nahrung
-Sinkt täglich um 1 Balken.[/center]"
+Sinkt täglich um 3 Balken.[/center]"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -67,7 +67,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Hydration
-Sinkt täglich um 1 Balken.[/center]"
+Sinkt täglich um 3 Balken.[/center]"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -85,7 +85,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Gesundheit
-Sinkt täglich um 1 Balken.[/center]"
+Sinkt täglich um 3 Balken.[/center]"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -103,7 +103,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 bbcode_enabled = true
 text = "[center]Wohlbefinden
-Sinkt täglich um 1 Balken.[/center]"
+Sinkt täglich um 3 Balken.[/center]"
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

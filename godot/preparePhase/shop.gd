@@ -42,7 +42,7 @@ func _ready() -> void:
 		if item_id == EMC_Item.IDs.DUMMY:
 			continue
 		var item := EMC_Item.make_from_id(item_id)
-		if item.has_comp(EMC_IC_Cost):
+		if item.has_comp(EMC_IC_Cost) and (item.get_comp(EMC_IC_Cost) as EMC_IC_Cost).is_buyable():
 			_shop_inventory.add_item(item)
 			
 	_shop_inventory.num_slots = _shop_inventory.get_num_item()

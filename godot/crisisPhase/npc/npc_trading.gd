@@ -88,8 +88,8 @@ func add_item(item_name: String, count: int = 1) -> void:
 func calulate_item_score_generic(items : Array[EMC_Item]) -> float:
 	return items.reduce(
 		func (accum : int, item : EMC_Item) -> int:
-			var value_comp := item.get_comp(EMC_IC_Value)
-			accum += _item_preference.get(JsonMngr.item_id_to_name(item.get_id()), 1) * (value_comp.get_value() if value_comp != null else 1)
+			var value_comp := item.get_comp(EMC_IC_Cost)
+			accum += _item_preference.get(JsonMngr.item_id_to_name(item.get_id()), 1) * (value_comp.get_cost() if value_comp != null else 1)
 			return accum, 0)
 
 func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_Item]) -> float:

@@ -54,6 +54,7 @@ visible = false
 modulate = Color(1, 1, 1, 0.521569)
 z_index = 1
 use_parent_material = true
+tile_map_data = PackedByteArray("AAAIAAIABgAHAAAAAAAHAAIABgAHAAAAAAAGAAIABgAHAAAAAAAFAAIABgAHAAAAAAAEAAIABgAHAAAAAAADAAIABgAHAAAAAAACAAIABgAHAAAAAAABAAIABgAHAAAAAAAAAAIABgAHAAAAAAAIAAYABgAIAAAAAAAJAAYABgAIAAAAAAA=")
 tile_set = ExtResource("1_v3pi5")
 navigation_enabled = false
 

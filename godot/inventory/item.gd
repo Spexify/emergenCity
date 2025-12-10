@@ -79,8 +79,12 @@ func setup(p_id : int) -> EMC_Item:
 	name = data.get("name", "Dummy")
 	descr = data.get("descr", "Error: Someone tempered with the JsonMngr.")
 	sound_effect = data.get("sound", sound_effect)
-	var tmp_comps : Array = data.get("comps", [])
-	comps.assign(tmp_comps.map(func (comp_data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(comp_data)))
+	var comps_data : Dictionary = data.get("comps", {})
+	for comp_name: String in comps_data:
+		var comp := EMC_ItemComponent.from_dict(comp_name, comps_data[comp_name])
+		comps.append(comp)
+	
+	#comps.assign(tmp_comps.map(func (comp_data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(comp_data)))
 
 	load_texture()
 	return self
@@ -179,38 +183,38 @@ func to_save() -> Dictionary:
 	return data
 
 
-## Returns a new Item constructed out of a Dictionary containing all information of the Item
-static func from_dict(data : Dictionary) -> EMC_Item:
-	var item : EMC_Item = EMC_Item.new()
-	item.id = data.get("ID", 0)
-	item.name = data.get("name", "Dummy")
-	item.descr = data.get("descr", "Error")
-	item.sound_effect = data.get("sound", item.sound_effect)
-	var tmp_comps : Array = data.get("comps", [])
-	item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
-	
-	return item
-
-
-## Returns a new Item constructed out of a Dictionary containing relevant information of the Item.
-## For this to work JsonMngr must already have loaded all Items.
-## Relevant Infromation is:
-## - ID
-## - comps
-static func from_save(data : Dictionary) -> EMC_Item:
-	var item : EMC_Item = EMC_Item.new()
-	
-	item.id = data.get("ID", 0)
-	
-	var default_info : Dictionary = JsonMngr.get_item_vars_from_id(item.id)
-	
-	item.name = default_info.get("name", "Dummy")
-	item.descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
-	item.sound_effect = default_info.get("sound", item.sound_effect)
-	var tmp_comps : Array = data.get("comps", default_info.get("comps", []))
-	item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return EMC_ItemComponent.from_dict(data)))
-	
-	return item
+### Returns a new Item constructed out of a Dictionary containing all information of the Item
+#static func from_dict(data : Dictionary) -> EMC_Item:
+	#var item : EMC_Item = EMC_Item.new()
+	#item.id = data.get("ID", 0)
+	#item.name = data.get("name", "Dummy")
+	#item.descr = data.get("descr", "Error")
+	#item.sound_effect = data.get("sound", item.sound_effect)
+	#var tmp_comps : Array = data.get("comps", [])
+	#item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return  EMC_ItemComponent.from_dict(data)))
+	#
+	#return item
+#
+#
+### Returns a new Item constructed out of a Dictionary containing relevant information of the Item.
+### For this to work JsonMngr must already have loaded all Items.
+### Relevant Infromation is:
+### - ID
+### - comps
+#static func from_save(data : Dictionary) -> EMC_Item:
+	#var item : EMC_Item = EMC_Item.new()
+	#
+	#item.id = data.get("ID", 0)
+	#
+	#var default_info : Dictionary = JsonMngr.get_item_vars_from_id(item.id)
+	#
+	#item.name = default_info.get("name", "Dummy")
+	#item.descr = default_info.get("descr", "Error: Someone tempered with the JsonMngr.")
+	#item.sound_effect = default_info.get("sound", item.sound_effect)
+	#var tmp_comps : Array = data.get("comps", default_info.get("comps", []))
+	#item.comps.assign(tmp_comps.map(func (data : Dictionary) -> EMC_ItemComponent : return EMC_ItemComponent.from_dict(data)))
+	#
+	#return item
 	
 static func make_from_id(item_id : int) -> EMC_Item:
 	var item : EMC_Item = EMC_Item.new()

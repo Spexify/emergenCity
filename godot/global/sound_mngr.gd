@@ -91,24 +91,24 @@ func play_musik() -> void:
 	
 	await cross_fade_musik(get_current_bg_musik(), musik)
 
-func play_slow_musik() -> void:
+func play_slow_musik(t: float = 3) -> void:
 	if slow_musik.playing:
 		crisis_musik.stop()
 		musik.stop()
 		return
 	
-	await cross_fade_musik(get_current_bg_musik(), slow_musik)
+	await cross_fade_musik(get_current_bg_musik(), slow_musik, t)
 	
 
-func cross_fade_musik(from: Array, to: Node) -> Signal:	
+func cross_fade_musik(from: Array, to: Node, t: float = 3) -> Signal:	
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_callback(to.play)
-	tween.tween_property(to, "volume_linear", 1, 3).from(0)#.set_ease(Tween.EASE_IN)
+	tween.tween_property(to, "volume_linear", 1, t).from(0)#.set_ease(Tween.EASE_IN)
 	for player: Node in from:
 		if player == to:
 			continue
-		tween.tween_property(player, "volume_linear", 0, 3)#.set_ease(Tween.EASE_OUT)
+		tween.tween_property(player, "volume_linear", 0, t)#.set_ease(Tween.EASE_OUT)
 		tween.chain().tween_callback(player.stop)
 		tween.chain().tween_callback(player.set_volume_linear.bind(1.0))
 	return tween.finished

@@ -11,6 +11,7 @@ const LOST := "VERLOREN"
 const ACTION_LOG_UI = preload("res://GUI/action_log_ui.tscn")
 
 @export var _scoreboard: EMC_Scoreboard
+var _inventory: EMC_Inventory
 
 @onready var title: RichTextLabel = $SummaryWindow/MarginContainer/VBC/TitleSpacing/Title
 @onready var logs: VBoxContainer = $SummaryWindow/MarginContainer/VBC/SC/Logs
@@ -68,6 +69,8 @@ func _ready() -> void:
 	#avatar._nutrition_value = 0
 	#open([], false, avatar)
 
+func setup(p_inventory: EMC_Inventory) -> void:
+	_inventory = p_inventory
 
 ## opens summary end of day GUI/makes visible
 func open(p_won : bool, _avatar : EMC_Avatar) -> void:
@@ -131,6 +134,15 @@ func open(p_won : bool, _avatar : EMC_Avatar) -> void:
 		i += 1
 		
 	var coins: int = _scoreboard.calculate_e_coins(p_won)
+	var leftover_items := _inventory.filter_items(
+		EMC_Inventory.filter_not_comp(EMC_IC_Unpalatable))
+	if not leftover_items.is_empty():
+		var add_coins: int = leftover_items.reduce(
+			func (accum: int, item: EMC_Item) -> int:
+				var cost: EMC_IC_Cost = item.get_comp(EMC_IC_Cost)
+				return accum + cost.get_cost(), 0)
+		coins += add_coins
+				
 	tween.set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_method(
 		func (v: int) -> void: e_coins.set_text("Du erhältst " + str(v) + " [img]res://assets/GUI/icons/icon_ecoins.png[/img]."),

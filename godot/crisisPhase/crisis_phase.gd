@@ -55,6 +55,8 @@ func _get_comp(comp_name: String) -> Node:
 			return stage_mngr
 		"Global":
 			return Global
+		"GSI":
+			return emc_gsi
 		_:
 			return self
 

@@ -8,11 +8,13 @@ var method_cache: Dictionary = {}
 func _init() -> void:
 	for dict in get_method_list():
 		var args: Array
+		var default_count: int = len(dict["default_args"])
 		for arg: Dictionary in dict["args"]:
 			args.append(arg["type"])
 		
 		method_cache[dict["name"]] = {
 			"args": args,
+			"default": default_count,
 			"return": dict["return"]
 		}
 
