@@ -26,8 +26,9 @@ func _execute_helper(branch: Dictionary, gsi: VRV_GSI, context: Dictionary = {})
 				var args: Array = []
 				for arg in branch.get("args"):
 					args.append(_execute_helper(arg, gsi, context))
-				
-				if _check_args(args, gsi.get_method_signature(method_name)["args"]):
+					
+				var signature := gsi.get_method_signature(method_name)
+				if _check_args(args, signature["args"], signature["default"]):
 					return gsi.call_method(method_name, args)
 				return false
 			else:
@@ -40,12 +41,12 @@ func _execute_helper(branch: Dictionary, gsi: VRV_GSI, context: Dictionary = {})
 	printerr("VRV_Action: Unrecognised type: %s" % [branch["type"]])
 	return null
 
-func _check_args(args: Array, expected: Array) -> bool:
-	if args.size() != expected.size() and expected.size() != 0:
+func _check_args(args: Array, expected: Array, defaut_count: int) -> bool:
+	if (args.size() > expected.size() or args.size() < (expected.size() - defaut_count)) and expected.size() != 0:
 		printerr("VRV_Action: Parameter count missmatch is %s expected %s" % [args.size(), expected.size()])
 		return false
 		
-	for i: int in range(expected.size()):
+	for i: int in range(min(expected.size(), args.size())):
 		if typeof(args[i]) != expected[i] and expected[i] != 0:
 			printerr("VRV_Action: Parameter type missmatch is %s expected %s" % [type_string(typeof(args[i])), type_string(expected[i])])
 			return false

@@ -77,7 +77,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Speichern & Schließen"
 
+[node name="Save" parent="VBC/CenterContainer2/Buttons" instance=ExtResource("3_yj78q")]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Speichern"
+
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/CancelCurrCrisis" to="." method="_on_cancel_curr_crisis_pressed"]
 [connection signal="pressed" from="VBC/CenterContainer2/Buttons/SaveAndQuit" to="." method="_on_save_and_quit_pressed"]
+[connection signal="pressed" from="VBC/CenterContainer2/Buttons/Save" to="." method="_on_save_pressed"]

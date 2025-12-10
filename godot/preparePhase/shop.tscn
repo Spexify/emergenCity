@@ -35,7 +35,7 @@ grow_vertical = 2
 texture = ExtResource("3_bnbfs")
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 1024.0
 theme_override_constants/margin_top = 10
@@ -65,7 +65,7 @@ size_flags_vertical = 0
 texture = ExtResource("3_spno5")
 
 [node name="Margin" type="MarginContainer" parent="ColorRect"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 576.0
 offset_bottom = 1024.0
 theme = ExtResource("2_duud7")
@@ -167,7 +167,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"ConfirmButton"
-text = "Einkauf Bestätigen"
+text = "Einkauf bestätigen"
 
 [node name="Cancel" type="TextureButton" parent="ColorRect/Margin/Main/HBoxContainer"]
 layout_mode = 2
@@ -205,21 +205,21 @@ grow_vertical = 2
 
 [node name="Text" type="RichTextLabel" parent="CanvasLayer/Tutorial"]
 custom_minimum_size = Vector2(500, 624)
-layout_mode = 2
+layout_mode = 0
 offset_left = 38.0
 offset_top = 200.0
 offset_right = 538.0
 offset_bottom = 824.0
 theme_type_variation = &"WhiteRichTextLabel"
-text = "Hier können Items gekauft werden, um sich auf mögliche Krisen vorzubereiten.
+text = "Stocke deine Vorräte auf!
 
-Um mehr Informationen über ein Item zu erhalten, drücken sie lange auf jenes Item.
+Hier kannst du Lebensmittel und Nützliches kaufen, mit denen du in jeder Krise einen Schritt voraus bist.
 
-Um ein Item aus dem Laden zu kaufen können sie kurz tippen.
+Halte ein Item gedrückt, um mehr über Haltbarkeit, Nährwerte und Kosten herauszufinden.
 
-Um ein Item aus dem Rucksack wieder zurückzugeben können sie ebenfalls kurz tippen.
+Tippe kurz auf ein Item, um es zu kaufen und in deinen Rucksack zu legen.
 
-Die Items im Rucksack welche leicht durchsichtig sind, sind die Standarditems, welche sie immer dabei haben werden."
+Die leicht durchsichtigen Items in deinem Rucksack sind Standard-Items, die du immer dabei hast."
 
 [node name="TuBack" type="TextureButton" parent="CanvasLayer/Tutorial"]
 layout_mode = 0

@@ -6,6 +6,8 @@ func _on_continue_pressed() -> void:
 
 func _on_cancel_pressed() -> void:
 	Global.save_game(Global.State.START)
+	Global.save_ani_canvas.show()
 	Global.load_game()
-	SoundMngr.play_slow_musik()
+	await SoundMngr.play_slow_musik()
+	Global.save_ani_canvas.hide()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

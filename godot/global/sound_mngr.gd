@@ -65,48 +65,60 @@ func is_musik_playing() -> bool:
 	return musik.playing
 
 func close_game() -> Signal:
-	var currently_playing: AudioStreamPlayer
-	currently_playing = get_current_bg_musik()
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(currently_playing, "volume_linear", 0, 0.3)#.set_ease(Tween.EASE_OUT)
+	tween.parallel()
+	for player: AudioStreamPlayer in get_current_bg_musik():
+		tween.tween_property(player, "volume_linear", 0, 1)#.set_ease(Tween.EASE_OUT)
+	tween.tween_interval(0.3)
 	return tween.finished
 
-func get_current_bg_musik() -> AudioStreamPlayer:
-	return slow_musik if slow_musik.playing else (crisis_musik if crisis_musik.playing else musik)
+func get_current_bg_musik() -> Array[AudioStreamPlayer]:
+	var currently_playing: Array[AudioStreamPlayer]
+	if slow_musik.playing:
+		currently_playing.append(slow_musik)
+	if crisis_musik.playing:
+		currently_playing.append(crisis_musik)
+	if musik.playing:
+		currently_playing.append(musik)
+	
+	return currently_playing
 
 func play_musik() -> void:
 	if musik.playing:
+		crisis_musik.stop()
+		slow_musik.stop()
 		return
 	
-	var currently_playing: AudioStreamPlayer
-	currently_playing = slow_musik if slow_musik.playing else crisis_musik
-	
-	await cross_fade_musik(currently_playing, musik)
+	await cross_fade_musik(get_current_bg_musik(), musik)
 
-func play_slow_musik() -> void:
+func play_slow_musik(t: float = 3) -> void:
 	if slow_musik.playing:
+		crisis_musik.stop()
+		musik.stop()
 		return
 	
-	var currently_playing: AudioStreamPlayer
-	currently_playing = musik if musik.playing else crisis_musik
+	await cross_fade_musik(get_current_bg_musik(), slow_musik, t)
 	
-	await cross_fade_musik(currently_playing, slow_musik)
 
-func cross_fade_musik(from: Node, to: Node) -> Signal:	
+func cross_fade_musik(from: Array, to: Node, t: float = 3) -> Signal:	
 	var tween: Tween = get_tree().create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(from, "volume_linear", 0, 3)#.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(to.play)
-	tween.tween_property(to, "volume_linear", 1, 3).from(0)#.set_ease(Tween.EASE_IN)
-	tween.chain().tween_callback(from.stop)
-	tween.chain().tween_callback(from.set_volume_linear.bind(1.0))
+	tween.tween_property(to, "volume_linear", 1, t).from(0)#.set_ease(Tween.EASE_IN)
+	for player: Node in from:
+		if player == to:
+			continue
+		tween.tween_property(player, "volume_linear", 0, t)#.set_ease(Tween.EASE_OUT)
+		tween.chain().tween_callback(player.stop)
+		tween.chain().tween_callback(player.set_volume_linear.bind(1.0))
 	return tween.finished
  
 func play_stinger() -> void:
 	stinger.play()
 	#await stinger.finished
 	#crisis_musik.play()
-	get_current_bg_musik().stop()
+	slow_musik.stop()
+	musik.stop()
 	crisis_musik.play()
 	
 var duration_crisis: int = 0
@@ -117,7 +129,7 @@ func next_day() -> void:
 	duration_crisis += 1
 	
 	if duration_crisis > 3:
-		cross_fade_musik(crisis_musik, musik)
+		cross_fade_musik([crisis_musik], musik)
 		duration_crisis = 0
 
 func play_sound(sound : String, start : float = 0, pitch : float = 1) -> AudioStreamPlayer:

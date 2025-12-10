@@ -6,10 +6,10 @@ class_name EMC_Avatar
 signal arrived
 
 signal status_updated(
-	delta_food: int, new_food: int,
-	delta_drink: int, new_drink: int,
-	delta_health: int, new_health: int,
-	delta_social: int, new_social: int,
+	delta_food: float, new_food: float,
+	delta_drink: float, new_drink: float,
+	delta_health: float, new_health: float,
+	delta_social: float, new_social: float,
 )
 
 signal died
@@ -20,22 +20,23 @@ const PITCH: float = 1.0
 @onready var _nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var _walking_SFX := $SFX/Walking
 
-const MAX_STATUS: int = 8 #EMC_DayMngr.TIME_PRE_DAY/3*10*3
+const MAX_STATUS: float = 8 #EMC_DayMngr.TIME_PRE_DAY/3*10*3
 
-var INIT_FOOD: int = MAX_STATUS/2
-var INIT_DRINK: int = MAX_STATUS/2
-var INIT_HEALTH: int = MAX_STATUS/2
-var INIT_SOCIAL: int = MAX_STATUS/2
+var INIT_FOOD: float = MAX_STATUS/2
+var INIT_DRINK: float = MAX_STATUS/2
+var INIT_HEALTH: float = MAX_STATUS/2
+var INIT_SOCIAL: float = MAX_STATUS/2
 
-var _food_status: int = 0
-var _drink_status: int = 0
-var _health_status: int = 0
-var _social_status: int = 0
+var _food_status: float = 0
+var _drink_status: float = 0
+var _health_status: float = 0
+var _social_status: float = 0
 
-var _food_decay: int = 1
-var _drink_decay: int = 1
-var _health_decay: int = 1
-var _social_decay: int = 1
+# equal to 3 per day
+var _food_decay: float = 3/EMC_DayMngr.TIME_PRE_DAY
+var _drink_decay: float = 3/EMC_DayMngr.TIME_PRE_DAY
+var _health_decay: float = 3/EMC_DayMngr.TIME_PRE_DAY
+var _social_decay: float = 3/EMC_DayMngr.TIME_PRE_DAY
 
 enum Frame{
 	FRONTSIDE = 0,
@@ -66,10 +67,10 @@ func consume_item(p_item : EMC_Item) -> void:
 		con.consume(self)
 	end_batch()
 
-var _food_delta: int = 0
-var _drink_delta: int = 0
-var _health_delta: int = 0
-var _social_delta: int = 0
+var _food_delta: float = 0
+var _drink_delta: float = 0
+var _health_delta: float = 0
+var _social_delta: float = 0
 
 var _batch_depth: int = 0
 
@@ -84,25 +85,25 @@ func end_batch() -> void:
 		
 		_apply_delta()
 
-func modify_food_delta(delta: int) -> void:
+func modify_food_delta(delta: float) -> void:
 	_food_delta = delta
 	
 	if _batch_depth == 0:
 		_apply_delta()
 
-func modify_drink_delta(delta: int) -> void:
+func modify_drink_delta(delta: float) -> void:
 	_drink_delta = delta
 	
 	if _batch_depth == 0:
 		_apply_delta()
 
-func modify_health_delta(delta: int) -> void:
+func modify_health_delta(delta: float) -> void:
 	_health_delta = delta
 	
 	if _batch_depth == 0:
 		_apply_delta()
 		
-func modify_social_delta(delta: int) -> void:
+func modify_social_delta(delta: float) -> void:
 	_social_delta = delta
 	
 	if _batch_depth == 0:
@@ -130,12 +131,12 @@ func _apply_delta() -> void:
 	_health_delta = 0
 	_social_delta = 0
 
-func advance_time(delta: int) -> void:
+func advance_time(delta: float) -> void:
 	begin_batch()
-	modify_food_delta(-_food_decay)
-	modify_drink_delta(-_drink_decay)
-	modify_health_delta(-_health_decay)
-	modify_social_delta(-_social_decay)
+	modify_food_delta(-_food_decay*delta)
+	modify_drink_delta(-_drink_decay*delta)
+	modify_health_delta(-_health_decay*delta)
+	modify_social_delta(-_social_decay*delta)
 	end_batch()
 
 #region old

@@ -323,6 +323,7 @@ layout_mode = 2
 _day_mngr = NodePath("../../UpperSection/HBC/DayMngr")
 
 [node name="ConfirmationGUI" parent="GUI/CL/VBC/LowerSection" groups=["Gui"] instance=ExtResource("22_ifwb8")]
+visible = false
 layout_mode = 2
 
 [node name="TwoChoice" parent="GUI/CL/VBC/LowerSection" node_paths=PackedStringArray("_day_mngr") groups=["Gui"] instance=ExtResource("33_52q5c")]

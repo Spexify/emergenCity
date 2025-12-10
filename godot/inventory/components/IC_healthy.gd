@@ -8,9 +8,13 @@ const UNIT: String = "% ♡"
 const UNIT_FACTOR: int = 10
 
 ########################################## PUBLIC METHODS ##########################################
-func _init(_p_health_change : int = 0) -> void:
+func _init() -> void:
 	super("Gesund", Color.HOT_PINK)
-	_health_change = _p_health_change
+
+func setup(data: Dictionary) -> EMC_IC_Healthy:
+	_health_change = data.get("value", _health_change)
+	
+	return self
 
 func consume(p_avatar : EMC_Avatar) -> void:
 	p_avatar.modify_health_delta(self.get_health_change())
@@ -27,10 +31,15 @@ func get_unit_health_change() -> int:
 
 ## RENAME WITH CAUTION: It overrides superclass method!
 func get_name_with_values() -> String:
-	if _health_change < 0:
-		return "Un" + name.to_lower() + " (" + str(get_unit_health_change()) + " " + UNIT + ")"
+	if _health_change >= 0:
+		return "Gesund: " + "+\u2060".repeat(_health_change).left(-1)
 	else:
-		return name + " (+" + str(get_unit_health_change()) + " " + UNIT + ")"
+		return "Ungesund: " + "-\u2060".repeat(-_health_change).left(-1)
+	
+	#if _health_change < 0:
+		#return "Un" + name.to_lower() + " (" + str(get_unit_health_change()) + " " + UNIT + ")"
+	#else:
+		#return name + " (+" + str(get_unit_health_change()) + " " + UNIT + ")"
 
 func to_dict() -> Dictionary:
 	var data : Dictionary = {

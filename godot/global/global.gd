@@ -54,6 +54,7 @@ signal game_saved
 signal scene_changed
 
 @onready var _root := get_tree().root
+@onready var save_ani_canvas: CanvasLayer = $SaveAniCanvas
 
 # Settings
 var _vibration : bool = true

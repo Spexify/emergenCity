@@ -133,17 +133,19 @@ func _unhandled_input(p_event: InputEvent) -> void:
 func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 	_last_click_position = Vector2.INF
 	_last_clicked_NPC = p_NPC
-	var offset: Vector2 = Vector2.ZERO
-	if _avatar.position[0] < p_NPC.position[0]: #X Pos Offset
-		offset += Vector2(-50, 0)
-	else:
-		offset += Vector2(50, 0)
-	if _avatar.position[1] < p_NPC.position[1]: #> Pos Offset
-		offset += Vector2(0, -50)
-	else:
-		offset += Vector2(0, 50)
+	#var offset: Vector2 = Vector2.ZERO
+	#if _avatar.position[0] < p_NPC.position[0]: #X Pos Offset
+		#offset += Vector2(-50, 0)
+	#else:
+		#offset += Vector2(50, 0)
+	#if _avatar.position[1] < p_NPC.position[1]: #> Pos Offset
+		#offset += Vector2(0, -50)
+	#else:
+		#offset += Vector2(0, 50)
 		
-	_avatar.set_target(p_NPC.position + offset)
+	var _target_pos := _curr_stage.get_avatar_target(p_NPC.position)
+	if _target_pos.is_finite():
+			_avatar.set_target(_target_pos)
 
 ## Is called when the [EMC_Avatar] stops navigation, aka arrives at some point
 ## See func _unhandled_input for where the navigation began

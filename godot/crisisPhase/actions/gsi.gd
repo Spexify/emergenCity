@@ -65,7 +65,7 @@ func gain_player_item(item_name: String, message: String) -> bool:
 	if _crisis_phase._backpack.add_item(item) == false:
 		_gui_mngr.request_gui("TooltipGUI", ["Dein Inventar ist bereits voll und kann keine weiteren Items aufnehmen!"])
 	else:
-		_gui_mngr.queue_gui("ItemQuestionGUI", [item, message])
+		_gui_mngr.queue_gui("ItemQuestionGUI", [item, {"question": message, "answere": ""}])
 	
 	return true
 
@@ -86,27 +86,56 @@ func add_points_water() -> bool:
 	_avatar.modify_drink_delta(1)
 	return true
 
+func add_points_social(value: int = 1) -> bool:
+	_avatar.modify_social_delta(value)
+	return true
+
 func npc_karma_higher_than(npc_name: String, value: float) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_krama() > value
 
 func npc_karma_less_than(npc_name: String, value: float) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_krama() < value
 
 func npc_friendship_higher_than(npc_name: String, value: int) -> bool:
 	return true
 
 func npc_is_happy(npc_name: String) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_mood() > EMC_NPC_Karma.Mood.MID
 
 func npc_is_sad(npc_name: String) -> bool:
-	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).get_comp(EMC_NPC_Karma)
+	var karma: EMC_NPC_Karma = _npc_mngr.get_NPC(npc_name).npc_resource.get_comp(EMC_NPC_Karma)
 	return karma.get_mood() < EMC_NPC_Karma.Mood.MID
 
 func is_state_by_name_str(state_name_value: String) -> bool:
 	return OverworldStatesMngr.is_effective_state_eq(state_name_value.get_basename(), state_name_value.get_extension())
+
+# _t is the relative time step _t = 0 means right now, _t = 1 means next time period
+func is_state_eq(state: String, value: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.is_effective_state_eq(state, value, _t)
+
+func is_state_neq(state: String, value: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.is_effective_state_neq(state, value, _t)
+	
+func is_state_lt(state: String, value: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.is_effective_state_lt(state, value, _t)
+	
+func is_state_gt(state: String, value: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.is_effective_state_gt(state, value, _t)
+
+func has_flag(state: String, flag: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.has_flag(state, flag, _t)
+
+func has_not_flag(state: String, flag: String, _t: int = 0) -> bool:
+	return OverworldStatesMngr.has_not_flag(state, flag, _t)
+	
+func has_any_flag(p_state: String, p_flags: Array[String], _t: int = 0) -> bool:
+	return OverworldStatesMngr.has_any_flag(p_state, p_flags, _t)
+	
+func has_all_flag(state: String, p_flags: Array[String], _t: int = 0) -> bool:
+	return OverworldStatesMngr.has_all_flag(state, p_flags, _t)
 
 func crisis_is(crisis_name: String) -> bool:
 	return crisis_name in OverworldStatesMngr.get_scenario_names()

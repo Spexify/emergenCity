@@ -14,6 +14,7 @@ class_name  EMC_GUIMngr
 @onready var _rainwater_barrel_gui := $CL/VBC/MiddleSection/RainwaterBarrelGUI
 #@onready var two_choice: EMC_TwoChoice = $CL/VBC/LowerSection/TwoChoice
 #@onready var default_action_gui: EMC_DefaultActionGUI = $CL/VBC/LowerSection/DefaultActionGUI
+@onready var end_game_gui: EMC_EndGameGUI = $CL/VBC/MiddleSection/EndGameGUI
 
 @onready var middle_section := $CL/VBC/MiddleSection
 @onready var lower_section := $CL/VBC/LowerSection
@@ -68,6 +69,8 @@ func _ready() -> void:
 func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
 	_trade_ui.setup(p_backpack)
 	
+	end_game_gui.setup(p_backpack)
+	
 	_city_map.setup(p_opt_event_mngr)
 	
 	_backpack_GUI.setup(p_backpack, "Rucksack")
@@ -97,6 +100,7 @@ func close_gui(index: int) -> void:
 func request_gui(gui_name : String, argv : Array = []) -> Variant:
 	for gui in all_the_guis:
 		if gui.name == gui_name:
+			
 			_hide_buttons()
 			_status_bars.set_process_mode(PROCESS_MODE_DISABLED)
 			_stage_mngr.set_process_mode(PROCESS_MODE_DISABLED)

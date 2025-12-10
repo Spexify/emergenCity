@@ -14,9 +14,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "request_gui",
-				"params": [
-					"Trade", ["$result.npc"]
-				]
+				"params": ["Trade", ["$result.npc"]]
 			}
 		]
 	},
@@ -28,13 +26,13 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "request_gui",
-				"params": [ "IconInformation" ]
+				"params": ["IconInformation"]
 			},
 			{
 				"type": "single",
 				"system": "ActCons",
 				"method": "set_tutorial",
-				"params": [ true ]
+				"params": [true]
 			}
 		]
 	},
@@ -52,7 +50,7 @@
 				"type": "single",
 				"system": "OSM",
 				"method": "add_state_layer_str_range",
-				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+				"params": ["ElectricityState", "Scenario", "NONE", 0, 5]
 			},
 			{
 				"type": "single",
@@ -70,7 +68,7 @@
 				"type": "single",
 				"system": "OSM",
 				"method": "add_state_layer_str_range",
-				"params": ["MobileNetState","Scenario", "OFFLINE", 0, 5]
+				"params": ["MobileNetState", "Scenario", "OFFLINE", 0, 5]
 			}
 		]
 	},
@@ -112,7 +110,7 @@
 				"type": "single",
 				"system": "OSM",
 				"method": "add_state_layer_str_range",
-				"params": ["ElectricityState","Scenario", "NONE", 0, 5]
+				"params": ["ElectricityState", "Scenario", "NONE", 0, 5]
 			},
 			{
 				"type": "single",
@@ -130,7 +128,7 @@
 				"type": "single",
 				"system": "OSM",
 				"method": "add_quest",
-				"params": [ "FRIEDEL_WEG", 1 ]
+				"params": ["FRIEDEL_WEG", 1]
 			},
 			{
 				"type": "single",
@@ -146,29 +144,57 @@
 			}
 		]
 	},
-	"INT_EXIT": {
+	"INT_RIVER": {
 		"type": "single",
 		"system": "gui_mngr",
 		"method": "request_gui",
 		"params": [
-			"CityMap"
+			"DefaultActionGUI",
+			[
+				"Willst du Wasser aus dem Fluss schöpfen?",
+				"IQ_DirtyWater",
+				"SFX_Water",
+				true
+			]
 		]
+	},
+	"INT_TREE": {
+		"type": "single",
+		"system": "gui_mngr",
+		"method": "request_gui",
+		"params": [
+			"DefaultActionGUI",
+			[
+				"Willst du dich am Baum ausruhen?",
+				"Sleep",
+				"SFX_Tree",
+				true
+			]
+		]
+	},
+	"SFX_Tree": {
+		"type": "single",
+		"system": "SoundMngr",
+		"method": "play_sound",
+		"params": [""]
+	},
+	"INT_EXIT": {
+		"type": "single",
+		"system": "gui_mngr",
+		"method": "request_gui",
+		"params": ["CityMap"]
 	},
 	"INT_COOK": {
 		"type": "single",
 		"system": "gui_mngr",
 		"method": "request_gui",
-		"params": [
-			"CookingGUI"
-		]
+		"params": ["CookingGUI"]
 	},
 	"SFX_Water": {
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"TapWater"
-		]
+		"params": ["TapWater"]
 	},
 	"IQ_DirtyWater": {
 		"type": "single",
@@ -230,9 +256,7 @@
 			"type": "single",
 			"system": "OSM",
 			"method": "is_effective_state_gt",
-			"params": [
-				"WaterState", "NONE"
-			]
+			"params": ["WaterState", "NONE"]
 		},
 		"then": {
 			"type": "condition",
@@ -240,9 +264,7 @@
 				"type": "single",
 				"system": "OSM",
 				"method": "is_effective_state_eq",
-				"params": [
-					"WaterState", "CLEAN"
-				]
+				"params": ["WaterState", "CLEAN"]
 			},
 			"then": {
 				"type": "condition",
@@ -250,9 +272,7 @@
 					"type": "single",
 					"system": "OSM",
 					"method": "has_upgrade",
-					"params": [
-						6
-					]
+					"params": [6]
 				},
 				"then": {
 					"type": "single",
@@ -310,21 +330,14 @@
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Es kommt kein Wasser aus dem Wasserhahn!"
-				]
-			]
+			"params": ["TooltipGUI", ["Es kommt kein Wasser aus dem Wasserhahn!"]]
 		}
 	},
 	"SFX_PillowRuffle": {
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"PillowRuffle"
-		]
+		"params": ["PillowRuffle"]
 	},
 	"Sleep": {
 		"type": "multi",
@@ -334,17 +347,13 @@
 				"type": "single",
 				"system": "ActCons",
 				"method": "add_health",
-				"params": [
-					1
-				]
+				"params": [1]
 			},
 			{
 				"type": "single",
 				"system": "Score",
 				"method": "add_score",
-				"params": [
-					"sleep"
-				]
+				"params": ["sleep"]
 			}
 		]
 	},
@@ -369,38 +378,26 @@
 			"type": "single",
 			"system": "ActCond",
 			"method": "upgrade_state_greater",
-			"params": [
-				1,
-				1
-			]
+			"params": [1, 1]
 		},
 		"then": {
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"RainwaterBarrelGUI"
-			]
+			"params": ["RainwaterBarrelGUI"]
 		},
 		"else": {
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Die Regentonne ist leer."
-				]
-			]
+			"params": ["TooltipGUI", ["Die Regentonne ist leer."]]
 		}
 	},
 	"SFX_Shower": {
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"Shower"
-		]
+		"params": ["Shower"]
 	},
 	"Shower": {
 		"type": "condition",
@@ -408,9 +405,7 @@
 			"type": "single",
 			"system": "OSM",
 			"method": "is_effective_state_eq",
-			"params": [
-				"WaterState", "CLEAN"
-			]
+			"params": ["WaterState", "CLEAN"]
 		},
 		"then": {
 			"type": "multi",
@@ -420,9 +415,7 @@
 					"type": "single",
 					"system": "ActCons",
 					"method": "add_health",
-					"params": [
-						2
-					]
+					"params": [2]
 				},
 				{
 					"type": "single",
@@ -446,9 +439,7 @@
 					"type": "single",
 					"system": "ActCons",
 					"method": "add_health",
-					"params": [
-						1
-					]
+					"params": [1]
 				},
 				{
 					"type": "single",
@@ -473,9 +464,7 @@
 				"type": "single",
 				"system": "ActCons",
 				"method": "use_item_by_name",
-				"params": [
-					"SOAP"
-				]
+				"params": ["SOAP"]
 			},
 			{
 				"type": "condition",
@@ -483,9 +472,7 @@
 					"type": "single",
 					"system": "OSM",
 					"method": "is_effective_state_eq",
-					"params": [
-						"WaterState", "CLEAN"
-					]
+					"params": ["WaterState", "CLEAN"]
 				},
 				"then": {
 					"type": "multi",
@@ -495,9 +482,13 @@
 							"type": "single",
 							"system": "ActCons",
 							"method": "add_health",
-							"params": [
-								3
-							]
+							"params": [3]
+						},
+						{
+							"type": "single",
+							"system": "GSI",
+							"method": "add_points_social",
+							"params": [2]
 						},
 						{
 							"type": "single",
@@ -521,9 +512,7 @@
 							"type": "single",
 							"system": "ActCons",
 							"method": "add_health",
-							"params": [
-								2
-							]
+							"params": [2]
 						},
 						{
 							"type": "single",
@@ -548,9 +537,7 @@
 			"type": "single",
 			"system": "OSM",
 			"method": "is_effective_state_gt",
-			"params": [
-				"WaterState", "NONE"
-			]
+			"params": ["WaterState", "NONE"]
 		},
 		"then": {
 			"type": "condition",
@@ -558,9 +545,7 @@
 				"type": "single",
 				"system": "ActCond",
 				"method": "has_item",
-				"params": [
-					"SOAP"
-				]
+				"params": ["SOAP"]
 			},
 			"then": {
 				"type": "single",
@@ -593,13 +578,7 @@
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
-					[
-						"Willst du duschen?",
-						"Shower",
-						"SFX_Shower",
-						true,
-						"Hat geduscht."
-					]
+					["Willst du duschen?", "Shower", "SFX_Shower", true, "Hat geduscht."]
 				]
 			}
 		},
@@ -607,12 +586,7 @@
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Es ist leider gerade kein Wasser verfügbar!"
-				]
-			]
+			"params": ["TooltipGUI", ["Es ist leider gerade kein Wasser verfügbar!"]]
 		}
 	},
 	"bbk": {
@@ -629,9 +603,7 @@
 				"type": "single",
 				"system": "Score",
 				"method": "add_score",
-				"params": [
-					"bbk"
-				]
+				"params": ["bbk"]
 			}
 		]
 	},
@@ -639,7 +611,7 @@
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [ "open_GUI" ]
+		"params": ["open_GUI"]
 	},
 	"INT_BBK": {
 		"type": "single",
@@ -659,9 +631,7 @@
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"RadioTuning"
-		]
+		"params": ["RadioTuning"]
 	},
 	"Radio_Batteries": {
 		"type": "multi",
@@ -671,9 +641,7 @@
 				"type": "single",
 				"system": "ActCons",
 				"method": "use_item_by_name",
-				"params": [
-					"BATTERIES"
-				]
+				"params": ["BATTERIES"]
 			},
 			{
 				"type": "single",
@@ -700,9 +668,7 @@
 			"type": "single",
 			"system": "ActCond",
 			"method": "has_item",
-			"params": [
-				"BATTERIES"
-			]
+			"params": ["BATTERIES"]
 		},
 		"then": {
 			"type": "single",
@@ -723,9 +689,7 @@
 			"method": "request_gui",
 			"params": [
 				"TooltipGUI",
-				[
-					"Du brauchst Batterien, um dieses Radio zu bedienen."
-				]
+				["Du brauchst Batterien, um dieses Radio zu bedienen."]
 			]
 		}
 	},
@@ -758,11 +722,7 @@
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
-			[
-				"Willst du das Kurbelradio benutzen?",
-				"Radio",
-				"SFX_Radio"
-			]
+			["Willst du das Kurbelradio benutzen?", "Radio", "SFX_Radio"]
 		]
 	},
 	"Take_Reservoir": {
@@ -773,9 +733,7 @@
 				"type": "single",
 				"system": "ActCons",
 				"method": "remove_from_reservoir",
-				"params": [
-					25
-				]
+				"params": [25]
 			},
 			{
 				"type": "single",
@@ -810,10 +768,7 @@
 			"type": "single",
 			"system": "ActCond",
 			"method": "upgrade_state_greater",
-			"params": [
-				6,
-				0
-			]
+			"params": [6, 0]
 		},
 		"then": {
 			"type": "single",
@@ -832,12 +787,7 @@
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"Das Wasser Reservoir ist leer."
-				]
-			]
+			"params": ["TooltipGUI", ["Das Wasser Reservoir ist leer."]]
 		}
 	},
 	"INT_TV": {
@@ -846,35 +796,44 @@
 			"type": "single",
 			"system": "OSM",
 			"method": "is_effective_state_eq",
-			"params": [
-				"ElectricityState", "NONE"
-			]
+			"params": ["ElectricityState", "NONE"]
 		},
 		"then": {
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI", ["Der Fernseher lässt sich nicht einschalten!"]
-			]
+			"params": ["TooltipGUI", ["Der Fernseher lässt sich nicht einschalten!"]]
 		},
 		"else": {
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": ["TooltipGUI", ["Die Werbung läuft endlos lang."]]
+			"params": ["DefaultActionGUI", 
+			[
+				"Willst du Fernseher schauen?",
+				"Watch_TV",
+				"SFX_TV",
+				true
+			]]
 		}
 	},
-
-
-
+	"Watch_TV": {
+		"type": "single",
+		"system": "GSI",
+		"method": "add_points_social",
+		"params": [2]
+	},
+	"SFX_TV": {
+		"type": "single",
+		"system": "SoundMngr",
+		"method": "play_sound",
+		"params": ["TV"]
+	},
 	"SFX_Stage": {
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"BasicItem"
-		]
+		"params": ["BasicItem"]
 	},
 	"Go_Home": {
 		"type": "multi",
@@ -898,9 +857,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -945,9 +902,7 @@
 				"type": "single",
 				"system": "ActCond",
 				"method": "is_current_stage",
-				"params": [
-					"home"
-				]
+				"params": ["home"]
 			},
 			"then": {
 				"type": "single",
@@ -955,11 +910,7 @@
 				"method": "request_gui",
 				"params": [
 					"DefaultActionGUI",
-					[
-						"$result.question",
-						"$result.stage_act",
-						"SFX_Stage"
-					]
+					["$result.question", "$result.stage_act", "SFX_Stage"]
 				]
 			},
 			"else": {
@@ -982,12 +933,7 @@
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": [
-				"TooltipGUI",
-				[
-					"$result.no_entry"
-				]
-			]
+			"params": ["TooltipGUI", ["$result.no_entry"]]
 		}
 	},
 	"Go_Market": {
@@ -1013,9 +959,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1042,9 +986,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1056,45 +998,45 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "market" ],
+				"params": ["market"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Market" ],
+				"params": ["Go_Market"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Market_Wait" ],
+				"params": ["Go_Market_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du zum Marktplatz gehen?" ],
+				"params": ["Willst du zum Marktplatz gehen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Der Marktplatz ist leider nicht betretbar!" ],
+				"params": ["Der Marktplatz ist leider nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
-	}, 
+	},
 	"Go_Townhall": {
 		"type": "multi",
 		"acc": "array",
@@ -1118,9 +1060,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1147,9 +1087,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1161,45 +1099,45 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "townhall" ],
+				"params": ["townhall"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Townhall" ],
+				"params": ["Go_Townhall"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Townhall_Wait" ],
+				"params": ["Go_Townhall_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du zum Rathaus gehen?" ],
+				"params": ["Willst du zum Rathaus gehen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Das Rathaus ist nicht betretbar!" ],
+				"params": ["Das Rathaus ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
-	}, 
+	},
 	"Go_Park": {
 		"type": "multi",
 		"acc": "array",
@@ -1223,9 +1161,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1252,9 +1188,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1266,45 +1200,45 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "park" ],
+				"params": ["park"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Park" ],
+				"params": ["Go_Park"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Park_Wait" ],
+				"params": ["Go_Park_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du in den Park gehen?" ],
+				"params": ["Willst du in den Park gehen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Der Park ist nicht betretbar!" ],
+				"params": ["Der Park ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
-	}, 
+	},
 	"Go_Garden": {
 		"type": "multi",
 		"acc": "array",
@@ -1328,9 +1262,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1357,9 +1289,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1371,42 +1301,42 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "gardenhouse" ],
+				"params": ["gardenhouse"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Garden" ],
+				"params": ["Go_Garden"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Garden_Wait" ],
+				"params": ["Go_Garden_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Gerhard besuchen?" ],
+				"params": ["Willst du Gerhard besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Das Gartenhaus ist nicht betretbar!" ],
+				"params": ["Das Gartenhaus ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
 	},
@@ -1433,9 +1363,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1462,9 +1390,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1476,42 +1402,42 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "rowhouse" ],
+				"params": ["rowhouse"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Rowhouse" ],
+				"params": ["Go_Rowhouse"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Rowhouse_Wait" ],
+				"params": ["Go_Rowhouse_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Julia besuchen?" ],
+				"params": ["Willst du Julia besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Das Reihenhaus ist nicht betretbar!" ],
+				"params": ["Das Reihenhaus ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
 	},
@@ -1538,9 +1464,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1567,9 +1491,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1581,42 +1503,42 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "mansion" ],
+				"params": ["mansion"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Mansion" ],
+				"params": ["Go_Mansion"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Mansion_Wait" ],
+				"params": ["Go_Mansion_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Petro & Irena besuchen?" ],
+				"params": ["Willst du Petro & Irena besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Das Wohnhaus ist nicht betretbar!" ],
+				"params": ["Das Wohnhaus ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
 	},
@@ -1643,9 +1565,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1672,9 +1592,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1686,42 +1604,42 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "penthouse" ],
+				"params": ["penthouse"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Penthouse" ],
+				"params": ["Go_Penthouse"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Penthouse_Wait" ],
+				"params": ["Go_Penthouse_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Elias besuchen?" ],
+				"params": ["Willst du Elias besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Das Penthouse ist nicht betretbar!" ],
+				"params": ["Das Penthouse ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "call_act",
-				"params": [ "stage", "$context" ]
+				"params": ["stage", "$context"]
 			}
 		]
 	},
@@ -1748,9 +1666,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1777,9 +1693,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1791,35 +1705,35 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "apartment_mert" ],
+				"params": ["apartment_mert"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Mert" ],
+				"params": ["Go_Mert"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Mert_Wait" ],
+				"params": ["Go_Mert_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Mert besuchen?" ],
+				"params": ["Willst du Mert besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"params": ["Dieses Stockwerk ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
@@ -1828,9 +1742,7 @@
 					"type": "single",
 					"system": "ActCond",
 					"method": "is_current_stage",
-					"params": [
-						"$result.stage"
-					]
+					"params": ["$result.stage"]
 				},
 				"then": {
 					"type": "single",
@@ -1842,7 +1754,7 @@
 					"type": "single",
 					"system": "builtin",
 					"method": "call_act",
-					"params": [ "stage", "$context" ]
+					"params": ["stage", "$context"]
 				}
 			}
 		]
@@ -1870,9 +1782,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1899,9 +1809,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -1913,35 +1821,35 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "apartment_camper" ],
+				"params": ["apartment_camper"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Camper" ],
+				"params": ["Go_Camper"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Camper_Wait" ],
+				"params": ["Go_Camper_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Kris & Veronika besuchen?" ],
+				"params": ["Willst du Kris & Veronika besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"params": ["Dieses Stockwerk ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
@@ -1950,9 +1858,7 @@
 					"type": "single",
 					"system": "ActCond",
 					"method": "is_current_stage",
-					"params": [
-						"$result.stage"
-					]
+					"params": ["$result.stage"]
 				},
 				"then": {
 					"type": "single",
@@ -1964,7 +1870,7 @@
 					"type": "single",
 					"system": "builtin",
 					"method": "call_act",
-					"params": [ "stage", "$context" ]
+					"params": ["stage", "$context"]
 				}
 			}
 		]
@@ -1992,9 +1898,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -2021,9 +1925,7 @@
 				"type": "single",
 				"system": "gui_mngr",
 				"method": "close_gui",
-				"params": [
-					-2
-				]
+				"params": [-2]
 			}
 		]
 	},
@@ -2035,35 +1937,35 @@
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "apartment_default" ],
+				"params": ["apartment_default"],
 				"as": "stage"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Default" ],
+				"params": ["Go_Default"],
 				"as": "stage_act"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Go_Default_Wait" ],
+				"params": ["Go_Default_Wait"],
 				"as": "stage_act_wait"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Willst du Agathe besuchen?" ],
+				"params": ["Willst du Agathe besuchen?"],
 				"as": "question"
 			},
 			{
 				"type": "single",
 				"system": "builtin",
 				"method": "define",
-				"params": [ "Dieses Stockwerk ist nicht betretbar!" ],
+				"params": ["Dieses Stockwerk ist nicht betretbar!"],
 				"as": "no_entry"
 			},
 			{
@@ -2072,9 +1974,7 @@
 					"type": "single",
 					"system": "ActCond",
 					"method": "is_current_stage",
-					"params": [
-						"$result.stage"
-					]
+					"params": ["$result.stage"]
 				},
 				"then": {
 					"type": "single",
@@ -2086,7 +1986,7 @@
 					"type": "single",
 					"system": "builtin",
 					"method": "call_act",
-					"params": [ "stage", "$context" ]
+					"params": ["stage", "$context"]
 				}
 			}
 		]
@@ -2095,14 +1995,12 @@
 		"type": "single",
 		"system": "ActCons",
 		"method": "friedel_weg",
-		"params": [ ]
+		"params": []
 	},
 	"SFX_Door": {
 		"type": "single",
 		"system": "SoundMngr",
 		"method": "play_sound",
-		"params": [
-			"Door"
-		]
+		"params": ["Door"]
 	}
 }
