@@ -48,7 +48,7 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	#Global.get_tree().paused = false
 	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.START)
-	await SoundMngr.play_slow_musik()
+	await SoundMngr.play_slow_musik(1)
 	Global.load_game()
 	Global.save_ani_canvas.hide()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)

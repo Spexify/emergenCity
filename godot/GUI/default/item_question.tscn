@@ -16,14 +16,7 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="Resource" id="Resource_852rd"]
 resource_name = "Dummy"
 script = ExtResource("3_3xyb7")
-id = 0
-name = "Dummy"
 descr = "<No Descr>"
-comps = Array[ExtResource("3_6qmk2")]([])
-sound_effect = {
-"clicked": "BasicItem",
-"consumed": ""
-}
 texture = SubResource("AtlasTexture_7a0jo")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jy4p8"]

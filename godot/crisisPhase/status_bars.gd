@@ -16,21 +16,21 @@ extends Control
 func _ready() -> void:
 	_avatar.status_updated.connect(update_bars)
 
-func update_bars(delta_food: int, new_food: int,
-				delta_drink: int, new_drink: int,
-				delta_health: int, new_health: int,
-				delta_social: int, new_social: int,) -> void:
+func update_bars(delta_food: float, new_food: float,
+				delta_drink: float, new_drink: float,
+				delta_health: float, new_health: float,
+				delta_social: float, new_social: float,) -> void:
 	if delta_food != 0:
-		food_cont.value = (float(new_food) / float(EMC_Avatar.MAX_STATUS)) * 48.0
+		food_cont.value = (new_food / EMC_Avatar.MAX_STATUS) * 48.0
 		food_vfx.set_emitting(true)
 	if delta_drink != 0:
-		drink_cont.value = (float(new_drink) / float(EMC_Avatar.MAX_STATUS)) * 48.0
+		drink_cont.value = (new_drink / EMC_Avatar.MAX_STATUS) * 48.0
 		drink_vfx.set_emitting(true)
 	if delta_health != 0:
-		health_cont.value = (float(new_health) / float(EMC_Avatar.MAX_STATUS)) * 48.0
+		health_cont.value = (new_health / EMC_Avatar.MAX_STATUS) * 48.0
 		health_vfx.set_emitting(true)
 	if delta_social != 0:
-		social_cont.value = (float(new_social) / float(EMC_Avatar.MAX_STATUS)) * 48.0
+		social_cont.value = (new_social / EMC_Avatar.MAX_STATUS) * 48.0
 		social_vfx.set_emitting(true)
 
 func _on_food_button_pressed() -> void:

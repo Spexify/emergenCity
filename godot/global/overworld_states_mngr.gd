@@ -298,10 +298,14 @@ func get_flags(state: String, _t: int = 0) -> Array[String]:
 	
 func has_flag(state: String, flag: String, _t: int = 0) -> bool:
 	var t: int = current_t + _t
+	if flag.is_empty():
+		return flags.get(t, {}).has(state)
 	return flags.get(t, {}).get(state, {}).has(flag)
 
 func has_not_flag(state: String, flag: String, _t: int = 0) -> bool:
 	var t: int = current_t + _t
+	if flag.is_empty():
+		return not flags.get(t, {}).has(state)
 	return not flags.get(t, {}).get(state, {}).has(flag)	
 	
 func has_any_flag(p_state: String, p_flags: Array[String], _t: int = 0) -> bool:

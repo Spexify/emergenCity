@@ -75,7 +75,7 @@ kris:Du siehst nicht zufällig meinen Schlüssel? Ich suche ihn schon seit Ewigk
 
 [[Node]] BraucheSchluessel
 [actors] avatar kris.flipped
-[Condition] is_state_by_name_str("IsolationState.NONE")
+[Condition] has_not_flag("NoEntry", "")
 [text]
 kris:Ich brauche ihn erst heute Abend, wenn ich auf die Arbeit gehe.
 kris:Aber eigentlich wollte ich vorher nochmal spazieren.

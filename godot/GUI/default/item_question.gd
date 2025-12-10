@@ -27,7 +27,10 @@ func open(p_item : EMC_Item, text : Dictionary = {}) -> void:
 	
 	_item = p_item
 	
-	question.set_text(question_text % _item.name)
+	if question_text.find("%s") != -1:
+		question.set_text(question_text % _item.name)
+	else:
+		question.set_text(question_text)
 	if not answere_text.is_empty():
 		confirm_btn.set_text(answere_text)
 		confirm_btn.show()

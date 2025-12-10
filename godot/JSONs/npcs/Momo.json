@@ -16,7 +16,7 @@
 		},
 		"stage": {
 			"stage_name": "apartment_mert",
-			"spot": "bed",
+			"spot": "sleeping",
 
 			"position": { "x": 480, "y": 760 },
 			"start": "ApartmentMert",
