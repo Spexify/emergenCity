@@ -5,7 +5,7 @@ momo:...
 mert:Momo ist etwas scheu.
 [Choice]
 - [talk] Warum denn?
-- [stop] Muss los.
+- [stop] Dann will ich lieber nicht stören.
 
 [[Node]] stop
 [actors] avatar momo mert.flipped

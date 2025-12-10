@@ -1,10 +1,8 @@
 [[Node]] start
 [actors] avatar julia.flipped
 [text]
-julia:Hi Nachbar!
-[Choice]
-- [reden] Möchtest du mit mir reden?
-- [stop] Bis dann!
+julia:Hi! Das ist aber nett, dass du vorbeischaust.
+[jump] reden
 
 [[Node]] reden
 [random]
@@ -64,7 +62,7 @@ julia:Besser ist es, jeden Tag etwas außer Haus zu unternehmen.
 [[Node]] reden5
 [actors] avatar julia.flipped
 [text]
-julia:Tut mir Leid, wenn ich so viel rede.
+julia:Tut mir leid, wenn ich so viel rede.
 julia:Ich bin als Psychologin oft den ganzen Tag damit beschäftigt, anderen zuzuhören.
 julia:Es tut auch gut, einfach mal draufloszureden.
 julia:Aber erzähl doch mal, wie geht es dir?
@@ -109,7 +107,7 @@ julia:Womit verbringst du deine Freizeit am liebsten?
 - [FreizeitSport] Sport.
 - [FreizeitLesen] Lesen.
 - [FreizeitLeuteTreffen] Leute treffen.
-- [FreizeitAlles] Alles mögliche.
+- [FreizeitAlles] Alles Mögliche.
 
 [[Node]] FreizeitSport
 [actors] avatar julia.flipped
@@ -148,6 +146,7 @@ julia:Und ich hatte gar nichts eingekauft.
 julia:In solchen Momenten ist es wirklich praktisch, ein paar Dosen und haltbare Snacks zu Hause zu haben.
 julia:Man braucht nicht immer frische Zutaten, um etwas Leckeres zu zaubern.
 avatar:Das stimmt!
+[action] add_score("tip", {"source": "julia5"})
 
 [[Node]] reden9
 [actors] avatar julia.flipped
@@ -155,6 +154,6 @@ avatar:Das stimmt!
 julia:Krisopolis ist wirklich eine einzigartige Stadt.
 julia:In anderen Städten habe ich mich im Dunkeln nicht immer wohl gefühlt. Da sind oft nur die Straßen ausgeleuchtet und die Gehwege sind dunkel.
 julia:Man könnte ja meinen, dass Krisopolis noch schlimmer ist - mit all den Stromausfällen.
-julia:Aber hier nehmen die Menschen viel aktiver an der Stadtgestaltung teil. Und reden auch viel mehr miteinander. Hier gibt es keine gruseligen Ecken, die Frauen meiden sollten.
+julia:Aber hier nehmen die Menschen viel aktiver an der Stadtgestaltung teil. In Krisopolis gibt es keine gruseligen Ecken, die ich als Frau meiden sollte.
 julia:Die Laternen haben alle Notstromversorgung. Wenn ich vom Fitnesscenter nach Hause gehe, leuchten die immer.
 julia:Ich würde nirgendwo sonst leben wollen, Krisen hin oder her.

@@ -13,7 +13,7 @@ elias:Hi.
 elias:Brauchen Sie was?
 [Choice]
 - [no_time] Nein, lass uns reden!
-- [trade] Handeln.
+- [trade] Ja, lass uns handeln.
 - [stop] Nö.
 
 [[Node]] no_time
@@ -28,7 +28,7 @@ elias:Sorry.
 elias:Brauchen Sie was?
 [Choice]
 - [talk] Nein, lass uns reden!
-- [trade] Handeln.
+- [trade] Ja, lass uns handeln.
 - [stop] Nö.
 
 [[Node]] stop
@@ -151,7 +151,7 @@ elias:Angebellt hat er mich auch noch. Nicht zu fassen, sowas.
 [actors] avatar elias.flipped
 [text]
 elias:Ich hab nen Kundentermin verpasst.
-elias:Der Termin war in meinem Kalender, aber ich hab keine Erinnerung bekommen. Auf voice assistants ist auch kein Verlass.
+elias:Der Termin war in meinem Kalender, aber ich hab keine Erinnerung bekommen. Auf Voice Assistants ist auch kein Verlass.
 elias:Wie soll ich denn so arbeiten? Ich hab doch keine Zeit, ständig meinen Kalender zu prüfen, welche Termine ich hab.
 elias:Wenn der Kunde wenigstens so intelligent gewesen wäre, mich anzurufen. Aber nein.
 elias:Er hat nur ne Mail geschickt. Als ob ich es mir leisten könnte, auf alle Notifications zu reagieren.
@@ -207,7 +207,7 @@ elias:Wenn du mit 100 Leuten redest, kriegst du einen neuen Kontakt. Reine Stati
 [match] @talked_of_veronika
 - [false] [jump] set_talked_veronika
 - [true] [text]
-	elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder.
+	elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder?
 	elias:Dafür ist das Essen gut.
 [Comment]
 	[if] eq_bool(@talked_of_veronika, false)
@@ -219,7 +219,7 @@ elias:Wenn du mit 100 Leuten redest, kriegst du einen neuen Kontakt. Reine Stati
 			[set] @talked_of_veronika true
 		[else]
 			[text]
-			elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder.
+			elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder?
 			elias:Dafür ist das Essen gut.
 
 [[Node]] set_talked_veronika

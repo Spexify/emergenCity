@@ -2,10 +2,8 @@
 [actors] avatar kris.flipped
 [text]
 kris:Oh, hey!
-kris:Was geht?
-[Choice]
-- [talk3] Was geht?
-- [stop] Man sieht sich!
+avatar:Was geht?
+[jump] talk
 
 [[Node]] talk
 [random]
@@ -43,7 +41,7 @@ kris:Achja. Na gut. Dann nächstes Mal.
 [[Node]] talk2
 [actors] avatar kris.flipped
 [text]
-kris:Vero plant schon unseren nächsten Camping-Trip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.
+kris:Vero plant schon unseren nächsten Campingtrip. Ich hoffe, sie plant nicht zu viele Urlaubstage komplett durch.
 kris:Versteh mich nicht falsch: Ich finde es toll, dass sie immer den Überblick hat und ich mich um nichts kümmern muss.
 kris:Aber manchmal will ich auch einfach in die Natur wandern, ohne einen Plan für den Tag. Verstehst du?
 [Choice]
@@ -61,7 +59,7 @@ kris:Mal sehen, was wir dieses Mal finden!
 [[Node]] no
 [actors] avatar kris.flipped
 [text]
-avatar:Nur in den Tag hinein leben funktioniert auch nicht."
+avatar:Nur in den Tag hinein leben funktioniert auch nicht.
 [actors] avatar kris
 [text]
 kris:Ja, das stimmt natürlich ...
@@ -193,7 +191,8 @@ veronika:...
 [text]
 veronika:Danke!
 kris:Das tu ich ja auch. Sowas ist ärgerlich. Aber dann ärgert man sich eben kurz, entschuldigt sich und dann passt das doch auch, wenns nicht weiter schlimm ist.
-kris:Ist doch viel schlimmer, wenn ich den ganzen Ärger in mir aufstaue. Dann bin ich nur noch damit beschäftigt, den Deckel draufzuhalten, und kann mich nicht mehr auf das Meeting konzentrieren.
+kris:Ist doch viel schlimmer, wenn ich den ganzen Ärger in mir aufstaue.
+kris:Dann bin ich nur noch damit beschäftigt, den Deckel draufzuhalten, und kann mich nicht mehr auf das Meeting konzentrieren.
 veronika:...
 veronika:Manchmal hasse ich es, wenn du Recht hast ...
 kris:Na also. So gefällst du mir besser.
@@ -235,7 +234,7 @@ kris:Die Natur ist wunderbar.
 [[Node]] talk7
 [actors] avatar kris.flipped
 [text]
-kris:Ich bin froh, dass ich beim kellnern immer in Bewegung bin. So wie Vero ständig vorm Computer hocken, das wär nichts für mich.
+kris:Ich bin froh, dass ich beim Kellnern immer in Bewegung bin. So wie Vero ständig vorm Computer hocken, das wär nichts für mich.
 kris:Je mehr ich draußen und in Bewegung bin, desto besser fühle ich mich.
 [Choice]
 - [outside_meh] Ist bei mir anders.
@@ -255,7 +254,7 @@ kris:Ich wusste, wir verstehen uns.
 [actors] avatar kris.flipped
 [text]
 kris:Kinder lernen heutzutage kaum noch was über die Natur. Das ist richtig schade.
-kris:Ich hab schon ein paarmal als Wanderführer mit der Grundschule Ausflüge organisiert.
+kris:Ich hab schon ein paar Mal als Wanderführer mit der Grundschule Ausflüge organisiert.
 kris:Von sowas sollte es viel mehr geben. Leider sind es nur die interessierten Lehrer, die sich darauf einlassen.
 kris:Viel zu viele Leute sind heute viel zu überarbeitet. Da geht so viel Magie verloren.
 [match] eq_int(randomize(1, 3), 1)

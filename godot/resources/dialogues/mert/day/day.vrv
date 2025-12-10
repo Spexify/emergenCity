@@ -2,9 +2,8 @@
 [actors] avatar mert.flipped
 [text]
 mert:Hey Kumpel! Alles klar bei dir?
-[Choice]
-- [talk] Ja, wie läuft's bei dir?
-- [stop] Ich muss los!
+avatar:Ja, wie läuft's bei dir?
+[jump] talk
 
 [[Node]] talk
 [random]
@@ -69,7 +68,7 @@ mert:Ich mach mir ein bisschen Sorgen um Momo.
 mert:Sie mag ihre Zeiten und ich kann sie manchmal nicht rechtzeitig füttern, weil ich beim Einsatz bin.
 mert:Hab schon ne Futtermaschine versucht, aber sie hat sie aufgekriegt und sich vollgefressen.
 mert:Jetzt kommt Irena vorbei, um sie zu füttern. Eigentlich ist sie auch ganz vorsichtig mit Momo.
-mert:Aber ich glaub Momo mag es nicht, wenn wer anders hier ist, aber ich nicht.
+mert:Aber ich glaub, Momo mag es nicht, wenn wer anders hier ist, aber ich nicht.
 avatar:Sie gewöhnt sich sicher daran.
 mert:Das hoff ich auch!
 
@@ -132,7 +131,7 @@ avatar:Was?
 [[Node]] talk6
 [actors] avatar mert.flipped
 [text]
-mert:Manchmal, wenn ich allein zuhause bin, überfällt mich diese trübe Stimmung.
+mert:Manchmal, wenn ich allein zu Hause bin, überfällt mich diese trübe Stimmung.
 mert:Dann kommt Momo zu mir und tröstet mich.
 mert:Und dann merke ich, dass alles gar nicht so schlimm ist.
 mert:Sie ist großartig!
@@ -140,7 +139,7 @@ mert:Sie ist großartig!
 [[Node]] talk7
 [actors] avatar mert.flipped
 [text]
-mert:Ich denke über alte Zeiten nach. Ich war je früher auf dem Bau. Da hab ich schon so manches gelernt was bei Krisen und bei meiner Arbeit beim THW hilft.
+mert:Ich denke über alte Zeiten nach. Ich war ja früher auf dem Bau. Da hab ich schon so manches gelernt was bei Krisen und bei meiner Arbeit beim THW hilft.
 [random]
 - [jump] bau_starkregen
 - [jump] bau_erdbeben
@@ -153,6 +152,7 @@ mert:Ich denke über alte Zeiten nach. Ich war je früher auf dem Bau. Da hab ic
 [text]
 mert:Die Häuser in Krisopolis haben alle einen Rückstauverschluss, damit das Abwasser bei Starkregen nicht zurück in die Häuser laufen kann.
 mert:Das war eine Schweinerei, als es das noch nicht gab!
+[action] add_score("tip", {"source": "mert1"})
 
 [[Node]] bau_hochwasser
 [Condition] crisis_is("Hochwasser")
@@ -169,6 +169,7 @@ mert:Hochwasser ist so ne Sache. Da haben modernere Gebäude tatsächlich einen 
 mert:Wenn der Keller zu gut abgedichtet ist, kann das Grundwasser von außen die Wände zusammendrücken und das Haus einstürzen.
 mert:Deshalb heißt es bei Hochwasser immer, Sandsäcke schleppen, für den Gegendruck.
 mert:Wenns gar nicht anders geht, müssen wir selbst den Keller fluten.
+[action] add_score("tip", {"source": "mert2"})
 
 [[Node]] nicht_nachfragen_hochwasser
 [actors] avatar mert.flipped
@@ -195,7 +196,9 @@ avatar:Das stimmt.
 mert:Manchmal ist es auch einfach beruhigend zu wissen, was alles getan wird.
 mert:Krisopolis ist zum Beispiel gut gegen Erdbeben gewappnet. Die Gebäude haben alle Stahlbetonrahmen für Wände, Fenster und Türen.
 mert:Wände sind ja an sich sehr stabil, nur die Öffnungen machen sie anfällig. Da hilft der Stahlbeton.
-mert:Weicher oder sandiger Boden ist natürlich noch ein Problem, da können Gebäude kippen oder absinken. Aber den gibts eigentlich nur am Ufer der Riskana und das ist kaum bebaut.
+mert:Weicher oder sandiger Boden ist natürlich noch ein Problem, da können Gebäude kippen oder absinken.
+mert:Aber sandigen Boden gibts eigentlich nur am Ufer der Riskana und das ist kaum bebaut.
+[action] add_score("tip", {"source": "mert3"})
 
 [[Node]] bau_sensoren
 [actors] avatar mert.flipped
@@ -204,6 +207,7 @@ mert:In Krisopolis gibt es ne Menge Sensoren, damit wir frühzeitig vor Krisen g
 mert:Die messen Wind, Temperatur, Feuchtigkeit, Luftdruck, Wasserstand der Riskana und sogar die Stabilität von Brücken und öffentlichen Gebäuden.
 mert:Wenn man die Daten alle zusammennimmt und die Daten anderer Gebiete noch mit reinnimmt, kann man erstaunlich gute Vorhersagen machen.
 mert:Manchmal allerdings nur ganz knapp im Voraus, weil es zu viele Möglichkeiten gibt, in welche Richtung es geht.
+[action] add_score("tip", {"source": "mert4"})
 
 [[Node]] talk8
 [actors] avatar mert.flipped
@@ -217,10 +221,11 @@ mert:Nett, dass du fragst. Mir gehts gut, aber du siehst gestresst aus?
 [actors] avatar mert.flipped
 [text]
 avatar:So eine Krise bringt einem den Alltag durcheinander. Das ist schon anstrengend.
-mert:Da hast du Recht. Viele von uns haben inzwischen so eine Art Krisenalltag. Das macht es leichter.
+mert:Da hast du recht. Viele von uns haben inzwischen so eine Art Krisenalltag. Das macht es leichter.
 mert:Wenn du Krisopolis erstmal gut kennst, geht es dir bald genauso.
 mert:Dann weiß man auch, wen man fragen kann, wenn das Tofu ausgegangen ist.
 avatar:Guter Tipp, danke.
+[action] add_score("tip", {"source": "mert5"})
 
 [[Node]] schon
 [actors] avatar mert.flipped
@@ -260,5 +265,5 @@ mert:Es kann schnell gruselig werden, wenn Krisen wichtige Infrastruktur treffen
 mert:Stell dir vor, du hast eine wichtige Behandlung, und sie kann nicht durchgeführt werden, weil die Geräte nicht laufen.
 mert:Je nach Situation kann man Behandlungen gar nicht folgenlos verschieben.
 mert:Oder stell dir vor, eine OP muss abgebrochen werden. Das kann lebensgefährlich sein.
-mert:Tut mir Leid, ich grüble schon wieder. Zum Glück hat das Krankenhaus in Krisopolis eine gute Notstromversorgung.
+mert:Tut mir leid, ich grüble schon wieder. Zum Glück hat das Krankenhaus in Krisopolis eine gute Notstromversorgung.
 

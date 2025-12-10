@@ -1,12 +1,8 @@
 [[Node]] start
 [actors] agathe avatar.flipped
-[text]
-agathe:Oh toll, endlich wieder Besuch!
-agathe:Bist du zum Tauschen hier?
-[Choice]
-- [talk] Nein, lass uns reden!
-- [trade] Handeln.
-- [stop] Nichts dergleichen.
+agathe:Oh, endlich wieder Besuch!
+avatar:Ich komme vorbei, um ein bisschen zu plaudern.
+[jump] talk
 
 [[Node]] talk
 [random]
@@ -70,15 +66,15 @@ agathe:Und da alle Pflanzen gut überlebt haben, darf ich sie beim nächsten Url
 agathe:Wie reizend! Gestern war meine Nichte hier, kennst du sie eigentlich?
 agathe:Nein, noch nicht.
 agathe:Schade. Sie ist auch immer sehr beschäftigt.
-agathe:Ich weiß gar nicht, wie sie das macht. Arbeit und drei Kinder.
-agathe:Mir war damals schon ein Mann zu viel. Die Arbeit hat mich so eingenommen.
+agathe:Ich weiß gar nicht, wie sie das macht. Mit ihrer Arbeit und den drei Kindern ...
+agathe:Mir war damals schon eine Beziehung zu viel. Die Arbeit hat mich so eingenommen.
 agathe:Aber inzwischen sind die Zeiten ja andere.
 
 [[Node]] talk5
 [actors] agathe avatar.flipped
 [text]
 agathe:Wie reizend, dass du dir Zeit für deine Mitmenschen nimmst.
-agathe:Wenn ich da an mich zurückdenke... Ich hatte immer nur meine Karriere im Kopf.
+agathe:Wenn ich da an mich zurückdenke ... Ich hatte immer nur meine Karriere im Kopf.
 agathe:Ganz wie Elias, fürchte ich. Kennst du Elias?
 [Choice]
 - [EliasBekannt] Ich kenne ihn.
@@ -86,28 +82,22 @@ agathe:Ganz wie Elias, fürchte ich. Kennst du Elias?
 
 [[Node]] EliasBekannt
 [actors] agathe avatar.flipped
-[jump] EliasWeiter
+agathe:Er wohnt in meiner alten Wohnung.
+agathe:Es ist eine sehr schöne Wohnung. Nun ja, zumindest war sie das zu meiner Zeit.
+agathe:Diese moderne Einrichtung von Elias ... Hast du seine Couch gesehen? Das ist ein Albtraum von einem Möbelstück!
+agathe:Der Anblick hat mich von allen Sentimentalitäten geheilt.
 
 [[Node]] EliasNichtBekannt
 [actors] agathe avatar.flipped
 [text]
-agathe:Das ist genau, was ich meine. Keine Zeit für niemanden.
-[jump] EliasWeiter
-
-[[Node]] EliasWeiter
-[actors] agathe avatar.flipped
-[text]
-agathe:Er wohnt in meiner alten Wohnung.
-agathe:Sehr schöne Wohnung. Zumindest war sie das zu meiner Zeit.
-agathe:Diese moderne Einrichtung von Elias... Hast du diese Couch gesehen? Ein Albtraum!
-agathe:Hat mich von allen Sentimentalitäten geheilt.
+agathe:Das ist genau, was ich meine. Er hat einfach keine Zeit für niemanden.
 
 [[Node]] talk6
 [actors] agathe avatar.flipped
 [text]
 agathe:Wie schön! Manchmal denke ich doch noch an meine alte Wohnung zurück.
-agathe:Mitten unter Menschen, weit weg von meiner Arbeit. Aber der Kopf war immer bei der Arbeit.
-agathe:Heute schaut mein Fenster raus aufs Industriegebiet. Ganz hinten kann man die Schornsteine der Fabrik sehen.
+agathe:Sie lag in der Innenstadt, mitten unter Menschen und weit weg von meiner Arbeit. Aber mit dem Kopf war ich immer bei der Arbeit.
+agathe:Heute schaue ich durch mein Fenster direkt auf das Industriegebiet. Dort hinten kannst du die Schornsteine der Fabrik sehen.
 agathe:Aber jetzt genieße ich es, mich mit meinen Nachbarn zu unterhalten.
 [random]
 - [jump] dialog6Mood1
@@ -118,19 +108,19 @@ agathe:Aber jetzt genieße ich es, mich mit meinen Nachbarn zu unterhalten.
 [Condition] npc_is_happy("agathe")
 [actors] agathe avatar.flipped
 [text]
-agathe:Und denke sogar über ein Haustier nach. Wer hätte das gedacht?
+agathe:Ich denke sogar über ein Haustier nach. Wer hätte das gedacht?
 
 [[Node]] dialog6Mood2
 [Condition] and_bool(not_bool(npc_is_happy("agathe")), not_bool(npc_is_sad("agathe")))
 [actors] agathe avatar.flipped
 [text]
-agathe:Seltsam, nicht wahr? Aber so ist das Leben manchmal.
+agathe:Das ist seltsam, nicht wahr? Aber so ist das Leben.
 
 [[Node]] dialog6Mood3
 [Condition] npc_is_sad("agathe")
 [actors] agathe avatar.flipped
 [text]
-agathe:Es kommt mir vor, als hätte ich all die Zeit zuvor vergeudet...
+agathe:Es kommt mir vor, als hätte ich all die Zeit zuvor vergeudet ...
 
 [[Node]] talk7
 [actors] agathe avatar.flipped
@@ -145,8 +135,8 @@ agathe:Als ich jung war, wollte ich hier weg. Aber anderswo wurde es mir schnell
 [Condition] is_state_by_name_str("ElectricityState.NONE")
 [actors] agathe avatar.flipped
 [text]
-agathe:Wie reizend! Ich bin auch gleich mit Kris und Veronika verabredet.
-agathe:Ich leihe mir nämlich immer ihren Campingkocher aus, wenn der Strom ausgefallen ist.
+agathe:Wie reizend! Ich bin gleich mit Kris und Veronika verabredet.
+agathe:Ich leihe mir immer ihren Campingkocher aus, wenn der Strom ausgefallen ist.
 agathe:Es ist zwar etwas mühsamer, auf dem Balkon zu kochen, aber ich koche so gerne.
 [random]
 - [jump] MarmeladeFuerAvatar
@@ -157,7 +147,7 @@ agathe:Es ist zwar etwas mühsamer, auf dem Balkon zu kochen, aber ich koche so 
 [actors] agathe avatar.flipped
 [text]
 agathe:Ganz besonders Marmelade.
-agathe:Ich bring dir mal ein Glas vorbei.
+agathe:Ich bringe dir mal ein Glas vorbei.
 avatar:Oh ja, gerne!
 
 [[Node]] ChemieUndKochen
@@ -171,23 +161,22 @@ agathe:Vielleicht bin ich deshalb in die Chemie gegangen.
 agathe:Wie reizend! Ich habe eben in einem alten Fotobuch geblättert.
 agathe:Veronika möchte ein paar meiner Bilder für ihr Buch verwenden.
 [Choice]
-- [FotosTeilenSuper] Super!
-- [FotosTeilenMeh] Okay ...
+- [FotosTeilenSuper] Das ist ja toll!
+- [FotosTeilenMeh] Wirklich?
 
 [[Node]] FotosTeilenSuper
 [actors] agathe avatar.flipped
 [text]
-avatar:Das ist ja toll!
-agathe:Ja, nicht wahr? Dabei war ich immer nur Amateur.
+agathe:Ja, nicht wahr? Dabei war ich immer nur ein Amateur.
 agathe:Ein Nachbar hatte damals eine Dunkelkammer.
-agathe:Er hat mir gezeigt, wie man Fotos entwickelt. Da war ich noch ein Kind.
+agathe:Er hat mir gezeigt, wie man Fotos entwickelt. Damals war ich noch ein Kind.
 
 [[Node]] FotosTeilenMeh
 [actors] agathe avatar.flipped
 [text]
-avatar:Ja, ich weiß, ich bin nur Amateur.
+agathe:Ja, ich weiß, ich bin nur ein Amateur.
 agathe:Ich habe die Alben ja nur, weil es mir so einen Spaß gemacht hat, die Fotos zu entwickeln.
-agathe:Und der Erinnerungen wegen...
+agathe:Und der Erinnerungen wegen ...
 
 [[Node]] talk10
 [actors] agathe avatar.flipped
@@ -200,13 +189,14 @@ agathe:Wie reizend! Hast du dich gut eingelebt in Krisopolis?
 [[Node]] EingelebtJa
 [actors] agathe avatar.flipped
 [text]
-agathe:Ja, nicht wahr?
-agathe:Es freut mich, dass du das auch so siehst.
+agathe:Ja, nicht wahr? Es freut mich, dass du das auch so siehst.
+[jump] EingelebtWeiter
 
 [[Node]] EingelebtNein
 [actors] agathe avatar.flipped
 [text]
 agathe:Ich verstehe, was du meinst.
+[jump] EingelebtWeiter
 
 [[Node]] EingelebtWeiter
 [actors] agathe avatar.flipped
@@ -231,7 +221,7 @@ agathe:Oh, wirklich? Wie schade.
 [[Node]] Flut1977Nein
 [actors] agathe avatar.flipped
 [text]
-agathe:Das war ein Jahr! Die Riskana tritt ja häufiger über die Ufer, aber damals...
+agathe:Das war ein Jahr! Die Riskana tritt ja häufiger über die Ufer, aber damals ...
 agathe:Wir sind mit Booten durch die Straßen gefahren. Wie in Venedig!
 [random]
 - [jump] dialogFlutMood1
@@ -242,73 +232,82 @@ agathe:Wir sind mit Booten durch die Straßen gefahren. Wie in Venedig!
 [Condition] npc_is_sad("agathe")
 [actors] agathe avatar.flipped
 [text]
-agathe:Meine Eltern haben mich damals gefragt, ob ich ihr Haus übernehmen will.
+agathe:Meine Eltern haben mich damals gefragt, ob ich ihr Haus später übernehmen will.
 agathe:Keller, Erdgeschoss, alles war hinüber.
-agathe:Als ich ablehnte, sind sie umgezogen. Renovieren war ihnen zu viel Arbeit.
-agathe:Schade eigentlich.
+agathe:Ich habe abgelehnt und sie sind umgezogen. Renovieren war ihnen zu viel Arbeit.
+agathe:Eigentlich schade um das Haus.
 
 [[Node]] dialogFlutMood2
 [Condition] and_bool(not_bool(npc_is_happy("agathe")), not_bool(npc_is_sad("agathe")))
 [actors] agathe avatar.flipped
 [text]
-agathe:Wir waren tagelang ohne sauberes Trinkwasser.
-agathe:Alle Vorräte im Keller vernichtet.
-agathe:Das ist etwas, was ich damals gelernt habe. Hier oben sind immer Notfallvorräte.
+agathe:Wir hatten tagelang kein sauberes Trinkwasser.
+agathe:Alle Vorräte im Keller waren vernichtet.
+agathe:Das ist etwas, was ich damals gelernt habe. Hier oben habe ich immer Notfallvorräte.
+agathe:Das kann ich dir auch nur ans Herz legen. Ein Notfallvorrat an Nahrung und Wasser in der Wohnung, nicht nur im Keller, ist Gold wert!
+avatar:Danke für den Tipp!
+[action] add_score("tip", {"source": "agathe1"})
 
 [[Node]] dialogFlutMood1
 [Condition] npc_is_happy("agathe")
 [actors] agathe avatar.flipped
 [text]
 agathe:Ich habe noch im Kopf, wie mein Bruder sich im Boot aufstellte und anfing zu singen.
-agathe:Oh, süße Krisopolis, du Stadt meiner Jugend.
-agathe:Bei dir zu verweilen, das wär meine Tugend.
-agathe:Hauch deiner Sirenen in der Nacht.
-agathe:Donnernde Küsse, Häuser in Feuerspracht.
-agathe:Doch ich, ich hab mich davon gemacht.
-agathe:Keine Liebe mehr an dich verschwendet.
-agathe:Mit deiner Tränenflut hast du es nun beendet.
-agathe:Zu schade, dass mein Bruder keinen Fuß mehr in die Stadt setzt.
+agathe:'Oh, süße Krisopolis, du Stadt meiner Jugend. Bei dir zu verweilen, das wär meine Tugend.'
+agathe:'Hauch deiner Sirenen in der Nacht. Donnernde Küsse, Häuser in Feuerspracht.'
+agathe:'Doch ich, ich hab mich davon gemacht.'
+agathe:'Keine Liebe mehr an dich verschwendet. Mit deiner Tränenflut hast du es nun beendet.'
+agathe:Zu schade, dass mein Bruder keinen Fuß mehr in die Stadt setzt ...
 
 [[Node]] talk12
 [actors] agathe avatar.flipped
 [text]
 agathe:Wie reizend! Wusstest du, dass Waldbrände früher selten waren?
-agathe:Wir hatten ja alles. Hochwasser, Dürre, Sturm, Erdbeben, Unfälle, Häuserbränder... ja, die schon.
-agathe:Aber ich habe nur einen einzigen Waldbrand erlebt - in meinen ersten sechzig Lebensjahren.
-agathe:Seitdem waren es drei oder vier. Ich erinnere mich nicht genau.
-agathe:Die Dürren heute sind schlimmer als damals. Und der Wald ist trockener.
-agathe:Den letzten schlimmen Brand hat ein Zigarettenstummel ausgelöst. Furchtbar!
+agathe:Wir hatten sonst fast alles. Hochwasser, Dürre, Sturm, Erdbeben, Unfälle ...
+agathe:Es gab auch Häuserbrände. Aber in meinen ersten sechzig Lebensjahren habe ich nur einen einzigen Waldbrand erlebt.
+agathe:Seitdem gab es drei Waldbrände! Oder waren es vier? Ich erinnere mich nicht genau, wie viele es waren. Aber deutlich mehr waren es.
+agathe:Die Dürren heute sind schlimmer als damals und der Wald ist trockener.
+agathe:Den letzten schlimmen Brand hat ein Zigarettenstummel ausgelöst. Furchtbar, so etwas!
+avatar:Das stimmt.
 
 [[Node]] talk13
 [actors] agathe avatar.flipped
 [text]
-agathe:Wie reizend! Es gibt so einiges, was man sich angewöhnt, wenn man hier wohnt.
-agathe:Andernorts schauen einen die Leute immer komisch an.
+agathe:Wie reizend! Es gibt so einiges, an das man sich gewöhnt, wenn man hier wohnt. Andernorts schauen einen die Leute oft so seltsam an.
 agathe:Wenn man bei Sturm sofort rausgeht und die Sachen auf dem Balkon befestigt, zum Beispiel.
-agathe:Und dann passiert etwas und plötzlich wird man ganz anders angeschaut.
-agathe:Und die Leute fangen an zu fragen.
-agathe:So ist das wohl. Man kocht mit den Zutaten, die man kennt.
-agathe:Ich bin froh, dass ich weiß, was ich tun muss - egal was passiert.
+agathe:Aber wenn dann etwas passiert, schauen einen die Leute plötzlich ganz anders an. Meistens kommen dann die Fragen ...
+agathe:Nun, so ist das wohl. Man kocht mit den Zutaten, die man kennt.
+agathe:Ich bin froh, dass ich weiß, was ich tun muss - egal, was passiert.
 
 [[Node]] talk14
 [actors] agathe avatar.flipped
 [text]
-agathe:Wie schön! Früher bin ich immer in den Supermarkt gegangen.
-agathe:Heute bin ich froh, dass wir den Marktplatz haben.
+agathe:Wie schön! Früher bin ich immer in den Supermarkt gegangen. Heute bin ich froh, dass wir den Marktplatz haben.
 agathe:Das Essen von dort schmeckt einfach viel besser.
 agathe:Noch besser ist es natürlich, wenn man es selbst anbaut.
-agathe:Kennst du Gerhard? Er baut ganz viel Obst und Gemüse an.
+[random]
+- [jump] kris_tomaten
+- [jump] gerhard_alles
+
+[[Node]] kris_tomaten
+[actors] agathe avatar.flipped
+[text]
+agathe:Kris gibt mir manchmal Tomaten ab. Herrliche kleine Dinger! Aber die Chilis sind mir zu scharf.
+
+[[Node]] gerhard_alles
+[actors] agathe avatar.flipped
+[text]
+agathe:Kennst du Gerhard? Er baut viel Obst und Gemüse an.
 agathe:Leider ist er so zurückhaltend. Er sieht mich kaum an, wenn ich mit ihm spreche.
 
 [[Node]] talk15
 [actors] agathe avatar.flipped
 [text]
-agathe:Wie schön! Ich koche ja wirklich gerne. Aber ohne Internet.
-agathe:Wenn ich da über Nährstoffverluste und so einen Quatsch lese, das verdirbt mir die Laune.
-agathe:Als ob wir heutzutage nicht schon überversorgt wären.
-agathe:Mit Nährstoffen und Stress.
-agathe:Wer hat denn schon die Zeit, alles von Grund auf zuzubereiten?
-agathe:Nein, den Stress spare ich mir.
+agathe:Wie schön! Ich koche ja wirklich gerne, aber ohne Internet.
+agathe:Wenn ich da über Nährstoffverluste und so einen Unsinn lese, verdirbt mir das die Laune.
+agathe:Die tun so, als ob wir heutzutage nicht schon überversorgt wären. Mit Nährstoffen und Stress.
+agathe:Wer hat denn schon die Zeit, alles aus rohen Zutaten zuzubereiten?
+agathe:Den Stress spare ich mir lieber.
 
 [[Node]] trade
 [action] request_trade_gui("agathe")
