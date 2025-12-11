@@ -61,8 +61,15 @@ func open() -> void:
 	opened.emit()
 	
 func close() -> void:
-	self.hide()
-	closed.emit(self)
+	if off.visible or active_app == null:
+		self.hide()
+		closed.emit(self)
+		return
+	
+	if active_app != null and active_app.back():
+		active_app.hide()
+		active_app = null
+		menu.show()
 	
 func restart() -> void:
 	if active_app != null:
@@ -90,14 +97,7 @@ func _on_open_app(app_name : String) -> void:
 			
 
 func _on_back_button_pressed() -> void:
-	if off.visible or active_app == null:
-		close()
-		return
-	
-	if active_app != null and active_app.back():
-		active_app.hide()
-		active_app = null
-		menu.show()
+	close()
 
 ###########################################SAVE/LOAD################################################
 

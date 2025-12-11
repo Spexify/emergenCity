@@ -1,8 +1,11 @@
+@abstract
 extends Control
 class_name EMC_GUI
 
 signal opened
 signal closed(gui : EMC_GUI)
+
+@abstract func close() -> void
 
 #func _unhandled_input(event : InputEvent) -> void:
 	#if visible:

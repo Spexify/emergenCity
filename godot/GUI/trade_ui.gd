@@ -57,6 +57,7 @@ func open(npc : EMC_NPC) -> void:
 	_npc_descr = npc.npc_resource.get_comp(EMC_NPC_Descr)
 	
 	inventories.set_tab_title(1, _npc_descr.get_npc_name())
+	inventories.set_current_tab(1)
 	
 	_npc_inventory = _npc_trade.get_inventory()
 	trader_grid.set_inventory(_npc_inventory)
@@ -76,6 +77,9 @@ func open(npc : EMC_NPC) -> void:
 	opened.emit()
 	
 func close() -> void:
+	if not _sell_items.is_empty() or not _buy_items.is_empty():
+		_on_cancel_pressed()
+	
 	hide()
 	closed.emit(self)
 

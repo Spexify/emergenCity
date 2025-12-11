@@ -41,7 +41,7 @@ func set_item(p_item : EMC_Item) -> void:
 		load_texture()
 
 func has_item() -> bool:
-	return item.get_id() != EMC_Item.IDs.DUMMY
+	return item != null and item.get_id() != EMC_Item.IDs.DUMMY
 
 func is_item(p_item: EMC_Item) -> bool:
 	return item == p_item

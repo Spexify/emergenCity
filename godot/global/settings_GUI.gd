@@ -136,4 +136,4 @@ func _on_vibrate_pressed() -> void:
 
 
 func _on_info_pressed() -> void:
-	tooltip_gui.open("Godot version 4.4.1\nGame Version 0.4.1")
+	tooltip_gui.open("Godot version 4.4.1\nGame Version 0.4.2")

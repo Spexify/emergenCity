@@ -182,6 +182,15 @@ func _on_un_equip_btn_pressed() -> void:
 	_last_clicked_upgrade = null
 	_clicked_slot = null
 
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if upgrade_info_gui.visible:
+			upgrade_info_gui.close()
+		elif tutorial.visible:
+			_on_tu_back_pressed()
+		else:
+			_on_main_menu_btn_pressed()
+
 func _on_main_menu_btn_pressed() -> void:
 	Global.session["upgrades"] = _equipped_upgrades
 	#OverworldStatesMngr.set_upgrades(_equipped_upgrades)

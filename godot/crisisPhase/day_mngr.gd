@@ -6,6 +6,7 @@ class_name EMC_DayMngr
 ## [EMC_GUI] stroed in [member EMC_Action.type_ui].
 
 signal period_increased(new_value : int)
+signal animation_end
 
 ## Enum describing the periods of a Day.
 enum DayPeriod {
@@ -87,9 +88,6 @@ func _advance_time(delta: float) -> void:
 	var tmp := get_current_day_period()
 	self._time += int(delta)
 	
-	# per time step update
-	_avatar.advance_time(delta)
-	
 	# per day update
 	if self._time >= TIME_PRE_DAY:
 		
@@ -97,8 +95,12 @@ func _advance_time(delta: float) -> void:
 		self._time = 0
 		_update_HUD()
 	
+	# per time step update
+	_avatar.advance_time(delta)
+	if tmp == get_current_day_period():
+		_gui_mngr.queue_gui("ActionAnimation", [animation_end])
 	# per period update
-	if tmp != get_current_day_period():
+	else:
 		var closed : Signal = _gui_mngr.queue_gui("DayPeriodTransition", [get_current_day(), get_current_day_period(), false, _callback])
 		
 		#if get_current_day_period() == DayPeriod.MORNING:
@@ -114,8 +116,9 @@ func _advance_time(delta: float) -> void:
 		OverworldStatesMngr.next_day(get_period_count())
 		
 		# To time stage change with animation
-		await Global.get_tree().create_timer(0.3).timeout
 		period_increased.emit(get_period_count())
+		await Global.get_tree().create_timer(0.3).timeout
+		animation_end.emit()
 
 
 func _callback() -> void:

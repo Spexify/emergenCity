@@ -20,11 +20,14 @@ func _on_get_water_btn_pressed() -> void:
 			rich_text_label.text = "In der Regentonne sind [color=#7bb0df]" + str(float(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL)) / 4) + "l Wasser[/color]."
 
 func _on_done_btn_pressed() -> void:
-	hide() # Replace with function body.
-	closed.emit(self)
+	close()
 
 func open() -> void:
 	rich_text_label.text = "In der Regentonne sind [color=#7bb0df]" + str(float(OverworldStatesMngr.get_furniture_state(EMC_Upgrade.IDs.RAINWATER_BARREL)) / 4) + "l Wasser[/color]."
 	#$SFX/OpenGUISFX.play()
 	show()
 	opened.emit()
+
+func close() -> void:
+	hide()
+	closed.emit(self)

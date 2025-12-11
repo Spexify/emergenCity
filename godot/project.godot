@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Krisopolis"
 run/main_scene="res://global/entry.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://assets/app_icon/app_icon.svg"

@@ -140,6 +140,107 @@
 			"following": [
 				"1.Hochwasser.1"
 			]
+		},
+		"1.Riskana.0": {
+			"weight": 1,
+			"desc": "Der Pegel der Riskana hat die Meldestufe 2 erreicht und steigt weiter an.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Riskana.1",
+				"0.Riskana.2",
+				"0.Riskana.3",
+				"0.Riskana.4"
+			]
+		},
+		"1.Chemie.0": {
+			"weight": 1,
+			"desc": "In der Nähe von Krisopolis gab es einen Chemieunfall.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Chemie.1",
+				"0.Chemie.2"
+			]
+		},
+		"1.LKW.0": {
+			"difficulty": 0,
+			"weight": 1,
+			"desc": "Austritt von Gefahrstoffen nach Chemieunfall in der Industriestraße 34-40.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.LKW.1",
+				"0.LKW.2"
+			]
+		},
+		"1.Duerre.0": {
+			"weight": 1,
+			"desc": "Warnung vor anhaltender extremer Trockenheit.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Duerre.1"
+			]
+		},
+		"1.Sturmtief.0": {
+			"weight": 1,
+			"desc": "Warnung vor Sturm mit orkanartigen Böen.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Sturmtief.1",
+				"0.Sturmtief.2"
+			]
+		},
+		"1.Pandemie.0": {
+			"weight": 1,
+			"desc": "Warnung vor steigenden Fallzahlen von Infektionen mit den hochansteckenden Krisoviren in Krisopolis.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Pandemie.1",
+				"0.Pandemie.2"
+			]
+		},
+		"1.Starkregen.0": {
+			"weight": 1,
+			"desc": "Warnung vor lokalem extremen Niederschlag durch Tief Flutaris.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Starkregen.1",
+				"0.Starkregen.2",
+				"0.Starkregen.3",
+				"0.Starkregen.4"
+			]
+		},
+		"1.Waldbrand.0": {
+			"weight": 1,
+			"desc": "Warnung vor großflächigem Brand im Waldgebiet Gluthain.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Waldbrand.1",
+				"0.Waldbrand.2",
+				"0.Waldbrand.3"
+			]
 		}
 	},
 	"HARD": {
@@ -156,6 +257,107 @@
 				"0.Hochwasser.3",
 				"0.Hochwasser.4",
 				"1.Hochwasser.1"
+			]
+		},
+		"2.Riskana.0": {
+			"weight": 1,
+			"desc": "Der Pegel der Riskana hat die Meldestufe 2 erreicht und steigt weiter an.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Riskana.1",
+				"0.Riskana.2",
+				"0.Riskana.3",
+				"0.Riskana.4"
+			]
+		},
+		"2.Chemie.0": {
+			"weight": 1,
+			"desc": "In der Nähe von Krisopolis gab es einen Chemieunfall.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Chemie.1",
+				"0.Chemie.2"
+			]
+		},
+		"2.LKW.0": {
+			"difficulty": 0,
+			"weight": 1,
+			"desc": "Austritt von Gefahrstoffen nach Chemieunfall in der Industriestraße 34-40.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.LKW.1",
+				"0.LKW.2"
+			]
+		},
+		"2.Duerre.0": {
+			"weight": 1,
+			"desc": "Warnung vor anhaltender extremer Trockenheit.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Duerre.1"
+			]
+		},
+		"2.Sturmtief.0": {
+			"weight": 1,
+			"desc": "Warnung vor Sturm mit orkanartigen Böen.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Sturmtief.1",
+				"0.Sturmtief.2"
+			]
+		},
+		"2.Pandemie.0": {
+			"weight": 1,
+			"desc": "Warnung vor steigenden Fallzahlen von Infektionen mit den hochansteckenden Krisoviren in Krisopolis.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Pandemie.1",
+				"0.Pandemie.2"
+			]
+		},
+		"2.Starkregen.0": {
+			"weight": 1,
+			"desc": "Warnung vor lokalem extremen Niederschlag durch Tief Flutaris.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Starkregen.1",
+				"0.Starkregen.2",
+				"0.Starkregen.3",
+				"0.Starkregen.4"
+			]
+		},
+		"2.Waldbrand.0": {
+			"weight": 1,
+			"desc": "Warnung vor großflächigem Brand im Waldgebiet Gluthain.",
+			"fcount": [
+				1,
+				1
+			],
+			"following": [
+				"0.Waldbrand.1",
+				"0.Waldbrand.2",
+				"0.Waldbrand.3"
 			]
 		}
 	},

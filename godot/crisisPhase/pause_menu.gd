@@ -48,7 +48,7 @@ func _on_cancel_curr_crisis_pressed() -> void:
 	#Global.get_tree().paused = false
 	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.START)
-	await SoundMngr.play_slow_musik(1)
+	await SoundMngr.play_slow_musik(0.5)
 	Global.load_game()
 	Global.save_ani_canvas.hide()
 	Global.goto_scene(Global.MAIN_MENU_SCENE)
@@ -65,6 +65,5 @@ func _on_save_and_quit_pressed() -> void:
 func _on_save_pressed() -> void:
 	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.CRISIS)
-	await SoundMngr.close_game()
 	Global.save_ani_canvas.hide()
 	#SoundMngr.play_sound("stinger")

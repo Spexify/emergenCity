@@ -3,7 +3,7 @@ class_name EMC_ConfirmationGUI
 
 signal decided
 
-var _confirmed: bool
+var _confirmed: bool = false
 
 
 func _ready() -> void:
@@ -21,15 +21,15 @@ func open(p_question: String) -> bool:
 func close() -> void:
 	hide()
 	closed.emit(self)
+	decided.emit()
 
 
 func _on_confirmation_btn_pressed() -> void:
 	_confirmed = true
 	close()
-	decided.emit()
+	
 
 
 func _on_cancel_pressed() -> void:
 	_confirmed = false
 	close()
-	decided.emit()

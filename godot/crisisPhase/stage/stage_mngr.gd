@@ -53,13 +53,13 @@ func setup(p_opt_event_mngr: EMC_OptionalEventMngr) -> void:
 	_opt_event_mngr = p_opt_event_mngr
 
 	change_stage(_initial_stage_name, false)
-
-## Change the stage to the one specified via [param p_stage_name]
-## Wait: waits for the day transition to change_stage,
 ## if the stage change does not advance the day it should be set to false
 func change_stage(p_stage_name: String, wait : bool = true) -> void:
 	if wait:
-		await _day_mngr.period_increased
+		await _day_mngr.animation_end
+
+## Change the stage to the one specified via [param p_stage_name]
+## Wait: waits for the day transition to change_stage,
 		
 	unload_stage()
 	load_stage(p_stage_name)
@@ -133,15 +133,6 @@ func _unhandled_input(p_event: InputEvent) -> void:
 func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 	_last_click_position = Vector2.INF
 	_last_clicked_NPC = p_NPC
-	#var offset: Vector2 = Vector2.ZERO
-	#if _avatar.position[0] < p_NPC.position[0]: #X Pos Offset
-		#offset += Vector2(-50, 0)
-	#else:
-		#offset += Vector2(50, 0)
-	#if _avatar.position[1] < p_NPC.position[1]: #> Pos Offset
-		#offset += Vector2(0, -50)
-	#else:
-		#offset += Vector2(0, 50)
 		
 	var _target_pos := _curr_stage.get_avatar_target(p_NPC.position)
 	if _target_pos.is_finite():

@@ -106,30 +106,14 @@ func _add_balance(value : int) -> void:
 	label_ecoins.clear()
 	label_ecoins.append_text("[right][color=black]" + str(_balance) + "[/color][/right]")
 
-### Display information of clicked [EMC_Item]
-#func _display_info(sender: EMC_Item) -> void:
-	#
-	##Name of the item
-	#var label_name := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox/Name
-	#label_name.clear()
-	#label_name.append_text("[color=black]" + sender.get_name() + "[/color]")
-	#
-	##Components of item
-	#var comps := sender.get_comps()
-	#var comp_string: String = ""
-	#for comp in comps:
-		#comp_string += comp.get_colored_name_with_vals() + ", "
-	##Remove superfluous comma:
-	#comp_string = comp_string.left(comp_string.length() - 2)
-	#var label_comps := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox/Components
-	#label_comps.clear()
-	#label_comps.append_text("[color=black]" + comp_string + "[/color]")
-	#
-	##Description of item:
-	#var label_descr := $Background/Margin/Main/InventorySection/InventoryPanel/Margin/VBox/Description/VBox/Description
-	#label_descr.clear()
-	#label_descr.append_text("[color=black][i]" + sender.get_descr() + "[/i][/color]")
-
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if item_info_gui.visible:
+			item_info_gui.close()
+		elif tutorial.visible:
+			_on_tu_back_pressed()
+		else:
+			_on_cancel_pressed()
 
 func _on_home_pressed() -> void:
 	_tmp_inventory.sort_custom(EMC_Inventory.sort_by_id)

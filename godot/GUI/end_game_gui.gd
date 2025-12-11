@@ -161,8 +161,10 @@ func clear() -> void:
 
 ## closes summary end of day GUI/makes invisible
 func close() -> void:
-	hide()
-	closed.emit(self)
+	_on_main_menu_pressed()
+	
+	#hide()
+	#closed.emit(self)
 
 func _on_main_menu_pressed() -> void:
 	SoundMngr.play_slow_musik()

@@ -26,6 +26,7 @@ class_name  EMC_GUIMngr
 @onready var _trade_ui : EMC_TradeUI = $CL/Trade
 @onready var handy_gui : EMC_Handy = $CL/HandyGUI
 @onready var npc_interaction : EMC_Interaction_GUI = $CL/NpcInteraction
+@onready var action_animation: EMC_ActionAnimtion = $CL/ActionAnimation
 
 @onready var pause_menu_btn: TextureButton = $ButtonList/VBC/PauseMenuBtn
 @onready var backpack_btn: TextureButton = $ButtonList/VBC/BackpackBtn
@@ -61,9 +62,16 @@ func _ready() -> void:
 	all_the_guis.append(_trade_ui)
 	all_the_guis.append(handy_gui)
 	all_the_guis.append(npc_interaction)
+	all_the_guis.append(action_animation)
 	
 	_set_guis_process_mode(all_the_guis, PROCESS_MODE_DISABLED)
 	
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if is_any_gui():
+			close_current_gui()
+		else:
+			request_gui("PauseMenu", [])
 
 # Called when the node enters the scene tree for the first time.
 func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:

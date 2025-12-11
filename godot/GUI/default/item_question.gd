@@ -40,6 +40,9 @@ func open(p_item : EMC_Item, text : Dictionary = {}) -> void:
 	slot.set_item(_item)
 	
 func close() -> void:
+	if slot.has_item():
+		slot.remove_item()
+	
 	self.hide()
 	closed.emit(self)
 
