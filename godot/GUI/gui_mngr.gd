@@ -72,7 +72,10 @@ func _notification(what : int) -> void:
 			close_current_gui()
 		else:
 			request_gui("PauseMenu", [])
-
+	elif what == NOTIFICATION_APPLICATION_PAUSED:
+		close_current_gui()
+		request_gui("PauseMenu", [])
+		
 # Called when the node enters the scene tree for the first time.
 func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr) -> void:
 	_trade_ui.setup(p_backpack)

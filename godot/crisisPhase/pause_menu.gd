@@ -65,5 +65,6 @@ func _on_save_and_quit_pressed() -> void:
 func _on_save_pressed() -> void:
 	Global.save_ani_canvas.show()
 	Global.save_game(Global.State.CRISIS)
+	await get_tree().create_timer(0.3).timeout
 	Global.save_ani_canvas.hide()
 	#SoundMngr.play_sound("stinger")

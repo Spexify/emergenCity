@@ -18,11 +18,11 @@
 		"trading": {
 			"preferences": {
 				"WATER": 1,
-				"POTATOES": 2,
-				"VEGETABLES": 4,
-				"SOAP": 8,
-				"MEAT": 12,
-				"BREAD": 4
+				"POTATOES": 1,
+				"VEGETABLES": 1,
+				"SOAP": 1,
+				"MEAT": 1,
+				"BREAD": 1
 			},
 			"inventory": {
 				"WATER": 3,

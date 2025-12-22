@@ -57,6 +57,9 @@ func get_tile_type(p_click_pos : Vector2) -> String:
 		tile_data = layer.get_cell_tile_data(tile_coord)
 		if tile_data != null:
 			break
+	
+	if tile_data == null:
+		return "background"
 			
 	var tooltip : String = tile_data.get_custom_data_by_layer_id(CustomDataLayers.TOOLTIP)
 	if tooltip != "":

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6dhg3wicg3a5"]
 
 [ext_resource type="Script" uid="uid://b47fpyj0h0ry1" path="res://global/entry.gd" id="1_jmk7n"]
-[ext_resource type="VideoStream" uid="uid://un7jgboqxuko" path="res://assets/video/251128_Krisopolis_Intro_2160p__H264_25Mbit_.ogv" id="2_7p8ed"]
+[ext_resource type="VideoStream" uid="uid://dx1qb6rn7dgfk" path="res://assets/video/251128_Krisopolis_Intro_2160p__H264_25Mbit__UT_DE.ogv" id="2_n7mir"]
 [ext_resource type="VideoStream" uid="uid://dhsqy30722ert" path="res://assets/video/251128_Krisopolis_Boot-Sequenz_2160p__H264_.ogv" id="3_tbubc"]
 [ext_resource type="Texture2D" uid="uid://b7kk24kpdehbm" path="res://assets/GUI/backgrounds/menu_box_white.png" id="5_6kr0e"]
 [ext_resource type="Theme" uid="uid://c38cnaco26erq" path="res://GUI/default_theme.tres" id="6_r7xhs"]
@@ -28,7 +28,7 @@ color = Color(0, 0, 0, 1)
 [node name="IntoVideo" type="VideoStreamPlayer" parent="."]
 offset_right = 576.0
 offset_bottom = 1024.0
-stream = ExtResource("2_7p8ed")
+stream = ExtResource("2_n7mir")
 expand = true
 
 [node name="BootVideo" type="VideoStreamPlayer" parent="."]
@@ -60,6 +60,7 @@ theme_override_constants/margin_bottom = 10
 [node name="skip" type="RichTextLabel" parent="Margin"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "Klicke nochmal zum Überspringen >>"
 fit_content = true

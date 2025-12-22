@@ -142,6 +142,7 @@ func _on_NPC_clicked(p_NPC: EMC_NPC) -> void:
 ## See func _unhandled_input for where the navigation began
 ## (doesn't have to be the target position that was originally set)
 func _on_avatar_arrived() -> void:
+	
 	if not _last_click_position.is_finite() and _last_clicked_NPC != null:
 		#NPC
 			npc_interaction.emit(_last_clicked_NPC)

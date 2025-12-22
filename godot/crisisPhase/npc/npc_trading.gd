@@ -98,6 +98,9 @@ func calculate_trade_score(sell_items : Array[EMC_Item], buy_items : Array[EMC_I
 	var sell_value := calulate_item_score_generic(sell_items)
 	var buy_value := calulate_item_score_generic(buy_items)
 	
+	print(sell_value)
+	print(buy_value)
+	
 	if sell_value == 0 and buy_value == 0:
 		return -1.0
 	

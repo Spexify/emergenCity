@@ -32,6 +32,16 @@ func _ready() -> void:
 		trading.set_owner(self)
 		insert_interaction(1, trading)
 	
+	## HACK: workaround till we have new solution presistent state and version upgrade solution
+	if name == "Raphael":
+		trading._item_preference = {
+			"WATER": 1,
+			"POTATOES": 1,
+			"VEGETABLES": 1,
+			"SOAP": 1,
+			"MEAT": 1,
+			"BREAD": 1
+		}
 	
 	prompt_button.pressed.connect(_on_button_pressed)
 	

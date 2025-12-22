@@ -170,13 +170,17 @@ func get_home() -> void:
 	set_global_position(Vector2i(250, 750))
 
 ########################################## PRIVATE METHODS #########################################
+func _notification(what : int) -> void:
+	if what == NOTIFICATION_APPLICATION_PAUSED:
+		cancel_navigation()
+
 func _ready() -> void:
 	self._food_status = INIT_FOOD 
 	self._drink_status = INIT_DRINK 
 	self._health_status = INIT_HEALTH 
 	self._social_status = INIT_SOCIAL 
 	
-	_apply_delta()
+	#_apply_delta()
 	SettingsGUI.avatar_sprite_changed.connect(_on_new_avatar_sprite_changed)
 	_on_new_avatar_sprite_changed(SettingsGUI.get_avatar_sprite_suffix()) #init
 	$AnimationPlayer.play("idle")
@@ -188,7 +192,6 @@ func _process(p_delta: float) -> void:
 			$Sprite2D.frame = Frame.FRONTSIDE
 		else:
 			$Sprite2D.frame = Frame.BACKSIDE
-
 
 func _physics_process(_delta: float) -> void:
 	var input_direction: Vector2

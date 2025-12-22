@@ -204,11 +204,12 @@ elias:Gut.
 elias:Ich war bei einem Meetup für Geschäftsleute.
 elias:Gute Connections sind alles. Da kann man sich auch mal sowas antun.
 elias:Wenn du mit 100 Leuten redest, kriegst du einen neuen Kontakt. Reine Statistik.
-[match] @talked_of_veronika
+[match] get_var_or(@talked_of_veronika, false)
 - [false] [jump] set_talked_veronika
 - [true] [text]
 	elias:Sind natürlich keine 100 Leute da. Wer lässt sich als Geschäftsmann schon in einem Krisengebiet nieder?
 	elias:Dafür ist das Essen gut.
+[action] output("Here")
 [Comment]
 	[if] eq_bool(@talked_of_veronika, false)
 		[then]

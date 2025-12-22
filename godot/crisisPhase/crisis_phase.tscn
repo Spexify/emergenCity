@@ -214,11 +214,10 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 36
 
-[node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar") groups=["Gui"] instance=ExtResource("6_22w2e")]
+[node name="StatusBars" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr") groups=["Gui"] instance=ExtResource("6_22w2e")]
 custom_minimum_size = Vector2(295, 70)
 layout_mode = 2
 _gui_mngr = NodePath("../../../../..")
-_avatar = NodePath("../../../../../../Avatar")
 
 [node name="DayMngr" parent="GUI/CL/VBC/UpperSection/HBC" node_paths=PackedStringArray("_gui_mngr", "_avatar", "_stage_mngr", "_action_constraints", "_action_consequences", "_scoreboard") groups=["Gui", "Save"] instance=ExtResource("5_gk1jp")]
 custom_minimum_size = Vector2(200, 0)
@@ -376,6 +375,7 @@ gsi = NodePath("../EMC_GSI")
 metadata/_custom_type_script = "uid://bmk42mgjk4yaq"
 
 [connection signal="stage_changed" from="StageMngr" to="NPCMngr" method="_on_stage_changed"]
+[connection signal="status_updated" from="Avatar" to="GUI/CL/VBC/UpperSection/HBC/StatusBars" method="update_bars"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/InfoCenterBtn" to="GUI" method="_on_info_center_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]

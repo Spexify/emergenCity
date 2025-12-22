@@ -15,8 +15,6 @@ var data: Dictionary = { "Imports": ["util"], "Nodes": { "start": { "sequence": 
 
 @export var nodes: Dictionary
 
-
-
 var gsi: VRV_GSI
 	
 func get_meta_data() -> Dictionary:
@@ -202,7 +200,7 @@ func resolve_variable(raw: String, state: VRV_InstanceData) -> Variant:
 
 func _jump(node_name: String, state: VRV_InstanceData) -> void:
 	state.last_node = state.current_node
-	state.current_node = nodes.get(node_name)
+	state.current_node = (nodes.get(node_name) as Dictionary).duplicate(true)
 	state.current_sequence.assign(state.current_node.get("sequence", []))
 	state.current_entry = -1
 
