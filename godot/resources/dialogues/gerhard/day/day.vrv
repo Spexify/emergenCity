@@ -20,7 +20,7 @@ gerhard:Wir sehen uns.
 [[Node]] talk1
 [actors] avatar gerhard.flipped friedel
 [text]
-avatar:Lass uns reden! Wie geht's dir?
+avatar:Wie geht's dir?
 gerhard:Man kann sich nicht beklagen. Also, man könnte schon, aber man tut es ja nicht.
 friedel:Wuff.
 [actors] avatar gerhard friedel
@@ -34,7 +34,7 @@ friedel:Wuff!
 [[Node]] talk2
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Wie geht es Friedel?
+avatar:Wie geht es Friedel?
 gerhard:Manchmal glaube ich, er spürt, dass wir uns in einer Krise befinden.
 gerhard:Wenn er am Fenster liegt und traurig nach draußen schaut. Oder wenn er anhänglicher wird als sonst.
 gerhard:Aber am nächsten Tag tollt er wieder durch den Park, ohne eine Sorge im Leben ... also vielleicht doch nicht.
@@ -45,7 +45,7 @@ friedel:Wuff!
 [[Node]] talk3
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Was macht die Gartenarbeit?
+avatar:Was macht die Gartenarbeit?
 gerhard:Arbeit? So würde ich das nicht nennen.
 gerhard:Der Garten war immer mein Rückzugsort nach der Arbeit.
 gerhard:Und heute ist er mein ganzer Stolz.
@@ -58,7 +58,7 @@ friedel:Wuff!
 [Condition] npc_is_sad("gerhard")
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Du siehst aus, als wärst du verärgert.
+avatar:Du siehst aus, als wärst du verärgert.
 gerhard:Wirklich? Hm, ja. Ich habe mich in der Tat etwas geärgert.
 gerhard:Dieser junge Bursche mit seinem E-Scooter ist schuld.
 gerhard:Der im Anzug und mit diesen Stöpseln im Ohr.
@@ -71,7 +71,7 @@ friedel:Winsel.
 [[Node]] talk5
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Was gibt's Neues?
+avatar:Was gibt's Neues?
 gerhard:Ach, wenn man mal so alt ist wie ich, nicht mehr viel.
 gerhard:Unwetter. Krisen. Ungeziefer. Missernten. Alles schon gesehen.
 gerhard:Gibt einem eine gewisse Gelassenheit. Alles schon erlebt. Alles schon überstanden.
@@ -82,7 +82,7 @@ friedel:[i]*Hechel.*[/i] Wuff!
 [Condition] crisis_is("Hochwasser")
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Wie läuft es bei dir?
+avatar:Wie läuft es bei dir?
 gerhard:Viel Regen ist nicht gut für meine Kürbisse.
 gerhard:In der aktuellen Wachstumsphase sorgt zu viel Wasser für einen faden Geschmack.
 gerhard:Hoffentlich gibt es bald wieder mehr Sonnenschein.
@@ -130,7 +130,7 @@ gerhard:Ja, man muss schon auf sich Acht geben.
 [[Node]] talk8
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Was macht Friedel?
+avatar:Was macht Friedel?
 gerhard:In Krisen läuft der Alltag nicht so wie sonst. Ich glaube, das findet er zur Abwechslung ganz nett.
 gerhard:Er mag alles, was neu und ungewohnt ist. Ganz im Gegenteil zu mir. Haha.
 friedel:Wuff! Wuff!
@@ -154,7 +154,7 @@ friedel:Wuff!
 [[Node]] talk10
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Wird dir auch nicht langweilig hier?
+avatar:Wird dir auch nicht langweilig hier?
 gerhard:Langweilig? In Krisopolis? Wohl kaum. Ist dir etwa langweilig?
 [Choice]
 - [nicht_langweilig] Nein.
@@ -200,7 +200,7 @@ friedel:Wuff!
 [[Node]] talk11
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Fühlst du dich auch nicht einsam hier?
+avatar:Fühlst du dich auch nicht einsam hier?
 gerhard:Ich und einsam? Ich hab doch Friedel.
 friedel:Wuff!
 gerhard:Und ab und zu treffe ich junge Leute im Park. So wie dich und Kris.
@@ -226,7 +226,7 @@ avatar:Da hast du Recht.
 [[Node]] talk12
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Wie kommst du zurecht?
+avatar:Wie kommst du zurecht?
 gerhard:Ich komm zurecht. Musste nur neulich wieder zum Tierarzt mit Friedel wegen seiner Impfung.
 gerhard:Wär mir fast durchgebrannt, der Schlawiner.
 gerhard:Manchmal denke ich, ich bin zu alt für einen so großen Angsthasen von einem Hund.
@@ -238,7 +238,7 @@ friedel:[i]*Schwanzwedel?*[/i]
 [[Node]] talk13
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Was macht der Garten?
+avatar:Was macht der Garten?
 gerhard:Die Kürbisse werden dieses Jahr wirklich gut.
 gerhard:Ich züchte da eine besonders große Sorte. Einer bringt es schon auf 10 Kilo, würde ich sagen.
 avatar:Das ist eine Menge!
@@ -254,7 +254,7 @@ avatar:Wenn du das sagst.
 [[Node]] talk14
 [actors] avatar friedel gerhard.flipped
 [text]
-avatar:Lass uns reden! Kommst du gut durch die Krise?
+avatar:Kommst du gut durch die Krise?
 gerhard:Ach, so gut wie man eben durch so eine Krise kommt.
 gerhard:Ich hab ja ganz viel Essen in Dosen zuhause, das ich kalt essen kann.
 gerhard:Und ganz viel Frisches aus dem Garten.
