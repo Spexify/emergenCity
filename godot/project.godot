@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Krisopolis"
+config/version="1.0.1"
 run/main_scene="res://global/entry.tscn"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Mobile")
@@ -53,7 +54,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/vervain/plugin.cfg")
+enabled=PackedStringArray("res://addons/readable-data/plugin.cfg", "res://addons/vervain/plugin.cfg")
 
 [file_customization]
 
