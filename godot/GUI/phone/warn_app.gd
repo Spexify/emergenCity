@@ -8,11 +8,10 @@ extends EMC_App
 @onready var text : RichTextLabel = $Description/Infos/MarginContainer/Text
 @onready var offline : Control = $Offline
 
-
 func _ready() -> void:
 	item_list.item_clicked.connect(_on_item_clicked)
 
-func start() -> void:
+func open() -> void:
 	if OverworldStatesMngr.is_effective_state_eq("MobileNetState", "OFFLINE"):
 		description.hide()
 		notifications.hide()
@@ -66,13 +65,17 @@ func start() -> void:
 	
 	show()
 	
-func back() -> bool:
+func back() -> void:
 	if description.visible:
 		description.hide()
 		notifications.show()
 		offline.hide()
-		return false
-	return true
+	else:
+		close()
+		
+func close() -> void:
+	self.hide()
+	closed.emit()
 	
 func _on_item_clicked(id : String) -> void:
 	print("Pressed on: '" + id + "'")
@@ -82,7 +85,6 @@ func _on_item_clicked(id : String) -> void:
 		description.show()
 		text.set_text(JsonMngr.scenarios.get(id).get("description"))
 	
-
 func _on_text_meta_clicked(meta : Variant) -> void:
 	var url : String = meta as String
 	if url == null:

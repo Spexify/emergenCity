@@ -20,7 +20,7 @@ enum DayPeriod {
 
 var _period_cnt : int = 0 #Keeps track of the current period (counted/summed up over all days)
 
-const TIME_PRE_DAY: float = 96
+const TIME_PRE_DAY: float = 96 
 const ACTION_PER_DAY: int = 6
 
 var _time: int = 0

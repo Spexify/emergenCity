@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b8su8e0hk46wu" path="res://crisisPhase/pause_menu.tscn" id="15_cjvwy"]
 [ext_resource type="PackedScene" uid="uid://buhj6araogehg" path="res://GUI/book_GUI.tscn" id="16_eg1dm"]
 [ext_resource type="PackedScene" uid="uid://dmchkorcdvl0d" path="res://crisisPhase/icon_information.tscn" id="17_yxtkp"]
+[ext_resource type="PackedScene" uid="uid://y3stunek7sgq" path="res://GUI/phone/phone_gui.tscn" id="18_gnj02"]
 [ext_resource type="PackedScene" uid="uid://c7423f41j0fg3" path="res://animations/cooking_animation.tscn" id="19_rorhr"]
 [ext_resource type="PackedScene" uid="uid://cbh3i1g4hxurj" path="res://GUI/default/default_action_GUI.tscn" id="19_sb74j"]
 [ext_resource type="PackedScene" uid="uid://dnf32wr215wj3" path="res://GUI/default/item_question.tscn" id="20_b3rgh"]
@@ -30,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://cdvvsn8hcgjtw" path="res://GUI/default/confirmation_GUI.tscn" id="22_ifwb8"]
 [ext_resource type="PackedScene" uid="uid://hcfsn06a2085" path="res://crisisPhase/stage/city_map.tscn" id="23_8pknv"]
 [ext_resource type="PackedScene" uid="uid://ciu2vijowrby5" path="res://animations/rain_animation.tscn" id="24_5kmdu"]
-[ext_resource type="PackedScene" uid="uid://druwt2u04fhrc" path="res://GUI/handy/handy_gui.tscn" id="24_lodu6"]
 [ext_resource type="PackedScene" uid="uid://dusoswyk1fft6" path="res://GUI/dialogue/dialogue_gui.tscn" id="25_qh0l1"]
 [ext_resource type="PackedScene" uid="uid://ctlisou6u6wex" path="res://GUI/trade_ui.tscn" id="26_eyapc"]
 [ext_resource type="PackedScene" uid="uid://cr304u228icot" path="res://GUI/npc_interaction_gui.tscn" id="27_8bng3"]
@@ -187,14 +187,15 @@ visible = false
 size_flags_horizontal = 4
 gui_mngr = NodePath("../..")
 
-[node name="HandyGUI" parent="GUI/CL" groups=["Save"] instance=ExtResource("24_lodu6")]
-visible = false
-
 [node name="NpcInteraction" parent="GUI/CL" node_paths=PackedStringArray("gsi") instance=ExtResource("27_8bng3")]
 visible = false
 offset_top = 112.0
 offset_bottom = 112.0
 gsi = NodePath("../../../EMC_GSI")
+
+[node name="Phone" parent="GUI/CL" node_paths=PackedStringArray("_day_mngr") groups=["Save"] instance=ExtResource("18_gnj02")]
+visible = false
+_day_mngr = NodePath("../VBC/UpperSection/HBC/DayMngr")
 
 [node name="VBC" type="VBoxContainer" parent="GUI/CL"]
 offset_top = 8.0
@@ -380,4 +381,5 @@ metadata/_custom_type_script = "uid://bmk42mgjk4yaq"
 [connection signal="pressed" from="GUI/ButtonList/VBC/PauseMenuBtn" to="GUI" method="_on_pause_menu_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/BackpackBtn" to="GUI" method="_on_backpack_btn_pressed"]
 [connection signal="pressed" from="GUI/ButtonList/VBC/PhoneBtn" to="GUI" method="_on_phone_btn_pressed"]
+[connection signal="period_increased" from="GUI/CL/VBC/UpperSection/HBC/DayMngr" to="GUI/CL/Phone" method="_on_period_increased"]
 [connection signal="closed" from="GUI/CL/VBC/MiddleSection/PauseMenu" to="." method="_on_pause_menu_closed"]

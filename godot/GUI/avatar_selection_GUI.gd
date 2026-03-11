@@ -140,4 +140,3 @@ func _on_nb_06_pressed() -> void:
 
 func _on_m_06_pressed() -> void:
 	_settingGUI.set_avatar_sprite_suffix(SPRITE_M06)
-

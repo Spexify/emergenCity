@@ -9,7 +9,7 @@ var _backpack: EMC_Inventory# = Global.get_inventory()
 @onready var _day_mngr : EMC_DayMngr = $GUI/CL/VBC/UpperSection/HBC/DayMngr
 #GUIs Middle Section:
 #@onready var _pause_menue := $GUI/CL/VBC/MiddleSection/PauseMenu
-@onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
+#@onready var _handy_gui : EMC_Handy = $GUI/CL/HandyGUI
 @onready var info_center_gui: EMC_Info_Center = $GUI/CL/VBC/MiddleSection/InfoCenterGui
 @onready var icon_information: EMC_Icon_Information_GUI = $GUI/CL/VBC/MiddleSection/IconInformation
 #GUIs Lower Section:
@@ -139,6 +139,14 @@ func _ready() -> void:
 ## indiscriminately
 func _process(delta: float) -> void:
 	pass
+
+	#if Input.is_action_just_pressed("Toggle_Electricity"):
+		#OverworldStatesMngr.add_state_layer_int("ElectricityState", "God", 0)
+		#OverworldStatesMngr.add_state_layer_int("ElectricityState", "God", 0, 1)
+		#OverworldStatesMngr.add_state_layer_int("ElectricityState", "God", 0, 2)
+		#OverworldStatesMngr.add_state_layer_int("ElectricityState", "God", 0, 3)
+		#OverworldStatesMngr.add_state_layer_int("ElectricityState", "God", 0, 4)
+	
 	#if Input.is_action_just_pressed("Toggle_Electricity"):
 		#if OverworldStatesMngr.is_effective_state_eq("ElectricityState", "UNLIMITED"):
 			### Overrides effective state, this will be reset when a new crisis changes the state

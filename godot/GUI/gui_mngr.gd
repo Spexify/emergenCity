@@ -24,7 +24,8 @@ class_name  EMC_GUIMngr
 @onready var _day_period_transition : EMC_GUI = $CL/DayPeriodTransition
 @onready var _rain_animation : EMC_GUI = $CL/RainAnimation
 @onready var _trade_ui : EMC_TradeUI = $CL/Trade
-@onready var handy_gui : EMC_Handy = $CL/HandyGUI
+#@onready var handy_gui : EMC_Handy = $CL/HandyGUI
+@onready var phone_gui: EMC_Phone = $CL/Phone
 @onready var npc_interaction : EMC_Interaction_GUI = $CL/NpcInteraction
 @onready var action_animation: EMC_ActionAnimtion = $CL/ActionAnimation
 
@@ -60,7 +61,8 @@ func _ready() -> void:
 	all_the_guis.append(_rain_animation)
 	all_the_guis.append(_day_period_transition)
 	all_the_guis.append(_trade_ui)
-	all_the_guis.append(handy_gui)
+	#all_the_guis.append(handy_gui)
+	all_the_guis.append(phone_gui)
 	all_the_guis.append(npc_interaction)
 	all_the_guis.append(action_animation)
 	
@@ -184,7 +186,7 @@ func _on_pause_menu_btn_pressed() -> void:
 	request_gui("PauseMenu", [])
 	
 func _on_phone_btn_pressed() -> void:
-	request_gui("HandyGUI", [])
+	request_gui("Phone", [])
 	#request_gui("DialogueGui", [{"stage_name": "penthouse", "actor_name": "elias"}])
 	#var info: Array[Dictionary]
 	#info.assign([])

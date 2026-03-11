@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://druwt2u04fhrc"]
 
 [ext_resource type="Script" uid="uid://co0uhqffc67qb" path="res://GUI/handy/handy_gui.gd" id="1_4od8s"]
-[ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/handy/app_icon.tscn" id="1_xwilm"]
+[ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/phone/app_icon.tscn" id="1_xwilm"]
 [ext_resource type="Texture2D" uid="uid://b4iuh38wfe4f4" path="res://assets/GUI/icons/icon_info_app.png" id="2_6tb3d"]
 [ext_resource type="Texture2D" uid="uid://5mu0vxw1uan1" path="res://assets/GUI/backgrounds/phone.png" id="2_e701l"]
 [ext_resource type="Texture2D" uid="uid://cno5csi1waa8v" path="res://assets/GUI/icons/icon_warn_app.png" id="3_fdip5"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bjd8nobhmauco" path="res://assets/GUI/icons/riskana_icon.png" id="17_67dn7"]
 [ext_resource type="Texture2D" uid="uid://cejau2hhujec5" path="res://assets/GUI/icons/pandemie_icon.png" id="19_eh1bh"]
 [ext_resource type="Texture2D" uid="uid://xuhitwogmglt" path="res://assets/GUI/icons/flutaris_icon.png" id="20_s715n"]
-[ext_resource type="Script" uid="uid://doifnju5vr0df" path="res://GUI/handy/warn_app.gd" id="21_hd3ml"]
+[ext_resource type="Script" uid="uid://doifnju5vr0df" path="res://GUI/phone/warn_app.gd" id="21_hd3ml"]
 [ext_resource type="Texture2D" uid="uid://c0hmfc280arn3" path="res://assets/GUI/icons/forestfire_icon.png" id="21_rgsqc"]
 [ext_resource type="Texture2D" uid="uid://b2yixgn3oaixk" path="res://assets/GUI/icons/icon_world_states.png" id="22_683kg"]
 
@@ -139,8 +139,8 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_3j51c")
 script = ExtResource("8_njk5s")
-handy = NodePath("../..")
 down_texture = ExtResource("6_306ny")
+handy = NodePath("../..")
 
 [node name="VBC" type="VBoxContainer" parent="VBC/Store"]
 layout_mode = 2
@@ -371,6 +371,165 @@ bbcode_enabled = true
 text = "[color=white]Krisopolis[/color]"
 fit_content = true
 
+[node name="Cook" type="PanelContainer" parent="VBC"]
+visible = false
+custom_minimum_size = Vector2(0, 940)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"WarnItemList"
+script = ExtResource("21_hd3ml")
+scenario_icons = Array[Texture2D]([SubResource("ImageTexture_vp7jv"), ExtResource("12_mwwyw"), ExtResource("13_erivy"), ExtResource("16_cqoi2"), ExtResource("15_gn6mf"), ExtResource("16_yt3fb"), ExtResource("17_67dn7"), ExtResource("15_wyg6i"), ExtResource("19_eh1bh"), ExtResource("20_s715n"), ExtResource("21_rgsqc")])
+
+[node name="Notifications" type="Control" parent="VBC/Cook"]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="VBC/Cook/Notifications"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Cook/Notifications/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Cook/Notifications/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Meine Orte[/color]"
+fit_content = true
+
+[node name="Margin" type="MarginContainer" parent="VBC/Cook/Notifications"]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 940.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 106
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBC" type="VBoxContainer" parent="VBC/Cook/Notifications/Margin"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBC/Cook/Notifications/Margin/VBC"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_type_variation = &"WarnItemList"
+theme_override_styles/panel = SubResource("StyleBoxFlat_uu3e2")
+
+[node name="Title" type="RichTextLabel" parent="VBC/Cook/Notifications/Margin/VBC/PanelContainer"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][color=black][b]Krisopolis[/b][/color][/center]"
+
+[node name="ItemList" parent="VBC/Cook/Notifications/Margin/VBC" instance=ExtResource("12_vrakr")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"WarnItemList"
+LIST_ITEM_SCN = ExtResource("14_iodyr")
+
+[node name="Description" type="Control" parent="VBC/Cook"]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Cook/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Cook/Description/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Cook/Description/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Cook/Description"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Cook/Description/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Cook/Description/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Kochbuch
+[/color]"
+fit_content = true
+
+[node name="Offline" type="Control" parent="VBC/Cook"]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="VBC/Cook/Offline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xvypq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Cook/Offline/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="VBC/Cook/Offline/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 202.73)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][img]res://assets/GUI/icons/icon_offline.png[/img]
+ You are currently offline"
+fit_content = true
+
+[node name="Panel" type="PanelContainer" parent="VBC/Cook/Offline"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogubb")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBC/Cook/Offline/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="Title" type="RichTextLabel" parent="VBC/Cook/Offline/Panel/MarginContainer"]
+custom_minimum_size = Vector2(150, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Krisopolis[/color]"
+fit_content = true
+
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 14
@@ -406,4 +565,6 @@ title = "[center]Info-Center"
 
 [connection signal="meta_clicked" from="VBC/Warn/Description/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
 [connection signal="meta_clicked" from="VBC/Warn/Offline/Infos/MarginContainer/Text" to="VBC/Warn" method="_on_text_meta_clicked"]
+[connection signal="meta_clicked" from="VBC/Cook/Description/Infos/MarginContainer/Text" to="VBC/Cook" method="_on_text_meta_clicked"]
+[connection signal="meta_clicked" from="VBC/Cook/Offline/Infos/MarginContainer/Text" to="VBC/Cook" method="_on_text_meta_clicked"]
 [connection signal="pressed" from="Margin/BackButton" to="." method="_on_back_button_pressed"]

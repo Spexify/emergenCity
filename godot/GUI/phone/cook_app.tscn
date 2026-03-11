@@ -1,0 +1,215 @@
+[gd_scene load_steps=9 format=3 uid="uid://dctdukswlxo43"]
+
+[ext_resource type="Script" uid="uid://cy4m5co5vhj4r" path="res://GUI/phone/cook_app.gd" id="1_g1atf"]
+[ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_arikk"]
+[ext_resource type="PackedScene" uid="uid://hurmnm4yg5ew" path="res://GUI/handy/warn_list_item.tscn" id="13_sjqr2"]
+[ext_resource type="Texture2D" uid="uid://80yai28l2kh6" path="res://assets/GUI/buttons/button_left.png" id="14_j2qd0"]
+[ext_resource type="Texture2D" uid="uid://b0whs1kiah54x" path="res://assets/GUI/buttons/button_left_disabled.png" id="15_x4mfy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x08ft"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj50q"]
+bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prkbl"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Cook" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 833)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_type_variation = &"WarnItemList"
+script = ExtResource("1_g1atf")
+
+[node name="Recipes" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Recipes"]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 940.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 106
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBC" type="VBoxContainer" parent="Recipes/Margin"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Recipes/Margin/VBC"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_type_variation = &"WarnItemList"
+theme_override_styles/panel = SubResource("StyleBoxFlat_x08ft")
+
+[node name="Title" type="RichTextLabel" parent="Recipes/Margin/VBC/PanelContainer"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][color=black][b]Krisopolis[/b][/color][/center]"
+
+[node name="ItemList" parent="Recipes/Margin/VBC" instance=ExtResource("12_arikk")]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"WarnItemList"
+LIST_ITEM_SCN = ExtResource("13_sjqr2")
+
+[node name="Panel" type="PanelContainer" parent="Recipes"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xj50q")
+
+[node name="Margin" type="MarginContainer" parent="Recipes/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="HBC" type="HBoxContainer" parent="Recipes/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BackPlace" type="TextureButton" parent="Recipes/Panel/Margin/HBC"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("14_j2qd0")
+texture_disabled = ExtResource("15_x4mfy")
+stretch_mode = 3
+
+[node name="Title" type="RichTextLabel" parent="Recipes/Panel/Margin/HBC"]
+custom_minimum_size = Vector2(180, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Meine Orte[/color]"
+fit_content = true
+
+[node name="Description" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_prkbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Description/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="Description/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+
+[node name="Panel" type="PanelContainer" parent="Description"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xj50q")
+
+[node name="Margin" type="MarginContainer" parent="Description/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="HBC" type="HBoxContainer" parent="Description/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BackDescr" type="TextureButton" parent="Description/Panel/Margin/HBC"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("14_j2qd0")
+texture_disabled = ExtResource("15_x4mfy")
+stretch_mode = 3
+
+[node name="Title" type="RichTextLabel" parent="Description/Panel/Margin/HBC"]
+custom_minimum_size = Vector2(180, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Kochbuch[/color]"
+fit_content = true
+
+[node name="Offline" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Infos" type="PanelContainer" parent="Offline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_prkbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Offline/Infos"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 14
+
+[node name="Text" type="RichTextLabel" parent="Offline/Infos/MarginContainer"]
+custom_minimum_size = Vector2(0, 202.73)
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center][img]res://assets/GUI/icons/no_entry_icon.png[/img]
+ Kommt bald"
+fit_content = true
+
+[node name="Panel" type="PanelContainer" parent="Offline"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 96.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xj50q")
+
+[node name="Margin" type="MarginContainer" parent="Offline/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="HBC" type="HBoxContainer" parent="Offline/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BackOffline" type="TextureButton" parent="Offline/Panel/Margin/HBC"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("14_j2qd0")
+texture_disabled = ExtResource("15_x4mfy")
+stretch_mode = 3
+
+[node name="Title" type="RichTextLabel" parent="Offline/Panel/Margin/HBC"]
+custom_minimum_size = Vector2(180, 26)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[color=white]Kochbuck[/color]"
+fit_content = true
+
+[connection signal="pressed" from="Recipes/Panel/Margin/HBC/BackPlace" to="." method="back"]
+[connection signal="meta_clicked" from="Description/Infos/MarginContainer/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="pressed" from="Description/Panel/Margin/HBC/BackDescr" to="." method="back"]
+[connection signal="meta_clicked" from="Offline/Infos/MarginContainer/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="pressed" from="Offline/Panel/Margin/HBC/BackOffline" to="." method="back"]

@@ -3,7 +3,7 @@ class_name EMC_App_Icon
 
 extends VBoxContainer
 
-signal open_app(app : String)
+signal app_pressed(app : String)
 
 @export var app : String
 @export var icon : Texture2D:
@@ -17,4 +17,5 @@ signal open_app(app : String)
 		$Title.set_text(title)
 
 func _on_icon_pressed() -> void:
-	open_app.emit(app) #app.start()
+	print(app)
+	app_pressed.emit(app) #app.start()
