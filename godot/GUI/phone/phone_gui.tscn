@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://y3stunek7sgq"]
+[gd_scene load_steps=16 format=3 uid="uid://y3stunek7sgq"]
 
 [ext_resource type="Script" uid="uid://clic2yjwi1q6x" path="res://GUI/phone/phone_gui.gd" id="1_tmxix"]
 [ext_resource type="PackedScene" uid="uid://c7njvi1qsgdon" path="res://GUI/phone/app_icon.tscn" id="2_41ni8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b87usik8pagtp" path="res://assets/GUI/icons/icon_cookl.png" id="7_utskd"]
 [ext_resource type="PackedScene" uid="uid://bwmnipiors5rv" path="res://GUI/phone/warn_app.tscn" id="8_5bq30"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="11_hinpo"]
+[ext_resource type="PackedScene" uid="uid://dctdukswlxo43" path="res://GUI/phone/cook_app.tscn" id="12_npk8y"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i3whd"]
 load_path = "res://.godot/imported/menu_box_black.png-4754cbdfea1e979fe3ed2615d0e2dc2b.ctex"
@@ -170,6 +171,10 @@ grow_vertical = 0
 mouse_filter = 2
 
 [node name="Warn" parent="Apps" instance=ExtResource("8_5bq30")]
+visible = false
+layout_mode = 1
+
+[node name="Cook" parent="Apps" instance=ExtResource("12_npk8y")]
 visible = false
 layout_mode = 1
 

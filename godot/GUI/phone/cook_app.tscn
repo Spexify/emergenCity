@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dctdukswlxo43"]
+[gd_scene load_steps=10 format=3 uid="uid://dctdukswlxo43"]
 
 [ext_resource type="Script" uid="uid://cy4m5co5vhj4r" path="res://GUI/phone/cook_app.gd" id="1_g1atf"]
 [ext_resource type="PackedScene" uid="uid://l7giak7i5oop" path="res://util/item_list.tscn" id="12_arikk"]
@@ -10,10 +10,13 @@
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xj50q"]
-bg_color = Color(0.0431373, 0.223529, 0.415686, 1)
+bg_color = Color(0.96862745, 0.73333335, 0.4745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prkbl"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1atf"]
+bg_color = Color(0.96862745, 0.73333335, 0.4745098, 1)
 
 [node name="Cook" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 833)
@@ -123,7 +126,7 @@ layout_mode = 0
 offset_right = 576.0
 offset_bottom = 96.0
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_xj50q")
+theme_override_styles/panel = SubResource("StyleBoxFlat_g1atf")
 
 [node name="Margin" type="MarginContainer" parent="Description/Panel"]
 layout_mode = 2
@@ -146,7 +149,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[color=white]Kochbuch[/color]"
+text = "[color=white]Rezepte[/color]"
 fit_content = true
 
 [node name="Offline" type="Control" parent="."]
@@ -205,7 +208,7 @@ layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[color=white]Kochbuck[/color]"
+text = "[color=white]Kochbuch[/color]"
 fit_content = true
 
 [connection signal="pressed" from="Recipes/Panel/Margin/HBC/BackPlace" to="." method="back"]
