@@ -8,12 +8,12 @@ extends EMC_GUI
 ##@tutorial(Mehr Infos in der Doku): https://sharelatex.tu-darmstadt.de/project/655b70099f37cc035f7e5fa4
 class_name EMC_InventoryGUI
 
-@onready var _label := $Inventory/Margin/VBC/Label
-@onready var _consume_btn : Button = $Inventory/Margin/VBC/HBC/CC/HBC/Consume
-@onready var _info_btn : Button = $Inventory/Margin/VBC/HBC/CC/HBC/Info
-@onready var _continue_btn : TextureButton = $Inventory/Margin/VBC/HBC/Continue
-@onready var _back_btn : TextureButton = $Inventory/Margin/VBC/HBC/Back
-@onready var _inventory_ui : EMC_Inventory_UI = $Inventory/Margin/VBC/Panel/InventoryUI
+@onready var _label: RichTextLabel = $Inventory/Margin/VBC/Margin/Panel/Label
+@onready var _consume_btn : Button = $Inventory/Margin/VBC/VBC/HBC/CC/HBC/Consume
+@onready var _info_btn : Button = $Inventory/Margin/VBC/VBC/HBC/CC/HBC/Info
+@onready var _continue_btn : TextureButton = $Inventory/Margin/VBC/VBC/HBC/Continue
+@onready var _back_btn : TextureButton = $Inventory/Margin/VBC/VBC/HBC/Back
+@onready var _inventory_ui : EMC_Inventory_UI = $Inventory/Margin/VBC/VBC/Panel/InventoryUI
 
 @export var _avatar : EMC_Avatar
 @export var _gui_mngr : EMC_GUIMngr
@@ -42,8 +42,8 @@ func setup(p_inventory: EMC_Inventory, p_title: String = "Inventar") -> void:
 func set_title(p_new_text: String) -> void:
 	_label.text = "[center]" + p_new_text + "[/center]"
 
-func set_grid_height(height : int = 400) -> void:
-	$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
+#func set_grid_height(height : int = 400) -> void:
+	#$Inventory/VBC/ScrollContainer.custom_minimum_size.y = height
 
 ## Open the GUI
 func open(p_is_continue : bool = false) -> void:

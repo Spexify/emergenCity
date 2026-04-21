@@ -1,3 +1,4 @@
+@tool
 extends EMC_GUI
 class_name EMC_Cooking_GUI
 
@@ -14,8 +15,30 @@ var _last_clicked_recipe: EMC_Recipe
 @onready var _needs_heat_icon : TextureRect = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/RestrictionList/NeedsHeat
 @onready var _input_item_list : HBoxContainer = $PanelContainer/MarginContainer/VBC/PanelContainer/HBC/ScrollContainer/InputItemList
 
+@onready var foldable_container: FoldableContainer = $Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer
+
 
 ########################################## PUBLIC METHODS ##########################################
+
+func _ready() -> void:
+	var hbox := HBoxContainer.new()
+	var pic := TextureRect.new()
+	var atlas := AtlasTexture.new()
+	atlas.set_atlas(load("res://assets/items.png"))
+	atlas.set_region(Rect2(0, 64, 64, 64))
+	pic.set_texture(atlas)
+	pic.set_expand_mode(TextureRect.ExpandMode.EXPAND_FIT_WIDTH_PROPORTIONAL)
+	pic.set_size(Vector2(32, 32))
+	hbox.add_child(pic)
+	var button := Button.new()
+	button.set_text("Brot")
+	button.set_flat(true)
+	button.add_theme_font_size_override("font_size", 25)
+	button.add_theme_color_override("font_color", Color())
+	hbox.add_child(button)
+	hbox.set_anchors_preset(Control.PRESET_CENTER_LEFT)
+	foldable_container.add_title_bar_control(hbox)
+
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory
 	
@@ -48,14 +71,20 @@ func open() -> void:
 				if not _recipe_cookable(child):
 					recipe.move_child(child, -1)
 					child.set_disabled(true) 
+				else:
+					child.set_disabled(false)
 				all_disabled = all_disabled and child.is_disabled()
 			if all_disabled:
 				_recipe_list.move_child(recipe, -1)
 				recipe.set_disabled(true)
+			else:
+				recipe.set_disabled(false)
 		else:
 			if not _recipe_cookable(recipe):
 				_recipe_list.move_child(recipe, -1)
-				recipe.set_disabled(true) 
+				recipe.set_disabled(true)
+			else:
+				recipe.set_disabled(false)
 	
 	# DEBUG: check whether recipes are correctly sorted
 	#print(_recipe_list.get_children().map(func(recipe:Variant) -> bool: return recipe.is_disabled()))
@@ -70,7 +99,6 @@ func close() -> void:
 	hide()
 	closed.emit(self)
 	
-
 static func sort_recipe(a : Variant, b : Variant) -> bool:
 	if a == null:
 		return false
@@ -79,9 +107,6 @@ static func sort_recipe(a : Variant, b : Variant) -> bool:
 	return (not a.is_disabled()) and b.is_disabled()
 
 ########################################## PRIVATE METHODS #########################################
-func _ready() -> void:
-	hide()
-
 
 func _on_cook_pressed() -> void:
 	if _recipe_cookable(_last_clicked_recipe):

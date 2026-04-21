@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d374ckeaba1lx" path="res://inventory/components/item_component.gd" id="3_fl1kr"]
 [ext_resource type="Texture2D" uid="uid://qk3ha65v0lsg" path="res://assets/items.png" id="3_yhqop"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uon1f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl1kr"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(64, 0, 64, 64)
 
@@ -15,9 +15,9 @@ script = ExtResource("2_bivd5")
 id = 1
 name = "Wasser"
 descr = "Das ist Wasser"
-texture = SubResource("AtlasTexture_uon1f")
+texture = SubResource("AtlasTexture_fl1kr")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_063xa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0xrm"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(64, 0, 64, 64)
 
@@ -25,9 +25,10 @@ region = Rect2(64, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 1
-texture = SubResource("AtlasTexture_063xa")
+name = "Wasser"
+texture = SubResource("AtlasTexture_l0xrm")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mqf05"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsc3k"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(64, 0, 64, 64)
 
@@ -35,9 +36,9 @@ region = Rect2(64, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 1
-texture = SubResource("AtlasTexture_mqf05")
+texture = SubResource("AtlasTexture_lsc3k")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_atlad"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndl0e"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(128, 0, 64, 64)
 
@@ -45,9 +46,9 @@ region = Rect2(128, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 2
-texture = SubResource("AtlasTexture_atlad")
+texture = SubResource("AtlasTexture_ndl0e")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_71555"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yv0u"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(128, 0, 64, 64)
 
@@ -55,9 +56,9 @@ region = Rect2(128, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 2
-texture = SubResource("AtlasTexture_71555")
+texture = SubResource("AtlasTexture_8yv0u")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4fbwu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4ekp"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(192, 0, 64, 64)
 
@@ -65,9 +66,9 @@ region = Rect2(192, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 3
-texture = SubResource("AtlasTexture_4fbwu")
+texture = SubResource("AtlasTexture_u4ekp")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fu133"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_50ud0"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(192, 0, 64, 64)
 
@@ -75,9 +76,9 @@ region = Rect2(192, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 3
-texture = SubResource("AtlasTexture_fu133")
+texture = SubResource("AtlasTexture_50ud0")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bj805"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1n2a"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(384, 0, 64, 64)
 
@@ -85,9 +86,9 @@ region = Rect2(384, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 6
-texture = SubResource("AtlasTexture_bj805")
+texture = SubResource("AtlasTexture_p1n2a")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ul36d"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3tdi"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(512, 0, 64, 64)
 
@@ -95,9 +96,9 @@ region = Rect2(512, 0, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 8
-texture = SubResource("AtlasTexture_ul36d")
+texture = SubResource("AtlasTexture_o3tdi")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nptj4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yvnw"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 64, 64, 64)
 
@@ -105,9 +106,9 @@ region = Rect2(0, 64, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 10
-texture = SubResource("AtlasTexture_nptj4")
+texture = SubResource("AtlasTexture_6yvnw")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_auvoi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_28u22"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(64, 64, 64, 64)
 
@@ -115,178 +116,178 @@ region = Rect2(64, 64, 64, 64)
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
 id = 11
-texture = SubResource("AtlasTexture_auvoi")
+texture = SubResource("AtlasTexture_28u22")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rq4yb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o45b8"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_8cmd1"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_rq4yb")
+texture = SubResource("AtlasTexture_o45b8")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_flj32"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b052n"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_cejxl"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_flj32")
+texture = SubResource("AtlasTexture_b052n")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bir7x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyuch"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_gvlji"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_bir7x")
+texture = SubResource("AtlasTexture_xyuch")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4486r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufc6t"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_0k4v5"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_4486r")
+texture = SubResource("AtlasTexture_ufc6t")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vhjrf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5kw8"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_g78ee"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_vhjrf")
+texture = SubResource("AtlasTexture_e5kw8")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r1sgi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_trdou"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_cate3"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_r1sgi")
+texture = SubResource("AtlasTexture_trdou")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_21g0q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rp41"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_t2t57"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_21g0q")
+texture = SubResource("AtlasTexture_8rp41")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m8ka3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_55k6e"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_teff6"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_m8ka3")
+texture = SubResource("AtlasTexture_55k6e")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eegmd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqi00"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_07ofy"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_eegmd")
+texture = SubResource("AtlasTexture_bqi00")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_prdfh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffd1o"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_gsp7l"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_prdfh")
+texture = SubResource("AtlasTexture_ffd1o")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i8sku"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o5dr"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_0m8j8"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_i8sku")
+texture = SubResource("AtlasTexture_2o5dr")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3pqw2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_or42x"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_r3mwb"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_3pqw2")
+texture = SubResource("AtlasTexture_or42x")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b574t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_71jq8"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_j6eqq"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_b574t")
+texture = SubResource("AtlasTexture_71jq8")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bb0oc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_med2u"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_5i23s"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_bb0oc")
+texture = SubResource("AtlasTexture_med2u")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkw2a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_27642"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_k3dc1"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_dkw2a")
+texture = SubResource("AtlasTexture_27642")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yk5vy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpt4i"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_ywlth"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_yk5vy")
+texture = SubResource("AtlasTexture_cpt4i")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5rn0r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6aja"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_7w187"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_5rn0r")
+texture = SubResource("AtlasTexture_t6aja")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qahqt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqu5n"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_f50nd"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_qahqt")
+texture = SubResource("AtlasTexture_vqu5n")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6krwd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt6yo"]
 atlas = ExtResource("3_yhqop")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="Resource" id="Resource_qika0"]
 resource_name = "Dummy"
 script = ExtResource("2_bivd5")
-texture = SubResource("AtlasTexture_6krwd")
+texture = SubResource("AtlasTexture_dt6yo")
 
 [resource]
 script = ExtResource("1_w3uv3")

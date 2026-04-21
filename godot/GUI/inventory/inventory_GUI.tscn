@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://diu2wl65n301n"]
+[gd_scene load_steps=12 format=3 uid="uid://diu2wl65n301n"]
 
 [ext_resource type="Script" uid="uid://dtx4jipwjswfb" path="res://GUI/inventory/inventory_GUI.gd" id="1_ve5h2"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="2_8srdv"]
 [ext_resource type="PackedScene" uid="uid://bsmvtvjkbid3v" path="res://inventory/inventory_ui.tscn" id="2_opbok"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="4_2ujqp"]
+[ext_resource type="Resource" uid="uid://bayr86p850dt" path="res://resources/test/test_inventory.tres" id="4_8abox"]
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://assets/GUI/buttons/button_right.png" id="5_kbada"]
 [ext_resource type="AudioStream" uid="uid://kuu2ftwlhnk2" path="res://assets/SFX/open_GUI.wav" id="5_w1mvg"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="6_gonuj"]
@@ -55,9 +56,18 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBC" type="VBoxContainer" parent="Inventory/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
-[node name="Label" type="RichTextLabel" parent="Inventory/Margin/VBC"]
+[node name="Margin" type="MarginContainer" parent="Inventory/Margin/VBC"]
+layout_mode = 2
+theme_override_constants/margin_left = -16
+theme_override_constants/margin_top = -26
+theme_override_constants/margin_right = -16
+
+[node name="Panel" type="PanelContainer" parent="Inventory/Margin/VBC/Margin"]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="Inventory/Margin/VBC/Margin/Panel"]
 custom_minimum_size = Vector2(460, 52)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -65,34 +75,40 @@ size_flags_vertical = 0
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center]Inventory[/center]"
+fit_content = true
 
-[node name="Panel" type="PanelContainer" parent="Inventory/Margin/VBC"]
+[node name="VBC" type="VBoxContainer" parent="Inventory/Margin/VBC"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Panel" type="PanelContainer" parent="Inventory/Margin/VBC/VBC"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_8srdv")
 
-[node name="InventoryUI" parent="Inventory/Margin/VBC/Panel" instance=ExtResource("2_opbok")]
-custom_minimum_size = Vector2(416, 350)
+[node name="InventoryUI" parent="Inventory/Margin/VBC/VBC/Panel" instance=ExtResource("2_opbok")]
+custom_minimum_size = Vector2(404, 350)
 layout_mode = 2
 size_flags_horizontal = 4
+inventory = ExtResource("4_8abox")
 
-[node name="HBC" type="HBoxContainer" parent="Inventory/Margin/VBC"]
+[node name="HBC" type="HBoxContainer" parent="Inventory/Margin/VBC/VBC"]
 custom_minimum_size = Vector2(460, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 10
 alignment = 2
 
-[node name="CC" type="CenterContainer" parent="Inventory/Margin/VBC/HBC"]
+[node name="CC" type="CenterContainer" parent="Inventory/Margin/VBC/VBC/HBC"]
 custom_minimum_size = Vector2(312, 0)
 layout_mode = 2
 
-[node name="HBC" type="HBoxContainer" parent="Inventory/Margin/VBC/HBC/CC"]
+[node name="HBC" type="HBoxContainer" parent="Inventory/Margin/VBC/VBC/HBC/CC"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Consume" parent="Inventory/Margin/VBC/HBC/CC/HBC" instance=ExtResource("4_2ujqp")]
+[node name="Consume" parent="Inventory/Margin/VBC/VBC/HBC/CC/HBC" instance=ExtResource("4_2ujqp")]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -100,7 +116,7 @@ size_flags_vertical = 4
 theme_type_variation = &"ConfirmButton"
 text = "Konsumieren"
 
-[node name="Info" parent="Inventory/Margin/VBC/HBC/CC/HBC" instance=ExtResource("4_2ujqp")]
+[node name="Info" parent="Inventory/Margin/VBC/VBC/HBC/CC/HBC" instance=ExtResource("4_2ujqp")]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -108,13 +124,13 @@ size_flags_vertical = 4
 theme_type_variation = &"BlueButton"
 text = "Info"
 
-[node name="Back" type="TextureButton" parent="Inventory/Margin/VBC/HBC"]
+[node name="Back" type="TextureButton" parent="Inventory/Margin/VBC/VBC/HBC"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture_normal = ExtResource("6_gonuj")
 
-[node name="Continue" type="TextureButton" parent="Inventory/Margin/VBC/HBC"]
+[node name="Continue" type="TextureButton" parent="Inventory/Margin/VBC/VBC/HBC"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
@@ -141,7 +157,7 @@ process_material = SubResource("ParticleProcessMaterial_3fov1")
 
 [node name="VFX_Instances" type="Node2D" parent="."]
 
-[connection signal="pressed" from="Inventory/Margin/VBC/HBC/CC/HBC/Consume" to="." method="_on_consume_pressed"]
-[connection signal="pressed" from="Inventory/Margin/VBC/HBC/CC/HBC/Info" to="." method="_on_info_pressed"]
-[connection signal="pressed" from="Inventory/Margin/VBC/HBC/Back" to="." method="close"]
-[connection signal="pressed" from="Inventory/Margin/VBC/HBC/Continue" to="." method="close"]
+[connection signal="pressed" from="Inventory/Margin/VBC/VBC/HBC/CC/HBC/Consume" to="." method="_on_consume_pressed"]
+[connection signal="pressed" from="Inventory/Margin/VBC/VBC/HBC/CC/HBC/Info" to="." method="_on_info_pressed"]
+[connection signal="pressed" from="Inventory/Margin/VBC/VBC/HBC/Back" to="." method="close"]
+[connection signal="pressed" from="Inventory/Margin/VBC/VBC/HBC/Continue" to="." method="close"]

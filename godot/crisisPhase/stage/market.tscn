@@ -92,3 +92,7 @@ tile_coords = Array[Vector2i]([Vector2i(5, 11)])
 [node name="talk2" parent="Spots" instance=ExtResource("3_aydbw")]
 position = Vector2(415, 748)
 tile_coords = Array[Vector2i]([Vector2i(6, 11)])
+
+[node name="start" parent="Spots" instance=ExtResource("3_aydbw")]
+position = Vector2(288, 950)
+tile_coords = Array[Vector2i]([Vector2i(6, 11)])

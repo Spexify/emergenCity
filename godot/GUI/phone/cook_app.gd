@@ -2,7 +2,7 @@ extends EMC_App
 
 @export var scenario_icons : Array[Texture2D]
 
-@onready var item_list : EMC_Item_List = $Recipes/Margin/VBC/ItemList
+@onready var item_list : EMC_Item_List = $Recipes/Margin/Scroll/VBC/ItemList
 @onready var recipes : Control = $Recipes
 @onready var description : Control = $Description
 @onready var text : RichTextLabel = $Description/Infos/MarginContainer/Text
@@ -13,8 +13,12 @@ func _ready() -> void:
 
 func open() -> void:
 	description.hide()
-	#recipes.show()
-	offline.show()
+	recipes.show()
+	#offline.show()
+
+	for recepie in JsonMngr.load_recipes():
+		var item: EMC_Item = EMC_Item.make_from_id(recepie.get_output_item_ID())
+		item_list.add_item([item.get_item_name(), item], item.get_item_name())
 
 	#var dict : Array[String]
 	#dict.assign(OverworldStatesMngr.get_scenario().keys())

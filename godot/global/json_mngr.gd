@@ -31,6 +31,9 @@ const DIALOGUES_SOURCE := "res://JSONs/dialogues/"
 
 ########################################JSON RECIPES################################################
 
+var _is_recipes_loaded : bool = false
+var recipes: Array[EMC_Recipe]
+
 func load_recipes() -> Array[EMC_Recipe]:
 	if not FileAccess.file_exists(RECIPT_SOURCE):
 		printerr("Could not load recipes from source: " + RECIPT_SOURCE)

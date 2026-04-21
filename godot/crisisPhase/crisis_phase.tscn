@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cdqgsn775dgsp"]
+[gd_scene load_steps=49 format=3 uid="uid://cdqgsn775dgsp"]
 
 [ext_resource type="Script" uid="uid://bayw2phrdam5s" path="res://crisisPhase/crisis_phase.gd" id="1_23hjb"]
 [ext_resource type="PackedScene" uid="uid://cku3etpcuk085" path="res://crisisPhase/characters/avatar.tscn" id="1_mrtgi"]
@@ -38,8 +38,10 @@
 [ext_resource type="PackedScene" uid="uid://cxdptvo5x7o3t" path="res://GUI/info_center/info_center_gui.tscn" id="30_31x86"]
 [ext_resource type="PackedScene" uid="uid://b6rt1srdy2k6h" path="res://GUI/default/two_choice.tscn" id="33_52q5c"]
 [ext_resource type="PackedScene" uid="uid://dwklogkejltna" path="res://global/scoreboard.tscn" id="34_0pmq5"]
+[ext_resource type="PackedScene" uid="uid://cwo4v2jnqda51" path="res://GUI/cooking/fridge_gui.tscn" id="34_gnj02"]
 [ext_resource type="Script" uid="uid://c0xaaimi1qp8e" path="res://crisisPhase/actions/action_consequences.gd" id="34_gwktw"]
 [ext_resource type="Script" uid="uid://bd2g8sc41awon" path="res://crisisPhase/actions/action_constraints.gd" id="35_kkbik"]
+[ext_resource type="PackedScene" uid="uid://dsdq5x4tmfumm" path="res://GUI/cooking/board_gui.tscn" id="35_s3jjw"]
 [ext_resource type="PackedScene" uid="uid://byfn5n1lyrawq" path="res://animations/action_animation.tscn" id="37_gw70k"]
 [ext_resource type="Script" uid="uid://daje87lka1imw" path="res://crisisPhase/actions/gsi.gd" id="40_ak664"]
 [ext_resource type="Script" uid="uid://bmk42mgjk4yaq" path="res://crisisPhase/actions/vervain_runtime.gd" id="42_7p0y5"]
@@ -310,6 +312,16 @@ layout_mode = 2
 [node name="InfoCenterGui" parent="GUI/CL/VBC/MiddleSection" instance=ExtResource("30_31x86")]
 visible = false
 layout_mode = 2
+
+[node name="FridgeGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_gui_mngr") instance=ExtResource("34_gnj02")]
+visible = false
+layout_mode = 2
+_gui_mngr = NodePath("../../../..")
+
+[node name="BoardGui" parent="GUI/CL/VBC/MiddleSection" node_paths=PackedStringArray("_gui_mngr") instance=ExtResource("35_s3jjw")]
+visible = false
+layout_mode = 2
+_gui_mngr = NodePath("../../../..")
 
 [node name="LowerSection" type="Container" parent="GUI/CL/VBC"]
 process_mode = 3

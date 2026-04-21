@@ -82,3 +82,7 @@ tile_coords = Array[Vector2i]([Vector2i(7, 8)])
 [node name="room" parent="Spots" instance=ExtResource("3_4en18")]
 position = Vector2(161, 554)
 tile_coords = Array[Vector2i]([Vector2i(2, 8)])
+
+[node name="start" parent="Spots" instance=ExtResource("3_4en18")]
+position = Vector2(226, 414)
+tile_coords = Array[Vector2i]([Vector2i(2, 8)])

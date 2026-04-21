@@ -48,7 +48,9 @@ func open() -> void:
 	
 	if OverworldStatesMngr.is_effective_state_eq("MobileNetState", "OFFLINE"):
 		offline.show()
+		online.hide()
 	else:
+		offline.hide()
 		online.show()
 
 	opened.emit()

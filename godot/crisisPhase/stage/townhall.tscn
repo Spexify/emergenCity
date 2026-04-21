@@ -64,3 +64,6 @@ y_sort_enabled = true
 
 [node name="bureau" parent="Spots" instance=ExtResource("3_hypwg")]
 position = Vector2(449, 351)
+
+[node name="start" parent="Spots" instance=ExtResource("3_hypwg")]
+position = Vector2(481, 552)
