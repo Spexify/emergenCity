@@ -2,7 +2,7 @@
 extends EMC_GUI
 class_name EMC_Cooking_GUI
 
-const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
+const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe_button.tscn")
 var _inventory: EMC_Inventory
 var _last_clicked_recipe: EMC_Recipe
 
@@ -19,25 +19,6 @@ var _last_clicked_recipe: EMC_Recipe
 
 
 ########################################## PUBLIC METHODS ##########################################
-
-func _ready() -> void:
-	var hbox := HBoxContainer.new()
-	var pic := TextureRect.new()
-	var atlas := AtlasTexture.new()
-	atlas.set_atlas(load("res://assets/items.png"))
-	atlas.set_region(Rect2(0, 64, 64, 64))
-	pic.set_texture(atlas)
-	pic.set_expand_mode(TextureRect.ExpandMode.EXPAND_FIT_WIDTH_PROPORTIONAL)
-	pic.set_size(Vector2(32, 32))
-	hbox.add_child(pic)
-	var button := Button.new()
-	button.set_text("Brot")
-	button.set_flat(true)
-	button.add_theme_font_size_override("font_size", 25)
-	button.add_theme_color_override("font_color", Color())
-	hbox.add_child(button)
-	hbox.set_anchors_preset(Control.PRESET_CENTER_LEFT)
-	foldable_container.add_title_bar_control(hbox)
 
 func setup(p_inventory: EMC_Inventory) -> void:
 	_inventory = p_inventory

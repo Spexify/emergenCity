@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://e2vuw03w1lx6"]
+[gd_scene load_steps=14 format=3 uid="uid://e2vuw03w1lx6"]
 
 [ext_resource type="Script" uid="uid://ccfdpxhpkl27t" path="res://GUI/cooking/cooking_GUI.gd" id="1_yctcf"]
 [ext_resource type="Texture2D" uid="uid://c10dm4x6n65dm" path="res://assets/GUI/icons/icon_needs_heat.png" id="2_rmnvb"]
@@ -6,13 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://b3oov025lvb8v" path="res://assets/GUI/icons/icon_needs_water.png" id="3_f34gp"]
 [ext_resource type="PackedScene" uid="uid://cf2pewcvtrtic" path="res://util/UX_button.tscn" id="5_kacsq"]
 [ext_resource type="StyleBox" uid="uid://dt8x7ww14ngtb" path="res://resources/background/menu_box_white_tex.tres" id="6_5p4k5"]
-[ext_resource type="Texture2D" uid="uid://the3xo4y6lnv" path="res://assets/GUI/buttons/button_down_small_blue.png" id="7_thnuv"]
-[ext_resource type="Texture2D" uid="uid://dmotet5jbha8q" path="res://assets/GUI/buttons/button_plus_small_blue.png" id="8_6qspi"]
+[ext_resource type="PackedScene" uid="uid://j5nyqj2o5l6f" path="res://GUI/cooking/recipe_button.tscn" id="6_6qspi"]
+[ext_resource type="StyleBox" uid="uid://dpomspib1gvl1" path="res://resources/background/menu_box_dark_gray_tex.tres" id="6_thnuv"]
+[ext_resource type="Script" uid="uid://bjofqooknj8w4" path="res://GUI/cooking/recipe.gd" id="7_6qspi"]
+[ext_resource type="PackedScene" uid="uid://bg21twvowvkuc" path="res://GUI/cooking/foldable_recipe.tscn" id="7_uixv0"]
 [ext_resource type="Texture2D" uid="uid://b210wc8r8w571" path="res://assets/GUI/buttons/button_back.png" id="9_uixv0"]
-[ext_resource type="StyleBox" uid="uid://bwu0dssl63nbv" path="res://resources/background/menu_box_tex.tres" id="9_v5tt8"]
 [ext_resource type="Texture2D" uid="uid://upvg4o4g0c8" path="res://assets/GUI/buttons/button_right.png" id="10_v5tt8"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6qspi"]
+[sub_resource type="Resource" id="Resource_thnuv"]
+script = ExtResource("7_6qspi")
+metadata/_custom_type_script = "uid://bjofqooknj8w4"
 
 [node name="CookingGUI" type="Control"]
 layout_mode = 3
@@ -170,6 +173,22 @@ bbcode_enabled = true
 text = "[center]Küche[/center]"
 fit_content = true
 
+[node name="NoSelection" type="PanelContainer" parent="Panel/Margin/VBC"]
+custom_minimum_size = Vector2(0, 66)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_thnuv")
+
+[node name="Label" type="Label" parent="Panel/Margin/VBC/NoSelection"]
+layout_mode = 2
+text = "Wähle ein Rezept aus"
+horizontal_alignment = 1
+
+[node name="Recipe" parent="Panel/Margin/VBC" instance=ExtResource("6_6qspi")]
+visible = false
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+recipe = SubResource("Resource_thnuv")
+
 [node name="VBC" type="VBoxContainer" parent="Panel/Margin/VBC"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -187,162 +206,17 @@ layout_mode = 2
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="FoldableContainer" type="FoldableContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer"]
 custom_minimum_size = Vector2(428, 0)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/h_separation = 15
-theme_override_font_sizes/font_size = 24
-theme_override_icons/expanded_arrow = ExtResource("7_thnuv")
-theme_override_icons/folded_arrow = ExtResource("8_6qspi")
-theme_override_styles/title_panel = ExtResource("9_v5tt8")
-theme_override_styles/title_collapsed_panel = ExtResource("9_v5tt8")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6qspi")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer"]
-show_behind_parent = true
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = -64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer/MarginContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_constants/separation = -2
-
-[node name="PanelContainer" type="PanelContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer"]
+[node name="FoldableContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer" instance=ExtResource("7_uixv0")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = -16
-theme_override_constants/margin_top = 46
-theme_override_constants/margin_right = -16
-theme_override_constants/margin_bottom = -18
-
-[node name="Button" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-show_behind_parent = true
-layout_mode = 2
-theme_type_variation = &"BasicButton"
-text = "Brot"
-flat = true
-
-[node name="Button2" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer/MarginContainer/VBoxContainer"]
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_vertical = 8
-theme_type_variation = &"BasicButton"
-text = "Brot
-"
-
-[node name="FoldableContainer2" type="FoldableContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer"]
-custom_minimum_size = Vector2(428, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/h_separation = 15
-theme_override_font_sizes/font_size = 24
-theme_override_icons/expanded_arrow = ExtResource("7_thnuv")
-theme_override_icons/folded_arrow = ExtResource("8_6qspi")
-theme_override_styles/title_panel = ExtResource("9_v5tt8")
-theme_override_styles/title_collapsed_panel = ExtResource("9_v5tt8")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6qspi")
-folded = true
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2"]
-visible = false
-show_behind_parent = true
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = -64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2/MarginContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_constants/separation = -2
-
-[node name="PanelContainer" type="PanelContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer"]
+[node name="Recipe" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer" instance=ExtResource("6_6qspi")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="FoldableContainer2" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer" instance=ExtResource("7_uixv0")]
 layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = -16
-theme_override_constants/margin_top = 46
-theme_override_constants/margin_right = -16
-theme_override_constants/margin_bottom = -18
-
-[node name="Button" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-show_behind_parent = true
-layout_mode = 2
-theme_type_variation = &"BasicButton"
-text = "Brot"
-flat = true
-
-[node name="Button2" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer2/MarginContainer/VBoxContainer"]
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_vertical = 8
-theme_type_variation = &"BasicButton"
-text = "Brot
-"
-
-[node name="FoldableContainer3" type="FoldableContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer"]
-custom_minimum_size = Vector2(428, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/h_separation = 15
-theme_override_font_sizes/font_size = 24
-theme_override_icons/expanded_arrow = ExtResource("7_thnuv")
-theme_override_icons/folded_arrow = ExtResource("8_6qspi")
-theme_override_styles/title_panel = ExtResource("9_v5tt8")
-theme_override_styles/title_collapsed_panel = ExtResource("9_v5tt8")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6qspi")
-folded = true
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3"]
-visible = false
-show_behind_parent = true
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = -64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3/MarginContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_constants/separation = -2
-
-[node name="PanelContainer" type="PanelContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = -16
-theme_override_constants/margin_top = 46
-theme_override_constants/margin_right = -16
-theme_override_constants/margin_bottom = -18
-
-[node name="Button" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-show_behind_parent = true
-layout_mode = 2
-theme_type_variation = &"BasicButton"
-text = "Brot"
-flat = true
-
-[node name="Button2" type="Button" parent="Panel/Margin/VBC/VBC/Panel/Scroll/VBoxContainer/FoldableContainer3/MarginContainer/VBoxContainer"]
-show_behind_parent = true
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-size_flags_vertical = 8
-theme_type_variation = &"BasicButton"
-text = "Brot
-"
 
 [node name="HBC" type="HBoxContainer" parent="Panel/Margin/VBC/VBC"]
 custom_minimum_size = Vector2(460, 0)

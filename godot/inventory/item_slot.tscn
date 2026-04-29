@@ -13,50 +13,51 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="Resource" id="Resource_7h3iq"]
 resource_name = "Dummy"
 script = ExtResource("2_dgih1")
-id = 0
-name = "Dummy"
 descr = "<No Descr>"
-comps = Array[ExtResource("2_2xwh8")]([])
-sound_effect = {
-"clicked": "BasicItem",
-"consumed": ""
-}
 texture = SubResource("AtlasTexture_mvlci")
 
 [node name="ItemSlot" type="Control" groups=["slot"]]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
-anchor_left = 0.056
-anchor_top = 0.031
-anchor_right = 0.056
-anchor_bottom = 0.031
-offset_left = -32.256
-offset_top = -31.744
-offset_right = 31.744
-offset_bottom = 32.256
-mouse_filter = 1
-mouse_force_pass_scroll_events = false
-script = ExtResource("1_lvpcn")
-item = SubResource("Resource_7h3iq")
-
-[node name="Slot_BG" type="Sprite2D" parent="."]
-texture = ExtResource("1_l71h0")
-centered = false
-
-[node name="ItemButton" type="TextureButton" parent="Slot_BG"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -32.5
+offset_top = -32.0
 offset_right = 32.0
-offset_bottom = 32.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_lvpcn")
+item = SubResource("Resource_7h3iq")
+
+[node name="Slot_BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_l71h0")
+expand_mode = 3
+
+[node name="ItemButton" type="TextureButton" parent="Slot_BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 action_mode = 0
 texture_normal = SubResource("AtlasTexture_mvlci")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="pressed" from="Slot_BG/ItemButton" to="." method="_on_item_button_pressed"]

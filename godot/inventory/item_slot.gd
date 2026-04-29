@@ -10,7 +10,7 @@ const DRAG_THRESHOLD: float = 15
 
 @export var item: EMC_Item
 @onready var item_button : TextureButton = $Slot_BG/ItemButton
-@onready var slot_bg: Sprite2D = $Slot_BG
+@onready var slot_bg: TextureRect = $Slot_BG
 
 var disabled: bool = false
 var modulate_color: Color =  DEFAULT_COLOR
