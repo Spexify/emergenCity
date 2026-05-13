@@ -30,6 +30,7 @@ custom_minimum_size = Vector2(428, 66)
 offset_right = 471.0
 offset_bottom = 64.0
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/h_separation = 15
 theme_override_font_sizes/font_size = 25
 theme_override_icons/expanded_arrow = ExtResource("1_jtugf")
@@ -50,7 +51,7 @@ visible = false
 show_behind_parent = true
 layout_mode = 2
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = -32
+theme_override_constants/margin_top = -28
 
 [node name="VBC" type="VBoxContainer" parent="Margin"]
 custom_minimum_size = Vector2(250, 0)
@@ -72,3 +73,6 @@ theme_override_constants/margin_bottom = -18
 [node name="Recipe" parent="Margin/VBC/Panel/Margin" instance=ExtResource("6_oakr6")]
 layout_mode = 2
 recipe = SubResource("Resource_dxjbi")
+
+[connection signal="recipe_disabled_pressed" from="Margin/VBC/Panel/Margin/Recipe" to="." method="_on_recipe_disabled_pressed"]
+[connection signal="recipe_pressed" from="Margin/VBC/Panel/Margin/Recipe" to="." method="_on_recipe_pressed"]

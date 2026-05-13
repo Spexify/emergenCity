@@ -54,6 +54,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 
 [node name="Slot" parent="Panel/Margin/VBC/CC" instance=ExtResource("2_3qs2r")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 item = SubResource("Resource_ten6j")
 

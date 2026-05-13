@@ -41,7 +41,7 @@
 	{
 		"ID": 4,
 		"name": "Gaskartusche",
-		"descr": "Für den Gaskocher.",
+		"descr": "Für den Gaskocher. Können benutzt werden um 5 mal zu kochen.",
 		"comps": {
 			"cost": {
 				"cost": 30,

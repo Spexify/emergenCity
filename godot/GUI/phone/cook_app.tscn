@@ -155,7 +155,6 @@ text = "[color=white]Rezept[/color]"
 fit_content = true
 
 [node name="Offline" type="Control" parent="."]
-visible = false
 layout_mode = 2
 
 [node name="Infos" type="PanelContainer" parent="Offline"]
@@ -218,3 +217,4 @@ fit_content = true
 [connection signal="pressed" from="Recipes/Panel/Margin/HBC/BackPlace" to="." method="back"]
 [connection signal="meta_clicked" from="Description/Infos/MarginContainer/Text" to="." method="_on_text_meta_clicked"]
 [connection signal="meta_clicked" from="Offline/Infos/MarginContainer/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="pressed" from="Offline/Panel/Margin/HBC/BackPlace" to="." method="back"]

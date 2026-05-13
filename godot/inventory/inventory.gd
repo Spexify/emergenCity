@@ -93,7 +93,9 @@ func get_items_filterd_sorted(filter : Callable, sorter : Callable) -> Array[EMC
 	return filterd
 
 func get_items_filterd(filter : Callable) -> Array[EMC_Item]:
-	return slots.filter(filter)
+	var result: Array[EMC_Item]
+	result.assign(slots.filter(filter))
+	return result
 
 ## The inventory has at least one item of [p_ID]
 func has_item(p_ID: EMC_Item.IDs, p_times: int = 1) -> bool:

@@ -52,6 +52,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 
 [node name="Slot" parent="VBoxContainer/CC" instance=ExtResource("2_nyoc0")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 item = SubResource("Resource_852rd")
 
@@ -76,6 +77,7 @@ custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_type_variation = &"ConfirmButton"
 text = "Essen"
 
 [node name="BackBtn" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_rgisu")]
@@ -83,6 +85,7 @@ custom_minimum_size = Vector2(180, 42)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_type_variation = &"BlueButton"
 text = "Aufheben"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]

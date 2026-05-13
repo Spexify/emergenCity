@@ -1,12 +1,4 @@
-{
-	"BREAD": [
-		{
-			"items": ["FLOUR"],
-			"needs_water": true,
-			"needs_heat": true,
-		}
-	]
-}
+
 
 [
 	{

@@ -12,12 +12,14 @@ func _ready() -> void:
 	item_list.item_clicked.connect(_on_item_clicked)
 
 func open() -> void:
-	description.hide()
-	recipes.show()
-	#offline.show()
+	#description.hide()
+	#recipes.show()
+	offline.show()
+	show()
+	return
 
-	for recepie in JsonMngr.load_recipes():
-		var item: EMC_Item = EMC_Item.make_from_id(recepie.get_output_item_ID())
+	for recipe in JsonMngr.load_recipes():
+		var item: EMC_Item = EMC_Item.make_from_id(recipe.get_output_item_ID())
 		item_list.add_item([item.get_item_name(), item], item.get_item_name())
 
 	#var dict : Array[String]

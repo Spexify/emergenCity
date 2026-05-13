@@ -9,8 +9,8 @@ const DEFAULT_COLOR := Color(1, 1, 1, 1)
 const DRAG_THRESHOLD: float = 15
 
 @export var item: EMC_Item
-@onready var item_button : TextureButton = $Slot_BG/ItemButton
-@onready var slot_bg: TextureRect = $Slot_BG
+@onready var item_button: TextureButton = $ItemButton
+@onready var slot_bg: EMC_Item_Slot = $"."
 
 var disabled: bool = false
 var modulate_color: Color =  DEFAULT_COLOR
