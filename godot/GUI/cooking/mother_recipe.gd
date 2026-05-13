@@ -22,7 +22,7 @@ func _ready() -> void:
 	item_name.set_text(item.get_item_name())
 	
 	for child in _child_recipe:
-		add_child(child)
+		#add_child(child)
 		child.hide()
 
 func hide_children(irrelevant : EMC_GUI = null) -> void:

@@ -5,7 +5,7 @@ const INVALID_STRING_VALUE: String = "ERROR"
 const INVALID_DICTIONARY_VALUE: Dictionary = {}
 
 ## RECIPTS
-const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
+#const RECIPE_SCN: PackedScene = preload("res://GUI/cooking/recipe.tscn")
 const RECIPT_SOURCE := "res://JSONs/recipe.json"
 ## ITEMS
 const ITEM_SOURCE := "res://JSONs/item.json"
@@ -30,6 +30,9 @@ const UPGRADES_SOURCE := "res://JSONs/upgrades.json"
 const DIALOGUES_SOURCE := "res://JSONs/dialogues/"
 
 ########################################JSON RECIPES################################################
+
+var _is_recipes_loaded : bool = false
+var recipes: Array[EMC_Recipe]
 
 func load_recipes() -> Array[EMC_Recipe]:
 	if not FileAccess.file_exists(RECIPT_SOURCE):
@@ -79,7 +82,7 @@ func load_recipes() -> Array[EMC_Recipe]:
 		var needs_water : bool = recipe_json.get("needs_water", false) as bool
 		var needs_heat : bool = recipe_json.get("needs_heat", false) as bool
 		
-		var new_recipe : EMC_Recipe = RECIPE_SCN.instantiate()
+		var new_recipe : EMC_Recipe = EMC_Recipe.new()#RECIPE_SCN.instantiate()
 		new_recipe.setup(input_item_IDs, output_item_ID, needs_water, needs_heat)
 		
 		results.append(new_recipe)

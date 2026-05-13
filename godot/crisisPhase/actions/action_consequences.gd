@@ -237,15 +237,20 @@ func change_stage(p_data : Dictionary) -> void:
 	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("wait", true))
 	
 	# Avatar is moved to early should be handeled in stage or stage_mngr
-	await _day_mngr.animation_end
-	_avatar.position = p_data.get("avatar_pos")
+	if p_data.get("wait", true):
+		await _day_mngr.animation_end
+	var spot: Node2D = _stage_mngr.request_spot("start")
+	_avatar.global_position = spot.global_position
 	
 func change_stage_by_dict(p_data : Dictionary) -> void:
 	_stage_mngr.change_stage(p_data.get("stage_name"), p_data.get("wait", true))
 	
 	# Avatar is moved to early should be handeled in stage or stage_mngr
-	await _day_mngr.animation_end
-	_avatar.position = EMC_Util.dict_to_vector(p_data.get("avatar_pos"), TYPE_VECTOR2)
+	if p_data.get("wait", true):
+		await _day_mngr.animation_end
+	var spot: Node2D = _stage_mngr.request_spot("start")
+	_avatar.global_position = spot.global_position
+	# _avatar.position = EMC_Util.dict_to_vector(p_data.get("avatar_pos"), TYPE_VECTOR2)
 
 ############################################ JSON ##################################################
 

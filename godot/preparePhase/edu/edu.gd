@@ -17,7 +17,6 @@ func _on_continue_pressed() -> void:
 			_inventory.add_new_item(EMC_Item.IDs.WATER)
 			_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
 			_inventory.add_new_item(EMC_Item.IDs.WATER_DIRTY)
-			_inventory.add_new_item(EMC_Item.IDs.RAVIOLI_TIN)
 			_inventory.add_new_item(EMC_Item.IDs.MEAT)
 			Global.session["inventory"] = _inventory
 			Global.session["changes"].append("SEN_ONE")

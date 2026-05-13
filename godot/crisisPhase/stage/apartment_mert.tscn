@@ -64,6 +64,10 @@ y_sort_enabled = true
 position = Vector2(351, 344)
 tile_coords = Array[Vector2i]([Vector2i(5, 5)])
 
+[node name="start" parent="Spots" instance=ExtResource("3_s4rip")]
+position = Vector2(159, 349)
+tile_coords = Array[Vector2i]([Vector2i(5, 5)])
+
 [node name="cooking" parent="Spots" instance=ExtResource("3_s4rip")]
 position = Vector2(448, 342)
 tile_coords = Array[Vector2i]([Vector2i(6, 5), Vector2i(7, 5)])

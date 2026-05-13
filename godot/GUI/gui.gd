@@ -6,6 +6,8 @@ signal opened
 signal closed(gui : EMC_GUI)
 
 @abstract func close() -> void
+#	hide()
+#	closed.emit()
 
 #func _unhandled_input(event : InputEvent) -> void:
 	#if visible:

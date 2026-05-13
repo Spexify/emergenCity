@@ -117,6 +117,8 @@ func request_spot(spot_name: String) -> EMC_Stage_Spot:
 
 	if spot == null:
 		printerr("EMC_Stage: no such spot %s" % spot_name)
+	elif spot_name == "start":
+		return spot
 	elif spot.is_occupied():
 		EMC_Util.print_warn("EMC_Stage: spot occupied.")
 	else:

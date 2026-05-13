@@ -25,6 +25,9 @@ func _init(p_num_slots: int = 30) -> void:
 func get_free_num_slot() -> int:
 	return num_slots - slots.size()
 
+func is_empty() -> bool:
+	return slots.is_empty()
+
 ## Returns if the inventory has any free slots left
 func has_space() -> bool:
 	return slots.size() < num_slots
@@ -49,6 +52,9 @@ func add_item(p_item: EMC_Item) -> bool:
 	update.emit()
 	sort()
 	return true
+
+func clear_items() -> void:
+	slots.clear()
 
 ## Remove a concrete [EMC_Item] from this inventory
 ## Returns if the removal was successful
@@ -87,7 +93,9 @@ func get_items_filterd_sorted(filter : Callable, sorter : Callable) -> Array[EMC
 	return filterd
 
 func get_items_filterd(filter : Callable) -> Array[EMC_Item]:
-	return slots.filter(filter)
+	var result: Array[EMC_Item]
+	result.assign(slots.filter(filter))
+	return result
 
 ## The inventory has at least one item of [p_ID]
 func has_item(p_ID: EMC_Item.IDs, p_times: int = 1) -> bool:

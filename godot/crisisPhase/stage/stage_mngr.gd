@@ -63,6 +63,7 @@ func change_stage(p_stage_name: String, wait : bool = true) -> void:
 		
 	unload_stage()
 	load_stage(p_stage_name)
+	_curr_stage.request_spot("start")
 	stage_changed.emit(get_curr_stage_name())
 
 func load_stage(stage_name: String) -> void:

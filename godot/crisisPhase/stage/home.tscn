@@ -66,3 +66,7 @@ z_index = 1
 [node name="besuch" parent="Spots" instance=ExtResource("3_d04v6")]
 position = Vector2(160, 1006)
 tile_coords = Array[Vector2i]([Vector2i(2, 15)])
+
+[node name="start" parent="Spots" instance=ExtResource("3_d04v6")]
+position = Vector2(290, 1006)
+tile_coords = Array[Vector2i]([Vector2i(2, 15)])

@@ -164,12 +164,7 @@
 		"method": "request_gui",
 		"params": [
 			"DefaultActionGUI",
-			[
-				"Willst du dich am Baum ausruhen?",
-				"Sleep",
-				"SFX_Tree",
-				true
-			]
+			["Willst du dich am Baum ausruhen?", "Sleep", "SFX_Tree", true]
 		]
 	},
 	"SFX_Tree": {
@@ -536,8 +531,8 @@
 		"if": {
 			"type": "single",
 			"system": "OSM",
-			"method": "is_effective_state_gt",
-			"params": ["WaterState", "NONE"]
+			"method": "is_effective_state_eq",
+			"params": ["WaterState", "CLEAN"]
 		},
 		"then": {
 			"type": "condition",
@@ -583,10 +578,31 @@
 			}
 		},
 		"else": {
-			"type": "single",
-			"system": "gui_mngr",
-			"method": "request_gui",
-			"params": ["TooltipGUI", ["Es ist leider gerade kein Wasser verfügbar!"]]
+			"type": "condition",
+			"if": {
+				"type": "single",
+				"system": "OSM",
+				"method": "is_effective_state_eq",
+				"params": ["WaterState", "DIRTY"]
+			},
+			"then": {
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"TooltipGUI",
+					["Das Wasser ist leider verdreckt!"]
+				]
+			},
+			"else": {
+				"type": "single",
+				"system": "gui_mngr",
+				"method": "request_gui",
+				"params": [
+					"TooltipGUI",
+					["Es ist leider gerade kein Wasser verfügbar!"]
+				]
+			}
 		}
 	},
 	"bbk": {
@@ -808,13 +824,10 @@
 			"type": "single",
 			"system": "gui_mngr",
 			"method": "request_gui",
-			"params": ["DefaultActionGUI", 
-			[
-				"Willst du Fernseher schauen?",
-				"Watch_TV",
-				"SFX_TV",
-				true
-			]]
+			"params": [
+				"DefaultActionGUI",
+				["Willst du Fernseher schauen?", "Watch_TV", "SFX_TV", true]
+			]
 		}
 	},
 	"Watch_TV": {

@@ -7,6 +7,9 @@ class_name  EMC_GUIMngr
 @onready var _cooking_GUI : EMC_Cooking_GUI = $CL/VBC/MiddleSection/CookingGUI
 @onready var seodGUI : EMC_SummaryEndOfDayGUI = $CL/VBC/MiddleSection/SummaryEndOfDayGUI
 @onready var item_question_gui : EMC_ItemQuestion= $CL/VBC/MiddleSection/ItemQuestionGUI
+@onready var fridge_gui: EMC_Fridge_GUI = $CL/VBC/MiddleSection/FridgeGui
+@onready var board_gui: EMC_Board_GUI = $CL/VBC/MiddleSection/BoardGui
+
 #@onready var _dialogue_gui : EMC_Dialogue_GUI = $CL/VBC/MiddleSection/DialogueGui
 #GUIs Lower Section:
 #@onready var tooltip_GUI := $CL/VBC/LowerSection/TooltipGUI
@@ -89,6 +92,9 @@ func setup(p_backpack : EMC_Inventory, p_opt_event_mngr : EMC_OptionalEventMngr)
 	_backpack_GUI.setup(p_backpack, "Rucksack")
 	
 	item_question_gui.setup(p_backpack)
+	
+	fridge_gui.setup(p_backpack)
+	board_gui.setup(p_backpack)
 	
 	_cooking_GUI.setup(p_backpack)
 	if(OverworldStatesMngr.has_upgrade(EMC_Upgrade.IDs.RAINWATER_BARREL)):

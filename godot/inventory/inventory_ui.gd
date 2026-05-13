@@ -39,6 +39,10 @@ func reload() -> void:
 		if item.is_dummy():
 			slot.disable()
 			
+		slot.set_custom_minimum_size(Vector2(64.0, 64.0))
+		#slot.reset_size()
+		#slot.get_child(0).set_size(Vector2(64.0, 64.0))
+			
 		if not slot.item_clicked.is_connected(_on_item_clicked):
 			slot.item_clicked.connect(_on_item_clicked)
 		if not slot.item_long_pressed.is_connected(_on_item_long_pressed):
